@@ -20,6 +20,7 @@ export default function Navbar() {
 
     navHidden.current = nextHidden;
     navRef.current?.classList.toggle('is-hidden', nextHidden);
+    document.documentElement.dataset.navHidden = nextHidden ? 'true' : 'false';
   }
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function Navbar() {
   }, [open]);
 
   useEffect(() => {
+    document.documentElement.dataset.navHidden = 'false';
     lastScrollY.current = window.scrollY;
 
     const handleScroll = () => {
@@ -71,6 +73,7 @@ export default function Navbar() {
       if (stopTimer.current) {
         window.clearTimeout(stopTimer.current);
       }
+      delete document.documentElement.dataset.navHidden;
     };
   }, []);
 

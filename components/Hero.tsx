@@ -1,4 +1,5 @@
 import AvatarProfile from './AvatarProfile';
+import SplitText from './animate-ui/primitives/texts/SplitText';
 import { HighlightText } from './animate-ui/primitives/texts/highlight';
 
 export default function Hero() {
@@ -16,7 +17,19 @@ export default function Hero() {
 
       <div className="hero-copy">
         <div className="hero-title">
-          <h1>哈囉！我是黃宣銘 Brian Huang</h1>
+          <SplitText
+            tag="h1"
+            text="哈囉！我是黃宣銘 Brian Huang"
+            delay={42}
+            duration={0.72}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 34 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-80px"
+            textAlign="inherit"
+          />
           <p className="headline">
             一名熱衷{' '}
             <HighlightText

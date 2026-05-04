@@ -30,7 +30,8 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "IBM Plex Sans", "PingFang TC", "Noto Sans TC", Inter, Arial, sans-serif;
+  font-family:
+    "IBM Plex Sans", "PingFang TC", "Noto Sans TC", Inter, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -143,7 +144,9 @@ button {
   height: 2px;
   border-radius: 999px;
   background: #999999;
-  transition: transform 180ms ease, top 180ms ease;
+  transition:
+    transform 180ms ease,
+    top 180ms ease;
 }
 
 .menu-button span:first-child {
@@ -266,6 +269,20 @@ button {
   line-height: 1.5;
 }
 
+.split-parent {
+  max-width: 100%;
+}
+
+.split-line,
+.split-word,
+.split-char {
+  will-change: transform, opacity;
+}
+
+.split-char {
+  display: inline-block;
+}
+
 .headline {
   margin: 0;
   font-size: 32px;
@@ -336,7 +353,9 @@ button {
   border-radius: 200px;
   font-weight: 600;
   line-height: 1.4;
-  transition: transform 180ms ease, background-color 180ms ease;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease;
 }
 
 .button:hover {
@@ -505,7 +524,9 @@ button {
     0 10px 10px rgba(0, 0, 0, 0.12);
   opacity: 0;
   transform: translate(420px, -50%);
-  transition: opacity 260ms ease, transform 360ms ease;
+  transition:
+    opacity 260ms ease,
+    transform 360ms ease;
 }
 
 .project-card:hover .project-info,
@@ -608,6 +629,21 @@ button {
   color: #004b85;
 }
 
+.project-card.tone-icecream .project-tags span {
+  background-color: #ffe2ea;
+  color: #aa2d53;
+}
+
+.project-card.tone-laushu .project-tags span {
+  background-color: #f5eeff;
+  color: #3b3475;
+}
+
+.project-card.tone-thesis .project-tags span {
+  background-color: #e6ffe3;
+  color: #2d462a;
+}
+
 .project-button {
   display: inline-flex;
   justify-content: center;
@@ -634,6 +670,21 @@ button {
 
 .tone-advantech .project-button {
   background: #00548a;
+}
+
+.project-card.tone-icecream .project-button {
+  background-color: #eb80a0;
+  color: #ffffff;
+}
+
+.project-card.tone-laushu .project-button {
+  background-color: #4f59c5;
+  color: #ffffff;
+}
+
+.project-card.tone-thesis .project-button {
+  background-color: #6faa68;
+  color: #ffffff;
 }
 
 .contact-page-section {
@@ -748,7 +799,9 @@ button {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 180ms ease, transform 180ms ease;
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
 .contact-form button:hover {
@@ -761,6 +814,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  width: 100%;
   padding: 0 clamp(24px, 8vw, 120px) 24px;
   background: white;
 }
@@ -774,20 +828,37 @@ button {
 .social-links {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 .social-links a {
   display: grid;
+  position: relative;
   place-items: center;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  font-weight: 700;
-  transition: background-color 180ms ease;
 }
 
-.social-links a:hover {
-  background: #f2f2f7;
+.social-logo {
+  grid-area: 1 / 1;
+  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transition: opacity 180ms ease;
+}
+
+.social-logo-color {
+  opacity: 0;
+}
+
+.social-link:hover .social-logo-color {
+  opacity: 1;
+}
+
+.social-link:hover .social-logo-gray {
+  opacity: 0;
 }
 
 .about-page {
@@ -1046,11 +1117,16 @@ button {
 
 .year-rail {
   position: sticky;
-  top: 104px;
+  top: var(--year-rail-sticky-top, 104px);
   display: grid;
   gap: 24px;
   padding: 12px;
   background: white;
+  transition: top 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-nav-hidden="true"] .year-rail {
+  --year-rail-sticky-top: 24px;
 }
 
 .year-rail a {
@@ -1350,23 +1426,26 @@ button {
 
 @media (max-width: 809px) {
   .site-nav {
+    --mobile-nav-closed-height: 80px;
+    --mobile-nav-open-height: 336px;
     align-items: stretch;
     flex-direction: column;
+    height: var(--mobile-nav-closed-height);
     min-height: 80px;
     padding: 18px 12px 18px 24px;
     overflow: hidden;
     transition:
-      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 240ms ease,
-      max-height 220ms ease;
+      transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+      height 550ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .site-nav:not(.is-open) {
-    max-height: 80px;
+    height: var(--mobile-nav-closed-height);
   }
 
   .site-nav.is-open {
-    max-height: 100vh;
+    height: var(--mobile-nav-open-height);
   }
 
   .nav-top {
@@ -1386,12 +1465,16 @@ button {
     padding: 20px 0;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 180ms ease;
+    transform: translateY(-8px);
+    transition:
+      opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .site-nav.is-open .nav-links {
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
   }
 
   .nav-links a {
@@ -1604,9 +1687,15 @@ button {
   }
 
   .site-footer {
+    align-items: stretch;
     flex-direction: column-reverse;
     gap: 0;
     padding: 0 24px 24px;
+  }
+
+  .social-links {
+    align-self: flex-end;
+    margin-left: 0;
   }
 
   .site-footer p {
@@ -1715,20 +1804,56 @@ button {
   }
 
   .experience-layout {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    align-items: stretch;
     gap: 24px;
   }
 
   .year-rail {
-    top: 92px;
+    position: sticky;
+    --year-rail-sticky-top: 92px;
+    top: var(--year-rail-sticky-top);
+    order: 0;
     z-index: 2;
     display: flex;
+    align-items: center;
+    justify-content: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-height: 56px;
     overflow-x: auto;
     border-radius: 100px;
   }
 
-  .year-rail a,
-  .year-rail a:first-child {
+  html[data-nav-hidden="true"] .year-rail {
+    --year-rail-sticky-top: 12px;
+  }
+
+  .experience-list {
+    order: 1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .experience-card {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .year-rail a {
+    display: inline-flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
     font-size: 18px;
+    line-height: 1;
+  }
+
+  .year-rail a.is-active {
+    font-size: 24px;
   }
 
   .experience-card {
