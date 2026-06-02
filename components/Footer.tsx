@@ -35,8 +35,8 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image className="social-logo social-logo-gray" src={link.graySrc} alt="" width={60} height={60} />
-            <Image className="social-logo social-logo-color" src={link.colorSrc} alt="" width={60} height={60} />
+            <Image className="social-logo social-logo-gray" src={link.graySrc} alt="" width={40} height={40} />
+            <Image className="social-logo social-logo-color" src={link.colorSrc} alt="" width={40} height={40} />
           </a>
         ))}
       </div>

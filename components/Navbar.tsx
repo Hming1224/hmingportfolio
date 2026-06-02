@@ -114,7 +114,7 @@ export default function Navbar() {
         </Link>
         <a
           className="resume-link"
-          href="https://drive.google.com/file/d/1FA0dA5v2eIrjKXOpzDj2y0u6REfJ1lpm/view?usp=sharing"
+          href="/Brian_Huang_Resume.html"
           target="_blank"
           rel="noopener noreferrer"
         >

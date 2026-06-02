@@ -11,7 +11,23 @@ import {
   TabsTab,
 } from "./animate-ui/primitives/base/tabs";
 
-const projects = [
+type Project = {
+  id: string;
+  title: string;
+  date: string;
+  description: string;
+  imageUrl: string;
+  logoUrl: string;
+  tags: string[];
+  tone: string;
+  category: string;
+  cta: string;
+  hoverCta?: string;
+  href?: string;
+  disabled?: boolean;
+};
+
+const projects: Project[] = [
   {
     id: "project-advantech-wiseiems",
     title: "生成式AI能源管理系統",
@@ -24,7 +40,8 @@ const projects = [
     tone: "advantech",
     category: "enterprise",
     cta: "資料準備中",
-    disabled: true,
+    hoverCta: "了解更多",
+    href: "/advantech",
   },
   {
     id: "project-crypto-arsenal",
@@ -148,7 +165,7 @@ const projects = [
   },
 ];
 
-function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+function ProjectCard({ project }: { project: Project }) {
   return (
     <article className={`project-card tone-${project.tone}`} id={project.id}>
       <Image
@@ -177,9 +194,18 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
         <a
           className={`project-button ${project.disabled ? "is-disabled" : ""}`}
           href={project.disabled ? undefined : project.href}
+          target={project.href && !project.disabled ? "_blank" : undefined}
+          rel={project.href && !project.disabled ? "noopener noreferrer" : undefined}
           aria-disabled={project.disabled}
         >
-          {project.cta}
+          {project.hoverCta ? (
+            <>
+              <span className="btn-text">{project.cta}</span>
+              <span className="btn-hover-text">{project.hoverCta}</span>
+            </>
+          ) : (
+            project.cta
+          )}
         </a>
       </div>
     </article>
