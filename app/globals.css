@@ -27,6 +27,7 @@
   --fs-xs:   12px;  /* 最小 */
 
   --ink: #343434;
+  --ink-hover: #555555; /* 黑色 primary 按鈕 hover：比 ink 淺一階 */
   --muted: #8e8e9c;
   --paper: #ffffff;
   --line: rgba(0, 0, 0, 0.08);
@@ -44,6 +45,35 @@
   --surface: #f2f2f7;
   --purple-hover: #4f54c9;
   --about-accent: #ffd467;
+
+  /* ── 頁面左右留白（section gutter）。改這一個值即可全頁生效 ──
+     15.6vw 讓 1920px 視窗剛好達到 300px 上限；小螢幕由 24px 下限保護 */
+  --page-gutter: clamp(24px, 15.6vw, 300px);
+
+  /* ── 文字色階梯（語意化）──
+     只套用在「純大標 / 內文 / 副標題」這類頁面骨架文字；
+     label、Tab、卡片內字級不適用，各自保留原設計。
+     彩色（--purple / --blue 等）屬強調/分類色，不在此階梯。
+
+     【分層 theming】這裡是「綁定規則 + 預設值（中性）」，所有專案共用。
+     大標主色跟著各專案走 → 每個專案頁用 .theme-xxx 覆寫 --text-heading 一個值即可，
+     內文/副標/標籤等中性階所有專案共用、不需覆寫。 */
+  --text-heading:   #1a1a1a;  /* 大標題（中性預設；專案可覆寫成主色） */
+  --text-body:      #1f2933;  /* 內文 */
+  --text-secondary: #5d6674;  /* 副標 / 內文說明 */
+  --text-muted:     #8e8e9c;  /* 最弱（同 --muted） */
+  /* 深色背景反轉組 */
+  --text-on-dark:       #ffffff;
+  --text-on-dark-body:  rgba(255, 255, 255, 0.88);
+  --text-on-dark-muted: rgba(255, 255, 255, 0.6);
+}
+
+/* ── 專案主題（換色盤）──
+   每個案例頁在 <main class="cs-page theme-xxx"> 掛一個 theme，
+   只覆寫大標主色 --text-heading；其餘文字階梯沿用全域中性值。
+   新增專案＝在這裡加一行 .theme-xxx { --text-heading: 主色 } 即可。 */
+.theme-advantech {
+  --text-heading: #093060;  /* 研華主色：深藍 */
 }
 
 * {
@@ -142,8 +172,13 @@ button {
   padding: 12px 24px;
   border-radius: 100px;
   background: var(--purple);
-  color: white;
+  color: #fff;
   line-height: 1;
+  transition: background-color 180ms ease;
+}
+
+.nav-links .resume-link:hover {
+  background: var(--purple-hover);
 }
 
 .nav-line {
@@ -381,13 +416,7 @@ button {
   border-radius: 200px;
   font-weight: 600;
   line-height: 1.4;
-  transition:
-    transform 180ms ease,
-    background-color 180ms ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
+  transition: background-color 180ms ease;
 }
 
 .button-primary {
@@ -395,8 +424,34 @@ button {
   color: white;
 }
 
+.button-primary:hover {
+  background: var(--purple-hover);
+}
+
+/* Dark：黑色填色 primary（非紫色 CTA 的強行動）。
+   hover 與紫色相反——底色「變淺」給回饋，因為黑已是最深。 */
+.button-dark {
+  background: var(--ink);
+  color: #fff;
+}
+
+.button-dark:hover {
+  background: var(--ink-hover);
+}
+
+/* Secondary：灰色 stroke，用 inset box-shadow 畫在元件「內側」，
+   不像 border 會撐出外框，與 primary 維持完全相同的外尺寸。 */
 .button-secondary {
-  border: 2px solid var(--ink);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--muted);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.button-secondary:hover {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--ink);
 }
 
 .projects-section {
@@ -677,7 +732,7 @@ button {
   justify-content: center;
   width: 100%;
   padding: 12px 0;
-  border-radius: 8px;
+  border-radius: 200px;
   color: white;
   font-weight: 500;
 }
@@ -688,31 +743,28 @@ button {
   background: var(--disabled);
 }
 
-.tone-peach .project-button {
-  background: var(--peach);
-}
-
-.tone-navy .project-button {
-  background: var(--blue);
-}
-
-.tone-advantech .project-button {
-  background: #00548a;
-}
-
-.project-card.tone-icecream .project-button {
-  background-color: #eb80a0;
+/* 上線專案的 CTA 全站統一紫色（CTA = purple 規則）。
+   專案的個性色保留在標籤與邊框，不再用在主按鈕上。
+   用 :not(.is-disabled) 確保未上線（資料準備中）的卡片不會被染成紫色，
+   一律落回下方的 --disabled 灰階。 */
+.tone-peach .project-button:not(.is-disabled),
+.tone-navy .project-button:not(.is-disabled),
+.tone-advantech .project-button:not(.is-disabled),
+.project-card.tone-icecream .project-button:not(.is-disabled),
+.project-card.tone-laushu .project-button:not(.is-disabled),
+.project-card.tone-thesis .project-button:not(.is-disabled) {
+  background: var(--purple);
   color: #ffffff;
+  transition: background-color 180ms ease;
 }
 
-.project-card.tone-laushu .project-button {
-  background-color: #4f59c5;
-  color: #ffffff;
-}
-
-.project-card.tone-thesis .project-button {
-  background-color: #6faa68;
-  color: #ffffff;
+.tone-peach .project-button:not(.is-disabled):hover,
+.tone-navy .project-button:not(.is-disabled):hover,
+.tone-advantech .project-button:not(.is-disabled):hover,
+.project-card.tone-icecream .project-button:not(.is-disabled):hover,
+.project-card.tone-laushu .project-button:not(.is-disabled):hover,
+.project-card.tone-thesis .project-button:not(.is-disabled):hover {
+  background: var(--purple-hover);
 }
 
 .contact-page-section {
@@ -823,18 +875,16 @@ button {
 
 .contact-form button {
   padding: 15px;
+  border-radius: 200px;
   background: var(--purple);
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    background-color 180ms ease,
-    transform 180ms ease;
+  transition: background-color 180ms ease;
 }
 
 .contact-form button:hover {
   background: var(--purple-hover);
-  transform: translateY(-1px);
 }
 
 .site-footer {
@@ -1499,7 +1549,12 @@ html[data-nav-hidden="true"] .year-rail {
   }
 
   .hero-actions .button-secondary {
-    border-width: 3px;
+    box-shadow: inset 0 0 0 3px var(--muted);
+  }
+
+  .hero-actions .button-secondary:hover {
+    background: var(--surface);
+    box-shadow: inset 0 0 0 3px var(--ink);
   }
 }
 
@@ -2117,19 +2172,107 @@ html[data-nav-hidden="true"] .year-rail {
   font-family: Inter, var(--font-space-grotesk), sans-serif;
 }
 
+/* TOC 錨點跳轉時，停駐點下移一個 navbar 高度(80px)，避免標題被固定 navbar 蓋住 */
+[id^="cs-sec-"] {
+  scroll-margin-top: 80px;
+}
+
+/* ── Case Study TOC (頁內目錄 / Scrollspy TOC) ──
+   TOC 不切版面欄位，改成左側浮動小卡，讓 full-bleed 圖能貫穿左右 */
+.cs-toc-layout {
+  position: relative;   /* 作為 scrollspy 「顯示區段」的觀察對象 */
+}
+
+.cs-toc-aside {
+  display: contents;    /* 不產生 box，不佔版面空間 */
+}
+
+.cs-toc {
+  display: none;        /* base：1024px 以下不顯示 */
+}
+
+.cs-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1.5px solid var(--line);
+}
+
+.cs-toc-link {
+  display: block;
+  padding: 6px 0 6px 14px;
+  margin-left: -1.5px;
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  border-left: 1.5px solid transparent;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.cs-toc-link:hover {
+  color: var(--ink);
+}
+
+.cs-toc-item--active .cs-toc-link {
+  color: var(--purple);
+  font-weight: 500;
+  border-left-color: var(--purple);
+}
+
+@media (min-width: 1024px) {
+  .cs-toc {
+    display: block;
+    position: fixed;
+    left: 20px;
+    /* navbar 顯示時(高 80px)其下方再留 48px */
+    top: calc(80px + 48px);
+    z-index: 50;
+    /* 寬度貼合最長標題（最小寬度），但不超過左留白 */
+    width: fit-content;
+    max-width: calc(var(--page-gutter) - 32px);
+    max-height: calc(100vh - 128px - 20px);
+    overflow-y: auto;
+    padding: 16px 14px;
+    box-sizing: border-box;
+    /* 與 navbar 同款半透明毛玻璃 */
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    /* 進出內容區段時淡入淡出，由 JS 切換 is-visible */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 260ms ease, visibility 260ms ease;
+  }
+
+  .cs-toc.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
 /* ── 共用 section 容器 ── */
 .cs-section {
-  padding: 48px clamp(24px, 12.5vw, 240px);
+  padding: 48px var(--page-gutter);
 }
 
 .cs-section-dark {
-  padding: 48px clamp(24px, 12.5vw, 240px);
+  padding: 48px var(--page-gutter);
   background: #131b24;
   color: white;
 }
 
 .cs-section-surface {
-  padding: 48px clamp(24px, 12.5vw, 240px);
+  padding: 48px var(--page-gutter);
   background: #ffffff;
 }
 
@@ -2140,7 +2283,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-heading {
   font-size: var(--fs-h2);
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-heading);
   margin: 0 0 24px;
   line-height: 1.22;
 }
@@ -2148,7 +2291,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-heading-white {
   font-size: var(--fs-h2);
   font-weight: 700;
-  color: #fff;
+  color: var(--text-on-dark);
   margin: 0 0 16px;
   line-height: 1.3;
 }
@@ -2177,7 +2320,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-body {
   font-size: var(--fs-body);
   line-height: 1.75;
-  color: #191919;
+  color: var(--text-body);
 }
 
 .cs-body-muted {
@@ -2201,7 +2344,7 @@ html[data-nav-hidden="true"] .year-rail {
 }
 
 .cs-hero-info {
-  padding: 48px clamp(24px, 12.5vw, 240px);
+  padding: 48px var(--page-gutter);
   border-bottom: 0;
 }
 
@@ -2240,7 +2383,7 @@ html[data-nav-hidden="true"] .year-rail {
   font-size: var(--fs-h1);
   font-weight: 700;
   line-height: 1.265;
-  color: #1a1a1a;
+  color: var(--text-heading);
   margin: 0 0 24px;
 }
 
@@ -2488,7 +2631,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-process-bg {
   position: relative;
   overflow: hidden;
-  padding: 72px clamp(24px, 12.5vw, 240px);
+  padding: 72px var(--page-gutter);
 }
 
 .cs-process-bg-img {
@@ -2501,7 +2644,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-process-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
@@ -2676,10 +2819,18 @@ html[data-nav-hidden="true"] .year-rail {
 }
 
 .cs-sub-section-desc {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-body);
   line-height: 1.75;
-  color: var(--muted);
+  color: var(--text-secondary);
   margin: 0 0 28px;
+}
+
+.cs-text-muted-blue {
+  color: #425466;
+}
+
+.cs-text-ink {
+  color: #191919;
 }
 
 /* === Section 01: AI Tool Cards === */
@@ -2691,6 +2842,7 @@ html[data-nav-hidden="true"] .year-rail {
 
 .cs-comp-card {
   background: #ddf1fe;
+  border: 1px solid #d5dfec;
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -2701,6 +2853,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-comp-card-img {
   width: 100%;
   height: 196px;
+  border: 1px solid #d5dfec;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -2740,8 +2893,8 @@ html[data-nav-hidden="true"] .year-rail {
 }
 
 .cs-comp-ems-card {
-  background: white;
-  border: 1px solid #416e94;
+  background: #f5faff;
+  border: 1px solid #cbdef4;
   border-radius: 8px;
   padding: 18px;
   display: flex;
@@ -2752,6 +2905,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-comp-ems-img {
   width: 232px;
   height: 163px;
+  border: 1px solid #cbdef4;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
@@ -3062,7 +3216,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-iv-stage {
   flex: 1;
   align-self: stretch;
-  background: white;
+  background: #fafdfe;
   border: 1px solid #cbdef4;
   border-radius: 8px;
   padding: 18px;
@@ -3150,6 +3304,31 @@ html[data-nav-hidden="true"] .year-rail {
   background: #005796;
   flex-shrink: 0;
   margin-top: 7px;
+}
+
+/* 桌機(≥810px)：用 grid + subgrid 讓三欄的 title / 痛點卡 / AI 卡各自跨欄等高。
+   ≤809px 不套用 → 沿用 base 的 flex，並由 809 斷點收成單欄堆疊。
+   放在 base 規則之後，確保 source order 蓋過 base 的 flex。 */
+@media (min-width: 810px) {
+  .cs-iv-workflow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    grid-template-rows: auto auto 1fr;
+    align-items: stretch;
+    column-gap: 16px;
+  }
+
+  .cs-iv-stage {
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-rows: subgrid;
+    row-gap: 14px;
+  }
+
+  .cs-iv-arrow {
+    grid-row: 1 / -1;
+    align-self: center;
+  }
 }
 
 /* === Interview Synthesis === */
@@ -3626,14 +3805,14 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-sol-blk-title {
   font-size: var(--fs-h2);
   font-weight: 700;
-  color: #093060;
+  color: var(--text-heading);
   margin: 0;
   line-height: 1.2;
 }
 
 .cs-sol-blk-desc {
   font-size: var(--fs-body);
-  color: #5d6674;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 25px;
   max-width: 920px;
@@ -3955,21 +4134,20 @@ html[data-nav-hidden="true"] .year-rail {
   position: relative;
 }
 
-.cs-sol-fc-stripe {
-  height: 66px;
+.cs-sol-fchead {
   background: linear-gradient(269.45deg, rgba(255, 255, 255, 0) 0%, rgb(203, 222, 244) 62.975%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  padding: 24px 28px;
+}
+
+.cs-sol-fc--teal .cs-sol-fchead {
+  background: linear-gradient(269.45deg, rgba(255, 255, 255, 0) 0%, rgb(221, 241, 254) 62.975%);
 }
 
 .cs-sol-fcbody {
   padding: 24px 28px 28px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  position: relative;
+  gap: 0;
 }
 
 .cs-sol-ftitle {
@@ -3980,10 +4158,14 @@ html[data-nav-hidden="true"] .year-rail {
   line-height: 28px;
 }
 
+.cs-sol-fc--teal .cs-sol-ftitle {
+  color: #083b4c;
+}
+
 .cs-sol-fsub {
   font-size: var(--fs-sm);
   color: #5d6674;
-  margin: 0;
+  margin: 0 0 24px;
   line-height: 22px;
 }
 
@@ -4022,6 +4204,8 @@ html[data-nav-hidden="true"] .year-rail {
   min-width: 0;
   border-radius: 12px;
   overflow: hidden;
+  border: 1px solid #d5dfec;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.07);
 }
 
 .cs-sol-fnote {
@@ -4341,7 +4525,7 @@ html[data-nav-hidden="true"] .year-rail {
 /* ── Next Step ── */
 .cs-ns-section {
   background: #ffffff;
-  padding: 96px clamp(24px, 12.5vw, 240px);
+  padding: 96px var(--page-gutter);
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -4366,6 +4550,16 @@ html[data-nav-hidden="true"] .year-rail {
   line-height: 1.75;
   margin: 0;
 }
+
+.cs-sub-section-desc.cs-text-muted-blue,
+.cs-sol-blk-desc.cs-text-muted-blue {
+  color: #425466;
+}
+
+.cs-ns-desc.cs-text-ink {
+  color: #191919;
+}
+
 .cs-ns-divider {
   width: 100%;
   height: 1px;
@@ -4379,7 +4573,7 @@ html[data-nav-hidden="true"] .year-rail {
 }
 .cs-ns-card {
   flex: 1;
-  background: white;
+  background: #fafdfe;
   border: 1px solid #d5dfec;
   border-radius: 20px;
   padding: 32px;
@@ -4466,7 +4660,7 @@ html[data-nav-hidden="true"] .year-rail {
 .cs-result-bg {
   position: relative;
   overflow: hidden;
-  padding: 72px clamp(24px, 12.5vw, 240px);
+  padding: 72px var(--page-gutter);
 }
 
 .cs-result-bg-img {
@@ -4534,7 +4728,7 @@ html[data-nav-hidden="true"] .year-rail {
   gap: 24px;
   align-items: center;
   justify-content: flex-end;
-  padding: 48px clamp(24px, 12.5vw, 240px);
+  padding: 48px var(--page-gutter);
   background: #fff;
 }
 .cs-next-btn-outline {
@@ -4542,20 +4736,20 @@ html[data-nav-hidden="true"] .year-rail {
   align-items: center;
   justify-content: center;
   padding: 16px 24px;
-  border: 2px solid #000;
   border-radius: 200px;
   background: #fff;
+  box-shadow: inset 0 0 0 2px var(--muted);
   font-size: var(--fs-body);
   font-weight: 600;
-  color: #000;
+  color: var(--ink);
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, box-shadow 0.15s;
 }
 .cs-next-btn-outline:hover {
-  background: #000;
-  color: #fff;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--ink);
 }
 .cs-next-btn-filled {
   display: flex;
@@ -4598,6 +4792,41 @@ html[data-nav-hidden="true"] .year-rail {
   }
 }
 
+/* Role radial cannot keep fixed-height cards once the card width gets this narrow. */
+@media (max-width: 900px) {
+  .cs-role-radial {
+    display: grid;
+    min-height: 0;
+    gap: 16px;
+  }
+
+  .cs-role-center {
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-self: center;
+    width: 184px;
+    height: 184px;
+    transform: none;
+  }
+
+  .cs-role-card {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .cs-role-connectors {
+    display: none;
+  }
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
   :root {
@@ -4605,6 +4834,8 @@ html[data-nav-hidden="true"] .year-rail {
     --fs-h2: 22px;
     --fs-h3: 18px;
     --fs-h4: 16px;
+    /* 手機維持原本舒適留白，不被大螢幕的加大 gutter 波及 */
+    --page-gutter: clamp(20px, 6vw, 48px);
   }
 
   .cs-title {

@@ -37,7 +37,8 @@
 
 > **顏色可以換，框架不變。**
 
-每個專案有自己的主色調，標籤、按鈕、強調色跟著走——但卡片格式、資訊架構、排版結構保持一致。
+每個專案有自己的主色調，標籤、強調色跟著走——但卡片格式、資訊架構、排版結構保持一致。
+（**例外：CTA 按鈕不跟 tone 走，全站統一紫色**，見 2.4 與 4.1。）
 這樣做有兩個好處：每個案子有個性，同時整體作品集看起來有系統感；而且加新案子時不用每次重新設計版面，才不會做得又慢又痛苦。
 
 ---
@@ -89,19 +90,22 @@
 
 ### 2.4 每個專案的 Tone 色
 
-每個專案卡片有自己的 `tone-xxx` class，定義標籤背景色、標籤文字色、CTA 按鈕色。
+每個專案卡片有自己的 `tone-xxx` class，定義標籤背景色、標籤文字色。
 **加新專案時，在 `globals.css` 新增一個 `.tone-新專案名` 的段落，不要改到其他 tone。**
 
-| Class | 標籤文字色 | 標籤底色 | 按鈕色 | 狀態 |
+> **CTA 按鈕色不再跟著 tone 走。** 全站上線專案的 CTA 一律 `var(--purple)`，
+> 專案個性只保留在「標籤文字色 + 標籤底色」。未上線專案維持 `--disabled` 灰。
+
+| Class | 標籤文字色 | 標籤底色 | CTA 按鈕色 | 狀態 |
 |---|---|---|---|---|
-| `tone-brown` | `#705650` | `#e8e2e0` | `#dedee4` | 未上線 |
-| `tone-green` | `#477a6b` | `#d6ebe3` | `#dedee4` | 未上線 |
-| `tone-peach` | `#a83b1e` | `#fce8e2` | `#a83b1e` | 上線 |
-| `tone-navy` | `#416484` | `#dce5ed` | `#416484` | 上線 |
-| `tone-advantech` | `#004b85` | `#d9f1ff` | `#00548a` | 上線 |
-| `tone-icecream` | `#aa2d53` | `#ffe2ea` | `#eb80a0` | 上線 |
-| `tone-laushu` | `#3b3475` | `#f5eeff` | `#4f59c5` | 上線 |
-| `tone-thesis` | `#2d462a` | `#e6ffe3` | `#6faa68` | 上線 |
+| `tone-brown` | `#705650` | `#e8e2e0` | `--disabled` | 未上線 |
+| `tone-green` | `#477a6b` | `#d6ebe3` | `--disabled` | 未上線 |
+| `tone-peach` | `#a83b1e` | `#fce8e2` | `--purple` | 上線 |
+| `tone-navy` | `#416484` | `#dce5ed` | `--purple` | 上線 |
+| `tone-advantech` | `#004b85` | `#d9f1ff` | `--purple` | 上線 |
+| `tone-icecream` | `#aa2d53` | `#ffe2ea` | `--purple` | 上線 |
+| `tone-laushu` | `#3b3475` | `#f5eeff` | `--purple` | 上線 |
+| `tone-thesis` | `#2d462a` | `#e6ffe3` | `--purple` | 上線 |
 
 ---
 
@@ -156,15 +160,34 @@ font-family: var(--font-roboto-condensed), var(--font-space-grotesk), sans-serif
 
 形狀：Pill（`border-radius: 200px`），高度 `min-height: 48px`
 
-| 類型 | 底色 | 文字色 | 邊框 |
-|---|---|---|---|
-| Primary | `#5d62d8` | `#ffffff` | — |
-| Secondary | `transparent` | `--ink` | `2px solid --ink`（手機 `3px`）|
-| Disabled | `#dedee4` | `#ffffff` | — |
+**語意三層（對齊 Apple HIG「一個畫面只有一個主 CTA」）：**
 
-Hover：`translateY(-2px)` 微浮起，`180ms ease`。Hover 底色換 `var(--purple-hover)`。
+| 類型 | 底色 | 文字色 | 描邊（stroke） | 語意 |
+|---|---|---|---|---|
+| Primary（紫色 CTA） | `--purple` | `#ffffff` | — | 「我最希望你點這裡」（轉換型 CTA） |
+| Primary（黑色） | `--ink` | `#ffffff` | — | 強行動，但非紫色轉換 CTA（如 Hero「我的歷程」→ 關於我頁） |
+| Secondary（次要） | `transparent` | `--ink` | 灰色 `--muted`，`inset 0 0 0 2px`（手機 `3px`） | 「也可以點，但不是重點」 |
+| Disabled（停用） | `--disabled` | `#ffffff` | — | 「還不能點」（未上線專案） |
 
-**導覽列 resume 按鈕例外：** `min-height: 38px`（比標準小 10px）。原因是導覽列高度只有 80px，38px 讓按鈕在 nav 內比例正確，不顯得過大。這是唯一的例外，其他按鈕一律 48px。
+> **紫色 vs 黑色 primary 怎麼選：** 紫色保留給「希望訪客轉換」的 CTA（下載履歷、聯絡、看專案）；黑色 primary 用在「重要但不是轉換目標」的強行動（Hero「我的歷程」）。同屏出現時，紫色永遠是視覺第一順位。對應 class：`.button-primary`（紫）/ `.button-dark`（黑）。
+
+**Secondary 描邊用 `box-shadow: inset` 而非 `border`：** inset 陰影畫在元件內側，不會像 border 一樣把外框撐大，secondary 與 primary 的外尺寸完全一致。顏色用灰色 `--muted (#8e8e9c)`，比黑框更低調，符合「次要」的語意。
+
+**Hover 規則（全站統一）：** 按鈕 hover **不做位移**（不上浮、不縮放），只靠底色/描邊變化給回饋，`180ms ease`，維持克制的調性。變化依類型：
+
+| 類型 | Hover 行為 |
+|---|---|
+| Primary（紫色） | 底色加深 → `var(--purple-hover)`（與專案卡 CTA 一致） |
+| Primary（黑色） | 底色變淺 → `var(--ink-hover) #555`（與紫色相反方向；黑已是最深，只能往淺走）。用於 Hero「我的歷程」 |
+| Secondary（灰描邊） | 底色填淺灰 `var(--surface)` + 描邊由 `--muted` 加深成 `--ink`（不反白、不填深色） |
+
+設計邏輯：填色按鈕 hover 往「更實」的方向（紫色加深）給回饋；secondary 本來是空心的，hover 才浮出一層淺灰底暗示可點。黑色 primary 因為本身已是最深，hover 只能往變淺走。
+
+**全站只有 CTA 用紫色，其餘一律黑白。** 一個畫面（一屏）盡量只出現一顆紫色主按鈕，避免焦點被稀釋。
+
+**導覽列 resume 按鈕：** `min-height: 38px`（比標準小 10px，因導覽列高度只有 80px，38px 讓比例正確）。樣式為 **Primary 紫色 CTA**——「下載履歷」是求職情境最重要的常駐行動，刻意用紫色讓它在每一頁都隨手可達。這是「一屏一主 CTA」的**刻意例外**：它與 Hero 主按鈕同屏出現兩顆紫是可接受的，因為導覽列的履歷是全站固定的招募入口，不屬於單一頁面的內容行動。除了高度，其他按鈕一律 48px。
+
+**用詞原則：** 動詞或名詞短語開頭、簡短、口吻沈穩。避免同一個詞（如「了解更多」）在不同地方指不同目的地。Hero 主按鈕用「我的歷程」引導進關於我頁；專案卡 hover 用「了解更多」進案例頁。
 
 ---
 

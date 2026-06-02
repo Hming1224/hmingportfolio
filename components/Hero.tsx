@@ -57,8 +57,8 @@ export default function Hero() {
           <a className="button button-secondary" href="#projects">
             查看作品
           </a>
-          <a className="button button-primary" href="/about-me">
-            了解更多
+          <a className="button button-dark" href="/about-me">
+            我的歷程
           </a>
         </div>
       </div>

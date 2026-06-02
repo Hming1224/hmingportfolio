@@ -1,5 +1,11 @@
 # Project Memory
 
+## 2026-06-02 Local dev server / visual check preference
+
+- 檢查網站或做視覺驗證時，優先共用既有的 `localhost:3000` / port 3000 dev server。
+- 只有在確認 port 3000 沒有開、或該服務不是目前專案時，才另外啟動新的 dev server 或改用其他 port。
+- 這點很重要：不要因為要檢查頁面就直接另開 3001、3002，避免多個 dev server 混在一起造成驗證對錯頁。
+
 ## 2026-05-31 Advantech role connector details
 
 - Page: `/advantech`
@@ -60,7 +66,7 @@ Page: `/advantech`. Files: `app/advantech/page.tsx`, `app/advantech/FlowConnecto
 ### 水平捲動斷點
 
 - 流程圖 **≤809px 改水平捲動**（像「設計流程」），不收單欄。`.cs-ds-flow-inner { min-width: 607px }` ＝ 809px 視窗時的內容區寬。
-- **內容區寬公式**：`.cs-section` padding 是 `clamp(24px, 12.5vw, 240px)`，所以在 192–1920px 之間 **內容寬 = 0.75 × 視窗寬**。算捲動/斷點門檻都靠這條。
+- **內容區寬公式（已於 2026-06-02 更新，見下方「頁面留白變數化」）**：原本 padding `clamp(24px, 12.5vw, 240px)` → 內容寬 = 0.75 × 視窗寬。**現已改成 `--page-gutter: clamp(24px, 15.6vw, 300px)`**，1920px 時 padding 達 300、內容寬約 0.69 × 視窗（1320px）；手機 ≤768 另用較小 gutter。算斷點門檻請以新值為準。
 - ≤1100px 改用緊湊等寬三欄（`grid-template-columns: 1fr 1fr 1fr; column-gap: 28px`），>1100px 才用 Figma 不等寬百分比版面。
 
 ### Before / After 圖片等比例縮放
@@ -86,3 +92,103 @@ Page: `/advantech`. Files: `app/advantech/page.tsx`, `app/advantech/FlowConnecto
 ### 新增
 
 - hero 新增「團隊成員」資訊卡（2 位設計師、2 位後端工程師、1 位 PM），hero 變 4 欄並排。
+
+## 2026-06-02 全站按鈕系統統一（design guideline 大調整）
+
+Files: `app/globals.css`、`components/Hero.tsx`、`components/Works.tsx`、`design.md`（設計聖經全面同步）。對齊 Apple HIG 按鈕層級。
+
+### 顏色：CTA = 紫色，其餘黑白
+
+- **專案卡 CTA 全站統一 `--purple`**，不再跟 tone 走（原本 peach/navy/advantech/icecream/laushu/thesis 各用各色）。專案個性只保留在標籤文字色＋標籤底色。
+- **specificity 踩坑**：紫色群組用 `.project-card.tone-xxx .project-button`（0,3,0）會蓋過 `.project-button.is-disabled`（0,2,0），導致 disabled 卡片誤顯紫色。**解法＝紫色規則全部加 `:not(.is-disabled)`**，讓未上線卡片一定落回 `--disabled` 灰階。
+- `--purple` 只給「希望訪客轉換」的 CTA（下載履歷、聯絡送出、看專案）。
+
+### Disabled：無連結專案 = 資料準備中 + 灰階
+
+- 9 個專案中**只有研華（`/advantech`）有真實連結**，其餘 8 個 `href:"#"`（點了原地不動）全部改 `disabled: true` + cta「資料準備中」（`components/Works.tsx` 資料層）。
+- disabled 樣式：`.project-button.is-disabled { background: var(--disabled) }`（#dedee4 灰底白字）。
+
+### Secondary：灰色描邊，且描邊「在內」
+
+- Secondary（Hero 查看作品、案例頁返回首頁）改用 **灰色 `--muted` (#8e8e9c)** 描邊。
+- **描邊用 `box-shadow: inset 0 0 0 2px`（手機 3px），不用 `border`**。原因：border 會撐大外框、視覺比 primary 大；inset 陰影畫在元件內側，secondary 與 primary 外尺寸完全一致。
+
+### Hover：不位移，只變色/描邊（克制調性）
+
+- **移除所有 `translateY` 上浮**（原 `.button:hover -2px`、contact button `-1px` 都拿掉）。
+- Primary 紫色 hover → 底色加深 `--purple-hover`。
+- Primary 黑色 hover → 底色**變淺** `--ink-hover (#555)`（黑已最深，只能往淺；方向跟紫色相反）。
+- Secondary hover → 底色填淺灰 `--surface` + 描邊由 `--muted` 加深成 `--ink`（不反白、不填深色）。
+
+### 黑色 primary 變體
+
+- 新增 `.button-dark`（`--ink` 底白字），用於 **Hero「我的歷程」**（強行動但非轉換 CTA，連到關於我頁）。`.button-primary`（紫色 CTA）保留給未來用。
+- 新增 token `--ink-hover: #555555`。
+
+### 導覽列履歷 = 紫色 CTA（刻意例外）
+
+- 「下載履歷」用紫色 primary。這是「一屏一主 CTA」原則的**刻意例外**——履歷是全站常駐招募入口，與 Hero 同屏出現兩顆紫可接受。
+
+### 形狀：全部 pill 200px
+
+- 補齊兩個漏網的小圓角按鈕：專案卡 button（`8px`→`200px`）、聯絡送出 button（原與 input 共用 `8px`，獨立出 `200px`；input/textarea 維持 8px）。全站填色/描邊按鈕共 5 顆皆 pill。
+
+### 文字
+
+- Hero 主按鈕「了解更多」→「我的歷程」（避免「了解更多」一詞在 Hero 與專案卡 hover 各指不同目的地）。
+
+### 驗證方式
+
+- 無法用 Playwright（瀏覽器 profile 被佔用、pkill 權限被拒），改**讀 dev server 編譯後 CSS**（`/_next/static/css/app/layout.css`）逐條比對 token 與規則；最後使用者手動確認外觀無誤。
+
+## Figma 對應節點（從 Agent 層搬來，屬本專案技術細節）
+
+- **Scenario 1 ProposalTabs**：component set `2346:113`；Tab 1 圖片集 `2365:67055`（5 slides）、Tab 2 `2365:67056`（6 slides）、Tab 3 `2365:67057`（5 slides）。下次需要重抓直接對這些 node ID 操作。
+
+## 2026-06-02 /advantech「最終 3 種 feature」connector 踩坑（1025–1439px）
+
+（此筆原在 `000_Agent/memory/MEMORY.md`，因屬單一頁面技術 debug，移到專案層。）
+
+- **問題範圍只有 1025–1439px**，其他斷點不要跟著亂改。此範圍第一張圖從左右排列變成「文字卡在上、圖片在下」，所以第一張到第二張的 connector 不能沿用 1440px+ 的幾何假設。
+- 正確測量基準是「圖片下緣到下一張圖片上緣」的圖距，不是文字卡位置。第一條 connector 必須同時滿足：(1) 圖距與第二條一致、(2) 視覺比例與第二條一致、(3) 上端對第一張圖中心、(4) 底端對第二張圖中心。
+- **走錯過的路**：① React/inline script 動態寫 `img style` → hydration mismatch；② `next/script afterInteractive` 或獨立 client component → in-app browser / dev bundle hydration 不穩、effect 沒可靠執行；③ 固定 482×211 → 第一條視覺比第二條大、端點偏右。
+- **有效解法**：不依賴 JS hydrate，改用 **CSS 幾何定位 + 專用 `connector-1-mid.svg`**；在 `@media (min-width: 1025px) and (max-width: 1439px)` 內，第一條用 `content: url('/projects/advantech-figma/sol06/connector-1-mid.svg')`、`margin-left: calc(20% - 40px)`、`width: calc(30% + 40px)`，其他 connector 用同寬與 `margin-left: calc(35% - 20px)`。
+- **Next dev 踩坑**：用 `127.0.0.1:3000` 會有 HMR cross-origin WebSocket error → 在 `next.config.ts` 加 `allowedDevOrigins: ['127.0.0.1']` 並重啟。
+- **驗證**：看 1025 / 1200 / 1439px 三點 → `topDelta=0`、`bottomDelta=0`、第一/第二段 gaps 一致、hydration/HMR console error 為 0。
+
+## 2026-06-02 /advantech 頁內目錄(TOC) + 頁面留白變數化 + 文字色 token
+
+Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(新)。
+
+### 頁面左右留白變數化 `--page-gutter`
+
+- 把全站 9 處重複的水平 padding magic value 抽成 **`--page-gutter: clamp(24px, 15.6vw, 300px)`**(原 `clamp(24px, 12.5vw, 240px)`)。`.cs-section` 等全部改 `padding: 48px var(--page-gutter)`，改一個變數整頁生效。
+- `15.6vw` 讓 **1920px 時 padding 剛好 300**(內容更收斂、約 0.69×視窗)；1440→225、1280→200。
+- **手機保護**:`@media (max-width: 768px)` 內把 `--page-gutter` 覆寫成 `clamp(20px, 6vw, 48px)`，否則 15.6vw 會把手機內容壓太窄(390px 只剩 268)。
+- 內部元素全是 flex/grid/百分比，padding 一改就自動縮，**不用逐一手動調**。
+
+### TOC(頁內目錄 / scrollspy)——左側半透明浮卡
+
+- 元件 `CaseTOC.tsx`('use client')，props `sections:{id,title}[]`。`page.tsx` 在各 section 加 `id="cs-sec-*"`、外層包 `.cs-toc-layout`。最後一項標題是「學習反思」(對應「我學到了什麼…」段)。
+- **scrollspy**:`IntersectionObserver` 監看各 section 更新 active；點擊 `scrollIntoView({behavior:smooth})` 並暫鎖 observer 1s 防跳。
+- **關鍵踩坑:不要用 grid 切一欄給 TOC**。一旦 grid 把 section 推到右欄，full-bleed 背景圖(如「設計流程」工廠圖)左邊會被切出一條白欄、很醜。**正解＝section 全寬不切欄，TOC 用 `position: fixed` 浮在左側、完全不佔版面**。
+- TOC 樣式:`left: 20px`、`top: calc(80px + 48px)`(navbar 高 80 + 48)、底色 `rgba(255,255,255,0.94)` + `backdrop-filter: blur(16px)`(與 navbar 同款毛玻璃)、圓角。
+- **寬度用 `width: fit-content` + `max-width: calc(var(--page-gutter) - 32px)`**:貼合最長標題(最小寬度，約 116px)，且永遠不超過左留白、不蓋內容(1024px gutter 小時自動更窄)。`.cs-toc-link { white-space: nowrap }` 保證單行。
+- **斷點 ≥1024 才顯示**(base `display:none`，`@media (min-width:1024px)` 顯示)。
+- **進出內容區才淡入**:第二個 `IntersectionObserver` 監看 `.cs-toc-layout`，`is-visible` class 控 opacity，hero/footer 區淡出。
+- **錨點不被 navbar 蓋**:`[id^="cs-sec-"] { scroll-margin-top: 80px }`，點 TOC 跳轉後 section 標題停在 navbar(80px)正下方。
+
+### 介面圖加描邊+陰影
+
+- solution「最終 3 種 feature」14 張 `.cs-sol-fimg` 加 `border: 1px solid #d5dfec`(與右側資訊卡 `.cs-sol-fc` 同色)+ 輕陰影 `box-shadow: 0 2px 16px rgba(0,0,0,0.07)`。
+
+### 文字色 token 階梯(語意化)——★只套骨架、不套元件
+
+- token:`--text-heading`(大標)、`--text-body:#1f2933`(內文)、`--text-secondary:#5d6674`(副標/說明)、`--text-muted:#8e8e9c`;深底反轉組 `--text-on-dark:#fff` / `-body:rgba(255,255,255,.88)` / `-muted:rgba(255,255,255,.6)`。
+- **★分層 theming(換色盤)——大標主色跟著各專案走,不是全域寫死**:
+  - **全域 `:root` 只放「綁定規則 + 中性預設」**,所有專案共用:`--text-heading: #1a1a1a`(中性)、body/secondary/muted 等。
+  - **每個案例頁在 `<main class="cs-page theme-xxx">` 掛 theme,只覆寫 `--text-heading` 一個主色值**。Advantech＝`.theme-advantech { --text-heading: #093060 }`(研華深藍)。新增專案就在 globals.css 加一行 `.theme-xxx { --text-heading: 主色 }`,內文/副標/標籤中性階全專案共用、不必覆寫。
+  - 原因:研華主色是深藍,但每個專案主色不同;若把深藍寫死在全域,其他專案標題會誤吃深藍。**綁定規則共用一次、主色每專案覆寫一行** = 不重定義整套、也不犧牲各專案品牌色。
+- **★關鍵原則:token 只套「純大標 / 內文 / 副標題」這 6 個骨架 class**:`cs-title`、`cs-heading`、`cs-heading-white`、`cs-body`、`cs-sol-blk-title`、`cs-sol-blk-desc`。**label、Tab、卡片內字級不套**,各自保留原本調好的顏色。
+- **踩坑:不要用色值 `replace_all` 全域套 token**——會誤傷卡片內標題/desc/legend/tab(共 41 處)。正解是白名單精準套;若已誤套，用 `git show HEAD:` 取原始檔、腳本比對 selector→原色，把非白名單還原。
+- 彩色(`--purple`、`#0072bd` 藍、分類標籤色)屬 accent/分類色,**不納入文字階梯**,刻意保留頁面的彩色層次。

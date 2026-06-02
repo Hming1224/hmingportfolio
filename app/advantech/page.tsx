@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ProposalTabs from "./ProposalTabs";
@@ -7,6 +8,7 @@ import FeatureConnectors from "./FeatureConnectors";
 import FlowConnectors from "./FlowConnectors";
 import AlarmLevelDemo from "./AlarmLevelDemo";
 import ScrollProgress from "../../components/ScrollProgress";
+import CaseTOC, { type TocSection } from "../../components/CaseTOC";
 
 export const metadata: Metadata = {
   title: "生成式AI能源管理系統 — Brian Huang",
@@ -55,9 +57,22 @@ const processSteps = [
   { num: "06", title: "互動介面影片", desc: "製作影片展示最終設計體驗，向利害關係人溝通並作為開發對齊依據。" },
 ];
 
+const tocSections: TocSection[] = [
+  { id: 'cs-sec-overview',    title: '專案背景' },
+  { id: 'cs-sec-background',  title: '產品背景' },
+  { id: 'cs-sec-role',        title: '我的角色' },
+  { id: 'cs-sec-process',     title: '設計流程' },
+  { id: 'cs-sec-analysis',    title: '競品分析' },
+  { id: 'cs-sec-interview',   title: '使用者訪談' },
+  { id: 'cs-sec-scenario',    title: '設計情境' },
+  { id: 'cs-sec-solution',    title: '設計成果' },
+  { id: 'cs-sec-next',        title: '下一步' },
+  { id: 'cs-sec-result',      title: '學習反思' },
+];
+
 export default function AdventechPage() {
   return (
-    <main className="cs-page">
+    <main className="cs-page theme-advantech">
       <ScrollProgress />
       <Navbar />
 
@@ -112,8 +127,15 @@ export default function AdventechPage() {
         </div>
       </section>
 
+      {/* ── TOC Layout: wraps all sections from 02 to Result ── */}
+      <div className="cs-toc-layout">
+        <aside className="cs-toc-aside">
+          <CaseTOC sections={tocSections} />
+        </aside>
+        <div className="cs-toc-main">
+
       {/* ── 02 Overview ── */}
-      <section className="cs-section">
+      <section id="cs-sec-overview" className="cs-section">
         <h2 className="cs-heading">專案背景</h2>
         <div className="cs-divider" />
         <div className="cs-overview-body">
@@ -136,7 +158,7 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 02.5 Product Background ── */}
-      <section className="cs-section-surface">
+      <section id="cs-sec-background" className="cs-section-surface">
         <h2 className="cs-heading">認識 ECOWatch 與 HVAC 模組</h2>
         <div className="cs-divider" />
         <p className="cs-body-muted" style={{ marginBottom: 32 }}>
@@ -200,7 +222,7 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 02.6 My Role ── */}
-      <section className="cs-section">
+      <section id="cs-sec-role" className="cs-section">
         <h2 className="cs-heading">我在這個專案做了什麼...</h2>
         <div className="cs-divider" />
         <div className="cs-role-radial">
@@ -236,7 +258,7 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 04 Process ── */}
-      <section className="cs-process-bg">
+      <section id="cs-sec-process" className="cs-process-bg">
         <div className="cs-process-bg-img">
           <Image
             src="/projects/advantech-figma/process-bg.png"
@@ -299,7 +321,7 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 03 Competitive Analysis ── */}
-      <section className="cs-section">
+      <section id="cs-sec-analysis" className="cs-section">
         <h2 className="cs-heading">從競品功能比較，定義 GenAI Chatbot 的設計機會</h2>
         <div className="cs-divider" />
         <p className="cs-body-muted" style={{ marginBottom: 36 }}>
@@ -309,7 +331,7 @@ export default function AdventechPage() {
         {/* 01 */}
         <div className="cs-sub-section">
           <h3 className="cs-sub-section-heading">01 / 產業 AI 工具提供的互動模式</h3>
-          <p className="cs-sub-section-desc">
+          <p className="cs-sub-section-desc cs-text-muted-blue">
             從 4 個產業 AI 工具中整理出可借鏡的互動模式：摘要、洞察、建議與告警。這些能力可轉化成能源管理場景中的資料理解與主動提醒。
           </p>
           <div className="cs-comp-grid">
@@ -334,7 +356,7 @@ export default function AdventechPage() {
         {/* 02 */}
         <div className="cs-sub-section">
           <h3 className="cs-sub-section-heading">02 / 能源管理與設備管理競品分析</h3>
-          <p className="cs-sub-section-desc">
+          <p className="cs-sub-section-desc cs-text-muted-blue">
             市場上的能源管理系統已開始把設備監控、能源分析、成本最佳化與 AI 洞察整合在同一個工作流程中。
           </p>
           <div className="cs-comp-ems-grid">
@@ -367,7 +389,7 @@ export default function AdventechPage() {
         {/* 03 */}
         <div className="cs-sub-section">
           <h3 className="cs-sub-section-heading">03 / AI 功能比較與設計機會</h3>
-          <p className="cs-sub-section-desc">
+          <p className="cs-sub-section-desc cs-text-muted-blue">
             比對研華已上線的功能與市場競品的區別，找出後續可以深化的機會點。
           </p>
           {/* Grid: 2 cols (feature matrix | opportunity). Rows share height automatically. */}
@@ -449,7 +471,7 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 04 User Interview ── */}
-      <section className="cs-section-surface">
+      <section id="cs-sec-interview" className="cs-section-surface">
         <h2 className="cs-heading">透過專案訪談，理解能源與廠務管理的實際工作流程</h2>
         <div className="cs-divider" />
         <p className="cs-body-muted" style={{ marginBottom: 36 }}>
@@ -481,7 +503,7 @@ export default function AdventechPage() {
         {/* 01 Factory Workflow */}
         <div className="cs-sub-section">
           <h3 className="cs-sub-section-heading">01 / 內部廠務人員：設備能耗盤查工作流</h3>
-          <p className="cs-sub-section-desc">資深廠務管理人員在設備能耗盤查中，需要從設備異常查找、報修、維修到後續追蹤一路處理，但目前許多判斷仍依賴人工經驗與分散資料。</p>
+          <p className="cs-sub-section-desc cs-text-muted-blue">資深廠務管理人員在設備能耗盤查中，需要從設備異常查找、報修、維修到後續追蹤一路處理，但目前許多判斷仍依賴人工經驗與分散資料。</p>
           <div className="cs-iv-workflow">
             <div className="cs-iv-stage">
               <h4 className="cs-iv-stage-title">設備異常查找</h4>
@@ -506,7 +528,7 @@ export default function AdventechPage() {
         {/* 02 SI Workflow */}
         <div className="cs-sub-section">
           <h3 className="cs-sub-section-heading">02 / 系統整合商：能源分析工作流</h3>
-          <p className="cs-sub-section-desc">SI 訪談指出，能源分析工作常卡在資料串接、判讀空間與報告產出。當資料不能直接對應設備與能源管理資訊時，使用者很難快速形成可執行的節能決策。</p>
+          <p className="cs-sub-section-desc cs-text-muted-blue">SI 訪談指出，能源分析工作常卡在資料串接、判讀空間與報告產出。當資料不能直接對應設備與能源管理資訊時，使用者很難快速形成可執行的節能決策。</p>
           <div className="cs-iv-workflow">
             <div className="cs-iv-stage">
               <h4 className="cs-iv-stage-title">調用資料</h4>
@@ -558,7 +580,7 @@ export default function AdventechPage() {
 
 
       {/* ── 05 Design Scenario ── */}
-      <section className="cs-section">
+      <section id="cs-sec-scenario" className="cs-section">
         <h2 className="cs-heading">AI 應用情境：從底層機制到介面落地</h2>
         <div className="cs-divider" />
         <p className="cs-body-muted" style={{ marginBottom: 48 }}>
@@ -699,19 +721,19 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 06 Solution ── */}
-      <section className="cs-section-surface cs-solution-section">
+      <section id="cs-sec-solution" className="cs-section-surface cs-solution-section">
         {/* Header */}
         <h2 className="cs-heading">設計發想、迭代與最終方案</h2>
         <div className="cs-divider" />
         <p className="cs-body-muted" style={{ marginBottom: 56 }}>
-          在研究與情境收斂後，我將兩個 AI 應用方向推進到介面設計：從早期提案、回饋修正到第二次迭代，逐步釐清告警、分析與建議產出的操作流程。
+          依據前述定義的設計情境，後續迭代將聚焦在幾個會直接影響決策判斷的介面：AI Chatbot、超約預警分析視窗、設備能耗異常分析視窗，以及其中的圖表、資料表與 AI 建議區塊。
         </p>
 
         {/* ── BrainStorming Block ── */}
         <div className="cs-sol-block">
           <span className="cs-sol-tag" style={{ background: "#e0f8fc", color: "#0072bd" }}>BrainStorming</span>
           <h3 className="cs-sol-blk-title">2 種情境的設計發想</h3>
-          <p className="cs-sol-blk-desc">先從兩個情境拆出核心使用任務與 AI 介入點，定義後續迭代要驗證的頁面入口、通知方式與建議回饋。</p>
+          <p className="cs-sol-blk-desc cs-text-muted-blue">先從兩個情境拆出核心使用任務與 AI 介入點，定義後續迭代要驗證的頁面入口、通知方式與建議回饋。</p>
 
           {/* Scenario 1 */}
           <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech-figma/sol06/flow-sc1.png')" }}>
@@ -820,7 +842,7 @@ export default function AdventechPage() {
         <div className="cs-sol-block">
           <span className="cs-sol-tag" style={{ background: "#f6f1fd", color: "#7d4fb9", borderRadius: 999 }}>Design Iteration</span>
           <h3 className="cs-sol-blk-title">兩種情境的頁面與元件迭代</h3>
-          <p className="cs-sol-blk-desc">依據 05 Design Scenario 的情境邏輯，我將提案拆成頁面入口、關鍵元件與操作回饋三個層次，逐步修正資訊優先級與使用者決策路徑。</p>
+          <p className="cs-sol-blk-desc cs-text-muted-blue">迭代時主要檢視資訊優先級是否清楚、資料呈現是否符合廠務人員的判讀習慣，以及使用者能否在最少的操作成本下，從異常提示一路理解原因並採取下一步行動。</p>
 
           {/* Board 1: Scenario 1 - AI Chatbot 元件 */}
           <div className="cs-sol-board">
@@ -982,15 +1004,16 @@ export default function AdventechPage() {
         <div className="cs-sol-block">
           <span className="cs-sol-tag" style={{ background: "#fff4e3", color: "#f69418" }}>Final UI Design</span>
           <h3 className="cs-sol-blk-title">最終 3 種 feature 的介面細節</h3>
-          <p className="cs-sol-blk-desc">最終介面聚焦在告警提示、進階分析與建議生成，讓使用者能從異常發現一路走到決策行動。</p>
+          <p className="cs-sol-blk-desc cs-text-muted-blue">最終介面聚焦在告警提示、進階分析與建議生成，讓使用者能從異常發現一路走到決策行動。</p>
 
           {/* Feature 1.1 */}
           <div className="cs-sol-fgroup cs-sol-fgroup-f11">
           <div className="cs-sol-fr">
             <div className="cs-sol-fc">
-              <div className="cs-sol-fc-stripe" />
-              <div className="cs-sol-fcbody">
+              <div className="cs-sol-fchead">
                 <p className="cs-sol-ftitle">Feature 1.1｜自主需量分析</p>
+              </div>
+              <div className="cs-sol-fcbody">
                 <p className="cs-sol-fsub">由使用者自主操控介面，從預測、超約預警到 AI 建議，讓能源管理不只看圖表，而是能直接支援決策。</p>
                 <div className="cs-sol-dpts">
                   <div className="cs-sol-dpt">
@@ -1052,9 +1075,10 @@ export default function AdventechPage() {
           <div className="cs-sol-fgroup cs-sol-fgroup-f12">
           <div className="cs-sol-fr">
             <div className="cs-sol-fc">
-              <div className="cs-sol-fc-stripe" />
-              <div className="cs-sol-fcbody">
+              <div className="cs-sol-fchead">
                 <p className="cs-sol-ftitle">Feature 1.2｜主動通知預警</p>
+              </div>
+              <div className="cs-sol-fcbody">
                 <p className="cs-sol-fsub">由系統後台間段式預測，將問題嚴重程度分級預告用戶，促成決策者快速擬定解決方案。</p>
                 <div className="cs-sol-dpts">
                   <div className="cs-sol-dpt">
@@ -1140,10 +1164,11 @@ export default function AdventechPage() {
           {/* Feature 2 */}
           <div className="cs-sol-fgroup cs-sol-fgroup-f2">
           <div className="cs-sol-fr">
-            <div className="cs-sol-fc">
-              <div className="cs-sol-fc-stripe" style={{ background: "linear-gradient(269.45deg, rgba(255,255,255,0) 0%, rgb(221,241,254) 62.975%)" }} />
+            <div className="cs-sol-fc cs-sol-fc--teal">
+              <div className="cs-sol-fchead">
+                <p className="cs-sol-ftitle">Feature 2｜模式識別</p>
+              </div>
               <div className="cs-sol-fcbody">
-                <p className="cs-sol-ftitle" style={{ color: "#083b4c" }}>Feature 2｜模式識別</p>
                 <p className="cs-sol-fsub">設備能耗即時監控，當發生問題時可提供該設備的數據、事件進行分析，提供廠務人員及時修繕建議與故障排除方案。</p>
                 <div className="cs-sol-dpts">
                   <div className="cs-sol-dpt">
@@ -1243,7 +1268,7 @@ export default function AdventechPage() {
         {/* ── UI Video Block ── */}
         <div className="cs-sol-block" style={{ marginBottom: 0 }}>
           <h3 className="cs-sol-blk-title">UI 影片展示</h3>
-          <p className="cs-sol-blk-desc">UI 影片呈現兩個 feature 的完整操作：從觸發告警、查看圖表分析，到取得系統建議與後續處理。</p>
+          <p className="cs-sol-blk-desc cs-text-muted-blue">UI 影片呈現兩個 feature 的完整操作：從觸發告警、查看圖表分析，到取得系統建議與後續處理。</p>
           <div className="cs-sol-vc" style={{ background: "#f6faff", borderColor: "#0072bd" }}>
             <p className="cs-sol-vtitle" style={{ color: "#093060" }}>超約預警操作流程</p>
             <div className="cs-sol-vimg">
@@ -1272,10 +1297,10 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 07 Next Step ── */}
-      <section className="cs-ns-section">
+      <section id="cs-sec-next" className="cs-ns-section">
         <div className="cs-ns-header">
           <h2 className="cs-ns-title">下一步：工程實作與 AI 系統落地</h2>
-          <p className="cs-ns-desc">UI/UX 設計階段完成後，專案將進入工程實作與 AI 能力持續優化階段。設計師已先定義 AI Chatbot 的使用情境、互動流程與介面體驗；接下來，後端工程師將承接這些設計方向，進一步建構 AI 資料庫、訓練模型能力，並將設計中的功能情境轉化為可運作的系統架構。</p>
+          <p className="cs-ns-desc cs-text-ink">UI/UX 設計階段完成後，專案將進入工程實作與 AI 能力持續優化階段。設計師已先定義 AI Chatbot 的使用情境、互動流程與介面體驗；接下來，後端工程師將承接這些設計方向，進一步建構 AI 資料庫、訓練模型能力，並將設計中的功能情境轉化為可運作的系統架構。</p>
           <div className="cs-ns-divider" />
         </div>
 
@@ -1316,7 +1341,7 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 08 Result ── */}
-      <section className="cs-result-bg">
+      <section id="cs-sec-result" className="cs-result-bg">
         <div className="cs-result-bg-img">
           <Image
             src="/projects/advantech-result-bg.jpg"
@@ -1362,9 +1387,12 @@ export default function AdventechPage() {
         </div>
       </section>
 
+        </div>{/* /cs-toc-main */}
+      </div>{/* /cs-toc-layout */}
+
       {/* ── Next Project Nav ── */}
       <div className="cs-next-nav">
-        <a href="/" className="cs-next-btn-outline">返回首頁</a>
+        <Link href="/" className="cs-next-btn-outline">返回首頁</Link>
         <a href="#" className="cs-next-btn-filled">下一個專案：虛擬貨幣量化交易平台</a>
       </div>
 

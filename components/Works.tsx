@@ -68,8 +68,8 @@ const projects: Project[] = [
     tags: ["GenAI應用", "碩士論文", "人與AI合作"],
     tone: "thesis",
     category: "school",
-    cta: "了解專案",
-    href: "#",
+    cta: "資料準備中",
+    disabled: true,
   },
   {
     id: "project-icecream-maniac",
@@ -82,8 +82,8 @@ const projects: Project[] = [
     tags: ["遊戲設計", "個人專案", "VibeCoding"],
     tone: "icecream",
     category: "school",
-    cta: "了解專案",
-    href: "#",
+    cta: "資料準備中",
+    disabled: true,
   },
   {
     id: "project-laushu",
@@ -96,8 +96,8 @@ const projects: Project[] = [
     tags: ["UIUX設計", "使用者研究", "團隊專案"],
     tone: "laushu",
     category: "school",
-    cta: "了解專案",
-    href: "#",
+    cta: "資料準備中",
+    disabled: true,
   },
   {
     id: "project4",
@@ -144,8 +144,8 @@ const projects: Project[] = [
     tags: ["UIUX 設計", "iOS", "團隊專案", "Side Project"],
     tone: "peach",
     category: "school",
-    cta: "了解專案",
-    href: "#",
+    cta: "資料準備中",
+    disabled: true,
   },
   {
     id: "project1",
@@ -160,8 +160,8 @@ const projects: Project[] = [
     tags: ["UIUX 設計", "iOS", "End-to-End Design", "Side Project"],
     tone: "navy",
     category: "school",
-    cta: "了解專案",
-    href: "#",
+    cta: "資料準備中",
+    disabled: true,
   },
 ];
 
