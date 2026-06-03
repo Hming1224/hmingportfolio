@@ -889,6 +889,7 @@ button {
 /* Secondary：灰色 stroke，用 inset box-shadow 畫在元件「內側」，
    不像 border 會撐出外框，與 primary 維持完全相同的外尺寸。 */
 .button-secondary {
+  background: #fff;
   color: var(--ink);
   box-shadow: inset 0 0 0 2px var(--muted);
   transition:

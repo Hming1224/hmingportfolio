@@ -73,7 +73,7 @@ export default function Hero() {
 
           <div className="hero-taglines">
             <TrueFocus
-              sentence="以系統性思考問題|以人為本做設計|協同 AI 打造產品"
+              sentence="以同理心研究需求|以好奇心探索設計|以清晰思維打造產品"
               separator="|"
               blurAmount={2}
               borderColor="var(--purple)"
