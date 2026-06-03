@@ -85,9 +85,13 @@ Page: `/advantech`. Files: `app/advantech/page.tsx`, `app/advantech/FlowConnecto
 - 迭代說明框 `.cs-sol-dr` ≤768px：直向，`.cs-sol-drlabel { width: auto }`（標題在上）。
 - 「報警等級」hover demo ≤768px：容器 `cs-alarm-demo` 直向置中、箭頭 `cs-alarm-arrow { transform: rotate(90deg) }`（→ 變 ↓）、hover 後狀態 `cs-alarm-after { margin-top: 84px }` 讓往上的 tooltip 不蓋住箭頭與第一項。
 
-### 影片封面
+### 影片託管（2026-06-03 已遷移到 Vimeo，原 mp4 做法作廢）
 
-- UI 影片用 `<video poster="…/video-sc1.png">`（資料夾已有現成封面 `video-sc1.png` / `video-sc2.png`）。`controls` + `poster` 在播放前可能與封面內畫好的播放鍵重疊出現兩顆原生播放鍵，目前可接受。
+- **不再把 mp4 放進 repo**。兩支 UI 影片改用 **Vimeo 串流託管**（大檔不進 git，呼應 MEMORY 的大檔託管原則）。
+- 元件：`app/advantech/VimeoPlayer.tsx`（'use client'）＝**點擊播放 facade**：平常只顯示客製 poster（`video-sc1.png` / `video-sc2.png`，內含播放鍵），點下去才把 `<iframe>` 換上去並 `autoplay=1`。好處：① 保留客製封面 ② 不點不載入 Vimeo 播放器 JS、頁面更快 ③ 解掉原本 `controls`+`poster` 兩顆播放鍵重疊問題。
+- 容器 `.cs-sol-vplayer` 用 `aspect-ratio: 16/9`（poster 為 4096×2304 精準 16:9，零位移）；hover 微放大、`:focus-visible` 紫框。
+- **Vimeo 影片 ID（重要，重抓對這些）**：超約預警操作流程＝`1197912187`（原 video-sc1）；模式識別操作流程＝`1197912188`（原 video-sc2）。
+- poster PNG（共約 5.4MB）仍留在 repo 當封面，遠小於 50MB 上限、不影響瘦身。
 
 ### 新增
 
