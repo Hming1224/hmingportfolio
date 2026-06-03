@@ -1,5 +1,38 @@
 # Project Memory
 
+## 2026-06-03 Home hero RWD progress
+
+- Page: `/` home hero. Main file touched: `app/globals.css`.
+- RWD rule: when SVG/illustration decoration components need to shrink across breakpoints, prefer `transform: scale(...)` on the visual element/wrapper instead of changing its intrinsic width/height. This preserves internal spacing and avoids collapsed gaps.
+- Figma references:
+  - 1440px–768px: Portfolio Site node `2471:21860` (`800×889` hero section reference under fixed nav).
+  - `<768px`: Portfolio Site node `2471:43392` (`460×889` hero section reference under fixed nav).
+- Current implementation direction:
+  - `max-width: 1023px` hero now keeps decorations visible instead of hiding all `.hero-decoration`.
+  - Hero gets `margin-top: 80px` on narrow layouts so the section starts below the fixed nav, matching Figma frame y=80 and preventing top decorations from sitting under the navbar.
+  - Mid layout (`768px–1024px`) now treats the hero as a viewport section: `min-height: calc(100svh - 80px)` under the fixed nav, responsive top/bottom padding via `clamp(...)`, `hero-copy` width `550px`, horizontal 136×52 buttons, and Figma-aligned decoration positions. Decoration `top` values in this range also use viewport-aware `clamp(...)` so short 768px-high screens do not keep the 889px Figma y positions unchanged.
+  - Mobile `<768px` uses `hero-copy` width `408px`, vertical full-width CTA buttons (`查看作品` on top, `我的歷程` below via column-reverse), compact cursor tags, clustered sticky notes, and bottom decorations repositioned around y=713–765.
+  - Follow-up RWD rule applied: cursor tags, Session frame, Fun demo frame, toggle button set, sticky notes, and Walpencil keep their intrinsic component sizing and shrink via inner `transform: scale(...)` variables so internal spacing does not collapse.
+  - `<768px` hero also uses viewport height (`calc(100svh - 80px)`) with scaled top/bottom padding. The post-up sticky notes are arranged as a fan from lower-left to upper-right, and cursor tags sit above sticky notes with higher z-index.
+  - Sticky note wrappers now include semantic classes by content/color (`hero-sticky-idea`, `hero-sticky-user-centric`, `hero-sticky-data-storage`, `hero-sticky-co-work`, `hero-sticky-product-spec`, `hero-sticky-how-might`) so mobile fan positioning and z-index are not tied only to numeric class names.
+  - Mobile sticky note positions should follow Figma node `2471:43392` as ratios of the `460×889` hero frame: data-storage `x=53 y=116.5`, co-work `x=82 y=75.5`, idea `x=138 y=24`, user-centric `x=191 y=25`, product-spec `x=258.7 y=40.4`, how-might `x=296.3 y=77.5`.
+  - Follow-up mobile height rule: for `<768px`, y-axis placement should use the hero's visible height (`--hero-mobile-h`) as a proportional basis, without fixed Figma-height max caps. This prevents 16:10/taller screens from making all hero objects look stuck near the top.
+  - Mobile center copy group was nudged down from roughly `29.4%` of hero height to about `31.5%` of hero height.
+  - Because base `.focus-container` styles live near the bottom of `globals.css`, hero-specific focus gap overrides also need to live after that block or be repeated later in the file.
+  - H1 font was reduced for RWD safety: `36px` around tablet/mid layouts and `24px` below 768px, because actual web font width is wider than the Figma visual and can visually clip on 460px.
+- Verification completed:
+  - `npm run build` passed.
+  - In-app browser checked `800×969` and `460×969`: no horizontal overflow and no console errors.
+  - Follow-up viewport-padding fix also passed `npm run build`; Browser re-measurement was blocked by Browser URL policy, so visual re-check should be done from the already-open `localhost:3000` tab if needed.
+  - Follow-up scale/fan layout fix also passed `npm run build`.
+  - Follow-up mobile proportional-height fix also passed `npm run build`.
+  - Follow-up semantic sticky-note fan/z-index fix also passed `npm run build`.
+  - Follow-up exact Figma-ratio sticky position fix also passed `npm run build`.
+  - `npm run lint` still fails on an existing unrelated rule in `components/animate-ui/primitives/texts/DecryptedText.tsx:345` (`react-hooks/set-state-in-effect`), plus existing warnings.
+- Session note:
+  - User requested `localhost:3000` stay running until the session ends. Do not stop the dev server during final cleanup unless the user explicitly asks.
+  - Follow-up fix: the center copy group in the `768px–1024px` viewport range was too low because `padding-top: 426px` had been applied as a fixed value. It was changed to responsive viewport padding so the copy group moves up on shorter screens while the hero still owns the full first viewport.
+
 ## 2026-06-02 Local dev server / visual check preference
 
 - 檢查網站或做視覺驗證時，優先共用既有的 `localhost:3000` / port 3000 dev server。
@@ -72,6 +105,21 @@ Page: `/advantech`. Files: `app/advantech/page.tsx`, `app/advantech/FlowConnecto
 ### Before / After 圖片等比例縮放
 
 - 要「卡片左右等寬、但圖片各自維持原始比例一起縮」：把較小的圖包一層 `div`，寬度設 `calc(min(607px, 100%) * 360 / 607)`，鎖成大圖顯示寬度的 360/607 倍，兩張用同一縮放係數。
+
+### Hero 裝飾 label 靠左（重複踩坑，務必記住）
+
+- **`.wireframe-label`（Session / Fun demo 的標題）必須 `display: block`**，否則靠左失效、被推到置中。
+- 錯誤做法：只在 `.wireframe-label`（`<span>`）上加 `text-align: left`。span 是 inline，`text-align` 只管它「內部文字」，它在容器中的位置由父層決定，而 `.wireframe-frame-visual` 繼承了 `.hero { text-align: center }` → label 被置中於卡片。
+- 正解：label 設 `display: block`（撐滿容器寬），自身的 `text-align: left` 才會生效、貼齊卡片左緣（對齊 Figma）。
+- 驗證法：比對 label 與卡片的左緣 / center，相等於 center 就是被置中了。
+
+### Hero 底部裝飾在矮螢幕隱藏
+
+- `@media (max-width: 768px) and (max-height: 799px)`：把 `.hero-frame-large / .hero-ai-widget / .hero-wal-pencil / .hero-toggle` 設 `display: none`。矮手機（如 iPhone SE）放不下這四個底部物件，直接隱藏避免擠壓 / 溢出。限定 mobile 寬度，不影響 768px 高的桌機。
+
+### wal-pencil scale 失效踩坑
+
+- `.wal-pencil` 不可自宣告 `--wal-pencil-scale: 1`，否則 CSS 變數就近原則會蓋掉父層 `.hero-wal-pencil` media query 設的 override，導致縮放永遠 = 1。正解：消費端用 `var(--wal-pencil-scale, 1)` 給 fallback，讓父層的值能繼承下來（對比 wireframe / ai-widget 的消費元素本來就沒重宣告，所以正常）。
 
 ### Inline style vs media query 踩坑
 

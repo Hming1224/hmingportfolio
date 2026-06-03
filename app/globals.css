@@ -153,7 +153,7 @@ button {
 .brand {
   display: block;
   position: relative;
-  width: 172px;
+  width: 67px;
   height: 24px;
 }
 
@@ -512,9 +512,17 @@ button {
 
 /* Cursor tags */
 .cursor-tag {
+  --cursor-tag-scale: 1;
+  z-index: 4;
+  display: inline-block;
+}
+
+.cursor-tag-inner {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  transform: scale(var(--cursor-tag-scale));
+  transform-origin: left top;
 }
 
 .cursor-tag-icon {
@@ -541,19 +549,29 @@ button {
 
 /* Wireframe / Session frame */
 .wireframe-frame-wrap {
+  --wireframe-scale: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 143px;
 }
 
+.wireframe-frame-visual {
+  transform: scale(var(--wireframe-scale));
+  transform-origin: left top;
+}
+
 .wireframe-label {
+  /* display:block 讓 label 撐滿容器寬度、靠左貼齊卡片左緣。
+     若維持 inline span，會被父層 .hero 繼承的 text-align:center 推到置中。 */
+  display: block;
   font-size: 11px;
   color: #78909c;
   font-weight: 500;
   letter-spacing: 0.02em;
   white-space: nowrap;
   margin-bottom: 4px;
+  text-align: left;
 }
 
 .session-frame {
@@ -675,6 +693,7 @@ button {
 
 /* Sticky notes */
 .sticky-note {
+  --sticky-note-scale: 1;
   width: 112px;
   height: 112px;
   padding: 12px 10px;
@@ -703,6 +722,10 @@ button {
   white-space: nowrap;
 }
 
+/* 桌機/平板：wrapper 不產生 box，6 張卡仍各自相對 .hero 絕對定位（沿用原本規則）。
+   ≤768px 會被覆寫成置中容器。 */
+.hero-sticky-group { display: contents; }
+
 /* 6 sticky note positions — offset by nav 80px */
 .hero-sticky-1 { left: 31%;  top: 18%;  animation: heroShootTopL 0.75s cubic-bezier(0.34,1.56,0.64,1) 0.20s both, float-y 4s ease-in-out 1.00s infinite; }
 .hero-sticky-2 { left: 38%;  top: 14%;  animation: heroShootTop  0.75s cubic-bezier(0.34,1.56,0.64,1) 0.30s both, float-y 4s ease-in-out 1.10s infinite; }
@@ -713,13 +736,21 @@ button {
 
 /* Toggle decoration */
 .toggle-decoration {
+  --toggle-scale: 1;
+  width: 95px;
+  height: 104px;
+}
+
+.toggle-decoration-inner {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 95px;
   padding: 12px;
   border: 2px dashed #af5eff;
   border-radius: 12px;
-  width: 95px;
+  transform: scale(var(--toggle-scale));
+  transform-origin: left top;
 }
 
 .toggle-btn {
@@ -748,10 +779,16 @@ button {
 
 /* AI Widget Frame */
 .ai-widget-wrap {
+  --ai-widget-scale: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 103px;
+}
+
+.ai-widget-visual {
+  transform: scale(var(--ai-widget-scale));
+  transform-origin: left top;
 }
 
 .ai-widget-frame {
@@ -1949,15 +1986,124 @@ html[data-nav-hidden="true"] .year-rail {
 
 @media (max-width: 1023px) {
   .hero {
-    padding: 140px 80px 100px;
+    justify-content: flex-start;
+    margin-top: 80px;
+    min-height: calc(100svh - 80px);
+    padding: clamp(220px, 38svh, 368px) 24px clamp(40px, 6svh, 66px);
   }
 
-  .hero-decoration {
-    display: none;
+  .hero-copy {
+    width: min(550px, 100%);
+    max-width: 550px;
+    gap: 40px;
+  }
+
+  .hero-title {
+    gap: 32px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .hero-taglines {
+    width: 100%;
+    font-size: 32px;
+    line-height: 1.4;
+  }
+
+  .focus-container {
+    row-gap: 32px;
   }
 
   .hero-actions {
     justify-content: center;
+    gap: 16px;
+  }
+
+  .hero-actions .button {
+    min-width: 136px;
+    min-height: 52px;
+    padding: 12px 28px;
+    font-size: 20px;
+  }
+
+  .hero-decoration {
+    display: block;
+  }
+
+  .hero-cursor-brian {
+    left: 39.875%;
+    top: clamp(185px, calc(26.9svh - 22px), 239px);
+  }
+
+  .hero-cursor-engineers {
+    left: 19.625%;
+    top: clamp(276px, calc(40.2svh - 32px), 357px);
+  }
+
+  .hero-cursor-pm {
+    right: 53px;
+    left: auto;
+    top: clamp(276px, calc(40.2svh - 32px), 357px);
+  }
+
+  .hero-frame-large {
+    --wireframe-scale: 0.815;
+    left: 12.375%;
+    top: clamp(548px, calc(79.7svh - 64px), 709px);
+  }
+
+  .hero-toggle {
+    --toggle-scale: 0.667;
+    left: 8.375%;
+    top: clamp(312px, calc(45.3svh - 36px), 403px);
+  }
+
+  .hero-sticky-1 {
+    left: 35.625%;
+    top: clamp(70px, calc(10.1svh - 8px), 90px);
+  }
+
+  .hero-sticky-2 {
+    left: 47%;
+    top: clamp(42px, calc(6.1svh - 5px), 54px);
+  }
+
+  .hero-sticky-3 {
+    left: 5%;
+    top: clamp(171px, calc(24.9svh - 20px), 221px);
+  }
+
+  .hero-sticky-4 {
+    left: 14.75%;
+    top: clamp(144px, calc(20.9svh - 17px), 186px);
+  }
+
+  .hero-sticky-5 {
+    left: auto;
+    right: 137px;
+    top: clamp(138px, calc(20.1svh - 16px), 179px);
+  }
+
+  .hero-sticky-6 {
+    left: auto;
+    right: 59px;
+    top: clamp(159px, calc(23.2svh - 19px), 206px);
+  }
+
+  .hero-ai-widget {
+    --ai-widget-scale: 0.815;
+    left: 6.875%;
+    top: clamp(589px, calc(85.6svh - 69px), 761px);
+  }
+
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.807;
+    left: auto;
+    right: 70px;
+    top: clamp(577px, calc(83.9svh - 67px), 746px);
   }
 
   .project-card {
@@ -2100,15 +2246,28 @@ html[data-nav-hidden="true"] .year-rail {
   }
 
   .hero {
-    padding: 120px 24px 80px;
+    min-height: calc(100svh - 80px);
+    padding: clamp(190px, calc((100svh - 80px) * 0.294), 261px) 20px clamp(40px, calc((100svh - 80px) * 0.069), 61px);
   }
 
   .hero-copy {
-    gap: 24px;
+    width: min(408px, 100%);
+    max-width: 408px;
+    gap: 16px;
+  }
+
+  .hero-badge-shimmer-wrap {
+    max-width: 100%;
+  }
+
+  .hero-badge {
+    max-width: 100%;
+    font-size: 14px;
   }
 
   .hero h1 {
     font-size: 28px;
+    line-height: 1.2;
   }
 
   .hero-tagline {
@@ -2117,15 +2276,113 @@ html[data-nav-hidden="true"] .year-rail {
 
   .hero-taglines {
     font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .focus-container {
+    column-gap: 48px;
+    row-gap: 12px;
   }
 
   .hero-actions {
     flex-direction: column-reverse;
     width: 100%;
+    gap: 16px;
   }
 
   .button {
     width: 100%;
+    min-height: 52px;
+    font-size: 20px;
+  }
+
+  .button-secondary {
+    min-height: 56px;
+  }
+
+  .cursor-tag {
+    --cursor-tag-scale: 0.87;
+    z-index: 12;
+  }
+
+  .cursor-tag-icon {
+    width: 20px;
+    height: auto;
+  }
+
+  .cursor-tag-label {
+    padding: 4px 10px;
+    font-size: 13px;
+    line-height: normal;
+  }
+
+  .hero-cursor-engineers {
+    left: 16px;
+    top: clamp(18px, calc((100svh - 80px) * 0.027), 24px);
+  }
+
+  .hero-cursor-pm {
+    right: 50px;
+    top: clamp(18px, calc((100svh - 80px) * 0.028), 25px);
+  }
+
+  .hero-cursor-brian {
+    left: calc(50% - 68.5px);
+    top: clamp(158px, calc((100svh - 80px) * 0.231), 205px);
+  }
+
+  .hero-sticky-1 {
+    left: 30%;
+    top: clamp(44px, calc((100svh - 80px) * 0.072), 64px);
+  }
+
+  .hero-sticky-2 {
+    left: 41.5%;
+    top: clamp(36px, calc((100svh - 80px) * 0.059), 52px);
+  }
+
+  .hero-sticky-3 {
+    left: 11.5%;
+    top: clamp(90px, calc((100svh - 80px) * 0.139), 124px);
+  }
+
+  .hero-sticky-4 {
+    left: 17.75%;
+    top: clamp(72px, calc((100svh - 80px) * 0.112), 100px);
+  }
+
+  .hero-sticky-5 {
+    right: 57px;
+    top: clamp(28px, calc((100svh - 80px) * 0.045), 40px);
+  }
+
+  .hero-sticky-6 {
+    right: 20px;
+    top: clamp(20px, calc((100svh - 80px) * 0.031), 28px);
+  }
+
+  .hero-toggle {
+    --toggle-scale: 0.667;
+    left: 52.2%;
+    top: clamp(504px, calc((100svh - 80px) * 0.733), 652px);
+  }
+
+  .hero-frame-large {
+    --wireframe-scale: 0.815;
+    left: 19.5%;
+    top: clamp(551px, calc((100svh - 80px) * 0.802), 713px);
+  }
+
+  .hero-ai-widget {
+    --ai-widget-scale: 0.815;
+    left: 10%;
+    top: clamp(591px, calc((100svh - 80px) * 0.861), 765px);
+  }
+
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.807;
+    right: 38px;
+    top: clamp(580px, calc((100svh - 80px) * 0.845), 751px);
   }
 
   .projects-section {
@@ -5511,7 +5768,10 @@ html[data-nav-hidden="true"] .year-rail {
   position: relative;
   width: 161px;
   height: 112px;
-  transform: rotate(4deg);
+  /* fallback 1：var 沿 .hero-wal-pencil 父層繼承下來，
+     不在此自宣告，否則會蓋掉 media query 的 override */
+  transform: rotate(4deg) scale(var(--wal-pencil-scale, 1));
+  transform-origin: left top;
 }
 
 .wal-pencil-walpy {
@@ -5524,4 +5784,279 @@ html[data-nav-hidden="true"] .year-rail {
   position: absolute;
   top: 18px;
   left: 68px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    justify-content: flex-start;
+    margin-top: 80px;
+    min-height: calc(100svh - 80px);
+    padding: clamp(220px, 38svh, 368px) 24px clamp(40px, 6svh, 66px);
+  }
+
+  .hero-copy {
+    width: min(550px, 100%);
+    max-width: 550px;
+    gap: 40px;
+  }
+
+  .hero-title {
+    gap: 32px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .hero-taglines {
+    font-size: 32px;
+    line-height: 1.4;
+  }
+
+  .focus-container {
+    column-gap: 1em;
+    row-gap: 32px;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    width: auto;
+    gap: 16px;
+  }
+
+  .hero-actions .button {
+    width: auto;
+    min-width: 136px;
+    min-height: 52px;
+    padding: 12px 28px;
+    font-size: 20px;
+  }
+
+  .hero-actions .button-secondary {
+    min-height: 52px;
+  }
+
+  .cursor-tag {
+    gap: 6px;
+  }
+
+  .cursor-tag-icon {
+    width: 20px;
+    height: auto;
+  }
+
+  .cursor-tag-label {
+    padding: 4px 10px;
+    font-size: 13px;
+    line-height: normal;
+  }
+
+  .hero-cursor-brian {
+    left: 39.875%;
+    top: clamp(185px, calc(26.9svh - 22px), 239px);
+  }
+
+  .hero-cursor-engineers {
+    left: 19.625%;
+    top: clamp(276px, calc(40.2svh - 32px), 357px);
+  }
+
+  .hero-cursor-pm {
+    right: 53px;
+    left: auto;
+    top: clamp(276px, calc(40.2svh - 32px), 357px);
+  }
+
+  .hero-frame-large {
+    --wireframe-scale: 0.815;
+    left: 12.375%;
+    top: clamp(548px, calc(79.7svh - 64px), 709px);
+  }
+
+  .hero-toggle {
+    --toggle-scale: 0.667;
+    left: 8.375%;
+    top: clamp(312px, calc(45.3svh - 36px), 403px);
+  }
+
+  .hero-sticky-1 {
+    left: 35.625%;
+    top: clamp(70px, calc(10.1svh - 8px), 90px);
+  }
+
+  .hero-sticky-2 {
+    left: 47%;
+    top: clamp(42px, calc(6.1svh - 5px), 54px);
+  }
+
+  .hero-sticky-3 {
+    left: 5%;
+    top: clamp(171px, calc(24.9svh - 20px), 221px);
+  }
+
+  .hero-sticky-4 {
+    left: 14.75%;
+    top: clamp(144px, calc(20.9svh - 17px), 186px);
+  }
+
+  .hero-sticky-5 {
+    left: auto;
+    right: 137px;
+    top: clamp(138px, calc(20.1svh - 16px), 179px);
+  }
+
+  .hero-sticky-6 {
+    left: auto;
+    right: 59px;
+    top: clamp(159px, calc(23.2svh - 19px), 206px);
+  }
+
+  .hero-ai-widget {
+    --ai-widget-scale: 0.815;
+    left: 6.875%;
+    top: clamp(589px, calc(85.6svh - 69px), 761px);
+  }
+
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.807;
+    left: auto;
+    right: 70px;
+    top: clamp(577px, calc(83.9svh - 67px), 746px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    --hero-mobile-h: calc(100svh - 80px);
+    --sticky-inner-rotate: 0deg;
+    min-height: var(--hero-mobile-h);
+    padding: max(192px, calc(var(--hero-mobile-h) * 0.315)) 20px max(40px, calc(var(--hero-mobile-h) * 0.069));
+  }
+
+  .hero-copy {
+    width: min(408px, 100%);
+    max-width: 408px;
+    gap: 16px;
+  }
+
+  .hero-title {
+    gap: 16px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .hero-taglines {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .focus-container {
+    column-gap: 48px;
+    row-gap: 12px;
+  }
+
+  .hero-actions {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    min-height: 52px;
+    font-size: 20px;
+  }
+
+  .hero-actions .button-secondary {
+    min-height: 56px;
+  }
+
+  .cursor-tag {
+    --cursor-tag-scale: 0.87;
+  }
+
+  .hero-cursor-engineers {
+    left: 31px;
+    top: max(18px, calc(var(--hero-mobile-h) * 0.031));
+  }
+
+  .hero-cursor-pm {
+    right: 46px;
+    left: auto;
+    top: calc(var(--hero-mobile-h) * 0.056);
+  }
+
+  .hero-cursor-brian {
+    left: calc(50% - 68.5px);
+    top: max(158px, calc(var(--hero-mobile-h) * 0.274));
+  }
+
+  /* 6 張卡包進 .hero-sticky-group，整組水平置中於螢幕。
+     group 寬 362px = 扇形未旋轉方框的左右跨距（data 左緣 0 → how-might 右緣 362），
+     扇形中心 = 181 = 寬/2，所以 left:50% + translateX(-50%) 即可置中。
+     卡片改用相對 group 的固定 px，扇形比例 / 間距不再隨視窗寬度變形。 */
+  .hero-sticky-group {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(var(--hero-mobile-h) * 0.068);
+    width: 362px;
+    height: 154px;
+    z-index: 1;
+  }
+
+  /* 配對等高：data-storage↔how-might、co-work↔product-spec、idea↔user-centric。
+     left/top = 未旋轉方框左上角（卡片固定 112×112，繞中心旋轉）。 */
+  .hero-sticky-data-storage { z-index: 1; left: 0;     top: 42px; rotate: -15deg; }
+  .hero-sticky-co-work      { z-index: 2; left: 50px;  top: 21px; rotate: -10deg; }
+  .hero-sticky-idea         { z-index: 3; left: 100px; top: 0;    rotate: -5deg; }
+  .hero-sticky-user-centric { z-index: 4; left: 150px; top: 0;    rotate: 5deg; }
+  .hero-sticky-product-spec { z-index: 5; right: auto; left: 200px; top: 21px; rotate: 10deg; }
+  .hero-sticky-how-might    { z-index: 6; right: auto; left: 250px; top: 42px; rotate: 15deg; }
+
+  /* 底部四個裝飾「垂直置中於按鈕與視窗下緣之間的空隙」。
+     按鈕底 = heroH×0.315(padding-top) + 398px(copy 固定高)；
+     空隙中點 = (按鈕底 + heroH)/2 = heroH×0.6575 + 199px。
+     各裝飾 top = 該中點 + 固定偏移（保留原本列的相對排列、整組一起置中）。
+     ※ 高度 < 800px 時這四個物件已由下方 media query 隱藏，故這裡只需顧 ≥800 的情況。 */
+  .hero-toggle {
+    --toggle-scale: 0.498;
+    left: 69.6%;
+    top: calc(var(--hero-mobile-h) * 0.6575 + 184px);
+  }
+
+  .hero-frame-large {
+    --wireframe-scale: 0.650;
+    left: 23.9%;
+    top: calc(var(--hero-mobile-h) * 0.6575 + 164px);
+  }
+
+  .hero-ai-widget {
+    --ai-widget-scale: 0.650;
+    left: 12.8%;
+    top: calc(var(--hero-mobile-h) * 0.6575 + 182px);
+  }
+
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.45;
+    left: 52%;
+    right: auto;
+    top: calc(var(--hero-mobile-h) * 0.6575 + 190px);
+  }
+}
+
+/* 矮螢幕手機（高度 < 800px，如 iPhone SE）：底部四個裝飾沒有足夠空間，
+   直接隱藏避免擠壓 / 溢出。只在 mobile 寬度生效，不影響 768px 高的桌機。 */
+@media (max-width: 768px) and (max-height: 799px) {
+  .hero-frame-large,
+  .hero-ai-widget,
+  .hero-wal-pencil,
+  .hero-toggle {
+    display: none;
+  }
 }

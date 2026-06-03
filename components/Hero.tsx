@@ -28,13 +28,17 @@ export default function Hero() {
       {/* Toggle decoration */}
       <ToggleDecoration className="hero-decoration hero-toggle" />
 
-      {/* Sticky notes — wrapper div carries the entrance animation; inner StickyNote keeps its rotation */}
-      <div className="hero-decoration hero-sticky-1"><StickyNote text="I have a good idea!"  subtitle="Product Designer"  subtitleColor="#7f714c" color="#FFE299" rotation={-3} /></div>
-      <div className="hero-decoration hero-sticky-2"><StickyNote text="User-Centric Design"  subtitle="Product Designer"  subtitleColor="#695e7f" color="#D3BDFF" rotation={4}  /></div>
-      <div className="hero-decoration hero-sticky-3"><StickyNote text="Data Storage"         subtitle="Backend Engineer"  subtitleColor="#597a77" color="#B3F4EF" rotation={-4} /></div>
-      <div className="hero-decoration hero-sticky-4"><StickyNote text="Co-work with AI"      subtitle="Frontend Engineer" subtitleColor="#546d7f" color="#A8DAFF" rotation={3}  /></div>
-      <div className="hero-decoration hero-sticky-5"><StickyNote text="Product Spec"         subtitle="Project Manager"   subtitleColor="#7f5751" color="#FFAFA3" rotation={-5} /></div>
-      <div className="hero-decoration hero-sticky-6"><StickyNote text="How Might We...?"     subtitle="Project Manager"   subtitleColor="#7f6954" color="#FFD3A8" rotation={5}  /></div>
+      {/* Sticky notes — wrapper div carries the entrance animation; inner StickyNote keeps its rotation.
+          .hero-sticky-group 在桌機/平板是 display:contents（不影響各卡的絕對定位）；
+          ≤768px 變成一個置中的容器，6 張卡改用相對 group 的固定 px 排成對稱扇形。 */}
+      <div className="hero-sticky-group">
+        <div className="hero-decoration hero-sticky-1 hero-sticky-idea"><StickyNote text="I have a good idea!"  subtitle="Product Designer"  subtitleColor="#7f714c" color="#FFE299" rotation={-3} /></div>
+        <div className="hero-decoration hero-sticky-2 hero-sticky-user-centric"><StickyNote text="User-Centric Design"  subtitle="Product Designer"  subtitleColor="#695e7f" color="#D3BDFF" rotation={4}  /></div>
+        <div className="hero-decoration hero-sticky-3 hero-sticky-data-storage"><StickyNote text="Data Storage"         subtitle="Backend Engineer"  subtitleColor="#597a77" color="#B3F4EF" rotation={-4} /></div>
+        <div className="hero-decoration hero-sticky-4 hero-sticky-co-work"><StickyNote text="Co-work with AI"      subtitle="Frontend Engineer" subtitleColor="#546d7f" color="#A8DAFF" rotation={3}  /></div>
+        <div className="hero-decoration hero-sticky-5 hero-sticky-product-spec"><StickyNote text="Product Spec"         subtitle="Project Manager"   subtitleColor="#7f5751" color="#FFAFA3" rotation={-5} /></div>
+        <div className="hero-decoration hero-sticky-6 hero-sticky-how-might"><StickyNote text="How Might We...?"     subtitle="Project Manager"   subtitleColor="#7f6954" color="#FFD3A8" rotation={5}  /></div>
+      </div>
 
       {/* AI widget */}
       <AiWidgetFrame label="Fun demo" className="hero-decoration hero-ai-widget" />

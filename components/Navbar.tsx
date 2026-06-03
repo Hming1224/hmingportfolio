@@ -82,12 +82,12 @@ export default function Navbar() {
       <div className="nav-top">
         <Link href="/" className="brand" aria-label="Brian Huang home">
           <Image
-            src="/brand-logo.avif"
+            src="/brand-logo.svg"
             alt="Brian Huang"
-            width={172}
+            width={67}
             height={24}
             priority
-            sizes="172px"
+            sizes="67px"
           />
         </Link>
         <button

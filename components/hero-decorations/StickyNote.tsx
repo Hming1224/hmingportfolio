@@ -18,7 +18,7 @@ export default function StickyNote({
   return (
     <div
       className={`sticky-note ${className}`}
-      style={{ backgroundColor: color, transform: `rotate(${rotation}deg)` }}
+      style={{ backgroundColor: color, transform: `rotate(var(--sticky-inner-rotate, ${rotation}deg)) scale(var(--sticky-note-scale, 1))` }}
     >
       <p>{text}</p>
       {subtitle && (
