@@ -1,5 +1,5 @@
 import SplitText from './animate-ui/primitives/texts/SplitText';
-import { HighlightText } from './animate-ui/primitives/texts/highlight';
+import DecryptedText from './animate-ui/primitives/texts/DecryptedText';
 import CursorTag from './hero-decorations/CursorTag';
 import WireframeFrame from './hero-decorations/WireframeFrame';
 import AnnotationPin from './hero-decorations/AnnotationPin';
@@ -84,27 +84,36 @@ export default function Hero() {
 
           <div className="hero-taglines">
             <p className="hero-tagline">
-              <HighlightText
-                className="hero-highlight hero-highlight-purple"
-                delay={0.35}
+              <DecryptedText
                 text="以系統性思考問題"
-                textClassName="accent accent-purple"
+                animateOn="view"
+                sequential
+                revealDirection="start"
+                speed={60}
+                className="accent accent-purple"
+                encryptedClassName="hero-tagline-encrypted"
               />
             </p>
             <p className="hero-tagline">
-              <HighlightText
-                className="hero-highlight hero-highlight-blue"
-                delay={0.55}
+              <DecryptedText
                 text="以人為本做設計"
-                textClassName="accent accent-blue"
+                animateOn="view"
+                sequential
+                revealDirection="start"
+                speed={60}
+                className="accent accent-blue"
+                encryptedClassName="hero-tagline-encrypted"
               />
             </p>
             <p className="hero-tagline">
-              <HighlightText
-                className="hero-highlight hero-highlight-cyan"
-                delay={0.75}
+              <DecryptedText
                 text="協同 AI 打造產品"
-                textClassName="accent accent-cyan"
+                animateOn="view"
+                sequential
+                revealDirection="start"
+                speed={60}
+                className="accent accent-cyan"
+                encryptedClassName="hero-tagline-encrypted"
               />
             </p>
           </div>
