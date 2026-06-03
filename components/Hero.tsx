@@ -89,7 +89,9 @@ export default function Hero() {
                 animateOn="view"
                 sequential
                 revealDirection="start"
-                speed={60}
+                speed={70}
+                useOriginalCharsOnly
+                viewDelay={800}
                 className="accent accent-purple"
                 encryptedClassName="hero-tagline-encrypted"
               />
@@ -100,7 +102,9 @@ export default function Hero() {
                 animateOn="view"
                 sequential
                 revealDirection="start"
-                speed={60}
+                speed={70}
+                useOriginalCharsOnly
+                viewDelay={1200}
                 className="accent accent-blue"
                 encryptedClassName="hero-tagline-encrypted"
               />
@@ -111,7 +115,9 @@ export default function Hero() {
                 animateOn="view"
                 sequential
                 revealDirection="start"
-                speed={60}
+                speed={70}
+                useOriginalCharsOnly
+                viewDelay={1600}
                 className="accent accent-cyan"
                 encryptedClassName="hero-tagline-encrypted"
               />

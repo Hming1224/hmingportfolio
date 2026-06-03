@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
 
 const styles = {
   wrapper: {
@@ -33,6 +32,7 @@ interface DecryptedTextProps {
   encryptedClassName?: string;
   animateOn?: 'view' | 'hover' | 'inViewHover' | 'click';
   clickMode?: 'once' | 'toggle';
+  viewDelay?: number;
 }
 
 export default function DecryptedText({
@@ -48,6 +48,7 @@ export default function DecryptedText({
   encryptedClassName = '',
   animateOn = 'hover',
   clickMode = 'once',
+  viewDelay = 0,
 }: DecryptedTextProps) {
   const [displayText, setDisplayText] = useState(text);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -60,6 +61,7 @@ export default function DecryptedText({
   const orderRef = useRef<number[]>([]);
   const pointerRef = useRef(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const viewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const availableChars = useMemo(() => {
     return useOriginalCharsOnly
@@ -315,8 +317,12 @@ export default function DecryptedText({
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !hasAnimated) {
-          triggerDecrypt();
           setHasAnimated(true);
+          if (viewDelay > 0) {
+            viewTimerRef.current = setTimeout(() => triggerDecrypt(), viewDelay);
+          } else {
+            triggerDecrypt();
+          }
         }
       });
     };
@@ -330,11 +336,12 @@ export default function DecryptedText({
     if (currentRef) observer.observe(currentRef);
     return () => {
       if (currentRef) observer.unobserve(currentRef);
+      if (viewTimerRef.current) clearTimeout(viewTimerRef.current);
     };
-  }, [animateOn, hasAnimated, triggerDecrypt]);
+  }, [animateOn, hasAnimated, triggerDecrypt, viewDelay]);
 
   useEffect(() => {
-    if (animateOn === 'click') {
+    if (animateOn === 'click' || animateOn === 'view' || animateOn === 'inViewHover') {
       encryptInstantly();
     } else {
       setDisplayText(text);
@@ -352,7 +359,7 @@ export default function DecryptedText({
         : {};
 
   return (
-    <motion.span className={parentClassName} ref={containerRef} style={styles.wrapper} {...animateProps}>
+    <span className={parentClassName} ref={containerRef} style={styles.wrapper} {...animateProps}>
       <span style={styles.srOnly}>{text}</span>
       <span aria-hidden="true">
         {displayText.split('').map((char, index) => {
@@ -364,6 +371,6 @@ export default function DecryptedText({
           );
         })}
       </span>
-    </motion.span>
+    </span>
   );
 }
