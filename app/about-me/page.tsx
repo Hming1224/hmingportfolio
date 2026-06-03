@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import YearRail from '../../components/YearRail';
+import AvatarProfile from '../../components/AvatarProfile';
 
 const portrait = 'https://framerusercontent.com/images/0jl4zXFFlLw62xerQd3MmTif4ss.jpg';
 
@@ -132,12 +133,14 @@ export default function AboutMePage() {
             <span />
           </div>
           <div className="about-window-body">
-            <div className="portrait-stack" aria-label="Brian Huang portrait">
-              {[0.15, 0.25, 0.35, 1].map((opacity, index) => (
-                <div className={`portrait-card portrait-${index}`} style={{ opacity }} key={opacity}>
-                  <Image src={portrait} alt={index === 3 ? 'Brian Huang' : ''} fill sizes="(max-width: 809px) 238px, 341px" />
-                </div>
-              ))}
+            <div className="avatar-profile-wrap" aria-label="Brian Huang portrait">
+              <div className="avatar-profile-stage">
+                <AvatarProfile
+                  imageSrc="/avatar/avatar-gray.png"
+                  hoverImageSrc="/avatar/avatar-yellow.png"
+                  imageAlt="Brian Huang"
+                />
+              </div>
             </div>
 
             <div className="about-intro-copy">

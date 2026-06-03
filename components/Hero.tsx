@@ -1,20 +1,71 @@
-import AvatarProfile from './AvatarProfile';
 import SplitText from './animate-ui/primitives/texts/SplitText';
 import { HighlightText } from './animate-ui/primitives/texts/highlight';
+import CursorTag from './hero-decorations/CursorTag';
+import WireframeFrame from './hero-decorations/WireframeFrame';
+import AnnotationPin from './hero-decorations/AnnotationPin';
+import StickyNote from './hero-decorations/StickyNote';
 
 export default function Hero() {
   return (
     <section className="hero" id="about">
-      <div className="avatar-profile-wrap">
-        <div className="avatar-profile-stage">
-          <AvatarProfile
-            imageSrc="/avatar/avatar-gray.png"
-            hoverImageSrc="/avatar/avatar-yellow.png"
-            imageAlt="Brian Huang"
-          />
-        </div>
-      </div>
+      {/* Floating decorations — hidden on mobile */}
+      <CursorTag
+        text="Brian Huang"
+        color="#4B7BEC"
+        className="hero-decoration hero-cursor-brian"
+      />
+      <CursorTag
+        text="Engineers"
+        color="#26DE81"
+        className="hero-decoration hero-cursor-engineers"
+      />
+      <CursorTag
+        text="PM"
+        color="#FD9644"
+        className="hero-decoration hero-cursor-pm"
+      />
 
+      <WireframeFrame
+        label="Portfolio / Hero"
+        size="large"
+        className="hero-decoration hero-frame-large"
+      />
+      <WireframeFrame
+        label="About"
+        size="small"
+        className="hero-decoration hero-frame-small"
+      />
+
+      <AnnotationPin
+        number={1}
+        text="跨域背景（機械→設計）"
+        className="hero-decoration hero-pin-1"
+      />
+      <AnnotationPin
+        number={2}
+        text="解決真實問題"
+        className="hero-decoration hero-pin-2"
+      />
+      <AnnotationPin
+        number={3}
+        text="德語 N4"
+        className="hero-decoration hero-pin-3"
+      />
+
+      <StickyNote
+        text="觀察生活細節"
+        color="#FFF3CD"
+        rotation={-5}
+        className="hero-decoration hero-sticky-1"
+      />
+      <StickyNote
+        text="PM 跨職能溝通"
+        color="#D0F0F9"
+        rotation={4}
+        className="hero-decoration hero-sticky-2"
+      />
+
+      {/* Main copy */}
       <div className="hero-copy">
         <div className="hero-title">
           <SplitText
@@ -30,28 +81,34 @@ export default function Hero() {
             rootMargin="-80px"
             textAlign="inherit"
           />
-          <p className="headline">
-            一名熱衷{' '}
-            <HighlightText
-              className="hero-highlight hero-highlight-purple"
-              delay={0.35}
-              text="觀察生活細節"
-              textClassName="accent accent-purple"
-            />{' '}
-            &amp; 嘗試{' '}
-            <HighlightText
-              className="hero-highlight hero-highlight-blue"
-              delay={0.55}
-              text="解決真實問題"
-              textClassName="accent accent-blue"
-            />{' '}
-            的設計師
-          </p>
-        </div>
 
-        <p className="intro">
-          從機械工程跨域專案管理，我是個熱愛學習新知的青年。目前具備2年以上互動體驗與UX/UI設計專案經驗。我的作品不只解決用戶的痛點，也創造可以幫助用戶成長的產品。以人為本的設計是我擁抱的思維，同時我也擅長用設計軟體發揮創意！
-        </p>
+          <div className="hero-taglines">
+            <p className="hero-tagline">
+              <HighlightText
+                className="hero-highlight hero-highlight-purple"
+                delay={0.35}
+                text="以系統性思考問題"
+                textClassName="accent accent-purple"
+              />
+            </p>
+            <p className="hero-tagline">
+              <HighlightText
+                className="hero-highlight hero-highlight-blue"
+                delay={0.55}
+                text="以人為本做設計"
+                textClassName="accent accent-blue"
+              />
+            </p>
+            <p className="hero-tagline">
+              <HighlightText
+                className="hero-highlight hero-highlight-cyan"
+                delay={0.75}
+                text="協同 AI 打造產品"
+                textClassName="accent accent-cyan"
+              />
+            </p>
+          </div>
+        </div>
 
         <div className="hero-actions">
           <a className="button button-secondary" href="#projects">
