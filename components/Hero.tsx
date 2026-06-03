@@ -1,72 +1,57 @@
 import SplitText from './animate-ui/primitives/texts/SplitText';
-import DecryptedText from './animate-ui/primitives/texts/DecryptedText';
+import TrueFocus from './animate-ui/primitives/texts/TrueFocus';
+import DotPattern from './ui/dot-pattern';
 import CursorTag from './hero-decorations/CursorTag';
 import WireframeFrame from './hero-decorations/WireframeFrame';
-import AnnotationPin from './hero-decorations/AnnotationPin';
 import StickyNote from './hero-decorations/StickyNote';
+import ToggleDecoration from './hero-decorations/ToggleDecoration';
+import AiWidgetFrame from './hero-decorations/AiWidgetFrame';
+import WalPencilDecoration from './hero-decorations/WalPencilDecoration';
+import HeroEntranceController from './hero-decorations/HeroEntranceController';
 
 export default function Hero() {
   return (
     <section className="hero" id="about">
+      <HeroEntranceController />
+      <DotPattern className="[mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,white,transparent)]" />
+
       {/* Floating decorations — hidden on mobile */}
-      <CursorTag
-        text="Brian Huang"
-        color="#4B7BEC"
-        className="hero-decoration hero-cursor-brian"
-      />
-      <CursorTag
-        text="Engineers"
-        color="#26DE81"
-        className="hero-decoration hero-cursor-engineers"
-      />
-      <CursorTag
-        text="PM"
-        color="#FD9644"
-        className="hero-decoration hero-cursor-pm"
-      />
 
-      <WireframeFrame
-        label="Portfolio / Hero"
-        size="large"
-        className="hero-decoration hero-frame-large"
-      />
-      <WireframeFrame
-        label="About"
-        size="small"
-        className="hero-decoration hero-frame-small"
-      />
+      {/* Cursor tags */}
+      <CursorTag text="Product Designer" color="#4B7BEC" className="hero-decoration hero-cursor-brian" />
+      <CursorTag text="Engineers"        color="#26DE81" icon="/decorations/cursor-engineers.svg" className="hero-decoration hero-cursor-engineers" />
+      <CursorTag text="PM"               color="#FD9644" icon="/decorations/cursor-pm.svg"        className="hero-decoration hero-cursor-pm" />
 
-      <AnnotationPin
-        number={1}
-        text="跨域背景（機械→設計）"
-        className="hero-decoration hero-pin-1"
-      />
-      <AnnotationPin
-        number={2}
-        text="解決真實問題"
-        className="hero-decoration hero-pin-2"
-      />
-      <AnnotationPin
-        number={3}
-        text="德語 N4"
-        className="hero-decoration hero-pin-3"
-      />
+      {/* Wireframe frames */}
+      <WireframeFrame label="Session : Build Wow!" size="large" className="hero-decoration hero-frame-large" />
 
-      <StickyNote
-        text="觀察生活細節"
-        color="#FFF3CD"
-        rotation={-5}
-        className="hero-decoration hero-sticky-1"
-      />
-      <StickyNote
-        text="PM 跨職能溝通"
-        color="#D0F0F9"
-        rotation={4}
-        className="hero-decoration hero-sticky-2"
-      />
+      {/* Toggle decoration */}
+      <ToggleDecoration className="hero-decoration hero-toggle" />
+
+      {/* Sticky notes — wrapper div carries the entrance animation; inner StickyNote keeps its rotation */}
+      <div className="hero-decoration hero-sticky-1"><StickyNote text="I have a good idea!"  subtitle="Product Designer"  subtitleColor="#7f714c" color="#FFE299" rotation={-3} /></div>
+      <div className="hero-decoration hero-sticky-2"><StickyNote text="User-Centric Design"  subtitle="Product Designer"  subtitleColor="#695e7f" color="#D3BDFF" rotation={4}  /></div>
+      <div className="hero-decoration hero-sticky-3"><StickyNote text="Data Storage"         subtitle="Backend Engineer"  subtitleColor="#597a77" color="#B3F4EF" rotation={-4} /></div>
+      <div className="hero-decoration hero-sticky-4"><StickyNote text="Co-work with AI"      subtitle="Frontend Engineer" subtitleColor="#546d7f" color="#A8DAFF" rotation={3}  /></div>
+      <div className="hero-decoration hero-sticky-5"><StickyNote text="Product Spec"         subtitle="Project Manager"   subtitleColor="#7f5751" color="#FFAFA3" rotation={-5} /></div>
+      <div className="hero-decoration hero-sticky-6"><StickyNote text="How Might We...?"     subtitle="Project Manager"   subtitleColor="#7f6954" color="#FFD3A8" rotation={5}  /></div>
+
+      {/* AI widget */}
+      <AiWidgetFrame label="Fun demo" className="hero-decoration hero-ai-widget" />
+
+      {/* Walpy + pencil illustration */}
+      <WalPencilDecoration className="hero-decoration hero-wal-pencil" />
 
       {/* Main copy */}
       <div className="hero-copy">
+        <div className="hero-badge-shimmer-wrap">
+          <div className="hero-badge">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/decorations/badge-icon.png" width={24} height={24} alt="" aria-hidden="true" />
+            <span>2+ 業界專案經驗，目前正在尋找新的機會！</span>
+          </div>
+        </div>
+
         <div className="hero-title">
           <SplitText
             tag="h1"
@@ -83,55 +68,21 @@ export default function Hero() {
           />
 
           <div className="hero-taglines">
-            <p className="hero-tagline">
-              <DecryptedText
-                text="以系統性思考問題"
-                animateOn="view"
-                sequential
-                revealDirection="start"
-                speed={70}
-                useOriginalCharsOnly
-                viewDelay={800}
-                className="accent accent-purple"
-                encryptedClassName="hero-tagline-encrypted"
-              />
-            </p>
-            <p className="hero-tagline">
-              <DecryptedText
-                text="以人為本做設計"
-                animateOn="view"
-                sequential
-                revealDirection="start"
-                speed={70}
-                useOriginalCharsOnly
-                viewDelay={1200}
-                className="accent accent-blue"
-                encryptedClassName="hero-tagline-encrypted"
-              />
-            </p>
-            <p className="hero-tagline">
-              <DecryptedText
-                text="協同 AI 打造產品"
-                animateOn="view"
-                sequential
-                revealDirection="start"
-                speed={70}
-                useOriginalCharsOnly
-                viewDelay={1600}
-                className="accent accent-cyan"
-                encryptedClassName="hero-tagline-encrypted"
-              />
-            </p>
+            <TrueFocus
+              sentence="以系統性思考問題|以人為本做設計|協同 AI 打造產品"
+              separator="|"
+              blurAmount={2}
+              borderColor="var(--purple)"
+              glowColor="rgba(93, 98, 216, 0.35)"
+              animationDuration={0.7}
+              pauseBetweenAnimations={1.8}
+            />
           </div>
         </div>
 
         <div className="hero-actions">
-          <a className="button button-secondary" href="#projects">
-            查看作品
-          </a>
-          <a className="button button-dark" href="/about-me">
-            我的歷程
-          </a>
+          <a className="button button-secondary" href="/about-me">我的歷程</a>
+          <a className="button button-dark"      href="#projects">查看作品</a>
         </div>
       </div>
     </section>

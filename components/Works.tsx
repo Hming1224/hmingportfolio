@@ -194,8 +194,6 @@ function ProjectCard({ project }: { project: Project }) {
         <a
           className={`project-button ${project.disabled ? "is-disabled" : ""}`}
           href={project.disabled ? undefined : project.href}
-          target={project.href && !project.disabled ? "_blank" : undefined}
-          rel={project.href && !project.disabled ? "noopener noreferrer" : undefined}
           aria-disabled={project.disabled}
         >
           {project.hoverCta ? (
