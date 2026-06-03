@@ -4522,6 +4522,44 @@ html[data-nav-hidden="true"] .year-rail {
   line-height: 26px;
 }
 
+/* 影片：點擊播放的 Vimeo facade */
+.cs-sol-vplayer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+.cs-sol-vframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.cs-sol-vplay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.cs-sol-vplay img {
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+.cs-sol-vplay:hover img {
+  transform: scale(1.02);
+  filter: brightness(1.05);
+}
+.cs-sol-vplay:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 2px;
+}
+
 /* ── Next Step ── */
 .cs-ns-section {
   background: #ffffff;

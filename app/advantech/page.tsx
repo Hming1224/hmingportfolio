@@ -7,6 +7,7 @@ import ProposalTabs from "./ProposalTabs";
 import FeatureConnectors from "./FeatureConnectors";
 import FlowConnectors from "./FlowConnectors";
 import AlarmLevelDemo from "./AlarmLevelDemo";
+import VimeoPlayer from "./VimeoPlayer";
 import ScrollProgress from "../../components/ScrollProgress";
 import CaseTOC, { type TocSection } from "../../components/CaseTOC";
 
@@ -1272,24 +1273,20 @@ export default function AdventechPage() {
           <div className="cs-sol-vc" style={{ background: "#f6faff", borderColor: "#0072bd" }}>
             <p className="cs-sol-vtitle" style={{ color: "#093060" }}>超約預警操作流程</p>
             <div className="cs-sol-vimg">
-              <video
-                src="/projects/advantech-figma/sol06/video-sc1.mp4"
+              <VimeoPlayer
+                videoId="1197912187"
                 poster="/projects/advantech-figma/sol06/video-sc1.png"
-                controls
-                preload="metadata"
-                style={{ width: "100%", height: "auto", borderRadius: 8, display: "block" }}
+                title="超約預警操作流程"
               />
             </div>
           </div>
           <div className="cs-sol-vc" style={{ background: "#eef8ff", borderColor: "#135e78" }}>
             <p className="cs-sol-vtitle" style={{ color: "#083b4c" }}>模式識別操作流程</p>
             <div className="cs-sol-vimg">
-              <video
-                src="/projects/advantech-figma/sol06/video-sc2.mp4"
+              <VimeoPlayer
+                videoId="1197912188"
                 poster="/projects/advantech-figma/sol06/video-sc2.png"
-                controls
-                preload="metadata"
-                style={{ width: "100%", height: "auto", borderRadius: 8, display: "block" }}
+                title="模式識別操作流程"
               />
             </div>
           </div>
