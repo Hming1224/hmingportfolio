@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 import {
   Tabs,
   TabsHighlight,
@@ -164,6 +165,41 @@ const projects: Project[] = [
   },
 ];
 
+function useScrollReveal() {
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+
+    const cards = Array.from(list.querySelectorAll<HTMLElement>(".project-card"));
+
+    cards.forEach((card) => card.classList.add("card-hidden"));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const card = entry.target as HTMLElement;
+          const index = cards.indexOf(card);
+          setTimeout(() => {
+            card.classList.remove("card-hidden");
+            card.classList.add("card-visible");
+          }, index * 120);
+          observer.unobserve(card);
+        });
+      },
+      { threshold: 0.08 }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return listRef;
+}
+
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article className={`project-card tone-${project.tone}`} id={project.id}>
@@ -213,6 +249,17 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
+function ProjectList({ projects: list }: { projects: Project[] }) {
+  const listRef = useScrollReveal();
+  return (
+    <div className="projects-list" ref={listRef}>
+      {list.map((project) => (
+        <ProjectCard project={project} key={project.id} />
+      ))}
+    </div>
+  );
+}
+
 export default function Works() {
   const enterpriseProjects = projects.filter(
     (project) => project.category === "enterprise",
@@ -247,18 +294,10 @@ export default function Works() {
 
         <TabsPanels mode="wait">
           <TabsPanel value="enterprise">
-            <div className="projects-list">
-              {enterpriseProjects.map((project) => (
-                <ProjectCard project={project} key={project.id} />
-              ))}
-            </div>
+            <ProjectList projects={enterpriseProjects} />
           </TabsPanel>
           <TabsPanel value="school">
-            <div className="projects-list">
-              {schoolProjects.map((project) => (
-                <ProjectCard project={project} key={project.id} />
-              ))}
-            </div>
+            <ProjectList projects={schoolProjects} />
           </TabsPanel>
         </TabsPanels>
       </Tabs>

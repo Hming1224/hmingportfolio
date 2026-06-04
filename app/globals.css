@@ -1005,6 +1005,33 @@ button {
   gap: 48px;
 }
 
+/* scroll reveal：初始隱藏狀態（複製 Kat Wang Framer 站的 selected works 進場：由下方 150px 升起）*/
+.project-card.card-hidden {
+  opacity: 0.001;
+  transform: translateY(150px) translateZ(0);
+  will-change: transform;
+}
+
+/* scroll reveal：進場完成狀態（duration 0.8s、ease cubic-bezier(0.44, 0, 0.56, 1)）*/
+.project-card.card-visible {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+  transition:
+    opacity 800ms cubic-bezier(0.44, 0, 0.56, 1),
+    transform 800ms cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+/* 尊重系統減少動態設定 */
+@media (prefers-reduced-motion: reduce) {
+  .project-card.card-hidden {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+  .project-card.card-visible {
+    transition: none;
+  }
+}
+
 .project-card {
   position: relative;
   width: 100%;
