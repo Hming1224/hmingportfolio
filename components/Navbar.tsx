@@ -114,7 +114,7 @@ export default function Navbar() {
         </Link>
         <a
           className="resume-link"
-          href="/Brian_Huang_Resume.html"
+          href="/Brian_Huang_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
