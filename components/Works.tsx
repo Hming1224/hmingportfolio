@@ -39,8 +39,7 @@ const projects: Project[] = [
     tags: ["UIUX 設計", "團隊專案", "使用者研究", "GenAI 應用"],
     tone: "advantech",
     category: "enterprise",
-    cta: "資料準備中",
-    hoverCta: "了解更多",
+    cta: "了解更多",
     href: "/advantech",
   },
   {
@@ -168,28 +167,32 @@ const projects: Project[] = [
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article className={`project-card tone-${project.tone}`} id={project.id}>
-      <Image
-        className="project-image"
-        src={project.imageUrl}
-        alt={project.title}
-        fill
-        sizes="(max-width: 809px) calc(100vw - 48px), (max-width: 1279px) calc(100vw - 96px), 1200px"
-      />
-      <div className="project-scrim" />
+      <div className="project-media">
+        <Image
+          className="project-image"
+          src={project.imageUrl}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1279px) calc(100vw - 96px), 1200px"
+        />
+        <div className="project-scrim" />
+      </div>
 
       <div className="project-info">
-        <div className="project-logo-wrap">
-          <Image src={project.logoUrl} alt="" fill sizes="168px" />
-        </div>
-        <div className="project-title">
-          <h3>{project.title}</h3>
-          <p>{project.date}</p>
-        </div>
-        <p className="project-description">{project.description}</p>
-        <div className="project-tags">
-          {project.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
+        <div className="project-meta">
+          <div className="project-logo-wrap">
+            <Image src={project.logoUrl} alt="" fill sizes="168px" />
+          </div>
+          <div className="project-title">
+            <h3>{project.title}</h3>
+            <p>{project.date}</p>
+          </div>
+          <p className="project-description">{project.description}</p>
+          <div className="project-tags">
+            {project.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
         </div>
         <a
           className={`project-button ${project.disabled ? "is-disabled" : ""}`}

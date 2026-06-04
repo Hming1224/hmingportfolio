@@ -191,7 +191,7 @@ export default function AboutMePage() {
       <SectionHeading id="traits">人格特質</SectionHeading>
       <section className="traits-panel">
         <div className="traits-photo">
-          <Image src="https://framerusercontent.com/images/lPNLR0tL3A5W7CVHifVKJxgj10s.jpg" alt="Brian Huang portrait" fill sizes="(max-width: 809px) 342px, 289px" />
+          <Image src="https://framerusercontent.com/images/lPNLR0tL3A5W7CVHifVKJxgj10s.jpg" alt="Brian Huang portrait" fill sizes="(max-width: 768px) 342px, 289px" />
         </div>
         <div className="traits-list">
           <article>
@@ -221,7 +221,7 @@ export default function AboutMePage() {
               key={`${item.title}-${index}`}
             >
               <div className="experience-image">
-                <Image src={item.image} alt={item.title} fill sizes="(max-width: 809px) calc(100vw - 48px), 269px" />
+                <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) calc(100vw - 48px), 269px" />
               </div>
               <div className="experience-copy">
                 <p className="experience-year">{item.year}</p>

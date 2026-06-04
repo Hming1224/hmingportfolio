@@ -510,6 +510,12 @@ button {
   animation: float-y 4s ease-in-out infinite;
 }
 
+/* 桌機/平板：底部四裝飾的 frame 不參與版面，四個物件沿用各自相對 .hero 的絕對定位。
+   ≤768px 才把它變成真正的容器（見 768 斷點）。 */
+.hero-bottom-group {
+  display: contents;
+}
+
 /* Cursor tags */
 .cursor-tag {
   --cursor-tag-scale: 1;
@@ -1011,6 +1017,15 @@ button {
   transform: translateZ(0);
 }
 
+/* 桌機：圖片容器填滿整張卡（圖片絕對定位 fill）；手機改成流式比例框（見 768 斷點）。 */
+.project-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
 .project-image {
   width: 100%;
   height: 100%;
@@ -1074,6 +1089,12 @@ button {
 .project-card:hover .project-image,
 .project-card:focus-within .project-image {
   transform: scale(1.03);
+}
+
+/* 桌機：包裹層不參與版面，logo/標題/描述/標籤直接當 project-info 的 flex 子項，
+   維持原本的單欄白色浮卡。手機才把它變成獨立白色資訊卡（見 768 / 440 斷點）。 */
+.project-meta {
+  display: contents;
 }
 
 .project-logo-wrap {
@@ -2183,7 +2204,7 @@ html[data-nav-hidden="true"] .year-rail {
 
 }
 
-@media (max-width: 809px) {
+@media (max-width: 768px) {
   .site-nav {
     --mobile-nav-closed-height: 80px;
     --mobile-nav-open-height: 336px;
@@ -2418,14 +2439,28 @@ html[data-nav-hidden="true"] .year-rail {
   }
 
   .projects-list {
-    gap: 12px;
+    gap: 48px;
   }
 
+  /* 手機改流式排版：卡片＝直向 flex（圖片 → 資訊卡 → 按鈕），
+     內容變高（tag 折行、標題折行）時自然往下推，按鈕與下一張圖的間距永遠保留。 */
   .project-card {
     min-height: 0;
-    aspect-ratio: 1.78 / 1;
+    aspect-ratio: auto;
     overflow: visible;
-    margin-bottom: 64px;
+    border-radius: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* 圖片容器改成流式比例框（取代桌機的 absolute inset:0） */
+  .project-media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 1.78 / 1;
     border-radius: 10px;
   }
 
@@ -2433,23 +2468,82 @@ html[data-nav-hidden="true"] .year-rail {
     border-radius: 10px;
   }
 
-  .project-info {
+  /* 圖片下方依序堆：白色資訊卡 → 按鈕（自然流式，不再絕對定位） */
+  .project-info,
+  .project-card:hover .project-info,
+  .project-card:focus-within .project-info {
     position: static;
-    width: 100%;
+    inset: auto;
+    width: auto;
     min-height: 0;
-    padding: 14px 0 0;
+    padding: 0;
     border-radius: 0;
     box-shadow: none;
     background: transparent;
     opacity: 1;
     transform: none;
+    transition: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
-  .project-logo-wrap,
-  .project-title,
-  .project-description,
-  .project-tags {
+  /* 白色資訊卡（橫式：logo 左、標題/日期/標籤右）— 對應 Figma 440–768 規格 */
+  .project-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 8px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: white;
+  }
+
+  .project-logo-wrap {
+    display: block;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: center;
+    width: 134px;
+    height: 40px;
+    border-radius: 0;
+  }
+
+  .project-title {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 8px;
+    align-self: end;
+  }
+
+  .project-title h3 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .project-title p {
+    font-size: 12px;
+  }
+
+  .project-description {
     display: none;
+  }
+
+  .project-tags {
+    grid-column: 2;
+    grid-row: 2;
+    flex: none;
+    gap: 8px;
+    align-self: start;
+  }
+
+  .project-tags span {
+    min-height: 0;
+    padding: 4px 8px;
+    font-size: 12px;
   }
 
   .project-scrim {
@@ -2727,6 +2821,33 @@ html[data-nav-hidden="true"] .year-rail {
     align-self: center;
   }
 
+}
+
+/* 低於 440px：資訊卡改直式置中（logo 上、標題/日期下），標籤隱藏 —
+   對應 Figma 340 / 439 規格。放在 768 斷點之後以覆蓋橫式佈局。 */
+@media (max-width: 440px) {
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  /* 直式置中時，logo 圖在框內也要置中（橫式維持靠左對齊） */
+  .project-logo-wrap img {
+    object-position: center;
+  }
+
+  .project-title {
+    width: 100%;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .project-tags {
+    display: none;
+  }
 }
 
 /* ============================================
@@ -3904,10 +4025,10 @@ html[data-nav-hidden="true"] .year-rail {
   margin-top: 7px;
 }
 
-/* 桌機(≥810px)：用 grid + subgrid 讓三欄的 title / 痛點卡 / AI 卡各自跨欄等高。
-   ≤809px 不套用 → 沿用 base 的 flex，並由 809 斷點收成單欄堆疊。
+/* 桌機(≥769px)：用 grid + subgrid 讓三欄的 title / 痛點卡 / AI 卡各自跨欄等高。
+   ≤768px 不套用 → 沿用 base 的 flex，並由 768 斷點收成單欄堆疊。
    放在 base 規則之後，確保 source order 蓋過 base 的 flex。 */
-@media (min-width: 810px) {
+@media (min-width: 769px) {
   .cs-iv-workflow {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -5408,14 +5529,14 @@ html[data-nav-hidden="true"] .year-rail {
 
 /* Below 1100px the wide Figma spacing gets cramped, so switch to a compact,
    even 3-column layout. It keeps a min content width and scrolls horizontally
-   (like the 設計流程 timeline) once the viewport drops to ~809px and under,
+   (like the 設計流程 timeline) once the viewport drops to ~768px and under,
    instead of collapsing — so the AI→Feature→UI story stays intact. */
 @media (max-width: 1100px) {
   .cs-ds-flow-cols {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 28px;
   }
-  /* 607px ≈ the section's content width at a 809px viewport → scroll at ≤809px */
+  /* 607px ≈ the section's content width at a 768px viewport → scroll at ≤768px */
   .cs-ds-flow-inner {
     min-width: 607px;
   }
@@ -6020,34 +6141,46 @@ html[data-nav-hidden="true"] .year-rail {
   .hero-sticky-product-spec { z-index: 5; right: auto; left: 200px; top: 21px; rotate: 10deg; }
   .hero-sticky-how-might    { z-index: 6; right: auto; left: 250px; top: 42px; rotate: 15deg; }
 
-  /* 底部四個裝飾「垂直置中於按鈕與視窗下緣之間的空隙」。
-     按鈕底 = heroH×0.315(padding-top) + 398px(copy 固定高)；
-     空隙中點 = (按鈕底 + heroH)/2 = heroH×0.6575 + 199px。
-     各裝飾 top = 該中點 + 固定偏移（保留原本列的相對排列、整組一起置中）。
+  /* 底部四個裝飾包成一個 frame，整個 frame 垂直置中於「按鈕底 ↔ 視窗下緣」的空隙。
+     按鈕底(相對 hero) = heroH×0.315(padding-top) + 322px(copy 固定高)；
+     空隙中點 = (按鈕底 + heroH)/2 = heroH×0.6575 + 161px。
+     frame 高 162px，故 frame top = 中點 − 81 = heroH×0.6575 + 80px，frame 正好置中。
+     四個子物件水平用 left:%（隨寬度自適應），垂直用相對 frame 的固定 px 排高度順序。
      ※ 高度 < 800px 時這四個物件已由下方 media query 隱藏，故這裡只需顧 ≥800 的情況。 */
+  .hero-bottom-group {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--hero-mobile-h) * 0.6575 + 80px);
+    height: 162px;
+    z-index: 1;
+  }
+
+  /* 高度順序：wal-pencil 最高(0) → toggle(22) → frame-large(44) → ai-widget(58) */
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.45;
+    left: 52%;
+    right: auto;
+    top: 0;
+  }
+
   .hero-toggle {
     --toggle-scale: 0.498;
     left: 69.6%;
-    top: calc(var(--hero-mobile-h) * 0.6575 + 184px);
+    top: 22px;
   }
 
   .hero-frame-large {
     --wireframe-scale: 0.650;
     left: 23.9%;
-    top: calc(var(--hero-mobile-h) * 0.6575 + 164px);
+    top: 44px;
   }
 
   .hero-ai-widget {
     --ai-widget-scale: 0.650;
     left: 12.8%;
-    top: calc(var(--hero-mobile-h) * 0.6575 + 182px);
-  }
-
-  .hero-wal-pencil {
-    --wal-pencil-scale: 0.45;
-    left: 52%;
-    right: auto;
-    top: calc(var(--hero-mobile-h) * 0.6575 + 190px);
+    top: 58px;
   }
 }
 
