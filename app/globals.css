@@ -1949,19 +1949,18 @@ button {
 
 .year-rail {
   position: sticky;
-  top: var(--year-rail-sticky-top, 0px);
+  --year-rail-sticky-top: 80px; /* Default sticky offset to clear navbar */
+  top: var(--year-rail-sticky-top);
   display: grid;
   gap: 24px;
   align-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--year-rail-sticky-top)); /* Clear navbar to prevent bottom cutoff */
   padding: 12px;
   background: white;
   transition: top 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10; /* Keep rail above cards to prevent overlapping */
 }
 
-html[data-nav-hidden="true"] .year-rail {
-  --year-rail-sticky-top: 0px;
-}
 
 .year-rail a {
   color: var(--muted);
@@ -1973,6 +1972,11 @@ html[data-nav-hidden="true"] .year-rail {
     color 180ms ease,
     font-size 180ms ease,
     font-weight 180ms ease;
+  cursor: pointer;
+}
+
+.year-rail a:hover {
+  color: var(--purple);
 }
 
 .year-rail a.is-active {
@@ -1999,6 +2003,7 @@ html[data-nav-hidden="true"] .year-rail {
     opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
+  scroll-margin-top: 100px; /* Offset scrolling position to prevent cards from sliding behind fixed navbar */
 }
 
 .experience-card.is-visible {
@@ -2146,6 +2151,7 @@ html[data-nav-hidden="true"] .year-rail {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition:
+    background-color 260ms ease,
     box-shadow 260ms ease,
     transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
   transform: translateZ(0);
@@ -2225,6 +2231,7 @@ html[data-nav-hidden="true"] .year-rail {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.7;
+  transition: color 260ms ease;
 }
 
 /* 三張卡標題 + icon 對應 avatar_profile 三色：紫 / 橘 / 綠 */
@@ -2233,15 +2240,41 @@ html[data-nav-hidden="true"] .year-rail {
   color: #5d62d8;
   background: rgba(93, 98, 216, 0.1);
 }
+.design-value-animated:nth-child(1) .design-value-card:hover,
+.design-value-animated:nth-child(1) .design-value-card:focus-within {
+  background: rgba(239, 239, 251, 0.4);
+}
+.design-value-animated:nth-child(1) .design-value-card:hover p,
+.design-value-animated:nth-child(1) .design-value-card:focus-within p {
+  color: #343434;
+}
+
 .design-value-animated:nth-child(2) .design-value-card h3 { color: #e8856b; }
 .design-value-animated:nth-child(2) .design-value-icon {
   color: #e8856b;
   background: rgba(232, 133, 107, 0.12);
 }
+.design-value-animated:nth-child(2) .design-value-card:hover,
+.design-value-animated:nth-child(2) .design-value-card:focus-within {
+  background: rgba(252, 240, 237, 0.4);
+}
+.design-value-animated:nth-child(2) .design-value-card:hover p,
+.design-value-animated:nth-child(2) .design-value-card:focus-within p {
+  color: #343434;
+}
+
 .design-value-animated:nth-child(3) .design-value-card h3 { color: #1fa37e; }
 .design-value-animated:nth-child(3) .design-value-icon {
   color: #1fa37e;
   background: rgba(31, 163, 126, 0.12);
+}
+.design-value-animated:nth-child(3) .design-value-card:hover,
+.design-value-animated:nth-child(3) .design-value-card:focus-within {
+  background: rgba(228, 244, 240, 0.4);
+}
+.design-value-animated:nth-child(3) .design-value-card:hover p,
+.design-value-animated:nth-child(3) .design-value-card:focus-within p {
+  color: #343434;
 }
 
 @keyframes designValueShine {

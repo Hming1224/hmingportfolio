@@ -19,7 +19,9 @@ export default function YearRail({ years }: YearRailProps) {
     }
 
     const updateActiveYear = () => {
-      const viewportAnchor = window.innerHeight * 0.5;
+      // Use a higher viewport anchor (30% of viewport height) to match the reading focus area
+      // since cards scroll to the top of the viewport (under the 80px navbar)
+      const viewportAnchor = Math.max(120, window.innerHeight * 0.3);
       const closestCard = cards.reduce(
         (closest, card) => {
           const rect = card.getBoundingClientRect();
