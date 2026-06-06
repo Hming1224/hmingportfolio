@@ -1501,7 +1501,6 @@ button {
 }
 
 .portrait-card img,
-.polaroid img,
 .traits-photo img,
 .experience-image img {
   object-fit: cover;
@@ -1563,35 +1562,313 @@ button {
 }
 
 .growth-grid {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
+  /* clip 水平方向避免出現頁面捲軸，但保留垂直可見，
+     讓膠帶 / 迴紋針 / 拍立得上緣能完整露出不被裁掉 */
+  overflow-x: clip;
+  overflow-y: visible;
+  padding-top: 28px;
 }
 
-.story-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 48px;
+.growth-story {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-height: max-content;
+  overflow: visible;
+}
+
+.growth-story-blue {
+  justify-content: flex-start;
+}
+
+.growth-story-orange {
+  justify-content: flex-end;
+}
+
+.growth-cluster {
+  position: relative;
+  flex: 1 0 0;
+  max-width: 1000px;
+  min-width: 0;
+  width: 1px;
+}
+
+/* 進場動畫：預設隱藏，捲到畫面內（.is-visible）才播放 */
+.growth-story-blue,
+.growth-story-orange {
+  opacity: 0;
+}
+
+.growth-story-blue.is-visible {
+  animation: growthBlueIn 820ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.growth-story-orange.is-visible {
+  animation: growthOrangeIn 820ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+
+.growth-card {
+  position: relative;
+  display: flex;
   align-items: center;
+  width: 100%;
+  min-height: max-content;
+  overflow: visible;
   padding: 48px;
   border-radius: 6px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
 }
 
-.blue-card {
-  background: #d4e2f1;
-}
-
-.orange-card {
-  grid-template-columns: 280px minmax(0, 1fr);
-  background: #fff3e0;
-}
-
-.story-copy {
-  display: grid;
+.growth-card-blue {
   gap: 24px;
+  justify-content: flex-start;
+  background: #d4e2f1;
+  transform: rotate(-1deg);
 }
 
-.story-copy h3,
+.growth-card-orange {
+  gap: 48px;
+  justify-content: flex-start;
+  background: #fff3e0;
+  transform: rotate(1deg);
+}
+
+.growth-copy {
+  position: relative;
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  width: 1px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.growth-copy p {
+  z-index: 1;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.growth-copy strong {
+  font-weight: 700;
+}
+
+.growth-highlight-blue {
+  color: rgba(29, 103, 177, 0.8);
+}
+
+.growth-highlight-orange {
+  color: var(--purple);
+}
+
+.growth-label {
+  position: relative;
+  z-index: 2;
+  display: inline-grid;
+  flex: none;
+  width: 135px;
+  height: 36px;
+  place-items: center;
+  overflow: hidden;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.growth-label-blue {
+  transform: rotate(-1deg);
+}
+
+.growth-label-orange {
+  transform: rotate(1deg);
+}
+
+.growth-mark {
+  position: absolute;
+  inset: 2px 0;
+  z-index: 0;
+  width: 100%;
+  height: calc(100% - 4px);
+  pointer-events: none;
+}
+
+.growth-label span {
+  position: relative;
+  z-index: 1;
+}
+
+.growth-sticker {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.growth-sticker svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.growth-sticker-blue {
+  top: -34px;
+  left: calc(50% - 16px);
+  z-index: 2;
+  width: 31px;
+  height: 54px;
+}
+
+.growth-sticker-orange {
+  top: -34px;
+  left: calc(50% - 18px);
+  width: 37px;
+  height: 54px;
+}
+
+.growth-photo-stage {
+  position: relative;
+  flex: none;
+  width: 201px;
+  height: 316px;
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+
+.growth-polaroid {
+  position: absolute;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  height: min-content;
+  width: 248px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  background: white;
+  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.growth-polaroid-blue {
+  top: -25px;
+  right: -65px;
+  transform: rotate(-9deg);
+  transform-origin: center;
+  opacity: 0;
+}
+
+.growth-polaroid-orange {
+  top: -7px;
+  left: -72px;
+  transform: rotate(9deg);
+  transform-origin: center;
+  opacity: 0;
+}
+
+.growth-story-blue.is-visible .growth-polaroid-blue {
+  animation: growthPhotoBlueIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+}
+
+.growth-story-orange.is-visible .growth-polaroid-orange {
+  animation: growthPhotoOrangeIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
+}
+
+.growth-polaroid > img:not(.growth-paperclip) {
+  position: relative !important;
+  width: 100% !important;
+  height: 305px !important;
+  object-fit: cover;
+}
+
+.growth-polaroid figcaption {
+  color: var(--ink);
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.growth-paperclip {
+  position: absolute;
+  z-index: 4;
+  top: -14px;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  transform: translateX(-50%);
+  object-fit: cover;
+  pointer-events: none;
+}
+
+@keyframes growthBlueIn {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) translate(40px, -40px) rotateX(20deg) rotateY(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) translate(0, 0) rotateX(0) rotateY(0);
+  }
+}
+
+@keyframes growthOrangeIn {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) translate(-40px, -40px) rotateX(20deg) rotateY(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) translate(0, 0) rotateX(0) rotateY(0);
+  }
+}
+
+@keyframes growthPhotoBlueIn {
+  from {
+    opacity: 0;
+    filter: saturate(0.85);
+    transform: perspective(1200px) translate(20px, -20px) rotate(-9deg) rotateX(20deg);
+  }
+  to {
+    opacity: 1;
+    filter: saturate(1);
+    transform: perspective(1200px) translate(0, 0) rotate(-9deg) rotateX(0);
+  }
+}
+
+@keyframes growthPhotoOrangeIn {
+  from {
+    opacity: 0;
+    filter: saturate(0.85);
+    transform: perspective(1200px) translate(-20px, -20px) rotate(9deg) rotateX(20deg);
+  }
+  to {
+    opacity: 1;
+    filter: saturate(1);
+    transform: perspective(1200px) translate(0, 0) rotate(9deg) rotateX(0);
+  }
+}
+
+/* 尊重「減少動態效果」偏好：直接顯示最終狀態，不播進場動畫 */
+@media (prefers-reduced-motion: reduce) {
+  .growth-story-blue,
+  .growth-story-orange,
+  .growth-polaroid-blue,
+  .growth-polaroid-orange {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 .traits-list h3,
 .experience-copy h3,
 .skills-panel h3,
@@ -1603,46 +1880,12 @@ button {
   line-height: 1.4;
 }
 
-.story-copy p,
 .traits-list p,
 .education-card p {
   margin: 0;
   color: rgba(0, 0, 0, 0.78);
   font-weight: 500;
   line-height: 1.4;
-}
-
-.polaroid {
-  position: relative;
-  width: 248px;
-  min-height: 344px;
-  margin: 0;
-  padding: 12px 12px 16px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-  background: white;
-  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.12);
-}
-
-.polaroid img {
-  position: relative !important;
-  width: 100% !important;
-  height: 305px !important;
-}
-
-.polaroid figcaption {
-  margin-top: 8px;
-  text-align: center;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.tilt-left {
-  transform: rotate(-8deg);
-}
-
-.tilt-right {
-  transform: rotate(8deg);
 }
 
 .traits-panel {
@@ -1846,6 +2089,224 @@ html[data-nav-hidden="true"] .year-rail {
 .education-card div {
   display: grid;
   gap: 12px;
+}
+
+/* ── Design Values：Dark Cards ── */
+.design-values-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 0 clamp(24px, 8vw, 120px) 24px;
+}
+
+.design-value-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  border-radius: 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.design-value-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--purple);
+}
+
+.design-value-card h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.design-value-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* 三張卡標題 + icon 對應 avatar_profile 三色：紫 / 橘 / 綠 */
+.design-value-card:nth-child(1) h3 { color: #5d62d8; }
+.design-value-card:nth-child(1) .design-value-icon {
+  color: #5d62d8;
+  background: rgba(93, 98, 216, 0.1);
+}
+.design-value-card:nth-child(2) h3 { color: #e8856b; }
+.design-value-card:nth-child(2) .design-value-icon {
+  color: #e8856b;
+  background: rgba(232, 133, 107, 0.12);
+}
+.design-value-card:nth-child(3) h3 { color: #1fa37e; }
+.design-value-card:nth-child(3) .design-value-icon {
+  color: #1fa37e;
+  background: rgba(31, 163, 126, 0.12);
+}
+
+/* ── Educator section：Bento Grid ── */
+.educator-section {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  margin: 0 clamp(24px, 8vw, 120px) 24px;
+}
+
+/* OpenHCI — 大格（2/3 寬） */
+.educator-card:nth-child(1) {
+  grid-column: span 4;
+}
+
+/* NCCU 人機介面設計 — 小格（1/3 寬） */
+.educator-card:nth-child(2) {
+  grid-column: span 2;
+}
+
+/* NCCU 人機互動 — 小格（1/3 寬） */
+.educator-card:nth-child(3) {
+  grid-column: span 2;
+}
+
+/* 社會議題黑客鬆 — 大格（2/3 寬） */
+.educator-card:nth-child(4) {
+  grid-column: span 4;
+}
+
+.educator-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 380px;
+  background: #1c1c2e;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  isolation: isolate;
+  outline: none;
+}
+
+.educator-card:focus-visible {
+  box-shadow: 0 0 0 3px var(--purple-soft), 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* 全幅背景照片，hover 微放大 */
+.educator-card-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.educator-card:hover .educator-card-photo,
+.educator-card:focus-within .educator-card-photo {
+  transform: scale(1.05);
+}
+
+/* 底部漸層遮罩：確保文字可讀，hover 時加深 */
+.educator-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(15, 15, 30, 0.9) 0%,
+    rgba(15, 15, 30, 0.55) 32%,
+    rgba(15, 15, 30, 0) 68%
+  );
+  transition: background 0.4s ease;
+}
+
+.educator-card:hover::after,
+.educator-card:focus-within::after {
+  background: linear-gradient(
+    to top,
+    rgba(15, 15, 30, 0.94) 0%,
+    rgba(15, 15, 30, 0.72) 45%,
+    rgba(15, 15, 30, 0.18) 88%
+  );
+}
+
+/* 底部內容：標題 + 角色常駐，介紹文 hover 由下往上展開 */
+.educator-card-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 28px 32px;
+  color: white;
+}
+
+.educator-card-body h3 {
+  margin: 0;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.educator-role {
+  margin: 0;
+  color: var(--purple-soft);
+  font-weight: 500;
+}
+
+/* hover 展開容器：grid-template-rows 0fr→1fr 做出由下往上滑入 */
+.educator-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.educator-reveal-inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+}
+
+.educator-card:hover .educator-reveal,
+.educator-card:focus-within .educator-reveal {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.educator-card-body p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.educator-date {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 13px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .educator-card-photo,
+  .educator-reveal {
+    transition: none;
+  }
 }
 
 @keyframes fadeUp {
@@ -2178,19 +2639,45 @@ html[data-nav-hidden="true"] .year-rail {
     font-size: 28px;
   }
 
-  .story-card,
-  .orange-card {
-    grid-template-columns: minmax(0, 1fr) 220px;
-    gap: 24px;
+  .growth-story {
+    min-height: max-content;
   }
 
-  .polaroid {
+  .growth-card {
+    padding: 48px;
+  }
+
+  .growth-card-orange {
+    gap: 16px;
+  }
+
+  .growth-photo-stage {
+    width: 174px;
+    height: 274px;
+  }
+
+  .growth-polaroid {
     width: 212px;
-    min-height: 310px;
   }
 
-  .polaroid img {
+  .growth-polaroid > img:not(.growth-paperclip) {
     height: 255px !important;
+  }
+
+  .growth-polaroid-blue {
+    top: -32px;
+    right: -30px;
+  }
+
+  .growth-polaroid-orange {
+    top: auto;
+    bottom: -42px;
+    left: -39px;
+    width: 209px;
+  }
+
+  .growth-polaroid-orange > img:not(.growth-paperclip) {
+    height: 252px !important;
   }
 
   .tool-grid {
@@ -2702,22 +3189,18 @@ html[data-nav-hidden="true"] .year-rail {
     margin-inline: 24px;
   }
 
-  .story-card,
-  .orange-card,
   .traits-panel,
   .experience-card,
   .education-card {
     grid-template-columns: 1fr;
   }
 
-  .story-card,
   .traits-panel,
   .skills-panel,
   .education-card {
     padding: 24px;
   }
 
-  .story-copy h3,
   .traits-list h3,
   .experience-copy h3,
   .skills-panel h3,
@@ -2725,12 +3208,110 @@ html[data-nav-hidden="true"] .year-rail {
     font-size: 20px;
   }
 
-  .orange-card .polaroid {
-    order: 2;
+  .growth-story {
+    min-height: auto;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
-  .polaroid {
-    justify-self: center;
+  .growth-story-orange {
+    padding-bottom: 16px;
+  }
+
+  .growth-cluster {
+    flex: none;
+    width: 100%;
+  }
+
+  .growth-card {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+
+  .growth-card-blue {
+    gap: 64px;
+  }
+
+  .growth-card-orange {
+    gap: 24px;
+  }
+
+  .growth-card-blue,
+  .growth-card-orange {
+    transform: none;
+  }
+
+  .growth-copy {
+    flex: none;
+    width: 100%;
+  }
+
+  .growth-copy p {
+    font-size: 14px;
+  }
+
+  .growth-label {
+    width: 116px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .growth-label-blue,
+  .growth-label-orange {
+    transform: none;
+  }
+
+  .growth-sticker-blue {
+    top: -4px;
+    left: auto;
+    right: 24px;
+  }
+
+  .growth-sticker-orange {
+    bottom: auto;
+    left: auto;
+    top: 8px;
+    right: 24px;
+  }
+
+  .growth-photo-stage {
+    width: 174px;
+    height: 274px;
+  }
+
+  .growth-card-orange .growth-copy {
+    order: 0;
+  }
+
+  .growth-card-orange .growth-photo-stage {
+    order: 1;
+  }
+
+  .growth-polaroid {
+    width: 212px;
+  }
+
+  .growth-polaroid-blue {
+    top: -32px;
+    right: -30px;
+  }
+
+  .growth-polaroid-orange {
+    top: auto;
+    bottom: -19px;
+    left: -38px;
+    width: 209px;
+  }
+
+  .growth-polaroid > img:not(.growth-paperclip) {
+    height: 272px !important;
+  }
+
+  .growth-paperclip {
+    top: -12px;
+    width: 23px;
+    height: 23px;
   }
 
   .traits-photo {
@@ -2831,6 +3412,44 @@ html[data-nav-hidden="true"] .year-rail {
   .education-card {
     justify-items: center;
     text-align: center;
+  }
+
+  .design-values-section {
+    grid-template-columns: 1fr;
+    margin-inline: 24px;
+  }
+
+  .design-value-card {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .design-value-card h3 {
+    font-size: 18px;
+  }
+
+  .educator-section {
+    grid-template-columns: 1fr;
+    margin-inline: 24px;
+  }
+
+  .educator-card:nth-child(1),
+  .educator-card:nth-child(2),
+  .educator-card:nth-child(3),
+  .educator-card:nth-child(4) {
+    grid-column: span 1;
+  }
+
+  .educator-card {
+    min-height: 340px;
+  }
+
+  .educator-card-photo {
+    height: 100%;
+  }
+
+  .educator-card-body {
+    padding: 20px 24px;
   }
 
   /* Section 04 – User Interview */
