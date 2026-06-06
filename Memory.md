@@ -1,5 +1,23 @@
 # Project Memory
 
+## 2026-06-06 About-Me refactoring & SEO progress
+
+- Page: `/about-me`
+- Main files touched:
+  - `app/about-me/page.tsx`, `app/about-me/AnimatedContent.tsx` (new), `app/about-me/EducatorMasonry.tsx` (new)
+  - `app/globals.css`, `app/layout.tsx`, `components/YearRail.tsx`, `components/AvatarProfile.tsx`
+  - `AGENTS.md`, `Memory.md`
+- Key refactoring and optimizations:
+  - **Component Extraction**: Split client-side animations and the educator Bento grid from `about-me/page.tsx` into `AnimatedContent.tsx` and `EducatorMasonry.tsx`.
+  - **Content & Experience Correction**: Updated Advantech intern experience details (dates to 2024.06 - 2024.08, points to stakeholder approvals/chatbot proposal), and NCCU educator course names.
+  - **Scroll active rail optimization**: Refactored `YearRail.tsx` to use `IntersectionObserver` for fade-in animations. Shifted scroll spy detection to center-of-viewport alignment for accurate active year toggling.
+  - **SEO & Icons**: Added standard SEO metadata, OpenGraph, Twitter cards, and brand logos/favicons in `app/layout.tsx`.
+  - **Code Cleanup**: Deleted the unused component `DecryptedText.tsx` and removed completed visual layout TODO comments in `AvatarProfile.tsx`.
+  - **Standardized Communication**: Added a dialog response format guideline in `AGENTS.md` to ensure progress reporting consistency across sessions.
+- Verification:
+  - `npm run build` passed successfully.
+  - Local dev server running via `npm run dev` at localhost:3000.
+
 ## 2026-06-03 Home hero RWD progress
 
 - Page: `/` home hero. Main file touched: `app/globals.css`.
