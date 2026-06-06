@@ -18,4 +18,8 @@ Project-specific defaults:
 - Prefer focused edits over broad rewrites.
 - Verify UI changes visually when a local dev server can run.
 - Summarize changed files and verification results at the end of each task.
+- 對話回覆格式：每次回覆必須包含且主動整理以下三個標題區塊：
+  - **✅ 剛完成** (總結完成工作)
+  - **👉 建議下一步** (列出下一步建議)
+  - **⚠️ 可能遺漏** (提醒潛在或可能被遺漏的細節)
 
