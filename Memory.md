@@ -28,7 +28,6 @@
   - Follow-up mobile proportional-height fix also passed `npm run build`.
   - Follow-up semantic sticky-note fan/z-index fix also passed `npm run build`.
   - Follow-up exact Figma-ratio sticky position fix also passed `npm run build`.
-  - `npm run lint` still fails on an existing unrelated rule in `components/animate-ui/primitives/texts/DecryptedText.tsx:345` (`react-hooks/set-state-in-effect`), plus existing warnings.
 - Session note:
   - User requested `localhost:3000` stay running until the session ends. Do not stop the dev server during final cleanup unless the user explicitly asks.
   - Follow-up fix: the center copy group in the `768px–1024px` viewport range was too low because `padding-top: 426px` had been applied as a fixed value. It was changed to responsive viewport padding so the copy group moves up on shorter screens while the hero still owns the full first viewport.
