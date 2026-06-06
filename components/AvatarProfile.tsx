@@ -257,7 +257,6 @@ export default function AvatarProfile({
     >
       <motion.div
         className="absolute overflow-visible"
-        // TODO: Fine-tune this frame height against the Framer screenshot.
         style={{ left: 50, top: 48, width: 340, height: 334 }}
         variants={avatarFrameVariants}
       >
@@ -366,8 +365,6 @@ export default function AvatarProfile({
           </div>
         </div>
       </motion.div>
-
-      {/* TODO: Fine-tune badge and arrow placement against the Framer video. */}
     </motion.div>
   );
 }
