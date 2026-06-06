@@ -7,6 +7,12 @@
   initial-value: 0deg;
 }
 
+@property --shine-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 @keyframes shimmer-rotate {
   to { --shimmer-angle: 360deg; }
 }
@@ -1860,6 +1866,14 @@ button {
 
 /* 尊重「減少動態效果」偏好：直接顯示最終狀態，不播進場動畫 */
 @media (prefers-reduced-motion: reduce) {
+  .experience-card,
+  .experience-card.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
   .growth-story-blue,
   .growth-story-orange,
   .growth-polaroid-blue,
@@ -1935,16 +1949,18 @@ button {
 
 .year-rail {
   position: sticky;
-  top: var(--year-rail-sticky-top, 104px);
+  top: var(--year-rail-sticky-top, 0px);
   display: grid;
   gap: 24px;
+  align-content: center;
+  min-height: 100vh;
   padding: 12px;
   background: white;
   transition: top 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html[data-nav-hidden="true"] .year-rail {
-  --year-rail-sticky-top: 24px;
+  --year-rail-sticky-top: 0px;
 }
 
 .year-rail a {
@@ -1977,6 +1993,17 @@ html[data-nav-hidden="true"] .year-rail {
   border-radius: 20px;
   background: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  transform: translateY(72px);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.experience-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .experience-image {
@@ -2014,8 +2041,10 @@ html[data-nav-hidden="true"] .year-rail {
 
 .experience-copy ul {
   margin: 14px 0 0;
-  padding-left: 20px;
+  padding-left: 0;
+  list-style: none;
   line-height: 1.4;
+  text-align: left;
 }
 
 .skills-panel {
@@ -2091,7 +2120,7 @@ html[data-nav-hidden="true"] .year-rail {
   gap: 12px;
 }
 
-/* ── Design Values：Dark Cards ── */
+/* ── Design Values：Animated shine cards ── */
 .design-values-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2099,15 +2128,77 @@ html[data-nav-hidden="true"] .year-rail {
   margin: 0 clamp(24px, 8vw, 120px) 24px;
 }
 
+.design-value-animated {
+  min-width: 0;
+  height: 100%;
+}
+
 .design-value-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100%;
   padding: 32px;
   border-radius: 20px;
   background: var(--paper);
   border: 1px solid var(--line);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition:
+    box-shadow 260ms ease,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateZ(0);
+}
+
+.design-value-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--shine-angle, 0deg),
+    transparent 0deg,
+    transparent 52deg,
+    #a07cfe 86deg,
+    #fe8fb5 132deg,
+    #ffbe7b 178deg,
+    transparent 226deg,
+    transparent 360deg
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: designValueShine 2.4s linear infinite;
+}
+
+.design-value-card:hover,
+.design-value-card:focus-within {
+  transform: scale(1.025) translateZ(0);
+  box-shadow: 0 14px 36px rgba(72, 76, 160, 0.14);
+}
+
+.design-value-card:focus-visible {
+  outline: none;
+}
+
+.design-value-card:hover::before,
+.design-value-card:focus-within::before {
+  opacity: 1;
+}
+
+.design-value-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .design-value-icon {
@@ -2137,23 +2228,44 @@ html[data-nav-hidden="true"] .year-rail {
 }
 
 /* 三張卡標題 + icon 對應 avatar_profile 三色：紫 / 橘 / 綠 */
-.design-value-card:nth-child(1) h3 { color: #5d62d8; }
-.design-value-card:nth-child(1) .design-value-icon {
+.design-value-animated:nth-child(1) .design-value-card h3 { color: #5d62d8; }
+.design-value-animated:nth-child(1) .design-value-icon {
   color: #5d62d8;
   background: rgba(93, 98, 216, 0.1);
 }
-.design-value-card:nth-child(2) h3 { color: #e8856b; }
-.design-value-card:nth-child(2) .design-value-icon {
+.design-value-animated:nth-child(2) .design-value-card h3 { color: #e8856b; }
+.design-value-animated:nth-child(2) .design-value-icon {
   color: #e8856b;
   background: rgba(232, 133, 107, 0.12);
 }
-.design-value-card:nth-child(3) h3 { color: #1fa37e; }
-.design-value-card:nth-child(3) .design-value-icon {
+.design-value-animated:nth-child(3) .design-value-card h3 { color: #1fa37e; }
+.design-value-animated:nth-child(3) .design-value-icon {
   color: #1fa37e;
   background: rgba(31, 163, 126, 0.12);
 }
 
-/* ── Educator section：Bento Grid ── */
+@keyframes designValueShine {
+  to {
+    --shine-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .design-value-card {
+    transition: none;
+  }
+
+  .design-value-card:hover,
+  .design-value-card:focus-within {
+    transform: translateZ(0);
+  }
+
+  .design-value-card::before {
+    animation: none;
+  }
+}
+
+/* ── Educator section：Bento grid with GSAP entrance ── */
 .educator-section {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -2161,22 +2273,18 @@ html[data-nav-hidden="true"] .year-rail {
   margin: 0 clamp(24px, 8vw, 120px) 24px;
 }
 
-/* OpenHCI — 大格（2/3 寬） */
 .educator-card:nth-child(1) {
   grid-column: span 4;
 }
 
-/* NCCU 人機介面設計 — 小格（1/3 寬） */
 .educator-card:nth-child(2) {
   grid-column: span 2;
 }
 
-/* NCCU 人機互動 — 小格（1/3 寬） */
 .educator-card:nth-child(3) {
   grid-column: span 2;
 }
 
-/* 社會議題黑客鬆 — 大格（2/3 寬） */
 .educator-card:nth-child(4) {
   grid-column: span 4;
 }
@@ -2191,6 +2299,13 @@ html[data-nav-hidden="true"] .year-rail {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
   isolation: isolate;
   outline: none;
+}
+
+.educator-masonry .educator-card {
+  opacity: 0;
+  color: inherit;
+  text-decoration: none;
+  will-change: transform, opacity, filter;
 }
 
 .educator-card:focus-visible {
@@ -2249,6 +2364,20 @@ html[data-nav-hidden="true"] .year-rail {
   color: white;
 }
 
+.educator-badge {
+  width: fit-content;
+  margin-bottom: 4px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  backdrop-filter: blur(8px);
+}
+
 .educator-card-body h3 {
   margin: 0;
   color: white;
@@ -2303,9 +2432,11 @@ html[data-nav-hidden="true"] .year-rail {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .educator-masonry .educator-card,
   .educator-card-photo,
   .educator-reveal {
     transition: none;
+    will-change: auto;
   }
 }
 
