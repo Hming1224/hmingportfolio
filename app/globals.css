@@ -2187,7 +2187,8 @@ button {
   scroll-margin-top: 100px;
   transition:
     opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
   will-change: opacity, transform;
 }
 
@@ -2196,9 +2197,23 @@ button {
   transform: translateY(0);
 }
 
+.experience-card.is-visible:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+}
+
 .experience-image {
   position: relative;
   min-height: 290px;
+  overflow: hidden;
+}
+
+.experience-image img {
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.experience-card:hover .experience-image img {
+  transform: scale(1.06);
 }
 
 .experience-copy {
@@ -2231,10 +2246,41 @@ button {
 
 .experience-copy ul {
   margin: 14px 0 0;
-  padding-left: 0;
-  list-style: none;
-  line-height: 1.4;
+  padding-left: 20px;
+  list-style: disc;
+  line-height: 1.6;
   text-align: left;
+}
+
+.experience-copy li {
+  margin-bottom: 8px;
+}
+
+.experience-copy li:last-child {
+  margin-bottom: 0;
+}
+
+/* Resume highlighted metrics styling */
+.resume-highlight {
+  position: relative;
+  display: inline;
+  padding: 1px 4px;
+  margin: 0 -2px;
+  border-radius: 4px;
+  background-image: linear-gradient(to right, var(--purple-soft), var(--purple-soft));
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left center;
+  color: #000000;
+  font-weight: 700;
+  transition:
+    background-size 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 300ms ease;
+}
+
+.experience-card:hover .resume-highlight {
+  background-size: 100% 100%;
+  color: var(--purple);
 }
 
 .skills-panel {

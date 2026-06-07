@@ -10,57 +10,62 @@ const experiences = [
   {
     year: "2024",
     title: "Advantech 研華科技",
-    role: "UIUX Design Intern",
+    role: "UIUX 設計實習生",
     date: "2024.06 - 2024.08",
     image: "/projects/advantech-wiseiems2.png",
     points: [
-      "2.5 個月內完成 3 次設計提案，皆依時程通過利害關係人審核",
-      "進行使用者訪談與痛點分析，讓 AI 功能決策能對齊真實操作需求",
-      "設計並提案 Edge AI 平台的 AI Chatbot 整合方案，影響後續產品路線規劃",
-      "運用內部資源製作產品介紹影片，支援業務與 go-to-market 溝通",
-      "最終提案促成 2 個主要模組功能通過審核並排入工程開發",
+      <>
+        參與 Edge AI 平台產品設計，於 <strong className="resume-highlight">2.5 個月內完成 3 次設計提案</strong>，並依時程通過上級主管/ CEO 審查。
+      </>,
+      "進行使用者訪談與痛點分析，將企業級 AI 產品需求整理為可討論、可驗證的功能方向。",
+      "設計並提案 AI Chatbot 整合方案，與專案 PM 協助團隊評估後續產品路線與功能模組優先順序。",
+      <>
+        最終提案中有 <strong className="resume-highlight">2 項主要模組功能獲採納</strong>，順利進入工程開發排程。
+      </>,
     ],
   },
   {
     year: "2023",
     title: "Crypto-Arsenal",
-    role: "UIUX & PM Intern",
+    role: "UIUX & PM 實習生",
     date: "2023.03 - 2023.10",
     image:
       "https://framerusercontent.com/images/dIryK4ZcMPoWUc9rlwSZzl9F88Y.jpeg",
     points: [
-      "設計 RWD 網頁介面，降低交易儀表板對非技術使用者的理解門檻",
-      "維護並擴充 UI Design System，確保快速成長的功能仍維持視覺一致性",
-      "建立 UI/UX 團隊 SOP，標準化設計到交付流程並減少設計債",
-      "導入 Scrum 儀式與共享 Dashboard，提升跨職能工程開發協作效率",
+      "維護並重整 Design System，統一 3大不同功能元件與對應頁面，並應用於 20+ 個產品設計流程，提升視覺與互動一致性。",
+      "進行使用者訪談與競品分析，完成 6+ 個產品功能，既有產品優化 12+ 項 UX 問題，與 20+ 個 RWD 頁面設計。",
+      <>
+        在 Scrum 中擔任助理 PO，優化設計流程與檔案管理，<strong className="resume-highlight">協助 Sprint 產出提升至過往 1.5 倍</strong>。
+      </>,
     ],
   },
   {
     year: "2022",
     title: "Taiwan Blockchain Academia",
-    role: "Product Designer（合約）",
+    role: "產品設計師（約聘）",
     date: "2022.11 - 2023.02",
     image:
       "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
     points: [
-      "進行使用者訪談與研究，釐清非技術使用者進入 Web3 情境時的摩擦點",
-      "與 PM 和國泰金控技術團隊協調產品規格，平衡合規需求與 UX 方向",
-      "產出 wireframe 與互動 prototype，透過多輪回饋進行易用性測試與迭代",
-      "協作工程師將關鍵區塊鏈技術整合進使用流程，同時維持介面可理解性",
+      "透過使用者訪談與研究，釐清非技術使用者進入 Web3 服務時的理解斷點與操作阻礙。",
+      "與產品經理及國泰金控技術團隊協作，對齊產品規格、開發方向與合規情境下的使用者體驗。",
+      "製作 wireframe 與互動 prototype，支援可用性測試與多輪設計迭代。",
+      "協助工程團隊將區塊鏈技術整合至使用流程，同時維持服務的易用性與可理解性。",
     ],
   },
   {
     year: "2021",
-    title: "LCFC（聯宝電腦）",
-    role: "Associate Project Manager",
+    title: "LCFC 合肥聯寶電子科技",
+    role: "助理專案管理師",
     date: "2021.05 - 2021.12",
     image:
       "https://framerusercontent.com/images/2aFK7DdC44h75205XrUXIGN0s.jpeg",
     points: [
-      "與跨職能開發團隊協調專案里程碑，在供應受限下確保交付時程",
-      "與供應商協商供貨排程，降低零組件短缺對生產進度的影響",
-      "撰寫產品規格書，協助工程需求與採購現況保持一致",
-      "與工程師調整可行性測試時程，在品質標準與交期之間取得平衡",
+      <>
+        協調工程、供應商與跨部門時程，<strong className="resume-highlight">平均提前 1.5 週</strong>完成預訂交付。
+      </>,
+      "在 2 個 milestone 中因應物料短缺風險，重新協調料件與測試排程，成功將原可能延誤的時程拉回期限內。",
+      "撰寫產品規格並與工程師對齊可行性測試，在品質標準、供應限制與交付壓力間維持平衡。",
     ],
   },
 ];
@@ -405,7 +410,7 @@ export default function AboutMePage() {
                   大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。
                 </p>
                 <p>
-                  過去我參與過 B2B Edge AI 平台、量化交易產品與 Web3
+                  過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3
                   服務設計，累積使用者研究、介面設計、prototype
                   與跨部門協作經驗。現在的我，正持續探索 AI
                   工具如何幫助設計師更有效率地釐清問題、建立
@@ -473,8 +478,8 @@ export default function AboutMePage() {
                 <p className="experience-role">{item.role}</p>
                 <p className="experience-date">{item.date}</p>
                 <ul>
-                  {item.points.map((point) => (
-                    <li key={point}>{point}</li>
+                  {item.points.map((point, pointIdx) => (
+                    <li key={pointIdx}>{point}</li>
                   ))}
                 </ul>
               </div>
@@ -578,7 +583,7 @@ export default function AboutMePage() {
             <div>
               <h3>國立政治大學 數位內容碩士學位學程</h3>
               <p className="experience-date">2023.09 - 2026.04 GPA4.07</p>
-              <p>主修使用者體驗研究、行為科學、人機互動。</p>
+              <p>主修使用者體驗研究、人機互動、設計思考與人工智慧。</p>
             </div>
           </article>
         </AnimatedContent>

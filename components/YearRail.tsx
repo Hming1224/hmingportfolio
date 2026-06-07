@@ -80,7 +80,7 @@ export default function YearRail({ years }: YearRailProps) {
       },
       {
         rootMargin: "0px 0px -12% 0px",
-        threshold: 0.32,
+        threshold: 0.05,
       },
     );
 

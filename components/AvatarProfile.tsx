@@ -37,7 +37,9 @@ const rootVariants: Variants = {
     transition: spring,
   },
   hover: {
+    opacity: 1,
     scale: 1.02,
+    y: 0,
     transition: spring,
   },
 };
@@ -66,7 +68,7 @@ const initialImageVariants: Variants = {
     transition: spring,
   },
   hover: {
-    opacity: 0,
+    opacity: 1,
     x: 0,
     y: 0,
     scale: 1,
@@ -286,8 +288,9 @@ export default function AvatarProfile({
       initial="initial"
       animate={isMobile ? (isTapped ? "hover" : "animate") : "animate"}
       whileHover={isMobile ? undefined : "hover"}
-      onClick={() => {
+      onClick={(e) => {
         if (isMobile) {
+          e.stopPropagation();
           setIsTapped((prev) => !prev);
         }
       }}
