@@ -585,9 +585,7 @@ export default function AboutMePage() {
               <p className="experience-date" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <span>2023.09 - 2026.04</span>
                 <span className="hero-badge-shimmer-wrap" style={{ padding: '1px' }}>
-                  <span className="hero-badge" style={{ padding: '4px 10px', fontSize: '12px', gap: '4px' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/decorations/badge-icon.png" width={16} height={16} alt="" aria-hidden="true" />
+                  <span className="hero-badge" style={{ padding: '4px 10px', fontSize: '12px' }}>
                     <span>GPA 4.07</span>
                   </span>
                 </span>
