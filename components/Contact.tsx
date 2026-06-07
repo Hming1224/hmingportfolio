@@ -4,7 +4,16 @@ import Image from 'next/image';
 import { useState } from 'react';
 import AnimatedContent from '../app/about-me/AnimatedContent';
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xkgwojzw";
+const getCleanFormspreeId = (id: string) => {
+  const trimmed = id.trim();
+  if (trimmed.includes('/')) {
+    const parts = trimmed.split('/');
+    return parts[parts.length - 1];
+  }
+  return trimmed;
+};
+
+const FORMSPREE_ID = getCleanFormspreeId(process.env.NEXT_PUBLIC_FORMSPREE_ID || "xkgwojzw");
 
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
