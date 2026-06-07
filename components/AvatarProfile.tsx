@@ -161,8 +161,8 @@ const rippleVariants: Variants = {
 
 const ring1Variants: Variants = {
   animate: {
-    scale: [0.6, 1.4],
-    opacity: [0.6, 0],
+    scale: [0.98, 1.45],
+    opacity: [0.8, 0],
     transition: {
       duration: 2.5,
       ease: "easeOut" as const,
@@ -174,8 +174,8 @@ const ring1Variants: Variants = {
 
 const ring2Variants: Variants = {
   animate: {
-    scale: [0.6, 1.4],
-    opacity: [0.6, 0],
+    scale: [0.98, 1.45],
+    opacity: [0.8, 0],
     transition: {
       duration: 2.5,
       ease: "easeOut" as const,
@@ -333,6 +333,46 @@ export default function AvatarProfile({
       }}
       variants={rootVariants}
     >
+      {/* Ripple effect - visible only before hover, rendered behind avatar frame */}
+      <motion.div
+        className="absolute pointer-events-none"
+        style={{
+          left: 220,
+          top: 215,
+          width: 0,
+          height: 0,
+        }}
+        variants={rippleVariants}
+        aria-hidden="true"
+      >
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            left: -135,
+            top: -135,
+            width: 270,
+            height: 270,
+            border: '2px solid rgba(255, 255, 255, 0.65)',
+            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 60%, transparent 100%)',
+            boxShadow: '0 0 16px rgba(255, 255, 255, 0.35)',
+          }}
+          variants={ring1Variants}
+        />
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            left: -135,
+            top: -135,
+            width: 270,
+            height: 270,
+            border: '2px solid rgba(255, 255, 255, 0.65)',
+            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 60%, transparent 100%)',
+            boxShadow: '0 0 16px rgba(255, 255, 255, 0.35)',
+          }}
+          variants={ring2Variants}
+        />
+      </motion.div>
+
       <motion.div
         className="absolute overflow-visible"
         style={{ left: 50, top: 48, width: 340, height: 334 }}
@@ -350,46 +390,6 @@ export default function AvatarProfile({
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-contain object-center"
           variants={hoverImageVariants}
-        />
-      </motion.div>
-
-      {/* Ripple effect - visible only before hover, rendered on top of avatar frame */}
-      <motion.div
-        className="absolute pointer-events-none"
-        style={{
-          left: 220,
-          top: 320,
-          width: 0,
-          height: 0,
-        }}
-        variants={rippleVariants}
-        aria-hidden="true"
-      >
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            left: -100,
-            top: -30,
-            width: 200,
-            height: 60,
-            border: '2px solid rgba(93, 98, 216, 0.55)',
-            background: 'radial-gradient(ellipse, rgba(93, 98, 216, 0.15) 0%, transparent 70%)',
-            boxShadow: '0 0 10px rgba(93, 98, 216, 0.25)',
-          }}
-          variants={ring1Variants}
-        />
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            left: -100,
-            top: -30,
-            width: 200,
-            height: 60,
-            border: '2px solid rgba(93, 98, 216, 0.55)',
-            background: 'radial-gradient(ellipse, rgba(93, 98, 216, 0.15) 0%, transparent 70%)',
-            boxShadow: '0 0 10px rgba(93, 98, 216, 0.25)',
-          }}
-          variants={ring2Variants}
         />
       </motion.div>
 
