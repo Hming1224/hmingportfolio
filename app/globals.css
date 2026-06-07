@@ -1472,7 +1472,7 @@ button {
 .contact-panel-band {
   display: flex;
   justify-content: center;
-  padding: 80px 40px 120px;
+  padding: 80px clamp(24px, 8vw, 120px) 120px;
   background: #fdfdfd;
 }
 
