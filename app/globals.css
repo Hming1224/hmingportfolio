@@ -3983,33 +3983,6 @@ button {
    BUTTON HOVER TEXT SWAP
    ============================================ */
 
-.project-card.tone-advantech .project-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-text,
-.btn-hover-text {
-  transition: opacity 0.18s ease;
-}
-
-.btn-hover-text {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-}
-
-.project-card.tone-advantech:hover .btn-text {
-  opacity: 0;
-}
-
-.project-card.tone-advantech:hover .btn-hover-text {
-  opacity: 1;
-}
-
 /* ============================================
    CASE STUDY PAGE — /advantech
    ============================================ */
