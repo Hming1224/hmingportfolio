@@ -148,7 +148,7 @@ export default function Contact() {
             <div className="contact-card">
               <div className="contact-card-header">
                 <h3>填寫聯絡表單</h3>
-                <p>我有收到通知將會儘速回覆你！😸</p>
+                <p>收到通知後，將會儘速回覆！😸</p>
               </div>
 
               <form className="contact-form" onSubmit={handleSubmit}>

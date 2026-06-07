@@ -1478,8 +1478,8 @@ button {
 
 .contact-split-container {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  width: min(1040px, 100%);
+  grid-template-columns: 1fr 2fr;
+  width: min(1200px, 100%);
   gap: 48px;
   align-items: start;
 }
