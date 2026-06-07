@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import { motion, Variants } from "framer-motion";
 
 export interface AvatarProfileProps {
@@ -148,21 +149,31 @@ const arrowImageVariants: Variants = {
   },
 };
 
+type RippleCustomProperties = CSSProperties & {
+  "--ripple-color": string;
+  "--ripple-bg-color": string;
+  "--ripple-shadow-color": string;
+};
+
 const rippleVariants: Variants = {
   animate: {
-    opacity: 1,
+    "--ripple-color": "rgba(255, 255, 255, 0.65)",
+    "--ripple-bg-color": "rgba(255, 255, 255, 0.12)",
+    "--ripple-shadow-color": "rgba(255, 255, 255, 0.35)",
     transition: { duration: 0.3 }
-  },
+  } as Variants[string],
   hover: {
-    opacity: 0,
-    transition: { duration: 0.2 }
-  }
+    "--ripple-color": "rgba(253, 224, 71, 0.65)",
+    "--ripple-bg-color": "rgba(253, 224, 71, 0.12)",
+    "--ripple-shadow-color": "rgba(253, 224, 71, 0.35)",
+    transition: { duration: 0.3 }
+  } as Variants[string],
 };
 
 const ring1Variants: Variants = {
   animate: {
     scale: [0.98, 1.45],
-    opacity: [0.8, 0],
+    opacity: [0, 0.8, 0],
     transition: {
       duration: 2.5,
       ease: "easeOut" as const,
@@ -175,7 +186,7 @@ const ring1Variants: Variants = {
 const ring2Variants: Variants = {
   animate: {
     scale: [0.98, 1.45],
-    opacity: [0.8, 0],
+    opacity: [0, 0.8, 0],
     transition: {
       duration: 2.5,
       ease: "easeOut" as const,
@@ -267,6 +278,16 @@ function polarPosition(angle: number, radius: number, size: number) {
   };
 }
 
+function shouldUsePressInteraction() {
+  if (typeof window === "undefined") return false;
+
+  const hasCoarsePrimaryPointer = window.matchMedia("(pointer: coarse)").matches;
+  const cannotHover = window.matchMedia("(hover: none)").matches;
+  const hasAnyHoverInput = window.matchMedia("(any-hover: hover)").matches;
+
+  return hasCoarsePrimaryPointer && cannotHover && !hasAnyHoverInput;
+}
+
 export default function AvatarProfile({
   imageSrc,
   hoverImageSrc,
@@ -280,25 +301,34 @@ export default function AvatarProfile({
   lightbulbIconHoverSrc = "/avatar/engineer-color.png",
   arrowSrc = "/avatar/upper-right-arrow.png",
 }: AvatarProfileProps) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [usesPressInteraction, setUsesPressInteraction] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    const timer = setTimeout(() => {
-      setIsMobile(mediaQuery.matches);
-    }, 0);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mediaQuery.addEventListener("change", handler);
+    const pointerQuery = window.matchMedia("(pointer: coarse)");
+    const hoverQuery = window.matchMedia("(hover: none)");
+    const anyHoverQuery = window.matchMedia("(any-hover: hover)");
+    const updateInteractionMode = () => {
+      setUsesPressInteraction(shouldUsePressInteraction());
+      setIsTapped(false);
+    };
+
+    const timer = setTimeout(updateInteractionMode, 0);
+    pointerQuery.addEventListener("change", updateInteractionMode);
+    hoverQuery.addEventListener("change", updateInteractionMode);
+    anyHoverQuery.addEventListener("change", updateInteractionMode);
+
     return () => {
       clearTimeout(timer);
-      mediaQuery.removeEventListener("change", handler);
+      pointerQuery.removeEventListener("change", updateInteractionMode);
+      hoverQuery.removeEventListener("change", updateInteractionMode);
+      anyHoverQuery.removeEventListener("change", updateInteractionMode);
     };
   }, []);
 
   useEffect(() => {
-    if (!isTapped || !isMobile) return;
+    if (!isTapped || !usesPressInteraction) return;
 
     const handleDocumentClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -309,7 +339,7 @@ export default function AvatarProfile({
 
     document.addEventListener("click", handleDocumentClick);
     return () => document.removeEventListener("click", handleDocumentClick);
-  }, [isTapped, isMobile]);
+  }, [isTapped, usesPressInteraction]);
 
   const badgeClassName = "absolute";
   const badgeSize = 78;
@@ -323,17 +353,17 @@ export default function AvatarProfile({
       className={`relative overflow-visible cursor-pointer ${className}`}
       style={{ width: 440, height: 427 }}
       initial="initial"
-      animate={isMobile ? (isTapped ? "hover" : "animate") : "animate"}
-      whileHover={isMobile ? undefined : "hover"}
+      animate={usesPressInteraction ? (isTapped ? "hover" : "animate") : "animate"}
+      whileHover={usesPressInteraction ? undefined : "hover"}
       onClick={(e) => {
-        if (isMobile) {
+        if (usesPressInteraction) {
           e.stopPropagation();
           setIsTapped((prev) => !prev);
         }
       }}
       variants={rootVariants}
     >
-      {/* Ripple effect - visible only before hover, rendered behind avatar frame */}
+      {/* Ripple effect - visible before and during hover, rendered behind avatar frame */}
       <motion.div
         className="absolute pointer-events-none"
         style={{
@@ -341,7 +371,10 @@ export default function AvatarProfile({
           top: 215,
           width: 0,
           height: 0,
-        }}
+          "--ripple-color": "rgba(255, 255, 255, 0.65)",
+          "--ripple-bg-color": "rgba(255, 255, 255, 0.12)",
+          "--ripple-shadow-color": "rgba(255, 255, 255, 0.35)",
+        } as RippleCustomProperties}
         variants={rippleVariants}
         aria-hidden="true"
       >
@@ -352,9 +385,9 @@ export default function AvatarProfile({
             top: -135,
             width: 270,
             height: 270,
-            border: '2px solid rgba(255, 255, 255, 0.65)',
-            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 60%, transparent 100%)',
-            boxShadow: '0 0 16px rgba(255, 255, 255, 0.35)',
+            border: '2px solid var(--ripple-color)',
+            background: 'radial-gradient(circle, var(--ripple-bg-color) 60%, transparent 100%)',
+            boxShadow: '0 0 16px var(--ripple-shadow-color)',
           }}
           variants={ring1Variants}
         />
@@ -365,9 +398,9 @@ export default function AvatarProfile({
             top: -135,
             width: 270,
             height: 270,
-            border: '2px solid rgba(255, 255, 255, 0.65)',
-            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 60%, transparent 100%)',
-            boxShadow: '0 0 16px rgba(255, 255, 255, 0.35)',
+            border: '2px solid var(--ripple-color)',
+            background: 'radial-gradient(circle, var(--ripple-bg-color) 60%, transparent 100%)',
+            boxShadow: '0 0 16px var(--ripple-shadow-color)',
           }}
           variants={ring2Variants}
         />
