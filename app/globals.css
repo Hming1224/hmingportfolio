@@ -1699,7 +1699,7 @@ button {
 }
 
 .form-field textarea {
-  min-height: 130px;
+  min-height: 180px;
   resize: vertical;
 }
 
@@ -3834,7 +3834,7 @@ button {
   }
 
   .contact-panel-band {
-    padding: 40px 20px 80px;
+    padding: 40px 24px 80px;
   }
 
   .contact-split-container {
