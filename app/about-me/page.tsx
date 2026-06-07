@@ -582,7 +582,16 @@ export default function AboutMePage() {
             />
             <div>
               <h3>國立政治大學 數位內容碩士學位學程</h3>
-              <p className="experience-date">2023.09 - 2026.04 GPA4.07</p>
+              <p className="experience-date" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span>2023.09 - 2026.04</span>
+                <span className="hero-badge-shimmer-wrap" style={{ padding: '1px' }}>
+                  <span className="hero-badge" style={{ padding: '4px 10px', fontSize: '12px', gap: '4px' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/decorations/badge-icon.png" width={16} height={16} alt="" aria-hidden="true" />
+                    <span>GPA 4.07</span>
+                  </span>
+                </span>
+              </p>
               <p>主修使用者體驗研究、人機互動、設計思考與人工智慧。</p>
             </div>
           </article>
