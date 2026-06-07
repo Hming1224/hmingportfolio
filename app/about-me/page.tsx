@@ -65,18 +65,39 @@ const experiences = [
   },
 ];
 
-const skills = [
-  "Figma",
-  "UX Research",
-  "Product Design",
-  "User Research",
-  "Wireframing",
-  "Prototyping",
-  "Design System",
-  "Human-AI Interaction",
-  "Vibe Coding",
-  "Scrum",
-  "Mechanical Engineering",
+const skillCategories = [
+  {
+    title: "產品設計",
+    color: "#5d62d8", // Purple
+    bgColor: "rgba(93, 98, 216, 0.04)",
+    borderColor: "rgba(93, 98, 216, 0.12)",
+    iconId: "layout",
+    skills: ["UI flow", "設計系統", "線框圖 / 原型設計", "響應式網頁設計", "基礎前端知識"]
+  },
+  {
+    title: "使用者研究",
+    color: "#4a90e2", // Blue
+    bgColor: "rgba(74, 144, 226, 0.04)",
+    borderColor: "rgba(74, 144, 226, 0.12)",
+    iconId: "users",
+    skills: ["使用者訪談", "利害關係人訪談", "競品分析", "親和圖", "使用者旅程圖", "易用性測試"]
+  },
+  {
+    title: "AI 工具",
+    color: "#e8856b", // Orange
+    bgColor: "rgba(232, 133, 107, 0.04)",
+    borderColor: "rgba(232, 133, 107, 0.12)",
+    iconId: "cpu",
+    skills: ["Claude Code", "Codex", "Figma Make", "Canva AI", "NoteBookLM"]
+  },
+  {
+    title: "協作與管理",
+    color: "#1fa37e", // Green
+    bgColor: "rgba(31, 163, 126, 0.04)",
+    borderColor: "rgba(31, 163, 126, 0.12)",
+    iconId: "briefcase",
+    skills: ["Jira / Trello", "Scrum 敏捷開發", "跨部門溝通", "專案時程控管"]
+  }
 ];
 
 const tools = [
@@ -238,6 +259,89 @@ function ValueIcon({ id }: { id: string }) {
   return null;
 }
 
+function SkillIcon({ id }: { id: string }) {
+  if (id === "layout") {
+    return (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+        <line x1="9" y1="21" x2="9" y2="9" />
+      </svg>
+    );
+  }
+  if (id === "users") {
+    return (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    );
+  }
+  if (id === "cpu") {
+    return (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="4" y="4" width="16" height="16" rx="2" ry="2" />
+        <rect x="9" y="9" width="6" height="6" />
+        <line x1="9" y1="1" x2="9" y2="4" />
+        <line x1="15" y1="1" x2="15" y2="4" />
+        <line x1="9" y1="20" x2="9" y2="23" />
+        <line x1="15" y1="20" x2="15" y2="23" />
+        <line x1="20" y1="9" x2="23" y2="9" />
+        <line x1="20" y1="15" x2="23" y2="15" />
+        <line x1="1" y1="9" x2="4" y2="9" />
+        <line x1="1" y1="15" x2="4" y2="15" />
+      </svg>
+    );
+  }
+  if (id === "briefcase") {
+    return (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      </svg>
+    );
+  }
+  return null;
+}
+
 function SectionHeading({
   children,
   id,
@@ -261,45 +365,56 @@ export default function AboutMePage() {
 
       {/* 1. Hero — Quote + 個人故事 */}
       <section className="about-hero" aria-labelledby="about-title">
-        <div className="about-window">
-          <div className="window-bar">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="about-window-body">
-            <div
-              className="avatar-profile-wrap"
-              aria-label="Brian Huang portrait"
-            >
-              <div className="avatar-profile-stage">
-                <AvatarProfile
-                  imageSrc="/avatar/avatar-gray.png"
-                  hoverImageSrc="/avatar/avatar-yellow.png"
-                  imageAlt="Brian Huang"
-                />
+        <AnimatedContent
+          animationType="genie"
+          threshold={0.05}
+          delay={0.1}
+          distance={120}
+          duration={0.95}
+          scale={0.96}
+          ease="power3.out"
+          className="about-window-animated-wrap"
+        >
+          <div className="about-window">
+            <div className="window-bar">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="about-window-body">
+              <div
+                className="avatar-profile-wrap"
+                aria-label="Brian Huang portrait"
+              >
+                <div className="avatar-profile-stage">
+                  <AvatarProfile
+                    imageSrc="/avatar/avatar-gray.png"
+                    hoverImageSrc="/avatar/avatar-yellow.png"
+                    imageAlt="Brian Huang"
+                  />
+                </div>
+              </div>
+
+              <div className="about-intro-copy">
+                <h1 id="about-title">從重啟自我，到設計產品體驗</h1>
+                <p>
+                  我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Junior
+                  Product Designer。
+                </p>
+                <p>
+                  大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。
+                </p>
+                <p>
+                  過去我參與過 B2B Edge AI 平台、量化交易產品與 Web3
+                  服務設計，累積使用者研究、介面設計、prototype
+                  與跨部門協作經驗。現在的我，正持續探索 AI
+                  工具如何幫助設計師更有效率地釐清問題、建立
+                  MVP，並推進產品驗證，朝 Product Builder 的方向前進。
+                </p>
               </div>
             </div>
-
-            <div className="about-intro-copy">
-              <h1 id="about-title">從重啟自我，到設計產品體驗</h1>
-              <p>
-                我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Junior
-                Product Designer。
-              </p>
-              <p>
-                大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。
-              </p>
-              <p>
-                過去我參與過 B2B Edge AI 平台、量化交易產品與 Web3
-                服務設計，累積使用者研究、介面設計、prototype
-                與跨部門協作經驗。現在的我，正持續探索 AI
-                工具如何幫助設計師更有效率地釐清問題、建立
-                MVP，並推進產品驗證，朝 Product Builder 的方向前進。
-              </p>
-            </div>
           </div>
-        </div>
+        </AnimatedContent>
       </section>
 
       {/* 2. Design Values */}
@@ -315,7 +430,7 @@ export default function AboutMePage() {
             initialOpacity={0}
             key={value.title}
             scale={0.96}
-            threshold={0.22}
+            threshold={0.05}
           >
             <div className="design-value-card" tabIndex={0}>
               <div className="design-value-icon">
@@ -375,19 +490,69 @@ export default function AboutMePage() {
       {/* 5. 專業技能 */}
       <SectionHeading id="skills">專業技能</SectionHeading>
       <section className="skills-panel">
-        <h3>設計能力與方法</h3>
-        <div className="skill-tags">
-          {skills.map((skill) => (
-            <span key={skill}>{skill}</span>
+        <div className="skills-grid">
+          {skillCategories.map((category, idx) => (
+            <AnimatedContent
+              key={category.title}
+              className="skill-animated-card"
+              delay={idx * 0.12}
+              distance={80}
+              duration={0.8}
+              ease="power3.out"
+              initialOpacity={0}
+              scale={0.97}
+              threshold={0.05}
+            >
+              <div
+                className="skill-category-card"
+                style={
+                  {
+                    "--accent-color": category.color,
+                    "--bg-color-tint": category.bgColor,
+                    "--border-color-tint": category.borderColor,
+                  } as React.CSSProperties
+                }
+              >
+                <div className="skill-card-header">
+                  <div
+                    className="skill-card-icon"
+                    style={{ color: category.color }}
+                  >
+                    <SkillIcon id={category.iconId} />
+                  </div>
+                  <h3>{category.title}</h3>
+                </div>
+                <div className="skill-card-divider" />
+                <ul className="skill-item-list">
+                  {category.skills.map((skill) => (
+                    <li key={skill} className="skill-item">
+                      <span className="skill-bullet" />
+                      <span className="skill-text">{skill}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AnimatedContent>
           ))}
         </div>
+
         <h3>擅長軟體</h3>
         <div className="tool-grid">
-          {tools.map(([name, icon]) => (
-            <div className="tool-item" key={name}>
+          {tools.map(([name, icon], idx) => (
+            <AnimatedContent
+              key={name}
+              className="tool-item"
+              delay={idx * 0.05}
+              distance={40}
+              duration={0.6}
+              ease="power3.out"
+              initialOpacity={0}
+              scale={0.95}
+              threshold={0.05}
+            >
               <Image src={icon} alt="" width={80} height={80} sizes="80px" />
               <p>{name}</p>
-            </div>
+            </AnimatedContent>
           ))}
         </div>
       </section>
@@ -395,34 +560,53 @@ export default function AboutMePage() {
       {/* 6. 教育背景 */}
       <SectionHeading id="education">教育背景</SectionHeading>
       <section className="education-list">
-        <article className="education-card">
-          <Image
-            src="https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png"
-            alt=""
-            width={140}
-            height={140}
-          />
-          <div>
-            <h3>國立政治大學 數位內容碩士學位學程</h3>
-            <p className="experience-date">2023.09 - 2026.04 GPA4.07</p>
-            <p>主修使用者體驗研究、行為科學、人機互動。</p>
-          </div>
-        </article>
-        <article className="education-card">
-          <Image
-            src="https://framerusercontent.com/images/o53UPGa6UhydVFF9ZPVPLPqKJ20.png"
-            alt=""
-            width={140}
-            height={140}
-          />
-          <div>
-            <h3>國立成功大學 機械工程學系</h3>
-            <p className="experience-date">2017.09 - 2021.02</p>
-            <p>
-              主修熱力學與機械設計，並以設計思維和使用者中心設計作為第二專業。
-            </p>
-          </div>
-        </article>
+        <AnimatedContent
+          delay={0}
+          distance={120}
+          duration={0.95}
+          scale={0.96}
+          ease="power3.out"
+          threshold={0.05}
+        >
+          <article className="education-card">
+            <Image
+              src="https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png"
+              alt=""
+              width={140}
+              height={140}
+            />
+            <div>
+              <h3>國立政治大學 數位內容碩士學位學程</h3>
+              <p className="experience-date">2023.09 - 2026.04 GPA4.07</p>
+              <p>主修使用者體驗研究、行為科學、人機互動。</p>
+            </div>
+          </article>
+        </AnimatedContent>
+
+        <AnimatedContent
+          delay={0.12}
+          distance={120}
+          duration={0.95}
+          scale={0.96}
+          ease="power3.out"
+          threshold={0.05}
+        >
+          <article className="education-card">
+            <Image
+              src="https://framerusercontent.com/images/o53UPGa6UhydVFF9ZPVPLPqKJ20.png"
+              alt=""
+              width={140}
+              height={140}
+            />
+            <div>
+              <h3>國立成功大學 機械工程學系</h3>
+              <p className="experience-date">2017.09 - 2021.02</p>
+              <p>
+                主修熱力學與機械設計，並以設計思維和使用者中心設計作為第二專業。
+              </p>
+            </div>
+          </article>
+        </AnimatedContent>
       </section>
 
       <Footer />
