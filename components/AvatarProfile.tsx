@@ -148,6 +148,28 @@ const arrowImageVariants: Variants = {
   },
 };
 
+const rippleVariants: Variants = {
+  animate: {
+    opacity: 1,
+    transition: { duration: 0.3 }
+  },
+  hover: {
+    opacity: 0,
+    transition: { duration: 0.2 }
+  }
+};
+
+const ringAnimation = (delay: number) => ({
+  scale: [0.6, 1.4],
+  opacity: [0.6, 0],
+  transition: {
+    duration: 2.5,
+    ease: "easeOut" as const,
+    repeat: Infinity,
+    delay: delay,
+  }
+});
+
 function ImageLayer({ src, variants }: { src: string; variants: Variants }) {
   return (
     <motion.span
@@ -296,6 +318,43 @@ export default function AvatarProfile({
       }}
       variants={rootVariants}
     >
+      {/* Ripple effect - visible only before hover */}
+      <motion.div
+        className="absolute pointer-events-none"
+        style={{
+          left: 220,
+          top: 320,
+          width: 0,
+          height: 0,
+        }}
+        variants={rippleVariants}
+        aria-hidden="true"
+      >
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            left: -100,
+            top: -30,
+            width: 200,
+            height: 60,
+            border: '2px solid rgba(93, 98, 216, 0.35)',
+            boxShadow: '0 0 8px rgba(93, 98, 216, 0.15)',
+          }}
+          animate={ringAnimation(0)}
+        />
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            left: -100,
+            top: -30,
+            width: 200,
+            height: 60,
+            border: '2px solid rgba(93, 98, 216, 0.35)',
+            boxShadow: '0 0 8px rgba(93, 98, 216, 0.15)',
+          }}
+          animate={ringAnimation(1.25)}
+        />
+      </motion.div>
       <motion.div
         className="absolute overflow-visible"
         style={{ left: 50, top: 48, width: 340, height: 334 }}
