@@ -148,7 +148,7 @@ export default function Contact() {
             <div className="contact-card">
               <div className="contact-card-header">
                 <h3>填寫聯絡表單</h3>
-                <p>我有收到通知將會儘速回覆你</p>
+                <p>我有收到通知將會儘速回覆你！😸</p>
               </div>
 
               <form className="contact-form" onSubmit={handleSubmit}>
@@ -158,8 +158,20 @@ export default function Contact() {
                 </div>
 
                 <div className="form-field">
-                  <input type="email" id="email" name="email" placeholder=" " required />
-                  <label htmlFor="email">電子信箱</label>
+                  <input type="text" id="company" name="company" placeholder=" " required />
+                  <label htmlFor="company">服務單位</label>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-field">
+                    <input type="email" id="email" name="email" placeholder=" " required />
+                    <label htmlFor="email">電子信箱</label>
+                  </div>
+
+                  <div className="form-field">
+                    <input type="tel" id="phone" name="phone" placeholder=" " />
+                    <label htmlFor="phone">手機號碼</label>
+                  </div>
                 </div>
 
                 <div className="form-field is-textarea">
