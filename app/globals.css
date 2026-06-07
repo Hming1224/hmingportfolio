@@ -1484,6 +1484,13 @@ button {
   align-items: start;
 }
 
+@media (max-width: 1024px) {
+  .contact-split-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
 /* --- Left Column: Info Card --- */
 .contact-info-wrap {
   width: 100%;
@@ -3837,10 +3844,6 @@ button {
     padding: 40px 24px 80px;
   }
 
-  .contact-split-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
 
   .contact-info-header h2 {
     font-size: 26px;
