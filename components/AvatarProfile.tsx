@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 
 export interface AvatarProfileProps {
@@ -240,6 +241,37 @@ export default function AvatarProfile({
   lightbulbIconHoverSrc = "/avatar/engineer-color.png",
   arrowSrc = "/avatar/upper-right-arrow.png",
 }: AvatarProfileProps) {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTapped, setIsTapped] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const timer = setTimeout(() => {
+      setIsMobile(mediaQuery.matches);
+    }, 0);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => {
+      clearTimeout(timer);
+      mediaQuery.removeEventListener("change", handler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isTapped || !isMobile) return;
+
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (ref.current && !ref.current.contains(target)) {
+        setIsTapped(false);
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, [isTapped, isMobile]);
+
   const badgeClassName = "absolute";
   const badgeSize = 78;
   const arrowSize = 72;
@@ -248,11 +280,17 @@ export default function AvatarProfile({
 
   return (
     <motion.div
-      className={`relative overflow-visible ${className}`}
+      ref={ref}
+      className={`relative overflow-visible cursor-pointer ${className}`}
       style={{ width: 440, height: 427 }}
       initial="initial"
-      animate="animate"
-      whileHover="hover"
+      animate={isMobile ? (isTapped ? "hover" : "animate") : "animate"}
+      whileHover={isMobile ? undefined : "hover"}
+      onClick={() => {
+        if (isMobile) {
+          setIsTapped((prev) => !prev);
+        }
+      }}
       variants={rootVariants}
     >
       <motion.div
