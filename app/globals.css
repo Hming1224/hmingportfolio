@@ -1193,20 +1193,20 @@ button {
   gap: 48px;
 }
 
-/* scroll reveal：初始隱藏狀態（複製 Kat Wang Framer 站的 selected works 進場：由下方 150px 升起）*/
+/* scroll reveal：初始隱藏狀態（對齊 about-me 進場：由下方 120px 升起，縮放 0.96）*/
 .project-card.card-hidden {
   opacity: 0.001;
-  transform: translateY(150px) translateZ(0);
-  will-change: transform;
+  transform: translateY(120px) scale(0.96) translateZ(0);
+  will-change: transform, opacity;
 }
 
-/* scroll reveal：進場完成狀態（duration 0.8s、ease cubic-bezier(0.44, 0, 0.56, 1)）*/
+/* scroll reveal：進場完成狀態（duration 0.95s、ease power3.out）*/
 .project-card.card-visible {
   opacity: 1;
-  transform: translateY(0) translateZ(0);
+  transform: translateY(0) scale(1) translateZ(0);
   transition:
-    opacity 800ms cubic-bezier(0.44, 0, 0.56, 1),
-    transform 800ms cubic-bezier(0.44, 0, 0.56, 1);
+    opacity 950ms cubic-bezier(0.215, 0.61, 0.355, 1),
+    transform 950ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 /* 尊重系統減少動態設定 */

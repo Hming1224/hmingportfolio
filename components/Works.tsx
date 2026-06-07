@@ -178,18 +178,19 @@ function useScrollReveal() {
 
     const observer = new IntersectionObserver(
       (entries) => {
+        let revealCount = 0;
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const card = entry.target as HTMLElement;
-          const index = cards.indexOf(card);
           setTimeout(() => {
             card.classList.remove("card-hidden");
             card.classList.add("card-visible");
-          }, index * 120);
+          }, revealCount * 120);
+          revealCount++;
           observer.unobserve(card);
         });
       },
-      { threshold: 0.08 }
+      { threshold: 0.05 }
     );
 
     cards.forEach((card) => observer.observe(card));
