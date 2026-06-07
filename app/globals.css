@@ -3106,7 +3106,6 @@ button {
   .about-window-body {
     grid-template-columns: 260px minmax(0, 1fr);
     gap: 32px;
-    padding: 24px;
   }
 
   .portrait-stack {
@@ -3622,6 +3621,7 @@ button {
   .about-window-body {
     grid-template-columns: 1fr;
     gap: 24px;
+    padding: 24px;
   }
 
   .portrait-stack {
