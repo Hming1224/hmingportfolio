@@ -1557,6 +1557,11 @@ button {
   color: #24292f;
 }
 
+.method-icon-wrap.phone {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
 .method-details {
   display: grid;
   gap: 4px;

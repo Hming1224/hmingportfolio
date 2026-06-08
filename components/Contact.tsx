@@ -142,7 +142,7 @@ export default function Contact() {
                   className="contact-method-item phone-card"
                   onClick={handleCopyPhone}
                 >
-                  <div className="method-icon-wrap">
+                  <div className="method-icon-wrap phone">
                     <svg
                       width="24"
                       height="24"
