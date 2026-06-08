@@ -124,8 +124,10 @@ export default function AnimatedContent({
       };
 
       if (targetEl) {
+        // 陰影改掛在內層卡片上，動畫期間先設透明（且會被 clip-path 裁掉 → 零重繪成本），
+        // 結束後再淡入補回。避免外層 drop-shadow 跟著變形輪廓逐幀重算造成卡頓。
         gsap.set(targetEl, {
-          willChange: "clip-path",
+          boxShadow: "0 10px 40px rgba(0, 0, 0, 0)",
         });
       }
 
@@ -152,7 +154,7 @@ export default function AnimatedContent({
           });
           const target = targetEl || el;
           gsap.set(target, {
-            clearProps: "clipPath,willChange",
+            clearProps: "clipPath,boxShadow",
           });
         },
       });
@@ -171,6 +173,20 @@ export default function AnimatedContent({
           ease: ease, // Respect easing curve prop
           onUpdate: updateClipPath,
         }, 0);
+
+      // 漏斗變形結束後（clip 已是完整矩形、輪廓不再變動）才淡入陰影，
+      // 此時 box-shadow 只在固定形狀上算一次，成本低且不會「啪」一下彈出。
+      if (targetEl) {
+        timeline.to(
+          targetEl,
+          {
+            boxShadow: "0 10px 40px rgba(0, 0, 0, 0.12)",
+            duration: 0.35,
+            ease: "power2.out",
+          },
+          duration,
+        );
+      }
 
       const trigger = ScrollTrigger.create({
         trigger: el,

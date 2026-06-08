@@ -74,6 +74,16 @@
   --surface: #f9f9f9;
   --purple-hover: #4f54c9;
   --about-accent: #ffd467;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0 16px 32px rgba(0, 0, 0, 0.16);
+  --shadow-photo: -5px 10px 20px rgba(0, 0, 0, 0.12);
+  --shadow-soft:
+    0 0.6px 0.6px rgba(0, 0, 0, 0.12),
+    0 2.3px 2.3px rgba(0, 0, 0, 0.12),
+    0 10px 10px rgba(0, 0, 0, 0.12);
 
   /* ── 頁面左右留白（section gutter）。改這一個值即可全頁生效 ──
      15.6vw 讓 1920px 視窗剛好達到 300px 上限；小螢幕由 24px 下限保護 */
@@ -136,6 +146,18 @@ a {
 
 button {
   font: inherit;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
 }
 
 .site-nav {
@@ -763,7 +785,7 @@ button {
   font-size: 11px;
   color: #546e7a;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-pin-1 {
@@ -1027,8 +1049,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 12px 24px;
+  min-height: 52px;
+  padding: 14px 28px;
   border-radius: 200px;
   font-size: var(--fs-body);
   font-weight: 600;
@@ -1245,10 +1267,7 @@ button {
   padding: 24px 32px;
   border-radius: 12px;
   background: white;
-  box-shadow:
-    0 0.6px 0.6px rgba(0, 0, 0, 0.12),
-    0 2.3px 2.3px rgba(0, 0, 0, 0.12),
-    0 10px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-soft);
   opacity: 0;
   transform: translate(420px, -50%);
   transition:
@@ -1402,8 +1421,8 @@ button {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 48px;
-  padding: 12px 0;
+  min-height: 52px;
+  padding: 14px 0;
   border-radius: 200px;
   color: white;
   font-size: var(--fs-body);
@@ -1740,7 +1759,8 @@ button {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 16px;
+  min-height: 52px;
+  padding: 14px 28px;
   border: 0;
   border-radius: 200px;
   background: var(--purple);
@@ -1860,13 +1880,40 @@ button {
 
 .about-window-animated-wrap {
   width: 100%;
-  filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.12));
+  min-height: 120px;
 }
 
 .about-window {
   overflow: hidden;
   border-radius: 12px;
   background: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.genie-dock-icon {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background: var(--ink);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-50%);
+  will-change: transform, opacity;
+}
+
+.genie-dock-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  object-fit: cover;
 }
 
 .window-bar {
@@ -2035,7 +2082,7 @@ button {
   overflow: visible;
   padding: 48px;
   border-radius: 6px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
 .growth-card-blue {
@@ -2172,7 +2219,7 @@ button {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   background: white;
-  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-photo);
 }
 
 .growth-polaroid-blue {
@@ -2367,7 +2414,7 @@ button {
   overflow: hidden;
   border-radius: 16px;
   background: white;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
   opacity: 0;
   transform: translateY(72px);
   scroll-margin-top: 100px;
@@ -2385,7 +2432,7 @@ button {
 
 .experience-card.is-visible:hover {
   transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .experience-image {
@@ -2479,7 +2526,7 @@ button {
   padding: 48px;
   border-radius: 16px;
   background: var(--surface);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
 }
 
 .skills-grid {
@@ -2679,7 +2726,7 @@ button {
   padding: 48px;
   border-radius: 16px;
   background: white;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
 }
 
 .education-card img {
@@ -2910,7 +2957,7 @@ button {
   border-radius: 16px;
   min-height: 380px;
   background: #1c1c2e;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
   isolation: isolate;
   outline: none;
 }
@@ -2925,7 +2972,7 @@ button {
 .educator-card:focus-visible {
   box-shadow:
     0 0 0 3px var(--purple-soft),
-    0 10px 20px rgba(0, 0, 0, 0.12);
+    var(--shadow-md);
 }
 
 /* 全幅背景照片，hover 微放大 */
@@ -3227,8 +3274,8 @@ button {
   }
 
   .hero-actions .button {
-    min-height: 48px;
-    padding: 12px 28px;
+    min-height: 52px;
+    padding: 14px 28px;
     border-radius: 200px;
     font-size: var(--fs-body);
   }
@@ -3286,6 +3333,25 @@ button {
     min-height: 48px;
     padding: 12px 28px;
     font-size: var(--fs-body);
+  }
+
+  .button,
+  .project-button,
+  .submit-btn {
+    min-height: 48px;
+    font-size: var(--fs-body);
+  }
+
+  .button {
+    padding: 12px 24px;
+  }
+
+  .project-button {
+    padding: 12px 0;
+  }
+
+  .submit-btn {
+    padding: 12px 24px;
   }
 
   .hero-decoration {
@@ -3571,12 +3637,18 @@ button {
 
   .button {
     width: 100%;
-    min-height: 48px;
-    font-size: var(--fs-body);
+    min-height: 44px;
+    font-size: var(--fs-sm);
   }
 
   .button-secondary {
-    min-height: 48px;
+    min-height: 44px;
+  }
+
+  .submit-btn {
+    min-height: 44px;
+    padding: 12px 24px;
+    font-size: var(--fs-sm);
   }
 
   .cursor-tag {
@@ -3813,7 +3885,9 @@ button {
   }
 
   .project-button {
-    min-height: 48px;
+    min-height: 44px;
+    padding: 12px 0;
+    font-size: var(--fs-sm);
   }
 
   .contact-hero-image {
@@ -4190,6 +4264,37 @@ button {
 /* 低於 440px：資訊卡改直式置中（logo 上、標題/日期下），標籤隱藏 —
    對應 Figma 340 / 439 規格。放在 768 斷點之後以覆蓋橫式佈局。 */
 @media (max-width: 440px) {
+  .about-hero {
+    padding-inline: 16px;
+  }
+
+  .about-window-body {
+    padding: 24px 16px;
+  }
+
+  .avatar-profile-wrap {
+    width: min(240px, 100%);
+    height: 233px;
+    flex: 0 1 auto;
+    margin-inline: auto;
+  }
+
+  .avatar-profile-stage {
+    transform: translate(-50%, -50%) scale(0.545);
+  }
+
+  .about-intro-copy {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .about-intro-copy h1,
+  .about-intro-copy p,
+  .about-intro-copy blockquote {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
   .project-meta {
     display: flex;
     flex-direction: column;
@@ -6118,6 +6223,85 @@ button {
   box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.07);
 }
 
+.cs-feature-zoom-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.cs-feature-zoom-trigger img {
+  display: block;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.cs-feature-zoom-trigger:hover img {
+  transform: scale(1.015);
+  filter: brightness(1.03);
+}
+
+.cs-feature-zoom-trigger:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: -3px;
+}
+
+.cs-feature-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.88);
+  cursor: zoom-out;
+}
+
+.cs-feature-lightbox-image {
+  display: block;
+  width: auto;
+  max-width: calc(100vw - 48px);
+  height: auto;
+  max-height: calc(100vh - 48px);
+  border-radius: 8px;
+  box-shadow: var(--shadow-xl);
+  cursor: default;
+  object-fit: contain;
+}
+
+.cs-feature-lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.cs-feature-lightbox-close:hover {
+  background: white;
+}
+
+.cs-feature-lightbox-close:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 3px;
+}
+
 .cs-sol-fnote {
   flex: 0 0 30%;
   background: white;
@@ -7341,12 +7525,12 @@ button {
 
   .hero-actions .button {
     width: 100%;
-    min-height: 48px;
-    font-size: var(--fs-body);
+    min-height: 44px;
+    font-size: var(--fs-sm);
   }
 
   .hero-actions .button-secondary {
-    min-height: 48px;
+    min-height: 44px;
   }
 
   .cursor-tag {

@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import YearRail from "../../components/YearRail";
 import AvatarProfile from "../../components/AvatarProfile";
 import AnimatedContent from "./AnimatedContent";
+import GenieReveal from "./GenieReveal";
 import EducatorMasonry from "./EducatorMasonry";
 
 const experiences = [
@@ -362,16 +363,7 @@ export default function AboutMePage() {
 
       {/* 1. Hero — Quote + 個人故事 */}
       <section className="about-hero" aria-labelledby="about-title">
-        <AnimatedContent
-          animationType="genie"
-          threshold={0.05}
-          delay={0.1}
-          distance={120}
-          duration={0.95}
-          scale={0.96}
-          ease="power3.out"
-          className="about-window-animated-wrap"
-        >
+        <GenieReveal threshold={0.05} className="about-window-animated-wrap">
           <div className="about-window">
             <div className="window-bar">
               <span />
@@ -411,7 +403,7 @@ export default function AboutMePage() {
               </div>
             </div>
           </div>
-        </AnimatedContent>
+        </GenieReveal>
       </section>
 
       {/* 2. Design Values */}

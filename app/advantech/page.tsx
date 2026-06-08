@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import ProposalTabs from "./ProposalTabs";
 import FeatureConnectors from "./FeatureConnectors";
+import FeatureImageLightbox from "./FeatureImageLightbox";
 import FlowConnectors from "./FlowConnectors";
 import AlarmLevelDemo from "./AlarmLevelDemo";
 import VimeoPlayer from "./VimeoPlayer";
@@ -1010,13 +1011,13 @@ export default function AdventechPage() {
               </div>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f11-01.png" alt="Feature 1.1 需量分析畫面" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-01.png" alt="Feature 1.1 需量分析畫面" width={960} height={540} />
             </div>
           </div>
           <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
           <div className="cs-sol-fr cs-sol-fr-mid">
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f11-02.png" alt="Feature 1.1 AI Chatbot 觸發" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-02.png" alt="Feature 1.1 AI Chatbot 觸發" width={960} height={540} />
             </div>
             <div className="cs-sol-fnote">
               <p>跳出 AI chatbot，並且自動輸入：請問今日需量預測分析？</p>
@@ -1028,13 +1029,13 @@ export default function AdventechPage() {
               <p>AI chatbot 從資料庫中讀取相關資訊，並整合 LLM 回答框架，提供需量分析與折線圖表。另外，提供問題模組供用戶持續深入提問。</p>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f11-03.png" alt="Feature 1.1 AI 需量分析回覆" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-03.png" alt="Feature 1.1 AI 需量分析回覆" width={960} height={540} />
             </div>
           </div>
           <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
           <div className="cs-sol-fr cs-sol-fr-mid">
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f11-04.png" alt="Feature 1.1 AI 超約建議" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-04.png" alt="Feature 1.1 AI 超約建議" width={960} height={540} />
             </div>
             <div className="cs-sol-fnote">
               <p>點擊「請提供給我避免需量超約的建議。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成結構化文字回覆。</p>
@@ -1046,7 +1047,7 @@ export default function AdventechPage() {
               <p>點擊「請提供給我高耗能設備排名。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成圖表，依據耗能排名顯示最需要修復的設備列表。</p>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f11-05.png" alt="Feature 1.1 高耗能設備排名" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-05.png" alt="Feature 1.1 高耗能設備排名" width={960} height={540} />
             </div>
           </div>
           </div>
@@ -1075,13 +1076,13 @@ export default function AdventechPage() {
               </div>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f12-01.png" alt="Feature 1.2 系統通知" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-01.png" alt="Feature 1.2 系統通知" width={960} height={540} />
             </div>
           </div>
           <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
           <div className="cs-sol-fr cs-sol-fr-mid">
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f12-02.png" alt="Feature 1.2 報警等級" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-02.png" alt="Feature 1.2 報警等級" width={960} height={540} />
             </div>
             <div className="cs-sol-fnote" style={{ gap: 16 }}>
               <div className="cs-sol-dpts">
@@ -1122,13 +1123,13 @@ export default function AdventechPage() {
               </div>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f12-03.png" alt="Feature 1.2 AI 分析" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-03.png" alt="Feature 1.2 AI 分析" width={960} height={540} />
             </div>
           </div>
           <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
           <div className="cs-sol-fr cs-sol-fr-mid">
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f12-04.png" alt="Feature 1.2 高耗能設備" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-04.png" alt="Feature 1.2 高耗能設備" width={960} height={540} />
             </div>
             <div className="cs-sol-fnote">
               <div className="cs-sol-dpts">
@@ -1165,13 +1166,13 @@ export default function AdventechPage() {
               </div>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f2-01.png" alt="Feature 2 模式識別主畫面" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-01.png" alt="Feature 2 模式識別主畫面" width={960} height={540} />
             </div>
           </div>
           <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
           <div className="cs-sol-fr cs-sol-fr-mid">
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f2-02.png" alt="Feature 2 設備報警等級" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-02.png" alt="Feature 2 設備報警等級" width={960} height={540} />
             </div>
             <div className="cs-sol-fnote" style={{ gap: 16 }}>
               <div className="cs-sol-dpts">
@@ -1212,13 +1213,13 @@ export default function AdventechPage() {
               </div>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f2-03.png" alt="Feature 2 AI 異常分析" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-03.png" alt="Feature 2 AI 異常分析" width={960} height={540} />
             </div>
           </div>
           <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
           <div className="cs-sol-fr cs-sol-fr-mid">
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f2-04.png" alt="Feature 2 事件分析" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-04.png" alt="Feature 2 事件分析" width={960} height={540} />
             </div>
             <div className="cs-sol-fnote">
               <div className="cs-sol-dpts">
@@ -1240,7 +1241,7 @@ export default function AdventechPage() {
               </div>
             </div>
             <div className="cs-sol-fimg">
-              <Image src="/projects/advantech-figma/sol06/final-f2-05.png" alt="Feature 2 故障排除建議" width={960} height={540} unoptimized style={{ width: "100%", height: "auto" }} />
+              <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-05.png" alt="Feature 2 故障排除建議" width={960} height={540} />
             </div>
           </div>
           </div>

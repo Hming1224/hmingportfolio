@@ -1,5 +1,23 @@
 # Project Memory
 
+## 2026-06-08 About Genie dock icon + hidden-card flow
+
+Files: `app/about-me/GenieReveal.tsx`、`app/globals.css`。
+- **視覺決策**：為了解決 hero 首屏 canvas 快照期間的空白感，`.about-window` 進場前先顯示底部中央的頭貼 dock icon；快照完成後 icon 模仿被點擊，往上彈兩下，再進入 canvas Genie 展開與真卡片落定。
+- **後續修正**：dock icon 改為黑底；最後真卡片的 `opacity/scale` 彈跳落定已移除，因為它會和 canvas 淡出疊加造成額外閃爍。現在真卡片直接接上 canvas 最後一幀，只讓 canvas 短淡出。
+- **疊影修正**：canvas Genie 播放期間，真卡片 wrapper 必須維持 `visibility:hidden`，只在最後換場前改回 visible。不能只打開外層可見，否則背景會看到原本方案 A 的黑色視窗，和 Genie effect 疊在一起。
+- **觸發踩坑**：about hero 是首屏內容，不能只靠 `requestIdleCallback` + `ScrollTrigger onEnter`；dev / Fast Refresh 情境可能停在 dock icon 不播放。現在快照用短 `setTimeout` 延後，並補首屏可見檢查後直接 `play()`。
+- **驗證**：`npm run build` 過；production `localhost:4001/about-me` 最新預覽確認 dock icon 黑底、真卡片 visible、canvas hidden、dock icon opacity 0、card opacity 1 / transform none、0 console error、無水平溢出。`localhost:4000` 是前一版舊 server，不代表最新畫面。
+
+## 2026-06-08 按鈕 52/48/44 階梯 + 陰影 token 化
+
+Files: `app/globals.css`、`design.md`、`Memory.md`。
+- **決策更新**：前一筆「所有斷點 48px / 16px」已被 Hming 新拍板取代。現在 md / lg 按鈕採 **桌機 52px、平板 48px、手機 44px**。
+- **字級規則**：桌機與平板按鈕用 `var(--fs-body)`；手機按鈕不可硬寫 15px，必須套既有 token `var(--fs-sm)`。這次 Hming 明確糾正：「不要用 15px，需要照字級 token 套上去」。
+- **套用範圍**：`.button` / `.button-primary` / `.button-secondary` / `.hero-actions .button` / `.project-button` / `.submit-btn`。手機 `max-width:768px` 有重複 Hero 覆寫，兩邊都要維持 44px / `--fs-sm`。
+- **陰影 token**：`:root` 新增 `--shadow-sm/md/lg/xl` 與特例 `--shadow-card-hover`、`--shadow-photo`、`--shadow-soft`；主系統黑陰影改吃 token。案例頁 `cs-*` 有色陰影與 Hero 裝飾微陰影保留，不納入主系統 token。
+- **驗證**：`npm run build` 過；Browser 驗證 `/`、`/about-me`、`/advantech`、`/contact` 在 1440×900 與 390×844 都無水平溢出、0 console error。computed：桌機 Hero / project / submit 按鈕 52px / 16px；手機 Hero 44px / 14px、project / submit `min-height:44px`（rect 約 45px 來自 line-height / padding 渲染）。
+
 ## 2026-06-08 案例頁骨架元件用法（CA 專案直接照抄）
 
 Files: `components/case-study/*`、`app/advantech/page.tsx`、`app/globals.css`。

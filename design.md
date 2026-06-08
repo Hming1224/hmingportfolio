@@ -269,20 +269,20 @@ font-family: var(--font-space-grotesk), sans-serif;
 **形狀**：Pill `border-radius: 200px`（見 4.1）。
 
 #### 尺寸階層（sm / md / lg）
-| 階層 | 高度 | 左右 padding | 字級 | 用在哪 | 對應 class |
-|---|---|---|---|---|---|
-| **sm** | `38px` | `24px` | `14px`（`--fs-sm`）| 緊湊 / 常駐入口 | 目前無按鈕在用 |
-| **md（預設）** | `48px` | `24px` | `16px`（`--fs-body`）| 絕大多數 CTA：Hero、案例頁、聯絡送出 | `.button`（+ `-primary`/`-secondary`）|
-| **lg（全寬）** | `48px`，`width:100%` | padding `12px 0` | `16px` | 卡片 CTA、手機全寬 CTA | `.project-button` |
+| 階層 | 桌機 ≥1024 | 平板 769–1023 | 手機 ≤768 | 左右 padding | 字級 | 用在哪 | 對應 class |
+|---|---|---|---|---|---|---|---|
+| **sm** | `38px` | `38px` | `38px` | `24px` | `14px`（`--fs-sm`）| 緊湊 / 常駐入口 | 目前無按鈕在用 |
+| **md（預設）** | `52px` | `48px` | `44px` | 桌機 `28px`、平板/手機 `24px` | 桌機/平板 `--fs-body`、手機 `--fs-sm` | 絕大多數 CTA：Hero、案例頁、聯絡送出 | `.button`（+ `-primary`/`-secondary`）|
+| **lg（全寬）** | `52px`，`width:100%` | `48px`，`width:100%` | `44px`，`width:100%` | 桌機 `14px 0`、平板/手機 `12px 0` | 桌機/平板 `--fs-body`、手機 `--fs-sm` | 卡片 CTA、手機全寬 CTA | `.project-button` |
 
-- md 48px 是標準；sm 38px 為緊湊情境（目前無按鈕在用）；lg 不是更高，是「撐滿容器寬」的變體。
+- md 以 52 / 48 / 44 依斷點收斂；sm 38px 為緊湊情境（目前無按鈕在用）；lg 不是更高，是「撐滿容器寬」的變體。
 - 字重統一 `600`，包含 `.project-button`。
 
-> **跨斷點規格（2026-06-08 對齊 code）★**：md 按鈕（`.button` / `-primary` / `-secondary`、Hero 的 `.hero-actions .button`）與 lg（`.project-button`）**在所有斷點都維持 `48px` 高 + `16px`（`var(--fs-body)`）字級——手機不放大**。
-> - 修正前的踩坑：手機曾把字級跳到 `20px`、高度漂移成 `52 / 56 / 43px`（primary 52、secondary 56、project-button 43），各斷點不一致。已全部收斂回 48 / 16。
-> - 高度用 `min-height: 48px`（`box-sizing: border-box`，含 padding 不爆高）；`.button` 與 `.project-button` 都明寫 `font-size: var(--fs-body)`，不靠瀏覽器預設繼承。
-> - Hero 按鈕在 ≤1023 斷點保留 `min-width: 136px`、`padding: 12px 28px`（控制 Hero 視覺比例），但高度/字級同樣是 48 / 16。
-> - 手機（≤768）primary 與 project-button 轉 `width: 100%` 全寬堆疊，高度仍 48。
+> **跨斷點規格（2026-06-08 對齊 code）★**：md 按鈕（`.button` / `-primary` / `-secondary`、Hero 的 `.hero-actions .button`）與 lg（`.project-button`）採 **桌機 52px / 平板 48px / 手機 44px**。桌機與平板字級用 `--fs-body`，手機字級用 `--fs-sm`，全程使用既有 type token。
+> - 歷史踩坑：手機曾把字級跳到 `20px`、高度漂移成 `52 / 56 / 43px`（primary 52、secondary 56、project-button 43），各斷點不一致。2026-06-08 後改為刻意的 52 / 48 / 44 分階，而不是漂移。
+> - 高度用 `min-height`（`box-sizing: border-box`，含 padding 不爆高）；`.button`、`.project-button` 與 `.submit-btn` 都明寫字級，不靠瀏覽器預設繼承。
+> - Hero 按鈕在平板保留 `min-width: 136px`、`padding: 12px 28px`（控制 Hero 視覺比例）。
+> - 手機（≤768）primary 與 project-button 轉 `width: 100%` 全寬堆疊，高度 44px。
 
 #### 語意三層（顏色變體，與尺寸正交組合）
 | 變體 | 底色 | 文字色 | 描邊 | 語意 | class | 實際用在哪 |
@@ -429,13 +429,15 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 
 主系統陰影只用 `rgba(0,0,0,x)`，保持乾淨。
 
-| 層級 | CSS 值 | 用途 |
+| Token | CSS 值 | 用途 |
 |---|---|---|
-| 輕 | `0 10px 20px rgba(0,0,0,0.12)` | Experience / Traits / Skills / Education 卡片（最常用）|
-| 中 | `0 10px 40px rgba(0,0,0,0.12)` | 故事卡片、About window |
-| 重 | `0 40px 80px rgba(0,0,0,0.25)` | Contact card（整頁焦點）|
-| 多層柔和 | `0 0.6px 0.6px…, 0 2.3px 2.3px…, 0 10px 10px rgba(0,0,0,0.12)` | 專案 Info panel |
-| 偏移（像照片）| `-5px 10px 20px rgba(0,0,0,0.12)` | About Polaroid 照片 |
+| `--shadow-sm` | `0 2px 8px rgba(0,0,0,0.06)` | 小元件：annotation、badge、tab 類 |
+| `--shadow-md` | `0 10px 20px rgba(0,0,0,0.12)` | Experience / Skills / Education / Educator 卡片（最常用）|
+| `--shadow-lg` | `0 10px 40px rgba(0,0,0,0.12)` | 故事卡片、About window |
+| `--shadow-xl` | `0 40px 80px rgba(0,0,0,0.25)` | Contact card（整頁焦點；保留 token 供未來焦點面板使用）|
+| `--shadow-card-hover` | `0 16px 32px rgba(0,0,0,0.16)` | 卡片 hover 抬升 |
+| `--shadow-photo` | `-5px 10px 20px rgba(0,0,0,0.12)` | About Polaroid 照片 |
+| `--shadow-soft` | 多層柔和陰影 | 專案 Info panel |
 
 > ⚠️ **例外（案例頁）**：`cs-*` 用了一些**有色陰影**（研華藍 `rgba(9,48,96,…)`、紫 `rgba(93,98,216,…)`）做品牌感。這違反「只用黑陰影」的主規則，但**限定在案例頁的品牌情境**可接受；**主系統元件（按鈕、卡片、表單）一律用黑陰影**，不要把有色陰影擴散出去。
 
@@ -449,6 +451,7 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 |---|---|---|
 | `--fs-h1`~`--fs-xs` | 全域（響應式）| 字級，見 3.2 |
 | 色彩 token | 全域 | 見 2.1–2.4 |
+| `--shadow-*` | 全域 | 主系統陰影，見 7 |
 | `--page-gutter` | 全域（手機覆寫）| 頁面左右留白 |
 | `--text-heading` 覆寫 | `.theme-xxx` | 案例頁主色 theming |
 | `--tag-bg` / `--tag-text` | `.tone-xxx`（目標）| 專案標籤色 |
