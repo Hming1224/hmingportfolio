@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import "../../styles/case-study-advantech.css";
 import ProposalTabs from "./ProposalTabs";
 import FeatureConnectors from "./FeatureConnectors";
 import FeatureImageLightbox from "./FeatureImageLightbox";

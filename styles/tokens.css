@@ -1,0 +1,351 @@
+/* Global tokens, base elements, navigation, scroll progress, and footer. */
+
+/* Shimmer badge border animation */
+@property --shimmer-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --shine-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes shimmer-rotate {
+  to {
+    --shimmer-angle: 360deg;
+  }
+}
+
+/* Scroll progress bar */
+.scroll-progress-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+  height: 3px;
+  background: linear-gradient(to right, var(--purple), #000000);
+  transition: top 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-nav-hidden="false"] .scroll-progress-bar {
+  top: 80px;
+}
+
+:root {
+  /* ── Type scale ── */
+  --fs-h1: 32px;
+  /* 頁面主標 */
+  --fs-h2: 28px;
+  /* section 標題 */
+  --fs-h3: 24px;
+  /* block / 卡片標題 */
+  --fs-h4: 18px;
+  /* 卡內子標 */
+  --fs-body: 16px;
+  /* 正文 */
+  --fs-sm: 14px;
+  /* 小標籤 */
+  --fs-xs: 12px;
+  /* 最小 */
+
+  --ink: #343434;
+  --ink-hover: #555555;
+  /* 黑色 primary 按鈕 hover：比 ink 淺一階 */
+  --muted: #8e8e9c;
+  --paper: #ffffff;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.16);
+  /* 比 --line 明顯、又比 --muted 文字淡：secondary 按鈕描邊等 */
+  --purple: #5d62d8;
+  --purple-soft: #dbdcff;
+  --blue: #416484;
+  --blue-soft: #dce5ed;
+  --brown: #705650;
+  --brown-soft: #e8e2e0;
+  --green: #477a6b;
+  --green-soft: #d6ebe3;
+  --peach: #a83b1e;
+  --peach-soft: #fce8e2;
+  --disabled: #dedee4;
+  --surface: #f9f9f9;
+  --purple-hover: #4f54c9;
+  --about-accent: #ffd467;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0 16px 32px rgba(0, 0, 0, 0.16);
+  --shadow-photo: -5px 10px 20px rgba(0, 0, 0, 0.12);
+  --shadow-soft:
+    0 0.6px 0.6px rgba(0, 0, 0, 0.12),
+    0 2.3px 2.3px rgba(0, 0, 0, 0.12),
+    0 10px 10px rgba(0, 0, 0, 0.12);
+
+  /* ── 頁面左右留白（section gutter）。改這一個值即可全頁生效 ──
+     15.6vw 讓 1920px 視窗剛好達到 300px 上限；小螢幕由 24px 下限保護 */
+  --page-gutter: clamp(24px, 15.6vw, 300px);
+
+  /* ── 文字色階梯（語意化）──
+     只套用在「純大標 / 內文 / 副標題」這類頁面骨架文字；
+     label、Tab、卡片內字級不適用，各自保留原設計。
+     彩色（--purple / --blue 等）屬強調/分類色，不在此階梯。
+
+     【分層 theming】這裡是「綁定規則 + 預設值（中性）」，所有專案共用。
+     大標主色跟著各專案走 → 每個專案頁用 .theme-xxx 覆寫 --text-heading 一個值即可，
+     內文/副標/標籤等中性階所有專案共用、不需覆寫。 */
+  --text-heading: #1a1a1a;
+  /* 大標題（中性預設；專案可覆寫成主色） */
+  --text-body: #1f2933;
+  /* 內文 */
+  --text-secondary: #5d6674;
+  /* 副標 / 內文說明 */
+  --text-muted: #8e8e9c;
+  /* 最弱（同 --muted） */
+  /* 深色背景反轉組 */
+  --text-on-dark: #ffffff;
+}
+
+/* ── 專案主題（換色盤）──
+   每個案例頁在 <main class="cs-page theme-xxx"> 掛一個 theme，
+   只覆寫大標主色 --text-heading；其餘文字階梯沿用全域中性值。
+   新增專案＝在這裡加一行 .theme-xxx { --text-heading: 主色 } 即可。 */
+.theme-advantech {
+  --text-heading: #093060;
+  /* 研華主色：深藍 */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fixed navbar is 80px — all anchor targets need this offset so content isn't hidden behind it */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-space-grotesk), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 80px;
+  padding: 12px clamp(48px, 8vw, 120px);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  backdrop-filter: blur(16px);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease;
+  will-change: transform, opacity;
+}
+
+.site-nav.is-hidden:not(.is-open) {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 172px;
+}
+
+.brand {
+  display: block;
+  position: relative;
+  width: 67px;
+  height: 24px;
+}
+
+.brand img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--line);
+}
+
+.menu-button {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-button span {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: #999999;
+  transition:
+    transform 180ms ease,
+    top 180ms ease;
+}
+
+.menu-button span:first-child {
+  top: 16px;
+}
+
+.menu-button span:last-child {
+  top: 26px;
+}
+
+.site-nav.is-open .menu-button span:first-child,
+.site-nav.is-open .menu-button span:last-child {
+  top: 22px;
+}
+
+.site-nav.is-open .menu-button span:first-child {
+  transform: rotate(45deg);
+}
+
+.site-nav.is-open .menu-button span:last-child {
+  transform: rotate(-45deg);
+}
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 0 clamp(24px, 8vw, 120px) 24px;
+  background: white;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.social-links a {
+  display: grid;
+  position: relative;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.social-logo {
+  grid-area: 1 / 1;
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: opacity 180ms ease;
+}
+
+.social-logo-color {
+  opacity: 0;
+}
+
+.social-link:hover .social-logo-color {
+  opacity: 1;
+}
+
+.social-link:hover .social-logo-gray {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --fs-h1: 24px;
+    --fs-h2: 22px;
+    --fs-h3: 18px;
+    --fs-h4: 16px;
+    /* 手機維持原本舒適留白，不被大螢幕的加大 gutter 波及 */
+    --page-gutter: clamp(20px, 6vw, 48px);
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --fs-h1: 22px;
+    --fs-h2: 20px;
+    --fs-h3: 16px;
+    --fs-h4: 14px;
+  }
+}

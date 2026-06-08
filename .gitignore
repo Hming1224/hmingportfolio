@@ -45,10 +45,13 @@ next-env.d.ts
 # local agent / tool config
 .claude/
 .codex/
+.playwright-mcp/
 
 # design iterations — 排除工作檔，保留截圖與 iteration.md 進 git
 /iterations/.tmp_*
 /iterations/.before_state.json
 /iterations/.selector-cache.json
 /iterations/.debug.log
+/iterations/**/*.log
+/iterations/**/*.tmp
 /iterations/**/.descjob.json

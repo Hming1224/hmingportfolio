@@ -1,0 +1,1583 @@
+/* Home page, project cards, and hero decoration components. */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 100svh;
+  padding: 120px clamp(48px, 8vw, 120px);
+  text-align: center;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  max-width: 720px;
+  animation: fadeUp 700ms 100ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-badge-shimmer-wrap {
+  display: inline-flex;
+  padding: 1.5px;
+  border-radius: 100px;
+  background: conic-gradient(
+    from var(--shimmer-angle),
+    transparent 0%,
+    transparent 38%,
+    #c4b5fd 47%,
+    var(--purple) 52%,
+    transparent 62%,
+    transparent 100%
+  );
+  animation: shimmer-rotate 3s linear infinite;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f3f1ff;
+  border-radius: 100px;
+  font-size: 14px;
+  color: #161616;
+  white-space: nowrap;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.split-parent {
+  max-width: 100%;
+}
+
+.split-line,
+.split-word,
+.split-char {
+  will-change: transform, opacity;
+}
+
+.split-char {
+  display: inline-block;
+}
+
+.accent {
+  display: inline-block;
+}
+
+.accent-purple {
+  color: var(--purple);
+}
+
+.accent-blue {
+  color: var(--blue);
+}
+
+.highlight-text {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  padding: 0 0.12em;
+  white-space: nowrap;
+}
+
+.highlight-text-mark {
+  position: absolute;
+  inset: 0.18em -0.04em 0.1em;
+  z-index: 0;
+  border-radius: 0.18em;
+  transform-origin: left center;
+}
+
+.hero-highlight-purple .highlight-text-mark {
+  background: linear-gradient(90deg, #dce5ff 0%, #ede9ff 100%);
+}
+
+.hero-highlight-blue .highlight-text-mark {
+  background: linear-gradient(90deg, var(--blue-soft) 0%, #e6f2ff 100%);
+}
+
+.hero-highlight-cyan .highlight-text-mark {
+  background: linear-gradient(90deg, #c8f0ef 0%, #d8f8f8 100%);
+}
+
+.accent-cyan {
+  color: #0d9488;
+}
+
+.hero-taglines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.hero-tagline {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 34px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.hero-tagline-encrypted {
+  color: var(--muted, #aaa);
+  opacity: 0.45;
+}
+
+.highlight-text-content {
+  position: relative;
+  z-index: 1;
+}
+
+.intro {
+  max-width: 860px;
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Hero decoration entrance — 7 directional variants */
+@keyframes heroShootLeft {
+  from {
+    transform: translate(-220px, 0px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroShootRight {
+  from {
+    transform: translate(220px, 0px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroShootTop {
+  from {
+    transform: translate(0px, -110px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroShootTopL {
+  from {
+    transform: translate(-130px, -80px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroShootTopR {
+  from {
+    transform: translate(130px, -80px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroShootBotL {
+  from {
+    transform: translate(-80px, 140px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroShootBotR {
+  from {
+    transform: translate(80px, 140px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* Hero decoration base */
+.hero-decoration {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  animation: float-y 4s ease-in-out infinite;
+}
+
+/* 桌機/平板：底部四裝飾的 frame 不參與版面，四個物件沿用各自相對 .hero 的絕對定位。
+   ≤768px 才把它變成真正的容器（見 768 斷點）。 */
+.hero-bottom-group {
+  display: contents;
+}
+
+/* Cursor tags */
+.cursor-tag {
+  --cursor-tag-scale: 1;
+  z-index: 4;
+  display: inline-block;
+}
+
+.cursor-tag-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: scale(var(--cursor-tag-scale));
+  transform-origin: left top;
+}
+
+.cursor-tag-icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+.cursor-tag-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+/* Figma ref: 1330×900px section, nav 80px fixed → top = (figma_y + 80) / 900 */
+.hero-cursor-brian {
+  left: 42%;
+  top: 31%;
+  animation:
+    heroShootTopR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both,
+    float-y 4s ease-in-out 0.9s infinite;
+}
+
+.hero-cursor-engineers {
+  left: 17%;
+  top: 44%;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both,
+    float-y 4s ease-in-out 1.1s infinite;
+}
+
+.hero-cursor-pm {
+  left: 82%;
+  top: 41%;
+  animation:
+    heroShootRight 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both,
+    float-y 4s ease-in-out 0.95s infinite;
+}
+
+/* Wireframe / Session frame */
+.wireframe-frame-wrap {
+  --wireframe-scale: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 143px;
+}
+
+.wireframe-frame-visual {
+  transform: scale(var(--wireframe-scale));
+  transform-origin: left top;
+}
+
+.wireframe-label {
+  /* display:block 讓 label 撐滿容器寬度、靠左貼齊卡片左緣。
+     若維持 inline span，會被父層 .hero 繼承的 text-align:center 推到置中。 */
+  display: block;
+  font-size: 11px;
+  color: #78909c;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.session-frame {
+  background: #fbfbfb;
+  border: 1px solid #b0bec5;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+}
+
+.session-frame-inner {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.session-code-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.session-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #ececec;
+  border-radius: 4px;
+  padding: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.session-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  opacity: 0.4;
+}
+
+.session-line {
+  height: 6px;
+  border-radius: 100px;
+}
+
+.session-line--full {
+  width: 100%;
+  background: linear-gradient(90deg, #737373 3%, #d9d9d9 75%, #b0b0b0 100%);
+}
+
+.session-line--lg {
+  width: 82%;
+  background: linear-gradient(90deg, #9a9a9a 26%, #d9d9d9 63%, #9a9a9a 100%);
+}
+
+.session-line--sm {
+  width: 56%;
+  background: linear-gradient(90deg, #b0b0b0 3%, #d9d9d9 31%, #737373 100%);
+}
+
+.session-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  background: white;
+  border-radius: 100px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-size: 10px;
+  font-weight: 500;
+  color: #0f8cdb;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.hero-frame-large {
+  left: 59%;
+  top: calc(36% - 24px);
+  animation:
+    heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both,
+    float-y 4s ease-in-out 1.2s infinite;
+}
+
+/* Annotation pins */
+.annotation-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.annotation-circle {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #4b7bec;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.annotation-connector {
+  width: 20px;
+  height: 1px;
+  background: #90a4ae;
+}
+
+.annotation-text {
+  background: white;
+  border: 1px solid #e0e7ef;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #546e7a;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-pin-1 {
+  left: 8%;
+  top: 68%;
+  animation-delay: 0.3s;
+}
+
+.hero-pin-2 {
+  left: 36%;
+  bottom: 10%;
+  animation-delay: 1.7s;
+}
+
+.hero-pin-3 {
+  right: 8%;
+  top: 48%;
+  animation-delay: 0.9s;
+}
+
+/* Sticky notes */
+.sticky-note {
+  --sticky-note-scale: 1;
+  width: 112px;
+  height: 112px;
+  padding: 12px 10px;
+  border-radius: 4px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    2px 3px 0 rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: left;
+}
+
+.sticky-note p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.8);
+  letter-spacing: -0.14px;
+}
+
+.sticky-note-subtitle {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: -0.09px;
+  white-space: nowrap;
+}
+
+/* 桌機/平板：wrapper 不產生 box，6 張卡仍各自相對 .hero 絕對定位（沿用原本規則）。
+   ≤768px 會被覆寫成置中容器。 */
+.hero-sticky-group {
+  display: contents;
+}
+
+/* 6 sticky note positions — offset by nav 80px */
+.hero-sticky-1 {
+  left: 31%;
+  top: 18%;
+  animation:
+    heroShootTopL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both,
+    float-y 4s ease-in-out 1s infinite;
+}
+
+.hero-sticky-2 {
+  left: 38%;
+  top: 14%;
+  animation:
+    heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both,
+    float-y 4s ease-in-out 1.1s infinite;
+}
+
+.hero-sticky-3 {
+  left: 5%;
+  top: 32%;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s both,
+    float-y 4s ease-in-out 1.15s infinite;
+}
+
+.hero-sticky-4 {
+  left: 11%;
+  top: 28%;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both,
+    float-y 4s ease-in-out 1.1s infinite;
+}
+
+.hero-sticky-5 {
+  left: 72%;
+  top: 21%;
+  animation:
+    heroShootRight 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both,
+    float-y 4s ease-in-out 1s infinite;
+}
+
+.hero-sticky-6 {
+  left: 78%;
+  top: 24%;
+  animation:
+    heroShootTopR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both,
+    float-y 4s ease-in-out 1.05s infinite;
+}
+
+/* Toggle decoration */
+.toggle-decoration {
+  --toggle-scale: 1;
+  width: 95px;
+  height: 104px;
+}
+
+.toggle-decoration-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 95px;
+  padding: 12px;
+  border: 2px dashed #af5eff;
+  border-radius: 12px;
+  transform: scale(var(--toggle-scale));
+  transform-origin: left top;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 1000px;
+  width: 100%;
+}
+
+.toggle-btn-on {
+  justify-content: flex-end;
+  background: linear-gradient(
+    222.12deg,
+    var(--purple) 30.805%,
+    #313472 94.471%
+  );
+}
+
+.toggle-btn-off {
+  justify-content: flex-start;
+  border: 2px solid #000;
+}
+
+.toggle-btn img {
+  flex-shrink: 0;
+}
+
+.hero-toggle {
+  left: 5%;
+  top: 57%;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both,
+    float-y 4s ease-in-out 1.35s infinite;
+}
+
+/* AI Widget Frame */
+.ai-widget-wrap {
+  --ai-widget-scale: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 103px;
+}
+
+.ai-widget-visual {
+  transform: scale(var(--ai-widget-scale));
+  transform-origin: left top;
+}
+
+.ai-widget-frame {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px;
+  background: #fbfbfb;
+  border: 1.5px solid #b0bec5;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.ai-widget-icon {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-widget-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-widget-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0.4;
+}
+
+.ai-widget-line {
+  height: 4px;
+  border-radius: 60px;
+  background: linear-gradient(90deg, #737373 3%, #d9d9d9 62%, #9a9a9a 100%);
+}
+
+.ai-widget-line--lg {
+  width: 100%;
+}
+
+.ai-widget-line--md {
+  width: 80%;
+}
+
+.ai-widget-line--sm {
+  width: 55%;
+}
+
+.ai-widget-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2px 4px;
+  background: white;
+  border-radius: 60px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-size: 8px;
+  font-weight: 500;
+  color: #0f8cdb;
+  white-space: nowrap;
+}
+
+.hero-ai-widget {
+  left: 15%;
+  top: calc(85% - 24px);
+  animation:
+    heroShootBotL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s both,
+    float-y 4s ease-in-out 1.25s infinite;
+}
+
+.hero-wal-pencil {
+  left: 79%;
+  top: calc(81% - 24px);
+  animation:
+    heroShootBotR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both,
+    float-y 4s ease-in-out 1.3s infinite;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 28px;
+  border-radius: 200px;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 1.4;
+  transition: background-color 180ms ease;
+}
+
+.button-primary {
+  background: var(--purple);
+  color: white;
+}
+
+.button-primary:hover {
+  background: var(--purple-hover);
+}
+
+/* Secondary：採用聯絡頁複製鈕（.copy-btn）的外觀——白底、細灰邊、灰字，
+   hover 時邊框與文字轉紫。用 inset box-shadow 當細邊，外尺寸與 primary 一致（不撐大）。 */
+.button-secondary {
+  background: #fff;
+  color: var(--muted);
+  box-shadow: inset 0 0 0 2px var(--line-strong);
+  transition:
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.button-secondary:hover {
+  color: var(--purple);
+  box-shadow: inset 0 0 0 2px var(--purple);
+}
+
+.projects-section {
+  --page-gutter: clamp(24px, 8vw, 120px);
+  padding: 0 var(--page-gutter) 48px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: 100vw;
+  margin-left: calc(var(--page-gutter) * -1);
+  padding: 48px 0;
+}
+
+.section-heading span {
+  height: 1px;
+  background: var(--line);
+}
+
+.section-heading span:first-child {
+  width: max(0px, calc(var(--page-gutter) - 32px));
+  flex: 0 0 max(0px, calc(var(--page-gutter) - 32px));
+}
+
+.section-heading span:last-child {
+  flex: 1;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: var(--fs-h1);
+  font-weight: 600;
+}
+
+.project-tabs {
+  display: grid;
+  gap: 32px;
+}
+
+.project-tabs-highlight {
+  position: relative;
+  width: min(100%, 360px);
+}
+
+.project-tabs-list {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  min-height: 48px;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.project-tabs-item {
+  position: relative;
+  flex: 1;
+}
+
+.tabs-active-highlight {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 999px;
+  background: white;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.project-tabs-tab {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  transition: color 180ms ease;
+}
+
+.project-tabs-tab[data-state="active"] {
+  color: var(--ink);
+}
+
+.projects-list {
+  display: grid;
+  gap: 48px;
+}
+
+/* scroll reveal：初始隱藏狀態（對齊 about-me 進場：由下方 120px 升起，縮放 0.96）*/
+.project-card.card-hidden {
+  opacity: 0.001;
+  transform: translateY(120px) scale(0.96) translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* scroll reveal：進場完成狀態（duration 0.95s、ease power3.out）*/
+.project-card.card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1) translateZ(0);
+  transition:
+    opacity 950ms cubic-bezier(0.215, 0.61, 0.355, 1),
+    transform 950ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* 尊重系統減少動態設定 */
+@media (prefers-reduced-motion: reduce) {
+  .project-card.card-hidden {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+
+  .project-card.card-visible {
+    transition: none;
+  }
+}
+
+.project-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 500px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface);
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+/* 桌機：圖片容器填滿整張卡（圖片絕對定位 fill）；手機改成流式比例框（見 768 斷點）。 */
+.project-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  transition: transform 420ms ease;
+}
+
+.project-card:nth-child(3) .project-image,
+.project-card:nth-child(4) .project-image {
+  object-position: center top;
+}
+
+.project-card:nth-child(4) .project-image {
+  object-position: right top;
+}
+
+.project-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.project-info {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  z-index: 2;
+  display: flex;
+  width: 348px;
+  min-height: 446px;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 32px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translate(420px, -50%);
+  transition:
+    opacity 260ms ease,
+    transform 360ms ease;
+}
+
+.project-card:hover .project-info,
+.project-card:focus-within .project-info {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.project-card:hover .project-scrim,
+.project-card:focus-within .project-scrim {
+  opacity: 0.18;
+}
+
+.project-card:hover .project-image,
+.project-card:focus-within .project-image {
+  transform: scale(1.03);
+}
+
+/* 桌機：包裹層不參與版面，logo/標題/描述/標籤直接當 project-info 的 flex 子項，
+   維持原本的單欄白色浮卡。手機才把它變成獨立白色資訊卡（見 768 / 440 斷點）。 */
+.project-meta {
+  display: contents;
+}
+
+.project-logo-wrap {
+  position: relative;
+  width: 168px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.project-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.project-title {
+  display: grid;
+  gap: 4px;
+}
+
+.project-title h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.project-title p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.project-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.project-tags {
+  display: flex;
+  flex: 1;
+  align-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.tone-brown .project-tags span {
+  background: var(--brown-soft);
+  color: var(--brown);
+}
+
+.tone-green .project-tags span {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.tone-peach .project-tags span {
+  background: var(--peach-soft);
+  color: var(--peach);
+}
+
+.tone-navy .project-tags span {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.tone-advantech {
+  --tag-bg: #d9f1ff;
+  --tag-text: #004b85;
+}
+
+.tone-icecream {
+  --tag-bg: #ffe2ea;
+  --tag-text: #aa2d53;
+}
+
+.tone-laushu {
+  --tag-bg: #f5eeff;
+  --tag-text: #3b3475;
+}
+
+.tone-thesis {
+  --tag-bg: #e6ffe3;
+  --tag-text: #2d462a;
+}
+
+.tone-advantech .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+.tone-icecream .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+.tone-laushu .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+.tone-thesis .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+.project-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 0;
+  border-radius: 200px;
+  color: white;
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+
+.tone-brown .project-button,
+.tone-green .project-button,
+.project-button.is-disabled {
+  background: var(--disabled);
+}
+
+/* 上線專案的 CTA 全站統一紫色（CTA = purple 規則）。
+   專案的個性色保留在標籤與邊框，不再用在主按鈕上。
+   用 :not(.is-disabled) 確保未上線（資料準備中）的卡片不會被染成紫色，
+   一律落回下方的 --disabled 灰階。 */
+.tone-peach .project-button:not(.is-disabled),
+.tone-navy .project-button:not(.is-disabled),
+.tone-advantech .project-button:not(.is-disabled),
+.tone-icecream .project-button:not(.is-disabled),
+.tone-laushu .project-button:not(.is-disabled),
+.tone-thesis .project-button:not(.is-disabled) {
+  background: var(--purple);
+  color: var(--paper);
+  transition: background-color 180ms ease;
+}
+
+.tone-peach .project-button:not(.is-disabled):hover,
+.tone-navy .project-button:not(.is-disabled):hover,
+.tone-advantech .project-button:not(.is-disabled):hover,
+.tone-icecream .project-button:not(.is-disabled):hover,
+.tone-laushu .project-button:not(.is-disabled):hover,
+.tone-thesis .project-button:not(.is-disabled):hover {
+  background: var(--purple-hover);
+}
+
+/* ============================================
+   TrueFocus component
+   ============================================ */
+
+.focus-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.7em 1em;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  user-select: none;
+}
+
+.focus-word {
+  position: relative;
+  font-size: inherit;
+  font-weight: inherit;
+  color: #d0cfce;
+  cursor: default;
+  transition:
+    filter 0.3s ease,
+    color 0.3s ease;
+  outline: none;
+  user-select: none;
+}
+
+.focus-word.active {
+  filter: blur(0);
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.focus-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  box-sizing: content-box;
+  border: none;
+}
+
+.focus-corner {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2.5px solid var(--border-color, #fff);
+  filter: drop-shadow(0px 0px 3px var(--glow-color, rgba(93, 98, 216, 0.3)));
+  border-radius: 3px;
+  transition: none;
+}
+
+.focus-corner.top-left {
+  top: -13px;
+  left: -13px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.focus-corner.top-right {
+  top: -13px;
+  right: -13px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.focus-corner.bottom-left {
+  bottom: -13px;
+  left: -13px;
+  border-right: none;
+  border-top: none;
+}
+
+.focus-corner.bottom-right {
+  bottom: -13px;
+  right: -13px;
+  border-left: none;
+  border-top: none;
+}
+
+/* WalPencil decoration */
+.wal-pencil {
+  position: relative;
+  width: 161px;
+  height: 112px;
+  /* fallback 1：var 沿 .hero-wal-pencil 父層繼承下來，
+     不在此自宣告，否則會蓋掉 media query 的 override */
+  transform: rotate(4deg) scale(var(--wal-pencil-scale, 1));
+  transform-origin: left top;
+}
+
+.wal-pencil-walpy {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.wal-pencil-pencil {
+  position: absolute;
+  top: 18px;
+  left: 68px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    justify-content: flex-start;
+    margin-top: 80px;
+    min-height: calc(100svh - 80px);
+    padding: clamp(220px, 38svh, 368px) 24px clamp(40px, 6svh, 66px);
+  }
+
+  .hero-copy {
+    width: min(550px, 100%);
+    max-width: 550px;
+    gap: 40px;
+  }
+
+  .hero-title {
+    gap: 32px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .hero-taglines {
+    font-size: 26px;
+    line-height: 1.4;
+  }
+
+  .focus-container {
+    column-gap: 1em;
+    row-gap: 32px;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    width: auto;
+    gap: 16px;
+  }
+
+  .hero-actions .button {
+    width: auto;
+    min-width: 136px;
+    min-height: 48px;
+    padding: 12px 28px;
+    font-size: var(--fs-body);
+  }
+
+  .hero-actions .button-secondary {
+    min-height: 48px;
+  }
+
+  .cursor-tag {
+    gap: 6px;
+  }
+
+  .cursor-tag-icon {
+    width: 20px;
+    height: auto;
+  }
+
+  .cursor-tag-label {
+    padding: 4px 10px;
+    font-size: 13px;
+    line-height: normal;
+  }
+
+  .hero-cursor-brian {
+    left: 39.875%;
+    top: clamp(185px, calc(26.9svh - 22px), 239px);
+  }
+
+  .hero-cursor-engineers {
+    left: 19.625%;
+    top: clamp(276px, calc(40.2svh - 32px), 357px);
+  }
+
+  .hero-cursor-pm {
+    right: 53px;
+    left: auto;
+    top: clamp(276px, calc(40.2svh - 32px), 357px);
+  }
+
+  .hero-frame-large {
+    --wireframe-scale: 0.815;
+    left: 12.375%;
+    top: clamp(548px, calc(79.7svh - 64px), 709px);
+  }
+
+  .hero-toggle {
+    --toggle-scale: 0.667;
+    left: 8.375%;
+    top: clamp(312px, calc(45.3svh - 36px), 403px);
+  }
+
+  .hero-sticky-1 {
+    left: 35.625%;
+    top: clamp(70px, calc(10.1svh - 8px), 90px);
+  }
+
+  .hero-sticky-2 {
+    left: 47%;
+    top: clamp(42px, calc(6.1svh - 5px), 54px);
+  }
+
+  .hero-sticky-3 {
+    left: 5%;
+    top: clamp(171px, calc(24.9svh - 20px), 221px);
+  }
+
+  .hero-sticky-4 {
+    left: 14.75%;
+    top: clamp(144px, calc(20.9svh - 17px), 186px);
+  }
+
+  .hero-sticky-5 {
+    left: auto;
+    right: 137px;
+    top: clamp(138px, calc(20.1svh - 16px), 179px);
+  }
+
+  .hero-sticky-6 {
+    left: auto;
+    right: 59px;
+    top: clamp(159px, calc(23.2svh - 19px), 206px);
+  }
+
+  .hero-ai-widget {
+    --ai-widget-scale: 0.815;
+    left: 6.875%;
+    top: clamp(589px, calc(85.6svh - 69px), 761px);
+  }
+
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.807;
+    left: auto;
+    right: 70px;
+    top: clamp(577px, calc(83.9svh - 67px), 746px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    --hero-mobile-h: calc(100svh - 80px);
+    --sticky-inner-rotate: 0deg;
+    min-height: var(--hero-mobile-h);
+    padding: max(192px, calc(var(--hero-mobile-h) * 0.315)) 20px
+      max(40px, calc(var(--hero-mobile-h) * 0.069));
+  }
+
+  .hero-copy {
+    width: min(408px, 100%);
+    max-width: 408px;
+    gap: 16px;
+  }
+
+  .hero-title {
+    gap: 16px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .hero-taglines {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .focus-container {
+    column-gap: 48px;
+    row-gap: 12px;
+  }
+
+  .hero-actions {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    min-height: 44px;
+    font-size: var(--fs-sm);
+  }
+
+  .hero-actions .button-secondary {
+    min-height: 44px;
+  }
+
+  .cursor-tag {
+    --cursor-tag-scale: 0.87;
+  }
+
+  .hero-cursor-engineers {
+    left: 31px;
+    top: max(18px, calc(var(--hero-mobile-h) * 0.031));
+  }
+
+  .hero-cursor-pm {
+    right: 46px;
+    left: auto;
+    top: calc(var(--hero-mobile-h) * 0.056);
+  }
+
+  .hero-cursor-brian {
+    left: calc(50% - 68.5px);
+    top: max(158px, calc(var(--hero-mobile-h) * 0.274));
+  }
+
+  /* 6 張卡包進 .hero-sticky-group，整組水平置中於螢幕。
+     group 寬 362px = 扇形未旋轉方框的左右跨距（data 左緣 0 → how-might 右緣 362），
+     扇形中心 = 181 = 寬/2，所以 left:50% + translateX(-50%) 即可置中。
+     卡片改用相對 group 的固定 px，扇形比例 / 間距不再隨視窗寬度變形。 */
+  .hero-sticky-group {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(var(--hero-mobile-h) * 0.068);
+    width: 362px;
+    height: 154px;
+    z-index: 1;
+  }
+
+  /* 配對等高：data-storage↔how-might、co-work↔product-spec、idea↔user-centric。
+     left/top = 未旋轉方框左上角（卡片固定 112×112，繞中心旋轉）。 */
+  .hero-sticky-data-storage {
+    z-index: 1;
+    left: 0;
+    top: 42px;
+    rotate: -15deg;
+  }
+
+  .hero-sticky-co-work {
+    z-index: 2;
+    left: 50px;
+    top: 21px;
+    rotate: -10deg;
+  }
+
+  .hero-sticky-idea {
+    z-index: 3;
+    left: 100px;
+    top: 0;
+    rotate: -5deg;
+  }
+
+  .hero-sticky-user-centric {
+    z-index: 4;
+    left: 150px;
+    top: 0;
+    rotate: 5deg;
+  }
+
+  .hero-sticky-product-spec {
+    z-index: 5;
+    right: auto;
+    left: 200px;
+    top: 21px;
+    rotate: 10deg;
+  }
+
+  .hero-sticky-how-might {
+    z-index: 6;
+    right: auto;
+    left: 250px;
+    top: 42px;
+    rotate: 15deg;
+  }
+
+  /* 底部四個裝飾包成一個 frame，整個 frame 垂直置中於「按鈕底 ↔ 視窗下緣」的空隙。
+     按鈕底(相對 hero) = heroH×0.315(padding-top) + 322px(copy 固定高)；
+     空隙中點 = (按鈕底 + heroH)/2 = heroH×0.6575 + 161px。
+     frame 高 162px，故 frame top = 中點 − 81 = heroH×0.6575 + 80px，frame 正好置中。
+     四個子物件水平用 left:%（隨寬度自適應），垂直用相對 frame 的固定 px 排高度順序。
+     ※ 高度 < 800px 時這四個物件已由下方 media query 隱藏，故這裡只需顧 ≥800 的情況。 */
+  .hero-bottom-group {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--hero-mobile-h) * 0.6575 + 80px);
+    height: 162px;
+    z-index: 1;
+  }
+
+  /* 高度順序：wal-pencil 最高(0) → toggle(22) → frame-large(44) → ai-widget(58) */
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.45;
+    left: 52%;
+    right: auto;
+    top: 0;
+  }
+
+  .hero-toggle {
+    --toggle-scale: 0.498;
+    left: 69.6%;
+    top: 22px;
+  }
+
+  .hero-frame-large {
+    --wireframe-scale: 0.65;
+    left: 23.9%;
+    top: 44px;
+  }
+
+  .hero-ai-widget {
+    --ai-widget-scale: 0.65;
+    left: 12.8%;
+    top: 58px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+}
+
+/* 矮螢幕手機（高度 < 800px，如 iPhone SE）：底部四個裝飾沒有足夠空間，
+   直接隱藏避免擠壓 / 溢出。只在 mobile 寬度生效，不影響 768px 高的桌機。 */
+@media (max-width: 768px) and (max-height: 799px) {
+  .hero-frame-large,
+  .hero-ai-widget,
+  .hero-wal-pencil,
+  .hero-toggle {
+    display: none;
+  }
+}
