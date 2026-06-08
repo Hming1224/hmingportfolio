@@ -22,12 +22,20 @@ export default function Contact() {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [copied, setCopied] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
     navigator.clipboard.writeText("hmingdesigner@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyPhone = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText("+886 978-629-321");
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -90,7 +98,7 @@ export default function Contact() {
               <div className="contact-info-header">
                 <h2 id="contact-title">對我的經歷或作品感興趣嗎？</h2>
                 <p className="contact-subtitle">
-                  透過以下管道與我聯繫，或是傳送訊息！
+                  透過以下管道與我聯繫，或傳送表單訊息！
                 </p>
               </div>
 
@@ -126,6 +134,39 @@ export default function Contact() {
                     aria-label="複製信箱"
                   >
                     {copied ? "已複製！" : "複製"}
+                  </button>
+                </div>
+
+                {/* Phone Method */}
+                <div
+                  className="contact-method-item phone-card"
+                  onClick={handleCopyPhone}
+                >
+                  <div className="method-icon-wrap">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </div>
+                  <div className="method-details">
+                    <span className="method-label">手機號碼</span>
+                    <span className="method-value">
+                      +886 978-629-321
+                    </span>
+                  </div>
+                  <button
+                    className={`copy-btn ${copiedPhone ? "copied" : ""}`}
+                    aria-label="複製手機號碼"
+                  >
+                    {copiedPhone ? "已複製！" : "複製"}
                   </button>
                 </div>
 
@@ -230,7 +271,7 @@ export default function Contact() {
             <div className="contact-card">
               <div className="contact-card-header">
                 <h3>填寫聯絡表單</h3>
-                <p>收到通知後，將會儘速回覆！😸</p>
+                <p>收到回覆後，將會儘速聯絡！😸</p>
               </div>
 
               <form className="contact-form" onSubmit={handleSubmit}>
