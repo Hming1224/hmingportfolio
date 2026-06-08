@@ -113,10 +113,10 @@ export default function Navbar() {
           聯絡資訊
         </Link>
         <a
-          className="resume-link"
           href="/Brian_Huang_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => setOpen(false)}
         >
           下載履歷
         </a>

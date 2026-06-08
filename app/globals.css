@@ -1082,18 +1082,20 @@ button {
 
 /* Secondary：灰色 stroke，用 inset box-shadow 畫在元件「內側」，
    不像 border 會撐出外框，與 primary 維持完全相同的外尺寸。 */
+/* Secondary：採用聯絡頁複製鈕（.copy-btn）的外觀——白底、細灰邊、灰字，
+   hover 時邊框與文字轉紫。用 inset box-shadow 當細邊，外尺寸與 primary 一致（不撐大）。 */
 .button-secondary {
   background: #fff;
-  color: var(--ink);
-  box-shadow: inset 0 0 0 2px var(--muted);
+  color: var(--muted);
+  box-shadow: inset 0 0 0 1px var(--line);
   transition:
-    background-color 180ms ease,
+    color 180ms ease,
     box-shadow 180ms ease;
 }
 
 .button-secondary:hover {
-  background: var(--surface);
-  box-shadow: inset 0 0 0 2px var(--ink);
+  color: var(--purple);
+  box-shadow: inset 0 0 0 1px var(--purple);
 }
 
 .projects-section {
@@ -3245,12 +3247,12 @@ button {
   }
 
   .hero-actions .button-secondary {
-    box-shadow: inset 0 0 0 3px var(--muted);
+    box-shadow: inset 0 0 0 1px var(--line);
   }
 
   .hero-actions .button-secondary:hover {
-    background: var(--surface);
-    box-shadow: inset 0 0 0 3px var(--ink);
+    color: var(--purple);
+    box-shadow: inset 0 0 0 1px var(--purple);
   }
 }
 

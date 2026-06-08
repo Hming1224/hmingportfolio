@@ -1,5 +1,34 @@
 # Project Memory
 
+## 2026-06-08 按鈕系統改 code（審查後第一批實作）
+
+Files: `components/Navbar.tsx`、`components/Hero.tsx`、`app/globals.css`、`design.md`、`design-audit`。Hming 拍板的三項：
+1. **導覽列「下載履歷」改純文字連結**：拿掉 `.resume-link` class（保留 PDF href + target/rel + onClick 關選單），變成跟設計案例/關於我/聯絡資訊同款 tab。→ `.resume-link` CSS 變未使用。
+2. **Hero「查看作品」改紫色 primary**：`button-dark` → `button-primary`。`.button-primary`（原本全站沒用）終於 live；`.button-dark` 改成沒人用。「我的歷程」維持 secondary。
+3. **`.button-secondary` 改成複製鈕（`.copy-btn`）的 outline 風**：白底 + `inset 0 0 0 1px var(--line)` 細灰邊 + `--muted` 灰字，hover 邊框與文字轉紫。用 inset box-shadow（非 border）維持「與 primary 外尺寸一致」。手機覆寫（原 inset 3px muted）也同步改成 1px line + purple hover。
+   - 踩坑提醒：`.button-secondary` 有多處斷點覆寫（手機 3px、各 min-height），改樣式要一起掃過、別只改 base。
+- **驗證**：dev server localhost:3000 已在跑；Playwright 截 `/`（Hero 兩鈕 + 導覽列）與 `/contact`（複製鈕 vs 新 secondary 外觀一致）皆正確、0 console error。screenshot 存在母資料夾 `verify-home-hero.png` / `verify-contact.png`。
+- design.md 5.1/5.3 與 audit L3 已同步成新現況。
+
+## 2026-06-08 設計系統審查 + design.md 對齊 code
+
+- 產出 `design-audit-2026-06-08.md`：比對 design.md ↔ globals.css(7666 行, 293 處寫死 hex) ↔ 元件，找到 19 條不一致（高 8 / 中 8 / 低 3）。
+- **重寫了 `design.md`**（依 Hming 決策）：
+  - 字級以 code 為準——**全站最大字級就是 32px，沒有 40px**；舊文件宣稱 H1 40px 是錯的。
+  - **Roboto Condensed 是幽靈字型**：layout.tsx 從未 import、globals.css 0 處使用。全站只有 Space Grotesk。已從文件刪除。
+  - 按鈕補上 **sm(38px,導覽列) / md(48px,預設) / lg(全寬卡片CTA)** 三階層 + 語意三層正交。
+  - 輸入框(4.4)整段重寫為 floating label 實況（bg #F9F9F9 / radius 12px / 外環 focus），舊文件 #f2f2f7/8px/inset 已過時。
+  - 補 `--text-*` 文字色階梯 + `.theme-xxx` 分層 theming 進文件第 2 章。
+  - 新增 **2.0 token 化原則**：token 價值＝重複次數 × 會不會改；**token ≠ 全域**。三層規則：跨頁共用→全域 :root token；單頁內用 ≥2 次→**區域 token**（scope 在 .theme-xxx / .tone-xxx）；只用一次→直接寫 hex。
+  - tone 色決策修正：前 4 個重用既有 accent 全域 token；後 4 個（advantech/icecream/laushu/thesis）只為單一專案而生→**做成「區域 token」**（`.tone-xxx { --tag-bg; --tag-text }`），不進全域。About 兩張卡片色只用一次→**保留 hex**（不做 token）。編號重梳（修掉重複的兩個 2.4）。
+- **關鍵觀念（Hming 提出、已釐清）**：design system 規則只對「會重複用 + 同資訊層級」的東西才套；單一專案專屬的色不必塞全域 token，但若那頁內重複用，做「區域 token」最方便。
+- **第二輪完整掃描重寫（同日，Hming 要求徹底掃整個專案）**：抽樣掃描有漏，改成完整掃 4 頁路由 + 25 元件 + 740 條 class + 全部 token。補抓到的脫節：① 斷點全錯（文件 ≤809/810，實際主斷點 768 + 640/440/360 + 桌機 1439/1100/900）② `--fs-*` 是響應式 token（768/360 重定義），文件當靜態 ③ 字重缺 700（全站用最多，65 處）④ 圓角混亂（pill 用 999/200/100/60/1000 五種；卡片 8/10/12/16/20）⑤ 一堆 token 用了沒記（hero 裝飾 scale 全套、--cs-tl-*、--mobile-nav-*、skill-card 的 --accent-color 區域 token、--year-rail-sticky-top）⑥ section 6「只用黑陰影」與 code 矛盾（案例頁有研華藍/紫有色陰影）⑦ **cs-* 佔 41%（307/740 條）是 advantech 單頁專屬 layout、不屬可複用系統**。
+- **重寫後 design.md 結構**：新增「0. 專案地圖（4 頁+元件+兩層結構）」「4. 圓角系統」「8. Token 總清單」；修正字級(響應式)/字重(補700)/斷點/陰影。詳見 design-audit 附錄。
+- **踩坑（重寫文件時）→ 錯誤做法：沿用舊 design.md 的「角色/用途」描述、假設它還成立。正確做法：每個 class 的「用在哪」描述都要 grep tsx 確認該 class 還被 render。原因：抓到兩組已被移除卻仍寫在文件的死 CSS**：① `.traits-panel`/`.traits-list`/`.traits-photo`（舊「個人特質區塊」，brown 色）已無人 render；② `.role-badge`/`.badge-designer/coordinator/engineer`（舊文字版角色徽章）被 AvatarProfile.tsx 圖片版 WobbleBadge 取代。連帶：brown 真實用途已從「個人特質區塊」變成「tone-brown 專案標籤色」；角色徽章從首頁 Hero 搬到 About 頁。design.md 已修正。
+- **「描述正確性驗證」pass（逐一 grep tsx 確認每個 class 還被 render）再抓到**：① **Hero 兩顆按鈕映射寫反**——實際「查看作品＝button-dark（黑填色）」「我的歷程＝button-secondary（灰描邊）」② `.button-primary`（紫填色）全站沒用，實際紫 CTA 來自 resume-link/project-button/submit-btn 直接用 --purple ③ `.cs-section-dark`(#131b24) 未 render、目前無深色 section ④ `--text-on-dark-body/-muted` 兩 token 無人消費 ⑤ `.headline` 死 CSS。全部已修進 design.md + 報告 L3。驗證為正確的：8 個 tone（動態 className）、project-card 系列、導覽/表單/skill-card、cs 骨架、theme-advantech、about-window、submit-btn=紫、Hero 裝飾全在。
+- **本次只改文件、沒動 code**。design.md 內標 🔧 的項目＝規格已定、code 待對齊，集中在 audit 報告的「改 code 清單」：① 293 處 hex→token（已有全域 token 卻寫死的）② --fs-* 字級 token 落實（現 fs-h1 全檔只用 1 次）③ 後 4 個 tone 改區域 token + selector 統一 ④ project-button 字重 500→600 ⑤ resume-link 圓角 100px→200px。**Q4 待 Hming 決定要不要另開 session 真的改 code。**
+- ⚠️ 輸入框那段對應 `components/Contact.tsx` 的未提交改動，表單若再調要同步 design.md 4.4。
+
 ## 2026-06-06 About-Me refactoring & SEO progress
 
 - Page: `/about-me`

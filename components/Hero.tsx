@@ -87,7 +87,7 @@ export default function Hero() {
 
         <div className="hero-actions">
           <a className="button button-secondary" href="/about-me">我的歷程</a>
-          <a className="button button-dark"      href="#projects">查看作品</a>
+          <a className="button button-primary"   href="#projects">查看作品</a>
         </div>
       </div>
     </section>
