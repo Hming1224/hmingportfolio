@@ -1,5 +1,12 @@
 # Project Memory
 
+## 2026-06-08 About skill card 區域 token 清理
+
+Files: `app/about-me/page.tsx`、`app/globals.css`、`design.md`。
+- **問題**：About「專業技能」四張卡的主色 / hover tint / border tint 原本散在 `skillCategories` 資料陣列裡，用 inline CSS variables + icon inline color 寫入 TSX。雖然視覺可用，但資料層混入設計 token，後續新增技能分類容易複製 hex / rgba。
+- **做法**：`skillCategories` 改成只掛 `toneClass`；色彩搬到 `.skill-category-card.is-*` variant，覆寫 `--accent-color`、`--bg-color-tint`、`--border-color-tint`。`.skill-card-icon` 改吃 `var(--accent-color)`，不再 inline color。
+- **原則**：同款卡片不同主色 = CSS variant + 區域 token；TSX 資料陣列只保留內容與 class 名，不直接放 hex / rgba。
+
 ## 2026-06-08 按鈕跨斷點字級/高度收斂（48px / 16px 統一）
 
 Files: `app/globals.css`、`design.md`（5.1）、`Memory.md`。

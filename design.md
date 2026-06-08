@@ -359,8 +359,14 @@ About 頁技能卡是「元件自帶區域 token」的範本：
   --border-color-tint: rgba(0,0,0,0.12);
   border-radius: 16px; padding: 28px 24px;
 }
+
+.skill-category-card.is-user-research {
+  --accent-color: #4a90e2;
+  --bg-color-tint: rgba(74,144,226,0.04);
+  --border-color-tint: rgba(74,144,226,0.12);
+}
 ```
-> 新做「同款但不同主色」的卡片時，照這個模式覆寫 `--accent-color` 即可，不用複製整套樣式。
+> 新做「同款但不同主色」的卡片時，在 CSS 新增 `.skill-category-card.is-*` variant 覆寫這 3 個區域 token；TSX 只掛 class，不把 hex / rgba 寫進資料陣列。
 
 ---
 

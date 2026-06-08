@@ -73,33 +73,25 @@ const experiences = [
 const skillCategories = [
   {
     title: "產品設計",
-    color: "#5d62d8", // Purple
-    bgColor: "rgba(93, 98, 216, 0.04)",
-    borderColor: "rgba(93, 98, 216, 0.12)",
+    toneClass: "is-product-design",
     iconId: "layout",
     skills: ["UI flow", "設計系統", "線框圖 / 原型設計", "響應式網頁設計", "基礎前端知識"]
   },
   {
     title: "使用者研究",
-    color: "#4a90e2", // Blue
-    bgColor: "rgba(74, 144, 226, 0.04)",
-    borderColor: "rgba(74, 144, 226, 0.12)",
+    toneClass: "is-user-research",
     iconId: "users",
     skills: ["使用者訪談", "利害關係人訪談", "競品分析", "親和圖", "使用者旅程圖", "易用性測試"]
   },
   {
     title: "AI 工具",
-    color: "#e8856b", // Orange
-    bgColor: "rgba(232, 133, 107, 0.04)",
-    borderColor: "rgba(232, 133, 107, 0.12)",
+    toneClass: "is-ai-tools",
     iconId: "cpu",
     skills: ["Claude Code", "Codex", "Figma Make", "Canva AI", "NoteBookLM"]
   },
   {
     title: "協作與管理",
-    color: "#1fa37e", // Green
-    bgColor: "rgba(31, 163, 126, 0.04)",
-    borderColor: "rgba(31, 163, 126, 0.12)",
+    toneClass: "is-collaboration",
     iconId: "briefcase",
     skills: ["Jira / Trello", "Scrum 敏捷開發", "跨部門溝通", "專案時程控管"]
   }
@@ -509,20 +501,10 @@ export default function AboutMePage() {
               threshold={0.05}
             >
               <div
-                className="skill-category-card"
-                style={
-                  {
-                    "--accent-color": category.color,
-                    "--bg-color-tint": category.bgColor,
-                    "--border-color-tint": category.borderColor,
-                  } as React.CSSProperties
-                }
+                className={`skill-category-card ${category.toneClass}`}
               >
                 <div className="skill-card-header">
-                  <div
-                    className="skill-card-icon"
-                    style={{ color: category.color }}
-                  >
+                  <div className="skill-card-icon">
                     <SkillIcon id={category.iconId} />
                   </div>
                   <h3>{category.title}</h3>
