@@ -176,7 +176,7 @@ const educatorItems = [
     role: "課程助教",
     desc: "指導學碩同學共20組期末專案，提供 TA office hour 諮詢與每週作業回饋",
     date: "2025.09-2026.01",
-    image: "/educator/nccu-ta.jpg",
+    image: "/educator/nccu-ta.png",
   },
   {
     badge: "16+",
