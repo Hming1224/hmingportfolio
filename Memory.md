@@ -1,5 +1,69 @@
 # Project Memory
 
+## 2026-06-08 案例頁骨架元件用法（CA 專案直接照抄）
+
+Files: `components/case-study/*`、`app/advantech/page.tsx`、`app/globals.css`。
+
+- **目的**：新案例頁（尤其 CA 專案）不要再手刻 Navbar / ScrollProgress / TOC / next nav / Footer。直接用 `components/case-study` 的骨架元件，讓案例頁結構一致、之後要改全站 case study 外框也只改一處。
+- **固定 import**：
+  ```tsx
+  import {
+    CaseStudyShell,
+    CaseSection,
+    CaseHeading,
+    type TocSection,
+  } from "../../components/case-study";
+  ```
+- **基本頁面骨架**：
+  ```tsx
+  const tocSections: TocSection[] = [
+    { id: "cs-sec-overview", label: "專案背景" },
+    { id: "cs-sec-research", label: "研究洞察" },
+    { id: "cs-sec-solution", label: "設計方案" },
+  ];
+
+  export default function CasePage() {
+    const hero = (
+      <section>
+        {/* 每個專案自己的 hero cover + hero info */}
+      </section>
+    );
+
+    return (
+      <CaseStudyShell
+        theme="theme-ca"
+        tocSections={tocSections}
+        nextNav={{ nextHref: "/next-project", nextLabel: "下一個專案：..." }}
+        hero={hero}
+      >
+        <CaseSection id="cs-sec-overview" title="專案背景">
+          {/* section content */}
+        </CaseSection>
+
+        <CaseSection id="cs-sec-research" surface title="研究洞察">
+          {/* section content */}
+        </CaseSection>
+
+        <section id="cs-sec-process" className="cs-process-bg">
+          <CaseHeading title="設計流程" tone="white" style={{ marginBottom: 8 }} />
+          {/* 自帶背景 / 特殊 layout 的客製 section */}
+        </section>
+      </CaseStudyShell>
+    );
+  }
+  ```
+- **元件分工**：
+  - `CaseStudyShell`：統一 `<main className="cs-page theme-xxx">`、`ScrollProgress`、`Navbar`、hero、TOC layout、next project nav、`Footer`。
+  - `CaseSection`：一般白底 / surface section；自動輸出 `.cs-heading` + `.cs-divider`。`surface` 會用 `.cs-section-surface`，`className` 可加局部 section class（例如 `cs-solution-section`）。
+  - `CaseHeading`：只處理「section 標題 + divider」。深色背景 section 用 `tone="white"`；process / result / next 這類特殊 layout 不包 `CaseSection`，但可以直接用 `CaseHeading` 保持標題一致。
+- **TOC 規則**：`tocSections` 的 `id` 必須和 section `id` 完全一致，案例頁內容 section id 維持 `cs-sec-*`，才能吃到 scroll-margin 與 scrollspy。
+- **theme 規則 / 踩坑**：
+  - 新專案主色只加 `.theme-ca { --text-heading: <主色>; }`，只讓大標 / section heading 用專案主色。
+  - 不要讓整個 `.cs-page` 繼承 `--text-heading`，否則 Navbar 與未指定顏色的 hero 文字會一起變專案主色。
+  - Navbar 是全站元件，顏色必須維持中性（目前 `.site-nav { color: var(--ink); }`）。
+  - hero meta 裡的時間、角色、團隊、負責項目屬資訊文字，應該用中性黑（目前 `.cs-info-value` / `.cs-info-tasks span` 用 `var(--ink)`），不要跟專案主色。
+- **移植 CA 時的做法**：先複製 Advantech 頁面的 `tocSections + hero + CaseStudyShell` 架構，再替換內容；一般 section 優先改成 `CaseSection`，只有自帶背景圖、特殊連線、特殊互動的區塊才保留原生 `<section>` + `CaseHeading`。
+
 ## 2026-06-08 About skill card 區域 token 清理
 
 Files: `app/about-me/page.tsx`、`app/globals.css`、`design.md`。

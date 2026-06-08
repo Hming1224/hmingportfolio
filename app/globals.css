@@ -148,6 +148,7 @@ button {
   min-height: 80px;
   padding: 12px clamp(48px, 8vw, 120px);
   background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
   backdrop-filter: blur(16px);
   opacity: 1;
   transform: translateY(0);
@@ -4223,7 +4224,7 @@ button {
 
 .cs-page {
   background: var(--paper);
-  color: var(--text-heading);
+  color: var(--text-body);
   font-family: Inter, var(--font-space-grotesk), sans-serif;
 }
 
@@ -4468,7 +4469,7 @@ button {
 .cs-info-value {
   font-size: var(--fs-h4);
   font-weight: 700;
-  color: var(--text-heading);
+  color: var(--ink);
 }
 
 .cs-info-tasks {
@@ -4481,7 +4482,7 @@ button {
   font-size: var(--fs-h4);
   line-height: 1.22;
   font-weight: 700;
-  color: var(--text-heading);
+  color: var(--ink);
 }
 
 /* ── 02 Overview ── */
