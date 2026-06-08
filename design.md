@@ -92,8 +92,9 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `--paper` | `#ffffff` | 頁面底色、卡片底色 |
 | `--ink` | `#343434` | 主要文字。不用純黑，深灰讓字更柔 |
 | `--ink-hover` | `#555555` | 黑色 primary 按鈕 hover（比 ink 淺一階）|
-| `--muted` | `#8e8e9c` | 次要文字、placeholder、secondary 按鈕描邊 |
+| `--muted` | `#8e8e9c` | 次要文字、placeholder、secondary 按鈕**文字** |
 | `--line` | `rgba(0,0,0,0.08)` | 分隔線，透明度做的，不死硬 |
+| `--line-strong` | `rgba(0,0,0,0.16)` | 比 `--line` 明顯、又比 `--muted` 文字淡的描邊：secondary 按鈕邊框 |
 | `--surface` | `#f9f9f9` | tab 背景、表單欄位底色、卡片 placeholder 背景、secondary 按鈕 hover 底 |
 | `--disabled` | `#dedee4` | 停用狀態（未上線專案）|
 
@@ -287,10 +288,10 @@ font-family: var(--font-space-grotesk), sans-serif;
 | 變體 | 底色 | 文字色 | 描邊 | 語意 | class | 實際用在哪 |
 |---|---|---|---|---|---|---|
 | Primary（紫）| `--purple` | `#fff` | — | 轉換型 CTA（最希望點）| `.button-primary` | **Hero「查看作品」**（→ `#projects`）。另外專案卡 CTA（`.project-button`）、聯絡送出（`.submit-btn`）也直接用 `--purple` |
-| Secondary | 白 | `--muted` → hover `--purple` | 細灰邊 `inset 0 0 0 1px var(--line)`，hover 轉 `--purple` | 次要（outline 風）| `.button-secondary` | **Hero「我的歷程」**（→ `/about-me`）|
+| Secondary | 白 | `--muted` → hover `--purple` | 灰邊 `inset 0 0 0 2px var(--line-strong)`，hover 轉 `--purple` | 次要（outline 風）| `.button-secondary` | **Hero「我的歷程」**（→ `/about-me`）|
 | Disabled | `--disabled` | `#fff` | — | 未上線專案 | `.is-disabled` | 8 個未上線專案卡 CTA |
 
-> **Secondary 樣式（2026-06-08 更新）**：改成與聯絡頁複製鈕（`.copy-btn`）同款的 outline 風——白底、細灰邊（`--line`）、灰字，hover 時邊框與文字轉紫。用 `box-shadow: inset 0 0 0 1px`（非 `border`）當細邊，外尺寸與 primary 一致、不撐大。
+> **Secondary 樣式（2026-06-08 更新）**：outline 風——白底、灰字（`--muted`），描邊用 `box-shadow: inset 0 0 0 2px var(--line-strong)`（非 `border`，不撐大外尺寸），hover 時邊框與文字轉紫。**邊框刻意比文字（`--muted`）淡一階**：原本沿用 copy-btn 的 `2px var(--muted)`（邊＝字同色）覺得太重，改用新 token `--line-strong`（比 `--line` 明顯、比 `--muted` 淡）。
 > **紫色語意**：紫色＝「希望訪客轉換」的 CTA（看作品、聯絡送出、看專案）。同屏盡量一顆紫色主按鈕。
 
 #### Hover（全站統一，不位移只變色，`180ms ease`）

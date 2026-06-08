@@ -58,6 +58,8 @@
   --muted: #8e8e9c;
   --paper: #ffffff;
   --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.16);
+  /* 比 --line 明顯、又比 --muted 文字淡：secondary 按鈕描邊等 */
   --purple: #5d62d8;
   --purple-soft: #dbdcff;
   --blue: #416484;
@@ -1047,7 +1049,7 @@ button {
 .button-secondary {
   background: #fff;
   color: var(--muted);
-  box-shadow: inset 0 0 0 1px var(--line);
+  box-shadow: inset 0 0 0 2px var(--line-strong);
   transition:
     color 180ms ease,
     box-shadow 180ms ease;
@@ -1055,7 +1057,7 @@ button {
 
 .button-secondary:hover {
   color: var(--purple);
-  box-shadow: inset 0 0 0 1px var(--purple);
+  box-shadow: inset 0 0 0 2px var(--purple);
 }
 
 .projects-section {
@@ -3231,12 +3233,12 @@ button {
   }
 
   .hero-actions .button-secondary {
-    box-shadow: inset 0 0 0 1px var(--line);
+    box-shadow: inset 0 0 0 2px var(--line-strong);
   }
 
   .hero-actions .button-secondary:hover {
     color: var(--purple);
-    box-shadow: inset 0 0 0 1px var(--purple);
+    box-shadow: inset 0 0 0 2px var(--purple);
   }
 }
 
