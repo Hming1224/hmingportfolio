@@ -22,20 +22,6 @@
   transform-origin: center;
 }
 
-.profile-figure {
-  position: relative;
-  width: 361px;
-  height: 361px;
-  flex: 0 0 361px;
-  animation: riseIn 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.profile-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .about-page {
   padding-top: 80px;
 }
@@ -115,41 +101,8 @@
   padding: 48px 80px 48px 48px;
 }
 
-.portrait-stack {
-  position: relative;
-  min-height: 430px;
-}
-
-.portrait-card {
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 341px;
-  height: 425px;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
-}
-
-.portrait-card img,
 .experience-image img {
   object-fit: cover;
-}
-
-.portrait-0 {
-  transform: translate(24px, 20px);
-}
-
-.portrait-1 {
-  transform: translate(12px, 10px) rotate(-1deg);
-}
-
-.portrait-2 {
-  transform: translate(6px, 4px) rotate(-2deg);
-}
-
-.portrait-3 {
-  border: 11px solid white;
-  transform: rotate(-3deg);
 }
 
 .about-intro-copy {
@@ -182,316 +135,10 @@
   padding-inline: clamp(24px, 8vw, 120px);
 }
 
-.growth-grid,
 .experience-layout,
 .skills-panel,
 .education-list {
   margin: 0 clamp(24px, 8vw, 120px) 24px;
-}
-
-.growth-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  /* clip 水平方向避免出現頁面捲軸，但保留垂直可見，
-     讓膠帶 / 迴紋針 / 拍立得上緣能完整露出不被裁掉 */
-  overflow-x: clip;
-  overflow-y: visible;
-  padding-top: 28px;
-}
-
-.growth-story {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  min-height: max-content;
-  overflow: visible;
-}
-
-.growth-story-blue {
-  justify-content: flex-start;
-}
-
-.growth-story-orange {
-  justify-content: flex-end;
-}
-
-.growth-cluster {
-  position: relative;
-  flex: 1 0 0;
-  max-width: 1000px;
-  min-width: 0;
-  width: 1px;
-}
-
-/* 進場動畫：預設隱藏，捲到畫面內（.is-visible）才播放 */
-.growth-story-blue,
-.growth-story-orange {
-  opacity: 0;
-}
-
-.growth-story-blue.is-visible {
-  animation: growthBlueIn 820ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.growth-story-orange.is-visible {
-  animation: growthOrangeIn 820ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
-}
-
-.growth-card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: max-content;
-  overflow: visible;
-  padding: 48px;
-  border-radius: 6px;
-  box-shadow: var(--shadow-lg);
-}
-
-.growth-card-blue {
-  gap: 24px;
-  justify-content: flex-start;
-  background: #d4e2f1;
-  transform: rotate(-1deg);
-}
-
-.growth-card-orange {
-  gap: 48px;
-  justify-content: flex-start;
-  background: #fff3e0;
-  transform: rotate(1deg);
-}
-
-.growth-copy {
-  position: relative;
-  display: flex;
-  flex: 1 0 0;
-  flex-direction: column;
-  gap: 24px;
-  justify-content: center;
-  width: 1px;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.growth-copy p {
-  z-index: 1;
-  margin: 0;
-  color: rgba(0, 0, 0, 0.8);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.growth-copy strong {
-  font-weight: 700;
-}
-
-.growth-highlight-blue {
-  color: rgba(29, 103, 177, 0.8);
-}
-
-.growth-highlight-orange {
-  color: var(--purple);
-}
-
-.growth-label {
-  position: relative;
-  z-index: 2;
-  display: inline-grid;
-  flex: none;
-  width: 135px;
-  height: 36px;
-  place-items: center;
-  overflow: hidden;
-  color: white;
-  font-size: var(--fs-h3);
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-.growth-label-blue {
-  transform: rotate(-1deg);
-}
-
-.growth-label-orange {
-  transform: rotate(1deg);
-}
-
-.growth-mark {
-  position: absolute;
-  inset: 2px 0;
-  z-index: 0;
-  width: 100%;
-  height: calc(100% - 4px);
-  pointer-events: none;
-}
-
-.growth-label span {
-  position: relative;
-  z-index: 1;
-}
-
-.growth-sticker {
-  position: absolute;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.growth-sticker svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.growth-sticker-blue {
-  top: -34px;
-  left: calc(50% - 16px);
-  z-index: 2;
-  width: 31px;
-  height: 54px;
-}
-
-.growth-sticker-orange {
-  top: -34px;
-  left: calc(50% - 18px);
-  width: 37px;
-  height: 54px;
-}
-
-.growth-photo-stage {
-  position: relative;
-  flex: none;
-  width: 201px;
-  height: 316px;
-  overflow: visible;
-  transform-style: preserve-3d;
-}
-
-.growth-polaroid {
-  position: absolute;
-  display: flex;
-  flex: none;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-  height: min-content;
-  width: 248px;
-  margin: 0;
-  padding: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-  background: white;
-  box-shadow: var(--shadow-photo);
-}
-
-.growth-polaroid-blue {
-  top: -25px;
-  right: -65px;
-  transform: rotate(-9deg);
-  transform-origin: center;
-  opacity: 0;
-}
-
-.growth-polaroid-orange {
-  top: -7px;
-  left: -72px;
-  transform: rotate(9deg);
-  transform-origin: center;
-  opacity: 0;
-}
-
-.growth-story-blue.is-visible .growth-polaroid-blue {
-  animation: growthPhotoBlueIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
-}
-
-.growth-story-orange.is-visible .growth-polaroid-orange {
-  animation: growthPhotoOrangeIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
-}
-
-.growth-polaroid > img:not(.growth-paperclip) {
-  position: relative !important;
-  width: 100% !important;
-  height: 305px !important;
-  object-fit: cover;
-}
-
-.growth-polaroid figcaption {
-  color: var(--ink);
-  text-align: center;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.growth-paperclip {
-  position: absolute;
-  z-index: 4;
-  top: -14px;
-  left: 50%;
-  width: 28px;
-  height: 28px;
-  transform: translateX(-50%);
-  object-fit: cover;
-  pointer-events: none;
-}
-
-@keyframes growthBlueIn {
-  from {
-    opacity: 0;
-    transform: perspective(1200px) translate(40px, -40px) rotateX(20deg)
-      rotateY(-2deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: perspective(1200px) translate(0, 0) rotateX(0) rotateY(0);
-  }
-}
-
-@keyframes growthOrangeIn {
-  from {
-    opacity: 0;
-    transform: perspective(1200px) translate(-40px, -40px) rotateX(20deg)
-      rotateY(2deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: perspective(1200px) translate(0, 0) rotateX(0) rotateY(0);
-  }
-}
-
-@keyframes growthPhotoBlueIn {
-  from {
-    opacity: 0;
-    filter: saturate(0.85);
-    transform: perspective(1200px) translate(20px, -20px) rotate(-9deg)
-      rotateX(20deg);
-  }
-
-  to {
-    opacity: 1;
-    filter: saturate(1);
-    transform: perspective(1200px) translate(0, 0) rotate(-9deg) rotateX(0);
-  }
-}
-
-@keyframes growthPhotoOrangeIn {
-  from {
-    opacity: 0;
-    filter: saturate(0.85);
-    transform: perspective(1200px) translate(-20px, -20px) rotate(9deg)
-      rotateX(20deg);
-  }
-
-  to {
-    opacity: 1;
-    filter: saturate(1);
-    transform: perspective(1200px) translate(0, 0) rotate(9deg) rotateX(0);
-  }
 }
 
 /* 尊重「減少動態效果」偏好：直接顯示最終狀態，不播進場動畫 */
@@ -504,13 +151,6 @@
     will-change: auto;
   }
 
-  .growth-story-blue,
-  .growth-story-orange,
-  .growth-polaroid-blue,
-  .growth-polaroid-orange {
-    opacity: 1;
-    animation: none;
-  }
 }
 
 .experience-copy h3,
@@ -1606,58 +1246,8 @@
     gap: 32px;
   }
 
-  .portrait-stack {
-    min-height: 320px;
-  }
-
-  .portrait-card {
-    width: 238px;
-    height: 297px;
-  }
-
   .about-intro-copy h1 {
     font-size: var(--fs-h1);
-  }
-
-  .growth-story {
-    min-height: max-content;
-  }
-
-  .growth-card {
-    padding: 48px;
-  }
-
-  .growth-card-orange {
-    gap: 16px;
-  }
-
-  .growth-photo-stage {
-    width: 174px;
-    height: 274px;
-  }
-
-  .growth-polaroid {
-    width: 212px;
-  }
-
-  .growth-polaroid > img:not(.growth-paperclip) {
-    height: 255px !important;
-  }
-
-  .growth-polaroid-blue {
-    top: -32px;
-    right: -30px;
-  }
-
-  .growth-polaroid-orange {
-    top: auto;
-    bottom: -42px;
-    left: -39px;
-    width: 209px;
-  }
-
-  .growth-polaroid-orange > img:not(.growth-paperclip) {
-    height: 252px !important;
   }
 
   .tool-grid {
@@ -2116,33 +1706,6 @@
     padding: 24px;
   }
 
-  .portrait-stack {
-    min-height: 280px;
-  }
-
-  .portrait-card {
-    left: 50%;
-    width: 238px;
-    height: 297px;
-    transform-origin: center;
-  }
-
-  .portrait-0 {
-    transform: translateX(-43%) translateY(16px);
-  }
-
-  .portrait-1 {
-    transform: translateX(-47%) translateY(8px) rotate(-1deg);
-  }
-
-  .portrait-2 {
-    transform: translateX(-49%) translateY(4px) rotate(-2deg);
-  }
-
-  .portrait-3 {
-    transform: translateX(-50%) rotate(-3deg);
-  }
-
   .about-intro-copy h1 {
     font-size: var(--fs-h1);
   }
@@ -2156,7 +1719,6 @@
     padding-inline: 24px;
   }
 
-  .growth-grid,
   .experience-layout,
   .skills-panel,
   .education-list {
@@ -2177,112 +1739,6 @@
   .skills-panel h3,
   .education-card h3 {
     font-size: var(--fs-h3);
-  }
-
-  .growth-story {
-    min-height: auto;
-    overflow-x: clip;
-    overflow-y: visible;
-  }
-
-  .growth-story-orange {
-    padding-bottom: 16px;
-  }
-
-  .growth-cluster {
-    flex: none;
-    width: 100%;
-  }
-
-  .growth-card {
-    flex-direction: column;
-    align-items: center;
-    padding: 24px;
-  }
-
-  .growth-card-blue {
-    gap: 64px;
-  }
-
-  .growth-card-orange {
-    gap: 24px;
-  }
-
-  .growth-card-blue,
-  .growth-card-orange {
-    transform: none;
-  }
-
-  .growth-copy {
-    flex: none;
-    width: 100%;
-  }
-
-  .growth-copy p {
-    font-size: 14px;
-  }
-
-  .growth-label {
-    width: 116px;
-    height: 32px;
-    font-size: 20px;
-  }
-
-  .growth-label-blue,
-  .growth-label-orange {
-    transform: none;
-  }
-
-  .growth-sticker-blue {
-    top: -4px;
-    left: auto;
-    right: 24px;
-  }
-
-  .growth-sticker-orange {
-    bottom: auto;
-    left: auto;
-    top: 8px;
-    right: 24px;
-  }
-
-  .growth-photo-stage {
-    width: 174px;
-    height: 274px;
-  }
-
-  .growth-card-orange .growth-copy {
-    order: 0;
-  }
-
-  .growth-card-orange .growth-photo-stage {
-    order: 1;
-  }
-
-  .growth-polaroid {
-    width: 212px;
-  }
-
-  .growth-polaroid-blue {
-    top: -32px;
-    right: -30px;
-  }
-
-  .growth-polaroid-orange {
-    top: auto;
-    bottom: -19px;
-    left: -38px;
-    width: 209px;
-  }
-
-  .growth-polaroid > img:not(.growth-paperclip) {
-    height: 272px !important;
-  }
-
-  .growth-paperclip {
-    top: -12px;
-    width: 23px;
-    height: 23px;
   }
 
   .experience-layout {
@@ -2353,15 +1809,6 @@
   .experience-role,
   .experience-date {
     font-size: 16px;
-  }
-
-  .skill-tags {
-    gap: 12px;
-  }
-
-  .skill-tags span {
-    padding: 8px 16px;
-    font-size: 14px;
   }
 
   .tool-grid {

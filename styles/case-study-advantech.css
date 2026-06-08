@@ -349,41 +349,6 @@
   margin: 0;
 }
 
-.cs-timeline-item {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 24px;
-  position: relative;
-  z-index: 1;
-}
-
-.cs-timeline-num {
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  display: inline-block;
-  padding: 2px 8px;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
-}
-
-.cs-timeline-title {
-  font-size: var(--fs-body);
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 10px;
-}
-
-.cs-timeline-desc {
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 0;
-}
-
 /* ── Competitive Analysis ── */
 .cs-sub-section {
   margin-bottom: 56px;
@@ -1166,24 +1131,6 @@
   font-size: var(--fs-body);
   color: #425466;
   margin-top: 24px;
-}
-
-/* ── Solution section ── */
-.cs-solution-intro {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 40px;
-}
-
-.cs-showcase-placeholder {
-  width: 100%;
-  aspect-ratio: 16 / 7;
-  background: var(--surface);
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid var(--line);
 }
 
 /* ── Section 06 Solution sub-blocks ── */
@@ -2435,37 +2382,6 @@
   .cs-comp-ems-img {
     width: 100%;
     height: 140px;
-  }
-
-  .cs-opp-col {
-    width: 200px;
-  }
-
-  .cs-flow {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .cs-flow-arrow {
-    transform: rotate(90deg);
-    padding: 0;
-    justify-content: flex-start;
-  }
-
-  .cs-insight-box {
-    grid-template-columns: 1fr;
-  }
-
-  .cs-insight-photo {
-    width: 100%;
-  }
-
-  .cs-timeline {
-    grid-template-columns: 1fr;
-  }
-
-  .cs-timeline::before {
-    display: none;
   }
 
   /* Next project nav */
