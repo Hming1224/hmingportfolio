@@ -277,6 +277,12 @@ font-family: var(--font-space-grotesk), sans-serif;
 - md 48px 是標準；sm 38px 為緊湊情境（目前無按鈕在用）；lg 不是更高，是「撐滿容器寬」的變體。
 - 字重統一 `600`，包含 `.project-button`。
 
+> **跨斷點規格（2026-06-08 對齊 code）★**：md 按鈕（`.button` / `-primary` / `-secondary`、Hero 的 `.hero-actions .button`）與 lg（`.project-button`）**在所有斷點都維持 `48px` 高 + `16px`（`var(--fs-body)`）字級——手機不放大**。
+> - 修正前的踩坑：手機曾把字級跳到 `20px`、高度漂移成 `52 / 56 / 43px`（primary 52、secondary 56、project-button 43），各斷點不一致。已全部收斂回 48 / 16。
+> - 高度用 `min-height: 48px`（`box-sizing: border-box`，含 padding 不爆高）；`.button` 與 `.project-button` 都明寫 `font-size: var(--fs-body)`，不靠瀏覽器預設繼承。
+> - Hero 按鈕在 ≤1023 斷點保留 `min-width: 136px`、`padding: 12px 28px`（控制 Hero 視覺比例），但高度/字級同樣是 48 / 16。
+> - 手機（≤768）primary 與 project-button 轉 `width: 100%` 全寬堆疊，高度仍 48。
+
 #### 語意三層（顏色變體，與尺寸正交組合）
 | 變體 | 底色 | 文字色 | 描邊 | 語意 | class | 實際用在哪 |
 |---|---|---|---|---|---|---|

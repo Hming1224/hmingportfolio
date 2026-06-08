@@ -16,3 +16,5 @@
 | 2026-06-06T12-53-24 | home | `GrowthReveal` | [查看](./2026-06-06T12-53-24_home_GrowthReveal/iteration.md) |
 | 2026-06-06T12-53-39 | about-me | `page` | [查看](./2026-06-06T12-53-39_about-me_page/iteration.md) |
 | 2026-06-06T12-53-57 | about-me | `growth-grid` | [查看](./2026-06-06T12-53-57_about-me_growth-grid/iteration.md) |
+| 2026-06-08T13-23-18 | home | `globals` | [查看](./2026-06-08T13-23-18_home_globals/iteration.md) |
+| 2026-06-08T13-23-38 | home | `project-button` | [查看](./2026-06-08T13-23-38_home_project-button/iteration.md) |

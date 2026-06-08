@@ -1,5 +1,15 @@
 # Project Memory
 
+## 2026-06-08 按鈕跨斷點字級/高度收斂（48px / 16px 統一）
+
+Files: `app/globals.css`、`design.md`（5.1）、`Memory.md`。
+- **問題**：按鈕的字級和高度在斷點之間是臨時硬寫、互相打架，從沒有跨斷點規格。手機把字級跳到 **20px**、高度漂移成 **52 / 56 / 43px**（generic `.button` 52、`.button-secondary` 56、`.project-button` 43、Hero `.hero-actions .button` 全斷點 52 且字級 16↔20 亂跳）。
+- **決策（Hming 拍板）**：md 按鈕（`.button` / `-primary` / `-secondary` / `.hero-actions .button`）與 lg（`.project-button`）**所有斷點統一 `48px` 高 + `16px`（`var(--fs-body)`）字，手機不放大**。
+- **做法**：base `.button` 與 `.project-button` 明寫 `font-size: var(--fs-body)`（不靠瀏覽器預設繼承）；`.project-button` 補 `min-height: 48px` + `align-items: center`。各斷點覆寫用**行號精準替換**把 `52/56/43→48`、`font-size:20px→var(--fs-body)`（共 12 處 media 覆寫 + 2 處 base 插入）。
+- **踩坑**：`min-height:52px;`/`font-size:20px;` 在 generic `.button`（≤768）和 Hero `.button`（≤768）**字串完全相同**，不能用 Edit 唯一匹配，必須用行號改。
+- **驗證注意**：用 `getBoundingClientRect().height` 量 `.project-button` 會得 **46**（不是 48）——因為母層 `.project-card.card-hidden` 有進場動畫 `transform: scale(0.96)`，48×0.96≈46；看 `getComputedStyle().minHeight` 才是真值 48px。
+- 驗證：build 過；Hero 桌機/平板(900)/手機(390) 兩顆按鈕等高一致；computed primary/secondary/project-button 均 48px / 16px。
+
 ## 2026-06-08 設計系統改 code 第二批
 
 Files: `app/globals.css`、`design.md`、`design-audit-2026-06-08.md`、`Memory.md`。

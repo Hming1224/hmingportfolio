@@ -1027,6 +1027,7 @@ button {
   min-height: 48px;
   padding: 12px 24px;
   border-radius: 200px;
+  font-size: var(--fs-body);
   font-weight: 600;
   line-height: 1.4;
   transition: background-color 180ms ease;
@@ -1395,11 +1396,14 @@ button {
 
 .project-button {
   display: inline-flex;
+  align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: 48px;
   padding: 12px 0;
   border-radius: 200px;
   color: white;
+  font-size: var(--fs-body);
   font-weight: 600;
 }
 
@@ -3195,7 +3199,7 @@ button {
   }
 
   .hero-actions .button {
-    min-height: 52px;
+    min-height: 48px;
     padding: 12px 28px;
     border-radius: 200px;
     font-size: var(--fs-body);
@@ -3251,7 +3255,7 @@ button {
 
   .hero-actions .button {
     min-width: 136px;
-    min-height: 52px;
+    min-height: 48px;
     padding: 12px 28px;
     font-size: var(--fs-body);
   }
@@ -3539,12 +3543,12 @@ button {
 
   .button {
     width: 100%;
-    min-height: 52px;
-    font-size: 20px;
+    min-height: 48px;
+    font-size: var(--fs-body);
   }
 
   .button-secondary {
-    min-height: 56px;
+    min-height: 48px;
   }
 
   .cursor-tag {
@@ -3781,7 +3785,7 @@ button {
   }
 
   .project-button {
-    min-height: 43px;
+    min-height: 48px;
   }
 
   .contact-hero-image {
@@ -7345,13 +7349,13 @@ button {
   .hero-actions .button {
     width: auto;
     min-width: 136px;
-    min-height: 52px;
+    min-height: 48px;
     padding: 12px 28px;
-    font-size: 20px;
+    font-size: var(--fs-body);
   }
 
   .hero-actions .button-secondary {
-    min-height: 52px;
+    min-height: 48px;
   }
 
   .cursor-tag {
@@ -7485,12 +7489,12 @@ button {
 
   .hero-actions .button {
     width: 100%;
-    min-height: 52px;
-    font-size: 20px;
+    min-height: 48px;
+    font-size: var(--fs-body);
   }
 
   .hero-actions .button-secondary {
-    min-height: 56px;
+    min-height: 48px;
   }
 
   .cursor-tag {
