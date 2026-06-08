@@ -113,7 +113,7 @@ export default function Navbar() {
           聯絡資訊
         </Link>
         <a
-          href="/Brian_Huang_Resume.pdf"
+          href="/黃宣銘_中文履歷.pdf"
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setOpen(false)}

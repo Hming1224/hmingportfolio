@@ -327,7 +327,7 @@ background: rgba(255,255,255,0.94) + backdrop-filter: blur(16px)
 position: fixed，z-index 高
 ```
 向下滾動加 `.is-hidden` → 消失，停止滾動恢復。手機用漢堡選單（`.menu-button`），展開高度由 `--mobile-nav-open-height: 336px` 控制。
-**連結**：設計案例 / 關於我 / 聯絡資訊 / 下載履歷——四個都是同款純文字連結（`.nav-links a`）。下載履歷連到 PDF（`/Brian_Huang_Resume.pdf`），**2026-06-08 從紫色按鈕改成純文字連結**，與其他 tab 一致。
+**連結**：設計案例 / 關於我 / 聯絡資訊 / 下載履歷——四個都是同款純文字連結（`.nav-links a`）。下載履歷連到 PDF（`/黃宣銘_中文履歷.pdf`），**2026-06-08 從紫色按鈕改成純文字連結**，與其他 tab 一致。
 > **導覽列補償**：因固定高 80px，所有 Section 頂部 padding 需多 80px 避免被蓋。
 
 ### 5.4 輸入框（聯絡表單，`.form-field input/textarea`）

@@ -22,7 +22,7 @@ export default function About() {
           </p>
           <div className="flex justify-center md:justify-start space-x-4 mt-6">
             <a
-              href="/Brian_Huang_Resume.pdf"
+              href="/黃宣銘_中文履歷.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
