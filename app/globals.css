@@ -2,13 +2,13 @@
 
 /* Shimmer badge border animation */
 @property --shimmer-angle {
-  syntax: '<angle>';
+  syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
 
 @property --shine-angle {
-  syntax: '<angle>';
+  syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
@@ -69,7 +69,7 @@
   --peach: #a83b1e;
   --peach-soft: #fce8e2;
   --disabled: #dedee4;
-  --surface: #f2f2f7;
+  --surface: #f9f9f9;
   --purple-hover: #4f54c9;
   --about-accent: #ffd467;
 
@@ -123,8 +123,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family:
-    var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -316,13 +315,15 @@ button {
   display: inline-flex;
   padding: 1.5px;
   border-radius: 100px;
-  background: conic-gradient(from var(--shimmer-angle),
-      transparent 0%,
-      transparent 38%,
-      #c4b5fd 47%,
-      var(--purple) 52%,
-      transparent 62%,
-      transparent 100%);
+  background: conic-gradient(
+    from var(--shimmer-angle),
+    transparent 0%,
+    transparent 38%,
+    #c4b5fd 47%,
+    var(--purple) 52%,
+    transparent 62%,
+    transparent 100%
+  );
   animation: shimmer-rotate 3s linear infinite;
 }
 
@@ -346,7 +347,7 @@ button {
 
 .hero h1 {
   margin: 0;
-  font-size: var(--fs-h1);
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 600;
   line-height: 1.3;
 }
@@ -450,7 +451,6 @@ button {
 }
 
 @keyframes float-y {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -596,19 +596,25 @@ button {
 .hero-cursor-brian {
   left: 42%;
   top: 31%;
-  animation: heroShootTopR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.10s both, float-y 4s ease-in-out 0.90s infinite;
+  animation:
+    heroShootTopR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both,
+    float-y 4s ease-in-out 0.9s infinite;
 }
 
 .hero-cursor-engineers {
   left: 17%;
   top: 44%;
-  animation: heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both, float-y 4s ease-in-out 1.10s infinite;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both,
+    float-y 4s ease-in-out 1.1s infinite;
 }
 
 .hero-cursor-pm {
   left: 82%;
   top: 41%;
-  animation: heroShootRight 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both, float-y 4s ease-in-out 0.95s infinite;
+  animation:
+    heroShootRight 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both,
+    float-y 4s ease-in-out 0.95s infinite;
 }
 
 /* Wireframe / Session frame */
@@ -714,7 +720,9 @@ button {
 .hero-frame-large {
   left: 59%;
   top: calc(36% - 24px);
-  animation: heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.40s both, float-y 4s ease-in-out 1.20s infinite;
+  animation:
+    heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both,
+    float-y 4s ease-in-out 1.2s infinite;
 }
 
 /* Annotation pins */
@@ -780,7 +788,9 @@ button {
   height: 112px;
   padding: 12px 10px;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 2px 3px 0 rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    2px 3px 0 rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -814,37 +824,49 @@ button {
 .hero-sticky-1 {
   left: 31%;
   top: 18%;
-  animation: heroShootTopL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.20s both, float-y 4s ease-in-out 1.00s infinite;
+  animation:
+    heroShootTopL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both,
+    float-y 4s ease-in-out 1s infinite;
 }
 
 .hero-sticky-2 {
   left: 38%;
   top: 14%;
-  animation: heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.30s both, float-y 4s ease-in-out 1.10s infinite;
+  animation:
+    heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both,
+    float-y 4s ease-in-out 1.1s infinite;
 }
 
 .hero-sticky-3 {
   left: 5%;
   top: 32%;
-  animation: heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s both, float-y 4s ease-in-out 1.15s infinite;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s both,
+    float-y 4s ease-in-out 1.15s infinite;
 }
 
 .hero-sticky-4 {
   left: 11%;
   top: 28%;
-  animation: heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.30s both, float-y 4s ease-in-out 1.10s infinite;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both,
+    float-y 4s ease-in-out 1.1s infinite;
 }
 
 .hero-sticky-5 {
   left: 72%;
   top: 21%;
-  animation: heroShootRight 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.20s both, float-y 4s ease-in-out 1.00s infinite;
+  animation:
+    heroShootRight 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both,
+    float-y 4s ease-in-out 1s infinite;
 }
 
 .hero-sticky-6 {
   left: 78%;
   top: 24%;
-  animation: heroShootTopR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both, float-y 4s ease-in-out 1.05s infinite;
+  animation:
+    heroShootTopR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both,
+    float-y 4s ease-in-out 1.05s infinite;
 }
 
 /* Toggle decoration */
@@ -876,7 +898,11 @@ button {
 
 .toggle-btn-on {
   justify-content: flex-end;
-  background: linear-gradient(222.12deg, var(--purple) 30.805%, #313472 94.471%);
+  background: linear-gradient(
+    222.12deg,
+    var(--purple) 30.805%,
+    #313472 94.471%
+  );
 }
 
 .toggle-btn-off {
@@ -891,7 +917,9 @@ button {
 .hero-toggle {
   left: 5%;
   top: 57%;
-  animation: heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both, float-y 4s ease-in-out 1.35s infinite;
+  animation:
+    heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both,
+    float-y 4s ease-in-out 1.35s infinite;
 }
 
 /* AI Widget Frame */
@@ -979,13 +1007,17 @@ button {
 .hero-ai-widget {
   left: 15%;
   top: calc(85% - 24px);
-  animation: heroShootBotL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s both, float-y 4s ease-in-out 1.25s infinite;
+  animation:
+    heroShootBotL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s both,
+    float-y 4s ease-in-out 1.25s infinite;
 }
 
 .hero-wal-pencil {
   left: 79%;
   top: calc(81% - 24px);
-  animation: heroShootBotR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.50s both, float-y 4s ease-in-out 1.30s infinite;
+  animation:
+    heroShootBotR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both,
+    float-y 4s ease-in-out 1.3s infinite;
 }
 
 .button {
@@ -1570,7 +1602,9 @@ button {
 .arrow-icon {
   color: var(--muted);
   opacity: 0.5;
-  transition: transform 260ms ease, opacity 260ms ease;
+  transition:
+    transform 260ms ease,
+    opacity 260ms ease;
 }
 
 .contact-method-item:hover .arrow-icon {
@@ -1736,8 +1770,12 @@ button {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .checkmark-path {
@@ -2154,7 +2192,7 @@ button {
   animation: growthPhotoOrangeIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
 }
 
-.growth-polaroid>img:not(.growth-paperclip) {
+.growth-polaroid > img:not(.growth-paperclip) {
   position: relative !important;
   width: 100% !important;
   height: 305px !important;
@@ -2183,7 +2221,8 @@ button {
 @keyframes growthBlueIn {
   from {
     opacity: 0;
-    transform: perspective(1200px) translate(40px, -40px) rotateX(20deg) rotateY(-2deg);
+    transform: perspective(1200px) translate(40px, -40px) rotateX(20deg)
+      rotateY(-2deg);
   }
 
   to {
@@ -2195,7 +2234,8 @@ button {
 @keyframes growthOrangeIn {
   from {
     opacity: 0;
-    transform: perspective(1200px) translate(-40px, -40px) rotateX(20deg) rotateY(2deg);
+    transform: perspective(1200px) translate(-40px, -40px) rotateX(20deg)
+      rotateY(2deg);
   }
 
   to {
@@ -2208,7 +2248,8 @@ button {
   from {
     opacity: 0;
     filter: saturate(0.85);
-    transform: perspective(1200px) translate(20px, -20px) rotate(-9deg) rotateX(20deg);
+    transform: perspective(1200px) translate(20px, -20px) rotate(-9deg)
+      rotateX(20deg);
   }
 
   to {
@@ -2222,7 +2263,8 @@ button {
   from {
     opacity: 0;
     filter: saturate(0.85);
-    transform: perspective(1200px) translate(-20px, -20px) rotate(9deg) rotateX(20deg);
+    transform: perspective(1200px) translate(-20px, -20px) rotate(9deg)
+      rotateX(20deg);
   }
 
   to {
@@ -2234,7 +2276,6 @@ button {
 
 /* 尊重「減少動態效果」偏好：直接顯示最終狀態，不播進場動畫 */
 @media (prefers-reduced-motion: reduce) {
-
   .experience-card,
   .experience-card.is-visible {
     opacity: 1;
@@ -2405,7 +2446,11 @@ button {
   padding: 1px 4px;
   margin: 0 -2px;
   border-radius: 4px;
-  background-image: linear-gradient(to right, var(--purple-soft), var(--purple-soft));
+  background-image: linear-gradient(
+    to right,
+    var(--purple-soft),
+    var(--purple-soft)
+  );
   background-size: 0% 100%;
   background-repeat: no-repeat;
   background-position: left center;
@@ -2565,7 +2610,6 @@ button {
   height: 100%;
 }
 
-
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(8, minmax(82px, 1fr));
@@ -2653,14 +2697,16 @@ button {
   inset: 0;
   padding: 1.5px;
   border-radius: inherit;
-  background: conic-gradient(from var(--shine-angle, 0deg),
-      transparent 0deg,
-      transparent 52deg,
-      #a07cfe 86deg,
-      #fe8fb5 132deg,
-      #ffbe7b 178deg,
-      transparent 226deg,
-      transparent 360deg);
+  background: conic-gradient(
+    from var(--shine-angle, 0deg),
+    transparent 0deg,
+    transparent 52deg,
+    #a07cfe 86deg,
+    #fe8fb5 132deg,
+    #ffbe7b 178deg,
+    transparent 226deg,
+    transparent 360deg
+  );
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms ease;
@@ -2690,7 +2736,7 @@ button {
   opacity: 1;
 }
 
-.design-value-card>* {
+.design-value-card > * {
   position: relative;
   z-index: 1;
 }
@@ -2734,7 +2780,7 @@ button {
 
 .design-value-animated:nth-child(1) .design-value-card:hover,
 .design-value-animated:nth-child(1) .design-value-card:focus-within {
-  background: #EFEFFB;
+  background: #efeffb;
 }
 
 .design-value-animated:nth-child(1) .design-value-card:hover p,
@@ -2753,7 +2799,7 @@ button {
 
 .design-value-animated:nth-child(2) .design-value-card:hover,
 .design-value-animated:nth-child(2) .design-value-card:focus-within {
-  background: #FCF0ED;
+  background: #fcf0ed;
 }
 
 .design-value-animated:nth-child(2) .design-value-card:hover p,
@@ -2772,7 +2818,7 @@ button {
 
 .design-value-animated:nth-child(3) .design-value-card:hover,
 .design-value-animated:nth-child(3) .design-value-card:focus-within {
-  background: #E4F4F0;
+  background: #e4f4f0;
 }
 
 .design-value-animated:nth-child(3) .design-value-card:hover p,
@@ -2845,7 +2891,9 @@ button {
 }
 
 .educator-card:focus-visible {
-  box-shadow: 0 0 0 3px var(--purple-soft), 0 10px 20px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 0 0 3px var(--purple-soft),
+    0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* 全幅背景照片，hover 微放大 */
@@ -2869,19 +2917,23 @@ button {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to top,
-      rgba(15, 15, 30, 0.9) 0%,
-      rgba(15, 15, 30, 0.55) 32%,
-      rgba(15, 15, 30, 0) 68%);
+  background: linear-gradient(
+    to top,
+    rgba(15, 15, 30, 0.9) 0%,
+    rgba(15, 15, 30, 0.55) 32%,
+    rgba(15, 15, 30, 0) 68%
+  );
   transition: background 0.4s ease;
 }
 
 .educator-card:hover::after,
 .educator-card:focus-within::after {
-  background: linear-gradient(to top,
-      rgba(15, 15, 30, 0.94) 0%,
-      rgba(15, 15, 30, 0.72) 45%,
-      rgba(15, 15, 30, 0.18) 88%);
+  background: linear-gradient(
+    to top,
+    rgba(15, 15, 30, 0.94) 0%,
+    rgba(15, 15, 30, 0.72) 45%,
+    rgba(15, 15, 30, 0.18) 88%
+  );
 }
 
 /* 底部內容：標題 + 角色常駐，介紹文 hover 由下往上展開 */
@@ -2964,7 +3016,6 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .educator-masonry .educator-card,
   .educator-card-photo,
   .educator-reveal {
@@ -3012,7 +3063,6 @@ button {
     flex: unset;
     width: 100%;
   }
-
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
@@ -3128,7 +3178,7 @@ button {
   }
 
   .hero h1 {
-    font-size: var(--fs-h1);
+    font-size: 48px;
     line-height: 1.2;
   }
 
@@ -3180,8 +3230,8 @@ button {
   }
 
   .hero h1 {
-    font-size: var(--fs-h1);
-    line-height: 1.3;
+    font-size: 36px;
+    line-height: 1.4;
   }
 
   .hero-taglines {
@@ -3326,7 +3376,7 @@ button {
     width: 212px;
   }
 
-  .growth-polaroid>img:not(.growth-paperclip) {
+  .growth-polaroid > img:not(.growth-paperclip) {
     height: 255px !important;
   }
 
@@ -3342,7 +3392,7 @@ button {
     width: 209px;
   }
 
-  .growth-polaroid-orange>img:not(.growth-paperclip) {
+  .growth-polaroid-orange > img:not(.growth-paperclip) {
     height: 252px !important;
   }
 
@@ -3381,7 +3431,6 @@ button {
     order: -1;
     margin-top: 40px;
   }
-
 }
 
 @media (max-width: 768px) {
@@ -3444,7 +3493,8 @@ button {
 
   .hero {
     min-height: calc(100svh - 80px);
-    padding: clamp(190px, calc((100svh - 80px) * 0.294), 261px) 20px clamp(40px, calc((100svh - 80px) * 0.069), 61px);
+    padding: clamp(190px, calc((100svh - 80px) * 0.294), 261px) 20px
+      clamp(40px, calc((100svh - 80px) * 0.069), 61px);
   }
 
   .hero-copy {
@@ -3463,7 +3513,7 @@ button {
   }
 
   .hero h1 {
-    font-size: var(--fs-h1);
+    font-size: 24px;
     line-height: 1.2;
   }
 
@@ -3746,7 +3796,6 @@ button {
     padding: 40px 24px 80px;
   }
 
-
   .contact-info-header h2 {
     font-size: 26px;
   }
@@ -3954,7 +4003,7 @@ button {
     width: 209px;
   }
 
-  .growth-polaroid>img:not(.growth-paperclip) {
+  .growth-polaroid > img:not(.growth-paperclip) {
     height: 272px !important;
   }
 
@@ -4104,7 +4153,6 @@ button {
     transform: rotate(90deg);
     align-self: center;
   }
-
 }
 
 /* 低於 440px：資訊卡改直式置中（logo 上、標題/日期下），標籤隱藏 —
@@ -4190,7 +4238,9 @@ button {
   text-decoration: none;
   white-space: nowrap;
   border-left: 1.5px solid transparent;
-  transition: color 150ms ease, border-color 150ms ease;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
 }
 
 .cs-toc-link:hover {
@@ -4229,7 +4279,9 @@ button {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 260ms ease, visibility 260ms ease;
+    transition:
+      opacity 260ms ease,
+      visibility 260ms ease;
   }
 
   .cs-toc.is-visible {
@@ -4639,7 +4691,10 @@ button {
 .cs-tl-tops,
 .cs-tl-bottoms {
   display: grid;
-  grid-template-columns: repeat(var(--cs-tl-step-count), minmax(var(--cs-tl-step-width), 1fr));
+  grid-template-columns: repeat(
+    var(--cs-tl-step-count),
+    minmax(var(--cs-tl-step-width), 1fr)
+  );
   align-items: stretch;
   min-width: calc(var(--cs-tl-step-width) * var(--cs-tl-step-count));
   min-height: calc(var(--cs-tl-card-height) + 24px);
@@ -4657,7 +4712,10 @@ button {
 
 .cs-tl-dots-row {
   display: grid;
-  grid-template-columns: repeat(var(--cs-tl-step-count), minmax(var(--cs-tl-step-width), 1fr));
+  grid-template-columns: repeat(
+    var(--cs-tl-step-count),
+    minmax(var(--cs-tl-step-width), 1fr)
+  );
   position: relative;
   height: 18px;
   flex-shrink: 0;
@@ -4930,7 +4988,7 @@ button {
 }
 
 .cs-comp-ems-list li::before {
-  content: '';
+  content: "";
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -5022,7 +5080,7 @@ button {
 }
 
 /* Remove bottom border from last data row pair */
-.cs-fm-wrap>.cs-fm-row:nth-last-child(2) {
+.cs-fm-wrap > .cs-fm-row:nth-last-child(2) {
   border-bottom: none;
 }
 
@@ -5077,7 +5135,7 @@ button {
 }
 
 .cs-fm-cell ul li::before {
-  content: '';
+  content: "";
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -5119,7 +5177,7 @@ button {
 }
 
 .cs-opp-cell ul li::before {
-  content: '';
+  content: "";
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -5270,7 +5328,7 @@ button {
 }
 
 .cs-iv-ai ul li::before {
-  content: '';
+  content: "";
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -5858,7 +5916,9 @@ button {
   text-align: center;
   border: none;
   outline: none;
-  transition: color 0.15s, background 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s;
   user-select: none;
 }
 
@@ -5905,7 +5965,9 @@ button {
   font-weight: 700;
   color: #7d4fb9;
   cursor: pointer;
-  transition: opacity 0.15s, box-shadow 0.15s;
+  transition:
+    opacity 0.15s,
+    box-shadow 0.15s;
   line-height: 1;
   padding: 0;
   padding-bottom: 2px;
@@ -6020,13 +6082,16 @@ button {
   flex-direction: column;
 }
 
-
 .cs-sol-bahd {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(269.56deg, rgba(221, 241, 254, 0.2) 0%, rgb(221, 241, 254) 62.975%);
+  background: linear-gradient(
+    269.56deg,
+    rgba(221, 241, 254, 0.2) 0%,
+    rgb(221, 241, 254) 62.975%
+  );
   font-size: var(--fs-h3);
   font-weight: 700;
   color: #135e78;
@@ -6098,10 +6163,11 @@ button {
 }
 
 @media (min-width: 1025px) and (max-width: 1139px) {
-
-  .cs-sol-fgroup-f12>.cs-sol-fr:first-child+.cs-sol-fconn,
-  .cs-sol-fgroup-f2>.cs-sol-fr:first-child+.cs-sol-fconn {
-    margin-bottom: calc(-28px - clamp(0px, calc((1140px - 100vw) * 0.139), 16px));
+  .cs-sol-fgroup-f12 > .cs-sol-fr:first-child + .cs-sol-fconn,
+  .cs-sol-fgroup-f2 > .cs-sol-fr:first-child + .cs-sol-fconn {
+    margin-bottom: calc(
+      -28px - clamp(0px, calc((1140px - 100vw) * 0.139), 16px)
+    );
   }
 }
 
@@ -6115,12 +6181,20 @@ button {
 }
 
 .cs-sol-fchead {
-  background: linear-gradient(269.45deg, rgba(255, 255, 255, 0) 0%, rgb(203, 222, 244) 62.975%);
+  background: linear-gradient(
+    269.45deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(203, 222, 244) 62.975%
+  );
   padding: 24px 28px;
 }
 
 .cs-sol-fc--teal .cs-sol-fchead {
-  background: linear-gradient(269.45deg, rgba(255, 255, 255, 0) 0%, rgb(221, 241, 254) 62.975%);
+  background: linear-gradient(
+    269.45deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(221, 241, 254) 62.975%
+  );
 }
 
 .cs-sol-fcbody {
@@ -6200,7 +6274,7 @@ button {
   gap: 12px;
 }
 
-.cs-sol-fnote>p {
+.cs-sol-fnote > p {
   font-size: var(--fs-sm);
   color: var(--text-secondary);
   margin: 0;
@@ -6368,11 +6442,14 @@ button {
     font-weight: 700;
     line-height: 1;
     cursor: pointer;
-    transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    transition:
+      color 180ms ease,
+      background 180ms ease,
+      box-shadow 180ms ease;
   }
 
-  .cs-alarm-mode-default:checked~.cs-alarm-toggle .cs-alarm-toggle-default,
-  .cs-alarm-mode-hover:checked~.cs-alarm-toggle .cs-alarm-toggle-hover {
+  .cs-alarm-mode-default:checked ~ .cs-alarm-toggle .cs-alarm-toggle-default,
+  .cs-alarm-mode-hover:checked ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
     background: #fff;
     color: var(--ink);
     box-shadow:
@@ -6396,12 +6473,12 @@ button {
     display: none;
   }
 
-  .cs-alarm-mode-default:checked~.cs-alarm-before,
-  .cs-alarm-mode-hover:checked~.cs-alarm-after {
+  .cs-alarm-mode-default:checked ~ .cs-alarm-before,
+  .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
     display: flex;
   }
 
-  .cs-alarm-mode-hover:checked~.cs-alarm-after {
+  .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
@@ -6434,7 +6511,7 @@ button {
     justify-content: center;
   }
 
-  .cs-alarm-mode-hover:checked~.cs-alarm-after .cs-alarm-state-row {
+  .cs-alarm-mode-hover:checked ~ .cs-alarm-after .cs-alarm-state-row {
     align-self: center;
   }
 }
@@ -6470,17 +6547,17 @@ button {
 }
 
 @media (min-width: 1025px) and (max-width: 1439px) {
-  .cs-sol-fgroup>.cs-sol-fconn img {
+  .cs-sol-fgroup > .cs-sol-fconn img {
     max-width: none;
     width: calc(30% + 40px);
   }
 
-  .cs-sol-fgroup>.cs-sol-fconn:nth-child(2) img {
+  .cs-sol-fgroup > .cs-sol-fconn:nth-child(2) img {
     content: url("/projects/advantech-figma/sol06/connector-1-mid.svg");
     margin-left: calc(20% - 40px);
   }
 
-  .cs-sol-fgroup>.cs-sol-fconn:not(:nth-child(2)) img {
+  .cs-sol-fgroup > .cs-sol-fconn:not(:nth-child(2)) img {
     margin-left: calc(35% - 20px);
   }
 }
@@ -6532,7 +6609,9 @@ button {
 }
 
 .cs-sol-vplay img {
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
 }
 
 .cs-sol-vplay:hover img {
@@ -6783,7 +6862,9 @@ button {
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s, box-shadow 0.15s;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
 }
 
 .cs-next-btn-outline:hover {
@@ -7083,7 +7164,6 @@ button {
     height: 220px;
     min-height: 0;
   }
-
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -7138,9 +7218,11 @@ button {
   position: relative;
   font-size: inherit;
   font-weight: inherit;
-  color: #D0CFCE;
+  color: #d0cfce;
   cursor: default;
-  transition: filter 0.3s ease, color 0.3s ease;
+  transition:
+    filter 0.3s ease,
+    color 0.3s ease;
   outline: none;
   user-select: none;
 }
@@ -7366,7 +7448,8 @@ button {
     --hero-mobile-h: calc(100svh - 80px);
     --sticky-inner-rotate: 0deg;
     min-height: var(--hero-mobile-h);
-    padding: max(192px, calc(var(--hero-mobile-h) * 0.315)) 20px max(40px, calc(var(--hero-mobile-h) * 0.069));
+    padding: max(192px, calc(var(--hero-mobile-h) * 0.315)) 20px
+      max(40px, calc(var(--hero-mobile-h) * 0.069));
   }
 
   .hero-copy {
@@ -7380,7 +7463,7 @@ button {
   }
 
   .hero h1 {
-    font-size: var(--fs-h1);
+    font-size: 28px;
     line-height: 1.2;
   }
 
@@ -7522,22 +7605,27 @@ button {
   }
 
   .hero-frame-large {
-    --wireframe-scale: 0.650;
+    --wireframe-scale: 0.65;
     left: 23.9%;
     top: 44px;
   }
 
   .hero-ai-widget {
-    --ai-widget-scale: 0.650;
+    --ai-widget-scale: 0.65;
     left: 12.8%;
     top: 58px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero h1 {
+    font-size: 36px;
   }
 }
 
 /* 矮螢幕手機（高度 < 800px，如 iPhone SE）：底部四個裝飾沒有足夠空間，
    直接隱藏避免擠壓 / 溢出。只在 mobile 寬度生效，不影響 768px 高的桌機。 */
 @media (max-width: 768px) and (max-height: 799px) {
-
   .hero-frame-large,
   .hero-ai-widget,
   .hero-wal-pencil,

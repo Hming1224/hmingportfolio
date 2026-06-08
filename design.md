@@ -94,7 +94,7 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `--ink-hover` | `#555555` | 黑色 primary 按鈕 hover（比 ink 淺一階）|
 | `--muted` | `#8e8e9c` | 次要文字、placeholder、secondary 按鈕描邊 |
 | `--line` | `rgba(0,0,0,0.08)` | 分隔線，透明度做的，不死硬 |
-| `--surface` | `#f2f2f7` | tab 背景、標籤底色、卡片 placeholder 背景、secondary 按鈕 hover 底 |
+| `--surface` | `#f9f9f9` | tab 背景、表單欄位底色、卡片 placeholder 背景、secondary 按鈕 hover 底 |
 | `--disabled` | `#dedee4` | 停用狀態（未上線專案）|
 
 ### 2.2 品牌主色：Purple
@@ -203,7 +203,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 
 | Token | 桌機（預設）| ≤768px | ≤360px | 語意 |
 |---|---|---|---|---|
-| `--fs-h1` | `32px` | `24px` | `22px` | 頁面主標 / Hero 主標題 / Section 標題（全站最大）|
+| `--fs-h1` | `32px` | `24px` | `22px` | 頁面主標 / Section 標題（一般骨架最大）|
 | `--fs-h2` | `28px` | `22px` | `20px` | 次級大標 |
 | `--fs-h3` | `24px` | `18px` | `16px` | 卡片標題、段落標題 |
 | `--fs-h4` | `18px` | `16px` | `14px` | 卡內子標 |
@@ -211,8 +211,10 @@ font-family: var(--font-space-grotesk), sans-serif;
 | `--fs-sm` | `14px` | `14px` | `14px` | 小標籤、導覽連結、輔助說明 |
 | `--fs-xs` | `12px` | `12px` | `12px` | 最小（Footer 版權等）|
 
-> **全站最大字級就是 32px，沒有 40px。**
+> **一般骨架最大字級是 32px，沒有 40px。**
 主標題、section 標題、About / Contact 骨架標題已改用 `var(--fs-*)`；案例頁內部高度客製的小型 label / 圖表文字仍可依局部版面保留自己的尺寸。
+
+**首頁 Hero 例外**：`.hero h1` 是第一屏品牌主標，刻意不套 `--fs-h1`。目前規則為桌機 `48px`、`768–1024px` 為 `36px`、`<768px` 與矮手機特例為 `28px`。
 
 ### 3.3 字重（font-weight）
 
@@ -227,7 +229,8 @@ font-family: var(--font-space-grotesk), sans-serif;
 
 | 用途 | 行高 |
 |---|---|
-| 大標題（`.hero h1`、`.section-heading h2`、`.hero-taglines`、`.about-intro-copy h1`）| `1.4`（桌機 media query 收到 1.2–1.28）|
+| 大標題（`.section-heading h2`、`.hero-taglines`、`.about-intro-copy h1`）| `1.4`（桌機 media query 收到 1.2–1.28）|
+| Hero 主標（`.hero h1`）| `1.2–1.3`，字級獨立於 `--fs-*` |
 | 卡片標題（h3）| `1.4` |
 | Hero intro / body large | `1.4–1.45` |
 | 內文 | `1.4` |
@@ -300,7 +303,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 ```
 border-radius: 12px
 aspect-ratio: 16/9，min-height: 500px（桌機）
-背景預設：var(--surface) #f2f2f7
+背景預設：var(--surface) #f9f9f9
 ```
 **桌機 Hover — 三層聯動同時觸發：**
 1. 圖片 `scale(1.03)`，`420ms ease`（`.project-image`）
@@ -451,7 +454,7 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 ### ✅ 要這樣做
 - **顏色換，框架不換**：新增專案只建新 `tone-xxx`，卡片排版不動
 - **改顏色用 token**：跨頁共用 → 全域 token；單區域重複用 → 區域 token；只用一次 → hex + 註解（見 2.0）
-- **字級用 token**：新元件用 `var(--fs-*)`，不要寫死 px；最大不超過 32px（`--fs-h1`）
+- **字級用 token**：新元件用 `var(--fs-*)`，不要寫死 px；一般骨架最大不超過 32px（`--fs-h1`），首頁 Hero 主標為已定義例外
 - **陰影分層**：主系統一律黑陰影，重要元素重陰影、次要輕陰影
 - **留白要夠**：文字最少 `24px` 內距
 - **每個互動狀態都要有**：hover、active、focus、disabled
@@ -466,4 +469,4 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - **不要把案例頁的有色陰影擴散到主系統元件**
 - **不要在手機版保留 hover-only 互動**：改成靜態或點擊觸發
 - **不要讓未上線案子看起來可點**：用 `--disabled` 底色
-- **不要用超過 32px 的字號**：全站最大就是 32px
+- **不要隨意用超過 32px 的字號**：一般骨架最大就是 32px；只有首頁 Hero 主標可用 48px

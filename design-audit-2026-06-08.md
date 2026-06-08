@@ -36,7 +36,7 @@
 - **後果**：有 token 等於沒有，改字級還是要全檔找 `32px`。且 `--fs-h2:28px`、`--fs-h4:18px` 是文件沒有的層級。
 - **建議**：二選一——① 認真用這組 token（文件補上、元件改用 `var(--fs-*)`）；② 廢掉這組 token。建議①，但屬「改 code」範疇，本次先記錄。
 
-### H3. 輸入框（4.4）整段過時 ★
+### H3. 輸入框（4.4）整段過時 ★（已解）
 | 屬性 | 文件寫 | 實際 code（line 1691~）|
 |---|---|---|
 | 背景 | `#f2f2f7` | `#F9F9F9` ❌ |
@@ -45,6 +45,7 @@
 | Focus | `inset 0 0 0 2px --purple-soft` | `border-color: --purple` + 外環 `0 0 0 3px --purple-soft` ❌ |
 - 表單已改成 **floating label** 設計，文件還停在舊版。
 - **建議**：等 `Contact.tsx` 未提交改動確認後，整段重寫 4.4。
+- **目前狀態（2026-06-08）**：已改成 floating label 文件版本；背景統一使用 `var(--surface)`，且 `--surface` 已定義為較淺的 `#f9f9f9`。
 
 ### H4. 8 個 tone 有一半沒上 token
 - `tone-brown / green / peach / navy` → 用 `var(--brown-soft)` 等 token ✓
@@ -175,12 +176,12 @@
 
 ### ✅ Q4「改 code 清單」已執行（2026-06-08）
 1. 已把明確對應全域 token 的骨架色換回 token（H5）；案例頁 `cs-*` 局部色依 design.md 2.7 保留。
-2. 主標題 / section 標題 / About / Contact / 年份 rail 等骨架字級已改用 `var(--fs-*)`（H2）。
+2. section 標題 / About / Contact / 年份 rail 等骨架字級已改用 `var(--fs-*)`（H2）；首頁 `.hero h1` 維持第一屏專屬規則 48 / 36 / 28px，不套一般 h1 token。
 3. 後 4 個 tone 已改成 `.tone-xxx { --tag-bg; --tag-text }` 區域 token，selector 統一不帶 `.project-card` 前綴（H4 / M2）。
 4. `.project-button` 字重已改 500→600（H7）。
 5. 卡片圓角已收斂成 8 / 12 / 16 三階；`cs-*` 圖表局部元件保留必要例外（D3）。
 6. 已刪確定死 CSS：`.traits-panel`/`.traits-list`/`.traits-photo`、`.role-badge`/`.badge-*`、`.headline`，以及 `.button-dark`、`.resume-link`、`.cs-section-dark`、`--text-on-dark-body/-muted`（L3 / D1 / D2）。
-7. `.form-field input/textarea` 背景已改為 `var(--surface)`（D4）。
+7. `.form-field input/textarea` 背景已改為 `var(--surface)`（D4），且 `--surface` 統一為較淺的 `#f9f9f9`。
 
 ### ⏳ 待後續低優先清理
 - 8px 間距魔術數字收斂（M3）尚未本次全面處理。
@@ -191,7 +192,7 @@
 - **D2 → 已刪**：深色 section（`.cs-section-dark` + text-on-dark 那組）一併刪除，不做深色區塊。
   - ⚠️ 注意：`--text-on-dark`（單數，由 `.cs-heading-white` 消費）**要留**；刪的是 `-body`/`-muted` 兩個沒人用的。執行時先確認 `.cs-heading-white` 是否仍需要（grep 確認後再決定 `.cs-heading-white` 去留）。
 - **D3 → 已收斂**：主要卡片圓角收斂成「小 `8` / 預設 `12` / 大 `16`」三階。
-- **D4 → 已併入**：輸入框底色 `#F9F9F9` 改用 `var(--surface)`（#f2f2f7）。
+- **D4 → 已併入**：輸入框底色改用 `var(--surface)`，並將 `--surface` 統一為 `#f9f9f9`。
 - **D5 → 已執行**：本 session 依交接單完成主要 code 對齊。
 
 > 完整執行交接單見 `100_Todo/plans/2026-06-08-設計系統改code執行.md`。
