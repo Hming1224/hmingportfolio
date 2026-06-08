@@ -7,7 +7,7 @@ Files: `app/globals.css`、`design.md`、`design-audit-2026-06-08.md`、`Memory.
 - **token 對齊**：後 4 個專案 tone（advantech / icecream / laushu / thesis）已改為 `.tone-xxx { --tag-bg; --tag-text }` 區域 token，selector 統一不帶 `.project-card` 前綴；骨架文字與明確對應的紫色 / blue-soft / text-secondary 已換回 token。`cs-*` 單頁專屬色依 design.md 2.7 保留。
 - **字級與按鈕**：section / About / Contact / 年份 rail 等一般骨架標題改用 `var(--fs-*)`；`.project-button` 字重改為 600。**Hero `.hero h1` 是首頁第一屏專屬例外，不套 `--fs-h1`**：桌機 48px、768–1024px 36px、<768px / 矮手機 28px，這是刻意設計。若 768–1024px 沒顯示 36px，要檢查檔案後段 `@media (min-width: 768px) and (max-width: 1024px)` 是否覆蓋前面的 `@media (max-width: 1023px)`。
 - **圓角 / surface**：全站主要卡片收斂到 8 / 12 / 16；`--surface` 統一為較淺的 `#f9f9f9`，聯絡表單 input / textarea 背景使用 `var(--surface)`。`cs-*` 圖表局部小面板與 About 一次性卡片色保留例外。
-- **尚未做**：M3 間距魔術數字（14 / 18 / 6 / 7 / 26 / 44 / 84px 等）尚未全面收斂，避免本次改動過大。
+- **M3 間距收斂（2026-06-08 已做）**：容器排版間距（padding / margin / gap）的 `14 / 18 / 6 / 7 / 9 / 26 / 44 / 84px` 約 50 處往 8px 系統值靠（多數 →16、`6/7/9→8`、`26→24`、`44→48`、`84→80`），含 `cs-*` 案例頁層（design.md 0.3 允許局部值，但收斂相容）。**刻意保留不動**：Hero/About 裝飾元件內部間距與絕對定位（`.cursor-tag` / `.session-*` / `.annotation-pin` / `.ai-widget` / `.window-bar` / `.growth-*` / `.wal-pencil` / `.menu-button` 漢堡幾何）、`::before` 自訂項目符號光學對齊 `margin-top:7px`、`clamp()` 響應式值——這些是視覺/幾何微調，非 8px 系統間距。**做法**：用 Python 依行號精準替換（不用 `replace_all`，避免誤傷字級 14px / 圓角 6px）。驗證：build 過、四頁桌機+手機 0 error。
 
 ## 2026-06-08 按鈕系統改 code（審查後第一批實作）
 

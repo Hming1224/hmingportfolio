@@ -183,8 +183,12 @@
 6. 已刪確定死 CSS：`.traits-panel`/`.traits-list`/`.traits-photo`、`.role-badge`/`.badge-*`、`.headline`，以及 `.button-dark`、`.resume-link`、`.cs-section-dark`、`--text-on-dark-body/-muted`（L3 / D1 / D2）。
 7. `.form-field input/textarea` 背景已改為 `var(--surface)`（D4），且 `--surface` 統一為較淺的 `#f9f9f9`。
 
+### ✅ M3 8px 間距魔術數字收斂已執行（2026-06-08）
+- 把容器排版間距（padding/margin/gap）的 `14/18/6/7/9/26/44/84px` 共約 50 處往系統值收斂（多數 →16、`6/7/9→8`、`26→24`、`44→48`、`84→80`），含 `cs-*` 案例頁層。
+- **刻意保留**：Hero/About 裝飾元件內部間距與絕對定位、`::before` 項目符號光學對齊 `7px`、`clamp()` 響應式值（非 8px 系統間距）。
+- 驗證：`npm run build` 過；`/`、`/about-me`、`/advantech`、`/contact` 四頁桌機+手機 0 console error、無爆版。
+
 ### ⏳ 待後續低優先清理
-- 8px 間距魔術數字收斂（M3）尚未本次全面處理。
 - About 卡片色 `#d4e2f1` / `#fff3e0` 依 design.md 2.6 暫保留為一次性頁面色。
 
 ### ✅ D1–D5 已拍板（2026-06-08 Hming 決策）
@@ -205,7 +209,7 @@
 |---|---|
 | 不一致清單報告（本檔） | ✅ 已產出（含第二輪完整掃描附錄）|
 | 重寫 design.md（編號、按鈕階層、text token/theming、輸入框、間距例外、token 界線、區域地圖、圓角系統、token 總清單）| ✅ 已完成並對齊 code |
-| 改 code | ✅ 第二批設計系統對齊已做；剩餘低優先項為 M3 間距魔術數字 |
+| 改 code | ✅ 全部完成（含 M3 間距魔術數字收斂，2026-06-08）|
 
 ---
 

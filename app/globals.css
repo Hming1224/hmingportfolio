@@ -1576,7 +1576,7 @@ button {
 }
 
 .copy-btn {
-  padding: 6px 14px;
+  padding: 8px 16px;
   border: 1px solid var(--line);
   border-radius: 200px;
   background: white;
@@ -1634,7 +1634,7 @@ button {
 }
 
 .contact-card-header h3 {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--ink);
   font-size: var(--fs-h3);
   font-weight: 700;
@@ -2424,7 +2424,7 @@ button {
 }
 
 .experience-copy ul {
-  margin: 14px 0 0;
+  margin: 16px 0 0;
   padding-left: 20px;
   list-style: disc;
   line-height: 1.6;
@@ -2564,7 +2564,7 @@ button {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   text-align: left;
 }
 
@@ -2943,7 +2943,7 @@ button {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   padding: 28px 32px;
   color: white;
 }
@@ -2951,7 +2951,7 @@ button {
 .educator-badge {
   width: fit-content;
   margin-bottom: 4px;
-  padding: 4px 9px;
+  padding: 4px 8px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
   color: rgba(255, 255, 255, 0.88);
@@ -2992,7 +2992,7 @@ button {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   padding-top: 10px;
 }
 
@@ -3098,7 +3098,7 @@ button {
     min-width: 0;
     border: 0;
     border-radius: 8px;
-    padding: 6px 4px;
+    padding: 8px 4px;
     background: transparent;
     color: var(--text-secondary);
     font-size: 11px;
@@ -3441,7 +3441,7 @@ button {
     flex-direction: column;
     height: var(--mobile-nav-closed-height);
     min-height: 80px;
-    padding: 18px 12px 18px 24px;
+    padding: 16px 12px 16px 24px;
     overflow: hidden;
     transition:
       transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -4229,7 +4229,7 @@ button {
 
 .cs-toc-link {
   display: block;
-  padding: 6px 0 6px 14px;
+  padding: 8px 0 8px 16px;
   margin-left: -1.5px;
   font-size: var(--fs-sm);
   font-weight: 400;
@@ -4266,7 +4266,7 @@ button {
     max-width: calc(var(--page-gutter) - 32px);
     max-height: calc(100vh - 128px - 20px);
     overflow-y: auto;
-    padding: 16px 14px;
+    padding: 16px 16px;
     box-sizing: border-box;
     /* 與 navbar 同款半透明毛玻璃 */
     background: rgba(255, 255, 255, 0.94);
@@ -4431,7 +4431,7 @@ button {
   font-size: var(--fs-xs);
   font-weight: 500;
   color: #a0a0a0;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 .cs-info-value {
@@ -4633,7 +4633,7 @@ button {
   border-radius: 4px;
   display: inline-flex;
   width: fit-content;
-  padding: 4px 9px;
+  padding: 4px 8px;
   margin-bottom: 0;
 }
 
@@ -4782,7 +4782,7 @@ button {
   font-size: var(--fs-xs);
   font-weight: 700;
   border-radius: 4px;
-  padding: 4px 9px;
+  padding: 4px 8px;
   margin-bottom: 10px;
 }
 
@@ -4819,7 +4819,7 @@ button {
   border-radius: 4px;
   display: inline-block;
   padding: 2px 8px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   letter-spacing: 1px;
 }
 
@@ -4912,7 +4912,7 @@ button {
   font-size: var(--fs-xs);
   font-weight: 600;
   border-radius: 999px;
-  padding: 7px 11px;
+  padding: 8px 12px;
   text-align: center;
 }
 
@@ -4927,9 +4927,9 @@ button {
   background: #f5faff;
   border: 1px solid #cbdef4;
   border-radius: 8px;
-  padding: 18px;
+  padding: 16px;
   display: flex;
-  gap: 18px;
+  gap: 16px;
   align-items: flex-start;
 }
 
@@ -4965,7 +4965,7 @@ button {
   font-size: var(--fs-xs);
   font-weight: 600;
   border-radius: 999px;
-  padding: 7px 11px;
+  padding: 8px 12px;
   align-self: flex-start;
 }
 
@@ -4981,7 +4981,7 @@ button {
 .cs-comp-ems-list li {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 8px;
   font-size: var(--fs-sm);
   line-height: 21px;
   color: #425466;
@@ -5088,7 +5088,7 @@ button {
   width: 120px;
   flex-shrink: 0;
   background: #f5faff;
-  padding: 18px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -5107,7 +5107,7 @@ button {
 .cs-fm-cell {
   flex: 1;
   min-width: 160px;
-  padding: 18px;
+  padding: 16px;
   border-right: 1px solid #cbdef4;
   background: white;
 }
@@ -5146,7 +5146,7 @@ button {
 
 .cs-opp-cell {
   background: #eef8ff;
-  padding: 18px;
+  padding: 16px;
   border-bottom: 1px solid #cbdef4;
   display: flex;
   flex-direction: column;
@@ -5250,10 +5250,10 @@ button {
   background: #fafdfe;
   border: 1px solid #cbdef4;
   border-radius: 8px;
-  padding: 18px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .cs-iv-stage-title {
@@ -5268,7 +5268,7 @@ button {
   background: #fff7e8;
   border: 1px solid #f2d9a6;
   border-radius: 8px;
-  padding: 14px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -5292,7 +5292,7 @@ button {
   background: #e5effa;
   border: 1px solid #88b9e8;
   border-radius: 8px;
-  padding: 14px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -5321,7 +5321,7 @@ button {
 .cs-iv-ai ul li {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 8px;
   font-size: var(--fs-sm);
   line-height: 21px;
   color: #191919;
@@ -5353,7 +5353,7 @@ button {
     grid-row: 1 / -1;
     display: grid;
     grid-template-rows: subgrid;
-    row-gap: 14px;
+    row-gap: 16px;
   }
 
   .cs-iv-arrow {
@@ -5485,7 +5485,7 @@ button {
   font-size: var(--fs-body);
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 
 .cs-persona-desc {
@@ -5553,7 +5553,7 @@ button {
 
 .cs-flow-opp-list {
   margin: 0;
-  padding-left: 14px;
+  padding-left: 16px;
   font-size: var(--fs-xs);
   line-height: 1.7;
   color: var(--ink);
@@ -5630,13 +5630,13 @@ button {
 /* ── Design Scenario ── */
 /* ── Design Scenario (Section 05) ── */
 .cs-ds-scenario {
-  margin-bottom: 44px;
+  margin-bottom: 48px;
 }
 
 .cs-ds-head {
   display: flex;
   align-items: flex-start;
-  gap: 18px;
+  gap: 16px;
   margin-bottom: 24px;
 }
 
@@ -5698,7 +5698,7 @@ button {
 
 .cs-ds-card {
   border-radius: 8px;
-  padding: 14px 16px;
+  padding: 16px 16px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -5748,7 +5748,7 @@ button {
   display: inline-block;
   background: white;
   border-radius: 999px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   font-size: var(--fs-body);
   font-weight: 600;
   line-height: 1.35;
@@ -5791,7 +5791,7 @@ button {
 .cs-ds-legend {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: var(--fs-body);
   color: #425466;
   margin-top: 24px;
@@ -5825,7 +5825,7 @@ button {
 
 .cs-sol-tag {
   display: inline-block;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 14px;
   font-size: var(--fs-xs);
   font-weight: 600;
@@ -5987,7 +5987,7 @@ button {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 24px;
 }
 
 .cs-sol-txt-h {
@@ -6024,7 +6024,7 @@ button {
 }
 
 .cs-sol-badge {
-  padding: 9px 14px;
+  padding: 8px 16px;
   border-radius: 999px;
   font-size: var(--fs-sm);
   font-weight: 600;
@@ -6232,10 +6232,10 @@ button {
 .cs-sol-dpt {
   background: #f6faff;
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .cs-sol-dpt-l {
@@ -6435,7 +6435,7 @@ button {
     min-width: 0;
     border: 0;
     border-radius: 999px;
-    padding: 7px 8px;
+    padding: 8px 8px;
     background: transparent;
     color: var(--muted);
     font-size: 14px;
@@ -6568,7 +6568,7 @@ button {
   padding: 24px 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   border: 1px solid;
 }
 
@@ -6691,7 +6691,7 @@ button {
 
 .cs-ns-card-hd {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   align-items: center;
 }
 
@@ -6701,7 +6701,7 @@ button {
   justify-content: center;
   background: #ebf6fe;
   border-radius: 999px;
-  padding: 10px 14px;
+  padding: 8px 16px;
   font-size: var(--fs-body);
   font-weight: 700;
   color: #0072bd;
@@ -6738,7 +6738,7 @@ button {
   background: #ebf6fe;
   border: 1px solid #d5dfec;
   border-radius: 999px;
-  padding: 6px 12px;
+  padding: 8px 12px;
   font-size: var(--fs-sm);
   font-weight: 600;
   color: #0072bd;
@@ -6821,7 +6821,7 @@ button {
   border-radius: 4px;
   display: inline-block;
   padding: 2px 8px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .cs-result-title {
@@ -6987,7 +6987,7 @@ button {
 
   .cs-info-row {
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
   }
 
   .cs-info-card {
@@ -6998,7 +6998,7 @@ button {
 
   .cs-info-tasks {
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 8px;
   }
 
   .cs-role-radial {
@@ -7137,7 +7137,7 @@ button {
   /* room above the "after" state for its (downward-pointing) tooltip so it
      doesn't cover the arrow / first state when stacked */
   .cs-alarm-after {
-    margin-top: 84px;
+    margin-top: 80px;
   }
 
   .cs-sol-fr-mid .cs-sol-fnote {

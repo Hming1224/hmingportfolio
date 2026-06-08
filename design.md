@@ -398,7 +398,7 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 | `22px 16px 8px` | 輸入框浮動 label 專用內距（見 5.4）|
 | `28px 24px` | skill-category-card padding |
 
-> 🔧 其餘散落的 `14/18/6/7/26/44/84px` 屬待清理魔術數字，改 code 時往系統值收斂。
+> ✅ 已收斂（2026-06-08）：原散落的 `14/18/6/7/9/26/44/84px` **容器排版間距**（padding/margin/gap）已往系統值靠（多數 →16px、`7/6/9→8`、`26→24`、`44→48`、`84→80`）。**例外保留**：Hero/About 裝飾元件內部間距與絕對定位（如 `.cursor-tag`、`.growth-*`、`.menu-button` 漢堡幾何）、`::before` 自訂項目符號的光學對齊 `margin-top:7px`、以及 `clamp()` 響應式值——這些是視覺/幾何微調，不算 8px 系統間距，刻意不動。
 
 ### 6.4 Section 頂部 padding 特例
 | Section | 桌機頂部 | 手機頂部 | 原因 |
