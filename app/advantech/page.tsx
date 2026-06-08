@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import ProposalTabs from "./ProposalTabs";
 import FeatureConnectors from "./FeatureConnectors";
 import FlowConnectors from "./FlowConnectors";
 import AlarmLevelDemo from "./AlarmLevelDemo";
 import VimeoPlayer from "./VimeoPlayer";
-import ScrollProgress from "../../components/ScrollProgress";
-import CaseTOC, { type TocSection } from "../../components/CaseTOC";
+import {
+  CaseStudyShell,
+  CaseSection,
+  CaseHeading,
+  type TocSection,
+} from "../../components/case-study";
 
 export const metadata: Metadata = {
   title: "生成式AI能源管理系統 — Brian Huang",
@@ -72,13 +73,8 @@ const tocSections: TocSection[] = [
 ];
 
 export default function AdventechPage() {
-  return (
-    <main className="cs-page theme-advantech">
-      <ScrollProgress />
-      <Navbar />
-
-      {/* ── 01 Hero ── */}
-      <section>
+  const hero = (
+    <section>
         <div className="cs-hero-cover">
           <div className="cs-hero-cover-img">
             <Image
@@ -127,18 +123,18 @@ export default function AdventechPage() {
           </div>
         </div>
       </section>
+  );
 
-      {/* ── TOC Layout: wraps all sections from 02 to Result ── */}
-      <div className="cs-toc-layout">
-        <aside className="cs-toc-aside">
-          <CaseTOC sections={tocSections} />
-        </aside>
-        <div className="cs-toc-main">
+  return (
+    <CaseStudyShell
+      theme="theme-advantech"
+      tocSections={tocSections}
+      nextNav={{ nextHref: "#", nextLabel: "下一個專案：虛擬貨幣量化交易平台" }}
+      hero={hero}
+    >
 
       {/* ── 02 Overview ── */}
-      <section id="cs-sec-overview" className="cs-section">
-        <h2 className="cs-heading">專案背景</h2>
-        <div className="cs-divider" />
+      <CaseSection id="cs-sec-overview" title="專案背景">
         <div className="cs-overview-body">
           <p className="cs-body">
             這個專案聚焦於透過 UX/UI 設計優化 ECOWatch 與 HVAC 的 AI Chatbot 體驗，以改善使用者操作流程並提升整體可用性。
@@ -156,12 +152,10 @@ export default function AdventechPage() {
             unoptimized
           />
         </div>
-      </section>
+      </CaseSection>
 
       {/* ── 02.5 Product Background ── */}
-      <section id="cs-sec-background" className="cs-section-surface">
-        <h2 className="cs-heading">認識 ECOWatch 與 HVAC 模組</h2>
-        <div className="cs-divider" />
+      <CaseSection id="cs-sec-background" surface title="認識 ECOWatch 與 HVAC 模組">
         <p className="cs-body-muted" style={{ marginBottom: 32 }}>
           本專案的設計對象為研華科技 WISE-IoT 平台下的兩大能源管理模組。ECOWatch 負責建築能源用量的即時可視化監控；WISE iEMS HVAC 模組則整合 AI 演算法主動優化空調系統能效。兩者共同構成智慧設施管理的核心解決方案，也是本次 AI Chatbot 設計用於整合各項功能的系統。
         </p>
@@ -220,12 +214,10 @@ export default function AdventechPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CaseSection>
 
       {/* ── 02.6 My Role ── */}
-      <section id="cs-sec-role" className="cs-section">
-        <h2 className="cs-heading">我在這個專案做了什麼...</h2>
-        <div className="cs-divider" />
+      <CaseSection id="cs-sec-role" title="我在這個專案做了什麼...">
         <div className="cs-role-radial">
           <svg
             className="cs-role-connectors"
@@ -256,7 +248,7 @@ export default function AdventechPage() {
             </div>
           ))}
         </div>
-      </section>
+      </CaseSection>
 
       {/* ── 04 Process ── */}
       <section id="cs-sec-process" className="cs-process-bg">
@@ -271,8 +263,7 @@ export default function AdventechPage() {
         </div>
         <div className="cs-process-overlay" />
         <div className="cs-process-content">
-          <h2 className="cs-heading-white" style={{ marginBottom: 8 }}>設計流程</h2>
-          <div className="cs-divider-white" />
+          <CaseHeading title="設計流程" tone="white" style={{ marginBottom: 8 }} />
           <div className="cs-timeline-alt">
             {/* Row 1: cards above axis (01, 03, 05) */}
             <div className="cs-tl-tops">
@@ -322,9 +313,7 @@ export default function AdventechPage() {
       </section>
 
       {/* ── 03 Competitive Analysis ── */}
-      <section id="cs-sec-analysis" className="cs-section">
-        <h2 className="cs-heading">從競品功能比較，定義 GenAI Chatbot 的設計機會</h2>
-        <div className="cs-divider" />
+      <CaseSection id="cs-sec-analysis" title="從競品功能比較，定義 GenAI Chatbot 的設計機會">
         <p className="cs-body-muted" style={{ marginBottom: 36 }}>
           透過產業 AI 工具、能源管理系統競品與 AI 功能模組比較，釐清聊天機器人不只是搜尋入口，而是能協助使用者完成問題來源、異常診斷與節能決策的工作流程介面。
         </p>
@@ -469,12 +458,10 @@ export default function AdventechPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CaseSection>
 
       {/* ── 04 User Interview ── */}
-      <section id="cs-sec-interview" className="cs-section-surface">
-        <h2 className="cs-heading">透過專案訪談，理解能源與廠務管理的實際工作流程</h2>
-        <div className="cs-divider" />
+      <CaseSection id="cs-sec-interview" surface title="透過專案訪談，理解能源與廠務管理的實際工作流程">
         <p className="cs-body-muted" style={{ marginBottom: 36 }}>
           訪談內部廠務人員與系統整合商（SI），釐清終端使用者在設備能耗盤查、能源分析與報告產出中的痛點，並找出生成式 AI 在 iEMS 中能切入的工作節點。
         </p>
@@ -577,13 +564,10 @@ export default function AdventechPage() {
             </div>
           </div>
         </div>
-      </section>
-
+      </CaseSection>
 
       {/* ── 05 Design Scenario ── */}
-      <section id="cs-sec-scenario" className="cs-section">
-        <h2 className="cs-heading">AI 應用情境：從底層機制到介面落地</h2>
-        <div className="cs-divider" />
+      <CaseSection id="cs-sec-scenario" title="AI 應用情境：從底層機制到介面落地">
         <p className="cs-body-muted" style={{ marginBottom: 48 }}>
           專案研究過後，團隊透過工作坊討論功能優先級，將使用者痛點轉譯為兩個可落地的 AI 應用情境。每個情境都從底層 AI 機制出發，對應到核心功能，最後落到使用者會接觸的介面呈現。
         </p>
@@ -719,13 +703,10 @@ export default function AdventechPage() {
           </div>
         ))}
         <FlowConnectors />
-      </section>
+      </CaseSection>
 
       {/* ── 06 Solution ── */}
-      <section id="cs-sec-solution" className="cs-section-surface cs-solution-section">
-        {/* Header */}
-        <h2 className="cs-heading">設計發想、迭代與最終方案</h2>
-        <div className="cs-divider" />
+      <CaseSection id="cs-sec-solution" surface className="cs-solution-section" title="設計發想、迭代與最終方案">
         <p className="cs-body-muted" style={{ marginBottom: 56 }}>
           依據前述定義的設計情境，後續迭代將聚焦在幾個會直接影響決策判斷的介面：AI Chatbot、超約預警分析視窗、設備能耗異常分析視窗，以及其中的圖表、資料表與 AI 建議區塊。
         </p>
@@ -1291,7 +1272,7 @@ export default function AdventechPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CaseSection>
 
       {/* ── 07 Next Step ── */}
       <section id="cs-sec-next" className="cs-ns-section">
@@ -1349,8 +1330,7 @@ export default function AdventechPage() {
         </div>
         <div className="cs-result-overlay" />
         <div className="cs-result-content">
-          <h2 className="cs-heading-white" style={{ marginBottom: 8 }}>我學到了什麼...</h2>
-          <div className="cs-divider-white" />
+          <CaseHeading title="我學到了什麼..." tone="white" style={{ marginBottom: 8 }} />
           <div className="cs-result-grid">
             {[
               {
@@ -1383,17 +1363,6 @@ export default function AdventechPage() {
           </div>
         </div>
       </section>
-
-        </div>{/* /cs-toc-main */}
-      </div>{/* /cs-toc-layout */}
-
-      {/* ── Next Project Nav ── */}
-      <div className="cs-next-nav">
-        <Link href="/" className="cs-next-btn-outline">返回首頁</Link>
-        <a href="#" className="cs-next-btn-filled">下一個專案：虛擬貨幣量化交易平台</a>
-      </div>
-
-      <Footer />
-    </main>
+    </CaseStudyShell>
   );
 }
