@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>黃宣銘 Brian Huang - 中文履歷</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --accent: #5d62d8;
+      --ink: #24262d;
+      --body: #5d6674;
+      --muted: #8e8e9c;
+      --line: #e5e6ee;
+      --icon: #6d767e;
+      --paper: #ffffff;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      background: #e9e9ef;
+      color: var(--ink);
+      font-family: "Inter", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      font-size: 10px;
+      line-height: 1.4;
+      padding: 20px 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 1px;
+    }
+
+    .page {
+      width: 595px;
+      height: 842px;
+      margin: 0 auto;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .main {
+      width: 395px;
+      height: 842px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .header {
+      width: 359.842px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .name {
+      width: 359.842px;
+      color: var(--ink);
+      font-size: 23.989px;
+      font-weight: 800;
+      letter-spacing: 0.3045px;
+      line-height: 1.4;
+    }
+
+    .intro {
+      width: 359.842px;
+      max-width: 402.336px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .intro p {
+      width: 360.585px;
+      color: var(--body);
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .experience {
+      width: 359.842px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-title {
+      width: 359.842px;
+      height: 21px;
+      display: flex;
+      align-items: center;
+      gap: 7.497px;
+    }
+
+    .section-title span {
+      flex: 0 0 auto;
+      color: var(--ink);
+      font-size: 14.993px;
+      font-weight: 800;
+      letter-spacing: -0.3368px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1 0 0;
+      height: 1.499px;
+      border-radius: 748.908px;
+      background: var(--accent);
+      opacity: 0.28;
+    }
+
+    .entry {
+      width: 359.842px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .logo {
+      flex: 0 0 32px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 0.75px solid var(--line);
+      border-radius: 5.997px;
+      background: #fff;
+      box-shadow: 0 4.498px 11.995px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo img {
+      width: 32px;
+      height: 32px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .work {
+      width: 315.842px;
+      min-width: 0;
+      display: flex;
+      flex: 1 0 0;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .work-head {
+      width: 315.842px;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.4;
+      white-space: nowrap;
+      word-break: break-word;
+    }
+
+    .work-top,
+    .work-sub {
+      width: 315.842px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .work-top {
+      align-items: flex-end;
+      height: 15px;
+    }
+
+    .work-sub {
+      align-items: flex-start;
+      height: 14.75px;
+      padding-top: 0.75px;
+    }
+
+    .company {
+      color: var(--ink);
+      font-size: 10.595px;
+      font-weight: 800;
+      letter-spacing: -0.1207px;
+      line-height: 1.4;
+    }
+
+    .location {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.0394px;
+      line-height: 1.4;
+    }
+
+    .role {
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.0204px;
+      line-height: 1.4;
+    }
+
+    .date {
+      color: var(--body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.0204px;
+      line-height: 1.4;
+    }
+
+    .detail-list {
+      width: 315.842px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: -0.0144px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .detail-list p {
+      width: 100%;
+      min-height: 14px;
+    }
+
+    .sidebar {
+      width: 200px;
+      height: 842px;
+      flex: 0 0 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 70px 24px 0 24.75px;
+      border-left: 0.75px solid var(--line);
+      background: linear-gradient(180deg, #fbfbff 0%, #ffffff 44%);
+    }
+
+    .side-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .basic-info {
+      width: 151.25px;
+    }
+
+    .skills,
+    .education {
+      width: 118.247px;
+    }
+
+    .side-title {
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.3257px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .basic-info .side-title {
+      letter-spacing: -0.4345px;
+    }
+
+    .contact-list {
+      width: 151.25px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .contact-item {
+      width: 151.25px;
+      min-height: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.0683px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .contact-icon-frame {
+      flex: 0 0 12px;
+      width: 12px;
+      height: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-icon {
+      flex: 0 0 auto;
+      display: block;
+      object-fit: contain;
+      width: 12px;
+      height: 12px;
+    }
+
+    .link-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .slash {
+      color: var(--body);
+    }
+
+    .skill-blocks {
+      width: 118.247px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .skill-group {
+      width: 118.247px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skill-heading {
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: -0.0294px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .skill-list {
+      width: 118.247px;
+      display: flex;
+      flex-direction: column;
+      padding-top: 2.999px;
+      color: var(--body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.0332px;
+      line-height: 1.4;
+      list-style: none;
+      white-space: nowrap;
+    }
+
+    .skill-list.no-offset {
+      padding-top: 0;
+    }
+
+    .edu-list {
+      width: 118.247px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .edu-item {
+      width: 118.247px;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.4;
+      white-space: nowrap;
+      word-break: break-word;
+    }
+
+    .edu-school {
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: -0.0218px;
+      line-height: 1.4;
+    }
+
+    .edu-degree {
+      color: var(--accent);
+      font-size: 8.196px;
+      font-weight: 700;
+      letter-spacing: 0.0512px;
+      line-height: 1.4;
+    }
+
+    .edu-date {
+      color: var(--body);
+      font-size: 8.196px;
+      font-weight: 400;
+      letter-spacing: 0.0512px;
+      line-height: 1.4;
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        background: #fff;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .page {
+        margin: 0;
+        transform: scale(1.333333);
+        transform-origin: top left;
+      }
+
+      .logo {
+        box-shadow: none;
+        filter: drop-shadow(0 3.4px 8.5px rgba(0, 0, 0, 0.045));
+        border-color: #e5e6ee;
+        background: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="main">
+      <header class="header">
+        <h1 class="name">黃宣銘 Brian Huang</h1>
+        <div class="intro">
+          <p>我是一名具備 UI/UX 設計、產品思維與跨域工程背景的產品設計師，擅長將複雜企業問題與使用者需求，轉化為清楚、可落地的使用者體驗。過去曾參與 B2B Edge AI 平台、量化交易產品與 Web3 服務設計，累積使用者研究、介面設計、prototype 與跨部門協作經驗。</p>
+          <p>面對 AI 時代的產品開發，我也持續探索 AI 工具於設計、前端 prototype 與產品規格整理中的應用，期望以更有效率的工作方式，協助團隊釐清問題框架、設計 MVP，並驗證商業目標與使用者體驗，朝 Product Builder 的方向前進。</p>
+        </div>
+      </header>
+
+      <section class="experience" aria-label="工作經歷">
+        <h2 class="section-title"><span>Experience</span></h2>
+
+        <article class="entry">
+          <div class="logo">
+            <img src="../assets/figma-current/advantech.png" alt="Advantech logo" />
+          </div>
+          <div class="work">
+            <div class="work-head">
+              <div class="work-top">
+                <h3 class="company">Advantech 研華科技</h3>
+                <span class="location">台北</span>
+              </div>
+              <div class="work-sub">
+                <span class="role">UIUX 設計實習生</span>
+                <span class="date">2024.06 - 2024.08</span>
+              </div>
+            </div>
+            <div class="detail-list">
+              <p>參與 Edge AI 平台產品設計，於 <strong style="color: #000000; font-weight: 700;">2.5 個月內完成 3 次設計提案</strong>，並依時程通過上級主管/ CEO 審查。</p>
+              <p>進行使用者訪談與痛點分析，將企業級 AI 產品需求整理為可討論、可驗證的功能方向。</p>
+              <p>設計並提案 AI Chatbot 整合方案，與專案 PM 協助團隊評估後續產品路線與功能模組優先順序。</p>
+              <p>最終提案中有 <strong style="color: #000000; font-weight: 700;">2 項主要模組功能獲採納</strong>，順利進入工程開發排程。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="logo">
+            <img src="../assets/figma-current/crypto-arsenal.png" alt="Crypto-Arsenal logo" />
+          </div>
+          <div class="work">
+            <div class="work-head">
+              <div class="work-top">
+                <h3 class="company">Crypto-Arsenal</h3>
+                <span class="location">台北</span>
+              </div>
+              <div class="work-sub">
+                <span class="role">UIUX &amp; PM 實習生</span>
+                <span class="date">2023.03 - 2023.10</span>
+              </div>
+            </div>
+            <div class="detail-list">
+              <p>維護並重整 Design System，統一 3大不同功能元件與對應頁面，並應用於 20+ 個產品設計流程，提升視覺與互動一致性。</p>
+              <p>進行使用者訪談與競品分析，完成 6+ 個產品功能，既有產品優化 12+ 項 UX 問題，與 20+ 個 RWD 頁面設計。</p>
+              <p>在 Scrum 中擔任助理 PO，優化設計流程與檔案管理，<strong style="color: #000000; font-weight: 700;">協助 Sprint 產出提升至過往 1.5 倍</strong>。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="logo">
+            <img src="../assets/figma-current/tba.png" alt="Taiwan Blockchain Academia logo" />
+          </div>
+          <div class="work">
+            <div class="work-head">
+              <div class="work-top">
+                <h3 class="company">Taiwan Blockchain Academia</h3>
+                <span class="location">台北</span>
+              </div>
+              <div class="work-sub">
+                <span class="role">產品設計師（約聘）</span>
+                <span class="date">2022.11 - 2023.02</span>
+              </div>
+            </div>
+            <div class="detail-list">
+              <p>透過使用者訪談與研究，釐清非技術使用者進入 Web3 服務時的理解斷點與操作阻礙。</p>
+              <p>與產品經理及國泰金控技術團隊協作，對齊產品規格、開發方向與合規情境下的使用者體驗。</p>
+              <p>製作 wireframe 與互動 prototype，支援可用性測試與多輪設計迭代。</p>
+              <p>協助工程團隊將區塊鏈技術整合至使用流程，同時維持服務的易用性與可理解性。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="logo">
+            <img src="../assets/figma-current/lcfc.png" alt="LCFC logo" />
+          </div>
+          <div class="work">
+            <div class="work-head">
+              <div class="work-top">
+                <h3 class="company">LCFC 合肥聯寶電子科技</h3>
+                <span class="location">台北</span>
+              </div>
+              <div class="work-sub">
+                <span class="role">助理專案管理師</span>
+                <span class="date">2021.05 - 2021.12</span>
+              </div>
+            </div>
+            <div class="detail-list">
+              <p>協調工程、供應商與跨部門時程，<strong style="color: #000000; font-weight: 700;">平均提前 1.5 週</strong>完成預訂交付。</p>
+              <p>在 2 個 milestone 中因應物料短缺風險，重新協調料件與測試排程，成功將原可能延誤的時程拉回期限內。</p>
+              <p>撰寫產品規格並與工程師對齊可行性測試，在品質標準、供應限制與交付壓力間維持平衡。</p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <aside class="sidebar">
+      <section class="side-section basic-info" aria-label="基本資訊">
+        <h2 class="side-title">基本資訊</h2>
+        <ul class="contact-list">
+          <li class="contact-item">
+            <span class="contact-icon-frame">
+              <img class="contact-icon globe" src="../assets/figma-current/icon-globe.svg" alt="" />
+            </span>
+            <span class="link-row">
+              <a href="https://hmingportfolio.vercel.app/">Portfolio</a>
+              <span class="slash">/</span>
+              <a href="https://www.linkedin.com/in/brian-huang-a36759128/">LinkedIn</a>
+            </span>
+          </li>
+          <li class="contact-item">
+            <span class="contact-icon-frame">
+              <img class="contact-icon mail" src="../assets/figma-current/icon-mail.svg" alt="" />
+            </span>
+            <a href="mailto:hmingdesigner@gmail.com">hmingdesigner@gmail.com</a>
+          </li>
+          <li class="contact-item">
+            <span class="contact-icon-frame">
+              <img class="contact-icon phone" src="../assets/figma-current/icon-phone.svg" alt="" />
+            </span>
+            <span>+886 978-629-321</span>
+          </li>
+          <li class="contact-item">
+            <span class="contact-icon-frame">
+              <img class="contact-icon location" src="../assets/figma-current/icon-location.svg" alt="" />
+            </span>
+            <span>新北，台灣</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="side-section skills" aria-label="技能">
+        <h2 class="side-title">技能</h2>
+        <div class="skill-blocks">
+          <div class="skill-group">
+            <h3 class="skill-heading">產品設計</h3>
+            <ul class="skill-list">
+              <li>UI flow</li>
+              <li>設計系統</li>
+              <li>線框圖 / 原型設計</li>
+              <li>響應式網頁設計</li>
+              <li>基礎前端知識</li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3 class="skill-heading">使用者研究</h3>
+            <ul class="skill-list">
+              <li>使用者訪談</li>
+              <li>利害關係人訪談</li>
+              <li>競品分析</li>
+              <li>親和圖</li>
+              <li>使用者旅程圖</li>
+              <li>易用性測試</li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3 class="skill-heading">AI 工具</h3>
+            <ul class="skill-list">
+              <li>Claude Code</li>
+              <li>Codex</li>
+              <li>Figma Make</li>
+              <li>Canva AI</li>
+              <li>NoteBookLM</li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3 class="skill-heading">協作與管理</h3>
+            <ul class="skill-list no-offset">
+              <li>Jira / Trello</li>
+              <li>Scrum 敏捷開發</li>
+              <li>跨部門溝通</li>
+              <li>專案時程控管</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="side-section education" aria-label="學歷">
+        <h2 class="side-title">學歷</h2>
+        <div class="edu-list">
+          <div class="edu-item">
+            <div class="edu-school">國立政治大學</div>
+            <div class="edu-degree">數位內容與科技碩士學位學程</div>
+            <div class="edu-date">2023.09 - 2026.04 / GPA 4.07</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-school">國立成功大學</div>
+            <div class="edu-degree">機械工程學系 學士</div>
+            <div class="edu-date">2017.09 - 2021.02</div>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </main>
+</body>
+</html>
