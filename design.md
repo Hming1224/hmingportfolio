@@ -127,14 +127,12 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `--text-secondary` | `#5d6674` | 副標 / 內文說明 |
 | `--text-muted` | `#8e8e9c` | 最弱（同 `--muted`）|
 | `--text-on-dark` | `#ffffff` | 深色背景上的大標（由 `.cs-heading-white` 消費，用於圖片/overlay 上的白標題）|
-| `--text-on-dark-body` | `rgba(255,255,255,0.88)` | 深色背景內文。⚠️ 目前無人消費（定義保留）|
-| `--text-on-dark-muted` | `rgba(255,255,255,0.6)` | 深色背景弱文字。⚠️ 目前無人消費（定義保留）|
 
 **分層 theming（區域 token 的最佳範例）：**
 - 全域 `:root` 只放「綁定規則 + 中性預設」。
 - 每個案例頁在 `<main class="cs-page theme-xxx">` 掛 theme，**只覆寫 `--text-heading` 一個值**。例：`.theme-advantech { --text-heading: #093060 }`。
 - 對應骨架 class（只套這 6 個）：`.cs-title`、`.cs-heading`、`.cs-heading-white`、`.cs-body`、`.cs-sol-blk-title`、`.cs-sol-blk-desc`。
-- **深色 section**：`.cs-section-dark`（底色 `#131b24`）有定義，但 ⚠️ **目前全站未被 render**（dormant，沒有實際深色 section）。現有的白色標題（`.cs-heading-white`）是疊在圖片/overlay 上，不是靠 `.cs-section-dark`。未來真要做深色區塊時用這個 class，並補上 `--text-on-dark-body/-muted` 的消費。
+- **深色 section**：目前不保留深色 section class。`.cs-heading-white` 仍用於圖片 / overlay 上的白標題，所以只保留 `--text-on-dark` 單一 token。
 
 ### 2.5 每個專案的 Tone 色
 
@@ -153,17 +151,17 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `tone-green` | `--green` | `--green-soft` | `--disabled` | 未上線 | ✅ 全域 token |
 | `tone-peach` | `--peach` | `--peach-soft` | `--purple` | 上線 | ✅ 全域 token |
 | `tone-navy` | `--blue` | `--blue-soft` | `--purple` | 上線 | ✅ 全域 token |
-| `tone-advantech` | `#004b85` | `#d9f1ff` | `--purple` | 上線 | 🔧 改區域 token |
-| `tone-icecream` | `#aa2d53` | `#ffe2ea` | `--purple` | 上線 | 🔧 改區域 token |
-| `tone-laushu` | `#3b3475` | `#f5eeff` | `--purple` | 上線 | 🔧 改區域 token |
-| `tone-thesis` | `#2d462a` | `#e6ffe3` | `--purple` | 上線 | 🔧 改區域 token |
+| `tone-advantech` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
+| `tone-icecream` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
+| `tone-laushu` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
+| `tone-thesis` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
 
 **後 4 個目標寫法（區域 token）：**
 ```css
 .tone-advantech { --tag-bg: #d9f1ff; --tag-text: #004b85; }
 .tone-advantech .project-tags span { background: var(--tag-bg); color: var(--tag-text); }
 ```
-> 🔧 目前仍寫死；selector 也要統一（有的帶 `.project-card` 前綴有的沒有，統一成不帶前綴）。
+後 4 個 tone 已統一 selector，不帶 `.project-card` 前綴。
 
 ### 2.6 頁面特定色（不可跨區塊使用）
 
@@ -214,7 +212,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 | `--fs-xs` | `12px` | `12px` | `12px` | 最小（Footer 版權等）|
 
 > **全站最大字級就是 32px，沒有 40px。**
-> 🔧 待對齊：目前多數標題仍寫死 `font-size: 32px` 而非 `var(--fs-h1)`（`--fs-h1` 全檔只用 1 次），且有些元件在自己的 media query 寫死手機字級（如 `.hero h1` 手機 28px），與 token 的 24px 不一致。規格以本表 token 為準，把元件改用 token 屬「改 code」。
+主標題、section 標題、About / Contact 骨架標題已改用 `var(--fs-*)`；案例頁內部高度客製的小型 label / 圖表文字仍可依局部版面保留自己的尺寸。
 
 ### 3.3 字重（font-weight）
 
@@ -245,20 +243,18 @@ font-family: var(--font-space-grotesk), sans-serif;
 | 用途 | 值 | 對應 |
 |---|---|---|
 | **按鈕** | `200px` | `.button`、`.project-button`、`.submit-btn`、`.cs-next-btn-*` |
-| **小 pill / 標籤 / badge** | `999px`（全圓）| `.role-badge`、`.cursor-tag-label`、`.project-tabs`、`.educator-badge`、各 `cs-*` pill/badge |
+| **小 pill / 標籤 / badge** | `999px`（全圓）| `.cursor-tag-label`、`.project-tabs`、`.educator-badge`、各 `cs-*` pill/badge |
 
-> 🔧 待對齊的散落值：`.resume-link` 用 `100px`（應 200px 對齊按鈕）、`.hero-badge`/`.session-badge`/`.year-rail` 用 `100px`、裝飾用 `60px`/`1000px`。原則：**按鈕一律 200px，標籤/badge 一律 999px**，其餘往這兩個收斂。
+原則：**按鈕一律 200px，標籤 / badge 一律 999px**；純裝飾元件可按視覺比例保留局部值。
 
 ### 4.2 卡片角
 | 值 | 用途 |
 |---|---|
-| `12px` | **預設卡片圓角**（最常用，22 處）：專案卡手機、輸入框、多數卡片 |
-| `10px` | 專案卡桌機 |
-| `16px` | skill-category-card、較大卡片 |
-| `20px` | 特定大卡片 |
+| `12px` | **預設卡片圓角**：專案卡、輸入框、多數卡片 |
+| `16px` | 較大卡片 / 面板：Contact card、skills panel、education card、educator card、案例頁大板塊 |
 | `8px` | 小元件、標籤 |
 
-> 🔧 卡片圓角值偏多（8/10/12/16/20），建議收斂成「小 8 / 預設 12 / 大 16」三階，改 code 時統一。
+卡片角已收斂成「小 8 / 預設 12 / 大 16」三階；`cs-*` 圖表中的局部小面板可依單頁版面保留例外。
 
 ---
 
@@ -271,18 +267,17 @@ font-family: var(--font-space-grotesk), sans-serif;
 #### 尺寸階層（sm / md / lg）
 | 階層 | 高度 | 左右 padding | 字級 | 用在哪 | 對應 class |
 |---|---|---|---|---|---|
-| **sm** | `38px` | `24px` | `14px`（`--fs-sm`）| 緊湊 / 常駐入口 | `.resume-link`（CSS 保留，目前未當按鈕用——導覽列履歷已改純文字連結，見 5.3）|
+| **sm** | `38px` | `24px` | `14px`（`--fs-sm`）| 緊湊 / 常駐入口 | 目前無按鈕在用 |
 | **md（預設）** | `48px` | `24px` | `16px`（`--fs-body`）| 絕大多數 CTA：Hero、案例頁、聯絡送出 | `.button`（+ `-primary`/`-secondary`）|
 | **lg（全寬）** | `48px`，`width:100%` | padding `12px 0` | `16px` | 卡片 CTA、手機全寬 CTA | `.project-button` |
 
 - md 48px 是標準；sm 38px 為緊湊情境（目前無按鈕在用）；lg 不是更高，是「撐滿容器寬」的變體。
-- 字重統一 `600`。🔧 `.project-button` 目前 500，應統一成 600。
+- 字重統一 `600`，包含 `.project-button`。
 
 #### 語意三層（顏色變體，與尺寸正交組合）
 | 變體 | 底色 | 文字色 | 描邊 | 語意 | class | 實際用在哪 |
 |---|---|---|---|---|---|---|
 | Primary（紫）| `--purple` | `#fff` | — | 轉換型 CTA（最希望點）| `.button-primary` | **Hero「查看作品」**（→ `#projects`）。另外專案卡 CTA（`.project-button`）、聯絡送出（`.submit-btn`）也直接用 `--purple` |
-| Primary（黑）| `--ink` | `#fff` | — | 強行動但非轉換 CTA | `.button-dark` | ⚠️ 目前未使用（定義保留，供未來「強但非轉換」情境）|
 | Secondary | 白 | `--muted` → hover `--purple` | 細灰邊 `inset 0 0 0 1px var(--line)`，hover 轉 `--purple` | 次要（outline 風）| `.button-secondary` | **Hero「我的歷程」**（→ `/about-me`）|
 | Disabled | `--disabled` | `#fff` | — | 未上線專案 | `.is-disabled` | 8 個未上線專案卡 CTA |
 
@@ -303,7 +298,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 
 ### 5.2 專案卡（`.project-card`，最重要元件）
 ```
-border-radius: 10px（桌機）/ 12px（手機）
+border-radius: 12px
 aspect-ratio: 16/9，min-height: 500px（桌機）
 背景預設：var(--surface) #f2f2f7
 ```
@@ -330,7 +325,7 @@ position: fixed，z-index 高
 
 採 **floating label** 設計。
 ```css
-background: #F9F9F9;          /* 🔧 比 --surface 略淺，待評估併入 token */
+background: var(--surface);
 border: 1px solid var(--line);
 border-radius: 12px;
 padding: 22px 16px 8px;        /* 上方多留空間給浮動 label */

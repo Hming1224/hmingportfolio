@@ -173,22 +173,26 @@
 - **Q3 對照標註**：標 class 名（不標行號），design.md 已套。
 - **按鈕系統第一批改 code**（Hming 拍板）：① 下載履歷→純文字連結 ② Hero 查看作品→紫色 `.button-primary` ③ `.button-secondary`→copy-btn outline 風。已做 + localhost 驗證。
 
-### ⏳ Q4「改 code 清單」剩餘——方向已定、只差執行（不需再決策，你說「做」即可）
-1. 293 處「已有 token 卻寫死的 hex」換回 token（H5）
-2. 元件字級改用 `var(--fs-*)`，不寫死 px（H2）
-3. 後 4 個 tone 改區域 token + selector 統一（H4 / M2）
-4. `.project-button` 字重 500→600（H7）
-5. 8px 間距魔術數字收斂（M3）
-6. 刪確定的死 CSS：`.traits-panel`/`.traits-list`/`.traits-photo`、`.role-badge`/`.badge-*`、`.headline`（L3）
-7. About 卡片色 `#d4e2f1`/`#fff3e0` 補註解（小事）
+### ✅ Q4「改 code 清單」已執行（2026-06-08）
+1. 已把明確對應全域 token 的骨架色換回 token（H5）；案例頁 `cs-*` 局部色依 design.md 2.7 保留。
+2. 主標題 / section 標題 / About / Contact / 年份 rail 等骨架字級已改用 `var(--fs-*)`（H2）。
+3. 後 4 個 tone 已改成 `.tone-xxx { --tag-bg; --tag-text }` 區域 token，selector 統一不帶 `.project-card` 前綴（H4 / M2）。
+4. `.project-button` 字重已改 500→600（H7）。
+5. 卡片圓角已收斂成 8 / 12 / 16 三階；`cs-*` 圖表局部元件保留必要例外（D3）。
+6. 已刪確定死 CSS：`.traits-panel`/`.traits-list`/`.traits-photo`、`.role-badge`/`.badge-*`、`.headline`，以及 `.button-dark`、`.resume-link`、`.cs-section-dark`、`--text-on-dark-body/-muted`（L3 / D1 / D2）。
+7. `.form-field input/textarea` 背景已改為 `var(--surface)`（D4）。
+
+### ⏳ 待後續低優先清理
+- 8px 間距魔術數字收斂（M3）尚未本次全面處理。
+- About 卡片色 `#d4e2f1` / `#fff3e0` 依 design.md 2.6 暫保留為一次性頁面色。
 
 ### ✅ D1–D5 已拍板（2026-06-08 Hming 決策）
-- **D1 → 刪掉**：`.button-dark`、`.resume-link`、`.cs-section-dark`、`--text-on-dark-body/-muted` 這些「定義了但沒用」的全部刪除。
-- **D2 → 刪掉**：深色 section（`.cs-section-dark` + text-on-dark 那組）一併刪除，不做深色區塊。
+- **D1 → 已刪**：`.button-dark`、`.resume-link`、`.cs-section-dark`、`--text-on-dark-body/-muted` 這些「定義了但沒用」的全部刪除。
+- **D2 → 已刪**：深色 section（`.cs-section-dark` + text-on-dark 那組）一併刪除，不做深色區塊。
   - ⚠️ 注意：`--text-on-dark`（單數，由 `.cs-heading-white` 消費）**要留**；刪的是 `-body`/`-muted` 兩個沒人用的。執行時先確認 `.cs-heading-white` 是否仍需要（grep 確認後再決定 `.cs-heading-white` 去留）。
-- **D3 → 收斂**：卡片圓角收斂成「小 `8` / 預設 `12` / 大 `16`」三階（移除 10/20 → 併到最近的階）。改完跨頁視覺驗證。
-- **D4 → 併入**：輸入框底色 `#F9F9F9` 改用 `var(--surface)`（#f2f2f7）。
-- **D5 → 另開乾淨 session 執行**剩餘 Q4（本 session 不再動 code）。
+- **D3 → 已收斂**：主要卡片圓角收斂成「小 `8` / 預設 `12` / 大 `16`」三階。
+- **D4 → 已併入**：輸入框底色 `#F9F9F9` 改用 `var(--surface)`（#f2f2f7）。
+- **D5 → 已執行**：本 session 依交接單完成主要 code 對齊。
 
 > 完整執行交接單見 `100_Todo/plans/2026-06-08-設計系統改code執行.md`。
 
@@ -200,7 +204,7 @@
 |---|---|
 | 不一致清單報告（本檔） | ✅ 已產出（含第二輪完整掃描附錄）|
 | 重寫 design.md（編號、按鈕階層、text token/theming、輸入框、間距例外、token 界線、區域地圖、圓角系統、token 總清單）| ✅ 已完成並對齊 code |
-| 改 code | 🔧 第一批（按鈕系統）已做；其餘見上方 Q4 清單 + D1–D5 |
+| 改 code | ✅ 第二批設計系統對齊已做；剩餘低優先項為 M3 間距魔術數字 |
 
 ---
 

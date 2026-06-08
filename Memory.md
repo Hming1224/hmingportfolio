@@ -1,5 +1,14 @@
 # Project Memory
 
+## 2026-06-08 設計系統改 code 第二批
+
+Files: `app/globals.css`、`design.md`、`design-audit-2026-06-08.md`、`Memory.md`。
+- **刪除死 CSS / 未使用定義**：已移除 `.traits-panel` / `.traits-list` / `.traits-photo`、`.role-badge` / `.badge-*`、`.headline`、`.button-dark`、`.resume-link`、`.cs-section-dark`、`--text-on-dark-body` / `--text-on-dark-muted`。`--text-on-dark` 單數保留，因 `.cs-heading-white` 在 `/advantech` 仍有兩處使用。
+- **token 對齊**：後 4 個專案 tone（advantech / icecream / laushu / thesis）已改為 `.tone-xxx { --tag-bg; --tag-text }` 區域 token，selector 統一不帶 `.project-card` 前綴；骨架文字與明確對應的紫色 / blue-soft / text-secondary 已換回 token。`cs-*` 單頁專屬色依 design.md 2.7 保留。
+- **字級與按鈕**：Hero / section / About / Contact / 年份 rail 等骨架標題改用 `var(--fs-*)`；`.project-button` 字重改為 600。注意：Hero 桌機字級因此從先前視覺較大的 56px 收到 `--fs-h1` 32px，後續視覺驗證若覺得第一屏氣勢不足，要先回 design.md 討論是否調整 token，而不是只在 `.hero h1` 寫死。
+- **圓角 / surface**：全站主要卡片收斂到 8 / 12 / 16；聯絡表單 input / textarea 背景改 `var(--surface)`。`cs-*` 圖表局部小面板與 About 一次性卡片色保留例外。
+- **尚未做**：M3 間距魔術數字（14 / 18 / 6 / 7 / 26 / 44 / 84px 等）尚未全面收斂，避免本次改動過大。
+
 ## 2026-06-08 按鈕系統改 code（審查後第一批實作）
 
 Files: `components/Navbar.tsx`、`components/Hero.tsx`、`app/globals.css`、`design.md`、`design-audit`。Hming 拍板的三項：

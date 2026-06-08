@@ -95,8 +95,6 @@
   /* 最弱（同 --muted） */
   /* 深色背景反轉組 */
   --text-on-dark: #ffffff;
-  --text-on-dark-body: rgba(255, 255, 255, 0.88);
-  --text-on-dark-muted: rgba(255, 255, 255, 0.6);
 }
 
 /* ── 專案主題（換色盤）──
@@ -203,21 +201,6 @@ button {
   font-weight: 500;
 }
 
-.nav-links .resume-link {
-  min-height: 38px;
-  margin-left: 8px;
-  padding: 12px 24px;
-  border-radius: 100px;
-  background: var(--purple);
-  color: #fff;
-  line-height: 1;
-  transition: background-color 180ms ease;
-}
-
-.nav-links .resume-link:hover {
-  background: var(--purple-hover);
-}
-
 .nav-line {
   position: absolute;
   right: 0;
@@ -318,42 +301,6 @@ button {
   object-fit: contain;
 }
 
-.role-badge {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  transform: rotate(15deg);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.badge-designer {
-  bottom: 8px;
-  left: 121px;
-  width: 69px;
-  height: 69px;
-  background: #555563;
-}
-
-.badge-coordinator {
-  top: 149px;
-  right: 10px;
-  width: 78px;
-  height: 78px;
-  background: var(--ink);
-}
-
-.badge-engineer {
-  top: 68px;
-  left: 60px;
-  width: 60px;
-  height: 60px;
-  background: var(--muted);
-}
-
 .hero-copy {
   position: relative;
   z-index: 2;
@@ -373,7 +320,7 @@ button {
       transparent 0%,
       transparent 38%,
       #c4b5fd 47%,
-      #5d62d8 52%,
+      var(--purple) 52%,
       transparent 62%,
       transparent 100%);
   animation: shimmer-rotate 3s linear infinite;
@@ -399,7 +346,7 @@ button {
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: var(--fs-h1);
   font-weight: 600;
   line-height: 1.3;
 }
@@ -416,13 +363,6 @@ button {
 
 .split-char {
   display: inline-block;
-}
-
-.headline {
-  margin: 0;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.4;
 }
 
 .accent {
@@ -458,7 +398,7 @@ button {
 }
 
 .hero-highlight-blue .highlight-text-mark {
-  background: linear-gradient(90deg, #dce5ed 0%, #e6f2ff 100%);
+  background: linear-gradient(90deg, var(--blue-soft) 0%, #e6f2ff 100%);
 }
 
 .hero-highlight-cyan .highlight-text-mark {
@@ -474,7 +414,7 @@ button {
   flex-direction: column;
   gap: 12px;
   align-items: center;
-  font-size: 32px;
+  font-size: var(--fs-h1);
   font-weight: 600;
   line-height: 1.4;
 }
@@ -936,7 +876,7 @@ button {
 
 .toggle-btn-on {
   justify-content: flex-end;
-  background: linear-gradient(222.12deg, #5d62d8 30.805%, #313472 94.471%);
+  background: linear-gradient(222.12deg, var(--purple) 30.805%, #313472 94.471%);
 }
 
 .toggle-btn-off {
@@ -1069,19 +1009,6 @@ button {
   background: var(--purple-hover);
 }
 
-/* Dark：黑色填色 primary（非紫色 CTA 的強行動）。
-   hover 與紫色相反——底色「變淺」給回饋，因為黑已是最深。 */
-.button-dark {
-  background: var(--ink);
-  color: #fff;
-}
-
-.button-dark:hover {
-  background: var(--ink-hover);
-}
-
-/* Secondary：灰色 stroke，用 inset box-shadow 畫在元件「內側」，
-   不像 border 會撐出外框，與 primary 維持完全相同的外尺寸。 */
 /* Secondary：採用聯絡頁複製鈕（.copy-btn）的外觀——白底、細灰邊、灰字，
    hover 時邊框與文字轉紫。用 inset box-shadow 當細邊，外尺寸與 primary 一致（不撐大）。 */
 .button-secondary {
@@ -1128,7 +1055,7 @@ button {
 
 .section-heading h2 {
   margin: 0;
-  font-size: 32px;
+  font-size: var(--fs-h1);
   font-weight: 600;
 }
 
@@ -1229,7 +1156,7 @@ button {
   aspect-ratio: 16 / 9;
   min-height: 500px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--surface);
   isolation: isolate;
   transform: translateZ(0);
@@ -1394,24 +1321,44 @@ button {
   color: var(--blue);
 }
 
+.tone-advantech {
+  --tag-bg: #d9f1ff;
+  --tag-text: #004b85;
+}
+
+.tone-icecream {
+  --tag-bg: #ffe2ea;
+  --tag-text: #aa2d53;
+}
+
+.tone-laushu {
+  --tag-bg: #f5eeff;
+  --tag-text: #3b3475;
+}
+
+.tone-thesis {
+  --tag-bg: #e6ffe3;
+  --tag-text: #2d462a;
+}
+
 .tone-advantech .project-tags span {
-  background: #d9f1ff;
-  color: #004b85;
+  background: var(--tag-bg);
+  color: var(--tag-text);
 }
 
-.project-card.tone-icecream .project-tags span {
-  background-color: #ffe2ea;
-  color: #aa2d53;
+.tone-icecream .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
 }
 
-.project-card.tone-laushu .project-tags span {
-  background-color: #f5eeff;
-  color: #3b3475;
+.tone-laushu .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
 }
 
-.project-card.tone-thesis .project-tags span {
-  background-color: #e6ffe3;
-  color: #2d462a;
+.tone-thesis .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
 }
 
 .project-button {
@@ -1421,7 +1368,7 @@ button {
   padding: 12px 0;
   border-radius: 200px;
   color: white;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .tone-brown .project-button,
@@ -1437,20 +1384,20 @@ button {
 .tone-peach .project-button:not(.is-disabled),
 .tone-navy .project-button:not(.is-disabled),
 .tone-advantech .project-button:not(.is-disabled),
-.project-card.tone-icecream .project-button:not(.is-disabled),
-.project-card.tone-laushu .project-button:not(.is-disabled),
-.project-card.tone-thesis .project-button:not(.is-disabled) {
+.tone-icecream .project-button:not(.is-disabled),
+.tone-laushu .project-button:not(.is-disabled),
+.tone-thesis .project-button:not(.is-disabled) {
   background: var(--purple);
-  color: #ffffff;
+  color: var(--paper);
   transition: background-color 180ms ease;
 }
 
 .tone-peach .project-button:not(.is-disabled):hover,
 .tone-navy .project-button:not(.is-disabled):hover,
 .tone-advantech .project-button:not(.is-disabled):hover,
-.project-card.tone-icecream .project-button:not(.is-disabled):hover,
-.project-card.tone-laushu .project-button:not(.is-disabled):hover,
-.project-card.tone-thesis .project-button:not(.is-disabled):hover {
+.tone-icecream .project-button:not(.is-disabled):hover,
+.tone-laushu .project-button:not(.is-disabled):hover,
+.tone-thesis .project-button:not(.is-disabled):hover {
   background: var(--purple-hover);
 }
 
@@ -1506,7 +1453,7 @@ button {
 .contact-info-header h2 {
   margin: 0 0 12px;
   color: var(--ink);
-  font-size: 32px;
+  font-size: var(--fs-h1);
   font-weight: 700;
   line-height: 1.35;
 }
@@ -1514,7 +1461,7 @@ button {
 .contact-info-header .contact-subtitle {
   margin: 0;
   color: var(--muted);
-  font-size: 18px;
+  font-size: var(--fs-h4);
   line-height: 1.5;
 }
 
@@ -1599,7 +1546,7 @@ button {
 .copy-btn {
   padding: 6px 14px;
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: 200px;
   background: white;
   color: var(--muted);
   font-size: 14px;
@@ -1641,7 +1588,7 @@ button {
   display: grid;
   gap: 32px;
   padding: 48px;
-  border-radius: 20px;
+  border-radius: 16px;
   background: white;
   border: 1px solid var(--line);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
@@ -1655,7 +1602,7 @@ button {
 .contact-card-header h3 {
   margin: 0 0 6px;
   color: var(--ink);
-  font-size: 24px;
+  font-size: var(--fs-h3);
   font-weight: 700;
 }
 
@@ -1694,7 +1641,7 @@ button {
 .form-field textarea {
   width: 100%;
   padding: 22px 16px 8px;
-  background: #F9F9F9;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 12px;
   font: inherit;
@@ -1921,12 +1868,11 @@ button {
   width: 341px;
   height: 425px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
 
 .portrait-card img,
-.traits-photo img,
 .experience-image img {
   object-fit: cover;
 }
@@ -1956,7 +1902,7 @@ button {
 .about-intro-copy h1 {
   margin: 0;
   color: var(--about-accent);
-  font-size: 32px;
+  font-size: var(--fs-h1);
   font-weight: 500;
   line-height: 1.25;
 }
@@ -1979,7 +1925,6 @@ button {
 }
 
 .growth-grid,
-.traits-panel,
 .experience-layout,
 .skills-panel,
 .education-list {
@@ -2105,7 +2050,7 @@ button {
   place-items: center;
   overflow: hidden;
   color: white;
-  font-size: 24px;
+  font-size: var(--fs-h3);
   font-weight: 600;
   line-height: 1.5;
 }
@@ -2307,61 +2252,21 @@ button {
   }
 }
 
-.traits-list h3,
 .experience-copy h3,
 .skills-panel h3,
 .education-card h3 {
   margin: 0;
   color: var(--ink);
-  font-size: 24px;
+  font-size: var(--fs-h3);
   font-weight: 600;
   line-height: 1.4;
 }
 
-.traits-list p,
 .education-card p {
   margin: 0;
   color: rgba(0, 0, 0, 0.78);
   font-weight: 500;
   line-height: 1.4;
-}
-
-.traits-panel {
-  display: grid;
-  grid-template-columns: 289px minmax(0, 1fr);
-  gap: 48px;
-  align-items: stretch;
-  overflow: hidden;
-  padding: 48px;
-  border-radius: 20px;
-  background: var(--brown-soft);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-}
-
-.traits-photo {
-  position: relative;
-  min-height: 520px;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.traits-photo img {
-  object-position: center top;
-}
-
-.traits-list {
-  display: grid;
-  gap: 48px;
-  align-content: center;
-}
-
-.traits-list article {
-  display: grid;
-  gap: 24px;
-}
-
-.traits-list p {
-  color: var(--brown);
 }
 
 .experience-layout {
@@ -2388,7 +2293,7 @@ button {
 .year-rail a {
   color: var(--muted);
   font-family: var(--font-space-grotesk), sans-serif;
-  font-size: 24px;
+  font-size: var(--fs-h3);
   font-weight: 600;
   line-height: 1;
   transition:
@@ -2399,7 +2304,7 @@ button {
 
 .year-rail a.is-active {
   color: var(--purple);
-  font-size: 32px;
+  font-size: var(--fs-h1);
   font-weight: 600;
 }
 
@@ -2412,7 +2317,7 @@ button {
   display: grid;
   grid-template-columns: 269px minmax(0, 1fr);
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 16px;
   background: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
   opacity: 0;
@@ -2520,8 +2425,8 @@ button {
   display: grid;
   gap: 32px;
   padding: 48px;
-  border-radius: 20px;
-  background: #F9F9F9;
+  border-radius: 16px;
+  background: var(--surface);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
@@ -2584,7 +2489,7 @@ button {
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: rgba(0, 0, 0, 0.02);
   flex-shrink: 0;
   transition: transform 300ms ease;
@@ -2696,7 +2601,7 @@ button {
   gap: 48px;
   align-items: center;
   padding: 48px;
-  border-radius: 20px;
+  border-radius: 16px;
   background: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
@@ -2730,8 +2635,8 @@ button {
   gap: 20px;
   height: 100%;
   padding: 32px;
-  border-radius: 20px;
-  background: F9F9F9;
+  border-radius: 16px;
+  background: var(--surface);
   border: 1px solid var(--line);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   overflow: hidden;
@@ -2819,11 +2724,11 @@ button {
 
 /* 三張卡標題 + icon 對應 avatar_profile 三色：紫 / 橘 / 綠 */
 .design-value-animated:nth-child(1) .design-value-card h3 {
-  color: #5d62d8;
+  color: var(--purple);
 }
 
 .design-value-animated:nth-child(1) .design-value-icon {
-  color: #5d62d8;
+  color: var(--purple);
   background: rgba(93, 98, 216, 0.1);
 }
 
@@ -2834,7 +2739,7 @@ button {
 
 .design-value-animated:nth-child(1) .design-value-card:hover p,
 .design-value-animated:nth-child(1) .design-value-card:focus-within p {
-  color: #343434;
+  color: var(--ink);
 }
 
 .design-value-animated:nth-child(2) .design-value-card h3 {
@@ -2853,7 +2758,7 @@ button {
 
 .design-value-animated:nth-child(2) .design-value-card:hover p,
 .design-value-animated:nth-child(2) .design-value-card:focus-within p {
-  color: #343434;
+  color: var(--ink);
 }
 
 .design-value-animated:nth-child(3) .design-value-card h3 {
@@ -2872,7 +2777,7 @@ button {
 
 .design-value-animated:nth-child(3) .design-value-card:hover p,
 .design-value-animated:nth-child(3) .design-value-card:focus-within p {
-  color: #343434;
+  color: var(--ink);
 }
 
 @keyframes designValueShine {
@@ -2924,7 +2829,7 @@ button {
   position: relative;
   display: block;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 16px;
   min-height: 380px;
   background: #1c1c2e;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
@@ -3145,7 +3050,7 @@ button {
     border-radius: 8px;
     padding: 6px 4px;
     background: transparent;
-    color: #5d6674;
+    color: var(--text-secondary);
     font-size: 11px;
     font-weight: 700;
     line-height: 14px;
@@ -3165,7 +3070,7 @@ button {
   .cs-alarm-panel {
     justify-content: center;
     min-height: 76px;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #f6faff;
   }
 
@@ -3223,7 +3128,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 56px;
+    font-size: var(--fs-h1);
     line-height: 1.2;
   }
 
@@ -3232,7 +3137,7 @@ button {
   }
 
   .hero-taglines {
-    font-size: 32px;
+    font-size: var(--fs-h1);
   }
 
   .hero-actions {
@@ -3242,8 +3147,8 @@ button {
   .hero-actions .button {
     min-height: 52px;
     padding: 12px 28px;
-    border-radius: 28px;
-    font-size: 20px;
+    border-radius: 200px;
+    font-size: var(--fs-body);
   }
 
   .hero-actions .button-secondary {
@@ -3275,13 +3180,13 @@ button {
   }
 
   .hero h1 {
-    font-size: 36px;
+    font-size: var(--fs-h1);
     line-height: 1.3;
   }
 
   .hero-taglines {
     width: 100%;
-    font-size: 32px;
+    font-size: var(--fs-h1);
     line-height: 1.4;
   }
 
@@ -3298,7 +3203,7 @@ button {
     min-width: 136px;
     min-height: 52px;
     padding: 12px 28px;
-    font-size: 20px;
+    font-size: var(--fs-body);
   }
 
   .hero-decoration {
@@ -3397,7 +3302,7 @@ button {
   }
 
   .about-intro-copy h1 {
-    font-size: 28px;
+    font-size: var(--fs-h1);
   }
 
   .growth-story {
@@ -3537,11 +3442,6 @@ button {
     width: 100%;
   }
 
-  .nav-links .resume-link {
-    justify-content: center;
-    margin-left: 0;
-  }
-
   .hero {
     min-height: calc(100svh - 80px);
     padding: clamp(190px, calc((100svh - 80px) * 0.294), 261px) 20px clamp(40px, calc((100svh - 80px) * 0.069), 61px);
@@ -3563,7 +3463,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 28px;
+    font-size: var(--fs-h1);
     line-height: 1.2;
   }
 
@@ -3698,7 +3598,7 @@ button {
   }
 
   .section-heading h2 {
-    font-size: 24px;
+    font-size: var(--fs-h1);
   }
 
   .project-tabs {
@@ -3736,11 +3636,11 @@ button {
     inset: auto;
     width: 100%;
     aspect-ratio: 1.78 / 1;
-    border-radius: 10px;
+    border-radius: 12px;
   }
 
   .project-image {
-    border-radius: 10px;
+    border-radius: 12px;
   }
 
   /* 圖片下方依序堆：白色資訊卡 → 按鈕（自然流式，不再絕對定位） */
@@ -3773,7 +3673,7 @@ button {
     row-gap: 8px;
     width: 100%;
     padding: 12px;
-    border-radius: 10px;
+    border-radius: 12px;
     background: white;
   }
 
@@ -3923,7 +3823,7 @@ button {
   }
 
   .about-intro-copy h1 {
-    font-size: 24px;
+    font-size: var(--fs-h1);
   }
 
   .about-intro-copy p,
@@ -3936,30 +3836,26 @@ button {
   }
 
   .growth-grid,
-  .traits-panel,
   .experience-layout,
   .skills-panel,
   .education-list {
     margin-inline: 24px;
   }
 
-  .traits-panel,
   .experience-card,
   .education-card {
     grid-template-columns: 1fr;
   }
 
-  .traits-panel,
   .skills-panel,
   .education-card {
     padding: 24px;
   }
 
-  .traits-list h3,
   .experience-copy h3,
   .skills-panel h3,
   .education-card h3 {
-    font-size: 20px;
+    font-size: var(--fs-h3);
   }
 
   .growth-story {
@@ -4068,18 +3964,6 @@ button {
     height: 23px;
   }
 
-  .traits-photo {
-    min-height: 400px;
-  }
-
-  .traits-list {
-    gap: 24px;
-  }
-
-  .traits-list article {
-    gap: 12px;
-  }
-
   .experience-layout {
     display: flex;
     flex-direction: column;
@@ -4125,12 +4009,12 @@ button {
     align-items: center;
     justify-content: center;
     min-width: 0;
-    font-size: 18px;
+    font-size: var(--fs-h4);
     line-height: 1;
   }
 
   .year-rail a.is-active {
-    font-size: 24px;
+    font-size: var(--fs-h3);
   }
 
   .experience-card {
@@ -4179,7 +4063,7 @@ button {
   }
 
   .design-value-card h3 {
-    font-size: 18px;
+    font-size: var(--fs-h4);
   }
 
   .educator-section {
@@ -4260,7 +4144,7 @@ button {
 
 .cs-page {
   background: var(--paper);
-  color: #1a1a1a;
+  color: var(--text-heading);
   font-family: Inter, var(--font-space-grotesk), sans-serif;
 }
 
@@ -4358,12 +4242,6 @@ button {
 /* ── 共用 section 容器 ── */
 .cs-section {
   padding: 48px var(--page-gutter);
-}
-
-.cs-section-dark {
-  padding: 48px var(--page-gutter);
-  background: #131b24;
-  color: white;
 }
 
 .cs-section-surface {
@@ -4507,7 +4385,7 @@ button {
 .cs-info-value {
   font-size: var(--fs-h4);
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-heading);
 }
 
 .cs-info-tasks {
@@ -4520,7 +4398,7 @@ button {
   font-size: var(--fs-h4);
   line-height: 1.22;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-heading);
 }
 
 /* ── 02 Overview ── */
@@ -4711,7 +4589,7 @@ button {
   font-size: clamp(15px, 0.89vw, 17px);
   font-weight: 700;
   line-height: 1.5;
-  color: #1a1a1a;
+  color: var(--text-heading);
   margin: 0;
 }
 
@@ -5429,7 +5307,7 @@ button {
 /* === Interview Synthesis === */
 .cs-synthesis {
   border: 1px solid #d5dfec;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
 }
 
@@ -5917,7 +5795,7 @@ button {
 .cs-sol-flow {
   width: 100%;
   height: 115px;
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid #d5dfec;
   background-size: cover;
   background-position: center top;
@@ -6060,7 +5938,7 @@ button {
 
 .cs-sol-txt-p {
   font-size: var(--fs-body);
-  color: #5d6674;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 23px;
 }
@@ -6069,7 +5947,7 @@ button {
 .cs-sol-board {
   background: white;
   border: 1px solid #d5dfec;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -6110,7 +5988,7 @@ button {
 .cs-sol-drlabel {
   font-size: var(--fs-body);
   font-weight: 700;
-  color: #5d6674;
+  color: var(--text-secondary);
   width: 98px;
   flex-shrink: 0;
   line-height: 23px;
@@ -6120,7 +5998,7 @@ button {
 .cs-sol-drbody {
   flex: 1;
   font-size: var(--fs-body);
-  color: #5d6674;
+  color: var(--text-secondary);
   line-height: 23px;
   margin: 0;
 }
@@ -6135,7 +6013,7 @@ button {
 .cs-sol-bapanel {
   flex: 1;
   border: 1px solid #d5dfec;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   background: #fafdfe;
   display: flex;
@@ -6266,7 +6144,7 @@ button {
 
 .cs-sol-fsub {
   font-size: var(--fs-sm);
-  color: #5d6674;
+  color: var(--text-secondary);
   margin: 0 0 24px;
   line-height: 22px;
 }
@@ -6314,7 +6192,7 @@ button {
   flex: 0 0 30%;
   background: white;
   border: 1px solid #d5dfec;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -6324,7 +6202,7 @@ button {
 
 .cs-sol-fnote>p {
   font-size: var(--fs-sm);
-  color: #5d6674;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 22px;
 }
@@ -6410,7 +6288,7 @@ button {
 
 .cs-alarm-arrow {
   flex-shrink: 0;
-  color: #5d6674;
+  color: var(--text-secondary);
   font-size: 20px;
   line-height: 24px;
 }
@@ -6509,7 +6387,7 @@ button {
   .cs-alarm-panel {
     justify-content: center;
     min-height: 76px;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #f6faff;
   }
 
@@ -6694,7 +6572,7 @@ button {
 .cs-ns-desc {
   font-size: var(--fs-body);
   font-weight: 400;
-  color: #5d6674;
+  color: var(--text-secondary);
   line-height: 1.75;
   margin: 0;
 }
@@ -6725,7 +6603,7 @@ button {
   flex: 1;
   background: #fafdfe;
   border: 1px solid #d5dfec;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -6763,7 +6641,7 @@ button {
 .cs-ns-card-text {
   font-size: var(--fs-body);
   font-weight: 400;
-  color: #5d6674;
+  color: var(--text-secondary);
   line-height: 1.73;
   margin: 0;
   flex: 1;
@@ -6810,7 +6688,7 @@ button {
 .cs-ns-vision-text {
   font-size: var(--fs-body);
   font-weight: 400;
-  color: #5d6674;
+  color: var(--text-secondary);
   line-height: 1.73;
   margin: 0;
 }
@@ -6919,7 +6797,7 @@ button {
   justify-content: center;
   padding: 16px 24px;
   border-radius: 200px;
-  background: #5d62d8;
+  background: var(--purple);
   font-size: var(--fs-body);
   font-weight: 600;
   color: #fff;
@@ -7502,7 +7380,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 28px;
+    font-size: var(--fs-h1);
     line-height: 1.2;
   }
 
