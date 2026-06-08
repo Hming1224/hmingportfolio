@@ -1746,16 +1746,11 @@ button {
   font-weight: 600;
   cursor: pointer;
   outline: none;
-  transition:
-    background-color 200ms ease,
-    transform 200ms ease,
-    box-shadow 200ms ease;
+  transition: background-color 180ms ease;
 }
 
 .submit-btn:not(:disabled):hover {
   background: var(--purple-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(93, 98, 216, 0.25);
 }
 
 .submit-btn:disabled {
