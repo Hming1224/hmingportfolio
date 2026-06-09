@@ -48,11 +48,5 @@ next-env.d.ts
 !.codex/hooks.json
 .playwright-mcp/
 
-# design iterations — 排除工作檔，保留截圖與 iteration.md 進 git
-/iterations/.tmp_*
-/iterations/.before_state.json
-/iterations/.selector-cache.json
-/iterations/.debug.log
-/iterations/**/*.log
-/iterations/**/*.tmp
-/iterations/**/.descjob.json
+# design iterations — 自動截圖 hook 已停用，整個資料夾不進 git
+/iterations/
