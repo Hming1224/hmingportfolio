@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
-  const locale = useLocale();
+  const t = useTranslations('nav');
   const [open, setOpen] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const openRef = useRef(false);
@@ -81,7 +81,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav ref={navRef} className={`site-nav ${open ? 'is-open' : ''}`} aria-label="主要導覽">
+    <nav ref={navRef} className={`site-nav ${open ? 'is-open' : ''}`} aria-label={t('ariaLabel')}>
       <div className="nav-top">
         <Link href="/" prefetch={false} className="brand" aria-label="Brian Huang home">
           <Image
@@ -96,7 +96,7 @@ export default function Navbar() {
         <button
           className="menu-button"
           type="button"
-          aria-label={open ? '關閉選單' : '開啟選單'}
+          aria-label={open ? t('closeMenu') : t('openMenu')}
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
         >
@@ -107,21 +107,21 @@ export default function Navbar() {
 
       <div className="nav-links">
         <Link href="/#projects" prefetch={false} onClick={() => setOpen(false)}>
-          設計案例
+          {t('projects')}
         </Link>
         <Link href="/about-me" onClick={() => setOpen(false)}>
-          關於我
+          {t('about')}
         </Link>
         <Link href="/contact" onClick={() => setOpen(false)}>
-          聯絡資訊
+          {t('contact')}
         </Link>
         <a
-          href={locale === 'en' ? '/Brian_Huang_Resume.pdf' : '/黃宣銘_中文履歷.pdf'}
+          href={t('resumeHref')}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setOpen(false)}
         >
-          下載履歷
+          {t('resume')}
         </a>
         <LanguageSwitcher />
       </div>

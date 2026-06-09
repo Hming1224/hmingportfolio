@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -11,6 +11,7 @@ const languageOptions: Array<{ locale: Locale; label: string }> = [
 ];
 
 export default function LanguageSwitcher() {
+  const t = useTranslations("language");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const router = useRouter();
@@ -61,19 +62,19 @@ export default function LanguageSwitcher() {
       <button
         className="language-switcher-trigger"
         type="button"
-        aria-label="選擇語言"
+        aria-label={t("select")}
         aria-expanded={open}
         aria-haspopup="menu"
         disabled={isPending}
         onClick={() => setOpen((value) => !value)}
       >
-        <span>{locale === "en" ? "EN" : "中文"}</span>
+        <span>{t("current")}</span>
         <svg viewBox="0 0 12 12" aria-hidden="true">
           <path d="m2.5 4.5 3.5 3 3.5-3" />
         </svg>
       </button>
 
-      <div className="language-switcher-menu" role="menu" aria-label="語言選單">
+      <div className="language-switcher-menu" role="menu" aria-label={t("menu")}>
         {languageOptions.map((option) => (
           <button
             key={option.locale}

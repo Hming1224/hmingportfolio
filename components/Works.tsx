@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
+import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import {
-  projects,
+  getProjects,
   type ProjectSummary,
 } from "../data/projects";
 import {
@@ -53,6 +56,7 @@ function useScrollReveal() {
 }
 
 function ProjectCard({ project }: { project: ProjectSummary }) {
+  const t = useTranslations("works");
   const disabled = project.status === "coming-soon";
 
   return (
@@ -87,13 +91,15 @@ function ProjectCard({ project }: { project: ProjectSummary }) {
             ))}
           </div>
         </div>
-        <a
-          className={`project-button ${disabled ? "is-disabled" : ""}`}
-          href={disabled ? undefined : project.href}
-          aria-disabled={disabled}
-        >
-          {disabled ? "即將上線" : "了解更多"}
-        </a>
+        {disabled ? (
+          <span className="project-button is-disabled" aria-disabled="true">
+            {t("comingSoon")}
+          </span>
+        ) : (
+          <Link className="project-button" href={project.href ?? "/"}>
+            {t("learnMore")}
+          </Link>
+        )}
       </div>
     </article>
   );
@@ -111,6 +117,9 @@ function ProjectList({ projects: list }: { projects: ProjectSummary[] }) {
 }
 
 export default function Works() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations("works");
+  const projects = getProjects(locale);
   const enterpriseProjects = projects.filter(
     (project) => project.category === "enterprise",
   );
@@ -122,7 +131,7 @@ export default function Works() {
     <section id="projects" className="projects-section">
       <div className="section-heading">
         <span />
-        <h2>設計案例</h2>
+        <h2>{t("heading")}</h2>
         <span />
       </div>
 
@@ -131,12 +140,12 @@ export default function Works() {
           <TabsList className="project-tabs-list">
             <TabsHighlightItem value="enterprise" className="project-tabs-item">
               <TabsTab value="enterprise" className="project-tabs-tab">
-                企業應用
+                {t("enterprise")}
               </TabsTab>
             </TabsHighlightItem>
             <TabsHighlightItem value="school" className="project-tabs-item">
               <TabsTab value="school" className="project-tabs-tab">
-                學校產出
+                {t("school")}
               </TabsTab>
             </TabsHighlightItem>
           </TabsList>

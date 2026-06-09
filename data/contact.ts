@@ -1,7 +1,18 @@
-export const contactData = {
+import type { Locale } from "../i18n/routing";
+
+const contactCopy = {
+  en: {
+    title: "Interested in my experience or work?",
+    subtitle: "Reach out through any channel below, or send me a message.",
+  },
+  zh: {
+    title: "對我的經歷或作品感興趣嗎？",
+    subtitle: "透過以下管道與我聯繫，或傳送表單訊息！",
+  },
+} satisfies Record<Locale, { title: string; subtitle: string }>;
+
+const contactDetails = {
   heroImage: "https://framerusercontent.com/images/NB9UIWMSY1Vp8KhJ1oEDFdGQI.jpg",
-  title: "對我的經歷或作品感興趣嗎？",
-  subtitle: "透過以下管道與我聯繫，或傳送表單訊息！",
   email: "hmingdesigner@gmail.com",
   phone: "+886 978-629-321",
   socials: {
@@ -15,3 +26,10 @@ export const contactData = {
     },
   },
 } as const;
+
+export function getContactData(locale: Locale) {
+  return {
+    ...contactDetails,
+    ...contactCopy[locale],
+  };
+}

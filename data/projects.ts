@@ -1,3 +1,5 @@
+import type { Locale } from "../i18n/routing";
+
 export type ProjectCategory = "enterprise" | "school";
 export type ProjectStatus = "published" | "coming-soon";
 
@@ -18,7 +20,7 @@ export interface ProjectSummary {
   seoDescription?: string;
 }
 
-export const projects: ProjectSummary[] = [
+const zhProjects: ProjectSummary[] = [
   {
     slug: "advantech",
     cardId: "project-advantech-wiseiems",
@@ -147,8 +149,149 @@ export const projects: ProjectSummary[] = [
   },
 ];
 
-export function getProjectBySlug(slug: string): ProjectSummary {
-  const project = projects.find((item) => item.slug === slug);
+const enProjects: ProjectSummary[] = [
+  {
+    slug: "advantech",
+    cardId: "project-advantech-wiseiems",
+    title: "GenAI-Powered Energy Management System",
+    date: "2024.06 - 2024.08",
+    description:
+      "A data platform designed with Advantech for factory teams and managers to monitor energy use and carbon emissions across facilities. The project introduced an AI chatbot to make energy management faster and more actionable.",
+    cover: "/projects/advantech/cover/cover.webp",
+    logo: "/projects/advantech/cover/logo.webp",
+    tags: ["UI/UX Design", "Team Project", "User Research", "GenAI"],
+    tone: "advantech",
+    category: "enterprise",
+    status: "published",
+    href: "/advantech",
+    nextProjectSlug: "crypto-arsenal",
+    seoDescription:
+      "A case study on designing a GenAI chatbot for Advantech WISE-iEMS, supporting smarter energy and HVAC operations.",
+  },
+  {
+    slug: "crypto-arsenal",
+    title: "Quantitative Crypto Trading Platform",
+    date: "2023.06 - 2023.08",
+    description:
+      "An automated quantitative trading platform where users can trade promising assets and subscribe to strategies published by bot creators. I designed and developed flows for reviewing personal holdings and scaling into positions.",
+    cover: "/projects/crypto-arsenal/cover/cover.webp",
+    logo: "/projects/crypto-arsenal/cover/logo.webp",
+    tags: ["UI/UX Design", "User Research"],
+    tone: "navy",
+    category: "enterprise",
+    status: "coming-soon",
+  },
+  {
+    slug: "thesis",
+    title: "GenAI Sketch Ideation System",
+    date: "2025.06 - 2025.08",
+    description:
+      "A GenAI platform that supports designers during early-stage ideation through four distinct feedback modes. The research examines how different forms of AI feedback influence creative outcomes.",
+    cover: "/projects/thesis/cover/cover.webp",
+    logo: "/projects/thesis/cover/logo.webp",
+    tags: ["GenAI", "Master's Thesis", "Human-AI Collaboration"],
+    tone: "thesis",
+    category: "school",
+    status: "coming-soon",
+  },
+  {
+    slug: "icecream-maniac",
+    title: "Ice Cream Maniac",
+    date: "2025.05 - 2025.06",
+    description:
+      "A playful web game made by a graduate student under the combined pressure of coursework and a thesis. Players satisfy the character's cravings by collecting as much ice cream as possible while avoiding bitter melon.",
+    cover: "/projects/icecream-maniac/cover/cover.webp",
+    logo: "/projects/icecream-maniac/cover/logo.webp",
+    tags: ["Game Design", "Personal Project", "Vibe Coding"],
+    tone: "icecream",
+    category: "school",
+    status: "coming-soon",
+  },
+  {
+    slug: "laushu",
+    title: "Laushu Contractor Payment System",
+    date: "2024.02 - 2024.04",
+    description:
+      "A contractor payment system that helps companies prepare payment forms, collect signatures, and organize tax records when working with external professionals, reducing administrative effort and improving efficiency.",
+    cover: "/projects/laushu/cover/cover.webp",
+    logo: "/projects/laushu/cover/logo.webp",
+    tags: ["UI/UX Design", "User Research", "Team Project"],
+    tone: "laushu",
+    category: "school",
+    status: "coming-soon",
+  },
+  {
+    slug: "nccuspace",
+    cardId: "project4",
+    title: "NCCUSpace Campus Booking System",
+    date: "2023.10 - 2023.12",
+    description:
+      "An information service that helps NCCU students book campus spaces more easily. The project focused on simplifying a complex reservation flow and helping students find spaces that match their needs.",
+    cover: "https://framerusercontent.com/images/QPe9idFph9AwvwFOSCV4JJDLJZ0.png",
+    logo: "https://framerusercontent.com/images/jocDTIVjs0ouwwKqNVnrI02aYGQ.png",
+    tags: ["UI/UX Design", "Web Design", "Team Project", "Course Project"],
+    tone: "brown",
+    category: "school",
+    status: "coming-soon",
+  },
+  {
+    slug: "tba",
+    cardId: "project3",
+    title: "TBA Digital Credential Platform",
+    date: "2022.12 - 2023.02",
+    description:
+      "A Web3-based digital credential service developed with Cathay Financial Holdings' digital technology team. During the two-month project, I led UX design, web interface design, user research, and usability testing.",
+    cover: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
+    logo: "https://framerusercontent.com/images/P57DkJCf8P5Yrz7l53G2waxdHIM.jpeg",
+    tags: ["UI/UX Design", "Web Design", "End-to-End Design", "In Development"],
+    tone: "green",
+    category: "enterprise",
+    status: "coming-soon",
+  },
+  {
+    slug: "sidd",
+    cardId: "project2",
+    title: "SIDD Student Lifestyle App",
+    date: "2022.05 - 2022.07",
+    description:
+      "SIDD, short for Student ID Daily, is a student-focused platform for everyday discounts and digital payments. It helps students make better use of student benefits while managing daily purchases.",
+    cover: "https://framerusercontent.com/images/atAQZ5VIKGpNezpwapXvzyP6P0k.jpg",
+    logo: "https://framerusercontent.com/images/7WaAn4JhL9Pt42V8nCM30Wy6lnQ.png",
+    tags: ["UI/UX Design", "iOS", "Team Project", "Side Project"],
+    tone: "peach",
+    category: "school",
+    status: "coming-soon",
+  },
+  {
+    slug: "mym",
+    cardId: "project1",
+    title: "MYM Movie Ticketing App",
+    date: "2022.02 - 2022.04",
+    description:
+      "MYM, short for Memo Your Movie, is a movie ticketing app designed around a faster, clearer booking flow. The project focused on improving the user experience and addressing common pain points in existing ticketing systems.",
+    cover: "https://framerusercontent.com/images/8Iaui73ExLg638pnKjFxBtKJuI4.jpg",
+    logo: "https://framerusercontent.com/images/SShjyBDiP4x3KC27pXvmazLujeI.jpg",
+    tags: ["UI/UX Design", "iOS", "End-to-End Design", "Side Project"],
+    tone: "navy",
+    category: "school",
+    status: "coming-soon",
+  },
+];
+
+const projectsByLocale = {
+  en: enProjects,
+  zh: zhProjects,
+} satisfies Record<Locale, ProjectSummary[]>;
+
+// Keep the existing Chinese default for case-study pages until their Phase 5 migration.
+export const projects = zhProjects;
+
+export function getProjects(locale: Locale): ProjectSummary[] {
+  return projectsByLocale[locale];
+}
+
+export function getProjectBySlug(slug: string, locale: Locale = "zh"): ProjectSummary {
+  const project = getProjects(locale).find((item) => item.slug === slug);
 
   if (!project) {
     throw new Error(`Unknown project slug: ${slug}`);
@@ -157,12 +300,12 @@ export function getProjectBySlug(slug: string): ProjectSummary {
   return project;
 }
 
-export function getNextProject(slug: string): ProjectSummary {
-  const project = getProjectBySlug(slug);
+export function getNextProject(slug: string, locale: Locale = "zh"): ProjectSummary {
+  const project = getProjectBySlug(slug, locale);
 
   if (!project.nextProjectSlug) {
     throw new Error(`Project "${slug}" does not define nextProjectSlug`);
   }
 
-  return getProjectBySlug(project.nextProjectSlug);
+  return getProjectBySlug(project.nextProjectSlug, locale);
 }

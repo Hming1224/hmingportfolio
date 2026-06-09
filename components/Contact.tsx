@@ -1,12 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import AnimatedContent from "../app/about-me/AnimatedContent";
-import { contactData } from "../data/contact";
+import { getContactData } from "../data/contact";
+import type { Locale } from "../i18n/routing";
 import { config } from "../lib/config";
 
 export default function Contact() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations("contact");
+  const contactData = getContactData(locale);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -116,16 +121,16 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div className="method-details">
-                    <span className="method-label">電子信箱</span>
+                    <span className="method-label">{t("email")}</span>
                     <span className="method-value">
                       {contactData.email}
                     </span>
                   </div>
                   <button
                     className={`copy-btn ${copied ? "copied" : ""}`}
-                    aria-label="複製信箱"
+                    aria-label={t("copyEmail")}
                   >
-                    {copied ? "已複製！" : "複製"}
+                    {copied ? t("copied") : t("copy")}
                   </button>
                 </div>
 
@@ -149,16 +154,16 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div className="method-details">
-                    <span className="method-label">手機號碼</span>
+                    <span className="method-label">{t("phone")}</span>
                     <span className="method-value">
                       {contactData.phone}
                     </span>
                   </div>
                   <button
                     className={`copy-btn ${copiedPhone ? "copied" : ""}`}
-                    aria-label="複製手機號碼"
+                    aria-label={t("copyPhone")}
                   >
-                    {copiedPhone ? "已複製！" : "複製"}
+                    {copiedPhone ? t("copied") : t("copy")}
                   </button>
                 </div>
 
@@ -266,8 +271,8 @@ export default function Contact() {
           >
             <div className="contact-card">
               <div className="contact-card-header">
-                <h3>填寫聯絡表單</h3>
-                <p>收到回覆後，將會儘速聯絡！😸</p>
+                <h3>{t("formTitle")}</h3>
+                <p>{t("formSubtitle")}</p>
               </div>
 
               <form className="contact-form" onSubmit={handleSubmit}>
@@ -279,7 +284,7 @@ export default function Contact() {
                     placeholder=" "
                     required
                   />
-                  <label htmlFor="name">你的姓名</label>
+                  <label htmlFor="name">{t("name")}</label>
                 </div>
 
                 <div className="form-field">
@@ -290,7 +295,7 @@ export default function Contact() {
                     placeholder=" "
                     required
                   />
-                  <label htmlFor="company">服務單位</label>
+                  <label htmlFor="company">{t("company")}</label>
                 </div>
 
                 <div className="form-row">
@@ -302,12 +307,12 @@ export default function Contact() {
                       placeholder=" "
                       required
                     />
-                    <label htmlFor="email">電子信箱</label>
+                    <label htmlFor="email">{t("email")}</label>
                   </div>
 
                   <div className="form-field">
                     <input type="tel" id="phone" name="phone" placeholder=" " />
-                    <label htmlFor="phone">手機號碼</label>
+                    <label htmlFor="phone">{t("phone")}</label>
                   </div>
                 </div>
 
@@ -319,7 +324,7 @@ export default function Contact() {
                     required
                     rows={4}
                   />
-                  <label htmlFor="message">訊息內容</label>
+                  <label htmlFor="message">{t("message")}</label>
                 </div>
 
                 <button
@@ -327,7 +332,7 @@ export default function Contact() {
                   disabled={status === "loading" || status === "success"}
                   className={`submit-btn btn-status-${status}`}
                 >
-                  {status === "idle" && "送出訊息"}
+                  {status === "idle" && t("submit")}
                   {status === "loading" && (
                     <span className="btn-content">
                       <svg
@@ -351,7 +356,7 @@ export default function Contact() {
                           className="opacity-75"
                         />
                       </svg>
-                      傳送中...
+                      {t("sending")}
                     </span>
                   )}
                   {status === "success" && (
@@ -372,10 +377,10 @@ export default function Contact() {
                           className="checkmark-path"
                         />
                       </svg>
-                      送出成功！
+                      {t("success")}
                     </span>
                   )}
-                  {status === "error" && "傳送失敗，請重試"}
+                  {status === "error" && t("error")}
                 </button>
               </form>
             </div>

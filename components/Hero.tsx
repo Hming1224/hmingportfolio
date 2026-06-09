@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import SplitText from './animate-ui/primitives/texts/SplitText';
 import TrueFocus from './animate-ui/primitives/texts/TrueFocus';
@@ -11,7 +12,9 @@ import WalPencilDecoration from './hero-decorations/WalPencilDecoration';
 import HeroEntranceController from './hero-decorations/HeroEntranceController';
 import HeroBottomGroupCenter from './hero-decorations/HeroBottomGroupCenter';
 
-export default function Hero() {
+export default async function Hero() {
+  const t = await getTranslations('hero');
+
   return (
     <section className="hero" id="about">
       <HeroEntranceController />
@@ -54,14 +57,14 @@ export default function Hero() {
           <div className="hero-badge">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/decorations/badge-icon.png" width={24} height={24} alt="" aria-hidden="true" />
-            <span>2+ 業界專案經驗，目前正在尋找新的機會！</span>
+            <span>{t('badge')}</span>
           </div>
         </div>
 
         <div className="hero-title">
           <SplitText
             tag="h1"
-            text="哈囉！我是黃宣銘 Brian Huang"
+            text={t('greeting')}
             delay={42}
             duration={0.72}
             ease="power3.out"
@@ -75,7 +78,7 @@ export default function Hero() {
 
           <div className="hero-taglines">
             <TrueFocus
-              sentence="以同理心研究需求|以好奇心探索設計|以清晰思維打造產品"
+              sentence={t('taglines')}
               separator="|"
               blurAmount={2}
               borderColor="var(--purple)"
@@ -87,8 +90,8 @@ export default function Hero() {
         </div>
 
         <div className="hero-actions">
-          <Link className="button button-secondary" href="/about-me">我的歷程</Link>
-          <a className="button button-primary"   href="#projects">查看作品</a>
+          <Link className="button button-secondary" href="/about-me">{t('journey')}</Link>
+          <a className="button button-primary" href="#projects">{t('works')}</a>
         </div>
       </div>
     </section>

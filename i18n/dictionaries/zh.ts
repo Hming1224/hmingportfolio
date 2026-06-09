@@ -1,3 +1,54 @@
-const messages = {};
+const messages = {
+  nav: {
+    ariaLabel: "主要導覽",
+    openMenu: "開啟選單",
+    closeMenu: "關閉選單",
+    projects: "設計案例",
+    about: "關於我",
+    contact: "聯絡資訊",
+    resume: "下載履歷",
+    resumeHref: "/黃宣銘_中文履歷.pdf",
+  },
+  language: {
+    select: "選擇語言",
+    menu: "語言選單",
+    current: "中文",
+  },
+  hero: {
+    badge: "2+ 業界專案經驗，目前正在尋找新的機會！",
+    greeting: "哈囉！我是黃宣銘 Brian Huang",
+    taglines: "以同理心研究需求|以好奇心探索設計|以清晰思維打造產品",
+    journey: "我的歷程",
+    works: "查看作品",
+  },
+  works: {
+    heading: "設計案例",
+    enterprise: "企業應用",
+    school: "學校產出",
+    comingSoon: "即將上線",
+    learnMore: "了解更多",
+  },
+  contact: {
+    email: "電子信箱",
+    phone: "手機號碼",
+    copyEmail: "複製信箱",
+    copyPhone: "複製手機號碼",
+    copy: "複製",
+    copied: "已複製！",
+    formTitle: "填寫聯絡表單",
+    formSubtitle: "收到回覆後，將會儘速聯絡！😸",
+    name: "你的姓名",
+    company: "服務單位",
+    message: "訊息內容",
+    submit: "送出訊息",
+    sending: "傳送中...",
+    success: "送出成功！",
+    error: "傳送失敗，請重試",
+  },
+  footer: {
+    socialLinks: "社群連結",
+    resume104: "104 個人履歷",
+  },
+};
 
 export default messages;
