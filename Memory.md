@@ -417,3 +417,32 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **修法**：刪掉 about.css 兩個會在 ≤768 命中的 block（`@media (max-width:1023px)` 與 `@media (max-width:768px)`）裡的 `.hero-sticky-1..6` 覆寫，讓 home.css 的對稱扇形勝出。游標/底部裝飾的 leak 暫留（沒被抱怨、且現況靠 about.css 版本在 render，動了反而有風險）。
 - **通用教訓**：① 多個全域 CSS 用 `@import` 串接時，**後載入的檔案會用同特異度蓋前面的**——scoped 檔之間別出現重複選擇器。② 首頁 hero 的 RWD 真正權威應只在 `home.css`；about.css 只該留 `/about-me` 自己的 class。③ debug「值被神秘覆寫」先用 `styleSheets` 走訪列出所有命中規則的來源檔＋media，不要只看單一檔案。
 - **待辦（未做，低優先）**：about.css 其實還殘留整套 home hero 的 leak（`.hero`/`.hero-copy`/`.hero-cursor-*`/`.hero-toggle`/`.hero-frame-large`/`.hero-ai-widget`/`.hero-wal-pencil` 等，跨 min-1024 / max-1023 / max-768 三個 block）。徹底乾淨應把這些全搬回 home.css 或刪除，讓 about.css 真正只管 /about-me。需逐斷點驗證首頁不回歸，適合另開 session。
+
+## 2026-06-09 根治 about.css 整套 home-hero leak（接續上一條的待辦）
+
+- **做了什麼**：把上一條待辦的「整套 home hero leak」徹底清掉。約刪 about.css 238 行（1889→1651），home.css +54 行。原則：home.css 成為首頁 hero 唯一權威，about.css 只留 `.about-hero` 與 `.hero-badge`/`.hero-badge-shimmer-wrap`（/about-me 自己有用到的 class）。
+- **關鍵判斷：刪 vs 搬**。逐斷點用 `getComputedStyle` 對比兩檔後決定：
+  - **桌機 ≥1024**：about 的 `@media (min-width:1024px)` 才是真正在 render 的 hero 文字版面（`max-width:1500px`、`padding:clamp(280px,48vh,500px)…`、`justify-content:flex-start`），home.css base `.hero` 只有 `center`/`120px`（不足）→ **必須把整塊搬進 home.css**（不能只刪），否則桌機 hero 退回置中、爆掉。
+  - **平板 768–1023**：about 的 `max-1023` 各值與 home.css `768-1024` block **完全相同** → 直接刪 about 的，home.css 接手，零變化。
+  - **手機 ≤768**：home.css 是新版 `.hero-bottom-group` 框架設計（4 個底部裝飾當框架子元素），但被 about 的 `max-768` 舊版逐元素絕對定位（`top:clamp(504~652px)`）**蓋掉而失效**——量到 4 個裝飾 rectTop≈1231–1328，整個掉到 hero 外、溢進 projects 區。刪掉 about 的就讓框架設計生效，裝飾回到 hero 內（rectTop≈662–824）。
+- **踩坑：刪完手機 hero 少了 `margin-top:80px`**。`margin-top:80px`（把 hero 推到 fixed nav 下方）原本**只**存在於 about 的 `max-1023`（涵蓋 ≤768），home.css 的 `max-768` block 沒有。刪掉後手機 hero `rectTop` 從 80→0，頂部 cursor tags（engineers/pm）被 80px 高的 fixed nav 蓋住（rectTop 16/35）。**修法：補 `margin-top:80px` 進 home.css 的 `@media (max-width:768px) .hero`**。教訓：刪除「後載入檔的覆寫」前，先確認被覆寫的選擇器在權威檔裡**每個屬性都有對應**，漏一個（這裡是 margin-top）就會在刪除後露餡。
+- **驗證**：dev server localhost:3000，playwright 量三斷點 computed top/left + rect。桌機/平板 hero 與裝飾數值**前後完全一致**；手機裝飾從溢出修正回 hero 內、cursor tags 清開 nav。home（桌機/手機截圖）與 /about-me（桌機/手機）皆正常，0 console error。
+- **結果**：about.css 現在 grep 不到任何 `.hero`/`.cursor-tag`/`.focus-container` 規則（只剩 `.about-hero` 與 `.hero-badge*`）。首頁 hero RWD 三斷點權威全部收斂到 home.css。
+
+## 2026-06-09 根治 about.css「首頁 projects」leak（第二輪同類清理）
+
+- **做了什麼**：把首頁專案區（`.projects-section`/`.section-heading*`/`.project-tabs*`/`.projects-list`/`.project-card*`/`.project-media`/`.project-image`/`.project-info`/`.project-meta`/`.project-logo-wrap*`/`.project-title*`/`.project-description`/`.project-tags*`/`.project-scrim`/`.project-button`）的**全部響應式規則**從 about.css 搬回 home.css。涵蓋 `max-1023`（`.project-card{min-height:500px}`）、`max-768`（整段流式卡片佈局）、`max-440`（資訊卡改置中直列）三個斷點。
+- **為何是「搬」不是「刪」**：grep 證實 home.css 只有 projects 的 **base + `prefers-reduced-motion`** 規則，**所有手機/平板響應式規則只存在於 about.css**——刪掉首頁專案區的 RWD 會全毀。和上一輪桌機 hero 同理：about.css 是唯一來源時必須搬。搬移時**原樣保留 about.css 用的斷點（1023/768/440）與先後順序**（1023→768→440，讓 ≤768 的 `min-height:0` 蓋過 ≤1023 的 500px、≤440 的置中蓋過 ≤768 的 grid），不轉成 home.css 的斷點方案，確保零變化。
+- **驗證**：localhost:3000，量 computed + 截圖。<440 置中直列（logo/標題置中、按鈕滿寬）✓；440–768 grid（`.project-meta` `grid-template-columns:134px …`，logo 左、標題/tags 右）✓。/about-me 不受影響、0 console error。about.css 1889→1470 行。
+- **本輪範圍**：只做首頁 projects（Hming 選的）。**about.css 仍殘留其他同類 leak（未做）**：① 共用 `.site-nav`/`.nav-*`/`.menu-button`（行動版 nav，全站共用，目前只存在 about.css→該搬 globals.css 或新建 nav.css）② 共用 `.button`/`.submit-btn`/`.project-button` 的尺寸規則 ③ contact 頁 `.contact-*` ④ `.site-footer`/`.social-links` ⑤ 案例頁 `.cs-*`（27 條，該搬回 case-study.css）。要徹底乾淨可再開一輪逐類處理。
+
+## 2026-06-09 第三輪同類清理：nav / footer / contact leak 各自歸位
+
+- **關鍵發現：共用 base 規則住在 `tokens.css`**，不是 globals.css（globals.css 只有 `@import`，沒自己的規則）。`tokens.css` 除了 design token，也放了全站共用的 base：`.site-nav`(:163)、`.nav-links`(:210)、`.site-footer`(:280)。所以上一輪「nav 落點待決定」其實有現成答案＝tokens.css，不必新建檔。
+- **做了什麼（3 類各歸其位，皆「搬移」非刪除）**：
+  - **共用 nav + footer**（`.site-nav*`/`.nav-top`/`.menu-button`/`.nav-links*`/`.site-footer*`/`.social-links`）的 `max-768` 行動版規則 → 併進 `tokens.css` 既有的 `@media (max-width:768px)` block（base 就在同檔上方，cascade 不變）。
+  - **contact 頁**（`.contact-panel-band`/`.contact-info-header*`/`.contact-method-item`/`.method-value`/`.contact-card`）`max-768` → append 進 `contact.css`（base 在該檔）。
+  - 從 about.css 的 `@media (max-width:768px)` 移除以上三群（保留 `.hero-badge*`、共用 `.button/.submit-btn` 尺寸、`.about-*`）。
+- **驗證**：localhost。手機 nav 點漢堡展開 → height 336px、links 直列、opacity/pointer 正常、X icon ✓；contact 頁 footer `column-reverse`、`.contact-panel-band`/`.contact-card` padding 正確、表單與 social links 正常 ✓。0 console error。about.css 1470→1371 行（三輪共 1889→1371）。
+- **cs-\* 這輪故意不做（有 cascade 陷阱）**：`.cs-sol-*`/`.cs-alarm-*`/`.cs-comp-ems-*`/`.cs-iv-*` 的 base 全在 **`case-study-advantech.css`**（不是 case-study.css，後者 0 條），而 advantech 頁是「globals.css 之後**再單獨 import** `case-study-advantech.css`」。所以 about.css 的 cs-* 媒體規則目前**載在 advantech.css base 之前**——同斷點下後載入的 advantech base 可能反而蓋過 about 的 override（about 的 cs-* 可能根本是死碼）。要處理得先確認：搬進 advantech.css 後放 base 之後會不會「啟用」原本失效的 override 而改變畫面。屬於需逐斷點實測的獨立題，適合另開 session 專做。
+- **約束未處理**：共用 `.button`/`.button-secondary`/`.submit-btn`/`.project-button` 的響應式尺寸（base 分散在 home.css 與 contact.css），落點仍曖昧，暫留 about.css。

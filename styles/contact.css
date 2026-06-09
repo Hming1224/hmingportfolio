@@ -357,3 +357,31 @@
     stroke-dashoffset: 0;
   }
 }
+
+@media (max-width: 768px) {
+  /* 自 about.css 收回的 contact 頁手機規則 */
+  .contact-panel-band {
+    padding: 40px 24px 80px;
+  }
+
+  .contact-info-header h2 {
+    font-size: 26px;
+  }
+
+  .contact-info-header .contact-subtitle {
+    font-size: 15px;
+  }
+
+  .contact-method-item {
+    padding: 16px;
+  }
+
+  .method-value {
+    font-size: 14px;
+  }
+
+  .contact-card {
+    padding: 24px;
+    gap: 24px;
+  }
+}
