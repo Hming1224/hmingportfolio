@@ -282,7 +282,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 > - 歷史踩坑：手機曾把字級跳到 `20px`、高度漂移成 `52 / 56 / 43px`（primary 52、secondary 56、project-button 43），各斷點不一致。2026-06-08 後改為刻意的 52 / 48 / 44 分階，而不是漂移。
 > - 高度用 `min-height`（`box-sizing: border-box`，含 padding 不爆高）；`.button`、`.project-button` 與 `.submit-btn` 都明寫字級，不靠瀏覽器預設繼承。
 > - Hero 按鈕在平板保留 `min-width: 136px`、`padding: 12px 28px`（控制 Hero 視覺比例）。
-> - 手機（≤768）primary 與 project-button 轉 `width: 100%` 全寬堆疊，高度 44px。
+> - 手機（≤768）primary 與 project-button 轉 `width: 100%` 全寬堆疊，高度 44px。多按鈕並排堆疊時（如 Hero 按鈕、案例頁底部的 `.cs-next-nav`），排版上 **Primary 按鈕應優先顯示（排在上方）**，Secondary 按鈕排在第二順位（排在下方）。在實作上可配合 `flex-direction: column-reverse;` 實現。
 
 #### 語意三層（顏色變體，與尺寸正交組合）
 | 變體 | 底色 | 文字色 | 描邊 | 語意 | class | 實際用在哪 |

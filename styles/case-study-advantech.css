@@ -2406,8 +2406,9 @@
 
   /* Next project nav */
   .cs-next-nav {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: stretch;
+    gap: 12px;
   }
 
   .cs-next-btn-outline,

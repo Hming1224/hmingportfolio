@@ -324,3 +324,18 @@
 .cs-next-btn-filled:hover {
   background: var(--purple-hover);
 }
+
+@media (max-width: 768px) {
+  .cs-next-nav {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .cs-next-btn-outline,
+  .cs-next-btn-filled {
+    white-space: normal;
+    text-align: center;
+    width: 100%;
+  }
+}
