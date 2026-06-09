@@ -3,8 +3,8 @@
    Scope 慣例（見 docs/add-case-study-checklist.md §4）：
    本檔所有「Advantech 私有」selector 一律以 `.theme-advantech` 開頭
    （root 由 CaseStudyShell 的 theme prop 掛上），確保私有規則不會污染其他案例。
-   少數共用骨架類（.cs-next-nav / .cs-next-btn-* / .cs-hero-* / .cs-info-* / .cs-title）
-   保持裸寫——它們屬於 styles/case-study.css，這裡只是 RWD 覆寫，待第二案例時歸位。 */
+   共用骨架類（.cs-next-nav / .cs-next-btn-* / .cs-hero-* / .cs-info-* / .cs-title）
+   的 base 與 RWD 規則都已歸位 styles/case-study.css，本檔不再覆寫它們。 */
 
 /* ── 區域色票（Advantech 案例頁專屬）──
    scope 在 .theme-advantech，不進全域 :root（見 design.md §2.7）。
@@ -2438,13 +2438,6 @@
   }
 }
 
-/* Tablet: tighten the gap between the 4 equal hero info columns */
-@media (min-width: 769px) and (max-width: 1023px) {
-  .cs-info-row {
-    gap: 12px;
-  }
-}
-
 /* Role radial cannot keep fixed-height cards once the card width gets this narrow. */
 @media (max-width: 900px) {
   .theme-advantech .cs-role-radial {
@@ -2482,10 +2475,6 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  .cs-title {
-    line-height: 1.35;
-  }
-
   .theme-advantech .cs-ns-cards {
     flex-direction: column;
   }
@@ -2494,32 +2483,6 @@
   .theme-advantech .cs-persona-grid,
   .theme-advantech .cs-result-grid {
     grid-template-columns: 1fr;
-  }
-
-  .cs-hero-info {
-    padding-top: 32px;
-  }
-
-  .cs-hero-meta {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .cs-info-row {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .cs-info-card {
-    flex: none;
-    width: 100%;
-    padding: 0;
-  }
-
-  .cs-info-tasks {
-    grid-template-columns: 1fr;
-    gap: 8px;
   }
 
   .theme-advantech .cs-role-radial {
@@ -2569,19 +2532,6 @@
   .theme-advantech .cs-comp-ems-img {
     width: 100%;
     height: 140px;
-  }
-
-  /* Next project nav */
-  .cs-next-nav {
-    flex-direction: column-reverse;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .cs-next-btn-outline,
-  .cs-next-btn-filled {
-    white-space: normal;
-    text-align: center;
   }
 
   /* Section 06 mobile */

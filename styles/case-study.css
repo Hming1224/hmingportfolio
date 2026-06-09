@@ -327,6 +327,13 @@
   background: var(--purple-hover);
 }
 
+/* Tablet: tighten the gap between the 4 equal hero info columns */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .cs-info-row {
+    gap: 12px;
+  }
+}
+
 @media (max-width: 1023px) {
   .cs-next-btn-outline,
   .cs-next-btn-filled {
@@ -337,6 +344,36 @@
 }
 
 @media (max-width: 768px) {
+  .cs-title {
+    line-height: 1.35;
+  }
+
+  .cs-hero-info {
+    padding-top: 32px;
+  }
+
+  .cs-hero-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cs-info-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cs-info-card {
+    flex: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  .cs-info-tasks {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .cs-next-nav {
     flex-direction: column-reverse;
     align-items: stretch;
