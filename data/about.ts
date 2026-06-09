@@ -8,7 +8,7 @@ export const experiences = [
     title: "Advantech 研華科技",
     role: "UIUX 設計實習生",
     date: "2024.06 - 2024.08",
-    image: "/projects/advantech-wiseiems2.png",
+    image: "/projects/advantech/cover/cover.webp",
     points: [
       [
         { text: "參與 Edge AI 平台產品設計，於 " },

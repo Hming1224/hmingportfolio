@@ -486,3 +486,12 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - **不要在手機版保留 hover-only 互動**：改成靜態或點擊觸發
 - **不要讓未上線案子看起來可點**：用 `--disabled` 底色
 - **不要隨意用超過 32px 的字號**：一般骨架最大就是 32px；只有首頁 Hero 主標可用 48px
+
+---
+
+## 10. 架構 Ownership 與新增專案流程
+
+為了維護專案架構的一致性並方便後續擴充，專案的 Ownership 權責劃分與新增 Case Study 流程已收錄於以下獨立文件中。在進行架構修改或新增案例時，請務必遵循其規範：
+
+- **架構 Ownership 與驗收基準**：請參閱 [architecture-baseline.md](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/docs/architecture-baseline.md)
+- **新增 Case Study 檢核清單**：請參閱 [add-case-study-checklist.md](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/docs/add-case-study-checklist.md)

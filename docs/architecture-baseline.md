@@ -33,8 +33,9 @@ Ownership checks:
 
 ## Workspace strategy
 
-- `iterations/` is retained as design-verification history.
-- Local agent helpers under `scripts/` and `.codex/` are excluded from website
-  lint so `npm run lint` represents website health.
-- Refactor changes must not delete or rewrite existing uncommitted iteration
-  artifacts.
+- **Iterations Retention Strategy**: The `iterations/` directory stores design-verification history (screenshots and matching `iteration.md` logs). To prevent repository size bloat:
+  1. **Landmark Only**: Only key design milestone/landmark iterations should be checked into Git.
+  2. **Ignore Temporary Files**: Temporary scratch files, caches, and logs within `iterations/` are excluded from Git via `.gitignore`.
+  3. **Periodic Cleanup**: Local trial-and-error verification folders (untracked folders) should be periodically cleaned up. Iteration records older than 30 days that are not critical milestones can be removed.
+- Local agent helpers under `scripts/` and `.codex/` are excluded from website lint so `npm run lint` represents website health.
+- Refactor changes must not delete or rewrite existing uncommitted iteration artifacts.
