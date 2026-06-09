@@ -495,3 +495,45 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 
 - **架構 Ownership 與驗收基準**：請參閱 [architecture-baseline.md](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/docs/architecture-baseline.md)
 - **新增 Case Study 檢核清單**：請參閱 [add-case-study-checklist.md](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/docs/add-case-study-checklist.md)
+
+---
+
+## 11. 圖片與媒體資產規範
+
+為維持頁面載入效能並優化儲存庫體積，專案對圖片資產制訂了嚴格的規範：
+
+### 11.1 格式與壓縮
+- **統一格式**：除了純向量圖使用 `.svg` 外，所有圖片資產（如專案 cover、流程圖、設計稿等）必須轉換為 `.webp` 格式。
+- **壓縮品質**：WebP 轉換品質設定為 `85`（此值在 Pillow 中能提供 80%–90% 的檔案大小削減，且視覺無損）。
+
+### 11.2 尺寸限制（單一來源最大寬度）
+- **專案封面 (Cover)**：最大寬度 `1600px`。
+- **背景/Hero Banner (Background)**：最大寬度 `1920px`。
+- **Lightbox 放大展示稿 (Lightbox)**：最大寬度 `2560px`（以確保在全螢幕放大時字體及 UI 細節依然清晰）。
+- **其他螢幕截圖 / 流程圖 (Screenshot/Flow)**：最大寬度 `1600px`（小於此寬度則維持原尺寸）。
+
+### 11.3 目錄結構與分類
+專案圖片放置於 `/public/projects/<slug>/`，並統一依階段劃分子目錄，避免檔案混亂：
+- `cover/`：存放專案封面圖（`cover.webp`）與 Logo（`logo.webp`）。
+- `research/`：存放使用者研究、競爭對手分析、persona 等相關圖表。
+- `solution/`：存放功能方案、系統架構流程、介面細節及 Lightbox 展示圖。
+- `result/`：存放專案成果、數據圖表等。
+
+> 💡 自動化處理腳本可參考 [optimize-images.py](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/scripts/optimize-images.py)。
+
+---
+
+## 12. 自動化衛生與架構稽核
+
+專案附帶了多個 Python 稽核工具以維護 repo 的衛生與一致性：
+
+### 12.1 圖片連結完整性稽核
+- **工具路徑**：[check-links.py](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/scripts/check-links.py)
+- **主要功能**：掃描所有 `app/`、`components/`、`data/` 與 `styles/` 底下的原始碼，抓取所有 `/projects/` 的圖片路徑並比對硬碟檔案是否確實存在，防範死連結。
+
+### 12.2 架構架構稽核
+- **工具路徑**：[arch-audit.py](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/scripts/arch-audit.py)
+- **主要功能**：
+  - 統計並列出 `public/` 與專案內體積最大的前 10 個大檔案，監管儲存庫肥大。
+  - 稽核 CSS 隔離性（如 case study 是否有確實被 `.theme-<slug>` 包裹限制）。
+  - 追蹤專案擴充點。

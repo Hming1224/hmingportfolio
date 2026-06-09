@@ -7,7 +7,7 @@
    的 base 與 RWD 規則都已歸位 styles/case-study.css，本檔不再覆寫它們。 */
 
 /* ── 區域色票（Advantech 案例頁專屬）──
-   scope 在 .theme-advantech，不進全域 :root（見 design.md §2.7）。
+   scope 在 .theme-advantech，不進全域 :root（見 docs/design-system.md §2.7）。
    只收斂「重複 ≥2 次、角色明確」的藍/石板/近黑系統色；
    只用一次或近乎重複的極淡藍底維持 hex，留待後續合併。 */
 .theme-advantech {

@@ -32,7 +32,7 @@
   .theme-advantech .cs-sol-board { ... }
   ```
   這樣即使未來 import 方式改變，私有規則也不會污染其他案例。
-- 區域色票放 `.theme-<slug> { --... }`，不要進全域 `:root`（見 `design.md §2.7`）。
+- 區域色票放 `.theme-<slug> { --... }`，不要進全域 `:root`（見 `design-system.md §2.7`）。
 - 共用骨架類（上面 §3 那些）**保持裸寫、不要冠 `.theme-<slug>`**——它們屬於 `case-study.css`，加 scope 反而是錯誤歸屬。需要調共用元件的 RWD，改 `case-study.css`，不要在案例 CSS 裡複製覆寫。
 
 ## 5. Section 元件
