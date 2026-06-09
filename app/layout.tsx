@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import ScrollBehaviorFix from "../components/ScrollBehaviorFix";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -24,11 +25,20 @@ export const metadata: Metadata = {
     description: "A designer with passion who embraces different challenges.",
     siteName: "Brian Huang's Portfolio",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Brian Huang's Portfolio",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Brian Huang's Portfolio",
     description: "A designer with passion who embraces different challenges.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -42,7 +52,10 @@ export default function RootLayout({
       lang="zh-Hant-TW"
       className={spaceGrotesk.variable}
     >
-      <body>{children}</body>
+      <body>
+        <ScrollBehaviorFix />
+        {children}
+      </body>
     </html>
   );
 }

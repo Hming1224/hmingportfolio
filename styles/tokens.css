@@ -123,7 +123,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Remove scroll-behavior: smooth to prevent Next.js route transition scroll bugs (clamping to non-zero offset) */
 }
 
 /* Fixed navbar is 80px — all anchor targets need this offset so content isn't hidden behind it */
