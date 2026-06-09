@@ -11,7 +11,7 @@ export default function ProductBackgroundSection() {
         <div className="cs-product-card">
           <div className="cs-product-card-header">
             <div className="cs-product-logo">
-              <Image src="/projects/advantech-figma/ecowatch-icon.png" alt="ECOWatch" fill style={{ objectFit: "cover" }} unoptimized />
+              <Image src="/projects/advantech/research/ecowatch-icon.webp" alt="ECOWatch" fill style={{ objectFit: "cover" }} unoptimized />
             </div>
             <h3 className="cs-product-card-name">ECOWatch</h3>
           </div>
@@ -26,7 +26,7 @@ export default function ProductBackgroundSection() {
           </div>
           <div className="cs-product-screen">
             <Image
-              src="/projects/advantech-figma/ecowatch-screen.png"
+              src="/projects/advantech/research/ecowatch-screen.webp"
               alt="ECOWatch 系統截圖"
               fill
               style={{ objectFit: "cover", objectPosition: "center" }}
@@ -38,7 +38,7 @@ export default function ProductBackgroundSection() {
         <div className="cs-product-card">
           <div className="cs-product-card-header">
             <div className="cs-product-logo">
-              <Image src="/projects/advantech-figma/hvac-icon.png" alt="HVAC" fill style={{ objectFit: "cover" }} unoptimized />
+              <Image src="/projects/advantech/research/hvac-icon.webp" alt="HVAC" fill style={{ objectFit: "cover" }} unoptimized />
             </div>
             <h3 className="cs-product-card-name">HVAC</h3>
           </div>
@@ -53,7 +53,7 @@ export default function ProductBackgroundSection() {
           </div>
           <div className="cs-product-screen">
             <Image
-              src="/projects/advantech-figma/hvac-screen.png"
+              src="/projects/advantech/research/hvac-screen.webp"
               alt="HVAC 系統截圖"
               fill
               style={{ objectFit: "cover", objectPosition: "center" }}

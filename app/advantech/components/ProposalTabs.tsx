@@ -45,8 +45,8 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={i === activeTab
-                  ? '/projects/advantech-figma/sol06/star-blue.svg'
-                  : '/projects/advantech-figma/sol06/star-gray.svg'}
+                  ? '/projects/advantech/solution/star-blue.svg'
+                  : '/projects/advantech/solution/star-gray.svg'}
                 alt=""
                 width={16}
                 height={16}

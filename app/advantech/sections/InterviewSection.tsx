@@ -12,7 +12,7 @@ export default function InterviewSection() {
       <div className="cs-iv-personas">
         <div className="cs-iv-persona">
           <div className="cs-iv-persona-img">
-            <Image src="/projects/advantech-figma/interview-persona-factory.png" alt="內部廠務人員" fill style={{ objectFit: "cover" }} unoptimized />
+            <Image src="/projects/advantech/research/interview-persona-factory.webp" alt="內部廠務人員" fill style={{ objectFit: "cover" }} unoptimized />
           </div>
           <div>
             <h3 className="cs-iv-persona-name">內部廠務人員</h3>
@@ -21,7 +21,7 @@ export default function InterviewSection() {
         </div>
         <div className="cs-iv-persona">
           <div className="cs-iv-persona-img">
-            <Image src="/projects/advantech-figma/interview-persona-si.png" alt="系統整合商" fill style={{ objectFit: "cover" }} unoptimized />
+            <Image src="/projects/advantech/research/interview-persona-si.webp" alt="系統整合商" fill style={{ objectFit: "cover" }} unoptimized />
           </div>
           <div>
             <h3 className="cs-iv-persona-name">系統整合商（SI）</h3>
@@ -102,7 +102,7 @@ export default function InterviewSection() {
             ))}
           </div>
           <div className="cs-synthesis-photo">
-            <Image src="/projects/advantech-figma/interview-synthesis-photo.png" alt="訪談現場" fill style={{ objectFit: "cover" }} unoptimized />
+            <Image src="/projects/advantech/research/interview-synthesis-photo.webp" alt="訪談現場" fill style={{ objectFit: "cover" }} unoptimized />
           </div>
         </div>
       </div>

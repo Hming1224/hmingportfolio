@@ -19,7 +19,7 @@ export default function RoleSection() {
         </svg>
         <div className="cs-role-center">
           <Image
-            src="/projects/advantech-figma/role-center.png"
+            src="/projects/advantech/research/role-center.webp"
             alt="專案工作證與工作現場照片"
             fill
             sizes="240px"

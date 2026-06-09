@@ -7,7 +7,7 @@ export default function ProcessSection() {
     <section id="cs-sec-process" className="cs-process-bg">
       <div className="cs-process-bg-img">
         <Image
-          src="/projects/advantech-figma/process-bg.png"
+          src="/projects/advantech/research/process-bg.webp"
           alt=""
           fill
           style={{ objectFit: "cover" }}

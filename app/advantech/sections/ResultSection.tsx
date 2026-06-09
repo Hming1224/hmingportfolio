@@ -7,7 +7,7 @@ export default function ResultSection() {
     <section id="cs-sec-result" className="cs-result-bg">
       <div className="cs-result-bg-img">
         <Image
-          src="/projects/advantech-result-bg.jpg"
+          src="/projects/advantech/result/advantech-result-bg.webp"
           alt=""
           fill
           style={{ objectFit: "cover", opacity: 0.6 }}

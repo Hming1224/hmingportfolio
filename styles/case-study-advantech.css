@@ -2137,7 +2137,7 @@
   }
 
   .theme-advantech .cs-sol-fgroup > .cs-sol-fconn:nth-child(2) img {
-    content: url("/projects/advantech-figma/sol06/connector-1-mid.svg");
+    content: url("/projects/advantech/solution/connector-1-mid.svg");
     margin-left: calc(20% - 40px);
   }
 

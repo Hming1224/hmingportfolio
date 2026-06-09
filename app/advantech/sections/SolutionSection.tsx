@@ -21,7 +21,7 @@ export default function SolutionSection() {
         <p className="cs-sol-blk-desc cs-text-muted-blue">先從兩個情境拆出核心使用任務與 AI 介入點，定義後續迭代要驗證的頁面入口、通知方式與建議回饋。</p>
 
         {/* Scenario 1 */}
-        <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech-figma/sol06/flow-sc1.png')" }}>
+        <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech/solution/flow-sc1.webp')" }}>
           <div className="cs-sol-flow-info">
             <p className="cs-sol-flow-label" style={{ color: "#1a87de" }}>Scenario 1</p>
             <p className="cs-sol-flow-name">需求管理決策助手：超約預警</p>
@@ -30,7 +30,7 @@ export default function SolutionSection() {
         <ProposalTabs defaultTab={2} tabs={proposalScenario1Tabs} />
 
         {/* Scenario 2 */}
-        <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech-figma/sol06/flow-sc2.png')" }}>
+        <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech/solution/flow-sc2.webp')" }}>
           <div className="cs-sol-flow-info">
             <p className="cs-sol-flow-label" style={{ color: "#1e84a6" }}>Scenario 2</p>
             <p className="cs-sol-flow-name" style={{ color: "#083b4c" }}>設備能效主動維護：模式識別</p>
@@ -67,7 +67,7 @@ export default function SolutionSection() {
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
                 <div style={{ width: "calc(min(607px, 100%) * 360 / 607)", display: "flex", flexDirection: "column" }}>
-                  <Image src="/projects/advantech-figma/sol06/iter-chatbot-before.png" alt="Before" width={360} height={461} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
+                  <Image src="/projects/advantech/solution/iter-chatbot-before.webp" alt="Before" width={360} height={461} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
                   <div className="cs-sol-redline" style={{ width: "100%" }}>
                     <span className="cs-sol-redline-label">360px</span>
                   </div>
@@ -79,7 +79,7 @@ export default function SolutionSection() {
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
                 <div style={{ width: "min(607px, 100%)", display: "flex", flexDirection: "column" }}>
-                  <Image src="/projects/advantech-figma/sol06/iter-chatbot-after.png" alt="After" width={607} height={452} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
+                  <Image src="/projects/advantech/solution/iter-chatbot-after.webp" alt="After" width={607} height={452} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
                   <div className="cs-sol-redline" style={{ width: "100%" }}>
                     <span className="cs-sol-redline-label">640px</span>
                   </div>
@@ -103,14 +103,14 @@ export default function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s1a-before.png" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s1a-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s1a-after.png" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s1a-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
           </div>
@@ -122,14 +122,14 @@ export default function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s1b-before.png" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s1b-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s1b-after.png" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s1b-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
           </div>
@@ -141,14 +141,14 @@ export default function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s1c-before.png" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s1c-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s1c-after.png" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s1c-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
           </div>
@@ -168,14 +168,14 @@ export default function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s2a-before.png" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s2a-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s2a-after.png" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s2a-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
           </div>
@@ -187,14 +187,14 @@ export default function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s2b-before.png" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s2b-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech-figma/sol06/iter-s2b-after.png" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <Image src="/projects/advantech/solution/iter-s2b-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
               </div>
             </div>
           </div>
@@ -229,43 +229,43 @@ export default function SolutionSection() {
             </div>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-01.png" alt="Feature 1.1 需量分析畫面" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-01.webp" alt="Feature 1.1 需量分析畫面" width={960} height={540} />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-02.png" alt="Feature 1.1 AI Chatbot 觸發" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-02.webp" alt="Feature 1.1 AI Chatbot 觸發" width={960} height={540} />
           </div>
           <div className="cs-sol-fnote">
             <p>跳出 AI chatbot，並且自動輸入：請問今日需量預測分析？</p>
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-2.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fnote">
             <p>AI chatbot 從資料庫中讀取相關資訊，並整合 LLM 回答框架，提供需量分析與折線圖表。另外，提供問題模組供用戶持續深入提問。</p>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-03.png" alt="Feature 1.1 AI 需量分析回覆" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-03.webp" alt="Feature 1.1 AI 需量分析回覆" width={960} height={540} />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-04.png" alt="Feature 1.1 AI 超約建議" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-04.webp" alt="Feature 1.1 AI 超約建議" width={960} height={540} />
           </div>
           <div className="cs-sol-fnote">
             <p>點擊「請提供給我避免需量超約的建議。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成結構化文字回覆。</p>
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-2.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fnote">
             <p>點擊「請提供給我高耗能設備排名。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成圖表，依據耗能排名顯示最需要修復的設備列表。</p>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f11-05.png" alt="Feature 1.1 高耗能設備排名" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-05.webp" alt="Feature 1.1 高耗能設備排名" width={960} height={540} />
           </div>
         </div>
         </div>
@@ -294,13 +294,13 @@ export default function SolutionSection() {
             </div>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-01.png" alt="Feature 1.2 系統通知" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-01.webp" alt="Feature 1.2 系統通知" width={960} height={540} />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-02.png" alt="Feature 1.2 報警等級" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-02.webp" alt="Feature 1.2 報警等級" width={960} height={540} />
           </div>
           <div className="cs-sol-fnote" style={{ gap: 16 }}>
             <div className="cs-sol-dpts">
@@ -326,7 +326,7 @@ export default function SolutionSection() {
             />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-2.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fnote">
             <div className="cs-sol-dpts">
@@ -341,13 +341,13 @@ export default function SolutionSection() {
             </div>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-03.png" alt="Feature 1.2 AI 分析" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-03.webp" alt="Feature 1.2 AI 分析" width={960} height={540} />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f12-04.png" alt="Feature 1.2 高耗能設備" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-04.webp" alt="Feature 1.2 高耗能設備" width={960} height={540} />
           </div>
           <div className="cs-sol-fnote">
             <div className="cs-sol-dpts">
@@ -384,13 +384,13 @@ export default function SolutionSection() {
             </div>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-01.png" alt="Feature 2 模式識別主畫面" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-01.webp" alt="Feature 2 模式識別主畫面" width={960} height={540} />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-02.png" alt="Feature 2 設備報警等級" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-02.webp" alt="Feature 2 設備報警等級" width={960} height={540} />
           </div>
           <div className="cs-sol-fnote" style={{ gap: 16 }}>
             <div className="cs-sol-dpts">
@@ -416,7 +416,7 @@ export default function SolutionSection() {
             />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-2.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fnote">
             <div className="cs-sol-dpts">
@@ -431,13 +431,13 @@ export default function SolutionSection() {
             </div>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-03.png" alt="Feature 2 AI 異常分析" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-03.webp" alt="Feature 2 AI 異常分析" width={960} height={540} />
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-1.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-04.png" alt="Feature 2 事件分析" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-04.webp" alt="Feature 2 事件分析" width={960} height={540} />
           </div>
           <div className="cs-sol-fnote">
             <div className="cs-sol-dpts">
@@ -448,7 +448,7 @@ export default function SolutionSection() {
             </div>
           </div>
         </div>
-        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech-figma/sol06/connector-2.svg" alt="" suppressHydrationWarning /></div>
+        <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fnote">
             <div className="cs-sol-dpts">
@@ -459,7 +459,7 @@ export default function SolutionSection() {
             </div>
           </div>
           <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech-figma/sol06/final-f2-05.png" alt="Feature 2 故障排除建議" width={960} height={540} />
+            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-05.webp" alt="Feature 2 故障排除建議" width={960} height={540} />
           </div>
         </div>
         </div>
@@ -475,7 +475,7 @@ export default function SolutionSection() {
           <div className="cs-sol-vimg">
             <VimeoPlayer
               videoId="1197912187"
-              poster="/projects/advantech-figma/sol06/video-sc1.png"
+              poster="/projects/advantech/solution/video-sc1.webp"
               title="超約預警操作流程"
             />
           </div>
@@ -485,7 +485,7 @@ export default function SolutionSection() {
           <div className="cs-sol-vimg">
             <VimeoPlayer
               videoId="1197912188"
-              poster="/projects/advantech-figma/sol06/video-sc2.png"
+              poster="/projects/advantech/solution/video-sc2.webp"
               title="模式識別操作流程"
             />
           </div>

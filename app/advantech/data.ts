@@ -36,21 +36,21 @@ export const processSteps = [
 
 // ── 競品分析 01：產業 AI 工具（cs-sec-analysis）──
 export const compAiTools = [
-  { title: "Tableau Pulse", tag: "圖表旁呈現洞見", desc: "無需撰寫程式即可建立預測性機器學習模型，減少對數據科學團隊的依賴。", img: "/projects/advantech-figma/comp-ai-tableau.png" },
-  { title: "Power BI Copilot", tag: "對話框提供圖表數據摘要", desc: "自動摘要報表、特定頁面或視覺效果，協助使用者快速掌握關鍵資訊。", img: "/projects/advantech-figma/comp-ai-powerbi.png" },
-  { title: "Salesforce Einstein GPT", tag: "圖表旁提供建議執行計畫方針", desc: "根據使用者數據與業務需求提出個人化建議，支援後續行動追蹤。", img: "/projects/advantech-figma/comp-ai-salesforce.png" },
-  { title: "PagerDuty AIOps", tag: "自動化告警通知視窗", desc: "整合監控系統並根據警報自動通知，協助團隊即時應對事件。", img: "/projects/advantech-figma/comp-ai-pagerduty.png" },
+  { title: "Tableau Pulse", tag: "圖表旁呈現洞見", desc: "無需撰寫程式即可建立預測性機器學習模型，減少對數據科學團隊的依賴。", img: "/projects/advantech/research/comp-ai-tableau.webp" },
+  { title: "Power BI Copilot", tag: "對話框提供圖表數據摘要", desc: "自動摘要報表、特定頁面或視覺效果，協助使用者快速掌握關鍵資訊。", img: "/projects/advantech/research/comp-ai-powerbi.webp" },
+  { title: "Salesforce Einstein GPT", tag: "圖表旁提供建議執行計畫方針", desc: "根據使用者數據與業務需求提出個人化建議，支援後續行動追蹤。", img: "/projects/advantech/research/comp-ai-salesforce.webp" },
+  { title: "PagerDuty AIOps", tag: "自動化告警通知視窗", desc: "整合監控系統並根據警報自動通知，協助團隊即時應對事件。", img: "/projects/advantech/research/comp-ai-pagerduty.webp" },
 ];
 
 // ── 競品分析 02：能源管理 / 設備管理競品 ──
 export const compEmsItems: { name: string; category: string; img: string; items: string[] }[] = [
-  { name: "IBM Maximo Energy Optimization", category: "設備管理 / 能源管理", img: "/projects/advantech-figma/comp-ems-ibm.png",
+  { name: "IBM Maximo Energy Optimization", category: "設備管理 / 能源管理", img: "/projects/advantech/research/comp-ems-ibm.webp",
     items: ["統一能源與資產管理平台，強調遠端可視性與深入見解。", "設備監測、數據分析、遠端監控，並透過 Copilot 對話式 AI 撈取資料與生成視覺報告。"] },
-  { name: "ABB Ability Energy and Asset Manager", category: "設備管理", img: "/projects/advantech-figma/comp-ems-abb.png",
+  { name: "ABB Ability Energy and Asset Manager", category: "設備管理", img: "/projects/advantech/research/comp-ems-abb.webp",
     items: ["優化資產效能、延長設備生命週期，並降低停機時間與成本。", "Senseye 預測性維護技術可尋找過去類似事例，支援設備狀態判讀與維護決策。"] },
-  { name: "Schneider EcoStruxure Resource Advisor", category: "能源管理", img: "/projects/advantech-figma/comp-ems-schneider.png",
+  { name: "Schneider EcoStruxure Resource Advisor", category: "能源管理", img: "/projects/advantech/research/comp-ems-schneider.webp",
     items: ["可彈性定義數據指標，具擴充性與平台互通性，並支援監控預算。", "Resource Advisor / Efficiency AI 可生成視覺報告並提供能耗洞察。"] },
-  { name: "Siemens EnergyIP", category: "能源管理", img: "/projects/advantech-figma/comp-ems-siemens.png",
+  { name: "Siemens EnergyIP", category: "能源管理", img: "/projects/advantech/research/comp-ems-siemens.webp",
     items: ["以能源資料管理與費用最佳化為核心，支援能源使用決策。", "主動優化建築物 HVAC 系統節能表現，並降低電費使用。"] },
 ];
 
@@ -72,7 +72,7 @@ export type ScenarioData = {
 
 export const scenarios: ScenarioData[] = [
   {
-    icon: "/projects/advantech-figma/scenario-icon-1.png",
+    icon: "/projects/advantech/research/scenario-icon-1.webp",
     titleColor: "#005796",
     title: "情境 1：需量管理決策助手",
     desc: "協助使用者擬定最佳用電方案，提前掌握需量風險，避免超約罰款。",
@@ -86,7 +86,7 @@ export const scenarios: ScenarioData[] = [
     ui2:  ["對話式聊天機器人", "以問答方式取得用電與契約策略建議。"],
   },
   {
-    icon: "/projects/advantech-figma/scenario-icon-2.png",
+    icon: "/projects/advantech/research/scenario-icon-2.webp",
     titleColor: "#1e84a6",
     title: "情境 2：設備能效主動維護",
     desc: "主動盤查設備用能模式，偵測異常熱點，並提供維護與能效優化建議。",
@@ -106,11 +106,11 @@ export const proposalScenario1Tabs: ProposalTab[] = [
   {
     label: "提案一：警示通知欄",
     images: [
-      "/projects/advantech-figma/sol06/prop-sc1-t1-01.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t1-02.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t1-03.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t1-04.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t1-05.png",
+      "/projects/advantech/solution/prop-sc1-t1-01.webp",
+      "/projects/advantech/solution/prop-sc1-t1-02.webp",
+      "/projects/advantech/solution/prop-sc1-t1-03.webp",
+      "/projects/advantech/solution/prop-sc1-t1-04.webp",
+      "/projects/advantech/solution/prop-sc1-t1-05.webp",
     ],
     concept: "透過點取 notification bar 形式，直接彈出一個 Pop up modal，提供目前異常的需量分析與高耗能設備列表，針對 AI 建議可給予回饋。",
     reasonTitle: "未採納原因",
@@ -120,12 +120,12 @@ export const proposalScenario1Tabs: ProposalTab[] = [
     label: "提案二：系統通知",
     adopted: true,
     images: [
-      "/projects/advantech-figma/sol06/prop-sc1-t2-01.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t2-02.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t2-03.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t2-04.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t2-05.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t2-06.png",
+      "/projects/advantech/solution/prop-sc1-t2-01.webp",
+      "/projects/advantech/solution/prop-sc1-t2-02.webp",
+      "/projects/advantech/solution/prop-sc1-t2-03.webp",
+      "/projects/advantech/solution/prop-sc1-t2-04.webp",
+      "/projects/advantech/solution/prop-sc1-t2-05.webp",
+      "/projects/advantech/solution/prop-sc1-t2-06.webp",
     ],
     concept: "透過點取 notification icon 形式，根據嚴重程度分級進行標籤分類顯示，點擊「了解詳細資訊」獲取目前異常的需量分析與高耗能設備列表，針對 AI 建議可給予回饋。",
     reasonTitle: "採納理由",
@@ -135,11 +135,11 @@ export const proposalScenario1Tabs: ProposalTab[] = [
     label: "提案三：圖表按鈕",
     adopted: true,
     images: [
-      "/projects/advantech-figma/sol06/prop-sc1-t3-01.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t3-02.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t3-03.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t3-04.png",
-      "/projects/advantech-figma/sol06/prop-sc1-t3-05.png",
+      "/projects/advantech/solution/prop-sc1-t3-01.webp",
+      "/projects/advantech/solution/prop-sc1-t3-02.webp",
+      "/projects/advantech/solution/prop-sc1-t3-03.webp",
+      "/projects/advantech/solution/prop-sc1-t3-04.webp",
+      "/projects/advantech/solution/prop-sc1-t3-05.webp",
     ],
     concept: "透過點取圖表右上角的警示 button，直接彈出一個 Pop up modal，提供目前異常的需量分析與高耗能設備列表，針對 AI 建議可給予回饋。",
     reasonTitle: "採納理由",
@@ -152,10 +152,10 @@ export const proposalScenario2Tabs: ProposalTab[] = [
     label: "提案一：系統通知",
     adopted: true,
     images: [
-      "/projects/advantech-figma/sol06/prop-sc2-t1-01.png",
-      "/projects/advantech-figma/sol06/prop-sc2-t1-02.png",
-      "/projects/advantech-figma/sol06/prop-sc2-t1-03.png",
-      "/projects/advantech-figma/sol06/prop-sc2-t1-04.png",
+      "/projects/advantech/solution/prop-sc2-t1-01.webp",
+      "/projects/advantech/solution/prop-sc2-t1-02.webp",
+      "/projects/advantech/solution/prop-sc2-t1-03.webp",
+      "/projects/advantech/solution/prop-sc2-t1-04.webp",
     ],
     concept: "透過點取 notification icon 形式，根據嚴重程度分級進行標籤分類顯示，點擊「進階分析」獲取目前異常的設備能耗資料與冷卻水溫圖表，可即時接收 AI 建議。",
     reasonTitle: "採納理由",
@@ -164,8 +164,8 @@ export const proposalScenario2Tabs: ProposalTab[] = [
   {
     label: "提案二：3D 圖按鈕",
     images: [
-      "/projects/advantech-figma/sol06/prop-sc2-t2-01.png",
-      "/projects/advantech-figma/sol06/prop-sc2-t2-02.png",
+      "/projects/advantech/solution/prop-sc2-t2-01.webp",
+      "/projects/advantech/solution/prop-sc2-t2-02.webp",
     ],
     concept: "透過懸停於異常圖標，了解當前設備問題。",
     reasonTitle: "未採納原因",
@@ -174,9 +174,9 @@ export const proposalScenario2Tabs: ProposalTab[] = [
   {
     label: "提案三：圖表按鈕",
     images: [
-      "/projects/advantech-figma/sol06/prop-sc2-t3-01.png",
-      "/projects/advantech-figma/sol06/prop-sc2-t3-02.png",
-      "/projects/advantech-figma/sol06/prop-sc2-t3-03.png",
+      "/projects/advantech/solution/prop-sc2-t3-01.webp",
+      "/projects/advantech/solution/prop-sc2-t3-02.webp",
+      "/projects/advantech/solution/prop-sc2-t3-03.webp",
     ],
     concept: "透過點取報警列表右上角的 button，直接進入到 AI chatbot 對話視窗，自動輸入「分析冰機設備能耗事件？」，了解當前各項冰機運轉情形。",
     reasonTitle: "未採納原因",

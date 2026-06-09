@@ -14,7 +14,7 @@ export default function OverviewSection() {
       </div>
       <div className="cs-overview-img">
         <Image
-          src="/projects/advantech-figma/overview-bg.png"
+          src="/projects/advantech/research/overview-bg.webp"
           alt="WISE-iEMS 系統介面與 AI Chatbot 概覽"
           fill
           style={{ objectFit: "cover" }}

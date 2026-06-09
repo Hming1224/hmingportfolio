@@ -6,7 +6,7 @@ export default function HeroSection() {
         <div className="cs-hero-cover">
           <div className="cs-hero-cover-img">
             <Image
-              src="/projects/advantech-figma/hero-cover.png"
+              src="/projects/advantech/cover/hero-cover.webp"
               alt="WISE-iEMS ECOWatch UI"
               fill
               style={{ objectFit: "cover", objectPosition: "center top" }}
