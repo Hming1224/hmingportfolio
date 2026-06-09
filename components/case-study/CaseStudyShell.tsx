@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import Link from 'next/link';
+import { Link } from '../../i18n/navigation';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import ScrollProgress from '../ScrollProgress';
@@ -61,9 +61,9 @@ export default function CaseStudyShell({
         <Link href={homeHref} prefetch={false} className="cs-next-btn-outline">
           {homeLabel}
         </Link>
-        <a href={nextHref} className="cs-next-btn-filled">
+        <Link href={nextHref} className="cs-next-btn-filled">
           {nextLabel}
-        </a>
+        </Link>
       </div>
 
       <Footer />

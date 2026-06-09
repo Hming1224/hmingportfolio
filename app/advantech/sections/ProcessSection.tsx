@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { CaseHeading } from "../../../components/case-study";
 import { processSteps } from "../data";
+import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
+import { getAdvantechTranslator } from "../i18n-server";
 
-export default function ProcessSection() {
-  return (
+export default async function ProcessSection() {
+  const { locale, t } = await getAdvantechTranslator();
+  const steps = translateAdvantechData(locale, processSteps);
+  return localizeAdvantechTree(locale,
     <section id="cs-sec-process" className="cs-process-bg">
       <div className="cs-process-bg-img">
         <Image
@@ -16,11 +20,11 @@ export default function ProcessSection() {
       </div>
       <div className="cs-process-overlay" />
       <div className="cs-process-content">
-        <CaseHeading title="設計流程" tone="white" style={{ marginBottom: 8 }} />
+        <CaseHeading title={t("設計流程")} tone="white" style={{ marginBottom: 8 }} />
         <div className="cs-timeline-alt">
           {/* Row 1: cards above axis (01, 03, 05) */}
           <div className="cs-tl-tops">
-            {processSteps.map((step, i) => (
+            {steps.map((step, i) => (
               <div key={`top-${step.num}`} className="cs-tl-top">
                 {i % 2 === 0 && (
                   <>
@@ -38,7 +42,7 @@ export default function ProcessSection() {
           {/* Row 2: axis line + dots */}
           <div className="cs-tl-dots-row">
             <div className="cs-tl-axis" />
-            {processSteps.map((step) => (
+            {steps.map((step) => (
               <div key={`dot-${step.num}`} className="cs-tl-dot-cell">
                 <div className="cs-tl-dot" />
               </div>
@@ -46,7 +50,7 @@ export default function ProcessSection() {
           </div>
           {/* Row 3: cards below axis (02, 04, 06) */}
           <div className="cs-tl-bottoms">
-            {processSteps.map((step, i) => (
+            {steps.map((step, i) => (
               <div key={`bot-${step.num}`} className="cs-tl-bottom">
                 {i % 2 !== 0 && (
                   <>

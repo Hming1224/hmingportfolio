@@ -1,10 +1,14 @@
 import Image from "next/image";
 import { CaseSection } from "../../../components/case-study";
 import { roleCards } from "../data";
+import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
+import { getAdvantechTranslator } from "../i18n-server";
 
-export default function RoleSection() {
-  return (
-    <CaseSection id="cs-sec-role" title="我在這個專案做了什麼...">
+export default async function RoleSection() {
+  const { locale, t } = await getAdvantechTranslator();
+  const cards = translateAdvantechData(locale, roleCards);
+  return localizeAdvantechTree(locale,
+    <CaseSection id="cs-sec-role" title={t("我在這個專案做了什麼...")}>
       <div className="cs-role-radial">
         <svg
           className="cs-role-connectors"
@@ -20,14 +24,14 @@ export default function RoleSection() {
         <div className="cs-role-center">
           <Image
             src="/projects/advantech/research/role-center.webp"
-            alt="專案工作證與工作現場照片"
+            alt={t("專案工作證與工作現場照片")}
             fill
             sizes="240px"
             style={{ objectFit: "cover" }}
             unoptimized
           />
         </div>
-        {roleCards.map((item, index) => (
+        {cards.map((item, index) => (
           <div key={item.num} className={`cs-role-card cs-role-card-${index + 1}`}>
             <span className="cs-role-num">{item.num}</span>
             <h3 className="cs-role-title">{item.title}</h3>

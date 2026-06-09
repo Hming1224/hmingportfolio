@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useId, useState } from "react";
+import { useLocale } from "next-intl";
+import type { Locale } from "../../../i18n/routing";
+import { translateAdvantech } from "../i18n";
 
 type FeatureImageLightboxProps = {
   alt: string;
@@ -18,6 +21,8 @@ export default function FeatureImageLightbox({
 }: FeatureImageLightboxProps) {
   const [isOpen, setIsOpen] = useState(false);
   const titleId = useId();
+  const locale = useLocale() as Locale;
+  const t = (text: string) => translateAdvantech(locale, text);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -41,7 +46,7 @@ export default function FeatureImageLightbox({
       <button
         type="button"
         className="cs-feature-zoom-trigger"
-        aria-label={`放大檢視：${alt}`}
+        aria-label={`${t("放大檢視")}：${alt}`}
         onClick={() => setIsOpen(true)}
       >
         <Image
@@ -70,7 +75,7 @@ export default function FeatureImageLightbox({
           <button
             type="button"
             className="cs-feature-lightbox-close"
-            aria-label="關閉放大圖片"
+            aria-label={t("關閉放大圖片")}
             onClick={() => setIsOpen(false)}
           >
             ×

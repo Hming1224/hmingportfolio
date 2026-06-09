@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useId } from 'react';
+import { useLocale } from 'next-intl';
+import type { Locale } from '../../../i18n/routing';
+import { translateAdvantech } from '../i18n';
 
 type Props = {
   tooltipLines: string[];
@@ -151,6 +154,8 @@ function setupFeatureConnectors() {
 
 export default function AlarmLevelDemo({ tooltipLines }: Props) {
   const id = useId();
+  const locale = useLocale() as Locale;
+  const t = (text: string) => translateAdvantech(locale, text);
 
   useEffect(() => {
     setupFeatureConnectors();
@@ -172,7 +177,7 @@ export default function AlarmLevelDemo({ tooltipLines }: Props) {
         type="radio"
       />
 
-      <div className="cs-alarm-toggle" role="group" aria-label="報警等級互動狀態">
+      <div className="cs-alarm-toggle" role="group" aria-label={t("報警等級互動狀態")}>
         <label className="cs-alarm-toggle-btn cs-alarm-toggle-default" htmlFor={`${id}-default`}>
           <span>Default</span>
         </label>
@@ -183,10 +188,10 @@ export default function AlarmLevelDemo({ tooltipLines }: Props) {
 
       <div className="cs-alarm-panel cs-alarm-before">
         <div className="cs-alarm-state-row">
-          <span className="cs-alarm-label">報警等級</span>
+          <span className="cs-alarm-label">{t("報警等級")}</span>
           <span className="cs-alarm-help cs-alarm-help-muted">?</span>
           <span>：</span>
-          <span className="cs-alarm-chip cs-alarm-chip-danger">嚴重</span>
+          <span className="cs-alarm-chip cs-alarm-chip-danger">{t("嚴重")}</span>
         </div>
       </div>
 
@@ -194,18 +199,18 @@ export default function AlarmLevelDemo({ tooltipLines }: Props) {
 
       <div className="cs-alarm-panel cs-alarm-after">
         <div className="cs-alarm-state-row">
-          <span className="cs-alarm-label">報警等級</span>
+          <span className="cs-alarm-label">{t("報警等級")}</span>
           <span className="cs-alarm-help-wrap">
             <span className="cs-alarm-help cs-alarm-help-active">?</span>
             <span className="cs-alarm-tip">
               {tooltipLines.map((line) => (
-                <p key={line}>{line}</p>
+                <p key={line}>{t(line)}</p>
               ))}
               <span className="cs-alarm-tip-arrow" />
             </span>
           </span>
           <span>：</span>
-          <span className="cs-alarm-chip cs-alarm-chip-danger">嚴重</span>
+          <span className="cs-alarm-chip cs-alarm-chip-danger">{t("嚴重")}</span>
         </div>
       </div>
     </div>

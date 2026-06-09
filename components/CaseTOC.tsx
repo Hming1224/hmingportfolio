@@ -1,5 +1,8 @@
 'use client';
+import { useLocale } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+import type { Locale } from '../i18n/routing';
+import { translateAdvantech } from '../app/advantech/i18n';
 
 export interface TocSection {
   id: string;
@@ -11,6 +14,7 @@ interface CaseTOCProps {
 }
 
 export default function CaseTOC({ sections }: CaseTOCProps) {
+  const locale = useLocale() as Locale;
   const [activeId, setActiveId] = useState<string>(sections[0]?.id ?? '');
   const [visible, setVisible] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -65,7 +69,7 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
     <nav
       ref={navRef}
       className={`cs-toc${visible ? ' is-visible' : ''}`}
-      aria-label="頁內目錄"
+      aria-label={translateAdvantech(locale, "頁內目錄")}
     >
       <ul className="cs-toc-list">
         {sections.map(({ id, title }) => (

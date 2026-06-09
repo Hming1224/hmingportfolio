@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { CaseHeading } from "../../../components/case-study";
 import { resultCards } from "../data";
+import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
+import { getAdvantechTranslator } from "../i18n-server";
 
-export default function ResultSection() {
-  return (
+export default async function ResultSection() {
+  const { locale, t } = await getAdvantechTranslator();
+  const cards = translateAdvantechData(locale, resultCards);
+  return localizeAdvantechTree(locale,
     <section id="cs-sec-result" className="cs-result-bg">
       <div className="cs-result-bg-img">
         <Image
@@ -15,9 +19,9 @@ export default function ResultSection() {
       </div>
       <div className="cs-result-overlay" />
       <div className="cs-result-content">
-        <CaseHeading title="我學到了什麼..." tone="white" style={{ marginBottom: 8 }} />
+        <CaseHeading title={t("我學到了什麼...")} tone="white" style={{ marginBottom: 8 }} />
         <div className="cs-result-grid">
-          {resultCards.map((item) => (
+          {cards.map((item) => (
             <div key={item.num} className="cs-result-card">
               <span className="cs-result-num">{item.num}</span>
               <h3 className="cs-result-title">{item.title}</h3>

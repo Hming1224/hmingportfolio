@@ -6,9 +6,12 @@ import FeatureConnectors from "../components/FeatureConnectors";
 import AlarmLevelDemo from "../components/AlarmLevelDemo";
 import VimeoPlayer from "../components/VimeoPlayer";
 import { proposalScenario1Tabs, proposalScenario2Tabs } from "../data";
+import { localizeAdvantechTree } from "../i18n";
+import { getAdvantechTranslator } from "../i18n-server";
 
-export default function SolutionSection() {
-  return (
+export default async function SolutionSection() {
+  const { locale } = await getAdvantechTranslator();
+  return localizeAdvantechTree(locale,
     <CaseSection id="cs-sec-solution" surface className="cs-solution-section" title="設計發想、迭代與最終方案">
       <p className="cs-body-muted" style={{ marginBottom: 56 }}>
         依據前述定義的設計情境，後續迭代將聚焦在幾個會直接影響決策判斷的介面：AI Chatbot、超約預警分析視窗、設備能耗異常分析視窗，以及其中的圖表、資料表與 AI 建議區塊。

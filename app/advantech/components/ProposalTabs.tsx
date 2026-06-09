@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
+import type { Locale } from '../../../i18n/routing';
+import { translateAdvantech } from '../i18n';
 
 export type ProposalTab = {
   label: string;
@@ -18,6 +21,8 @@ type Props = {
 };
 
 export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
+  const locale = useLocale() as Locale;
+  const t = (text: string) => translateAdvantech(locale, text);
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [slideIdx, setSlideIdx] = useState(0);
 
@@ -66,7 +71,7 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
             className="cs-sol-nav-btn"
             disabled={!canPrev}
             onClick={() => setSlideIdx((s) => s - 1)}
-            aria-label="上一張"
+            aria-label={t("上一張")}
           >
             ‹
           </button>
@@ -84,7 +89,7 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
             className="cs-sol-nav-btn"
             disabled={!canNext}
             onClick={() => setSlideIdx((s) => s + 1)}
-            aria-label="下一張"
+            aria-label={t("下一張")}
           >
             ›
           </button>
@@ -93,7 +98,7 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
         {/* Text */}
         <div className="cs-sol-txt">
           <div>
-            <p className="cs-sol-txt-h">流程概念</p>
+            <p className="cs-sol-txt-h">{t("流程概念")}</p>
             <p className="cs-sol-txt-p">{tab.concept}</p>
           </div>
           <div>

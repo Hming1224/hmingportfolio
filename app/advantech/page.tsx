@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import "../../styles/case-study-advantech.css";
 import {
   CaseStudyShell,
   type TocSection,
 } from "../../components/case-study";
 import { getNextProject, getProjectBySlug } from "../../data/projects";
+import type { Locale } from "../../i18n/routing";
+import { translateAdvantech } from "./i18n";
 import {
   HeroSection,
   OverviewSection,
@@ -19,35 +22,38 @@ import {
   ResultSection,
 } from "./sections";
 
-const project = getProjectBySlug("advantech");
-const nextProject = getNextProject(project.slug);
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const project = getProjectBySlug("advantech", locale);
+  return { title: `${project.title} — Brian Huang`, description: project.seoDescription };
+}
 
-export const metadata: Metadata = {
-  title: `${project.title} — Brian Huang`,
-  description: project.seoDescription,
-};
+export default async function AdventechPage() {
+  const locale = (await getLocale()) as Locale;
+  const t = (text: string) => translateAdvantech(locale, text);
+  const project = getProjectBySlug("advantech", locale);
+  const nextProject = getNextProject(project.slug, locale);
+  const tocSections: TocSection[] = [
+    { id: "cs-sec-overview", title: t("專案背景") },
+    { id: "cs-sec-background", title: t("產品背景") },
+    { id: "cs-sec-role", title: t("我的角色") },
+    { id: "cs-sec-process", title: t("設計流程") },
+    { id: "cs-sec-analysis", title: t("競品分析") },
+    { id: "cs-sec-interview", title: t("使用者訪談") },
+    { id: "cs-sec-scenario", title: t("設計情境") },
+    { id: "cs-sec-solution", title: t("設計成果") },
+    { id: "cs-sec-next", title: t("下一步") },
+    { id: "cs-sec-result", title: t("學習反思") },
+  ];
 
-const tocSections: TocSection[] = [
-  { id: 'cs-sec-overview',    title: '專案背景' },
-  { id: 'cs-sec-background',  title: '產品背景' },
-  { id: 'cs-sec-role',        title: '我的角色' },
-  { id: 'cs-sec-process',     title: '設計流程' },
-  { id: 'cs-sec-analysis',    title: '競品分析' },
-  { id: 'cs-sec-interview',   title: '使用者訪談' },
-  { id: 'cs-sec-scenario',    title: '設計情境' },
-  { id: 'cs-sec-solution',    title: '設計成果' },
-  { id: 'cs-sec-next',        title: '下一步' },
-  { id: 'cs-sec-result',      title: '學習反思' },
-];
-
-export default function AdventechPage() {
   return (
     <CaseStudyShell
       theme="theme-advantech"
       tocSections={tocSections}
       nextNav={{
         nextHref: nextProject.href ?? "#",
-        nextLabel: `下一個專案：${nextProject.title}`,
+        homeLabel: t("返回首頁"),
+        nextLabel: `${t("下一個專案")}：${nextProject.title}`,
       }}
       hero={<HeroSection />}
     >

@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
+import type { Locale } from '../../../i18n/routing';
+import { translateAdvantech } from '../i18n';
 
 type Props = {
   videoId: string;
@@ -16,6 +19,7 @@ type Props = {
  */
 export default function VimeoPlayer({ videoId, poster, title }: Props) {
   const [active, setActive] = useState(false);
+  const locale = useLocale() as Locale;
 
   return (
     <div className="cs-sol-vplayer">
@@ -31,7 +35,7 @@ export default function VimeoPlayer({ videoId, poster, title }: Props) {
         <button
           type="button"
           className="cs-sol-vplay"
-          aria-label={`播放：${title}`}
+          aria-label={`${translateAdvantech(locale, "播放")}：${title}`}
           onClick={() => setActive(true)}
         >
           <Image
