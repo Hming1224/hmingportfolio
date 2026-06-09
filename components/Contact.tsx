@@ -3,19 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import AnimatedContent from "../app/about-me/AnimatedContent";
-
-const getCleanFormspreeId = (id: string) => {
-  const trimmed = id.trim();
-  if (trimmed.includes("/")) {
-    const parts = trimmed.split("/");
-    return parts[parts.length - 1];
-  }
-  return trimmed;
-};
-
-const FORMSPREE_ID = getCleanFormspreeId(
-  process.env.NEXT_PUBLIC_FORMSPREE_ID || "xkgwojzw",
-);
+import { contactData } from "../data/contact";
+import { config } from "../lib/config";
 
 export default function Contact() {
   const [status, setStatus] = useState<
@@ -26,14 +15,14 @@ export default function Contact() {
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard.writeText("hmingdesigner@gmail.com");
+    navigator.clipboard.writeText(contactData.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleCopyPhone = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard.writeText("+886 978-629-321");
+    navigator.clipboard.writeText(contactData.phone);
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2000);
   };
@@ -46,13 +35,16 @@ export default function Contact() {
     const data = new FormData(form);
 
     try {
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: "POST",
-        body: data,
-        headers: {
-          Accept: "application/json",
+      const response = await fetch(
+        `https://formspree.io/f/${config.formspreeId}`,
+        {
+          method: "POST",
+          body: data,
+          headers: {
+            Accept: "application/json",
+          },
         },
-      });
+      );
 
       if (response.ok) {
         setStatus("success");
@@ -75,7 +67,7 @@ export default function Contact() {
     >
       <div className="contact-hero-image" aria-hidden="true">
         <Image
-          src="https://framerusercontent.com/images/NB9UIWMSY1Vp8KhJ1oEDFdGQI.jpg"
+          src={contactData.heroImage}
           alt=""
           fill
           sizes="100vw"
@@ -96,9 +88,9 @@ export default function Contact() {
           >
             <div className="contact-info-card">
               <div className="contact-info-header">
-                <h2 id="contact-title">對我的經歷或作品感興趣嗎？</h2>
+                <h2 id="contact-title">{contactData.title}</h2>
                 <p className="contact-subtitle">
-                  透過以下管道與我聯繫，或傳送表單訊息！
+                  {contactData.subtitle}
                 </p>
               </div>
 
@@ -126,7 +118,7 @@ export default function Contact() {
                   <div className="method-details">
                     <span className="method-label">電子信箱</span>
                     <span className="method-value">
-                      hmingdesigner@gmail.com
+                      {contactData.email}
                     </span>
                   </div>
                   <button
@@ -159,7 +151,7 @@ export default function Contact() {
                   <div className="method-details">
                     <span className="method-label">手機號碼</span>
                     <span className="method-value">
-                      +886 978-629-321
+                      {contactData.phone}
                     </span>
                   </div>
                   <button
@@ -172,7 +164,7 @@ export default function Contact() {
 
                 {/* Social Card: LinkedIn */}
                 <a
-                  href="https://www.linkedin.com/in/brian-huang-a36759128/"
+                  href={contactData.socials.linkedin.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact-method-item social-card"
@@ -195,7 +187,9 @@ export default function Contact() {
                   </div>
                   <div className="method-details">
                     <span className="method-label">LinkedIn</span>
-                    <span className="method-value">Brian Huang</span>
+                    <span className="method-value">
+                      {contactData.socials.linkedin.label}
+                    </span>
                   </div>
                   <div className="arrow-icon">
                     <svg
@@ -216,7 +210,7 @@ export default function Contact() {
 
                 {/* Social Card: GitHub */}
                 <a
-                  href="https://github.com/Hming1224"
+                  href={contactData.socials.github.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact-method-item social-card"
@@ -237,7 +231,9 @@ export default function Contact() {
                   </div>
                   <div className="method-details">
                     <span className="method-label">GitHub</span>
-                    <span className="method-value">Hming1224</span>
+                    <span className="method-value">
+                      {contactData.socials.github.label}
+                    </span>
                   </div>
                   <div className="arrow-icon">
                     <svg
