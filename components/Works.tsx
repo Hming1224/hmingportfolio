@@ -54,7 +54,7 @@ const projects: Project[] = [
     tags: ["UIUX設計", "使用者研究"],
     tone: "navy",
     category: "enterprise",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
   {
@@ -68,7 +68,7 @@ const projects: Project[] = [
     tags: ["GenAI應用", "碩士論文", "人與AI合作"],
     tone: "thesis",
     category: "school",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
   {
@@ -82,7 +82,7 @@ const projects: Project[] = [
     tags: ["遊戲設計", "個人專案", "VibeCoding"],
     tone: "icecream",
     category: "school",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
   {
@@ -96,7 +96,7 @@ const projects: Project[] = [
     tags: ["UIUX設計", "使用者研究", "團隊專案"],
     tone: "laushu",
     category: "school",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
   {
@@ -112,7 +112,7 @@ const projects: Project[] = [
     tags: ["UIUX 設計", "網頁設計", "團隊專案", "課堂專案"],
     tone: "brown",
     category: "school",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
   {
@@ -128,7 +128,7 @@ const projects: Project[] = [
     tags: ["UIUX 設計", "網頁設計", "End-to-end 設計", "網站開發中"],
     tone: "green",
     category: "enterprise",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
   {
@@ -144,7 +144,7 @@ const projects: Project[] = [
     tags: ["UIUX 設計", "iOS", "團隊專案", "Side Project"],
     tone: "peach",
     category: "school",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
   {
@@ -160,7 +160,7 @@ const projects: Project[] = [
     tags: ["UIUX 設計", "iOS", "End-to-End Design", "Side Project"],
     tone: "navy",
     category: "school",
-    cta: "資料準備中",
+    cta: "即將上線",
     disabled: true,
   },
 ];
