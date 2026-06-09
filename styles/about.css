@@ -345,6 +345,19 @@
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .experience-card {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+
+  .experience-image {
+    min-height: 300px;
+  }
+
+  .experience-copy {
+    padding: 32px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -934,10 +947,6 @@
 }
 
 @media (max-width: 1439px) {
-  .contact-hero-image img {
-    object-fit: cover;
-  }
-
   /* Section 06 – 1024-1439px: 字卡移到圖片上方，step 說明列維持 row */
   .cs-sol-fr:not(.cs-sol-fr-mid) {
     flex-direction: column;
@@ -1192,37 +1201,8 @@
     top: clamp(312px, calc(45.3svh - 36px), 403px);
   }
 
-  .hero-sticky-1 {
-    left: 35.625%;
-    top: clamp(70px, calc(10.1svh - 8px), 90px);
-  }
-
-  .hero-sticky-2 {
-    left: 47%;
-    top: clamp(42px, calc(6.1svh - 5px), 54px);
-  }
-
-  .hero-sticky-3 {
-    left: 5%;
-    top: clamp(171px, calc(24.9svh - 20px), 221px);
-  }
-
-  .hero-sticky-4 {
-    left: 14.75%;
-    top: clamp(144px, calc(20.9svh - 17px), 186px);
-  }
-
-  .hero-sticky-5 {
-    left: auto;
-    right: 137px;
-    top: clamp(138px, calc(20.1svh - 16px), 179px);
-  }
-
-  .hero-sticky-6 {
-    left: auto;
-    right: 59px;
-    top: clamp(159px, calc(23.2svh - 19px), 206px);
-  }
+  /* .hero-sticky-1..6 的 ≤1023px 排版改由 home.css 統一管理（對稱扇形），
+     此處不再覆寫，避免 about.css（後載入）蓋掉 home.css 的扇形佈局。 */
 
   .hero-ai-widget {
     --ai-widget-scale: 0.815;
@@ -1438,35 +1418,8 @@
     top: clamp(158px, calc((100svh - 80px) * 0.231), 205px);
   }
 
-  .hero-sticky-1 {
-    left: 30%;
-    top: clamp(44px, calc((100svh - 80px) * 0.072), 64px);
-  }
-
-  .hero-sticky-2 {
-    left: 41.5%;
-    top: clamp(36px, calc((100svh - 80px) * 0.059), 52px);
-  }
-
-  .hero-sticky-3 {
-    left: 11.5%;
-    top: clamp(90px, calc((100svh - 80px) * 0.139), 124px);
-  }
-
-  .hero-sticky-4 {
-    left: 17.75%;
-    top: clamp(72px, calc((100svh - 80px) * 0.112), 100px);
-  }
-
-  .hero-sticky-5 {
-    right: 57px;
-    top: clamp(28px, calc((100svh - 80px) * 0.045), 40px);
-  }
-
-  .hero-sticky-6 {
-    right: 20px;
-    top: clamp(20px, calc((100svh - 80px) * 0.031), 28px);
-  }
+  /* .hero-sticky-1..6 的 ≤768px 排版改由 home.css 統一管理（對稱扇形），
+     此處不再覆寫，避免 about.css（後載入）蓋掉 home.css 的扇形佈局。 */
 
   .hero-toggle {
     --toggle-scale: 0.667;
@@ -1646,14 +1599,6 @@
     font-size: var(--fs-sm);
   }
 
-  .contact-hero-image {
-    height: 320px;
-  }
-
-  .contact-hero-image img {
-    object-fit: cover;
-  }
-
   .contact-panel-band {
     padding: 40px 24px 80px;
   }
@@ -1762,7 +1707,17 @@
     max-width: 100%;
     min-height: 56px;
     overflow-x: auto;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--line);
     border-radius: 100px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    transition:
+      top 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
   }
 
   html[data-nav-hidden="true"] .year-rail {

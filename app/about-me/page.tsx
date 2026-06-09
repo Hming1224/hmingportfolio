@@ -453,7 +453,7 @@ export default function AboutMePage() {
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 768px) calc(100vw - 48px), 269px"
+                  sizes="(max-width: 1024px) calc(100vw - 48px), 269px"
                 />
               </div>
               <div className="experience-copy">
