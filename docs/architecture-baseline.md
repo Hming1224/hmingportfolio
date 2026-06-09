@@ -20,6 +20,9 @@ When adding a project:
 2. Add a route only when the project is published.
 3. Use the shared case-study shell and keep route CSS isolated.
 
+> Full step-by-step: see [`add-case-study-checklist.md`](./add-case-study-checklist.md),
+> including the `.theme-<slug>` selector-scope convention for route-private CSS.
+
 Ownership checks:
 
 - Project title, href, cover, status, and next-project relationship have one

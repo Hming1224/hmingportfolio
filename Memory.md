@@ -1,5 +1,26 @@
 # Project Memory
 
+## 2026-06-09 網站資料結構重構 Phase 3（case study 擴充邊界）
+
+Files: `styles/case-study-advantech.css`、`docs/add-case-study-checklist.md`、`docs/architecture-baseline.md`。
+
+- **案例私有 CSS scope 慣例**：`case-study-advantech.css` 所有 Advantech 私有 `.cs-*` selector 一律以 `.theme-advantech ` 開頭（root 由 `CaseStudyShell` 的 `theme` prop 掛上）。新案例比照 `.theme-<slug>`。完整流程見 `docs/add-case-study-checklist.md`。
+- **9 個共用骨架 class 保持裸寫，不要冠 `.theme-advantech`**：`.cs-next-nav` / `.cs-next-btn-filled` / `.cs-next-btn-outline` / `.cs-hero-info` / `.cs-hero-meta` / `.cs-info-card` / `.cs-info-row` / `.cs-info-tasks` / `.cs-title`。它們屬於共用 `case-study.css`，加 scope 是錯誤歸屬。**未來再過這支檔時不要把這 9 個也 prefix 掉。**
+- **批次改 CSS selector 要用 postcss、不要用 line-based regex**：本檔有跨行逗號的「值」（gradient / transition / calc），regex 會把值誤判成 selector 改壞。用 postcss 解析 `rule.selectors` 改寫才安全。
+- **cascade 安全性**：統一加同層 prefix = 全檔 specificity 均勻 +0,1,0，相對優先序與 source order 不變；唯一跨檔競合的 9 個共用 class 已裸寫，故私有元素 computed style 與改前完全相同（已四斷點 computed-style 驗證）。
+- **待 Phase 4**：那 9 個共用骨架的 RWD override 應歸位 `case-study.css`；next-nav / next-btn 的 mobile 規則是共用檔已涵蓋的重複碼，可直接刪。
+
+## 2026-06-09 網站資料結構重構 Phase 0 + Phase 1
+
+Files: `data/projects.ts`、`data/about.ts`、`data/contact.ts`、`lib/config.ts`、`docs/architecture-baseline.md`、`eslint.config.mjs` 與對應頁面 / 元件。
+
+- **專案單一資料來源**：首頁卡片、Advantech metadata、next-project 關係統一由 `data/projects.ts` 管理。查詢必須使用 `getProjectBySlug()` / `getNextProject()`；未知 slug 或缺少 next-project 關係要直接報錯，不能靜默顯示錯資料。
+- **About 純資料邊界**：經歷中的粗體內容不可把 JSX 放進 `data/about.ts`；使用文字片段 + `highlight` 標記，由 `app/about-me/page.tsx` 負責渲染。
+- **Contact ownership**：公開聯絡資料放 `data/contact.ts`；Formspree ID 清理與環境設定放 `lib/config.ts`；互動狀態與送出流程保留在 `Contact.tsx`。
+- **lint 邊界**：本地 agent helpers 的 `scripts/` / `.codex/` 不屬網站 runtime，已從 ESLint 排除。`npm run lint` 現為 0 error，只剩既有 `<img>` warning。
+- **iterations 策略**：保留作為設計驗證歷史，不在結構重構時刪除或混改；基準與新增專案 checklist 記在 `docs/architecture-baseline.md`。
+- **驗證**：build / diff check 通過；四頁在 1440 / 1024 / 768 / 390 無水平溢出、console 0 error；首頁 tabs、Contact copy、About highlights、Advantech metadata / next-nav 正常。
+
 ## 2026-06-08 About Genie dock icon + hidden-card flow
 
 Files: `app/about-me/GenieReveal.tsx`、`app/globals.css`。

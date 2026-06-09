@@ -1,4 +1,10 @@
-/* Advantech case study-specific sections and responsive rules. */
+/* Advantech case study-specific sections and responsive rules.
+
+   Scope 慣例（見 docs/add-case-study-checklist.md §4）：
+   本檔所有「Advantech 私有」selector 一律以 `.theme-advantech` 開頭
+   （root 由 CaseStudyShell 的 theme prop 掛上），確保私有規則不會污染其他案例。
+   少數共用骨架類（.cs-next-nav / .cs-next-btn-* / .cs-hero-* / .cs-info-* / .cs-title）
+   保持裸寫——它們屬於 styles/case-study.css，這裡只是 RWD 覆寫，待第二案例時歸位。 */
 
 /* ── 區域色票（Advantech 案例頁專屬）──
    scope 在 .theme-advantech，不進全域 :root（見 design.md §2.7）。
@@ -24,23 +30,23 @@
    Keep them before the section rules so the existing Advantech cascade stays intact. */
 @media (max-width: 1439px) {
   /* Section 06 – 1024-1439px: 字卡移到圖片上方，step 說明列維持 row */
-  .cs-sol-fr:not(.cs-sol-fr-mid) {
+  .theme-advantech .cs-sol-fr:not(.cs-sol-fr-mid) {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .cs-sol-fc {
+  .theme-advantech .cs-sol-fc {
     flex: unset;
     width: 100%;
   }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
-  .cs-sol-fnote {
+  .theme-advantech .cs-sol-fnote {
     padding: 16px;
   }
 
-  .cs-alarm-demo {
+  .theme-advantech .cs-alarm-demo {
     display: flex;
     align-items: stretch;
     justify-content: flex-start;
@@ -50,7 +56,7 @@
     font-size: 12px !important;
   }
 
-  .cs-alarm-toggle {
+  .theme-advantech .cs-alarm-toggle {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
@@ -60,7 +66,7 @@
     background: var(--surface);
   }
 
-  .cs-alarm-toggle-btn {
+  .theme-advantech .cs-alarm-toggle-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,29 +83,29 @@
     cursor: pointer;
   }
 
-  .cs-alarm-toggle-on {
+  .theme-advantech .cs-alarm-toggle-on {
     background: #fff;
     color: #0072bd;
     box-shadow: 0 2px 8px rgba(9, 48, 96, 0.08);
   }
 
-  .cs-alarm-arrow {
+  .theme-advantech .cs-alarm-arrow {
     display: none;
   }
 
-  .cs-alarm-panel {
+  .theme-advantech .cs-alarm-panel {
     justify-content: center;
     min-height: 76px;
     border-radius: 12px;
     background: #f6faff;
   }
 
-  .cs-alarm-demo-default .cs-alarm-after,
-  .cs-alarm-demo-hover .cs-alarm-before {
+  .theme-advantech .cs-alarm-demo-default .cs-alarm-after,
+  .theme-advantech .cs-alarm-demo-hover .cs-alarm-before {
     display: none;
   }
 
-  .cs-alarm-demo-hover .cs-alarm-after {
+  .theme-advantech .cs-alarm-demo-hover .cs-alarm-after {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
@@ -107,7 +113,7 @@
     background: transparent;
   }
 
-  .cs-alarm-tip {
+  .theme-advantech .cs-alarm-tip {
     position: relative;
     inset: auto;
     width: 100%;
@@ -115,50 +121,50 @@
     white-space: normal;
   }
 
-  .cs-alarm-tip-arrow {
+  .theme-advantech .cs-alarm-tip-arrow {
     right: 28px;
     left: auto;
     transform: none;
   }
 
-  .cs-alarm-state-row {
+  .theme-advantech .cs-alarm-state-row {
     justify-content: center;
   }
 
-  .cs-alarm-demo-hover .cs-alarm-after .cs-alarm-state-row {
+  .theme-advantech .cs-alarm-demo-hover .cs-alarm-after .cs-alarm-state-row {
     align-self: center;
   }
 }
 
 @media (max-width: 1023px) {
-  .cs-comp-ems-grid {
+  .theme-advantech .cs-comp-ems-grid {
     grid-template-columns: 1fr;
   }
 
-  .cs-comp-ems-card {
+  .theme-advantech .cs-comp-ems-card {
     flex-direction: column;
   }
 
-  .cs-comp-ems-img {
+  .theme-advantech .cs-comp-ems-img {
     width: 100%;
     height: 200px;
   }
 
   /* Section 06 – Feature rows: fc (30%) = 230px at 1023px → unreadable, stack to column */
-  .cs-sol-fr,
-  .cs-sol-fr.cs-sol-fr-mid {
+  .theme-advantech .cs-sol-fr,
+  .theme-advantech .cs-sol-fr.cs-sol-fr-mid {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .cs-sol-fc,
-  .cs-sol-fnote {
+  .theme-advantech .cs-sol-fc,
+  .theme-advantech .cs-sol-fnote {
     flex: unset;
     width: 100%;
   }
 
   /* 說明 frame 永遠排在圖片上方，不受 HTML 左右順序影響 */
-  .cs-sol-fr-mid .cs-sol-fnote {
+  .theme-advantech .cs-sol-fr-mid .cs-sol-fnote {
     order: -1;
     margin-top: 40px;
   }
@@ -166,30 +172,30 @@
 
 @media (max-width: 768px) {
   /* Section 04 – User Interview */
-  .cs-iv-personas {
+  .theme-advantech .cs-iv-personas {
     flex-direction: column;
   }
 
-  .cs-iv-workflow {
+  .theme-advantech .cs-iv-workflow {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .cs-iv-arrow {
+  .theme-advantech .cs-iv-arrow {
     transform: rotate(90deg);
     align-self: center;
   }
 }
 
 /* ── 02 Overview ── */
-.cs-overview-body {
+.theme-advantech .cs-overview-body {
   display: flex;
   flex-direction: column;
   gap: 0;
   margin-bottom: 24px;
 }
 
-.cs-overview-img {
+.theme-advantech .cs-overview-img {
   width: 100%;
   height: auto;
   aspect-ratio: 3000 / 1687;
@@ -200,13 +206,13 @@
 }
 
 /* ── Product Background cards ── */
-.cs-product-grid {
+.theme-advantech .cs-product-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-.cs-product-card {
+.theme-advantech .cs-product-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -217,14 +223,14 @@
   background: #dcf1fe;
 }
 
-.cs-product-card-header {
+.theme-advantech .cs-product-card-header {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 0;
 }
 
-.cs-product-logo {
+.theme-advantech .cs-product-logo {
   width: 32px;
   height: 32px;
   position: relative;
@@ -233,21 +239,21 @@
   border-radius: 4px;
 }
 
-.cs-product-card-name {
+.theme-advantech .cs-product-card-name {
   font-size: var(--fs-h3);
   font-weight: 700;
   color: #004380;
   margin: 0;
 }
 
-.cs-product-card-divider {
+.theme-advantech .cs-product-card-divider {
   height: 1px;
   width: 100%;
   background: rgba(203, 222, 244, 0.5);
   margin: 0;
 }
 
-.cs-product-card-body {
+.theme-advantech .cs-product-card-body {
   flex: 1;
   padding: 0;
   font-size: var(--fs-sm);
@@ -256,14 +262,14 @@
   margin: 0;
 }
 
-.cs-product-tags {
+.theme-advantech .cs-product-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   padding: 0;
 }
 
-.cs-product-tag {
+.theme-advantech .cs-product-tag {
   font-size: var(--fs-xs);
   font-weight: 500;
   padding: 4px 8px;
@@ -272,7 +278,7 @@
   color: #416e94;
 }
 
-.cs-product-screen {
+.theme-advantech .cs-product-screen {
   width: 100%;
   aspect-ratio: 662 / 373;
   position: relative;
@@ -281,13 +287,13 @@
 }
 
 /* ── My Role ── */
-.cs-role-radial {
+.theme-advantech .cs-role-radial {
   position: relative;
   min-height: 620px;
   margin-top: 0;
 }
 
-.cs-role-card {
+.theme-advantech .cs-role-card {
   position: absolute;
   z-index: 2;
   display: flex;
@@ -302,7 +308,7 @@
   overflow: hidden;
 }
 
-.cs-role-connectors {
+.theme-advantech .cs-role-connectors {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -312,33 +318,33 @@
   pointer-events: none;
 }
 
-.cs-role-connectors line {
+.theme-advantech .cs-role-connectors line {
   stroke: var(--cs-slate-dark);
   stroke-width: 2;
   stroke-linecap: square;
 }
 
-.cs-role-card-1 {
+.theme-advantech .cs-role-card-1 {
   top: 0;
   left: 0;
 }
 
-.cs-role-card-2 {
+.theme-advantech .cs-role-card-2 {
   top: 0;
   right: 0;
 }
 
-.cs-role-card-3 {
+.theme-advantech .cs-role-card-3 {
   bottom: 49px;
   left: 0;
 }
 
-.cs-role-card-4 {
+.theme-advantech .cs-role-card-4 {
   right: 0;
   bottom: 49px;
 }
 
-.cs-role-center {
+.theme-advantech .cs-role-center {
   position: absolute;
   top: 165.625px;
   left: 50%;
@@ -352,7 +358,7 @@
   background: #dceefa;
 }
 
-.cs-role-num {
+.theme-advantech .cs-role-num {
   font-size: clamp(10px, 0.58vw, 11px);
   font-weight: 700;
   letter-spacing: 0;
@@ -365,7 +371,7 @@
   margin-bottom: 0;
 }
 
-.cs-role-title {
+.theme-advantech .cs-role-title {
   font-size: clamp(15px, 0.89vw, 17px);
   font-weight: 700;
   line-height: 1.5;
@@ -373,7 +379,7 @@
   margin: 0;
 }
 
-.cs-role-desc {
+.theme-advantech .cs-role-desc {
   font-size: clamp(11.5px, 0.68vw, 13px);
   line-height: 1.5;
   color: #5e5658;
@@ -381,33 +387,33 @@
 }
 
 /* ── Process timeline ── */
-.cs-process-bg {
+.theme-advantech .cs-process-bg {
   position: relative;
   overflow: hidden;
   padding: 72px var(--page-gutter);
 }
 
-.cs-process-bg-img {
+.theme-advantech .cs-process-bg-img {
   position: absolute;
   inset: 0;
   z-index: 0;
   opacity: 0.6;
 }
 
-.cs-process-overlay {
+.theme-advantech .cs-process-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
-.cs-process-content {
+.theme-advantech .cs-process-content {
   position: relative;
   z-index: 2;
 }
 
 /* ── Alternating timeline ── */
-.cs-timeline-alt {
+.theme-advantech .cs-timeline-alt {
   --cs-tl-card-height: 196px;
   --cs-tl-step-count: 6;
   --cs-tl-step-width: 160px;
@@ -416,8 +422,8 @@
   overflow-x: auto;
 }
 
-.cs-tl-tops,
-.cs-tl-bottoms {
+.theme-advantech .cs-tl-tops,
+.theme-advantech .cs-tl-bottoms {
   display: grid;
   grid-template-columns: repeat(
     var(--cs-tl-step-count),
@@ -429,8 +435,8 @@
   width: 100%;
 }
 
-.cs-tl-top,
-.cs-tl-bottom {
+.theme-advantech .cs-tl-top,
+.theme-advantech .cs-tl-bottom {
   min-width: var(--cs-tl-step-width);
   padding: 0 8px;
   display: flex;
@@ -438,7 +444,7 @@
   align-items: stretch;
 }
 
-.cs-tl-dots-row {
+.theme-advantech .cs-tl-dots-row {
   display: grid;
   grid-template-columns: repeat(
     var(--cs-tl-step-count),
@@ -451,7 +457,7 @@
   width: 100%;
 }
 
-.cs-tl-axis {
+.theme-advantech .cs-tl-axis {
   position: absolute;
   left: 0;
   right: 0;
@@ -463,14 +469,14 @@
   pointer-events: none;
 }
 
-.cs-tl-dot-cell {
+.theme-advantech .cs-tl-dot-cell {
   min-width: var(--cs-tl-step-width);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.cs-tl-dot {
+.theme-advantech .cs-tl-dot {
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -480,7 +486,7 @@
   z-index: 1;
 }
 
-.cs-tl-card {
+.theme-advantech .cs-tl-card {
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 12px;
@@ -494,7 +500,7 @@
   flex-shrink: 0;
 }
 
-.cs-tl-vconn {
+.theme-advantech .cs-tl-vconn {
   flex: 1;
   width: 2px;
   background: rgba(255, 255, 255, 0.52);
@@ -502,7 +508,7 @@
   min-height: 8px;
 }
 
-.cs-tl-num {
+.theme-advantech .cs-tl-num {
   display: inline-flex;
   align-self: flex-start;
   background: rgba(255, 255, 255, 0.15);
@@ -514,7 +520,7 @@
   margin-bottom: 10px;
 }
 
-.cs-tl-title {
+.theme-advantech .cs-tl-title {
   font-size: var(--fs-sm);
   font-weight: 700;
   color: #fff;
@@ -522,7 +528,7 @@
   margin: 0 0 8px;
 }
 
-.cs-tl-desc {
+.theme-advantech .cs-tl-desc {
   font-size: var(--fs-xs);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.88);
@@ -531,40 +537,40 @@
 }
 
 /* ── Competitive Analysis ── */
-.cs-sub-section {
+.theme-advantech .cs-sub-section {
   margin-bottom: 56px;
 }
 
-.cs-sub-section-heading {
+.theme-advantech .cs-sub-section-heading {
   font-size: var(--fs-h3);
   font-weight: 700;
   color: var(--ink);
   margin: 0 0 8px;
 }
 
-.cs-sub-section-desc {
+.theme-advantech .cs-sub-section-desc {
   font-size: var(--fs-body);
   line-height: 1.75;
   color: var(--text-secondary);
   margin: 0 0 28px;
 }
 
-.cs-text-muted-blue {
+.theme-advantech .cs-text-muted-blue {
   color: var(--cs-slate);
 }
 
-.cs-text-ink {
+.theme-advantech .cs-text-ink {
   color: var(--cs-ink);
 }
 
 /* === Section 01: AI Tool Cards === */
-.cs-comp-grid {
+.theme-advantech .cs-comp-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
-.cs-comp-card {
+.theme-advantech .cs-comp-card {
   background: #ddf1fe;
   border: 1px solid var(--cs-line-soft);
   border-radius: 12px;
@@ -574,7 +580,7 @@
   gap: 12px;
 }
 
-.cs-comp-card-img {
+.theme-advantech .cs-comp-card-img {
   width: 100%;
   height: 196px;
   border: 1px solid var(--cs-line-soft);
@@ -584,14 +590,14 @@
   flex-shrink: 0;
 }
 
-.cs-comp-card-title {
+.theme-advantech .cs-comp-card-title {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-ink);
   margin: 0;
 }
 
-.cs-comp-card-desc {
+.theme-advantech .cs-comp-card-desc {
   font-size: var(--fs-sm);
   line-height: 21px;
   color: var(--cs-slate);
@@ -599,7 +605,7 @@
   flex: 1;
 }
 
-.cs-comp-pill {
+.theme-advantech .cs-comp-pill {
   background: white;
   color: var(--cs-slate-dark);
   font-size: var(--fs-xs);
@@ -610,13 +616,13 @@
 }
 
 /* === Section 02: EMS Competitor Cards === */
-.cs-comp-ems-grid {
+.theme-advantech .cs-comp-ems-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-.cs-comp-ems-card {
+.theme-advantech .cs-comp-ems-card {
   background: #f5faff;
   border: 1px solid var(--cs-line);
   border-radius: 8px;
@@ -626,7 +632,7 @@
   align-items: flex-start;
 }
 
-.cs-comp-ems-img {
+.theme-advantech .cs-comp-ems-img {
   width: 232px;
   height: 163px;
   border: 1px solid var(--cs-line);
@@ -636,14 +642,14 @@
   flex-shrink: 0;
 }
 
-.cs-comp-ems-body {
+.theme-advantech .cs-comp-ems-body {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.cs-comp-ems-name {
+.theme-advantech .cs-comp-ems-name {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-ink);
@@ -651,7 +657,7 @@
   margin: 0;
 }
 
-.cs-comp-category-pill {
+.theme-advantech .cs-comp-category-pill {
   display: inline-block;
   background: var(--cs-tint);
   color: var(--cs-blue);
@@ -662,7 +668,7 @@
   align-self: flex-start;
 }
 
-.cs-comp-ems-list {
+.theme-advantech .cs-comp-ems-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -671,7 +677,7 @@
   gap: 10px;
 }
 
-.cs-comp-ems-list li {
+.theme-advantech .cs-comp-ems-list li {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -680,7 +686,7 @@
   color: var(--cs-slate);
 }
 
-.cs-comp-ems-list li::before {
+.theme-advantech .cs-comp-ems-list li::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -691,15 +697,15 @@
 }
 
 @media (min-width: 768px) and (max-width: 1439px) {
-  .cs-comp-ems-grid {
+  .theme-advantech .cs-comp-ems-grid {
     grid-template-columns: 1fr 1fr;
   }
 
-  .cs-comp-ems-card {
+  .theme-advantech .cs-comp-ems-card {
     flex-direction: column;
   }
 
-  .cs-comp-ems-img {
+  .theme-advantech .cs-comp-ems-img {
     width: 100%;
     height: 200px;
   }
@@ -709,20 +715,20 @@
 /* 2-column grid: [feature matrix | opportunity col]
    Each pair of siblings (cs-fm-header + cs-opp-col-hd, cs-fm-row + cs-opp-cell)
    shares the same grid row → heights auto-align. */
-.cs-fm-wrap {
+.theme-advantech .cs-fm-wrap {
   display: grid;
   grid-template-columns: 1fr 280px;
   border: 1px solid var(--cs-line);
   overflow-x: auto;
 }
 
-.cs-fm-header {
+.theme-advantech .cs-fm-header {
   display: flex;
   border-bottom: 1px solid var(--cs-line);
   border-right: 1px solid var(--cs-line);
 }
 
-.cs-fm-module-hd {
+.theme-advantech .cs-fm-module-hd {
   width: 120px;
   flex-shrink: 0;
   background: var(--cs-tint);
@@ -734,7 +740,7 @@
   border-right: 1px solid var(--cs-line);
 }
 
-.cs-fm-col-hd {
+.theme-advantech .cs-fm-col-hd {
   flex: 1;
   min-width: 160px;
   background: var(--cs-tint);
@@ -745,11 +751,11 @@
   border-right: 1px solid var(--cs-line);
 }
 
-.cs-fm-col-hd:last-child {
+.theme-advantech .cs-fm-col-hd:last-child {
   border-right: none;
 }
 
-.cs-opp-col-hd {
+.theme-advantech .cs-opp-col-hd {
   background: #ddf1fe;
   border-bottom: 1px solid var(--cs-line);
   padding: 16px;
@@ -759,25 +765,25 @@
   min-width: 160px;
 }
 
-.cs-opp-col-hd span {
+.theme-advantech .cs-opp-col-hd span {
   font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--cs-teal);
   white-space: nowrap;
 }
 
-.cs-fm-row {
+.theme-advantech .cs-fm-row {
   display: flex;
   border-bottom: 1px solid var(--cs-line);
   border-right: 1px solid var(--cs-line);
 }
 
 /* Remove bottom border from last data row pair */
-.cs-fm-wrap > .cs-fm-row:nth-last-child(2) {
+.theme-advantech .cs-fm-wrap > .cs-fm-row:nth-last-child(2) {
   border-bottom: none;
 }
 
-.cs-fm-module {
+.theme-advantech .cs-fm-module {
   width: 120px;
   flex-shrink: 0;
   background: #f5faff;
@@ -790,14 +796,14 @@
   border-right: 1px solid var(--cs-line);
 }
 
-.cs-fm-module span {
+.theme-advantech .cs-fm-module span {
   font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--cs-ink);
   text-align: center;
 }
 
-.cs-fm-cell {
+.theme-advantech .cs-fm-cell {
   flex: 1;
   min-width: 160px;
   padding: 16px;
@@ -805,11 +811,11 @@
   background: white;
 }
 
-.cs-fm-cell:last-child {
+.theme-advantech .cs-fm-cell:last-child {
   border-right: none;
 }
 
-.cs-fm-cell ul {
+.theme-advantech .cs-fm-cell ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -818,7 +824,7 @@
   gap: 10px;
 }
 
-.cs-fm-cell ul li {
+.theme-advantech .cs-fm-cell ul li {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -827,7 +833,7 @@
   color: var(--cs-slate);
 }
 
-.cs-fm-cell ul li::before {
+.theme-advantech .cs-fm-cell ul li::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -837,7 +843,7 @@
   margin-top: 7px;
 }
 
-.cs-opp-cell {
+.theme-advantech .cs-opp-cell {
   background: #eef8ff;
   padding: 16px;
   border-bottom: 1px solid var(--cs-line);
@@ -847,11 +853,11 @@
   min-width: 160px;
 }
 
-.cs-opp-cell:last-child {
+.theme-advantech .cs-opp-cell:last-child {
   border-bottom: none;
 }
 
-.cs-opp-cell ul {
+.theme-advantech .cs-opp-cell ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -860,7 +866,7 @@
   gap: 10px;
 }
 
-.cs-opp-cell ul li {
+.theme-advantech .cs-opp-cell ul li {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -869,7 +875,7 @@
   color: var(--cs-teal);
 }
 
-.cs-opp-cell ul li::before {
+.theme-advantech .cs-opp-cell ul li::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -881,13 +887,13 @@
 
 /* ── User Interview ── */
 /* === User Interview — new design === */
-.cs-iv-personas {
+.theme-advantech .cs-iv-personas {
   display: flex;
   gap: 20px;
   margin-bottom: 36px;
 }
 
-.cs-iv-persona {
+.theme-advantech .cs-iv-persona {
   flex: 1;
   display: flex;
   gap: 20px;
@@ -898,7 +904,7 @@
   padding: 22px 24px;
 }
 
-.cs-iv-persona-img {
+.theme-advantech .cs-iv-persona-img {
   width: 102px;
   height: 94px;
   flex-shrink: 0;
@@ -907,7 +913,7 @@
   overflow: hidden;
 }
 
-.cs-iv-persona-name {
+.theme-advantech .cs-iv-persona-name {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-ink);
@@ -915,20 +921,20 @@
   margin: 0 0 8px;
 }
 
-.cs-iv-persona-desc {
+.theme-advantech .cs-iv-persona-desc {
   font-size: var(--fs-body);
   line-height: 28px;
   color: var(--cs-slate);
   margin: 0;
 }
 
-.cs-iv-workflow {
+.theme-advantech .cs-iv-workflow {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.cs-iv-arrow {
+.theme-advantech .cs-iv-arrow {
   width: 41px;
   height: 47px;
   flex-shrink: 0;
@@ -937,7 +943,7 @@
   justify-content: center;
 }
 
-.cs-iv-stage {
+.theme-advantech .cs-iv-stage {
   flex: 1;
   align-self: stretch;
   background: var(--cs-bg);
@@ -949,7 +955,7 @@
   gap: 16px;
 }
 
-.cs-iv-stage-title {
+.theme-advantech .cs-iv-stage-title {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-blue);
@@ -957,7 +963,7 @@
   margin: 0;
 }
 
-.cs-iv-pain {
+.theme-advantech .cs-iv-pain {
   background: #fff7e8;
   border: 1px solid #f2d9a6;
   border-radius: 8px;
@@ -967,21 +973,21 @@
   gap: 8px;
 }
 
-.cs-iv-pain-label {
+.theme-advantech .cs-iv-pain-label {
   font-size: var(--fs-xs);
   font-weight: 700;
   color: #a86800;
   line-height: 16px;
 }
 
-.cs-iv-pain-desc {
+.theme-advantech .cs-iv-pain-desc {
   font-size: var(--fs-sm);
   line-height: 21px;
   color: var(--cs-slate);
   margin: 0;
 }
 
-.cs-iv-ai {
+.theme-advantech .cs-iv-ai {
   background: var(--cs-tint);
   border: 1px solid #88b9e8;
   border-radius: 8px;
@@ -991,18 +997,18 @@
   gap: 8px;
 }
 
-.cs-iv-ai-grow {
+.theme-advantech .cs-iv-ai-grow {
   flex: 1;
 }
 
-.cs-iv-ai-label {
+.theme-advantech .cs-iv-ai-label {
   font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--cs-blue);
   line-height: 16px;
 }
 
-.cs-iv-ai ul {
+.theme-advantech .cs-iv-ai ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1011,7 +1017,7 @@
   gap: 8px;
 }
 
-.cs-iv-ai ul li {
+.theme-advantech .cs-iv-ai ul li {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -1020,7 +1026,7 @@
   color: var(--cs-ink);
 }
 
-.cs-iv-ai ul li::before {
+.theme-advantech .cs-iv-ai ul li::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -1034,7 +1040,7 @@
    ≤768px 不套用 → 沿用 base 的 flex，並由 768 斷點收成單欄堆疊。
    放在 base 規則之後，確保 source order 蓋過 base 的 flex。 */
 @media (min-width: 769px) {
-  .cs-iv-workflow {
+  .theme-advantech .cs-iv-workflow {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
     grid-template-rows: auto auto 1fr;
@@ -1042,27 +1048,27 @@
     column-gap: 16px;
   }
 
-  .cs-iv-stage {
+  .theme-advantech .cs-iv-stage {
     grid-row: 1 / -1;
     display: grid;
     grid-template-rows: subgrid;
     row-gap: 16px;
   }
 
-  .cs-iv-arrow {
+  .theme-advantech .cs-iv-arrow {
     grid-row: 1 / -1;
     align-self: center;
   }
 }
 
 /* === Interview Synthesis === */
-.cs-synthesis {
+.theme-advantech .cs-synthesis {
   border: 1px solid var(--cs-line-soft);
   border-radius: 16px;
   overflow: hidden;
 }
 
-.cs-synthesis-hd {
+.theme-advantech .cs-synthesis-hd {
   padding: 20px;
   background: linear-gradient(269deg, rgba(255, 255, 255, 0) 0%, #ddf1fe 63%);
   font-size: var(--fs-h3);
@@ -1071,25 +1077,25 @@
   line-height: 34px;
 }
 
-.cs-synthesis-body {
+.theme-advantech .cs-synthesis-body {
   background: var(--cs-bg);
   display: flex;
   gap: 20px;
   padding: 20px;
 }
 
-.cs-synthesis-insights {
+.theme-advantech .cs-synthesis-insights {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.cs-synthesis-insight {
+.theme-advantech .cs-synthesis-insight {
   flex: 1;
 }
 
-.cs-synthesis-badge {
+.theme-advantech .cs-synthesis-badge {
   width: 38px;
   height: 26px;
   background: var(--cs-slate-dark);
@@ -1103,7 +1109,7 @@
   flex-shrink: 0;
 }
 
-.cs-synthesis-card {
+.theme-advantech .cs-synthesis-card {
   flex: 1;
   background: white;
   border: 1px solid var(--cs-line);
@@ -1114,13 +1120,13 @@
   gap: 12px;
 }
 
-.cs-synthesis-card-heading {
+.theme-advantech .cs-synthesis-card-heading {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.cs-synthesis-card-title {
+.theme-advantech .cs-synthesis-card-title {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-ink);
@@ -1128,14 +1134,14 @@
   margin: 0;
 }
 
-.cs-synthesis-card-desc {
+.theme-advantech .cs-synthesis-card-desc {
   font-size: var(--fs-sm);
   line-height: 21px;
   color: var(--cs-slate);
   margin: 0;
 }
 
-.cs-synthesis-photo {
+.theme-advantech .cs-synthesis-photo {
   flex: 0 0 55%;
   position: relative;
   border: 1px solid var(--cs-line);
@@ -1146,25 +1152,25 @@
 
 /* ── Design Scenario ── */
 /* ── Design Scenario (Section 05) ── */
-.cs-ds-scenario {
+.theme-advantech .cs-ds-scenario {
   margin-bottom: 48px;
 }
 
-.cs-ds-head {
+.theme-advantech .cs-ds-head {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   margin-bottom: 24px;
 }
 
-.cs-ds-title {
+.theme-advantech .cs-ds-title {
   font-size: var(--fs-h3);
   font-weight: 700;
   line-height: 1.35;
   margin: 0 0 8px;
 }
 
-.cs-ds-subdesc {
+.theme-advantech .cs-ds-subdesc {
   font-size: var(--fs-body);
   line-height: 1.75;
   color: var(--cs-slate);
@@ -1172,19 +1178,19 @@
 }
 
 /* Flow diagram: SVG overlay + 3 card columns */
-.cs-ds-flow-wrap {
+.theme-advantech .cs-ds-flow-wrap {
   position: relative;
   overflow-x: auto;
 }
 
 /* Holds the connectors + cards at one shared width; gets a min-width on small
    screens so the whole row overflows and scrolls together. */
-.cs-ds-flow-inner {
+.theme-advantech .cs-ds-flow-inner {
   position: relative;
   width: 100%;
 }
 
-.cs-ds-svg-overlay {
+.theme-advantech .cs-ds-svg-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -1193,7 +1199,7 @@
   pointer-events: none;
 }
 
-.cs-ds-flow-cols {
+.theme-advantech .cs-ds-flow-cols {
   display: grid;
   /* Figma proportions: AI 310 / gap 250 / Feature 330 / gap 250 / UI 300 = 1440 */
   grid-template-columns: 21.53% 22.92% 20.83%;
@@ -1206,14 +1212,14 @@
   padding: 4px;
 }
 
-.cs-ds-col-label {
+.theme-advantech .cs-ds-col-label {
   font-size: var(--fs-h4);
   font-weight: 700;
   line-height: 25px;
   margin: 0;
 }
 
-.cs-ds-card {
+.theme-advantech .cs-ds-card {
   border-radius: 8px;
   padding: 16px 16px;
   position: relative;
@@ -1227,41 +1233,41 @@
 /* Row-aligned heights (AI/Func = UI + 20) keep card centres level so the
    centre-anchored connectors stay horizontal. Heights have extra headroom so
    wrapped titles/text fit WITHOUT growing the card → no connector wrinkle. */
-.cs-ds-card-ai {
+.theme-advantech .cs-ds-card-ai {
   min-height: 190px;
   background: #f8f0ff;
   border: 1px solid #6b46a3;
 }
 
-.cs-ds-card-func {
+.theme-advantech .cs-ds-card-func {
   min-height: 190px;
   background: #fff7e8;
   border: 1px solid #d88400;
 }
 
-.cs-ds-card-ui {
+.theme-advantech .cs-ds-card-ui {
   min-height: 170px;
   background: #eaf7ff;
   border: 1px solid var(--cs-blue);
 }
 
-.cs-ds-card-primary {
+.theme-advantech .cs-ds-card-primary {
   border-width: 2px;
 }
 
 /* Gap spacers between cards — tuned so row-2 / mid card centres stay level
    (ai-gap = UI height + 22, ui-gap = 21). */
-.cs-ds-ai-gap {
+.theme-advantech .cs-ds-ai-gap {
   height: 192px;
   flex-shrink: 0;
 }
 
-.cs-ds-ui-gap {
+.theme-advantech .cs-ds-ui-gap {
   height: 21px;
   flex-shrink: 0;
 }
 
-.cs-ds-pill {
+.theme-advantech .cs-ds-pill {
   display: inline-block;
   background: white;
   border-radius: 999px;
@@ -1272,7 +1278,7 @@
   margin: 0;
 }
 
-.cs-ds-card-desc {
+.theme-advantech .cs-ds-card-desc {
   font-size: var(--fs-xs);
   line-height: 1.6;
   color: var(--cs-slate);
@@ -1281,7 +1287,7 @@
 }
 
 /* "由我負責" marker — small avatar in the card header (matches Figma) */
-.cs-ds-card-head {
+.theme-advantech .cs-ds-card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1289,7 +1295,7 @@
   width: 100%;
 }
 
-.cs-ds-owner {
+.theme-advantech .cs-ds-owner {
   width: 22px;
   height: 22px;
   border-radius: 999px;
@@ -1298,14 +1304,14 @@
   display: inline-flex;
 }
 
-.cs-ds-owner img {
+.theme-advantech .cs-ds-owner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 /* Legend under each scenario flow */
-.cs-ds-legend {
+.theme-advantech .cs-ds-legend {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1315,14 +1321,14 @@
 }
 
 /* ── Section 06 Solution sub-blocks ── */
-.cs-sol-block {
+.theme-advantech .cs-sol-block {
   display: flex;
   flex-direction: column;
   gap: 28px;
   margin-bottom: 72px;
 }
 
-.cs-sol-tag {
+.theme-advantech .cs-sol-tag {
   display: inline-block;
   padding: 8px 12px;
   border-radius: 14px;
@@ -1332,7 +1338,7 @@
   width: fit-content;
 }
 
-.cs-sol-blk-title {
+.theme-advantech .cs-sol-blk-title {
   font-size: var(--fs-h2);
   font-weight: 700;
   color: var(--text-heading);
@@ -1340,7 +1346,7 @@
   line-height: 1.2;
 }
 
-.cs-sol-blk-desc {
+.theme-advantech .cs-sol-blk-desc {
   font-size: var(--fs-body);
   color: var(--text-secondary);
   margin: 0;
@@ -1349,7 +1355,7 @@
 }
 
 /* Flow Diagram Banner */
-.cs-sol-flow {
+.theme-advantech .cs-sol-flow {
   width: 100%;
   height: 115px;
   border-radius: 16px;
@@ -1361,7 +1367,7 @@
   flex-shrink: 0;
 }
 
-.cs-sol-flow-info {
+.theme-advantech .cs-sol-flow-info {
   position: absolute;
   left: 27px;
   top: 27px;
@@ -1370,14 +1376,14 @@
   gap: 10px;
 }
 
-.cs-sol-flow-label {
+.theme-advantech .cs-sol-flow-label {
   margin: 0;
   font-size: var(--fs-sm);
   font-weight: 600;
   line-height: 17px;
 }
 
-.cs-sol-flow-name {
+.theme-advantech .cs-sol-flow-name {
   margin: 0;
   font-size: var(--fs-h3);
   font-weight: 700;
@@ -1387,19 +1393,19 @@
 }
 
 /* Proposal Tabs */
-.cs-sol-prop {
+.theme-advantech .cs-sol-prop {
   border-radius: 22px;
   box-shadow: 0px 12px 14px rgba(9, 48, 96, 0.07);
   overflow: hidden;
 }
 
-.cs-sol-tabs {
+.theme-advantech .cs-sol-tabs {
   display: flex;
   gap: 4px;
   align-items: center;
 }
 
-.cs-sol-tab {
+.theme-advantech .cs-sol-tab {
   flex: 1;
   display: flex;
   align-items: center;
@@ -1421,12 +1427,12 @@
   user-select: none;
 }
 
-.cs-sol-tab-on {
+.theme-advantech .cs-sol-tab-on {
   background: white;
   color: var(--cs-navy);
 }
 
-.cs-sol-tab-bd {
+.theme-advantech .cs-sol-tab-bd {
   background: white;
   padding: 28px;
   display: flex;
@@ -1435,21 +1441,21 @@
   border-radius: 0 0 20px 20px;
 }
 
-.cs-sol-mock {
+.theme-advantech .cs-sol-mock {
   flex: 0 0 52%;
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.cs-sol-mock-img {
+.theme-advantech .cs-sol-mock-img {
   flex: 1;
   min-width: 0;
   border-radius: 12px;
   overflow: hidden;
 }
 
-.cs-sol-nav-btn {
+.theme-advantech .cs-sol-nav-btn {
   flex-shrink: 0;
   width: 44px;
   height: 44px;
@@ -1472,24 +1478,24 @@
   padding-bottom: 2px;
 }
 
-.cs-sol-nav-btn:hover {
+.theme-advantech .cs-sol-nav-btn:hover {
   box-shadow: 0px 10px 22px -6px rgba(125, 79, 185, 0.22);
 }
 
-.cs-sol-nav-btn:disabled {
+.theme-advantech .cs-sol-nav-btn:disabled {
   opacity: 0.25;
   cursor: default;
   box-shadow: none;
 }
 
-.cs-sol-txt {
+.theme-advantech .cs-sol-txt {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.cs-sol-txt-h {
+.theme-advantech .cs-sol-txt-h {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-navy);
@@ -1497,7 +1503,7 @@
   line-height: 24px;
 }
 
-.cs-sol-txt-p {
+.theme-advantech .cs-sol-txt-p {
   font-size: var(--fs-body);
   color: var(--text-secondary);
   margin: 0;
@@ -1505,7 +1511,7 @@
 }
 
 /* Iteration Boards */
-.cs-sol-board {
+.theme-advantech .cs-sol-board {
   background: white;
   border: 1px solid var(--cs-line-soft);
   border-radius: 16px;
@@ -1515,14 +1521,14 @@
   gap: 24px;
 }
 
-.cs-sol-bdhd {
+.theme-advantech .cs-sol-bdhd {
   display: flex;
   gap: 24px;
   align-items: center;
   overflow: hidden;
 }
 
-.cs-sol-badge {
+.theme-advantech .cs-sol-badge {
   padding: 8px 16px;
   border-radius: 999px;
   font-size: var(--fs-sm);
@@ -1531,7 +1537,7 @@
   flex-shrink: 0;
 }
 
-.cs-sol-bdtitle {
+.theme-advantech .cs-sol-bdtitle {
   font-size: var(--fs-h3);
   font-weight: 700;
   color: var(--cs-navy);
@@ -1539,14 +1545,14 @@
   line-height: 30px;
 }
 
-.cs-sol-dr {
+.theme-advantech .cs-sol-dr {
   display: flex;
   gap: 24px;
   align-items: flex-start;
   padding: 0 8px;
 }
 
-.cs-sol-drlabel {
+.theme-advantech .cs-sol-drlabel {
   font-size: var(--fs-body);
   font-weight: 700;
   color: var(--text-secondary);
@@ -1556,7 +1562,7 @@
   margin: 0;
 }
 
-.cs-sol-drbody {
+.theme-advantech .cs-sol-drbody {
   flex: 1;
   font-size: var(--fs-body);
   color: var(--text-secondary);
@@ -1565,13 +1571,13 @@
 }
 
 /* Before / After */
-.cs-sol-ba {
+.theme-advantech .cs-sol-ba {
   display: flex;
   gap: 24px;
   align-items: stretch;
 }
 
-.cs-sol-bapanel {
+.theme-advantech .cs-sol-bapanel {
   flex: 1;
   border: 1px solid var(--cs-line-soft);
   border-radius: 16px;
@@ -1581,7 +1587,7 @@
   flex-direction: column;
 }
 
-.cs-sol-bahd {
+.theme-advantech .cs-sol-bahd {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1597,7 +1603,7 @@
   flex-shrink: 0;
 }
 
-.cs-sol-bacontent {
+.theme-advantech .cs-sol-bacontent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1607,7 +1613,7 @@
   gap: 12px;
 }
 
-.cs-sol-arrow {
+.theme-advantech .cs-sol-arrow {
   flex-shrink: 0;
   width: 40px;
   font-size: var(--fs-h2);
@@ -1619,7 +1625,7 @@
 }
 
 /* Redline dimension annotation */
-.cs-sol-redline {
+.theme-advantech .cs-sol-redline {
   position: relative;
   height: 40px;
   display: flex;
@@ -1627,7 +1633,7 @@
   justify-content: center;
 }
 
-.cs-sol-redline::before {
+.theme-advantech .cs-sol-redline::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1639,7 +1645,7 @@
   border-bottom: 1.5px solid var(--cs-magenta);
 }
 
-.cs-sol-redline-label {
+.theme-advantech .cs-sol-redline-label {
   font-family: "Roboto Mono", monospace;
   font-size: var(--fs-sm);
   font-weight: 500;
@@ -1650,27 +1656,27 @@
 }
 
 /* Feature Rows */
-.cs-sol-fr {
+.theme-advantech .cs-sol-fr {
   display: flex;
   gap: 40px;
   align-items: flex-start;
   margin-bottom: 40px;
 }
 
-.cs-sol-fr-mid {
+.theme-advantech .cs-sol-fr-mid {
   align-items: center;
 }
 
 @media (min-width: 1025px) and (max-width: 1139px) {
-  .cs-sol-fgroup-f12 > .cs-sol-fr:first-child + .cs-sol-fconn,
-  .cs-sol-fgroup-f2 > .cs-sol-fr:first-child + .cs-sol-fconn {
+  .theme-advantech .cs-sol-fgroup-f12 > .cs-sol-fr:first-child + .cs-sol-fconn,
+  .theme-advantech .cs-sol-fgroup-f2 > .cs-sol-fr:first-child + .cs-sol-fconn {
     margin-bottom: calc(
       -28px - clamp(0px, calc((1140px - 100vw) * 0.139), 16px)
     );
   }
 }
 
-.cs-sol-fc {
+.theme-advantech .cs-sol-fc {
   flex: 0 0 30%;
   background: white;
   border: 1px solid var(--cs-line-soft);
@@ -1679,7 +1685,7 @@
   position: relative;
 }
 
-.cs-sol-fchead {
+.theme-advantech .cs-sol-fchead {
   background: linear-gradient(
     269.45deg,
     rgba(255, 255, 255, 0) 0%,
@@ -1688,7 +1694,7 @@
   padding: 24px 28px;
 }
 
-.cs-sol-fc--teal .cs-sol-fchead {
+.theme-advantech .cs-sol-fc--teal .cs-sol-fchead {
   background: linear-gradient(
     269.45deg,
     rgba(255, 255, 255, 0) 0%,
@@ -1696,14 +1702,14 @@
   );
 }
 
-.cs-sol-fcbody {
+.theme-advantech .cs-sol-fcbody {
   padding: 24px 28px 28px;
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-.cs-sol-ftitle {
+.theme-advantech .cs-sol-ftitle {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-navy);
@@ -1711,24 +1717,24 @@
   line-height: 28px;
 }
 
-.cs-sol-fc--teal .cs-sol-ftitle {
+.theme-advantech .cs-sol-fc--teal .cs-sol-ftitle {
   color: #083b4c;
 }
 
-.cs-sol-fsub {
+.theme-advantech .cs-sol-fsub {
   font-size: var(--fs-sm);
   color: var(--text-secondary);
   margin: 0 0 24px;
   line-height: 22px;
 }
 
-.cs-sol-dpts {
+.theme-advantech .cs-sol-dpts {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.cs-sol-dpt {
+.theme-advantech .cs-sol-dpt {
   background: #f6faff;
   border-radius: 12px;
   padding: 16px 16px;
@@ -1737,7 +1743,7 @@
   gap: 8px;
 }
 
-.cs-sol-dpt-l {
+.theme-advantech .cs-sol-dpt-l {
   font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--cs-blue-bright);
@@ -1745,14 +1751,14 @@
   margin: 0;
 }
 
-.cs-sol-dpt-b {
+.theme-advantech .cs-sol-dpt-b {
   font-size: var(--fs-sm);
   color: #1a1e25;
   line-height: 20px;
   margin: 0;
 }
 
-.cs-sol-fimg {
+.theme-advantech .cs-sol-fimg {
   flex: 1;
   min-width: 0;
   border-radius: 12px;
@@ -1761,7 +1767,7 @@
   box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.07);
 }
 
-.cs-feature-zoom-trigger {
+.theme-advantech .cs-feature-zoom-trigger {
   display: block;
   width: 100%;
   padding: 0;
@@ -1770,24 +1776,24 @@
   cursor: zoom-in;
 }
 
-.cs-feature-zoom-trigger img {
+.theme-advantech .cs-feature-zoom-trigger img {
   display: block;
   transition:
     transform 180ms ease,
     filter 180ms ease;
 }
 
-.cs-feature-zoom-trigger:hover img {
+.theme-advantech .cs-feature-zoom-trigger:hover img {
   transform: scale(1.015);
   filter: brightness(1.03);
 }
 
-.cs-feature-zoom-trigger:focus-visible {
+.theme-advantech .cs-feature-zoom-trigger:focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: -3px;
 }
 
-.cs-feature-lightbox {
+.theme-advantech .cs-feature-lightbox {
   position: fixed;
   inset: 0;
   z-index: 10000;
@@ -1798,7 +1804,7 @@
   cursor: zoom-out;
 }
 
-.cs-feature-lightbox-image {
+.theme-advantech .cs-feature-lightbox-image {
   display: block;
   width: auto;
   max-width: calc(100vw - 48px);
@@ -1810,7 +1816,7 @@
   object-fit: contain;
 }
 
-.cs-feature-lightbox-close {
+.theme-advantech .cs-feature-lightbox-close {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -1831,16 +1837,16 @@
   cursor: pointer;
 }
 
-.cs-feature-lightbox-close:hover {
+.theme-advantech .cs-feature-lightbox-close:hover {
   background: white;
 }
 
-.cs-feature-lightbox-close:focus-visible {
+.theme-advantech .cs-feature-lightbox-close:focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: 3px;
 }
 
-.cs-sol-fnote {
+.theme-advantech .cs-sol-fnote {
   flex: 0 0 30%;
   background: white;
   border: 1px solid var(--cs-line-soft);
@@ -1852,14 +1858,14 @@
   gap: 12px;
 }
 
-.cs-sol-fnote > p {
+.theme-advantech .cs-sol-fnote > p {
   font-size: var(--fs-sm);
   color: var(--text-secondary);
   margin: 0;
   line-height: 22px;
 }
 
-.cs-alarm-demo {
+.theme-advantech .cs-alarm-demo {
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1873,11 +1879,11 @@
   font-size: 13px;
 }
 
-.cs-alarm-toggle {
+.theme-advantech .cs-alarm-toggle {
   display: none;
 }
 
-.cs-alarm-mode {
+.theme-advantech .cs-alarm-mode {
   position: absolute;
   inline-size: 1px;
   block-size: 1px;
@@ -1885,18 +1891,18 @@
   pointer-events: none;
 }
 
-.cs-alarm-panel,
-.cs-alarm-state-row {
+.theme-advantech .cs-alarm-panel,
+.theme-advantech .cs-alarm-state-row {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.cs-alarm-label {
+.theme-advantech .cs-alarm-label {
   font-weight: 700;
 }
 
-.cs-alarm-help {
+.theme-advantech .cs-alarm-help {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
@@ -1908,48 +1914,48 @@
   font-weight: 700;
 }
 
-.cs-alarm-help-wrap {
+.theme-advantech .cs-alarm-help-wrap {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
 }
 
-.cs-alarm-help-muted {
+.theme-advantech .cs-alarm-help-muted {
   border: 1.5px solid #c0c4cc;
   color: #c0c4cc;
 }
 
-.cs-alarm-help-active {
+.theme-advantech .cs-alarm-help-active {
   border: 1.5px solid var(--cs-blue-bright);
   background: var(--cs-blue-bright);
   color: #fff;
 }
 
-.cs-alarm-chip {
+.theme-advantech .cs-alarm-chip {
   border-radius: 4px;
   padding: 0 8px;
   font-weight: 700;
   line-height: 22px;
 }
 
-.cs-alarm-chip-danger {
+.theme-advantech .cs-alarm-chip-danger {
   border: 1px solid var(--cs-red);
   background: #fbc7c9;
   color: var(--cs-red);
 }
 
-.cs-alarm-arrow {
+.theme-advantech .cs-alarm-arrow {
   flex-shrink: 0;
   color: var(--text-secondary);
   font-size: 20px;
   line-height: 24px;
 }
 
-.cs-alarm-after {
+.theme-advantech .cs-alarm-after {
   position: relative;
 }
 
-.cs-alarm-tip {
+.theme-advantech .cs-alarm-tip {
   position: absolute;
   bottom: calc(100% + 10px);
   left: 50%;
@@ -1965,11 +1971,11 @@
   white-space: nowrap;
 }
 
-.cs-alarm-tip p {
+.theme-advantech .cs-alarm-tip p {
   margin: 0;
 }
 
-.cs-alarm-tip-arrow {
+.theme-advantech .cs-alarm-tip-arrow {
   position: absolute;
   top: 100%;
   left: 50%;
@@ -1982,11 +1988,11 @@
 }
 
 @media (min-width: 1024px) {
-  .cs-sol-fnote {
+  .theme-advantech .cs-sol-fnote {
     padding: 16px;
   }
 
-  .cs-alarm-demo {
+  .theme-advantech .cs-alarm-demo {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -1996,7 +2002,7 @@
     font-size: 12px;
   }
 
-  .cs-alarm-toggle {
+  .theme-advantech .cs-alarm-toggle {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
@@ -2006,7 +2012,7 @@
     background: var(--surface);
   }
 
-  .cs-alarm-toggle-btn {
+  .theme-advantech .cs-alarm-toggle-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2026,8 +2032,8 @@
       box-shadow 180ms ease;
   }
 
-  .cs-alarm-mode-default:checked ~ .cs-alarm-toggle .cs-alarm-toggle-default,
-  .cs-alarm-mode-hover:checked ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
+  .theme-advantech .cs-alarm-mode-default:checked ~ .cs-alarm-toggle .cs-alarm-toggle-default,
+  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
     background: #fff;
     color: var(--ink);
     box-shadow:
@@ -2035,28 +2041,28 @@
       0 8px 24px rgba(0, 0, 0, 0.08);
   }
 
-  .cs-alarm-arrow {
+  .theme-advantech .cs-alarm-arrow {
     display: none;
   }
 
-  .cs-alarm-panel {
+  .theme-advantech .cs-alarm-panel {
     justify-content: center;
     min-height: 76px;
     border-radius: 12px;
     background: #f6faff;
   }
 
-  .cs-alarm-before,
-  .cs-alarm-after {
+  .theme-advantech .cs-alarm-before,
+  .theme-advantech .cs-alarm-after {
     display: none;
   }
 
-  .cs-alarm-mode-default:checked ~ .cs-alarm-before,
-  .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
+  .theme-advantech .cs-alarm-mode-default:checked ~ .cs-alarm-before,
+  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
     display: flex;
   }
 
-  .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
+  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
@@ -2066,7 +2072,7 @@
     background: transparent;
   }
 
-  .cs-alarm-tip {
+  .theme-advantech .cs-alarm-tip {
     position: absolute;
     bottom: calc(100% + 10px);
     left: 50%;
@@ -2079,22 +2085,22 @@
     white-space: nowrap;
   }
 
-  .cs-alarm-tip-arrow {
+  .theme-advantech .cs-alarm-tip-arrow {
     right: auto;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .cs-alarm-state-row {
+  .theme-advantech .cs-alarm-state-row {
     justify-content: center;
   }
 
-  .cs-alarm-mode-hover:checked ~ .cs-alarm-after .cs-alarm-state-row {
+  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after .cs-alarm-state-row {
     align-self: center;
   }
 }
 
-.cs-sol-fhr {
+.theme-advantech .cs-sol-fhr {
   width: 100%;
   height: 1px;
   background: var(--cs-line-soft);
@@ -2102,7 +2108,7 @@
 }
 
 /* Feature sub-group wrapper — transparent to layout, scopes JS connector queries */
-.cs-sol-fgroup {
+.theme-advantech .cs-sol-fgroup {
   display: contents;
 }
 
@@ -2110,7 +2116,7 @@
 /* Horizontal position + width are set dynamically by FeatureConnectors.tsx */
 /* margin-top cancels fr margin-bottom(40px) + block gap(28px) */
 /* margin-bottom cancels block gap(28px) after connector */
-.cs-sol-fconn {
+.theme-advantech .cs-sol-fconn {
   display: block;
   width: 100%;
   margin-top: -68px;
@@ -2119,29 +2125,29 @@
   user-select: none;
 }
 
-.cs-sol-fconn img {
+.theme-advantech .cs-sol-fconn img {
   display: block;
   height: auto;
 }
 
 @media (min-width: 1025px) and (max-width: 1439px) {
-  .cs-sol-fgroup > .cs-sol-fconn img {
+  .theme-advantech .cs-sol-fgroup > .cs-sol-fconn img {
     max-width: none;
     width: calc(30% + 40px);
   }
 
-  .cs-sol-fgroup > .cs-sol-fconn:nth-child(2) img {
+  .theme-advantech .cs-sol-fgroup > .cs-sol-fconn:nth-child(2) img {
     content: url("/projects/advantech-figma/sol06/connector-1-mid.svg");
     margin-left: calc(20% - 40px);
   }
 
-  .cs-sol-fgroup > .cs-sol-fconn:not(:nth-child(2)) img {
+  .theme-advantech .cs-sol-fgroup > .cs-sol-fconn:not(:nth-child(2)) img {
     margin-left: calc(35% - 20px);
   }
 }
 
 /* Video Section */
-.cs-sol-vc {
+.theme-advantech .cs-sol-vc {
   border-radius: 18px;
   padding: 24px 24px 28px;
   display: flex;
@@ -2150,7 +2156,7 @@
   border: 1px solid;
 }
 
-.cs-sol-vtitle {
+.theme-advantech .cs-sol-vtitle {
   font-size: var(--fs-h3);
   font-weight: 700;
   margin: 0;
@@ -2158,7 +2164,7 @@
 }
 
 /* 影片：點擊播放的 Vimeo facade */
-.cs-sol-vplayer {
+.theme-advantech .cs-sol-vplayer {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -2167,7 +2173,7 @@
   background: #000;
 }
 
-.cs-sol-vframe {
+.theme-advantech .cs-sol-vframe {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2175,7 +2181,7 @@
   border: 0;
 }
 
-.cs-sol-vplay {
+.theme-advantech .cs-sol-vplay {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2186,24 +2192,24 @@
   cursor: pointer;
 }
 
-.cs-sol-vplay img {
+.theme-advantech .cs-sol-vplay img {
   transition:
     transform 0.4s ease,
     filter 0.4s ease;
 }
 
-.cs-sol-vplay:hover img {
+.theme-advantech .cs-sol-vplay:hover img {
   transform: scale(1.02);
   filter: brightness(1.05);
 }
 
-.cs-sol-vplay:focus-visible {
+.theme-advantech .cs-sol-vplay:focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: 2px;
 }
 
 /* ── Next Step ── */
-.cs-ns-section {
+.theme-advantech .cs-ns-section {
   background: #ffffff;
   padding: 96px var(--page-gutter);
   display: flex;
@@ -2211,13 +2217,13 @@
   gap: 48px;
 }
 
-.cs-ns-header {
+.theme-advantech .cs-ns-header {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.cs-ns-title {
+.theme-advantech .cs-ns-title {
   font-size: var(--fs-h2);
   font-weight: 700;
   color: var(--cs-navy);
@@ -2226,7 +2232,7 @@
   max-width: 760px;
 }
 
-.cs-ns-desc {
+.theme-advantech .cs-ns-desc {
   font-size: var(--fs-body);
   font-weight: 400;
   color: var(--text-secondary);
@@ -2234,29 +2240,29 @@
   margin: 0;
 }
 
-.cs-sub-section-desc.cs-text-muted-blue,
-.cs-sol-blk-desc.cs-text-muted-blue {
+.theme-advantech .cs-sub-section-desc.cs-text-muted-blue,
+.theme-advantech .cs-sol-blk-desc.cs-text-muted-blue {
   color: var(--cs-slate);
 }
 
-.cs-ns-desc.cs-text-ink {
+.theme-advantech .cs-ns-desc.cs-text-ink {
   color: var(--cs-ink);
 }
 
-.cs-ns-divider {
+.theme-advantech .cs-ns-divider {
   width: 100%;
   height: 1px;
   background: var(--cs-line-soft);
   flex-shrink: 0;
 }
 
-.cs-ns-cards {
+.theme-advantech .cs-ns-cards {
   display: flex;
   gap: 60px;
   align-items: stretch;
 }
 
-.cs-ns-card {
+.theme-advantech .cs-ns-card {
   flex: 1;
   background: var(--cs-bg);
   border: 1px solid var(--cs-line-soft);
@@ -2267,13 +2273,13 @@
   gap: 20px;
 }
 
-.cs-ns-card-hd {
+.theme-advantech .cs-ns-card-hd {
   display: flex;
   gap: 16px;
   align-items: center;
 }
 
-.cs-ns-badge {
+.theme-advantech .cs-ns-badge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2287,7 +2293,7 @@
   line-height: 1.2;
 }
 
-.cs-ns-card-title {
+.theme-advantech .cs-ns-card-title {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-navy);
@@ -2295,7 +2301,7 @@
   margin: 0;
 }
 
-.cs-ns-card-text {
+.theme-advantech .cs-ns-card-text {
   font-size: var(--fs-body);
   font-weight: 400;
   color: var(--text-secondary);
@@ -2304,13 +2310,13 @@
   flex: 1;
 }
 
-.cs-ns-tags {
+.theme-advantech .cs-ns-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.cs-ns-tag {
+.theme-advantech .cs-ns-tag {
   display: flex;
   align-items: center;
   background: #ebf6fe;
@@ -2324,7 +2330,7 @@
   white-space: nowrap;
 }
 
-.cs-ns-vision {
+.theme-advantech .cs-ns-vision {
   background: rgba(9, 48, 96, 0.06);
   border: 1px solid rgba(9, 48, 96, 0.15);
   border-radius: 16px;
@@ -2334,7 +2340,7 @@
   gap: 12px;
 }
 
-.cs-ns-vision-title {
+.theme-advantech .cs-ns-vision-title {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--cs-navy);
@@ -2342,7 +2348,7 @@
   margin: 0;
 }
 
-.cs-ns-vision-text {
+.theme-advantech .cs-ns-vision-text {
   font-size: var(--fs-body);
   font-weight: 400;
   color: var(--text-secondary);
@@ -2351,38 +2357,38 @@
 }
 
 /* ── Result ── */
-.cs-result-bg {
+.theme-advantech .cs-result-bg {
   position: relative;
   overflow: hidden;
   padding: 72px var(--page-gutter);
 }
 
-.cs-result-bg-img {
+.theme-advantech .cs-result-bg-img {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.cs-result-overlay {
+.theme-advantech .cs-result-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.62);
   z-index: 1;
 }
 
-.cs-result-content {
+.theme-advantech .cs-result-content {
   position: relative;
   z-index: 2;
 }
 
-.cs-result-grid {
+.theme-advantech .cs-result-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-top: 8px;
 }
 
-.cs-result-card {
+.theme-advantech .cs-result-card {
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 16px;
@@ -2390,7 +2396,7 @@
   backdrop-filter: blur(6px);
 }
 
-.cs-result-num {
+.theme-advantech .cs-result-num {
   font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: 1px;
@@ -2402,14 +2408,14 @@
   margin-bottom: 16px;
 }
 
-.cs-result-title {
+.theme-advantech .cs-result-title {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: #fff;
   margin: 0 0 10px;
 }
 
-.cs-result-desc {
+.theme-advantech .cs-result-desc {
   font-size: var(--fs-sm);
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.88);
@@ -2421,13 +2427,13 @@
    (like the 設計流程 timeline) once the viewport drops to ~768px and under,
    instead of collapsing — so the AI→Feature→UI story stays intact. */
 @media (max-width: 1100px) {
-  .cs-ds-flow-cols {
+  .theme-advantech .cs-ds-flow-cols {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 28px;
   }
 
   /* 607px ≈ the section's content width at a 768px viewport → scroll at ≤768px */
-  .cs-ds-flow-inner {
+  .theme-advantech .cs-ds-flow-inner {
     min-width: 607px;
   }
 }
@@ -2441,13 +2447,13 @@
 
 /* Role radial cannot keep fixed-height cards once the card width gets this narrow. */
 @media (max-width: 900px) {
-  .cs-role-radial {
+  .theme-advantech .cs-role-radial {
     display: grid;
     min-height: 0;
     gap: 16px;
   }
 
-  .cs-role-center {
+  .theme-advantech .cs-role-center {
     position: relative;
     top: auto;
     left: auto;
@@ -2457,7 +2463,7 @@
     transform: none;
   }
 
-  .cs-role-card {
+  .theme-advantech .cs-role-card {
     position: relative;
     top: auto;
     right: auto;
@@ -2469,7 +2475,7 @@
     overflow: visible;
   }
 
-  .cs-role-connectors {
+  .theme-advantech .cs-role-connectors {
     display: none;
   }
 }
@@ -2480,13 +2486,13 @@
     line-height: 1.35;
   }
 
-  .cs-ns-cards {
+  .theme-advantech .cs-ns-cards {
     flex-direction: column;
   }
 
-  .cs-product-grid,
-  .cs-persona-grid,
-  .cs-result-grid {
+  .theme-advantech .cs-product-grid,
+  .theme-advantech .cs-persona-grid,
+  .theme-advantech .cs-result-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2516,13 +2522,13 @@
     gap: 8px;
   }
 
-  .cs-role-radial {
+  .theme-advantech .cs-role-radial {
     display: grid;
     min-height: 0;
     gap: 16px;
   }
 
-  .cs-role-center {
+  .theme-advantech .cs-role-center {
     position: relative;
     top: auto;
     left: auto;
@@ -2532,7 +2538,7 @@
     transform: none;
   }
 
-  .cs-role-card {
+  .theme-advantech .cs-role-card {
     position: relative;
     top: auto;
     right: auto;
@@ -2544,23 +2550,23 @@
     overflow: visible;
   }
 
-  .cs-role-connectors {
+  .theme-advantech .cs-role-connectors {
     display: none;
   }
 
-  .cs-comp-grid {
+  .theme-advantech .cs-comp-grid {
     grid-template-columns: 1fr;
   }
 
-  .cs-comp-ems-grid {
+  .theme-advantech .cs-comp-ems-grid {
     grid-template-columns: 1fr;
   }
 
-  .cs-comp-ems-card {
+  .theme-advantech .cs-comp-ems-card {
     flex-direction: column;
   }
 
-  .cs-comp-ems-img {
+  .theme-advantech .cs-comp-ems-img {
     width: 100%;
     height: 140px;
   }
@@ -2579,71 +2585,71 @@
   }
 
   /* Section 06 mobile */
-  .cs-sol-fconn {
+  .theme-advantech .cs-sol-fconn {
     display: none;
   }
 
   /* Proposal tabs: stack the mockup image above the text */
-  .cs-sol-tab-bd {
+  .theme-advantech .cs-sol-tab-bd {
     flex-direction: column;
     align-items: stretch;
     gap: 24px;
   }
 
-  .cs-sol-mock {
+  .theme-advantech .cs-sol-mock {
     flex: 0 0 auto;
     width: 100%;
   }
 
   /* Iteration design-note box: stack the label above the body text */
-  .cs-sol-dr {
+  .theme-advantech .cs-sol-dr {
     flex-direction: column;
     gap: 8px;
   }
 
-  .cs-sol-drlabel {
+  .theme-advantech .cs-sol-drlabel {
     width: auto;
   }
 
   /* Alarm-level hover demo: stack the two states vertically and point the
      arrow downwards instead of to the right */
-  .cs-alarm-demo {
+  .theme-advantech .cs-alarm-demo {
     flex-direction: column;
     align-items: center !important;
     gap: 12px !important;
     padding-top: 20px !important;
   }
 
-  .cs-alarm-arrow {
+  .theme-advantech .cs-alarm-arrow {
     display: inline-block;
     transform: rotate(90deg);
   }
 
   /* room above the "after" state for its (downward-pointing) tooltip so it
      doesn't cover the arrow / first state when stacked */
-  .cs-alarm-after {
+  .theme-advantech .cs-alarm-after {
     margin-top: 80px;
   }
 
-  .cs-sol-fr-mid .cs-sol-fnote {
+  .theme-advantech .cs-sol-fr-mid .cs-sol-fnote {
     margin-top: 0;
   }
 
-  .cs-sol-ba {
+  .theme-advantech .cs-sol-ba {
     flex-direction: column;
     padding: 0;
   }
 
-  .cs-sol-arrow {
+  .theme-advantech .cs-sol-arrow {
     transform: rotate(90deg);
   }
 
   /* Section 04 – Interview Synthesis */
-  .cs-synthesis-body {
+  .theme-advantech .cs-synthesis-body {
     flex-direction: column;
   }
 
-  .cs-synthesis-photo {
+  .theme-advantech .cs-synthesis-photo {
     flex: none;
     width: 100%;
     height: 220px;
@@ -2652,7 +2658,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .cs-comp-grid {
+  .theme-advantech .cs-comp-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -2660,14 +2666,14 @@
 /* 7-inch phones and under: stack each interview-persona card's image above
    its text and centre the whole card content. */
 @media (max-width: 440px) {
-  .cs-sol-bdhd {
+  .theme-advantech .cs-sol-bdhd {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     overflow: visible;
   }
 
-  .cs-iv-persona {
+  .theme-advantech .cs-iv-persona {
     flex-direction: column;
     align-items: center;
     text-align: center;
