@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import ScrollBehaviorFix from "../components/ScrollBehaviorFix";
 import "./globals.css";
 
@@ -42,14 +43,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="zh-Hant-TW"
+      lang={locale === "zh" ? "zh-Hant-TW" : "en"}
       className={spaceGrotesk.variable}
     >
       <body>

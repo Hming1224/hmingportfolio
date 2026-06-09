@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import SplitText from './animate-ui/primitives/texts/SplitText';
 import TrueFocus from './animate-ui/primitives/texts/TrueFocus';
 import DotPattern from './ui/dot-pattern';
@@ -86,7 +87,7 @@ export default function Hero() {
         </div>
 
         <div className="hero-actions">
-          <a className="button button-secondary" href="/about-me">我的歷程</a>
+          <Link className="button button-secondary" href="/about-me">我的歷程</Link>
           <a className="button button-primary"   href="#projects">查看作品</a>
         </div>
       </div>
