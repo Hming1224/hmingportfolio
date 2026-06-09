@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getLocale } from "next-intl/server";
 import { Fragment } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -7,16 +8,8 @@ import AvatarProfile from "../../components/AvatarProfile";
 import AnimatedContent from "./AnimatedContent";
 import GenieReveal from "./GenieReveal";
 import EducatorMasonry from "./EducatorMasonry";
-import {
-  designValues,
-  educatorItems,
-  experiences,
-  experienceYears,
-  firstExperienceIndexByYear,
-  skillCategories,
-  tools,
-  type ExperiencePoint,
-} from "../../data/about";
+import { getAboutData, type ExperiencePoint } from "../../data/about";
+import type { Locale } from "../../i18n/routing";
 
 function renderExperiencePoint(point: ExperiencePoint) {
   if (typeof point === "string") {
@@ -187,7 +180,22 @@ function SectionHeading({
   );
 }
 
-export default function AboutMePage() {
+export default async function AboutMePage() {
+  const locale = (await getLocale()) as Locale;
+  const {
+    designValues,
+    education,
+    educatorItems,
+    experiences,
+    experienceYears,
+    firstExperienceIndexByYear,
+    headings,
+    heroTitle,
+    intro,
+    skillCategories,
+    tools,
+  } = getAboutData(locale);
+
   return (
     <main className="about-page">
       <Navbar />
@@ -216,21 +224,8 @@ export default function AboutMePage() {
               </div>
 
               <div className="about-intro-copy">
-                <h1 id="about-title">從重啟自我，到設計產品體驗</h1>
-                <p>
-                  我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Junior
-                  Product Designer。
-                </p>
-                <p>
-                  大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。
-                </p>
-                <p>
-                  過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3
-                  服務設計，累積使用者研究、介面設計、prototype
-                  與跨部門協作經驗。現在的我，正持續探索 AI
-                  工具如何幫助設計師更有效率地釐清問題、建立
-                  MVP，並推進產品驗證，朝 Product Builder 的方向前進。
-                </p>
+                <h1 id="about-title">{heroTitle}</h1>
+                {intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
             </div>
           </div>
@@ -238,7 +233,7 @@ export default function AboutMePage() {
       </section>
 
       {/* 2. Design Values */}
-      <SectionHeading id="values">設計信念</SectionHeading>
+      <SectionHeading id="values">{headings.values}</SectionHeading>
       <section className="design-values-section">
         {designValues.map((value, i) => (
           <AnimatedContent
@@ -264,7 +259,7 @@ export default function AboutMePage() {
       </section>
 
       {/* 3. 工作經歷 */}
-      <SectionHeading id="experience">工作經歷</SectionHeading>
+      <SectionHeading id="experience">{headings.experience}</SectionHeading>
       <section className="experience-layout">
         <YearRail years={experienceYears} />
         <div className="experience-list">
@@ -304,11 +299,11 @@ export default function AboutMePage() {
       </section>
 
       {/* 4. 對設計教育的貢獻 */}
-      <SectionHeading id="educator">設計推廣</SectionHeading>
+      <SectionHeading id="educator">{headings.educator}</SectionHeading>
       <EducatorMasonry items={educatorItems} />
 
       {/* 5. 專業技能 */}
-      <SectionHeading id="skills">專業技能</SectionHeading>
+      <SectionHeading id="skills">{headings.skills}</SectionHeading>
       <section className="skills-panel">
         <div className="skills-grid">
           {skillCategories.map((category, idx) => (
@@ -346,7 +341,7 @@ export default function AboutMePage() {
           ))}
         </div>
 
-        <h3>擅長軟體</h3>
+        <h3>{headings.tools}</h3>
         <div className="tool-grid">
           {tools.map(([name, icon], idx) => (
             <AnimatedContent
@@ -368,62 +363,37 @@ export default function AboutMePage() {
       </section>
 
       {/* 6. 教育背景 */}
-      <SectionHeading id="education">教育背景</SectionHeading>
+      <SectionHeading id="education">{headings.education}</SectionHeading>
       <section className="education-list">
-        <AnimatedContent
-          delay={0}
-          distance={120}
-          duration={0.95}
-          scale={0.96}
-          ease="power3.out"
-          threshold={0.05}
-        >
-          <article className="education-card">
-            <Image
-              src="https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png"
-              alt=""
-              width={140}
-              height={140}
-            />
-            <div>
-              <h3>國立政治大學 數位內容碩士學位學程</h3>
-              <p className="experience-date" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span>2023.09 - 2026.04</span>
-                <span className="hero-badge-shimmer-wrap" style={{ padding: '1px' }}>
-                  <span className="hero-badge" style={{ padding: '4px 10px', fontSize: '12px' }}>
-                    <span>GPA 4.07</span>
-                  </span>
-                </span>
-              </p>
-              <p>主修使用者體驗研究、人機互動、設計思考與人工智慧。</p>
-            </div>
-          </article>
-        </AnimatedContent>
-
-        <AnimatedContent
-          delay={0.12}
-          distance={120}
-          duration={0.95}
-          scale={0.96}
-          ease="power3.out"
-          threshold={0.05}
-        >
-          <article className="education-card">
-            <Image
-              src="https://framerusercontent.com/images/o53UPGa6UhydVFF9ZPVPLPqKJ20.png"
-              alt=""
-              width={140}
-              height={140}
-            />
-            <div>
-              <h3>國立成功大學 機械工程學系</h3>
-              <p className="experience-date">2017.09 - 2021.02</p>
-              <p>
-                主修熱力學與機械設計，並以設計思維和使用者中心設計作為第二專業。
-              </p>
-            </div>
-          </article>
-        </AnimatedContent>
+        {education.map((item, index) => (
+          <AnimatedContent
+            delay={index * 0.12}
+            distance={120}
+            duration={0.95}
+            scale={0.96}
+            ease="power3.out"
+            threshold={0.05}
+            key={item.school}
+          >
+            <article className="education-card">
+              <Image src={item.image} alt="" width={140} height={140} />
+              <div>
+                <h3>{item.school}</h3>
+                <p className="experience-date" style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                  <span>{item.date}</span>
+                  {item.badge && (
+                    <span className="hero-badge-shimmer-wrap" style={{ padding: "1px" }}>
+                      <span className="hero-badge" style={{ padding: "4px 10px", fontSize: "12px" }}>
+                        <span>{item.badge}</span>
+                      </span>
+                    </span>
+                  )}
+                </p>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          </AnimatedContent>
+        ))}
       </section>
 
       <Footer />

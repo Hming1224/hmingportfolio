@@ -1,8 +1,10 @@
+import type { Locale } from "../i18n/routing";
+
 export type ExperiencePoint =
   | string
   | { text: string; highlight?: boolean }[];
 
-export const experiences = [
+const zhExperiences = [
   {
     year: "2024",
     title: "Advantech 研華科技",
@@ -71,7 +73,7 @@ export const experiences = [
   },
 ];
 
-export const skillCategories = [
+const zhSkillCategories = [
   {
     title: "產品設計",
     toneClass: "is-product-design",
@@ -109,7 +111,7 @@ export const tools = [
   ["After Effects", "https://framerusercontent.com/images/5ozjkYgaLwp6eZsoVcGOW30U1z4.png"],
 ] as const;
 
-export const designValues = [
+const zhDesignValues = [
   {
     iconId: "layers",
     title: "跨領域的眼界，比單一專業更能發現問題",
@@ -127,7 +129,7 @@ export const designValues = [
   },
 ];
 
-export const educatorItems = [
+const zhEducatorItems = [
   {
     badge: "40+",
     title: "OpenHCI 2024 暑期工作坊",
@@ -166,15 +168,248 @@ export const educatorItems = [
   },
 ];
 
-export const experienceYears = ["2024", "2023", "2022", "2021"];
-
-export const firstExperienceIndexByYear = experiences.reduce<Record<string, number>>(
-  (result, item, index) => {
-    if (result[item.year] === undefined) {
-      result[item.year] = index;
-    }
-
-    return result;
+const enExperiences = [
+  {
+    year: "2024",
+    title: "Advantech",
+    role: "UI/UX Design Intern",
+    date: "2024.06 - 2024.08",
+    image: "/projects/advantech/cover/cover.webp",
+    points: [
+      [
+        { text: "Contributed to an Edge AI platform and delivered " },
+        { text: "three design proposals within 2.5 months", highlight: true },
+        { text: ", passing reviews with senior leadership and the CEO on schedule." },
+      ],
+      "Conducted user interviews and pain-point analysis, translating enterprise AI requirements into testable product directions.",
+      "Designed and proposed an AI chatbot integration, working with the project PM to evaluate the product roadmap and prioritize feature modules.",
+      [
+        { text: "The final proposal had " },
+        { text: "two core feature modules approved", highlight: true },
+        { text: " and moved into the engineering roadmap." },
+      ],
+    ] satisfies ExperiencePoint[],
   },
-  {},
-);
+  {
+    year: "2023",
+    title: "Crypto-Arsenal",
+    role: "UI/UX & PM Intern",
+    date: "2023.03 - 2023.10",
+    image: "https://framerusercontent.com/images/dIryK4ZcMPoWUc9rlwSZzl9F88Y.jpeg",
+    points: [
+      "Maintained and reorganized the design system, unifying three major feature areas and applying it across 20+ product design flows.",
+      "Conducted user interviews and competitive analysis, delivered 6+ product features, improved 12+ UX issues, and designed 20+ responsive pages.",
+      [
+        { text: "Served as an assistant Product Owner in Scrum, improving design workflows and file management to " },
+        { text: "increase Sprint output to 1.5x its previous level", highlight: true },
+        { text: "." },
+      ],
+    ] satisfies ExperiencePoint[],
+  },
+  {
+    year: "2022",
+    title: "Taiwan Blockchain Academia",
+    role: "Contract Product Designer",
+    date: "2022.11 - 2023.02",
+    image: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
+    points: [
+      "Used interviews and research to uncover comprehension gaps and usability barriers for non-technical users entering Web3 services.",
+      "Collaborated with product managers and Cathay Financial Holdings' technology team to align product requirements, development direction, and UX within compliance constraints.",
+      "Created wireframes and interactive prototypes to support usability testing and multiple rounds of design iteration.",
+      "Helped engineers integrate blockchain technology into the user journey while keeping the service approachable and understandable.",
+    ] satisfies ExperiencePoint[],
+  },
+  {
+    year: "2021",
+    title: "LCFC",
+    role: "Assistant Project Manager",
+    date: "2021.05 - 2021.12",
+    image: "https://framerusercontent.com/images/2aFK7DdC44h75205XrUXIGN0s.jpeg",
+    points: [
+      [
+        { text: "Coordinated engineering, suppliers, and cross-functional schedules to deliver " },
+        { text: "an average of 1.5 weeks ahead of plan", highlight: true },
+        { text: "." },
+      ],
+      "Responded to material shortage risks across two milestones, rescheduling components and testing to bring potentially delayed deliveries back on track.",
+      "Wrote product specifications and aligned feasibility testing with engineers, balancing quality standards, supply constraints, and delivery pressure.",
+    ] satisfies ExperiencePoint[],
+  },
+];
+
+const enSkillCategories = [
+  {
+    title: "Product Design",
+    toneClass: "is-product-design",
+    iconId: "layout",
+    skills: ["UI Flows", "Design Systems", "Wireframing / Prototyping", "Responsive Web Design", "Frontend Fundamentals"],
+  },
+  {
+    title: "User Research",
+    toneClass: "is-user-research",
+    iconId: "users",
+    skills: ["User Interviews", "Stakeholder Interviews", "Competitive Analysis", "Affinity Mapping", "User Journey Mapping", "Usability Testing"],
+  },
+  {
+    title: "AI Tools",
+    toneClass: "is-ai-tools",
+    iconId: "cpu",
+    skills: ["Claude Code", "Codex", "Figma Make", "Canva AI", "NotebookLM"],
+  },
+  {
+    title: "Collaboration & Delivery",
+    toneClass: "is-collaboration",
+    iconId: "briefcase",
+    skills: ["Jira / Trello", "Scrum", "Cross-functional Communication", "Project Scheduling"],
+  },
+];
+
+const enDesignValues = [
+  {
+    iconId: "layers",
+    title: "Cross-disciplinary perspectives reveal overlooked opportunities",
+    desc: "Mechanical engineering trained me to think in systems and structures, while design taught me to focus on people's feelings and behavior. Together, these perspectives help me spot opportunities for improvement in places others may take for granted.",
+  },
+  {
+    iconId: "search",
+    title: "Understanding comes before solutions",
+    desc: "Before designing, I take time to uncover the real cause of a problem. Jumping straight to an answer often treats only the surface; understanding motivations and constraints creates solutions that address what truly needs to change.",
+  },
+  {
+    iconId: "zap",
+    title: "Good design makes complexity feel intuitive",
+    desc: "Products can be complex behind the scenes, but users should not have to feel that complexity. I consider a design successful when people understand what to do on their first try, without a manual or unnecessary detours.",
+  },
+];
+
+const enEducatorItems = [
+  {
+    badge: "40+",
+    title: "OpenHCI 2024 Summer Workshop",
+    href: "https://www.2024.openhci.com/",
+    role: "Design Team Lead",
+    desc: "Led a three-person design team through three months of preparation, developing the curriculum and delivering an intensive design thinking workshop for 40 participants.",
+    date: "2024.05-2024.08",
+    image: "/educator/openhci.jpg",
+  },
+  {
+    badge: "60+",
+    title: "NCCU Human-Computer Interface Design",
+    href: null,
+    role: "Teaching Assistant",
+    desc: "Taught Figma to 60 undergraduate students and supported grading, assignment reviews, and project mentoring throughout the course.",
+    date: "2024.02-2024.06",
+    image: "/educator/人機介面設計課程發表.jpg",
+  },
+  {
+    badge: "20+",
+    title: "NCCU Human-Computer Interaction Design",
+    href: null,
+    role: "Teaching Assistant",
+    desc: "Mentored 20 undergraduate and graduate project teams through weekly feedback and TA office hours.",
+    date: "2025.09-2026.01",
+    image: "/educator/nccu-ta.png",
+  },
+  {
+    badge: "16+",
+    title: "Evolution Design Hackathon",
+    href: null,
+    role: "Co-organizer",
+    desc: "Co-organized a two-day design hackathon, mentored 16 participants, and reviewed final projects with industry designers.",
+    date: "2024.06",
+    image: "/educator/hackathon.jpg",
+  },
+];
+
+const copyByLocale = {
+  zh: {
+    heroTitle: "從重啟自我，到設計產品體驗",
+    intro: [
+      "我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Junior Product Designer。",
+      "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。",
+      "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究、介面設計、prototype 與跨部門協作經驗。現在的我，正持續探索 AI 工具如何幫助設計師更有效率地釐清問題、建立 MVP，並推進產品驗證，朝 Product Builder 的方向前進。",
+    ],
+    headings: {
+      values: "設計信念",
+      experience: "工作經歷",
+      educator: "設計推廣",
+      skills: "專業技能",
+      tools: "擅長軟體",
+      education: "教育背景",
+    },
+    education: [
+      {
+        school: "國立政治大學 數位內容碩士學位學程",
+        date: "2023.09 - 2026.04",
+        badge: "GPA 4.07",
+        description: "主修使用者體驗研究、人機互動、設計思考與人工智慧。",
+        image: "https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png",
+      },
+      {
+        school: "國立成功大學 機械工程學系",
+        date: "2017.09 - 2021.02",
+        description: "主修熱力學與機械設計，並以設計思維和使用者中心設計作為第二專業。",
+        image: "https://framerusercontent.com/images/o53UPGa6UhydVFF9ZPVPLPqKJ20.png",
+      },
+    ],
+  },
+  en: {
+    heroTitle: "From Reinvention to Designing Product Experiences",
+    intro: [
+      "I'm Brian Huang, a junior product designer combining UI/UX design, business perspective, and an engineering background.",
+      "A serious illness during university led me to rediscover my passion for aesthetics and design. The systems thinking I developed through mechanical engineering later became a strong foundation for product design. To me, design is not simply about making screens look better; it is about turning complex problems, needs, and constraints into experiences that are clear, intuitive, and feasible.",
+      "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research, interface design, prototyping, and cross-functional collaboration. Today, I continue exploring how AI tools can help designers clarify problems, build MVPs, and accelerate product validation as I grow toward becoming a Product Builder.",
+    ],
+    headings: {
+      values: "Design Principles",
+      experience: "Experience",
+      educator: "Design Education",
+      skills: "Skills",
+      tools: "Tools",
+      education: "Education",
+    },
+    education: [
+      {
+        school: "National Chengchi University, M.A. in Digital Content",
+        date: "2023.09 - 2026.04",
+        badge: "GPA 4.07",
+        description: "Focused on UX research, human-computer interaction, design thinking, and artificial intelligence.",
+        image: "https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png",
+      },
+      {
+        school: "National Cheng Kung University, B.S. in Mechanical Engineering",
+        date: "2017.09 - 2021.02",
+        description: "Studied thermodynamics and mechanical design, with design thinking and human-centered design as a secondary focus.",
+        image: "https://framerusercontent.com/images/o53UPGa6UhydVFF9ZPVPLPqKJ20.png",
+      },
+    ],
+  },
+} satisfies Record<Locale, {
+  heroTitle: string;
+  intro: string[];
+  headings: Record<"values" | "experience" | "educator" | "skills" | "tools" | "education", string>;
+  education: Array<{ school: string; date: string; badge?: string; description: string; image: string }>;
+}>;
+
+export function getAboutData(locale: Locale) {
+  const experiences = locale === "en" ? enExperiences : zhExperiences;
+
+  return {
+    ...copyByLocale[locale],
+    experiences,
+    experienceYears: ["2024", "2023", "2022", "2021"],
+    firstExperienceIndexByYear: experiences.reduce<Record<string, number>>(
+      (result, item, index) => {
+        if (result[item.year] === undefined) {
+          result[item.year] = index;
+        }
+        return result;
+      },
+      {},
+    ),
+    skillCategories: locale === "en" ? enSkillCategories : zhSkillCategories,
+    designValues: locale === "en" ? enDesignValues : zhDesignValues,
+    educatorItems: locale === "en" ? enEducatorItems : zhEducatorItems,
+    tools,
+  };
+}
