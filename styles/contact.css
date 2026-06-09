@@ -327,6 +327,14 @@
   box-shadow: none;
 }
 
+@media (max-width: 1023px) {
+  .submit-btn {
+    min-height: 48px;
+    padding: 12px 24px;
+    font-size: var(--fs-body);
+  }
+}
+
 .btn-content {
   display: flex;
   align-items: center;
@@ -383,5 +391,11 @@
   .contact-card {
     padding: 24px;
     gap: 24px;
+  }
+
+  .submit-btn {
+    min-height: 44px;
+    padding: 12px 24px;
+    font-size: var(--fs-sm);
   }
 }

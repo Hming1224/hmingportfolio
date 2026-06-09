@@ -1123,6 +1123,22 @@
   background: var(--disabled);
 }
 
+@media (max-width: 1023px) {
+  .button,
+  .project-button {
+    min-height: 48px;
+    font-size: var(--fs-body);
+  }
+
+  .button {
+    padding: 12px 24px;
+  }
+
+  .project-button {
+    padding: 12px 0;
+  }
+}
+
 /* 上線專案的 CTA 全站統一紫色（CTA = purple 規則）。
    專案的個性色保留在標籤與邊框，不再用在主按鈕上。
    用 :not(.is-disabled) 確保未上線（資料準備中）的卡片不會被染成紫色，
@@ -1792,6 +1808,16 @@
   .project-card:hover .project-image,
   .project-card:focus-within .project-image {
     transform: none;
+  }
+
+  .button {
+    width: 100%;
+    min-height: 44px;
+    font-size: var(--fs-sm);
+  }
+
+  .button-secondary {
+    min-height: 44px;
   }
 
   .project-button {

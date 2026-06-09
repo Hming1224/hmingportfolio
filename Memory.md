@@ -446,3 +446,9 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **驗證**：localhost。手機 nav 點漢堡展開 → height 336px、links 直列、opacity/pointer 正常、X icon ✓；contact 頁 footer `column-reverse`、`.contact-panel-band`/`.contact-card` padding 正確、表單與 social links 正常 ✓。0 console error。about.css 1470→1371 行（三輪共 1889→1371）。
 - **cs-\* 這輪故意不做（有 cascade 陷阱）**：`.cs-sol-*`/`.cs-alarm-*`/`.cs-comp-ems-*`/`.cs-iv-*` 的 base 全在 **`case-study-advantech.css`**（不是 case-study.css，後者 0 條），而 advantech 頁是「globals.css 之後**再單獨 import** `case-study-advantech.css`」。所以 about.css 的 cs-* 媒體規則目前**載在 advantech.css base 之前**——同斷點下後載入的 advantech base 可能反而蓋過 about 的 override（about 的 cs-* 可能根本是死碼）。要處理得先確認：搬進 advantech.css 後放 base 之後會不會「啟用」原本失效的 override 而改變畫面。屬於需逐斷點實測的獨立題，適合另開 session 專做。
 - **約束未處理**：共用 `.button`/`.button-secondary`/`.submit-btn`/`.project-button` 的響應式尺寸（base 分散在 home.css 與 contact.css），落點仍曖昧，暫留 about.css。
+
+## 2026-06-09 第四輪同類清理：Advantech cs-* / button 尺寸歸位
+
+- **cs-* cascade 解法**：把 `about.css` 殘留的 Advantech responsive 規則搬到 `case-study-advantech.css` 前段、放在 Advantech base 之前，維持原本「先套 responsive、後由 route base / 後段 media 覆蓋」的順序，避免搬到檔尾後意外啟用舊覆寫。`about.css` 現在 grep 不到任何 `.cs-*`。
+- **button 尺寸歸位**：首頁 `.button` / `.project-button` responsive 規則歸 `home.css`；`.submit-btn` 歸 `contact.css`；共用 case-study footer `.cs-next-btn-*` 歸 `case-study.css`。全部依 design.md 維持桌機 52px / 平板 48px / 手機 44px，手機字級 `--fs-sm`。
+- **驗證**：`npm run build` 通過；Playwright 實測 `/advantech` 1440 / 1024 / 1023 / 900 / 390、`/contact` 900 / 390、`/` 390、`/about-me` 390，皆無水平溢出；Advantech route CSS 不會載入 `/about-me`。

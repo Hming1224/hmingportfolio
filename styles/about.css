@@ -947,134 +947,7 @@
   }
 }
 
-@media (max-width: 1439px) {
-  /* Section 06 – 1024-1439px: 字卡移到圖片上方，step 說明列維持 row */
-  .cs-sol-fr:not(.cs-sol-fr-mid) {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cs-sol-fc {
-    flex: unset;
-    width: 100%;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1439px) {
-  .cs-sol-fnote {
-    padding: 16px;
-  }
-
-  .cs-alarm-demo {
-    display: flex;
-    align-items: stretch;
-    justify-content: flex-start;
-    min-height: 148px;
-    gap: 8px;
-    padding: 12px !important;
-    font-size: 12px !important;
-  }
-
-  .cs-alarm-toggle {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    min-height: 48px;
-    border-radius: 999px;
-    padding: 4px;
-    background: var(--surface);
-  }
-
-  .cs-alarm-toggle-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-    border: 0;
-    border-radius: 8px;
-    padding: 8px 4px;
-    background: transparent;
-    color: var(--text-secondary);
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 14px;
-    cursor: pointer;
-  }
-
-  .cs-alarm-toggle-on {
-    background: #fff;
-    color: #0072bd;
-    box-shadow: 0 2px 8px rgba(9, 48, 96, 0.08);
-  }
-
-  .cs-alarm-arrow {
-    display: none;
-  }
-
-  .cs-alarm-panel {
-    justify-content: center;
-    min-height: 76px;
-    border-radius: 12px;
-    background: #f6faff;
-  }
-
-  .cs-alarm-demo-default .cs-alarm-after,
-  .cs-alarm-demo-hover .cs-alarm-before {
-    display: none;
-  }
-
-  .cs-alarm-demo-hover .cs-alarm-after {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    padding: 0;
-    background: transparent;
-  }
-
-  .cs-alarm-tip {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    transform: none;
-    white-space: normal;
-  }
-
-  .cs-alarm-tip-arrow {
-    right: 28px;
-    left: auto;
-    transform: none;
-  }
-
-  .cs-alarm-state-row {
-    justify-content: center;
-  }
-
-  .cs-alarm-demo-hover .cs-alarm-after .cs-alarm-state-row {
-    align-self: center;
-  }
-}
-
 @media (max-width: 1023px) {
-  .button,
-  .project-button,
-  .submit-btn {
-    min-height: 48px;
-    font-size: var(--fs-body);
-  }
-
-  .button {
-    padding: 12px 24px;
-  }
-
-  .project-button {
-    padding: 12px 0;
-  }
-
-  .submit-btn {
-    padding: 12px 24px;
-  }
-
   .about-window-body {
     grid-template-columns: 260px minmax(0, 1fr);
     gap: 32px;
@@ -1088,37 +961,6 @@
     grid-template-columns: repeat(4, minmax(92px, 1fr));
   }
 
-  .cs-comp-ems-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cs-comp-ems-card {
-    flex-direction: column;
-  }
-
-  .cs-comp-ems-img {
-    width: 100%;
-    height: 200px;
-  }
-
-  /* Section 06 – Feature rows: fc (30%) = 230px at 1023px → unreadable, stack to column */
-  .cs-sol-fr,
-  .cs-sol-fr.cs-sol-fr-mid {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cs-sol-fc,
-  .cs-sol-fnote {
-    flex: unset;
-    width: 100%;
-  }
-
-  /* 說明 frame 永遠排在圖片上方，不受 HTML 左右順序影響 */
-  .cs-sol-fr-mid .cs-sol-fnote {
-    order: -1;
-    margin-top: 40px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1129,22 +971,6 @@
   .hero-badge {
     max-width: 100%;
     font-size: 14px;
-  }
-
-  .button {
-    width: 100%;
-    min-height: 44px;
-    font-size: var(--fs-sm);
-  }
-
-  .button-secondary {
-    min-height: 44px;
-  }
-
-  .submit-btn {
-    min-height: 44px;
-    padding: 12px 24px;
-    font-size: var(--fs-sm);
   }
 
   .about-hero {
@@ -1319,20 +1145,6 @@
     padding: 20px 24px;
   }
 
-  /* Section 04 – User Interview */
-  .cs-iv-personas {
-    flex-direction: column;
-  }
-
-  .cs-iv-workflow {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cs-iv-arrow {
-    transform: rotate(90deg);
-    align-self: center;
-  }
 }
 
 /* 低於 440px：資訊卡改直式置中（logo 上、標題/日期下），標籤隱藏 —
