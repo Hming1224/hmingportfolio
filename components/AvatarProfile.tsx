@@ -170,30 +170,38 @@ const rippleVariants: Variants = {
   } as Variants[string],
 };
 
+// 無限擴散迴圈。animate 與 hover 共用同一份定義，
+// 這樣父層切到 hover 時 ripple 不會中斷，只跟著 rippleVariants 換顏色。
+const ring1Loop = {
+  scale: [0.98, 1.45],
+  opacity: [0, 0.8, 0],
+  transition: {
+    duration: 2.5,
+    ease: "easeOut" as const,
+    repeat: Infinity,
+    delay: 0,
+  },
+};
+
+const ring2Loop = {
+  scale: [0.98, 1.45],
+  opacity: [0, 0.8, 0],
+  transition: {
+    duration: 2.5,
+    ease: "easeOut" as const,
+    repeat: Infinity,
+    delay: 1.25,
+  },
+};
+
 const ring1Variants: Variants = {
-  animate: {
-    scale: [0.98, 1.45],
-    opacity: [0, 0.8, 0],
-    transition: {
-      duration: 2.5,
-      ease: "easeOut" as const,
-      repeat: Infinity,
-      delay: 0,
-    }
-  }
+  animate: ring1Loop,
+  hover: ring1Loop,
 };
 
 const ring2Variants: Variants = {
-  animate: {
-    scale: [0.98, 1.45],
-    opacity: [0, 0.8, 0],
-    transition: {
-      duration: 2.5,
-      ease: "easeOut" as const,
-      repeat: Infinity,
-      delay: 1.25,
-    }
-  }
+  animate: ring2Loop,
+  hover: ring2Loop,
 };
 
 function ImageLayer({ src, variants }: { src: string; variants: Variants }) {
