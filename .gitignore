@@ -44,7 +44,8 @@ next-env.d.ts
 
 # local agent / tool config
 .claude/
-.codex/
+.codex/*
+!.codex/hooks.json
 .playwright-mcp/
 
 # design iterations — 排除工作檔，保留截圖與 iteration.md 進 git
