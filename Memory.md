@@ -72,6 +72,8 @@ Files: `components/case-study/*`、`app/advantech/page.tsx`、`app/globals.css`�
   ```
 - **元件分工**：
   - `CaseStudyShell`：統一 `<main className="cs-page theme-xxx">`、`ScrollProgress`、`Navbar`、hero、TOC layout、next project nav、`Footer`。
+    - **底部 next-nav 兩顆鈕（`.cs-next-btn-outline` / `.cs-next-btn-filled`，定義在 `styles/case-study.css`）必須對齊 design.md 的 `.button` 規格**。2026-06-09 修正：outline（「返回首頁」）原本誤用 `--ink` 字 + `--muted` 邊 + hover 轉 `--surface`/`--ink`，不符 secondary 規格；已改為 secondary 標準＝白底、`--muted` 字、`inset 0 0 0 2px var(--line-strong)` 邊，hover 字與邊轉 `--purple`（對齊 `.button-secondary`，見 home.css）。
+    - **因為這兩顆鈕在共用 shell + `case-study.css`，所有走 `CaseStudyShell` 的新專案頁會自動套到正確樣式**；新增專案頁只要用 shell、不要在頁內另起手刻 secondary/primary 鈕。若真的要新做按鈕，一律比照 design.md §「按鈕」的 `.button-primary` / `.button-secondary` token，不要硬寫色值。
   - `CaseSection`：一般白底 / surface section；自動輸出 `.cs-heading` + `.cs-divider`。`surface` 會用 `.cs-section-surface`，`className` 可加局部 section class（例如 `cs-solution-section`）。
   - `CaseHeading`：只處理「section 標題 + divider」。深色背景 section 用 `tone="white"`；process / result / next 這類特殊 layout 不包 `CaseSection`，但可以直接用 `CaseHeading` 保持標題一致。
 - **TOC 規則**：`tocSections` 的 `id` 必須和 section `id` 完全一致，案例頁內容 section id 維持 `cs-sec-*`，才能吃到 scroll-margin 與 scrollspy。
@@ -113,7 +115,8 @@ Files: `app/globals.css`、`design.md`、`design-audit-2026-06-08.md`、`Memory.
 Files: `components/Navbar.tsx`、`components/Hero.tsx`、`app/globals.css`、`design.md`、`design-audit`。Hming 拍板的三項：
 1. **導覽列「下載履歷」改純文字連結**：拿掉 `.resume-link` class（保留 PDF href + target/rel + onClick 關選單），變成跟設計案例/關於我/聯絡資訊同款 tab。→ `.resume-link` CSS 變未使用。
 2. **Hero「查看作品」改紫色 primary**：`button-dark` → `button-primary`。`.button-primary`（原本全站沒用）終於 live；`.button-dark` 改成沒人用。「我的歷程」維持 secondary。
-3. **`.button-secondary` 改成複製鈕（`.copy-btn`）的 outline 風**：白底 + `inset 0 0 0 1px var(--line)` 細灰邊 + `--muted` 灰字，hover 邊框與文字轉紫。用 inset box-shadow（非 border）維持「與 primary 外尺寸一致」。手機覆寫（原 inset 3px muted）也同步改成 1px line + purple hover。
+3. **`.button-secondary` 改成複製鈕（`.copy-btn`）的 outline 風**：白底 + `--muted` 灰字 + 細灰邊，hover 邊框與文字轉紫。用 inset box-shadow（非 border）維持「與 primary 外尺寸一致」。
+   - **★現況（2026-06-09 對齊 design.md）**：邊框是 `inset 0 0 0 2px var(--line-strong)`（**不是早期的 `1px var(--line)`**——後來刻意把邊改成比文字 `--muted` 淡一階的 `--line-strong`、寬度 2px），hover 轉 `inset 0 0 0 2px var(--purple)`。以 `styles/home.css` 的 `.button-secondary` 與 design.md §按鈕為準。
    - 踩坑提醒：`.button-secondary` 有多處斷點覆寫（手機 3px、各 min-height），改樣式要一起掃過、別只改 base。
 - **驗證**：dev server localhost:3000 已在跑；Playwright 截 `/`（Hero 兩鈕 + 導覽列）與 `/contact`（複製鈕 vs 新 secondary 外觀一致）皆正確、0 console error。screenshot 存在母資料夾 `verify-home-hero.png` / `verify-contact.png`。
 - design.md 5.1/5.3 與 audit L3 已同步成新現況。
@@ -398,3 +401,19 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **★關鍵原則:token 只套「純大標 / 內文 / 副標題」這 6 個骨架 class**:`cs-title`、`cs-heading`、`cs-heading-white`、`cs-body`、`cs-sol-blk-title`、`cs-sol-blk-desc`。**label、Tab、卡片內字級不套**,各自保留原本調好的顏色。
 - **踩坑:不要用色值 `replace_all` 全域套 token**——會誤傷卡片內標題/desc/legend/tab(共 41 處)。正解是白名單精準套;若已誤套，用 `git show HEAD:` 取原始檔、腳本比對 selector→原色，把非白名單還原。
 - 彩色(`--purple`、`#0072bd` 藍、分類標籤色)屬 accent/分類色,**不納入文字階梯**,刻意保留頁面的彩色層次。
+
+## 2026-06-09 AvatarProfile ripple 點擊/hover 消失（Framer Motion variant 踩坑）
+
+- **症狀**：`components/AvatarProfile.tsx` 的擴散 ripple 在點擊（觸控 press interaction）或 hover 時會消失。
+- **錯誤做法**：以為是顏色或 opacity 問題。**正確根因**：兩個 ripple 環的 `ring1Variants` / `ring2Variants` 只定義了 `animate` 狀態、沒有 `hover`。Framer Motion 的 variant label 是從父層往下傳遞——根容器切到 `"hover"` 時，子層找不到對應 variant，那個 `repeat: Infinity` 的無限動畫就被中斷 → ripple 消失。
+- **正確做法**：把無限迴圈抽成共用物件（`ring1Loop` / `ring2Loop`），同時指給 `animate` 與 `hover`，讓父層切 hover 時動畫不中斷；顏色切換（白→黃）本來就由另一個有 `hover` 的 `rippleVariants` 負責。
+- **通用教訓**：用 variant label 驅動的子層無限動畫，**每個會被父層切到的 label（animate / hover / tap…）都要定義**，否則沒定義的 label 會把動畫停掉。
+
+## 2026-06-09 首頁 hero sticky ≤768 不對稱（about.css 漏規則蓋過 home.css）
+
+- **症狀**：首頁 6 張 hero sticky 在 ≤768px 變成「左低右高」的單調階梯，而非對稱扇形（綠↔橘、藍↔粉、黃↔紫 應各自等高）。
+- **根因（refactor 漏網）**：globals.css 以 `@import` 依序載入 `home.css` 然後 `about.css`（about 在後）。`4639a83`「Refactor global CSS into scoped style files」把舊版 globals 的整段 hero RWD 規則**誤留在 about.css**，裡面有舊的散開式 `.hero-sticky-1..6`（`%` + `clamp(svh)`）。因 about.css 後載入、選擇器同特異度，就**蓋掉 home.css 新版對稱扇形**（`.hero-sticky-idea/data-storage/...` 具名類）。`/about-me` 根本沒用這些 class，純屬 leak。
+- **抓法**：用 `getComputedStyle().top/left` 量到的值是分數（如 idea top=55.008px = `clamp(44px,-5.76+0.072*100svh,64px)`），不是具名規則的 0/21/42px；`rotate` 卻對（具名類有、數字類沒有）→ 代表 top/left 被另一條同名數字類規則蓋掉。再用 `document.styleSheets` 走訪列出哪個檔／media 設了 top/left，定位到 `about.css`（Next.js bundle 名 `layout.css`）。
+- **修法**：刪掉 about.css 兩個會在 ≤768 命中的 block（`@media (max-width:1023px)` 與 `@media (max-width:768px)`）裡的 `.hero-sticky-1..6` 覆寫，讓 home.css 的對稱扇形勝出。游標/底部裝飾的 leak 暫留（沒被抱怨、且現況靠 about.css 版本在 render，動了反而有風險）。
+- **通用教訓**：① 多個全域 CSS 用 `@import` 串接時，**後載入的檔案會用同特異度蓋前面的**——scoped 檔之間別出現重複選擇器。② 首頁 hero 的 RWD 真正權威應只在 `home.css`；about.css 只該留 `/about-me` 自己的 class。③ debug「值被神秘覆寫」先用 `styleSheets` 走訪列出所有命中規則的來源檔＋media，不要只看單一檔案。
+- **待辦（未做，低優先）**：about.css 其實還殘留整套 home hero 的 leak（`.hero`/`.hero-copy`/`.hero-cursor-*`/`.hero-toggle`/`.hero-frame-large`/`.hero-ai-widget`/`.hero-wal-pencil` 等，跨 min-1024 / max-1023 / max-768 三個 block）。徹底乾淨應把這些全搬回 home.css 或刪除，讓 about.css 真正只管 /about-me。需逐斷點驗證首頁不回歸，適合另開 session。
