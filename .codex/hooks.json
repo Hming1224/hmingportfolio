@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ../../000_Agent/scripts/session-start.sh",
+            "timeout": 10,
+            "statusMessage": "讀取上次進度…"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ../../000_Agent/scripts/codex-journal-autolog.js",
+            "timeout": 15,
+            "statusMessage": "更新並同步 Codex 日記進度…"
+          }
+        ]
+      }
+    ]
+  }
+}
