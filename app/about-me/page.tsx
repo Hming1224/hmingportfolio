@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { Fragment } from "react";
 import Navbar from "../../components/Navbar";
@@ -10,6 +11,24 @@ import GenieReveal from "./GenieReveal";
 import EducatorMasonry from "./EducatorMasonry";
 import { getAboutData, type ExperiencePoint } from "../../data/about";
 import type { Locale } from "../../i18n/routing";
+import { createLocalizedMetadata } from "../../lib/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+
+  return createLocalizedMetadata(locale, "/about-me", {
+    en: {
+      title: "About Me",
+      description:
+        "Learn about Brian Huang's product design experience, design values, education, skills, and journey toward becoming a Product Builder.",
+    },
+    zh: {
+      title: "關於我",
+      description:
+        "認識黃宣銘 Brian Huang 的產品設計經歷、設計價值觀、學習背景、技能，以及成為 Product Builder 的歷程。",
+    },
+  });
+}
 
 function renderExperiencePoint(point: ExperiencePoint) {
   if (typeof point === "string") {

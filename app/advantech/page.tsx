@@ -7,6 +7,7 @@ import {
 } from "../../components/case-study";
 import { getNextProject, getProjectBySlug } from "../../data/projects";
 import type { Locale } from "../../i18n/routing";
+import { createLocalizedMetadata } from "../../lib/metadata";
 import { translateAdvantech } from "./i18n";
 import {
   HeroSection,
@@ -25,7 +26,18 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const locale = (await getLocale()) as Locale;
   const project = getProjectBySlug("advantech", locale);
-  return { title: `${project.title} — Brian Huang`, description: project.seoDescription };
+  const description = project.seoDescription ?? project.description;
+
+  return createLocalizedMetadata(locale, "/advantech", {
+    en: {
+      title: project.title,
+      description,
+    },
+    zh: {
+      title: project.title,
+      description,
+    },
+  });
 }
 
 export default async function AdventechPage() {

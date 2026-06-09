@@ -399,8 +399,13 @@
 }
 
 [lang="en"] .theme-advantech .cs-role-desc {
-  font-size: clamp(11px, 0.63vw, 12px);
+  font-size: 12px;
   line-height: 1.4;
+}
+
+[lang="en"] .theme-advantech .cs-badge,
+[lang="en"] .theme-advantech .cs-tags {
+  font-size: 12px;
 }
 
 /* ── Process timeline ── */
@@ -2535,6 +2540,24 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
+  .theme-advantech .cs-sol-flow {
+    height: auto;
+    min-height: 140px;
+    background-position: center;
+  }
+
+  .theme-advantech .cs-sol-flow-info {
+    position: relative;
+    inset: auto;
+    max-width: 100%;
+    padding: 24px;
+  }
+
+  .theme-advantech .cs-sol-flow-name {
+    line-height: 1.35;
+    white-space: normal;
+  }
+
   .theme-advantech .cs-ns-cards {
     flex-direction: column;
   }

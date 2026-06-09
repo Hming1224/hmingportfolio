@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import ScrollBehaviorFix from "../components/ScrollBehaviorFix";
+import { siteUrl } from "../lib/metadata";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -12,7 +13,11 @@ const spaceGrotesk = Space_Grotesk({
 
 
 export const metadata: Metadata = {
-  title: "Brian Huang's Portfolio",
+  metadataBase: siteUrl,
+  title: {
+    default: "Brian Huang's Portfolio",
+    template: "%s | Brian Huang",
+  },
   description: "A designer with passion who embraces different challenges.",
   icons: {
     icon: [
@@ -22,8 +27,6 @@ export const metadata: Metadata = {
     apple: "/brand-logo.svg",
   },
   openGraph: {
-    title: "Brian Huang's Portfolio",
-    description: "A designer with passion who embraces different challenges.",
     siteName: "Brian Huang's Portfolio",
     type: "website",
     images: [

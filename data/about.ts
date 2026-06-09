@@ -13,7 +13,7 @@ const zhExperiences = [
     image: "/projects/advantech/cover/cover.webp",
     points: [
       [
-        { text: "參與 Edge AI 平台產品設計，於 " },
+        { text: "參與 AI 能源管理平台產品設計，於 " },
         { text: "2.5 個月內完成 3 次設計提案", highlight: true },
         { text: "，並依時程通過上級主管/ CEO 審查。" },
       ],
@@ -177,7 +177,7 @@ const enExperiences = [
     image: "/projects/advantech/cover/cover.webp",
     points: [
       [
-        { text: "Contributed to an Edge AI platform and delivered " },
+        { text: "Contributed to an AI energy management platform and delivered " },
         { text: "three design proposals within 2.5 months", highlight: true },
         { text: ", passing reviews with senior leadership and the CEO on schedule." },
       ],
@@ -361,7 +361,7 @@ const copyByLocale = {
       "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research, interface design, prototyping, and cross-functional collaboration. Today, I continue exploring how AI tools can help designers clarify problems, build MVPs, and accelerate product validation as I grow toward becoming a Product Builder.",
     ],
     headings: {
-      values: "Design Principles",
+      values: "Design Values",
       experience: "Experience",
       educator: "Design Education",
       skills: "Skills",
@@ -370,7 +370,7 @@ const copyByLocale = {
     },
     education: [
       {
-        school: "National Chengchi University, M.A. in Digital Content",
+        school: "National Chengchi University, M.S. in Digital Content & Technologies",
         date: "2023.09 - 2026.04",
         badge: "GPA 4.07",
         description: "Focused on UX research, human-computer interaction, design thinking, and artificial intelligence.",

@@ -20,6 +20,10 @@ export default function LanguageSwitcher() {
   const switcherRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    document.documentElement.lang = locale === "zh" ? "zh-Hant-TW" : "en";
+  }, [locale]);
+
+  useEffect(() => {
     if (!open) {
       return;
     }

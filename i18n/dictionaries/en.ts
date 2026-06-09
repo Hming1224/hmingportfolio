@@ -7,7 +7,7 @@ const messages = {
     about: "About",
     contact: "Contact",
     resume: "Resume",
-    resumeHref: "/Brian_Huang_Resume.pdf",
+    resumeHref: "/Brian_Huang_Resume.html",
   },
   language: {
     select: "Select language",
