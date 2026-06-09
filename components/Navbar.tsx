@@ -80,7 +80,7 @@ export default function Navbar() {
   return (
     <nav ref={navRef} className={`site-nav ${open ? 'is-open' : ''}`} aria-label="主要導覽">
       <div className="nav-top">
-        <Link href="/" className="brand" aria-label="Brian Huang home">
+        <Link href="/" prefetch={false} className="brand" aria-label="Brian Huang home">
           <Image
             src="/brand-logo.svg"
             alt="Brian Huang"
@@ -103,7 +103,7 @@ export default function Navbar() {
       </div>
 
       <div className="nav-links">
-        <Link href="/#projects" onClick={() => setOpen(false)}>
+        <Link href="/#projects" prefetch={false} onClick={() => setOpen(false)}>
           設計案例
         </Link>
         <Link href="/about-me" onClick={() => setOpen(false)}>

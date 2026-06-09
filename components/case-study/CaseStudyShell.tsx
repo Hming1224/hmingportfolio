@@ -58,7 +58,7 @@ export default function CaseStudyShell({
 
       {/* Next Project Nav */}
       <div className="cs-next-nav">
-        <Link href={homeHref} className="cs-next-btn-outline">
+        <Link href={homeHref} prefetch={false} className="cs-next-btn-outline">
           {homeLabel}
         </Link>
         <a href={nextHref} className="cs-next-btn-filled">

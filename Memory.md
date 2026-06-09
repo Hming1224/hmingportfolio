@@ -473,3 +473,10 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **cs-* cascade 解法**：把 `about.css` 殘留的 Advantech responsive 規則搬到 `case-study-advantech.css` 前段、放在 Advantech base 之前，維持原本「先套 responsive、後由 route base / 後段 media 覆蓋」的順序，避免搬到檔尾後意外啟用舊覆寫。`about.css` 現在 grep 不到任何 `.cs-*`。
 - **button 尺寸歸位**：首頁 `.button` / `.project-button` responsive 規則歸 `home.css`；`.submit-btn` 歸 `contact.css`；共用 case-study footer `.cs-next-btn-*` 歸 `case-study.css`。全部依 design.md 維持桌機 52px / 平板 48px / 手機 44px，手機字級 `--fs-sm`。
 - **驗證**：`npm run build` 通過；Playwright 實測 `/advantech` 1440 / 1024 / 1023 / 900 / 390、`/contact` 900 / 390、`/` 390、`/about-me` 390，皆無水平溢出；Advantech route CSS 不會載入 `/about-me`。
+
+## 2026-06-09 案例頁預抓首頁造成未使用 preload 警告
+
+- **症狀**：正式站 `/advantech` 的 console 出現首頁 Hero 裝飾素材（`badge-icon.png`、`claude-icon.svg`、cursor / toggle / session icons 等）「preloaded but not used」警告；案例頁本身沒有使用這些圖片。
+- **根因**：Next.js `<Link>` 預設會自動 prefetch 目標 route。案例頁 Navbar Logo、Navbar「設計案例」與底部「返回首頁」皆指向 `/`，因此背景預抓首頁，連帶 preload 首頁 Hero 素材。
+- **正確做法**：對跨頁回首頁的 `<Link>` 加 `prefetch={false}`；保留 About / Contact 等其他 route 的正常 prefetch。使用者真正點回首頁時再載入首頁內容。
+- **驗證**：localhost `/advantech` 的 `link[rel="prefetch"]` 為 0，preload 清單不再包含任何首頁裝飾素材；「設計案例」仍可正常前往 `/#projects`，錨點停在 Navbar 下方，首頁 Hero 裝飾正常渲染。
