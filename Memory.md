@@ -1,5 +1,12 @@
 # Project Memory
 
+## 2026-06-10 Advantech Phase 5 i18n 回歸修正
+
+- **遞迴翻譯 JSX 的 key 踩坑**：不可用一般 `Array.map()` 重建 React children，否則原本合法的靜態 JSX 會被 React 視為缺少 key 的動態列表，造成大量 console errors。處理 React children 要用 `React.Children.map()`，一般資料陣列才用 `Array.map()`。
+- **翻譯後一定要檢查固定高度元件**：中文可容納的固定高度卡片，換成英文後常會裁字。Advantech 英文 Role 卡片用語言限定的字級／間距調整維持 radial connector；Process timeline 則增加英文卡片高度。用 `scrollHeight > clientHeight` / `scrollWidth > clientWidth` 可快速抓出肉眼容易漏掉的裁切。
+- **Role radial RWD 邊界**：Role 卡片在 1024px 已無法可靠維持固定高度，改為 `max-width: 1100px` 切換堆疊版；堆疊時需另外指定順序為 `01 → 02 → 03 → 04`，因桌機 radial 的原始資料順序是 `01 → 03 → 02 → 04`。
+- **英文斷行原則**：英文標題與內文不可使用 `overflow-wrap: anywhere`，會把 `Notifications`、`Conversational` 等完整單字硬切開。應使用 `overflow-wrap: normal; word-break: normal; hyphens: manual;`，必要時擴寬容器或讓整個單字換到下一行；案例頁最小英文字級維持 12px。
+
 ## 2026-06-09 網站資料結構重構 Phase 3（case study 擴充邊界）
 
 Files: `styles/case-study-advantech.css`、`docs/add-case-study-checklist.md`、`docs/architecture-baseline.md`。

@@ -53,7 +53,7 @@ export default async function AdventechPage() {
       nextNav={{
         nextHref: nextProject.href ?? "#",
         homeLabel: t("返回首頁"),
-        nextLabel: `${t("下一個專案")}：${nextProject.title}`,
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
       }}
       hero={<HeroSection />}
     >

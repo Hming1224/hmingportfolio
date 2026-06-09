@@ -1,4 +1,10 @@
-import { cloneElement, isValidElement, type ReactElement, type ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import type { Locale } from "../../i18n/routing";
 
 const en = {
@@ -26,6 +32,8 @@ const en = {
   "放大檢視": "Enlarge image",
   "關閉放大圖片": "Close enlarged image",
   "播放": "Play",
+  "：": ": ",
+  "、": ", ",
   "時間進程": "Timeline",
   "團隊成員": "Team",
   "負責項目": "Responsibilities",
@@ -347,7 +355,12 @@ export function translateAdvantech(locale: Locale, text: string) {
 
 export function translateAdvantechData<T>(locale: Locale, value: T): T {
   if (typeof value === "string") return translateAdvantech(locale, value) as T;
-  if (Array.isArray(value)) return value.map((item) => translateAdvantechData(locale, item)) as T;
+  if (Array.isArray(value)) {
+    const translateItem = (item: unknown) => translateAdvantechData(locale, item);
+    return (value.some(isValidElement)
+      ? Children.map(value, translateItem)
+      : value.map(translateItem)) as T;
+  }
   if (isValidElement(value)) return localizeAdvantechTree(locale, value) as T;
   if (value && typeof value === "object") {
     return Object.fromEntries(
@@ -359,10 +372,16 @@ export function translateAdvantechData<T>(locale: Locale, value: T): T {
 
 export function localizeAdvantechTree(locale: Locale, node: ReactNode): ReactNode {
   if (typeof node === "string") return translateAdvantech(locale, node);
-  if (Array.isArray(node)) return node.map((item) => localizeAdvantechTree(locale, item));
+  if (Array.isArray(node)) {
+    return Children.map(node, (item) => localizeAdvantechTree(locale, item));
+  }
   if (!isValidElement(node)) return node;
 
   const element = node as ReactElement<Record<string, unknown>>;
-  const props = translateAdvantechData(locale, element.props);
-  return cloneElement(element, props);
+  const { children, ...restProps } = element.props;
+  const props = translateAdvantechData(locale, restProps);
+  const localizedChildren = Children.map(children as ReactNode, (child) =>
+    localizeAdvantechTree(locale, child),
+  );
+  return cloneElement(element, props, localizedChildren);
 }

@@ -120,7 +120,7 @@ export default async function ScenarioSection() {
           {/* Legend: 由我負責 */}
           <div className="cs-ds-legend">
             <OwnerMark label={t("由我負責")} />
-            <span>：{t("由我負責")}</span>
+            <span>{t("：")}{t("由我負責")}</span>
           </div>
         </div>
       ))}

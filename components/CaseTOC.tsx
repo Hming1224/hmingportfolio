@@ -2,7 +2,6 @@
 import { useLocale } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import type { Locale } from '../i18n/routing';
-import { translateAdvantech } from '../app/advantech/i18n';
 
 export interface TocSection {
   id: string;
@@ -69,7 +68,7 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
     <nav
       ref={navRef}
       className={`cs-toc${visible ? ' is-visible' : ''}`}
-      aria-label={translateAdvantech(locale, "頁內目錄")}
+      aria-label={locale === 'en' ? 'Table of contents' : '頁內目錄'}
     >
       <ul className="cs-toc-list">
         {sections.map(({ id, title }) => (

@@ -35,7 +35,7 @@ export default function VimeoPlayer({ videoId, poster, title }: Props) {
         <button
           type="button"
           className="cs-sol-vplay"
-          aria-label={`${translateAdvantech(locale, "播放")}：${title}`}
+          aria-label={`${translateAdvantech(locale, "播放")}${translateAdvantech(locale, "：")}${title}`}
           onClick={() => setActive(true)}
         >
           <Image

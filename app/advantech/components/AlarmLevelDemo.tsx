@@ -190,7 +190,7 @@ export default function AlarmLevelDemo({ tooltipLines }: Props) {
         <div className="cs-alarm-state-row">
           <span className="cs-alarm-label">{t("報警等級")}</span>
           <span className="cs-alarm-help cs-alarm-help-muted">?</span>
-          <span>：</span>
+          <span>{t("：")}</span>
           <span className="cs-alarm-chip cs-alarm-chip-danger">{t("嚴重")}</span>
         </div>
       </div>
@@ -209,7 +209,7 @@ export default function AlarmLevelDemo({ tooltipLines }: Props) {
               <span className="cs-alarm-tip-arrow" />
             </span>
           </span>
-          <span>：</span>
+          <span>{t("：")}</span>
           <span className="cs-alarm-chip cs-alarm-chip-danger">{t("嚴重")}</span>
         </div>
       </div>

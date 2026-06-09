@@ -46,7 +46,7 @@ export default function FeatureImageLightbox({
       <button
         type="button"
         className="cs-feature-zoom-trigger"
-        aria-label={`${t("放大檢視")}：${alt}`}
+        aria-label={`${t("放大檢視")}${t("：")}${alt}`}
         onClick={() => setIsOpen(true)}
       >
         <Image
