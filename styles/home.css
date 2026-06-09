@@ -773,6 +773,7 @@
 .projects-section {
   --page-gutter: clamp(24px, 8vw, 120px);
   padding: 0 var(--page-gutter) 48px;
+  scroll-margin-top: 80px;
 }
 
 .section-heading {
