@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import SplitText from './animate-ui/primitives/texts/SplitText';
 import TrueFocus from './animate-ui/primitives/texts/TrueFocus';
 import DotPattern from './ui/dot-pattern';

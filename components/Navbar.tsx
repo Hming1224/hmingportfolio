@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { useLocale } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from '@/i18n/navigation';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const openRef = useRef(false);
@@ -113,13 +116,14 @@ export default function Navbar() {
           聯絡資訊
         </Link>
         <a
-          href="/黃宣銘_中文履歷.pdf"
+          href={locale === 'en' ? '/Brian_Huang_Resume.pdf' : '/黃宣銘_中文履歷.pdf'}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setOpen(false)}
         >
           下載履歷
         </a>
+        <LanguageSwitcher />
       </div>
       <div className="nav-line" />
     </nav>

@@ -225,6 +225,109 @@ button {
   font-weight: 500;
 }
 
+.language-switcher {
+  position: relative;
+  margin-left: 8px;
+}
+
+.language-switcher-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 72px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.language-switcher-trigger:hover,
+.language-switcher-trigger:focus-visible,
+.language-switcher.is-open .language-switcher-trigger {
+  border-color: var(--purple);
+  background: var(--purple-soft);
+}
+
+.language-switcher-trigger:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.language-switcher-trigger svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+  transition: transform 180ms ease;
+}
+
+.language-switcher.is-open .language-switcher-trigger svg {
+  transform: rotate(180deg);
+}
+
+.language-switcher-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  gap: 2px;
+  width: 148px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 14px 36px rgba(31, 35, 64, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  visibility: hidden;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    visibility 160ms ease;
+}
+
+.language-switcher.is-open .language-switcher-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.language-switcher-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.language-switcher-menu button:hover,
+.language-switcher-menu button:focus-visible,
+.language-switcher-menu button.is-active {
+  background: var(--purple-soft);
+  color: var(--purple);
+}
+
 .nav-line {
   position: absolute;
   right: 0;
@@ -343,7 +446,7 @@ button {
   /* 共用行動版 nav（漢堡展開）— 自 about.css 收回；base 規則在本檔上方 */
   .site-nav {
     --mobile-nav-closed-height: 80px;
-    --mobile-nav-open-height: 336px;
+    --mobile-nav-open-height: 400px;
     align-items: stretch;
     flex-direction: column;
     height: var(--mobile-nav-closed-height);
@@ -362,6 +465,10 @@ button {
 
   .site-nav.is-open {
     height: var(--mobile-nav-open-height);
+  }
+
+  .site-nav.is-open:has(.language-switcher.is-open) {
+    height: 500px;
   }
 
   .nav-top {
@@ -396,6 +503,41 @@ button {
   .nav-links a {
     justify-content: flex-start;
     width: 100%;
+  }
+
+  .language-switcher {
+    margin: 4px 12px 0 0;
+  }
+
+  .language-switcher-trigger {
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .language-switcher-menu {
+    position: static;
+    width: 100%;
+    max-height: 0;
+    margin-top: 0;
+    padding: 0 6px;
+    overflow: hidden;
+    border-width: 0;
+    box-shadow: none;
+    transform: none;
+    transition:
+      max-height 180ms ease,
+      margin-top 180ms ease,
+      padding 180ms ease,
+      border-width 180ms ease,
+      opacity 160ms ease;
+  }
+
+  .language-switcher.is-open .language-switcher-menu {
+    max-height: 100px;
+    margin-top: 6px;
+    padding: 6px;
+    border-width: 1px;
   }
 
   /* 共用 footer — 自 about.css 收回；base 規則在本檔上方 */
