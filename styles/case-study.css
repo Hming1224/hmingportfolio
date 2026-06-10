@@ -300,11 +300,13 @@
   text-decoration: none;
   cursor: pointer;
   transition:
+    background 0.15s,
     color 0.15s,
     box-shadow 0.15s;
 }
 
 .cs-next-btn-outline:hover {
+  background: var(--purple-light);
   color: var(--purple);
   box-shadow: inset 0 0 0 2px var(--purple);
 }

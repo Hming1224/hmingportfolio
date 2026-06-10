@@ -323,7 +323,7 @@ const enEducatorItems = [
 
 const copyByLocale = {
   zh: {
-    heroTitle: "從重啟自我，到設計產品體驗",
+    heroTitle: "從重新認識自己，到設計產品體驗",
     intro: [
       "我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Junior Product Designer。",
       "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。",
@@ -354,7 +354,7 @@ const copyByLocale = {
     ],
   },
   en: {
-    heroTitle: "From Reinvention to Designing Product Experiences",
+    heroTitle: "From Self-Rediscovery to Product Experience Design",
     intro: [
       "I'm Brian Huang, a junior product designer combining UI/UX design, business perspective, and an engineering background.",
       "A serious illness during university led me to rediscover my passion for aesthetics and design. The systems thinking I developed through mechanical engineering later became a strong foundation for product design. To me, design is not simply about making screens look better; it is about turning complex problems, needs, and constraints into experiences that are clear, intuitive, and feasible.",

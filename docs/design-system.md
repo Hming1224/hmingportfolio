@@ -105,6 +105,7 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `--purple` | `#5d62d8` | CTA 按鈕底色、active 狀態、年份 rail 當前項目 |
 | `--purple-soft` | `#dbdcff` | 表單 focus ring、highlight 背景色 |
 | `--purple-hover` | `#4f54c9` | 按鈕 hover（比 purple 深一階）|
+| `--purple-light` | `#f0f1ff` | hover/active 極淺紫底色：語系選單 hover、secondary 按鈕 hover |
 
 這個紫色是我自己選的，不改。地位＝**所有「我希望你點這裡」的地方**。
 
@@ -288,10 +289,10 @@ font-family: var(--font-space-grotesk), sans-serif;
 | 變體 | 底色 | 文字色 | 描邊 | 語意 | class | 實際用在哪 |
 |---|---|---|---|---|---|---|
 | Primary（紫）| `--purple` | `#fff` | — | 轉換型 CTA（最希望點）| `.button-primary` | **Hero「查看作品」**（→ `#projects`）。另外專案卡 CTA（`.project-button`）、聯絡送出（`.submit-btn`）也直接用 `--purple` |
-| Secondary | 白 | `--muted` → hover `--purple` | 灰邊 `inset 0 0 0 2px var(--line-strong)`，hover 轉 `--purple` | 次要（outline 風）| `.button-secondary` | **Hero「我的歷程」**（→ `/about-me`）|
+| Secondary | 白 → hover `--purple-light` | `--muted` → hover `--purple` | 灰邊 `inset 0 0 0 2px var(--line-strong)`，hover 轉 `--purple` | 次要（outline 風）| `.button-secondary` | **Hero「我的歷程」**（→ `/about-me`）|
 | Disabled | `--disabled` | `#fff` | — | 未上線專案 | `.is-disabled` | 8 個未上線專案卡 CTA |
 
-> **Secondary 樣式（2026-06-08 更新）**：outline 風——白底、灰字（`--muted`），描邊用 `box-shadow: inset 0 0 0 2px var(--line-strong)`（非 `border`，不撐大外尺寸），hover 時邊框與文字轉紫。**邊框刻意比文字（`--muted`）淡一階**：原本沿用 copy-btn 的 `2px var(--muted)`（邊＝字同色）覺得太重，改用新 token `--line-strong`（比 `--line` 明顯、比 `--muted` 淡）。
+> **Secondary 樣式**：outline 風——白底、灰字（`--muted`），描邊用 `box-shadow: inset 0 0 0 2px var(--line-strong)`（非 `border`，不撐大外尺寸），hover 時邊框與文字轉紫，底色變為極淺紫 `--purple-light`（2026-06-10 更新一致化設計）。**邊框刻意比文字（`--muted`）淡一階**：原本沿用 copy-btn 的 `2px var(--muted)`（邊＝字同色）覺得太重，改用新 token `--line-strong`（比 `--line` 明顯、比 `--muted` 淡）。
 > **紫色語意**：紫色＝「希望訪客轉換」的 CTA（看作品、聯絡送出、看專案）。同屏盡量一顆紫色主按鈕。
 
 #### Hover（全站統一，不位移只變色，`180ms ease`）
@@ -299,7 +300,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 |---|---|
 | Primary（紫）| 底色加深 → `--purple-hover` |
 | Primary（黑）| 底色變淺 → `--ink-hover` `#555`（黑已最深，只能往淺）|
-| Secondary | 邊框與文字轉紫 → `--purple`（outline 風，對齊複製鈕）|
+| Secondary | 邊框、文字轉紫 → `--purple`，底色變淺紫 → `--purple-light`（對齊語系與複製按鈕）|
 
 #### 用法
 - 全站只有 CTA 用紫色，一屏盡量一顆紫色主按鈕。

@@ -62,6 +62,7 @@
   /* 比 --line 明顯、又比 --muted 文字淡：secondary 按鈕描邊等 */
   --purple: #5d62d8;
   --purple-soft: #dbdcff;
+  --purple-light: #f0f1ff;
   --blue: #416484;
   --blue-soft: #dce5ed;
   --brown: #705650;
@@ -247,14 +248,16 @@ button {
   cursor: pointer;
   transition:
     border-color 180ms ease,
-    background 180ms ease;
+    background 180ms ease,
+    color 180ms ease;
 }
 
 .language-switcher-trigger:hover,
 .language-switcher-trigger:focus-visible,
 .language-switcher.is-open .language-switcher-trigger {
   border-color: var(--purple);
-  background: var(--purple-soft);
+  background: var(--purple-light);
+  color: var(--purple);
 }
 
 .language-switcher-trigger:disabled {
@@ -282,7 +285,7 @@ button {
   top: calc(100% + 8px);
   right: 0;
   display: grid;
-  gap: 2px;
+  gap: 6px;
   width: 148px;
   padding: 6px;
   border: 1px solid var(--line);
@@ -310,8 +313,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 38px;
-  padding: 8px 10px;
+  min-height: 40px;
+  padding: 10px 12px;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -324,7 +327,7 @@ button {
 .language-switcher-menu button:hover,
 .language-switcher-menu button:focus-visible,
 .language-switcher-menu button.is-active {
-  background: var(--purple-soft);
+  background: var(--purple-light);
   color: var(--purple);
 }
 
@@ -468,7 +471,7 @@ button {
   }
 
   .site-nav.is-open:has(.language-switcher.is-open) {
-    height: 500px;
+    height: 510px;
   }
 
   .nav-top {
@@ -534,7 +537,7 @@ button {
   }
 
   .language-switcher.is-open .language-switcher-menu {
-    max-height: 100px;
+    max-height: 120px;
     margin-top: 6px;
     padding: 6px;
     border-width: 1px;
