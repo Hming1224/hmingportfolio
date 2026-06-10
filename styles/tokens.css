@@ -284,6 +284,7 @@ button {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
+  z-index: 10;
   display: grid;
   gap: 6px;
   width: 148px;
@@ -471,7 +472,7 @@ button {
   }
 
   .site-nav.is-open:has(.language-switcher.is-open) {
-    height: 510px;
+    height: 500px;
   }
 
   .nav-top {
@@ -537,7 +538,7 @@ button {
   }
 
   .language-switcher.is-open .language-switcher-menu {
-    max-height: 120px;
+    max-height: 100px;
     margin-top: 6px;
     padding: 6px;
     border-width: 1px;

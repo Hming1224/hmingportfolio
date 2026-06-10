@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description:
         "Brian Huang is a product designer focused on UX research, interface design, prototyping, and AI-assisted product building.",
     },
-    zh: {
+    "zh-TW": {
       title: "產品設計師作品集",
       description:
         "黃宣銘 Brian Huang 的產品設計作品集，專注於使用者研究、介面設計、原型製作與 AI 協作產品開發。",

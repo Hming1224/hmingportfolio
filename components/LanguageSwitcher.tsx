@@ -7,7 +7,7 @@ import type { Locale } from "@/i18n/routing";
 
 const languageOptions: Array<{ locale: Locale; label: string }> = [
   { locale: "en", label: "English" },
-  { locale: "zh", label: "中文" },
+  { locale: "zh-TW", label: "繁體中文" },
 ];
 
 export default function LanguageSwitcher() {
@@ -20,7 +20,7 @@ export default function LanguageSwitcher() {
   const switcherRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.documentElement.lang = locale === "zh" ? "zh-Hant-TW" : "en";
+    document.documentElement.lang = locale === "zh-TW" ? "zh-Hant-TW" : "en";
   }, [locale]);
 
   useEffect(() => {

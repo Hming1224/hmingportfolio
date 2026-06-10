@@ -12,7 +12,7 @@ const messages = {
   language: {
     select: "選擇語言",
     menu: "語言選單",
-    current: "中文",
+    current: "繁體中文",
   },
   hero: {
     badge: "2+ 業界專案經驗，目前正在尋找新的機會！",

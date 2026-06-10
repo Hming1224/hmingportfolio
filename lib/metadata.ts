@@ -28,7 +28,7 @@ export function createLocalizedMetadata(
       canonical: localizedPath,
       languages: {
         en: `/en${normalizedPath}`,
-        "zh-Hant-TW": `/zh${normalizedPath}`,
+        "zh-Hant-TW": `/zh-TW${normalizedPath}`,
         "x-default": `/en${normalizedPath}`,
       },
     },
@@ -36,8 +36,8 @@ export function createLocalizedMetadata(
       title,
       description,
       url: localizedPath,
-      locale: locale === "zh" ? "zh_TW" : "en_US",
-      alternateLocale: locale === "zh" ? ["en_US"] : ["zh_TW"],
+      locale: locale === "zh-TW" ? "zh_TW" : "en_US",
+      alternateLocale: locale === "zh-TW" ? ["en_US"] : ["zh_TW"],
     },
     twitter: {
       title,

@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description:
         "Learn about Brian Huang's product design experience, design values, education, skills, and journey toward becoming a Product Builder.",
     },
-    zh: {
+    "zh-TW": {
       title: "關於我",
       description:
         "認識黃宣銘 Brian Huang 的產品設計經歷、設計價值觀、學習背景、技能，以及成為 Product Builder 的歷程。",

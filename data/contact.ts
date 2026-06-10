@@ -5,7 +5,7 @@ const contactCopy = {
     title: "Interested in my experience or work?",
     subtitle: "Reach out through any channel below, or send me a message.",
   },
-  zh: {
+  "zh-TW": {
     title: "對我的經歷或作品感興趣嗎？",
     subtitle: "透過以下管道與我聯繫，或傳送表單訊息！",
   },

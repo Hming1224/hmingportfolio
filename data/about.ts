@@ -322,7 +322,7 @@ const enEducatorItems = [
 ];
 
 const copyByLocale = {
-  zh: {
+  "zh-TW": {
     heroTitle: "從重新認識自己，到設計產品體驗",
     intro: [
       "我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Junior Product Designer。",

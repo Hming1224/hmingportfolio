@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description:
         "Contact Brian Huang for product design, UX/UI design, and collaboration opportunities.",
     },
-    zh: {
+    "zh-TW": {
       title: "聯絡我",
       description:
         "聯絡黃宣銘 Brian Huang，洽談產品設計、UX/UI 設計與合作機會。",

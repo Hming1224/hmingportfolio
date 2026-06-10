@@ -55,7 +55,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang={locale === "zh" ? "zh-Hant-TW" : "en"}
+      lang={locale === "zh-TW" ? "zh-Hant-TW" : "en"}
       className={spaceGrotesk.variable}
     >
       <body>

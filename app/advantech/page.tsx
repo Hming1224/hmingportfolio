@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: project.title,
       description,
     },
-    zh: {
+    "zh-TW": {
       title: project.title,
       description,
     },

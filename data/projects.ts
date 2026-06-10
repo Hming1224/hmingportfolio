@@ -280,7 +280,7 @@ const enProjects: ProjectSummary[] = [
 
 const projectsByLocale = {
   en: enProjects,
-  zh: zhProjects,
+  "zh-TW": zhProjects,
 } satisfies Record<Locale, ProjectSummary[]>;
 
 // Keep the existing Chinese default for case-study pages until their Phase 5 migration.
@@ -290,7 +290,7 @@ export function getProjects(locale: Locale): ProjectSummary[] {
   return projectsByLocale[locale];
 }
 
-export function getProjectBySlug(slug: string, locale: Locale = "zh"): ProjectSummary {
+export function getProjectBySlug(slug: string, locale: Locale = "zh-TW"): ProjectSummary {
   const project = getProjects(locale).find((item) => item.slug === slug);
 
   if (!project) {
@@ -300,7 +300,7 @@ export function getProjectBySlug(slug: string, locale: Locale = "zh"): ProjectSu
   return project;
 }
 
-export function getNextProject(slug: string, locale: Locale = "zh"): ProjectSummary {
+export function getNextProject(slug: string, locale: Locale = "zh-TW"): ProjectSummary {
   const project = getProjectBySlug(slug, locale);
 
   if (!project.nextProjectSlug) {
