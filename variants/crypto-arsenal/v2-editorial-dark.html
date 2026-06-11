@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Arsenal — B 編輯式深色</title>
+<style>
+  :root{
+    --bg:#0a1027; --bg-soft:#0e1733; --card:#121d3f; --card-2:#16244c;
+    --ink:#f3f6ff; --muted:#aab6d8; --dim:#6f7ea8; --line:rgba(150,170,220,.16);
+    --periwinkle:#8ea2ff; --cyan:#5cd0f5; --teal:#37e0c5; --red:#ff6b8a; --green:#46e0a8;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 44px}
+  .narrow{max-width:760px}
+  /* hero */
+  .hero{position:relative;padding:120px 0 96px;overflow:hidden;
+    background:radial-gradient(120% 90% at 78% 8%,#2b3f86 0%,#16245a 38%,#0a1027 72%)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 70%,var(--bg));pointer-events:none}
+  .hero .wrap{position:relative;z-index:2}
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;font-weight:600}
+  .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+  h1{font-size:64px;line-height:1.06;font-weight:800;letter-spacing:-.02em;margin:26px 0 26px;max-width:15ch;
+    background:linear-gradient(180deg,#ffffff,#c7d2f5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:20px;line-height:1.7;color:var(--muted);max-width:60ch;font-weight:400}
+  .meta{display:flex;flex-wrap:wrap;gap:36px;margin-top:48px}
+  .meta div .k{font-size:12px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+  .meta div .v{font-size:16px;color:var(--ink);margin-top:7px;font-weight:600}
+  /* section base */
+  section{padding:96px 0}
+  .tag{font-size:13px;letter-spacing:.18em;color:var(--periwinkle);text-transform:uppercase;font-weight:700;margin-bottom:22px}
+  h2{font-size:40px;line-height:1.15;font-weight:800;letter-spacing:-.02em;margin-bottom:24px;max-width:18ch}
+  p.body{font-size:19px;line-height:1.8;color:var(--muted);max-width:64ch}
+  p.body b{color:var(--ink);font-weight:600}
+  p.body + p.body{margin-top:18px}
+  /* figure */
+  figure{margin:48px 0 0}
+  .frame{border-radius:18px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 50px 120px -50px rgba(92,208,245,.4),0 0 0 1px rgba(255,255,255,.03) inset;background:var(--card)}
+  .frame img{display:block;width:100%}
+  figcaption{font-size:14px;color:var(--dim);margin-top:16px;text-align:center}
+  /* decision */
+  .decision{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+  .dcard{border-radius:18px;padding:34px 32px;position:relative;overflow:hidden}
+  .dcard.bad{background:linear-gradient(160deg,rgba(255,107,138,.12),var(--card));border:1px solid rgba(255,107,138,.3)}
+  .dcard.good{background:linear-gradient(160deg,rgba(55,224,197,.14),var(--card));border:1px solid rgba(55,224,197,.35)}
+  .dlabel{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .dcard.bad .dlabel{color:var(--red)} .dcard.good .dlabel{color:var(--teal)}
+  .dcard h3{font-size:22px;margin-bottom:20px;font-weight:700}
+  .steps{list-style:none}
+  .steps li{font-size:15.5px;color:var(--muted);padding:9px 0;padding-left:30px;position:relative;line-height:1.5}
+  .steps li::before{content:counter(s);counter-increment:s;position:absolute;left:0;top:9px;width:20px;height:20px;border-radius:50%;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .dcard{counter-reset:s}
+  .dcard.bad .steps li::before{background:rgba(255,107,138,.2);color:var(--red)}
+  .dcard.good .steps li::before{background:rgba(55,224,197,.22);color:var(--teal)}
+  .dcard .out{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);font-size:15px;font-weight:600}
+  .dcard.bad .out{color:var(--red)} .dcard.good .out{color:var(--green)}
+  /* scope */
+  .scope2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:42px}
+  .sc{border-radius:18px;padding:30px;background:var(--card);border:1px solid var(--line)}
+  .sc h4{font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+  .sc.in h4{color:var(--teal)} .sc.out h4{color:var(--dim)}
+  .sc ul{list-style:none}
+  .sc li{font-size:16px;color:var(--muted);padding:8px 0 8px 26px;position:relative}
+  .sc.in li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:700}
+  .sc.out li::before{content:"×";position:absolute;left:0;color:var(--dim)}
+  /* gallery */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .g{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+  .g img{width:100%;height:160px;object-fit:cover;object-position:top;display:block;opacity:.92}
+  .g .m{padding:18px 20px}
+  .g .m .t{font-size:16px;font-weight:700}
+  .g .m .d{font-size:14px;color:var(--dim);margin-top:6px}
+  footer{padding:80px 0;text-align:center;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
+  @media(max-width:720px){h1{font-size:40px}h2{font-size:30px}.cards2,.scope2,.gal{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <header class="hero"><div class="wrap">
+    <span class="kicker"><span class="dot"></span>產品設計實習 · 2023.06 — 2023.08</span>
+    <h1>策略倉位顯示與 CA 內手動平倉</h1>
+    <p class="lede">讓使用者在 Crypto Arsenal 內就能看見策略持有的合約倉位，並安全地手動平掉當前倉位、同時讓策略繼續運行——免去跳到交易所操作、進而觸發機器人風控停策略的斷點。</p>
+    <div class="meta">
+      <div><div class="k">角色</div><div class="v">產品設計師 · UI/UX</div></div>
+      <div><div class="k">產品</div><div class="v">量化交易平台</div></div>
+      <div><div class="k">交易所</div><div class="v">Binance · Bybit · OKX</div></div>
+      <div><div class="k">節奏</div><div class="v">1–2 週 / feature</div></div>
+    </div>
+  </div></header>
+
+  <section><div class="wrap narrow">
+    <div class="tag">我的角色與工作模式</div>
+    <h2>在創辦人藍圖下，把產品從 0.5 擴建到 1</h2>
+    <p class="body">以 <b>1–2 週為節奏</b>持續設計新功能，主責新功能的 UI flow 與畫面。單一 feature 的流程：二手桌面研究 ＋ 競品參考 → UI flow → wireframe → 跟老闆討論可行性 → prototype → 設計交付影片 → Jira 卡排工程實作。</p>
+    <p class="body">多數 feature 以二手研究與競品對標為基礎，不見得有一手使用者訪談——這是業界 cadence 下的真實工作模式，能在快節奏中持續出貨。</p>
+  </div></section>
+
+  <section style="padding-top:0"><div class="wrap">
+    <div class="narrow" style="margin:0 auto 0 0">
+      <div class="tag">問題與目標</div>
+      <h2>策略在 CA、倉位卻要去交易所看</h2>
+      <p class="body">CA 介面只呈現策略<b>整體績效</b>（獲利、資產分布、Unrealized PnL），卻沒清楚顯示這支策略<b>目前實際持有哪些合約倉位</b>。想看倉位狀態得登入交易所後台；想提前平倉只能去交易所手動操作——但 CA 機器人偵測到外部異動、為風控會把策略停掉。</p>
+    </div>
+    <figure>
+      <div class="frame"><img src="../../public/projects/crypto-arsenal/_staging/hifi-ui-interface.png" alt="hi-fi 介面"></div>
+      <figcaption>現況：策略績效圖表清楚，但缺少單一倉位的即時欄位</figcaption>
+    </figure>
+  </div></section>
+
+  <section style="padding-top:0"><div class="wrap">
+    <div class="narrow" style="margin:0 auto 0 0">
+      <div class="tag">研究 — 二手桌面分析 ＋ 競品參考</div>
+      <h2>盤點交易所通用的倉位欄位</h2>
+      <p class="body">參考 Binance / Bybit / OKX 慣用的「倉位資訊」呈現方式，盤點合約交易最通用的欄位（Symbol / Side / Size / Entry Price / Mark Price / Margin / Unrealized PnL）。以二手桌面研究 ＋ 競品對標為主。</p>
+    </div>
+    <figure>
+      <div class="frame"><img src="../../public/projects/crypto-arsenal/_staging/ui-reference.png" alt="競品倉位 UI 對標"></div>
+      <figcaption>三交易所倉位 UI 截圖 + 紅筆標註通用欄位</figcaption>
+    </figure>
+  </div></section>
+
+  <section class="decision"><div class="wrap">
+    <div class="narrow" style="margin:0 auto 0 0">
+      <div class="tag">關鍵決策 — 為什麼一定要做在 CA 內</div>
+      <h2>兩種平倉路徑，結果天差地遠</h2>
+      <p class="body">手動平倉「只關閉目前倉位、不停止整支策略」；平倉後策略進入空倉，遇到新開倉條件仍會自動開倉。這需要跟創辦人確認新版機器人能「理解這是來自 CA 的合法操作」。</p>
+    </div>
+    <div class="cards2">
+      <div class="dcard bad">
+        <div class="dlabel">在交易所手動平倉</div>
+        <h3>CA 看不懂你的意圖</h3>
+        <ul class="steps">
+          <li>使用者跳出 CA 到交易所操作</li>
+          <li>CA 偵測到外部異動、無法確認意圖</li>
+          <li>視為外部干預</li>
+        </ul>
+        <div class="out">→ 風控停掉整支策略</div>
+      </div>
+      <div class="dcard good">
+        <div class="dlabel">在 CA 內手動平倉</div>
+        <h3>系統理解為合法操作</h3>
+        <ul class="steps">
+          <li>使用者在 CA 內按下平倉</li>
+          <li>CA 知道是主動、合法操作</li>
+          <li>機器人同步倉位狀態</li>
+        </ul>
+        <div class="out">→ 只關閉當前倉位、策略繼續運行</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="narrow" style="margin:0 auto 0 0">
+      <div class="tag">範圍取捨</div>
+      <h2>分兩階段，合約優先</h2>
+    </div>
+    <div class="scope2">
+      <div class="sc in"><h4>In Scope</h4><ul>
+        <li>顯示策略目前持有的合約倉位</li>
+        <li>CA 內手動平倉（需新版機器人支援）</li>
+        <li>合約優先於現貨</li>
+      </ul></div>
+      <div class="sc out"><h4>Out of Scope</h4><ul>
+        <li>所有交易所的全部倉位</li>
+        <li>已停止策略的殘留倉位</li>
+        <li>完整歷史訂單 / 現貨完整管理</li>
+        <li>完整 Trading Terminal</li>
+      </ul></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:0"><div class="wrap">
+    <div class="narrow" style="margin:0 auto 0 0">
+      <div class="tag">設計流程 — Wireframe → Prototype</div>
+      <h2>從兩方向探索到可點 prototype</h2>
+    </div>
+    <figure>
+      <div class="frame"><img src="../../public/projects/crypto-arsenal/_staging/vid-close-position.png" alt="close position prototype"></div>
+      <figcaption>平倉 modal：Limit/Market、Closing Price、Closed Qty、滑桿、預估損益、Hover Info</figcaption>
+    </figure>
+  </div></section>
+
+  <section style="padding-top:0"><div class="wrap">
+    <div class="narrow" style="margin:0 auto 0 0">
+      <div class="tag">其他 feature</div>
+      <h2>1–2 週節奏下的產量</h2>
+    </div>
+    <div class="gal">
+      <div class="g"><img src="../../public/projects/crypto-arsenal/_staging/vid-tpsl.png" alt=""><div class="m"><div class="t">TP / SL 停利停損</div><div class="d">mark price 觸發 + 預估 PnL</div></div></div>
+      <div class="g"><img src="../../public/projects/crypto-arsenal/_staging/vid-spot.png" alt=""><div class="m"><div class="t">現貨交易明細</div><div class="d">合約 vs 現貨差異</div></div></div>
+      <div class="g"><img src="../../public/projects/crypto-arsenal/_staging/wireframe-proposal.png" alt=""><div class="m"><div class="t">倉位資訊版面</div><div class="d">兩方向 wireframe 探索</div></div></div>
+    </div>
+  </div></section>
+
+  <footer>Crypto Arsenal · 量化交易平台 · 2023 — Hming Huang 作品集</footer>
+</body>
+</html>

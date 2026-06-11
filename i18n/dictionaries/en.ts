@@ -3,7 +3,7 @@ const messages = {
     ariaLabel: "Main navigation",
     openMenu: "Open menu",
     closeMenu: "Close menu",
-    projects: "Work",
+    projects: "Selected Work",
     about: "About",
     contact: "Contact",
     resume: "Resume",

@@ -3,7 +3,7 @@ const messages = {
     ariaLabel: "主要導覽",
     openMenu: "開啟選單",
     closeMenu: "關閉選單",
-    projects: "設計案例",
+    projects: "精選案例",
     about: "關於我",
     contact: "聯絡資訊",
     resume: "下載履歷",
@@ -22,7 +22,7 @@ const messages = {
     works: "查看作品",
   },
   works: {
-    heading: "設計案例",
+    heading: "精選案例",
     enterprise: "企業應用",
     school: "學校產出",
     comingSoon: "即將上線",

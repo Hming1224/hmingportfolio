@@ -50,3 +50,6 @@ next-env.d.ts
 
 # design iterations — 自動截圖 hook 已停用，整個資料夾不進 git
 /iterations/
+
+# Crypto Arsenal 案例頁製作暫存（Figma 驗證 render、影片 poster、影片工作檔）— 不進 git，定版後另匯出最終素材
+public/projects/*/_staging/
