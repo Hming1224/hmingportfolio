@@ -65,7 +65,7 @@
 | 6993–7208 | Case study mobile `@media (max-768)`（含 `:root` 覆寫） | 共用骨架的歸 `case-study.css`，Advantech 專屬的歸 `case-study-advantech.css` |
 | 7209–end | `@media (768–1024)` | 依內容分回各自檔（多半 Advantech 專屬） |
 
-> **拆兩層的依據**：case study CSS 是「共用骨架（每個案例都用）」+「該案例專屬版面」兩種混在一起。骨架來自 `CaseStudyShell`/`CaseSection`/`CaseHeading`，Advantech 專屬的 `.cs-alarm`/`.cs-iv`/`.cs-fm`… 才是 3000 多行的大宗。已知 `.tone-thesis`/`.tone-laushu`/`.tone-icecream`/`.tone-advantech` 四組主題色 → 代表後面還有 3 個 case study 要做，所以這層分法現在立起來剛好接得住。
+> **拆兩層的依據**：case study CSS 是「共用骨架（每個案例都用）」+「該案例專屬版面」兩種混在一起。骨架來自 `CaseStudyShell`/`CaseSection`/`CaseHeading`，Advantech 專屬的 `.cs-alarm`/`.cs-iv`/`.cs-fm`… 才是 3000 多行的大宗。已知 `.tone-laushu`/`.tone-advantech` 兩組專案主題色，這層分法能支援後續新增 case study。
 
 ### 1-3 repo 雜物
 - `iterations/` = **3.8MB**、72 個被 git 追蹤的 before/after 截圖（iteration-capture 工具產物，會持續長大）。

@@ -145,7 +145,7 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 
 **寫法分兩類（照 2.0 原則）：**
 - 前 4 個 tone 重用既有通用 accent 色（`--brown`/`--blue` 等）→ 引用全域 token。
-- 後 4 個 tone 的色「只為那專案標籤而生」→ 做成 **scope 在 `.tone-xxx` 的區域 token**（一張卡內多個 tag 會重複用）。
+- 其餘專案專屬 tone 的色「只為那專案標籤而生」→ 做成 **scope 在 `.tone-xxx` 的區域 token**（一張卡內多個 tag 會重複用）。
 
 | Class | 標籤文字色 | 標籤底色 | CTA | 狀態 | 寫法 |
 |---|---|---|---|---|---|
@@ -154,16 +154,14 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `tone-peach` | `--peach` | `--peach-soft` | `--purple` | 上線 | ✅ 全域 token |
 | `tone-navy` | `--blue` | `--blue-soft` | `--purple` | 上線 | ✅ 全域 token |
 | `tone-advantech` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
-| `tone-icecream` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
 | `tone-laushu` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
-| `tone-thesis` | `--tag-text` | `--tag-bg` | `--purple` | 上線 | ✅ 區域 token |
 
-**後 4 個目標寫法（區域 token）：**
+**專案專屬 tone 目標寫法（區域 token）：**
 ```css
 .tone-advantech { --tag-bg: #d9f1ff; --tag-text: #004b85; }
 .tone-advantech .project-tags span { background: var(--tag-bg); color: var(--tag-text); }
 ```
-後 4 個 tone 已統一 selector，不帶 `.project-card` 前綴。
+專案專屬 tone 已統一 selector，不帶 `.project-card` 前綴。
 
 ### 2.6 頁面特定色（不可跨區塊使用）
 

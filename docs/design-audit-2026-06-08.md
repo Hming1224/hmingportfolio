@@ -47,12 +47,12 @@
 - **建議**：等 `Contact.tsx` 未提交改動確認後，整段重寫 4.4。
 - **目前狀態（2026-06-08）**：已改成 floating label 文件版本；背景統一使用 `var(--surface)`，且 `--surface` 已定義為較淺的 `#f9f9f9`。
 
-### H4. 8 個 tone 有一半沒上 token
+### H4. 專案專屬 tone 沒上 token
 - `tone-brown / green / peach / navy` → 用 `var(--brown-soft)` 等 token ✓
-- `tone-advantech / icecream / laushu / thesis` → **直接寫死 hex**（`#d9f1ff`/`#004b85`、`#ffe2ea`/`#aa2d53`、`#f5eeff`/`#3b3475`、`#e6ffe3`/`#2d462a`）❌
+- `tone-advantech / laushu` → **直接寫死 hex**（`#d9f1ff`/`#004b85`、`#f5eeff`/`#3b3475`）❌
 - **後果**：同一組元件兩套寫法，新人不知道該跟哪套。
-- **真相（2026-06-08 釐清）**：前 4 個用 token 是因為**重用了既有的通用 accent 色**（`--brown`/`--blue`）；後 4 個寫死是因為**「只為那個專案標籤而生」**、別處不用。兩套寫法其實各有邏輯。
-- **決策**：後 4 個**做成「區域 token」**——scope 在 `.tone-xxx` 內用 `--tag-bg`/`--tag-text`，不進全域 `:root`。一張卡內多個 tag 會重複用、值得 token，又不污染全域系統。寫法見新版 design.md 2.5。屬「改 code」，待後續 session。
+- **真相（2026-06-08 釐清）**：前 4 個用 token 是因為**重用了既有的通用 accent 色**（`--brown`/`--blue`）；專案專屬 tone 寫死是因為**「只為那個專案標籤而生」**、別處不用。兩套寫法其實各有邏輯。
+- **決策**：專案專屬 tone **做成「區域 token」**——scope 在 `.tone-xxx` 內用 `--tag-bg`/`--tag-text`，不進全域 `:root`。一張卡內多個 tag 會重複用、值得 token，又不污染全域系統。寫法見新版 design.md 2.5。屬「改 code」，待後續 session。
 
 ### H5. 293 處寫死 hex，其中多處「已有 token 卻沒用」
 直接違反文件自己的「改顏色用 token」原則的重複定義：
@@ -94,7 +94,7 @@
 - **建議**：新 design.md 第 2 章補一節「文字色階梯 + 分層 theming（.theme-xxx 覆寫 --text-heading）」。
 
 ### M2. tone selector 前綴與寫法不一致
-- `.tone-brown .project-tags span` vs `.project-card.tone-icecream .project-tags span`（有的加 `.project-card` 前綴有的沒有）。
+- `.tone-brown .project-tags span` vs `.project-card.tone-laushu .project-tags span`（有的加 `.project-card` 前綴有的沒有）。
 - `background:` vs `background-color:` 混用。
 - **建議**：文件訂一個標準寫法，改 code 時統一。
 

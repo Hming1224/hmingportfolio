@@ -1071,19 +1071,9 @@
   --tag-text: #004b85;
 }
 
-.tone-icecream {
-  --tag-bg: #ffe2ea;
-  --tag-text: #aa2d53;
-}
-
 .tone-laushu {
   --tag-bg: #f5eeff;
   --tag-text: #3b3475;
-}
-
-.tone-thesis {
-  --tag-bg: #e6ffe3;
-  --tag-text: #2d462a;
 }
 
 .tone-advantech .project-tags span {
@@ -1091,17 +1081,7 @@
   color: var(--tag-text);
 }
 
-.tone-icecream .project-tags span {
-  background: var(--tag-bg);
-  color: var(--tag-text);
-}
-
 .tone-laushu .project-tags span {
-  background: var(--tag-bg);
-  color: var(--tag-text);
-}
-
-.tone-thesis .project-tags span {
   background: var(--tag-bg);
   color: var(--tag-text);
 }
@@ -1148,9 +1128,7 @@
 .tone-peach .project-button:not(.is-disabled),
 .tone-navy .project-button:not(.is-disabled),
 .tone-advantech .project-button:not(.is-disabled),
-.tone-icecream .project-button:not(.is-disabled),
-.tone-laushu .project-button:not(.is-disabled),
-.tone-thesis .project-button:not(.is-disabled) {
+.tone-laushu .project-button:not(.is-disabled) {
   background: var(--purple);
   color: var(--paper);
   transition: background-color 180ms ease;
@@ -1159,9 +1137,7 @@
 .tone-peach .project-button:not(.is-disabled):hover,
 .tone-navy .project-button:not(.is-disabled):hover,
 .tone-advantech .project-button:not(.is-disabled):hover,
-.tone-icecream .project-button:not(.is-disabled):hover,
-.tone-laushu .project-button:not(.is-disabled):hover,
-.tone-thesis .project-button:not(.is-disabled):hover {
+.tone-laushu .project-button:not(.is-disabled):hover {
   background: var(--purple-hover);
 }
 

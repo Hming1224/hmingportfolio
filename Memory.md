@@ -133,7 +133,7 @@ Files: `app/globals.css`、`design.md`（5.1）、`Memory.md`。
 
 Files: `app/globals.css`、`design.md`、`design-audit-2026-06-08.md`、`Memory.md`。
 - **刪除死 CSS / 未使用定義**：已移除 `.traits-panel` / `.traits-list` / `.traits-photo`、`.role-badge` / `.badge-*`、`.headline`、`.button-dark`、`.resume-link`、`.cs-section-dark`、`--text-on-dark-body` / `--text-on-dark-muted`。`--text-on-dark` 單數保留，因 `.cs-heading-white` 在 `/advantech` 仍有兩處使用。
-- **token 對齊**：後 4 個專案 tone（advantech / icecream / laushu / thesis）已改為 `.tone-xxx { --tag-bg; --tag-text }` 區域 token，selector 統一不帶 `.project-card` 前綴；骨架文字與明確對應的紫色 / blue-soft / text-secondary 已換回 token。`cs-*` 單頁專屬色依 design.md 2.7 保留。
+- **token 對齊**：專案專屬 tone（advantech / laushu）已改為 `.tone-xxx { --tag-bg; --tag-text }` 區域 token，selector 統一不帶 `.project-card` 前綴；骨架文字與明確對應的紫色 / blue-soft / text-secondary 已換回 token。`cs-*` 單頁專屬色依 design.md 2.7 保留。
 - **字級與按鈕**：section / About / Contact / 年份 rail 等一般骨架標題改用 `var(--fs-*)`；`.project-button` 字重改為 600。**Hero `.hero h1` 是首頁第一屏專屬例外，不套 `--fs-h1`**：桌機 48px、768–1024px 36px、<768px / 矮手機 28px，這是刻意設計。若 768–1024px 沒顯示 36px，要檢查檔案後段 `@media (min-width: 768px) and (max-width: 1024px)` 是否覆蓋前面的 `@media (max-width: 1023px)`。
 - **圓角 / surface**：全站主要卡片收斂到 8 / 12 / 16；`--surface` 統一為較淺的 `#f9f9f9`，聯絡表單 input / textarea 背景使用 `var(--surface)`。`cs-*` 圖表局部小面板與 About 一次性卡片色保留例外。
 - **M3 間距收斂（2026-06-08 已做）**：容器排版間距（padding / margin / gap）的 `14 / 18 / 6 / 7 / 9 / 26 / 44 / 84px` 約 50 處往 8px 系統值靠（多數 →16、`6/7/9→8`、`26→24`、`44→48`、`84→80`），含 `cs-*` 案例頁層（design.md 0.3 允許局部值，但收斂相容）。**刻意保留不動**：Hero/About 裝飾元件內部間距與絕對定位（`.cursor-tag` / `.session-*` / `.annotation-pin` / `.ai-widget` / `.window-bar` / `.growth-*` / `.wal-pencil` / `.menu-button` 漢堡幾何）、`::before` 自訂項目符號光學對齊 `margin-top:7px`、`clamp()` 響應式值——這些是視覺/幾何微調，非 8px 系統間距。**做法**：用 Python 依行號精準替換（不用 `replace_all`，避免誤傷字級 14px / 圓角 6px）。驗證：build 過、四頁桌機+手機 0 error。
@@ -159,7 +159,7 @@ Files: `components/Navbar.tsx`、`components/Hero.tsx`、`app/globals.css`、`de
   - 輸入框(4.4)整段重寫為 floating label 實況（bg #F9F9F9 / radius 12px / 外環 focus），舊文件 #f2f2f7/8px/inset 已過時。
   - 補 `--text-*` 文字色階梯 + `.theme-xxx` 分層 theming 進文件第 2 章。
   - 新增 **2.0 token 化原則**：token 價值＝重複次數 × 會不會改；**token ≠ 全域**。三層規則：跨頁共用→全域 :root token；單頁內用 ≥2 次→**區域 token**（scope 在 .theme-xxx / .tone-xxx）；只用一次→直接寫 hex。
-  - tone 色決策修正：前 4 個重用既有 accent 全域 token；後 4 個（advantech/icecream/laushu/thesis）只為單一專案而生→**做成「區域 token」**（`.tone-xxx { --tag-bg; --tag-text }`），不進全域。About 兩張卡片色只用一次→**保留 hex**（不做 token）。編號重梳（修掉重複的兩個 2.4）。
+  - tone 色決策修正：前 4 個重用既有 accent 全域 token；專案專屬 tone（advantech/laushu）只為單一專案而生→**做成「區域 token」**（`.tone-xxx { --tag-bg; --tag-text }`），不進全域。About 兩張卡片色只用一次→**保留 hex**（不做 token）。編號重梳（修掉重複的兩個 2.4）。
 - **關鍵觀念（Hming 提出、已釐清）**：design system 規則只對「會重複用 + 同資訊層級」的東西才套；單一專案專屬的色不必塞全域 token，但若那頁內重複用，做「區域 token」最方便。
 - **第二輪完整掃描重寫（同日，Hming 要求徹底掃整個專案）**：抽樣掃描有漏，改成完整掃 4 頁路由 + 25 元件 + 740 條 class + 全部 token。補抓到的脫節：① 斷點全錯（文件 ≤809/810，實際主斷點 768 + 640/440/360 + 桌機 1439/1100/900）② `--fs-*` 是響應式 token（768/360 重定義），文件當靜態 ③ 字重缺 700（全站用最多，65 處）④ 圓角混亂（pill 用 999/200/100/60/1000 五種；卡片 8/10/12/16/20）⑤ 一堆 token 用了沒記（hero 裝飾 scale 全套、--cs-tl-*、--mobile-nav-*、skill-card 的 --accent-color 區域 token、--year-rail-sticky-top）⑥ section 6「只用黑陰影」與 code 矛盾（案例頁有研華藍/紫有色陰影）⑦ **cs-* 佔 41%（307/740 條）是 advantech 單頁專屬 layout、不屬可複用系統**。
 - **重寫後 design.md 結構**：新增「0. 專案地圖（4 頁+元件+兩層結構）」「4. 圓角系統」「8. Token 總清單」；修正字級(響應式)/字重(補700)/斷點/陰影。詳見 design-audit 附錄。
@@ -336,7 +336,7 @@ Files: `app/globals.css`、`components/Hero.tsx`、`components/Works.tsx`、`des
 
 ### 顏色：CTA = 紫色，其餘黑白
 
-- **專案卡 CTA 全站統一 `--purple`**，不再跟 tone 走（原本 peach/navy/advantech/icecream/laushu/thesis 各用各色）。專案個性只保留在標籤文字色＋標籤底色。
+- **專案卡 CTA 全站統一 `--purple`**，不再跟 tone 走。專案個性只保留在標籤文字色＋標籤底色。
 - **specificity 踩坑**：紫色群組用 `.project-card.tone-xxx .project-button`（0,3,0）會蓋過 `.project-button.is-disabled`（0,2,0），導致 disabled 卡片誤顯紫色。**解法＝紫色規則全部加 `:not(.is-disabled)`**，讓未上線卡片一定落回 `--disabled` 灰階。
 - `--purple` 只給「希望訪客轉換」的 CTA（下載履歷、聯絡送出、看專案）。
 

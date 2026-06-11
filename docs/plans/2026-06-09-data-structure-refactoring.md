@@ -201,8 +201,6 @@ public/
       solution/
       result/
     crypto-arsenal/
-    thesis/
-    icecream-maniac/
     laushu/
 
 styles/
