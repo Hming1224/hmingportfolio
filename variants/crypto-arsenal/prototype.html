@@ -47,35 +47,39 @@
   .topnav .back{font-size:13px;color:#b9c0e0;text-decoration:none}
   .topnav .back:hover{color:#fff}
 
-  /* ── Hero：只放圖（比照 Advantech cs-hero-cover）── */
-  .hero-cover{position:relative;width:100%;height:clamp(300px,34vw,520px);overflow:hidden;background:#16245a}
-  .hero-cover img{width:100%;height:100%;object-fit:cover;object-position:center top}
+  /* ── Hero：只放圖（比照 Figma node 2574-260）── */
+  .hero-cover{position:relative;width:100%;aspect-ratio:1920/620;max-height:620px;overflow:hidden;background:#cbe1ef}
+  .hero-cover img{width:100%;height:100%;object-fit:cover;object-position:center}
 
-  /* ── Hero info：標題＋角色時程在圖下方（比照 cs-hero-info）── */
-  .hero-info{padding:48px 0}
-  .hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
-  .hero-badge{display:inline-flex;align-items:center;min-height:24px;border-radius:6px;padding:3px 12px;
-    background:var(--primary);color:#fff;font-size:var(--fs-xs);font-weight:600;letter-spacing:.04em}
-  .hero-tags{font-size:var(--fs-xs);font-weight:500;color:var(--muted);font-style:italic}
-  .hero-title{max-width:18ch;font-size:var(--fs-h1);font-weight:800;line-height:1.28;color:var(--text-heading);
+  /* ── Hero info：標題＋角色時程在圖下方 ── */
+  .hero-info{padding:48px 0 8px}
+  .hero-tags{display:block;font-size:13px;font-weight:500;color:var(--muted);font-style:italic;margin-bottom:18px;letter-spacing:.02em}
+  .hero-title{max-width:22ch;font-size:var(--fs-h1);font-weight:800;line-height:1.32;color:var(--text-heading);
     letter-spacing:-.01em;margin-bottom:18px}
-  .hero-sub{font-size:var(--fs-body);color:var(--text-secondary);line-height:1.8;max-width:62ch;margin-bottom:32px}
-  .info-row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .hero-sub{font-size:var(--fs-body);color:var(--text-secondary);line-height:1.8;max-width:62ch;margin-bottom:36px}
+  .info-row{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
   .info-card{flex:1 1 0;min-width:160px}
-  .info-label{display:block;font-size:var(--fs-xs);font-weight:600;color:var(--muted);margin-bottom:8px;letter-spacing:.04em}
-  .info-value{font-size:var(--fs-h4);font-weight:700;color:var(--ink);line-height:1.4}
-  .info-tasks{display:flex;flex-wrap:wrap;gap:6px}
-  .info-tasks span{font-size:var(--fs-sm);font-weight:700;color:var(--ink);background:var(--tint);
-    border-radius:6px;padding:3px 9px}
+  .info-label{display:block;font-size:var(--fs-xs);font-weight:500;color:var(--muted);margin-bottom:10px;letter-spacing:.02em}
+  .info-value{font-size:var(--fs-h4);font-weight:700;color:var(--ink);line-height:1.55}
+  .info-tasks{display:flex;flex-wrap:wrap;gap:6px 14px}
+  .info-tasks span{font-size:var(--fs-h4);font-weight:700;color:var(--ink);line-height:1.55}
 
   /* ── 區段 ── */
   section{padding:72px 0}
   .alt{background:var(--bg-soft)}
-  .cs-tag{display:inline-block;padding:8px 12px;border-radius:14px;font-size:var(--fs-xs);font-weight:700;
-    line-height:1;width:fit-content;background:var(--tint);color:var(--indigo);margin-bottom:18px;letter-spacing:.04em}
-  .cs-tag.teal{background:#e1f0f4;color:var(--teal)}
-  .cs-tag.blue{background:var(--t100);color:var(--blue)}
-  .cs-tag.amber{background:#fff3e2;color:#c97b1d}
+  /* 大標上方小字（無膠囊底，降低 AI 味）*/
+  .cs-tag{display:inline-block;font-size:var(--fs-xs);font-weight:700;line-height:1;
+    color:var(--blue);margin-bottom:12px;letter-spacing:.12em;text-transform:uppercase}
+  .cs-tag.teal{color:var(--teal)}
+  .cs-tag.blue{color:var(--blue)}
+  .cs-tag.amber{color:#c97b1d}
+  /* 資訊圖卡 */
+  .diagram{margin-top:36px;background:#fff;border:1px solid var(--line-soft);border-radius:16px;
+    padding:30px 28px;box-shadow:0 2px 16px rgba(37,42,71,.05)}
+  .diagram svg{width:100%;height:auto;display:block}
+  .diagram .dg-cap{font-size:13px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.6}
+  .whatis-text{max-width:760px}
+  .whatis-text .lead + .lead{margin-top:14px}
   h2{font-size:var(--fs-h2);font-weight:800;color:var(--text-heading);line-height:1.22;margin-bottom:18px;letter-spacing:-.01em}
   .lead{font-size:var(--fs-body);line-height:1.8;color:var(--text-secondary)}
   .lead b{color:var(--ink);font-weight:700}
@@ -278,11 +282,8 @@
       <img src="../../public/projects/crypto-arsenal/cover/cover.webp" alt="Crypto Arsenal 量化交易平台介面主視覺">
     </div>
     <div class="wrap hero-info">
-      <div class="hero-meta">
-        <span class="hero-badge">Product Design Internship</span>
-        <span class="hero-tags">WEB・FinTech・Crypto・UX Design・UI Design</span>
-      </div>
-      <h1 class="hero-title">策略倉位顯示與 CA 內手動平倉</h1>
+      <span class="hero-tags">WEB・FinTech・Crypto・UX Design・UI Design</span>
+      <h1 class="hero-title">策略倉位資訊顯示、手動平倉與止盈止損</h1>
       <p class="hero-sub">讓使用者在 Crypto Arsenal 內就能看見策略持有的合約倉位，並安全地手動平掉當前倉位、同時讓策略繼續運行——免去跳到交易所操作、進而觸發機器人風控停策略的斷點。</p>
       <div class="info-row">
         <div class="info-card">
@@ -300,7 +301,7 @@
         <div class="info-card">
           <span class="info-label">負責項目</span>
           <div class="info-tasks">
-            <span>競品對標</span><span>UI flow</span><span>線框稿</span><span>原型設計</span><span>設計交付影片</span>
+            <span>二手研究</span><span>線框稿</span><span>原型設計</span><span>設計交付影片</span>
           </div>
         </div>
       </div>
@@ -308,13 +309,85 @@
   </header>
 
   <main>
-    <!-- 1. 專案背景 -->
+    <!-- 1. 專案背景：Crypto Arsenal 是什麼 -->
     <section class="alt">
-      <div class="wrap text">
-        <span class="cs-tag">專案背景</span>
-        <h2>Crypto Arsenal 是什麼</h2>
-        <p class="lead">Crypto Arsenal 是一個<b>串接加密貨幣交易所的雲端自動量化交易平台</b>——使用者透過自建策略或訂閱創作者上架的策略，讓交易機器人在交易所（Binance / Bybit / OKX）依條件自動開倉、平倉，降低量化交易的技術與操作門檻。</p>
-        <p class="lead">啟動策略後，CA 會為它建立獨立的機器人 24 小時監控市場。CA 本身不是交易所，而是位於「交易策略」與「外部交易所」之間的<b>執行與管理層</b>。只要倉位還沒平掉，使用者看到的損益都是會隨市場變動的「未實現損益」。</p>
+      <div class="wrap">
+        <div class="whatis-text">
+          <span class="cs-tag">Starting with crypto · 專案背景</span>
+          <h2>Crypto Arsenal 是什麼</h2>
+          <p class="lead">就像傳統金融市場，加密市場裡的交易者透過<b>交易所</b>把法幣（如 USD）換成加密貨幣；交易所就像中間人，幫交易者完成買賣、並連到背後的<b>區塊鏈</b>。</p>
+          <p class="lead">但加密交易的門檻在於：通常得<b>手動盯盤、手動下單</b>，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。</p>
+        </div>
+
+        <div class="diagram">
+          <svg viewBox="0 0 960 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="交易與策略流程圖：交易者透過交易所把法幣換成加密貨幣，並透過交易策略經由 Crypto Arsenal 在交易所自動交易">
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,1 L9,5 L0.5,9" fill="none" stroke="#9aa3c2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+              <marker id="arr2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,1 L9,5 L0.5,9" fill="none" stroke="#376adc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            </defs>
+            <!-- connectors -->
+            <line x1="150" y1="60" x2="522" y2="60" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arr)"/>
+            <text x="336" y="48" text-anchor="middle" font-size="13" fill="#6c6e77">用法幣買進加密貨幣</text>
+            <line x1="522" y1="96" x2="150" y2="96" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arr)"/>
+            <text x="336" y="114" text-anchor="middle" font-size="13" fill="#6c6e77">加密貨幣互換</text>
+            <line x1="592" y1="78" x2="812" y2="78" stroke="#c4cbe0" stroke-width="1.6" marker-start="url(#arr)" marker-end="url(#arr)"/>
+            <text x="702" y="64" text-anchor="middle" font-size="13" fill="#6c6e77">Crypto</text>
+            <path d="M110,104 V238 H300" fill="none" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arr)"/>
+            <text x="122" y="180" font-size="13" fill="#6c6e77">挑選 &amp; 監控</text>
+            <line x1="360" y1="238" x2="486" y2="238" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arr)"/>
+            <path d="M560,218 V104" fill="none" stroke="#376adc" stroke-width="1.7" marker-end="url(#arr2)"/>
+            <text x="572" y="170" font-size="13" font-weight="600" fill="#376adc">下單執行</text>
+            <!-- nodes -->
+            <g transform="translate(110,78)" fill="none" stroke="#334dab" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle r="24" fill="#e8eafa" stroke="none"/><circle cx="0" cy="-5" r="6"/><path d="M-10,11 a10,9 0 0 1 20,0"/></g>
+            <text x="110" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#252a47">交易者</text>
+            <g transform="translate(560,78)" fill="none" stroke="#334dab" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle r="24" fill="#e8eafa" stroke="none"/><path d="M-13,-4 L0,-13 L13,-4"/><line x1="-13" y1="10" x2="13" y2="10"/><line x1="-9" y1="-4" x2="-9" y2="10"/><line x1="-3" y1="-4" x2="-3" y2="10"/><line x1="3" y1="-4" x2="3" y2="10"/><line x1="9" y1="-4" x2="9" y2="10"/></g>
+            <text x="560" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#252a47">交易所</text>
+            <g transform="translate(840,78)" fill="none" stroke="#334dab" stroke-width="1.7"><circle r="24" fill="#e8eafa" stroke="none"/><circle r="12"/><line x1="-12" y1="0" x2="12" y2="0"/><ellipse rx="5" ry="12"/></g>
+            <text x="840" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#252a47">區塊鏈</text>
+            <g transform="translate(330,238)" fill="none" stroke="#334dab" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle r="24" fill="#e8eafa" stroke="none"/><rect x="-11" y="-8" width="22" height="18" rx="4"/><line x1="0" y1="-8" x2="0" y2="-13"/><circle cx="0" cy="-14" r="1.6" fill="#334dab" stroke="none"/><circle cx="-4.5" cy="-1" r="1.8" fill="#334dab" stroke="none"/><circle cx="4.5" cy="-1" r="1.8" fill="#334dab" stroke="none"/><line x1="-4" y1="5" x2="4" y2="5"/></g>
+            <text x="330" y="282" text-anchor="middle" font-size="15" font-weight="700" fill="#252a47">交易策略</text>
+            <rect x="490" y="219" width="140" height="38" rx="19" fill="#376adc"/>
+            <text x="560" y="243" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Crypto Arsenal</text>
+          </svg>
+          <p class="dg-cap">交易者把法幣換成加密貨幣，並透過交易策略在交易所自動交易；Crypto Arsenal 位於「策略」與「交易所」之間負責執行下單。</p>
+        </div>
+
+        <div class="whatis-text" style="margin-top:48px">
+          <p class="lead">而 <b>Crypto Arsenal</b> 就是一個直接串接交易所、提供交易者自動化策略來交易的平台。它同時服務兩種角色，形成一個策略供需的生態系。</p>
+        </div>
+
+        <div class="diagram">
+          <svg viewBox="0 0 880 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="生態系圖：開發者建立交易機器人、交易者使用交易機器人，收益在雙方與平台之間流動">
+            <defs>
+              <marker id="arrB" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,1 L9,5 L0.5,9" fill="none" stroke="#9aa3c2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            </defs>
+            <line x1="172" y1="74" x2="384" y2="74" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arrB)"/>
+            <text x="278" y="60" text-anchor="middle" font-size="13" fill="#6c6e77">使用交易機器人</text>
+            <line x1="708" y1="74" x2="496" y2="74" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arrB)"/>
+            <text x="602" y="60" text-anchor="middle" font-size="13" fill="#6c6e77">建立交易機器人</text>
+            <path d="M414,206 H120 V106" fill="none" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arrB)"/>
+            <text x="250" y="232" text-anchor="middle" font-size="13" fill="#6c6e77">機器人帶來的收益</text>
+            <path d="M466,206 H760 V106" fill="none" stroke="#c4cbe0" stroke-width="1.6" marker-end="url(#arrB)"/>
+            <text x="620" y="232" text-anchor="middle" font-size="13" fill="#6c6e77">機器人收益 ＋ 跟單者分潤</text>
+            <!-- Traders -->
+            <g transform="translate(120,80)" fill="none" stroke="#334dab" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle r="24" fill="#e8eafa" stroke="none"/><circle cx="0" cy="-5" r="6"/><path d="M-10,11 a10,9 0 0 1 20,0"/></g>
+            <text x="120" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#252a47">交易者</text>
+            <!-- Crypto Arsenal -->
+            <g transform="translate(440,80)" fill="none" stroke="#376adc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle r="26" fill="#dde2fb" stroke="none"/><path d="M0,-13 L13,12 L-13,12 Z"/><line x1="-6.5" y1="2" x2="6.5" y2="2"/></g>
+            <text x="440" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#376adc">Crypto Arsenal</text>
+            <!-- Developers -->
+            <g transform="translate(760,80)" fill="none" stroke="#334dab" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle r="24" fill="#e8eafa" stroke="none"/><circle cx="0" cy="-7" r="5"/><path d="M-8,2 a8,7 0 0 1 16,0"/><rect x="-11" y="6" width="22" height="4" rx="1.5"/></g>
+            <text x="760" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#252a47">開發者</text>
+            <!-- Money -->
+            <g transform="translate(440,206)" fill="none" stroke="#334dab" stroke-width="1.7"><circle r="22" fill="#e8eafa" stroke="none"/><circle r="13"/></g>
+            <text x="440" y="212" text-anchor="middle" font-size="16" font-weight="700" fill="#334dab">$</text>
+          </svg>
+          <p class="dg-cap">開發者建立交易機器人上架、交易者選用機器人；收益在雙方與平台之間流動。</p>
+        </div>
+
+        <div class="whatis-text" style="margin-top:48px">
+          <p class="lead">這個模式為交易者、開發者與平台本身同時創造價值。不過策略<b>並非 100% 全自動</b>，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。</p>
+        </div>
       </div>
     </section>
 
