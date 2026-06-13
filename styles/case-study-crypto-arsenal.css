@@ -980,7 +980,12 @@
 }
 
 .theme-crypto-arsenal .ca-iter-badge {
-  padding: 9px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 98px;
+  width: 98px;
+  padding: 9px 0;
   border-radius: 999px;
   background: var(--ca-blue);
   color: #ffffff;
@@ -988,6 +993,7 @@
   font-weight: 600;
   line-height: 17px;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .theme-crypto-arsenal .ca-iter-title {
@@ -1215,6 +1221,12 @@
   .theme-crypto-arsenal .ca-iter-head {
     align-items: flex-start;
     gap: 16px;
+  }
+
+  .theme-crypto-arsenal .ca-iter-badge {
+    flex: none;
+    width: auto;
+    padding: 9px 14px;
   }
 
   .theme-crypto-arsenal .ca-iter-title {
