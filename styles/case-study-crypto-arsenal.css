@@ -1,0 +1,924 @@
+/* Crypto Arsenal case study-specific sections and responsive rules.
+
+   慣例（同 case-study-advantech.css）：
+   本檔所有「Crypto Arsenal 私有」selector 一律以 `.theme-crypto-arsenal` 開頭，
+   不污染全域；共用外殼（cs-page / cs-hero-* / cs-toc-* / cs-next-*）在 case-study.css。
+   設計來源：Figma Portfolio-Site node 2574-249（完稿）＋ variants/crypto-arsenal/prototype.html。 */
+
+/* ── 區域色票（CA 案例頁專屬）──
+   scope 在 .theme-crypto-arsenal，不進全域 :root（見 docs/design-system.md §2.7）。
+   色票來源：Figma node 2574-83（APPROVED.md 已定案）。 */
+.theme-crypto-arsenal {
+  --ca-navy: #252a47;
+  /* primary base：標題 */
+  --ca-ink: #1d2737;
+  /* 近黑內文 / 強調 */
+  --ca-blue: #376adc;
+  /* tertiary：主 accent */
+  --ca-indigo: #334dab;
+  /* secondary：次 accent */
+  --ca-body: #2b2c30;
+  --ca-secondary: #4a4c52;
+  --ca-muted: #6c6e77;
+  --ca-tint: #e8eafa;
+  /* tag / badge 底（secondary 100） */
+  --ca-tint-2: #eef2fd;
+  /* chip 底 */
+  --ca-bg-soft: #f4f6fc;
+  /* section 交替底 */
+  --ca-line-soft: #d8deec;
+  --ca-teal: #135e78;
+  /* 小標沿用 Advantech（Hming 同意） */
+  --ca-red: #d23a57;
+  --ca-green: #11a36e;
+  --ca-orange: #f0792e;
+  --ca-orange-tint: #ffe9dc;
+  --ca-indigo-tint: #e7eaff;
+  --ca-card-shadow: 0 2px 16px rgba(37, 42, 71, 0.05);
+}
+
+/* ── 共用：section 標頭（kicker tag + h2 + lead）── */
+.theme-crypto-arsenal .ca-section-alt {
+  background: var(--ca-bg-soft);
+}
+
+.theme-crypto-arsenal .ca-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ca-blue);
+}
+
+.theme-crypto-arsenal .ca-tag-teal {
+  color: var(--ca-teal);
+}
+
+.theme-crypto-arsenal .ca-tag-amber {
+  color: #c97b1d;
+}
+
+.theme-crypto-arsenal .ca-h2 {
+  margin: 0 0 18px;
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  color: var(--text-heading);
+}
+
+.theme-crypto-arsenal .ca-lead {
+  max-width: 980px;
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--ca-secondary);
+}
+
+.theme-crypto-arsenal .ca-lead + .ca-lead {
+  margin-top: 14px;
+}
+
+.theme-crypto-arsenal .ca-lead b {
+  font-weight: 700;
+  color: var(--ca-ink);
+}
+
+.theme-crypto-arsenal .ca-narrow {
+  max-width: 760px;
+}
+
+/* ── Hero（圖 + 圖下資訊列，沿用共用 cs-hero-*；此處只補 CA 差異）── */
+.theme-crypto-arsenal .cs-tags {
+  font-size: 13px;
+  color: var(--ca-muted);
+}
+
+/* ── 01 專案背景：說明圖卡 ── */
+.theme-crypto-arsenal .ca-diagram {
+  margin-top: 36px;
+  padding: 30px 28px;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-crypto-arsenal .ca-diagram-cap {
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--ca-muted);
+}
+
+.theme-crypto-arsenal .ca-overview-gap {
+  margin-top: 48px;
+}
+
+/* ── 02 角色與工作流：流程 chips ── */
+.theme-crypto-arsenal .ca-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 12px 0;
+  margin-top: 36px;
+}
+
+.theme-crypto-arsenal .ca-flow-item {
+  display: flex;
+  align-items: stretch;
+}
+
+.theme-crypto-arsenal .ca-flow-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  min-width: 124px;
+  padding: 14px 18px;
+  background: var(--ca-tint-2);
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 12px;
+}
+
+.theme-crypto-arsenal .ca-flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: var(--ca-indigo);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.theme-crypto-arsenal .ca-flow-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  flex-shrink: 0;
+  color: #b9c2dd;
+}
+
+.theme-crypto-arsenal .ca-flow-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── 03 問題定義：6 張角色情境卡 ── */
+.theme-crypto-arsenal .ca-pains {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.theme-crypto-arsenal .ca-pain-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 30px;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-pain-quote {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--ca-ink);
+  text-wrap: pretty;
+}
+
+.theme-crypto-arsenal .ca-pain-who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-crypto-arsenal .ca-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.theme-crypto-arsenal .ca-avatar svg {
+  width: 24px;
+  height: 24px;
+}
+
+.theme-crypto-arsenal .ca-avatar-orange {
+  background: var(--ca-orange-tint);
+  color: var(--ca-orange);
+}
+
+.theme-crypto-arsenal .ca-avatar-blue {
+  background: var(--ca-indigo-tint);
+  color: var(--ca-indigo);
+}
+
+.theme-crypto-arsenal .ca-pain-name {
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ca-ink);
+}
+
+.theme-crypto-arsenal .ca-pain-line {
+  flex: 1;
+  height: 1px;
+  background: var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-pain-role {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--ca-muted);
+}
+
+/* ── 04 介面現況：合成流程圖 ── */
+.theme-crypto-arsenal .ca-figure {
+  margin: 40px 0 0;
+}
+
+.theme-crypto-arsenal .ca-figure-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.theme-crypto-arsenal .ca-figure figcaption {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--ca-muted);
+}
+
+/* ── 05 兩種平倉路徑：紅綠漸層標頭對比卡 ── */
+.theme-crypto-arsenal .ca-decision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.theme-crypto-arsenal .ca-dcard {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-dcard-head {
+  padding: 14px 28px;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.theme-crypto-arsenal .ca-dcard-bad .ca-dcard-head {
+  background: linear-gradient(90deg, #c2375a, #e094ab);
+}
+
+.theme-crypto-arsenal .ca-dcard-good .ca-dcard-head {
+  background: linear-gradient(90deg, #0ea36d, #8ad4b4);
+}
+
+.theme-crypto-arsenal .ca-dcard-body {
+  padding: 24px 28px 26px;
+}
+
+.theme-crypto-arsenal .ca-dcard h3 {
+  margin: 0 0 16px;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ca-step;
+}
+
+.theme-crypto-arsenal .ca-steps li {
+  position: relative;
+  padding: 7px 0 7px 32px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ca-secondary);
+}
+
+.theme-crypto-arsenal .ca-steps li::before {
+  content: counter(ca-step);
+  counter-increment: ca-step;
+  position: absolute;
+  left: 0;
+  top: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.theme-crypto-arsenal .ca-dcard-bad .ca-steps li::before {
+  background: var(--ca-red);
+}
+
+.theme-crypto-arsenal .ca-dcard-good .ca-steps li::before {
+  background: var(--ca-green);
+}
+
+.theme-crypto-arsenal .ca-dcard-out {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px dashed var(--ca-line-soft);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.theme-crypto-arsenal .ca-dcard-bad .ca-dcard-out {
+  color: var(--ca-red);
+}
+
+.theme-crypto-arsenal .ca-dcard-good .ca-dcard-out {
+  color: var(--ca-green);
+}
+
+.theme-crypto-arsenal .ca-decision-close {
+  margin-top: 28px;
+}
+
+/* ── 06 交易所介面參考 ── */
+.theme-crypto-arsenal .ca-research-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.theme-crypto-arsenal .ca-research-info {
+  flex: 0 0 300px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-research-info-head {
+  padding: 18px 24px;
+  background: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-research-info-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 24px 24px;
+}
+
+.theme-crypto-arsenal .ca-research-info-body > p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--ca-secondary);
+}
+
+.theme-crypto-arsenal .ca-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  background: var(--ca-tint-2);
+  border-radius: 12px;
+}
+
+.theme-crypto-arsenal .ca-chip-label {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ca-blue);
+}
+
+.theme-crypto-arsenal .ca-chip-body {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: #1a1e25;
+}
+
+.theme-crypto-arsenal .ca-research-shots {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  flex: 1;
+  min-width: 0;
+}
+
+.theme-crypto-arsenal .ca-exchange {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.theme-crypto-arsenal .ca-exchange-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-crypto-arsenal .ca-exchange-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.theme-crypto-arsenal .ca-exchange-name {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-exchange-img {
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-subflow-head {
+  margin-top: 64px;
+}
+
+.theme-crypto-arsenal .ca-subflow-kicker {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--ca-teal);
+}
+
+.theme-crypto-arsenal .ca-subflow-title {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-research-flows {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 28px;
+}
+
+.theme-crypto-arsenal .ca-research-note {
+  margin-top: 48px;
+}
+
+/* ── 07 Wireframe：提案板（banner + 方案面板）── */
+.theme-crypto-arsenal .ca-wf-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 22px 28px;
+  border-radius: 14px;
+  background: linear-gradient(110deg, var(--ca-navy), #0a1336);
+  color: #ffffff;
+}
+
+.theme-crypto-arsenal .ca-wf-banner-kicker {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: #a8b6ee;
+}
+
+.theme-crypto-arsenal .ca-wf-banner-title {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.theme-crypto-arsenal .ca-wf-board {
+  margin-top: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-wf-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0;
+  background: var(--ca-bg-soft);
+  border-bottom: 1px solid var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-wf-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px;
+  border: 0;
+  border-radius: 12px 12px 0 0;
+  background: #f1f3f6;
+  color: #7b7b7b;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: default;
+}
+
+.theme-crypto-arsenal .ca-wf-tab.is-active {
+  background: #ffffff;
+  color: var(--ca-navy);
+  box-shadow: 0 6px 8px rgba(37, 42, 71, 0.08);
+}
+
+.theme-crypto-arsenal .ca-wf-tab.is-pending {
+  color: #a4a9b8;
+}
+
+.theme-crypto-arsenal .ca-wf-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+}
+
+.theme-crypto-arsenal .ca-wf-shot {
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-wf-cap {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--ca-muted);
+}
+
+.theme-crypto-arsenal .ca-wf-reason {
+  padding-top: 16px;
+  border-top: 1px solid var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-wf-reason-title {
+  margin: 0 0 8px;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-wf-reason-body {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--ca-secondary);
+}
+
+/* ── 08 設計元件迭代 ── */
+.theme-crypto-arsenal .ca-iter-board {
+  margin-top: 40px;
+  padding: 28px 30px 30px;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-iter-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.theme-crypto-arsenal .ca-iter-badge {
+  padding: 7px 15px;
+  border-radius: 999px;
+  background: var(--ca-indigo);
+  color: #ffffff;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.theme-crypto-arsenal .ca-iter-title {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-iter-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.theme-crypto-arsenal .ca-iter-label {
+  flex: 0 0 110px;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--ca-teal);
+}
+
+.theme-crypto-arsenal .ca-iter-desc {
+  flex: 1;
+  min-width: 0;
+}
+
+.theme-crypto-arsenal .ca-iter-desc p {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  color: var(--ca-secondary);
+}
+
+.theme-crypto-arsenal .ca-iter-desc p + p {
+  margin-top: 12px;
+}
+
+.theme-crypto-arsenal .ca-ba {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.theme-crypto-arsenal .ca-ba-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--ca-bg-soft);
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 14px;
+}
+
+.theme-crypto-arsenal .ca-ba-head {
+  padding: 14px;
+  background: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  text-align: center;
+  color: var(--ca-blue);
+}
+
+.theme-crypto-arsenal .ca-ba-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 14px;
+}
+
+.theme-crypto-arsenal .ca-ba-content img {
+  border-radius: 8px;
+}
+
+.theme-crypto-arsenal .ca-ba-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
+  width: 38px;
+  color: var(--ca-blue);
+}
+
+/* ── 09 最終介面 ── */
+.theme-crypto-arsenal .ca-final-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 40px;
+  padding: 18px 28px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--ca-navy), var(--ca-indigo));
+  color: #ffffff;
+}
+
+.theme-crypto-arsenal .ca-final-banner-kicker {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #a8b6ee;
+}
+
+.theme-crypto-arsenal .ca-final-banner-title {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.theme-crypto-arsenal .ca-final-shot {
+  margin: 24px 0 0;
+}
+
+/* ── 10 學習反思 ── */
+.theme-crypto-arsenal .ca-reflect {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.theme-crypto-arsenal .ca-reflect-card {
+  padding: 26px 24px;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-reflect-num {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--ca-tint);
+  color: var(--ca-blue);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.theme-crypto-arsenal .ca-reflect-card h3 {
+  margin: 0 0 8px;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-reflect-card p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--ca-secondary);
+}
+
+/* ── RWD ── */
+@media (max-width: 1199px) {
+  .theme-crypto-arsenal .ca-pains {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .theme-crypto-arsenal .ca-research-row {
+    flex-direction: column;
+  }
+
+  .theme-crypto-arsenal .ca-research-info {
+    flex: none;
+    width: 100%;
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .theme-crypto-arsenal .ca-decision {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-crypto-arsenal .ca-reflect {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-crypto-arsenal .ca-iter-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .theme-crypto-arsenal .ca-iter-label {
+    flex: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-crypto-arsenal .ca-pains {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-crypto-arsenal .ca-flow,
+  .theme-crypto-arsenal .ca-flow-item {
+    width: 100%;
+  }
+
+  .theme-crypto-arsenal .ca-flow-node {
+    width: 100%;
+  }
+
+  .theme-crypto-arsenal .ca-flow-arrow {
+    width: 100%;
+    transform: rotate(90deg);
+  }
+
+  .theme-crypto-arsenal .ca-ba {
+    flex-direction: column;
+  }
+
+  .theme-crypto-arsenal .ca-ba-arrow {
+    transform: rotate(90deg);
+  }
+
+  .theme-crypto-arsenal .ca-wf-tabs {
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 8px 0;
+  }
+
+  .theme-crypto-arsenal .ca-wf-tab {
+    border-radius: 8px;
+    min-height: 40px;
+  }
+
+  .theme-crypto-arsenal .ca-wf-panel {
+    padding: 20px 16px;
+  }
+
+  .theme-crypto-arsenal .ca-iter-board {
+    padding: 22px 18px;
+  }
+
+  .theme-crypto-arsenal .ca-pain-card {
+    padding: 24px 22px;
+  }
+
+  /* 手機：角色描述放到名稱下一行、避免 name —— role 那條線把文字擠出版面 */
+  .theme-crypto-arsenal .ca-pain-who {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  .theme-crypto-arsenal .ca-pain-line {
+    display: none;
+  }
+
+  .theme-crypto-arsenal .ca-pain-role {
+    flex-basis: 100%;
+    padding-left: 56px;
+  }
+
+  .theme-crypto-arsenal .ca-dcard-body {
+    padding: 20px 22px 22px;
+  }
+}

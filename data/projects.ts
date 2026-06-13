@@ -47,10 +47,14 @@ const zhProjects: ProjectSummary[] = [
       "這是一個自動化之量化交易平台，用戶可以選擇有潛力的投資標的進行買賣，也可以訂閱創作者上架的交易機器人之策略。專案的目標是查看個人持有的投資品項與加倉過程之流程設計與開發。",
     cover: "/projects/crypto-arsenal/cover/cover.webp",
     logo: "/projects/crypto-arsenal/cover/logo.webp",
-    tags: ["UIUX設計", "使用者研究"],
+    tags: ["UI/UX 設計", "二手研究", "FinTech"],
     tone: "navy",
     category: "enterprise",
-    status: "coming-soon",
+    status: "published",
+    href: "/crypto-arsenal",
+    nextProjectSlug: "tba",
+    seoDescription:
+      "量化交易平台 Crypto Arsenal 的策略倉位顯示、手動平倉與止盈止損功能設計案例研究。",
   },
   {
     slug: "laushu",
@@ -150,10 +154,14 @@ const enProjects: ProjectSummary[] = [
       "An automated quantitative trading platform where users can trade promising assets and subscribe to strategies published by bot creators. I designed and developed flows for reviewing personal holdings and scaling into positions.",
     cover: "/projects/crypto-arsenal/cover/cover.webp",
     logo: "/projects/crypto-arsenal/cover/logo.webp",
-    tags: ["UI/UX Design", "User Research"],
+    tags: ["UI/UX Design", "Secondary Research", "FinTech"],
     tone: "navy",
     category: "enterprise",
-    status: "coming-soon",
+    status: "published",
+    href: "/crypto-arsenal",
+    nextProjectSlug: "tba",
+    seoDescription:
+      "A case study on position visibility, manual closing, and take-profit / stop-loss flows for the Crypto Arsenal quantitative trading platform.",
   },
   {
     slug: "laushu",

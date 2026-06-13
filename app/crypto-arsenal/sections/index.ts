@@ -1,0 +1,11 @@
+export { default as HeroSection } from "./HeroSection";
+export { default as BackgroundSection } from "./BackgroundSection";
+export { default as RoleSection } from "./RoleSection";
+export { default as ProblemSection } from "./ProblemSection";
+export { default as CurrentSection } from "./CurrentSection";
+export { default as DecisionSection } from "./DecisionSection";
+export { default as ResearchSection } from "./ResearchSection";
+export { default as WireframeSection } from "./WireframeSection";
+export { default as IterationSection } from "./IterationSection";
+export { default as FinalSection } from "./FinalSection";
+export { default as ReflectSection } from "./ReflectSection";

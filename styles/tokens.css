@@ -119,6 +119,11 @@
   /* 研華主色：深藍 */
 }
 
+.theme-crypto-arsenal {
+  --text-heading: #252a47;
+  /* Crypto Arsenal 主色：深 navy（Figma node 2574-83 primary base） */
+}
+
 * {
   box-sizing: border-box;
 }
