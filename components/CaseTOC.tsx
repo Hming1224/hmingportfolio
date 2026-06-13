@@ -19,31 +19,37 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
   const navRef = useRef<HTMLElement>(null);
   const ignoreNextRef = useRef(false);
 
-  // 只在第一個內容 section 真的進入視窗後淡入；避免 hero 還在首屏時 TOC 提早出現。
+  // 第一個內容 section 到達 navbar 下緣後才淡入；避免 hero / section 預覽露出時 TOC 太早出現。
   useEffect(() => {
     const region = navRef.current?.closest('.cs-toc-layout');
     const firstSection = document.getElementById(sections[0]?.id ?? '');
     if (!region || !firstSection) return;
 
-    const firstObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-        else setVisible(window.scrollY > firstSection.offsetTop);
-      },
-      { rootMargin: '-12% 0px -12% 0px', threshold: 0 }
-    );
-    const regionObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) setVisible(false);
-      },
-      { rootMargin: '0px 0px -128px 0px', threshold: 0 }
-    );
+    const updateVisibility = () => {
+      const firstTop = firstSection.getBoundingClientRect().top;
+      const regionBottom = region.getBoundingClientRect().bottom;
+      const navbarOffset = 96;
+      setVisible(firstTop <= navbarOffset && regionBottom >= 128);
+    };
 
-    firstObserver.observe(firstSection);
-    regionObserver.observe(region);
+    updateVisibility();
+    const rafId = window.requestAnimationFrame(updateVisibility);
+    const timeoutId = window.setTimeout(updateVisibility, 250);
+    const lateTimeoutId = window.setTimeout(updateVisibility, 800);
+    const settledTimeoutId = window.setTimeout(updateVisibility, 1600);
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
+    window.addEventListener('hashchange', updateVisibility);
+    window.addEventListener('load', updateVisibility);
     return () => {
-      firstObserver.disconnect();
-      regionObserver.disconnect();
+      window.cancelAnimationFrame(rafId);
+      window.clearTimeout(timeoutId);
+      window.clearTimeout(lateTimeoutId);
+      window.clearTimeout(settledTimeoutId);
+      window.removeEventListener('scroll', updateVisibility);
+      window.removeEventListener('resize', updateVisibility);
+      window.removeEventListener('hashchange', updateVisibility);
+      window.removeEventListener('load', updateVisibility);
     };
   }, [sections]);
 

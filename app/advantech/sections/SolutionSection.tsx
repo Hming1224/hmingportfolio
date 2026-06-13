@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { CaseSection } from "../../../components/case-study";
 import ProposalTabs from "../components/ProposalTabs";
 import FeatureImageLightbox from "../components/FeatureImageLightbox";
@@ -70,7 +69,7 @@ export default async function SolutionSection() {
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
                 <div style={{ width: "calc(min(607px, 100%) * 360 / 607)", display: "flex", flexDirection: "column" }}>
-                  <Image src="/projects/advantech/solution/iter-chatbot-before.webp" alt="Before" width={360} height={461} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
+                  <FeatureImageLightbox src="/projects/advantech/solution/iter-chatbot-before.webp" alt="AI Chatbot before: 360px chat window" width={360} height={461} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="360px" />
                   <div className="cs-sol-redline" style={{ width: "100%" }}>
                     <span className="cs-sol-redline-label">360px</span>
                   </div>
@@ -82,7 +81,7 @@ export default async function SolutionSection() {
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
                 <div style={{ width: "min(607px, 100%)", display: "flex", flexDirection: "column" }}>
-                  <Image src="/projects/advantech/solution/iter-chatbot-after.webp" alt="After" width={607} height={452} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
+                  <FeatureImageLightbox src="/projects/advantech/solution/iter-chatbot-after.webp" alt="AI Chatbot after: 640px chat window" width={607} height={452} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="607px" />
                   <div className="cs-sol-redline" style={{ width: "100%" }}>
                     <span className="cs-sol-redline-label">640px</span>
                   </div>
@@ -106,14 +105,14 @@ export default async function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s1a-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s1a-before.webp" alt="Before" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s1a-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s1a-after.webp" alt="After" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
           </div>
@@ -125,14 +124,14 @@ export default async function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s1b-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s1b-before.webp" alt="Before" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s1b-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s1b-after.webp" alt="After" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
           </div>
@@ -144,14 +143,14 @@ export default async function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s1c-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s1c-before.webp" alt="Before" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s1c-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s1c-after.webp" alt="After" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
           </div>
@@ -171,14 +170,14 @@ export default async function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s2a-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s2a-before.webp" alt="Before" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s2a-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s2a-after.webp" alt="After" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
           </div>
@@ -190,14 +189,14 @@ export default async function SolutionSection() {
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">Before</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s2b-before.webp" alt="Before" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s2b-before.webp" alt="Before" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
             <div className="cs-sol-arrow" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
             <div className="cs-sol-bapanel">
               <div className="cs-sol-bahd">After</div>
               <div className="cs-sol-bacontent">
-                <Image src="/projects/advantech/solution/iter-s2b-after.webp" alt="After" width={480} height={432} unoptimized style={{ width: "auto", maxWidth: "100%", height: "auto", display: "block" }} />
+                <FeatureImageLightbox src="/projects/advantech/solution/iter-s2b-after.webp" alt="After" width={480} height={432} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="480px" />
               </div>
             </div>
           </div>

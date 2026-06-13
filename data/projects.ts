@@ -44,7 +44,7 @@ const zhProjects: ProjectSummary[] = [
     title: "虛擬貨幣量化交易平台",
     date: "2023.06 - 2023.08",
     description:
-      "這是一個自動化之量化交易平台，用戶可以選擇有潛力的投資標的進行買賣，也可以訂閱創作者上架的交易機器人之策略。專案的目標是查看個人持有的投資品項與加倉過程之流程設計與開發。",
+      "這是一個自動化之量化交易平台，用戶可以選擇有潛力的投資標的進行買賣，也可以訂閱創作者上架的交易機器人之策略。專案的目標是滿足已啟動交易的策略機器人下可以順利手動平倉或添加止盈止損訂單之流程設計與開發。",
     cover: "/projects/crypto-arsenal/cover/cover.webp",
     logo: "/projects/crypto-arsenal/cover/logo.webp",
     tags: ["UI/UX 設計", "二手研究", "FinTech"],

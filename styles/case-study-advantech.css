@@ -1806,6 +1806,8 @@
 .theme-advantech .cs-sol-fimg {
   flex: 1;
   min-width: 0;
+  display: grid;
+  place-items: center;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--cs-line-soft);
@@ -1813,7 +1815,25 @@
 }
 
 .theme-advantech .cs-feature-zoom-trigger {
+  justify-self: center;
+  width: min(100%, 960px);
+  margin-inline: auto;
   background: transparent;
+}
+
+.theme-advantech .cs-feature-zoom-trigger .cs-zoomable-image-media {
+  margin-inline: auto;
+}
+
+.theme-advantech .cs-sol-iteration-zoom {
+  width: auto;
+  max-width: 100%;
+}
+
+.theme-advantech .cs-sol-iteration-zoom-img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .theme-advantech .cs-feature-zoom-trigger:focus-visible {

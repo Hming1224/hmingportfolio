@@ -793,17 +793,16 @@
   margin-top: 16px;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid var(--ca-line-soft);
-  border-radius: 16px;
-  box-shadow: var(--ca-card-shadow);
+  border-radius: 22px;
+  box-shadow: 0 12px 14px rgba(9, 48, 96, 0.07);
 }
 
 .theme-crypto-arsenal .ca-wf-tabs {
   display: flex;
   gap: 4px;
   padding: 0;
-  background: var(--ca-bg-soft);
-  border-bottom: 1px solid var(--ca-line-soft);
+  min-height: 48px;
+  background: transparent;
 }
 
 .theme-crypto-arsenal .ca-wf-tab {
@@ -820,6 +819,7 @@
   background: #f1f3f6;
   color: #7b7b7b;
   font-size: 13px;
+  line-height: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
@@ -827,8 +827,8 @@
 
 .theme-crypto-arsenal .ca-wf-tab.is-active {
   background: #ffffff;
-  color: var(--ca-navy);
-  box-shadow: 0 6px 8px rgba(37, 42, 71, 0.08);
+  color: #093060;
+  box-shadow: 0 6px 16px -10px rgba(9, 48, 96, 0.08);
 }
 
 .theme-crypto-arsenal .ca-wf-tab:hover {
@@ -884,6 +884,9 @@
 }
 
 .theme-crypto-arsenal .ca-wf-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   min-width: 0;
   margin: 0;
 }

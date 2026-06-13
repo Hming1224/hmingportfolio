@@ -9,6 +9,7 @@ type StepLightboxProps = {
   alt: string;
   className?: string;
   imageClassName?: string;
+  lightboxMode?: "default" | "fullscreen";
   sizes?: string;
   src: string;
   width: number;
@@ -20,6 +21,7 @@ export default function StepLightbox({
   className = "ca-step-zoom",
   height,
   imageClassName,
+  lightboxMode,
   sizes,
   src,
   width,
@@ -38,6 +40,7 @@ export default function StepLightbox({
         separator: t("："),
         zoom: t("放大檢視"),
       }}
+      lightboxMode={lightboxMode}
       sizes={sizes}
       src={src}
       width={width}

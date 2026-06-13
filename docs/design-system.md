@@ -511,7 +511,13 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - **Lightbox 放大展示稿 (Lightbox)**：最大寬度 `2560px`（以確保在全螢幕放大時字體及 UI 細節依然清晰）。
 - **其他螢幕截圖 / 流程圖 (Screenshot/Flow)**：最大寬度 `1600px`（小於此寬度則維持原尺寸）。
 
-### 11.3 目錄結構與分類
+### 11.3 可放大圖片互動與對齊
+- **所有可點擊放大的圖片必須使用共用 `ZoomableImage` 互動模式**，並保留 hover / focus 的放大提示，不要在各專案頁另外手刻 lightbox。
+- **縮圖與 lightbox 圖片都必須水平置中顯示**：縮圖容器、觸發按鈕與圖片本體都要用 `margin-inline: auto` 或等效的 `place-items: center`，避免圖片在卡片或 Final UI 區塊中偏左 / 偏右。
+- **放大後必須使用 `object-fit: contain`**，不可裁切 UI 畫面；需要全螢幕檢視的 before / after 或細節稿可使用 fullscreen lightbox，但仍要完整保留圖片比例。
+- **圖片清晰度不足時優先重新輸出高解析來源**，不要用 CSS 銳化或放大濾鏡硬補；Lightbox 用圖建議至少 `2560px` 寬，細節多的流程圖或 UI 截圖可提高到 `3200px+`。
+
+### 11.4 目錄結構與分類
 專案圖片放置於 `/public/projects/<slug>/`，並統一依階段劃分子目錄，避免檔案混亂：
 - `cover/`：存放專案封面圖（`cover.webp`）與 Logo（`logo.webp`）。
 - `research/`：存放使用者研究、競爭對手分析、persona 等相關圖表。

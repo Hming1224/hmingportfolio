@@ -7,14 +7,22 @@ import { translateAdvantech } from "../i18n";
 
 type FeatureImageLightboxProps = {
   alt: string;
+  className?: string;
   height: number;
+  imageClassName?: string;
+  lightboxMode?: "default" | "fullscreen";
+  sizes?: string;
   src: string;
   width: number;
 };
 
 export default function FeatureImageLightbox({
   alt,
+  className,
   height,
+  imageClassName,
+  lightboxMode,
+  sizes,
   src,
   width,
 }: FeatureImageLightboxProps) {
@@ -24,13 +32,16 @@ export default function FeatureImageLightbox({
   return (
     <ZoomableImage
       alt={alt}
-      className="cs-feature-zoom-trigger"
+      className={`cs-feature-zoom-trigger${className ? ` ${className}` : ""}`}
       height={height}
+      imageClassName={imageClassName}
       labels={{
         close: t("關閉放大圖片"),
         separator: t("："),
         zoom: t("放大檢視"),
       }}
+      lightboxMode={lightboxMode}
+      sizes={sizes}
       src={src}
       width={width}
     />

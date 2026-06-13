@@ -15,6 +15,7 @@ type ZoomableImageProps = {
   height: number;
   imageClassName?: string;
   labels: ZoomableImageLabels;
+  lightboxMode?: "default" | "fullscreen";
   sizes?: string;
   src: string;
   width: number;
@@ -26,6 +27,7 @@ export default function ZoomableImage({
   height,
   imageClassName,
   labels,
+  lightboxMode = "default",
   sizes,
   src,
   width,
@@ -77,7 +79,7 @@ export default function ZoomableImage({
 
       {isOpen ? (
         <div
-          className="cs-zoomable-lightbox"
+          className={`cs-zoomable-lightbox${lightboxMode === "fullscreen" ? " is-fullscreen" : ""}`}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
