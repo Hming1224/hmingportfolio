@@ -1439,6 +1439,7 @@
 
 /* Proposal Tabs */
 .theme-advantech .cs-sol-prop {
+  background: white;
   border-radius: 22px;
   box-shadow: 0px 12px 14px rgba(9, 48, 96, 0.07);
   overflow: hidden;
@@ -1448,6 +1449,7 @@
   display: flex;
   gap: 4px;
   align-items: center;
+  min-height: 48px;
 }
 
 .theme-advantech .cs-sol-tab {
@@ -1455,11 +1457,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  gap: 8px;
+  min-width: 0;
+  min-height: 48px;
   padding: 8px;
   border-radius: 12px 12px 0 0;
   background: #f1f3f6;
-  font-size: var(--fs-sm);
+  font-size: 13px;
+  line-height: 16px;
   font-weight: 600;
   color: #7b7b7b;
   cursor: pointer;
@@ -1481,78 +1486,121 @@
   background: white;
   padding: 28px;
   display: flex;
-  gap: 56px;
-  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch;
   border-radius: 0 0 20px 20px;
 }
 
-.theme-advantech .cs-sol-mock {
-  flex: 0 0 52%;
-  display: flex;
+.theme-advantech .cs-sol-stage {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
+}
+
+.theme-advantech .cs-sol-frame {
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .theme-advantech .cs-sol-mock-img {
-  flex: 1;
-  min-width: 0;
-  border-radius: 12px;
   overflow: hidden;
+  border: 1px solid var(--cs-line-soft);
+  border-radius: 10px;
+}
+
+.theme-advantech .cs-sol-cap {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--text-secondary);
 }
 
 .theme-advantech .cs-sol-nav-btn {
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
   background: white;
   border: 1px solid var(--cs-line-soft);
   border-radius: 22px;
   box-shadow: 0px 8px 18px -8px rgba(9, 48, 96, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--fs-h2);
+  font-size: 30px;
   font-weight: 700;
   color: #7d4fb9;
   cursor: pointer;
   transition:
+    color 0.15s,
     opacity 0.15s,
-    box-shadow 0.15s;
+    transform 0.15s;
   line-height: 1;
   padding: 0;
   padding-bottom: 2px;
 }
 
-.theme-advantech .cs-sol-nav-btn:hover {
-  box-shadow: 0px 10px 22px -6px rgba(125, 79, 185, 0.22);
+.theme-advantech .cs-sol-nav-btn:hover:not(:disabled) {
+  color: var(--cs-blue);
+  transform: translateY(-1px);
 }
 
 .theme-advantech .cs-sol-nav-btn:disabled {
-  opacity: 0.25;
-  cursor: default;
-  box-shadow: none;
+  opacity: 0.32;
+  cursor: not-allowed;
 }
 
-.theme-advantech .cs-sol-txt {
-  flex: 1;
+.theme-advantech .cs-sol-step-dots {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.theme-advantech .cs-sol-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #c8d1e3;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    transform 0.15s,
+    width 0.15s;
+}
+
+.theme-advantech .cs-sol-dot-on {
+  width: 24px;
+  background: var(--cs-blue);
+}
+
+.theme-advantech .cs-sol-dot:hover {
+  transform: scale(1.15);
+}
+
+.theme-advantech .cs-sol-reason {
+  padding-top: 16px;
+  border-top: 1px solid var(--cs-line-soft);
 }
 
 .theme-advantech .cs-sol-txt-h {
-  font-size: var(--fs-h4);
+  font-size: var(--fs-body);
   font-weight: 700;
   color: var(--cs-navy);
-  margin: 0 0 12px;
-  line-height: 24px;
+  margin: 0 0 8px;
+  line-height: 1.5;
 }
 
 .theme-advantech .cs-sol-txt-p {
-  font-size: var(--fs-body);
+  font-size: var(--fs-sm);
   color: var(--text-secondary);
   margin: 0;
-  line-height: 23px;
+  line-height: 1.7;
 }
 
 /* Iteration Boards */
@@ -2572,16 +2620,35 @@
     display: none;
   }
 
-  /* Proposal tabs: stack the mockup image above the text */
   .theme-advantech .cs-sol-tab-bd {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 24px;
+    padding: 20px;
   }
 
-  .theme-advantech .cs-sol-mock {
-    flex: 0 0 auto;
-    width: 100%;
+  .theme-advantech .cs-sol-stage {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .theme-advantech .cs-sol-frame {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    gap: 12px;
+  }
+
+  .theme-advantech .cs-sol-nav-btn:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: end;
+  }
+
+  .theme-advantech .cs-sol-nav-btn:last-of-type {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .theme-advantech .cs-sol-cap {
+    font-size: 12px;
   }
 
   /* Iteration design-note box: stack the label above the body text */

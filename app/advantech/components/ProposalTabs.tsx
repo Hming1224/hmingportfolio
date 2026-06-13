@@ -8,11 +8,15 @@ import { translateAdvantech } from '../i18n';
 
 export type ProposalTab = {
   label: string;
-  images: string[];
-  concept: string;
+  slides: ProposalSlide[];
   reasonTitle: string;
   reason: string;
   adopted?: boolean;
+};
+
+export type ProposalSlide = {
+  image: string;
+  caption: string;
 };
 
 type Props = {
@@ -27,7 +31,8 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
   const [slideIdx, setSlideIdx] = useState(0);
 
   const tab = tabs[activeTab];
-  const slides = tab.images;
+  const slides = tab.slides;
+  const slide = slides[slideIdx] ?? slides[0];
   const canPrev = slideIdx > 0;
   const canNext = slideIdx < slides.length - 1;
 
@@ -65,8 +70,7 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
 
       {/* Body */}
       <div className="cs-sol-tab-bd">
-        {/* Image + nav buttons */}
-        <div className="cs-sol-mock">
+        <div className="cs-sol-stage">
           <button
             className="cs-sol-nav-btn"
             disabled={!canPrev}
@@ -75,16 +79,23 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
           >
             ‹
           </button>
-          <div className="cs-sol-mock-img">
-            <Image
-              src={slides[slideIdx]}
-              alt={tab.label}
-              width={660}
-              height={371}
-              unoptimized
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }}
-            />
-          </div>
+
+          <figure className="cs-sol-frame">
+            <div className="cs-sol-mock-img">
+              <Image
+                key={slide.image}
+                src={slide.image}
+                alt={t(slide.caption)}
+                width={960}
+                height={540}
+                sizes="(max-width: 768px) 100vw, 1120px"
+                unoptimized
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
+            <figcaption className="cs-sol-cap">{t(slide.caption)}</figcaption>
+          </figure>
+
           <button
             className="cs-sol-nav-btn"
             disabled={!canNext}
@@ -95,16 +106,22 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
           </button>
         </div>
 
-        {/* Text */}
-        <div className="cs-sol-txt">
-          <div>
-            <p className="cs-sol-txt-h">{t("流程概念")}</p>
-            <p className="cs-sol-txt-p">{tab.concept}</p>
-          </div>
-          <div>
-            <p className="cs-sol-txt-h">{tab.reasonTitle}</p>
-            <p className="cs-sol-txt-p">{tab.reason}</p>
-          </div>
+        <div className="cs-sol-step-dots" aria-label={t("提案步驟")}>
+          {slides.map((item, index) => (
+            <button
+              key={item.image}
+              type="button"
+              className={`cs-sol-dot${index === slideIdx ? ' cs-sol-dot-on' : ''}`}
+              aria-label={`${t("切換到步驟")} ${index + 1}`}
+              aria-current={index === slideIdx ? 'step' : undefined}
+              onClick={() => setSlideIdx(index)}
+            />
+          ))}
+        </div>
+
+        <div className="cs-sol-reason">
+          <p className="cs-sol-txt-h">{t(tab.reasonTitle)}</p>
+          <p className="cs-sol-txt-p">{t(tab.reason)}</p>
         </div>
       </div>
     </div>
