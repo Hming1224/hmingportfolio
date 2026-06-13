@@ -660,6 +660,15 @@
   padding-bottom: 16px;
 }
 
+/* 交易所 logo 左欄在水平捲動時固定（手機橫向比較不會丟失對照） */
+.theme-crypto-arsenal .ca-matrix-corner {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  align-self: stretch;
+  background: #ffffff;
+}
+
 .theme-crypto-arsenal .ca-matrix-step {
   padding: 9px 12px;
   border-radius: 10px;
@@ -685,12 +694,17 @@
 }
 
 .theme-crypto-arsenal .ca-matrix-ex {
+  position: sticky;
+  left: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
   text-align: center;
+  background: #ffffff;
+  box-shadow: 7px 0 10px -8px rgba(37, 42, 71, 0.12);
 }
 
 .theme-crypto-arsenal .ca-matrix-ex-logo {
