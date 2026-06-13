@@ -9,9 +9,16 @@
    ============================================ */
 
 .cs-page {
+  --page-gutter: clamp(24px, 12.5vw, 240px);
   background: var(--paper);
   color: var(--text-body);
   font-family: Inter, var(--font-space-grotesk), sans-serif;
+}
+
+@media (min-width: 1921px) {
+  .cs-page {
+    --page-gutter: calc((100vw - 1440px) / 2);
+  }
 }
 
 /* TOC 錨點跳轉時，停駐點下移一個 navbar 高度(80px)，避免標題被固定 navbar 蓋住 */
@@ -349,6 +356,10 @@
 }
 
 @media (max-width: 768px) {
+  .cs-page {
+    --page-gutter: clamp(20px, 6vw, 48px);
+  }
+
   .cs-title {
     line-height: 1.35;
   }

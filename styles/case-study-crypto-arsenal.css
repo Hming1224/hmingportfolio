@@ -71,7 +71,7 @@
 }
 
 .theme-crypto-arsenal .ca-lead {
-  max-width: 980px;
+  max-width: none;
   margin: 0;
   font-size: var(--fs-body);
   line-height: 1.8;
@@ -88,7 +88,7 @@
 }
 
 .theme-crypto-arsenal .ca-narrow {
-  max-width: 760px;
+  max-width: none;
 }
 
 /* ── Hero（圖 + 圖下資訊列，沿用共用 cs-hero-*；此處只補 CA 差異）── */
@@ -98,31 +98,83 @@
 }
 
 /* ── 01 專案背景：說明圖卡 ── */
+.theme-crypto-arsenal #cs-sec-background {
+  padding-block: 72px;
+}
+
 .theme-crypto-arsenal .ca-diagram {
   margin-top: 36px;
-  padding: 30px 28px;
+  padding: 31px 28px;
   background: #ffffff;
   border: 1px solid var(--ca-line-soft);
   border-radius: 16px;
-  box-shadow: var(--ca-card-shadow);
+  box-shadow: 0 2px 8px rgba(37, 42, 71, 0.05);
 }
 
-.theme-crypto-arsenal .ca-diagram svg {
+.theme-crypto-arsenal .ca-diagram-graphic {
   display: block;
   width: 100%;
-  height: auto;
+  overflow: visible;
+}
+
+.theme-crypto-arsenal .ca-flow-label {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.theme-crypto-arsenal .ca-flow-label-strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.theme-crypto-arsenal .ca-flow-label-white {
+  fill: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.theme-crypto-arsenal .ca-flow-currency {
+  fill: #334dab;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .theme-crypto-arsenal .ca-diagram-cap {
   margin: 14px 0 0;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.5;
   text-align: center;
   color: var(--ca-muted);
 }
 
 .theme-crypto-arsenal .ca-overview-gap {
   margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+  .theme-crypto-arsenal #cs-sec-background {
+    padding-block: 48px;
+  }
+
+  .theme-crypto-arsenal .ca-diagram {
+    padding: 24px 20px;
+    overflow-x: auto;
+  }
+
+  .theme-crypto-arsenal .ca-diagram-graphic {
+    width: 100%;
+    min-width: 519px;
+    max-width: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .theme-crypto-arsenal .ca-diagram-graphic {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* ── 02 角色與工作流：流程 chips ── */
@@ -190,16 +242,17 @@
 .theme-crypto-arsenal .ca-pains {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 19px 20px;
   margin-top: 40px;
 }
 
 .theme-crypto-arsenal .ca-pain-card {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
-  padding: 28px 30px;
+  padding: 30px 32px;
   background: #ffffff;
   border: 1px solid var(--ca-line-soft);
   border-radius: 16px;
@@ -208,9 +261,10 @@
 
 .theme-crypto-arsenal .ca-pain-quote {
   margin: 0;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
-  line-height: 1.7;
+  line-height: 1.6;
+  letter-spacing: -0.025em;
   color: var(--ca-ink);
   text-wrap: pretty;
 }
@@ -218,7 +272,7 @@
 .theme-crypto-arsenal .ca-pain-who {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .theme-crypto-arsenal .ca-avatar {
@@ -226,14 +280,15 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 12px;
 }
 
-.theme-crypto-arsenal .ca-avatar svg {
-  width: 24px;
-  height: 24px;
+.theme-crypto-arsenal .ca-avatar-img {
+  display: block;
+  width: auto;
+  height: auto;
 }
 
 .theme-crypto-arsenal .ca-avatar-orange {
@@ -261,19 +316,63 @@
 
 .theme-crypto-arsenal .ca-pain-role {
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 1.9;
   color: var(--ca-muted);
 }
 
+@container (max-width: 320px) {
+  .theme-crypto-arsenal .ca-pain-who {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    grid-template-areas:
+      "avatar name"
+      "avatar role";
+    column-gap: 14px;
+    row-gap: 2px;
+  }
+
+  .theme-crypto-arsenal .ca-avatar {
+    grid-area: avatar;
+  }
+
+  .theme-crypto-arsenal .ca-pain-name {
+    grid-area: name;
+  }
+
+  .theme-crypto-arsenal .ca-pain-line {
+    display: none;
+  }
+
+  .theme-crypto-arsenal .ca-pain-role {
+    grid-area: role;
+    min-width: 0;
+    white-space: normal;
+  }
+}
+
 /* ── 04 介面現況：合成流程圖 ── */
+.theme-crypto-arsenal #cs-sec-current {
+  padding-block: 72px;
+}
+
 .theme-crypto-arsenal .ca-figure {
   margin: 40px 0 0;
+}
+
+.theme-crypto-arsenal .ca-current-figure {
+  margin-top: 24px;
 }
 
 .theme-crypto-arsenal .ca-figure-img {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
+}
+
+.theme-crypto-arsenal .ca-current-figure-img {
+  overflow: visible;
+  border-radius: 0;
 }
 
 .theme-crypto-arsenal .ca-figure figcaption {
@@ -863,12 +962,33 @@
     width: 100%;
   }
 
+  .theme-crypto-arsenal .ca-flow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .theme-crypto-arsenal .ca-flow-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .theme-crypto-arsenal .ca-flow-node {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
     width: 100%;
+  }
+
+  .theme-crypto-arsenal .ca-flow-title {
+    flex: 1;
+    text-align: center;
   }
 
   .theme-crypto-arsenal .ca-flow-arrow {
     width: 100%;
+    height: 34px;
     transform: rotate(90deg);
   }
 
@@ -901,21 +1021,6 @@
 
   .theme-crypto-arsenal .ca-pain-card {
     padding: 24px 22px;
-  }
-
-  /* 手機：角色描述放到名稱下一行、避免 name —— role 那條線把文字擠出版面 */
-  .theme-crypto-arsenal .ca-pain-who {
-    flex-wrap: wrap;
-    gap: 4px 12px;
-  }
-
-  .theme-crypto-arsenal .ca-pain-line {
-    display: none;
-  }
-
-  .theme-crypto-arsenal .ca-pain-role {
-    flex-basis: 100%;
-    padding-left: 56px;
   }
 
   .theme-crypto-arsenal .ca-dcard-body {

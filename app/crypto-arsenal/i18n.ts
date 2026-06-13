@@ -35,6 +35,24 @@ const en = {
 
   // ── Background ──
   "Crypto Arsenal 是做什麼？": "What Is Crypto Arsenal?",
+  "就像傳統金融市場，加密市場裡的交易者透過":
+    "Just like traditional financial markets, traders in crypto markets use an ",
+  "把法幣（如 USD）換成加密貨幣；交易所就像中間人，幫交易者完成買賣、並連到背後的":
+    " to convert fiat currency (such as USD) into cryptocurrency. The exchange acts as a middleman, completing trades and connecting to the underlying ",
+  "。": ".",
+  "但加密交易的門檻在於：通常得":
+    "But crypto trading has a high barrier: it usually requires ",
+  "手動盯盤、手動下單": "manually watching the market and placing orders",
+  "，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
+    ", along with a solid understanding of the market. That's where \"trading strategies\" come in — programs or algorithms that monitor the market and trade more efficiently.",
+  "而 ": "",
+  " 就是一個直接串接交易所、提供交易者自動化策略來交易的平台。它同時服務兩種角色，形成一個策略供需的生態系。":
+    " is a platform that connects directly to exchanges and provides traders with automated strategies. It serves two roles at once, forming a supply-and-demand ecosystem around strategies.",
+  "這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 ":
+    "This model creates value for traders, developers, and the platform alike. However, strategies are not ",
+  "100% 全自動": "100% fully automated",
+  "，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
+    ", so traders often still need to fine-tune them based on market conditions. That's exactly the starting point this \"position display and manual close\" feature set out to solve.",
   "就像傳統金融市場，加密市場裡的交易者透過交易所把法幣（如 USD）換成加密貨幣；交易所就像中間人，幫交易者完成買賣、並連到背後的區塊鏈。":
     "Just like traditional financial markets, traders in crypto markets convert fiat (e.g. USD) into cryptocurrency through exchanges. The exchange acts as the middleman that completes trades and connects to the underlying blockchain.",
   "但加密交易的門檻在於：通常得手動盯盤、手動下單，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
@@ -85,6 +103,8 @@ const en = {
     "User Pain: Overall P&L Is Visible, but Position State Isn't",
   "CA 介面只呈現策略的整體績效（獲利、ROI、未實現 ROI、資產分布），卻沒直接顯示這支策略目前實際持有哪些倉位。使用者因此卡在幾個反覆出現的情境裡。":
     "The CA interface only shows a strategy's overall performance (profit, ROI, unrealized ROI, asset allocation), but doesn't directly show which positions the strategy currently holds. As a result, users get stuck in a few recurring situations.",
+  "使用者在CA 平台上使用策略機器人交易時，雖然可以看到策略整體賺了多少，卻無法清楚理解「現在到底開了什麼倉位」。當同時啟動多支策略、或同一支策略可能開多也可能開空時，使用者無法直接判斷目前是多倉還是空倉、倉位數量、入場價、標記價、浮動盈虧、保證金，以及該倉位距離止盈 / 止損還有多遠。":
+    "When users trade with strategy bots on CA, they can see the strategy's overall profit, but they cannot clearly understand \"what position is open right now.\" When multiple strategies are running at the same time, or when a single strategy may open either long or short positions, users cannot directly tell whether the current position is long or short, its size, entry price, mark price, floating P&L, margin, or how far it is from take-profit / stop-loss.",
   "「策略賺了多少我看得到，但它現在開的是多倉還是空倉、正在賺還是賠，介面上完全看不出來。」":
     "\"I can see how much the strategy has made, but whether it's currently long or short, in profit or in loss — the interface shows none of it.\"",
   "策略開發者 A": "Strategy User A",
@@ -114,6 +134,8 @@ const en = {
   "策略在 CA、倉位卻要去交易所看": "Strategies Live in CA, but Positions Live on the Exchange",
   "目前 CA 的 Portfolio 頁面可查看所有運行中的策略機器人，並在右上角呈現策略整體績效，例如獲利、ROI、未實現 ROI 與資產分布。然而，介面尚未直接顯示單一策略目前實際持有的倉位資訊，例如多 / 空方向、數量、入場價、標記價、浮動盈虧與保證金。使用者若想確認單一倉位狀態，仍需登入交易所查看，導致 CA 作為策略管理平台，無法讓使用者在站內完整掌握個別策略的實際收益與風險狀態。":
     "CA's Portfolio page lets users view all running strategy bots and shows overall performance in the top right — profit, ROI, unrealized ROI, and asset allocation. However, the interface doesn't directly show a single strategy's actual positions: long / short direction, size, entry price, mark price, floating P&L, and margin. To check a single position, users still have to log in to the exchange — so CA, as a strategy-management platform, can't let users fully grasp each strategy's real returns and risk on-site.",
+  "目前 CA 的 Portfolio 頁面可查看所有運行中的策略機器人，並在右上角呈現策略整體績效，例如獲利、ROI、未實現 ROI 與資產分布。然而，介面尚未直接顯示單一策略目前實際持有的倉位資訊，例如多 / 空方向、數量、入場價、標記價、浮動盈虧與保證金。使用者若想確認單一倉位狀態，仍需登入交易所查閱，導致 CA 作為策略管理平台，無法讓使用者在站內完整掌握個別策略的實際收益與風險狀態。":
+    "CA's Portfolio page lets users view all running strategy bots and shows overall performance in the top right — profit, ROI, unrealized ROI, and asset allocation. However, the interface doesn't directly show a single strategy's actual positions: long / short direction, size, entry price, mark price, floating P&L, and margin. To check a single position, users still have to review it on the exchange — so CA, as a strategy-management platform, can't let users fully grasp each strategy's real returns and risk on-site.",
   "Crypto Arsenal 策略詳情頁現況：上方策略列表與績效指標，下方訂單與倉位清單仍分散於交易所端":
     "Crypto Arsenal strategy detail page today: the strategy list and performance metrics sit on top, while order and position lists remain scattered on the exchange side",
   "現況：策略績效指標清楚，但「這支策略目前持有哪些倉位」仍要跳到交易所端查看":
