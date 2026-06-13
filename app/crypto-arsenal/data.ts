@@ -234,60 +234,6 @@ export const tpslMatrix: FlowMatrix = {
     "三家止盈止損同樣是兩步：開啟倉位 → 設定止盈 / 止損的觸發價與數量。CA 沿用相同結構。",
 };
 
-export const closeFlowShots: ExchangeShot[] = [
-  {
-    name: "Binance",
-    logo: `${IMG}/research/logo-binance.webp`,
-    img: `${IMG}/research/close-binance.webp`,
-    alt: "Binance 合約平倉流程：輸入金額和數量後，點擊 Limit 按鈕確認限價平倉，或點擊 Market 按鈕確認市價平倉",
-    width: 1600,
-    height: 739,
-  },
-  {
-    name: "Bybit",
-    logo: `${IMG}/research/logo-bybit.webp`,
-    img: `${IMG}/research/close-bybit.webp`,
-    alt: "Bybit 合約平倉流程：點擊 Limit 按鈕設定限價平倉（可設定金額與數量），或點擊 Market 按鈕市價平倉（可設定數量）",
-    width: 1600,
-    height: 876,
-  },
-  {
-    name: "OKX",
-    logo: `${IMG}/research/logo-okx.webp`,
-    img: `${IMG}/research/close-okx.webp`,
-    alt: "OKX 合約平倉流程：限價平倉可設定金額與數量，市價平倉可設定數量",
-    width: 1600,
-    height: 950,
-  },
-];
-
-export const tpslFlowShots: ExchangeShot[] = [
-  {
-    name: "Binance",
-    logo: `${IMG}/research/logo-binance.webp`,
-    img: `${IMG}/research/tpsl-binance.webp`,
-    alt: "Binance 合約止盈止損流程：點擊 TP/SL for position 下方編輯按鈕，可設定止盈與止損觸發價格（最新 / 標記），數量是全倉無法設定",
-    width: 1404,
-    height: 401,
-  },
-  {
-    name: "Bybit",
-    logo: `${IMG}/research/logo-bybit.webp`,
-    img: `${IMG}/research/tpsl-bybit.webp`,
-    alt: "Bybit 合約止盈止損流程：點擊 TP/SL 下方 +Add 按鈕，可設定止盈與止損觸發價格（最新 / 標記）與數量",
-    width: 1404,
-    height: 401,
-  },
-  {
-    name: "OKX",
-    logo: `${IMG}/research/logo-okx.webp`,
-    img: `${IMG}/research/tpsl-okx.webp`,
-    alt: "OKX 合約止盈止損流程：點擊 Position TP/SL 下方 add 按鈕，可設定止盈與止損觸發價格（最新 / 標記）與數量",
-    width: 1404,
-    height: 401,
-  },
-];
-
 export interface WireframeBoard {
   kicker: string;
   title: string;
