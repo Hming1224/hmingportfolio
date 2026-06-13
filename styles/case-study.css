@@ -182,6 +182,120 @@
   color: #191919;
 }
 
+/* ── Shared zoomable image interaction ── */
+.cs-zoomable-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.cs-zoomable-image-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.cs-zoomable-image:hover .cs-zoomable-image-media,
+.cs-zoomable-image:focus-visible .cs-zoomable-image-media {
+  transform: scale(1.015);
+  filter: brightness(1.03);
+}
+
+.cs-zoomable-image:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: -3px;
+}
+
+.cs-zoomable-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(10, 19, 48, 0.78);
+  color: #ffffff;
+  opacity: 0;
+  transform: translateY(2px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.cs-zoomable-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cs-zoomable-image:hover .cs-zoomable-icon,
+.cs-zoomable-image:focus-visible .cs-zoomable-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cs-zoomable-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 56px);
+  background: rgba(8, 14, 30, 0.88);
+  backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+
+.cs-zoomable-lightbox-image {
+  display: block;
+  width: auto;
+  max-width: calc(100vw - 48px);
+  height: auto;
+  max-height: calc(100vh - 48px);
+  border-radius: 10px;
+  box-shadow: var(--shadow-xl);
+  cursor: default;
+  object-fit: contain;
+}
+
+.cs-zoomable-lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.cs-zoomable-lightbox-close:hover,
+.cs-zoomable-lightbox-close:focus-visible {
+  background: #ffffff;
+  outline: 3px solid var(--purple);
+  outline-offset: 3px;
+}
+
 /* ── 01 Hero ── */
 .cs-hero-cover {
   position: relative;

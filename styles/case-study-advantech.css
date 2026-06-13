@@ -1813,82 +1813,12 @@
 }
 
 .theme-advantech .cs-feature-zoom-trigger {
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
   background: transparent;
-  cursor: zoom-in;
-}
-
-.theme-advantech .cs-feature-zoom-trigger img {
-  display: block;
-  transition:
-    transform 180ms ease,
-    filter 180ms ease;
-}
-
-.theme-advantech .cs-feature-zoom-trigger:hover img {
-  transform: scale(1.015);
-  filter: brightness(1.03);
 }
 
 .theme-advantech .cs-feature-zoom-trigger:focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: -3px;
-}
-
-.theme-advantech .cs-feature-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: rgba(0, 0, 0, 0.88);
-  cursor: zoom-out;
-}
-
-.theme-advantech .cs-feature-lightbox-image {
-  display: block;
-  width: auto;
-  max-width: calc(100vw - 48px);
-  height: auto;
-  max-height: calc(100vh - 48px);
-  border-radius: 8px;
-  box-shadow: var(--shadow-xl);
-  cursor: default;
-  object-fit: contain;
-}
-
-.theme-advantech .cs-feature-lightbox-close {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 1;
-  box-shadow: var(--shadow-md);
-  cursor: pointer;
-}
-
-.theme-advantech .cs-feature-lightbox-close:hover {
-  background: white;
-}
-
-.theme-advantech .cs-feature-lightbox-close:focus-visible {
-  outline: 3px solid var(--purple);
-  outline-offset: 3px;
 }
 
 .theme-advantech .cs-sol-fnote {

@@ -178,6 +178,17 @@ const en = {
   "操作流程 2": "Flow 2",
   "合約平倉": "Contract Close",
   "合約止盈止損": "Contract TP/SL",
+  // 對比矩陣：步驟欄標題 + 結論 + lightbox
+  "① 倉位 / 下單畫面": "① Position / trade screen",
+  "② 限價平倉（Limit）": "② Limit close",
+  "③ 市價平倉（Market）": "③ Market close",
+  "② 設定止盈止損": "② Set TP / SL",
+  "三家平倉流程一致：在倉位列表找到倉位 → 選擇限價（Limit）或市價（Market）→ 確認送出。CA 沿用相同的三步結構。":
+    "All three close flows are the same: find the position → choose Limit or Market → confirm. CA follows the same three-step structure.",
+  "三家止盈止損同樣是兩步：開啟倉位 → 設定止盈 / 止損的觸發價與數量。CA 沿用相同結構。":
+    "TP/SL is two steps everywhere: open the position → set the take-profit / stop-loss trigger price and quantity. CA follows the same structure.",
+  "放大檢視": "Enlarge",
+  "關閉放大圖片": "Close enlarged image",
   "從上面流程可以觀察到無論是 Binance、OKX、Bybit 的介面或是操作流程基本雷同，僅介面元件有差異，因此 CA 的兩項操作流程也將依照上述形式進行，確保使用者可以快速銜接。":
     "Across Binance, OKX, and Bybit the interfaces and flows are essentially the same — only the UI components differ. CA's two flows therefore follow the same form so users can transition quickly.",
   "Binance 合約倉位列表介面，含 Symbol、Size、Entry Price、Mark Price、Margin、PNL 等欄位":
@@ -209,14 +220,119 @@ const en = {
   "方案一：Checkbox": "Option 1: Checkbox",
   "方案二：Dropdown List": "Option 2: Dropdown List",
   "最終方案：Sidebar": "Final: Sidebar",
+  "採納理由": "Why It Was Chosen",
+  "上一張 wireframe": "Previous wireframe",
+  "下一張 wireframe": "Next wireframe",
+  "Wireframe 步驟": "Wireframe steps",
+  "切換到步驟": "Switch to step",
   "未採納原因": "Why It Wasn't Chosen",
   "開單之後，會在 Position Tab 底下呈現最新的倉位資訊": "After an order opens, the latest position appears under the Position tab",
+  "在趨勢圖旁顯示倉位欄位，讓使用者直接對照進出場資訊":
+    "Show position fields beside the trend chart so users can compare them directly with entry and exit points",
+  "使用者在同一畫面完成平倉條件確認":
+    "Users confirm the close-position conditions in the same view",
+  "將倉位資訊收在策略機器人 bar 下方的 Dropdown List 中":
+    "Place position details in a dropdown list under the strategy bot bar",
+  "使用者展開下拉區域後，查看目前策略底下的倉位明細":
+    "After expanding the dropdown, users review the positions under the current strategy",
+  "在列表中選取指定倉位並進入平倉操作":
+    "Select a specific position from the list and enter the close flow",
+  "確認平倉設定後回到策略詳情頁":
+    "Return to the strategy detail page after confirming the close settings",
+  "沿用 CA 既有 Sidebar 操作模式，降低新功能的學習成本":
+    "Reuse CA's existing sidebar pattern to reduce the learning cost of the new feature",
+  "右側 Sidebar 展開後，集中顯示目前可操作的倉位資訊":
+    "When the right sidebar opens, it concentrates all currently actionable position details",
+  "使用者選擇指定倉位後，進入手動平倉設定":
+    "After selecting a position, users enter the manual close settings",
+  "在保留策略脈絡的情況下確認平倉參數":
+    "Confirm close parameters while preserving the strategy context",
+  "完成手動平倉後，策略狀態能維持同步並繼續運行":
+    "After the manual close is complete, the strategy state stays synchronized and continues running",
+  "透過 Checkbox 快速啟用止盈止損設定": "Enable TP/SL quickly through checkboxes",
+  "在同一個欄位群組中輸入止盈與止損條件":
+    "Enter take-profit and stop-loss conditions in the same field group",
+  "送出後讓策略依照使用者設定管理出場風險":
+    "After submission, the strategy manages exit risk based on the user's settings",
+  "將 TP/SL 設定入口收斂在 Dropdown List 之中":
+    "Collapse the TP/SL settings entry into a dropdown list",
+  "展開後顯示可設定止盈止損的倉位內容":
+    "After expansion, show position content where TP/SL can be configured",
+  "使用者在列表中完成 TP/SL 條件輸入":
+    "Users complete TP/SL condition input in the list",
+  "確認設定後回到原策略詳情頁": "Return to the original strategy detail page after confirming the settings",
+  "沿用 CA 既有 Sidebar 操作模式，讓 TP/SL 設定更接近既有流程":
+    "Reuse CA's existing sidebar pattern so TP/SL setup feels closer to the current flow",
+  "右側 Sidebar 展開後，聚焦呈現 TP/SL 設定欄位":
+    "When the right sidebar opens, it focuses the TP/SL setting fields",
+  "使用者確認止盈、止損與數量設定":
+    "Users confirm take-profit, stop-loss, and quantity settings",
+  "完成設定後，策略能在既有流程中管理出場條件":
+    "After setup, the strategy can manage exit conditions within the existing flow",
+  "CA Watchlist 頁面既有 Sidebar 操作流程參考":
+    "Reference from CA's existing Watchlist sidebar flow",
   "CA 內手動平倉 wireframe 方案一：在策略詳情頁的趨勢圖旁，以欄位列表呈現倉位資訊的版面配置":
     "Manual close wireframe, option 1: position fields laid out beside the trend chart on the strategy detail page",
+  "CA 內手動平倉方案一 step 1：在策略詳情頁的趨勢圖旁呈現倉位資訊":
+    "Manual close option 1, step 1: show position details beside the trend chart on the strategy detail page",
+  "CA 內手動平倉方案一 step 2：使用者在 Metrix Chart 旁查看平倉資訊":
+    "Manual close option 1, step 2: users review close-position details beside the Metrix Chart",
+  "CA 內手動平倉方案一 step 3：使用者完成平倉設定":
+    "Manual close option 1, step 3: users complete the close-position settings",
+  "CA 內手動平倉方案二 step 1：以 Dropdown List 顯示倉位資訊":
+    "Manual close option 2, step 1: show position details in a dropdown list",
+  "CA 內手動平倉方案二 step 2：展開 Dropdown List 查看倉位":
+    "Manual close option 2, step 2: expand the dropdown list to review positions",
+  "CA 內手動平倉方案二 step 3：在 Dropdown List 中選擇平倉操作":
+    "Manual close option 2, step 3: choose the close action inside the dropdown list",
+  "CA 內手動平倉方案二 step 4：完成平倉設定":
+    "Manual close option 2, step 4: complete close-position settings",
+  "CA 內手動平倉最終方案 step 1：從策略詳情頁進入 Sidebar 流程":
+    "Manual close final option, step 1: enter the sidebar flow from the strategy detail page",
+  "CA 內手動平倉最終方案 step 2：Sidebar 展開可操作倉位":
+    "Manual close final option, step 2: the sidebar opens with actionable positions",
+  "CA 內手動平倉最終方案 step 3：選擇平倉項目":
+    "Manual close final option, step 3: select the position to close",
+  "CA 內手動平倉最終方案 step 4：確認平倉參數":
+    "Manual close final option, step 4: confirm close parameters",
+  "CA 內手動平倉最終方案 step 5：完成手動平倉流程":
+    "Manual close final option, step 5: complete the manual close flow",
   "CA 內手動止盈止損 wireframe 方案一：在策略詳情頁以 Checkbox 形式設定止盈止損的版面配置":
     "Manual TP/SL wireframe, option 1: setting take-profit / stop-loss via checkboxes on the strategy detail page",
+  "CA 內手動止盈止損方案一 step 1：以 Checkbox 形式設定 TP/SL":
+    "Manual TP/SL option 1, step 1: set TP/SL through checkboxes",
+  "CA 內手動止盈止損方案一 step 2：勾選 Checkbox 進入 TP/SL 設定":
+    "Manual TP/SL option 1, step 2: select the checkbox to enter TP/SL setup",
+  "CA 內手動止盈止損方案一 step 3：設定止盈與止損條件":
+    "Manual TP/SL option 1, step 3: set take-profit and stop-loss conditions",
+  "CA 內手動止盈止損方案一 step 4：完成 TP/SL 設定":
+    "Manual TP/SL option 1, step 4: complete TP/SL setup",
+  "CA 內手動止盈止損方案二 step 1：以 Dropdown List 顯示 TP/SL 入口":
+    "Manual TP/SL option 2, step 1: show the TP/SL entry in a dropdown list",
+  "CA 內手動止盈止損方案二 step 2：展開 Dropdown List":
+    "Manual TP/SL option 2, step 2: expand the dropdown list",
+  "CA 內手動止盈止損方案二 step 3：設定止盈止損條件":
+    "Manual TP/SL option 2, step 3: set TP/SL conditions",
+  "CA 內手動止盈止損方案二 step 4：確認 TP/SL 設定":
+    "Manual TP/SL option 2, step 4: confirm TP/SL setup",
+  "CA 內手動止盈止損最終方案 step 1：從策略詳情頁進入 Sidebar":
+    "Manual TP/SL final option, step 1: enter the sidebar from the strategy detail page",
+  "CA 內手動止盈止損最終方案 step 2：Sidebar 展開 TP/SL 設定":
+    "Manual TP/SL final option, step 2: the sidebar opens TP/SL setup",
+  "CA 內手動止盈止損最終方案 step 3：確認止盈止損參數":
+    "Manual TP/SL final option, step 3: confirm TP/SL parameters",
+  "CA 內手動止盈止損最終方案 step 4：完成 TP/SL 設定":
+    "Manual TP/SL final option, step 4: complete TP/SL setup",
   "左邊的趨勢圖需要往左縮小，以資訊層級而言，趨勢圖當中會標記何時進場和出場，若圖表過小很難點擊這些資訊。另外，右邊空間無法塞入 8–10 欄交易所的所有資訊，必定會有部分資訊被犧牲。":
     "The trend chart on the left has to shrink, but in terms of hierarchy the chart marks entry and exit points — too small and those become hard to tap. And the right side can't fit all 8–10 columns of exchange data, so some information is inevitably sacrificed.",
+  "用 Dropdown 顯示倉位資訊於該運行的策略機器人 bar 下方會導致無法完整呈現其他策略機器人，交易所也有限制至多一次呈現 20 筆訂單 / 倉位的限制。":
+    "Showing position details in a dropdown under the running strategy bot bar would prevent other strategy bots from being fully visible. Exchanges also limit how many orders / positions can be shown at once, often around 20.",
+  "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，用戶可以點選有興趣機器人並加入到右邊清單中。將用戶原本就已經熟悉 UI 流程整合到新的倉位資訊設計流程中，提升用戶操作的流暢度。":
+    "The final direction references CA's Watchlist flow for selecting strategy bots: after tapping add, the right sidebar opens and users can select bots to add to the list. Reusing a UI flow users already know makes the new position-information flow smoother.",
+  "雖然這個版本是參考幣安平台的現行設計，固然是個不錯且用戶習慣的設計，然而 CA 目前沒有該元件，需要重新手刻較費時。":
+    "Although this version references Binance's current pattern and is familiar to users, CA does not currently have this component, so building it from scratch would take more time.",
+  "目前的 Dropdown List 在平台中僅用於設定策略機器人的 API 或是交易幣別設定，若是用於新增全新的委託或是平倉，這樣設計會與原本 Dropdown List 使用邏輯有衝突。":
+    "In the current platform, dropdown lists are mainly used for configuring a strategy bot's API or trading pairs. Using one to create a new order or close a position would conflict with the existing dropdown logic.",
 
   // ── Iteration ──
   "設計元件迭代": "Component Iteration",
@@ -262,18 +378,18 @@ const en = {
     "Final UI for manual TP/SL inside CA: the TP/SL entry in the Trading Details dialog",
 
   // ── Reflect ──
-  "在快節奏與限制下做設計": "Designing Under Speed and Constraints",
-  "這份實習讓我誠實面對業界 cadence：多數決策建立在二手研究與競品對標上，沒有充裕時間做一手使用者研究——但也因此學會在限制下快速收斂、持續出貨。":
-    "This internship made me face industry cadence honestly: most decisions were built on secondary research and competitive benchmarks, without ample time for primary user research — but that's exactly how I learned to converge quickly and keep shipping under constraints.",
-  "在 cadence 下持續出貨": "Shipping continuously on cadence",
-  "以 1–2 週為節奏把模糊的產品需求收斂成可交付的 flow 與畫面，跟上創辦人的產品藍圖。":
-    "On a 1–2 week rhythm, I turned fuzzy product needs into deliverable flows and screens, keeping pace with the founder's product roadmap.",
-  "在技術 / 風控限制下做取捨": "Trade-offs under tech / risk constraints",
-  "手動平倉的設計必須理解機器人風控邏輯，學會把「為什麼這樣設計」講清楚、跟工程與創辦人對齊。":
-    "Designing manual close meant understanding the bot's risk-control logic, and learning to articulate \"why it's designed this way\" to align with engineering and the founder.",
-  "誠實看待研究的深度": "Being honest about research depth",
-  "以二手研究與競品為基礎不等於沒有依據；重點是把參考來源與決策邏輯說明白，而非包裝成沒做過的事。":
-    "Grounding work in secondary research and competitors isn't the same as having no basis; what matters is making the sources and decision logic clear, not dressing it up as something it wasn't.",
+  "在快節奏與限制下做設計": "Designing in Fast-Moving Product Constraints",
+  "這份實習讓我學會在快節奏產品開發中做設計判斷：當沒有額外資源安排正式用戶測試時，透過內部團隊與工程師快速驗證流程，再把交易所既有操作習慣、CA 原本的設計系統與技術限制一起納入取捨。":
+    "This internship taught me how to make design decisions in a fast-moving product environment: when there were no extra resources for formal user testing, I validated flows quickly with the internal team and engineers, then balanced exchange interaction patterns with CA's existing design system and technical constraints.",
+  "在快節奏中快速收斂方案": "Converging Quickly in a Fast-Moving Product Cycle",
+  "以 1–2 週為節奏，把模糊的產品需求拆成可討論的 flow、wireframe 與原型畫面，讓團隊能更快對齊方向並推進交付。":
+    "On a 1-2 week rhythm, I broke fuzzy product needs into discussable flows, wireframes, and prototypes so the team could align faster and keep delivery moving.",
+  "用內部測試補足驗證節奏": "Using Internal Testing to Keep Validation Moving",
+  "在沒有額外資源安排正式用戶測試的情況下，透過內部團隊、工程師與熟悉產品流程的成員快速測試操作邏輯，及早發現資訊層級、流程理解與實作限制問題。":
+    "Without extra resources for formal user testing, I used internal team members, engineers, and people familiar with the product flow to quickly test interaction logic and catch issues in information hierarchy, flow comprehension, and implementation constraints early.",
+  "把參考設計轉化成適合 CA 的流程": "Translating References into a CA-Native Flow",
+  "參考交易所既有模式時，重點不是照搬介面，而是理解使用者已熟悉的操作習慣，再結合 CA 原本的設計系統、風控邏輯與平台元件，轉化成更一致且可落地的方案。":
+    "When referencing exchange patterns, the goal was not to copy the interface, but to understand familiar user behaviors and translate them through CA's existing design system, risk-control logic, and platform components into a more consistent and feasible solution.",
 } as const;
 
 type CryptoArsenalKey = keyof typeof en;

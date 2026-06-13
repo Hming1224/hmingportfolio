@@ -1,6 +1,15 @@
 import Image from "next/image";
 import { getCryptoArsenalTranslator } from "../i18n-server";
-import { positionShots, closeFlowShots, tpslFlowShots, type ExchangeShot } from "../data";
+import {
+  positionShots,
+  closeMatrix,
+  tpslMatrix,
+  STEP_W,
+  STEP_H,
+  type ExchangeShot,
+  type FlowMatrix,
+} from "../data";
+import StepLightbox from "../components/StepLightbox";
 
 function ExchangeBlock({ shot, t }: { shot: ExchangeShot; t: (s: string) => string }) {
   return (
@@ -23,6 +32,54 @@ function ExchangeBlock({ shot, t }: { shot: ExchangeShot; t: (s: string) => stri
         />
       </div>
     </div>
+  );
+}
+
+function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => string }) {
+  const cols = `clamp(72px, 12%, 116px) repeat(${matrix.stepLabels.length}, minmax(0, 1fr))`;
+  return (
+    <>
+      <div className="ca-subflow-head">
+        <span className="ca-subflow-kicker">{t(matrix.kicker)}</span>
+        <h3 className="ca-subflow-title">{t(matrix.title)}</h3>
+      </div>
+      <div className="ca-matrix-scroll">
+        <div className="ca-matrix" style={{ minWidth: matrix.stepLabels.length === 3 ? 720 : 560 }}>
+          <div className="ca-matrix-head" style={{ gridTemplateColumns: cols }}>
+            <span className="ca-matrix-corner" aria-hidden="true" />
+            {matrix.stepLabels.map((label) => (
+              <div className="ca-matrix-step" key={label}>
+                {t(label)}
+              </div>
+            ))}
+          </div>
+          {matrix.rows.map((row) => (
+            <div className="ca-matrix-row" style={{ gridTemplateColumns: cols }} key={row.name}>
+              <div className="ca-matrix-ex">
+                <span className="ca-matrix-ex-logo">
+                  <Image src={row.logo} alt="" width={28} height={28} unoptimized />
+                </span>
+                <span className="ca-matrix-ex-name">{row.name}</span>
+              </div>
+              {row.cells.map((cell) => (
+                <div className="ca-matrix-cell" key={cell.img}>
+                  <StepLightbox src={cell.img} alt={t(cell.alt)} width={STEP_W} height={STEP_H} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="ca-matrix-synth">
+        <span className="ca-matrix-synth-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 7h11M4 7l3-3M4 7l3 3" />
+            <path d="M20 17H9M20 17l-3-3M20 17l-3 3" />
+          </svg>
+        </span>
+        <p>{t(matrix.synthesis)}</p>
+      </div>
+    </>
   );
 }
 
@@ -61,27 +118,9 @@ export default async function ResearchSection() {
         </div>
       </div>
 
-      {/* 操作流程 1：合約平倉 */}
-      <div className="ca-subflow-head">
-        <span className="ca-subflow-kicker">{t("操作流程 1")}</span>
-        <h3 className="ca-subflow-title">{t("合約平倉")}</h3>
-      </div>
-      <div className="ca-research-flows">
-        {closeFlowShots.map((shot) => (
-          <ExchangeBlock shot={shot} t={t} key={`close-${shot.name}`} />
-        ))}
-      </div>
-
-      {/* 操作流程 2：合約止盈止損 */}
-      <div className="ca-subflow-head">
-        <span className="ca-subflow-kicker">{t("操作流程 2")}</span>
-        <h3 className="ca-subflow-title">{t("合約止盈止損")}</h3>
-      </div>
-      <div className="ca-research-flows">
-        {tpslFlowShots.map((shot) => (
-          <ExchangeBlock shot={shot} t={t} key={`tpsl-${shot.name}`} />
-        ))}
-      </div>
+      {/* 操作流程對比矩陣：合約平倉 / 合約止盈止損 */}
+      <FlowMatrixBoard matrix={closeMatrix} t={t} />
+      <FlowMatrixBoard matrix={tpslMatrix} t={t} />
 
       <p className="ca-lead ca-research-note">
         {t(

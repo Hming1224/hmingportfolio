@@ -9,7 +9,7 @@ export default async function ReflectSection() {
       <h2 className="ca-h2">{t("在快節奏與限制下做設計")}</h2>
       <p className="ca-lead ca-narrow">
         {t(
-          "這份實習讓我誠實面對業界 cadence：多數決策建立在二手研究與競品對標上，沒有充裕時間做一手使用者研究——但也因此學會在限制下快速收斂、持續出貨。",
+          "這份實習讓我學會在快節奏產品開發中做設計判斷：當沒有額外資源安排正式用戶測試時，透過內部團隊與工程師快速驗證流程，再把交易所既有操作習慣、CA 原本的設計系統與技術限制一起納入取捨。",
         )}
       </p>
       <div className="ca-reflect">

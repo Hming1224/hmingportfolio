@@ -19,17 +19,33 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
   const navRef = useRef<HTMLElement>(null);
   const ignoreNextRef = useRef(false);
 
-  // 只在「內容區段」(.cs-toc-layout) 進入視窗時淡入；hero / footer 區淡出
+  // 只在第一個內容 section 真的進入視窗後淡入；避免 hero 還在首屏時 TOC 提早出現。
   useEffect(() => {
     const region = navRef.current?.closest('.cs-toc-layout');
-    if (!region) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
+    const firstSection = document.getElementById(sections[0]?.id ?? '');
+    if (!region || !firstSection) return;
+
+    const firstObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+        else setVisible(window.scrollY > firstSection.offsetTop);
+      },
       { rootMargin: '-12% 0px -12% 0px', threshold: 0 }
     );
-    observer.observe(region);
-    return () => observer.disconnect();
-  }, []);
+    const regionObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) setVisible(false);
+      },
+      { rootMargin: '0px 0px -128px 0px', threshold: 0 }
+    );
+
+    firstObserver.observe(firstSection);
+    regionObserver.observe(region);
+    return () => {
+      firstObserver.disconnect();
+      regionObserver.disconnect();
+    };
+  }, [sections]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { finalFlows } from "../data";
+import FinalVideo from "./FinalVideo";
 
 export default async function FinalSection() {
   const { t } = await getCryptoArsenalTranslator();
@@ -21,15 +21,7 @@ export default async function FinalSection() {
           </div>
           <figure className="ca-figure ca-final-shot">
             <div className="ca-figure-img">
-              <Image
-                src={flow.img}
-                alt={t(flow.alt)}
-                width={flow.width}
-                height={flow.height}
-                sizes="(max-width: 768px) 100vw, 1000px"
-                style={{ width: "100%", height: "auto" }}
-                unoptimized
-              />
+              <FinalVideo src={flow.video} label={t(flow.alt)} />
             </div>
           </figure>
         </div>
