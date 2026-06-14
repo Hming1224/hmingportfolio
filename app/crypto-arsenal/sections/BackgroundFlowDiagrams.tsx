@@ -146,7 +146,7 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
         <path d={`M${traderX} 112V${strategy.y}H${strategyLeft - FLOW_GAP}`} />
         <path d={`M${strategyRight + FLOW_GAP} ${strategy.y}H${arsenalLeft - FLOW_GAP}`} />
       </g>
-      <path d={`M${exchangeX} ${arsenal.y - 52.83 / 2 - 10}V118`} stroke="#376adc" strokeWidth="1.8" fill="none" markerEnd="url(#ca-flow-arrow)" />
+      <path d={`M${exchangeX} ${arsenal.y - 52.83 / 2 - 20}V118`} stroke="#376adc" strokeWidth="1.8" fill="none" markerEnd="url(#ca-flow-arrow)" />
 
       <FlowLabel x={(traderRight + exchangeLeft) / 2} y={13}>{labels.buyFiat}</FlowLabel>
       <FlowLabel x={(traderRight + exchangeLeft) / 2} y={76}>{labels.cryptoSwap}</FlowLabel>
