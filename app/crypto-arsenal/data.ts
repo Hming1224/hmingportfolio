@@ -144,6 +144,11 @@ export const STEP_H = 788;
 export interface MatrixCell {
   img: string;
   alt: string;
+  /* 同一步驟若需要兩張畫面（如 Binance 平倉前多一個「輸入金額/數量」畫面），
+     用 extraImg 在同一格內上下堆疊，並可用 note 補一句說明。 */
+  extraImg?: string;
+  extraAlt?: string;
+  note?: string;
 }
 
 export interface MatrixRow {
@@ -166,13 +171,19 @@ const LOGO = (n: string) => `${IMG}/research/logo-${n}.webp`;
 export const closeMatrix: FlowMatrix = {
   kicker: "操作流程 1",
   title: "合約平倉",
-  stepLabels: ["① 倉位 / 下單畫面", "② 限價平倉（Limit）", "③ 市價平倉（Market）"],
+  stepLabels: ["① 倉位 / 下單畫面", "②a 限價平倉（Limit）", "②b 市價平倉（Market）"],
   rows: [
     {
       name: "Binance",
       logo: LOGO("binance"),
       cells: [
-        { img: `${STEP}/close-binance-1-start.webp`, alt: "Binance 合約交易畫面，於倉位列表找到要平倉的合約倉位" },
+        {
+          img: `${STEP}/close-binance-1-start.webp`,
+          alt: "Binance 合約交易畫面，於倉位列表找到要平倉的合約倉位",
+          extraImg: `${STEP}/close-binance-1b-amount.webp`,
+          extraAlt: "Binance 平倉前需先輸入平倉金額與數量的畫面",
+          note: "Binance 多一步：需先輸入金額 / 數量",
+        },
         { img: `${STEP}/close-binance-2-limit.webp`, alt: "Binance 限價平倉確認彈窗，可設定平倉價格與數量後送出" },
         { img: `${STEP}/close-binance-3-market.webp`, alt: "Binance 市價平倉確認彈窗，以當前市價立即平倉" },
       ],
@@ -197,7 +208,7 @@ export const closeMatrix: FlowMatrix = {
     },
   ],
   synthesis:
-    "三家平倉流程一致：在倉位列表找到倉位 → 選擇限價（Limit）或市價（Market）→ 確認送出。CA 沿用相同的三步結構。",
+    "三家平倉流程大致一致：在倉位列表找到倉位 →（限價或市價二擇一）→ 確認送出；差別僅在 Binance 需多一個輸入金額 / 數量的畫面。CA 沿用相同的核心結構。",
 };
 
 export const tpslMatrix: FlowMatrix = {
@@ -273,13 +284,13 @@ const WATCHLIST_REFERENCES: WireframeReferenceImage[] = [
     img: `${WIRE}/close-final-reference-watchlist-add.png`,
     alt: "CA Watchlist 頁面點擊 add 按鈕後開啟 Sidebar 的操作流程參考",
     width: 1030,
-    height: 556,
+    height: 535,
   },
   {
     img: `${WIRE}/close-final-reference-watchlist-sidebar.png`,
     alt: "CA Watchlist 頁面右側 Sidebar 選擇策略機器人並加入清單的操作流程參考",
     width: 1030,
-    height: 556,
+    height: 535,
   },
 ];
 
@@ -385,13 +396,6 @@ export const wireframeBoards: WireframeBoard[] = [
             width: WF_W,
             height: WF_H,
             caption: "在保留策略脈絡的情況下確認平倉參數",
-          },
-          {
-            img: `${WIRE}/close-final-step-5.png`,
-            alt: "CA 內手動平倉最終方案 step 5：完成手動平倉流程",
-            width: WF_W,
-            height: WF_H,
-            caption: "完成手動平倉後，策略狀態能維持同步並繼續運行",
           },
         ],
         reasonTitle: "採納理由",

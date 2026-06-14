@@ -49,17 +49,19 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
             <span className="ca-matrix-corner" aria-hidden="true" />
             {matrix.stepLabels.map((label) => {
               const translated = t(label);
-              const match = translated.match(/^([①-⑨])\s*(.*)$/);
+              // 允許步驟編號帶 a/b 後綴（如 ②a / ②b），表示「二擇一」而非先後順序
+              const match = translated.match(/^([①-⑨])([a-z]?)\s*(.*)$/);
               if (match) {
                 const circleNum = match[1];
-                const text = match[2];
+                const suffix = match[2];
+                const text = match[3];
                 const numMap: Record<string, number> = {
                   "①": 1, "②": 2, "③": 3, "④": 4, "⑤": 5, "⑥": 6, "⑦": 7, "⑧": 8, "⑨": 9
                 };
                 const num = numMap[circleNum] || 1;
                 return (
                   <div className="ca-matrix-step" key={label}>
-                    <span className="ca-matrix-step-num">{num}</span>
+                    <span className="ca-matrix-step-num">{num}{suffix}</span>
                     <span className="ca-matrix-step-text">{text}</span>
                   </div>
                 );
@@ -80,8 +82,20 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
                 <span className="ca-matrix-ex-name">{row.name}</span>
               </div>
               {row.cells.map((cell) => (
-                <div className="ca-matrix-cell" key={cell.img}>
+                <div
+                  className={cell.extraImg ? "ca-matrix-cell ca-matrix-cell-stack" : "ca-matrix-cell"}
+                  key={cell.img}
+                >
                   <StepLightbox src={cell.img} alt={t(cell.alt)} width={STEP_W} height={STEP_H} />
+                  {cell.extraImg ? (
+                    <StepLightbox
+                      src={cell.extraImg}
+                      alt={t(cell.extraAlt ?? cell.alt)}
+                      width={STEP_W}
+                      height={STEP_H}
+                    />
+                  ) : null}
+                  {cell.note ? <span className="ca-matrix-cell-note">{t(cell.note)}</span> : null}
                 </div>
               ))}
             </div>

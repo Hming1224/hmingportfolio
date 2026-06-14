@@ -186,11 +186,14 @@ const en = {
   "合約止盈止損": "Contract TP/SL",
   // 對比矩陣：步驟欄標題 + 結論 + lightbox
   "① 倉位 / 下單畫面": "① Position / trade screen",
-  "② 限價平倉（Limit）": "② Limit close",
-  "③ 市價平倉（Market）": "③ Market close",
+  "②a 限價平倉（Limit）": "②a Limit close",
+  "②b 市價平倉（Market）": "②b Market close",
   "② 設定止盈止損": "② Set TP / SL",
-  "三家平倉流程一致：在倉位列表找到倉位 → 選擇限價（Limit）或市價（Market）→ 確認送出。CA 沿用相同的三步結構。":
-    "All three close flows are the same: find the position → choose Limit or Market → confirm. CA follows the same three-step structure.",
+  "Binance 多一步：需先輸入金額 / 數量": "Binance adds a step: enter amount / quantity first",
+  "Binance 平倉前需先輸入平倉金額與數量的畫面":
+    "Binance screen for entering the close amount and quantity before confirming",
+  "三家平倉流程大致一致：在倉位列表找到倉位 →（限價或市價二擇一）→ 確認送出；差別僅在 Binance 需多一個輸入金額 / 數量的畫面。CA 沿用相同的核心結構。":
+    "The three close flows are largely the same: find the position → choose Limit or Market → confirm. The only difference is Binance adds an extra amount / quantity screen. CA follows the same core structure.",
   "三家止盈止損同樣是兩步：開啟倉位 → 設定止盈 / 止損的觸發價與數量。CA 沿用相同結構。":
     "TP/SL is two steps everywhere: open the position → set the take-profit / stop-loss trigger price and quantity. CA follows the same structure.",
   "放大檢視": "Enlarge",
@@ -218,8 +221,7 @@ const en = {
 
   // ── Wireframe ──
   "打造與交易所同樣順暢且便利的操作體驗": "Building a Flow as Smooth as the Exchanges'",
-  "對照交易所的操作已經有雛形概念，然而 CA 產品畢竟是由領導機器人開單，再由交易者自行決定手動平倉的時機、數量，因此多次提案以確認最終設計方向。":
-    "Benchmarking the exchanges gave a working concept, but CA is different — bots open the orders, and traders then decide when and how much to close manually. So I ran several proposals to settle on the final direction.",
+  "雖然目前已參考交易所操作建立初步概念，但 CA 產品的交易流程與交易所仍存在差異。交易所偏向全手動操作，而 CA 目前以策略機器人全自動開單為主；交易者後續可依自身判斷，手動決定平倉時機與平倉數量。因此，在 CA 中導入手動平倉、止盈與止損功能時，需透過多種設計提案，進一步確認最終的介面樣式與操作流程。": "Although an initial concept has been developed by referencing exchange-based operations, the trading flow of the CA product still differs from that of exchanges. Exchanges are primarily based on fully manual operations, while CA currently relies on strategy bots to open positions automatically. Traders can then decide, based on their own judgment, when and how much of a position to close manually. Therefore, when introducing manual position closing, take-profit, and stop-loss features into CA, multiple design proposals are needed to further confirm the final interface style and operational flow.",
   "CA 內手動平倉": "Manual Close inside CA",
   "CA 內手動止盈止損": "Manual TP/SL inside CA",
   "方案一：Metrix Chart": "Option 1: Metrix Chart",

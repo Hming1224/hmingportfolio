@@ -487,3 +487,14 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **根因**：Next.js `<Link>` 預設會自動 prefetch 目標 route。案例頁 Navbar Logo、Navbar「設計案例」與底部「返回首頁」皆指向 `/`，因此背景預抓首頁，連帶 preload 首頁 Hero 素材。
 - **正確做法**：對跨頁回首頁的 `<Link>` 加 `prefetch={false}`；保留 About / Contact 等其他 route 的正常 prefetch。使用者真正點回首頁時再載入首頁內容。
 - **驗證**：localhost `/advantech` 的 `link[rel="prefetch"]` 為 0，preload 清單不再包含任何首頁裝飾素材；「設計案例」仍可正常前往 `/#projects`，錨點停在 Navbar 下方，首頁 Hero 裝飾正常渲染。
+
+## 2026-06-14 Crypto Arsenal 平倉/TPSL 步驟圖重出（帶紅色 cursor）+ Binance 4 步排版
+- **背景**：ResearchSection 的對比矩陣（`closeMatrix`/`tpslMatrix` in `app/crypto-arsenal/data.ts`）每格是 `research/steps/*.webp`，從 Figma FigJam board 匯出（close board node `1232:7619`、tpsl board node `1232:7826`，fileKey `1sIHQbXlN7S5LBU91Pn7IY`）。需求：重出 16 張圖且**畫面要含紅色 cursor**（`#FF2D55` 游標 +「點擊按鈕」紅標）。
+- **關鍵踩坑 — cursor 在 Figma 的兩種結構不同，匯出方式也不同**：
+  - **close board**：每張截圖 + cursor 同屬一個 Group（`1299:246xx`）。→ 直接 `download_figma_images` 匯出 **group node**（pngScale 2）即內含 cursor，最乾淨。
+  - **tpsl board**：截圖是裸 `RECTANGLE`，cursor 是**獨立 sibling 的 `Notes/Hover` frame**（非同 group）。匯出 rectangle 不含 cursor。→ 分別下載 6 張 rectangle + 6 個 cursor frame，再用 **Python PIL `alpha_composite`** 依 Figma 座標差 `(cursorX-rectX, cursorY-rectY)*2` 貼上。對齊誤差僅 ~2px（shadow blur），可接受。
+  - 工具：本機無 cwebp/magick，用 **Pillow（PIL 12.x）** crop+轉 webp（quality 88, method 6）；`sharp` 也在。
+- **交易所對應（別搞錯）**：close board 三列上→下＝OKX / Bybit / Binance；tpsl board 三列上→下＝**OKX / Binance / Bybit**（Binance 在中間，靠 desc「數量是全倉無法設定」辨識）。data.ts 列序則是 Binance / Bybit / OKX。
+- **Binance 平倉 4 步排版（Hming 拍板「維持 3 欄」）**：Binance 比別人多一個「輸入金額/數量」中間畫面。做法：`MatrixCell` 加 `extraImg`/`extraAlt`/`note`，把多出的 `close-binance-1b-amount.webp` 塞進步驟①格內**上下堆疊**（`.ca-matrix-cell-stack`），其他兩家不動，保持同欄可比對。
+- **欄號改 ②a/②b 表「二擇一」非先後**（Hming 指定）：限價/市價是 alternative。`ResearchSection.tsx` 解析 regex 改 `^([①-⑨])([a-z]?)\s*(.*)$`，badge 顯示 `2a`/`2b`；`.ca-matrix-step-num` 由固定圓形改 `min-width:18px;padding:0 5px;border-radius:9px`（單字仍近圓、雙字成膠囊）。i18n key 同步改 `②a/②b ...` 並補 note/synthesis EN。
+- **驗證**：localhost:3000（既有 server，未重啟）playwright 量 zh-TW/en、桌機 1440 + 手機 390。badge 1/2a/2b、堆疊格+note、sticky 交易所欄、水平捲動皆正常；22 張矩陣圖 0 broken，新 amount 圖 1493×960，0 console error。

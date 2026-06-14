@@ -81,7 +81,7 @@
   border-left-color: var(--purple);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1025px) {
   .cs-toc {
     display: block;
     position: fixed;
@@ -116,6 +116,13 @@
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+  }
+}
+
+/* 英文版的 TOC 在 1300px（含）以下隱藏，避開較長英文標題在窄版時的擠壓問題 */
+@media (max-width: 1300px) {
+  html[lang="en"] .cs-toc {
+    display: none;
   }
 }
 

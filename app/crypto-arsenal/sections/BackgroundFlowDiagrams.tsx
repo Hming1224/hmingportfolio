@@ -152,7 +152,7 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
       <FlowLabel x={(traderRight + exchangeLeft) / 2} y={76}>{labels.cryptoSwap}</FlowLabel>
       <FlowLabel x={(exchangeRight + blockchainLeft) / 2} y={25}>{labels.crypto}</FlowLabel>
       <FlowLabel x={traderX + 22} y={137} anchor="start">{labels.selectMonitor}</FlowLabel>
-      <FlowLabel x={exchangeX + 22} y={132} anchor="start" strong blue>{labels.executeOrder}</FlowLabel>
+      <FlowLabel x={exchangeX + 22} y={142} anchor="start" strong blue>{labels.executeOrder}</FlowLabel>
 
       <FlowIcon href="/projects/crypto-arsenal/background/icons/trader.svg" x={traderX} y={trader.y} size={trader.size} />
       <FlowIcon href="/projects/crypto-arsenal/background/icons/exchange.svg" x={exchangeX} y={exchange.y} size={exchange.size} />
