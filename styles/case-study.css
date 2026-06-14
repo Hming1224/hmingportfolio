@@ -90,8 +90,8 @@
     top: calc(80px + 48px);
     z-index: 50;
     /* Give English labels enough room, while staying inside the left gutter. */
-    width: min(220px, calc(var(--page-gutter) - 40px));
-    max-width: calc(100vw - 40px);
+    width: fit-content;
+    max-width: min(220px, calc(var(--page-gutter) - 40px));
     max-height: calc(100vh - 128px - 20px);
     overflow-y: auto;
     padding: 16px 16px;
