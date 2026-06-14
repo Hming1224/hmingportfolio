@@ -102,7 +102,6 @@
 
 /* ── Hero（圖 + 圖下資訊列，沿用共用 cs-hero-*；此處只補 CA 差異）── */
 .theme-crypto-arsenal .cs-tags {
-  font-size: 13px;
   color: var(--ca-muted);
 }
 
