@@ -17,8 +17,8 @@ export default async function CurrentSection() {
           <Image
             src="/projects/crypto-arsenal/current/current-state-figure.png"
             alt={t("Crypto Arsenal 策略詳情頁現況：上方策略列表與績效指標，下方訂單與倉位清單仍分散於交易所端")}
-            width={1489}
-            height={1392}
+            width={1441}
+            height={1371}
             sizes="(max-width: 768px) 100vw, 1440px"
             style={{ width: "100%", height: "auto" }}
             unoptimized

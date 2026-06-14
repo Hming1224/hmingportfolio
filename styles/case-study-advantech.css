@@ -1533,20 +1533,20 @@
   box-shadow: 0px 8px 18px -8px rgba(9, 48, 96, 0.12);
   font-size: 30px;
   font-weight: 700;
-  color: #7d4fb9;
+  color: var(--purple);
   cursor: pointer;
   transition:
+    background 0.15s,
     color 0.15s,
-    opacity 0.15s,
-    transform 0.15s;
+    opacity 0.15s;
   line-height: 1;
   padding: 0;
   padding-bottom: 2px;
 }
 
 .theme-advantech .cs-sol-nav-btn:hover:not(:disabled) {
-  color: var(--cs-blue);
-  transform: translateY(-1px);
+  background: var(--surface);
+  color: var(--purple-hover);
 }
 
 .theme-advantech .cs-sol-nav-btn:disabled {

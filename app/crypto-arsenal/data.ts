@@ -247,8 +247,7 @@ export interface WireframeProposal {
   slides: WireframeSlide[];
   reasonTitle: string;
   reasonBody: string;
-  referenceImage?: string;
-  referenceAlt?: string;
+  referenceImages?: WireframeReferenceImage[];
 }
 
 export interface WireframeSlide {
@@ -259,9 +258,30 @@ export interface WireframeSlide {
   caption: string;
 }
 
+export interface WireframeReferenceImage {
+  img: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 const WIRE = `${IMG}/wireframe/figma`;
 const WF_W = 1248;
 const WF_H = 1082;
+const WATCHLIST_REFERENCES: WireframeReferenceImage[] = [
+  {
+    img: `${WIRE}/close-final-reference-watchlist-add.png`,
+    alt: "CA Watchlist 頁面點擊 add 按鈕後開啟 Sidebar 的操作流程參考",
+    width: 1030,
+    height: 556,
+  },
+  {
+    img: `${WIRE}/close-final-reference-watchlist-sidebar.png`,
+    alt: "CA Watchlist 頁面右側 Sidebar 選擇策略機器人並加入清單的操作流程參考",
+    width: 1030,
+    height: 556,
+  },
+];
 
 export const wireframeBoards: WireframeBoard[] = [
   {
@@ -377,8 +397,7 @@ export const wireframeBoards: WireframeBoard[] = [
         reasonTitle: "採納理由",
         reasonBody:
           "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，用戶可以點選有興趣機器人並加入到右邊清單中。將用戶原本就已經熟悉 UI 流程整合到新的倉位資訊設計流程中，提升用戶操作的流暢度。",
-        referenceImage: `${WIRE}/close-final-references.png`,
-        referenceAlt: "CA Watchlist 頁面既有 Sidebar 操作流程參考",
+        referenceImages: WATCHLIST_REFERENCES,
       },
     ],
   },
@@ -495,8 +514,7 @@ export const wireframeBoards: WireframeBoard[] = [
         reasonTitle: "採納理由",
         reasonBody:
           "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，用戶可以點選有興趣機器人並加入到右邊清單中。將用戶原本就已經熟悉 UI 流程整合到新的倉位資訊設計流程中，提升用戶操作的流暢度。",
-        referenceImage: `${WIRE}/tpsl-final-references.png`,
-        referenceAlt: "CA Watchlist 頁面既有 Sidebar 操作流程參考",
+        referenceImages: WATCHLIST_REFERENCES,
       },
     ],
   },

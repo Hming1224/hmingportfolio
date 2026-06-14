@@ -329,6 +329,10 @@ const en = {
     "Showing position details in a dropdown under the running strategy bot bar would prevent other strategy bots from being fully visible. Exchanges also limit how many orders / positions can be shown at once, often around 20.",
   "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，用戶可以點選有興趣機器人並加入到右邊清單中。將用戶原本就已經熟悉 UI 流程整合到新的倉位資訊設計流程中，提升用戶操作的流暢度。":
     "The final direction references CA's Watchlist flow for selecting strategy bots: after tapping add, the right sidebar opens and users can select bots to add to the list. Reusing a UI flow users already know makes the new position-information flow smoother.",
+  "CA Watchlist 頁面點擊 add 按鈕後開啟 Sidebar 的操作流程參考":
+    "CA Watchlist reference: tapping add opens the sidebar flow",
+  "CA Watchlist 頁面右側 Sidebar 選擇策略機器人並加入清單的操作流程參考":
+    "CA Watchlist reference: selecting strategy bots in the right sidebar and adding them to the list",
   "雖然這個版本是參考幣安平台的現行設計，固然是個不錯且用戶習慣的設計，然而 CA 目前沒有該元件，需要重新手刻較費時。":
     "Although this version references Binance's current pattern and is familiar to users, CA does not currently have this component, so building it from scratch would take more time.",
   "目前的 Dropdown List 在平台中僅用於設定策略機器人的 API 或是交易幣別設定，若是用於新增全新的委託或是平倉，這樣設計會與原本 Dropdown List 使用邏輯有衝突。":
@@ -366,8 +370,8 @@ const en = {
   // ── Final ──
   "最終介面：倉位顯示、手動平倉、下止盈止損單":
     "Final UI: Position Display, Manual Close, and TP/SL Orders",
-  "最終把倉位顯示與手動平倉做成可點的 prototype，作為交付給工程的依據，並清楚區分「平倉」與「停止策略」避免誤觸。":
-    "The position display and manual close were finalized as a clickable prototype to hand off to engineering, clearly separating \"close position\" from \"stop strategy\" to avoid mistaps.",
+  "承接競品流程的拆解與多次提案的權衡，收斂出最適合 CA 的方案，把倉位顯示與手動平倉做成可點的 prototype 交付工程，並清楚區分「平倉」與「停止策略」避免誤觸。":
+    "Building on the competitor-flow breakdown and several rounds of proposal weighing, the best-fit approach for CA was distilled into a clickable prototype to hand off to engineering, clearly separating \"close position\" from \"stop strategy\" to avoid mistaps.",
   "CA 內手動限價平倉": "Manual Limit Close inside CA",
   "CA 內手動市價平倉": "Manual Market Close inside CA",
   "CA 內手動限價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口":

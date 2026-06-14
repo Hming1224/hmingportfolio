@@ -114,15 +114,21 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
           <div className="ca-wf-reason">
             <p className="ca-wf-reason-title">{t(proposal.reasonTitle)}</p>
             <p className="ca-wf-reason-body">{t(proposal.reasonBody)}</p>
-            {proposal.referenceImage && proposal.referenceAlt ? (
-              <Image
-                src={proposal.referenceImage}
-                alt={t(proposal.referenceAlt)}
-                width={1276}
-                height={278}
-                className="ca-wf-reference"
-                unoptimized
-              />
+            {proposal.referenceImages ? (
+              <div className="ca-wf-references">
+                {proposal.referenceImages.map((item) => (
+                  <figure key={item.img} className="ca-wf-reference">
+                    <Image
+                      src={item.img}
+                      alt={t(item.alt)}
+                      width={item.width}
+                      height={item.height}
+                      sizes="(max-width: 768px) 100vw, 48vw"
+                      unoptimized
+                    />
+                  </figure>
+                ))}
+              </div>
             ) : null}
           </div>
         </div>
