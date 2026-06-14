@@ -164,8 +164,8 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
       <FlowLabel x={strategyX} y={232} strong>{labels.strategy}</FlowLabel>
 
       <g>
-        <rect x={arsenalLeft} y={arsenal.y} width={arsenal.width} height={arsenal.height} rx="18" fill="#376adc" />
-        <text x={arsenal.x} y="194" textAnchor="middle" className="ca-flow-label ca-flow-label-white">Crypto Arsenal</text>
+        <FlowIcon href="/projects/crypto-arsenal/background/icons/arsenal.svg" x={scaleX(841.65)} y={arsenal.y} size={52.83} />
+        <FlowLabel x={scaleX(841.65)} y={222} strong blue>Crypto Arsenal</FlowLabel>
       </g>
     </svg>
   );
