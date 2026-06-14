@@ -30,22 +30,32 @@ export default async function HeroSection() {
             <span className="cs-info-value">2023.06 – 2023.08</span>
           </div>
           <div className="cs-info-card">
-            <span className="cs-info-label">{t("我的角色")}</span>
-            <span className="cs-info-value">{t("產品設計師 · UI/UX")}</span>
+            <span className="cs-info-label">{t("團隊成員")}</span>
+            <span className="cs-info-value">
+              {t("1位產品負責人")}
+              <br />
+              {t("1位UIUX設計師")}
+              <br />
+              {t("2位全端工程師")}
+            </span>
           </div>
           <div className="cs-info-card">
-            <span className="cs-info-label">{t("產品")}</span>
-            <span className="cs-info-value">
-              {t("量化交易平台")}
-              <br />
-              Binance · Bybit · OKX
-            </span>
+            <span className="cs-info-label">{t("我的角色")}</span>
+            <span className="cs-info-value">{t("產品設計師 · UI/UX")}</span>
           </div>
           <div className="cs-info-card">
             <span className="cs-info-label">{t("負責項目")}</span>
             <div className="cs-info-tasks">
               {heroTasks.map((item) => (
                 <span key={item}>{t(item)}</span>
+              ))}
+            </div>
+          </div>
+          <div className="cs-info-card">
+            <span className="cs-info-label">{t("使用軟體")}</span>
+            <div className="cs-info-tasks">
+              {["Figma", "FigJam", "Jira"].map((item) => (
+                <span key={item}>{item}</span>
               ))}
             </div>
           </div>
