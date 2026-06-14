@@ -45,6 +45,14 @@ export default async function HeroSection() {
                 {["競品分析", "終端使用者訪談", "線匡稿", "原型設計", "提案與功能迭代", "產品行銷影片"].map((item) => <span key={item}>{t(item)}</span>)}
               </div>
             </div>
+            <div className="cs-info-card">
+              <span className="cs-info-label">{t("使用軟體")}</span>
+              <div className="cs-info-tasks">
+                {["Figma", "FigJam", "Canva", "Screen studio", "Adobe After Effects"].map((item) => (
+                  <span key={item}>{t(item)}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
