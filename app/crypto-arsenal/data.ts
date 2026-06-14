@@ -114,8 +114,8 @@ export const positionShots: ExchangeShot[] = [
     logo: `${IMG}/research/logo-binance.webp`,
     img: `${IMG}/research/positions-binance.webp`,
     alt: "Binance 合約倉位列表介面，含 Symbol、Size、Entry Price、Mark Price、Margin、PNL 等欄位",
-    width: 1600,
-    height: 239,
+    width: 1536,
+    height: 262,
   },
   {
     name: "Bybit",
@@ -123,15 +123,15 @@ export const positionShots: ExchangeShot[] = [
     img: `${IMG}/research/positions-bybit.webp`,
     alt: "Bybit 合約倉位列表介面，含倉位數量、入場價、標記價、強平價與未實現損益欄位",
     width: 1600,
-    height: 351,
+    height: 239,
   },
   {
     name: "OKX",
     logo: `${IMG}/research/logo-okx.webp`,
     img: `${IMG}/research/positions-okx.webp`,
     alt: "OKX 合約倉位列表介面，含倉位資訊欄位與 Close 平倉入口",
-    width: 1536,
-    height: 262,
+    width: 1600,
+    height: 351,
   },
 ];
 
