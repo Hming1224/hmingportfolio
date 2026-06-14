@@ -47,11 +47,29 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
         <div className="ca-matrix" style={{ minWidth: matrix.stepLabels.length === 3 ? 720 : 560 }}>
           <div className="ca-matrix-head" style={{ gridTemplateColumns: cols }}>
             <span className="ca-matrix-corner" aria-hidden="true" />
-            {matrix.stepLabels.map((label) => (
-              <div className="ca-matrix-step" key={label}>
-                {t(label)}
-              </div>
-            ))}
+            {matrix.stepLabels.map((label) => {
+              const translated = t(label);
+              const match = translated.match(/^([①-⑨])\s*(.*)$/);
+              if (match) {
+                const circleNum = match[1];
+                const text = match[2];
+                const numMap: Record<string, number> = {
+                  "①": 1, "②": 2, "③": 3, "④": 4, "⑤": 5, "⑥": 6, "⑦": 7, "⑧": 8, "⑨": 9
+                };
+                const num = numMap[circleNum] || 1;
+                return (
+                  <div className="ca-matrix-step" key={label}>
+                    <span className="ca-matrix-step-num">{num}</span>
+                    <span className="ca-matrix-step-text">{text}</span>
+                  </div>
+                );
+              }
+              return (
+                <div className="ca-matrix-step" key={label}>
+                  {translated}
+                </div>
+              );
+            })}
           </div>
           {matrix.rows.map((row) => (
             <div className="ca-matrix-row" style={{ gridTemplateColumns: cols }} key={row.name}>
