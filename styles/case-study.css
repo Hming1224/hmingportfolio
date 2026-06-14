@@ -385,7 +385,7 @@
 }
 
 .cs-info-card {
-  flex: 1 1 0;
+  flex: 0 0 auto;
   min-width: 0;
   padding: 12px 0;
   border-radius: 8px;
