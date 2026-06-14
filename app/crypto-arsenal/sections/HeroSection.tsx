@@ -41,23 +41,33 @@ export default async function HeroSection() {
           </div>
           <div className="cs-info-card">
             <span className="cs-info-label">{t("我的角色")}</span>
-            <span className="cs-info-value">{t("產品設計師 · UI/UX")}</span>
+            <span className="cs-info-value">
+              {t("產品設計師")}
+              <br />
+              UI/UX
+            </span>
           </div>
           <div className="cs-info-card">
             <span className="cs-info-label">{t("負責項目")}</span>
-            <div className="cs-info-tasks">
-              {heroTasks.map((item) => (
-                <span key={item}>{t(item)}</span>
+            <span className="cs-info-value">
+              {heroTasks.map((item, idx) => (
+                <span key={item}>
+                  {t(item)}
+                  {idx < heroTasks.length - 1 && <br />}
+                </span>
               ))}
-            </div>
+            </span>
           </div>
           <div className="cs-info-card">
             <span className="cs-info-label">{t("使用軟體")}</span>
-            <div className="cs-info-tasks">
-              {["Figma", "FigJam", "Jira"].map((item) => (
-                <span key={item}>{item}</span>
+            <span className="cs-info-value">
+              {["Figma", "FigJam", "Jira"].map((item, idx) => (
+                <span key={item}>
+                  {item}
+                  {idx < 2 && <br />}
+                </span>
               ))}
-            </div>
+            </span>
           </div>
         </div>
       </div>

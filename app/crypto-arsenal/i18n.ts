@@ -24,6 +24,7 @@ const en = {
   "時間進程": "Timeline",
   "我的角色": "My Role",
   "產品設計師 · UI/UX": "Product Designer · UI/UX",
+  "產品設計師": "Product Designer",
   "產品": "Product",
   "量化交易平台": "Quantitative Trading Platform",
   "團隊成員": "Team Members",
