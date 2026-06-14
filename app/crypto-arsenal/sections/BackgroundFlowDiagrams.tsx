@@ -72,7 +72,7 @@ function FlowLabel({
 
 const FLOW_GAP = 32;
 const TRADING_WIDTH = 1382;
-const TRADING_HEIGHT = 233.05;
+const TRADING_HEIGHT = 270;
 const ECOSYSTEM_WIDTH = 1382;
 const ECOSYSTEM_HEIGHT = 190.73;
 
@@ -111,8 +111,8 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
   const trader = { x: 42.6, y: 40, size: 44.7 };
   const exchange = { x: 842.3, y: 40, size: 44.7 };
   const blockchain = { x: 1340, y: 40, size: 44.7 };
-  const strategy = { x: 433.4, y: 189, size: 44.7 };
-  const arsenal = { x: scaleX(841.65), y: 171.4, width: 160.9, height: 35.4 };
+  const strategy = { x: 433.4, y: 219, size: 44.7 };
+  const arsenal = { x: scaleX(841.65), y: 201.4, width: 52.83, height: 52.83 };
 
   const traderX = scaleX(trader.x);
   const exchangeX = scaleX(exchange.x);
@@ -146,7 +146,7 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
         <path d={`M${traderX} 112V${strategy.y}H${strategyLeft - FLOW_GAP}`} />
         <path d={`M${strategyRight + FLOW_GAP} ${strategy.y}H${arsenalLeft - FLOW_GAP}`} />
       </g>
-      <path d={`M${exchangeX} ${arsenalTop - 18}V118`} stroke="#376adc" strokeWidth="1.8" fill="none" markerEnd="url(#ca-flow-arrow)" />
+      <path d={`M${exchangeX} ${arsenal.y - 52.83 / 2 - 10}V118`} stroke="#376adc" strokeWidth="1.8" fill="none" markerEnd="url(#ca-flow-arrow)" />
 
       <FlowLabel x={(traderRight + exchangeLeft) / 2} y={13}>{labels.buyFiat}</FlowLabel>
       <FlowLabel x={(traderRight + exchangeLeft) / 2} y={76}>{labels.cryptoSwap}</FlowLabel>
@@ -161,11 +161,11 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
       <FlowLabel x={traderX} y={91} strong>{labels.trader}</FlowLabel>
       <FlowLabel x={exchangeX} y={91} strong>{labels.exchange}</FlowLabel>
       <FlowLabel x={blockchainX} y={91} strong>{labels.blockchain}</FlowLabel>
-      <FlowLabel x={strategyX} y={232} strong>{labels.strategy}</FlowLabel>
+      <FlowLabel x={strategyX} y={262} strong>{labels.strategy}</FlowLabel>
 
       <g>
         <FlowIcon href="/projects/crypto-arsenal/background/icons/arsenal.svg" x={scaleX(841.65)} y={arsenal.y} size={52.83} />
-        <FlowLabel x={scaleX(841.65)} y={222} strong blue>Crypto Arsenal</FlowLabel>
+        <FlowLabel x={scaleX(841.65)} y={252} strong blue>Crypto Arsenal</FlowLabel>
       </g>
     </svg>
   );
