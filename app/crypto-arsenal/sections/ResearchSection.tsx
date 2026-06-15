@@ -80,6 +80,11 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
                   <Image src={row.logo} alt="" width={28} height={28} unoptimized />
                 </span>
                 <span className="ca-matrix-ex-name">{row.name}</span>
+                {row.cells.map((cell) => cell.note ? (
+                  <span className="ca-matrix-ex-note" key={cell.note}>
+                    {t(cell.note)}
+                  </span>
+                ) : null)}
               </div>
               {row.cells.map((cell) => (
                 <div
@@ -95,7 +100,6 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
                       height={STEP_H}
                     />
                   ) : null}
-                  {cell.note ? <span className="ca-matrix-cell-note">{t(cell.note)}</span> : null}
                 </div>
               ))}
             </div>
