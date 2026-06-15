@@ -40,8 +40,9 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
   return (
     <>
       <div className="ca-subflow-head">
-        <span className="ca-subflow-kicker">{t(matrix.kicker)}</span>
-        <h3 className="ca-subflow-title">{t(matrix.title)}</h3>
+        <h3 className="ca-subflow-title">
+          {t(matrix.kicker)}{t("：")}{t(matrix.title)}
+        </h3>
       </div>
       <div className="ca-matrix-scroll">
         <div className="ca-matrix" style={{ minWidth: matrix.stepLabels.length === 3 ? 720 : 560 }}>
