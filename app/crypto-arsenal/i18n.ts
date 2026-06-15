@@ -336,7 +336,7 @@ const en = {
   "設計元件迭代": "Component Iteration",
   "透過內部團隊人員與工程師測試，將部分元件進行迭代修正，更加提升用戶使用體驗。":
     "Through testing with the internal team and engineers, I iterated on several components to further improve the user experience.",
-  "操作流程 1 & 2": "Flow 1 & 2",
+  "操作流程\n1 & 2": "Flow\n1 & 2",
   "策略機器人Bar UI顯示資訊": "Strategy Bot Bar UI Information",
   "優化策略列表資訊層級與操作按鈕一致性": "Optimizing Information Hierarchy and Button Consistency in Strategy List",
   "原本列表欄位同時顯示 Performance 與 Time Period，導致資訊集中在表格中，欄位偏多、橫向空間被壓縮；右側 Action 區只有主要的 Stop 按鈕，Duplicate 功能不明顯或不在同一層級呈現。":

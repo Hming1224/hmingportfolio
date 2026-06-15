@@ -539,7 +539,7 @@ export interface IterationBoard {
 
 export const iterationBoards: IterationBoard[] = [
   {
-    badge: "操作流程 1 & 2",
+    badge: "操作流程\n1 & 2",
     title: "策略機器人Bar UI顯示資訊",
     label: "優化策略列表資訊層級與操作按鈕一致性",
     paragraphs: [

@@ -1086,7 +1086,8 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 17px;
-  white-space: nowrap;
+  white-space: pre-line;
+  text-align: center;
   box-sizing: border-box;
 }
 
