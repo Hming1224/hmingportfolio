@@ -539,6 +539,21 @@ export interface IterationBoard {
 
 export const iterationBoards: IterationBoard[] = [
   {
+    badge: "操作流程 1 & 2",
+    title: "策略機器人Bar UI顯示資訊",
+    label: "優化策略列表資訊層級與操作按鈕一致性",
+    paragraphs: [
+      "原本列表欄位同時顯示 Performance 與 Time Period，導致資訊集中在表格中，欄位偏多、橫向空間被壓縮；右側 Action 區只有主要的 Stop 按鈕，Duplicate 功能不明顯或不在同一層級呈現。",
+      "調整後，新版將 Performance 與 Time Period 從下方列表中移除，改放到上方 Accumulated EC 圖表區域。這樣使用者在查看績效曲線時，可以直接對照策略 ID 與時間區間，不需要再到表格欄位中交叉比對，資訊層級更清楚，也讓下方列表更精簡。",
+    ],
+    beforeImg: `${IMG}/iteration/figma/iter-bar-before-content.png`,
+    beforeAlt: "迭代前：策略列表欄位同時顯示 Performance 與 Time Period，Action 區僅有 Stop 按鈕",
+    afterImg: `${IMG}/iteration/figma/iter-bar-after-content.png`,
+    afterAlt: "迭代後：移除非必要欄位至 Accumulated EC，Action 區新增 Duplicate 與 View Details 按鈕",
+    width: 600,
+    height: 318,
+  },
+  {
     badge: "操作流程 1",
     title: "平倉數量互動方式",
     label: "貼合用戶實際需求修正",

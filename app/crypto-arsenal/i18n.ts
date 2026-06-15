@@ -336,6 +336,17 @@ const en = {
   "設計元件迭代": "Component Iteration",
   "透過內部團隊人員與工程師測試，將部分元件進行迭代修正，更加提升用戶使用體驗。":
     "Through testing with the internal team and engineers, I iterated on several components to further improve the user experience.",
+  "操作流程 1 & 2": "Flow 1 & 2",
+  "策略機器人Bar UI顯示資訊": "Strategy Bot Bar UI Information",
+  "優化策略列表資訊層級與操作按鈕一致性": "Optimizing Information Hierarchy and Button Consistency in Strategy List",
+  "原本列表欄位同時顯示 Performance 與 Time Period，導致資訊集中在表格中，欄位偏多、橫向空間被壓縮；右側 Action 區只有主要的 Stop 按鈕，Duplicate 功能不明顯或不在同一層級呈現。":
+    "Originally, the list columns displayed both Performance and Time Period at the same time, crowding information in the table and compressing horizontal space. The Action column on the right only had the main Stop button, leaving the Duplicate function hidden or not presented at the same level.",
+  "調整後，新版將 Performance 與 Time Period 從下方列表中移除，改放到上方 Accumulated EC 圖表區域。這樣使用者在查看績效曲線時，可以直接對照策略 ID 與時間區間，不需要再到表格欄位中交叉比對，資訊層級更清楚，也讓下方列表更精簡。":
+    "In the revised version, Performance and Time Period are removed from the bottom list and moved to the Accumulated EC chart area. This allows users to directly compare strategy IDs and time ranges when viewing performance curves, eliminating the need to cross-check table columns, clarifying the information hierarchy, and streamlining the list below.",
+  "迭代前：策略列表欄位同時顯示 Performance 與 Time Period，Action 區僅有 Stop 按鈕":
+    "Before: The strategy list displayed both Performance and Time Period, and the Action column only had a Stop button.",
+  "迭代後：移除非必要欄位至 Accumulated EC，Action 區新增 Duplicate 與 View Details 按鈕":
+    "After: Non-essential columns are moved to Accumulated EC, and Duplicate and View Details buttons are added to the Action column.",
   "平倉數量互動方式": "Close-Quantity Interaction",
   "貼合用戶實際需求修正": "Fixed to match real user needs",
   "原本的平倉數量採用輸入框搭配下拉選單的方式，使用者需要點擊欄位後，再從 10%、20%、50%、100% 等固定比例中選擇。這種設計雖然能快速選取常用比例，但這些比例若非用戶的選擇，則需要手動輸入。另外，選項展開後也會覆蓋下方內容，讓彈窗視覺變得較擁擠。":
