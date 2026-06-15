@@ -42,7 +42,6 @@ function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }
               sizes="(max-width: 768px) 560px, 480px"
               className="ca-iteration-zoom"
               imageClassName="ca-iteration-zoom-img"
-              lightboxMode="fullscreen"
             />
           </div>
         </div>
@@ -58,7 +57,6 @@ function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }
               sizes="(max-width: 768px) 560px, 480px"
               className="ca-iteration-zoom"
               imageClassName="ca-iteration-zoom-img"
-              lightboxMode="fullscreen"
             />
           </div>
         </div>
