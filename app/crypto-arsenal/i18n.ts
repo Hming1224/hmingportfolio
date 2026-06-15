@@ -373,8 +373,8 @@ const en = {
   "迭代後：倉位已存在 TP/SL 設定時按鈕文字改為 Modify": "After: the button reads Modify when a position already has TP/SL set",
 
   // ── Final ──
-  "最終介面：倉位顯示、手動平倉、下止盈止損單":
-    "Final UI: Position Display, Manual Close, and TP/SL Orders",
+  "最終介面：手動平倉和下止盈止損單":
+    "Final UI: Manual Close and TP/SL Orders",
   "承接競品流程的拆解與多次提案的權衡，收斂出最適合 CA 的方案，把手動平倉和止盈止損分為三個流程依序介紹。":
     "Building on the competitor-flow breakdown and several rounds of proposal weighing, the best-fit approach for CA was distilled, presenting manual close and take-profit/stop-loss in three sequential flows.",
   "CA 內手動限價平倉": "Manual Limit Close inside CA",
