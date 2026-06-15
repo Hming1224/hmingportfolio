@@ -23,6 +23,7 @@ const en = {
     "Strategy Position Display, Manual Close, and Take-Profit / Stop-Loss",
   "時間進程": "Timeline",
   "我的角色": "My Role",
+  "UIUX設計師": "UI/UX Designer",
   "產品設計師 · UI/UX": "Product Designer · UI/UX",
   "產品設計師": "Product Designer",
   "產品": "Product",

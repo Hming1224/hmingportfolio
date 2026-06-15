@@ -41,11 +41,7 @@ export default async function HeroSection() {
           </div>
           <div className="cs-info-card">
             <span className="cs-info-label">{t("我的角色")}</span>
-            <span className="cs-info-value">
-              {t("產品設計師")}
-              <br />
-              UI/UX
-            </span>
+            <span className="cs-info-value">{t("UIUX設計師")}</span>
           </div>
           <div className="cs-info-card">
             <span className="cs-info-label">{t("負責項目")}</span>
