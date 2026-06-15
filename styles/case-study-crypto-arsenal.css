@@ -87,7 +87,7 @@
   color: var(--ca-secondary);
 }
 
-.theme-crypto-arsenal .ca-lead + .ca-lead {
+.theme-crypto-arsenal .ca-lead+.ca-lead {
   margin-top: 14px;
 }
 
@@ -526,7 +526,7 @@
   padding: 20px 24px 24px;
 }
 
-.theme-crypto-arsenal .ca-research-info-body > p {
+.theme-crypto-arsenal .ca-research-info-body>p {
   margin: 0;
   font-size: var(--fs-sm);
   line-height: 1.7;
@@ -670,7 +670,7 @@
   background: transparent;
 }
 
-.theme-crypto-arsenal .ca-matrix-head + .ca-matrix-row {
+.theme-crypto-arsenal .ca-matrix-head+.ca-matrix-row {
   border-top: none;
 }
 
@@ -1129,7 +1129,7 @@
   color: #5d6674;
 }
 
-.theme-crypto-arsenal .ca-iter-desc p + p {
+.theme-crypto-arsenal .ca-iter-desc p+p {
   margin-top: 23px;
 }
 
@@ -1223,7 +1223,7 @@
 }
 
 .theme-crypto-arsenal .ca-final-shot {
-  margin: 40px 0 0;
+  margin: 80px 0 80px;
 }
 
 .theme-crypto-arsenal .ca-final-video {
@@ -1504,6 +1504,3 @@ html[lang="en"] .theme-crypto-arsenal .ca-pain-role {
   white-space: normal;
   line-height: 1.3;
 }
-
-
-
