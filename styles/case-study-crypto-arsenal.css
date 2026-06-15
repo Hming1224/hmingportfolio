@@ -1277,6 +1277,211 @@
   color: var(--ca-secondary);
 }
 
+/* ── 設計成效（KPI 卡 + 質性回饋 + 誠實註腳）── */
+.theme-crypto-arsenal .ca-impact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.theme-crypto-arsenal .ca-impact-card {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 26px;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 16px;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .ca-impact-value {
+  display: block;
+  margin-bottom: 14px;
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ca-blue);
+}
+
+.theme-crypto-arsenal .ca-impact-label {
+  margin: 0 0 8px;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-impact-body {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--ca-secondary);
+}
+
+/* before / after 操作時間對比表 */
+.theme-crypto-arsenal .ca-impact-compare {
+  margin-top: 22px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.theme-crypto-arsenal .ca-impact-compare-cap {
+  display: block;
+  margin-bottom: 10px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ca-secondary);
+}
+
+.theme-crypto-arsenal .ca-impact-times {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 14px;
+  box-shadow: var(--ca-card-shadow);
+  font-size: var(--fs-sm);
+}
+
+.theme-crypto-arsenal .ca-impact-times thead th {
+  padding: 12px 18px;
+  background: var(--ca-tint-2);
+  color: var(--ca-navy);
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.theme-crypto-arsenal .ca-impact-times thead th:first-child {
+  text-align: left;
+}
+
+.theme-crypto-arsenal .ca-impact-times tbody th {
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--ca-navy);
+}
+
+.theme-crypto-arsenal .ca-impact-times tbody td {
+  padding: 14px 18px;
+  text-align: right;
+  color: var(--ca-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.theme-crypto-arsenal .ca-impact-times tbody tr + tr th,
+.theme-crypto-arsenal .ca-impact-times tbody tr + tr td {
+  border-top: 1px solid var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-impact-times .ca-impact-before {
+  color: var(--ca-muted);
+}
+
+.theme-crypto-arsenal .ca-impact-times .ca-impact-after {
+  color: var(--ca-navy);
+  font-weight: 700;
+}
+
+.theme-crypto-arsenal .ca-impact-times .ca-impact-cut {
+  color: #11a36e;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .theme-crypto-arsenal .ca-impact-times {
+    font-size: var(--fs-xs);
+  }
+
+  .theme-crypto-arsenal .ca-impact-times thead th,
+  .theme-crypto-arsenal .ca-impact-times tbody th,
+  .theme-crypto-arsenal .ca-impact-times tbody td {
+    padding: 10px 11px;
+  }
+
+  .theme-crypto-arsenal .ca-impact-times thead th,
+  .theme-crypto-arsenal .ca-impact-times tbody th {
+    white-space: normal;
+  }
+}
+
+.theme-crypto-arsenal .ca-impact-quotes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 20px;
+  margin-top: 20px;
+}
+
+.theme-crypto-arsenal .ca-impact-quote {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding: 20px 22px;
+  background: #f0faf5;
+  border: 1px solid #cdeadd;
+  border-radius: 14px;
+}
+
+.theme-crypto-arsenal .ca-impact-quote-text {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.65;
+  color: #0c5a44;
+  text-wrap: pretty;
+}
+
+.theme-crypto-arsenal .ca-impact-quote-who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.theme-crypto-arsenal .ca-impact-quote-name {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ca-secondary);
+}
+
+.theme-crypto-arsenal .ca-impact-quote-line {
+  flex: 1;
+  height: 1px;
+  background: var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-impact-quote-role {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #0c5a44;
+}
+
+@container (max-width: 280px) {
+  .theme-crypto-arsenal .ca-impact-quote-line {
+    display: none;
+  }
+
+  .theme-crypto-arsenal .ca-impact-quote-who {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+}
+
+.theme-crypto-arsenal .ca-impact-method {
+  margin: 16px 0 0;
+  font-size: var(--fs-xs);
+  line-height: 1.7;
+  color: var(--ca-secondary);
+}
+
 /* ── RWD ── */
 @media (max-width: 1199px) {
   .theme-crypto-arsenal .ca-pains {
@@ -1303,7 +1508,9 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-crypto-arsenal .ca-reflect {
+  .theme-crypto-arsenal .ca-reflect,
+  .theme-crypto-arsenal .ca-impact,
+  .theme-crypto-arsenal .ca-impact-quotes {
     grid-template-columns: 1fr;
   }
 

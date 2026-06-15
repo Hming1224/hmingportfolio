@@ -17,6 +17,7 @@ import {
   WireframeSection,
   IterationSection,
   FinalSection,
+  ImpactSection,
   ReflectSection,
 } from "./sections";
 
@@ -52,6 +53,7 @@ export default async function CryptoArsenalPage() {
     { id: "cs-sec-wireframe", title: t("Wireframe") },
     { id: "cs-sec-iteration", title: t("設計迭代") },
     { id: "cs-sec-final", title: t("最終介面") },
+    { id: "cs-sec-impact", title: t("設計成效") },
     { id: "cs-sec-reflect", title: t("學習反思") },
   ];
 
@@ -75,6 +77,7 @@ export default async function CryptoArsenalPage() {
       <WireframeSection />
       <IterationSection />
       <FinalSection />
+      <ImpactSection />
       <ReflectSection />
     </CaseStudyShell>
   );

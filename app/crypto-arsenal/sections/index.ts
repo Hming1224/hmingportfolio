@@ -8,4 +8,5 @@ export { default as ResearchSection } from "./ResearchSection";
 export { default as WireframeSection } from "./WireframeSection";
 export { default as IterationSection } from "./IterationSection";
 export { default as FinalSection } from "./FinalSection";
+export { default as ImpactSection } from "./ImpactSection";
 export { default as ReflectSection } from "./ReflectSection";

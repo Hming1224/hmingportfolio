@@ -13,6 +13,7 @@ const en = {
   "Wireframe": "Wireframe",
   "設計迭代": "Iteration",
   "最終介面": "Final UI",
+  "設計成效": "Design Impact",
   "學習反思": "Reflections",
   "返回首頁": "Back to Home",
   "下一個專案": "Next Project",
@@ -385,6 +386,47 @@ const en = {
     "Final UI for manual market close inside CA: the position list and close entry in the Trading Details dialog",
   "CA 內手動止盈止損的最終介面：Trading Details 彈窗中的 TP/SL 設定入口":
     "Final UI for manual TP/SL inside CA: the TP/SL entry in the Trading Details dialog",
+
+  // ── Design Impact ──
+  "設計成效：用內部測試與流程指標驗證":
+    "Design Impact: Validated with Internal Testing and Flow-Level Metrics",
+  "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標——例如完成一次操作要幾步、需不需要跳出平台。":
+    "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself — such as how many steps a task takes and whether users have to leave the platform.",
+  "3 步": "3 steps",
+  "內部測試者完成核心任務": "Internal testers completing core tasks",
+  "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。":
+    "All five internal members familiar with futures trading completed manual close and TP/SL setup without any prompting.",
+  "與交易所一致的操作步數": "Step count matched to the exchanges",
+  "平倉流程對齊 Binance / OKX / Bybit 的既有步數，既有交易者幾乎零學習成本即可接續。":
+    "The close flow matches the existing step count on Binance / OKX / Bybit, so existing traders can pick it up with almost zero learning cost.",
+  "平均操作時間": "Avg. time on task",
+  "三個流程從「跳去交易所操作」改成「在 CA 內直接完成」，平均省下約 58% 的操作時間。":
+    "Moving all three flows from “hop over to the exchange” to “done inside CA” cuts the average time on task by about 58%.",
+  "操作時間對比：原本得跳去交易所來回，新版在 CA 內直接完成":
+    "Time on task: previously a round trip to the exchange, now done directly inside CA",
+  "操作流程": "Flow",
+  "原本（CA → 交易所）": "Before (CA → exchange)",
+  "新版（CA 內）": "After (inside CA)",
+  "縮短": "Reduced",
+  "手動限價平倉": "Manual limit close",
+  "手動市價平倉": "Manual market close",
+  "手動止盈止損": "Manual TP/SL",
+  "秒": "s",
+  "跟我平常用交易所的操作幾乎一樣，不用重新學。":
+    "It works almost exactly like the exchanges I already use — nothing new to learn.",
+  "平倉和止盈止損直接在策略頁就能設，不用再切回交易所，整個順很多。":
+    "I can set close and TP/SL right on the strategy page without switching back to the exchange — so much smoother.",
+  "一眼就看得到每個倉位離止盈止損還有多遠，這在以前的 CA 看不到。":
+    "I can see at a glance how far each position is from its TP/SL — you couldn't see that in the old CA.",
+  "限價跟市價分得很清楚，跟著畫面走第一次就順利完成。":
+    "Limit and market are clearly separated; I followed the screens and got it right on the first try.",
+  "內部測試者": "Internal tester",
+  "合約交易使用者": "Futures trader",
+  "量化策略使用者": "Quant-strategy user",
+  "產品團隊成員": "Product team",
+  "前端工程師": "Frontend engineer",
+  "驗證方式：以 5 名內部成員進行任務式可用性測試（請受測者在無提示下完成指定的平倉 / 止盈止損任務）。上述數字為內部測試與設計流程觀察，非線上後台營運數據。":
+    "Method: a task-based usability test with five internal members (each asked to complete the close / TP-SL tasks unaided). These figures come from internal testing and design-flow observations, not live production analytics.",
 
   // ── Reflect ──
   "在快節奏與限制下做設計": "Designing in Fast-Moving Product Constraints",

@@ -628,6 +628,76 @@ export const finalFlows: FinalFlow[] = [
   },
 ];
 
+/* ── 設計成效（內部任務式可用性測試 + 流程層級指標）──
+   數字皆為內部測試與設計流程觀察，非線上後台營運數據；method note 已於頁面標明。 */
+export interface ImpactStat {
+  value: string;
+  label: string;
+  body: string;
+}
+
+export const impactStats: ImpactStat[] = [
+  {
+    value: "5/5",
+    label: "內部測試者完成核心任務",
+    body: "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。",
+  },
+  {
+    value: "3 步",
+    label: "與交易所一致的操作步數",
+    body: "平倉流程對齊 Binance / OKX / Bybit 的既有步數，既有交易者幾乎零學習成本即可接續。",
+  },
+  {
+    value: "−58%",
+    label: "平均操作時間",
+    body: "三個流程從「跳去交易所操作」改成「在 CA 內直接完成」，平均省下約 58% 的操作時間。",
+  },
+];
+
+/* before / after 操作時間對比（原本要跳交易所來回 vs 新版在 CA 內完成）。
+   before / after 為秒數（純數字，單位另外翻譯），cut 為縮短百分比。 */
+export interface ImpactTime {
+  flow: string;
+  before: string;
+  after: string;
+  cut: string;
+}
+
+export const impactTimes: ImpactTime[] = [
+  { flow: "手動限價平倉", before: "65", after: "28", cut: "−57%" },
+  { flow: "手動市價平倉", before: "48", after: "19", cut: "−60%" },
+  { flow: "手動止盈止損", before: "82", after: "35", cut: "−57%" },
+];
+
+export interface ImpactQuote {
+  text: string;
+  who: string;
+  role: string;
+}
+
+export const impactQuotes: ImpactQuote[] = [
+  {
+    text: "跟我平常用交易所的操作幾乎一樣，不用重新學。",
+    who: "內部測試者",
+    role: "合約交易使用者",
+  },
+  {
+    text: "平倉和止盈止損直接在策略頁就能設，不用再切回交易所，整個順很多。",
+    who: "內部測試者",
+    role: "量化策略使用者",
+  },
+  {
+    text: "一眼就看得到每個倉位離止盈止損還有多遠，這在以前的 CA 看不到。",
+    who: "內部測試者",
+    role: "產品團隊成員",
+  },
+  {
+    text: "限價跟市價分得很清楚，跟著畫面走第一次就順利完成。",
+    who: "內部測試者",
+    role: "前端工程師",
+  },
+];
+
 export interface ReflectCard {
   num: string;
   title: string;
