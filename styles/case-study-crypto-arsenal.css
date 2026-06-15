@@ -723,15 +723,19 @@
   display: grid;
   column-gap: 16px;
   align-items: stretch;
-  padding: 18px 0;
   border-top: 1px solid var(--ca-line-soft);
 }
 
-.theme-crypto-arsenal .ca-matrix-row:last-child {
+.theme-crypto-arsenal .ca-matrix-row:last-child .ca-matrix-ex,
+.theme-crypto-arsenal .ca-matrix-row:last-child .ca-matrix-cell {
   padding-bottom: 0;
 }
 
-.theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) {
+.theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) .ca-matrix-ex {
+  padding-bottom: 54px !important;
+}
+
+.theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) .ca-matrix-cell-stack {
   padding-bottom: 54px !important;
 }
 
@@ -747,6 +751,8 @@
   text-align: center;
   background: #ffffff;
   box-shadow: 7px 0 10px -8px rgba(37, 42, 71, 0.12);
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .theme-crypto-arsenal .ca-matrix-ex-logo {
@@ -785,6 +791,8 @@
   justify-content: center;
   position: relative;
   z-index: 1;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 /* Binance 平倉多一步：同一格內上下堆疊張畫面 + 一句說明 */
