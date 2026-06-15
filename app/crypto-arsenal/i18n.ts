@@ -175,15 +175,15 @@ const en = {
     "To let users pick up the flow seamlessly, I benchmarked the real interfaces of Binance / Bybit / OKX, breaking down the position fields, closing flows, and TP/SL flows the three share. Considering also what data the exchanges can return, I converged on an operation flow tailored to CA.",
   "交易詳細資訊確認": "Trade Detail Confirmation",
   "從三家交易所介面收斂出交易合約中倉位最通用、可從交易所撈取之數據，並且也是使用者最關心的欄位。":
-    "Converged from the three exchanges' interfaces: the most common, exchange-retrievable, and user-relevant fields for a contract position.",
+    "Converged from the three exchanges' interfaces: the most common, exchange-retrievable, and user-relevant fields for a futures position.",
   "交易資訊 Tab": "Trade Info Tabs",
   "Position、Open Orders、Order History、Position History": "Position, Open Orders, Order History, Position History",
   "倉位資訊": "Position Fields",
   // 操作流程
   "操作流程 1": "Flow 1",
   "操作流程 2": "Flow 2",
-  "合約平倉": "Contract Close",
-  "合約止盈止損": "Contract TP/SL",
+  "合約平倉": "Futures Close",
+  "合約止盈止損": "Futures TP/SL",
   // 對比矩陣：步驟欄標題 + 結論 + lightbox
   "① 倉位 / 下單畫面": "① Position / trade screen",
   "②a 限價平倉（Limit）": "②a Limit close",
@@ -201,11 +201,11 @@ const en = {
   "從上面流程可以觀察到無論是 Binance、OKX、Bybit 的介面或是操作流程基本雷同，僅介面元件有差異，因此 CA 的兩項操作流程也將依照上述形式進行，確保使用者可以快速銜接。":
     "Across Binance, OKX, and Bybit the interfaces and flows are essentially the same — only the UI components differ. CA's two flows therefore follow the same form so users can transition quickly.",
   "Binance 合約倉位列表介面，含 Symbol、Size、Entry Price、Mark Price、Margin、PNL 等欄位":
-    "Binance contract position list with Symbol, Size, Entry Price, Mark Price, Margin, PNL fields",
+    "Binance futures position list with Symbol, Size, Entry Price, Mark Price, Margin, PNL fields",
   "Bybit 合約倉位列表介面，含倉位數量、入場價、標記價、強平價與未實現損益欄位":
-    "Bybit contract position list with size, entry price, mark price, liquidation price, and unrealized P&L",
+    "Bybit futures position list with size, entry price, mark price, liquidation price, and unrealized P&L",
   "OKX 合約倉位列表介面，含倉位資訊欄位與 Close 平倉入口":
-    "OKX contract position list with position fields and a Close entry point",
+    "OKX futures position list with position fields and a Close entry point",
   "Binance 合約平倉流程：輸入金額和數量後，點擊 Limit 按鈕確認限價平倉，或點擊 Market 按鈕確認市價平倉":
     "Binance close flow: enter amount and quantity, then tap Limit for a limit close or Market for a market close",
   "Bybit 合約平倉流程：點擊 Limit 按鈕設定限價平倉（可設定金額與數量），或點擊 Market 按鈕市價平倉（可設定數量）":
