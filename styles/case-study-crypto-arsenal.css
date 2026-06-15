@@ -783,6 +783,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Binance 平倉多一步：同一格內上下堆疊張畫面 + 一句說明 */
@@ -792,6 +794,7 @@
   align-items: center;
   gap: 8px;
   position: relative !important;
+  z-index: 1;
 }
 
 
