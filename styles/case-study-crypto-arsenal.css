@@ -731,14 +731,14 @@
   padding-bottom: 0;
 }
 
-.theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-ex-note) {
-  padding-bottom: 24px !important;
+.theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) {
+  padding-bottom: 54px !important;
 }
 
 .theme-crypto-arsenal .ca-matrix-ex {
   position: sticky;
   left: 0;
-  z-index: 2;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -763,15 +763,19 @@
   line-height: 1.3;
 }
 
-.theme-crypto-arsenal .ca-matrix-ex-note {
-  font-size: 11px;
+.theme-crypto-arsenal .ca-matrix-cell-note {
+  position: absolute !important;
+  top: calc(100% + 18px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  font-size: var(--fs-xs, 12px);
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.4;
   color: var(--ca-blue);
   text-align: center;
-  max-width: 90px;
-  white-space: normal;
-  margin-top: 6px;
+  z-index: 1 !important;
 }
 
 .theme-crypto-arsenal .ca-matrix-cell {
