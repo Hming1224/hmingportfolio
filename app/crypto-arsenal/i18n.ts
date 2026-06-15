@@ -234,49 +234,34 @@ const en = {
   "Wireframe 步驟": "Wireframe steps",
   "切換到步驟": "Switch to step",
   "未採納原因": "Why It Wasn't Chosen",
-  "開單之後，會在 Position Tab 底下呈現最新的倉位資訊": "After an order opens, the latest position appears under the Position tab",
-  "在趨勢圖旁顯示倉位欄位，讓使用者直接對照進出場資訊":
-    "Show position fields beside the trend chart so users can compare them directly with entry and exit points",
-  "使用者在同一畫面完成平倉條件確認":
-    "Users confirm the close-position conditions in the same view",
-  "將倉位資訊收在策略機器人 bar 下方的 Dropdown List 中":
-    "Place position details in a dropdown list under the strategy bot bar",
-  "使用者展開下拉區域後，查看目前策略底下的倉位明細":
-    "After expanding the dropdown, users review the positions under the current strategy",
-  "在列表中選取指定倉位並進入平倉操作":
-    "Select a specific position from the list and enter the close flow",
-  "確認平倉設定後回到策略詳情頁":
-    "Return to the strategy detail page after confirming the close settings",
-  "沿用 CA 既有 Sidebar 操作模式，降低新功能的學習成本":
-    "Reuse CA's existing sidebar pattern to reduce the learning cost of the new feature",
-  "右側 Sidebar 展開後，集中顯示目前可操作的倉位資訊":
-    "When the right sidebar opens, it concentrates all currently actionable position details",
-  "使用者選擇指定倉位後，進入手動平倉設定":
-    "After selecting a position, users enter the manual close settings",
-  "在保留策略脈絡的情況下確認平倉參數":
-    "Confirm close parameters while preserving the strategy context",
-  "完成手動平倉後，策略狀態能維持同步並繼續運行":
-    "After the manual close is complete, the strategy state stays synchronized and continues running",
-  "透過 Checkbox 快速啟用止盈止損設定": "Enable TP/SL quickly through checkboxes",
-  "在同一個欄位群組中輸入止盈與止損條件":
-    "Enter take-profit and stop-loss conditions in the same field group",
-  "送出後讓策略依照使用者設定管理出場風險":
-    "After submission, the strategy manages exit risk based on the user's settings",
-  "將 TP/SL 設定入口收斂在 Dropdown List 之中":
-    "Collapse the TP/SL settings entry into a dropdown list",
-  "展開後顯示可設定止盈止損的倉位內容":
-    "After expansion, show position content where TP/SL can be configured",
-  "使用者在列表中完成 TP/SL 條件輸入":
-    "Users complete TP/SL condition input in the list",
-  "確認設定後回到原策略詳情頁": "Return to the original strategy detail page after confirming the settings",
-  "沿用 CA 既有 Sidebar 操作模式，讓 TP/SL 設定更接近既有流程":
-    "Reuse CA's existing sidebar pattern so TP/SL setup feels closer to the current flow",
-  "右側 Sidebar 展開後，聚焦呈現 TP/SL 設定欄位":
-    "When the right sidebar opens, it focuses the TP/SL setting fields",
-  "使用者確認止盈、止損與數量設定":
-    "Users confirm take-profit, stop-loss, and quantity settings",
-  "完成設定後，策略能在既有流程中管理出場條件":
-    "After setup, the strategy can manage exit conditions within the existing flow",
+  "右上角新增Exchange Record的Tab，點擊後可以看到倉位資訊，選擇對應的倉位，點擊close按鈕。":
+    "Add an Exchange Record tab in the top right. Click it to view position details, select the corresponding position, and click the close button.",
+  "彈出Pop-up視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。":
+    "A pop-up window appears, defaulting to limit close. Enter the price and quantity, then click the confirm button.",
+  "也可以在最上方的點選市價平倉，輸入數量後，最後再點confirm按鈕。":
+    "Alternatively, click market close at the top, enter the quantity, and click the confirm button.",
+  "在原本的策略機器人bar右方加入交易資訊欄，顯示該策略目前倉位數量，以及交易筆數，點擊該按鈕。":
+    "Add a trade info section to the right of the original strategy bot bar showing the current position size and number of trades, and click the button.",
+  "顯示下拉選單，可看到倉位資訊，選擇對應的倉位，點擊close按鈕。":
+    "Show a dropdown menu where position details can be viewed. Select the corresponding position and click the close button.",
+  "將原本action欄位，另外新增view details按鈕，點擊該按鈕。":
+    "Add a view details button to the original action column, and click the button.",
+  "彈出Pop-up視窗，可看到倉位資訊，選擇對應的倉位，點擊close按鈕。":
+    "A pop-up window appears showing position details. Select the corresponding position and click the close button.",
+  "從右邊sidebar彈出視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。":
+    "A sidebar slides out from the right, defaulting to limit close. Enter the price and quantity, then click the confirm button.",
+  "彈出Pop-up視窗，可看到倉位資訊，TP/SL的checkbox在該倉位的正下方。":
+    "A pop-up window appears showing position details, with the TP/SL checkbox directly below the position.",
+  "勾選TP/SL的checkbox，在右邊輸入止盈止損價格，最後點選add按鈕。":
+    "Check the TP/SL checkbox, enter the take-profit and stop-loss prices on the right, and click the add button.",
+  "完成TP/SL下單後，可看到下單價格，需要修改可以再點擊add按鈕。":
+    "After completing the TP/SL order, the order prices are visible. To modify them, click the add button again.",
+  "彈出Pop-up視窗，可看到倉位資訊，最右邊有TP/SL欄位，點擊add按鈕。":
+    "A pop-up window appears showing position details. There is a TP/SL column on the far right; click the add button.",
+  "點擊add按鈕，在下方跳出dropdown視窗，輸入止盈止損價格，最後點選confirm按鈕。":
+    "Click the add button to expand a dropdown below. Enter the take-profit and stop-loss prices, then click the confirm button.",
+  "從右邊sidebar彈出視窗，TP和SL可分別輸入金額，最後再點confirm按鈕。":
+    "A sidebar slides out from the right. Enter values for TP and SL separately, then click the confirm button.",
   "CA Watchlist 頁面既有 Sidebar 操作流程參考":
     "Reference from CA's existing Watchlist sidebar flow",
   "CA 內手動平倉 wireframe 方案一：在策略詳情頁的趨勢圖旁，以欄位列表呈現倉位資訊的版面配置":
