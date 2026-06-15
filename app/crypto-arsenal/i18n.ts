@@ -375,8 +375,8 @@ const en = {
   // ── Final ──
   "最終介面：倉位顯示、手動平倉、下止盈止損單":
     "Final UI: Position Display, Manual Close, and TP/SL Orders",
-  "承接競品流程的拆解與多次提案的權衡，收斂出最適合 CA 的方案，把倉位顯示與手動平倉做成可點的 prototype 交付工程，並清楚區分「平倉」與「停止策略」避免誤觸。":
-    "Building on the competitor-flow breakdown and several rounds of proposal weighing, the best-fit approach for CA was distilled into a clickable prototype to hand off to engineering, clearly separating \"close position\" from \"stop strategy\" to avoid mistaps.",
+  "承接競品流程的拆解與多次提案的權衡，收斂出最適合 CA 的方案，把手動平倉和止盈止損分為三個流程依序介紹。":
+    "Building on the competitor-flow breakdown and several rounds of proposal weighing, the best-fit approach for CA was distilled, presenting manual close and take-profit/stop-loss in three sequential flows.",
   "CA 內手動限價平倉": "Manual Limit Close inside CA",
   "CA 內手動市價平倉": "Manual Market Close inside CA",
   "CA 內手動限價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口":
