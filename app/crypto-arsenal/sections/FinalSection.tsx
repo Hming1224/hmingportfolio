@@ -21,7 +21,16 @@ export default async function FinalSection() {
           </div>
           <figure className="ca-figure ca-final-shot">
             <div className="ca-figure-img">
-              <FinalVideo src={flow.video} label={t(flow.alt)} />
+              <FinalVideo
+                src={flow.video}
+                label={t(flow.alt)}
+                mask={flow.mask}
+                labels={{
+                  close: t("關閉放大影片"),
+                  separator: "：",
+                  zoom: t("放大播放影片"),
+                }}
+              />
             </div>
           </figure>
         </div>

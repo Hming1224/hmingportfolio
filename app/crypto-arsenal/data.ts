@@ -604,6 +604,7 @@ export interface FinalFlow {
   kicker: string;
   title: string;
   video: string;
+  mask?: string;
   alt: string;
 }
 
@@ -612,18 +613,21 @@ export const finalFlows: FinalFlow[] = [
     kicker: "操作流程 1",
     title: "CA 內手動限價平倉",
     video: `${IMG}/final/close-position-limit.mp4`,
+    mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動限價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口",
   },
   {
     kicker: "操作流程 1",
     title: "CA 內手動市價平倉",
     video: `${IMG}/final/close-position-market.mp4`,
+    mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動市價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口",
   },
   {
     kicker: "操作流程 2",
     title: "CA 內手動止盈止損",
-    video: `${IMG}/final/tp-sl.mp4`,
+    video: `${IMG}/final/tp-sl-subtitled.mp4`,
+    mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動止盈止損的最終介面：Trading Details 彈窗中的 TP/SL 設定入口",
   },
 ];

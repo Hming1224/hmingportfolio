@@ -755,6 +755,20 @@
   padding-bottom: 18px;
 }
 
+.theme-crypto-arsenal .ca-matrix-ex::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ffffff;
+}
+
+.theme-crypto-arsenal .ca-matrix-head+.ca-matrix-row .ca-matrix-ex::before {
+  display: none;
+}
+
 .theme-crypto-arsenal .ca-matrix-ex-logo {
   width: 28px;
   height: 28px;
@@ -771,7 +785,8 @@
 
 .theme-crypto-arsenal .ca-matrix-cell-note {
   position: absolute !important;
-  top: calc(100% + 18px) !important;
+  top: auto !important;
+  bottom: 20px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   white-space: nowrap !important;
@@ -1240,12 +1255,96 @@
   margin: 80px 0 80px;
 }
 
+.theme-crypto-arsenal .ca-final-video-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
 .theme-crypto-arsenal .ca-final-video {
   display: block;
   width: 100%;
   aspect-ratio: 2184 / 1346;
   object-fit: cover;
   background: #0f172a;
+}
+
+.theme-crypto-arsenal .ca-final-video--masked {
+  background: transparent;
+  -webkit-mask-image: var(--ca-video-mask);
+  mask-image: var(--ca-video-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.ca-final-video-lightbox-frame.ca-final-video--masked {
+  background: transparent;
+  -webkit-mask-image: var(--ca-video-mask);
+  mask-image: var(--ca-video-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.ca-final-video-lightbox-media.ca-final-video--masked {
+  background: transparent;
+  -webkit-mask-image: var(--ca-video-mask);
+  mask-image: var(--ca-video-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.theme-crypto-arsenal .ca-final-video-button:hover .ca-final-video,
+.theme-crypto-arsenal .ca-final-video-button:focus-visible .ca-final-video {
+  filter: brightness(0.96);
+}
+
+.theme-crypto-arsenal .ca-final-video-button:focus-visible {
+  outline: 3px solid rgba(82, 127, 255, 0.72);
+  outline-offset: 6px;
+}
+
+.ca-final-video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(18px, 4vw, 56px);
+  background: #000000;
+  cursor: zoom-out;
+}
+
+.ca-final-video-lightbox-frame {
+  display: block;
+  width: min(96vw, calc(96vh * 2336 / 1440));
+  max-height: 96vh;
+  aspect-ratio: 2336 / 1440;
+  overflow: hidden;
+  background: transparent;
+}
+
+.ca-final-video-lightbox-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ── 10 學習反思 ── */

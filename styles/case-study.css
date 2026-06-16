@@ -262,7 +262,7 @@
   grid-template: 1fr / 1fr;
   padding: clamp(24px, 5vw, 80px);
   box-sizing: border-box;
-  background: rgba(8, 14, 30, 0.88);
+  background: rgba(8, 14, 30, 0.96);
   backdrop-filter: blur(4px);
   cursor: zoom-out;
 }

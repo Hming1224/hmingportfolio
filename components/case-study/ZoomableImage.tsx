@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
 
 type ZoomableImageLabels = {
   close: string;
@@ -77,7 +78,7 @@ export default function ZoomableImage({
         </span>
       </button>
 
-      {isOpen ? (
+      {isOpen ? createPortal(
         <div
           className={`cs-zoomable-lightbox${lightboxMode === "fullscreen" ? " is-fullscreen" : ""}`}
           role="dialog"
@@ -107,7 +108,8 @@ export default function ZoomableImage({
             className="cs-zoomable-lightbox-image"
             priority={false}
           />
-        </div>
+        </div>,
+        document.body,
       ) : null}
     </>
   );

@@ -200,6 +200,8 @@ const en = {
     "TP/SL is two steps everywhere: open the position → set the take-profit / stop-loss trigger price and quantity. CA follows the same structure.",
   "放大檢視": "Enlarge",
   "關閉放大圖片": "Close enlarged image",
+  "放大播放影片": "Enlarge and play video",
+  "關閉放大影片": "Close enlarged video",
   "從上面流程可以觀察到無論是 Binance、OKX、Bybit 的介面或是操作流程基本雷同，僅介面元件有差異，因此 CA 的兩項操作流程也將依照上述形式進行，確保使用者可以快速銜接。":
     "Across Binance, OKX, and Bybit the interfaces and flows are essentially the same — only the UI components differ. CA's two flows therefore follow the same form so users can transition quickly.",
   "Binance 合約倉位列表介面，含 Symbol、Size、Entry Price、Mark Price、Margin、PNL 等欄位":
