@@ -125,6 +125,10 @@
   overflow: visible;
 }
 
+.theme-crypto-arsenal .ca-diagram-scroll {
+  width: 100%;
+}
+
 .theme-crypto-arsenal .ca-flow-label {
   font-family: Inter, sans-serif;
   font-size: 14px;
@@ -168,7 +172,11 @@
 
   .theme-crypto-arsenal .ca-diagram {
     padding: 24px 20px;
+  }
+
+  .theme-crypto-arsenal .ca-diagram-scroll {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .theme-crypto-arsenal .ca-diagram-graphic {
@@ -717,6 +725,7 @@
 
 .theme-crypto-arsenal .ca-matrix-step-text {
   text-align: left;
+  white-space: pre-line;
 }
 
 .theme-crypto-arsenal .ca-matrix-row {
@@ -972,16 +981,21 @@
   justify-content: center;
   width: 44px;
   height: 44px;
+  padding: 0;
   border: 1px solid #d5dfec;
   border-radius: 999px;
   background: #ffffff;
   box-shadow: 0 8px 18px -8px rgba(9, 48, 96, 0.12);
   color: var(--purple);
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 1;
   cursor: pointer;
   transition: background 160ms ease, opacity 160ms ease, color 160ms ease;
+}
+
+.theme-crypto-arsenal .ca-wf-nav-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
 }
 
 .theme-crypto-arsenal .ca-wf-nav:hover:not(:disabled) {
@@ -1003,9 +1017,34 @@
 }
 
 .theme-crypto-arsenal .ca-wf-shot {
+  position: relative;
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid var(--ca-line-soft);
+}
+
+.theme-crypto-arsenal .ca-wf-shot-overlay {
+  display: none;
+}
+
+.theme-crypto-arsenal .ca-wf-shot-count {
+  display: none;
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(17, 22, 36, 0.7);
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
 }
 
 .theme-crypto-arsenal .ca-wf-cap {
@@ -1338,6 +1377,7 @@
   aspect-ratio: 2336 / 1440;
   overflow: hidden;
   background: transparent;
+  cursor: zoom-out;
 }
 
 .ca-final-video-lightbox-media {
@@ -1345,6 +1385,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: zoom-out;
 }
 
 /* ── 10 學習反思 ── */
@@ -1706,14 +1747,19 @@
   }
 
   .theme-crypto-arsenal .ca-wf-tabs {
-    flex-direction: column;
-    gap: 2px;
-    padding: 8px 8px 0;
+    gap: 4px;
+    padding: 0;
   }
 
   .theme-crypto-arsenal .ca-wf-tab {
-    border-radius: 8px;
-    min-height: 40px;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 42px;
+    padding: 10px 12px;
+    border-radius: 12px 12px 0 0;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
   }
 
   .theme-crypto-arsenal .ca-wf-panel {
@@ -1726,15 +1772,53 @@
   }
 
   .theme-crypto-arsenal .ca-wf-frame {
-    overflow-x: auto;
+    gap: 12px;
   }
 
   .theme-crypto-arsenal .ca-wf-shot {
-    min-width: 720px;
+    touch-action: pan-y;
+  }
+
+  .theme-crypto-arsenal .ca-wf-shot-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    pointer-events: none;
   }
 
   .theme-crypto-arsenal .ca-wf-nav {
     display: none;
+  }
+
+  .theme-crypto-arsenal .ca-wf-nav-mobile {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+  }
+
+  .theme-crypto-arsenal .ca-wf-nav-mobile:disabled {
+    opacity: 0.2;
+  }
+
+  .theme-crypto-arsenal .ca-wf-shot-count {
+    display: inline-flex;
+  }
+
+  .theme-crypto-arsenal .ca-wf-step-dots {
+    display: none;
+  }
+
+  .theme-crypto-arsenal .ca-iter-badge {
+    width: fit-content;
+    max-width: 100%;
+    white-space: normal;
   }
 
   .theme-crypto-arsenal .ca-research-flow-board {
@@ -1765,18 +1849,19 @@
   }
 
   .theme-crypto-arsenal .ca-ba-content {
-    justify-content: flex-start;
-    overflow-x: auto;
+    justify-content: center;
     padding: 18px;
   }
 
   .theme-crypto-arsenal .ca-ba-content img {
-    min-width: 560px;
+    width: 100%;
+    min-width: 0;
   }
 
   .theme-crypto-arsenal .ca-ba-content .ca-iteration-zoom {
-    width: 560px;
-    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 auto;
   }
 
   .theme-crypto-arsenal .ca-ba-head {

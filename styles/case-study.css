@@ -385,21 +385,28 @@
 }
 
 .cs-info-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, max-content);
   justify-content: space-between;
   gap: 21px;
   width: 100%;
+  align-items: start;
 }
 
 .cs-info-card {
-  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-self: start;
   min-width: 0;
+  width: fit-content;
+  max-width: 100%;
   padding: 12px 0;
   border-radius: 8px;
 }
 
 .cs-info-label {
   display: block;
+  width: 100%;
   font-size: var(--fs-xs);
   font-weight: 500;
   color: #a0a0a0;
@@ -407,9 +414,30 @@
 }
 
 .cs-info-value {
+  display: block;
+  width: 100%;
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--ink);
+}
+
+.cs-info-value--timeline {
+  display: inline-flex;
+  width: fit-content;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.cs-info-timeline-sep {
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  background: currentColor;
+  opacity: 0.4;
+  text-indent: -9999px;
+  overflow: hidden;
+  align-self: center;
 }
 
 .cs-info-tasks {
@@ -483,10 +511,19 @@
   background: var(--purple-hover);
 }
 
-/* Tablet: tighten the gap between the 4 equal hero info columns */
-@media (min-width: 769px) and (max-width: 1023px) {
+@media (max-width: 1199px) {
   .cs-info-row {
-    gap: 12px;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: space-between;
+    gap: 18px 20px;
+  }
+
+  .cs-info-row > .cs-info-card:nth-child(4) {
+    grid-column: 1;
+  }
+
+  .cs-info-row > .cs-info-card:nth-child(5) {
+    grid-column: 2;
   }
 }
 
@@ -499,7 +536,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .cs-page {
     --page-gutter: clamp(20px, 6vw, 48px);
   }
@@ -519,14 +556,23 @@
   }
 
   .cs-info-row {
-    flex-direction: column;
-    gap: 16px;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: space-between;
+    gap: 18px 16px;
+  }
+
+  .cs-info-row > .cs-info-card:nth-child(4),
+  .cs-info-row > .cs-info-card:nth-child(5) {
+    grid-column: auto;
   }
 
   .cs-info-card {
-    flex: none;
-    width: 100%;
+    width: auto;
     padding: 0;
+  }
+
+  .cs-info-timeline-sep {
+    display: inline;
   }
 
   .cs-info-tasks {

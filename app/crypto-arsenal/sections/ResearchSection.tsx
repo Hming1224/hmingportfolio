@@ -51,7 +51,7 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
             {matrix.stepLabels.map((label) => {
               const translated = t(label);
               // 允許步驟編號帶 a/b 後綴（如 ②a / ②b），表示「二擇一」而非先後順序
-              const match = translated.match(/^([①-⑨])([a-z]?)\s*(.*)$/);
+              const match = translated.match(/^([①-⑨])([a-z]?)\s*([\s\S]*)$/);
               if (match) {
                 const circleNum = match[1];
                 const suffix = match[2];

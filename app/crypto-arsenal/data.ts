@@ -171,7 +171,7 @@ const LOGO = (n: string) => `${IMG}/research/logo-${n}.webp`;
 export const closeMatrix: FlowMatrix = {
   kicker: "操作流程 1",
   title: "合約平倉",
-  stepLabels: ["① 倉位 / 下單畫面", "②a 限價平倉（Limit）", "②b 市價平倉（Market）"],
+  stepLabels: ["① 倉位 / 下單畫面", "②a 限價平倉（Limit）", "②b 市價平倉\n（Market）"],
   rows: [
     {
       name: "Binance",

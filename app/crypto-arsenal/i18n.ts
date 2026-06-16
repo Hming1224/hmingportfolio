@@ -189,7 +189,7 @@ const en = {
   // 對比矩陣：步驟欄標題 + 結論 + lightbox
   "① 倉位 / 下單畫面": "① Position / trade screen",
   "②a 限價平倉（Limit）": "②a Limit close",
-  "②b 市價平倉（Market）": "②b Market close",
+  "②b 市價平倉\n（Market）": "②b Market\nclose",
   "② 設定止盈止損": "② Set TP / SL",
   "Binance 多一步：需先輸入金額 / 數量": "Binance adds a step: enter amount / quantity first",
   "Binance 平倉前需先輸入平倉金額與數量的畫面":
@@ -236,6 +236,7 @@ const en = {
   "上一張 wireframe": "Previous wireframe",
   "下一張 wireframe": "Next wireframe",
   "Wireframe 步驟": "Wireframe steps",
+  "Wireframe 目前頁數": "Current wireframe page",
   "切換到步驟": "Switch to step",
   "未採納原因": "Why It Wasn't Chosen",
   "右上角新增Exchange Record的Tab，點擊後可以看到倉位資訊，選擇對應的倉位，點擊close按鈕。":

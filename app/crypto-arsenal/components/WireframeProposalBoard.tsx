@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import type { Locale } from "../../../i18n/routing";
 import type { WireframeBoard } from "../data";
@@ -11,12 +11,35 @@ type WireframeProposalBoardProps = {
   board: WireframeBoard;
 };
 
+function ArrowIcon({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg
+      className="ca-wf-nav-icon"
+      aria-hidden="true"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d={direction === "left" ? "M10.875 4.5L6.375 9L10.875 13.5" : "M7.125 4.5L11.625 9L7.125 13.5"}
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function WireframeProposalBoard({ board }: WireframeProposalBoardProps) {
   const locale = useLocale() as Locale;
   const t = (text: string) => translateCryptoArsenal(locale, text);
   const initialProposal = board.defaultProposalIndex ?? 0;
   const [activeProposalIndex, setActiveProposalIndex] = useState(initialProposal);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   const proposal = board.proposals[activeProposalIndex] ?? board.proposals[0];
   const slide = proposal.slides[activeSlideIndex] ?? proposal.slides[0];
@@ -26,6 +49,36 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
   function selectProposal(index: number) {
     setActiveProposalIndex(index);
     setActiveSlideIndex(0);
+  }
+
+  function goPrev() {
+    if (!canGoPrev) return;
+    setActiveSlideIndex((index) => index - 1);
+  }
+
+  function goNext() {
+    if (!canGoNext) return;
+    setActiveSlideIndex((index) => index + 1);
+  }
+
+  function handleTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  }
+
+  function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
+    if (touchStartX.current == null) return;
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const deltaX = touchEndX - touchStartX.current;
+    const swipeThreshold = 36;
+
+    if (deltaX <= -swipeThreshold) {
+      goNext();
+    } else if (deltaX >= swipeThreshold) {
+      goPrev();
+    }
+
+    touchStartX.current = null;
   }
 
   return (
@@ -78,13 +131,13 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
               className="ca-wf-nav"
               aria-label={t("上一張 wireframe")}
               disabled={!canGoPrev}
-              onClick={() => setActiveSlideIndex((index) => index - 1)}
+              onClick={goPrev}
             >
-              ‹
+              <ArrowIcon direction="left" />
             </button>
 
             <figure className="ca-wf-frame">
-              <div className="ca-wf-shot">
+              <div className="ca-wf-shot" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
                 <Image
                   key={slide.img}
                   src={slide.img}
@@ -95,6 +148,30 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
                   unoptimized
                   style={{ width: "100%", height: "auto" }}
                 />
+                <div className="ca-wf-shot-overlay">
+                  <button
+                    type="button"
+                    className="ca-wf-nav ca-wf-nav-mobile"
+                    aria-label={t("上一張 wireframe")}
+                    disabled={!canGoPrev}
+                    onClick={goPrev}
+                  >
+                    <ArrowIcon direction="left" />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="ca-wf-nav ca-wf-nav-mobile"
+                    aria-label={t("下一張 wireframe")}
+                    disabled={!canGoNext}
+                    onClick={goNext}
+                  >
+                    <ArrowIcon direction="right" />
+                  </button>
+                </div>
+                <div className="ca-wf-shot-count" aria-label={t("Wireframe 目前頁數")}>
+                  {activeSlideIndex + 1} / {proposal.slides.length}
+                </div>
               </div>
               <figcaption className="ca-wf-cap">{t(slide.caption)}</figcaption>
             </figure>
@@ -104,9 +181,9 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
               className="ca-wf-nav"
               aria-label={t("下一張 wireframe")}
               disabled={!canGoNext}
-              onClick={() => setActiveSlideIndex((index) => index + 1)}
+              onClick={goNext}
             >
-              ›
+              <ArrowIcon direction="right" />
             </button>
           </div>
 

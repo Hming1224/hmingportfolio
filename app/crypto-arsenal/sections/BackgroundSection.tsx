@@ -47,7 +47,9 @@ export default async function BackgroundSection() {
       </div>
 
       <div className="ca-diagram">
-        <TradingFlowDiagram labels={tradingFlowLabels} />
+        <div className="ca-diagram-scroll">
+          <TradingFlowDiagram labels={tradingFlowLabels} />
+        </div>
         <p className="ca-diagram-cap">
           {t(
             "交易者把法幣換成加密貨幣，並透過交易策略在交易所自動交易；Crypto Arsenal 位於「策略」與「交易所」之間負責執行下單。",
@@ -64,7 +66,9 @@ export default async function BackgroundSection() {
       </div>
 
       <div className="ca-diagram">
-        <EcosystemFlowDiagram labels={ecosystemFlowLabels} />
+        <div className="ca-diagram-scroll">
+          <EcosystemFlowDiagram labels={ecosystemFlowLabels} />
+        </div>
         <p className="ca-diagram-cap">
           {t("開發者建立交易機器人上架、交易者選用機器人；收益在雙方與平台之間流動。")}
         </p>

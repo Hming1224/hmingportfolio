@@ -29,7 +29,11 @@ export default async function HeroSection() {
           <div className="cs-info-row">
             <div className="cs-info-card">
               <span className="cs-info-label">{t("時間進程")}</span>
-              <span className="cs-info-value">2024.06 – 2024.08</span>
+              <span className="cs-info-value cs-info-value--timeline">
+                <span>2024.06</span>
+                <span className="cs-info-timeline-sep" aria-hidden="true">–</span>
+                <span>2024.08</span>
+              </span>
             </div>
             <div className="cs-info-card">
               <span className="cs-info-label">{t("團隊成員")}</span>
