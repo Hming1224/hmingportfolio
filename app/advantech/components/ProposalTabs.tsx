@@ -24,6 +24,28 @@ type Props = {
   defaultTab?: number;
 };
 
+function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
+  return (
+    <svg
+      className="cs-sol-nav-icon"
+      aria-hidden="true"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d={direction === 'left' ? 'M10.875 4.5L6.375 9L10.875 13.5' : 'M7.125 4.5L11.625 9L7.125 13.5'}
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
   const locale = useLocale() as Locale;
   const t = (text: string) => translateAdvantech(locale, text);
@@ -77,7 +99,7 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
             onClick={() => setSlideIdx((s) => s - 1)}
             aria-label={t("上一張")}
           >
-            ‹
+            <ArrowIcon direction="left" />
           </button>
 
           <figure className="cs-sol-frame">
@@ -92,6 +114,9 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
                 unoptimized
                 style={{ width: '100%', height: 'auto', display: 'block' }}
               />
+              <div className="cs-sol-count" aria-label={t("目前頁數")}>
+                {slideIdx + 1} / {slides.length}
+              </div>
             </div>
             <figcaption className="cs-sol-cap">{t(slide.caption)}</figcaption>
           </figure>
@@ -102,7 +127,7 @@ export default function ProposalTabs({ tabs, defaultTab = 0 }: Props) {
             onClick={() => setSlideIdx((s) => s + 1)}
             aria-label={t("下一張")}
           >
-            ›
+            <ArrowIcon direction="right" />
           </button>
         </div>
 

@@ -307,7 +307,7 @@
   border-radius: 200px;
   background: var(--purple);
   color: white;
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 600;
   cursor: pointer;
   outline: none;

@@ -66,29 +66,6 @@
     background: var(--surface);
   }
 
-  .theme-advantech .cs-alarm-toggle-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-    border: 0;
-    border-radius: 8px;
-    padding: 8px 4px;
-    background: transparent;
-    color: var(--text-secondary);
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 14px;
-    cursor: pointer;
-  }
-
-  .theme-advantech .cs-alarm-toggle-on {
-    background: #fff;
-    color: #0072bd;
-    box-shadow: 0 2px 8px rgba(9, 48, 96, 0.08);
-  }
-
   .theme-advantech .cs-alarm-arrow {
     display: none;
   }
@@ -1482,6 +1459,15 @@
   color: var(--cs-navy);
 }
 
+.theme-advantech .cs-sol-tab:hover {
+  color: var(--cs-navy);
+}
+
+.theme-advantech .cs-sol-tab:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: -3px;
+}
+
 .theme-advantech .cs-sol-tab-bd {
   background: white;
   padding: 28px;
@@ -1508,9 +1494,31 @@
 }
 
 .theme-advantech .cs-sol-mock-img {
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--cs-line-soft);
   border-radius: 10px;
+}
+
+/* 頁數指示器：桌機隱藏（改用下方 dots），手機顯示在圖片右下角，沿用 CA 的深色 pill 樣式 */
+.theme-advantech .cs-sol-count {
+  display: none;
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(17, 22, 36, 0.7);
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
 }
 
 .theme-advantech .cs-sol-cap {
@@ -1527,21 +1535,24 @@
   justify-content: center;
   width: 44px;
   height: 44px;
+  padding: 0;
   background: white;
   border: 1px solid var(--cs-line-soft);
-  border-radius: 22px;
+  border-radius: 999px;
   box-shadow: 0px 8px 18px -8px rgba(9, 48, 96, 0.12);
-  font-size: 30px;
-  font-weight: 700;
   color: var(--purple);
   cursor: pointer;
   transition:
-    background 0.15s,
-    color 0.15s,
-    opacity 0.15s;
-  line-height: 1;
-  padding: 0;
-  padding-bottom: 2px;
+    background 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease;
+}
+
+.theme-advantech .cs-sol-nav-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
 }
 
 .theme-advantech .cs-sol-nav-btn:hover:not(:disabled) {
@@ -1576,7 +1587,7 @@
 
 .theme-advantech .cs-sol-dot-on {
   width: 24px;
-  background: var(--cs-blue);
+  background: var(--purple);
 }
 
 .theme-advantech .cs-sol-dot:hover {
@@ -2073,6 +2084,16 @@
       color 180ms ease,
       background 180ms ease,
       box-shadow 180ms ease;
+  }
+
+  .theme-advantech .cs-alarm-toggle-btn:hover {
+    color: var(--ink);
+  }
+
+  .theme-advantech .cs-alarm-mode-default:focus-visible ~ .cs-alarm-toggle .cs-alarm-toggle-default,
+  .theme-advantech .cs-alarm-mode-hover:focus-visible ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
+    outline: 3px solid var(--purple);
+    outline-offset: -3px;
   }
 
   .theme-advantech .cs-alarm-mode-default:checked ~ .cs-alarm-toggle .cs-alarm-toggle-default,
@@ -2645,6 +2666,15 @@
     grid-column: 2;
     grid-row: 2;
     justify-self: start;
+  }
+
+  /* 手機改用圖片右下角的頁數指示器（比照 CA），收起 dots */
+  .theme-advantech .cs-sol-step-dots {
+    display: none;
+  }
+
+  .theme-advantech .cs-sol-count {
+    display: inline-flex;
   }
 
   .theme-advantech .cs-sol-cap {

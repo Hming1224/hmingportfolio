@@ -301,7 +301,7 @@ export const wireframeBoards: WireframeBoard[] = [
     defaultProposalIndex: 0,
     proposals: [
       {
-        label: "方案一：Metrix Chart",
+        label: "方案一：Matrix Chart",
         slides: [
           {
             img: `${WIRE}/close-option-1-step-1.png`,
@@ -312,7 +312,7 @@ export const wireframeBoards: WireframeBoard[] = [
           },
           {
             img: `${WIRE}/close-option-1-step-2.png`,
-            alt: "CA 內手動平倉方案一 step 2：使用者在 Metrix Chart 旁查看平倉資訊",
+            alt: "CA 內手動平倉方案一 step 2：使用者在 Matrix Chart 旁查看平倉資訊",
             width: WF_W,
             height: WF_H,
             caption: "彈出Pop-up視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。",

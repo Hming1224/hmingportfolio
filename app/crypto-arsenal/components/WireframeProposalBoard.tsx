@@ -11,6 +11,20 @@ type WireframeProposalBoardProps = {
   board: WireframeBoard;
 };
 
+function renderTabLabel(label: string) {
+  // Break the tab label after its leading "prefix:" so the descriptor sits on its own line
+  // (e.g. "Option 1:" / "Matrix Chart"). Falls back to the raw label when there is no colon.
+  const match = label.match(/^(.+?[:：])\s*(.+)$/);
+  if (!match) return label;
+  return (
+    <>
+      {match[1]}
+      <br />
+      {match[2]}
+    </>
+  );
+}
+
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
     <svg
@@ -118,7 +132,7 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
                     />
                   </svg>
                 ) : null}
-                <span>{t(item.label)}</span>
+                <span>{renderTabLabel(t(item.label))}</span>
               </button>
             );
           })}

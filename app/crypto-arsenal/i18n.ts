@@ -228,7 +228,7 @@ const en = {
   "雖然目前已參考交易所操作建立初步概念，但 CA 產品的交易流程與交易所仍存在差異。交易所偏向全手動操作，而 CA 目前以策略機器人全自動開單為主；交易者後續可依自身判斷，手動決定平倉時機與平倉數量。因此，在 CA 中導入手動平倉、止盈與止損功能時，需透過多種設計提案，進一步確認最終的介面樣式與操作流程。": "Although an initial concept has been developed by referencing exchange-based operations, the trading flow of the CA product still differs from that of exchanges. Exchanges are primarily based on fully manual operations, while CA currently relies on strategy bots to open positions automatically. Traders can then decide, based on their own judgment, when and how much of a position to close manually. Therefore, when introducing manual position closing, take-profit, and stop-loss features into CA, multiple design proposals are needed to further confirm the final interface style and operational flow.",
   "CA 內手動平倉": "Manual Close inside CA",
   "CA 內手動止盈止損": "Manual TP/SL inside CA",
-  "方案一：Metrix Chart": "Option 1: Metrix Chart",
+  "方案一：Matrix Chart": "Option 1: Matrix Chart",
   "方案一：Checkbox": "Option 1: Checkbox",
   "方案二：Dropdown List": "Option 2: Dropdown List",
   "最終方案：Sidebar": "Final: Sidebar",
@@ -273,8 +273,8 @@ const en = {
     "Manual close wireframe, option 1: position fields laid out beside the trend chart on the strategy detail page",
   "CA 內手動平倉方案一 step 1：在策略詳情頁的趨勢圖旁呈現倉位資訊":
     "Manual close option 1, step 1: show position details beside the trend chart on the strategy detail page",
-  "CA 內手動平倉方案一 step 2：使用者在 Metrix Chart 旁查看平倉資訊":
-    "Manual close option 1, step 2: users review close-position details beside the Metrix Chart",
+  "CA 內手動平倉方案一 step 2：使用者在 Matrix Chart 旁查看平倉資訊":
+    "Manual close option 1, step 2: users review close-position details beside the Matrix Chart",
   "CA 內手動平倉方案一 step 3：使用者完成平倉設定":
     "Manual close option 1, step 3: users complete the close-position settings",
   "CA 內手動平倉方案二 step 1：以 Dropdown List 顯示倉位資訊":
@@ -391,8 +391,8 @@ const en = {
     "Final UI for manual TP/SL inside CA: the TP/SL entry in the Trading Details dialog",
 
   // ── Design Impact ──
-  "設計成效：用內部測試與流程指標驗證":
-    "Design Impact: Validated with Internal Testing and Flow-Level Metrics",
+  "用內部測試與流程指標驗證":
+    "Validated with Internal Testing and Flow-Level Metrics",
   "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標——例如完成一次操作要幾步、需不需要跳出平台。":
     "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself — such as how many steps a task takes and whether users have to leave the platform.",
   "3 步": "3 steps",

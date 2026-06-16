@@ -551,14 +551,14 @@ button {
 
   /* 共用 footer — 自 about.css 收回；base 規則在本檔上方 */
   .site-footer {
-    align-items: stretch;
+    align-items: center;
     flex-direction: column-reverse;
-    gap: 0;
-    padding: 0 24px 24px;
+    gap: 16px;
+    padding: 16px 24px 24px;
   }
 
   .social-links {
-    align-self: flex-end;
+    align-self: center;
     margin-left: 0;
   }
 

@@ -479,9 +479,9 @@
   text-decoration: none;
   cursor: pointer;
   transition:
-    background 0.15s,
-    color 0.15s,
-    box-shadow 0.15s;
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .cs-next-btn-outline:hover {
@@ -504,7 +504,7 @@
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 180ms ease;
 }
 
 .cs-next-btn-filled:hover {

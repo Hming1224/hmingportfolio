@@ -63,11 +63,7 @@
 
 .theme-crypto-arsenal .ca-iter-tag {
   margin-bottom: 18px;
-  padding: 8px 12px;
-  border-radius: 14px;
-  background: #fff3e2;
-  color: #c97b1d;
-  letter-spacing: 0.04em;
+  color: var(--ca-teal);
 }
 
 .theme-crypto-arsenal .ca-h2 {
@@ -1074,7 +1070,7 @@
 
 .theme-crypto-arsenal .ca-wf-dot.is-active {
   width: 24px;
-  background: var(--ca-blue);
+  background: var(--purple);
 }
 
 .theme-crypto-arsenal .ca-wf-dot:hover {
