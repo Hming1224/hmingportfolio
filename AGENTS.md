@@ -11,7 +11,16 @@ Before working in this project, read the parent shared context:
 
 Apply those shared rules to this project.
 
-Project-specific defaults:
+## Git / 部署規矩（網站已正式上線，main = 正式站）
+
+`hmingdesign.com` 已正式發布，**push 到 main 會自動部署上線**。因此:
+
+- 🆕 **涉及「新專案」的功能、頁面、區塊**（例如新增一個作品集案例頁、新案例的 section）→ **只能推到分支，絕不可自行推 main**。要合進 main / 上線，**必須 Hming 明確說「推 main」才可以**，AI 不得自行判斷「夠完整」就推。
+- 🔧 **既有專案的修改維護、整個作品集網站本身的修改維護**（既有案例頁微調、文案、樣式、RWD、bug 修復、設定）→ 可以直接推 main。
+- 走分支時善用 Vercel 自動產生的 **Preview 預覽網址**先驗證，確認 build 沒報錯、沒弄壞既有頁面、新功能真的會動，再等 Hming 指示合併。
+- 出問題時記得 Vercel 有 Instant Rollback 可一鍵退回前一個正常版本。
+
+## Project-specific defaults:
 
 - Treat this as a portfolio-quality frontend project.
 - Preserve the existing code style and folder structure.
