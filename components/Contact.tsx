@@ -1,5 +1,6 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
@@ -53,6 +54,7 @@ export default function Contact() {
 
       if (response.ok) {
         setStatus("success");
+        sendGAEvent("event", "contact_form_submit", { locale });
         form.reset();
       } else {
         setStatus("error");

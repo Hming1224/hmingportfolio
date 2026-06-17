@@ -1,5 +1,6 @@
 'use client';
 
+import { sendGAEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
@@ -119,7 +120,10 @@ export default function Navbar() {
           href={t('resumeHref')}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            sendGAEvent("event", "resume_click", { href: t('resumeHref') });
+            setOpen(false);
+          }}
         >
           {t('resume')}
         </a>
