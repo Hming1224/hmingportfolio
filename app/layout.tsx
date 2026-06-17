@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { getLocale } from "next-intl/server";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import ScrollBehaviorFix from "../components/ScrollBehaviorFix";
+import MicrosoftClarity from "../components/MicrosoftClarity";
 import { siteUrl } from "../lib/metadata";
 import "./globals.css";
 
@@ -52,6 +54,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
     <html
@@ -61,7 +64,9 @@ export default async function RootLayout({
       <body>
         <ScrollBehaviorFix />
         {children}
+        <MicrosoftClarity />
       </body>
+      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }
