@@ -2559,6 +2559,35 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
+  .theme-advantech .cs-hero-info {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .theme-advantech .cs-badge {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .theme-advantech .cs-info-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+    column-gap: 0;
+  }
+
+  .theme-advantech .cs-info-row > .cs-info-card:nth-child(4),
+  .theme-advantech .cs-info-row > .cs-info-card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .theme-advantech .cs-info-card {
+    width: 100%;
+  }
+
+  .theme-advantech .cs-info-value {
+    overflow-wrap: anywhere;
+  }
+
   .theme-advantech .cs-sol-flow {
     height: auto;
     min-height: 140px;
