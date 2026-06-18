@@ -1336,8 +1336,8 @@
   }
 
   .hero-cursor-engineers {
-    left: 19.625%;
-    top: clamp(276px, calc(40.2svh - 32px), 357px);
+    left: 24%;
+    top: clamp(248px, calc(35svh - 24px), 330px);
   }
 
   .hero-cursor-pm {
@@ -1353,9 +1353,9 @@
   }
 
   .hero-toggle {
-    --toggle-scale: 0.667;
-    left: 8.375%;
-    top: clamp(312px, calc(45.3svh - 36px), 403px);
+    --toggle-scale: 0.6;
+    left: 0;
+    top: clamp(500px, 55svh, 580px);
   }
 
   .hero-sticky-1 {
@@ -1401,6 +1401,19 @@
     left: auto;
     right: 70px;
     top: clamp(577px, calc(83.9svh - 67px), 746px);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1100px) {
+  .hero-cursor-engineers {
+    left: 24%;
+    top: clamp(248px, calc(35svh - 24px), 330px);
+  }
+
+  .hero-toggle {
+    --toggle-scale: 0.6;
+    left: 0;
+    top: clamp(500px, 55svh, 580px);
   }
 }
 
