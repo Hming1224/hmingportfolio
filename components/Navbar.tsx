@@ -1,10 +1,10 @@
 'use client';
 
 import { sendGAEvent } from '@next/third-parties/google';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '@/i18n/navigation';
+import AnimatedLogo from './AnimatedLogo';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
@@ -85,14 +85,7 @@ export default function Navbar() {
     <nav ref={navRef} className={`site-nav ${open ? 'is-open' : ''}`} aria-label={t('ariaLabel')}>
       <div className="nav-top">
         <Link href="/" prefetch={false} className="brand" aria-label="Brian Huang home">
-          <Image
-            src="/brand-logo.svg"
-            alt="Brian Huang"
-            width={67}
-            height={24}
-            priority
-            sizes="67px"
-          />
+          <AnimatedLogo />
         </Link>
         <button
           className="menu-button"

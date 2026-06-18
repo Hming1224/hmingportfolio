@@ -213,6 +213,30 @@ button {
   object-fit: contain;
 }
 
+/* Animated Lottie logo: outer fills the 67x24 brand box; inner canvas is the
+   full 1200x556 artboard scaled up and nudged so the glyphs land where the
+   static logo sat. Flying animation elements stay clipped to the artboard. */
+.brand-logo-anim {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.brand-logo-anim__canvas {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 80px;
+  aspect-ratio: 1200 / 556;
+  display: block;
+}
+
+.brand-logo-anim__canvas svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .nav-links {
   display: flex;
   flex: 1;
