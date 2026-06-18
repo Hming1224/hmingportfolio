@@ -259,11 +259,29 @@
 }
 
 /* Hero decoration base */
+.hero-decoration-stage {
+  display: contents;
+}
+
 .hero-decoration {
   position: absolute;
   z-index: 1;
   pointer-events: none;
   animation: float-y 4s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .hero-decoration-stage {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    display: block;
+    width: min(100%, 1500px);
+    height: 100%;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
 }
 
 /* 桌機/平板：底部四裝飾的 frame 不參與版面，四個物件沿用各自相對 .hero 的絕對定位。
