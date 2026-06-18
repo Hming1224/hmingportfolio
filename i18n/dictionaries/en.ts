@@ -13,6 +13,7 @@ const messages = {
     select: "Select language",
     menu: "Language menu",
     current: "EN",
+    loading: "Switching language",
   },
   hero: {
     badge: "2+ years in industry. Open to opportunities!",

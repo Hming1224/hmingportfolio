@@ -1,7 +1,9 @@
 "use client";
 
+import lottie, { type AnimationItem } from "lottie-web";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useTransition } from "react";
+import { createPortal } from "react-dom";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
@@ -16,12 +18,23 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const switcherRef = useRef<HTMLDivElement>(null);
+  const loadingTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     document.documentElement.lang = locale === "zh-TW" ? "zh-Hant-TW" : "en";
+    setShowLoading(false);
   }, [locale]);
+
+  useEffect(() => {
+    return () => {
+      if (loadingTimerRef.current) {
+        window.clearTimeout(loadingTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!open) {
@@ -56,43 +69,107 @@ export default function LanguageSwitcher() {
 
     const hash = window.location.hash;
     setOpen(false);
-    startTransition(() => {
-      router.replace(`${pathname}${hash}`, { locale: nextLocale });
-    });
+    setShowLoading(true);
+    loadingTimerRef.current = window.setTimeout(() => {
+      startTransition(() => {
+        router.replace(`${pathname}${hash}`, { locale: nextLocale });
+      });
+    }, 2160);
   }
 
   return (
-    <div ref={switcherRef} className={`language-switcher ${open ? "is-open" : ""}`}>
-      <button
-        className="language-switcher-trigger"
-        type="button"
-        aria-label={t("select")}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        disabled={isPending}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <span>{t("current")}</span>
-        <svg viewBox="0 0 12 12" aria-hidden="true">
-          <path d="m2.5 4.5 3.5 3 3.5-3" />
-        </svg>
-      </button>
+    <>
+      <div ref={switcherRef} className={`language-switcher ${open ? "is-open" : ""}`}>
+        <button
+          className="language-switcher-trigger"
+          type="button"
+          aria-label={t("select")}
+          aria-expanded={open}
+          aria-haspopup="menu"
+          disabled={isPending || showLoading}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span>{t("current")}</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true">
+            <path d="m2.5 4.5 3.5 3 3.5-3" />
+          </svg>
+        </button>
 
-      <div className="language-switcher-menu" role="menu" aria-label={t("menu")}>
-        {languageOptions.map((option) => (
-          <button
-            key={option.locale}
-            type="button"
-            role="menuitemradio"
-            aria-checked={locale === option.locale}
-            className={locale === option.locale ? "is-active" : ""}
-            onClick={() => switchLocale(option.locale)}
-          >
-            <span>{option.label}</span>
-            {locale === option.locale && <span aria-hidden="true">✓</span>}
-          </button>
-        ))}
+        <div className="language-switcher-menu" role="menu" aria-label={t("menu")}>
+          {languageOptions.map((option) => (
+            <button
+              key={option.locale}
+              type="button"
+              role="menuitemradio"
+              aria-checked={locale === option.locale}
+              className={locale === option.locale ? "is-active" : ""}
+              disabled={isPending || showLoading}
+              onClick={() => switchLocale(option.locale)}
+            >
+              <span>{option.label}</span>
+              {locale === option.locale && <span aria-hidden="true">✓</span>}
+            </button>
+          ))}
+        </div>
       </div>
+      {(showLoading || isPending) && (
+        <LanguageLoadingPortal label={t("loading")} />
+      )}
+    </>
+  );
+}
+
+function LanguageLoadingPortal({ label }: { label: string }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return createPortal(
+    <>
+      <div className="language-loading-backdrop" aria-hidden="true" />
+      <LanguageLoadingOverlay label={label} />
+    </>,
+    document.body,
+  );
+}
+
+function LanguageLoadingOverlay({ label }: { label: string }) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const animation: AnimationItem = lottie.loadAnimation({
+      container,
+      renderer: "svg",
+      loop: !reducedMotion,
+      autoplay: !reducedMotion,
+      path: "/animations/language-loading.json",
+    });
+
+    if (reducedMotion) {
+      const showFirstFrame = () => animation.goToAndStop(0, true);
+      animation.addEventListener("DOMLoaded", showFirstFrame);
+    }
+
+    return () => {
+      animation.destroy();
+    };
+  }, []);
+
+  return (
+    <div className="language-loading-overlay" role="status" aria-label={label}>
+      <div ref={containerRef} className="language-loading-animation" aria-hidden="true" />
     </div>
   );
 }

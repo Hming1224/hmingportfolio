@@ -104,7 +104,7 @@ export const tools = [
   ["Figma", "https://framerusercontent.com/images/NFQE0lJpudFMnMlrxUlqwsTZobI.png"],
   ["Canva", "https://framerusercontent.com/images/xViGpNQGhsx0NAPy32ilYcniF4.png"],
   ["Framer", "https://framerusercontent.com/images/iGMc0V6aPbUXiqLig37GL6mpDYw.png"],
-  ["ProtoPie", "https://framerusercontent.com/images/qU7g8XziPvJiqL5NgCjlmuGcY.png"],
+  ["lottielab", "/tools/lottielab-logo.png"],
   ["Photoshop", "https://framerusercontent.com/images/G2wWkpP4Un4CQNemoiK0ou60O7o.png"],
   ["Illustrator", "https://framerusercontent.com/images/M0cU5uSFBQOhsa5CV9hdrPIMPY.png"],
   ["Adobe XD", "https://framerusercontent.com/images/7u5X456ibsvVQsGgqzKdFJ2ukIs.png"],
