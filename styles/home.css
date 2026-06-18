@@ -1269,17 +1269,17 @@
     justify-content: flex-start;
     margin-top: 80px;
     min-height: calc(100svh - 80px);
-    padding: clamp(220px, 38svh, 368px) 24px clamp(40px, 6svh, 66px);
+    padding: clamp(190px, 32svh, 320px) 24px clamp(40px, 6svh, 66px);
   }
 
   .hero-copy {
     width: min(550px, 100%);
     max-width: 550px;
-    gap: 40px;
+    gap: 28px;
   }
 
   .hero-title {
-    gap: 32px;
+    gap: 24px;
   }
 
   .hero h1 {
@@ -1288,13 +1288,13 @@
   }
 
   .hero-taglines {
-    font-size: 26px;
+    font-size: 24px;
     line-height: 1.4;
   }
 
   .focus-container {
     column-gap: 1em;
-    row-gap: 32px;
+    row-gap: 20px;
   }
 
   .hero-actions {
@@ -1348,8 +1348,8 @@
 
   .hero-frame-large {
     --wireframe-scale: 0.815;
-    left: 12.375%;
-    top: clamp(548px, calc(79.7svh - 64px), 709px);
+    left: 18%;
+    top: clamp(690px, 69svh, 760px);
   }
 
   .hero-toggle {
@@ -1392,8 +1392,8 @@
 
   .hero-ai-widget {
     --ai-widget-scale: 0.815;
-    left: 6.875%;
-    top: clamp(589px, calc(85.6svh - 69px), 761px);
+    left: 13%;
+    top: clamp(760px, 75svh, 830px);
   }
 
   .hero-wal-pencil {
