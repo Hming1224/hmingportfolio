@@ -30,7 +30,7 @@ export default async function DecisionSection() {
   const { t } = await getCryptoArsenalTranslator();
   return (
     <section id="cs-sec-decision" className="cs-section">
-      <span className="ca-tag ca-tag-amber">{t("問題延伸的後果")}</span>
+      <span className="ca-tag ca-tag-amber">{t("關鍵決策")}</span>
       <h2 className="ca-h2">{t("兩種平倉路徑，結果天差地遠")}</h2>
       <p className="ca-lead ca-narrow">
         {t(

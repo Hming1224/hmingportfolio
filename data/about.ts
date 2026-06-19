@@ -209,7 +209,7 @@ const enExperiences = [
   {
     year: "2022",
     title: "Taiwan Blockchain Academia",
-    role: "Contract Product Designer",
+    role: "Product Designer (Contract)",
     date: "2022.11 - 2023.02",
     image: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
     points: [
@@ -340,7 +340,7 @@ const copyByLocale = {
     education: [
       {
         school: "國立政治大學 數位內容碩士學位學程",
-        date: "2023.09 - 2026.04",
+        date: "2023.09 - 2026.05",
         badge: "GPA 4.07",
         description: "主修使用者體驗研究、人機互動、設計思考與人工智慧。",
         image: "https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png",
@@ -371,7 +371,7 @@ const copyByLocale = {
     education: [
       {
         school: "National Chengchi University, M.S. in Digital Content & Technologies",
-        date: "2023.09 - 2026.04",
+        date: "2023.09 - 2026.05",
         badge: "GPA 4.07",
         description: "Focused on UX research, human-computer interaction, design thinking, and artificial intelligence.",
         image: "https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png",
