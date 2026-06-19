@@ -1,9 +1,11 @@
 "use client";
 
 import { useLocale } from "next-intl";
+import { useEffect } from "react";
 import type { Locale } from "../../../i18n/routing";
 import { ZoomableImage } from "../../../components/case-study";
 import { translateAdvantech } from "../i18n";
+import { setupFeatureConnectors } from "./FeatureConnectors";
 
 type FeatureImageLightboxProps = {
   alt: string;
@@ -28,6 +30,10 @@ export default function FeatureImageLightbox({
 }: FeatureImageLightboxProps) {
   const locale = useLocale() as Locale;
   const t = (text: string) => translateAdvantech(locale, text);
+
+  useEffect(() => {
+    setupFeatureConnectors();
+  }, []);
 
   return (
     <ZoomableImage

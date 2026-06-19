@@ -203,7 +203,7 @@ export const closeMatrix: FlowMatrix = {
       cells: [
         { img: `${STEP}/close-okx-1-start.webp`, alt: "OKX 合約交易畫面，於倉位列表找到要平倉的合約倉位" },
         { img: `${STEP}/close-okx-2-limit.webp`, alt: "OKX 限價平倉彈窗，可設定平倉金額與數量" },
-        { img: `${STEP}/close-okx-3-market.webp`, alt: "OKX 市價平倉彈窗，可設定平倉數量" },
+        { img: `${STEP}/close-okx-3-market.png`, alt: "OKX 市價平倉彈窗，可設定平倉數量" },
       ],
     },
   ],

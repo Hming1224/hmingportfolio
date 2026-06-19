@@ -2208,7 +2208,6 @@
 
   /* 第一條連接線：標題卡為 fgroup 第 1 個子元素 → 第一條線為 nth-child(3) */
   .theme-advantech .cs-sol-fgroup > .cs-sol-fconn:nth-child(3) img {
-    content: url("/projects/advantech/solution/connector-1-mid.svg");
     margin-left: calc(20% - 40px);
   }
 

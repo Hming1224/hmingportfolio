@@ -208,6 +208,7 @@ export default async function SolutionSection() {
         <span className="cs-sol-tag" style={{ background: "#fff4e3", color: "#f69418" }}>Final UI Design</span>
         <h3 className="cs-sol-blk-title">最終 3 種 feature 的介面細節</h3>
         <p className="cs-sol-blk-desc cs-text-muted-blue">最終介面聚焦在告警提示、進階分析與建議生成，讓使用者能從異常發現一路走到決策行動。</p>
+        <FeatureConnectors />
 
         {/* Feature 1.1 */}
         <div className="cs-sol-fgroup cs-sol-fgroup-f11">
@@ -474,7 +475,6 @@ export default async function SolutionSection() {
           </div>
         </div>
         </div>
-        <FeatureConnectors />
       </div>
 
       {/* ── UI Video Block ── */}
