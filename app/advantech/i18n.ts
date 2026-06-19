@@ -324,6 +324,8 @@ const en = {
   "自動摘要報表、特定頁面或視覺效果，協助使用者快速掌握關鍵資訊。": "Automatically summarizes reports, pages, and visualizations so users grasp key information quickly.",
   "，使其與展開後的版本一致，讓使用者能更直接、順暢地瀏覽分析內容。": ", matching the expanded view so users can review analysis directly and smoothly.",
   "跳出 AI chatbot，並且自動輸入：請問今日需量預測分析？": "Opens the AI chatbot and automatically asks: What is today's demand forecast?",
+  "點擊「超約預警」按鈕": "Click the ‘Overage Alert’ button",
+  "點擊通知按鈕": "Click the notification button",
   "無需撰寫程式即可建立預測性機器學習模型，減少對數據科學團隊的依賴。": "Builds predictive machine-learning models without code, reducing reliance on data-science teams.",
   "Senseye 預測性維護技術可尋找過去類似事例，支援設備狀態判讀與維護決策。": "Senseye predictive maintenance finds similar historical cases to support equipment assessment and maintenance decisions.",
   "設備監測、數據分析、遠端監控，並透過 Copilot 對話式 AI 撈取資料與生成視覺報告。": "Combines equipment monitoring, data analysis, remote visibility, and conversational AI for data retrieval and visual reports.",

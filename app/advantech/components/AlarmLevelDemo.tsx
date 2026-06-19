@@ -124,14 +124,21 @@ function setupFeatureConnectors() {
   window.__featureConnectorsSetup = true;
 
   let rafId = 0;
+  let timerId = 0;
+  const runUpdate = () => {
+    if (rafId) { window.cancelAnimationFrame(rafId); rafId = 0; }
+    if (timerId) { window.clearTimeout(timerId); timerId = 0; }
+    updateFeatureConnectors();
+  };
   const scheduleUpdate = () => {
     if (rafId) window.cancelAnimationFrame(rafId);
     rafId = window.requestAnimationFrame(() => {
-      rafId = window.requestAnimationFrame(() => {
-        rafId = 0;
-        updateFeatureConnectors();
-      });
+      rafId = window.requestAnimationFrame(runUpdate);
     });
+    // 後備：某些情境（背景分頁／離屏渲染）會 throttle rAF 導致它不觸發，
+    // 連接線就會卡在預設的左對齊位置。用 setTimeout 保證定位一定會跑到。
+    if (timerId) window.clearTimeout(timerId);
+    timerId = window.setTimeout(runUpdate, 120);
   };
 
   window.updateFeatureConnectors = updateFeatureConnectors;
@@ -149,6 +156,16 @@ function setupFeatureConnectors() {
     document.querySelectorAll('.cs-sol-fgroup, .cs-sol-fr, .cs-sol-fimg').forEach((el) => {
       observer.observe(el);
     });
+  }
+
+  // 進入視窗時重算：首次載入的 rAF/timeout 可能在版面與圖片尚未定位完成時就跑過，
+  // 之後缺少可靠的重算觸發，使用者滑到「最終 UI」區時連接線會停在錯誤（左偏）位置。
+  // 用 IntersectionObserver 在每個 feature group 進入視窗時重算，確保以實際版面定位。
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) scheduleUpdate();
+    }, { rootMargin: '300px 0px' });
+    document.querySelectorAll('.cs-sol-fgroup').forEach((g) => io.observe(g));
   }
 }
 

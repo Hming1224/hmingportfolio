@@ -211,7 +211,6 @@ export default async function SolutionSection() {
 
         {/* Feature 1.1 */}
         <div className="cs-sol-fgroup cs-sol-fgroup-f11">
-        <div className="cs-sol-fr">
           <div className="cs-sol-fc">
             <div className="cs-sol-fchead">
               <p className="cs-sol-ftitle">Feature 1.1｜自主需量分析</p>
@@ -230,10 +229,14 @@ export default async function SolutionSection() {
               </div>
             </div>
           </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-01.webp" alt="Feature 1.1 需量分析畫面" width={960} height={540} />
+          <div className="cs-sol-fr cs-sol-fr-mid">
+            <div className="cs-sol-fnote">
+              <p>點擊「超約預警」按鈕</p>
+            </div>
+            <div className="cs-sol-fimg">
+              <FeatureImageLightbox src="/projects/advantech/solution/final-f11-01.webp" alt="Feature 1.1 需量分析畫面" width={960} height={540} />
+            </div>
           </div>
-        </div>
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
@@ -276,7 +279,6 @@ export default async function SolutionSection() {
 
         {/* Feature 1.2 */}
         <div className="cs-sol-fgroup cs-sol-fgroup-f12">
-        <div className="cs-sol-fr">
           <div className="cs-sol-fc">
             <div className="cs-sol-fchead">
               <p className="cs-sol-ftitle">Feature 1.2｜主動通知預警</p>
@@ -295,10 +297,14 @@ export default async function SolutionSection() {
               </div>
             </div>
           </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-01.webp" alt="Feature 1.2 系統通知" width={960} height={540} />
+          <div className="cs-sol-fr cs-sol-fr-mid">
+            <div className="cs-sol-fnote">
+              <p>點擊通知按鈕</p>
+            </div>
+            <div className="cs-sol-fimg">
+              <FeatureImageLightbox src="/projects/advantech/solution/final-f12-01.webp" alt="Feature 1.2 系統通知" width={960} height={540} />
+            </div>
           </div>
-        </div>
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">
@@ -366,7 +372,6 @@ export default async function SolutionSection() {
 
         {/* Feature 2 */}
         <div className="cs-sol-fgroup cs-sol-fgroup-f2">
-        <div className="cs-sol-fr">
           <div className="cs-sol-fc cs-sol-fc--teal">
             <div className="cs-sol-fchead">
               <p className="cs-sol-ftitle">Feature 2｜模式識別</p>
@@ -385,10 +390,14 @@ export default async function SolutionSection() {
               </div>
             </div>
           </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-01.webp" alt="Feature 2 模式識別主畫面" width={960} height={540} />
+          <div className="cs-sol-fr cs-sol-fr-mid">
+            <div className="cs-sol-fnote">
+              <p>點擊通知按鈕</p>
+            </div>
+            <div className="cs-sol-fimg">
+              <FeatureImageLightbox src="/projects/advantech/solution/final-f2-01.webp" alt="Feature 2 模式識別主畫面" width={960} height={540} />
+            </div>
           </div>
-        </div>
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <div className="cs-sol-fr cs-sol-fr-mid">
           <div className="cs-sol-fimg">

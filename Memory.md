@@ -276,6 +276,15 @@ Page: `/advantech`. Files: `app/advantech/page.tsx`, `app/advantech/FlowConnecto
 - **等高對齊數學（改高度時務必保持）**：AI/Func 卡 `min-height` = UI 卡 + 20；`.cs-ds-ai-gap` = UI 卡高 + 22；`.cs-ds-ui-gap` = 21；欄內 `margin-top` 27（AI/Func）/ 37（UI）。目前值：Func/AI 190、UI 170、ai-gap 192、ui-gap 21。破壞比例 → 中心錯位 → 皺摺回來。
 - **線條樣式**：對齊「最終 3 種 feature 的介面細節」那區的 `connector-*.svg` ＝ `stroke:#B3B3B3; stroke-width:2; stroke-linecap:square; stroke-linejoin:bevel`。兩端都是「由我負責」的線加粗到 3px（其餘 2px）。
 
+### 「最終 3 種 feature」流程連接線（`.cs-sol-fconn`）間距踩坑（2026-06-19）
+
+- **垂直間距 ≈ S 曲線（connector SVG）高度，而高度 = 兩張圖中心的水平跨距 ×(211/482)**（`AlarmLevelDemo.tsx` 的 `connectorOneSvg`）。所以「圖之間的上下間距」其實是被「兩張圖左右錯開多少」決定的，**不是 margin**。
+- **踩坑**：把 Feature 標題卡改全寬（row0 `flex-direction: column`）後，img01 變全寬置中（中心 50%），與側邊的 img02 水平跨距變小 → 第一條 S 曲線變矮 → 第一條間距被壓小（≥1440 才會發生；1512≈77、1920≈103，其他線 153/207）。
+- **走過的彎路（都別再試）**：① 給第一條線加固定 `margin-top` → 差距隨內容寬縮放（1512 差 76、1920 差 104），固定值會跑掉。② 只在 ≥1440 把 img01 靠右 `width: calc(70%-40px); align-self:flex-end` → 能讓間距統一，但 img01 左邊留一片空白、視覺不完整，Hming 否決。
+- **最終正解（結構性，2026-06-19 採用）**：把 Feature 標題卡（`.cs-sol-fc`）**移出第一列**，當 `.cs-sol-fgroup` 的直接子元素 → 全寬區塊排在最上方（`.cs-sol-fgroup` 是 `display:contents`，卡片等於 `.cs-sol-block` flex column 的子項，自動全寬，與第一列間距用 block 的 `gap:28px`）。第一張圖則改成**正常的 mid row**：`.cs-sol-fr.cs-sol-fr-mid` 內放「說明卡 `.cs-sol-fnote`（左，30%）＋ 圖 `.cs-sol-fimg`（右，flex:1≈70%）」。如此**所有列都是 mid row、同構**，img01 在右側、跨距與其他線一致 → 間距自動統一且隨寬度正確縮放（1280=159 / 1512=153 / 1920=207）。
+- **DOM 重構連帶要改的事**：① `:nth-child` 連接線定位選擇器會位移（卡片變第 1 個子元素 → 第一列變 `nth-child(2)`、第一條線變 `nth-child(3)`）：`@media(1025–1139)` 與 `@media(1025–1439)` 兩處原本 `.cs-sol-fr:first-child + .cs-sol-fconn` / `:nth-child(2)` 都要改成 `:nth-child(3)`。② 新 note 文案要進 `i18n.ts` 的 `en` 對照表（漏了英文頁會顯示中文）。③ JS（`AlarmLevelDemo.tsx`）以 `querySelectorAll('.cs-sol-fr')` / `.cs-sol-fconn'`) 取列與線、不靠 nth-child，故不受影響。
+- **編輯踩坑**：移除第一列 `<div class="cs-sol-fr">` wrapper 時，記得**同時刪掉它的收尾 `</div>`**，否則 div 不平衡 → SWC `Expression expected` build error。
+
 ### overflow / 捲動踩坑
 
 - **`overflow-x: auto` 會讓 `overflow-y` 被計算成 `auto`**（CSS 規範），導致上下方向也裁切。最高那欄的底部卡片下邊框、以及捲動到底時最右卡片右邊框都會被裁。解法：`.cs-ds-flow-cols { padding: 4px }`（四邊留空隙）。
@@ -284,7 +293,7 @@ Page: `/advantech`. Files: `app/advantech/page.tsx`, `app/advantech/FlowConnecto
 ### 水平捲動斷點
 
 - 流程圖 **≤809px 改水平捲動**（像「設計流程」），不收單欄。`.cs-ds-flow-inner { min-width: 607px }` ＝ 809px 視窗時的內容區寬。
-- **內容區寬公式（已於 2026-06-02 更新，見下方「頁面留白變數化」）**：原本 padding `clamp(24px, 12.5vw, 240px)` → 內容寬 = 0.75 × 視窗寬。**現已改成 `--page-gutter: clamp(24px, 15.6vw, 300px)`**，1920px 時 padding 達 300、內容寬約 0.69 × 視窗（1320px）；手機 ≤768 另用較小 gutter。算斷點門檻請以新值為準。
+- **內容區寬公式（2026-06-19 更新，見下方「頁面留白變數化」）**：一般內容使用 `--page-gutter: max(clamp(48px, 8vw, 120px), calc((100vw - 1920px) / 2))`，最大內容寬 1920px；navbar / footer 不算內容，navbar 維持自己的貼邊公式 `clamp(48px, 8vw, 120px)`。案例頁 TOC 顯示時會局部覆寫成至少 240px gutter。手機 ≤768 另用較小 gutter。算斷點門檻請以新值為準。
 - ≤1100px 改用緊湊等寬三欄（`grid-template-columns: 1fr 1fr 1fr; column-gap: 28px`），>1100px 才用 Figma 不等寬百分比版面。
 
 ### Before / After 圖片等比例縮放
@@ -399,10 +408,12 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 
 ### 頁面左右留白變數化 `--page-gutter`
 
-- 把全站 9 處重複的水平 padding magic value 抽成 **`--page-gutter: clamp(24px, 15.6vw, 300px)`**(原 `clamp(24px, 12.5vw, 240px)`)。`.cs-section` 等全部改 `padding: 48px var(--page-gutter)`，改一個變數整頁生效。
-- `15.6vw` 讓 **1920px 時 padding 剛好 300**(內容更收斂、約 0.69×視窗)；1440→225、1280→200。
-- **手機保護**:`@media (max-width: 768px)` 內把 `--page-gutter` 覆寫成 `clamp(20px, 6vw, 48px)`，否則 15.6vw 會把手機內容壓太窄(390px 只剩 268)。
-- 內部元素全是 flex/grid/百分比，padding 一改就自動縮，**不用逐一手動調**。
+- 2026-06-19 更新：一般內容 section 統一使用 **`--page-gutter: max(clamp(48px, 8vw, 120px), calc((100vw - 1920px) / 2))`**，所以所有顯示內容（不含 navbar / footer）最大寬 1920px。
+- Navbar 不吃 `--page-gutter`，維持自己的原本公式 `clamp(48px, 8vw, 120px)`，避免首頁和 nav 為了專案頁 TOC 變窄。
+- 案例頁在 TOC 會顯示的桌機寬度（≥1301px）局部覆寫 **`--page-gutter: max(240px, calc((100vw - 1920px) / 2))`**，左右至少保留 240px 給 TOC；1300px 以下 TOC 隱藏，沿用一般內容 gutter。
+- 首頁專案區、Contact 內容區、一般頁面 section 都要吃一般 `var(--page-gutter)`，不要再另外寫 1200px / 1440px 內容上限。未來新增任何頁面也套這條規則，除非是文字段落、表單欄位、TOC 這種局部可讀性限制。
+- **手機保護**:`@media (max-width: 768px)` 內把 `--page-gutter` 覆寫成 `clamp(20px, 6vw, 48px)`；首頁專案列表 mobile 仍可用自己的 24px 邊距維持卡片舒適度。
+- 內部元素盡量用 flex/grid/百分比，padding 一改就自動縮，**不用逐一手動調**。
 
 ### TOC(頁內目錄 / scrollspy)——左側半透明浮卡
 
