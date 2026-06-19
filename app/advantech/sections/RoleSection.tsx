@@ -16,10 +16,10 @@ export default async function RoleSection() {
           preserveAspectRatio="none"
           aria-hidden="true"
         >
-          <line x1="450" y1="161" x2="611" y2="235" />
-          <line x1="829" y1="235" x2="990" y2="161" />
-          <line x1="450" y1="410" x2="611" y2="336" />
-          <line x1="829" y1="336" x2="990" y2="410" />
+          <line x1="450" y1="161" x2="720" y2="286" />
+          <line x1="720" y1="286" x2="990" y2="161" />
+          <line x1="450" y1="410" x2="720" y2="286" />
+          <line x1="720" y1="286" x2="990" y2="410" />
         </svg>
         <div className="cs-role-center">
           <Image

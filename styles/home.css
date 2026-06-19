@@ -278,7 +278,7 @@
     left: 50%;
     z-index: 1;
     display: block;
-    width: min(calc(100% - (var(--home-page-gutter) * 2)), 1920px);
+    width: min(calc(100% - (var(--home-page-gutter) * 2)), 1200px);
     height: 100%;
     pointer-events: none;
     transform: translateX(-50%);

@@ -27,7 +27,7 @@
 }
 
 .about-hero {
-  padding: 48px clamp(24px, 8vw, 120px);
+  padding: 48px var(--page-gutter);
 }
 
 .about-window-animated-wrap {
@@ -132,14 +132,14 @@
 }
 
 .about-heading {
-  padding-inline: clamp(24px, 8vw, 120px);
+  margin-left: 0;
   scroll-margin-top: 80px;
 }
 
 .experience-layout,
 .skills-panel,
 .education-list {
-  margin: 0 clamp(24px, 8vw, 120px) 24px;
+  margin: 0 var(--page-gutter) 24px;
 }
 
 /* 尊重「減少動態效果」偏好：直接顯示最終狀態，不播進場動畫 */
@@ -567,7 +567,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin: 0 clamp(24px, 8vw, 120px) 24px;
+  margin: 0 var(--page-gutter) 24px;
 }
 
 .design-value-animated {
@@ -755,7 +755,7 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
-  margin: 0 clamp(24px, 8vw, 120px) 24px;
+  margin: 0 var(--page-gutter) 24px;
 }
 
 .educator-card:nth-child(1) {
@@ -997,7 +997,7 @@
   }
 
   .about-heading {
-    padding-inline: 24px;
+    --page-gutter: 24px;
   }
 
   .experience-layout,

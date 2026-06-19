@@ -139,7 +139,14 @@ export default function EducatorMasonry({ items }: { items: EducatorItem[] }) {
                 alt={item.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
+                style={{
+                  objectFit: "cover",
+                  objectPosition:
+                    item.image === "/educator/openhci.jpg" ||
+                    item.image === "/educator/hackathon.jpg"
+                      ? "center center"
+                      : "center top",
+                }}
               />
             </div>
             <div className="educator-card-body">
