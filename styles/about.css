@@ -60,6 +60,23 @@
   will-change: transform, opacity;
 }
 
+.genie-dock-icon--viewport {
+  position: fixed;
+  bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 1100px) {
+  .genie-dock-icon {
+    position: fixed;
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+.genie-dock-icon--card-edge {
+  position: absolute;
+  bottom: 18px;
+}
+
 .genie-dock-icon img {
   display: block;
   width: 100%;

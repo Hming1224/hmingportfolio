@@ -805,17 +805,17 @@
   padding: 48px 0;
 }
 
-.section-heading span {
+.section-heading > span {
   height: 1px;
   background: var(--line);
 }
 
-.section-heading span:first-child {
+.section-heading > span:first-child {
   width: max(0px, calc(var(--page-gutter) - 32px));
   flex: 0 0 max(0px, calc(var(--page-gutter) - 32px));
 }
 
-.section-heading span:last-child {
+.section-heading > span:last-child {
   flex: 1;
 }
 
@@ -1751,7 +1751,7 @@
     padding: 48px 0;
   }
 
-  .section-heading span:first-child {
+  .section-heading > span:first-child {
     flex: 0 0 max(0px, calc(var(--page-gutter) - 24px));
     width: max(0px, calc(var(--page-gutter) - 24px));
   }

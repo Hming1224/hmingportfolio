@@ -18,6 +18,7 @@ import {
   TabsPanels,
   TabsTab,
 } from "./animate-ui/primitives/base/tabs";
+import SplitText from "./animate-ui/primitives/texts/SplitText";
 
 function useScrollReveal() {
   const listRef = useRef<HTMLDivElement>(null);
@@ -131,7 +132,19 @@ export default function Works() {
     <section id="projects" className="projects-section">
       <div className="section-heading">
         <span />
-        <h2>{t("heading")}</h2>
+        <SplitText
+          tag="h2"
+          text={t("heading")}
+          delay={42}
+          duration={0.72}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 34 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-80px"
+          textAlign="inherit"
+        />
         <span />
       </div>
 

@@ -9,6 +9,7 @@ import AvatarProfile from "../../components/AvatarProfile";
 import AnimatedContent from "./AnimatedContent";
 import GenieReveal from "./GenieReveal";
 import EducatorMasonry from "./EducatorMasonry";
+import SplitText from "../../components/animate-ui/primitives/texts/SplitText";
 import { getAboutData, type ExperiencePoint } from "../../data/about";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
@@ -184,16 +185,28 @@ function SkillIcon({ id }: { id: string }) {
 }
 
 function SectionHeading({
-  children,
+  text,
   id,
 }: {
-  children: React.ReactNode;
+  text: string;
   id?: string;
 }) {
   return (
     <div className="section-heading about-heading" id={id}>
       <span />
-      <h2>{children}</h2>
+      <SplitText
+        tag="h2"
+        text={text}
+        delay={42}
+        duration={0.72}
+        ease="power3.out"
+        splitType="chars"
+        from={{ opacity: 0, y: 34 }}
+        to={{ opacity: 1, y: 0 }}
+        threshold={0.1}
+        rootMargin="-80px"
+        textAlign="inherit"
+      />
       <span />
     </div>
   );
@@ -235,15 +248,29 @@ export default async function AboutMePage() {
               >
                 <div className="avatar-profile-stage">
                   <AvatarProfile
-                    imageSrc="/avatar/avatar-gray.png"
-                    hoverImageSrc="/avatar/avatar-yellow.png"
+                    imageSrc="/avatar/avatar-gray-680.png"
+                    hoverImageSrc="/avatar/avatar-yellow-680.png"
                     imageAlt="Brian Huang"
                   />
                 </div>
               </div>
 
               <div className="about-intro-copy">
-                <h1 id="about-title">{heroTitle}</h1>
+                <SplitText
+                  id="about-title"
+                  tag="h1"
+                  text={heroTitle}
+                  className="about-title"
+                  delay={42}
+                  duration={0.72}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 34 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-80px"
+                  textAlign="inherit"
+                />
                 {intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
             </div>
@@ -252,7 +279,7 @@ export default async function AboutMePage() {
       </section>
 
       {/* 2. Design Values */}
-      <SectionHeading id="values">{headings.values}</SectionHeading>
+      <SectionHeading id="values" text={headings.values} />
       <section className="design-values-section">
         {designValues.map((value, i) => (
           <AnimatedContent
@@ -278,7 +305,7 @@ export default async function AboutMePage() {
       </section>
 
       {/* 3. 工作經歷 */}
-      <SectionHeading id="experience">{headings.experience}</SectionHeading>
+      <SectionHeading id="experience" text={headings.experience} />
       <section className="experience-layout">
         <YearRail years={experienceYears} />
         <div className="experience-list">
@@ -318,11 +345,11 @@ export default async function AboutMePage() {
       </section>
 
       {/* 4. 對設計教育的貢獻 */}
-      <SectionHeading id="educator">{headings.educator}</SectionHeading>
+      <SectionHeading id="educator" text={headings.educator} />
       <EducatorMasonry items={educatorItems} />
 
       {/* 5. 專業技能 */}
-      <SectionHeading id="skills">{headings.skills}</SectionHeading>
+      <SectionHeading id="skills" text={headings.skills} />
       <section className="skills-panel">
         <div className="skills-grid">
           {skillCategories.map((category, idx) => (
@@ -382,7 +409,7 @@ export default async function AboutMePage() {
       </section>
 
       {/* 6. 教育背景 */}
-      <SectionHeading id="education">{headings.education}</SectionHeading>
+      <SectionHeading id="education" text={headings.education} />
       <section className="education-list">
         {education.map((item, index) => (
           <AnimatedContent

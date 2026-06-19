@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
+import Image from "next/image";
 import { toCanvas } from "html-to-image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
@@ -22,6 +23,8 @@ gsap.registerPlugin(ScrollTrigger);
  */
 
 const DUR = 700; // 漏斗變形時長（ms）
+const VIEWPORT_DOCK_CLASS = "genie-dock-icon--viewport";
+const CARD_EDGE_DOCK_CLASS = "genie-dock-icon--card-edge";
 
 type GenieRevealProps = {
   children: React.ReactNode;
@@ -40,7 +43,7 @@ const eIn2 = (t: number) => t * t;
 export default function GenieReveal({
   children,
   className = "",
-  dockIconSrc = "/avatar/avatar-gray.png",
+  dockIconSrc = "/avatar/avatar-gray-dock.png",
   threshold = 0.05,
 }: GenieRevealProps) {
   const outerRef = useRef<HTMLDivElement | null>(null);
@@ -54,7 +57,7 @@ export default function GenieReveal({
     h: number;
   } | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const outer = outerRef.current;
     const card = cardRef.current;
     const canvas = canvasRef.current;
@@ -74,6 +77,40 @@ export default function GenieReveal({
     let played = false;
     let pendingPlay = false; // 觸發時快照還沒好 → 標記，好了立刻播
     let rafId = 0;
+    let placementRafId = 0;
+    let placementTimer = 0;
+
+    const updateDockPlacement = () => {
+      if (killed) return;
+      dockIcon.classList.remove(VIEWPORT_DOCK_CLASS);
+      dockIcon.classList.remove(CARD_EDGE_DOCK_CLASS);
+      const cardRect = card.getBoundingClientRect();
+      if (cardRect.bottom - 18 > window.innerHeight) {
+        dockIcon.classList.add(VIEWPORT_DOCK_CLASS);
+      } else {
+        dockIcon.classList.add(CARD_EDGE_DOCK_CLASS);
+      }
+    };
+
+    const scheduleDockPlacement = () => {
+      cancelAnimationFrame(placementRafId);
+      placementRafId = requestAnimationFrame(updateDockPlacement);
+    };
+
+    updateDockPlacement();
+    scheduleDockPlacement();
+    placementTimer = window.setTimeout(updateDockPlacement, 500);
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(scheduleDockPlacement).catch(() => {});
+    }
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(scheduleDockPlacement)
+        : null;
+    resizeObserver?.observe(card);
+    resizeObserver?.observe(outer);
+    window.addEventListener("resize", scheduleDockPlacement);
+    window.addEventListener("orientationchange", scheduleDockPlacement);
 
     // ── 1. 預拍快照（idle 時跑，使用者看不到）──────────────────────────────
     const takeSnapshot = async () => {
@@ -115,6 +152,7 @@ export default function GenieReveal({
         pendingPlay = true; // 快照還沒好，等好了再播
         return;
       }
+      updateDockPlacement();
       played = true;
 
       const { off, w, h } = snap;
@@ -130,10 +168,19 @@ export default function GenieReveal({
       }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const dockX = w / 2; // 漏斗吸入點 = 卡片底部中央
-      const dockY = h;
+      const getDockTarget = () => {
+        updateDockPlacement();
+        const cardRect = card.getBoundingClientRect();
+        const dockRect = dockIcon.getBoundingClientRect();
+        // 漏斗吸入點 = 目前畫面上的 dock icon 下緣中心。
+        // 字卡底部仍在 viewport 內時貼近卡片；超出 viewport 時貼近畫面下緣。
+        return {
+          dockX: clamp(dockRect.left + dockRect.width / 2 - cardRect.left, 0, w),
+          dockY: clamp(dockRect.bottom - cardRect.top, 0, h),
+        };
+      };
 
-      const renderGenie = (rawT: number) => {
+      const renderGenie = (rawT: number, dockX: number, dockY: number) => {
         ctx.clearRect(0, 0, w, h);
         for (let y = 0; y < h; y++) {
           const r = y / h;
@@ -150,19 +197,20 @@ export default function GenieReveal({
         }
       };
 
-      // 真卡片隱藏、canvas 顯示，畫起始收合狀態
-      canvas.style.display = "block";
-      canvas.style.opacity = "1";
-      card.style.visibility = "hidden";
-      renderGenie(0);
-
       const playGenie = () => {
+        const { dockX, dockY } = getDockTarget();
+        // 真卡片隱藏、canvas 顯示，畫起始收合狀態
+        canvas.style.display = "block";
+        canvas.style.opacity = "1";
+        card.style.visibility = "hidden";
+        renderGenie(0, dockX, dockY);
+
         let start: number | null = null;
         const frame = (ts: number) => {
           if (killed) return;
           if (start === null) start = ts;
           const rawT = clamp((ts - start) / DUR, 0, 1);
-          renderGenie(rawT);
+          renderGenie(rawT, dockX, dockY);
           if (rawT < 1) {
             rafId = requestAnimationFrame(frame);
           } else {
@@ -226,12 +274,17 @@ export default function GenieReveal({
     return () => {
       killed = true;
       cancelAnimationFrame(rafId);
+      cancelAnimationFrame(placementRafId);
       trigger.kill();
       gsap.killTweensOf(canvas);
       gsap.killTweensOf(card);
       gsap.killTweensOf(dockIcon);
       clearTimeout(snapshotTimer);
       clearTimeout(firstScreenTimer);
+      clearTimeout(placementTimer);
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", scheduleDockPlacement);
+      window.removeEventListener("orientationchange", scheduleDockPlacement);
     };
   }, [threshold]);
 
@@ -256,7 +309,15 @@ export default function GenieReveal({
         }}
       />
       <div ref={dockIconRef} className="genie-dock-icon" aria-hidden="true">
-        <img src={dockIconSrc} alt="" />
+        <Image
+          src={dockIconSrc}
+          alt=""
+          width={68}
+          height={68}
+          preload
+          unoptimized
+          decoding="sync"
+        />
       </div>
     </div>
   );

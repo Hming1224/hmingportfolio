@@ -15,6 +15,7 @@ type SplitTarget = HTMLElement & {
 };
 
 export interface SplitTextProps {
+  id?: string;
   tag?: SplitTextTag;
   text: string;
   className?: string;
@@ -31,6 +32,7 @@ export interface SplitTextProps {
 }
 
 export default function SplitText({
+  id,
   text,
   className = '',
   delay = 50,
@@ -112,6 +114,11 @@ export default function SplitText({
                       ? self.words
                       : self.lines;
 
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            gsap.set(targets, { ...to });
+            return;
+          }
+
           gsap.set(targets, { ...from });
 
           const tween = gsap.to(targets, {
@@ -186,6 +193,7 @@ export default function SplitText({
 
   return (
     <Tag
+      id={id}
       ref={(node) => {
         ref.current = node as SplitTarget | null;
       }}
