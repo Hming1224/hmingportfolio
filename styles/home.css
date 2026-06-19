@@ -1,6 +1,7 @@
 /* Home page, project cards, and hero decoration components. */
 
 .hero {
+  --home-page-gutter: clamp(24px, 12.5vw, 240px);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -8,7 +9,7 @@
   justify-content: center;
   overflow: hidden;
   min-height: 100svh;
-  padding: 120px clamp(48px, 8vw, 120px);
+  padding: 120px var(--home-page-gutter);
   text-align: center;
 }
 
@@ -277,7 +278,7 @@
     left: 50%;
     z-index: 1;
     display: block;
-    width: min(calc(100% - (clamp(48px, 8vw, 120px) * 2)), 1500px);
+    width: min(calc(100% - (var(--home-page-gutter) * 2)), 1440px);
     height: 100%;
     pointer-events: none;
     transform: translateX(-50%);
@@ -325,7 +326,7 @@
 /* Figma ref: 1330×900px section, nav 80px fixed → top = (figma_y + 80) / 900 */
 .hero-cursor-brian {
   left: 42%;
-  top: 31%;
+  top: 33%;
   animation:
     heroShootTopR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both,
     float-y 4s ease-in-out 0.9s infinite;
@@ -333,7 +334,7 @@
 
 .hero-cursor-engineers {
   left: 17%;
-  top: 44%;
+  top: 49%;
   animation:
     heroShootLeft 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both,
     float-y 4s ease-in-out 1.1s infinite;
@@ -449,7 +450,7 @@
 
 .hero-frame-large {
   left: 59%;
-  top: calc(36% - 24px);
+  top: 36%;
   animation:
     heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both,
     float-y 4s ease-in-out 1.2s infinite;
@@ -601,7 +602,7 @@
 
 /* Toggle decoration */
 .toggle-decoration {
-  --toggle-scale: 1;
+  --toggle-scale: 0.498;
   width: 95px;
   height: 104px;
 }
@@ -736,7 +737,7 @@
 
 .hero-ai-widget {
   left: 15%;
-  top: calc(85% - 24px);
+  top: 85%;
   animation:
     heroShootBotL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s both,
     float-y 4s ease-in-out 1.25s infinite;
@@ -744,7 +745,7 @@
 
 .hero-wal-pencil {
   left: 79%;
-  top: calc(81% - 24px);
+  top: 81%;
   animation:
     heroShootBotR 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both,
     float-y 4s ease-in-out 1.3s infinite;
@@ -791,7 +792,7 @@
 }
 
 .projects-section {
-  --page-gutter: clamp(24px, 8vw, 120px);
+  --page-gutter: clamp(24px, 12.5vw, 240px);
   padding: 0 var(--page-gutter) 48px;
   scroll-margin-top: 80px;
 }
@@ -1264,13 +1265,15 @@
   left: 68px;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .hero {
-    --hero-lower-decor-y: clamp(500px, 58svh, 640px);
+    --hero-copy-y: 42svh;
+    --hero-copy-top: 42%;
+    --hero-lower-decor-y: 65%;
     justify-content: flex-start;
     margin-top: 80px;
     min-height: calc(100svh - 80px);
-    padding: clamp(190px, 32svh, 320px) 24px clamp(40px, 6svh, 66px);
+    padding: var(--hero-copy-y) 24px clamp(40px, 6svh, 66px);
   }
 
   .hero-copy {
@@ -1333,18 +1336,18 @@
 
   .hero-cursor-brian {
     left: 39.875%;
-    top: clamp(185px, calc(26.9svh - 22px), 239px);
+    top: 33%;
   }
 
   .hero-cursor-engineers {
     left: 4%;
-    top: clamp(400px, 43svh, 470px);
+    top: calc(var(--hero-copy-top) + 1%);
   }
 
   .hero-cursor-pm {
-    right: 53px;
+    right: 7%;
     left: auto;
-    top: clamp(276px, calc(40.2svh - 32px), 357px);
+    top: 37%;
   }
 
   .hero-frame-large {
@@ -1354,79 +1357,53 @@
   }
 
   .hero-toggle {
-    --toggle-scale: 0.6;
     left: 0;
-    top: calc(var(--hero-lower-decor-y) - 24px);
+    top: 62%;
   }
 
   .hero-sticky-1 {
     left: 35.625%;
-    top: clamp(70px, calc(10.1svh - 8px), 90px);
+    top: 10%;
   }
 
   .hero-sticky-2 {
     left: 47%;
-    top: clamp(42px, calc(6.1svh - 5px), 54px);
+    top: 6%;
   }
 
   .hero-sticky-3 {
     left: 5%;
-    top: clamp(171px, calc(24.9svh - 20px), 221px);
+    top: 25%;
   }
 
   .hero-sticky-4 {
     left: 14.75%;
-    top: clamp(144px, calc(20.9svh - 17px), 186px);
+    top: 21%;
   }
 
   .hero-sticky-5 {
     left: auto;
-    right: 137px;
-    top: clamp(138px, calc(20.1svh - 16px), 179px);
+    right: 15%;
+    top: 20%;
   }
 
   .hero-sticky-6 {
     left: auto;
-    right: 59px;
-    top: clamp(159px, calc(23.2svh - 19px), 206px);
+    right: 6%;
+    top: 23%;
   }
 
   .hero-ai-widget {
     --ai-widget-scale: 0.815;
-    left: 13%;
-    top: calc(var(--hero-lower-decor-y) + 128px);
+    left: 4%;
+    top: 78%;
   }
 
   .hero-wal-pencil {
     --wal-pencil-scale: 0.807;
     left: auto;
-    right: 70px;
-    top: clamp(577px, calc(83.9svh - 67px), 746px);
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1280px) {
-  .hero {
-    --hero-lower-decor-y: clamp(540px, 62svh, 700px);
-  }
-
-  .hero-cursor-engineers {
-    left: 4%;
-    top: clamp(400px, 43svh, 470px);
-  }
-
-  .hero-toggle {
-    --toggle-scale: 0.6;
-    left: 0;
-    top: calc(var(--hero-lower-decor-y) - 80px);
-  }
-
-  .hero-sticky-3 {
-    top: 27%;
-  }
-
-  .hero-sticky-4 {
-    top: 23%;
+    right: -2%;
+    top: 79%;
   }
 }
 
@@ -1512,19 +1489,19 @@
   }
 
   .hero-cursor-engineers {
-    left: 31px;
-    top: max(18px, calc(var(--hero-mobile-h) * 0.031));
+    left: 8%;
+    top: 3%;
   }
 
   .hero-cursor-pm {
-    right: 46px;
+    right: 8%;
     left: auto;
-    top: calc(var(--hero-mobile-h) * 0.056);
+    top: 6%;
   }
 
   .hero-cursor-brian {
-    left: calc(50% - 68.5px);
-    top: max(158px, calc(var(--hero-mobile-h) * 0.274));
+    left: 40%;
+    top: 27%;
   }
 
   /* 6 張卡包進 .hero-sticky-group，整組水平置中於螢幕。
@@ -1536,7 +1513,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: calc(var(--hero-mobile-h) * 0.068);
+    top: 7%;
     width: 362px;
     height: 154px;
     z-index: 1;
@@ -1547,27 +1524,27 @@
   .hero-sticky-data-storage {
     z-index: 1;
     left: 0;
-    top: 42px;
+    top: 27%;
     rotate: -15deg;
   }
 
   .hero-sticky-co-work {
     z-index: 2;
-    left: 50px;
-    top: 21px;
+    left: 14%;
+    top: 14%;
     rotate: -10deg;
   }
 
   .hero-sticky-idea {
     z-index: 3;
-    left: 100px;
+    left: 28%;
     top: 0;
     rotate: -5deg;
   }
 
   .hero-sticky-user-centric {
     z-index: 4;
-    left: 150px;
+    left: 41%;
     top: 0;
     rotate: 5deg;
   }
@@ -1575,16 +1552,16 @@
   .hero-sticky-product-spec {
     z-index: 5;
     right: auto;
-    left: 200px;
-    top: 21px;
+    left: 55%;
+    top: 14%;
     rotate: 10deg;
   }
 
   .hero-sticky-how-might {
     z-index: 6;
     right: auto;
-    left: 250px;
-    top: 42px;
+    left: 69%;
+    top: 27%;
     rotate: 15deg;
   }
 
@@ -1592,14 +1569,14 @@
      按鈕底(相對 hero) = heroH×0.315(padding-top) + 322px(copy 固定高)；
      空隙中點 = (按鈕底 + heroH)/2 = heroH×0.6575 + 161px。
      frame 高 162px，故 frame top = 中點 − 81 = heroH×0.6575 + 80px，frame 正好置中。
-     四個子物件水平用 left:%（隨寬度自適應），垂直用相對 frame 的固定 px 排高度順序。
+     四個子物件水平與垂直都用百分比（隨 frame 尺寸自適應）排高度順序。
      ※ 高度 < 800px 時這四個物件已由下方 media query 隱藏，故這裡只需顧 ≥800 的情況。 */
   .hero-bottom-group {
     display: block;
     position: absolute;
     left: 0;
     right: 0;
-    top: calc(var(--hero-mobile-h) * 0.6575 + 80px);
+    top: 74%;
     height: 162px;
     z-index: 1;
   }
@@ -1613,25 +1590,24 @@
   }
 
   .hero-toggle {
-    --toggle-scale: 0.498;
     left: 69.6%;
-    top: 22px;
+    top: 14%;
   }
 
   .hero-frame-large {
     --wireframe-scale: 0.65;
     left: 23.9%;
-    top: 44px;
+    top: 27%;
   }
 
   .hero-ai-widget {
     --ai-widget-scale: 0.65;
     left: 12.8%;
-    top: 58px;
+    top: 36%;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .hero h1 {
     font-size: 36px;
   }
@@ -1641,10 +1617,14 @@
    現收回 home.css 作為首頁 hero 的唯一權威。底部裝飾位置沿用上方 base 規則。 */
 @media (min-width: 1024px) {
   .hero {
-    max-width: 1500px;
+    --hero-copy-y: 43svh;
+    --hero-copy-top: 43%;
+    --hero-lower-decor-y: 62%;
+    width: 100%;
+    max-width: none;
     margin: 0 auto;
     justify-content: flex-start;
-    padding: clamp(280px, 48vh, 500px) clamp(48px, 6vw, 112px) 100px;
+    padding: var(--hero-copy-y) var(--home-page-gutter) 100px;
   }
 
   .hero-copy {
@@ -1689,50 +1669,56 @@
     color: var(--purple);
     box-shadow: inset 0 0 0 2px var(--purple);
   }
-}
 
-@media (min-width: 1024px) and (max-height: 1100px) {
-  .hero {
-    padding-top: clamp(220px, 38vh, 330px);
-    padding-bottom: clamp(56px, 8vh, 84px);
+  .hero-cursor-engineers {
+    left: 4%;
+    top: calc(var(--hero-copy-top) + 1%);
   }
 
-  .hero-copy {
-    gap: 28px;
+  .hero-toggle {
+    left: 0;
+    top: 62%;
   }
 
-  .hero-title {
-    gap: 24px;
+  .hero-sticky-1 {
+    top: 20%;
   }
 
-  .hero-cursor-brian {
-    left: 50%;
-    top: clamp(245px, 28vh, 300px);
-  }
-
-  .hero-frame-large {
-    left: 80%;
-    top: clamp(560px, 62vh, 700px);
+  .hero-sticky-2 {
+    top: 16%;
   }
 
   .hero-sticky-3 {
-    top: 26%;
+    top: 27%;
   }
 
   .hero-sticky-4 {
-    top: 22%;
+    top: 23%;
   }
 
-  .hero-actions {
-    margin-top: 4px;
+  .hero-ai-widget {
+    --ai-widget-scale: 0.815;
+    left: 4%;
+    top: 78%;
+  }
+
+  .hero-wal-pencil {
+    --wal-pencil-scale: 0.807;
+    left: auto;
+    right: -2%;
+    top: 79%;
+  }
+
+  .hero-cursor-brian {
+    left: 39.875%;
   }
 }
 
 @media (min-width: 768px) {
   .hero-frame-large {
     left: auto;
-    right: clamp(0px, 2vw, 32px);
-    top: var(--hero-lower-decor-y, clamp(520px, 62svh, 700px));
+    right: -3%;
+    top: var(--hero-lower-decor-y, 62%);
   }
 }
 
