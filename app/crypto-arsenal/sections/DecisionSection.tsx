@@ -32,6 +32,7 @@ export default async function DecisionSection() {
     <section id="cs-sec-decision" className="cs-section">
       <span className="ca-tag ca-tag-amber">{t("關鍵決策")}</span>
       <h2 className="ca-h2">{t("兩種平倉路徑，結果天差地遠")}</h2>
+      <div className="cs-divider" />
       <p className="ca-lead ca-narrow">
         {t(
           "問題不只是「看不到倉位」，而是使用者為了控制單筆風險去交易所平倉，反而可能讓整支策略報廢——機器人偵測到自己管理的倉位突然消失、狀態錯亂，為風險控管只能停掉策略且無法恢復。",

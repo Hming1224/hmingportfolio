@@ -9,8 +9,8 @@ export default async function NextStepSection() {
     <section id="cs-sec-next" className="cs-ns-section">
       <div className="cs-ns-header">
         <h2 className="cs-ns-title">{t("下一步：工程實作與 AI 系統落地")}</h2>
-        <p className="cs-ns-desc cs-text-ink">UI/UX 設計階段完成後，專案將進入工程實作與 AI 能力持續優化階段。設計師已先定義 AI Chatbot 的使用情境、互動流程與介面體驗；接下來，後端工程師將承接這些設計方向，進一步建構 AI 資料庫、訓練模型能力，並將設計中的功能情境轉化為可運作的系統架構。</p>
         <div className="cs-ns-divider" />
+        <p className="cs-ns-desc cs-text-ink">UI/UX 設計階段完成後，專案將進入工程實作與 AI 能力持續優化階段。設計師已先定義 AI Chatbot 的使用情境、互動流程與介面體驗；接下來，後端工程師將承接這些設計方向，進一步建構 AI 資料庫、訓練模型能力，並將設計中的功能情境轉化為可運作的系統架構。</p>
       </div>
 
       <div className="cs-ns-cards">

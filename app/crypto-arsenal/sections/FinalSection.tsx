@@ -8,6 +8,7 @@ export default async function FinalSection() {
     <section id="cs-sec-final" className="cs-section">
       <span className="ca-tag">Final UI Design</span>
       <h2 className="ca-h2">{t("最終介面：手動平倉和下止盈止損單")}</h2>
+      <div className="cs-divider" />
       <p className="ca-lead">
         {t(
           "承接競品流程的拆解與多次提案的權衡，收斂出最適合 CA 的方案，把手動平倉和止盈止損分為三個流程依序介紹。",

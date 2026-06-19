@@ -122,6 +122,7 @@ export default async function ResearchSection() {
     <section id="cs-sec-research" className="cs-section ca-section-alt">
       <span className="ca-tag">{t("交易所介面參考")}</span>
       <h2 className="ca-h2">{t("盤點交易所通用的倉位資訊、平倉、止盈止損流程")}</h2>
+      <div className="cs-divider" />
       <p className="ca-lead">
         {t(
           "為了順利讓使用者無縫熟悉流程，我以 Binance / Bybit / OKX 的實際介面進行競品流程參考，拆解三家共通的倉位資訊欄位、平倉和止盈止損流程，另外同時考量交易所能夠回傳的資料，收斂出專屬於 CA 的操作流程。",

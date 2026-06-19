@@ -374,10 +374,11 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 
 ### 6.1 頁面橫向邊距（`--page-gutter`）
 ```css
---page-gutter: clamp(24px, 15.6vw, 300px);   /* 桌機：1920px 時達 300px 上限 */
---page-gutter: clamp(20px, 6vw, 48px);        /* ≤768px 覆寫，避免內容被壓太窄 */
+--page-gutter: max(clamp(48px, 8vw, 120px), calc((100vw - 1920px) / 2)); /* 一般內容 */
+--page-gutter: max(240px, calc((100vw - 1920px) / 2));                  /* 案例頁 ≥1301px，保留 TOC 空間 */
+--page-gutter: clamp(20px, 6vw, 48px);                                  /* ≤768px，避免內容被壓太窄 */
 ```
-`.cs-section` 等用 `padding: 48px var(--page-gutter)`。首頁 `.projects-section` 自有較窄 gutter（`clamp(24px, 8vw, 120px)`）。
+一般內容 section 都用 `var(--page-gutter)`，最大內容寬 1920px；navbar / footer 不算內容，navbar 維持自己的貼邊公式 `clamp(48px, 8vw, 120px)`。案例頁在 TOC 會顯示的桌機寬度，內容左右至少保留 240px 給 TOC。未來新增頁面不要另外寫 1200px / 1440px 內容上限，除非是文字段落、表單欄位、TOC 這種局部可讀性限制。
 
 ### 6.2 Breakpoints（真實斷點，已對齊 code）
 > ⚠️ 舊文件寫「≤809 手機 / 810–1023 平板」是錯的——code 沒有 809/810。
@@ -420,7 +421,15 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 | Contact | — | — | 無頂部 padding，由 Hero image 佔滿 |
 
 ### 6.5 最大寬度
-- Hero copy `max-width: 820px`；Intro 段落 `780–860px`；Contact card `min(540px, 100%)`。
+- 一般頁面內容線：`--page-gutter` 控制，最大內容寬 1920px。
+- 局部可讀性限制：Hero copy `max-width: 820px`；Intro 段落 `780–860px`；表單欄位可依互動可讀性限制寬度。
+
+### 6.6 案例頁 TOC 標題與分隔線規範
+- **核心規則**：所有透過 Table of Contents (TOC) 導覽點擊進入的案例頁大標題（即對應於 TOC `id` 錨點的區塊主標題，例如 `.cs-heading`、`.ca-h2` 等），其下方**必須緊鄰一條水平分隔線**（`.cs-divider` 或其專案/主題變體）。
+- **實作方式**：
+  - **標準區塊**：使用 `CaseSection` 元件，其內部會自動渲染 `CaseHeading`（內含 `h2` 與 `.cs-divider` / `.cs-divider-white`）。
+  - **自訂/客製化區塊（如 Process, Result, Next Step, 以及 Crypto Arsenal 所有區塊）**：若不使用 `CaseSection` 元件，必須在區塊的大標題（`h2`）下方手動置入分隔線（例如 `<div className="cs-divider" />` 或使用 `CaseHeading` 元件）。
+  - **分隔線位置**：分隔線必須置於區塊的「大標題」正下方（大標題與其描述/段落之間），不可被放到描述段落的下方。
 
 ---
 

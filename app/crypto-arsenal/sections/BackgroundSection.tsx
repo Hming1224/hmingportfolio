@@ -30,6 +30,7 @@ export default async function BackgroundSection() {
     <section id="cs-sec-background" className="cs-section ca-section-alt">
       <span className="ca-tag">{t("專案背景")}</span>
       <h2 className="ca-h2">{t("Crypto Arsenal 是做什麼？")}</h2>
+      <div className="cs-divider" />
 
       <div className="ca-narrow">
         <p className="ca-lead">

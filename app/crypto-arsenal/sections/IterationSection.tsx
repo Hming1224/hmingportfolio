@@ -71,6 +71,7 @@ export default async function IterationSection() {
     <section id="cs-sec-iteration" className="cs-section ca-section-alt">
       <span className="ca-tag ca-iter-tag">Design Iteration</span>
       <h2 className="ca-h2">{t("設計元件迭代")}</h2>
+      <div className="cs-divider" />
       <p className="ca-lead">
         {t("透過內部團隊人員與工程師測試，將部分元件進行迭代修正，更加提升用戶使用體驗。")}
       </p>

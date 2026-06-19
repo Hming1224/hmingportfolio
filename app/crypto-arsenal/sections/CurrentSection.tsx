@@ -7,6 +7,7 @@ export default async function CurrentSection() {
     <section id="cs-sec-current" className="cs-section ca-section-alt">
       <span className="ca-tag">{t("介面現況")}</span>
       <h2 className="ca-h2">{t("策略在 CA、倉位卻要去交易所看")}</h2>
+      <div className="cs-divider" />
       <p className="ca-lead ca-narrow">
         {t(
           "目前 CA 的 Portfolio 頁面可查看所有運行中的策略機器人，並在右上角呈現策略整體績效，例如獲利、ROI、未實現 ROI 與資產分布。然而，介面尚未直接顯示單一策略目前實際持有的倉位資訊，例如多 / 空方向、數量、入場價、標記價、浮動盈虧。使用者若想確認單一倉位狀態，仍需登入交易所查閱，導致 CA 作為策略管理平台，無法讓使用者在站內完整掌握個別策略的實際收益與風險狀態。",

@@ -7,6 +7,7 @@ export default async function RoleSection() {
     <section id="cs-sec-role" className="cs-section ca-section-alt">
       <span className="ca-tag ca-tag-teal">{t("角色與工作流")}</span>
       <h2 className="ca-h2">{t("在 CA 的工作模式")}</h2>
+      <div className="cs-divider" />
       <p className="ca-lead ca-narrow">
         {t(
           "在 CA，每 1–2 週會持續一個 sprint，小功能設計時程約 2–4 周，大功能設計時程約需 1–3 個月。除了與 PO 持續討論產品功能上線時程及每週用戶反饋，多數 feature 以二手桌面研究與競品設計為基礎，我身為設計師的設計流程如下：",

@@ -75,6 +75,11 @@
   color: var(--text-heading);
 }
 
+.theme-crypto-arsenal .cs-divider {
+  background: var(--ca-line-soft);
+  margin-bottom: 28px;
+}
+
 .theme-crypto-arsenal .ca-lead {
   max-width: none;
   margin: 0;
