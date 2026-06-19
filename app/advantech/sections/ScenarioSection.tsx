@@ -44,74 +44,66 @@ export default async function ScenarioSection() {
                 lines stay aligned no matter how the cards reflow / change height. */}
             <svg className="cs-ds-svg-overlay" preserveAspectRatio="none" aria-hidden="true" />
 
-            {/* ── Three card columns ── */}
+            {/* ── Card grid ──
+                Cards are placed by explicit row/column so each grid row equalises
+                its cards' heights: row 2 = top cards (top-aligned, equal height),
+                row 4 = bottom cards (bottom-aligned, equal height), row 3 = the
+                middle UI card. Equal per-row heights keep card centres level, so
+                the centre-anchored connectors stay horizontal no matter how the
+                text wraps or the language changes — no fixed heights needed. */}
             <div className="cs-ds-flow-cols">
-              {/* Column 1: AI Logic */}
-              <div>
-                <p className="cs-ds-col-label" style={{ color: "#6b46a3" }}>{t("底層 AI 邏輯")}</p>
-                <div style={{ marginTop: 27 }}>
-                  <div className="cs-ds-card cs-ds-card-ai cs-ds-card-primary" data-flow="ai1">
-                    <div className="cs-ds-card-head">
-                      <span className="cs-ds-pill" style={{ color: "#6b46a3" }}>{sc.ai0[0]}</span>
-                      <OwnerMark label={t("由我負責")} />
-                    </div>
-                    <p className="cs-ds-card-desc">{sc.ai0[1]}</p>
-                  </div>
-                  <div className="cs-ds-ai-gap" />
-                  <div className="cs-ds-card cs-ds-card-ai" data-flow="ai2">
-                    <span className="cs-ds-pill" style={{ color: "#6b46a3" }}>{sc.ai1[0]}</span>
-                    <p className="cs-ds-card-desc">{sc.ai1[1]}</p>
-                  </div>
+              {/* Row 1: column labels */}
+              <p className="cs-ds-col-label" style={{ color: "#6b46a3", gridColumn: 1, gridRow: 1 }}>{t("底層 AI 邏輯")}</p>
+              <p className="cs-ds-col-label" style={{ color: "#d88400", gridColumn: 2, gridRow: 1 }}>{t("對應功能策略")}</p>
+              <p className="cs-ds-col-label" style={{ color: "#005796", gridColumn: 3, gridRow: 1 }}>{t("介面呈現方式")}</p>
+
+              {/* Row 2: top cards (ai1 · fn1 · ui1) */}
+              <div className="cs-ds-card cs-ds-card-ai cs-ds-card-primary" data-flow="ai1" style={{ gridColumn: 1, gridRow: 2 }}>
+                <div className="cs-ds-card-head">
+                  <span className="cs-ds-pill" style={{ color: "#6b46a3" }}>{sc.ai0[0]}</span>
+                  <OwnerMark label={t("由我負責")} />
                 </div>
+                <p className="cs-ds-card-desc">{sc.ai0[1]}</p>
+              </div>
+              <div className="cs-ds-card cs-ds-card-func cs-ds-card-primary" data-flow="fn1" style={{ gridColumn: 2, gridRow: 2 }}>
+                <div className="cs-ds-card-head">
+                  <span className="cs-ds-pill" style={{ color: "#d88400" }}>{sc.fn0[0]}</span>
+                  <OwnerMark label={t("由我負責")} />
+                </div>
+                <p className="cs-ds-card-desc">{sc.fn0[1]}</p>
+              </div>
+              <div className="cs-ds-card cs-ds-card-ui cs-ds-card-primary" data-flow="ui1" style={{ gridColumn: 3, gridRow: 2 }}>
+                <div className="cs-ds-card-head">
+                  <span className="cs-ds-pill" style={{ color: "#005796" }}>{sc.ui0[0]}</span>
+                  <OwnerMark label={t("由我負責")} />
+                </div>
+                <p className="cs-ds-card-desc">{sc.ui0[1]}</p>
               </div>
 
-              {/* Column 2: Feature Strategy */}
-              <div>
-                <p className="cs-ds-col-label" style={{ color: "#d88400" }}>{t("對應功能策略")}</p>
-                <div style={{ marginTop: 27 }}>
-                  <div className="cs-ds-card cs-ds-card-func cs-ds-card-primary" data-flow="fn1">
-                    <div className="cs-ds-card-head">
-                      <span className="cs-ds-pill" style={{ color: "#d88400" }}>{sc.fn0[0]}</span>
-                      <OwnerMark label={t("由我負責")} />
-                    </div>
-                    <p className="cs-ds-card-desc">{sc.fn0[1]}</p>
-                  </div>
-                  <div className="cs-ds-ai-gap" />
-                  <div className="cs-ds-card cs-ds-card-func" data-flow="fn2">
-                    <span className="cs-ds-pill" style={{ color: "#d88400" }}>{sc.fn1[0]}</span>
-                    <p className="cs-ds-card-desc">{sc.fn1[1]}</p>
-                  </div>
+              {/* Row 3: middle UI card (ui2) */}
+              <div className="cs-ds-card cs-ds-card-ui cs-ds-card-primary" data-flow="ui2" style={{ gridColumn: 3, gridRow: 3 }}>
+                <div className="cs-ds-card-head">
+                  <span className="cs-ds-pill" style={{ color: "#005796" }}>{sc.ui1[0]}</span>
+                  <OwnerMark label={t("由我負責")} />
                 </div>
+                <p className="cs-ds-card-desc">{sc.ui1[1]}</p>
               </div>
 
-              {/* Column 3: UI Presentation */}
-              <div>
-                <p className="cs-ds-col-label" style={{ color: "#005796" }}>{t("介面呈現方式")}</p>
-                <div style={{ marginTop: 37 }}>
-                  <div className="cs-ds-card cs-ds-card-ui cs-ds-card-primary" data-flow="ui1">
-                    <div className="cs-ds-card-head">
-                      <span className="cs-ds-pill" style={{ color: "#005796" }}>{sc.ui0[0]}</span>
-                      <OwnerMark label={t("由我負責")} />
-                    </div>
-                    <p className="cs-ds-card-desc">{sc.ui0[1]}</p>
-                  </div>
-                  <div className="cs-ds-ui-gap" />
-                  <div className="cs-ds-card cs-ds-card-ui cs-ds-card-primary" data-flow="ui2">
-                    <div className="cs-ds-card-head">
-                      <span className="cs-ds-pill" style={{ color: "#005796" }}>{sc.ui1[0]}</span>
-                      <OwnerMark label={t("由我負責")} />
-                    </div>
-                    <p className="cs-ds-card-desc">{sc.ui1[1]}</p>
-                  </div>
-                  <div className="cs-ds-ui-gap" />
-                  <div className="cs-ds-card cs-ds-card-ui cs-ds-card-primary" data-flow="ui3">
-                    <div className="cs-ds-card-head">
-                      <span className="cs-ds-pill" style={{ color: "#005796" }}>{sc.ui2[0]}</span>
-                      <OwnerMark label={t("由我負責")} />
-                    </div>
-                    <p className="cs-ds-card-desc">{sc.ui2[1]}</p>
-                  </div>
+              {/* Row 4: bottom cards (ai2 · fn2 · ui3) */}
+              <div className="cs-ds-card cs-ds-card-ai" data-flow="ai2" style={{ gridColumn: 1, gridRow: 4 }}>
+                <span className="cs-ds-pill" style={{ color: "#6b46a3" }}>{sc.ai1[0]}</span>
+                <p className="cs-ds-card-desc">{sc.ai1[1]}</p>
+              </div>
+              <div className="cs-ds-card cs-ds-card-func" data-flow="fn2" style={{ gridColumn: 2, gridRow: 4 }}>
+                <span className="cs-ds-pill" style={{ color: "#d88400" }}>{sc.fn1[0]}</span>
+                <p className="cs-ds-card-desc">{sc.fn1[1]}</p>
+              </div>
+              <div className="cs-ds-card cs-ds-card-ui cs-ds-card-primary" data-flow="ui3" style={{ gridColumn: 3, gridRow: 4 }}>
+                <div className="cs-ds-card-head">
+                  <span className="cs-ds-pill" style={{ color: "#005796" }}>{sc.ui2[0]}</span>
+                  <OwnerMark label={t("由我負責")} />
                 </div>
+                <p className="cs-ds-card-desc">{sc.ui2[1]}</p>
               </div>
             </div>
             </div>

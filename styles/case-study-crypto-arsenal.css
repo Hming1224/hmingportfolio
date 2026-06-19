@@ -1559,6 +1559,17 @@
     padding: 10px 11px;
   }
 
+  /* 表格外側欄位左右間距對齊卡片，讓首/末欄文字不貼邊 */
+  .theme-crypto-arsenal .ca-impact-times thead th:first-child,
+  .theme-crypto-arsenal .ca-impact-times tbody th {
+    padding-left: 22px;
+  }
+
+  .theme-crypto-arsenal .ca-impact-times thead th:last-child,
+  .theme-crypto-arsenal .ca-impact-times tbody td:last-child {
+    padding-right: 22px;
+  }
+
   .theme-crypto-arsenal .ca-impact-times thead th,
   .theme-crypto-arsenal .ca-impact-times tbody th {
     white-space: normal;

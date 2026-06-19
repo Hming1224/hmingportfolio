@@ -1203,6 +1203,11 @@
   /* Figma proportions: AI 310 / gap 250 / Feature 330 / gap 250 / UI 300 = 1440 */
   grid-template-columns: 21.53% 22.92% 20.83%;
   column-gap: 17.36%;
+  /* Cards are placed by explicit grid-row (see ScenarioSection): each row
+     stretches its cards to a shared height (default align-items: stretch), so
+     top cards top-align and bottom cards bottom-align with level centres —
+     keeping the connectors horizontal regardless of text length. */
+  row-gap: 24px;
   position: relative;
   z-index: 1;
   /* breathing room so the edge card borders aren't clipped at the scroll
@@ -1229,17 +1234,16 @@
   gap: 8px;
 }
 
-/* Row-aligned heights (AI/Func = UI + 20) keep card centres level so the
-   centre-anchored connectors stay horizontal. Heights have extra headroom so
-   wrapped titles/text fit WITHOUT growing the card → no connector wrinkle. */
+/* min-height is just a visual floor now — per-row equal heights come from the
+   grid (align-items: stretch), so alignment no longer depends on these values. */
 .theme-advantech .cs-ds-card-ai {
-  min-height: 190px;
+  min-height: 170px;
   background: #f8f0ff;
   border: 1px solid #6b46a3;
 }
 
 .theme-advantech .cs-ds-card-func {
-  min-height: 190px;
+  min-height: 170px;
   background: #fff7e8;
   border: 1px solid #d88400;
 }
@@ -1252,18 +1256,6 @@
 
 .theme-advantech .cs-ds-card-primary {
   border-width: 2px;
-}
-
-/* Gap spacers between cards — tuned so row-2 / mid card centres stay level
-   (ai-gap = UI height + 22, ui-gap = 21). */
-.theme-advantech .cs-ds-ai-gap {
-  height: 192px;
-  flex-shrink: 0;
-}
-
-.theme-advantech .cs-ds-ui-gap {
-  height: 21px;
-  flex-shrink: 0;
 }
 
 .theme-advantech .cs-ds-pill {
