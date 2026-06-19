@@ -8,6 +8,7 @@ import AnimatedContent from "../app/about-me/AnimatedContent";
 import { getContactData } from "../data/contact";
 import type { Locale } from "../i18n/routing";
 import { config } from "../lib/config";
+import Button from "./ui/Button";
 
 export default function Contact() {
   const locale = useLocale() as Locale;
@@ -329,10 +330,11 @@ export default function Contact() {
                   <label htmlFor="message">{t("message")}</label>
                 </div>
 
-                <button
+                <Button
                   type="submit"
                   disabled={status === "loading" || status === "success"}
                   className={`submit-btn btn-status-${status}`}
+                  size="lg"
                 >
                   {status === "idle" && t("submit")}
                   {status === "loading" && (
@@ -383,7 +385,7 @@ export default function Contact() {
                     </span>
                   )}
                   {status === "error" && t("error")}
-                </button>
+                </Button>
               </form>
             </div>
           </AnimatedContent>

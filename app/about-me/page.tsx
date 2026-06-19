@@ -344,7 +344,7 @@ export default async function AboutMePage() {
         </div>
       </section>
 
-      {/* 4. 對設計教育的貢獻 */}
+      {/* 4. 設計社群 */}
       <SectionHeading id="educator" text={headings.educator} />
       <EducatorMasonry items={educatorItems} />
 

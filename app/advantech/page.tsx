@@ -63,7 +63,7 @@ export default async function AdventechPage() {
       theme="theme-advantech"
       tocSections={tocSections}
       nextNav={{
-        nextHref: nextProject.href ?? "#",
+        nextHref: nextProject.status === "published" ? nextProject.href : undefined,
         homeLabel: t("返回首頁"),
         nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
       }}

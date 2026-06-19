@@ -3,7 +3,7 @@
    Scope 慣例（見 docs/add-case-study-checklist.md §4）：
    本檔所有「Advantech 私有」selector 一律以 `.theme-advantech` 開頭
    （root 由 CaseStudyShell 的 theme prop 掛上），確保私有規則不會污染其他案例。
-   共用骨架類（.cs-next-nav / .cs-next-btn-* / .cs-hero-* / .cs-info-* / .cs-title）
+   共用骨架類（.cs-next-nav / .ds-button / .cs-hero-* / .cs-info-* / .cs-title）
    的 base 與 RWD 規則都已歸位 styles/case-study.css，本檔不再覆寫它們。 */
 
 /* ── 區域色票（Advantech 案例頁專屬）──
@@ -1272,6 +1272,16 @@
   hyphens: manual;
 }
 
+/* English titles are longer than the Chinese source and wrap to 3 lines,
+   pushing card content past the tuned min-heights → unequal heights break the
+   row-aligned card centres (and the centre-anchored connectors). Shrinking the
+   EN title to 12px + centring keeps every card at its min-height so the three
+   columns stay top/bottom aligned and the connector lines stay level. */
+html[lang="en"] .theme-advantech .cs-ds-pill {
+  font-size: 12px;
+  text-align: center;
+}
+
 .theme-advantech .cs-ds-card-desc {
   font-size: var(--fs-xs);
   line-height: 1.6;
@@ -1395,7 +1405,7 @@
 
 /* Proposal Tabs */
 .theme-advantech .cs-sol-prop {
-  background: white;
+  background: transparent;
   border-radius: 22px;
   box-shadow: 0px 12px 14px rgba(9, 48, 96, 0.07);
   overflow: hidden;
@@ -1404,8 +1414,9 @@
 .theme-advantech .cs-sol-tabs {
   display: flex;
   gap: 4px;
-  align-items: center;
+  align-items: stretch;
   min-height: 48px;
+  background: transparent;
 }
 
 .theme-advantech .cs-sol-tab {
@@ -1416,6 +1427,7 @@
   gap: 8px;
   min-width: 0;
   min-height: 48px;
+  align-self: stretch;
   padding: 8px;
   border-radius: 12px 12px 0 0;
   background: #f1f3f6;
@@ -1433,8 +1445,22 @@
   user-select: none;
 }
 
+.theme-advantech .cs-sol-tab-star {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+}
+
+.theme-advantech .case-proposal-star-muted {
+  color: #7b7b7b !important;
+}
+
+.theme-advantech .cs-sol-tab-star-active {
+  color: #31afd9;
+}
+
 .theme-advantech .cs-sol-tab-on {
-  background: white;
+  background: transparent;
   color: var(--cs-navy);
 }
 
@@ -1492,7 +1518,7 @@
   min-height: 28px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(17, 22, 36, 0.7);
+  background: rgba(82, 87, 101, 0.88);
   color: #ffffff;
   font-size: 12px;
   line-height: 1;

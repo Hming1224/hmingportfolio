@@ -3,7 +3,7 @@
 > 這份文件是我的設計語言。記錄的不只是「目前長什麼樣」，更是「為什麼這樣選」。
 > 任何人（AI 或真人）要幫我維護或新增內容，讀完這份文件才能動手。
 >
-> **使用慣例**：每個元件 / token 都標了對應的 CSS class 名（如 `.button-secondary`），方便對照 `app/globals.css`。標 class 名而非行號——行號會隨改動失效，class 名穩定。
+> **使用慣例**：每個元件 / token 都標了對應的 React 元件或 CSS class（如 `Button variant="secondary"`），方便對照實作。標名稱而非行號——行號會隨改動失效。
 >
 > **校準基準**：2026-06-08 完整掃描整個專案（4 頁路由、25 個元件、globals.css 7666 行 / 740 條 class / 全部 token）後重寫。
 > 標記：✅＝code 已實作且一致；🔧＝規格已定、code 待對齊（清單見 `design-audit-2026-06-08.md`）。
@@ -245,7 +245,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 ### 4.1 Pill（完全圓的兩端）
 | 用途 | 值 | 對應 |
 |---|---|---|
-| **按鈕** | `200px` | `.button`、`.project-button`、`.submit-btn`、`.cs-next-btn-*` |
+| **按鈕** | `200px` | `Button` / `.ds-button` |
 | **小 pill / 標籤 / badge** | `999px`（全圓）| `.cursor-tag-label`、`.project-tabs`、`.educator-badge`、各 `cs-*` pill/badge |
 
 原則：**按鈕一律 200px，標籤 / badge 一律 999px**；純裝飾元件可按視覺比例保留局部值。
@@ -263,32 +263,32 @@ font-family: var(--font-space-grotesk), sans-serif;
 
 ## 5. 元件樣式
 
-### 5.1 按鈕（`.button` 系列 + `.project-button`）
+### 5.1 按鈕（`components/ui/Button.tsx`）
 
 **形狀**：Pill `border-radius: 200px`（見 4.1）。
 
 #### 尺寸階層（sm / md / lg）
 | 階層 | 桌機 ≥1024 | 平板 769–1023 | 手機 ≤768 | 左右 padding | 字級 | 用在哪 | 對應 class |
 |---|---|---|---|---|---|---|---|
-| **sm** | `38px` | `38px` | `38px` | `24px` | `14px`（`--fs-sm`）| 緊湊 / 常駐入口 | 目前無按鈕在用 |
-| **md（預設）** | `52px` | `48px` | `44px` | 桌機 `28px`、平板/手機 `24px` | 桌機/平板 `--fs-body`、手機 `--fs-sm` | 絕大多數 CTA：Hero、案例頁、聯絡送出 | `.button`（+ `-primary`/`-secondary`）|
-| **lg（全寬）** | `52px`，`width:100%` | `48px`，`width:100%` | `44px`，`width:100%` | 桌機 `14px 0`、平板/手機 `12px 0` | 桌機/平板 `--fs-body`、手機 `--fs-sm` | 卡片 CTA、手機全寬 CTA | `.project-button` |
+| **sm** | `38px` | `38px` | `38px` | `24px` | `14px`（`--fs-sm`）| 緊湊 / 常駐入口 | `<Button size="sm">` |
+| **md（預設）** | `52px` | `48px` | `44px` | 桌機 `28px`、平板/手機 `24px` | 桌機/平板 `--fs-body`、手機 `--fs-sm` | 絕大多數 CTA：Hero、案例頁 | `<Button>` |
+| **lg（全寬）** | `52px`，`width:100%` | `48px`，`width:100%` | `44px`，`width:100%` | 桌機 `14px 0`、平板/手機 `12px 0` | 桌機/平板 `--fs-body`、手機 `--fs-sm` | 卡片 CTA、聯絡送出 | `<Button size="lg">` |
 
 - md 以 52 / 48 / 44 依斷點收斂；sm 38px 為緊湊情境（目前無按鈕在用）；lg 不是更高，是「撐滿容器寬」的變體。
-- 字重統一 `600`，包含 `.project-button`。
+- 字重統一 `600`，由共用 `Button` 管理。
 
-> **跨斷點規格（2026-06-08 對齊 code）★**：md 按鈕（`.button` / `-primary` / `-secondary`、Hero 的 `.hero-actions .button`）與 lg（`.project-button`）採 **桌機 52px / 平板 48px / 手機 44px**。桌機與平板字級用 `--fs-body`，手機字級用 `--fs-sm`，全程使用既有 type token。
+> **跨斷點規格（2026-06-20 共用元件化）★**：`Button` 的 md / lg 採 **桌機 52px / 平板 48px / 手機 44px**。桌機與平板字級用 `--fs-body`，手機字級用 `--fs-sm`，全程使用既有 type token。
 > - 歷史踩坑：手機曾把字級跳到 `20px`、高度漂移成 `52 / 56 / 43px`（primary 52、secondary 56、project-button 43），各斷點不一致。2026-06-08 後改為刻意的 52 / 48 / 44 分階，而不是漂移。
-> - 高度用 `min-height`（`box-sizing: border-box`，含 padding 不爆高）；`.button`、`.project-button` 與 `.submit-btn` 都明寫字級，不靠瀏覽器預設繼承。
+> - 高度用 `min-height`（`box-sizing: border-box`，含 padding 不爆高）；尺寸與字級由 `Button` 的 `.ds-button-*` 集中管理。
 > - Hero 按鈕在平板保留 `min-width: 136px`、`padding: 12px 28px`（控制 Hero 視覺比例）。
-> - 手機（≤768）primary 與 project-button 轉 `width: 100%` 全寬堆疊，高度 44px。多按鈕並排堆疊時（如 Hero 按鈕、案例頁底部的 `.cs-next-nav`），排版上 **Primary 按鈕應優先顯示（排在上方）**，Secondary 按鈕排在第二順位（排在下方）。在實作上可配合 `flex-direction: column-reverse;` 實現。
+> - 手機（≤768）md / lg 轉 `width: 100%` 全寬、高度 44px。多按鈕並排堆疊時（如 Hero、案例頁底部），**Primary 應優先顯示在上方**，Secondary 排在下方。
 
 #### 語意三層（顏色變體，與尺寸正交組合）
 | 變體 | 底色 | 文字色 | 描邊 | 語意 | class | 實際用在哪 |
 |---|---|---|---|---|---|---|
-| Primary（紫）| `--purple` | `#fff` | — | 轉換型 CTA（最希望點）| `.button-primary` | **Hero「查看作品」**（→ `#projects`）。另外專案卡 CTA（`.project-button`）、聯絡送出（`.submit-btn`）也直接用 `--purple` |
-| Secondary | 白 → hover `--purple-light` | `--muted` → hover `--purple` | 灰邊 `inset 0 0 0 2px var(--line-strong)`，hover 轉 `--purple` | 次要（outline 風）| `.button-secondary` | **Hero「我的歷程」**（→ `/about-me`）|
-| Disabled | `--disabled` | `#fff` | — | 未上線專案 | `.is-disabled` | 8 個未上線專案卡 CTA |
+| Primary（紫）| `--purple` | `#fff` | — | 轉換型 CTA（最希望點）| `variant="primary"`（預設）| Hero「查看作品」、專案卡 CTA、聯絡送出 |
+| Secondary | 白 → hover `--purple-light` | `--muted` → hover `--purple` | 灰邊 `inset 0 0 0 2px var(--line-strong)`，hover 轉 `--purple` | 次要（outline 風）| `variant="secondary"` | Hero「我的歷程」、案例頁「返回首頁」 |
+| Disabled | `--disabled` | `#fff` | — | 無連結 / 不可操作 | `disabled` | 未上線專案與未上線 next-project CTA |
 
 > **Secondary 樣式**：outline 風——白底、灰字（`--muted`），描邊用 `box-shadow: inset 0 0 0 2px var(--line-strong)`（非 `border`，不撐大外尺寸），hover 時邊框與文字轉紫，底色變為極淺紫 `--purple-light`（2026-06-10 更新一致化設計）。**邊框刻意比文字（`--muted`）淡一階**：原本沿用 copy-btn 的 `2px var(--muted)`（邊＝字同色）覺得太重，改用新 token `--line-strong`（比 `--line` 明顯、比 `--muted` 淡）。
 > **紫色語意**：紫色＝「希望訪客轉換」的 CTA（看作品、聯絡送出、看專案）。同屏盡量一顆紫色主按鈕。

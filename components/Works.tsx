@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
-import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import {
   getProjects,
@@ -19,6 +18,7 @@ import {
   TabsTab,
 } from "./animate-ui/primitives/base/tabs";
 import SplitText from "./animate-ui/primitives/texts/SplitText";
+import Button from "./ui/Button";
 
 function useScrollReveal() {
   const listRef = useRef<HTMLDivElement>(null);
@@ -93,13 +93,13 @@ function ProjectCard({ project }: { project: ProjectSummary }) {
           </div>
         </div>
         {disabled ? (
-          <span className="project-button is-disabled" aria-disabled="true">
+          <Button disabled size="lg">
             {t("comingSoon")}
-          </span>
+          </Button>
         ) : (
-          <Link className="project-button" href={project.href ?? "/"}>
+          <Button href={project.href ?? "/"} size="lg">
             {t("learnMore")}
-          </Link>
+          </Button>
         )}
       </div>
     </article>

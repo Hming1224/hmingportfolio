@@ -1,5 +1,12 @@
 # Project Memory
 
+## 2026-06-20 共用 Button component
+
+- 全站 CTA 統一使用 `components/ui/Button.tsx`；支援 `variant="primary|secondary"`、`size="sm|md|lg"`、站內 Link、頁內 anchor 與 native button。
+- 尺寸與 disabled 視覺集中在 `styles/tokens.css` 的 `.ds-button-*`：md / lg 維持桌機 52px、平板 48px、手機 44px；disabled 固定 `--disabled` 灰底白字。
+- 已遷移 Hero、作品卡、Contact submit、案例頁 next nav。選單、複製、輪播、lightbox 等專用控制按鈕不納入 CTA component。
+- 無連結 CTA 必須 render native `<button disabled>`，不可用可點擊 Link 或只靠 class 假裝 disabled。
+
 ## 2026-06-10 Advantech Phase 5 i18n 回歸修正
 
 - **遞迴翻譯 JSX 的 key 踩坑**：不可用一般 `Array.map()` 重建 React children，否則原本合法的靜態 JSX 會被 React 視為缺少 key 的動態列表，造成大量 console errors。處理 React children 要用 `React.Children.map()`，一般資料陣列才用 `Array.map()`。

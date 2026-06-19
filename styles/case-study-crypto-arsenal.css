@@ -155,7 +155,7 @@
 }
 
 .theme-crypto-arsenal .ca-diagram-cap {
-  margin: 14px 0 0;
+  margin: 31px 0 0;
   font-size: 13px;
   line-height: 1.5;
   text-align: center;
@@ -742,11 +742,11 @@
 }
 
 .theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) .ca-matrix-ex {
-  padding-bottom: 54px !important;
+  padding-bottom: 18px !important;
 }
 
 .theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) .ca-matrix-cell-stack {
-  padding-bottom: 54px !important;
+  padding-bottom: 18px !important;
 }
 
 .theme-crypto-arsenal .ca-matrix-ex {
@@ -794,12 +794,12 @@
 }
 
 .theme-crypto-arsenal .ca-matrix-cell-note {
-  position: absolute !important;
-  top: auto !important;
-  bottom: 20px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  white-space: nowrap !important;
+  position: static !important;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  transform: none !important;
+  white-space: pre-line !important;
   margin: 0 !important;
   font-size: var(--fs-xs, 12px);
   font-weight: 600;
@@ -962,6 +962,14 @@
   line-height: 1;
 }
 
+.theme-crypto-arsenal .case-proposal-star-muted {
+  color: #7b7b7b !important;
+}
+
+.theme-crypto-arsenal .ca-wf-tab-star-active {
+  color: var(--ca-blue);
+}
+
 .theme-crypto-arsenal .ca-wf-panel {
   display: flex;
   flex-direction: column;
@@ -1040,12 +1048,16 @@
   min-height: 28px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(17, 22, 36, 0.7);
+  background: rgba(82, 87, 101, 0.88);
   color: #ffffff;
   font-size: 12px;
   line-height: 1;
   font-weight: 600;
   backdrop-filter: blur(10px);
+}
+
+.theme-crypto-arsenal .ca-wf-mobile-controls {
+  display: none;
 }
 
 .theme-crypto-arsenal .ca-wf-cap {
@@ -1529,8 +1541,8 @@
   white-space: nowrap;
 }
 
-.theme-crypto-arsenal .ca-impact-times tbody tr + tr th,
-.theme-crypto-arsenal .ca-impact-times tbody tr + tr td {
+.theme-crypto-arsenal .ca-impact-times tbody tr+tr th,
+.theme-crypto-arsenal .ca-impact-times tbody tr+tr td {
   border-top: 1px solid var(--ca-line-soft);
 }
 
@@ -1546,6 +1558,17 @@
 .theme-crypto-arsenal .ca-impact-times .ca-impact-cut {
   color: #11a36e;
   font-weight: 700;
+}
+
+/* 表格首/末欄外緣內距對齊卡片與引言（皆 26px），讓三個區塊的左右文字邊切齊成一直線 */
+.theme-crypto-arsenal .ca-impact-times thead th:first-child,
+.theme-crypto-arsenal .ca-impact-times tbody th {
+  padding-left: 26px;
+}
+
+.theme-crypto-arsenal .ca-impact-times thead th:last-child,
+.theme-crypto-arsenal .ca-impact-times tbody td:last-child {
+  padding-right: 26px;
 }
 
 @media (max-width: 640px) {
@@ -1590,7 +1613,7 @@
   justify-content: space-between;
   gap: 16px;
   margin: 0;
-  padding: 20px 22px;
+  padding: 20px 26px;
   background: #f0faf5;
   border: 1px solid #cdeadd;
   border-radius: 14px;
@@ -1792,18 +1815,17 @@
   }
 
   .theme-crypto-arsenal .ca-wf-shot-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    pointer-events: none;
+    display: none;
   }
 
   .theme-crypto-arsenal .ca-wf-nav {
     display: none;
+  }
+
+  .theme-crypto-arsenal .ca-wf-mobile-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
   }
 
   .theme-crypto-arsenal .ca-wf-nav-mobile {

@@ -297,43 +297,16 @@
 
 /* --- Submission Button --- */
 .submit-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 52px;
-  padding: 14px 28px;
-  border: 0;
-  border-radius: 200px;
-  background: var(--purple);
-  color: white;
-  font-size: var(--fs-body);
-  font-weight: 600;
-  cursor: pointer;
   outline: none;
-  transition: background-color 180ms ease;
-}
-
-.submit-btn:not(:disabled):hover {
-  background: var(--purple-hover);
 }
 
 .submit-btn:disabled {
-  cursor: not-allowed;
   opacity: 0.9;
 }
 
 .submit-btn.btn-status-success {
   background: #1fa37e;
   box-shadow: none;
-}
-
-@media (max-width: 1023px) {
-  .submit-btn {
-    min-height: 48px;
-    padding: 12px 24px;
-    font-size: var(--fs-body);
-  }
 }
 
 .btn-content {
@@ -394,9 +367,4 @@
     gap: 24px;
   }
 
-  .submit-btn {
-    min-height: 44px;
-    padding: 12px 24px;
-    font-size: var(--fs-sm);
-  }
 }

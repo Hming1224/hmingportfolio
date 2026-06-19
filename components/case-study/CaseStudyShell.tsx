@@ -1,17 +1,17 @@
 import type { ReactNode } from 'react';
-import { Link } from '../../i18n/navigation';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import ScrollProgress from '../ScrollProgress';
 import CaseTOC, { type TocSection } from '../CaseTOC';
 import { cn } from '../../lib/utils';
+import Button from '../ui/Button';
 
 interface NextNav {
   /** 「返回首頁」連結，預設 '/'。 */
   homeHref?: string;
   homeLabel?: string;
   /** 「下一個專案」連結與文字。 */
-  nextHref: string;
+  nextHref?: string;
   nextLabel: string;
 }
 
@@ -40,6 +40,7 @@ export default function CaseStudyShell({
   children,
 }: CaseStudyShellProps) {
   const { homeHref = '/', homeLabel = '返回首頁', nextHref, nextLabel } = nextNav;
+  const nextLinkHref = nextHref && nextHref !== '#' ? nextHref : null;
 
   return (
     <main className={cn('cs-page', theme)}>
@@ -58,12 +59,18 @@ export default function CaseStudyShell({
 
       {/* Next Project Nav */}
       <div className="cs-next-nav">
-        <Link href={homeHref} prefetch={false} className="cs-next-btn-outline">
+        <Button href={homeHref} prefetch={false} variant="secondary">
           {homeLabel}
-        </Link>
-        <Link href={nextHref} className="cs-next-btn-filled">
-          {nextLabel}
-        </Link>
+        </Button>
+        {nextLinkHref ? (
+          <Button href={nextLinkHref}>
+            {nextLabel}
+          </Button>
+        ) : (
+          <Button disabled>
+            {nextLabel}
+          </Button>
+        )}
       </div>
 
       <Footer />

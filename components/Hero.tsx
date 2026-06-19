@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
+import Button from './ui/Button';
 import SplitText from './animate-ui/primitives/texts/SplitText';
 import TrueFocus from './animate-ui/primitives/texts/TrueFocus';
 import DotPattern from './ui/dot-pattern';
@@ -92,8 +92,8 @@ export default async function Hero() {
         </div>
 
         <div className="hero-actions">
-          <Link className="button button-secondary" href="/about-me">{t('journey')}</Link>
-          <a className="button button-primary" href="#projects">{t('works')}</a>
+          <Button href="/about-me" variant="secondary">{t('journey')}</Button>
+          <Button href="#projects">{t('works')}</Button>
         </div>
       </div>
     </section>

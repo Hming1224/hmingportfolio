@@ -29,7 +29,7 @@ export default async function SolutionSection() {
             <p className="cs-sol-flow-name">需求管理決策助手：超約預警</p>
           </div>
         </div>
-        <ProposalTabs defaultTab={2} tabs={proposalScenario1Tabs} />
+        <ProposalTabs defaultTab={0} tabs={proposalScenario1Tabs} />
 
         {/* Scenario 2 */}
         <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech/solution/flow-sc2.webp')" }}>

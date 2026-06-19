@@ -18,7 +18,7 @@ export default function HeroBottomGroupCenter() {
   useEffect(() => {
     const hero = document.querySelector<HTMLElement>('.hero');
     const group = document.querySelector<HTMLElement>('.hero-bottom-group');
-    const btn = document.querySelector<HTMLElement>('.hero-actions .button-secondary');
+    const btn = document.querySelector<HTMLElement>('.hero-actions .ds-button-secondary');
     if (!hero || !group || !btn) return;
 
     const update = () => {

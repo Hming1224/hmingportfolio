@@ -363,7 +363,7 @@ const copyByLocale = {
     headings: {
       values: "Design Values",
       experience: "Experience",
-      educator: "Design Education",
+      educator: "Design Community",
       skills: "Skills",
       tools: "Tools",
       education: "Education",

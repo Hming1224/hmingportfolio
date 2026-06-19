@@ -70,11 +70,55 @@ function FlowLabel({
   );
 }
 
+function splitSvgLabel(text: string, maxWidth: number) {
+  const maxChars = Math.max(22, Math.floor(maxWidth / 6.7));
+  const words = text.split(" ");
+  const lines: string[] = [];
+  let line = "";
+
+  for (const word of words) {
+    const next = line ? `${line} ${word}` : word;
+    if (next.length > maxChars && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = next;
+    }
+  }
+
+  if (line) lines.push(line);
+  return lines;
+}
+
+function FlowWrappedLabel({
+  children,
+  x,
+  y,
+  maxWidth,
+}: {
+  children: string;
+  x: number;
+  y: number;
+  maxWidth: number;
+}) {
+  const lines = splitSvgLabel(children, maxWidth);
+
+  return (
+    <text x={x} y={y} textAnchor="middle" className="ca-flow-label" fill="#6c6e77">
+      {lines.map((line, index) => (
+        <tspan key={line} x={x} dy={index === 0 ? 0 : 18}>
+          {line}
+        </tspan>
+      ))}
+    </text>
+  );
+}
+
 const FLOW_GAP = 32;
 const TRADING_WIDTH = 1382;
 const TRADING_HEIGHT = 270;
 const ECOSYSTEM_WIDTH = 1382;
-const ECOSYSTEM_HEIGHT = 190.73;
+const ECOSYSTEM_HEIGHT = 210;
 
 function useSvgWidth(fallbackWidth: number) {
   const ref = useRef<SVGSVGElement>(null);
@@ -191,6 +235,11 @@ export function EcosystemFlowDiagram({ labels }: { labels: EcosystemFlowLabels }
   const developerLeft = developerX - developer.size / 2;
   const moneyLeft = moneyX - money.size / 2;
   const moneyRight = moneyX + money.size / 2;
+  const bottomLabelInset = 12;
+  const returnsLabelStart = traderX + bottomLabelInset;
+  const returnsLabelEnd = moneyLeft - FLOW_GAP - bottomLabelInset;
+  const revenueLabelStart = moneyRight + FLOW_GAP + bottomLabelInset;
+  const revenueLabelEnd = developerX - bottomLabelInset;
 
   return (
     <svg
@@ -212,8 +261,20 @@ export function EcosystemFlowDiagram({ labels }: { labels: EcosystemFlowLabels }
 
       <FlowLabel x={(traderRight + arsenalLeft) / 2} y={14}>{labels.useBots}</FlowLabel>
       <FlowLabel x={(developerLeft + arsenalRight) / 2} y={14}>{labels.buildBots}</FlowLabel>
-      <FlowLabel x={(traderX + moneyLeft) / 2} y={188}>{labels.botReturns}</FlowLabel>
-      <FlowLabel x={(developerX + moneyRight) / 2} y={188}>{labels.botRevenueShare}</FlowLabel>
+      <FlowWrappedLabel
+        x={(returnsLabelStart + returnsLabelEnd) / 2}
+        y={186}
+        maxWidth={returnsLabelEnd - returnsLabelStart}
+      >
+        {labels.botReturns}
+      </FlowWrappedLabel>
+      <FlowWrappedLabel
+        x={(revenueLabelStart + revenueLabelEnd) / 2}
+        y={186}
+        maxWidth={revenueLabelEnd - revenueLabelStart}
+      >
+        {labels.botRevenueShare}
+      </FlowWrappedLabel>
 
       <FlowIcon href="/projects/crypto-arsenal/background/icons/trader.svg" x={traderX} y={trader.y} size={trader.size} />
       <FlowIcon href="/projects/crypto-arsenal/background/icons/arsenal.svg" x={arsenalX} y={arsenal.y} size={arsenal.size} />

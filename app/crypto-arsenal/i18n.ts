@@ -189,9 +189,10 @@ const en = {
   // 對比矩陣：步驟欄標題 + 結論 + lightbox
   "① 倉位 / 下單畫面": "① Position / trade screen",
   "②a 限價平倉（Limit）": "②a Limit close",
+  "②b 市價平倉（Market）": "②b Market close",
   "②b 市價平倉\n（Market）": "②b Market\nclose",
   "② 設定止盈止損": "② Set TP / SL",
-  "Binance 多一步：需先輸入金額 / 數量": "Binance adds a step: enter amount / quantity first",
+  "Binance 多一步：需先輸入金額 / 數量": "Binance adds a step:\nenter amount / quantity first",
   "Binance 平倉前需先輸入平倉金額與數量的畫面":
     "Binance screen for entering the close amount and quantity before confirming",
   "三家平倉流程大致一致：在倉位列表找到倉位 →（限價或市價二擇一）→ 確認送出；差別僅在 Binance 需多一個輸入金額 / 數量的畫面。CA 沿用相同的核心結構。":

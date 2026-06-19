@@ -751,46 +751,6 @@
     float-y 4s ease-in-out 1.3s infinite;
 }
 
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  padding: 14px 28px;
-  border-radius: 200px;
-  font-size: var(--fs-body);
-  font-weight: 600;
-  line-height: 1.4;
-  transition: background-color 180ms ease;
-}
-
-.button-primary {
-  background: var(--purple);
-  color: white;
-}
-
-.button-primary:hover {
-  background: var(--purple-hover);
-}
-
-/* Secondary：採用聯絡頁複製鈕（.copy-btn）的外觀——白底、細灰邊、灰字，
-   hover 時邊框與文字轉紫。用 inset box-shadow 當細邊，外尺寸與 primary 一致（不撐大）。 */
-.button-secondary {
-  background: #fff;
-  color: var(--muted);
-  box-shadow: inset 0 0 0 2px var(--line-strong);
-  transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.button-secondary:hover {
-  background: var(--purple-light);
-  color: var(--purple);
-  box-shadow: inset 0 0 0 2px var(--purple);
-}
-
 .projects-section {
   padding: 0 var(--page-gutter) 48px;
   scroll-margin-top: 80px;
@@ -1104,61 +1064,6 @@
   color: var(--tag-text);
 }
 
-.project-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 52px;
-  padding: 14px 0;
-  border-radius: 200px;
-  color: white;
-  font-size: var(--fs-body);
-  font-weight: 600;
-}
-
-.tone-brown .project-button,
-.tone-green .project-button,
-.project-button.is-disabled {
-  background: var(--disabled);
-}
-
-@media (max-width: 1023px) {
-  .button,
-  .project-button {
-    min-height: 48px;
-    font-size: var(--fs-body);
-  }
-
-  .button {
-    padding: 12px 24px;
-  }
-
-  .project-button {
-    padding: 12px 0;
-  }
-}
-
-/* 上線專案的 CTA 全站統一紫色（CTA = purple 規則）。
-   專案的個性色保留在標籤與邊框，不再用在主按鈕上。
-   用 :not(.is-disabled) 確保未上線（資料準備中）的卡片不會被染成紫色，
-   一律落回下方的 --disabled 灰階。 */
-.tone-peach .project-button:not(.is-disabled),
-.tone-navy .project-button:not(.is-disabled),
-.tone-advantech .project-button:not(.is-disabled),
-.tone-laushu .project-button:not(.is-disabled) {
-  background: var(--purple);
-  color: var(--paper);
-  transition: background-color 180ms ease;
-}
-
-.tone-peach .project-button:not(.is-disabled):hover,
-.tone-navy .project-button:not(.is-disabled):hover,
-.tone-advantech .project-button:not(.is-disabled):hover,
-.tone-laushu .project-button:not(.is-disabled):hover {
-  background: var(--purple-hover);
-}
-
 /* ============================================
    TrueFocus component
    ============================================ */
@@ -1306,16 +1211,10 @@
     gap: 16px;
   }
 
-  .hero-actions .button {
+  .hero-actions .ds-button {
     width: auto;
     min-width: 136px;
-    min-height: 48px;
     padding: 12px 28px;
-    font-size: var(--fs-body);
-  }
-
-  .hero-actions .button-secondary {
-    min-height: 48px;
   }
 
   .cursor-tag {
@@ -1471,16 +1370,6 @@
     flex-direction: column-reverse;
     width: 100%;
     gap: 16px;
-  }
-
-  .hero-actions .button {
-    width: 100%;
-    min-height: 44px;
-    font-size: var(--fs-sm);
-  }
-
-  .hero-actions .button-secondary {
-    min-height: 44px;
   }
 
   .cursor-tag {
@@ -1650,23 +1539,6 @@
 
   .hero-actions {
     gap: 16px;
-  }
-
-  .hero-actions .button {
-    min-height: 52px;
-    padding: 14px 28px;
-    border-radius: 200px;
-    font-size: var(--fs-body);
-  }
-
-  .hero-actions .button-secondary {
-    box-shadow: inset 0 0 0 2px var(--line-strong);
-  }
-
-  .hero-actions .button-secondary:hover {
-    background: var(--purple-light);
-    color: var(--purple);
-    box-shadow: inset 0 0 0 2px var(--purple);
   }
 
   .hero-cursor-engineers {
@@ -1889,21 +1761,6 @@
     transform: none;
   }
 
-  .button {
-    width: 100%;
-    min-height: 44px;
-    font-size: var(--fs-sm);
-  }
-
-  .button-secondary {
-    min-height: 44px;
-  }
-
-  .project-button {
-    min-height: 44px;
-    padding: 12px 0;
-    font-size: var(--fs-sm);
-  }
 }
 
 @media (max-width: 440px) {
