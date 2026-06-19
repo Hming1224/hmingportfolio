@@ -20,14 +20,14 @@
 .contact-panel-band {
   display: flex;
   justify-content: center;
-  padding: 80px clamp(24px, 8vw, 120px) 120px;
+  padding: 80px var(--page-gutter) 120px;
   background: #fdfdfd;
 }
 
 .contact-split-container {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  width: min(1200px, 100%);
+  width: 100%;
   gap: 48px;
   align-items: start;
 }

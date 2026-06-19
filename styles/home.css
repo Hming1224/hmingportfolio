@@ -1,7 +1,7 @@
 /* Home page, project cards, and hero decoration components. */
 
 .hero {
-  --home-page-gutter: clamp(24px, 12.5vw, 240px);
+  --home-page-gutter: var(--page-gutter);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -278,7 +278,7 @@
     left: 50%;
     z-index: 1;
     display: block;
-    width: min(calc(100% - (var(--home-page-gutter) * 2)), 1440px);
+    width: min(calc(100% - (var(--home-page-gutter) * 2)), 1920px);
     height: 100%;
     pointer-events: none;
     transform: translateX(-50%);
@@ -792,7 +792,6 @@
 }
 
 .projects-section {
-  --page-gutter: clamp(24px, 12.5vw, 240px);
   padding: 0 var(--page-gutter) 48px;
   scroll-margin-top: 80px;
 }
@@ -1061,7 +1060,7 @@
   min-height: 27px;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 500;
 }
 

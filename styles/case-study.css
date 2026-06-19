@@ -9,15 +9,14 @@
    ============================================ */
 
 .cs-page {
-  --page-gutter: clamp(24px, 12.5vw, 240px);
   background: var(--paper);
   color: var(--text-body);
   font-family: Inter, var(--font-space-grotesk), sans-serif;
 }
 
-@media (min-width: 1921px) {
+@media (min-width: 1301px) {
   .cs-page {
-    --page-gutter: calc((100vw - 1440px) / 2);
+    --page-gutter: max(240px, calc((100vw - 1920px) / 2));
   }
 }
 
@@ -119,9 +118,9 @@
   }
 }
 
-/* 英文版的 TOC 在 1300px（含）以下隱藏，避開較長英文標題在窄版時的擠壓問題 */
+/* TOC 在 1300px（含）以下隱藏，避開窄版時左側閱讀空間不足。 */
 @media (max-width: 1300px) {
-  html[lang="en"] .cs-toc {
+  .cs-toc {
     display: none;
   }
 }
