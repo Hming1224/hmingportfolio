@@ -111,8 +111,8 @@ const en = {
     "User Pain: Overall P&L Is Visible, but Position State Isn't",
   "CA 介面只呈現策略的整體績效（獲利、ROI、未實現 ROI、資產分布），卻沒直接顯示這支策略目前實際持有哪些倉位。使用者因此卡在幾個反覆出現的情境裡。":
     "The CA interface only shows a strategy's overall performance (profit, ROI, unrealized ROI, asset allocation), but doesn't directly show which positions the strategy currently holds. As a result, users get stuck in a few recurring situations.",
-  "使用者在CA 平台上使用策略機器人交易時，雖然可以看到策略整體賺了多少，卻無法清楚理解「現在到底開了什麼倉位」。當同時啟動多支策略、或同一支策略可能開多也可能開空時，使用者無法直接判斷目前是多倉還是空倉、倉位數量、入場價、標記價、浮動盈虧、保證金，以及該倉位距離止盈 / 止損還有多遠。":
-    "When users trade with strategy bots on CA, they can see the strategy's overall profit, but they cannot clearly understand \"what position is open right now.\" When multiple strategies are running at the same time, or when a single strategy may open either long or short positions, users cannot directly tell whether the current position is long or short, its size, entry price, mark price, floating P&L, margin, or how far it is from take-profit / stop-loss.",
+  "使用者在CA 平台上使用策略機器人交易時，雖然可以看到策略整體賺了多少，卻無法清楚理解「現在到底開了什麼倉位」。當同時啟動多支策略、或同一支策略可能開多也可能開空時，使用者無法直接判斷目前是多倉還是空倉、倉位數量、入場價、標記價、浮動盈虧，以及該倉位距離止盈 / 止損還有多遠。":
+    "When users trade with strategy bots on CA, they can see the strategy's overall profit, but they cannot clearly understand \"what position is open right now.\" When multiple strategies are running at the same time, or when a single strategy may open either long or short positions, users cannot directly tell whether the current position is long or short, its size, entry price, mark price, floating P&L, or how far it is from take-profit / stop-loss.",
   "「策略賺了多少我看得到，但它現在開的是多倉還是空倉、正在賺還是賠，介面上完全看不出來。」":
     "\"I can see how much the strategy has made, but whether it's currently long or short, in profit or in loss — the interface shows none of it.\"",
   "策略開發者 A": "Strategy User A",
@@ -142,8 +142,8 @@ const en = {
   "策略在 CA、倉位卻要去交易所看": "Strategies Live in CA, but Positions Live on the Exchange",
   "目前 CA 的 Portfolio 頁面可查看所有運行中的策略機器人，並在右上角呈現策略整體績效，例如獲利、ROI、未實現 ROI 與資產分布。然而，介面尚未直接顯示單一策略目前實際持有的倉位資訊，例如多 / 空方向、數量、入場價、標記價、浮動盈虧與保證金。使用者若想確認單一倉位狀態，仍需登入交易所查看，導致 CA 作為策略管理平台，無法讓使用者在站內完整掌握個別策略的實際收益與風險狀態。":
     "CA's Portfolio page lets users view all running strategy bots and shows overall performance in the top right — profit, ROI, unrealized ROI, and asset allocation. However, the interface doesn't directly show a single strategy's actual positions: long / short direction, size, entry price, mark price, floating P&L, and margin. To check a single position, users still have to log in to the exchange — so CA, as a strategy-management platform, can't let users fully grasp each strategy's real returns and risk on-site.",
-  "目前 CA 的 Portfolio 頁面可查看所有運行中的策略機器人，並在右上角呈現策略整體績效，例如獲利、ROI、未實現 ROI 與資產分布。然而，介面尚未直接顯示單一策略目前實際持有的倉位資訊，例如多 / 空方向、數量、入場價、標記價、浮動盈虧與保證金。使用者若想確認單一倉位狀態，仍需登入交易所查閱，導致 CA 作為策略管理平台，無法讓使用者在站內完整掌握個別策略的實際收益與風險狀態。":
-    "CA's Portfolio page lets users view all running strategy bots and shows overall performance in the top right — profit, ROI, unrealized ROI, and asset allocation. However, the interface doesn't directly show a single strategy's actual positions: long / short direction, size, entry price, mark price, floating P&L, and margin. To check a single position, users still have to review it on the exchange — so CA, as a strategy-management platform, can't let users fully grasp each strategy's real returns and risk on-site.",
+  "目前 CA 的 Portfolio 頁面可查看所有運行中的策略機器人，並在右上角呈現策略整體績效，例如獲利、ROI、未實現 ROI 與資產分布。然而，介面尚未直接顯示單一策略目前實際持有的倉位資訊，例如多 / 空方向、數量、入場價、標記價、浮動盈虧。使用者若想確認單一倉位狀態，仍需登入交易所查閱，導致 CA 作為策略管理平台，無法讓使用者在站內完整掌握個別策略的實際收益與風險狀態。":
+    "CA's Portfolio page lets users view all running strategy bots and shows overall performance in the top right — profit, ROI, unrealized ROI, and asset allocation. However, the interface doesn't directly show a single strategy's actual positions: long / short direction, size, entry price, mark price, and floating P&L. To check a single position, users still have to review it on the exchange — so CA, as a strategy-management platform, can't let users fully grasp each strategy's real returns and risk on-site.",
   "Crypto Arsenal 策略詳情頁現況：上方策略列表與績效指標，下方訂單與倉位清單仍分散於交易所端":
     "Crypto Arsenal strategy detail page today: the strategy list and performance metrics sit on top, while order and position lists remain scattered on the exchange side",
   "現況：策略績效指標清楚，但「這支策略目前持有哪些倉位」仍要跳到交易所端查看":
@@ -393,8 +393,8 @@ const en = {
   // ── Design Impact ──
   "用內部測試與流程指標驗證":
     "Validated with Internal Testing and Flow-Level Metrics",
-  "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標——例如完成一次操作要幾步、需不需要跳出平台。":
-    "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself — such as how many steps a task takes and whether users have to leave the platform.",
+  "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。":
+    "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself, such as the number of steps to complete a task and the average time spent on each flow.",
   "3 步": "3 steps",
   "內部測試者完成核心任務": "Internal testers completing core tasks",
   "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。":
