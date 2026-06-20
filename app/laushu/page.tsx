@@ -1,0 +1,605 @@
+import Image from "next/image";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { getLocale } from "next-intl/server";
+import "../../styles/case-study-laushu.css";
+import {
+  CaseSection,
+  CaseStudyShell,
+  ZoomableImage,
+  type TocSection,
+} from "../../components/case-study";
+import FeatureConnectors from "../advantech/components/FeatureConnectors";
+import { getNextProject, getProjectBySlug } from "../../data/projects";
+import type { Locale } from "../../i18n/routing";
+import { createLocalizedMetadata } from "../../lib/metadata";
+import { translateLaushu, localizeLaushuTree } from "./i18n";
+import { StakeholderFlow, SolutionFlow, SurveyFlow } from "./components/LaushuDiagrams";
+
+const IMG = "/projects/laushu";
+const CONN1 = "/projects/advantech/solution/connector-1.svg";
+const CONN2 = "/projects/advantech/solution/connector-2.svg";
+
+const roleItems = [
+  { label: "類型", value: ["設計優化", "團體專案"] },
+  { label: "角色", value: ["UIUX 設計師", "使用者研究員"] },
+  { label: "方法", value: ["訪談、問卷", "任務測試", "易用性測試"] },
+  { label: "工具", value: ["FigJam", "Figma"] },
+  { label: "時間", value: ["2024.3 - 2024.6"] },
+];
+
+const overviewCards = [
+  {
+    title: "目標",
+    body: "Laushu 勞贖為已上線的數位化勞報單系統。此設計優化專案與其負責人合作，測試現有紙本勞報單數位化的流程易用性，於上線前提供改善建議。",
+  },
+  {
+    title: "需求",
+    body: "了解紙本勞報單報帳流程、拆解利害關係人需求，並優化數位化勞報單報帳體驗。",
+  },
+  {
+    title: "原型",
+    body: "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。",
+  },
+];
+
+const serviceCards = [
+  { title: "建立外包人員資料庫", body: "使用者掌握外包人員資料，日後有需求可立即找人展開合作。" },
+  { title: "外包人員線上填寫資料、回簽勞報單", body: "外包人員透過系統連結線上填寫與回簽，不必專程跑一趟。" },
+  { title: "合併多張勞報單", body: "減少回簽次數與重複麻煩的確認步驟。" },
+];
+
+const serviceBullets = [
+  "使用者掌握外包人員資料，日後有需求可立即找人展開合作",
+  "減少回簽次數與重複麻煩的確認步驟",
+  "省時、省力、省心，提升整體工作效率，讓財務工作既快樂又自由",
+];
+
+const stakeholderCards = [
+  { title: "會計師", body: "勞贖主要用戶，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。" },
+  { title: "公司使用者", body: "會計事務所的主要服務對象，會計事務所協助公司向旗下外包工作者開立勞報單。" },
+  { title: "外包工作者", body: "勞贖的終端用戶，確認勞報單是否成立，並向公司領取工資。" },
+  { title: "勞贖管理員", body: "管理會計師帳號。" },
+];
+
+const problemCards = [
+  { title: "僅作為佐證用", body: "公司外包時，每次都須請外包人員簽署紙本勞報單，但此紙本最後僅作為交易佐證。" },
+  { title: "流程繁瑣", body: "流程包含許多細節，像是所得類別、二代健保的計算等，很多創業者不知情下違反規定。" },
+  { title: "過程耗時", body: "會計師需人工核對且逐筆建檔；外包人員即使不須進公司，還是必須專程跑一趟公司或郵局。" },
+];
+
+const researchTable = {
+  head: ["研究流程", "了解現況", "研究分析", "質化分析", "原型 & 測試"],
+  rows: [
+    {
+      label: "研究方法",
+      cells: [
+        ["脈絡訪查"],
+        ["先詢問會計師勞報單流程，接續設計問卷 & 訪談"],
+        ["使用者歷程分析", "用例分析", "需求優先級"],
+        ["SUS 量表", "任務測試", "易用性測試"],
+      ],
+    },
+    {
+      label: "欲收集資料",
+      cells: [
+        ["報帳操作步驟", "使用軟體", "資料輸入習慣 / 順序"],
+        ["使用者動機、行為、目標"],
+        ["使用者潛在的需求", "用例重要程度"],
+        ["使用者反饋", "系統易用性分數"],
+      ],
+    },
+  ],
+};
+
+const interviewGuide = [
+  {
+    title: "所屬公司工作流程",
+    items: [
+      { head: "處理勞報起訖過程", body: "建立、發送勞報單到收回領據和最後結果過程。" },
+      { head: "工作時間花費、人力需求", body: "執行勞報流程的痛點。" },
+    ],
+  },
+  {
+    title: "執行線上勞報系統",
+    items: [
+      { head: "已知的勞報線上系統", body: "使用線上和實體紙本的經驗差異。" },
+      { head: "簽核常見問題、執行線上簽核窒礙點", body: "線上與紙本系統的差異、優點和缺點。" },
+    ],
+  },
+  {
+    title: "流程改善的想法",
+    items: [
+      { head: "法規報稅規定", body: "既有勞報流程執行的必要性。" },
+      { head: "內部執行現況", body: "公司內部調整流程的想法、改善預算成本及更動規模評估。" },
+    ],
+  },
+];
+
+const keyFlows = [
+  { title: "Flow 1：建立外包人員資料庫", body: "便於掌管人員個人資料，日後有需求可立即找人。" },
+  { title: "Flow 2：建立勞務報酬單", body: "發送系統連結給外包人員填寫資料 / 回簽。" },
+  { title: "Flow 3：合併多張勞務報酬單", body: "減少回簽次數與調整稅額。" },
+];
+
+const iterationGroups = [
+  {
+    title: "Flow 1：建立外包人員資料庫，便於掌管人員個人資料",
+    items: [
+      {
+        body: "設計迭代 1-1：對使用者而言，首頁建立人員資料庫時，重要的是知道確切是哪位人員，因此不容易變動的身份資料須置前，以利辨識。",
+        image: `${IMG}/flow1-ui.png`,
+        alt: "Laushu Flow1 建立外包人員資料庫介面迭代",
+      },
+    ],
+  },
+  {
+    title: "Flow 2：建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽",
+    items: [
+      { body: "設計迭代 2-1：增加稅額 ％ 顯示與文字說明，讓使用者便於對照。", image: `${IMG}/flow2-ui-1.png`, alt: "Laushu Flow2 增加稅額顯示介面迭代" },
+      { body: "設計迭代 2-2：修正用詞，更容易理解。", image: `${IMG}/flow2-ui-2.png`, alt: "Laushu Flow2 修正用詞介面迭代" },
+      { body: "設計迭代 2-3：優化資料呈現，快速查看已建立勞報單。", image: `${IMG}/flow2-ui-3.png`, alt: "Laushu Flow2 優化資料呈現介面迭代" },
+      { body: "設計迭代 2-4：增加預覽狀態，確保資料填寫正確後，寄出電子勞報單。", image: `${IMG}/flow2-ui-4.png`, alt: "Laushu Flow2 增加預覽狀態介面迭代" },
+    ],
+  },
+  {
+    title: "Flow 3：合併多張勞務報酬單，減少回簽次數與調整稅額",
+    items: [
+      { body: "設計迭代 3-1：優化合併勞報單功能，清楚顯示合併清單。", image: `${IMG}/flow3-ui.png`, alt: "Laushu Flow3 合併勞報單介面迭代" },
+    ],
+  },
+];
+
+const PROTO = `${IMG}/proto`;
+
+const prototypeFlows = [
+  {
+    tag: "Flow 3",
+    title: "合併多張勞務報酬單",
+    sub: "測試驗證後的合併流程：合併多筆勞報資料、清楚呈現細項，減少回簽次數與稅務整理時間。",
+    steps: [
+      { note: "進入「勞務報酬單」頁面，輸入外包人員姓名後按下搜尋。", image: `${PROTO}/merge-1-search.png`, alt: "Laushu 合併流程 搜尋外包人員勞報單" },
+      { note: "勾選要合併的多筆勞報單，右上方即時顯示已勾選筆數與「確認合併」。", image: `${PROTO}/merge-2-select.png`, alt: "Laushu 合併流程 勾選欲合併的勞報單" },
+      { note: "若勾選的勞務內容不相同，系統會跳出 alert 提醒，不可合併。", image: `${PROTO}/merge-3-alert.png`, alt: "Laushu 合併流程 內容不同時的 alert 提醒" },
+      { note: "合併第一張：外國人稅率不同時系統提醒、勞健保代扣需填 ％ 數、付款日期提醒；因為一起匯款，只需要一個支付方式。", image: `${PROTO}/merge-4-detail.png`, alt: "Laushu 合併流程 合併單據細節編輯" },
+      { note: "點選合併項目可展開，檢視被合併的每一張單張。", image: `${PROTO}/merge-5-expand.png`, alt: "Laushu 合併流程 展開檢視合併單張" },
+    ],
+  },
+];
+
+const demoItems = [
+  { title: "Flow 1：建立外包人員資料庫", body: "快速新增、查找與管理外包人員資料，降低後續建立勞報單時的重複輸入。", video: `${IMG}/demo/EXKqZMroni8.mp4`, poster: `${IMG}/demo/demo-01-poster.jpg`, duration: "00:12" },
+  { title: "Flow 2：建立勞務報酬單", body: "協助公司建立勞務報酬單，發送系統連結給外包人員填寫資料並完成回簽。", video: `${IMG}/demo/EzwEWYr2QgQ.mp4`, poster: `${IMG}/demo/demo-02-poster.jpg`, duration: "00:22" },
+  { title: "Flow 3：合併多張勞務報酬單", body: "合併多筆勞報資料並清楚呈現細項，減少回簽次數與稅務整理時間。", video: `${IMG}/demo/WpLXr671epg.mp4`, poster: `${IMG}/demo/demo-03-poster.jpg`, duration: "00:44" },
+];
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const project = getProjectBySlug("laushu", locale);
+  const description = project.seoDescription ?? project.description;
+  return createLocalizedMetadata(locale, "/laushu", {
+    en: { title: project.title, description },
+    "zh-TW": { title: project.title, description },
+  });
+}
+
+export default async function LaushuPage() {
+  const locale = (await getLocale()) as Locale;
+  const t = (text: string) => translateLaushu(locale, text);
+  const project = getProjectBySlug("laushu", locale);
+  const nextProject = getNextProject(project.slug, locale);
+
+  const tocSections: TocSection[] = [
+    { id: "cs-sec-overview", title: t("專案總覽") },
+    { id: "cs-sec-problem", title: t("問題定義") },
+    { id: "cs-sec-understand", title: t("了解使用者情境") },
+    { id: "cs-sec-converge", title: t("收斂與洞察") },
+    { id: "cs-sec-iterate", title: t("測試與設計迭代") },
+    { id: "cs-sec-prototype", title: t("原型設計") },
+    { id: "cs-sec-demo", title: t("成果 Demo") },
+    { id: "cs-sec-reflection", title: t("學習反思") },
+  ];
+
+  return (
+    <CaseStudyShell
+      theme="theme-laushu"
+      tocSections={tocSections}
+      nextNav={{
+        nextHref: nextProject.status === "published" ? nextProject.href : undefined,
+        homeLabel: t("返回首頁"),
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
+      }}
+      hero={localizeLaushuTree(locale, HeroSection())}
+    >
+      {localizeLaushuTree(locale, OverviewSection())}
+      {localizeLaushuTree(locale, ProblemSection())}
+      {localizeLaushuTree(locale, UnderstandSection())}
+      {localizeLaushuTree(locale, ConvergeSection())}
+      {localizeLaushuTree(locale, IterateSection())}
+      {localizeLaushuTree(locale, PrototypeSection())}
+      {localizeLaushuTree(locale, DemoSection())}
+      {localizeLaushuTree(locale, ReflectionSection())}
+    </CaseStudyShell>
+  );
+}
+
+function HeroSection() {
+  return (
+    <section>
+      <div className="cs-hero-cover laushu-hero-cover">
+        <div className="cs-hero-cover-img">
+          <Image src={`${IMG}/hero-cover.png`} alt="Laushu 勞贖設計優化專案主視覺" fill sizes="100vw" priority />
+        </div>
+      </div>
+      <div className="cs-hero-info laushu-hero-info">
+        <div className="cs-hero-meta">
+          <span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>
+        </div>
+        <h1 className="cs-title">Laushu 勞贖｜勞務報酬系統設計優化</h1>
+        <p className="laushu-hero-lead">
+          檢視目前紙本勞報單使用流程，透過訪談、設計與測試，優化勞贖勞報數位化系統，針對發送勞報單流程，提供設計體驗優化建議。
+        </p>
+        <div className="cs-info-row laushu-info-row">
+          {roleItems.map((item) => (
+            <div className="cs-info-card" key={item.label}>
+              <span className="cs-info-label">{item.label}</span>
+              <span className="cs-info-value">
+                {item.value.map((line, index) => (
+                  <span key={line}>
+                    {line}
+                    {index < item.value.length - 1 ? <br /> : null}
+                  </span>
+                ))}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OverviewSection() {
+  return (
+    <CaseSection id="cs-sec-overview" title="專案總覽 Overview" className="laushu-overview-section">
+      <div className="laushu-overview-copy">
+        <span className="laushu-section-tag">Project Scope</span>
+        <h3>將紙本勞報單流程轉譯成可測試、可上線的數位體驗。</h3>
+        <p>
+          專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
+        </p>
+      </div>
+      <div className="laushu-summary-grid">
+        {overviewCards.map((card) => (
+          <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
+        ))}
+      </div>
+      <div className="laushu-solution-block">
+        {SolutionFlow()}
+        <p className="laushu-diagram-caption">公司發送勞報單給外包工作者</p>
+      </div>
+      <div className="laushu-service-grid">
+        {serviceCards.map((card) => (
+          <article className="laushu-service-card" key={card.title}>
+            <h4>{card.title}</h4>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </div>
+      <ul className="laushu-bullets">
+        {serviceBullets.map((b) => (<li key={b}>{b}</li>))}
+      </ul>
+    </CaseSection>
+  );
+}
+
+function ProblemSection() {
+  return (
+    <CaseSection id="cs-sec-problem" title="問題定義 Problem" surface className="laushu-problem-section">
+      <div className="laushu-problem-layout">
+        <div className="laushu-problem-copy">
+          <span className="laushu-section-tag">Pain Point</span>
+          <h3>過去建立紙本勞報單費時費力，但最後紙本單據僅作為佐證用。</h3>
+          <p>
+            勞務報酬單，簡稱「勞報單」，為公司支付「酬勞」給「個人」時使用的證明單據，可作為公司支出的證明，並列入領到酬勞者的綜合所得稅中。
+          </p>
+        </div>
+        <figure className="laushu-form-card">
+          <ImageBlock src={`${IMG}/labor-form-example.png`} alt="勞務報酬單範例" variant="plain" />
+          <figcaption>勞報單範例</figcaption>
+        </figure>
+      </div>
+      <div className="laushu-problem-grid">
+        {problemCards.map((card, index) => (
+          <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
+        ))}
+      </div>
+    </CaseSection>
+  );
+}
+
+function UnderstandSection() {
+  return (
+    <CaseSection id="cs-sec-understand" title="了解使用者情境 Understand" className="laushu-process-section">
+      <ArticleBlock title="彙整使用勞報單流程" kicker="收集">
+        <p>訪談勞贖負責人並自行收集資料，了解外包與勞報單簽署流程，釐清會計師、公司、外包工作者三者關係。此平台至少包含四種核心利害關係人：</p>
+      </ArticleBlock>
+      <div className="laushu-stakeholder-grid">
+        {stakeholderCards.map((card, index) => (
+          <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
+        ))}
+      </div>
+      {StakeholderFlow()}
+
+      <ArticleBlock title="制定研究策略" kicker="規劃">
+        <p>為後續設計研究制定執行策略，從了解現況、研究分析、質化分析到原型與測試。</p>
+      </ArticleBlock>
+      {ResearchTable()}
+
+      <ArticleBlock title="篩選受訪者" kicker="問卷">
+        <p>設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整）。</p>
+      </ArticleBlock>
+      {SurveyFlow({ note: <p>了解目前勞報單填寫過程中，哪些過程感到繁雜。<br />會計師：建立 → 發送 → 回收 → 彙整。</p> })}
+
+      <ArticleBlock title="訪談大綱" kicker="訪談">
+        <p>共搜集 39 份有效問卷，篩選三位受訪者，圍繞以下三個面向深入訪談：</p>
+      </ArticleBlock>
+      <div className="laushu-guide-grid">
+        {interviewGuide.map((group) => (
+          <article className="laushu-guide-card" key={group.title}>
+            <h4>{group.title}</h4>
+            <ul>
+              {group.items.map((item) => (
+                <li key={item.head}>
+                  <strong>{item.head}</strong>
+                  <span>{item.body}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div className="laushu-persona">
+        <div className="laushu-persona-copy">
+          <strong>P1 攝影工作室老闆</strong>
+          <span className="laushu-persona-tags">#許多外包工作 #有長期配合的人員</span>
+          <p>老闆會自己整理每個外包人員專屬的資料夾，存放勞報單與過去的資料，就像自己建置了一套資料庫。</p>
+        </div>
+        <ImageBlock src={`${IMG}/interviewee-p1.png`} alt="Laushu 訪談者一資料整理" />
+      </div>
+    </CaseSection>
+  );
+}
+
+function ConvergeSection() {
+  return (
+    <CaseSection id="cs-sec-converge" title="收斂與洞察 Converge" surface className="laushu-process-section">
+      <ArticleBlock title="彙整流程 & 重塑 TA" kicker="洞察">
+        <p>挖掘使用者在建立、發放、回簽、建檔勞報單流程中的痛點，並首先聚焦會自己經手勞報單的公司端。</p>
+      </ArticleBlock>
+      <figure className="laushu-journey">
+        <ZoomableImage
+          src={`${IMG}/labor-form-flow-1.png`}
+          alt="Laushu 勞報單使用者歷程 journey map"
+          width={1600}
+          height={620}
+          labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
+        />
+        <figcaption>以前兩位受訪者為主，盤點建立 → 發放 → 回簽 → 建檔的完整歷程與痛點</figcaption>
+      </figure>
+      <ArticleBlock title="重要用例">
+        <p>收斂訪談洞見後，使用者最在意、也覺得紙本勞報單最麻煩的三件事：如何有效管理人員、如何改善簽收確認、如何減少回簽次數。據此彙整三個重要用例，進行後續介面流程設計。</p>
+      </ArticleBlock>
+      <div className="laushu-usecase-grid">
+        {keyFlows.map((item) => (
+          <InfoCard title={item.title} key={item.title}>{item.body}</InfoCard>
+        ))}
+      </div>
+    </CaseSection>
+  );
+}
+
+function IterateSection() {
+  return (
+    <CaseSection id="cs-sec-iterate" title="測試與設計迭代 Iterate" className="laushu-process-section">
+      <ArticleBlock title="任務測試與易用性量表">
+        <p>邀請上次接受訪談的 2 位受訪者再次進行介面評估。針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表。</p>
+        <ul>
+          <li>節目企劃：長期需要外包主持人</li>
+          <li>攝影工作室老闆：長期需要外包攝影師合作拍攝</li>
+        </ul>
+      </ArticleBlock>
+      {iterationGroups.map((group) => (
+        <div className="laushu-flow-group" key={group.title}>
+          <h3>{group.title}</h3>
+          {group.items.map((item) => (
+            <div className="laushu-iteration" key={item.image}>
+              <p>{item.body}</p>
+              <ImageBlock src={item.image} alt={item.alt} />
+            </div>
+          ))}
+        </div>
+      ))}
+      <ArticleBlock title="測試結果">
+        <p>根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。</p>
+        <ImageBlock src={`${IMG}/test-result.png`} alt="Laushu 任務測試與 SUS 結果" />
+      </ArticleBlock>
+    </CaseSection>
+  );
+}
+
+function PrototypeSection() {
+  return (
+    <CaseSection id="cs-sec-prototype" title="原型設計 Prototype" surface className="laushu-prototype-section">
+      <p className="cs-body-muted" style={{ marginBottom: 40 }}>
+        根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。
+      </p>
+      <ImageBlock src={`${IMG}/figma-design.png`} alt="Laushu Hi-fi 原型設計總覽" variant="wide" />
+      <FeatureConnectors />
+      <div className="cs-sol-block laushu-proto-block">
+        {prototypeFlows.map((flow, gi) => (
+          <div className="cs-sol-fgroup laushu-proto-group" key={flow.tag}>
+            {gi > 0 ? <div className="cs-sol-fhr" /> : null}
+            <div className="cs-sol-fc">
+              <div className="cs-sol-fchead">
+                <p className="cs-sol-ftitle">{`${flow.tag}｜${flow.title}`}</p>
+              </div>
+              <div className="cs-sol-fcbody">
+                <p className="cs-sol-fsub">{flow.sub}</p>
+              </div>
+            </div>
+            {flow.steps.map((step, i) => (
+              <ProtoStep key={step.image} step={step} index={i} isLast={i === flow.steps.length - 1} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </CaseSection>
+  );
+}
+
+function ProtoStep({
+  step,
+  index,
+  isLast,
+}: {
+  step: { note: string; image: string; alt: string };
+  index: number;
+  isLast: boolean;
+}) {
+  const flip = index % 2 === 1;
+  return (
+    <>
+      <div className="cs-sol-fr cs-sol-fr-mid">
+        {flip ? (
+          <>
+            <div className="cs-sol-fimg">
+              <ImageBlock src={step.image} alt={step.alt} variant="plain" />
+            </div>
+            <div className="cs-sol-fnote"><p>{step.note}</p></div>
+          </>
+        ) : (
+          <>
+            <div className="cs-sol-fnote"><p>{step.note}</p></div>
+            <div className="cs-sol-fimg">
+              <ImageBlock src={step.image} alt={step.alt} variant="plain" />
+            </div>
+          </>
+        )}
+      </div>
+      {!isLast ? (
+        <div className="cs-sol-fconn" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element -- connector SVG is resized at runtime by FeatureConnectors JS */}
+          <img src={index % 2 === 0 ? CONN1 : CONN2} alt="" suppressHydrationWarning />
+        </div>
+      ) : null}
+    </>
+  );
+}
+
+function DemoSection() {
+  return (
+    <CaseSection id="cs-sec-demo" title="成果 Demo" className="laushu-demo-section">
+      <div className="laushu-demo-list">
+        {demoItems.map((item, index) => (
+          <article className="laushu-demo-card" key={item.title}>
+            <div className="laushu-demo-media">
+              <div className="laushu-demo-meta">
+                <span>{`0${index + 1}`}</span>
+                <span>{item.duration}</span>
+              </div>
+              <video className="laushu-demo-video" controls preload="metadata" poster={item.poster} playsInline>
+                <source src={item.video} type="video/mp4" />
+              </video>
+            </div>
+            <div className="laushu-demo-copy">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </CaseSection>
+  );
+}
+
+function ReflectionSection() {
+  return (
+    <CaseSection id="cs-sec-reflection" title="學習反思 Reflections" surface className="laushu-learning-section">
+      <div className="laushu-learning-card">
+        <ArticleBlock title="從使用者出發的線上化策略思考">
+          <p>
+            設計線上化流程時，首要是釐清哪些是不可或缺的核心步驟，哪些可轉化為更便捷的數位形式。唯有從使用者需求出發，才能真正掌握該數位化的重點功能。本專案因時間限制，優先聚焦核心利害關係人——公司端——進行流程盤點與優化。實作過程中也意識到，專案要真正推動上線，需進一步納入更多商業面向與跨部門的決策考量。
+          </p>
+        </ArticleBlock>
+      </div>
+    </CaseSection>
+  );
+}
+
+function ResearchTable() {
+  return (
+    <div className="laushu-table-wrap">
+      <table className="laushu-research-table">
+        <thead>
+          <tr>
+            {researchTable.head.map((h, i) => (
+              <th key={h} className={i === 0 ? "laushu-th-corner" : undefined}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {researchTable.rows.map((row) => (
+            <tr key={row.label}>
+              <th scope="row">{row.label}</th>
+              {row.cells.map((cell, ci) => (
+                <td key={ci}>
+                  <ul>
+                    {cell.map((c) => (<li key={c}>{c}</li>))}
+                  </ul>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function InfoCard({ title, number, children }: { title: string; number?: string; children: ReactNode }) {
+  return (
+    <article className="laushu-info-card">
+      {number ? <span>{number}</span> : null}
+      <h4>{title}</h4>
+      <p>{children}</p>
+    </article>
+  );
+}
+
+function ArticleBlock({ title, kicker, children }: { title: string; kicker?: string; children: ReactNode }) {
+  return (
+    <section className="laushu-article">
+      {kicker ? <p className="laushu-kicker">{kicker}</p> : null}
+      <h3>{title}</h3>
+      <div className="laushu-copy">{children}</div>
+    </section>
+  );
+}
+
+function ImageBlock({
+  src,
+  alt,
+  variant = "default",
+}: {
+  src: string;
+  alt: string;
+  variant?: "default" | "plain" | "wide" | "flush";
+}) {
+  return (
+    <div className={`laushu-image-frame laushu-image-frame--${variant}`}>
+      <Image src={src} alt={alt} width={1472} height={828} sizes="(max-width: 768px) calc(100vw - 48px), 960px" />
+    </div>
+  );
+}

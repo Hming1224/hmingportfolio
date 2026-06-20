@@ -68,6 +68,7 @@ const zhProjects: ProjectSummary[] = [
     tone: "laushu",
     category: "school",
     status: "coming-soon",
+    nextProjectSlug: "tba",
   },
   {
     slug: "nccuspace",
@@ -175,6 +176,7 @@ const enProjects: ProjectSummary[] = [
     tone: "laushu",
     category: "school",
     status: "coming-soon",
+    nextProjectSlug: "tba",
   },
   {
     slug: "nccuspace",

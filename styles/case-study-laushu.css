@@ -1,0 +1,933 @@
+/* Laushu case study-specific sections. Private selectors stay under
+   .theme-laushu and reuse the shared case-study shell, hero, info row, TOC,
+   next navigation, spacing, type tokens, and button rules. */
+
+.theme-laushu {
+  --laushu-primary-100: #fdfcff;
+  --laushu-primary-200: #decbff;
+  --laushu-primary-300: #c399ff;
+  --laushu-primary-400: #ab5fff;
+  --laushu-primary-500: #9300f0;
+  --laushu-primary-600: #6300a5;
+  --laushu-primary-700: #37005f;
+  --laushu-tertiary-100: #f8f7fa;
+  --laushu-tertiary-200: #d3cce0;
+  --laushu-tertiary-300: #afa2c6;
+  --laushu-tertiary-500: #6a558a;
+  --laushu-tertiary-700: #241b31;
+  --laushu-grey-100: #fcfcfd;
+  --laushu-grey-200: #d2d2e2;
+  --laushu-grey-500: #5e5e91;
+  --laushu-grey-700: #1f1f3b;
+  --laushu-line: rgba(99, 0, 165, 0.16);
+  --laushu-shadow: 0 16px 40px rgba(55, 0, 95, 0.08);
+  --text-heading: var(--laushu-primary-700);
+}
+
+.theme-laushu .cs-divider {
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .cs-tags,
+.theme-laushu .cs-info-label {
+  color: var(--laushu-tertiary-500);
+}
+
+.theme-laushu .cs-info-value {
+  color: var(--laushu-tertiary-700);
+}
+
+.theme-laushu .laushu-hero-cover {
+  height: clamp(360px, 35vw, 640px);
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-hero-cover img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.theme-laushu .laushu-hero-info {
+  background: linear-gradient(180deg, #ffffff 0%, var(--laushu-primary-100) 100%);
+}
+
+.theme-laushu .laushu-hero-lead {
+  max-width: 760px;
+  margin: -8px 0 32px;
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-info-row {
+  padding-top: 8px;
+  border-top: 1px solid var(--laushu-line);
+}
+
+.theme-laushu .laushu-section-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--laushu-primary-500);
+}
+
+.theme-laushu .laushu-overview-section,
+.theme-laushu .laushu-process-section,
+.theme-laushu .laushu-learning-section {
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-problem-section,
+.theme-laushu .laushu-demo-section {
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-overview-layout,
+.theme-laushu .laushu-problem-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+  gap: 40px;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-overview-copy h3,
+.theme-laushu .laushu-problem-copy h3 {
+  margin: 0 0 18px;
+  max-width: 600px;
+  font-size: var(--fs-h2);
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-overview-copy p,
+.theme-laushu .laushu-problem-copy p {
+  margin: 0;
+  max-width: 640px;
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-summary-grid,
+.theme-laushu .laushu-problem-grid,
+.theme-laushu .laushu-stakeholder-grid,
+.theme-laushu .laushu-usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1440px;
+  margin: 40px auto 0;
+}
+
+.theme-laushu .laushu-stakeholder-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.theme-laushu .laushu-info-card {
+  min-height: 180px;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-info-card>span {
+  display: inline-flex;
+  margin-bottom: 18px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-600);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.theme-laushu .laushu-info-card h4 {
+  margin: 0 0 12px;
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--laushu-tertiary-700);
+}
+
+.theme-laushu .laushu-info-card p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-form-card {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-form-card figcaption {
+  margin-top: 14px;
+  color: var(--laushu-tertiary-500);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+.theme-laushu .laushu-process-grid {
+  display: grid;
+  gap: 48px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-article {
+  max-width: 760px;
+}
+
+.theme-laushu .laushu-article h3,
+.theme-laushu .laushu-flow-group h3 {
+  margin: 0 0 16px;
+  font-size: var(--fs-h3);
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-kicker {
+  margin: -6px 0 18px;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--laushu-primary-500);
+}
+
+.theme-laushu .laushu-copy {
+  color: var(--text-body);
+  font-size: var(--fs-body);
+  line-height: 1.8;
+}
+
+.theme-laushu .laushu-copy p,
+.theme-laushu .laushu-copy ul,
+.theme-laushu .laushu-copy ol {
+  margin: 0;
+}
+
+.theme-laushu .laushu-copy p+ul,
+.theme-laushu .laushu-copy p+ol {
+  margin-top: 16px;
+}
+
+.theme-laushu .laushu-copy ul,
+.theme-laushu .laushu-copy ol {
+  padding-left: 1.35em;
+}
+
+.theme-laushu .laushu-copy li+li {
+  margin-top: 8px;
+}
+
+.theme-laushu .laushu-image-frame {
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-image-frame--plain,
+.theme-laushu .laushu-image-frame--flush {
+  box-shadow: none;
+}
+
+.theme-laushu .laushu-image-frame--wide {
+  max-width: 980px;
+}
+
+.theme-laushu .laushu-image-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .laushu-research-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.theme-laushu .laushu-image-grid {
+  display: grid;
+  gap: 24px;
+  max-width: 980px;
+}
+
+.theme-laushu .laushu-persona {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: var(--laushu-primary-100);
+}
+
+.theme-laushu .laushu-persona strong,
+.theme-laushu .laushu-persona span {
+  display: block;
+}
+
+.theme-laushu .laushu-persona strong {
+  margin-bottom: 8px;
+  color: var(--laushu-primary-700);
+  font-size: var(--fs-h4);
+}
+
+.theme-laushu .laushu-persona span {
+  margin-bottom: 12px;
+  color: var(--laushu-tertiary-500);
+  font-size: var(--fs-sm);
+}
+
+.theme-laushu .laushu-persona p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.theme-laushu .laushu-flow-visuals {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.theme-laushu .laushu-flow-group {
+  display: grid;
+  gap: 24px;
+}
+
+.theme-laushu .laushu-iteration {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-iteration p {
+  margin: 0;
+  padding-left: 18px;
+  border-left: 4px solid var(--laushu-primary-500);
+  color: var(--laushu-tertiary-700);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  font-weight: 600;
+}
+
+.theme-laushu .laushu-demo-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-demo-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-demo-media {
+  position: relative;
+  background: var(--laushu-tertiary-700);
+}
+
+.theme-laushu .laushu-demo-meta {
+  position: absolute;
+  inset: 14px 14px auto 14px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+.theme-laushu .laushu-demo-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--laushu-tertiary-700);
+  object-fit: cover;
+}
+
+.theme-laushu .laushu-demo-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px;
+}
+
+.theme-laushu .laushu-demo-copy h3 {
+  margin: 0 0 12px;
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-demo-copy p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+.theme-laushu .laushu-learning-card {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--laushu-primary-100), var(--laushu-tertiary-100));
+}
+
+@media (max-width: 1199px) {
+  .theme-laushu .laushu-stakeholder-grid,
+  .theme-laushu .laushu-demo-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .theme-laushu .laushu-overview-layout,
+  .theme-laushu .laushu-problem-layout,
+  .theme-laushu .laushu-research-grid,
+  .theme-laushu .laushu-persona,
+  .theme-laushu .laushu-flow-visuals,
+  .theme-laushu .laushu-iteration {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-summary-grid,
+  .theme-laushu .laushu-problem-grid,
+  .theme-laushu .laushu-usecase-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-hero-cover {
+    height: 420px;
+  }
+
+  .theme-laushu .laushu-hero-cover img {
+    object-position: center top;
+  }
+
+  .theme-laushu .laushu-hero-lead {
+    margin-bottom: 24px;
+  }
+
+  .theme-laushu .laushu-stakeholder-grid,
+  .theme-laushu .laushu-demo-list {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-info-card {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .theme-laushu .laushu-form-card,
+  .theme-laushu .laushu-persona,
+  .theme-laushu .laushu-iteration,
+  .theme-laushu .laushu-learning-card {
+    padding: 20px;
+  }
+}
+
+/* ───────────────────────── v2：新版 8 段結構新增樣式 ───────────────────────── */
+
+/* Overview：解決方案流程 + 服務卡 + 重點清單 */
+.theme-laushu .laushu-overview-copy {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-solution-block {
+  max-width: 980px;
+  margin: 48px auto 0;
+}
+
+.theme-laushu .laushu-diagram-caption {
+  margin: 16px 0 0;
+  text-align: center;
+  color: var(--laushu-tertiary-500);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.theme-laushu .laushu-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1440px;
+  margin: 40px auto 0;
+}
+
+.theme-laushu .laushu-service-card {
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: var(--laushu-primary-100);
+}
+
+.theme-laushu .laushu-service-card h4 {
+  margin: 0 0 10px;
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-service-card p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-bullets {
+  max-width: 1000px;
+  margin: 28px auto 0;
+  padding-left: 1.2em;
+  color: var(--text-body);
+  font-size: var(--fs-body);
+  line-height: 1.9;
+}
+
+.theme-laushu .laushu-bullets li + li {
+  margin-top: 6px;
+}
+
+/* SVG 流程圖容器 */
+.theme-laushu .laushu-diagram {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.theme-laushu .laushu-flow-svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+}
+
+.theme-laushu .laushu-flow-node-label {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-flow-edge-label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Process / Understand / Converge / Iterate 段內容垂直間距（僅設上邊距，水平對齊維持各自規則） */
+.theme-laushu .laushu-process-section > .laushu-article,
+.theme-laushu .laushu-process-section > .laushu-stakeholder-grid,
+.theme-laushu .laushu-process-section > .laushu-diagram,
+.theme-laushu .laushu-process-section > .laushu-table-wrap,
+.theme-laushu .laushu-process-section > .laushu-survey-flow,
+.theme-laushu .laushu-process-section > .laushu-guide-grid,
+.theme-laushu .laushu-process-section > .laushu-persona,
+.theme-laushu .laushu-process-section > .laushu-journey,
+.theme-laushu .laushu-process-section > .laushu-flow-group,
+.theme-laushu .laushu-process-section > .laushu-usecase-grid {
+  margin-top: 44px;
+}
+
+/* 研究策略表格 */
+.theme-laushu .laushu-table-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.theme-laushu .laushu-research-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--fs-sm);
+}
+
+.theme-laushu .laushu-research-table th,
+.theme-laushu .laushu-research-table td {
+  border: 1px solid var(--laushu-line);
+  padding: 14px 16px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.theme-laushu .laushu-research-table thead th {
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-700);
+  font-weight: 800;
+  text-align: center;
+}
+
+.theme-laushu .laushu-research-table thead th.laushu-th-corner {
+  background: var(--laushu-tertiary-200);
+}
+
+.theme-laushu .laushu-research-table tbody th {
+  width: 120px;
+  white-space: nowrap;
+  background: var(--laushu-tertiary-100);
+  color: var(--laushu-tertiary-700);
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-research-table td {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.theme-laushu .laushu-research-table td ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.theme-laushu .laushu-research-table td li + li {
+  margin-top: 6px;
+}
+
+/* 問卷／訪談結構流程 */
+.theme-laushu .laushu-survey-flow {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(0, 1.5fr) minmax(150px, 0.8fr);
+  gap: 24px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-survey-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 28px 20px;
+  border-radius: 20px;
+  text-align: center;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-survey-node strong {
+  font-size: var(--fs-h4);
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-survey-node span {
+  font-size: var(--fs-sm);
+  color: var(--laushu-tertiary-500);
+}
+
+.theme-laushu .laushu-survey-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-laushu .laushu-survey-arrow {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+}
+
+.theme-laushu .laushu-survey-note {
+  text-align: center;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.theme-laushu .laushu-survey-note p {
+  margin: 0;
+}
+
+/* 訪談大綱三欄卡 */
+.theme-laushu .laushu-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-guide-card {
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-guide-card h4 {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--laushu-line);
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-guide-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.theme-laushu .laushu-guide-card li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-laushu .laushu-guide-card strong {
+  color: var(--laushu-tertiary-700);
+  font-size: var(--fs-body);
+}
+
+.theme-laushu .laushu-guide-card li span {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+/* Persona 文字欄 */
+.theme-laushu .laushu-persona-tags {
+  margin-bottom: 12px;
+}
+
+/* Journey 板（保留為可放大圖） */
+.theme-laushu .laushu-journey {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-journey figcaption {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--laushu-tertiary-500);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+/* ── 原型設計：沿用 advantech 連接線版面（主題化） ── */
+.theme-laushu .laushu-prototype-section {
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-prototype-section .cs-body-muted {
+  max-width: 920px;
+  color: var(--text-secondary);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+.theme-laushu .laushu-prototype-section .laushu-image-frame--wide {
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-proto-block {
+  margin-top: 40px;
+}
+
+.theme-laushu .cs-sol-block {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.theme-laushu .cs-sol-fgroup {
+  display: contents;
+}
+
+.theme-laushu .cs-sol-fr {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.theme-laushu .cs-sol-fr-mid {
+  align-items: center;
+}
+
+.theme-laushu .cs-sol-fc {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--laushu-line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.theme-laushu .cs-sol-fchead {
+  padding: 24px 28px;
+  background: linear-gradient(269deg, rgba(255, 255, 255, 0) 0%, var(--laushu-primary-200) 63%);
+}
+
+.theme-laushu .cs-sol-fcbody {
+  padding: 24px 28px 28px;
+}
+
+.theme-laushu .cs-sol-ftitle {
+  margin: 0;
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .cs-sol-fsub {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .cs-sol-fimg {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  background: #ffffff;
+}
+
+.theme-laushu .cs-sol-fimg .laushu-image-frame {
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.theme-laushu .cs-sol-fnote {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.theme-laushu .cs-sol-fnote > p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .cs-sol-fhr {
+  width: 100%;
+  height: 1px;
+  margin: 0 0 40px;
+  background: var(--laushu-line);
+}
+
+.theme-laushu .cs-sol-fconn {
+  display: block;
+  width: 100%;
+  margin-top: -68px;
+  margin-bottom: -28px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.theme-laushu .cs-sol-fconn img {
+  display: block;
+  height: auto;
+}
+
+@media (max-width: 1023px) {
+  .theme-laushu .laushu-service-grid,
+  .theme-laushu .laushu-guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .cs-sol-fr,
+  .theme-laushu .cs-sol-fr-mid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .theme-laushu .cs-sol-fc,
+  .theme-laushu .cs-sol-fnote {
+    flex: unset;
+    width: 100%;
+  }
+
+  .theme-laushu .cs-sol-fr-mid .cs-sol-fnote {
+    order: -1;
+  }
+
+  .theme-laushu .cs-sol-fconn {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .theme-laushu .laushu-demo-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-survey-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-survey-arrow {
+    transform: rotate(90deg);
+  }
+}
