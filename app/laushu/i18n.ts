@@ -187,6 +187,21 @@ const en = {
   "#許多外包工作 #有長期配合的人員": "#Lots of outsourcing #Long-term partners",
   "老闆會自己整理每個外包人員專屬的資料夾，存放勞報單與過去的資料，就像自己建置了一套資料庫。":
     "The owner organizes a dedicated folder for each contractor to store forms and past records — essentially building their own database by hand.",
+  "三位受訪者的訪談整理": "Synthesis of the three interviews",
+  "摘要": "Summary",
+  "下面整理三位受訪者的訪談摘要，從資料管理、會計配合到勞報單流程，盤點他們各自的經手方式與最有感的痛點。":
+    "Below is a synthesis of the three interviews — covering data management, working with accountants, and the labor-form flow — capturing how each person handles things and the pain points they feel most.",
+  "P2 節目企劃": "P2 Program planner",
+  "#有長期配合的人員 #臨時工讀生": "#Long-term partners #Temp part-timers",
+  "對他來說最麻煩的是工讀生很容易忘記帶勞報單；要簽收還得備齊身分證、存摺等證件，常常缺東缺西。":
+    "His biggest headache is that part-timers easily forget to bring their forms — and signing off requires documents like ID cards and bankbooks, which often end up missing.",
+  "P3 會計師": "P3 Accountant",
+  "#有許多配合的公司 #一年收一次勞報單": "#Many client companies #Collects forms once a year",
+  "因為一年只收一次，很容易發生檔案遺失或忘記存檔的狀況；對他來說，怎麼減少會計師與公司之間的隔閡才是重點。":
+    "Because forms are collected only once a year, files easily get lost or go unsaved — so for him, the key is reducing the gap between accountants and companies.",
+  "Laushu 訪談者一 攝影工作室老闆訪談整理": "Laushu interviewee 1 — photography studio owner synthesis",
+  "Laushu 訪談者二 節目企劃訪談整理": "Laushu interviewee 2 — program planner synthesis",
+  "Laushu 訪談者三 會計師訪談整理": "Laushu interviewee 3 — accountant synthesis",
 
   // ── Converge ──
   "彙整流程 & 重塑 TA": "Mapping the flow & reframing the TA",

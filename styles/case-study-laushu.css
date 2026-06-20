@@ -567,7 +567,7 @@
 .theme-laushu .laushu-process-section > .laushu-table-wrap,
 .theme-laushu .laushu-process-section > .laushu-survey-flow,
 .theme-laushu .laushu-process-section > .laushu-guide-grid,
-.theme-laushu .laushu-process-section > .laushu-persona,
+.theme-laushu .laushu-process-section > .laushu-persona-list,
 .theme-laushu .laushu-process-section > .laushu-journey,
 .theme-laushu .laushu-process-section > .laushu-flow-group,
 .theme-laushu .laushu-process-section > .laushu-usecase-grid {
@@ -738,9 +738,28 @@
   line-height: 1.6;
 }
 
-/* Persona 文字欄 */
+/* Persona 文字欄 + 三位受訪者整理板 */
 .theme-laushu .laushu-persona-tags {
   margin-bottom: 12px;
+}
+
+.theme-laushu .laushu-persona-list {
+  display: grid;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-persona .cs-zoomable-image {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.theme-laushu .laushu-persona .cs-zoomable-image img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* Journey 板（保留為可放大圖） */

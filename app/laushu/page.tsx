@@ -116,6 +116,36 @@ const interviewGuide = [
   },
 ];
 
+const personas = [
+  {
+    name: "P1 攝影工作室老闆",
+    tags: "#許多外包工作 #有長期配合的人員",
+    desc: "老闆會自己整理每個外包人員專屬的資料夾，存放勞報單與過去的資料，就像自己建置了一套資料庫。",
+    image: `${IMG}/interviewee-p1.png`,
+    alt: "Laushu 訪談者一 攝影工作室老闆訪談整理",
+    width: 1178,
+    height: 1004,
+  },
+  {
+    name: "P2 節目企劃",
+    tags: "#有長期配合的人員 #臨時工讀生",
+    desc: "對他來說最麻煩的是工讀生很容易忘記帶勞報單；要簽收還得備齊身分證、存摺等證件，常常缺東缺西。",
+    image: `${IMG}/interviewee-p2.png`,
+    alt: "Laushu 訪談者二 節目企劃訪談整理",
+    width: 1178,
+    height: 965,
+  },
+  {
+    name: "P3 會計師",
+    tags: "#有許多配合的公司 #一年收一次勞報單",
+    desc: "因為一年只收一次，很容易發生檔案遺失或忘記存檔的狀況；對他來說，怎麼減少會計師與公司之間的隔閡才是重點。",
+    image: `${IMG}/interviewee-p3.png`,
+    alt: "Laushu 訪談者三 會計師訪談整理",
+    width: 1031,
+    height: 881,
+  },
+];
+
 const keyFlows = [
   { title: "Flow 1：建立外包人員資料庫", body: "便於掌管人員個人資料，日後有需求可立即找人。" },
   { title: "Flow 2：建立勞務報酬單", body: "發送系統連結給外包人員填寫資料 / 回簽。" },
@@ -360,13 +390,26 @@ function UnderstandSection() {
         ))}
       </div>
 
-      <div className="laushu-persona">
-        <div className="laushu-persona-copy">
-          <strong>P1 攝影工作室老闆</strong>
-          <span className="laushu-persona-tags">#許多外包工作 #有長期配合的人員</span>
-          <p>老闆會自己整理每個外包人員專屬的資料夾，存放勞報單與過去的資料，就像自己建置了一套資料庫。</p>
-        </div>
-        <ImageBlock src={`${IMG}/interviewee-p1.png`} alt="Laushu 訪談者一資料整理" />
+      <ArticleBlock title="三位受訪者的訪談整理" kicker="摘要">
+        <p>下面整理三位受訪者的訪談摘要，從資料管理、會計配合到勞報單流程，盤點他們各自的經手方式與最有感的痛點。</p>
+      </ArticleBlock>
+      <div className="laushu-persona-list">
+        {personas.map((p) => (
+          <div className="laushu-persona" key={p.name}>
+            <div className="laushu-persona-copy">
+              <strong>{p.name}</strong>
+              <span className="laushu-persona-tags">{p.tags}</span>
+              <p>{p.desc}</p>
+            </div>
+            <ZoomableImage
+              src={p.image}
+              alt={p.alt}
+              width={p.width}
+              height={p.height}
+              labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
+            />
+          </div>
+        ))}
       </div>
     </CaseSection>
   );
