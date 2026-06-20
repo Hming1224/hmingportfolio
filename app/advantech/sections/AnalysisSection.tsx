@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseSection } from "../../../components/case-study";
+import { CaseSection, FlowScrollHint } from "../../../components/case-study";
 import { compAiTools, compEmsItems } from "../data";
 import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
 import { getAdvantechTranslator } from "../i18n-server";
@@ -65,6 +65,7 @@ export default async function AnalysisSection() {
           {t("比對研華已上線的功能與市場競品的區別，找出後續可以深化的機會點。")}
         </p>
         {/* Grid: 2 cols (feature matrix | opportunity). Rows share height automatically. */}
+        <FlowScrollHint label={t("左右滑動查看更多")} />
         <div className="cs-fm-wrap">
           {/* ── Row 1: headers ── */}
           <div className="cs-fm-header">

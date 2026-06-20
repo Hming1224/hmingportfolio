@@ -97,6 +97,7 @@ const en = {
   "訪談現場": "Interview session",
   "AI 應用情境：從底層機制到介面落地": "AI Scenarios: From Underlying Mechanisms to Interface Design",
   "專案研究過後，團隊透過工作坊討論功能優先級，將使用者痛點轉譯為兩個可落地的 AI 應用情境。每個情境都從底層 AI 機制出發，對應到核心功能，最後落到使用者會接觸的介面呈現。": "After the research phase, the team used a workshop to prioritize features and translate user pain points into two feasible AI scenarios. Each scenario connects an underlying AI mechanism to a core feature strategy and, ultimately, the interface users interact with.",
+  "左右滑動查看更多": "Swipe to see more",
   "底層 AI 邏輯": "Underlying AI Logic",
   "對應功能策略": "Feature Strategy",
   "介面呈現方式": "UI Interface",

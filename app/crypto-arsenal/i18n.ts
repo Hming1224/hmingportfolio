@@ -3,6 +3,7 @@ import type { Locale } from "../../i18n/routing";
 /* Crypto Arsenal 案例頁 zh-TW → en 對照。
    找不到對應 key 時回傳原文（與 advantech 同策略），方便分批補英文。 */
 const en = {
+  "左右滑動查看更多": "Swipe to see more",
   // ── TOC ──
   "專案背景": "Overview",
   "工作模式": "My Role",

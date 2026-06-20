@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseHeading } from "../../../components/case-study";
+import { CaseHeading, FlowScrollHint } from "../../../components/case-study";
 import { processSteps } from "../data";
 import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
 import { getAdvantechTranslator } from "../i18n-server";
@@ -21,6 +21,7 @@ export default async function ProcessSection() {
       <div className="cs-process-overlay" />
       <div className="cs-process-content">
         <CaseHeading title={t("設計流程")} tone="white" style={{ marginBottom: 8 }} />
+        <FlowScrollHint label={t("左右滑動查看更多")} />
         <div className="cs-timeline-alt">
           {/* Row 1: cards above axis (01, 03, 05) */}
           <div className="cs-tl-tops">

@@ -1,3 +1,4 @@
+import { FlowScrollHint } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { EcosystemFlowDiagram, TradingFlowDiagram } from "./BackgroundFlowDiagrams";
 
@@ -47,6 +48,7 @@ export default async function BackgroundSection() {
         </p>
       </div>
 
+      <FlowScrollHint label={t("左右滑動查看更多")} />
       <div className="ca-diagram">
         <div className="ca-diagram-scroll">
           <TradingFlowDiagram labels={tradingFlowLabels} />
@@ -66,6 +68,7 @@ export default async function BackgroundSection() {
         </p>
       </div>
 
+      <FlowScrollHint label={t("左右滑動查看更多")} />
       <div className="ca-diagram">
         <div className="ca-diagram-scroll">
           <EcosystemFlowDiagram labels={ecosystemFlowLabels} />

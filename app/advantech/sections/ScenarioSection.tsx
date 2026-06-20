@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseSection } from "../../../components/case-study";
+import { CaseSection, FlowScrollHint } from "../../../components/case-study";
 import FlowConnectors from "../components/FlowConnectors";
 import { scenarios } from "../data";
 import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
@@ -35,6 +35,8 @@ export default async function ScenarioSection() {
           </div>
 
           {/* ── Flow diagram ── */}
+          {/* Swipe hint — shown only when the flow row overflows (small screens). */}
+          <FlowScrollHint label={t("左右滑動查看更多")} />
           <div className="cs-ds-flow-wrap">
             {/* Inner box holds the connectors + cards at one shared width so the
                 SVG scrolls together with the cards when the row overflows. */}

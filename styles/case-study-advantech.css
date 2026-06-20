@@ -2812,3 +2812,9 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     text-align: center;
   }
 }
+
+/* The 設計流程 timeline sits over a dark photo; lighten the shared swipe hint
+   so it stays legible there (overrides the default muted-gray). */
+.theme-advantech .cs-process-content .cs-flow-hint {
+  color: rgba(255, 255, 255, 0.74);
+}

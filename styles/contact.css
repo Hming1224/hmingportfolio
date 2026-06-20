@@ -26,7 +26,9 @@
 
 .contact-split-container {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  /* Left info column never collapses so narrow that the email/phone wrap — keep
+     a floor wide enough for the full email on one line (with Copy moved below). */
+  grid-template-columns: minmax(340px, 1fr) 2fr;
   width: 100%;
   gap: 48px;
   align-items: start;
@@ -144,7 +146,14 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--ink);
-  word-break: break-all;
+  /* Only break as a last resort (won't trigger once the value has room), so we
+     never get greedy mid-word breaks like "gmail.co / m". */
+  overflow-wrap: anywhere;
+}
+
+/* The phone number should never break mid-number. */
+.phone-card .method-value {
+  white-space: nowrap;
 }
 
 .copy-btn {
@@ -170,6 +179,77 @@
   background: var(--purple);
   border-color: var(--purple);
   color: white;
+}
+
+/* Two-column layout: the left info column can get narrow. Make it a query
+   container so we can react to the card's real width instead of guessing
+   viewport breakpoints. Single column (≤1024px) isn't a container, so it keeps
+   the original inline layout untouched. */
+@media (min-width: 1025px) {
+  .contact-info-wrap {
+    container-type: inline-size;
+  }
+
+  /* Match the form column's height to the (often taller) info column so the
+     two columns bottom-align. The message textarea absorbs the extra height so
+     the fill looks intentional rather than leaving an empty gap. */
+  .contact-form-wrap {
+    align-self: stretch;
+  }
+
+  .contact-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-form .form-field.is-textarea {
+    flex: 1;
+  }
+
+  .contact-form .form-field.is-textarea textarea {
+    height: 100%;
+  }
+}
+
+/* Only when the card is too narrow to fit "email + Copy" side by side (~408px)
+   do we drop the Copy button onto its own row, giving the value the full card
+   width so email/phone stay on one line. Wider cards keep Copy inline. */
+@container (max-width: 420px) {
+  .contact-info-card .email-card,
+  .contact-info-card .phone-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon details"
+      "icon copy";
+    column-gap: 16px;
+    row-gap: 12px;
+    align-items: center;
+  }
+
+  .contact-info-card .email-card .method-icon-wrap,
+  .contact-info-card .phone-card .method-icon-wrap {
+    grid-area: icon;
+    align-self: start;
+  }
+
+  .contact-info-card .email-card .method-details,
+  .contact-info-card .phone-card .method-details {
+    grid-area: details;
+  }
+
+  .contact-info-card .email-card .copy-btn,
+  .contact-info-card .phone-card .copy-btn {
+    grid-area: copy;
+    justify-self: start;
+  }
 }
 
 .arrow-icon {
@@ -356,10 +436,29 @@
 
   .contact-method-item {
     padding: 16px;
+    gap: 12px;
+  }
+
+  /* Tighten the icon + copy button so the value column is wide enough for the
+     full email to sit on one line instead of breaking mid-word ("gmai/l.com"). */
+  .method-icon-wrap {
+    width: 40px;
+    height: 40px;
+  }
+
+  .copy-btn {
+    padding: 6px 12px;
+    font-size: 13px;
   }
 
   .method-value {
     font-size: 14px;
+  }
+
+  /* The email is the only value long enough to wrap; nudge it down a step so it
+     fits on one line instead of breaking mid-word. */
+  .email-card .method-value {
+    font-size: 13px;
   }
 
   .contact-card {

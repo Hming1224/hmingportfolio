@@ -534,3 +534,46 @@
     white-space: normal;
   }
 }
+
+/* ── Shared swipe hint for horizontally-scrolling flow charts ──
+   Used by <FlowScrollHint>; deliberately low-key (muted gray, no fill, no
+   animation). Hidden by default; the component toggles data-visible when its
+   sibling scroll container actually overflows. */
+.cs-flow-hint {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #9a9ca6;
+  user-select: none;
+}
+
+.cs-flow-hint[data-visible="true"] {
+  display: inline-flex;
+}
+
+/* Keep the gap between the hint and its component consistent everywhere: when
+   the hint is shown, drop the following element's own top margin so the hint's
+   12px margin is the single source of truth. Theme-scoped specificity (0,3,0)
+   so it always wins over per-component margins regardless of CSS load order.
+   On desktop the hint is hidden (data-visible="false") so margins stay intact. */
+.theme-advantech .cs-flow-hint[data-visible="true"] + *,
+.theme-crypto-arsenal .cs-flow-hint[data-visible="true"] + * {
+  margin-top: 0;
+}
+
+/* Crypto carried its group-separation spacing on the component's top margin
+   (now zeroed above), so give the hint that breathing room back above it — this
+   matches advantech, where the preceding element already supplies it. */
+.theme-crypto-arsenal .cs-flow-hint[data-visible="true"] {
+  margin-top: 24px;
+}
+
+.cs-flow-hint-icon {
+  font-size: 13px;
+  line-height: 1;
+  opacity: 0.85;
+}

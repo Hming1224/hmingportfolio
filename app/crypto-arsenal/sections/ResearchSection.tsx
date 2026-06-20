@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FlowScrollHint } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import {
   positionShots,
@@ -44,6 +45,7 @@ function FlowMatrixBoard({ matrix, t }: { matrix: FlowMatrix; t: (s: string) => 
           {t(matrix.kicker)}{t("：")}{t(matrix.title)}
         </h3>
       </div>
+      <FlowScrollHint label={t("左右滑動查看更多")} />
       <div className="ca-matrix-scroll">
         <div className="ca-matrix" style={{ minWidth: matrix.stepLabels.length === 3 ? 720 : 560 }}>
           <div className="ca-matrix-head" style={{ gridTemplateColumns: cols }}>
