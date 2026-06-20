@@ -22,10 +22,19 @@ export default function LanguageSwitcher() {
   const [isPending, startTransition] = useTransition();
   const switcherRef = useRef<HTMLDivElement>(null);
   const loadingTimerRef = useRef<number | null>(null);
+  const [prevLocale, setPrevLocale] = useState(locale);
+
+  // locale 切換完成後關閉 loading overlay：render 階段條件式更新，
+  // 是 React 建議的「prop 改變時調整 state」做法，避免在 effect 內同步 setState。
+  if (prevLocale !== locale) {
+    setPrevLocale(locale);
+    if (showLoading) {
+      setShowLoading(false);
+    }
+  }
 
   useEffect(() => {
     document.documentElement.lang = locale === "zh-TW" ? "zh-Hant-TW" : "en";
-    setShowLoading(false);
   }, [locale]);
 
   useEffect(() => {
@@ -120,16 +129,6 @@ export default function LanguageSwitcher() {
 }
 
 function LanguageLoadingPortal({ label }: { label: string }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
   return createPortal(
     <>
       <div className="language-loading-backdrop" aria-hidden="true" />
