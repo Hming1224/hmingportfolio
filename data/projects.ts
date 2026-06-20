@@ -67,7 +67,8 @@ const zhProjects: ProjectSummary[] = [
     tags: ["UIUX設計", "使用者研究", "團隊專案"],
     tone: "laushu",
     category: "school",
-    status: "coming-soon",
+    status: "published",
+    href: "/laushu",
     nextProjectSlug: "tba",
   },
   {
@@ -175,7 +176,8 @@ const enProjects: ProjectSummary[] = [
     tags: ["UI/UX Design", "User Research", "Team Project"],
     tone: "laushu",
     category: "school",
-    status: "coming-soon",
+    status: "published",
+    href: "/laushu",
     nextProjectSlug: "tba",
   },
   {
