@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { Locale } from "../i18n/routing";
 
-export const siteUrl = new URL("https://hmingportfolio.vercel.app");
+export const siteUrl = new URL("https://hmingdesign.com");
 
 type LocalizedMetadata = Record<
   Locale,
@@ -38,10 +38,13 @@ export function createLocalizedMetadata(
       url: localizedPath,
       locale: locale === "zh-TW" ? "zh_TW" : "en_US",
       alternateLocale: locale === "zh-TW" ? ["en_US"] : ["zh_TW"],
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: title }],
     },
     twitter: {
+      card: "summary_large_image",
       title,
       description,
+      images: ["/og-image.png"],
     },
   };
 }

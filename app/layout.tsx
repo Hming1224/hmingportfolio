@@ -31,20 +31,11 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Brian Huang's Portfolio",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Brian Huang's Portfolio",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Brian Huang's Portfolio",
     description: "A designer with passion who embraces different challenges.",
-    images: ["/og-image.png"],
   },
 };
 
