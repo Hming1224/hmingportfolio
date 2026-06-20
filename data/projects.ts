@@ -69,12 +69,12 @@ const zhProjects: ProjectSummary[] = [
     category: "school",
     status: "published",
     href: "/laushu",
-    nextProjectSlug: "tba",
+    nextProjectSlug: "nccuspace",
   },
   {
     slug: "nccuspace",
     cardId: "project4",
-    title: "NCCUSpace 政大場地管理系統",
+    title: "NCCU Space 政大場地預約管理系統",
     date: "2023.10 - 2023.12",
     description:
       "NCCUSpace是一款專注於提升政大學生預約校園空間的資訊服務平台。專案致力於減低預約流程複雜度與客製化預約空間。",
@@ -178,12 +178,12 @@ const enProjects: ProjectSummary[] = [
     category: "school",
     status: "published",
     href: "/laushu",
-    nextProjectSlug: "tba",
+    nextProjectSlug: "nccuspace",
   },
   {
     slug: "nccuspace",
     cardId: "project4",
-    title: "NCCUSpace Campus Booking System",
+    title: "NCCU Space Campus Booking System",
     date: "2023.10 - 2023.12",
     description:
       "An information service that helps NCCU students book campus spaces more easily. The project focused on simplifying a complex reservation flow and helping students find spaces that match their needs.",
