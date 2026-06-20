@@ -48,7 +48,6 @@ const messages = {
   },
   footer: {
     socialLinks: "Social links",
-    resume104: "104 Profile",
   },
 };
 

@@ -5,12 +5,6 @@ export default async function Footer() {
   const t = await getTranslations('footer');
   const socialLinks = [
     {
-      label: t('resume104'),
-      href: 'https://pda.104.com.tw/profile/share/8uHDDOioDTQ54dBTGxaQRxX84XjGVAgK',
-      graySrc: '/social/104-gray-v2.png',
-      colorSrc: '/social/104-color-v2.png',
-    },
-    {
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/brian-huang-a36759128',
       graySrc: '/social/linkedin-gray-v2.png',

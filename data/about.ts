@@ -325,7 +325,7 @@ const copyByLocale = {
   "zh-TW": {
     heroTitle: "從重新認識自己，到設計產品體驗",
     intro: [
-      "我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Junior Product Designer。",
+      "我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Product Designer。",
       "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。",
       "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究、介面設計、prototype 與跨部門協作經驗。現在的我，正持續探索 AI 工具如何幫助設計師更有效率地釐清問題、建立 MVP，並推進產品驗證，朝 Product Builder 的方向前進。",
     ],
@@ -356,7 +356,7 @@ const copyByLocale = {
   en: {
     heroTitle: "From Self-Rediscovery to Product Experience Design",
     intro: [
-      "I'm Brian Huang, a junior product designer combining UI/UX design, business perspective, and an engineering background.",
+      "I'm Brian Huang, a product designer combining UI/UX design, business perspective, and an engineering background.",
       "A serious illness during university led me to rediscover my passion for aesthetics and design. The systems thinking I developed through mechanical engineering later became a strong foundation for product design. To me, design is not simply about making screens look better; it is about turning complex problems, needs, and constraints into experiences that are clear, intuitive, and feasible.",
       "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research, interface design, prototyping, and cross-functional collaboration. Today, I continue exploring how AI tools can help designers clarify problems, build MVPs, and accelerate product validation as I grow toward becoming a Product Builder.",
     ],
