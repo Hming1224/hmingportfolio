@@ -48,7 +48,6 @@ const messages = {
   },
   footer: {
     socialLinks: "社群連結",
-    resume104: "104 個人履歷",
   },
 };
 
