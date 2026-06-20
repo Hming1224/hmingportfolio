@@ -100,7 +100,7 @@ const zhSkillCategories = [
   },
 ];
 
-export const tools = [
+const tools = [
   ["Figma", "https://framerusercontent.com/images/NFQE0lJpudFMnMlrxUlqwsTZobI.png"],
   ["Canva", "https://framerusercontent.com/images/xViGpNQGhsx0NAPy32ilYcniF4.png"],
   ["Framer", "https://framerusercontent.com/images/iGMc0V6aPbUXiqLig37GL6mpDYw.png"],

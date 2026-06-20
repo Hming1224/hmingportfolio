@@ -141,7 +141,7 @@ export const positionShots: ExchangeShot[] = [
 export const STEP_W = 1200;
 export const STEP_H = 788;
 
-export interface MatrixCell {
+interface MatrixCell {
   img: string;
   alt: string;
   /* 同一步驟若需要兩張畫面（如 Binance 平倉前多一個「輸入金額/數量」畫面），
@@ -151,7 +151,7 @@ export interface MatrixCell {
   note?: string;
 }
 
-export interface MatrixRow {
+interface MatrixRow {
   name: string;
   logo: string;
   cells: MatrixCell[];
@@ -252,7 +252,7 @@ export interface WireframeBoard {
   proposals: WireframeProposal[];
 }
 
-export interface WireframeProposal {
+interface WireframeProposal {
   label: string;
   adopted?: boolean;
   slides: WireframeSlide[];
@@ -261,7 +261,7 @@ export interface WireframeProposal {
   referenceImages?: WireframeReferenceImage[];
 }
 
-export interface WireframeSlide {
+interface WireframeSlide {
   img: string;
   alt: string;
   width: number;
@@ -269,7 +269,7 @@ export interface WireframeSlide {
   caption: string;
 }
 
-export interface WireframeReferenceImage {
+interface WireframeReferenceImage {
   img: string;
   alt: string;
   width: number;

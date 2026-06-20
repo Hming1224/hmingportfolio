@@ -4,7 +4,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 
-export type CaseProposalSlide = {
+type CaseProposalSlide = {
   image: string;
   alt?: string;
   caption: string;
@@ -12,7 +12,7 @@ export type CaseProposalSlide = {
   height?: number;
 };
 
-export type CaseProposalReference = {
+type CaseProposalReference = {
   image: string;
   alt: string;
   width: number;

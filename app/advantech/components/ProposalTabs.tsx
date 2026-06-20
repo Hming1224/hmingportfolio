@@ -13,7 +13,7 @@ export type ProposalTab = {
   adopted?: boolean;
 };
 
-export type ProposalSlide = {
+type ProposalSlide = {
   image: string;
   caption: string;
 };

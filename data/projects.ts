@@ -1,7 +1,7 @@
 import type { Locale } from "../i18n/routing";
 
-export type ProjectCategory = "enterprise" | "school";
-export type ProjectStatus = "published" | "coming-soon";
+type ProjectCategory = "enterprise" | "school";
+type ProjectStatus = "published" | "coming-soon";
 
 export interface ProjectSummary {
   slug: string;

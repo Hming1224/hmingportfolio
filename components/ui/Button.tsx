@@ -6,8 +6,8 @@ import type {
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-export type ButtonVariant = "primary" | "secondary";
-export type ButtonSize = "sm" | "md" | "lg";
+type ButtonVariant = "primary" | "secondary";
+type ButtonSize = "sm" | "md" | "lg";
 
 type SharedProps = {
   children: ReactNode;
