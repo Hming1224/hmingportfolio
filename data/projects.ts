@@ -97,34 +97,6 @@ const zhProjects: ProjectSummary[] = [
     category: "enterprise",
     status: "coming-soon",
   },
-  {
-    slug: "sidd",
-    cardId: "project2",
-    title: "SIDD 學生日用 App",
-    date: "2022.05 - 2022.07",
-    description:
-      "SIDD全名為Student ID Daily是一款專為在學生打造的優惠資訊平台，這款app主要提供學生日常生活的優惠資訊以及電子支付服務，目的是希望學生族群可以利用學生身份獲取優惠並同時滿足日常消費。",
-    cover: "https://framerusercontent.com/images/atAQZ5VIKGpNezpwapXvzyP6P0k.jpg",
-    logo: "https://framerusercontent.com/images/7WaAn4JhL9Pt42V8nCM30Wy6lnQ.png",
-    tags: ["UIUX 設計", "iOS", "團隊專案", "Side Project"],
-    tone: "peach",
-    category: "school",
-    status: "coming-soon",
-  },
-  {
-    slug: "mym",
-    cardId: "project1",
-    title: "MYM 電影訂票 App",
-    date: "2022.02 - 2022.04",
-    description:
-      "MYM app全名為Memo Your Movie，是一款為用戶打造高效率訂票流程的電影訂票app。整個專案的目標專注提升用戶訂票的使用者體驗，以及目前多數電影訂票系統上的缺點改進。",
-    cover: "https://framerusercontent.com/images/8Iaui73ExLg638pnKjFxBtKJuI4.jpg",
-    logo: "https://framerusercontent.com/images/SShjyBDiP4x3KC27pXvmazLujeI.jpg",
-    tags: ["UIUX 設計", "iOS", "End-to-End Design", "Side Project"],
-    tone: "navy",
-    category: "school",
-    status: "coming-soon",
-  },
 ];
 
 const enProjects: ProjectSummary[] = [
@@ -202,34 +174,6 @@ const enProjects: ProjectSummary[] = [
     tags: ["UI/UX Design", "Web Design", "End-to-End Design", "In Development"],
     tone: "green",
     category: "enterprise",
-    status: "coming-soon",
-  },
-  {
-    slug: "sidd",
-    cardId: "project2",
-    title: "SIDD Student Lifestyle App",
-    date: "2022.05 - 2022.07",
-    description:
-      "SIDD, short for Student ID Daily, is a student-focused platform for everyday discounts and digital payments. It helps students make better use of student benefits while managing daily purchases.",
-    cover: "https://framerusercontent.com/images/atAQZ5VIKGpNezpwapXvzyP6P0k.jpg",
-    logo: "https://framerusercontent.com/images/7WaAn4JhL9Pt42V8nCM30Wy6lnQ.png",
-    tags: ["UI/UX Design", "iOS", "Team Project", "Side Project"],
-    tone: "peach",
-    category: "school",
-    status: "coming-soon",
-  },
-  {
-    slug: "mym",
-    cardId: "project1",
-    title: "MYM Movie Ticketing App",
-    date: "2022.02 - 2022.04",
-    description:
-      "MYM, short for Memo Your Movie, is a movie ticketing app designed around a faster, clearer booking flow. The project focused on improving the user experience and addressing common pain points in existing ticketing systems.",
-    cover: "https://framerusercontent.com/images/8Iaui73ExLg638pnKjFxBtKJuI4.jpg",
-    logo: "https://framerusercontent.com/images/SShjyBDiP4x3KC27pXvmazLujeI.jpg",
-    tags: ["UI/UX Design", "iOS", "End-to-End Design", "Side Project"],
-    tone: "navy",
-    category: "school",
     status: "coming-soon",
   },
 ];
