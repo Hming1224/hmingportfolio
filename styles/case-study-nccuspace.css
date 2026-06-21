@@ -1,0 +1,710 @@
+/* NCCUSpace 案例頁主題與版型。大地色系：teal / brown / sand / cream。 */
+
+.theme-nccuspace {
+  --nccu-teal: #55c2ac;
+  --nccu-brown: #8c6c64;
+  --nccu-sand: #fbe7a8;
+  --nccu-cream: #f6f1ea;
+  --nccu-green: #13a463;
+  --nccu-blue: #cfe8fb;
+  --nccu-yellow: #fbcf52;
+  --nccu-purple: #e7caf3;
+}
+
+/* 分色原則：網站外殼（TOC、進度條、Navbar、Footer、下一個專案 / 返回首頁、focus 外框）
+   一律用作品集主色 --purple，全站一致；專案棕色只用在「內容畫布」元件
+   （kicker、tag、divider、hero、卡片、流程圖 / 圖表，以及未來的頁內 Tab / 切換鈕）。 */
+
+.theme-nccuspace .cs-divider {
+  background: #e7dcd2;
+}
+
+.theme-nccuspace .cs-hero-cover {
+  background: var(--nccu-cream);
+}
+
+/* ── Hero ── */
+.nccu-hero-info {
+  background: var(--nccu-cream);
+}
+
+.nccu-hero-lead {
+  max-width: 860px;
+  margin: 0 0 32px;
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--text-body);
+}
+
+/* ── Section 共用 ── */
+.nccu-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.nccu-lead {
+  max-width: 820px;
+  margin-bottom: 36px;
+}
+
+.nccu-tag {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--nccu-cream);
+  border: 1px solid #e7dcd2;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--nccu-brown);
+  text-transform: uppercase;
+}
+
+.nccu-lead h3 {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-heading);
+  margin: 0 0 14px;
+}
+
+.nccu-lead p {
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--text-body);
+  margin: 0;
+}
+
+/* Article block (kicker + heading + copy) */
+.nccu-article {
+  max-width: 820px;
+  margin: 44px 0 18px;
+}
+
+.nccu-kicker {
+  margin: 0 0 8px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--nccu-teal);
+}
+
+.nccu-article h3 {
+  font-size: clamp(18px, 2vw, 23px);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-heading);
+  margin: 0 0 12px;
+}
+
+.nccu-copy p {
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--text-body);
+  margin: 0;
+}
+
+.nccu-caption {
+  margin: 14px 0 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── Overview cards ── */
+.nccu-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.nccu-info-card {
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #efe7dd;
+  box-shadow: 0 6px 22px rgba(140, 108, 100, 0.06);
+}
+
+.nccu-info-card h4 {
+  margin: 0 0 10px;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--nccu-brown);
+}
+
+.nccu-info-card p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  color: var(--text-body);
+}
+
+/* ── Problem list ── */
+.nccu-problem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.nccu-problem-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 22px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #efe7dd;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+.nccu-problem-num {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--nccu-teal);
+}
+
+/* ── Flow block (介面流程) ── */
+.nccu-flow-block {
+  margin-top: 28px;
+}
+
+.nccu-flow-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.nccu-flow-tag {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--nccu-brown);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nccu-flow-head h4 {
+  margin: 0;
+  font-size: clamp(16px, 1.7vw, 20px);
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.nccu-flow-block > p {
+  margin: 0 0 16px;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.nccu-flow-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 6px 0 20px;
+}
+
+.nccu-flow-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-sm);
+  color: var(--text-body);
+}
+
+.nccu-flow-legend-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.nccu-flow-legend-dot--blue { background: var(--nccu-blue); }
+.nccu-flow-legend-dot--yellow { border-radius: 4px; background: var(--nccu-yellow); }
+.nccu-flow-legend-dot--purple { border-radius: 0; transform: rotate(45deg); background: var(--nccu-purple); }
+
+/* ── SVG flow diagrams ── */
+.nccu-flow-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nccu-flow-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nccu-flow-label {
+  font-family: Inter, var(--font-space-grotesk), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.nccu-flow-edge {
+  font-family: Inter, var(--font-space-grotesk), sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+/* IA flow (vertical) */
+.nccu-ia-scroll {
+  width: 100%;
+  max-width: 620px;
+  margin: 8px auto 0;
+  overflow-x: auto;
+}
+
+.nccu-ia-svg {
+  display: block;
+  width: 100%;
+  min-width: 480px;
+  height: auto;
+}
+
+.nccu-ia-svg .nccu-flow-label { font-size: 14px; }
+
+/* Brand mind map */
+.nccu-brand-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nccu-brand-swatch {
+  font-family: var(--font-space-grotesk), monospace;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nccu-brand-node {
+  font-family: Inter, sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.nccu-brand-node--strong { font-weight: 700; }
+
+/* ── Affinity board ── */
+.nccu-affinity {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr 0.85fr;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.nccu-affinity-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nccu-affinity-head {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--nccu-sand);
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  color: #4a3b25;
+  text-align: center;
+}
+
+.nccu-affinity-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nccu-affinity-insight {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #efeae3;
+  border-left: 3px solid var(--nccu-brown);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.5;
+  color: #4a4038;
+}
+
+.nccu-affinity-voices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nccu-affinity-voice {
+  margin: 0;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #ece4da;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+/* ── Priority table ── */
+.nccu-priority {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.nccu-priority-col {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e2ede5;
+  background: #fff;
+}
+
+.nccu-priority-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 18px;
+  color: #fff;
+}
+
+.nccu-priority-col--0 .nccu-priority-head { background: #2faf6e; }
+.nccu-priority-col--1 .nccu-priority-head { background: #6cc79a; }
+.nccu-priority-col--2 .nccu-priority-head { background: #a9d8c0; color: #2a4a3a; }
+
+.nccu-priority-head strong { font-size: var(--fs-h4); font-weight: 800; }
+.nccu-priority-head span { font-size: var(--fs-xs); opacity: 0.9; letter-spacing: 1px; }
+
+.nccu-priority-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nccu-priority-col li {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #f1f8f3;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: #2f4a3c;
+}
+
+/* ── Card sort legend ── */
+.nccu-cardsort {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.nccu-cardsort-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nccu-cardsort-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 22px;
+  border-radius: 12px;
+  min-width: 150px;
+}
+
+.nccu-cardsort-chip strong { font-size: var(--fs-h4); font-weight: 700; color: #2f2a26; }
+.nccu-cardsort-chip span { font-size: var(--fs-xs); color: #5c554d; }
+.nccu-cardsort-chip--blue { background: var(--nccu-blue); }
+.nccu-cardsort-chip--yellow { background: var(--nccu-yellow); }
+.nccu-cardsort-chip--green { background: #b7e6cd; }
+
+.nccu-cardsort-arrow {
+  font-size: 22px;
+  color: var(--muted);
+}
+
+/* ── Nested list board ── */
+.nccu-nested {
+  margin-top: 8px;
+  overflow-x: auto;
+}
+
+.nccu-nested-grid {
+  display: grid;
+  grid-template-columns: 92px repeat(3, minmax(190px, 1fr));
+  gap: 14px;
+  min-width: 720px;
+  align-items: stretch;
+}
+
+.nccu-nested-rl {
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--nccu-brown);
+}
+
+.nccu-nested-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--nccu-green);
+  color: #fff;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  text-align: center;
+}
+
+.nccu-nested-fn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--nccu-yellow);
+  color: #4a3b18;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+.nccu-nested-cases {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nccu-nested-case {
+  margin: 0;
+  padding: 11px 13px;
+  border-radius: 8px;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.nccu-nested-case--primary { background: #d8ebfb; color: #1f3a52; }
+.nccu-nested-case--secondary { background: #ecdcf6; color: #4a3360; }
+
+.nccu-nested-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  font-size: var(--fs-sm);
+  color: var(--text-body);
+}
+
+.nccu-nested-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  margin-left: 12px;
+}
+
+.nccu-nested-dot:first-child { margin-left: 0; }
+.nccu-nested-dot--primary { background: #d8ebfb; }
+.nccu-nested-dot--secondary { background: #ecdcf6; }
+
+/* ── SUS table ── */
+.nccu-table-wrap {
+  margin-top: 8px;
+  overflow-x: auto;
+}
+
+.nccu-sus-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+  font-size: var(--fs-sm);
+}
+
+.nccu-sus-table th,
+.nccu-sus-table td {
+  border: 1px solid #ece4da;
+  padding: 12px 14px;
+}
+
+.nccu-sus-table thead th {
+  background: var(--nccu-cream);
+  color: var(--nccu-brown);
+  font-weight: 700;
+}
+
+.nccu-sus-table thead th:not(.nccu-sus-q) { width: 64px; text-align: center; }
+
+.nccu-sus-table tbody th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-body);
+}
+
+.nccu-sus-num { margin-right: 8px; color: var(--muted); }
+
+.nccu-sus-table tbody td {
+  text-align: center;
+  font-weight: 700;
+  color: var(--nccu-brown);
+}
+
+/* ── Iteration list ── */
+.nccu-iter-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.nccu-iter-list li {
+  display: flex;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #efe7dd;
+}
+
+.nccu-iter-num {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--nccu-teal);
+}
+
+.nccu-iter-list h4 {
+  margin: 0 0 6px;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.nccu-iter-list p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+/* ── Brand points ── */
+.nccu-brand-points {
+  list-style: none;
+  margin: 8px 0 28px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.nccu-brand-points li {
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: var(--nccu-cream);
+}
+
+.nccu-brand-points strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--nccu-brown);
+}
+
+.nccu-brand-points span {
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+/* ── Final UI ── */
+.nccu-ui-intro { margin: 0 0 24px; }
+
+.nccu-ui-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.nccu-ui-cap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.nccu-ui-tag {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--nccu-teal);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.nccu-ui-item .cs-zoomable-image {
+  border-radius: 12px;
+  border: 1px solid #ece4da;
+  background: #fff;
+}
+
+/* ── Poster ── */
+.nccu-poster {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.nccu-poster .cs-zoomable-image {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(140, 108, 100, 0.14);
+}
+
+/* ── Reflection ── */
+.nccu-learning-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.nccu-learning-card {
+  padding: 32px;
+  border-radius: 18px;
+  background: var(--nccu-cream);
+  border: 1px solid #e7dcd2;
+}
+
+.nccu-learning-card .nccu-article { margin: 0; max-width: none; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .nccu-affinity { grid-template-columns: 1fr; }
+  .nccu-priority { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nccu-card-grid { grid-template-columns: 1fr; }
+  .nccu-problem-list { grid-template-columns: 1fr; }
+  .nccu-iter-list { grid-template-columns: 1fr; }
+  .nccu-brand-points { grid-template-columns: 1fr; }
+}

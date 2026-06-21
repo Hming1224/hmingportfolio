@@ -76,12 +76,16 @@ const zhProjects: ProjectSummary[] = [
     date: "2023.10 - 2023.12",
     description:
       "NCCUSpace是一款專注於提升政大學生預約校園空間的資訊服務平台。專案致力於減低預約流程複雜度與客製化預約空間。",
-    cover: "https://framerusercontent.com/images/QPe9idFph9AwvwFOSCV4JJDLJZ0.png",
-    logo: "https://framerusercontent.com/images/jocDTIVjs0ouwwKqNVnrI02aYGQ.png",
+    cover: "/projects/nccuspace/cover.jpg",
+    logo: "/projects/nccuspace/logo.png",
     tags: ["UIUX 設計", "網頁設計", "團隊專案", "課堂專案"],
     tone: "brown",
     category: "school",
-    status: "coming-soon",
+    status: "published",
+    href: "/nccuspace",
+    nextProjectSlug: "tba",
+    seoDescription:
+      "政大場地管理系統 NCCUSpace 討論室預約流程再設計：使用者研究、資訊架構、介面流程與品牌重塑案例研究。",
   },
   {
     slug: "tba",
@@ -183,12 +187,16 @@ const enProjects: ProjectSummary[] = [
     date: "2023.10 - 2023.12",
     description:
       "An information service that helps NCCU students book campus spaces more easily. The project focused on simplifying a complex reservation flow and helping students find spaces that match their needs.",
-    cover: "https://framerusercontent.com/images/QPe9idFph9AwvwFOSCV4JJDLJZ0.png",
-    logo: "https://framerusercontent.com/images/jocDTIVjs0ouwwKqNVnrI02aYGQ.png",
+    cover: "/projects/nccuspace/cover.jpg",
+    logo: "/projects/nccuspace/logo.png",
     tags: ["UI/UX Design", "Web Design", "Team Project", "Course Project"],
     tone: "brown",
     category: "school",
-    status: "coming-soon",
+    status: "published",
+    href: "/nccuspace",
+    nextProjectSlug: "tba",
+    seoDescription:
+      "NCCUSpace campus booking redesign — a case study on user research, information architecture, interface flows, and brand identity for NCCU's library discussion-room reservation system.",
   },
   {
     slug: "tba",
