@@ -56,6 +56,20 @@ const en = {
   "目標": "Goal",
   "需求": "Needs",
   "原型": "Prototype",
+  "設計流程": "Design Process",
+
+  // ── Section ledes (Figma 描述句副標) ──
+  "研究設計": "Research Design",
+  "受訪者輪廓": "Participant Profiles",
+  "找出最適合分析的使用者流程": "Finding the user flow best suited for analysis",
+  "從任務測試中，修正既有的流程與介面問題": "Fixing existing flow and interface issues found in task testing",
+  "UI 互動影片介紹": "UI interaction video walkthrough",
+  "線下與線上整合的數位流程考驗": "The challenge of integrating offline and online into one digital flow",
+
+  // ── Problem section framing ──
+  "科普小知識": "Quick primer",
+  "勞報單是什麼？": "What is a labor form?",
+  "現階段勞報單的問題": "Current problems with labor forms",
   "將紙本勞報單流程轉譯成可測試、可上線的數位體驗。":
     "Translating a paper-based labor-form process into a testable, launch-ready digital experience.",
 

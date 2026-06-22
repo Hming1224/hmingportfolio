@@ -39,7 +39,7 @@ const overviewCards = [
     body: "了解紙本勞報單報帳流程、拆解利害關係人需求，並優化數位化勞報單報帳體驗。",
   },
   {
-    title: "原型",
+    title: "設計流程",
     body: "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。",
   },
 ];
@@ -331,9 +331,6 @@ function HeroSection() {
           <span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>
         </div>
         <h1 className="cs-title">Laushu 勞贖｜勞務報酬系統設計優化</h1>
-        <p className="laushu-hero-lead">
-          檢視目前紙本勞報單使用流程，透過訪談、設計與測試，優化勞贖勞報數位化系統，針對發送勞報單流程，提供設計體驗優化建議。
-        </p>
         <div className="cs-info-row laushu-info-row">
           {roleItems.map((item) => (
             <div className="cs-info-card" key={item.label}>
@@ -356,14 +353,12 @@ function HeroSection() {
 
 function OverviewSection() {
   return (
-    <CaseSection id="cs-sec-overview" title="專案總覽 Overview" className="laushu-overview-section">
-      <div className="laushu-overview-intro">
-        <h3>將紙本勞報單流程轉譯成可測試、可上線的數位體驗。</h3>
-        <p>
-          專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
-        </p>
-      </div>
-      <div className="laushu-summary-grid">
+    <section id="cs-sec-overview" className="cs-section laushu-overview-section">
+      <LaushuHead eyebrow="專案總覽" title="將紙本勞報單流程轉譯成可測試、可上線的數位體驗。" />
+      <p className="laushu-overview-lead">
+        專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
+      </p>
+      <div className="laushu-summary-grid laushu-overview-grid">
         {overviewCards.map((card) => (
           <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
         ))}
@@ -377,39 +372,48 @@ function OverviewSection() {
           sizes="(max-width: 768px) calc(100vw - 48px), 1440px"
         />
       </figure>
-    </CaseSection>
+    </section>
   );
 }
 
 function ProblemSection() {
   return (
-    <CaseSection id="cs-sec-problem" title="問題定義 Problem" surface className="laushu-problem-section">
+    <section id="cs-sec-problem" className="cs-section laushu-problem-section">
+      <LaushuHead eyebrow="問題定義" title="過去建立紙本勞報單費時費力，但最後紙本單據僅作為佐證用。" />
       <div className="laushu-problem-layout">
         <div className="laushu-problem-copy">
-          <span className="laushu-section-tag">Pain Point</span>
-          <h3>過去建立紙本勞報單費時費力，但最後紙本單據僅作為佐證用。</h3>
+          <span className="laushu-problem-pill">科普小知識</span>
+          <h4 className="laushu-problem-define-title">勞報單是什麼？</h4>
           <p>
             勞務報酬單，簡稱「勞報單」，為公司支付「酬勞」給「個人」時使用的證明單據，可作為公司支出的證明，並列入領到酬勞者的綜合所得稅中。
           </p>
         </div>
         <figure className="laushu-form-card">
-          <ImageBlock src={`${IMG}/labor-form-example.png`} alt="勞務報酬單範例" variant="plain" />
+          <Image
+            src={`${IMG}/labor-form-example.png`}
+            alt="勞務報酬單範例"
+            width={982}
+            height={808}
+            sizes="(max-width: 1023px) calc(100vw - 88px), 456px"
+          />
           <figcaption>勞報單範例</figcaption>
         </figure>
       </div>
+      <h3 className="laushu-problem-cards-title">現階段勞報單的問題</h3>
       <div className="laushu-problem-grid">
         {problemCards.map((card, index) => (
           <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
         ))}
       </div>
-    </CaseSection>
+    </section>
   );
 }
 
 function UnderstandSection() {
   return (
-    <CaseSection id="cs-sec-understand" title="了解使用者情境 Understand" className="laushu-process-section">
-      <ArticleBlock title="彙整使用勞報單流程" kicker="收集">
+    <section id="cs-sec-understand" className="cs-section laushu-process-section laushu-understand-section">
+      <LaushuHead eyebrow="研究設計" title="了解使用者情境" />
+      <ArticleBlock title="彙整使用勞報單流程" number="01">
         <p>訪談勞贖負責人並自行收集資料，了解外包與勞報單簽署流程，釐清會計師、公司、外包工作者三者關係。此平台至少包含四種核心利害關係人：</p>
       </ArticleBlock>
       <div className="laushu-stakeholder-grid">
@@ -419,17 +423,17 @@ function UnderstandSection() {
       </div>
       {StakeholderFlow()}
 
-      <ArticleBlock title="制定研究策略" kicker="規劃">
+      <ArticleBlock title="制定研究策略" number="02">
         <p>為後續設計研究制定執行策略，從了解現況、研究分析、質化分析到原型與測試。</p>
       </ArticleBlock>
       {ResearchTable()}
 
-      <ArticleBlock title="篩選受訪者" kicker="問卷">
+      <ArticleBlock title="篩選受訪者" number="03">
         <p>設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整）。</p>
       </ArticleBlock>
       {SurveyFlow({ note: <p>了解目前勞報單填寫過程中，哪些過程感到繁雜。<br />會計師：建立 → 發送 → 回收 → 彙整。</p> })}
 
-      <ArticleBlock title="訪談大綱" kicker="訪談">
+      <ArticleBlock title="訪談大綱" number="04">
         <p>共搜集 39 份有效問卷，篩選三位受訪者，圍繞以下三個面向深入訪談：</p>
       </ArticleBlock>
       <div className="laushu-guide-grid">
@@ -448,7 +452,7 @@ function UnderstandSection() {
         ))}
       </div>
 
-      <ArticleBlock title="三位受訪者的訪談整理" kicker="摘要">
+      <ArticleBlock title="受訪者輪廓" number="05">
         <p>下面整理三位受訪者的訪談摘要，從資料管理、會計配合到勞報單流程，盤點他們各自的經手方式與最有感的痛點。</p>
       </ArticleBlock>
       <div className="laushu-persona-list">
@@ -469,14 +473,15 @@ function UnderstandSection() {
           </div>
         ))}
       </div>
-    </CaseSection>
+    </section>
   );
 }
 
 function ConvergeSection() {
   return (
     <CaseSection id="cs-sec-converge" title="收斂與洞察 Converge" surface className="laushu-process-section">
-      <ArticleBlock title="彙整流程 & 重塑 TA" kicker="洞察">
+      <SectionLede>找出最適合分析的使用者流程</SectionLede>
+      <ArticleBlock title="彙整流程 & 重塑 TA" number="01">
         <p>挖掘使用者在建立、發放、回簽、建檔勞報單流程中的痛點，並首先聚焦會自己經手勞報單的公司端。</p>
       </ArticleBlock>
       <figure className="laushu-journey">
@@ -489,7 +494,7 @@ function ConvergeSection() {
         />
         <figcaption>以前兩位受訪者為主，盤點建立 → 發放 → 回簽 → 建檔的完整歷程與痛點</figcaption>
       </figure>
-      <ArticleBlock title="重要用例">
+      <ArticleBlock title="重要用例" number="02">
         <p>收斂訪談洞見後，使用者最在意、也覺得紙本勞報單最麻煩的三件事：如何有效管理人員、如何改善簽收確認、如何減少回簽次數。據此彙整三個重要用例，進行後續介面流程設計。</p>
       </ArticleBlock>
       <div className="laushu-usecase-grid">
@@ -657,7 +662,8 @@ function TaskFlow3() {
 function IterateSection() {
   return (
     <CaseSection id="cs-sec-iterate" title="測試與設計迭代 Iterate" className="laushu-process-section">
-      <ArticleBlock title="任務測試與易用性量表">
+      <SectionLede>從任務測試中，修正既有的流程與介面問題</SectionLede>
+      <ArticleBlock title="任務測試與易用性量表" number="01">
         <p>邀請上次接受訪談的 2 位受訪者再次進行介面評估。針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表。</p>
         <ul>
           <li>節目企劃：長期需要外包主持人</li>
@@ -670,7 +676,7 @@ function IterateSection() {
         {TaskFlow2()}
         {TaskFlow3()}
       </div>
-      <ArticleBlock title="設計迭代與元件迭代">
+      <ArticleBlock title="設計迭代與元件迭代" number="02">
         <p>依任務測試發現的問題，逐一調整介面流程與元件用詞。下面以 Before / After 對照，呈現每個操作流程的調整重點。</p>
       </ArticleBlock>
       <div className="laushu-iter-list">
@@ -697,7 +703,7 @@ function IterateSection() {
           </article>
         ))}
       </div>
-      <ArticleBlock title="測試結果">
+      <ArticleBlock title="測試結果" number="03">
         <p>根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。</p>
         <ImageBlock src={`${IMG}/test-result.png`} alt="Laushu 任務測試與 SUS 結果" />
       </ArticleBlock>
@@ -777,6 +783,7 @@ function ProtoStep({
 function DemoSection() {
   return (
     <CaseSection id="cs-sec-demo" title="成果 Demo" className="laushu-demo-section">
+      <SectionLede>UI 互動影片介紹</SectionLede>
       <div className="laushu-demo-list">
         {demoItems.map((item, index) => (
           <article className="laushu-demo-card" key={item.title}>
@@ -818,6 +825,7 @@ const reflections = [
 function ReflectionSection() {
   return (
     <CaseSection id="cs-sec-reflection" title="學習反思 Reflections" surface className="laushu-learning-section">
+      <SectionLede>線下與線上整合的數位流程考驗</SectionLede>
       <div className="laushu-learning-grid">
         {reflections.map((r) => (
           <div className="laushu-learning-card" key={r.title}>
@@ -876,13 +884,31 @@ function InfoCard({ title, number, image, children }: { title: string; number?: 
   );
 }
 
-function ArticleBlock({ title, kicker, children }: { title: string; kicker?: string; children: ReactNode }) {
+function ArticleBlock({ title, number, kicker, children }: { title: string; number?: string; kicker?: string; children: ReactNode }) {
   return (
     <section className="laushu-article">
       {kicker ? <p className="laushu-kicker">{kicker}</p> : null}
-      <h3>{title}</h3>
+      <h3>
+        {number ? <span className="laushu-article-num">{number} / </span> : null}
+        {title}
+      </h3>
       <div className="laushu-copy">{children}</div>
     </section>
+  );
+}
+
+function SectionLede({ children }: { children: ReactNode }) {
+  return <p className="laushu-section-lede">{children}</p>;
+}
+
+/** Figma 風格 section 標題：小寫眉標 + 大論點句 + 分隔線（對齊 Figma node 2797:1521）。 */
+function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <header className="laushu-head">
+      <p className="laushu-head-eyebrow">{eyebrow}</p>
+      <h2 className="laushu-head-title">{title}</h2>
+      <div className="cs-divider" />
+    </header>
   );
 }
 
