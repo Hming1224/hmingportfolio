@@ -97,6 +97,7 @@
 }
 
 .theme-laushu .laushu-overview-copy h3,
+.theme-laushu .laushu-overview-intro h3,
 .theme-laushu .laushu-problem-copy h3 {
   margin: 0 0 18px;
   max-width: 600px;
@@ -107,12 +108,39 @@
 }
 
 .theme-laushu .laushu-overview-copy p,
+.theme-laushu .laushu-overview-intro p,
 .theme-laushu .laushu-problem-copy p {
   margin: 0;
   max-width: 640px;
   font-size: var(--fs-body);
   line-height: 1.8;
   color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-overview-intro {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px 40px;
+  border-radius: 20px;
+  background: #f8f2ff;
+}
+
+.theme-laushu .laushu-overview-intro h3 {
+  max-width: 760px;
+}
+
+.theme-laushu .laushu-overview-hero {
+  max-width: 1440px;
+  margin: 40px auto 0;
+  border-radius: 20px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.theme-laushu .laushu-overview-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .theme-laushu .laushu-summary-grid,
@@ -164,6 +192,29 @@
   font-size: var(--fs-sm);
   line-height: 1.7;
   color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-info-card--illustrated {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.theme-laushu .laushu-info-card-art {
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 132px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-info-card-art img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
 }
 
 .theme-laushu .laushu-form-card {
@@ -407,13 +458,30 @@
   line-height: 1.7;
 }
 
+.theme-laushu .laushu-learning-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
 .theme-laushu .laushu-learning-card {
-  max-width: 980px;
-  margin: 0 auto;
   padding: 32px;
   border: 1px solid var(--laushu-line);
   border-radius: 16px;
   background: linear-gradient(135deg, var(--laushu-primary-100), var(--laushu-tertiary-100));
+}
+
+.theme-laushu .laushu-learning-title {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--laushu-primary-700, var(--laushu-ink));
+}
+
+.theme-laushu .laushu-learning-card p {
+  margin: 0;
 }
 
 @media (max-width: 1199px) {
@@ -436,6 +504,10 @@
   .theme-laushu .laushu-summary-grid,
   .theme-laushu .laushu-problem-grid,
   .theme-laushu .laushu-usecase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-learning-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -473,66 +545,228 @@
 
 /* ───────────────────────── v2：新版 8 段結構新增樣式 ───────────────────────── */
 
-/* Overview：解決方案流程 + 服務卡 + 重點清單 */
-.theme-laushu .laushu-overview-copy {
-  max-width: 1000px;
-  margin: 0 auto;
+/* 設計迭代 Before/After board */
+.theme-laushu .laushu-iter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 8px;
 }
 
-.theme-laushu .laushu-solution-block {
-  max-width: 980px;
-  margin: 48px auto 0;
-}
-
-.theme-laushu .laushu-diagram-caption {
-  margin: 16px 0 0;
-  text-align: center;
-  color: var(--laushu-tertiary-500);
-  font-size: var(--fs-sm);
-  font-weight: 700;
-}
-
-.theme-laushu .laushu-service-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  max-width: 1440px;
-  margin: 40px auto 0;
-}
-
-.theme-laushu .laushu-service-card {
-  padding: 24px;
+.theme-laushu .laushu-iter-board {
+  padding: 28px;
   border: 1px solid var(--laushu-line);
-  border-radius: 16px;
+  border-radius: 18px;
   background: var(--laushu-primary-100);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.theme-laushu .laushu-service-card h4 {
-  margin: 0 0 10px;
-  font-size: var(--fs-h4);
-  font-weight: 800;
-  line-height: 1.35;
+.theme-laushu .laushu-iter-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.theme-laushu .laushu-iter-badge {
+  flex: none;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--laushu-primary-500);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.theme-laushu .laushu-iter-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: var(--laushu-primary-700);
 }
 
-.theme-laushu .laushu-service-card p {
+.theme-laushu .laushu-iter-body {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 28px;
+}
+
+.theme-laushu .laushu-iter-label {
   margin: 0;
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--laushu-primary-600);
 }
 
-.theme-laushu .laushu-bullets {
-  max-width: 1000px;
-  margin: 28px auto 0;
-  padding-left: 1.2em;
-  color: var(--text-body);
-  font-size: var(--fs-body);
-  line-height: 1.9;
+.theme-laushu .laushu-iter-paras {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.theme-laushu .laushu-bullets li + li {
-  margin-top: 6px;
+.theme-laushu .laushu-iter-paras p {
+  margin: 0;
+}
+
+.theme-laushu .laushu-iter-figure {
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .theme-laushu .laushu-iter-body {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-iter-board {
+    padding: 20px;
+  }
+
+  .theme-laushu .laushu-iter-title {
+    font-size: 1.2rem;
+  }
+}
+
+/* 任務測試流程圖（HTML node-flow，手機橫向捲動） */
+.theme-laushu .laushu-fc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 8px 0 40px;
+}
+
+.theme-laushu .laushu-fc-figure {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 18px;
+  background: var(--laushu-primary-100);
+}
+
+.theme-laushu .laushu-fc-cap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.theme-laushu .laushu-fc-badge {
+  flex: none;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--laushu-primary-500);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.theme-laushu .laushu-fc-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-fc-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.theme-laushu .laushu-fc-track {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+  min-width: 100%;
+  padding: 6px 2px;
+}
+
+.theme-laushu .laushu-fc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.theme-laushu .laushu-fc-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.theme-laushu .laushu-fc-node {
+  flex: none;
+  width: 132px;
+  min-height: 76px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #2a2440;
+}
+
+.theme-laushu .laushu-fc-node--action {
+  border-radius: 999px;
+  background: #cfe6fb;
+}
+
+.theme-laushu .laushu-fc-node--page {
+  border-radius: 12px;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-fc-node--decision {
+  width: 118px;
+  border-radius: 12px;
+  background: #f6e2a6;
+  font-weight: 600;
+}
+
+.theme-laushu .laushu-fc-arrow {
+  flex: none;
+  position: relative;
+  width: 34px;
+  height: 2px;
+  background: var(--laushu-primary-300);
+  align-self: center;
+}
+
+.theme-laushu .laushu-fc-arrow::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 7px solid var(--laushu-primary-300);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.theme-laushu .laushu-fc-arrow-label {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  color: var(--laushu-primary-600);
+  background: var(--laushu-primary-100);
+  padding: 0 3px;
+}
+
+.theme-laushu .laushu-fc-note {
+  margin: 16px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted, #6b647e);
 }
 
 /* SVG 流程圖容器 */
@@ -909,7 +1143,6 @@
 }
 
 @media (max-width: 1023px) {
-  .theme-laushu .laushu-service-grid,
   .theme-laushu .laushu-guide-grid {
     grid-template-columns: 1fr;
   }

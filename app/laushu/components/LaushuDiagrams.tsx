@@ -2,6 +2,35 @@
    文字以 <text> 子字串呈現，交由 localizeLaushuTree 自動中翻英。 */
 import type { ReactNode } from "react";
 
+const PEOPLE = "/projects/laushu/people";
+
+/** 圓形節點內的人物插圖（透明背景 PNG，置於圓內上半部） */
+function NodeImage({
+  href,
+  cx,
+  top,
+  w,
+  h,
+}: {
+  href: string;
+  cx: number;
+  top: number;
+  w: number;
+  h: number;
+}) {
+  return (
+    <image
+      href={href}
+      x={cx - w / 2}
+      y={top}
+      width={w}
+      height={h}
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+    />
+  );
+}
+
 function ArrowDefs({ id }: { id: string }) {
   return (
     <defs>
@@ -119,9 +148,13 @@ export function StakeholderFlow() {
         <Node cx={590} cy={210} r={120} tone="deep" />
         <Node cx={1030} cy={210} r={110} />
 
-        <NodeLabel cx={170} cy={210} lines={["會計事務所", "會計師"]} />
-        <NodeLabel cx={590} cy={210} lines={["公司"]} />
-        <NodeLabel cx={1030} cy={210} lines={["外包工作者"]} />
+        <NodeImage href={`${PEOPLE}/accountant.png`} cx={170} top={72} w={108} h={148} />
+        <NodeImage href={`${PEOPLE}/company.png`} cx={590} top={84} w={150} h={131} />
+        <NodeImage href={`${PEOPLE}/worker.png`} cx={1030} top={70} w={130} h={150} />
+
+        <NodeLabel cx={170} cy={255} lines={["會計事務所", "會計師"]} />
+        <NodeLabel cx={590} cy={262} lines={["公司"]} />
+        <NodeLabel cx={1030} cy={262} lines={["外包工作者"]} />
 
         {/* 邊標籤 */}
         <EdgeLabel x={385} y={188}>協助彙整勞報單</EdgeLabel>
@@ -153,8 +186,12 @@ export function SolutionFlow() {
 
         <Node cx={170} cy={180} r={120} tone="deep" />
         <Node cx={730} cy={180} r={110} />
-        <NodeLabel cx={170} cy={180} lines={["公司"]} />
-        <NodeLabel cx={730} cy={180} lines={["外包工作者"]} />
+
+        <NodeImage href={`${PEOPLE}/company.png`} cx={170} top={52} w={150} h={131} />
+        <NodeImage href={`${PEOPLE}/worker.png`} cx={730} top={40} w={130} h={150} />
+
+        <NodeLabel cx={170} cy={232} lines={["公司"]} />
+        <NodeLabel cx={730} cy={232} lines={["外包工作者"]} />
 
         <EdgeLabel x={470} y={62}>發送勞報單</EdgeLabel>
         <EdgeLabel x={455} y={166}>發出工資</EdgeLabel>
