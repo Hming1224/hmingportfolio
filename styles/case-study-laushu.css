@@ -508,13 +508,24 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-  max-width: 1100px;
-  margin: 0 auto;
+  max-width: 952px;
+  margin: 24px auto 0;
+}
+
+.theme-laushu .laushu-demo-section .laushu-head {
+  max-width: 952px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-demo-section .laushu-head-title {
+  max-width: 952px;
 }
 
 .theme-laushu .laushu-demo-card {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 570px) minmax(0, 1fr);
+  min-height: 322px;
   overflow: hidden;
   border: 1px solid var(--laushu-line);
   border-radius: 16px;
@@ -543,7 +554,8 @@
 .theme-laushu .laushu-demo-video {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  min-height: 320px;
   background: var(--laushu-tertiary-700);
   object-fit: cover;
 }
@@ -553,6 +565,7 @@
   flex-direction: column;
   justify-content: center;
   padding: 28px;
+  min-width: 0;
 }
 
 .theme-laushu .laushu-demo-copy h3 {
@@ -565,8 +578,8 @@
 
 .theme-laushu .laushu-demo-copy p {
   margin: 0;
-  color: var(--text-secondary);
-  font-size: var(--fs-sm);
+  color: #5d6674;
+  font-size: 14px;
   line-height: 1.7;
 }
 
@@ -574,31 +587,67 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
+  max-width: 1440px;
+  margin: 24px auto 0;
   align-items: stretch;
 }
 
+.theme-laushu .laushu-learning-section {
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-learning-section .laushu-head {
+  max-width: 952px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-learning-section .laushu-head-title {
+  max-width: 952px;
+}
+
 .theme-laushu .laushu-learning-card {
-  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 33px;
   border: 1px solid var(--laushu-line);
   border-radius: 16px;
-  background: linear-gradient(135deg, var(--laushu-primary-100), var(--laushu-tertiary-100));
+  background: linear-gradient(121deg, var(--laushu-primary-100) 0%, var(--laushu-tertiary-100) 100%);
+}
+
+.theme-laushu .laushu-learning-num {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-600);
+  font-size: var(--fs-xs);
+  line-height: 18px;
+  font-weight: 800;
 }
 
 .theme-laushu .laushu-learning-title {
-  margin: 0 0 16px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--laushu-primary-700, var(--laushu-ink));
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.8;
+  color: var(--laushu-tertiary-700);
 }
 
 .theme-laushu .laushu-learning-card p {
   margin: 0;
+  padding-top: 4px;
+  color: #1f2933;
+  font-size: 14px;
+  line-height: 2.05;
 }
 
 @media (max-width: 1199px) {
-  .theme-laushu .laushu-stakeholder-grid,
-  .theme-laushu .laushu-demo-list {
+  .theme-laushu .laushu-stakeholder-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1111,21 +1160,21 @@
 
 .theme-laushu .laushu-understand-section .laushu-survey-node {
   min-height: 137px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #ffffff;
+  border: 0;
+  border-radius: 20px;
+  background: #f5eeff;
 }
 
 .theme-laushu .laushu-understand-section .laushu-survey-node strong {
-  color: var(--laushu-tertiary-700);
+  color: var(--laushu-primary-700);
 }
 
 .theme-laushu .laushu-understand-section .laushu-survey-node span {
-  color: var(--text-secondary);
+  color: var(--laushu-tertiary-500);
 }
 
 .theme-laushu .laushu-understand-section .laushu-survey-note {
-  color: var(--text-body);
+  color: #1f2933;
 }
 
 /* 訪談大綱三欄卡 */
@@ -1183,7 +1232,9 @@
 .theme-laushu .laushu-understand-section .laushu-guide-card {
   overflow: hidden;
   padding: 0;
-  border-radius: 0;
+  border: 1px solid var(--laushu-line);
+  border-radius: 18px;
+  background: #ffffff;
   box-shadow: none;
 }
 
@@ -1191,8 +1242,9 @@
   min-height: 75px;
   margin: 0;
   padding: 24px 28px;
-  border-bottom: 1px solid var(--laushu-line);
-  color: var(--laushu-tertiary-700);
+  border-bottom: 0;
+  background: linear-gradient(90deg, #decbff 0%, rgba(255, 255, 255, 0) 100%);
+  color: var(--laushu-primary-700);
 }
 
 .theme-laushu .laushu-understand-section .laushu-guide-card ul {
@@ -1213,7 +1265,7 @@
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: var(--laushu-primary-500);
+  background: var(--laushu-primary-200);
 }
 
 .theme-laushu .laushu-understand-section .laushu-guide-card li + li::after {
@@ -1223,7 +1275,7 @@
   left: 4px;
   width: 1px;
   height: 48px;
-  background: var(--laushu-line);
+  background: var(--laushu-primary-200);
 }
 
 /* Persona 文字欄 + 三位受訪者整理板 */
@@ -1258,7 +1310,9 @@
   grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1fr);
   gap: 24px;
   padding: 25px;
-  background: #ffffff;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #fbf9ff;
   box-shadow: none;
 }
 
@@ -1267,7 +1321,269 @@
 }
 
 .theme-laushu .laushu-understand-section .laushu-persona strong {
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona-tags {
+  color: var(--laushu-tertiary-500);
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona p {
+  color: #5d6674;
+}
+
+/* 收斂與洞察：對齊 Figma node 2792:31609 */
+.theme-laushu .laushu-converge-section {
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-converge-section .laushu-head,
+.theme-laushu .laushu-converge-section .laushu-article {
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-converge-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-converge-section > .laushu-article,
+.theme-laushu .laushu-converge-section > .laushu-journey,
+.theme-laushu .laushu-converge-section > .laushu-usecase-grid {
+  margin-top: 40px;
+}
+
+.theme-laushu .laushu-converge-section .laushu-article h3 {
+  color: #4852c3;
+}
+
+.theme-laushu .laushu-converge-section .laushu-article-num {
+  color: inherit;
+}
+
+.theme-laushu .laushu-converge-section .laushu-copy {
+  color: #1f2933;
+}
+
+.theme-laushu .laushu-converge-section .laushu-journey .cs-zoomable-image {
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card {
+  min-height: 284px;
+  padding: 25px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #fbf9ff;
+  box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card-art {
+  flex: none;
+  width: 132px;
+  height: 132px;
+  padding: 0;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card-art img {
+  width: 84px;
+  height: 84px;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card h4 {
+  margin-bottom: 12px;
   color: var(--laushu-tertiary-700);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card p {
+  max-width: 254px;
+  color: #5d6674;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* 測試與迭代：對齊 Figma node 2792:31682 */
+.theme-laushu .laushu-iterate-section {
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-iterate-section .laushu-head,
+.theme-laushu .laushu-iterate-section .laushu-article,
+.theme-laushu .laushu-iterate-section .laushu-fc-list,
+.theme-laushu .laushu-iterate-section .laushu-iter-list {
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-iterate-section > .laushu-article,
+.theme-laushu .laushu-iterate-section > .laushu-fc-list,
+.theme-laushu .laushu-iterate-section > .laushu-iter-list {
+  margin-top: 40px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-article h3 {
+  color: #4852c3;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-article-num {
+  color: inherit;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-copy {
+  color: #1f2933;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-copy p,
+.theme-laushu .laushu-iterate-section .laushu-copy li {
+  line-height: 1.8;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-list {
+  gap: 40px;
+  margin-bottom: 0;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-figure {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-cap {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 25px 29px;
+  border: 1px solid #d8deec;
+  border-radius: 16px;
+  background: linear-gradient(162deg, #4852c3 3%, #d0b6f5 101%);
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-badge {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--laushu-primary-200);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  font-weight: 700;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-title {
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-scroll {
+  padding: 18px;
+  border: 1px solid #d8deec;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-note {
+  color: #5d6674;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-list {
+  gap: 40px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-board {
+  gap: 24px;
+  padding: 28px;
+  border: 1px solid #d5dfec;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-head {
+  gap: 24px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-badge {
+  width: 95px;
+  padding: 9px 14px;
+  background: #4852c3;
+  font-size: var(--fs-sm);
+  line-height: 17px;
+  text-align: center;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-title {
+  color: var(--laushu-tertiary-700);
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-body {
+  grid-template-columns: 98px minmax(0, 1fr);
+  gap: 24px;
+  color: #5d6674;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-label {
+  color: #5d6674;
+  font-size: 15px;
+  line-height: 1.53;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-paras {
+  gap: 23px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-paras p {
+  color: #5d6674;
+  font-size: 15px;
+  line-height: 1.53;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-figure {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-iterate-section .laushu-fc-cap {
+    padding: 20px;
+  }
+
+  .theme-laushu .laushu-iterate-section .laushu-fc-title,
+  .theme-laushu .laushu-iterate-section .laushu-iter-title {
+    font-size: 20px;
+  }
+
+  .theme-laushu .laushu-iterate-section .laushu-iter-body {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .theme-laushu .laushu-iterate-section .laushu-iter-badge {
+    width: auto;
+  }
 }
 
 /* Journey 板（保留為可放大圖） */
@@ -1289,15 +1605,43 @@
   background: var(--laushu-tertiary-100);
 }
 
-.theme-laushu .laushu-prototype-section .cs-body-muted {
+.theme-laushu .laushu-prototype-section .laushu-head,
+.theme-laushu .laushu-proto-intro,
+.theme-laushu .laushu-prototype-section .laushu-proto-overview,
+.theme-laushu .laushu-proto-block {
+  max-width: 952px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-prototype-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-proto-intro {
+  margin-top: 40px;
+  margin-bottom: 0;
   max-width: 920px;
-  color: var(--text-secondary);
-  font-size: var(--fs-body);
+  color: #5d6674;
+  font-size: 16px;
   line-height: 1.7;
 }
 
-.theme-laushu .laushu-prototype-section .laushu-image-frame--wide {
+.theme-laushu .laushu-prototype-section .laushu-proto-overview {
+  display: block;
   margin: 0 auto;
+  margin-top: 40px;
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-prototype-section .laushu-proto-overview .cs-zoomable-image-media {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .theme-laushu .laushu-proto-block {
@@ -1335,7 +1679,7 @@
 
 .theme-laushu .cs-sol-fchead {
   padding: 24px 28px;
-  background: linear-gradient(269deg, rgba(255, 255, 255, 0) 0%, var(--laushu-primary-200) 63%);
+  background: linear-gradient(257deg, rgba(255, 255, 255, 0) 1%, var(--laushu-primary-200) 63%);
 }
 
 .theme-laushu .cs-sol-fcbody {
@@ -1352,13 +1696,13 @@
 
 .theme-laushu .cs-sol-fsub {
   margin: 0;
-  font-size: var(--fs-sm);
+  font-size: 14px;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: #5d6674;
 }
 
 .theme-laushu .cs-sol-fimg {
-  flex: 1;
+  flex: 1 1 626px;
   min-width: 0;
   display: grid;
   place-items: center;
@@ -1376,13 +1720,24 @@
   box-shadow: none;
 }
 
+.theme-laushu .cs-sol-fimg .cs-feature-zoom-trigger {
+  width: 100%;
+}
+
+.theme-laushu .cs-sol-fimg .cs-zoomable-image-media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .theme-laushu .cs-sol-fnote {
-  flex: 0 0 30%;
+  flex: 0 0 286px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 12px;
-  padding: 24px;
+  min-height: 98px;
+  padding: 25px;
   border: 1px solid var(--laushu-line);
   border-radius: 16px;
   background: #ffffff;
@@ -1390,9 +1745,11 @@
 
 .theme-laushu .cs-sol-fnote > p {
   margin: 0;
-  font-size: var(--fs-sm);
+  width: 236px;
+  max-width: 100%;
+  font-size: 14px;
   line-height: 1.7;
-  color: var(--text-secondary);
+  color: #5d6674;
 }
 
 .theme-laushu .cs-sol-fhr {
@@ -1445,6 +1802,12 @@
 @media (max-width: 900px) {
   .theme-laushu .laushu-demo-card {
     grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-demo-video {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
   }
 }
 

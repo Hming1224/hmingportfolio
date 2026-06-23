@@ -16,8 +16,10 @@ const en = {
   "了解使用者情境": "Understand Users",
   "收斂與洞察": "Converge & Insights",
   "測試與設計迭代": "Test & Iterate",
+  "測試與迭代": "Test & Iterate",
   "原型設計": "Prototype",
   "成果 Demo": "Demo",
+  "最終成果": "Final outcome",
   "學習反思": "Reflections",
   "返回首頁": "Back to Home",
   "下一個專案": "Next Project",
@@ -248,10 +250,17 @@ const en = {
 
   // ── Iterate ──
   "任務測試與易用性量表": "Task testing & usability scale",
+  "邀請上次接受訪談的 2 位受訪者再次進行介面評估：":
+    "Invited the two prior interviewees back to evaluate the interface:",
   "邀請上次接受訪談的 2 位受訪者再次進行介面評估。針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表。":
     "Invited the two prior interviewees back to evaluate the interface. For the three key use cases I drew flows and built Figma prototypes, ran think-aloud task tests, and collected SUS usability scores.",
   "節目企劃：長期需要外包主持人": "Program planner: needs outsourced hosts long-term",
   "攝影工作室老闆：長期需要外包攝影師合作拍攝": "Studio owner: needs outsourced photographers long-term",
+  "針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表：":
+    "For the three key use cases, I drew flow diagrams, used Figma prototypes for think-aloud task testing, and collected SUS usability scores:",
+  "設計介面、元件迭代": "Interface and component iteration",
+  "這次介面與元件迭代聚焦在降低判斷成本、提升核對效率。透過調整資訊排序、用詞、提示文字與列表呈現，讓使用者能更快找到正確資料、理解欄位意義，並在寄出或合併前完成確認，降低錯填、漏填與誤合併的風險。":
+    "This interface and component iteration focused on lowering decision cost and improving checking efficiency. By adjusting information order, wording, helper text, and list presentation, users can find the right records faster, understand field meaning, and confirm details before sending or merging, reducing wrong entries, omissions, and mistaken merges.",
   "Flow 1：建立外包人員資料庫，便於掌管人員個人資料": "Flow 1: Build a contractor database to manage people's records",
   "設計迭代 1-1：對使用者而言，首頁建立人員資料庫時，重要的是知道確切是哪位人員，因此不容易變動的身份資料須置前，以利辨識。":
     "Iteration 1-1: When building the database, what matters most is knowing exactly who a person is — so stable identity fields are placed first for easier recognition.",
@@ -272,6 +281,7 @@ const en = {
     "Converged the iteration direction from task tests and SUS scores as the basis for the final hi-fi prototype.",
 
   // ── Prototype ──
+  "最終 UI flow 展示": "Final UI flow showcase",
   "根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。":
     "Iterated to a hi-fi prototype based on test results, focused on three core flows: adding contractors, creating forms, and merging forms.",
   "Flow 1｜建立外包人員資料庫": "Flow 1｜Build the contractor database",
@@ -330,8 +340,8 @@ const en = {
   "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」——像把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。":
     "Labor forms involve professional concepts — tax rates, filing categories, supplementary health insurance — that users don't necessarily understand. Looking back, many iterations were really about \"rewording\" and \"adding guidance\": replacing the unintuitive term \"income recipient\" with plainer language, adding a line of explanation where people got stuck, and surfacing the withholding percentage directly. It made me realize interface copy is itself part of the experience — translating jargon into the user's language often lowers the barrier more than adding another feature.",
   "用可驗證的小步迭代推進設計": "Advancing design through small, verifiable iterations",
-  "Laushu 是已經上線的系統，這次是在既有架構上做優化，而不是從零重來。過程中要一邊尊重原本的流程與限制，一邊找出真正值得改的地方。透過放聲思考測試加上 SUS 量表去驗證每一次調整，讓我學會用「可以被驗證的小步迭代」往前推，而不是一次大改；也更清楚設計要能落地，得把開發成本與既有限制一起算進來。":
-    "Laushu is an already-live system, so this project optimized within an existing architecture rather than starting from scratch. I had to respect the original flow and constraints while finding what was genuinely worth changing. Validating each adjustment with think-aloud testing and the SUS scale taught me to move forward in small, verifiable iterations instead of one big overhaul — and made it clearer that for design to ship, development cost and existing constraints have to be factored in too.",
+  "Laushu 是準備上線的系統，這次是在既有流程上做優化，而不是從零重來。過程中要一邊尊重原本的流程與限制，一邊找出真正值得改的地方。透過放聲思考測試加上 SUS 量表去驗證每一次調整，讓我學會用「可以被驗證的小步迭代」往前推，而不是一次大改；也更清楚設計要能落地，得把開發成本與既有限制一起算進來。":
+    "Laushu was a system preparing to launch, so this project optimized an existing flow rather than starting from scratch. I had to respect the original flow and constraints while finding what was genuinely worth changing. Validating each adjustment with think-aloud testing and the SUS scale taught me to move forward in small, verifiable iterations instead of one big overhaul — and made it clearer that for design to ship, development cost and existing constraints have to be factored in too.",
 
   // ── Design iteration boards ──
   "設計迭代與元件迭代": "Design & component iterations",

@@ -223,6 +223,24 @@ const iterationBoards = [
 
 const PROTO = `${IMG}/proto`;
 
+const protoImageSizes: Record<string, { width: number; height: number }> = {
+  [`${PROTO}/create-1-list.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/create-2-form.png`]: { width: 1440, height: 1741 },
+  [`${PROTO}/create-3-saved.png`]: { width: 1440, height: 1850 },
+  [`${PROTO}/create-4-added.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/bill-1-list.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/bill-2-form.png`]: { width: 1162, height: 2048 },
+  [`${PROTO}/bill-3-preview.png`]: { width: 1115, height: 2048 },
+  [`${PROTO}/bill-4-alert.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/bill-5-sent.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/bill-6-list.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/merge-1-search.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/merge-2-select.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/merge-3-alert.png`]: { width: 1440, height: 1024 },
+  [`${PROTO}/merge-4-detail.png`]: { width: 1440, height: 2028 },
+  [`${PROTO}/merge-5-expand.png`]: { width: 1440, height: 1024 },
+};
+
 const prototypeFlows = [
   {
     tag: "Flow 1",
@@ -287,11 +305,11 @@ export default async function LaushuPage() {
   const tocSections: TocSection[] = [
     { id: "cs-sec-overview", title: t("專案總覽") },
     { id: "cs-sec-problem", title: t("問題定義") },
-    { id: "cs-sec-understand", title: t("了解使用者情境") },
+    { id: "cs-sec-understand", title: t("研究設計") },
     { id: "cs-sec-converge", title: t("收斂與洞察") },
-    { id: "cs-sec-iterate", title: t("測試與設計迭代") },
+    { id: "cs-sec-iterate", title: t("測試與迭代") },
     { id: "cs-sec-prototype", title: t("原型設計") },
-    { id: "cs-sec-demo", title: t("成果 Demo") },
+    { id: "cs-sec-demo", title: t("最終成果") },
     { id: "cs-sec-reflection", title: t("學習反思") },
   ];
 
@@ -479,8 +497,8 @@ function UnderstandSection() {
 
 function ConvergeSection() {
   return (
-    <CaseSection id="cs-sec-converge" title="收斂與洞察 Converge" surface className="laushu-process-section">
-      <SectionLede>找出最適合分析的使用者流程</SectionLede>
+    <section id="cs-sec-converge" className="cs-section laushu-process-section laushu-converge-section">
+      <LaushuHead eyebrow="收斂與洞察" title="找出最適合分析的使用者流程" />
       <ArticleBlock title="彙整流程 & 重塑 TA" number="01">
         <p>挖掘使用者在建立、發放、回簽、建檔勞報單流程中的痛點，並首先聚焦會自己經手勞報單的公司端。</p>
       </ArticleBlock>
@@ -488,8 +506,8 @@ function ConvergeSection() {
         <ZoomableImage
           src={`${IMG}/labor-form-flow-1.png`}
           alt="Laushu 勞報單使用者歷程 journey map"
-          width={1600}
-          height={620}
+          width={1472}
+          height={645}
           labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
         />
         <figcaption>以前兩位受訪者為主，盤點建立 → 發放 → 回簽 → 建檔的完整歷程與痛點</figcaption>
@@ -502,7 +520,7 @@ function ConvergeSection() {
           <InfoCard title={item.title} image={item.image} key={item.title}>{item.body}</InfoCard>
         ))}
       </div>
-    </CaseSection>
+    </section>
   );
 }
 
@@ -661,23 +679,23 @@ function TaskFlow3() {
 
 function IterateSection() {
   return (
-    <CaseSection id="cs-sec-iterate" title="測試與設計迭代 Iterate" className="laushu-process-section">
-      <SectionLede>從任務測試中，修正既有的流程與介面問題</SectionLede>
+    <section id="cs-sec-iterate" className="cs-section laushu-process-section laushu-iterate-section">
+      <LaushuHead eyebrow="測試與迭代" title="從任務測試中，修正既有的流程與介面問題" />
       <ArticleBlock title="任務測試與易用性量表" number="01">
-        <p>邀請上次接受訪談的 2 位受訪者再次進行介面評估。針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表。</p>
+        <p>邀請上次接受訪談的 2 位受訪者再次進行介面評估：</p>
         <ul>
           <li>節目企劃：長期需要外包主持人</li>
           <li>攝影工作室老闆：長期需要外包攝影師合作拍攝</li>
         </ul>
-        <p>針對三個重要用例繪製任務流程圖，作為原型測試的腳本依據（手機可左右滑動檢視）。</p>
+        <p>針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表：</p>
       </ArticleBlock>
       <div className="laushu-fc-list">
         {TaskFlow1()}
         {TaskFlow2()}
         {TaskFlow3()}
       </div>
-      <ArticleBlock title="設計迭代與元件迭代" number="02">
-        <p>依任務測試發現的問題，逐一調整介面流程與元件用詞。下面以 Before / After 對照，呈現每個操作流程的調整重點。</p>
+      <ArticleBlock title="設計介面、元件迭代" number="02">
+        <p>這次介面與元件迭代聚焦在降低判斷成本、提升核對效率。透過調整資訊排序、用詞、提示文字與列表呈現，讓使用者能更快找到正確資料、理解欄位意義，並在寄出或合併前完成確認，降低錯填、漏填與誤合併的風險。</p>
       </ArticleBlock>
       <div className="laushu-iter-list">
         {iterationBoards.map((board) => (
@@ -707,14 +725,15 @@ function IterateSection() {
         <p>根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。</p>
         <ImageBlock src={`${IMG}/test-result.png`} alt="Laushu 任務測試與 SUS 結果" />
       </ArticleBlock>
-    </CaseSection>
+    </section>
   );
 }
 
 function PrototypeSection() {
   return (
-    <CaseSection id="cs-sec-prototype" title="原型設計 Prototype" surface className="laushu-prototype-section">
-      <p className="cs-body-muted" style={{ marginBottom: 40 }}>
+    <section id="cs-sec-prototype" className="cs-section laushu-process-section laushu-prototype-section">
+      <LaushuHead eyebrow="原型設計" title="最終 UI flow 展示" />
+      <p className="laushu-proto-intro">
         根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。
       </p>
       <FeatureImageLightbox src={`${IMG}/figma-design.png`} alt="Laushu Hi-fi 原型設計總覽" width={1472} height={793} className="laushu-proto-overview" />
@@ -737,7 +756,7 @@ function PrototypeSection() {
           </div>
         ))}
       </div>
-    </CaseSection>
+    </section>
   );
 }
 
@@ -751,13 +770,15 @@ function ProtoStep({
   isLast: boolean;
 }) {
   const flip = index % 2 === 1;
+  const imageSize = protoImageSizes[step.image] ?? { width: 1440, height: 1024 };
+
   return (
     <>
       <div className="cs-sol-fr cs-sol-fr-mid">
         {flip ? (
           <>
             <div className="cs-sol-fimg">
-              <FeatureImageLightbox src={step.image} alt={step.alt} width={1440} height={1024} />
+              <FeatureImageLightbox src={step.image} alt={step.alt} width={imageSize.width} height={imageSize.height} />
             </div>
             <div className="cs-sol-fnote"><p>{step.note}</p></div>
           </>
@@ -765,7 +786,7 @@ function ProtoStep({
           <>
             <div className="cs-sol-fnote"><p>{step.note}</p></div>
             <div className="cs-sol-fimg">
-              <FeatureImageLightbox src={step.image} alt={step.alt} width={1440} height={1024} />
+              <FeatureImageLightbox src={step.image} alt={step.alt} width={imageSize.width} height={imageSize.height} />
             </div>
           </>
         )}
@@ -782,8 +803,8 @@ function ProtoStep({
 
 function DemoSection() {
   return (
-    <CaseSection id="cs-sec-demo" title="成果 Demo" className="laushu-demo-section">
-      <SectionLede>UI 互動影片介紹</SectionLede>
+    <section id="cs-sec-demo" className="cs-section laushu-demo-section">
+      <LaushuHead eyebrow="最終成果" title="UI 互動影片介紹" />
       <div className="laushu-demo-list">
         {demoItems.map((item, index) => (
           <article className="laushu-demo-card" key={item.title}>
@@ -803,7 +824,7 @@ function DemoSection() {
           </article>
         ))}
       </div>
-    </CaseSection>
+    </section>
   );
 }
 
@@ -818,23 +839,24 @@ const reflections = [
   },
   {
     title: "用可驗證的小步迭代推進設計",
-    body: "Laushu 是已經上線的系統，這次是在既有架構上做優化，而不是從零重來。過程中要一邊尊重原本的流程與限制，一邊找出真正值得改的地方。透過放聲思考測試加上 SUS 量表去驗證每一次調整，讓我學會用「可以被驗證的小步迭代」往前推，而不是一次大改；也更清楚設計要能落地，得把開發成本與既有限制一起算進來。",
+    body: "Laushu 是準備上線的系統，這次是在既有流程上做優化，而不是從零重來。過程中要一邊尊重原本的流程與限制，一邊找出真正值得改的地方。透過放聲思考測試加上 SUS 量表去驗證每一次調整，讓我學會用「可以被驗證的小步迭代」往前推，而不是一次大改；也更清楚設計要能落地，得把開發成本與既有限制一起算進來。",
   },
 ];
 
 function ReflectionSection() {
   return (
-    <CaseSection id="cs-sec-reflection" title="學習反思 Reflections" surface className="laushu-learning-section">
-      <SectionLede>線下與線上整合的數位流程考驗</SectionLede>
+    <section id="cs-sec-reflection" className="cs-section laushu-learning-section">
+      <LaushuHead eyebrow="學習反思" title="線下與線上整合的數位流程考驗" />
       <div className="laushu-learning-grid">
-        {reflections.map((r) => (
+        {reflections.map((r, index) => (
           <div className="laushu-learning-card" key={r.title}>
+            <span className="laushu-learning-num">{String(index + 1).padStart(2, "0")}</span>
             <h3 className="laushu-learning-title">{r.title}</h3>
             <p>{r.body}</p>
           </div>
         ))}
       </div>
-    </CaseSection>
+    </section>
   );
 }
 
