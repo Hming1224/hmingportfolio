@@ -1905,6 +1905,7 @@
   }
 
   .theme-laushu .cs-sol-fc,
+  .theme-laushu .cs-sol-fimg,
   .theme-laushu .cs-sol-fnote {
     flex: unset;
     width: 100%;
@@ -1932,6 +1933,14 @@
 }
 
 @media (max-width: 768px) {
+  .theme-laushu .laushu-understand-section .laushu-persona {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-understand-section .laushu-persona > .cs-zoomable-image {
+    order: -1;
+  }
+
   .theme-laushu .laushu-survey-flow {
     grid-template-columns: 1fr;
   }
