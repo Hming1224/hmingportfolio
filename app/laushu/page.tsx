@@ -591,7 +591,7 @@ function TaskFlow1() {
       tag="操作流程 1"
       title="建立外包人員資料庫，便於掌管人員個人資料"
     >
-      <TaskFlowOneDiagram />
+      {TaskFlowOneDiagram()}
     </TaskFlowChart>
   );
 }
@@ -602,7 +602,7 @@ function TaskFlow2() {
       tag="操作流程 2"
       title="建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽"
     >
-      <TaskFlowTwoDiagram />
+      {TaskFlowTwoDiagram()}
     </TaskFlowChart>
   );
 }
@@ -613,7 +613,7 @@ function TaskFlow3() {
       tag="操作流程 3"
       title="合併多張勞務報酬單，減少回簽次數與調整稅額"
     >
-      <TaskFlowThreeDiagram />
+      {TaskFlowThreeDiagram()}
     </TaskFlowChart>
   );
 }

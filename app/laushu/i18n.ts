@@ -400,6 +400,9 @@ const en = {
     "Task flowcharts were drawn for the three key use cases as the script for prototype testing (swipe horizontally on mobile).",
   "是": "Yes",
   "否": "No",
+  "建立外包人員資料庫任務流程圖": "Build a contractor database — task flow",
+  "建立勞務報酬單任務流程圖": "Create a labor form — task flow",
+  "合併多張勞務報酬單任務流程圖": "Merge multiple labor forms — task flow",
   // Flow 2
   "建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽":
     "Create a labor form and send a link for the contractor to fill in / counter-sign",
