@@ -33,7 +33,7 @@
   ```
   這樣即使未來 import 方式改變，私有規則也不會污染其他案例。
 - 區域色票放 `.theme-<slug> { --... }`，不要進全域 `:root`（見 `design-system.md §2.7`）。
-- 共用骨架類（上面 §3 那些）**保持裸寫、不要冠 `.theme-<slug>`**——它們屬於 `case-study.css`，加 scope 反而是錯誤歸屬。需要調共用元件的 RWD，改 `case-study.css`，不要在案例 CSS 裡複製覆寫。
+- 共用骨架類（上面 §3 那些）**保持裸寫、不要冠 `.theme-<slug>`**，它們屬於 `case-study.css`，加 scope 反而是錯誤歸屬。需要調共用元件的 RWD，改 `case-study.css`，不要在案例 CSS 裡複製覆寫。
 
 ## 5. Section 元件
 
@@ -46,7 +46,13 @@
 - 放 `public/projects/<slug>/`，依用途分 `cover / research / solution / result`。
 - 大圖先壓 WebP / AVIF，真正需要放大的才保留高解析。
 
-## 7. 驗收
+## 7. 設計系統同步
+
+- 如果新增案例時有補新的共用 token、共用元件、button state、表單狀態或其他可複用規則，**完成案例頁後要同步更新 `/design-system` 頁**，包含對應展示區與 Token Reference。
+- `/design-system` 是對外文件頁，展示的是已落地的系統內容；不要把案例專屬暫時性樣式誤塞進去。
+- Token Reference 以 `styles/tokens.css` 為準。新增 token 時，除了在 code 定義，也要補進設計系統頁的 reference 表。
+
+## 8. 驗收
 
 - `npm run build`、`npm run lint`（0 error）。
 - `1440 / 1024 / 768 / 390` 四斷點：無水平溢出、console 0 error、TOC scrollspy 正常。

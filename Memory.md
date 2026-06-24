@@ -523,3 +523,10 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **Binance 平倉 4 步排版（Hming 拍板「維持 3 欄」）**：Binance 比別人多一個「輸入金額/數量」中間畫面。做法：`MatrixCell` 加 `extraImg`/`extraAlt`/`note`，把多出的 `close-binance-1b-amount.webp` 塞進步驟①格內**上下堆疊**（`.ca-matrix-cell-stack`），其他兩家不動，保持同欄可比對。
 - **欄號改 ②a/②b 表「二擇一」非先後**（Hming 指定）：限價/市價是 alternative。`ResearchSection.tsx` 解析 regex 改 `^([①-⑨])([a-z]?)\s*(.*)$`，badge 顯示 `2a`/`2b`；`.ca-matrix-step-num` 由固定圓形改 `min-width:18px;padding:0 5px;border-radius:9px`（單字仍近圓、雙字成膠囊）。i18n key 同步改 `②a/②b ...` 並補 note/synthesis EN。
 - **驗證**：localhost:3000（既有 server，未重啟）playwright 量 zh-TW/en、桌機 1440 + 手機 390。badge 1/2a/2b、堆疊格+note、sticky 交易所欄、水平捲動皆正常；22 張矩陣圖 0 broken，新 amount 圖 1493×960，0 console error。
+
+## 2026-06-25 Design system page synchronization rule
+
+- `/design-system` 已升級成完整文件頁結構：Getting Started、Colors、Typography、Spacing、Border Radius、Shadows、Motion、Component Gallery、Primary Button Tokens、Token Reference。
+- **往後任何設計系統升級、新 token、新共用元件或新狀態完成時，都要同步更新 `/design-system` 頁對應區塊與 Token Reference。** 不要只改 code 不改文件頁。
+- Token Reference 以 `styles/tokens.css` 為單一真實來源；若新增 token，必須同步補進設計系統頁的 reference 表與必要說明。
+- 公開網站不放 gap analysis / maturity roadmap；這類內容改放面試或內部輔助文件，例如 `100_Todo/drafts/job-hunt/2026-06-25_設計系統面試對答.md`。

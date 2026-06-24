@@ -124,17 +124,90 @@
   --hm-info: #1d4ed8;
   --hm-info-soft: #dbeafe;
 
+  /* ── Seed → Map → Component contract ──
+     New reusable components consume component tokens. Existing semantic
+     names remain as migration aliases below. */
+  --hm-seed-color-brand: var(--hm-purple-600);
+  --hm-seed-color-ink: #343434;
+  --hm-seed-color-white: #ffffff;
+  --hm-seed-color-disabled: #dedee4;
+  --hm-seed-font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  --hm-seed-font-size-md: 16px;
+  --hm-seed-font-size-sm: 14px;
+  --hm-seed-font-weight-semibold: 600;
+  --hm-seed-radius-base: 12px;
+  --hm-seed-duration-fast: 180ms;
+  --hm-seed-easing-default: ease;
+
+  --hm-map-color-primary: var(--hm-seed-color-brand);
+  --hm-map-color-primary-hover: var(--hm-purple-700);
+  --hm-map-color-primary-active: var(--hm-purple-800);
+  --hm-map-color-primary-bg: var(--hm-purple-50);
+  --hm-map-color-primary-disabled: var(--hm-seed-color-disabled);
+  --hm-map-color-on-primary: var(--hm-seed-color-white);
+  --hm-map-font-size-btn-md: var(--hm-seed-font-size-md);
+  --hm-map-font-size-btn-sm: var(--hm-seed-font-size-sm);
+  --hm-map-font-weight-btn: var(--hm-seed-font-weight-semibold);
+  --hm-map-line-height-btn: 1.4;
+  --hm-map-radius-pill: 200px;
+  --hm-map-height-control-md: 52px;
+  --hm-map-height-control-sm: 38px;
+  --hm-map-padding-inline-md: 28px;
+  --hm-map-padding-inline-sm: 24px;
+  --hm-map-duration-btn: var(--hm-seed-duration-fast);
+  --hm-map-easing-btn: var(--hm-seed-easing-default);
+
+  --hm-btn-primary-bg: var(--hm-map-color-primary);
+  --hm-btn-primary-bg-hover: var(--hm-map-color-primary-hover);
+  --hm-btn-primary-bg-active: var(--hm-map-color-primary-active);
+  --hm-btn-primary-bg-disabled: var(--hm-map-color-primary-disabled);
+  --hm-btn-primary-color: var(--hm-map-color-on-primary);
+  --hm-btn-primary-color-disabled: var(--hm-map-color-on-primary);
+  --hm-btn-primary-border-width: 0;
+  --hm-btn-primary-border-color: transparent;
+  --hm-btn-radius: var(--hm-map-radius-pill);
+  --hm-btn-height-md: var(--hm-map-height-control-md);
+  --hm-btn-height-md-tablet: 48px;
+  --hm-btn-height-md-mobile: 44px;
+  --hm-btn-padding-inline-md: var(--hm-map-padding-inline-md);
+  --hm-btn-height-sm: var(--hm-map-height-control-sm);
+  --hm-btn-padding-inline-sm: var(--hm-map-padding-inline-sm);
+  --hm-btn-font-family: var(--hm-seed-font-family);
+  --hm-btn-font-size-md: var(--hm-map-font-size-btn-md);
+  --hm-btn-font-size-sm: var(--hm-map-font-size-btn-sm);
+  --hm-btn-font-weight: var(--hm-map-font-weight-btn);
+  --hm-btn-line-height: var(--hm-map-line-height-btn);
+  --hm-btn-transition-duration: var(--hm-map-duration-btn);
+  --hm-btn-transition-easing: var(--hm-map-easing-btn);
+
   /* ── Motion ── */
+  --hm-duration-instant: 100ms;
   --hm-duration-fast: 180ms;
   --hm-duration-base: 260ms;
+  --hm-duration-card: 360ms;
+  --hm-duration-image: 420ms;
   --hm-duration-slow: 420ms;
   --hm-duration-enter: 600ms;
+  --hm-duration-stagger: 80ms;
   --hm-duration-reveal: 950ms;
+  --hm-ease-default: ease;
   --hm-ease-standard: ease;
   --hm-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hm-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --hm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --hm-ease-emphasized: cubic-bezier(0.215, 0.61, 0.355, 1);
 
   /* ── Spacing ── */
+  --hm-space-1: 4px;
+  --hm-space-2: 8px;
+  --hm-space-3: 12px;
+  --hm-space-4: 16px;
+  --hm-space-6: 24px;
+  --hm-space-8: 32px;
+  --hm-space-10: 40px;
+  --hm-space-12: 48px;
+  --hm-space-16: 64px;
+  --hm-space-20: 80px;
   --hm-space-3xs: 4px;
   --hm-space-2xs: 8px;
   --hm-space-xs: 12px;
@@ -196,6 +269,19 @@
   --fs-xs: 12px;
   /* 最小 */
 
+  /* Preferred typography aliases. */
+  --hm-fs-h1: var(--fs-h1);
+  --hm-fs-h2: var(--fs-h2);
+  --hm-fs-h3: var(--fs-h3);
+  --hm-fs-h4: var(--fs-h4);
+  --hm-fs-body: var(--fs-body);
+  --hm-fs-sm: var(--fs-sm);
+  --hm-fs-xs: var(--fs-xs);
+  --hm-fw-regular: 400;
+  --hm-fw-medium: 500;
+  --hm-fw-semibold: 600;
+  --hm-fw-bold: 700;
+
   /* @deprecated aliases. Migrate new code to --hm-* names. */
   --ink: var(--hm-ink);
   --ink-hover: var(--hm-ink-hover);
@@ -229,6 +315,13 @@
     0 0.6px 0.6px rgba(0, 0, 0, 0.12),
     0 2.3px 2.3px rgba(0, 0, 0, 0.12),
     0 10px 10px rgba(0, 0, 0, 0.12);
+  --hm-shadow-sm: var(--shadow-sm);
+  --hm-shadow-md: var(--shadow-md);
+  --hm-shadow-lg: var(--shadow-lg);
+  --hm-shadow-xl: var(--shadow-xl);
+  --hm-shadow-card-hover: var(--shadow-card-hover);
+  --hm-radius-btn: var(--hm-radius-button);
+  --hm-page-gutter: var(--page-gutter);
 
   /* ── 一般內容左右留白（不含 navbar / footer）。
      先維持原本貼邊節奏，超寬螢幕再把內容限制在 1920px 內。 */
@@ -358,30 +451,35 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 14px 28px;
-  border: 0;
-  border-radius: 200px;
-  font-size: var(--fs-body);
-  font-weight: 600;
-  line-height: 1.4;
+  min-height: var(--hm-btn-height-md);
+  padding: 14px var(--hm-btn-padding-inline-md);
+  border: var(--hm-btn-primary-border-width) solid var(--hm-btn-primary-border-color);
+  border-radius: var(--hm-btn-radius);
+  font-family: var(--hm-btn-font-family);
+  font-size: var(--hm-btn-font-size-md);
+  font-weight: var(--hm-btn-font-weight);
+  line-height: var(--hm-btn-line-height);
   white-space: nowrap;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color var(--hm-duration-fast) var(--hm-ease-standard),
-    color var(--hm-duration-fast) var(--hm-ease-standard),
-    box-shadow var(--hm-duration-fast) var(--hm-ease-standard);
+    background-color var(--hm-btn-transition-duration) var(--hm-btn-transition-easing),
+    color var(--hm-btn-transition-duration) var(--hm-btn-transition-easing),
+    box-shadow var(--hm-btn-transition-duration) var(--hm-btn-transition-easing);
 }
 
 .ds-button-primary {
-  background: var(--purple);
-  color: #fff;
+  background: var(--hm-btn-primary-bg);
+  color: var(--hm-btn-primary-color);
 }
 
 .ds-button-primary:hover:not(:disabled) {
-  background: var(--purple-hover);
+  background: var(--hm-btn-primary-bg-hover);
+}
+
+.ds-button-primary:active:not(:disabled) {
+  background: var(--hm-btn-primary-bg-active);
 }
 
 .ds-button-secondary {
@@ -422,9 +520,9 @@ button {
 }
 
 .ds-button-sm {
-  min-height: 38px;
-  padding: 8px 24px;
-  font-size: var(--fs-sm);
+  min-height: var(--hm-btn-height-sm);
+  padding: 8px var(--hm-btn-padding-inline-sm);
+  font-size: var(--hm-btn-font-size-sm);
 }
 
 .ds-button-lg {
