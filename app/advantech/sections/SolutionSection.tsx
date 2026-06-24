@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- connector SVGs are resized at runtime by FeatureConnectors JS (it rewrites img.src), so raw <img> is intentional here */
 import { CaseSection } from "../../../components/case-study";
 import ProposalTabs from "../components/ProposalTabs";
 import FeatureImageLightbox from "../components/FeatureImageLightbox";

@@ -171,7 +171,6 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
   const strategyLeft = strategyX - strategy.size / 2;
   const strategyRight = strategyX + strategy.size / 2;
   const arsenalLeft = arsenal.x - arsenal.width / 2;
-  const arsenalTop = arsenal.y;
   return (
     <svg
       ref={ref}
