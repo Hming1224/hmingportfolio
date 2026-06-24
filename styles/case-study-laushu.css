@@ -1,0 +1,1938 @@
+/* Laushu case study-specific sections. Private selectors stay under
+   .theme-laushu and reuse the shared case-study shell, hero, info row, TOC,
+   next navigation, spacing, type tokens, and button rules. */
+
+.theme-laushu {
+  --laushu-primary-100: #fdfcff;
+  --laushu-primary-200: #decbff;
+  --laushu-primary-300: #c399ff;
+  --laushu-primary-400: #ab5fff;
+  --laushu-primary-500: #9300f0;
+  --laushu-primary-600: #6300a5;
+  --laushu-primary-700: #37005f;
+  --laushu-tertiary-100: #f8f7fa;
+  --laushu-tertiary-200: #d3cce0;
+  --laushu-tertiary-300: #afa2c6;
+  --laushu-tertiary-500: #6a558a;
+  --laushu-tertiary-700: #241b31;
+  --laushu-grey-100: #fcfcfd;
+  --laushu-grey-200: #d2d2e2;
+  --laushu-grey-500: #5e5e91;
+  --laushu-grey-700: #1f1f3b;
+  --laushu-line: rgba(99, 0, 165, 0.16);
+  --laushu-shadow: 0 16px 40px rgba(55, 0, 95, 0.08);
+  --laushu-content-max: 1920px;
+  --text-heading: var(--laushu-primary-700);
+}
+
+.theme-laushu .cs-divider {
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .cs-tags,
+.theme-laushu .cs-info-label {
+  color: var(--laushu-tertiary-500);
+}
+
+.theme-laushu .cs-info-value {
+  color: var(--laushu-tertiary-700);
+}
+
+.theme-laushu .laushu-hero-cover {
+  height: clamp(360px, 35vw, 640px);
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-hero-cover img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.theme-laushu .laushu-hero-info {
+  background: linear-gradient(180deg, #ffffff 0%, var(--laushu-primary-100) 100%);
+}
+
+.theme-laushu .laushu-info-row {
+  padding-top: 8px;
+  border-top: 1px solid var(--laushu-line);
+}
+
+.theme-laushu .laushu-section-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--laushu-primary-500);
+}
+
+.theme-laushu .laushu-overview-section,
+.theme-laushu .laushu-process-section,
+.theme-laushu .laushu-learning-section {
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-problem-section,
+.theme-laushu .laushu-demo-section {
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-overview-layout,
+.theme-laushu .laushu-problem-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+  gap: 40px;
+  align-items: center;
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-problem-layout {
+  align-items: start;
+}
+
+.theme-laushu .laushu-problem-section .laushu-head {
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-problem-section .laushu-head-title {
+  max-width: 784px;
+}
+
+.theme-laushu .laushu-overview-copy h3,
+.theme-laushu .laushu-overview-intro h3,
+.theme-laushu .laushu-problem-copy h3 {
+  margin: 0 0 18px;
+  max-width: 600px;
+  font-size: var(--fs-h2);
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-overview-copy p,
+.theme-laushu .laushu-overview-intro p,
+.theme-laushu .laushu-problem-copy p {
+  margin: 0;
+  max-width: 640px;
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-overview-intro {
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+  padding: 36px 40px;
+  border-radius: 20px;
+  background: #f8f2ff;
+}
+
+.theme-laushu .laushu-overview-intro h3 {
+  max-width: 760px;
+}
+
+.theme-laushu .laushu-overview-hero {
+  max-width: var(--laushu-content-max);
+  margin: 40px auto 0;
+  border-radius: 20px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.theme-laushu .laushu-overview-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .laushu-summary-grid,
+.theme-laushu .laushu-problem-grid,
+.theme-laushu .laushu-stakeholder-grid,
+.theme-laushu .laushu-usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: var(--laushu-content-max);
+  margin: 40px auto 0;
+}
+
+.theme-laushu .laushu-stakeholder-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.theme-laushu .laushu-info-card {
+  min-height: 180px;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-info-card>span {
+  display: inline-flex;
+  margin-bottom: 18px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-600);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.theme-laushu .laushu-info-card h4 {
+  margin: 0 0 12px;
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--laushu-tertiary-700);
+}
+
+.theme-laushu .laushu-info-card p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.theme-laushu .laushu-info-card--illustrated {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.theme-laushu .laushu-info-card > .laushu-info-card-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 132px;
+  margin-bottom: 18px;
+  padding: 0;
+  border-radius: 999px;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-info-card-art img {
+  width: 84px;
+  height: auto;
+  max-height: 84px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.theme-laushu .laushu-form-card {
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-form-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .laushu-form-card figcaption {
+  margin-top: 16px;
+  color: var(--laushu-tertiary-500);
+  font-size: var(--fs-h4);
+  line-height: 1.33;
+  font-weight: 700;
+  text-align: center;
+}
+
+.theme-laushu .laushu-process-grid {
+  display: grid;
+  gap: 48px;
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-article {
+  max-width: 760px;
+}
+
+.theme-laushu .laushu-article h3,
+.theme-laushu .laushu-flow-group h3 {
+  margin: 0 0 16px;
+  font-size: var(--fs-h3);
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-kicker {
+  margin: -6px 0 18px;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--laushu-primary-500);
+}
+
+/* Figma 風格：section 標題下的描述句副標 */
+.theme-laushu .laushu-section-lede {
+  max-width: var(--laushu-content-max);
+  margin: -8px auto 40px;
+  font-size: var(--fs-h3);
+  line-height: 1.4;
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+/* Figma 風格：小節標題的數字前綴（01 / …） */
+.theme-laushu .laushu-article-num {
+  color: var(--laushu-primary-500);
+  font-weight: 800;
+}
+
+/* Figma 風格 section 標題：眉標 + 論點句（對齊 Figma node 2797:1521） */
+.theme-laushu .laushu-head-eyebrow {
+  margin: 0 0 12px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--laushu-primary-500);
+}
+
+.theme-laushu .laushu-head-title {
+  margin: 0 0 24px;
+  max-width: 720px;
+  font-size: var(--fs-h2);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--laushu-primary-700);
+}
+
+/* 專案總覽：論點段落（取代舊的紫底框） */
+.theme-laushu .laushu-overview-lead {
+  max-width: var(--laushu-content-max);
+  margin: 0 auto 40px;
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* 專案總覽 3 張卡片：Figma 漸層紫底 + 淺陰影 */
+.theme-laushu .laushu-overview-grid .laushu-info-card {
+  box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-overview-grid .laushu-info-card:nth-child(1) {
+  background: #fbf9ff;
+}
+
+.theme-laushu .laushu-overview-grid .laushu-info-card:nth-child(2) {
+  background: #f5eeff;
+}
+
+.theme-laushu .laushu-overview-grid .laushu-info-card:nth-child(3) {
+  background: #e6e2ff;
+}
+
+.theme-laushu .laushu-problem-define-title {
+  margin: 12px 0 40px;
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+  font-weight: 800;
+  color: #4852c3;
+}
+
+.theme-laushu .laushu-problem-pill {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-600);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.theme-laushu .laushu-problem-grid .laushu-info-card {
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-problem-grid .laushu-info-card>span {
+  background: #f5eeff;
+  line-height: 18px;
+}
+
+.theme-laushu .laushu-problem-cards-title {
+  max-width: var(--laushu-content-max);
+  margin: 40px auto 0;
+  font-size: var(--fs-h3);
+  line-height: 1.35;
+  font-weight: 800;
+  color: #4852c3;
+}
+
+.theme-laushu .laushu-copy {
+  color: var(--text-body);
+  font-size: var(--fs-body);
+  line-height: 1.8;
+}
+
+.theme-laushu .laushu-copy p,
+.theme-laushu .laushu-copy ul,
+.theme-laushu .laushu-copy ol {
+  margin: 0;
+}
+
+.theme-laushu .laushu-copy p+ul,
+.theme-laushu .laushu-copy p+ol {
+  margin-top: 16px;
+}
+
+.theme-laushu .laushu-copy ul+p,
+.theme-laushu .laushu-copy ol+p,
+.theme-laushu .laushu-copy p+.laushu-image-frame {
+  margin-top: 24px;
+}
+
+.theme-laushu .laushu-copy ul,
+.theme-laushu .laushu-copy ol {
+  padding-left: 1.35em;
+}
+
+.theme-laushu .laushu-copy li+li {
+  margin-top: 8px;
+}
+
+.theme-laushu .laushu-image-frame {
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-image-frame--plain,
+.theme-laushu .laushu-image-frame--flush {
+  box-shadow: none;
+}
+
+.theme-laushu .laushu-image-frame--wide {
+  max-width: 980px;
+}
+
+.theme-laushu .laushu-image-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .laushu-research-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.theme-laushu .laushu-image-grid {
+  display: grid;
+  gap: 24px;
+  max-width: 980px;
+}
+
+.theme-laushu .laushu-persona {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: var(--laushu-primary-100);
+}
+
+.theme-laushu .laushu-persona strong,
+.theme-laushu .laushu-persona span {
+  display: block;
+}
+
+.theme-laushu .laushu-persona strong {
+  margin-bottom: 8px;
+  color: var(--laushu-primary-700);
+  font-size: var(--fs-h4);
+}
+
+.theme-laushu .laushu-persona span {
+  margin-bottom: 12px;
+  color: var(--laushu-tertiary-500);
+  font-size: var(--fs-sm);
+}
+
+.theme-laushu .laushu-persona p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.theme-laushu .laushu-flow-visuals {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.theme-laushu .laushu-flow-group {
+  display: grid;
+  gap: 24px;
+}
+
+.theme-laushu .laushu-iteration {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-iteration p {
+  margin: 0;
+  padding-left: 18px;
+  border-left: 4px solid var(--laushu-primary-500);
+  color: var(--laushu-tertiary-700);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  font-weight: 600;
+}
+
+.theme-laushu .laushu-demo-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: var(--laushu-content-max);
+  margin: 24px auto 0;
+}
+
+.theme-laushu .laushu-demo-section .laushu-head {
+  max-width: var(--laushu-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-demo-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-demo-card {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(360px, 2fr);
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-demo-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--laushu-tertiary-700);
+}
+
+.theme-laushu .laushu-demo-meta {
+  position: absolute;
+  inset: 14px 14px auto 14px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+.theme-laushu .laushu-demo-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--laushu-tertiary-700);
+  object-fit: cover;
+}
+
+.theme-laushu .laushu-demo-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(28px, 3vw, 68px);
+  min-width: 0;
+}
+
+.theme-laushu .laushu-demo-copy h3 {
+  margin: 0 0 12px;
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-demo-copy p {
+  margin: 0;
+  color: #5d6674;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+.theme-laushu .laushu-learning-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: var(--laushu-content-max);
+  margin: 24px auto 0;
+  align-items: stretch;
+}
+
+.theme-laushu .laushu-learning-section {
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-learning-section .laushu-head {
+  max-width: var(--laushu-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-learning-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-learning-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 33px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: linear-gradient(121deg, var(--laushu-primary-100) 0%, var(--laushu-tertiary-100) 100%);
+}
+
+.theme-laushu .laushu-learning-num {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-600);
+  font-size: var(--fs-xs);
+  line-height: 18px;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-learning-title {
+  margin: 0;
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  line-height: 1.8;
+  color: var(--laushu-tertiary-700);
+}
+
+.theme-laushu .laushu-learning-card p {
+  margin: 0;
+  padding-top: 4px;
+  color: #1f2933;
+  font-size: var(--fs-sm);
+  line-height: 2.05;
+}
+
+@media (max-width: 1199px) {
+  .theme-laushu .laushu-stakeholder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .theme-laushu .laushu-overview-layout,
+  .theme-laushu .laushu-problem-layout,
+  .theme-laushu .laushu-research-grid,
+  .theme-laushu .laushu-persona,
+  .theme-laushu .laushu-flow-visuals,
+  .theme-laushu .laushu-iteration {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-summary-grid,
+  .theme-laushu .laushu-problem-grid,
+  .theme-laushu .laushu-usecase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-learning-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-hero-cover {
+    height: 420px;
+  }
+
+  .theme-laushu .laushu-hero-cover img {
+    object-position: center top;
+  }
+
+  .theme-laushu .laushu-stakeholder-grid,
+  .theme-laushu .laushu-demo-list {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-info-card {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .theme-laushu .laushu-form-card,
+  .theme-laushu .laushu-persona,
+  .theme-laushu .laushu-iteration,
+  .theme-laushu .laushu-learning-card {
+    padding: 20px;
+  }
+}
+
+/* ───────────────────────── v2：新版 8 段結構新增樣式 ───────────────────────── */
+
+/* 設計迭代 Before/After board */
+.theme-laushu .laushu-iter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 952px;
+  margin: 8px auto 0;
+}
+
+.theme-laushu .laushu-iter-board {
+  padding: 28px;
+  border: 1px solid #d5dfec;
+  border-radius: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.theme-laushu .laushu-iter-head {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.theme-laushu .laushu-iter-badge {
+  flex: 0 0 95px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: #4852c3;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.theme-laushu .laushu-iter-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+  color: #241b31;
+}
+
+.theme-laushu .laushu-iter-body {
+  display: grid;
+  grid-template-columns: 98px minmax(0, 1fr);
+  gap: 24px;
+}
+
+.theme-laushu .laushu-iter-label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 23px;
+  color: #5d6674;
+}
+
+.theme-laushu .laushu-iter-paras {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  font-size: 15px;
+  line-height: 23px;
+  color: #5d6674;
+}
+
+.theme-laushu .laushu-iter-paras p {
+  margin: 0;
+}
+
+.theme-laushu .laushu-iter-compare {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.theme-laushu .laushu-iter-frame {
+  position: relative;
+  align-self: stretch;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #d8deec;
+  border-radius: 16px;
+  background: #fbf9ff;
+}
+
+.theme-laushu .laushu-iter-frame figcaption {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: linear-gradient(96deg, #8d96f9 0%, rgba(255, 255, 255, 0) 54%);
+  color: #241b31;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 31.5px;
+  letter-spacing: -0.44px;
+}
+
+.theme-laushu .laushu-iter-media {
+  display: flex;
+  min-height: calc(100% - 64px);
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.theme-laushu .laushu-iter-card {
+  display: block;
+  width: 100%;
+}
+
+.theme-laushu .laushu-iter-card .cs-zoomable-image-media {
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .laushu-iter-arrow {
+  position: relative;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 48px;
+}
+
+.theme-laushu .laushu-iter-arrow::before {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  background: #6f56bd;
+  content: "";
+  transform: translateY(-50%);
+}
+
+.theme-laushu .laushu-iter-arrow::after {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-top: 3px solid #6f56bd;
+  border-right: 3px solid #6f56bd;
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 1023px) {
+  .theme-laushu .laushu-iter-body {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-iter-board {
+    padding: 20px;
+  }
+
+  .theme-laushu .laushu-iter-compare {
+    flex-direction: column;
+  }
+
+  .theme-laushu .laushu-iter-frame {
+    width: 100%;
+  }
+
+  .theme-laushu .laushu-iter-arrow {
+    height: 32px;
+    transform: rotate(90deg);
+  }
+
+  .theme-laushu .laushu-iter-title {
+    font-size: 1.2rem;
+  }
+
+  .theme-laushu .laushu-iter-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .theme-laushu .laushu-iter-badge {
+    flex-basis: auto;
+  }
+}
+
+/* 任務測試流程圖（HTML node-flow，手機橫向捲動） */
+.theme-laushu .laushu-fc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 8px 0 40px;
+}
+
+.theme-laushu .laushu-fc-figure {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 18px;
+  background: var(--laushu-primary-100);
+}
+
+.theme-laushu .laushu-fc-cap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.theme-laushu .laushu-fc-badge {
+  flex: none;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--laushu-primary-500);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.theme-laushu .laushu-fc-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-fc-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.theme-laushu .laushu-task-flow-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.theme-laushu .laushu-task-flow-svg--one {
+  min-width: 1000px;
+}
+
+.theme-laushu .laushu-task-flow-svg--two {
+  min-width: 950px;
+}
+
+.theme-laushu .laushu-task-flow-svg--three {
+  min-width: 1900px;
+}
+
+.theme-laushu .laushu-task-connector {
+  fill: none;
+  stroke: #b8b8b8;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-laushu .laushu-task-node-copy {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #241b31;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.theme-laushu .laushu-task-edge-label {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #5d6674;
+  font-size: 17px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* SVG 流程圖容器 */
+.theme-laushu .laushu-diagram {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.theme-laushu .laushu-flow-svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+}
+
+.theme-laushu .laushu-flow-node-label {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-flow-edge-label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Process / Understand / Converge / Iterate 段內容垂直間距（僅設上邊距，水平對齊維持各自規則） */
+.theme-laushu .laushu-process-section > .laushu-article,
+.theme-laushu .laushu-process-section > .laushu-stakeholder-grid,
+.theme-laushu .laushu-process-section > .laushu-diagram,
+.theme-laushu .laushu-process-section > .laushu-table-wrap,
+.theme-laushu .laushu-process-section > .laushu-survey-flow,
+.theme-laushu .laushu-process-section > .laushu-guide-grid,
+.theme-laushu .laushu-process-section > .laushu-persona-list,
+.theme-laushu .laushu-process-section > .laushu-journey,
+.theme-laushu .laushu-process-section > .laushu-flow-group,
+.theme-laushu .laushu-process-section > .laushu-usecase-grid {
+  margin-top: 44px;
+}
+
+.theme-laushu .laushu-understand-section {
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-understand-section .laushu-head {
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-understand-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-understand-section > .laushu-article,
+.theme-laushu .laushu-understand-section > .laushu-stakeholder-grid,
+.theme-laushu .laushu-understand-section > .laushu-diagram,
+.theme-laushu .laushu-understand-section > .laushu-table-wrap,
+.theme-laushu .laushu-understand-section > .laushu-survey-flow,
+.theme-laushu .laushu-understand-section > .laushu-guide-grid,
+.theme-laushu .laushu-understand-section > .laushu-persona-list {
+  margin-top: 40px;
+}
+
+.theme-laushu .laushu-understand-section .laushu-article {
+  max-width: var(--laushu-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-understand-section .laushu-article h3 {
+  color: #4852c3;
+}
+
+.theme-laushu .laushu-understand-section .laushu-article-num {
+  color: inherit;
+}
+
+.theme-laushu .laushu-understand-section .laushu-copy {
+  color: var(--text-body);
+}
+
+.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .laushu-info-card {
+  min-height: 251px;
+  padding: 25px;
+  background: #fbf9ff;
+  box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .laushu-info-card > span {
+  line-height: 18px;
+}
+
+/* 研究策略表格 */
+.theme-laushu .laushu-table-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.theme-laushu .laushu-research-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--fs-sm);
+}
+
+.theme-laushu .laushu-research-table th,
+.theme-laushu .laushu-research-table td {
+  border: 1px solid var(--laushu-line);
+  padding: 14px 16px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.theme-laushu .laushu-research-table thead th {
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-700);
+  font-weight: 800;
+  text-align: center;
+}
+
+.theme-laushu .laushu-research-table thead th.laushu-th-corner {
+  background: var(--laushu-tertiary-200);
+}
+
+.theme-laushu .laushu-research-table tbody th {
+  width: 120px;
+  white-space: nowrap;
+  background: var(--laushu-tertiary-100);
+  color: var(--laushu-tertiary-700);
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-research-table td {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.theme-laushu .laushu-research-table td ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.theme-laushu .laushu-research-table td li + li {
+  margin-top: 6px;
+}
+
+.theme-laushu .laushu-understand-section .laushu-table-wrap {
+  max-width: var(--laushu-content-max);
+}
+
+.theme-laushu .laushu-understand-section .laushu-research-table {
+  min-width: 952px;
+}
+
+.theme-laushu .laushu-understand-section .laushu-research-table th,
+.theme-laushu .laushu-understand-section .laushu-research-table td {
+  padding: 15px 16px;
+}
+
+.theme-laushu .laushu-understand-section .laushu-research-table thead th {
+  height: 51px;
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-understand-section .laushu-research-table thead th.laushu-th-corner {
+  background: var(--laushu-tertiary-200);
+  color: var(--laushu-tertiary-700);
+}
+
+/* 問卷／訪談結構流程 */
+.theme-laushu .laushu-survey-flow {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(0, 1.5fr) minmax(150px, 0.8fr);
+  gap: 24px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-survey-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 28px 20px;
+  border-radius: 20px;
+  text-align: center;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-survey-node strong {
+  font-size: var(--fs-h4);
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-survey-node span {
+  font-size: var(--fs-sm);
+  color: var(--laushu-tertiary-500);
+}
+
+.theme-laushu .laushu-survey-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-laushu .laushu-survey-arrow {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+}
+
+.theme-laushu .laushu-survey-note {
+  text-align: center;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.theme-laushu .laushu-survey-note p {
+  margin: 0;
+}
+
+.theme-laushu .laushu-understand-section .laushu-survey-flow {
+  max-width: var(--laushu-content-max);
+  grid-template-columns: minmax(180px, 0.8fr) minmax(320px, 1.5fr) minmax(180px, 0.8fr);
+}
+
+.theme-laushu .laushu-understand-section .laushu-survey-node {
+  min-height: 137px;
+  border: 0;
+  border-radius: 20px;
+  background: #f5eeff;
+}
+
+.theme-laushu .laushu-understand-section .laushu-survey-node strong {
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-understand-section .laushu-survey-node span {
+  color: var(--laushu-tertiary-500);
+}
+
+.theme-laushu .laushu-understand-section .laushu-survey-note {
+  color: #1f2933;
+}
+
+/* 訪談大綱三欄卡 */
+.theme-laushu .laushu-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-guide-card {
+  padding: 24px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-guide-card h4 {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--laushu-line);
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-guide-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.theme-laushu .laushu-guide-card li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-laushu .laushu-guide-card strong {
+  color: var(--laushu-tertiary-700);
+  font-size: var(--fs-body);
+}
+
+.theme-laushu .laushu-guide-card li span {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-card {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--laushu-line);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-card h4 {
+  margin: 0;
+  padding: 24px 28px;
+  border-bottom: 0;
+  background: linear-gradient(90deg, #decbff 0%, rgba(255, 255, 255, 0) 100%);
+  color: var(--laushu-primary-700);
+  font-size: var(--fs-h4);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-card ul {
+  padding: 24px 28px 28px;
+  gap: 0;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-card li {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: stretch;
+  padding-left: 0;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-card li:not(:last-child) .laushu-guide-item {
+  padding-bottom: 14px;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-dot {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: #9261ef;
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-line {
+  flex: 1 1 auto;
+  width: 1px;
+  margin: 12px 0 0;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-understand-section .laushu-guide-card li:last-child .laushu-guide-line {
+  display: none;
+}
+
+/* Persona 文字欄 + 三位受訪者整理板 */
+.theme-laushu .laushu-persona-tags {
+  margin-bottom: 12px;
+}
+
+.theme-laushu .laushu-persona-list {
+  display: grid;
+  gap: 24px;
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-persona .cs-zoomable-image {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.theme-laushu .laushu-persona .cs-zoomable-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona-list {
+  gap: 40px;
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona {
+  grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1fr);
+  gap: 24px;
+  padding: 25px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #fbf9ff;
+  box-shadow: none;
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona-copy {
+  align-self: center;
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona strong {
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona-tags {
+  color: var(--laushu-tertiary-500);
+}
+
+.theme-laushu .laushu-understand-section .laushu-persona p {
+  color: #5d6674;
+}
+
+/* 收斂與洞察：對齊 Figma node 2792:31609 */
+.theme-laushu .laushu-converge-section {
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-converge-section .laushu-head,
+.theme-laushu .laushu-converge-section .laushu-article {
+  max-width: var(--laushu-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-converge-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-converge-section > .laushu-article,
+.theme-laushu .laushu-converge-section > .laushu-journey,
+.theme-laushu .laushu-converge-section > .laushu-usecase-grid {
+  margin-top: 40px;
+}
+
+.theme-laushu .laushu-converge-section .laushu-article h3 {
+  color: #4852c3;
+}
+
+.theme-laushu .laushu-converge-section .laushu-article-num {
+  color: inherit;
+}
+
+.theme-laushu .laushu-converge-section .laushu-copy {
+  color: #1f2933;
+}
+
+.theme-laushu .laushu-converge-section .laushu-journey .cs-zoomable-image {
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card {
+  min-height: 284px;
+  padding: 25px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #fbf9ff;
+  box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card-art {
+  flex: none;
+  width: 132px;
+  height: 132px;
+  padding: 0;
+  background: var(--laushu-primary-200);
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card-art img {
+  width: 84px;
+  height: 84px;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card h4 {
+  margin-bottom: 12px;
+  color: var(--laushu-tertiary-700);
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+}
+
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card p {
+  max-width: 254px;
+  color: #5d6674;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* 測試與迭代：對齊 Figma node 2792:31682 */
+.theme-laushu .laushu-iterate-section {
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-iterate-section .laushu-head,
+.theme-laushu .laushu-iterate-section .laushu-article,
+.theme-laushu .laushu-iterate-section .laushu-fc-list,
+.theme-laushu .laushu-iterate-section .laushu-iter-list {
+  max-width: var(--laushu-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-iterate-section > .laushu-article,
+.theme-laushu .laushu-iterate-section > .laushu-fc-list,
+.theme-laushu .laushu-iterate-section > .laushu-iter-list {
+  margin-top: 40px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-article h3 {
+  color: #4852c3;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-article-num {
+  color: inherit;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-copy {
+  color: #1f2933;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-copy p,
+.theme-laushu .laushu-iterate-section .laushu-copy li {
+  line-height: 1.8;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-list {
+  gap: 40px;
+  margin-bottom: 0;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-figure {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-cap {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 25px 29px;
+  border: 1px solid #d8deec;
+  border-radius: 16px;
+  background: linear-gradient(162deg, #4852c3 3%, #d0b6f5 101%);
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-badge {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--laushu-primary-200);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  font-weight: 700;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-title {
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-fc-scroll {
+  padding: 28px;
+  border: 1px solid #d8deec;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-list {
+  gap: 40px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-board {
+  gap: 24px;
+  padding: 28px;
+  border: 1px solid #d5dfec;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-head {
+  gap: 24px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-badge {
+  width: fit-content;
+  padding: 9px 14px;
+  background: #4852c3;
+  font-size: var(--fs-sm);
+  line-height: 17px;
+  text-align: center;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-title {
+  color: var(--laushu-tertiary-700);
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-body {
+  grid-template-columns: 98px minmax(0, 1fr);
+  gap: 24px;
+  color: #5d6674;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-label {
+  color: #5d6674;
+  font-size: 15px;
+  line-height: 1.53;
+  font-weight: 800;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-paras {
+  gap: 23px;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-paras p {
+  color: #5d6674;
+  font-size: 15px;
+  line-height: 1.53;
+}
+
+.theme-laushu .laushu-iterate-section .laushu-iter-figure {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-iterate-section .laushu-fc-cap {
+    padding: 20px;
+  }
+
+  .theme-laushu .laushu-iterate-section .laushu-fc-title,
+  .theme-laushu .laushu-iterate-section .laushu-iter-title {
+    font-size: 20px;
+  }
+
+  .theme-laushu .laushu-iterate-section .laushu-iter-body {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .theme-laushu .laushu-iterate-section .laushu-iter-badge {
+    width: auto;
+  }
+}
+
+/* Journey 板（保留為可放大圖） */
+.theme-laushu .laushu-journey {
+  max-width: var(--laushu-content-max);
+  margin: 0 auto;
+}
+
+.theme-laushu .laushu-test-result {
+  max-width: var(--laushu-content-max);
+  margin: 24px auto 0;
+}
+
+.theme-laushu .laushu-journey figcaption {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--laushu-tertiary-500);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+/* ── 原型設計：沿用 advantech 連接線版面（主題化） ── */
+.theme-laushu .laushu-prototype-section {
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-prototype-section .laushu-head,
+.theme-laushu .laushu-prototype-section .laushu-proto-overview,
+.theme-laushu .laushu-proto-block {
+  max-width: var(--laushu-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.theme-laushu .laushu-prototype-section .laushu-head-title {
+  max-width: 952px;
+}
+
+.theme-laushu .laushu-proto-intro {
+  margin-top: 40px;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  max-width: var(--laushu-content-max);
+  color: #5d6674;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+.theme-laushu .laushu-prototype-section .laushu-proto-overview {
+  display: block;
+  margin: 0 auto;
+  margin-top: 40px;
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-prototype-section .laushu-proto-overview .cs-zoomable-image-media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .laushu-proto-block {
+  margin-top: 40px;
+}
+
+.theme-laushu .cs-sol-block {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.theme-laushu .cs-sol-fgroup {
+  display: contents;
+}
+
+.theme-laushu .cs-sol-fr {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.theme-laushu .cs-sol-fr-mid {
+  align-items: center;
+}
+
+.theme-laushu .cs-sol-fc {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--laushu-line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.theme-laushu .cs-sol-fchead {
+  padding: 24px 28px;
+  background: linear-gradient(257deg, rgba(255, 255, 255, 0) 1%, var(--laushu-primary-200) 63%);
+}
+
+.theme-laushu .cs-sol-fcbody {
+  padding: 24px 28px 28px;
+}
+
+.theme-laushu .cs-sol-ftitle {
+  margin: 0;
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--laushu-primary-700);
+}
+
+.theme-laushu .cs-sol-fsub {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: #5d6674;
+}
+
+.theme-laushu .cs-sol-fimg {
+  flex: 1 1 626px;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  background: #ffffff;
+}
+
+.theme-laushu .cs-sol-fimg .laushu-image-frame {
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.theme-laushu .cs-sol-fimg .cs-feature-zoom-trigger {
+  width: 100%;
+}
+
+.theme-laushu .cs-sol-fimg .cs-zoomable-image-media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.theme-laushu .cs-sol-fnote {
+  flex: 0 0 286px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  min-height: 98px;
+  padding: 25px;
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.theme-laushu .cs-sol-fnote > p {
+  margin: 0;
+  width: 236px;
+  max-width: 100%;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: #5d6674;
+}
+
+.theme-laushu .cs-sol-fhr {
+  width: 100%;
+  height: 1px;
+  margin: 0 0 40px;
+  background: var(--laushu-line);
+}
+
+.theme-laushu .cs-sol-fconn {
+  display: block;
+  width: 100%;
+  margin-top: -68px;
+  margin-bottom: -28px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.theme-laushu .cs-sol-fconn img {
+  display: block;
+  height: auto;
+}
+
+@media (max-width: 1280px) {
+  .theme-laushu .laushu-understand-section .laushu-guide-card h4 {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 1023px) {
+  .theme-laushu .laushu-guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .cs-sol-fr,
+  .theme-laushu .cs-sol-fr-mid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .theme-laushu .cs-sol-fc,
+  .theme-laushu .cs-sol-fnote {
+    flex: unset;
+    width: 100%;
+  }
+
+  .theme-laushu .cs-sol-fr-mid .cs-sol-fnote {
+    order: -1;
+  }
+
+  .theme-laushu .cs-sol-fconn {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .theme-laushu .laushu-demo-card {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-demo-video {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-survey-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-understand-section .laushu-survey-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-survey-arrow {
+    transform: rotate(90deg);
+  }
+}
