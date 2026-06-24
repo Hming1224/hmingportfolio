@@ -19,15 +19,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: var(--hm-space-xl);
   max-width: 720px;
-  animation: fadeUp 700ms 100ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: fadeUp 700ms 100ms var(--hm-ease-emphasized) both;
 }
 
 .hero-badge-shimmer-wrap {
   display: inline-flex;
   padding: 1.5px;
-  border-radius: 100px;
+  border-radius: var(--hm-radius-pill);
   background: conic-gradient(
     from var(--shimmer-angle),
     transparent 0%,
@@ -43,10 +43,10 @@
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: var(--hm-space-2xs);
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
   background: #f3f1ff;
-  border-radius: 100px;
+  border-radius: var(--hm-radius-pill);
   font-size: 14px;
   color: #161616;
   white-space: nowrap;
@@ -55,7 +55,7 @@
 .hero-title {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: var(--hm-space-lg);
 }
 
 .hero h1 {
@@ -126,7 +126,7 @@
 .hero-taglines {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   align-items: center;
   font-size: var(--fs-h1);
   font-weight: 600;
@@ -160,7 +160,7 @@
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--hm-space-2xs);
 }
 
 @keyframes float-y {
@@ -860,8 +860,8 @@
   opacity: 1;
   transform: translateY(0) scale(1) translateZ(0);
   transition:
-    opacity 950ms cubic-bezier(0.215, 0.61, 0.355, 1),
-    transform 950ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    opacity var(--hm-duration-reveal) var(--hm-ease-emphasized),
+    transform var(--hm-duration-reveal) var(--hm-ease-emphasized);
 }
 
 /* 尊重系統減少動態設定 */
@@ -902,7 +902,7 @@
   height: 100%;
   object-fit: cover;
   object-position: left top;
-  transition: transform 420ms ease;
+  transition: transform var(--hm-duration-slow) var(--hm-ease-standard);
 }
 
 .project-card:nth-child(3) .project-image,
@@ -919,7 +919,7 @@
   inset: 0;
   background: var(--ink);
   opacity: 0;
-  transition: opacity 260ms ease;
+  transition: opacity var(--hm-duration-base) var(--hm-ease-standard);
 }
 
 .project-info {
@@ -939,8 +939,8 @@
   opacity: 0;
   transform: translate(420px, -50%);
   transition:
-    opacity 260ms ease,
-    transform 360ms ease;
+    opacity var(--hm-duration-base) var(--hm-ease-standard),
+    transform var(--hm-duration-slow) var(--hm-ease-standard);
 }
 
 .project-card:hover .project-info,
@@ -1062,6 +1062,11 @@
 .tone-laushu .project-tags span {
   background: var(--tag-bg);
   color: var(--tag-text);
+}
+
+.project-empty-state {
+  margin-top: auto;
+  padding: 16px;
 }
 
 /* ============================================

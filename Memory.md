@@ -1,5 +1,12 @@
 # Project Memory
 
+## 2026-06-24 設計系統 token 補完與 dark mode 停用邊界
+
+- 新增主系統 token：`--hm-space-3xs` 到 `--hm-space-3xl`、`--hm-radius-sm/md/lg/pill/button`、`--hm-container`、`--hm-container-wide`、`--hm-grid-gutter`、`--hm-grid-gutter-lg`，並提供 `.hm-grid` 輕量 helper。新 code 優先吃 token，不直接散寫 16/24/32/48 或 8/12/16/999/200。
+- 設計系統頁與主系統骨架元件的 radius / spacing 應優先使用 `--hm-*`；案例頁 `cs-*` 允許局部例外，但不要把單頁特例反向擴散到全域。
+- 設計系統頁標題一律優先使用 `--fs-*`；一般骨架最大字級維持 `32px`，只有首頁 Hero 主標是刻意例外。
+- dark theme semantic token 保留，但目前網站預設停用。`app/layout.tsx` 不主動在 `<html>` 掛 `.dark` 或 `data-theme="dark"`；若未來重啟 dark mode，再從 theme 啟用流與 `ThemeToggle` 一起設計，不要讓 localStorage 舊值偷偷改變首屏。
+
 ## 2026-06-20 共用 Button component
 
 - 全站 CTA 統一使用 `components/ui/Button.tsx`；支援 `variant="primary|secondary"`、`size="sm|md|lg"`、站內 Link、頁內 anchor 與 native button。

@@ -1,0 +1,488 @@
+.ds-page {
+  background: var(--hm-paper);
+  color: var(--text-body);
+}
+
+.ds-shell {
+  width: min(var(--hm-container), calc(100% - 96px));
+  margin: 0 auto;
+}
+
+.ds-hero {
+  padding: 148px 0 56px;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--hm-purple-soft) 80%, white) 0%, transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--hm-surface) 65%, white) 0%, transparent 100%);
+}
+
+.ds-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.9fr);
+  gap: var(--hm-space-lg);
+  align-items: end;
+}
+
+.ds-eyebrow {
+  margin: 0 0 var(--hm-space-xs);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hm-purple);
+}
+
+.ds-hero-copy h1,
+.ds-cta h2 {
+  margin: 0;
+  font-size: clamp(36px, 5vw, 52px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--text-heading);
+}
+
+.ds-hero-description,
+.ds-cta p {
+  margin: var(--hm-space-sm) 0 0;
+  max-width: 760px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.ds-hero-actions,
+.ds-cta-actions,
+.ds-inline-actions,
+.ds-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-xs);
+}
+
+.ds-hero-actions {
+  margin-top: 28px;
+}
+
+.ds-anchor-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 22px;
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple);
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background var(--hm-duration-base) var(--hm-ease-out),
+    transform var(--hm-duration-base) var(--hm-ease-out),
+    box-shadow var(--hm-duration-base) var(--hm-ease-out);
+  box-shadow: var(--shadow-sm);
+}
+
+.ds-anchor-link:hover {
+  background: var(--hm-purple-hover);
+  transform: translateY(-1px);
+}
+
+.ds-anchor-link.is-secondary {
+  background: transparent;
+  color: var(--hm-ink);
+  border: 1px solid var(--hm-line-strong);
+  box-shadow: none;
+}
+
+.ds-anchor-link.is-secondary:hover {
+  background: var(--hm-purple-light);
+  border-color: color-mix(in srgb, var(--hm-purple) 25%, transparent);
+}
+
+.ds-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+}
+
+.ds-stat-card,
+.ds-soul-card,
+.ds-principle-card,
+.ds-foundation-card,
+.ds-component-card,
+.ds-narrative-card,
+.ds-method-card,
+.ds-roadmap-card,
+.ds-token-card,
+.ds-cta {
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: color-mix(in srgb, var(--hm-paper) 92%, white);
+  box-shadow: var(--shadow-sm);
+}
+
+.ds-stat-card {
+  padding: var(--hm-space-md);
+}
+
+.ds-stat-card strong {
+  display: block;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1;
+  color: var(--text-heading);
+}
+
+.ds-stat-card span {
+  display: block;
+  margin-top: var(--hm-space-2xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.ds-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+  padding: var(--hm-space-md) 0 96px;
+}
+
+.ds-toc {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: color-mix(in srgb, var(--hm-paper) 88%, white);
+}
+
+.ds-toc p {
+  margin: 0 0 var(--hm-space-xs);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.ds-toc nav {
+  display: grid;
+  gap: var(--hm-space-2xs);
+}
+
+.ds-toc a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.ds-toc a:hover {
+  color: var(--hm-purple);
+}
+
+.ds-content {
+  display: grid;
+  gap: var(--hm-space-lg);
+}
+
+.ds-section {
+  scroll-margin-top: 112px;
+}
+
+.ds-section-heading {
+  display: grid;
+  grid-template-columns: 40px auto 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: var(--hm-space-md);
+}
+
+.ds-section-heading span {
+  height: 1px;
+  background: var(--hm-line-strong);
+}
+
+.ds-section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 3.2vw, 32px);
+  line-height: 1.3;
+  color: var(--text-heading);
+}
+
+.ds-soul-card,
+.ds-method-card,
+.ds-cta {
+  padding: 28px;
+}
+
+.ds-soul-card h3,
+.ds-method-card h3,
+.ds-roadmap-head h3,
+.ds-token-toggle h3,
+.ds-component-card h3,
+.ds-foundation-card h3,
+.ds-narrative-card h3,
+.ds-principle-card h3,
+.ds-roadmap-item h4 {
+  margin: 0;
+  font-size: var(--fs-h4);
+  line-height: 1.4;
+  color: var(--text-heading);
+}
+
+.ds-soul-card p,
+.ds-method-card p,
+.ds-foundation-card p,
+.ds-narrative-card p,
+.ds-principle-card p,
+.ds-roadmap-item p,
+.ds-component-card-header p,
+.ds-token-toggle p,
+.ds-modal-body p {
+  margin: var(--hm-space-2xs) 0 0;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.ds-principles-grid,
+.ds-foundation-grid,
+.ds-playground-grid,
+.ds-narrative-grid,
+.ds-roadmap-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.ds-principles-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ds-principle-card,
+.ds-foundation-card,
+.ds-component-card,
+.ds-narrative-card {
+  padding: 24px;
+}
+
+.ds-principle-index {
+  margin: 0 0 16px;
+  color: var(--hm-purple);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.ds-foundation-grid,
+.ds-playground-grid,
+.ds-narrative-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ds-component-card-header {
+  margin-bottom: 18px;
+}
+
+.ds-form-grid,
+.ds-choice-grid,
+.ds-feedback-stack,
+.ds-skeleton-copy,
+.ds-token-groups,
+.ds-roadmap-list,
+.ds-modal-body {
+  display: grid;
+  gap: 14px;
+}
+
+.ds-form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.ds-form-field > span {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.ds-skeleton-layout {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.ds-skeleton-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.ds-skeleton-copy {
+  flex: 1;
+}
+
+.ds-skeleton-line {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+}
+
+.ds-skeleton-line-lg {
+  width: 78%;
+}
+
+.ds-skeleton-line-sm {
+  width: 52%;
+}
+
+.ds-token-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 24px;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.ds-token-toggle > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--hm-purple);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ds-token-toggle .is-rotated {
+  transform: rotate(180deg);
+}
+
+.ds-token-table-wrap {
+  padding: 0 24px 24px;
+  overflow-x: auto;
+}
+
+.ds-token-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ds-token-table th,
+.ds-token-table td {
+  padding: 14px 0;
+  border-top: 1px solid var(--hm-line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.ds-token-table th {
+  color: var(--text-heading);
+  font-size: var(--fs-sm);
+}
+
+.ds-token-table td {
+  color: var(--text-secondary);
+}
+
+.ds-roadmap-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ds-roadmap-card {
+  padding: 24px;
+}
+
+.ds-roadmap-head {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--hm-line);
+}
+
+.ds-roadmap-head p {
+  margin: 0 0 6px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--hm-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ds-roadmap-item strong {
+  color: var(--text-heading);
+}
+
+.ds-cta {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+}
+
+.ds-cta-actions {
+  justify-content: flex-end;
+}
+
+.ds-modal-body {
+  margin-top: 20px;
+}
+
+@media (max-width: 1023px) {
+  .ds-shell {
+    width: min(100%, calc(100% - 48px));
+  }
+
+  .ds-hero-inner,
+  .ds-layout,
+  .ds-roadmap-grid,
+  .ds-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .ds-layout {
+    gap: 24px;
+  }
+
+  .ds-toc {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .ds-hero {
+    padding-top: 128px;
+  }
+
+  .ds-shell {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .ds-principles-grid,
+  .ds-foundation-grid,
+  .ds-playground-grid,
+  .ds-narrative-grid,
+  .ds-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ds-section-heading {
+    grid-template-columns: 24px auto 1fr;
+  }
+
+  .ds-token-toggle {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ds-hero-copy h1,
+  .ds-cta h2 {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .ds-hero-description,
+  .ds-cta p {
+    font-size: 16px;
+  }
+}

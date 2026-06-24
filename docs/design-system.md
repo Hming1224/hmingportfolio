@@ -242,22 +242,31 @@ font-family: var(--font-space-grotesk), sans-serif;
 
 圓角分兩種用途——**pill（膠囊）** 與 **卡片角**。
 
-### 4.1 Pill（完全圓的兩端）
-| 用途 | 值 | 對應 |
+### 4.1 Token 對應（已 token 化）
+| Token | 值 | 用途 |
 |---|---|---|
-| **按鈕** | `200px` | `Button` / `.ds-button` |
-| **小 pill / 標籤 / badge** | `999px`（全圓）| `.cursor-tag-label`、`.project-tabs`、`.educator-badge`、各 `cs-*` pill/badge |
+| `--hm-radius-sm` | `8px` | 小元件、標籤、小 badge |
+| `--hm-radius-md` | `12px` | 預設卡片、輸入框、多數一般卡片 |
+| `--hm-radius-lg` | `16px` | 較大卡片 / 面板 / 大板塊 |
+| `--hm-radius-pill` | `999px` | 全圓 pill、badge、tag |
+| `--hm-radius-button` | `200px` | CTA 按鈕專用 pill |
 
-原則：**按鈕一律 200px，標籤 / badge 一律 999px**；純裝飾元件可按視覺比例保留局部值。
+### 4.2 Pill（完全圓的兩端）
+| 用途 | Token / 值 | 對應 |
+|---|---|---|
+| **按鈕** | `--hm-radius-button` / `200px` | `Button` / `.ds-button` |
+| **小 pill / 標籤 / badge** | `--hm-radius-pill` / `999px` | `.cursor-tag-label`、`.project-tabs`、`.educator-badge`、各 `cs-*` pill/badge |
 
-### 4.2 卡片角
-| 值 | 用途 |
+原則：**按鈕一律用 `--hm-radius-button`，標籤 / badge 一律用 `--hm-radius-pill`**；純裝飾元件可按視覺比例保留局部例外。
+
+### 4.3 卡片角
+| Token / 值 | 用途 |
 |---|---|
-| `12px` | **預設卡片圓角**：專案卡、輸入框、多數卡片 |
-| `16px` | 較大卡片 / 面板：Contact card、skills panel、education card、educator card、案例頁大板塊 |
-| `8px` | 小元件、標籤 |
+| `--hm-radius-md` / `12px` | **預設卡片圓角**：專案卡、輸入框、多數卡片 |
+| `--hm-radius-lg` / `16px` | 較大卡片 / 面板：Contact card、skills panel、education card、educator card、案例頁大板塊 |
+| `--hm-radius-sm` / `8px` | 小元件、標籤 |
 
-卡片角已收斂成「小 8 / 預設 12 / 大 16」三階；`cs-*` 圖表中的局部小面板可依單頁版面保留例外。
+卡片角已收斂成「小 8 / 預設 12 / 大 16」三階；主系統元件優先使用 `--hm-radius-*`，`cs-*` 圖表中的局部小面板可依單頁版面保留例外。
 
 ---
 
@@ -374,11 +383,13 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 
 ### 6.1 頁面橫向邊距（`--page-gutter`）
 ```css
---page-gutter: max(clamp(48px, 8vw, 120px), calc((100vw - 1920px) / 2)); /* 一般內容 */
---page-gutter: max(240px, calc((100vw - 1920px) / 2));                  /* 案例頁 ≥1301px，保留 TOC 空間 */
---page-gutter: clamp(20px, 6vw, 48px);                                  /* ≤768px，避免內容被壓太窄 */
+--hm-container: 1440px;
+--hm-container-wide: 1920px;
+--page-gutter: max(clamp(48px, 8vw, 120px), calc((100vw - var(--hm-container-wide)) / 2)); /* 一般內容 */
+--page-gutter: max(240px, calc((100vw - var(--hm-container-wide)) / 2));                    /* 案例頁 ≥1301px，保留 TOC 空間 */
+--page-gutter: clamp(20px, 6vw, 48px);                                                        /* ≤768px，避免內容被壓太窄 */
 ```
-一般內容 section 都用 `var(--page-gutter)`，最大內容寬 1920px；navbar / footer 不算內容，navbar 維持自己的貼邊公式 `clamp(48px, 8vw, 120px)`。案例頁在 TOC 會顯示的桌機寬度，內容左右至少保留 240px 給 TOC。未來新增頁面不要另外寫 1200px / 1440px 內容上限，除非是文字段落、表單欄位、TOC 這種局部可讀性限制。
+一般內容 section 都用 `var(--page-gutter)`，核心內容容器以 `--hm-container` 為主，超寬畫面則由 `--hm-container-wide` 與 `--page-gutter` 一起限制。navbar / footer 不算內容，navbar 維持自己的貼邊公式 `clamp(48px, 8vw, 120px)`。案例頁在 TOC 會顯示的桌機寬度，內容左右至少保留 240px 給 TOC。未來新增頁面不要另外寫 1200px / 1440px 內容上限，除非是文字段落、表單欄位、TOC 這種局部可讀性限制。
 
 ### 6.2 Breakpoints（真實斷點，已對齊 code）
 > ⚠️ 舊文件寫「≤809 手機 / 810–1023 平板」是錯的——code 沒有 809/810。
@@ -392,39 +403,60 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 | ↳ 小手機微調 | `≤640` / `≤440` / `≤360` | 字級再降（≤360 整組 `--fs` 再縮）、布局微調 |
 | 矮螢幕特例 | `max-width:768 and max-height:799` | 隱藏 Hero 底部裝飾，避免擠壓（如 iPhone SE）|
 
-### 6.3 間距系統（以 8px 為基準）
-| 值 | 用途 |
-|---|---|
-| `16px` | 標題子元素間距、project info 內欄間距 |
-| `24px` | 卡片欄間距、表單欄位間距、行動版卡片間距 |
-| `32px` | Section heading 與周邊 gap |
-| `40px` | Experience 卡片列表 gap |
-| `48px` | 大型 Section 內距、卡片 padding（桌機）、`cs-section` 上下 padding |
-| `64px` | About window body 欄距 |
-| `80px` | Hero 圖文橫向 gap（行動版）、導覽列高度補償 |
+### 6.3 間距系統（以 8px 為基準，已 token 化）
+| Token | 值 | 用途 |
+|---|---|---|
+| `--hm-space-3xs` | `4px` | 細節間距、細小 badge 內距 |
+| `--hm-space-2xs` | `8px` | 小間距、標籤 / icon 與文字間距 |
+| `--hm-space-xs` | `12px` | Hero badge、表頭下緣、小群組 gap |
+| `--hm-space-sm` | `16px` | 標題子元素間距、project info 內欄間距 |
+| `--hm-space-md` | `24px` | 卡片欄間距、表單欄位間距、行動版卡片間距 |
+| `--hm-space-lg` | `32px` | Section heading 與周邊 gap |
+| `--hm-space-xl` | `48px` | 大型 Section 內距、卡片 padding（桌機）、`cs-section` 上下 padding |
+| `--hm-space-2xl` | `64px` | About window body 欄距 |
+| `--hm-space-3xl` | `80px` | Hero 圖文橫向 gap（行動版）、導覽列高度補償 |
+
+`40px`（如 experience 卡片列表 gap）目前視為已知局部例外，可保留於特定版面，不強迫塞入主 token 尺。
 
 **允許的非 8 倍數例外（刻意的，不算魔術數字）：**
 | 值 | 合理用途 |
 |---|---|
-| `4px` / `12px` | 細節間距、標籤內距、badge 間距 |
 | `10px` | 細節微調 |
 | `22px 16px 8px` | 輸入框浮動 label 專用內距（見 5.4）|
 | `28px 24px` | skill-category-card padding |
 
-> ✅ 已收斂（2026-06-08）：原散落的 `14/18/6/7/9/26/44/84px` **容器排版間距**（padding/margin/gap）已往系統值靠（多數 →16px、`7/6/9→8`、`26→24`、`44→48`、`84→80`）。**例外保留**：Hero/About 裝飾元件內部間距與絕對定位（如 `.cursor-tag`、`.growth-*`、`.menu-button` 漢堡幾何）、`::before` 自訂項目符號的光學對齊 `margin-top:7px`、以及 `clamp()` 響應式值——這些是視覺/幾何微調，不算 8px 系統間距，刻意不動。
+> ✅ 已收斂（2026-06-08）：原散落的 `14/18/6/7/9/26/44/84px` **容器排版間距**（padding/margin/gap）已往系統值靠（多數 →16px、`7/6/9→8`、`26→24`、`44→48`、`84→80`）。主系統新 code 一律優先用 `--hm-space-*`；**例外保留**：Hero/About 裝飾元件內部間距與絕對定位（如 `.cursor-tag`、`.growth-*`、`.menu-button` 漢堡幾何）、`::before` 自訂項目符號的光學對齊 `margin-top:7px`、以及 `clamp()` 響應式值——這些是視覺/幾何微調，不算 8px 系統間距，刻意不動。
 
-### 6.4 Section 頂部 padding 特例
+### 6.4 Grid / Layout
+
+```css
+--hm-grid-gutter: 24px;
+--hm-grid-gutter-lg: 32px;
+
+.hm-grid {
+  display: grid;
+  gap: var(--hm-grid-gutter);
+  grid-template-columns: repeat(auto-fit, minmax(var(--hm-grid-min, 240px), 1fr));
+}
+```
+
+- `--hm-container` / `--hm-container-wide` 定義內容最大寬與 full-bleed 上限。
+- `--hm-grid-gutter` 是預設欄間距；需要更寬鬆的展示區可改用 `--hm-grid-gutter-lg`。
+- `.hm-grid` 是輕量共用 helper，適合 token 卡、能力卡、摘要卡等 auto-fit 版面，不強制導入 24 欄系統。
+- 案例頁若需要更高度客製的 `cs-*` 單頁 layout，可保留局部 grid，不必硬套 helper。
+
+### 6.5 Section 頂部 padding 特例
 | Section | 桌機頂部 | 手機頂部 | 原因 |
 |---|---|---|---|
 | Hero | `112px` | `140–180px` | 蓋過固定導覽列（80px）並留視覺呼吸 |
 | About | `48px`（含 80px 補償）| `48px` | 標準 section |
 | Contact | — | — | 無頂部 padding，由 Hero image 佔滿 |
 
-### 6.5 最大寬度
+### 6.6 最大寬度
 - 一般頁面內容線：`--page-gutter` 控制，最大內容寬 1920px。
 - 局部可讀性限制：Hero copy `max-width: 820px`；Intro 段落 `780–860px`；表單欄位可依互動可讀性限制寬度。
 
-### 6.6 案例頁 TOC 標題與分隔線規範
+### 6.7 案例頁 TOC 標題與分隔線規範
 - **核心規則**：所有透過 Table of Contents (TOC) 導覽點擊進入的案例頁大標題（即對應於 TOC `id` 錨點的區塊主標題，例如 `.cs-heading`、`.ca-h2` 等），其下方**必須緊鄰一條水平分隔線**（`.cs-divider` 或其專案/主題變體）。
 - **實作方式**：
   - **標準區塊**：使用 `CaseSection` 元件，其內部會自動渲染 `CaseHeading`（內含 `h2` 與 `.cs-divider` / `.cs-divider-white`）。
@@ -551,3 +583,60 @@ About 頁技能卡是「元件自帶區域 token」的範本：
   - 統計並列出 `public/` 與專案內體積最大的前 10 個大檔案，監管儲存庫肥大。
   - 稽核 CSS 隔離性（如 case study 是否有確實被 `.theme-<slug>` 包裹限制）。
   - 追蹤專案擴充點。
+
+---
+
+## 13. Token v2：`--hm-*` 單一前綴
+
+- 新 code 一律使用 `--hm-*`。
+- `--paper`、`--ink`、`--purple` 等舊名只保留為 `@deprecated` alias，遷移方向為 `--hm-paper`、`--hm-ink`、`--hm-purple`。
+- Primitive 色階為 `--hm-{purple|blue|green|peach|brown}-50` 到 `-900`；元件不可直接消費 primitive，必須透過 semantic token。
+- Status semantic：`--hm-success`、`--hm-warning`、`--hm-error`、`--hm-info`，各自搭配 `-soft` 背景。
+- Spacing：`--hm-space-3xs` 到 `--hm-space-3xl`，以 8px 基準建立主系統間距尺；新 code 優先使用 token，不直接散寫 16/24/32/48。
+- Radius：`--hm-radius-sm/md/lg/pill/button` 對應 8 / 12 / 16 / 999 / 200；主系統元件 radius 一律優先吃 token。
+- Layout / Grid：`--hm-container`、`--hm-container-wide`、`--hm-grid-gutter`、`--hm-grid-gutter-lg`，搭配 `.hm-grid` helper 使用。
+- Z-index：base `0`、sticky `10`、navbar `100`、overlay `200`、modal `300`、toast `400`。
+- Breakpoint 文件值：mobile `768px`、tablet `1024px`、desktop `1440px`；JS 單一來源為 `lib/breakpoints.ts`。CSS custom property 無法直接用於 `@media`，不可假裝能動態取代斷點。
+
+## 14. Icon System
+
+- 唯一 icon library：`lucide-react`。
+- Inline icon 預設 `16px`；standalone icon 預設 `20px`。
+- 一般 `strokeWidth={1.5}`；需要更強視覺權重時用 `2`。
+- 新元件禁止手寫 inline SVG。既有案例頁的專案專屬 SVG 圖表不在此限，因其屬內容資產，不是 UI icon。
+- Icon-only button 必須有可讀的 `aria-label`。
+
+## 15. Motion System
+
+| Token | 值 | 用途 |
+|---|---:|---|
+| `--hm-duration-fast` | `180ms` | hover、focus、顏色 |
+| `--hm-duration-base` | `260ms` | navbar、toast、一般狀態 |
+| `--hm-duration-slow` | `420ms` | card image / panel |
+| `--hm-duration-enter` | `600ms` | skeleton / 入場 |
+| `--hm-duration-reveal` | `950ms` | 首頁專案卡 reveal |
+
+所有動畫需支援 `prefers-reduced-motion: reduce`。案例頁避免新增主動動畫。
+
+## 16. Theme、Status 與資料視覺化
+
+- Dark theme token 保留，但目前站點預設停用，不主動在 `<html>` 掛 `.dark` 或 `data-theme="dark"`。`ThemeToggle` 可保留作未來功能，不影響現況。
+- Dark semantic 至少覆蓋 paper、surface、ink、muted、line 與文字階梯；案例頁品牌色可維持局部 scope。
+- 圖表依序使用 `--hm-chart-1` 到 `--hm-chart-6`。不可只靠顏色表達狀態；線圖搭配 dash / marker，區域圖搭配 pattern 或直接標籤。
+
+## 17. Form 與 Feedback 元件
+
+- `Button`：`primary | secondary | danger`，支援 `loading`；loading 必須設 `aria-busy`、停用重複提交並保留原按鈕寬度。
+- Input：default / focus / error / success；錯誤訊息使用 `--hm-error` + `--fs-xs`，並用 `aria-describedby` 連到欄位。
+- `Select`、`Checkbox`、`Radio`：必須包含 default / hover / focus / checked / disabled / error。
+- `Alert` / `Toast`：使用 success / warning / error / info 四種 status token。
+- `Modal`：ESC 關閉、backdrop 點擊關閉、focus trap、關閉後焦點回到觸發元素。
+- `Skeleton` 遵守 reduced-motion；`EmptyState` 結構為 icon + title + description + optional CTA。
+
+## 18. Accessibility
+
+- 一般文字對比至少 WCAG AA `4.5:1`；大型文字至少 `3:1`。
+- 所有互動元件支援 `Tab`；Button 用 `Enter/Space`；Select / Modal 用 `Escape` 關閉。
+- 不移除 focus outline；統一使用 `:focus-visible` ring。
+- 純裝飾圖片與 Hero decoration 使用空 `alt` 或 `aria-hidden="true"`。
+- Loading / success / error 回饋使用 `aria-busy`、`role="status"` 或 `role="alert"`，不能只靠顏色。

@@ -66,8 +66,8 @@
   hyphens: manual;
   border-left: 1.5px solid transparent;
   transition:
-    color 150ms ease,
-    border-color 150ms ease;
+    color var(--hm-duration-fast) var(--hm-ease-standard),
+    border-color var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
 .cs-toc-link:hover {
@@ -107,8 +107,8 @@
     visibility: hidden;
     pointer-events: none;
     transition:
-      opacity 260ms ease,
-      visibility 260ms ease;
+      opacity var(--hm-duration-base) var(--hm-ease-standard),
+      visibility var(--hm-duration-base) var(--hm-ease-standard);
   }
 
   .cs-toc.is-visible {
@@ -207,8 +207,8 @@
   height: auto;
   margin-inline: auto;
   transition:
-    transform 180ms ease,
-    filter 180ms ease;
+    transform var(--hm-duration-fast) var(--hm-ease-standard),
+    filter var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
 .cs-zoomable-image:hover .cs-zoomable-image-media,
@@ -237,8 +237,8 @@
   opacity: 0;
   transform: translateY(2px);
   transition:
-    opacity 160ms ease,
-    transform 160ms ease;
+    opacity var(--hm-duration-fast) var(--hm-ease-standard),
+    transform var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
 .cs-zoomable-icon svg {
@@ -276,7 +276,7 @@
   max-height: calc(100svh - clamp(48px, 10vw, 160px));
   margin: auto;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: var(--hm-radius-md);
   box-shadow: var(--shadow-xl);
   cursor: default;
   object-fit: contain;
