@@ -277,6 +277,7 @@ const en = {
   "設計迭代 3-1：優化合併勞報單功能，清楚顯示合併清單。":
     "Iteration 3-1: Improved the merge feature to clearly show the merge list.",
   "測試結果": "Test results",
+  "SUS ：82.5 (excellent) 介面容易了解與使用。": "SUS: 82.5 (excellent). The interface was easy to understand and use.",
   "根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。":
     "Converged the iteration direction from task tests and SUS scores as the basis for the final hi-fi prototype.",
 
@@ -357,6 +358,8 @@ const en = {
   "調整欄位優先級，提升人員辨識效率": "Reprioritize columns to speed up contractor recognition",
   "原本的欄位排序以一般資料欄位為主，將電子郵件與身分證字號放在前段，但在實際查找外包人員時，使用者更需要先確認姓名、戶籍地址與匯款資料，才能快速判斷是否正確對象。":
     "Originally the columns led with general data fields, putting email and ID number up front. But when actually looking up a contractor, users first need to confirm the name, registered address and remittance details to quickly judge whether it's the right person.",
+  "原本的欄位排序以一般資料欄位為主，將電子郵件與身分證字號放在前段，但在實際查找外包人員時，使用者更需要先確認姓名、戶籍地址與匯款資料，才能快速判斷是否為正確對象。":
+    "Originally the columns led with general data fields, putting email and ID number up front. But when actually looking up a contractor, users first need to confirm the name, registered address and remittance details to quickly judge whether it's the right person.",
   "調整後將欄位順序改為「姓名 → 戶籍地址 → 存摺 → 身分證字號 → 電子郵件」，把變動性低、辨識度高，且與付款流程直接相關的資訊提前，降低橫向掃描成本，提升查找與核對效率。":
     "After the change, the column order became \"Name → Registered address → Passbook → ID number → Email,\" moving low-volatility, high-recognition information directly tied to payment to the front — lowering horizontal scanning cost and improving lookup and cross-checking efficiency.",
   "勞務內容與金額填寫區": "Work details and amount entry area",
@@ -371,6 +374,8 @@ const en = {
     "The \"filler\" block originally used \"Have the income recipient fill it in\" and \"Fill in yourself\" as option labels, but \"income recipient\" was unintuitive — users weren't sure whether it meant the contractor, internal staff, or the form creator. The \"New staff / Existing labor personnel\" options below were also misread as whether a record already existed, rather than distinguishing the contractor's status.",
   "調整後將選項文字修正為「外包人員填寫」與「自行填寫」，直接點出資料由誰填寫，讓使用者能更快理解兩種填寫方式的差異。同時將下方選項改為「首次外包人員／既有外包人員」，明確區分是第一次建立資料的外包人員，還是已存在於名單中的外包人員，降低用詞造成的判斷成本。":
     "After the change, the options were corrected to \"Contractor fills in\" and \"Fill in yourself,\" directly stating who enters the data so users grasp the difference faster. The lower options became \"First-time contractor / Existing contractor,\" clearly distinguishing a contractor recorded for the first time from one already on the list — lowering the judgment cost caused by wording.",
+  "調整後將選項文字修正為「外包人員填寫」與「自行填寫」，直接點出由誰完成，讓使用者能更快理解兩種填寫方式的差異。同時將下方選項改為「首次外包人員／既有外包人員」，明確區分是第一次建立資料的外包人員，還是已存在於名單中的外包人員，降低用詞造成的判斷成本。":
+    "After the change, the options were corrected to \"Contractor fills in\" and \"Fill in yourself,\" directly stating who completes it so users grasp the difference faster. The lower options became \"First-time contractor / Existing contractor,\" clearly distinguishing a contractor recorded for the first time from one already on the list — lowering the judgment cost caused by wording.",
   "列表資料呈現區": "List data presentation",
   "優化資料呈現，快速查看已建立勞報單": "Improve presentation for quickly reviewing created forms",
   "原本的勞務報酬單列表雖然已顯示建立日期、姓名、勞務內容、金額與簽收進度，但資料呈現較接近一般清單，缺少能幫助使用者快速判斷時間區間與資料批次的視覺提示。當勞報單數量增加時，使用者需要逐筆掃描日期，才能分辨哪些資料屬於同一年、同一批或需要優先處理的期間，查找效率較低。":

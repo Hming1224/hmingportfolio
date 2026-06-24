@@ -11,7 +11,7 @@
 .cs-page {
   background: var(--paper);
   color: var(--text-body);
-  font-family: Inter, var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
 }
 
 @media (min-width: 1301px) {

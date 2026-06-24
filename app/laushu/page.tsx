@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { getLocale } from "next-intl/server";
 import "../../styles/case-study-laushu.css";
 import {
-  CaseSection,
   CaseStudyShell,
   ZoomableImage,
   type TocSection,
@@ -503,8 +502,14 @@ function UnderstandSection() {
             <ul>
               {group.items.map((item) => (
                 <li key={item.head}>
-                  <strong>{item.head}</strong>
-                  <span>{item.body}</span>
+                  <span className="laushu-guide-marker" aria-hidden="true">
+                    <span className="laushu-guide-dot" />
+                    <span className="laushu-guide-line" />
+                  </span>
+                  <div className="laushu-guide-item">
+                    <strong>{item.head}</strong>
+                    <span>{item.body}</span>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -656,8 +661,16 @@ function IterateSection() {
       </div>
       <ArticleBlock title="測試結果" number="03">
         <p>根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。</p>
-        <ImageBlock src={`${IMG}/test-result.png`} alt="Laushu 任務測試與 SUS 結果" />
       </ArticleBlock>
+      <figure className="laushu-test-result">
+        <ZoomableImage
+          src={`${IMG}/test-result.png`}
+          alt="Laushu 任務測試與 SUS 結果"
+          width={2752}
+          height={1968}
+          labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
+        />
+      </figure>
     </section>
   );
 }
@@ -885,10 +898,6 @@ function ArticleBlock({ title, number, kicker, children }: { title: string; numb
   );
 }
 
-function SectionLede({ children }: { children: ReactNode }) {
-  return <p className="laushu-section-lede">{children}</p>;
-}
-
 /** Figma 風格 section 標題：小寫眉標 + 大論點句 + 分隔線（對齊 Figma node 2797:1521）。 */
 function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
@@ -900,18 +909,3 @@ function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
   );
 }
 
-function ImageBlock({
-  src,
-  alt,
-  variant = "default",
-}: {
-  src: string;
-  alt: string;
-  variant?: "default" | "plain" | "wide" | "flush";
-}) {
-  return (
-    <div className={`laushu-image-frame laushu-image-frame--${variant}`}>
-      <Image src={src} alt={alt} width={1472} height={828} sizes="(max-width: 768px) calc(100vw - 48px), 960px" />
-    </div>
-  );
-}
