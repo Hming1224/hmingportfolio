@@ -150,9 +150,9 @@ export function TaskFlowOneDiagram() {
 export function TaskFlowTwoDiagram() {
   const marker = "task-flow-2-arrow";
   return (
-    <svg viewBox="0 0 1995 1077" className="laushu-task-flow-svg laushu-task-flow-svg--two" role="img" aria-label="建立勞務報酬單任務流程圖">
+    <svg viewBox="0 0 1995 1132" className="laushu-task-flow-svg laushu-task-flow-svg--two" role="img" aria-label="建立勞務報酬單任務流程圖">
       <FlowDefs id={marker} />
-      <g transform="translate(0 60)">
+      <g transform="translate(0 93)">
 
       {/* 勞務報酬單頁面 → 三種建立方式 */}
       <Connector d="M221 447 H253 V140 H285" marker={marker} />

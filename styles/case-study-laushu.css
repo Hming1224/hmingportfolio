@@ -961,15 +961,23 @@
   overflow: visible;
 }
 
+/* 三張流程圖固定在同一個縮放比例（≈ flow3 的 1900/3994 ≈ 0.476 px/單位），
+   讓節點與文字大小一致；字級在 foreignObject 內以 viewBox 單位定義，會跟著縮放，不會溢出。
+   寬度固定（非 100%），超出卡片時由 .laushu-fc-scroll 橫向捲動。 */
 .theme-laushu .laushu-task-flow-svg--one {
-  min-width: 1000px;
+  width: 1018px;
+  min-width: 1018px;
+  margin-inline: auto;
 }
 
 .theme-laushu .laushu-task-flow-svg--two {
+  width: 950px;
   min-width: 950px;
+  margin-inline: auto;
 }
 
 .theme-laushu .laushu-task-flow-svg--three {
+  width: 1900px;
   min-width: 1900px;
 }
 
