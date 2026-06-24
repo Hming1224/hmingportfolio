@@ -14,7 +14,12 @@ import { getNextProject, getProjectBySlug } from "../../data/projects";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
 import { translateLaushu, localizeLaushuTree } from "./i18n";
-import { StakeholderFlow, SurveyFlow } from "./components/LaushuDiagrams";
+import {
+  StakeholderFlow,
+  SurveyFlow,
+  SurveyInsight,
+  SurveyStats,
+} from "./components/LaushuDiagrams";
 import {
   TaskFlowOneDiagram,
   TaskFlowThreeDiagram,
@@ -84,6 +89,41 @@ const researchTable = {
     },
   ],
 };
+
+const surveyProfile = [
+  { label: "一般公司會計", value: 71.1 },
+  { label: "會計師", value: 10.5 },
+  { label: "記帳士", value: 7.9 },
+  { label: "其他", value: 10.5 },
+];
+
+const surveyExperience = [
+  { label: "未滿 1 年", value: 10.5 },
+  { label: "1–未滿 3 年", value: 42.1 },
+  { label: "3–未滿 5 年", value: 18.4 },
+  { label: "5 年以上", value: 28.9 },
+];
+
+const surveyVolume = [
+  { label: "10 份以下", value: 23.7 },
+  { label: "11–50 份", value: 36.8 },
+  { label: "51–200 份", value: 26.3 },
+  { label: "201 份以上", value: 13.2 },
+];
+
+const surveyStepQuotes = [
+  "照著填就好",
+  "電子化後變得很輕鬆",
+  "存檔超簡單",
+  "公司已有固定 SOP",
+];
+
+const surveyPainQuotes = [
+  "整體而言有點麻煩",
+  "等待回簽、追蹤進度比較麻煩",
+  "大量收回勞報單時，處理就會很麻煩",
+  "蠻花時間，也覺得很無趣",
+];
 
 const interviewGuide = [
   {
@@ -488,9 +528,18 @@ function UnderstandSection() {
       {ResearchTable()}
 
       <ArticleBlock title="篩選受訪者" number="03">
-        <p>設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整）。</p>
+        <p>設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整），並回收問卷驗證樣本輪廓。</p>
       </ArticleBlock>
       {SurveyFlow({ note: <p>了解目前勞報單填寫過程中，哪些過程感到繁雜。<br />會計師：建立 → 發送 → 回收 → 彙整。</p> })}
+      {SurveyStats({
+        profile: surveyProfile,
+        experience: surveyExperience,
+        volume: surveyVolume,
+      })}
+      {SurveyInsight({
+        stepQuotes: surveyStepQuotes,
+        painQuotes: surveyPainQuotes,
+      })}
 
       <ArticleBlock title="訪談大綱" number="04">
         <p>共搜集 39 份有效問卷，篩選三位受訪者，圍繞以下三個面向深入訪談：</p>
@@ -908,4 +957,3 @@ function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
     </header>
   );
 }
-
