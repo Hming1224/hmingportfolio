@@ -134,34 +134,34 @@ export function StakeholderFlow() {
         {/* 連線 */}
         <g stroke="#c7c2d6" strokeWidth="2" fill="none">
           {/* 會計師 ↔ 公司（雙向） */}
-          <path d="M300 210 H470" markerEnd="url(#laushu-arrow-stake)" markerStart="url(#laushu-arrow-stake)" />
+          <path d="M270 210 H450" markerEnd="url(#laushu-arrow-stake)" markerStart="url(#laushu-arrow-stake)" />
           {/* 公司 → 外包（發送，上弧） */}
-          <path d="M650 130 C780 70 880 70 990 125" markerEnd="url(#laushu-arrow-stake)" />
+          <path d="M674 98 C780 70 880 70 985 92" markerEnd="url(#laushu-arrow-stake)" />
           {/* 公司 → 外包（發出工資，中） */}
-          <path d="M710 210 H910" markerEnd="url(#laushu-arrow-stake)" />
+          <path d="M730 210 H910" markerEnd="url(#laushu-arrow-stake)" />
           {/* 外包 → 公司（確認，下弧） */}
-          <path d="M990 295 C880 350 780 350 650 290" markerEnd="url(#laushu-arrow-stake)" />
+          <path d="M985 328 C880 345 780 345 674 322" markerEnd="url(#laushu-arrow-stake)" />
         </g>
 
         {/* 節點 */}
-        <Node cx={170} cy={210} r={110} />
+        <Node cx={140} cy={210} r={110} />
         <Node cx={590} cy={210} r={120} tone="deep" />
-        <Node cx={1030} cy={210} r={110} />
+        <Node cx={1040} cy={210} r={110} />
 
-        <NodeImage href={`${PEOPLE}/accountant.png`} cx={170} top={72} w={108} h={148} />
+        <NodeImage href={`${PEOPLE}/accountant.png`} cx={140} top={72} w={108} h={148} />
         <NodeImage href={`${PEOPLE}/company.png`} cx={590} top={84} w={150} h={131} />
-        <NodeImage href={`${PEOPLE}/worker.png`} cx={1030} top={70} w={130} h={150} />
+        <NodeImage href={`${PEOPLE}/worker.png`} cx={1040} top={70} w={130} h={150} />
 
-        <NodeLabel cx={170} cy={255} lines={["會計事務所", "會計師"]} />
+        <NodeLabel cx={140} cy={255} lines={["會計事務所", "會計師"]} />
         <NodeLabel cx={590} cy={262} lines={["公司"]} />
-        <NodeLabel cx={1030} cy={262} lines={["外包工作者"]} />
+        <NodeLabel cx={1040} cy={262} lines={["外包工作者"]} />
 
         {/* 邊標籤 */}
-        <EdgeLabel x={385} y={188}>協助彙整勞報單</EdgeLabel>
-        <EdgeLabel x={385} y={248}>回傳勞報單</EdgeLabel>
-        <EdgeLabel x={815} y={78}>發送勞報單</EdgeLabel>
-        <EdgeLabel x={810} y={196}>發出工資</EdgeLabel>
-        <EdgeLabel x={815} y={342}>確認勞報單</EdgeLabel>
+        <EdgeLabel x={360} y={194}>協助彙整勞報單</EdgeLabel>
+        <EdgeLabel x={360} y={240}>回傳勞報單</EdgeLabel>
+        <EdgeLabel x={825} y={59}>發送勞報單</EdgeLabel>
+        <EdgeLabel x={825} y={194}>發出工資</EdgeLabel>
+        <EdgeLabel x={825} y={370}>確認勞報單</EdgeLabel>
       </svg>
     </div>
   );

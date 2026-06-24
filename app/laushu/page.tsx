@@ -176,7 +176,7 @@ const iterationBoards = [
     alt: "Laushu 設計迭代 勞務內容與金額填寫區 Before/After 對照",
   },
   {
-    tag: "操作流程 3",
+    tag: "操作流程 2",
     title: "填寫人選擇元件",
     label: "修正填寫人用詞，明確區分資料建立情境",
     paras: [
@@ -187,7 +187,7 @@ const iterationBoards = [
     alt: "Laushu 設計迭代 填寫人選擇元件 Before/After 對照",
   },
   {
-    tag: "操作流程 4",
+    tag: "操作流程 2",
     title: "列表資料呈現區",
     label: "優化資料呈現，快速查看已建立勞報單",
     paras: [
@@ -198,7 +198,7 @@ const iterationBoards = [
     alt: "Laushu 設計迭代 列表資料呈現區 Before/After 對照",
   },
   {
-    tag: "操作流程 5",
+    tag: "操作流程 2",
     title: "寄出確認視窗",
     label: "增加預覽狀態，降低寄出前的不確定感",
     paras: [
@@ -209,7 +209,7 @@ const iterationBoards = [
     alt: "Laushu 設計迭代 寄出確認視窗 Before/After 對照",
   },
   {
-    tag: "操作流程 6",
+    tag: "操作流程 3",
     title: "合併清單顯示",
     label: "優化合併勞報單功能，清楚顯示合併清單",
     paras: [

@@ -1523,7 +1523,7 @@
 }
 
 .theme-laushu .laushu-iterate-section .laushu-iter-badge {
-  width: 95px;
+  width: fit-content;
   padding: 9px 14px;
   background: #4852c3;
   font-size: var(--fs-sm);
