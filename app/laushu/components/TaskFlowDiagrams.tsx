@@ -174,9 +174,9 @@ export function TaskFlowTwoDiagram() {
       <Connector d="M1366 447 H1430" marker={marker} />
       <Connector d="M1671 447 H1735" marker={marker} />
 
-      {/* 儲存、取消與寄信後的回流 */}
+      {/* 儲存與取消：上方分成兩條獨立回流線 */}
       <Connector d="M978 32 V0 H101 V327" marker={marker} label="儲存並返回" labelX={540} labelY={-42} />
-      <Connector d="M1571 327 V0 H978 V28" marker={marker} label="取消" labelX={1275} labelY={-42} />
+      <Connector d="M1571 327 V0 H1010 V28" marker={marker} label="取消" labelX={1275} labelY={-42} />
       <Connector
         d="M1843 555 V937 H101 V567"
         marker={marker}
