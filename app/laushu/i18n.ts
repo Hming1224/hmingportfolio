@@ -400,6 +400,9 @@ const en = {
     "Create a labor form and send a link for the contractor to fill in / counter-sign",
   "↩ 流程中可「儲存並返回」勞務報酬單頁面；點選「寄出確認信」後返回首頁，並發送信件給外包人員。":
     "↩ You can \"save and return\" to the labor-form page along the way; after \"Send confirmation email,\" it returns to the home page and emails the contractor.",
+  "儲存並返回": "Save and return",
+  "取消": "Cancel",
+  "返回勞務報酬單頁面，且發送信件給外包人員": "Return to the labor-form page and email the contractor",
   "勞務報酬單頁面": "Labor-form page",
   "建立勞報單（所得人填寫）": "Create form (recipient fills in)",
   "建立勞報單（公司客戶填寫・新增外包人員）": "Create form (company fills in · new contractor)",
@@ -439,6 +442,7 @@ const en = {
   "承辦人建立勞報單頁": "Officer's create-form page",
   "活動結束，承辦人執行支付款項": "After the event, the officer makes the payment",
   "搜尋外包者姓名": "Search contractor name",
+  "同一個外包者多張勞報單結果畫面": "Results showing multiple forms for the same contractor",
   "勾選同一外包者的多張勞報單": "Select multiple forms of the same contractor",
   "合併": "Merge",
   "選擇單張、確認合併": "Select forms and confirm merge",

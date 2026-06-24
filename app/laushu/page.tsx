@@ -16,6 +16,11 @@ import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
 import { translateLaushu, localizeLaushuTree } from "./i18n";
 import { StakeholderFlow, SurveyFlow } from "./components/LaushuDiagrams";
+import {
+  TaskFlowOneDiagram,
+  TaskFlowThreeDiagram,
+  TaskFlowTwoDiagram,
+} from "./components/TaskFlowDiagrams";
 
 const IMG = "/projects/laushu";
 const CONN1 = "/projects/advantech/solution/connector-1.svg";
@@ -561,24 +566,7 @@ function ConvergeSection() {
   );
 }
 
-function FcNode({ type, children }: { type: "page" | "action" | "decision"; children: ReactNode }) {
-  return (
-    <div className={`laushu-fc-node laushu-fc-node--${type}`}>
-      <span>{children}</span>
-    </div>
-  );
-}
-
-function FcArrow({ label }: { label?: string }) {
-  return (
-    <div className="laushu-fc-arrow" aria-hidden="true">
-      {label ? <span className="laushu-fc-arrow-label">{label}</span> : null}
-      <span className="laushu-fc-arrow-line" />
-    </div>
-  );
-}
-
-function TaskFlowChart({ tag, title, children, note }: { tag: string; title: string; children: ReactNode; note: string }) {
+function TaskFlowChart({ tag, title, children }: { tag: string; title: string; children: ReactNode }) {
   return (
     <figure className="laushu-fc-figure">
       <figcaption className="laushu-fc-cap">
@@ -586,9 +574,8 @@ function TaskFlowChart({ tag, title, children, note }: { tag: string; title: str
         <span className="laushu-fc-title">{title}</span>
       </figcaption>
       <div className="laushu-fc-scroll">
-        <div className="laushu-fc-track">{children}</div>
+        {children}
       </div>
-      <p className="laushu-fc-note">{note}</p>
     </figure>
   );
 }
@@ -598,84 +585,19 @@ function TaskFlow1() {
     <TaskFlowChart
       tag="操作流程 1"
       title="建立外包人員資料庫，便於掌管人員個人資料"
-      note="↩ 「儲存」後返回外包人員資料頁；「編輯／查看人員頁」返回人員業務頁；「儲存並建立勞報單」接續建立勞報單流程。"
     >
-      <FcNode type="page">外包人員資料頁</FcNode>
-      <FcArrow />
-      <div className="laushu-fc-rows">
-        <div className="laushu-fc-row">
-          <FcNode type="action">建立人員勞報單</FcNode>
-          <FcArrow />
-          <FcNode type="page">建立勞報單頁</FcNode>
-        </div>
-        <div className="laushu-fc-row">
-          <FcNode type="action">新增外包人員</FcNode>
-          <FcArrow />
-          <FcNode type="page">新增人員頁</FcNode>
-          <FcArrow />
-          <FcNode type="action">填寫身份資料</FcNode>
-          <FcArrow />
-          <FcNode type="decision">是否已有相同身分證字號</FcNode>
-          <div className="laushu-fc-rows">
-            <div className="laushu-fc-row">
-              <FcArrow label="否" />
-              <FcNode type="action">上傳身分證存摺影本</FcNode>
-              <div className="laushu-fc-rows">
-                <div className="laushu-fc-row"><FcArrow /><FcNode type="action">儲存並建立勞報單</FcNode></div>
-                <div className="laushu-fc-row"><FcArrow /><FcNode type="action">儲存</FcNode></div>
-              </div>
-            </div>
-            <div className="laushu-fc-row">
-              <FcArrow label="是" />
-              <FcNode type="action">系統提醒曾建立過</FcNode>
-            </div>
-          </div>
-        </div>
-        <div className="laushu-fc-row">
-          <FcNode type="action">查看業務</FcNode>
-          <FcArrow />
-          <FcNode type="page">人員業務頁</FcNode>
-          <div className="laushu-fc-rows">
-            <div className="laushu-fc-row"><FcArrow /><FcNode type="action">編輯個人資料</FcNode><FcArrow /><FcNode type="page">編輯人員頁</FcNode></div>
-            <div className="laushu-fc-row"><FcArrow /><FcNode type="action">查看個人資料</FcNode><FcArrow /><FcNode type="page">查看人員頁</FcNode></div>
-          </div>
-        </div>
-      </div>
+      <TaskFlowOneDiagram />
     </TaskFlowChart>
   );
 }
 
 function TaskFlow2() {
-  const rows: { who: string; fill: string }[] = [
-    { who: "建立勞報單（所得人填寫）", fill: "填寫資料：基本資料、勞報內容與金額、付款資訊" },
-    { who: "建立勞報單（公司客戶填寫・新增外包人員）", fill: "填寫資料：基本資料、勞報內容與金額、付款資訊" },
-    { who: "建立勞報單（公司客戶填寫・既有外包人員）", fill: "填寫資料：接待姓名、勞報內容與金額" },
-  ];
   return (
     <TaskFlowChart
       tag="操作流程 2"
       title="建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽"
-      note="↩ 流程中可「儲存並返回」勞務報酬單頁面；點選「寄出確認信」後返回首頁，並發送信件給外包人員。"
     >
-      <FcNode type="page">勞務報酬單頁面</FcNode>
-      <FcArrow />
-      <div className="laushu-fc-rows">
-        {rows.map((r, i) => (
-          <div className="laushu-fc-row" key={i}>
-            <FcNode type="action">{r.who}</FcNode>
-            <FcArrow />
-            <FcNode type="page">建立勞務報酬單頁面</FcNode>
-            <FcArrow />
-            <FcNode type="action">{r.fill}</FcNode>
-          </div>
-        ))}
-      </div>
-      <FcArrow />
-      <FcNode type="action">點擊「填寫完畢」</FcNode>
-      <FcArrow />
-      <FcNode type="page">編輯發送信件頁面</FcNode>
-      <FcArrow />
-      <FcNode type="action">點選「寄出確認信」</FcNode>
+      <TaskFlowTwoDiagram />
     </TaskFlowChart>
   );
 }
@@ -685,31 +607,8 @@ function TaskFlow3() {
     <TaskFlowChart
       tag="操作流程 3"
       title="合併多張勞務報酬單，減少回簽次數與調整稅額"
-      note="↩ 「是否超過兩萬」為否、或「單張確認頁」確認後，皆進入「寄送簽收」。"
     >
-      <FcNode type="action">承辦人建立外包人員資訊</FcNode>
-      <FcArrow />
-      <FcNode type="page">承辦人建立勞報單頁</FcNode>
-      <FcArrow />
-      <FcNode type="action">活動結束，承辦人執行支付款項</FcNode>
-      <FcArrow />
-      <FcNode type="page">搜尋外包者姓名</FcNode>
-      <FcArrow />
-      <FcNode type="page">勾選同一外包者的多張勞報單</FcNode>
-      <FcArrow />
-      <FcNode type="action">合併</FcNode>
-      <FcArrow />
-      <FcNode type="page">選擇單張、確認合併</FcNode>
-      <FcArrow />
-      <FcNode type="decision">是否超過兩萬</FcNode>
-      <FcArrow label="是" />
-      <FcNode type="page">文字提醒：代扣二代健保</FcNode>
-      <FcArrow />
-      <FcNode type="decision">是否拆單</FcNode>
-      <FcArrow label="是" />
-      <FcNode type="page">單張確認頁</FcNode>
-      <FcArrow />
-      <FcNode type="action">寄送簽收</FcNode>
+      <TaskFlowThreeDiagram />
     </TaskFlowChart>
   );
 }
