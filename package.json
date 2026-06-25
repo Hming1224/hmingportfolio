@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "audit:architecture": "python3 scripts/arch-audit.py",
     "knip": "knip"
   },
   "dependencies": {
