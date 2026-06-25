@@ -5,20 +5,22 @@
 >
 > **使用慣例**：每個元件 / token 都標了對應的 React 元件或 CSS class（如 `Button variant="secondary"`），方便對照實作。標名稱而非行號——行號會隨改動失效。
 >
-> **校準基準**：2026-06-08 完整掃描整個專案（4 頁路由、25 個元件、globals.css 7666 行 / 740 條 class / 全部 token）後重寫。
+> **校準基準**：2026-06-25 重新掃描三個 Case Study、共用案例元件與 4 支案例 CSS 後更新。
 > 標記：✅＝code 已實作且一致；🔧＝規格已定、code 待對齊（清單見 `design-audit-2026-06-08.md`）。
 
 ---
 
 ## 0. 專案地圖（先看這個，才知道東西在哪）
 
-### 0.1 路由頁面（4 頁）
+### 0.1 路由頁面
 
 | 路由 | 進入點 | 性質 | 主要組成 |
 |---|---|---|---|
 | `/` | `app/page.tsx` | 首頁 | Navbar → Hero（含大量裝飾元件）→ Works（專案卡）→ Footer |
 | `/about-me` | `app/about-me/page.tsx`（627 行）| 自我介紹 | About window → 成長故事 → 特質 → 經歷時間軸 → 技能 → 設計價值 → 教學經歷 |
-| `/advantech` | `app/advantech/page.tsx`（1399 行）| **案例頁（case study）** | 大量 `cs-*` 單頁專屬 layout（見 0.3）|
+| `/advantech` | `app/advantech/page.tsx` | 案例頁 | 共用 Case Study 架構 + Advantech 內容 |
+| `/crypto-arsenal` | `app/crypto-arsenal/page.tsx` | 案例頁 | 共用 Case Study 架構 + Crypto Arsenal 內容 |
+| `/laushu` | `app/laushu/page.tsx` | 案例頁 | 共用 Case Study 架構 + Laushu 內容 |
 | `/contact` | `app/contact/page.tsx` | 聯絡 | Contact 元件（表單 + 聯絡方式）|
 
 ### 0.2 元件清單（`components/`）
@@ -27,17 +29,32 @@
 - **首頁**：`Hero`、`Works`、`AvatarProfile`
 - **Hero 裝飾**（`components/hero-decorations/`）：`StickyNote`、`CursorTag`、`WireframeFrame`、`AiWidgetFrame`、`ToggleDecoration`、`WalPencilDecoration`、`AnnotationPin`、`HeroBottomGroupCenter`、`HeroEntranceController`
 - **About 頁**：`About`、`YearRail`、`app/about-me/` 下的 `AnimatedContent`、`EducatorMasonry`、`GrowthReveal`
-- **案例頁**：`CaseTOC`，`app/advantech/` 下的 `ProposalTabs`、`AlarmLevelDemo`、`FlowConnectors`、`FeatureConnectors`、`VimeoPlayer`
+- **案例頁共用**（`components/case-study/`）：`CaseStudyShell`、`CaseSection`、`CaseHeading`、`ZoomableImage`、`FlowScrollHint`
+- **案例頁待共用化**：Hero、Info Grid、Section Header、Media Figure、Card / Grid、Proposal Tabs、Before / After、Metric Grid、Feature Row
+- **案例內容視覺**：各案例 route 下的流程圖、connector、產品截圖與專案資料；這些是內容資產，不是另一套 UI system
 - **Contact**：`Contact`
 - **底層 UI**（`components/ui`、`components/animate-ui`）：`dot-pattern`、`SplitText`、`TrueFocus`、`highlight`、`tabs`
 
-### 0.3 兩層結構：可複用系統 vs 案例頁專屬 ★重要
+### 0.3 四層架構：案例頁也屬於 Design System ★重要
 
-globals.css 的 740 條 class 大致分兩層：
+Design System 必須覆蓋整個作品集，案例頁不能因為內容不同就自行建立 layout、spacing、card、tabs 或 RWD 規則。目標架構分四層：
 
-1. **可複用設計系統**（本文件主要規範的對象）：色彩 token、字級、按鈕、專案卡、表單、導覽、Footer、About 各區塊等——這些會跨內容重複使用、要嚴格遵守規則。
-2. **案例頁專屬 layout**（`cs-*` 前綴，**佔了 307 條 ≈ 全部的 41%**）：advantech 案例頁的流程圖、connector、persona、feature 表格等高度客製的版面。**這層不屬於可複用系統**——它們是為單一案例量身做的，新案例可以參考但不必硬套。
-   > 規則：`cs-*` 的色 / 間距 / 陰影**可以有自己的局部值**（見 2.0 區域 token），但**字體、按鈕、文字色階梯仍要遵守全站系統**。
+1. **Foundation**：全站 color、type、spacing、radius、shadow、motion、breakpoint token。
+2. **Case Study Shell**：Navbar、Footer、ScrollProgress、TOC、Hero 外框、內容寬度、Section、Next Project Nav。
+3. **Case Study Patterns**：可組合的 Hero、Info Grid、Section Header、Media Figure、Card / Grid、Proposal Tabs、Before / After、Metric Grid、Feature Row、Flow Container。相同資訊層級必須使用同一 pattern。
+4. **Project Theme / Content**：每個案例只提供顏色 token、文字、圖片、影片與流程圖內容；不可重新定義 layout、spacing、typography、radius、shadow geometry、motion 或 breakpoint。
+
+> **唯一例外：內容視覺的幾何資料。** 流程圖節點座標、SVG path、connector 端點、圖片比例等屬專案內容，可以由案例資料或專屬 visualization component 管理；但包住它的 section、標題、卡片、捲動容器、提示、留白與 RWD 行為仍必須使用共用 pattern。
+
+### 0.4 目前缺口（2026-06-25 掃描）
+
+- `styles/case-study.css`：579 行，共用 shell 只覆蓋 40 個 `cs-*` class。
+- 三個案例專屬 CSS：合計 7,035 行；Advantech 250、Crypto Arsenal 163、Laushu 161 個 unique class。
+- 三支專屬 CSS 合計約 3,730 條 declaration，其中至少 911 條是寫死的 layout / spacing 尺寸。
+- 同類 pattern 使用不同前綴重做：Advantech 多為 `cs-*`、Crypto Arsenal 為 `ca-*`、Laushu 為 `laushu-*`，所以只統計 `cs-*` 會低估未共用比例。
+- 已確認可優先共用的重複 pattern：Section Header / Lead、Card / Grid、Media Figure、Info / Metric Card、Proposal / Feature Row、Before / After、Flow Scroll Container。
+
+舊版「案例頁專屬 layout 不屬於可複用系統」的描述正式廢止。🔧 目前 code 尚未完全對齊本規格。
 
 ---
 
@@ -130,10 +147,11 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `--text-muted` | `#8e8e9c` | 最弱（同 `--muted`）|
 | `--text-on-dark` | `#ffffff` | 深色背景上的大標（由 `.cs-heading-white` 消費，用於圖片/overlay 上的白標題）|
 
-**分層 theming（區域 token 的最佳範例）：**
+**分層 theming（案例頁唯一允許的專屬 UI 差異）：**
 - 全域 `:root` 只放「綁定規則 + 中性預設」。
-- 每個案例頁在 `<main class="cs-page theme-xxx">` 掛 theme，**只覆寫 `--text-heading` 一個值**。例：`.theme-advantech { --text-heading: #093060 }`。
-- 對應骨架 class（只套這 6 個）：`.cs-title`、`.cs-heading`、`.cs-heading-white`、`.cs-body`、`.cs-sol-blk-title`、`.cs-sol-blk-desc`。
+- 每個案例頁在 `<main class="cs-page theme-xxx">` 掛 theme，只能指定共用 semantic case tokens，例如 `--cs-accent`、`--cs-accent-strong`、`--cs-accent-soft`、`--cs-surface`、`--cs-line`、`--cs-text-heading`。
+- 共用元件只能消費 `--cs-*` semantic token，不得直接讀 `--ca-*`、`--laushu-*`、`--advantech-*`。
+- `.theme-xxx` 不得包含 `display`、`grid-template-*`、`gap`、`padding`、`margin`、`width`、`height`、`font-size`、`border-radius` 或 breakpoint override。
 - **深色 section**：目前不保留深色 section class。`.cs-heading-white` 仍用於圖片 / overlay 上的白標題，所以只保留 `--text-on-dark` 單一 token。
 
 ### 2.5 每個專案的 Tone 色
@@ -173,14 +191,16 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 
 > 照 2.0：只用一次的色做 token 是多此一舉，保留 hex + 註解即可。
 
-### 2.7 案例頁局部色（界線規則）
+### 2.7 案例頁 Theme Token（界線規則）
 
 案例頁（`cs-*`）內部有大量視覺色（插圖、流程圖、資訊卡藍色系）。
 
-> **規則：案例頁內部視覺色「不進」全域 `:root`，但同一頁內要自己收斂。**
-> - 該頁內**重複用 ≥2 次**的色（如 advantech 那組藍 `#cbdef4`/`#093060`/`#425466`）→ 做成 scope 在 `.theme-advantech` 或該頁容器的**區域 token**。
+> **規則：案例頁只允許顏色因專案而異，其他 UI 規則一律共用。**
+> - 該頁內**重複用 ≥2 次**的色 → 在 `.theme-xxx` 映射到統一的 `--cs-*` semantic token。
 > - **只用一次**的 → 直接寫 hex。
 > - 一頁內不要冒出 5 種藍，色也要成套。
+> - 專案色可影響文字、背景、邊框、圖表與 shadow color；shadow 的 offset / blur / spread 必須使用共用規格。
+> - 禁止用 theme selector 改變 component geometry 或 RWD。
 
 ---
 
@@ -212,7 +232,7 @@ font-family: var(--font-space-grotesk), sans-serif;
 | `--fs-xs` | `12px` | `12px` | `12px` | 最小（Footer 版權等）|
 
 > **一般骨架最大字級是 32px，沒有 40px。**
-主標題、section 標題、About / Contact 骨架標題已改用 `var(--fs-*)`；案例頁內部高度客製的小型 label / 圖表文字仍可依局部版面保留自己的尺寸。
+主標題、section 標題、About / Contact 與案例頁 UI 文字一律使用 `var(--fs-*)`。只有 SVG / canvas 內由圖表座標系控制的內容標籤可保留視覺化專用尺寸。
 
 **首頁 Hero 例外**：`.hero h1` 是第一屏品牌主標，刻意不套 `--fs-h1`。目前規則為桌機 `48px`、`768–1024px` 為 `36px`、`<768px` 與矮手機特例為 `28px`。
 
@@ -425,7 +445,7 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 | `22px 16px 8px` | 輸入框浮動 label 專用內距（見 5.4）|
 | `28px 24px` | skill-category-card padding |
 
-> ✅ 已收斂（2026-06-08）：原散落的 `14/18/6/7/9/26/44/84px` **容器排版間距**（padding/margin/gap）已往系統值靠（多數 →16px、`7/6/9→8`、`26→24`、`44→48`、`84→80`）。主系統新 code 一律優先用 `--hm-space-*`；**例外保留**：Hero/About 裝飾元件內部間距與絕對定位（如 `.cursor-tag`、`.growth-*`、`.menu-button` 漢堡幾何）、`::before` 自訂項目符號的光學對齊 `margin-top:7px`、以及 `clamp()` 響應式值——這些是視覺/幾何微調，不算 8px 系統間距，刻意不動。
+> 🔧 案例頁目前仍有大量寫死 spacing，尚未完成收斂。案例頁 section、card、grid、tabs、media、caption、feature row 必須改用 `--hm-space-*`；只有流程圖座標、connector 端點與圖像幾何可保留數值。
 
 ### 6.4 Grid / Layout
 
@@ -443,7 +463,7 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - `--hm-container` / `--hm-container-wide` 定義內容最大寬與 full-bleed 上限。
 - `--hm-grid-gutter` 是預設欄間距；需要更寬鬆的展示區可改用 `--hm-grid-gutter-lg`。
 - `.hm-grid` 是輕量共用 helper，適合 token 卡、能力卡、摘要卡等 auto-fit 版面，不強制導入 24 欄系統。
-- 案例頁若需要更高度客製的 `cs-*` 單頁 layout，可保留局部 grid，不必硬套 helper。
+- 案例頁一般內容使用共用 Case Study pattern；若現有 `.hm-grid` 不足，應新增可重用的 Case Grid variant，而不是在 `.theme-xxx` 內另寫 grid。
 
 ### 6.5 Section 頂部 padding 特例
 | Section | 桌機頂部 | 手機頂部 | 原因 |
@@ -479,7 +499,7 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 | `--shadow-photo` | `-5px 10px 20px rgba(0,0,0,0.12)` | About Polaroid 照片 |
 | `--shadow-soft` | 多層柔和陰影 | 專案 Info panel |
 
-> ⚠️ **例外（案例頁）**：`cs-*` 用了一些**有色陰影**（研華藍 `rgba(9,48,96,…)`、紫 `rgba(93,98,216,…)`）做品牌感。這違反「只用黑陰影」的主規則，但**限定在案例頁的品牌情境**可接受；**主系統元件（按鈕、卡片、表單）一律用黑陰影**，不要把有色陰影擴散出去。
+> 案例頁可透過 `--cs-shadow-color` 使用專案色，但陰影的 offset / blur / spread 必須來自共用 elevation token，不得每頁重做一套陰影尺寸。
 
 ---
 
@@ -494,6 +514,8 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 | `--shadow-*` | 全域 | 主系統陰影，見 7 |
 | `--page-gutter` | 全域（手機覆寫）| 頁面左右留白 |
 | `--text-heading` 覆寫 | `.theme-xxx` | 案例頁主色 theming |
+| `--cs-accent` / `--cs-accent-strong` / `--cs-accent-soft` | `.theme-xxx` | 案例主色、強調色與淡色背景 |
+| `--cs-surface` / `--cs-line` / `--cs-text-heading` / `--cs-shadow-color` | `.theme-xxx` | 案例 surface、邊線、標題與陰影色 |
 | `--tag-bg` / `--tag-text` | `.tone-xxx`（目標）| 專案標籤色 |
 | `--accent-color` / `--bg-color-tint` / `--border-color-tint` | `.skill-category-card` | 技能卡可換色 |
 | `--cursor-tag-scale` / `--wireframe-scale` / `--sticky-note-scale` / `--toggle-scale` / `--ai-widget-scale` / `--wal-pencil-scale` | Hero 裝飾 | RWD 縮放：各裝飾用 `transform: scale(var(--xxx-scale))` 在斷點縮小，**保留內部間距不塌陷**（見 Memory.md）|
@@ -509,6 +531,7 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 
 ### ✅ 要這樣做
 - **顏色換，框架不換**：新增專案只建新 `tone-xxx`，卡片排版不動
+- **案例頁同樣套系統**：Section、Card、Grid、Tabs、Media、Spacing、RWD 使用共用 Case Study patterns
 - **改顏色用 token**：跨頁共用 → 全域 token；單區域重複用 → 區域 token；只用一次 → hex + 註解（見 2.0）
 - **字級用 token**：新元件用 `var(--fs-*)`，不要寫死 px；一般骨架最大不超過 32px（`--fs-h1`），首頁 Hero 主標為已定義例外
 - **陰影分層**：主系統一律黑陰影，重要元素重陰影、次要輕陰影
@@ -522,7 +545,9 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - **不要用純黑**：文字最深 `--ink (#343434)`
 - **不要讓 accent 大面積出現**：`--purple` 只用於 CTA 和 active
 - **不要把單一專案才用的色塞進全域 `:root`**：用區域 token（見 2.0）
-- **不要把案例頁的有色陰影擴散到主系統元件**
+- **不要在 `.theme-xxx` 寫 layout**：theme 只能設定顏色 token
+- **不要用 `ca-*` / `laushu-*` / 專案私有 `cs-*` 重做既有 UI pattern**
+- **不要把案例頁的有色陰影尺寸擴散成另一套 elevation**
 - **不要在手機版保留 hover-only 互動**：改成靜態或點擊觸發
 - **不要讓未上線案子看起來可點**：用 `--disabled` 底色
 - **不要隨意用超過 32px 的字號**：一般骨架最大就是 32px；只有首頁 Hero 主標可用 48px
@@ -535,6 +560,15 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 
 - **架構 Ownership 與驗收基準**：請參閱 [architecture-baseline.md](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/docs/architecture-baseline.md)
 - **新增 Case Study 檢核清單**：請參閱 [add-case-study-checklist.md](file:///Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio/docs/add-case-study-checklist.md)
+
+### 10.1 Case Study CSS Ownership
+
+- `styles/case-study.css`：Case Study shell 與共用 pattern 的單一樣式來源。
+- `components/case-study/`：共用 React component 與 pattern API。
+- `.theme-<slug>`：只宣告 `--cs-*` 顏色 token。
+- 專案 route：只組合共用 component、提供內容與資料。
+- 專案 visualization component：可管理流程圖節點、SVG path、connector 與圖像比例；不得重做 section / card / typography / spacing / RWD shell。
+- 若同一 pattern 在第二個案例出現，不是「考慮」共用，而是必須先抽成 `components/case-study/` 再使用。
 
 ---
 
