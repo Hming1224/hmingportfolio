@@ -9,6 +9,17 @@
    scope 在 .theme-crypto-arsenal，不進全域 :root（見 docs/design-system.md §2.7）。
    色票來源：Figma node 2574-83（APPROVED.md 已定案）。 */
 .theme-crypto-arsenal {
+  --cs-accent: #376adc;
+  --cs-accent-strong: #252a47;
+  --cs-accent-soft: #e8eafa;
+  --cs-surface-soft: #f4f6fc;
+  --cs-line: #d8deec;
+  --cs-line-strong: #d8deec;
+  --cs-text-heading: #252a47;
+  --cs-text-body: #2b2c30;
+  --cs-text-secondary: #4a4c52;
+  --cs-text-muted: #6c6e77;
+  --cs-shadow-color: rgba(37, 42, 71, 0.12);
   --ca-navy: #252a47;
   /* primary base：標題 */
   --ca-ink: #1d2737;
@@ -257,23 +268,19 @@
 
 /* ── 03 問題定義：6 張角色情境卡 ── */
 .theme-crypto-arsenal .ca-pains {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 19px 20px;
+  --cs-grid-gap: 19px 20px;
   margin-top: 40px;
 }
 
 .theme-crypto-arsenal .ca-pain-card {
+  --cs-card-bg: #ffffff;
+  --cs-card-border: var(--ca-line-soft);
+  --cs-card-shadow: var(--ca-card-shadow);
+  --cs-card-padding: 30px 32px;
+  --cs-card-radius: 16px;
   container-type: inline-size;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   gap: 24px;
-  padding: 30px 32px;
-  background: #ffffff;
-  border: 1px solid var(--ca-line-soft);
-  border-radius: 16px;
-  box-shadow: var(--ca-card-shadow);
 }
 
 .theme-crypto-arsenal .ca-pain-quote {
@@ -1403,18 +1410,16 @@
 
 /* ── 10 學習反思 ── */
 .theme-crypto-arsenal .ca-reflect {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  --cs-grid-gap: 20px;
   margin-top: 40px;
 }
 
 .theme-crypto-arsenal .ca-reflect-card {
-  padding: 26px 24px;
-  background: #ffffff;
-  border: 1px solid var(--ca-line-soft);
-  border-radius: 16px;
-  box-shadow: var(--ca-card-shadow);
+  --cs-card-bg: #ffffff;
+  --cs-card-border: var(--ca-line-soft);
+  --cs-card-shadow: var(--ca-card-shadow);
+  --cs-card-padding: 26px 24px;
+  --cs-card-radius: 16px;
 }
 
 .theme-crypto-arsenal .ca-reflect-num {
@@ -1673,10 +1678,6 @@
 
 /* ── RWD ── */
 @media (max-width: 1199px) {
-  .theme-crypto-arsenal .ca-pains {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .theme-crypto-arsenal .ca-research-row {
     flex-direction: column;
   }
@@ -1697,7 +1698,6 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-crypto-arsenal .ca-reflect,
   .theme-crypto-arsenal .ca-impact,
   .theme-crypto-arsenal .ca-impact-quotes {
     grid-template-columns: 1fr;
@@ -1730,10 +1730,6 @@
 }
 
 @media (max-width: 768px) {
-  .theme-crypto-arsenal .ca-pains {
-    grid-template-columns: 1fr;
-  }
-
   .theme-crypto-arsenal .ca-flow,
   .theme-crypto-arsenal .ca-flow-item {
     width: 100%;

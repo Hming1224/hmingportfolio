@@ -345,6 +345,26 @@
   /* 最弱（同 --muted） */
   /* 深色背景反轉組 */
   --text-on-dark: #ffffff;
+
+  /* ── Case Study semantic tokens ──
+     Shared case-study components consume these tokens. Project themes map
+     their colors into this semantic layer without changing geometry. */
+  --cs-accent: var(--hm-purple);
+  --cs-accent-strong: var(--hm-purple-700);
+  --cs-accent-soft: var(--hm-purple-50);
+  --cs-surface: var(--hm-paper);
+  --cs-surface-soft: var(--hm-surface);
+  --cs-line: var(--hm-line);
+  --cs-line-strong: var(--hm-line-strong);
+  --cs-text-heading: var(--text-heading);
+  --cs-text-body: var(--text-body);
+  --cs-text-secondary: var(--text-secondary);
+  --cs-text-muted: var(--text-muted);
+  --cs-text-inverse: var(--text-on-dark);
+  --cs-hero-cover-bg: var(--hm-blue-100);
+  --cs-badge-bg: #4c4c4c;
+  --cs-badge-text: #ffffff;
+  --cs-shadow-color: rgba(0, 0, 0, 0.12);
 }
 
 .hm-grid {
@@ -401,11 +421,26 @@
    新增專案＝在這裡加一行 .theme-xxx { --text-heading: 主色 } 即可。 */
 .theme-advantech {
   --text-heading: #093060;
+  --cs-accent: #005796;
+  --cs-accent-strong: #093060;
+  --cs-accent-soft: #e5effa;
+  --cs-surface-soft: #fafcfe;
+  --cs-line: #cbdef4;
+  --cs-line-strong: #d5dfec;
+  --cs-text-heading: #093060;
+  --cs-shadow-color: rgba(9, 48, 96, 0.12);
   /* 研華主色：深藍 */
 }
 
 .theme-crypto-arsenal {
   --text-heading: #252a47;
+  --cs-accent: #376adc;
+  --cs-accent-strong: #252a47;
+  --cs-accent-soft: #e8eafa;
+  --cs-line: #d8deec;
+  --cs-line-strong: #d8deec;
+  --cs-text-heading: #252a47;
+  --cs-shadow-color: rgba(37, 42, 71, 0.12);
   /* Crypto Arsenal 主色：深 navy（Figma node 2574-83 primary base） */
 }
 

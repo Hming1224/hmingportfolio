@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseSection, FlowScrollHint } from "../../../components/case-study";
+import { CaseCard, CaseGrid, CaseMedia, CaseSection, FlowScrollHint } from "../../../components/case-study";
 import { compAiTools, compEmsItems } from "../data";
 import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
 import { getAdvantechTranslator } from "../i18n-server";
@@ -20,18 +20,18 @@ export default async function AnalysisSection() {
         <p className="cs-sub-section-desc cs-text-muted-blue">
           {t("從 4 個產業 AI 工具中整理出可借鏡的互動模式：摘要、洞察、建議與告警。這些能力可轉化成能源管理場景中的資料理解與主動提醒。")}
         </p>
-        <div className="cs-comp-grid">
+        <CaseGrid variant="four" className="cs-comp-grid">
           {aiTools.map((item) => (
-            <div key={item.title} className="cs-comp-card">
-              <div className="cs-comp-card-img">
+            <CaseCard key={item.title} variant="accent" className="cs-comp-card">
+              <CaseMedia className="cs-comp-media" contentClassName="cs-comp-card-img">
                 <Image src={item.img} alt={item.title} fill style={{ objectFit: "cover" }} unoptimized />
-              </div>
+              </CaseMedia>
               <h4 className="cs-comp-card-title">{item.title}</h4>
               <p className="cs-comp-card-desc">{item.desc}</p>
               <div className="cs-comp-pill">{item.tag}</div>
-            </div>
+            </CaseCard>
           ))}
-        </div>
+        </CaseGrid>
       </div>
 
       {/* 02 */}
@@ -40,12 +40,12 @@ export default async function AnalysisSection() {
         <p className="cs-sub-section-desc cs-text-muted-blue">
           {t("市場上的能源管理系統已開始把設備監控、能源分析、成本最佳化與 AI 洞察整合在同一個工作流程中。")}
         </p>
-        <div className="cs-comp-ems-grid">
+        <CaseGrid variant="two" className="cs-comp-ems-grid">
           {emsItems.map((item) => (
-            <div key={item.name} className="cs-comp-ems-card">
-              <div className="cs-comp-ems-img">
+            <CaseCard key={item.name} className="cs-comp-ems-card">
+              <CaseMedia className="cs-comp-ems-media" contentClassName="cs-comp-ems-img">
                 <Image src={item.img} alt={item.name} fill style={{ objectFit: "cover" }} unoptimized />
-              </div>
+              </CaseMedia>
               <div className="cs-comp-ems-body">
                 <h4 className="cs-comp-ems-name">{item.name}</h4>
                 <span className="cs-comp-category-pill">{item.category}</span>
@@ -53,9 +53,9 @@ export default async function AnalysisSection() {
                   {item.items.map((bullet, idx) => <li key={idx}>{bullet}</li>)}
                 </ul>
               </div>
-            </div>
+            </CaseCard>
           ))}
-        </div>
+        </CaseGrid>
       </div>
 
       {/* 03 */}

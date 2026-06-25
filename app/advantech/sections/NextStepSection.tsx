@@ -1,3 +1,4 @@
+import { CaseCard, CaseGrid } from "../../../components/case-study";
 import { nextStepCards } from "../data";
 import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
 import { getAdvantechTranslator } from "../i18n-server";
@@ -13,9 +14,9 @@ export default async function NextStepSection() {
         <p className="cs-ns-desc cs-text-ink">UI/UX 設計階段完成後，專案將進入工程實作與 AI 能力持續優化階段。設計師已先定義 AI Chatbot 的使用情境、互動流程與介面體驗；接下來，後端工程師將承接這些設計方向，進一步建構 AI 資料庫、訓練模型能力，並將設計中的功能情境轉化為可運作的系統架構。</p>
       </div>
 
-      <div className="cs-ns-cards">
+      <CaseGrid variant="two" className="cs-ns-cards">
         {cards.map((card) => (
-          <div key={card.num} className="cs-ns-card">
+          <CaseCard key={card.num} className="cs-ns-card">
             <div className="cs-ns-card-hd">
               <span className="cs-ns-badge">{card.num}</span>
               <h3 className="cs-ns-card-title">{card.title}</h3>
@@ -27,9 +28,9 @@ export default async function NextStepSection() {
                 <span key={tag} className="cs-ns-tag">{tag}</span>
               ))}
             </div>
-          </div>
+          </CaseCard>
         ))}
-      </div>
+      </CaseGrid>
 
       <div className="cs-ns-vision">
         <p className="cs-ns-vision-title">{t("智慧工作流程平台願景")}</p>

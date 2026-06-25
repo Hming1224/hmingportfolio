@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseSection } from "../../../components/case-study";
+import { CaseCard, CaseGrid, CaseMedia, CaseSection } from "../../../components/case-study";
 import { getAdvantechTranslator } from "../i18n-server";
 
 export default async function ProductBackgroundSection() {
@@ -9,8 +9,8 @@ export default async function ProductBackgroundSection() {
       <p className="cs-body-muted" style={{ marginBottom: 32 }}>
         {t("本專案的設計對象為研華科技 WISE-IoT 平台下的兩大能源管理模組。ECOWatch 負責建築能源用量的即時可視化監控；WISE iEMS HVAC 模組則整合 AI 演算法主動優化空調系統能效。兩者共同構成智慧設施管理的核心解決方案，也是本次 AI Chatbot 設計用於整合各項功能的系統。")}
       </p>
-      <div className="cs-product-grid">
-        <div className="cs-product-card">
+      <CaseGrid variant="two" className="cs-product-grid">
+        <CaseCard variant="accent" className="cs-product-card">
           <div className="cs-product-card-header">
             <div className="cs-product-logo">
               <Image src="/projects/advantech/research/ecowatch-icon.webp" alt="ECOWatch" fill style={{ objectFit: "cover" }} unoptimized />
@@ -26,7 +26,7 @@ export default async function ProductBackgroundSection() {
               <span key={tag} className="cs-product-tag">{t(tag)}</span>
             ))}
           </div>
-          <div className="cs-product-screen">
+          <CaseMedia className="cs-product-media" contentClassName="cs-product-screen">
             <Image
               src="/projects/advantech/research/ecowatch-screen.webp"
               alt={t("ECOWatch 系統截圖")}
@@ -34,10 +34,10 @@ export default async function ProductBackgroundSection() {
               style={{ objectFit: "cover", objectPosition: "center" }}
               unoptimized
             />
-          </div>
-        </div>
+          </CaseMedia>
+        </CaseCard>
 
-        <div className="cs-product-card">
+        <CaseCard variant="accent" className="cs-product-card">
           <div className="cs-product-card-header">
             <div className="cs-product-logo">
               <Image src="/projects/advantech/research/hvac-icon.webp" alt="HVAC" fill style={{ objectFit: "cover" }} unoptimized />
@@ -53,7 +53,7 @@ export default async function ProductBackgroundSection() {
               <span key={tag} className="cs-product-tag">{t(tag)}</span>
             ))}
           </div>
-          <div className="cs-product-screen">
+          <CaseMedia className="cs-product-media" contentClassName="cs-product-screen">
             <Image
               src="/projects/advantech/research/hvac-screen.webp"
               alt={t("HVAC 系統截圖")}
@@ -61,9 +61,9 @@ export default async function ProductBackgroundSection() {
               style={{ objectFit: "cover", objectPosition: "center" }}
               unoptimized
             />
-          </div>
-        </div>
-      </div>
+          </CaseMedia>
+        </CaseCard>
+      </CaseGrid>
     </CaseSection>
   );
 }

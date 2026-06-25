@@ -1,6 +1,13 @@
 export { default as CaseStudyShell } from './CaseStudyShell';
+export { default as CaseHero } from './CaseHero';
+export { default as CaseInfoGrid } from './CaseInfoGrid';
+export { default as CaseGrid } from './CaseGrid';
+export { default as CaseCard } from './CaseCard';
+export { default as CaseMedia } from './CaseMedia';
+export { default as CaseMetricGrid } from './CaseMetricGrid';
 export { default as CaseSection } from './CaseSection';
 export { default as CaseHeading } from './CaseHeading';
 export { default as ZoomableImage } from './ZoomableImage';
 export { default as FlowScrollHint } from './FlowScrollHint';
+export { type CaseInfoItem } from './CaseInfoGrid';
 export { type TocSection } from '../CaseTOC';

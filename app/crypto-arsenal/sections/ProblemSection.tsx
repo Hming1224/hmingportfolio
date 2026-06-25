@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CaseCard, CaseGrid } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { painCards } from "../data";
 
@@ -25,9 +26,9 @@ export default async function ProblemSection() {
           "使用者在CA 平台上使用策略機器人交易時，雖然可以看到策略整體賺了多少，卻無法清楚理解「現在到底開了什麼倉位」。當同時啟動多支策略、或同一支策略可能開多也可能開空時，使用者無法直接判斷目前是多倉還是空倉、倉位數量、入場價、標記價、浮動盈虧，以及該倉位距離止盈 / 止損還有多遠。",
         )}
       </p>
-      <div className="ca-pains">
+      <CaseGrid variant="three" className="ca-pains">
         {painCards.map((card) => (
-          <article className="ca-pain-card" key={card.name}>
+          <CaseCard className="ca-pain-card" key={card.name}>
             <p className="ca-pain-quote">{t(card.quote)}</p>
             <div className="ca-pain-who">
               <span className={`ca-avatar ca-avatar-${card.tone}`}>
@@ -44,9 +45,9 @@ export default async function ProblemSection() {
               <span className="ca-pain-line" aria-hidden="true" />
               <span className="ca-pain-role">{t(card.role)}</span>
             </div>
-          </article>
+          </CaseCard>
         ))}
-      </div>
+      </CaseGrid>
     </section>
   );
 }

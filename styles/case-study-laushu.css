@@ -3,6 +3,17 @@
    next navigation, spacing, type tokens, and button rules. */
 
 .theme-laushu {
+  --cs-accent: #9300f0;
+  --cs-accent-strong: #37005f;
+  --cs-accent-soft: #decbff;
+  --cs-surface-soft: #f8f7fa;
+  --cs-line: rgba(99, 0, 165, 0.16);
+  --cs-line-strong: rgba(99, 0, 165, 0.24);
+  --cs-text-heading: #37005f;
+  --cs-text-body: #1f2933;
+  --cs-text-secondary: #6a558a;
+  --cs-text-muted: #6a558a;
+  --cs-shadow-color: rgba(55, 0, 95, 0.12);
   --laushu-primary-100: #fdfcff;
   --laushu-primary-200: #decbff;
   --laushu-primary-300: #c399ff;
@@ -153,25 +164,23 @@
 .theme-laushu .laushu-problem-grid,
 .theme-laushu .laushu-stakeholder-grid,
 .theme-laushu .laushu-usecase-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  --cs-grid-gap: 20px;
   max-width: var(--laushu-content-max);
   margin: 40px auto 0;
 }
 
 .theme-laushu .laushu-stakeholder-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 0;
 }
 
 .theme-laushu .laushu-info-card {
+  --cs-card-bg: #ffffff;
+  --cs-card-border: var(--laushu-line);
+  --cs-card-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+  --cs-card-padding: 24px;
+  --cs-card-padding-mobile: 20px;
+  --cs-card-radius: 16px;
   min-height: 180px;
-  padding: 24px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
 }
 
 .theme-laushu .laushu-info-card>span {
@@ -594,9 +603,7 @@
 }
 
 .theme-laushu .laushu-learning-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  --cs-grid-gap: 24px;
   max-width: var(--laushu-content-max);
   margin: 24px auto 0;
   align-items: stretch;
@@ -617,14 +624,13 @@
 }
 
 .theme-laushu .laushu-learning-card {
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
-  padding: 33px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: linear-gradient(121deg, var(--laushu-primary-100) 0%, var(--laushu-tertiary-100) 100%);
+  --cs-card-bg: linear-gradient(121deg, var(--laushu-primary-100) 0%, var(--laushu-tertiary-100) 100%);
+  --cs-card-border: var(--laushu-line);
+  --cs-card-gap: 12px;
+  --cs-card-padding: 33px;
+  --cs-card-padding-mobile: 20px;
+  --cs-card-radius: 16px;
 }
 
 .theme-laushu .laushu-learning-num {
@@ -656,12 +662,6 @@
   line-height: 2.05;
 }
 
-@media (max-width: 1199px) {
-  .theme-laushu .laushu-stakeholder-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 1023px) {
   .theme-laushu .laushu-overview-layout,
   .theme-laushu .laushu-problem-layout,
@@ -672,15 +672,6 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-laushu .laushu-summary-grid,
-  .theme-laushu .laushu-problem-grid,
-  .theme-laushu .laushu-usecase-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .theme-laushu .laushu-learning-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 768px) {
@@ -692,20 +683,17 @@
     object-position: center top;
   }
 
-  .theme-laushu .laushu-stakeholder-grid,
   .theme-laushu .laushu-demo-list {
     grid-template-columns: 1fr;
   }
 
   .theme-laushu .laushu-info-card {
     min-height: 0;
-    padding: 20px;
   }
 
   .theme-laushu .laushu-form-card,
   .theme-laushu .laushu-persona,
-  .theme-laushu .laushu-iteration,
-  .theme-laushu .laushu-learning-card {
+  .theme-laushu .laushu-iteration {
     padding: 20px;
   }
 }

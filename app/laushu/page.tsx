@@ -4,8 +4,12 @@ import type { ReactNode } from "react";
 import { getLocale } from "next-intl/server";
 import "../../styles/case-study-laushu.css";
 import {
+  CaseCard,
+  CaseGrid,
+  CaseHero,
   CaseStudyShell,
   ZoomableImage,
+  type CaseInfoItem,
   type TocSection,
 } from "../../components/case-study";
 import FeatureConnectors from "../advantech/components/FeatureConnectors";
@@ -418,35 +422,31 @@ export default async function LaushuPage() {
 }
 
 function HeroSection() {
+  const infoItems: CaseInfoItem[] = roleItems.map((item) => ({
+    label: item.label,
+    value: item.value.map((line, index) => (
+      <span key={line}>
+        {line}
+        {index < item.value.length - 1 ? <br /> : null}
+      </span>
+    )),
+  }));
+
   return (
-    <section>
-      <div className="cs-hero-cover laushu-hero-cover">
-        <div className="cs-hero-cover-img">
-          <Image src={`${IMG}/hero-cover.png`} alt="Laushu 勞贖設計優化專案主視覺" fill sizes="100vw" priority />
-        </div>
-      </div>
-      <div className="cs-hero-info laushu-hero-info">
-        <div className="cs-hero-meta">
-          <span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>
-        </div>
-        <h1 className="cs-title">Laushu 勞贖｜勞務報酬系統設計優化</h1>
-        <div className="cs-info-row laushu-info-row">
-          {roleItems.map((item) => (
-            <div className="cs-info-card" key={item.label}>
-              <span className="cs-info-label">{item.label}</span>
-              <span className="cs-info-value">
-                {item.value.map((line, index) => (
-                  <span key={line}>
-                    {line}
-                    {index < item.value.length - 1 ? <br /> : null}
-                  </span>
-                ))}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <CaseHero
+      cover={{
+        src: `${IMG}/hero-cover.png`,
+        alt: "Laushu 勞贖設計優化專案主視覺",
+        objectPosition: "center",
+        sizes: "100vw",
+      }}
+      coverClassName="laushu-hero-cover"
+      infoClassName="laushu-hero-info"
+      infoGridClassName="laushu-info-row"
+      meta={<span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>}
+      title="Laushu 勞贖｜勞務報酬系統設計優化"
+      infoItems={infoItems}
+    />
   );
 }
 
@@ -457,11 +457,11 @@ function OverviewSection() {
       <p className="laushu-overview-lead">
         專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
       </p>
-      <div className="laushu-summary-grid laushu-overview-grid">
+      <CaseGrid variant="three" className="laushu-summary-grid laushu-overview-grid">
         {overviewCards.map((card) => (
           <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
         ))}
-      </div>
+      </CaseGrid>
       <figure className="laushu-overview-hero">
         <Image
           src={`${IMG}/overview-hero.png`}
@@ -499,11 +499,11 @@ function ProblemSection() {
         </figure>
       </div>
       <h3 className="laushu-problem-cards-title">現階段勞報單的問題</h3>
-      <div className="laushu-problem-grid">
+      <CaseGrid variant="three" className="laushu-problem-grid">
         {problemCards.map((card, index) => (
           <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
         ))}
-      </div>
+      </CaseGrid>
     </section>
   );
 }
@@ -515,11 +515,11 @@ function UnderstandSection() {
       <ArticleBlock title="彙整使用勞報單流程" number="01">
         <p>訪談勞贖負責人並自行收集資料，了解外包與勞報單簽署流程，釐清會計師、公司、外包工作者三者關係。此平台至少包含四種核心利害關係人：</p>
       </ArticleBlock>
-      <div className="laushu-stakeholder-grid">
+      <CaseGrid variant="four" className="laushu-stakeholder-grid">
         {stakeholderCards.map((card, index) => (
           <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
         ))}
-      </div>
+      </CaseGrid>
       {StakeholderFlow()}
 
       <ArticleBlock title="制定研究策略" number="02">
@@ -611,11 +611,11 @@ function ConvergeSection() {
       <ArticleBlock title="重要用例" number="02">
         <p>收斂訪談洞見後，使用者最在意、也覺得紙本勞報單最麻煩的三件事：如何有效管理人員、如何改善簽收確認、如何減少回簽次數。據此彙整三個重要用例，進行後續介面流程設計。</p>
       </ArticleBlock>
-      <div className="laushu-usecase-grid">
+      <CaseGrid variant="three" className="laushu-usecase-grid">
         {keyFlows.map((item) => (
           <InfoCard title={item.title} image={item.image} key={item.title}>{item.body}</InfoCard>
         ))}
-      </div>
+      </CaseGrid>
     </section>
   );
 }
@@ -875,15 +875,15 @@ function ReflectionSection() {
   return (
     <section id="cs-sec-reflection" className="cs-section laushu-learning-section">
       <LaushuHead eyebrow="學習反思" title="線下與線上整合的數位流程考驗" />
-      <div className="laushu-learning-grid">
+      <CaseGrid variant="three" className="laushu-learning-grid">
         {reflections.map((r, index) => (
-          <div className="laushu-learning-card" key={r.title}>
+          <CaseCard variant="accent" className="laushu-learning-card" key={r.title}>
             <span className="laushu-learning-num">{String(index + 1).padStart(2, "0")}</span>
             <h3 className="laushu-learning-title">{r.title}</h3>
             <p>{r.body}</p>
-          </div>
+          </CaseCard>
         ))}
-      </div>
+      </CaseGrid>
     </section>
   );
 }
@@ -920,7 +920,7 @@ function ResearchTable() {
 
 function InfoCard({ title, number, image, children }: { title: string; number?: string; image?: string; children: ReactNode }) {
   return (
-    <article className={`laushu-info-card${image ? " laushu-info-card--illustrated" : ""}`}>
+    <CaseCard className={`laushu-info-card${image ? " laushu-info-card--illustrated" : ""}`}>
       {number ? <span>{number}</span> : null}
       {image ? (
         <span className="laushu-info-card-art" aria-hidden="true">
@@ -930,7 +930,7 @@ function InfoCard({ title, number, image, children }: { title: string; number?: 
       ) : null}
       <h4>{title}</h4>
       <p>{children}</p>
-    </article>
+    </CaseCard>
   );
 }
 
