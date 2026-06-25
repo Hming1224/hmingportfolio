@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import type { DesignSystemLocale } from "@/lib/design-system-docs";
 import Button from "../ui/Button";
 import { Alert } from "../ui/Alert";
 import { Checkbox } from "../ui/Checkbox";
@@ -18,12 +20,20 @@ const options = [
   { label: "Design system", value: "system" },
 ];
 
-export default function ComponentDemo({ type }: { type?: string }) {
+export default function ComponentDemo({
+  type,
+  locale,
+}: {
+  type?: string;
+  locale: DesignSystemLocale;
+}) {
+  const zh = locale === "zh-TW";
   const [copied, setCopied] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectValue, setSelectValue] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [activeTab, setActiveTab] = useState("Overview");
+  const [activeProposal, setActiveProposal] = useState(1);
 
   if (!type) {
     return <p className="ds-doc-demo-note">This pattern is documented from its live portfolio usage.</p>;
@@ -53,6 +63,59 @@ export default function ComponentDemo({ type }: { type?: string }) {
       >
         {copied ? "Copied" : "Copy token"}
       </Button>
+    );
+  }
+
+  if (type === "language-switcher") {
+    return (
+      <div className="ds-doc-language" aria-label={zh ? "語言選單範例" : "Language menu example"}>
+        <button type="button" aria-expanded="true">
+          {zh ? "繁體中文" : "English"} <span aria-hidden="true">⌄</span>
+        </button>
+        <div role="menu">
+          <button type="button" role="menuitemradio" aria-checked={locale === "en"}>
+            English {locale === "en" ? "✓" : ""}
+          </button>
+          <button type="button" role="menuitemradio" aria-checked={locale === "zh-TW"}>
+            繁體中文 {locale === "zh-TW" ? "✓" : ""}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "navbar") {
+    return (
+      <div className="ds-doc-navbar">
+        <strong aria-label="Hming Design">H</strong>
+        <nav aria-label={zh ? "主要導覽範例" : "Primary navigation example"}>
+          <a href="#preview">{zh ? "作品" : "Projects"}</a>
+          <a href="#preview">{zh ? "關於我" : "About"}</a>
+          <a href="#preview">{zh ? "聯絡我" : "Contact"}</a>
+        </nav>
+        <button type="button" aria-label={zh ? "開啟選單" : "Open menu"}>☰</button>
+      </div>
+    );
+  }
+
+  if (type === "footer") {
+    return (
+      <footer className="ds-doc-footer">
+        <p>© Brian Huang 2026</p>
+        <div>
+          <a href="https://www.linkedin.com" aria-label="LinkedIn">in</a>
+          <a href="https://github.com" aria-label="GitHub">GH</a>
+        </div>
+      </footer>
+    );
+  }
+
+  if (type === "scroll-progress") {
+    return (
+      <div className="ds-doc-progress-preview">
+        <div><span /></div>
+        <p>{zh ? "目前閱讀進度 64%" : "Current reading progress: 64%"}</p>
+      </div>
     );
   }
 
@@ -118,6 +181,70 @@ export default function ComponentDemo({ type }: { type?: string }) {
     );
   }
 
+  if (type === "case-toc") {
+    return (
+      <nav className="ds-doc-toc-preview" aria-label={zh ? "案例目錄範例" : "Case table of contents example"}>
+        {(zh ? ["專案背景", "研究洞察", "設計方案", "成果反思"] : ["Context", "Insights", "Solution", "Outcome"]).map((item, index) => (
+          <a className={index === 1 ? "is-active" : undefined} href="#preview" key={item}>
+            <span>{String(index + 1).padStart(2, "0")}</span>{item}
+          </a>
+        ))}
+      </nav>
+    );
+  }
+
+  if (type === "year-rail") {
+    return (
+      <nav className="ds-doc-year-rail" aria-label={zh ? "年份範例" : "Year navigation example"}>
+        {["2026", "2025", "2024", "2023"].map((year) => (
+          <a className={year === "2025" ? "is-active" : undefined} href="#preview" key={year}>{year}</a>
+        ))}
+      </nav>
+    );
+  }
+
+  if (type === "case-next-nav") {
+    return (
+      <div className="ds-inline-actions ds-doc-next-nav">
+        <Button variant="secondary">← {zh ? "返回首頁" : "Back home"}</Button>
+        <Button>{zh ? "下一個專案" : "Next project"} →</Button>
+      </div>
+    );
+  }
+
+  if (type === "contact-method") {
+    return (
+      <div className="ds-doc-contact-method">
+        <span aria-hidden="true">@</span>
+        <div><small>Email</small><strong>hmingdesigner@gmail.com</strong></div>
+        <Button size="sm" variant="secondary">{zh ? "複製" : "Copy"}</Button>
+      </div>
+    );
+  }
+
+  if (type === "project-card") {
+    return (
+      <article className="ds-doc-project-card">
+        <div className="ds-doc-project-cover">
+          <Image src="/projects/advantech/cover/cover.webp" alt="" fill sizes="560px" loading="eager" />
+        </div>
+        <div>
+          <p>Product Design · 2024</p>
+          <h3>{zh ? "智慧能源維運系統" : "Smart energy operations system"}</h3>
+          <div className="ds-project-tag-row"><span>UX Research</span><span>UI Design</span></div>
+        </div>
+      </article>
+    );
+  }
+
+  if (type === "section-heading") {
+    return (
+      <div className="ds-doc-section-heading-preview">
+        <span /><h3>{zh ? "精選作品" : "Selected Projects"}</h3><span />
+      </div>
+    );
+  }
+
   if (type === "tags") {
     return (
       <div className="ds-project-tag-row">
@@ -126,6 +253,95 @@ export default function ComponentDemo({ type }: { type?: string }) {
         <span>AI collaboration</span>
       </div>
     );
+  }
+
+  if (type === "social-link") {
+    return (
+      <div className="ds-doc-social-row">
+        <a href="https://www.linkedin.com" aria-label="LinkedIn">in</a>
+        <a href="https://github.com" aria-label="GitHub">GH</a>
+      </div>
+    );
+  }
+
+  if (type === "skill-card") {
+    return (
+      <article className="ds-doc-skill-card">
+        <p>01 / Product</p>
+        <h3>{zh ? "產品設計" : "Product Design"}</h3>
+        <ul><li>UX Research</li><li>Interaction Design</li><li>Prototyping</li></ul>
+      </article>
+    );
+  }
+
+  if (type === "experience-card") {
+    return (
+      <article className="ds-doc-experience-card">
+        <time>2024 — 2025</time>
+        <div>
+          <h3>{zh ? "產品設計師" : "Product Designer"}</h3>
+          <p>{zh ? "負責研究、流程設計與介面規格，協作 PM 與工程團隊完成產品迭代。" : "Owned research, flows, and UI specifications across product iterations."}</p>
+        </div>
+      </article>
+    );
+  }
+
+  if (type === "hero-badge") {
+    return <div className="ds-doc-hero-badge"><span aria-hidden="true">✦</span>{zh ? "產品設計師・與 AI 協作" : "Product Designer · Building with AI"}</div>;
+  }
+
+  if (type === "case-hero") {
+    return (
+      <article className="ds-doc-case-hero">
+        <div className="ds-doc-case-cover">
+          <Image src="/projects/crypto-arsenal/cover/hero-cover.webp" alt="" fill sizes="720px" loading="eager" />
+        </div>
+        <div>
+          <p>WEB · FinTech · UX/UI</p>
+          <h3>{zh ? "策略倉位資訊與風險控制介面" : "Position insights and risk controls"}</h3>
+        </div>
+      </article>
+    );
+  }
+
+  if (type === "case-section") {
+    return (
+      <section className="ds-doc-case-section">
+        <div><span /><h3>{zh ? "研究洞察" : "Research Insights"}/</h3><span /></div>
+        <p>{zh ? "用一致的標題、內容寬度與留白建立案例頁閱讀節奏。" : "Consistent headings, content width, and spacing create a stable case-study rhythm."}</p>
+      </section>
+    );
+  }
+
+  if (type === "proposal-tabs") {
+    const proposals = zh ? ["方案 A", "方案 B・採用", "方案 C"] : ["Option A", "Option B · Adopted", "Option C"];
+    return (
+      <div className="ds-doc-proposal">
+        <div className="ds-doc-tabs" role="tablist">
+          {proposals.map((tab, index) => (
+            <button
+              aria-selected={activeProposal === index}
+              className={activeProposal === index ? "is-active" : undefined}
+              key={tab}
+              onClick={() => setActiveProposal(index)}
+              role="tab"
+              type="button"
+            >{tab}</button>
+          ))}
+        </div>
+        <div className="ds-doc-proposal-panel">
+          <strong>{proposals[activeProposal]}</strong>
+          <p>{zh ? "清楚說明提案差異、驗證結果與最終採用理由。" : "Explain the proposal difference, validation result, and adoption rationale."}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "case-info-card") {
+    const items = zh
+      ? [["時間", "2024.06 — 2024.08"], ["角色", "UI/UX 設計師"], ["團隊", "5 人跨職能團隊"]]
+      : [["Timeline", "Jun — Aug 2024"], ["Role", "UI/UX Designer"], ["Team", "5-person cross-functional team"]];
+    return <div className="ds-doc-info-grid">{items.map(([label, value]) => <article key={label}><small>{label}</small><strong>{value}</strong></article>)}</div>;
   }
 
   if (type === "alert") {

@@ -91,7 +91,7 @@ export default function DesignSystemDocsPage({
             <section className="ds-doc-section">
               <h2>{localized(locale, "Examples", "範例")}</h2>
               <div className="ds-doc-demo-stage">
-                <ComponentDemo type={doc.demo} />
+                <ComponentDemo locale={locale} type={doc.demo} />
               </div>
             </section>
           ) : null}
