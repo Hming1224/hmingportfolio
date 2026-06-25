@@ -18,95 +18,13 @@ export type DesignSystemDoc = {
   demo?: string;
 };
 
-export const designSystemSections = [
-  {
-    label: "Foundations",
-    labelZh: "基礎規範",
-    items: ["colors", "typography", "spacing", "radius", "shadows", "motion"].map(
-      (slug) => ({ kind: "foundation" as const, slug }),
-    ),
-  },
-  {
-    label: "General",
-    labelZh: "一般元件",
-    items: ["button", "copy-button", "language-switcher"].map((slug) => ({
-      kind: "component" as const,
-      slug,
-    })),
-  },
-  {
-    label: "Shell",
-    labelZh: "網站骨架",
-    items: ["navbar", "footer", "scroll-progress"].map((slug) => ({
-      kind: "component" as const,
-      slug,
-    })),
-  },
-  {
-    label: "Navigation",
-    labelZh: "導覽",
-    items: ["tabs", "case-toc", "year-rail", "case-next-nav"].map((slug) => ({
-      kind: "component" as const,
-      slug,
-    })),
-  },
-  {
-    label: "Data Entry",
-    labelZh: "資料輸入",
-    items: [
-      "floating-input",
-      "floating-textarea",
-      "contact-method",
-      "select",
-      "checkbox",
-      "radio",
-    ].map((slug) => ({ kind: "component" as const, slug })),
-  },
-  {
-    label: "Data Display",
-    labelZh: "資料展示",
-    items: [
-      "project-card",
-      "section-heading",
-      "project-tag",
-      "social-link",
-      "skill-category-card",
-      "experience-card",
-      "hero-badge",
-    ].map((slug) => ({ kind: "component" as const, slug })),
-  },
-  {
-    label: "Case Study",
-    labelZh: "案例頁",
-    items: [
-      "case-hero",
-      "case-section",
-      "zoomable-image",
-      "proposal-tabs",
-      "case-info-card",
-    ].map((slug) => ({ kind: "component" as const, slug })),
-  },
-  {
-    label: "Feedback",
-    labelZh: "系統回饋",
-    items: ["toast", "alert", "modal", "skeleton", "empty-state"].map((slug) => ({
-      kind: "component" as const,
-      slug,
-    })),
-  },
-  {
-    label: "Reference",
-    labelZh: "參考資料",
-    items: ["tokens", "button-tokens", "gaps", "plan"].map((slug) => ({
-      kind: "reference" as const,
-      slug,
-    })),
-  },
-] as const;
+import { designSystemSections } from "./design-system-data";
+
+export { designSystemSections };
 
 const foundations: DesignSystemDoc[] = [
   ["colors", "Colors", "色彩", "Primitive、semantic、project tone 與 status colors。", ["品牌紫色只用於主要 CTA 與 active 訊號。", "專案色只影響局部 tone，不覆蓋全站骨架。"], ["--hm-purple-50…900", "--hm-paper / surface / ink", "--hm-success / warning / error / info", "--hm-chart-1…6"]],
-  ["typography", "Typography", "字體與排版", "Space Grotesk 與響應式字級、字重、行高規格。", ["標題維持清楚層級，正文優先可讀性。", "英文完整單字換行，不使用 anywhere 強制切字。"], ["--hm-fs-h1…xs", "--hm-fw-regular…bold", "--hm-text-heading / body / secondary"]],
+  ["typography", "Typography", "字體與排版", "Space Grotesk 與響應式字級、字重、行高規格。", ["標題維持清楚層級，正文優先可讀性。", "英文完整單字換行，不使用 anywhere 強制切字。"], ["--hm-fs-h1…xs", "--hm-fw-regular…bold", "--hm-ink / --hm-muted"]],
   ["spacing", "Spacing", "間距", "4px 基準的數字間距與既有 T-shirt aliases。", ["優先使用 token；只在幾何對齊有明確理由時例外。", "section 留白大於元件內距。"], ["--hm-space-1…20", "--hm-space-3xs…3xl", "--hm-page-gutter"]],
   ["radius", "Border Radius", "圓角", "控制項、卡片、面板與 pill 的圓角語言。", ["同層級元件使用相同圓角。", "按鈕與 badge 使用 pill，不把所有卡片做成膠囊。"], ["--hm-radius-sm / md / lg", "--hm-radius-btn", "--hm-radius-pill"]],
   ["shadows", "Shadows", "陰影", "從輕量分層到 overlay 的 elevation 系統。", ["陰影只表達層級，不取代邊框。", "hover elevation 不造成版面位移。"], ["--hm-shadow-sm / md / lg / xl", "--hm-shadow-card-hover"]],
@@ -147,6 +65,7 @@ const componentSeeds: ComponentSeed[] = [
   { slug: "case-toc", title: "CaseTOC", titleZh: "案例目錄", category: "Navigation", source: "components/CaseTOC.tsx", demo: "case-toc", states: ["hidden before content", "visible", "active section"], usage: ["用於案例頁長篇內容的章節定位。", "進入第一個內容 section 後才顯示，並跟隨閱讀位置更新 active item。"] },
   { slug: "year-rail", title: "YearRail", titleZh: "年份導覽", category: "Navigation", source: "components/YearRail.tsx", demo: "year-rail", states: ["default", "active year", "reduced motion"], usage: ["用於 About 經歷時間軸，快速跳到指定年份。", "目前年份依閱讀焦點自動更新。"] },
   { slug: "case-next-nav", title: "CaseNextNav", titleZh: "下一案例導覽", category: "Navigation", source: "components/case-study/CaseStudyShell.tsx", demo: "case-next-nav", states: ["previous", "next", "disabled"], usage: ["放在案例正文與 Footer 之間。", "提供返回首頁與前往下一個案例的明確出口。"] },
+  { slug: "accordion", title: "Accordion", titleZh: "手風琴", category: "Navigation", source: "components/ui/Accordion.tsx", demo: "accordion", states: ["collapsed", "expanded", "single", "multiple", "keyboard focus"], tokens: ["--hm-line", "--hm-surface", "--hm-radius-sm", "--hm-duration-fast", "--hm-ease-out"], usage: ["用於可分組的長列表導覽或文件區塊，例如 Design System sidebar。", "預設展開目前所在分類；需要多分類同時開啟時使用 multiple 模式。"], accessibility: ["Header 使用 button，並同步 aria-expanded 與 aria-controls。", "Panel 使用 role=\"region\" 並以 aria-labelledby 關聯 header。", "支援 Enter、Space 切換，方向鍵可在 header 之間移動焦點。"] },
   { slug: "floating-input", title: "FloatingInput", titleZh: "浮動標籤輸入框", category: "Data Entry", source: "components/Contact.tsx", demo: "input", states: ["empty", "focus", "filled", "error", "success", "disabled"] },
   { slug: "floating-textarea", title: "FloatingTextarea", titleZh: "浮動標籤多行輸入", category: "Data Entry", source: "components/Contact.tsx", demo: "textarea", states: ["empty", "focus", "filled", "error", "disabled"] },
   { slug: "contact-method", title: "ContactMethod", titleZh: "聯絡方式", category: "Data Entry", source: "components/Contact.tsx", demo: "contact-method", states: ["default", "hover", "focus"], usage: ["顯示 Email、電話或社群帳號與對應動作。", "可複製資料使用 button；外部社群使用 link。"] },

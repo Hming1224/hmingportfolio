@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import CaseSectionHeader from './CaseSectionHeader';
 
 interface CaseHeadingProps {
   title: string;
@@ -15,6 +16,10 @@ interface CaseHeadingProps {
  */
 export default function CaseHeading({ title, tone = 'default', style }: CaseHeadingProps) {
   const isWhite = tone === 'white';
+  if (!isWhite && !style) {
+    return <CaseSectionHeader title={title} />;
+  }
+
   return (
     <>
       <h2 className={isWhite ? 'cs-heading-white' : 'cs-heading'} style={style}>

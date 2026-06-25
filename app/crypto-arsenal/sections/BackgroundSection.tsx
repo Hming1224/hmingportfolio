@@ -1,4 +1,4 @@
-import { FlowScrollHint } from "../../../components/case-study";
+import { CaseSectionHeader, FlowScrollHint } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { EcosystemFlowDiagram, TradingFlowDiagram } from "./BackgroundFlowDiagrams";
 
@@ -29,9 +29,7 @@ export default async function BackgroundSection() {
 
   return (
     <section id="cs-sec-background" className="cs-section ca-section-alt">
-      <span className="ca-tag">{t("專案背景")}</span>
-      <h2 className="ca-h2">{t("Crypto Arsenal 是做什麼？")}</h2>
-      <div className="cs-divider" />
+      <CaseSectionHeader kicker={t("專案背景")} title={t("Crypto Arsenal 是做什麼？")} />
 
       <div className="ca-narrow">
         <p className="ca-lead">

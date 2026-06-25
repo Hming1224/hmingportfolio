@@ -13,6 +13,12 @@ import { Select } from "../ui/Select";
 import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import ZoomableImage from "../case-study/ZoomableImage";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionItem,
+  AccordionPanel,
+} from "../ui/Accordion";
 
 const options = [
   { label: "Product design", value: "product" },
@@ -209,6 +215,25 @@ export default function ComponentDemo({
         <Button variant="secondary">← {zh ? "返回首頁" : "Back home"}</Button>
         <Button>{zh ? "下一個專案" : "Next project"} →</Button>
       </div>
+    );
+  }
+
+  if (type === "accordion") {
+    const items = zh
+      ? [["foundations", "基礎規範", "色彩、字級、間距與 motion token。"], ["components", "元件", "以 production code 為準的元件狀態與使用方式。"]]
+      : [["foundations", "Foundations", "Color, type, spacing, and motion tokens."], ["components", "Components", "States and usage documented from production code."]];
+
+    return (
+      <Accordion className="ds-doc-accordion-preview" defaultValue="foundations" type="single">
+        {items.map(([value, title, body]) => (
+          <AccordionItem key={value} value={value}>
+            <AccordionHeader>{title}</AccordionHeader>
+            <AccordionPanel>
+              <p>{body}</p>
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
     );
   }
 

@@ -1,3 +1,4 @@
+import { CaseCard, CaseSectionHeader } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { decisionBad, decisionGood, type DecisionPath } from "../data";
 
@@ -11,7 +12,7 @@ function DecisionCard({
   t: (s: string) => string;
 }) {
   return (
-    <div className={`ca-dcard ca-dcard-${variant}`}>
+    <CaseCard className={`ca-dcard ca-dcard-${variant}`}>
       <div className="ca-dcard-head">{t(path.head)}</div>
       <div className="ca-dcard-body">
         <h3>{t(path.title)}</h3>
@@ -22,7 +23,7 @@ function DecisionCard({
         </ul>
         <div className="ca-dcard-out">{t(path.outcome)}</div>
       </div>
-    </div>
+    </CaseCard>
   );
 }
 
@@ -30,9 +31,7 @@ export default async function DecisionSection() {
   const { t } = await getCryptoArsenalTranslator();
   return (
     <section id="cs-sec-decision" className="cs-section">
-      <span className="ca-tag ca-tag-amber">{t("關鍵決策")}</span>
-      <h2 className="ca-h2">{t("兩種平倉路徑，結果天差地遠")}</h2>
-      <div className="cs-divider" />
+      <CaseSectionHeader kicker={t("關鍵決策")} title={t("兩種平倉路徑，結果天差地遠")} tone="warning" />
       <p className="ca-lead ca-narrow">
         {t(
           "問題不只是「看不到倉位」，而是使用者為了控制單筆風險去交易所平倉，反而可能讓整支策略報廢——機器人偵測到自己管理的倉位突然消失、狀態錯亂，為風險控管只能停掉策略且無法恢復。",

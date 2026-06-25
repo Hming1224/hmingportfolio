@@ -6,6 +6,7 @@ import DesignSystemPlayground from "../../components/DesignSystemPlayground";
 import { Link } from "../../i18n/navigation";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
+import { designPrinciples } from "../../lib/design-system-data";
 import enMessages from "../../i18n/dictionaries/en";
 import zhMessages from "../../i18n/dictionaries/zh-TW";
 
@@ -43,16 +44,6 @@ const messageMap: Record<Locale, Messages> = {
 function getMessages(locale: Locale) {
   return messageMap[locale].designSystem;
 }
-
-const designPrinciples = [
-  "Set the character before adding decoration / 先建立氣質，再談裝飾",
-  "Colors can change, the frame cannot fall apart / 顏色可以換，框架不能散",
-  "The main actor must always be obvious / 主角永遠要清楚",
-  "Interaction is not decoration, it adds meaning / 互動不是加特效，是補語意",
-  "High information density still needs room to breathe / 資訊密度高，也要讓人呼吸",
-  "Design should be catchable by engineering / 設計要能被工程接住",
-  "Every reachable state deserves design attention / 每個可到達狀態都值得被設計",
-] as const;
 
 const colorGroups: Record<Locale, Array<{ id: string; title: string; items: ColorSwatch[] }>> = {
   en: [

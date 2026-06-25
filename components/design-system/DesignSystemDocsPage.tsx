@@ -1,11 +1,10 @@
 import { Link } from "@/i18n/navigation";
 import type { DesignSystemDoc, DesignSystemLocale } from "@/lib/design-system-docs";
-import {
-  designSystemDocs,
-  designSystemSections,
-  getDesignSystemHref,
-} from "@/lib/design-system-docs";
 import ComponentDemo from "./ComponentDemo";
+import {
+  DesignSystemDocsMobileNav,
+  DesignSystemDocsSidebar,
+} from "./DesignSystemDocsNav";
 
 function localized(locale: DesignSystemLocale, english: string, chinese: string) {
   return locale === "en" ? english : chinese;
@@ -25,26 +24,7 @@ export default function DesignSystemDocsPage({
     <main className="ds-page ds-docs-page">
       <div className="ds-docs-mobile-head">
         <Link href="/design-system">Hming DS</Link>
-        <details>
-          <summary>{localized(locale, "Browse docs", "瀏覽文件")}</summary>
-          <nav>
-            {designSystemSections.map((section) => (
-              <section key={section.label}>
-                <strong>{localized(locale, section.label, section.labelZh)}</strong>
-                {section.items.map((item) => {
-                  const target = designSystemDocs.find(
-                    (candidate) => candidate.kind === item.kind && candidate.slug === item.slug,
-                  );
-                  return target ? (
-                    <Link key={target.slug} href={getDesignSystemHref(target.kind, target.slug)}>
-                      {localized(locale, target.title, target.titleZh)}
-                    </Link>
-                  ) : null;
-                })}
-              </section>
-            ))}
-          </nav>
-        </details>
+        <DesignSystemDocsMobileNav currentKind={doc.kind} currentSlug={doc.slug} locale={locale} />
       </div>
 
       <div className="ds-docs-layout">
@@ -53,30 +33,7 @@ export default function DesignSystemDocsPage({
             <span>H</span>
             <strong>Hming DS</strong>
           </Link>
-          <nav aria-label={localized(locale, "Design system documentation", "設計系統文件")}>
-            {designSystemSections.map((section) => (
-              <section key={section.label}>
-                <p>{localized(locale, section.label, section.labelZh)}</p>
-                {section.items.map((item) => {
-                  const target = designSystemDocs.find(
-                    (candidate) => candidate.kind === item.kind && candidate.slug === item.slug,
-                  );
-                  if (!target) return null;
-                  const active = target.kind === doc.kind && target.slug === doc.slug;
-                  return (
-                    <Link
-                      aria-current={active ? "page" : undefined}
-                      className={active ? "is-active" : undefined}
-                      href={getDesignSystemHref(target.kind, target.slug)}
-                      key={`${target.kind}-${target.slug}`}
-                    >
-                      {localized(locale, target.title, target.titleZh)}
-                    </Link>
-                  );
-                })}
-              </section>
-            ))}
-          </nav>
+          <DesignSystemDocsSidebar currentKind={doc.kind} currentSlug={doc.slug} locale={locale} />
         </aside>
 
         <article className="ds-docs-article">

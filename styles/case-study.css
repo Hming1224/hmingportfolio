@@ -147,6 +147,51 @@
   line-height: 1.22;
 }
 
+.cs-section-header {
+  --cs-section-kicker-color: var(--cs-accent);
+  margin: 0;
+}
+
+.cs-section-header--secondary {
+  --cs-section-kicker-color: var(--cs-accent-secondary, var(--cs-accent));
+}
+
+.cs-section-header--warning {
+  --cs-section-kicker-color: var(--cs-accent-warning, var(--cs-accent));
+}
+
+.cs-section-header--inverse {
+  --cs-section-kicker-color: var(--cs-text-inverse);
+}
+
+.cs-section-kicker {
+  margin: 0 0 12px;
+  color: var(--cs-section-kicker-color);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cs-section-title {
+  max-width: var(--cs-section-title-max, none);
+  margin: 0 0 18px;
+  color: var(--cs-text-heading);
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+.cs-section-description {
+  max-width: var(--cs-section-description-max, none);
+  margin: 0 0 24px;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+}
+
 .cs-heading-white {
   font-size: var(--fs-h2);
   font-weight: 700;
@@ -592,9 +637,9 @@
   .cs-title {
     max-width: calc(100vw - (var(--page-gutter) * 2));
     line-height: 1.35;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     white-space: normal;
-    word-break: normal;
+    word-break: break-word;
   }
 
   .cs-hero-info {
@@ -619,8 +664,15 @@
   }
 
   .cs-info-card {
+    min-width: 0;
     width: auto;
     padding: 0;
+  }
+
+  .cs-info-value,
+  .cs-info-tasks span {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .cs-info-timeline-sep {

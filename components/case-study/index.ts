@@ -7,6 +7,7 @@ export { default as CaseMedia } from './CaseMedia';
 export { default as CaseMetricGrid } from './CaseMetricGrid';
 export { default as CaseSection } from './CaseSection';
 export { default as CaseHeading } from './CaseHeading';
+export { default as CaseSectionHeader } from './CaseSectionHeader';
 export { default as ZoomableImage } from './ZoomableImage';
 export { default as FlowScrollHint } from './FlowScrollHint';
 export { type CaseInfoItem } from './CaseInfoGrid';

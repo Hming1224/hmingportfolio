@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "check:tokens": "node scripts/check-design-tokens.mjs",
     "audit:architecture": "python3 scripts/arch-audit.py",
     "knip": "knip"
   },

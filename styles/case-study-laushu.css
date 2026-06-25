@@ -288,6 +288,21 @@
   color: var(--laushu-primary-500);
 }
 
+.theme-laushu {
+  --cs-section-title-max: 720px;
+}
+
+.theme-laushu .laushu-head .cs-section-kicker {
+  color: var(--laushu-primary-500);
+}
+
+.theme-laushu .laushu-head .cs-section-title {
+  margin-bottom: 24px;
+  color: var(--laushu-primary-700);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
 /* Figma 風格：section 標題下的描述句副標 */
 .theme-laushu .laushu-section-lede {
   max-width: var(--laushu-content-max);
@@ -543,6 +558,8 @@
 }
 
 .theme-laushu .laushu-demo-card {
+  --cs-card-gap: 0;
+  --cs-card-padding: 0;
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(360px, 2fr);
   overflow: hidden;
@@ -550,6 +567,10 @@
   border-radius: 16px;
   background: #ffffff;
   box-shadow: var(--laushu-shadow);
+}
+
+.theme-laushu .laushu-demo-media-wrap {
+  margin: 0;
 }
 
 .theme-laushu .laushu-demo-media {
@@ -781,6 +802,8 @@
 }
 
 .theme-laushu .laushu-iter-frame {
+  --cs-card-gap: 0;
+  --cs-card-padding: 0;
   position: relative;
   align-self: stretch;
   min-width: 0;

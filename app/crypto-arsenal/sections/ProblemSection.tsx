@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseCard, CaseGrid } from "../../../components/case-study";
+import { CaseCard, CaseGrid, CaseSectionHeader } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { painCards } from "../data";
 
@@ -18,9 +18,7 @@ export default async function ProblemSection() {
   const { t } = await getCryptoArsenalTranslator();
   return (
     <section id="cs-sec-problem" className="cs-section ca-section-alt">
-      <span className="ca-tag">{t("問題定義")}</span>
-      <h2 className="ca-h2">{t("用戶痛點：整體策略賺賠看得到，倉位狀態卻看不見")}</h2>
-      <div className="cs-divider" />
+      <CaseSectionHeader kicker={t("問題定義")} title={t("用戶痛點：整體策略賺賠看得到，倉位狀態卻看不見")} />
       <p className="ca-lead ca-narrow">
         {t(
           "使用者在CA 平台上使用策略機器人交易時，雖然可以看到策略整體賺了多少，卻無法清楚理解「現在到底開了什麼倉位」。當同時啟動多支策略、或同一支策略可能開多也可能開空時，使用者無法直接判斷目前是多倉還是空倉、倉位數量、入場價、標記價、浮動盈虧，以及該倉位距離止盈 / 止損還有多遠。",

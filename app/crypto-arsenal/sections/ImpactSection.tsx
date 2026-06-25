@@ -1,3 +1,4 @@
+import { CaseCard, CaseMetricGrid, CaseSectionHeader } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { impactStats, impactTimes, impactQuotes } from "../data";
 
@@ -7,23 +8,21 @@ export default async function ImpactSection() {
     locale === "zh-TW" ? `「${text}」` : `“${text}”`;
   return (
     <section id="cs-sec-impact" className="cs-section ca-section-alt">
-      <span className="ca-tag">{t("設計成效")}</span>
-      <h2 className="ca-h2">{t("用內部測試與流程指標驗證")}</h2>
-      <div className="cs-divider" />
+      <CaseSectionHeader kicker={t("設計成效")} title={t("用內部測試與流程指標驗證")} />
       <p className="ca-lead ca-narrow">
         {t(
           "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。",
         )}
       </p>
-      <div className="ca-impact">
+      <CaseMetricGrid className="ca-impact">
         {impactStats.map((stat) => (
-          <div className="ca-impact-card" key={stat.label}>
+          <CaseCard className="ca-impact-card" key={stat.label} variant="metric">
             <span className="ca-impact-value">{t(stat.value)}</span>
             <h3 className="ca-impact-label">{t(stat.label)}</h3>
             <p className="ca-impact-body">{t(stat.body)}</p>
-          </div>
+          </CaseCard>
         ))}
-      </div>
+      </CaseMetricGrid>
       <div className="ca-impact-compare">
         <span className="ca-impact-compare-cap">
           {t("操作時間對比：原本得跳去交易所來回，新版在 CA 內直接完成")}

@@ -20,6 +20,8 @@
   --cs-text-secondary: #4a4c52;
   --cs-text-muted: #6c6e77;
   --cs-shadow-color: rgba(37, 42, 71, 0.12);
+  --cs-accent-secondary: #135e78;
+  --cs-accent-warning: #c97b1d;
   --ca-navy: #252a47;
   /* primary base：標題 */
   --ca-ink: #1d2737;
@@ -220,6 +222,8 @@
 }
 
 .theme-crypto-arsenal .ca-flow-node {
+  --cs-card-gap: 6px;
+  --cs-card-padding: 14px 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -416,6 +420,8 @@
 }
 
 .theme-crypto-arsenal .ca-dcard {
+  --cs-card-gap: 0;
+  --cs-card-padding: 0;
   overflow: hidden;
   background: #ffffff;
   border: 1px solid var(--ca-line-soft);
@@ -519,6 +525,8 @@
 }
 
 .theme-crypto-arsenal .ca-research-info {
+  --cs-card-gap: 0;
+  --cs-card-padding: 0;
   flex: 0 0 300px;
   overflow: hidden;
   background: #ffffff;
@@ -582,9 +590,17 @@
 }
 
 .theme-crypto-arsenal .ca-exchange {
+  --cs-card-gap: 12px;
+  --cs-card-padding: 0;
+  --cs-card-bg: transparent;
+  --cs-card-border: transparent;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.theme-crypto-arsenal .ca-exchange-media {
+  margin: 0;
 }
 
 .theme-crypto-arsenal .ca-exchange-label {
@@ -1143,6 +1159,8 @@
 
 /* ── 08 設計元件迭代 ── */
 .theme-crypto-arsenal .ca-iter-board {
+  --cs-card-gap: 24px;
+  --cs-card-padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -1228,6 +1246,8 @@
 }
 
 .theme-crypto-arsenal .ca-ba-panel {
+  --cs-card-gap: 0;
+  --cs-card-padding: 0;
   display: flex;
   flex-direction: column;
   flex: 1;

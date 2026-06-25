@@ -1,3 +1,4 @@
+import { CaseCard, CaseSectionHeader } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { iterationBoards, type IterationBoard } from "../data";
 import StepLightbox from "../components/StepLightbox";
@@ -17,7 +18,7 @@ function Arrow() {
 
 function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }) {
   return (
-    <div className="ca-iter-board">
+    <CaseCard className="ca-iter-board">
       <div className="ca-iter-head">
         <span className="ca-iter-badge">{t(board.badge)}</span>
         <h3 className="ca-iter-title">{t(board.title)}</h3>
@@ -31,7 +32,7 @@ function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }
         </div>
       </div>
       <div className="ca-ba">
-        <div className="ca-ba-panel">
+        <CaseCard className="ca-ba-panel" variant="media">
           <div className="ca-ba-head">Before</div>
           <div className="ca-ba-content">
             <StepLightbox
@@ -44,9 +45,9 @@ function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }
               imageClassName="ca-iteration-zoom-img"
             />
           </div>
-        </div>
+        </CaseCard>
         <Arrow />
-        <div className="ca-ba-panel">
+        <CaseCard className="ca-ba-panel" variant="media">
           <div className="ca-ba-head">After</div>
           <div className="ca-ba-content">
             <StepLightbox
@@ -59,9 +60,9 @@ function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }
               imageClassName="ca-iteration-zoom-img"
             />
           </div>
-        </div>
+        </CaseCard>
       </div>
-    </div>
+    </CaseCard>
   );
 }
 
@@ -69,9 +70,7 @@ export default async function IterationSection() {
   const { t } = await getCryptoArsenalTranslator();
   return (
     <section id="cs-sec-iteration" className="cs-section ca-section-alt">
-      <span className="ca-tag ca-iter-tag">Design Iteration</span>
-      <h2 className="ca-h2">{t("設計元件迭代")}</h2>
-      <div className="cs-divider" />
+      <CaseSectionHeader kicker="Design Iteration" title={t("設計元件迭代")} tone="secondary" />
       <p className="ca-lead">
         {t("透過內部團隊人員與工程師測試，將部分元件進行迭代修正，更加提升用戶使用體驗。")}
       </p>

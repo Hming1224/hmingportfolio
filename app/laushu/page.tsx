@@ -7,6 +7,8 @@ import {
   CaseCard,
   CaseGrid,
   CaseHero,
+  CaseMedia,
+  CaseSectionHeader,
   CaseStudyShell,
   ZoomableImage,
   type CaseInfoItem,
@@ -462,7 +464,7 @@ function OverviewSection() {
           <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
         ))}
       </CaseGrid>
-      <figure className="laushu-overview-hero">
+      <CaseMedia className="laushu-overview-hero" variant="full">
         <Image
           src={`${IMG}/overview-hero.png`}
           alt="Laushu 勞務報酬系統介面總覽"
@@ -470,7 +472,7 @@ function OverviewSection() {
           height={1376}
           sizes="(max-width: 768px) calc(100vw - 48px), 1440px"
         />
-      </figure>
+      </CaseMedia>
     </section>
   );
 }
@@ -487,7 +489,7 @@ function ProblemSection() {
             勞務報酬單，簡稱「勞報單」，為公司支付「酬勞」給「個人」時使用的證明單據，可作為公司支出的證明，並列入領到酬勞者的綜合所得稅中。
           </p>
         </div>
-        <figure className="laushu-form-card">
+        <CaseMedia className="laushu-form-card" caption="勞報單範例" variant="full">
           <Image
             src={`${IMG}/labor-form-example.png`}
             alt="勞務報酬單範例"
@@ -495,8 +497,7 @@ function ProblemSection() {
             height={808}
             sizes="(max-width: 1023px) calc(100vw - 88px), 456px"
           />
-          <figcaption>勞報單範例</figcaption>
-        </figure>
+        </CaseMedia>
       </div>
       <h3 className="laushu-problem-cards-title">現階段勞報單的問題</h3>
       <CaseGrid variant="three" className="laushu-problem-grid">
@@ -598,7 +599,11 @@ function ConvergeSection() {
       <ArticleBlock title="彙整流程 & 重塑 TA" number="01">
         <p>挖掘使用者在建立、發放、回簽、建檔勞報單流程中的痛點，並首先聚焦會自己經手勞報單的公司端。</p>
       </ArticleBlock>
-      <figure className="laushu-journey">
+      <CaseMedia
+        className="laushu-journey"
+        caption="以前兩位受訪者為主，盤點建立 → 發放 → 回簽 → 建檔的完整歷程與痛點"
+        variant="full"
+      >
         <ZoomableImage
           src={`${IMG}/labor-form-flow-1.png`}
           alt="Laushu 勞報單使用者歷程 journey map"
@@ -606,8 +611,7 @@ function ConvergeSection() {
           height={645}
           labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
         />
-        <figcaption>以前兩位受訪者為主，盤點建立 → 發放 → 回簽 → 建檔的完整歷程與痛點</figcaption>
-      </figure>
+      </CaseMedia>
       <ArticleBlock title="重要用例" number="02">
         <p>收斂訪談洞見後，使用者最在意、也覺得紙本勞報單最麻煩的三件事：如何有效管理人員、如何改善簽收確認、如何減少回簽次數。據此彙整三個重要用例，進行後續介面流程設計。</p>
       </ArticleBlock>
@@ -711,7 +715,7 @@ function IterateSection() {
       <ArticleBlock title="測試結果" number="03">
         <p>根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。</p>
       </ArticleBlock>
-      <figure className="laushu-test-result">
+      <CaseMedia className="laushu-test-result" variant="full">
         <ZoomableImage
           src={`${IMG}/test-result.png`}
           alt="Laushu 任務測試與 SUS 結果"
@@ -719,7 +723,7 @@ function IterateSection() {
           height={1968}
           labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
         />
-      </figure>
+      </CaseMedia>
     </section>
   );
 }
@@ -738,7 +742,8 @@ function IterationComparisonCard({
   alt: string;
 }) {
   return (
-    <figure
+    <CaseCard
+      as="figure"
       className="laushu-iter-frame"
       style={{ flexGrow: image.width }}
     >
@@ -753,7 +758,7 @@ function IterationComparisonCard({
           labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
         />
       </div>
-    </figure>
+    </CaseCard>
   );
 }
 
@@ -835,8 +840,8 @@ function DemoSection() {
       <LaushuHead eyebrow="最終成果" title="UI 互動影片介紹" />
       <div className="laushu-demo-list">
         {demoItems.map((item, index) => (
-          <article className="laushu-demo-card" key={item.title}>
-            <div className="laushu-demo-media">
+          <CaseCard className="laushu-demo-card" key={item.title}>
+            <CaseMedia className="laushu-demo-media-wrap" contentClassName="laushu-demo-media" variant="full">
               <div className="laushu-demo-meta">
                 <span>{`0${index + 1}`}</span>
                 <span>{item.duration}</span>
@@ -844,12 +849,12 @@ function DemoSection() {
               <video className="laushu-demo-video" controls preload="metadata" poster={item.poster} playsInline>
                 <source src={item.video} type="video/mp4" />
               </video>
-            </div>
+            </CaseMedia>
             <div className="laushu-demo-copy">
               <h3>{item.title}</h3>
               <p>{item.body}</p>
             </div>
-          </article>
+          </CaseCard>
         ))}
       </div>
     </section>
@@ -949,11 +954,5 @@ function ArticleBlock({ title, number, kicker, children }: { title: string; numb
 
 /** Figma 風格 section 標題：小寫眉標 + 大論點句 + 分隔線（對齊 Figma node 2797:1521）。 */
 function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return (
-    <header className="laushu-head">
-      <p className="laushu-head-eyebrow">{eyebrow}</p>
-      <h2 className="laushu-head-title">{title}</h2>
-      <div className="cs-divider" />
-    </header>
-  );
+  return <CaseSectionHeader className="laushu-head" kicker={eyebrow} title={title} />;
 }
