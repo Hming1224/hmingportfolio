@@ -547,18 +547,18 @@ function UnderstandSection() {
       <ArticleBlock title="訪談大綱" number="04">
         <p>共搜集 39 份有效問卷，篩選三位受訪者，圍繞以下三個面向深入訪談：</p>
       </ArticleBlock>
-      <div className="laushu-guide-grid">
+      <div className="cs-guide-list-grid">
         {interviewGuide.map((group) => (
-          <CaseCard className="laushu-guide-card" key={group.title}>
+          <CaseCard className="cs-guide-list-card" key={group.title}>
             <h4>{group.title}</h4>
             <ul>
               {group.items.map((item) => (
                 <li key={item.head}>
-                  <span className="laushu-guide-marker" aria-hidden="true">
-                    <span className="laushu-guide-dot" />
-                    <span className="laushu-guide-line" />
+                  <span className="cs-guide-list-marker" aria-hidden="true">
+                    <span className="cs-guide-list-dot" />
+                    <span className="cs-guide-list-line" />
                   </span>
-                  <div className="laushu-guide-item">
+                  <div className="cs-guide-list-item">
                     <strong>{item.head}</strong>
                     <span>{item.body}</span>
                   </div>
@@ -572,12 +572,12 @@ function UnderstandSection() {
       <ArticleBlock title="受訪者輪廓" number="05">
         <p>下面整理三位受訪者的訪談摘要，從資料管理、會計配合到勞報單流程，盤點他們各自的經手方式與最有感的痛點。</p>
       </ArticleBlock>
-      <div className="laushu-persona-list">
+      <div className="cs-persona-list">
         {personas.map((p) => (
-          <CaseCard className="laushu-persona" key={p.name}>
-            <div className="laushu-persona-copy">
+          <CaseCard className="cs-persona-card" key={p.name}>
+            <div className="cs-persona-copy">
               <strong>{p.name}</strong>
-              <span className="laushu-persona-tags">{p.tags}</span>
+              <span className="cs-persona-tags">{p.tags}</span>
               <p>{p.desc}</p>
             </div>
             <ZoomableImage
@@ -696,22 +696,22 @@ function IterateSection() {
       <ArticleBlock title="設計介面、元件迭代" number="02">
         <p>這次介面與元件迭代聚焦在降低判斷成本、提升核對效率。透過調整資訊排序、用詞、提示文字與列表呈現，讓使用者能更快找到正確資料、理解欄位意義，並在寄出或合併前完成確認，降低錯填、漏填與誤合併的風險。</p>
       </ArticleBlock>
-      <div className="laushu-iter-list">
+      <div className="cs-iteration-list">
         {iterationBoards.map((board) => (
-          <CaseCard className="laushu-iter-board" key={board.title}>
-            <header className="laushu-iter-head">
-              <span className="laushu-iter-badge">{board.tag}</span>
-              <h3 className="laushu-iter-title">{board.title}</h3>
+          <CaseCard className="cs-iteration-board" key={board.title}>
+            <header className="cs-iteration-head">
+              <span className="cs-iteration-badge">{board.tag}</span>
+              <h3 className="cs-iteration-title">{board.title}</h3>
             </header>
-            <div className="laushu-iter-body">
-              <p className="laushu-iter-label">{board.label}</p>
-              <div className="laushu-iter-paras">
+            <div className="cs-iteration-body">
+              <p className="cs-iteration-label">{board.label}</p>
+              <div className="cs-iteration-copy">
                 {board.paras.map((p, i) => (<p key={i}>{p}</p>))}
               </div>
             </div>
-            <div className="laushu-iter-compare">
+            <div className="cs-iteration-compare">
               <IterationComparisonCard label="Before" image={board.before} alt={`${board.alt} Before`} />
-              <span className="laushu-iter-arrow" aria-hidden="true" />
+              <span className="cs-iteration-arrow" aria-hidden="true" />
               <IterationComparisonCard label="After" image={board.after} alt={`${board.alt} After`} />
             </div>
           </CaseCard>
@@ -749,17 +749,17 @@ function IterationComparisonCard({
   return (
     <CaseCard
       as="figure"
-      className="laushu-iter-frame"
+      className="cs-iteration-panel"
       style={{ flexGrow: image.width }}
     >
       <figcaption>{label}</figcaption>
-      <div className="laushu-iter-media">
+      <div className="cs-iteration-panel-media">
         <ZoomableImage
           src={image.src}
           alt={alt}
           width={image.width}
           height={image.height}
-          className="laushu-iter-card"
+          className="cs-iteration-panel-image"
           labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
         />
       </div>
@@ -837,19 +837,19 @@ function DemoSection() {
   return (
     <section id="cs-sec-demo" className="cs-section laushu-demo-section">
       <LaushuHead eyebrow="最終成果" title="UI 互動影片介紹" />
-      <div className="laushu-demo-list">
+      <div className="cs-video-showcase-list">
         {demoItems.map((item, index) => (
-          <CaseCard className="laushu-demo-card" key={item.title}>
-            <CaseMedia className="laushu-demo-media-wrap" contentClassName="laushu-demo-media" variant="full">
-              <div className="laushu-demo-meta">
+          <CaseCard className="cs-video-showcase-card" key={item.title}>
+            <CaseMedia className="cs-video-showcase-media-wrap" contentClassName="cs-video-showcase-media" variant="full">
+              <div className="cs-video-showcase-meta">
                 <span>{`0${index + 1}`}</span>
                 <span>{item.duration}</span>
               </div>
-              <video className="laushu-demo-video" controls preload="metadata" poster={item.poster} playsInline>
+              <video className="cs-video-showcase-video" controls preload="metadata" poster={item.poster} playsInline>
                 <source src={item.video} type="video/mp4" />
               </video>
             </CaseMedia>
-            <div className="laushu-demo-copy">
+            <div className="cs-video-showcase-copy">
               <h3>{item.title}</h3>
               <p>{item.body}</p>
             </div>
@@ -881,9 +881,9 @@ function ReflectionSection() {
       <LaushuHead eyebrow="學習反思" title="線下與線上整合的數位流程考驗" />
       <CaseGrid variant="three" className="laushu-learning-grid">
         {reflections.map((r, index) => (
-          <CaseCard variant="accent" className="laushu-learning-card" key={r.title}>
-            <span className="laushu-learning-num">{String(index + 1).padStart(2, "0")}</span>
-            <h3 className="laushu-learning-title">{r.title}</h3>
+          <CaseCard variant="accent" className="cs-reflection-card" key={r.title}>
+            <span className="cs-reflection-card-num">{String(index + 1).padStart(2, "0")}</span>
+            <h3 className="cs-reflection-card-title">{r.title}</h3>
             <p>{r.body}</p>
           </CaseCard>
         ))}

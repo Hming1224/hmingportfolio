@@ -287,47 +287,17 @@
 }
 
 
-.theme-laushu .laushu-persona {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1fr);
-  gap: 24px;
-  align-items: center;
-  padding: 24px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: var(--laushu-primary-100);
-}
-
-.theme-laushu .laushu-persona strong,
-.theme-laushu .laushu-persona span {
-  display: block;
-}
-
-.theme-laushu .laushu-persona strong {
-  margin-bottom: 8px;
-  color: var(--laushu-primary-700);
-  font-size: var(--fs-h4);
-}
-
-.theme-laushu .laushu-persona span {
-  margin-bottom: 12px;
-  color: var(--laushu-tertiary-500);
-  font-size: var(--fs-sm);
-}
-
-.theme-laushu .laushu-persona p {
-  margin: 0;
-  color: var(--text-secondary);
-  line-height: 1.75;
+.theme-laushu .cs-persona-card {
+  --cs-persona-card-border: var(--laushu-line);
+  --cs-persona-card-bg: var(--laushu-primary-100);
+  --cs-persona-name-color: var(--laushu-primary-700);
+  --cs-persona-tags-color: var(--laushu-tertiary-500);
+  --cs-persona-body-color: var(--text-secondary);
 }
 
 
-.theme-laushu .laushu-demo-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-  max-width: var(--laushu-content-max);
-  margin: 24px auto 0;
+.theme-laushu .cs-video-showcase-list {
+  --cs-video-showcase-list-max-width: var(--laushu-content-max);
 }
 
 .theme-laushu .laushu-demo-section .laushu-head {
@@ -337,70 +307,20 @@
 }
 
 
-.theme-laushu .laushu-demo-card {
-  --cs-card-gap: 0;
-  --cs-card-padding: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(360px, 2fr);
-  overflow: hidden;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: var(--laushu-shadow);
+.theme-laushu .cs-video-showcase-card {
+  --cs-video-showcase-card-border: var(--laushu-line);
+  --cs-video-showcase-card-radius: 16px;
+  --cs-video-showcase-card-shadow: var(--laushu-shadow);
 }
 
-.theme-laushu .laushu-demo-media-wrap {
-  margin: 0;
+.theme-laushu .cs-video-showcase-media,
+.theme-laushu .cs-video-showcase-video {
+  --cs-video-showcase-media-bg: var(--laushu-tertiary-700);
 }
 
-.theme-laushu .laushu-demo-media {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background: var(--laushu-tertiary-700);
-}
-
-.theme-laushu .laushu-demo-meta {
-  position: absolute;
-  inset: 14px 14px auto 14px;
-  z-index: 2;
-  display: flex;
-  justify-content: space-between;
-  color: #ffffff;
-  font-size: var(--fs-xs);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  pointer-events: none;
-}
-
-.theme-laushu .laushu-demo-video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--laushu-tertiary-700);
-  object-fit: cover;
-}
-
-.theme-laushu .laushu-demo-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(28px, 3vw, 68px);
-  min-width: 0;
-}
-
-.theme-laushu .laushu-demo-copy h3 {
-  margin: 0 0 12px;
-  font-size: var(--fs-h4);
-  line-height: 1.35;
-  font-weight: 800;
-  color: var(--laushu-primary-700);
-}
-
-.theme-laushu .laushu-demo-copy p {
-  margin: 0;
-  color: #5d6674;
-  font-size: var(--fs-sm);
-  line-height: 1.7;
+.theme-laushu .cs-video-showcase-copy {
+  --cs-video-showcase-title-color: var(--laushu-primary-700);
+  --cs-video-showcase-body-color: #5d6674;
 }
 
 .theme-laushu .laushu-learning-grid {
@@ -421,50 +341,25 @@
 }
 
 
-.theme-laushu .laushu-learning-card {
-  align-items: flex-start;
-  --cs-card-bg: linear-gradient(121deg, var(--laushu-primary-100) 0%, var(--laushu-tertiary-100) 100%);
-  --cs-card-border: var(--laushu-line);
-  --cs-card-gap: 12px;
-  --cs-card-padding: 33px;
+.theme-laushu .cs-reflection-card {
+  --cs-reflection-card-bg: linear-gradient(121deg, var(--laushu-primary-100) 0%, var(--laushu-tertiary-100) 100%);
+  --cs-reflection-card-border: var(--laushu-line);
+  --cs-reflection-card-gap: 12px;
+  --cs-reflection-card-padding: 33px;
   --cs-card-padding-mobile: 20px;
-  --cs-card-radius: 16px;
-}
-
-.theme-laushu .laushu-learning-num {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: var(--laushu-primary-200);
-  color: var(--laushu-primary-600);
-  font-size: var(--fs-xs);
-  line-height: 18px;
-  font-weight: 800;
-}
-
-.theme-laushu .laushu-learning-title {
-  margin: 0;
-  font-size: var(--fs-h4);
-  font-weight: 800;
-  line-height: 1.8;
-  color: var(--laushu-tertiary-700);
-}
-
-.theme-laushu .laushu-learning-card p {
-  margin: 0;
-  padding-top: 4px;
-  color: #1f2933;
-  font-size: var(--fs-sm);
-  line-height: 2.05;
+  --cs-reflection-card-radius: 16px;
+  --cs-reflection-card-num-bg: var(--laushu-primary-200);
+  --cs-reflection-card-num-color: var(--laushu-primary-600);
+  --cs-reflection-card-title-color: var(--laushu-tertiary-700);
+  --cs-reflection-card-body-color: #1f2933;
+  --cs-reflection-card-body-line-height: 2.05;
 }
 
 @media (max-width: 1023px) {
   .theme-laushu .laushu-overview-layout,
   .theme-laushu .laushu-problem-layout,
   .theme-laushu .laushu-research-grid,
-  .theme-laushu .laushu-persona,
+  .theme-laushu .cs-persona-card,
   .theme-laushu .laushu-flow-visuals,
   .theme-laushu .laushu-iteration {
     grid-template-columns: 1fr;
@@ -481,7 +376,7 @@
     object-position: center top;
   }
 
-  .theme-laushu .laushu-demo-list {
+  .theme-laushu .cs-video-showcase-list {
     grid-template-columns: 1fr;
   }
 
@@ -490,7 +385,7 @@
   }
 
   .theme-laushu .laushu-form-card,
-  .theme-laushu .laushu-persona,
+  .theme-laushu .cs-persona-card,
   .theme-laushu .laushu-iteration {
     padding: 20px;
   }
@@ -499,198 +394,91 @@
 /* ───────────────────────── v2：新版 8 段結構新增樣式 ───────────────────────── */
 
 /* 設計迭代 Before/After board */
-.theme-laushu .laushu-iter-list {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  max-width: 952px;
-  margin: 8px auto 0;
+.theme-laushu .cs-iteration-list {
+  --cs-iteration-list-max-width: 952px;
 }
 
-.theme-laushu .laushu-iter-board {
-  padding: 28px;
-  border: 1px solid #d5dfec;
-  border-radius: 20px;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.theme-laushu .cs-iteration-board {
+  --cs-iteration-board-border: #d5dfec;
+  --cs-iteration-board-radius: 20px;
 }
 
-.theme-laushu .laushu-iter-head {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+.theme-laushu .cs-iteration-badge {
+  --cs-iteration-badge-bg: #4852c3;
+  --cs-iteration-badge-size: 14px;
 }
 
-.theme-laushu .laushu-iter-badge {
-  flex: 0 0 95px;
-  padding: 9px 14px;
-  border-radius: 999px;
-  background: #4852c3;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 17px;
-  text-align: center;
-  white-space: nowrap;
+.theme-laushu .cs-iteration-title {
+  --cs-iteration-title-color: #241b31;
+  --cs-iteration-title-size: 24px;
+  --cs-iteration-title-line-height: 30px;
 }
 
-.theme-laushu .laushu-iter-title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 30px;
-  color: #241b31;
+.theme-laushu .cs-iteration-label {
+  --cs-iteration-label-color: #5d6674;
+  --cs-iteration-label-size: 15px;
+  --cs-iteration-label-line-height: 23px;
 }
 
-.theme-laushu .laushu-iter-body {
-  display: grid;
-  grid-template-columns: 98px minmax(0, 1fr);
-  gap: 24px;
+.theme-laushu .cs-iteration-copy {
+  --cs-iteration-copy-color: #5d6674;
+  --cs-iteration-copy-size: 15px;
+  --cs-iteration-copy-line-height: 23px;
 }
 
-.theme-laushu .laushu-iter-label {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 23px;
-  color: #5d6674;
+.theme-laushu .cs-iteration-panel {
+  --cs-iteration-panel-border: #d8deec;
+  --cs-iteration-panel-radius: 16px;
+  --cs-iteration-panel-bg: #fbf9ff;
 }
 
-.theme-laushu .laushu-iter-paras {
-  display: flex;
-  flex-direction: column;
-  gap: 23px;
-  font-size: 15px;
-  line-height: 23px;
-  color: #5d6674;
-}
-
-.theme-laushu .laushu-iter-paras p {
-  margin: 0;
-}
-
-.theme-laushu .laushu-iter-compare {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-}
-
-.theme-laushu .laushu-iter-frame {
-  --cs-card-gap: 0;
-  --cs-card-padding: 0;
-  position: relative;
-  align-self: stretch;
-  min-width: 0;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid #d8deec;
-  border-radius: 16px;
-  background: #fbf9ff;
-}
-
-.theme-laushu .laushu-iter-frame figcaption {
-  display: flex;
-  min-height: 64px;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background: linear-gradient(96deg, #8d96f9 0%, rgba(255, 255, 255, 0) 54%);
-  color: #241b31;
-  font-family: var(--font-space-grotesk), sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 31.5px;
+.theme-laushu .cs-iteration-panel figcaption {
+  --cs-iteration-panel-caption-bg: linear-gradient(96deg, #8d96f9 0%, rgba(255, 255, 255, 0) 54%);
+  --cs-iteration-panel-caption-color: #241b31;
+  --cs-iteration-panel-caption-line-height: 31.5px;
   letter-spacing: -0.44px;
 }
 
-.theme-laushu .laushu-iter-media {
-  display: flex;
-  min-height: calc(100% - 64px);
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-}
-
-.theme-laushu .laushu-iter-card {
-  display: block;
-  width: 100%;
-}
-
-.theme-laushu .laushu-iter-card .cs-zoomable-image-media {
-  width: 100%;
-  height: auto;
-}
-
-.theme-laushu .laushu-iter-arrow {
-  position: relative;
-  flex: 0 0 40px;
-  width: 40px;
-  height: 48px;
-}
-
-.theme-laushu .laushu-iter-arrow::before {
-  position: absolute;
-  top: 50%;
-  left: 2px;
-  width: 34px;
-  height: 3px;
-  border-radius: 999px;
-  background: #6f56bd;
-  content: "";
-  transform: translateY(-50%);
-}
-
-.theme-laushu .laushu-iter-arrow::after {
-  position: absolute;
-  top: 50%;
-  right: 2px;
-  width: 14px;
-  height: 14px;
-  border-top: 3px solid #6f56bd;
-  border-right: 3px solid #6f56bd;
-  content: "";
-  transform: translateY(-50%) rotate(45deg);
+.theme-laushu .cs-iteration-arrow {
+  --cs-iteration-arrow-color: #6f56bd;
 }
 
 @media (max-width: 1023px) {
-  .theme-laushu .laushu-iter-body {
+  .theme-laushu .cs-iteration-body {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 }
 
 @media (max-width: 768px) {
-  .theme-laushu .laushu-iter-board {
+  .theme-laushu .cs-iteration-board {
     padding: 20px;
   }
 
-  .theme-laushu .laushu-iter-compare {
+  .theme-laushu .cs-iteration-compare {
     flex-direction: column;
   }
 
-  .theme-laushu .laushu-iter-frame {
+  .theme-laushu .cs-iteration-panel {
     width: 100%;
   }
 
-  .theme-laushu .laushu-iter-arrow {
+  .theme-laushu .cs-iteration-arrow {
     height: 32px;
     transform: rotate(90deg);
   }
 
-  .theme-laushu .laushu-iter-title {
+  .theme-laushu .cs-iteration-title {
     font-size: 1.2rem;
   }
 
-  .theme-laushu .laushu-iter-head {
+  .theme-laushu .cs-iteration-head {
     align-items: flex-start;
     flex-direction: column;
     gap: 12px;
   }
 
-  .theme-laushu .laushu-iter-badge {
+  .theme-laushu .cs-iteration-badge {
     flex-basis: auto;
   }
 }
@@ -819,8 +607,8 @@
 .theme-laushu .laushu-process-section > .laushu-survey-flow,
 .theme-laushu .laushu-process-section > .laushu-survey-stats,
 .theme-laushu .laushu-process-section > .laushu-insight,
-.theme-laushu .laushu-process-section > .laushu-guide-grid,
-.theme-laushu .laushu-process-section > .laushu-persona-list,
+.theme-laushu .laushu-process-section > .cs-guide-list-grid,
+.theme-laushu .laushu-process-section > .cs-persona-list,
 .theme-laushu .laushu-process-section > .laushu-journey,
 .theme-laushu .laushu-process-section > .laushu-flow-group,
 .theme-laushu .laushu-process-section > .laushu-usecase-grid {
@@ -844,8 +632,8 @@
 .theme-laushu .laushu-understand-section > .laushu-survey-flow,
 .theme-laushu .laushu-understand-section > .laushu-survey-stats,
 .theme-laushu .laushu-understand-section > .laushu-insight,
-.theme-laushu .laushu-understand-section > .laushu-guide-grid,
-.theme-laushu .laushu-understand-section > .laushu-persona-list {
+.theme-laushu .laushu-understand-section > .cs-guide-list-grid,
+.theme-laushu .laushu-understand-section > .cs-persona-list {
   margin-top: 40px;
 }
 
@@ -1332,83 +1120,42 @@
 }
 
 /* 訪談大綱三欄卡 */
-.theme-laushu .laushu-guide-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  max-width: var(--laushu-content-max);
-  margin: 0 auto;
+.theme-laushu .cs-guide-list-grid {
+  --cs-guide-list-grid-max-width: var(--laushu-content-max);
 }
 
-.theme-laushu .laushu-guide-card {
-  padding: 24px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+.theme-laushu .cs-guide-list-card {
+  --cs-guide-list-card-border: var(--laushu-line);
+  --cs-guide-list-card-radius: 16px;
+  --cs-guide-list-card-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+  --cs-guide-list-title-border-bottom: 1px solid var(--laushu-line);
+  --cs-guide-list-title-color: var(--laushu-primary-700);
+  --cs-guide-list-strong-color: var(--laushu-tertiary-700);
+  --cs-guide-list-text-color: var(--text-secondary);
 }
 
-.theme-laushu .laushu-guide-card h4 {
-  margin: 0 0 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--laushu-line);
-  font-size: var(--fs-h4);
-  font-weight: 800;
-  color: var(--laushu-primary-700);
+.theme-laushu .laushu-understand-section .cs-guide-list-card {
+  --cs-guide-list-card-overflow: hidden;
+  --cs-guide-list-card-padding: 0;
+  --cs-guide-list-card-border: var(--laushu-line);
+  --cs-guide-list-card-radius: 18px;
+  --cs-guide-list-card-shadow: none;
+  --cs-guide-list-title-margin: 0;
+  --cs-guide-list-title-padding: 24px 28px;
+  --cs-guide-list-title-border-bottom: 0;
+  --cs-guide-list-title-bg: linear-gradient(90deg, #decbff 0%, rgba(255, 255, 255, 0) 100%);
+  --cs-guide-list-title-color: var(--laushu-primary-700);
+  --cs-guide-list-title-line-height: 1.5;
+  --cs-guide-list-title-white-space: nowrap;
+  --cs-guide-list-padding: 24px 28px 28px;
+  --cs-guide-list-gap: 0;
+  --cs-guide-list-row-gap: 0;
+  --cs-guide-list-item-padding-bottom: 14px;
+  --cs-guide-list-dot-bg: #9261ef;
+  --cs-guide-list-line-bg: var(--laushu-primary-200);
 }
 
-.theme-laushu .laushu-guide-card ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.theme-laushu .laushu-guide-card li {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.theme-laushu .laushu-guide-card strong {
-  color: var(--laushu-tertiary-700);
-  font-size: var(--fs-body);
-}
-
-.theme-laushu .laushu-guide-card li span {
-  color: var(--text-secondary);
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-card {
-  overflow: hidden;
-  padding: 0;
-  border: 1px solid var(--laushu-line);
-  border-radius: 18px;
-  background: #ffffff;
-  box-shadow: none;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-card h4 {
-  margin: 0;
-  padding: 24px 28px;
-  border-bottom: 0;
-  background: linear-gradient(90deg, #decbff 0%, rgba(255, 255, 255, 0) 100%);
-  color: var(--laushu-primary-700);
-  font-size: var(--fs-h4);
-  line-height: 1.5;
-  white-space: nowrap;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-card ul {
-  padding: 24px 28px 28px;
-  gap: 0;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-card li {
+.theme-laushu .laushu-understand-section .cs-guide-list-card li {
   display: grid;
   grid-template-columns: 10px minmax(0, 1fr);
   column-gap: 12px;
@@ -1416,95 +1163,38 @@
   padding-left: 0;
 }
 
-.theme-laushu .laushu-understand-section .laushu-guide-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-card li:not(:last-child) .laushu-guide-item {
-  padding-bottom: 14px;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-marker {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-dot {
-  flex: 0 0 auto;
-  width: 10px;
-  height: 10px;
-  margin-top: 7px;
-  border-radius: 999px;
-  background: #9261ef;
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-line {
-  flex: 1 1 auto;
-  width: 1px;
-  margin: 12px 0 0;
-  background: var(--laushu-primary-200);
-}
-
-.theme-laushu .laushu-understand-section .laushu-guide-card li:last-child .laushu-guide-line {
-  display: none;
-}
-
 /* Persona 文字欄 + 三位受訪者整理板 */
-.theme-laushu .laushu-persona-tags {
+.theme-laushu .cs-persona-tags {
   margin-bottom: 12px;
 }
 
-.theme-laushu .laushu-persona-list {
-  display: grid;
-  gap: 24px;
-  max-width: var(--laushu-content-max);
-  margin: 0 auto;
+.theme-laushu .cs-persona-list {
+  --cs-persona-list-max-width: var(--laushu-content-max);
 }
 
-.theme-laushu .laushu-persona .cs-zoomable-image {
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
+.theme-laushu .laushu-understand-section .cs-persona-list {
+  --cs-persona-list-gap: 40px;
 }
 
-.theme-laushu .laushu-persona .cs-zoomable-image img {
-  display: block;
-  width: 100%;
-  height: auto;
+.theme-laushu .laushu-understand-section .cs-persona-card {
+  --cs-persona-card-columns: minmax(240px, 0.62fr) minmax(0, 1fr);
+  --cs-persona-card-padding: 25px;
+  --cs-persona-card-border: var(--laushu-line);
+  --cs-persona-card-bg: #fbf9ff;
+  --cs-card-shadow: none;
+  --cs-persona-body-color: #5d6674;
 }
 
-.theme-laushu .laushu-understand-section .laushu-persona-list {
-  gap: 40px;
-}
-
-.theme-laushu .laushu-understand-section .laushu-persona {
-  grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1fr);
-  gap: 24px;
-  padding: 25px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #fbf9ff;
-  box-shadow: none;
-}
-
-.theme-laushu .laushu-understand-section .laushu-persona-copy {
+.theme-laushu .laushu-understand-section .cs-persona-copy {
   align-self: center;
 }
 
-.theme-laushu .laushu-understand-section .laushu-persona strong {
+.theme-laushu .laushu-understand-section .cs-persona-card strong {
   color: var(--laushu-primary-700);
 }
 
-.theme-laushu .laushu-understand-section .laushu-persona-tags {
+.theme-laushu .laushu-understand-section .cs-persona-tags {
   color: var(--laushu-tertiary-500);
-}
-
-.theme-laushu .laushu-understand-section .laushu-persona p {
-  color: #5d6674;
 }
 
 /* 收斂與洞察：對齊 Figma node 2792:31609 */
@@ -1593,7 +1283,7 @@
 .theme-laushu .laushu-iterate-section .laushu-head,
 .theme-laushu .laushu-iterate-section .cs-article,
 .theme-laushu .laushu-iterate-section .laushu-fc-list,
-.theme-laushu .laushu-iterate-section .laushu-iter-list {
+.theme-laushu .laushu-iterate-section .cs-iteration-list {
   max-width: var(--laushu-content-max);
   margin-right: auto;
   margin-left: auto;
@@ -1602,7 +1292,7 @@
 
 .theme-laushu .laushu-iterate-section > .cs-article,
 .theme-laushu .laushu-iterate-section > .laushu-fc-list,
-.theme-laushu .laushu-iterate-section > .laushu-iter-list {
+.theme-laushu .laushu-iterate-section > .cs-iteration-list {
   margin-top: 40px;
 }
 
@@ -1645,75 +1335,70 @@
   font-weight: 800;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-list {
-  gap: 40px;
+.theme-laushu .laushu-iterate-section .cs-iteration-list {
+  --cs-iteration-list-gap: 40px;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-board {
-  gap: 24px;
-  padding: 28px;
-  border: 1px solid #d5dfec;
-  border-radius: 20px;
-  background: #ffffff;
+.theme-laushu .laushu-iterate-section .cs-iteration-board {
+  --cs-iteration-board-gap: 24px;
+  --cs-iteration-board-padding: 28px;
+  --cs-iteration-board-border: #d5dfec;
+  --cs-iteration-board-radius: 20px;
+  --cs-iteration-board-bg: #ffffff;
   box-shadow: none;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-head {
-  gap: 24px;
+.theme-laushu .laushu-iterate-section .cs-iteration-head {
+  --cs-iteration-head-gap: 24px;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-badge {
+.theme-laushu .laushu-iterate-section .cs-iteration-badge {
   width: fit-content;
-  padding: 9px 14px;
-  background: #4852c3;
-  font-size: var(--fs-sm);
-  line-height: 17px;
-  text-align: center;
+  --cs-iteration-badge-padding: 9px 14px;
+  --cs-iteration-badge-bg: #4852c3;
+  --cs-iteration-badge-size: var(--fs-sm);
+  --cs-iteration-badge-line-height: 17px;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-title {
-  color: var(--laushu-tertiary-700);
-  font-size: 24px;
-  line-height: 1.25;
-  font-weight: 800;
+.theme-laushu .laushu-iterate-section .cs-iteration-title {
+  --cs-iteration-title-color: var(--laushu-tertiary-700);
+  --cs-iteration-title-size: 24px;
+  --cs-iteration-title-line-height: 1.25;
+  --cs-iteration-title-weight: 800;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-body {
+.theme-laushu .laushu-iterate-section .cs-iteration-body {
   grid-template-columns: 98px minmax(0, 1fr);
   gap: 24px;
   color: #5d6674;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-label {
-  color: #5d6674;
-  font-size: 15px;
-  line-height: 1.53;
-  font-weight: 800;
+.theme-laushu .laushu-iterate-section .cs-iteration-label {
+  --cs-iteration-label-color: #5d6674;
+  --cs-iteration-label-size: 15px;
+  --cs-iteration-label-line-height: 1.53;
+  --cs-iteration-label-weight: 800;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-paras {
-  gap: 23px;
+.theme-laushu .laushu-iterate-section .cs-iteration-copy {
+  --cs-iteration-copy-gap: 23px;
+  --cs-iteration-copy-color: #5d6674;
+  --cs-iteration-copy-size: 15px;
+  --cs-iteration-copy-line-height: 1.53;
 }
-
-.theme-laushu .laushu-iterate-section .laushu-iter-paras p {
-  color: #5d6674;
-  font-size: 15px;
-  line-height: 1.53;
-}
-
 
 @media (max-width: 768px) {
   .theme-laushu .laushu-iterate-section .laushu-fc-title,
-  .theme-laushu .laushu-iterate-section .laushu-iter-title {
+  .theme-laushu .laushu-iterate-section .cs-iteration-title {
     font-size: 20px;
   }
 
-  .theme-laushu .laushu-iterate-section .laushu-iter-body {
+  .theme-laushu .laushu-iterate-section .cs-iteration-body {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .theme-laushu .laushu-iterate-section .laushu-iter-badge {
+  .theme-laushu .laushu-iterate-section .cs-iteration-badge {
     width: auto;
   }
 }
@@ -1847,7 +1532,11 @@
 }
 
 @media (max-width: 1280px) {
-  .theme-laushu .laushu-understand-section .laushu-guide-card h4 {
+  .theme-laushu .laushu-understand-section .cs-guide-list-card {
+    --cs-guide-list-title-white-space: normal;
+  }
+
+  .theme-laushu .laushu-understand-section .cs-guide-list-card h4 {
     white-space: normal;
   }
 }
@@ -1857,7 +1546,7 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-laushu .laushu-guide-grid {
+  .theme-laushu .cs-guide-list-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1872,11 +1561,11 @@
 }
 
 @media (max-width: 900px) {
-  .theme-laushu .laushu-demo-card {
+  .theme-laushu .cs-video-showcase-card {
     grid-template-columns: 1fr;
   }
 
-  .theme-laushu .laushu-demo-video {
+  .theme-laushu .cs-video-showcase-video {
     height: auto;
     min-height: 0;
     aspect-ratio: 16 / 9;
@@ -1899,11 +1588,11 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-laushu .laushu-understand-section .laushu-persona {
+  .theme-laushu .laushu-understand-section .cs-persona-card {
     grid-template-columns: 1fr;
   }
 
-  .theme-laushu .laushu-understand-section .laushu-persona > .cs-zoomable-image {
+  .theme-laushu .laushu-understand-section .cs-persona-card > .cs-zoomable-image {
     order: -1;
   }
 
