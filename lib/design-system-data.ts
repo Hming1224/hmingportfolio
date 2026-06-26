@@ -30,7 +30,7 @@ export const designSystemSections = [
   {
     label: "General",
     labelZh: "一般元件",
-    items: ["button", "copy-button", "language-switcher"].map((slug) => ({
+    items: ["button", "language-switcher"].map((slug) => ({
       kind: "component" as const,
       slug,
     })),
