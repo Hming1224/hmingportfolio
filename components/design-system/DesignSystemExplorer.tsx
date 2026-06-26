@@ -61,25 +61,24 @@ export default function DesignSystemExplorer({
                     if (!doc) return null;
                     const isActive = activeSlug === doc.slug;
                     return (
-                      <button
+                      <a
                         key={doc.slug}
-                        type="button"
+                        href="#components"
                         onClick={() => setActiveSlug(doc.slug)}
                         className={`ds-docs-nav-link ${isActive ? "is-active" : ""}`}
                         style={{
+                          display: "block",
                           textAlign: "left",
-                          background: "none",
-                          border: "none",
+                          textDecoration: "none",
                           padding: "6px 12px",
                           borderRadius: "4px",
-                          cursor: "pointer",
                           fontSize: "var(--hm-fs-sm)",
                           color: isActive ? "var(--hm-purple)" : "var(--hm-ink)",
                           fontWeight: isActive ? 600 : 400,
                         }}
                       >
                         {locale === "zh-TW" && doc.titleZh ? doc.titleZh : doc.title}
-                      </button>
+                      </a>
                     );
                   })}
                 </nav>
