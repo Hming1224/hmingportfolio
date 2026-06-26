@@ -165,6 +165,20 @@ try {
         const iterationPanelMedia = iterationPanel?.querySelector('.cs-iteration-panel-media');
         const iterationPanelImage = iterationPanel?.querySelector('.cs-iteration-panel-image');
         const iterationArrow = iterationBoard?.querySelector('.cs-iteration-arrow');
+        const documentPreview = document.querySelector('.cs-document-preview');
+        const documentPreviewFrame = documentPreview?.querySelector('.cs-media-frame');
+        const documentPreviewCaption = documentPreview?.querySelector('.cs-media-caption');
+        const showcaseMedia = document.querySelector('.cs-showcase-media');
+        const showcaseFrame = showcaseMedia?.querySelector('.cs-media-frame');
+        const showcaseCaptionCenter = document.querySelector('.cs-showcase-media--caption-center');
+        const showcaseCaption = showcaseCaptionCenter?.querySelector('.cs-media-caption');
+        const showcaseFramed = document.querySelector('.cs-showcase-media--framed');
+        const showcaseFramedFrame = showcaseFramed?.querySelector('.cs-media-frame');
+        const explainerLayout = document.querySelector('.cs-explainer-layout');
+        const explainerCopy = explainerLayout?.querySelector('.cs-explainer-copy');
+        const explainerPill = explainerLayout?.querySelector('.cs-explainer-pill');
+        const explainerTitle = explainerLayout?.querySelector('.cs-explainer-title');
+        const explainerBody = explainerLayout?.querySelector('p');
         const topicCardStyle = topicCard ? getComputedStyle(topicCard) : null;
         const topicKickerStyle = topicKicker ? getComputedStyle(topicKicker) : null;
         const topicArtStyle = topicArt ? getComputedStyle(topicArt) : null;
@@ -207,6 +221,18 @@ try {
         const iterationPanelMediaStyle = iterationPanelMedia ? getComputedStyle(iterationPanelMedia) : null;
         const iterationPanelImageStyle = iterationPanelImage ? getComputedStyle(iterationPanelImage) : null;
         const iterationArrowStyle = iterationArrow ? getComputedStyle(iterationArrow) : null;
+        const documentPreviewStyle = documentPreview ? getComputedStyle(documentPreview) : null;
+        const documentPreviewFrameStyle = documentPreviewFrame ? getComputedStyle(documentPreviewFrame) : null;
+        const documentPreviewCaptionStyle = documentPreviewCaption ? getComputedStyle(documentPreviewCaption) : null;
+        const showcaseMediaStyle = showcaseMedia ? getComputedStyle(showcaseMedia) : null;
+        const showcaseFrameStyle = showcaseFrame ? getComputedStyle(showcaseFrame) : null;
+        const showcaseCaptionStyle = showcaseCaption ? getComputedStyle(showcaseCaption) : null;
+        const showcaseFramedFrameStyle = showcaseFramedFrame ? getComputedStyle(showcaseFramedFrame) : null;
+        const explainerLayoutStyle = explainerLayout ? getComputedStyle(explainerLayout) : null;
+        const explainerCopyStyle = explainerCopy ? getComputedStyle(explainerCopy) : null;
+        const explainerPillStyle = explainerPill ? getComputedStyle(explainerPill) : null;
+        const explainerTitleStyle = explainerTitle ? getComputedStyle(explainerTitle) : null;
+        const explainerBodyStyle = explainerBody ? getComputedStyle(explainerBody) : null;
         const overflowNodes = [...document.querySelectorAll('body *')].filter((el) => {
           const rect = el.getBoundingClientRect();
           return rect.width > 0 && (rect.right > window.innerWidth + 1 || rect.left < -1);
@@ -229,7 +255,9 @@ try {
             persona: document.querySelectorAll('.laushu-persona-list, .laushu-persona, .laushu-persona-copy, .laushu-persona-tags').length,
             videoShowcase: document.querySelectorAll('.laushu-demo-list, .laushu-demo-card, .laushu-demo-media-wrap, .laushu-demo-media, .laushu-demo-meta, .laushu-demo-video, .laushu-demo-copy').length,
             reflection: document.querySelectorAll('.laushu-learning-card, .laushu-learning-num, .laushu-learning-title').length,
-            iteration: document.querySelectorAll('.laushu-iter-list, .laushu-iter-board, .laushu-iter-head, .laushu-iter-badge, .laushu-iter-title, .laushu-iter-body, .laushu-iter-label, .laushu-iter-paras, .laushu-iter-compare, .laushu-iter-frame, .laushu-iter-media, .laushu-iter-card, .laushu-iter-arrow').length
+            iteration: document.querySelectorAll('.laushu-iter-list, .laushu-iter-board, .laushu-iter-head, .laushu-iter-badge, .laushu-iter-title, .laushu-iter-body, .laushu-iter-label, .laushu-iter-paras, .laushu-iter-compare, .laushu-iter-frame, .laushu-iter-media, .laushu-iter-card, .laushu-iter-arrow').length,
+            mediaFrame: document.querySelectorAll('.laushu-form-card, .laushu-overview-hero, .laushu-journey, .laushu-test-result, .laushu-proto-overview').length,
+            explainer: document.querySelectorAll('.laushu-problem-layout, .laushu-problem-copy, .laushu-problem-pill, .laushu-problem-define-title').length
           },
           counts: {
             topicCard: document.querySelectorAll('.cs-topic-card').length,
@@ -270,7 +298,15 @@ try {
             iterationPanel: document.querySelectorAll('.cs-iteration-panel').length,
             iterationPanelMedia: document.querySelectorAll('.cs-iteration-panel-media').length,
             iterationPanelImage: document.querySelectorAll('.cs-iteration-panel-image').length,
-            iterationArrow: document.querySelectorAll('.cs-iteration-arrow').length
+            iterationArrow: document.querySelectorAll('.cs-iteration-arrow').length,
+            documentPreview: document.querySelectorAll('.cs-document-preview').length,
+            showcaseMedia: document.querySelectorAll('.cs-showcase-media').length,
+            showcaseCaptionCenter: document.querySelectorAll('.cs-showcase-media--caption-center').length,
+            showcaseFramed: document.querySelectorAll('.cs-showcase-media--framed').length,
+            explainerLayout: document.querySelectorAll('.cs-explainer-layout').length,
+            explainerCopy: document.querySelectorAll('.cs-explainer-copy').length,
+            explainerPill: document.querySelectorAll('.cs-explainer-pill').length,
+            explainerTitle: document.querySelectorAll('.cs-explainer-title').length
           },
           topicCard: topicCard && {
             padding: topicCardStyle.padding,
@@ -378,6 +414,35 @@ try {
             imageDisplay: iterationPanelImageStyle.display,
             arrowPosition: iterationArrowStyle.position,
             arrowTransform: iterationArrowStyle.transform
+          },
+          mediaFrame: documentPreview && documentPreviewFrame && documentPreviewCaption && showcaseMedia && showcaseFrame && showcaseCaption && showcaseFramedFrame && {
+            documentDisplay: documentPreviewStyle.display,
+            documentPadding: documentPreviewFrameStyle.padding,
+            documentRadius: documentPreviewFrameStyle.borderRadius,
+            documentBorder: documentPreviewFrameStyle.borderTopStyle,
+            documentShadow: documentPreviewFrameStyle.boxShadow,
+            documentCaptionAlign: documentPreviewCaptionStyle.textAlign,
+            showcaseDisplay: showcaseMediaStyle.display,
+            showcaseRadius: showcaseFrameStyle.borderRadius,
+            showcaseOverflow: showcaseFrameStyle.overflow,
+            captionAlign: showcaseCaptionStyle.textAlign,
+            captionWeight: showcaseCaptionStyle.fontWeight,
+            framedRadius: showcaseFramedFrameStyle.borderRadius,
+            framedBorder: showcaseFramedFrameStyle.borderTopStyle,
+            framedShadow: showcaseFramedFrameStyle.boxShadow
+          },
+          explainer: explainerLayout && explainerCopy && explainerPill && explainerTitle && explainerBody && {
+            layoutDisplay: explainerLayoutStyle.display,
+            layoutColumns: explainerLayoutStyle.gridTemplateColumns,
+            layoutAlign: explainerLayoutStyle.alignItems,
+            copyMinWidth: explainerCopyStyle.minWidth,
+            pillDisplay: explainerPillStyle.display,
+            pillRadius: explainerPillStyle.borderRadius,
+            pillWeight: explainerPillStyle.fontWeight,
+            titleWeight: explainerTitleStyle.fontWeight,
+            titleColor: explainerTitleStyle.color,
+            titleMarginBottom: explainerTitleStyle.marginBottom,
+            bodyLineHeight: explainerBodyStyle.lineHeight
           }
         };
       })()`,
@@ -404,6 +469,8 @@ try {
     result.oldCounts.videoShowcase !== 0 ||
     result.oldCounts.reflection !== 0 ||
     result.oldCounts.iteration !== 0 ||
+    result.oldCounts.mediaFrame !== 0 ||
+    result.oldCounts.explainer !== 0 ||
     result.counts.topicCard !== 13 ||
     result.counts.topicCardKicker !== 7 ||
     result.counts.topicCardIllustrated !== 3 ||
@@ -443,6 +510,14 @@ try {
     result.counts.iterationPanelMedia !== 12 ||
     result.counts.iterationPanelImage !== 12 ||
     result.counts.iterationArrow !== 6 ||
+    result.counts.documentPreview !== 1 ||
+    result.counts.showcaseMedia !== 4 ||
+    result.counts.showcaseCaptionCenter !== 1 ||
+    result.counts.showcaseFramed !== 1 ||
+    result.counts.explainerLayout !== 1 ||
+    result.counts.explainerCopy !== 1 ||
+    result.counts.explainerPill !== 1 ||
+    result.counts.explainerTitle !== 1 ||
     result.topicCard?.radius !== "16px" ||
     !["flex", "inline-flex"].includes(result.topicKicker?.display) ||
     result.topicKicker?.fontWeight !== "700" ||
@@ -494,6 +569,24 @@ try {
     result.iteration?.mediaDisplay !== "flex" ||
     result.iteration?.imageDisplay !== "block" ||
     result.iteration?.arrowPosition !== "relative" ||
+    result.mediaFrame?.documentPadding !== (result.viewport.startsWith("390") ? "20px" : "28px") ||
+    result.mediaFrame?.documentRadius !== "18px" ||
+    result.mediaFrame?.documentBorder !== "solid" ||
+    result.mediaFrame?.documentCaptionAlign !== "center" ||
+    result.mediaFrame?.showcaseRadius !== "20px" ||
+    result.mediaFrame?.showcaseOverflow !== "hidden" ||
+    result.mediaFrame?.captionAlign !== "center" ||
+    result.mediaFrame?.captionWeight !== "700" ||
+    result.mediaFrame?.framedRadius !== "16px" ||
+    result.mediaFrame?.framedBorder !== "solid" ||
+    result.explainer?.layoutDisplay !== "grid" ||
+    result.explainer?.layoutAlign !== "start" ||
+    result.explainer?.copyMinWidth !== "0px" ||
+    !["inline-flex", "flex"].includes(result.explainer?.pillDisplay) ||
+    result.explainer?.pillRadius !== "999px" ||
+    result.explainer?.pillWeight !== "700" ||
+    result.explainer?.titleWeight !== "800" ||
+    result.explainer?.titleMarginBottom !== "40px" ||
     result.consoleErrors !== 0
   ));
 

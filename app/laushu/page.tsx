@@ -466,7 +466,7 @@ function OverviewSection() {
           <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
         ))}
       </CaseGrid>
-      <CaseMedia className="laushu-overview-hero" variant="full">
+      <CaseMedia className="cs-showcase-media" variant="full">
         <Image
           src={`${IMG}/overview-hero.png`}
           alt="Laushu 勞務報酬系統介面總覽"
@@ -483,15 +483,15 @@ function ProblemSection() {
   return (
     <section id="cs-sec-problem" className="cs-section laushu-problem-section">
       <LaushuHead eyebrow="問題定義" title="過去建立紙本勞報單費時費力，但最後紙本單據僅作為佐證用。" />
-      <div className="laushu-problem-layout">
-        <div className="laushu-problem-copy">
-          <span className="laushu-problem-pill">科普小知識</span>
-          <h4 className="laushu-problem-define-title">勞報單是什麼？</h4>
+      <div className="cs-explainer-layout">
+        <div className="cs-explainer-copy">
+          <span className="cs-explainer-pill">科普小知識</span>
+          <h4 className="cs-explainer-title">勞報單是什麼？</h4>
           <p>
             勞務報酬單，簡稱「勞報單」，為公司支付「酬勞」給「個人」時使用的證明單據，可作為公司支出的證明，並列入領到酬勞者的綜合所得稅中。
           </p>
         </div>
-        <CaseMedia className="laushu-form-card" caption="勞報單範例" variant="full">
+        <CaseMedia className="cs-document-preview" caption="勞報單範例" variant="full">
           <Image
             src={`${IMG}/labor-form-example.png`}
             alt="勞務報酬單範例"
@@ -602,7 +602,7 @@ function ConvergeSection() {
         <p>挖掘使用者在建立、發放、回簽、建檔勞報單流程中的痛點，並首先聚焦會自己經手勞報單的公司端。</p>
       </ArticleBlock>
       <CaseMedia
-        className="laushu-journey"
+        className="cs-showcase-media cs-showcase-media--caption-center"
         caption="以前兩位受訪者為主，盤點建立 → 發放 → 回簽 → 建檔的完整歷程與痛點"
         variant="full"
       >
@@ -720,7 +720,7 @@ function IterateSection() {
       <ArticleBlock title="測試結果" number="03">
         <p>根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。</p>
       </ArticleBlock>
-      <CaseMedia className="laushu-test-result" variant="full">
+      <CaseMedia className="cs-showcase-media" variant="full">
         <ZoomableImage
           src={`${IMG}/test-result.png`}
           alt="Laushu 任務測試與 SUS 結果"
@@ -774,7 +774,7 @@ function PrototypeSection() {
       <p className="laushu-proto-intro">
         根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。
       </p>
-      <CaseMedia className="laushu-proto-overview" variant="full">
+      <CaseMedia className="cs-showcase-media cs-showcase-media--framed" variant="full">
         <FeatureImageLightbox src={`${IMG}/figma-design.png`} alt="Laushu Hi-fi 原型設計總覽" width={1472} height={793} />
       </CaseMedia>
       <FeatureConnectors />
