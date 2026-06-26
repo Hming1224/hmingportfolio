@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import Button from "./ui/Button";
+import type { DesignSystemTokenRow } from "../lib/design-system-data";
 
 type Dictionary = {
   tokenToggle: string;
@@ -35,14 +36,6 @@ type TokenGroup = {
   rows: string[][];
 };
 
-type TokenReferenceRow = {
-  token: string;
-  value: string;
-  type: string;
-  scope: string;
-  usage: string;
-  filter: string;
-};
 
 export default function DesignSystemPlayground({
   dictionary,
@@ -56,7 +49,7 @@ export default function DesignSystemPlayground({
 }: {
   dictionary: Dictionary;
   tokenGroups: TokenGroup[];
-  tokenReferenceRows?: TokenReferenceRow[];
+  tokenReferenceRows?: DesignSystemTokenRow[];
   tokenReferenceFilters?: Array<{ value: string; label: string }>;
   tokenReferenceTitle?: string;
   tokenReferenceDescription?: string;
@@ -72,7 +65,7 @@ export default function DesignSystemPlayground({
   const tokenSections = useMemo(() => tokenGroups, [tokenGroups]);
   const filteredTokenRows = useMemo(() => {
     return tokenReferenceRows.filter((row) => {
-      const matchesFilter = tokenFilter === "all" || row.filter === tokenFilter;
+      const matchesFilter = tokenFilter === "all" || row.type === tokenFilter;
       const normalizedQuery = tokenQuery.trim().toLowerCase();
       const haystack = `${row.token} ${row.value} ${row.type} ${row.scope} ${row.usage}`.toLowerCase();
       const matchesQuery = !normalizedQuery || haystack.includes(normalizedQuery);
