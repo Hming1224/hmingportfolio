@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import DesignSystemPlayground from "../../components/DesignSystemPlayground";
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "../../components/ui/Accordion";
+import { designSystemDocs } from "../../lib/design-system-docs";
+import { designSystemSections } from "../../lib/design-system-data";
+import DesignSystemExplorer from "../../components/design-system/DesignSystemExplorer";
 import { Link } from "../../i18n/navigation";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
-import { designPrinciples, designSystemTokenRows } from "../../lib/design-system-data";
+import { designPrinciples } from "../../lib/design-system-data";
 import enMessages from "../../i18n/dictionaries/en";
 import zhMessages from "../../i18n/dictionaries/zh-TW";
 
@@ -33,63 +36,7 @@ function getMessages(locale: Locale) {
 }
 
 
-const spacingVisuals = [4, 8, 12, 16, 24, 32, 40, 48, 64, 80] as const;
 
-
-const tokenFilters = {
-  en: [
-    { value: "all", label: "All" },
-    { value: "color", label: "Color" },
-    { value: "type", label: "Type" },
-    { value: "spacing", label: "Spacing" },
-    { value: "radius", label: "Radius" },
-    { value: "shadow", label: "Shadow" },
-    { value: "motion", label: "Motion" },
-    { value: "layout", label: "Layout" },
-  ],
-  "zh-TW": [
-    { value: "all", label: "全部" },
-    { value: "color", label: "Color" },
-    { value: "type", label: "Type" },
-    { value: "spacing", label: "Spacing" },
-    { value: "radius", label: "Radius" },
-    { value: "shadow", label: "Shadow" },
-    { value: "motion", label: "Motion" },
-    { value: "layout", label: "Layout" },
-  ],
-} satisfies Record<Locale, Array<{ value: string; label: string }>>;
-
-
-const colorGroupDefinitions: Record<Locale, Array<{ id: string; title: string; tokens: string[] }>> = {
-  en: [
-    { id: "purple", title: "Purple", tokens: ["--hm-purple", "--hm-purple-hover", "--hm-purple-soft", "--hm-purple-light"] },
-    { id: "neutral", title: "Neutrals", tokens: ["--hm-paper", "--hm-surface", "--hm-ink", "--hm-muted", "--hm-line", "--hm-line-strong"] },
-    { id: "text", title: "Semantic text", tokens: ["--text-heading", "--text-body", "--text-secondary", "--text-muted"] },
-    { id: "accent", title: "Accent", tokens: ["--hm-blue", "--hm-green", "--hm-peach", "--hm-brown"] },
-    { id: "project-tone", title: "Project tone", tokens: [".tone-advantech --tag-text", ".tone-advantech --tag-bg", ".tone-laushu --tag-text", ".tone-laushu --tag-bg"] },
-  ],
-  "zh-TW": [
-    { id: "purple", title: "Purple", tokens: ["--hm-purple", "--hm-purple-hover", "--hm-purple-soft", "--hm-purple-light"] },
-    { id: "neutral", title: "中性色", tokens: ["--hm-paper", "--hm-surface", "--hm-ink", "--hm-muted", "--hm-line", "--hm-line-strong"] },
-    { id: "text", title: "語意文字", tokens: ["--text-heading", "--text-body", "--text-secondary", "--text-muted"] },
-    { id: "accent", title: "Accent", tokens: ["--hm-blue", "--hm-green", "--hm-peach", "--hm-brown"] },
-    { id: "project-tone", title: "Project tone", tokens: [".tone-advantech --tag-text", ".tone-advantech --tag-bg", ".tone-laushu --tag-text", ".tone-laushu --tag-bg"] },
-  ]
-};
-
-function getColorSections(locale: Locale) {
-  return colorGroupDefinitions[locale].map(group => ({
-    id: group.id,
-    title: group.title,
-    items: group.tokens.map(token => {
-      const found = designSystemTokenRows.find(r => r.token === token);
-      const usage = found ? (locale === "zh-TW" && found.usageZh ? found.usageZh : found.usage) : "";
-      const value = found ? found.value : "";
-      const swatchClass = "is-" + token.replace("--hm-", "").replace("--text-", "text-").replace(".tone-", "").replace(" --tag-", "-").replace("-bg", "-bg").replace("-text", "-text");
-      return { token, value, usage, swatchClass };
-    })
-  }));
-}
 
 const foundationGroups: Record<Locale, TokenGroup[]> = {
   en: [
@@ -190,11 +137,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DesignSystemPage() {
   const locale = (await getLocale()) as Locale;
   const copy = getMessages(locale);
-  const colorSections = getColorSections(locale);
-  const tokenGroupRows = foundationGroups[locale];
-  const tokenFilterOptions = tokenFilters[locale];
-
-  return (
+const tokenGroupRows = foundationGroups[locale];
+return (
     <main className="ds-page">
       <Navbar />
 
@@ -237,6 +181,7 @@ export default async function DesignSystemPage() {
         </aside>
 
         <div className="ds-content">
+
           <section className="ds-section" id="getting-started">
             <div className="ds-section-heading">
               <span />
@@ -281,317 +226,50 @@ export default async function DesignSystemPage() {
             </div>
           </section>
 
-          <section className="ds-section" id="colors">
+          <section className="ds-section" id="foundations">
             <div className="ds-section-heading">
               <span />
-              <h2>{copy.colors.heading}</h2>
+              <h2>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
               <span />
             </div>
-            <div className="ds-color-groups">
-              {colorSections.map((group) => (
-                <section key={group.id} className="ds-color-group-card">
-                  <div className="ds-color-group-head">
-                    <h3>{group.title}</h3>
-                  </div>
-                  <div className="ds-color-grid">
-                    {group.items.map((item) => (
-                      <article key={item.token} className="ds-color-card">
-                        <div className={`ds-color-swatch ${item.swatchClass ?? ""}`} aria-hidden="true" />
-                        <div className="ds-color-meta">
-                          <strong>{item.token}</strong>
-                          <span>{item.value}</span>
-                          <p>{item.usage}</p>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </section>
+            <Accordion type="multiple" defaultValue={["color", "spacing", "motion"]}>
+              {tokenGroupRows.map(group => (
+                <AccordionItem key={group.id} value={group.id}>
+                  <AccordionHeader>{group.title}</AccordionHeader>
+                  <AccordionPanel>
+                    <p style={{ color: "var(--hm-muted)", marginBottom: "var(--hm-space-md)" }}>{group.description}</p>
+                    <div className="ds-context-table-wrap">
+                      <table className="ds-context-table">
+                        <thead>
+                          <tr>
+                            {group.columns.map(col => <th key={col}>{col}</th>)}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {group.rows.map(row => (
+                            <tr key={row[0]}>
+                              {row.map(cell => <td key={cell}>{cell}</td>)}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </AccordionPanel>
+                </AccordionItem>
               ))}
-            </div>
-            <div className="ds-rules-grid">
-              {copy.colors.rules.map((rule) => (
-                <article key={rule.title} className={`ds-rule-card ${rule.tone === "do" ? "is-do" : "is-dont"}`}>
-                  <p className="ds-rule-badge">{rule.badge}</p>
-                  <h3>{rule.title}</h3>
-                  <p>{rule.body}</p>
-                </article>
-              ))}
-            </div>
+            </Accordion>
           </section>
 
-          <section className="ds-section" id="typography">
+          <section className="ds-section" id="components" style={{ borderTop: "1px solid var(--hm-line)", marginTop: "var(--hm-space-2xl)", paddingTop: "var(--hm-space-2xl)" }}>
             <div className="ds-section-heading">
               <span />
-              <h2>{copy.typography.heading}</h2>
+              <h2>{locale === "en" ? "Component Explorer" : "元件庫"}</h2>
               <span />
             </div>
-            <div className="ds-type-stack">
-              {copy.typography.scale.map((item) => (
-                <article key={item.token} className="ds-type-row">
-                  <div>
-                    <p className={`ds-type-sample ${item.className}`}>{item.sample}</p>
-                    <div className="ds-type-meta">
-                      <strong>{item.token}</strong>
-                      <span>{item.desktop}</span>
-                      <span>{item.mobile}</span>
-                    </div>
-                  </div>
-                  <p className="ds-type-note">{item.usage}</p>
-                </article>
-              ))}
-            </div>
-            <div className="ds-spec-grid">
-              <article className="ds-spec-card">
-                <h3>{copy.typography.weightTitle}</h3>
-                <div className="ds-weight-list">
-                  {copy.typography.weights.map((item) => (
-                    <div key={item.label} className="ds-weight-row">
-                      <strong style={{ fontWeight: item.weight }}>{item.label}</strong>
-                      <span>{item.usage}</span>
-                    </div>
-                  ))}
-                </div>
-              </article>
-              <article className="ds-spec-card">
-                <h3>{copy.typography.lineHeightTitle}</h3>
-                <div className="ds-weight-list">
-                  {copy.typography.lineHeights.map((item) => (
-                    <div key={item.label} className="ds-weight-row">
-                      <strong>{item.label}</strong>
-                      <span>{item.usage}</span>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section className="ds-section" id="spacing">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.spacing.heading}</h2>
-              <span />
-            </div>
-            <div className="ds-spec-grid">
-              <article className="ds-spec-card">
-                <h3>{copy.spacing.tokenTitle}</h3>
-                <div className="ds-spacing-token-list">
-                  {copy.spacing.tokens.map((item) => (
-                    <div key={item.token} className="ds-spacing-token-row">
-                      <strong>{item.token}</strong>
-                      <span>{item.value}</span>
-                      <p>{item.usage}</p>
-                    </div>
-                  ))}
-                </div>
-              </article>
-              <article className="ds-spec-card">
-                <h3>{copy.spacing.visualTitle}</h3>
-                <div className="ds-spacing-visuals">
-                  {spacingVisuals.map((value) => (
-                    <div key={value} className="ds-spacing-bar-row">
-                      <span>{value}px</span>
-                      <div className="ds-spacing-bar-track">
-                        <div className="ds-spacing-bar-fill" style={{ width: `${Math.max(value, 4)}px` }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            </div>
-            <div className="ds-context-table-wrap">
-              <table className="ds-context-table">
-                <thead>
-                  <tr>
-                    {copy.spacing.contextColumns.map((column) => (
-                      <th key={column} scope="col">
-                        {column}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {copy.spacing.contextRows.map((row) => (
-                    <tr key={row.context}>
-                      <td>{row.context}</td>
-                      <td>{row.token}</td>
-                      <td>{row.note}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <article className="ds-note-card">
-              <h3>{copy.spacing.exceptionTitle}</h3>
-              <p>{copy.spacing.exceptionBody}</p>
-            </article>
-          </section>
-
-          <section className="ds-section" id="radius">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.radius.heading}</h2>
-              <span />
-            </div>
-            <div className="ds-radius-grid">
-              {copy.radius.items.map((item) => (
-                <article key={item.token} className="ds-radius-card">
-                  <div className={`ds-radius-demo ${item.className}`} aria-hidden="true" />
-                  <strong>{item.token}</strong>
-                  <span>{item.value}</span>
-                  <p>{item.usage}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="ds-section" id="shadows">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.shadows.heading}</h2>
-              <span />
-            </div>
-            <div className="ds-shadow-grid">
-              {copy.shadows.items.map((item) => (
-                <article key={item.token} className="ds-shadow-card">
-                  <div className={`ds-shadow-demo ${item.className}`} aria-hidden="true" />
-                  <strong>{item.token}</strong>
-                  <span>{item.value}</span>
-                  <p>{item.usage}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="ds-section" id="motion">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.motion.heading}</h2>
-              <span />
-            </div>
-            <div className="ds-spec-grid">
-              <article className="ds-spec-card">
-                <h3>{copy.motion.durationTitle}</h3>
-                <div className="ds-weight-list">
-                  {copy.motion.durations.map((item) => (
-                    <div key={item.token} className="ds-weight-row">
-                      <strong>{item.token}</strong>
-                      <span>{item.usage}</span>
-                    </div>
-                  ))}
-                </div>
-              </article>
-              <article className="ds-spec-card">
-                <h3>{copy.motion.easingTitle}</h3>
-                <div className="ds-weight-list">
-                  {copy.motion.easings.map((item) => (
-                    <div key={item.token} className="ds-weight-row">
-                      <strong>{item.token}</strong>
-                      <span>{item.usage}</span>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            </div>
-            <div className="ds-motion-demo-grid">
-              <article className="ds-motion-card">
-                <h3>{copy.motion.demoPrimaryTitle}</h3>
-                <button type="button" className="ds-motion-chip">
-                  {copy.motion.demoPrimaryLabel}
-                </button>
-              </article>
-              <article className="ds-motion-card">
-                <h3>{copy.motion.demoPanelTitle}</h3>
-                <div className="ds-motion-panel">
-                  <div className="ds-motion-panel-surface">{copy.motion.demoPanelLabel}</div>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section className="ds-section" id="components">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.components.heading}</h2>
-              <span />
-            </div>
-            <DesignSystemPlayground
-              part="components"
-              dictionary={copy.playground}
-              tokenGroups={tokenGroupRows}
-            />
-            <div className="ds-inline-actions ds-section-actions">
-              <Link className="ds-anchor-link is-secondary" href="/design-system/components/button">
-                {locale === "en" ? "Browse component documentation" : "瀏覽完整元件文件"}
-              </Link>
-            </div>
-            <div className="ds-context-table-wrap">
-              <table className="ds-context-table">
-                <thead>
-                  <tr>
-                    {copy.components.matrixColumns.map((column) => (
-                      <th key={column} scope="col">
-                        {column}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {copy.components.matrixRows.map((row) => (
-                    <tr key={row.component}>
-                      <td>{row.component}</td>
-                      <td>{row.default}</td>
-                      <td>{row.hover}</td>
-                      <td>{row.focus}</td>
-                      <td>{row.active}</td>
-                      <td>{row.disabled}</td>
-                      <td>{row.loading}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section className="ds-section" id="button-tokens">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.buttonTokens.heading}</h2>
-              <span />
-            </div>
-            <div className="ds-button-token-card">
-              <div className="ds-button-token-stage">
-                <button type="button" className="ds-button-token-demo">
-                  {copy.buttonTokens.buttonLabel}
-                </button>
-              </div>
-              <div className="ds-button-token-list">
-                {copy.buttonTokens.items.map((item) => (
-                  <article key={item.label} className="ds-button-token-row">
-                    <strong>{item.label}</strong>
-                    <span>{item.token}</span>
-                    <p>{item.body}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="ds-section" id="tokens">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.tokens.heading}</h2>
-              <span />
-            </div>
-            <DesignSystemPlayground
-              part="tokens"
-              dictionary={copy.playground}
-              tokenGroups={tokenGroupRows}
-              tokenReferenceRows={designSystemTokenRows}
-              tokenReferenceFilters={tokenFilterOptions}
-              tokenReferenceTitle={copy.tokens.tableTitle}
-              tokenReferenceDescription={copy.tokens.tableDescription}
-              tokenReferenceColumns={copy.tokens.columns}
+            <DesignSystemExplorer
+              locale={locale}
+              sections={designSystemSections.slice(1)}
+              docs={designSystemDocs}
             />
           </section>
 
