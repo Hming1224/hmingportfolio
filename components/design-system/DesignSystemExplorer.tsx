@@ -28,30 +28,27 @@ export default function DesignSystemExplorer({
     <div className="ds-shell ds-docs-layout" style={{ marginTop: "var(--hm-space-2xl)", alignItems: "flex-start" }}>
       <aside className="ds-docs-sidebar" style={{ position: "sticky", top: "80px", maxHeight: "calc(100vh - 100px)", overflowY: "auto" }}>
         
-        <div style={{ marginBottom: "var(--hm-space-xl)" }}>
-          <p style={{ fontWeight: 600, padding: "0 12px", marginBottom: "var(--hm-space-sm)" }}>{toc.title}</p>
-          <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            {toc.items.map((item) => (
-              <a 
-                key={item.href} 
-                href={item.href}
-                className="ds-docs-nav-link"
-                style={{
-                  display: "block",
-                  padding: "6px 12px",
-                  color: "var(--hm-ink)",
-                  textDecoration: "none",
-                  fontSize: "var(--hm-fs-sm)",
-                  borderRadius: "4px"
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </div>
+        <nav className="ds-docs-sidebar-nav" style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+          
+          {/* Top-level page links acting as nav roots */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <a 
+              href={toc.items[0].href} 
+              className="hm-accordion-trigger" 
+              style={{ textDecoration: "none", cursor: "pointer", display: "flex", alignItems: "center" }}
+            >
+              {toc.items[0].label}
+            </a>
+            <a 
+              href={toc.items[1].href} 
+              className="hm-accordion-trigger" 
+              style={{ textDecoration: "none", cursor: "pointer", display: "flex", alignItems: "center" }}
+            >
+              {toc.items[1].label}
+            </a>
+          </div>
 
-        <Accordion type="single" defaultValue={sections[0]?.label}>
+          <Accordion type="single" defaultValue={sections[0]?.label}>
           {sections.map((section) => (
             <AccordionItem key={section.label} value={section.label}>
               <AccordionHeader>
@@ -90,6 +87,17 @@ export default function DesignSystemExplorer({
             </AccordionItem>
           ))}
         </Accordion>
+
+          <div style={{ display: "flex", flexDirection: "column", marginTop: "var(--hm-space-xs)" }}>
+            <a 
+              href={toc.items[3].href} 
+              className="hm-accordion-trigger" 
+              style={{ textDecoration: "none", cursor: "pointer", display: "flex", alignItems: "center" }}
+            >
+              {toc.items[3].label}
+            </a>
+          </div>
+        </nav>
       </aside>
 
       <div className="ds-content ds-docs-article" style={{ flex: 1, minWidth: 0 }}>
