@@ -149,67 +149,19 @@
   margin-top: 0;
 }
 
-.theme-laushu .laushu-info-card {
-  --cs-card-bg: #ffffff;
-  --cs-card-border: var(--laushu-line);
-  --cs-card-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
-  --cs-card-padding: 24px;
-  --cs-card-padding-mobile: 20px;
-  --cs-card-radius: 16px;
-  min-height: 180px;
-}
-
-.theme-laushu .laushu-info-card>span {
-  display: inline-flex;
-  margin-bottom: 18px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: var(--laushu-primary-200);
-  color: var(--laushu-primary-600);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-}
-
-.theme-laushu .laushu-info-card h4 {
-  margin: 0 0 12px;
-  font-size: var(--fs-h4);
-  line-height: 1.35;
-  font-weight: 800;
-  color: var(--laushu-tertiary-700);
-}
-
-.theme-laushu .laushu-info-card p {
-  margin: 0;
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
-.theme-laushu .laushu-info-card--illustrated {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.theme-laushu .laushu-info-card > .laushu-info-card-art {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 132px;
-  height: 132px;
-  margin-bottom: 18px;
-  padding: 0;
-  border-radius: 999px;
-  background: var(--laushu-primary-200);
-}
-
-.theme-laushu .laushu-info-card-art img {
-  width: 84px;
-  height: auto;
-  max-height: 84px;
-  object-fit: contain;
-  object-position: center;
+.theme-laushu .cs-topic-card {
+  --cs-topic-card-bg: #ffffff;
+  --cs-topic-card-border: var(--laushu-line);
+  --cs-topic-card-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+  --cs-topic-card-padding: 24px;
+  --cs-topic-card-padding-mobile: 20px;
+  --cs-topic-card-radius: 16px;
+  --cs-topic-card-min-height: 180px;
+  --cs-topic-card-kicker-bg: var(--laushu-primary-200);
+  --cs-topic-card-kicker-color: var(--laushu-primary-600);
+  --cs-topic-card-title-color: var(--laushu-tertiary-700);
+  --cs-topic-card-body-color: var(--text-secondary);
+  --cs-topic-card-art-bg: var(--laushu-primary-200);
 }
 
 .theme-laushu .laushu-form-card {
@@ -237,25 +189,16 @@
 }
 
 
-.theme-laushu .laushu-article {
-  max-width: 760px;
+.theme-laushu .cs-article {
+  --cs-article-title-color: var(--laushu-primary-700);
+  --cs-article-kicker-color: var(--laushu-primary-500);
+  --cs-article-num-color: var(--laushu-primary-500);
+  --cs-rich-copy-color: var(--text-body);
 }
 
-.theme-laushu .laushu-article h3,
+.theme-laushu .cs-article h3,
 .theme-laushu .laushu-flow-group h3 {
-  margin: 0 0 16px;
-  font-size: var(--fs-h3);
-  line-height: 1.35;
-  font-weight: 800;
   color: var(--laushu-primary-700);
-}
-
-.theme-laushu .laushu-kicker {
-  margin: -6px 0 18px;
-  font-size: var(--fs-body);
-  line-height: 1.5;
-  font-weight: 700;
-  color: var(--laushu-primary-500);
 }
 
 .theme-laushu {
@@ -276,11 +219,6 @@
 /* Figma 風格：section 標題下的描述句副標 */
 
 /* Figma 風格：小節標題的數字前綴（01 / …） */
-.theme-laushu .laushu-article-num {
-  color: var(--laushu-primary-500);
-  font-weight: 800;
-}
-
 /* Figma 風格 section 標題：眉標 + 論點句（對齊 Figma node 2797:1521） */
 
 
@@ -294,19 +232,19 @@
 }
 
 /* 專案總覽 3 張卡片：Figma 漸層紫底 + 淺陰影 */
-.theme-laushu .laushu-overview-grid .laushu-info-card {
+.theme-laushu .laushu-overview-grid .cs-topic-card {
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-overview-grid .laushu-info-card:nth-child(1) {
+.theme-laushu .laushu-overview-grid .cs-topic-card:nth-child(1) {
   background: #fbf9ff;
 }
 
-.theme-laushu .laushu-overview-grid .laushu-info-card:nth-child(2) {
+.theme-laushu .laushu-overview-grid .cs-topic-card:nth-child(2) {
   background: #f5eeff;
 }
 
-.theme-laushu .laushu-overview-grid .laushu-info-card:nth-child(3) {
+.theme-laushu .laushu-overview-grid .cs-topic-card:nth-child(3) {
   background: #e6e2ff;
 }
 
@@ -329,12 +267,12 @@
   line-height: 18px;
 }
 
-.theme-laushu .laushu-problem-grid .laushu-info-card {
+.theme-laushu .laushu-problem-grid .cs-topic-card {
   padding: 25px;
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-problem-grid .laushu-info-card>span {
+.theme-laushu .laushu-problem-grid .cs-topic-card-kicker {
   background: #f5eeff;
   line-height: 18px;
 }
@@ -346,38 +284,6 @@
   line-height: 1.35;
   font-weight: 800;
   color: #4852c3;
-}
-
-.theme-laushu .laushu-copy {
-  color: var(--text-body);
-  font-size: var(--fs-body);
-  line-height: 1.8;
-}
-
-.theme-laushu .laushu-copy p,
-.theme-laushu .laushu-copy ul,
-.theme-laushu .laushu-copy ol {
-  margin: 0;
-}
-
-.theme-laushu .laushu-copy p+ul,
-.theme-laushu .laushu-copy p+ol {
-  margin-top: 16px;
-}
-
-.theme-laushu .laushu-copy ul+p,
-.theme-laushu .laushu-copy ol+p,
-.theme-laushu .laushu-copy p+.laushu-image-frame {
-  margin-top: 24px;
-}
-
-.theme-laushu .laushu-copy ul,
-.theme-laushu .laushu-copy ol {
-  padding-left: 1.35em;
-}
-
-.theme-laushu .laushu-copy li+li {
-  margin-top: 8px;
 }
 
 
@@ -579,7 +485,7 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-laushu .laushu-info-card {
+  .theme-laushu .cs-topic-card {
     min-height: 0;
   }
 
@@ -906,7 +812,7 @@
 }
 
 /* Process / Understand / Converge / Iterate 段內容垂直間距（僅設上邊距，水平對齊維持各自規則） */
-.theme-laushu .laushu-process-section > .laushu-article,
+.theme-laushu .laushu-process-section > .cs-article,
 .theme-laushu .laushu-process-section > .laushu-stakeholder-grid,
 .theme-laushu .laushu-process-section > .laushu-diagram,
 .theme-laushu .laushu-process-section > .laushu-table-wrap,
@@ -931,7 +837,7 @@
 }
 
 
-.theme-laushu .laushu-understand-section > .laushu-article,
+.theme-laushu .laushu-understand-section > .cs-article,
 .theme-laushu .laushu-understand-section > .laushu-stakeholder-grid,
 .theme-laushu .laushu-understand-section > .laushu-diagram,
 .theme-laushu .laushu-understand-section > .laushu-table-wrap,
@@ -943,32 +849,32 @@
   margin-top: 40px;
 }
 
-.theme-laushu .laushu-understand-section .laushu-article {
+.theme-laushu .laushu-understand-section .cs-article {
   max-width: var(--laushu-content-max);
   margin-right: auto;
   margin-left: auto;
 }
 
-.theme-laushu .laushu-understand-section .laushu-article h3 {
+.theme-laushu .laushu-understand-section .cs-article h3 {
   color: #4852c3;
 }
 
-.theme-laushu .laushu-understand-section .laushu-article-num {
+.theme-laushu .laushu-understand-section .cs-article-num {
   color: inherit;
 }
 
-.theme-laushu .laushu-understand-section .laushu-copy {
+.theme-laushu .laushu-understand-section .cs-rich-copy {
   color: var(--text-body);
 }
 
-.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .laushu-info-card {
+.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .cs-topic-card {
   min-height: 251px;
   padding: 25px;
   background: #fbf9ff;
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .laushu-info-card > span {
+.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .cs-topic-card-kicker {
   line-height: 18px;
 }
 
@@ -1607,28 +1513,28 @@
 }
 
 .theme-laushu .laushu-converge-section .laushu-head,
-.theme-laushu .laushu-converge-section .laushu-article {
+.theme-laushu .laushu-converge-section .cs-article {
   max-width: var(--laushu-content-max);
   margin-right: auto;
   margin-left: auto;
 }
 
 
-.theme-laushu .laushu-converge-section > .laushu-article,
+.theme-laushu .laushu-converge-section > .cs-article,
 .theme-laushu .laushu-converge-section > .laushu-journey,
 .theme-laushu .laushu-converge-section > .laushu-usecase-grid {
   margin-top: 40px;
 }
 
-.theme-laushu .laushu-converge-section .laushu-article h3 {
+.theme-laushu .laushu-converge-section .cs-article h3 {
   color: #4852c3;
 }
 
-.theme-laushu .laushu-converge-section .laushu-article-num {
+.theme-laushu .laushu-converge-section .cs-article-num {
   color: inherit;
 }
 
-.theme-laushu .laushu-converge-section .laushu-copy {
+.theme-laushu .laushu-converge-section .cs-rich-copy {
   color: #1f2933;
 }
 
@@ -1642,7 +1548,7 @@
   margin-left: auto;
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card {
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card {
   min-height: 284px;
   padding: 25px;
   border: 1px solid var(--laushu-line);
@@ -1651,7 +1557,7 @@
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card-art {
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card-art {
   flex: none;
   width: 132px;
   height: 132px;
@@ -1659,19 +1565,19 @@
   background: var(--laushu-primary-200);
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card-art img {
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card-art img {
   width: 84px;
   height: 84px;
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card h4 {
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card h4 {
   margin-bottom: 12px;
   color: var(--laushu-tertiary-700);
   font-size: var(--fs-h4);
   line-height: 1.35;
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .laushu-info-card p {
+.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card p {
   max-width: 254px;
   color: #5d6674;
   font-size: var(--fs-sm);
@@ -1685,7 +1591,7 @@
 }
 
 .theme-laushu .laushu-iterate-section .laushu-head,
-.theme-laushu .laushu-iterate-section .laushu-article,
+.theme-laushu .laushu-iterate-section .cs-article,
 .theme-laushu .laushu-iterate-section .laushu-fc-list,
 .theme-laushu .laushu-iterate-section .laushu-iter-list {
   max-width: var(--laushu-content-max);
@@ -1694,26 +1600,26 @@
 }
 
 
-.theme-laushu .laushu-iterate-section > .laushu-article,
+.theme-laushu .laushu-iterate-section > .cs-article,
 .theme-laushu .laushu-iterate-section > .laushu-fc-list,
 .theme-laushu .laushu-iterate-section > .laushu-iter-list {
   margin-top: 40px;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-article h3 {
+.theme-laushu .laushu-iterate-section .cs-article h3 {
   color: #4852c3;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-article-num {
+.theme-laushu .laushu-iterate-section .cs-article-num {
   color: inherit;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-copy {
+.theme-laushu .laushu-iterate-section .cs-rich-copy {
   color: #1f2933;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-copy p,
-.theme-laushu .laushu-iterate-section .laushu-copy li {
+.theme-laushu .laushu-iterate-section .cs-rich-copy p,
+.theme-laushu .laushu-iterate-section .cs-rich-copy li {
   line-height: 1.8;
 }
 

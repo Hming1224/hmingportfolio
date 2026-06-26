@@ -924,10 +924,10 @@ function ResearchTable() {
 
 function InfoCard({ title, number, image, children }: { title: string; number?: string; image?: string; children: ReactNode }) {
   return (
-    <CaseCard className={`laushu-info-card${image ? " laushu-info-card--illustrated" : ""}`}>
-      {number ? <span>{number}</span> : null}
+    <CaseCard className={`cs-topic-card${image ? " cs-topic-card--illustrated" : ""}`}>
+      {number ? <span className="cs-topic-card-kicker">{number}</span> : null}
       {image ? (
-        <span className="laushu-info-card-art" aria-hidden="true">
+        <span className="cs-topic-card-art" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={image} alt="" loading="lazy" />
         </span>
@@ -940,13 +940,13 @@ function InfoCard({ title, number, image, children }: { title: string; number?: 
 
 function ArticleBlock({ title, number, kicker, children }: { title: string; number?: string; kicker?: string; children: ReactNode }) {
   return (
-    <section className="laushu-article">
-      {kicker ? <p className="laushu-kicker">{kicker}</p> : null}
+    <section className="cs-article">
+      {kicker ? <p className="cs-article-kicker">{kicker}</p> : null}
       <h3>
-        {number ? <span className="laushu-article-num">{number} / </span> : null}
+        {number ? <span className="cs-article-num">{number} / </span> : null}
         {title}
       </h3>
-      <div className="laushu-copy">{children}</div>
+      <div className="cs-rich-copy">{children}</div>
     </section>
   );
 }
