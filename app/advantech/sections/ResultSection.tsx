@@ -8,8 +8,8 @@ export default async function ResultSection() {
   const { locale, t } = await getAdvantechTranslator();
   const cards = translateAdvantechData(locale, resultCards);
   return localizeAdvantechTree(locale,
-    <section id="cs-sec-result" className="cs-result-bg">
-      <div className="cs-result-bg-img">
+    <section id="cs-sec-result" className="cs-result-bg cs-stack-box">
+      <div className="cs-result-bg-img cs-object-box">
         <Image
           src="/projects/advantech/result/advantech-result-bg.webp"
           alt=""
@@ -17,15 +17,15 @@ export default async function ResultSection() {
           style={{ objectFit: "cover", opacity: 0.6 }}
         />
       </div>
-      <div className="cs-result-overlay" />
-      <div className="cs-result-content">
+      <div className="cs-result-overlay cs-object-box" />
+      <div className="cs-result-content cs-stack-box">
         <CaseHeading title={t("我學到了什麼...")} tone="white" style={{ marginBottom: 8 }} />
         <CaseGrid variant="two" className="cs-result-grid">
           {cards.map((item) => (
             <CaseCard key={item.num} className="cs-result-card">
-              <span className="cs-result-num">{item.num}</span>
-              <h3 className="cs-result-title">{item.title}</h3>
-              <p className="cs-result-desc">{item.desc}</p>
+              <span className="cs-result-num cs-inline-pill">{item.num}</span>
+              <h3 className="cs-result-title cs-copy-title">{item.title}</h3>
+              <p className="cs-result-desc cs-copy-body">{item.desc}</p>
             </CaseCard>
           ))}
         </CaseGrid>

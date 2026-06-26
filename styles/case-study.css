@@ -47,7 +47,7 @@
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: var(--cs-stack-box-direction, column);
   border-left: 1.5px solid var(--cs-line);
 }
 
@@ -1048,8 +1048,10 @@
 /* ── Shared card / grid / media primitives ── */
 .cs-grid {
   display: grid;
+  align-items: var(--cs-grid-align-items, stretch);
   gap: var(--cs-grid-gap, 20px);
   width: 100%;
+  margin: var(--cs-grid-margin, 0);
 }
 
 .cs-grid--two {
@@ -1243,6 +1245,193 @@
 
 .cs-rich-copy li+li {
   margin-top: var(--cs-rich-copy-list-item-gap, 8px);
+}
+
+.cs-marker-list {
+  display: flex;
+  margin: var(--cs-marker-list-margin, 0);
+  padding: var(--cs-marker-list-padding, 0);
+  flex-direction: column;
+  gap: var(--cs-marker-list-gap, 10px);
+  list-style: none;
+}
+
+.cs-marker-list li {
+  display: flex;
+  align-items: var(--cs-marker-list-item-align, flex-start);
+  gap: var(--cs-marker-list-item-gap, 8px);
+  color: var(--cs-marker-list-color, var(--cs-text-secondary));
+  font-size: var(--cs-marker-list-size, var(--fs-sm));
+  line-height: var(--cs-marker-list-line-height, 1.5);
+}
+
+.cs-marker-list li::before {
+  content: "";
+  flex: 0 0 auto;
+  width: var(--cs-marker-list-dot-size, 6px);
+  height: var(--cs-marker-list-dot-size, 6px);
+  margin-top: var(--cs-marker-list-dot-margin-top, 7px);
+  border-radius: var(--cs-marker-list-dot-radius, 50%);
+  background: var(--cs-marker-list-dot-bg, currentColor);
+}
+
+.cs-flex-cluster {
+  display: flex;
+  position: var(--cs-flex-cluster-position, static);
+  z-index: var(--cs-flex-cluster-z-index, auto);
+  flex: var(--cs-flex-cluster-flex, initial);
+  flex-shrink: var(--cs-flex-cluster-flex-shrink, 1);
+  min-width: var(--cs-flex-cluster-min-width, 0);
+  max-width: var(--cs-flex-cluster-max-width, none);
+  width: var(--cs-flex-cluster-width, auto);
+  height: var(--cs-flex-cluster-height, auto);
+  min-height: var(--cs-flex-cluster-min-height, 0);
+  flex-direction: var(--cs-flex-cluster-direction, row);
+  flex-wrap: var(--cs-flex-cluster-wrap, nowrap);
+  align-items: var(--cs-flex-cluster-align, center);
+  align-self: var(--cs-flex-cluster-align-self, auto);
+  justify-content: var(--cs-flex-cluster-justify, flex-start);
+  gap: var(--cs-flex-cluster-gap, 12px);
+  padding: var(--cs-flex-cluster-padding, 0);
+  overflow: var(--cs-flex-cluster-overflow, visible);
+  background: var(--cs-flex-cluster-bg, transparent);
+  border: var(--cs-flex-cluster-border, 0);
+  border-radius: var(--cs-flex-cluster-radius, 0);
+  margin: var(--cs-flex-cluster-margin, 0);
+  transform: var(--cs-flex-cluster-transform, none);
+}
+
+.cs-flex-cell {
+  flex: var(--cs-flex-cell-flex, 1);
+  min-width: var(--cs-flex-cell-min-width, 0);
+  padding: var(--cs-flex-cell-padding, 0);
+  border: var(--cs-flex-cell-border, 0);
+  background: var(--cs-flex-cell-bg, transparent);
+}
+
+.cs-track-grid {
+  display: grid;
+  position: var(--cs-track-grid-position, static);
+  z-index: var(--cs-track-grid-z-index, auto);
+  flex-shrink: var(--cs-track-grid-flex-shrink, 1);
+  grid-template-columns: var(--cs-track-grid-template-columns, none);
+  grid-template-rows: var(--cs-track-grid-template-rows, none);
+  align-items: var(--cs-track-grid-align-items, stretch);
+  column-gap: var(--cs-track-grid-column-gap, normal);
+  row-gap: var(--cs-track-grid-row-gap, normal);
+  min-width: var(--cs-track-grid-min-width, 0);
+  width: var(--cs-track-grid-width, auto);
+  min-height: var(--cs-track-grid-min-height, 0);
+  height: var(--cs-track-grid-height, auto);
+  padding: var(--cs-track-grid-padding, 0);
+  overflow-x: var(--cs-track-grid-overflow-x, visible);
+}
+
+.cs-stack-box {
+  display: flex;
+  position: var(--cs-stack-box-position, static);
+  inset: var(--cs-stack-box-inset, auto);
+  top: var(--cs-stack-box-top, auto);
+  right: var(--cs-stack-box-right, auto);
+  bottom: var(--cs-stack-box-bottom, auto);
+  left: var(--cs-stack-box-left, auto);
+  z-index: var(--cs-stack-box-z-index, auto);
+  order: var(--cs-stack-box-order, 0);
+  margin: var(--cs-stack-box-margin, 0);
+  flex: var(--cs-stack-box-flex, initial);
+  align-self: var(--cs-stack-box-align-self, auto);
+  align-items: var(--cs-stack-box-align, stretch);
+  justify-content: var(--cs-stack-box-justify, flex-start);
+  min-width: var(--cs-stack-box-min-width, 0);
+  max-width: var(--cs-stack-box-max-width, none);
+  width: var(--cs-stack-box-width, auto);
+  min-height: var(--cs-stack-box-min-height, 0);
+  height: var(--cs-stack-box-height, auto);
+  flex-direction: column;
+  gap: var(--cs-stack-box-gap, 12px);
+  padding: var(--cs-stack-box-padding, 0);
+  overflow: var(--cs-stack-box-overflow, visible);
+  overflow-x: var(--cs-stack-box-overflow-x, var(--cs-stack-box-overflow, visible));
+  overflow-y: var(--cs-stack-box-overflow-y, var(--cs-stack-box-overflow, visible));
+  border: var(--cs-stack-box-border, 0);
+  border-width: var(--cs-stack-box-border-width, initial);
+  border-radius: var(--cs-stack-box-radius, 0);
+  background: var(--cs-stack-box-bg, transparent);
+}
+
+.cs-object-box {
+  position: var(--cs-object-box-position, relative);
+  inset: var(--cs-object-box-inset, auto);
+  top: var(--cs-object-box-top, auto);
+  right: var(--cs-object-box-right, auto);
+  bottom: var(--cs-object-box-bottom, auto);
+  left: var(--cs-object-box-left, auto);
+  z-index: var(--cs-object-box-z-index, auto);
+  order: var(--cs-object-box-order, 0);
+  padding: var(--cs-object-box-padding, 0);
+  flex: var(--cs-object-box-flex, initial);
+  flex-shrink: var(--cs-object-box-flex-shrink, 0);
+  align-self: var(--cs-object-box-align-self, auto);
+  justify-self: var(--cs-object-box-justify-self, auto);
+  max-width: var(--cs-object-box-max-width, none);
+  width: var(--cs-object-box-width, 100%);
+  height: var(--cs-object-box-height, auto);
+  min-height: var(--cs-object-box-min-height, 0);
+  aspect-ratio: var(--cs-object-box-aspect-ratio, auto);
+  overflow: var(--cs-object-box-overflow, hidden);
+  border: var(--cs-object-box-border, 0);
+  border-radius: var(--cs-object-box-radius, 0);
+  background: var(--cs-object-box-bg, transparent);
+  background-size: var(--cs-object-box-bg-size, auto);
+  background-position: var(--cs-object-box-bg-position, 0% 0%);
+  transform: var(--cs-object-box-transform, none);
+}
+
+.cs-inline-pill {
+  display: var(--cs-inline-pill-display, inline-flex);
+  width: var(--cs-inline-pill-width, auto);
+  height: var(--cs-inline-pill-height, auto);
+  flex-shrink: var(--cs-inline-pill-flex-shrink, 0);
+  margin: var(--cs-inline-pill-margin, 0);
+  align-items: var(--cs-inline-pill-align, center);
+  align-self: var(--cs-inline-pill-align-self, auto);
+  justify-content: var(--cs-inline-pill-justify, center);
+  padding: var(--cs-inline-pill-padding, 4px 8px);
+  border: var(--cs-inline-pill-border, 0);
+  border-radius: var(--cs-inline-pill-radius, 999px);
+  background: var(--cs-inline-pill-bg, var(--cs-accent-soft));
+  color: var(--cs-inline-pill-color, var(--cs-accent));
+  font-size: var(--cs-inline-pill-size, var(--fs-xs));
+  font-weight: var(--cs-inline-pill-weight, 600);
+  line-height: var(--cs-inline-pill-line-height, 1);
+  text-align: var(--cs-inline-pill-text-align, center);
+  white-space: var(--cs-inline-pill-white-space, nowrap);
+}
+
+.cs-copy-title {
+  flex: var(--cs-copy-title-flex, initial);
+  flex-shrink: var(--cs-copy-title-flex-shrink, 1);
+  width: var(--cs-copy-title-width, auto);
+  max-width: var(--cs-copy-title-max-width, none);
+  margin: var(--cs-copy-title-margin, 0);
+  color: var(--cs-copy-title-color, var(--cs-text-heading));
+  font-size: var(--cs-copy-title-size, var(--fs-h4));
+  font-weight: var(--cs-copy-title-weight, 700);
+  line-height: var(--cs-copy-title-line-height, 1.35);
+  text-align: var(--cs-copy-title-text-align, inherit);
+  white-space: var(--cs-copy-title-white-space, normal);
+}
+
+.cs-copy-body {
+  flex: var(--cs-copy-body-flex, initial);
+  flex-shrink: var(--cs-copy-body-flex-shrink, 1);
+  width: var(--cs-copy-body-width, auto);
+  max-width: var(--cs-copy-body-max-width, none);
+  margin: var(--cs-copy-body-margin, 0);
+  padding: var(--cs-copy-body-padding, 0);
+  color: var(--cs-copy-body-color, var(--cs-text-secondary));
+  font-size: var(--cs-copy-body-size, var(--fs-sm));
+  line-height: var(--cs-copy-body-line-height, 1.6);
 }
 
 .cs-guide-list-grid {
@@ -2550,6 +2739,8 @@
 }
 
 .cs-sol-fc {
+  position: var(--cs-sol-fc-position, static);
+  flex: var(--cs-sol-fc-flex, initial);
   width: var(--cs-sol-fc-width, 100%);
   overflow: var(--cs-sol-fc-overflow, hidden);
   border: var(--cs-sol-fc-border, 1px solid var(--cs-line));
@@ -2563,6 +2754,9 @@
 }
 
 .cs-sol-fcbody {
+  display: var(--cs-sol-fcbody-display, block);
+  flex-direction: var(--cs-sol-fcbody-direction, column);
+  gap: var(--cs-sol-fcbody-gap, 0);
   padding: var(--cs-sol-fcbody-padding, 24px 28px 28px);
 }
 
@@ -2575,7 +2769,7 @@
 }
 
 .cs-sol-fsub {
-  margin: 0;
+  margin: var(--cs-sol-fsub-margin, 0);
   color: var(--cs-sol-fsub-color, var(--cs-text-secondary));
   font-size: var(--cs-sol-fsub-size, var(--fs-sm));
   line-height: var(--cs-sol-fsub-line-height, 1.6);
@@ -2599,6 +2793,9 @@
 
 .cs-sol-fconn img {
   display: block;
+  max-width: var(--cs-sol-fconn-img-max-width, initial);
+  margin-left: var(--cs-sol-fconn-img-margin-left, 0);
+  width: var(--cs-sol-fconn-img-width, auto);
   height: auto;
 }
 
@@ -2708,6 +2905,21 @@
   .cs-iteration-body {
     grid-template-columns: var(--cs-iteration-body-columns-tablet, var(--cs-iteration-body-columns, 98px minmax(0, 1fr)));
     gap: var(--cs-iteration-body-gap-tablet, var(--cs-iteration-body-gap, 24px));
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1439px) {
+  .cs-sol-fgroup > .cs-sol-fconn img {
+    max-width: var(--cs-sol-fconn-img-max-width-tablet, var(--cs-sol-fconn-img-max-width, initial));
+    width: var(--cs-sol-fconn-img-width-tablet, var(--cs-sol-fconn-img-width, auto));
+  }
+
+  .cs-sol-fgroup > .cs-sol-fconn:nth-child(3) img {
+    margin-left: var(--cs-sol-fconn-first-img-margin-left-tablet, var(--cs-sol-fconn-img-margin-left, 0));
+  }
+
+  .cs-sol-fgroup > .cs-sol-fconn:not(:nth-child(3)) img {
+    margin-left: var(--cs-sol-fconn-img-margin-left-tablet, var(--cs-sol-fconn-img-margin-left, 0));
   }
 }
 
