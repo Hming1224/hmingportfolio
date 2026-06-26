@@ -28,34 +28,7 @@ export type CaseProposalTab = {
   referenceImages?: CaseProposalReference[];
 };
 
-type CaseProposalTabsClasses = {
-  root: string;
-  tabs: string;
-  tab: string;
-  tabActive: string;
-  tabAdopted?: string;
-  tabStar: string;
-  tabStarInactive?: string;
-  tabStarActive?: string;
-  panel: string;
-  stage: string;
-  nav: string;
-  navIcon: string;
-  frame: string;
-  shot: string;
-  shotOverlay?: string;
-  shotCount: string;
-  caption: string;
-  mobileControls?: string;
-  stepDots: string;
-  dot: string;
-  dotActive: string;
-  reason: string;
-  reasonTitle: string;
-  reasonBody: string;
-  references?: string;
-  reference?: string;
-};
+export type CaseProposalTabsVariant = "solution" | "wireframe";
 
 type CaseProposalTabsLabels = {
   previous: string;
@@ -67,7 +40,6 @@ type CaseProposalTabsLabels = {
 
 type CaseProposalTabsProps = {
   tabs: CaseProposalTab[];
-  classes: CaseProposalTabsClasses;
   labels: CaseProposalTabsLabels;
   t: (text: string) => string;
   defaultTab?: number;
@@ -75,7 +47,12 @@ type CaseProposalTabsProps = {
   defaultImageWidth?: number;
   defaultImageHeight?: number;
   renderTabLabel?: (label: string) => ReactNode;
+  variant?: CaseProposalTabsVariant;
 };
+
+function cx(...classes: Array<string | false | null | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
 
 function defaultRenderTabLabel(label: string) {
   const match = label.match(/^(.+?[:：])\s*(.+)$/);
@@ -132,7 +109,6 @@ function StarIcon({ className }: { className: string }) {
 
 export default function CaseProposalTabs({
   tabs,
-  classes,
   labels,
   t,
   defaultTab = 0,
@@ -140,6 +116,7 @@ export default function CaseProposalTabs({
   defaultImageWidth = 960,
   defaultImageHeight = 540,
   renderTabLabel = defaultRenderTabLabel,
+  variant = "solution",
 }: CaseProposalTabsProps) {
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [slideIndex, setSlideIndex] = useState(0);
@@ -187,8 +164,8 @@ export default function CaseProposalTabs({
   }
 
   return (
-    <div className={classes.root}>
-      <div className={classes.tabs} role="tablist">
+    <div className={cx("cs-proposal", `cs-proposal--${variant}`)}>
+      <div className="cs-proposal-tabs" role="tablist">
         {tabs.map((item, index) => {
           const isActive = index === activeTab;
           return (
@@ -197,23 +174,15 @@ export default function CaseProposalTabs({
               type="button"
               role="tab"
               aria-selected={isActive}
-              className={[
-                classes.tab,
-                isActive ? classes.tabActive : "",
-                item.adopted && classes.tabAdopted ? classes.tabAdopted : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
+              className={cx(
+                "cs-proposal-tab",
+                isActive && "is-active",
+              )}
               onClick={() => selectTab(index)}
             >
               {item.adopted ? (
                 <StarIcon
-                  className={[
-                    classes.tabStar,
-                    isActive ? classes.tabStarActive : classes.tabStarInactive,
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
+                  className="cs-proposal-tab-star"
                 />
               ) : null}
               <span>{renderTabLabel(t(item.label))}</span>
@@ -222,14 +191,14 @@ export default function CaseProposalTabs({
         })}
       </div>
 
-      <div className={classes.panel}>
-        <div className={classes.stage}>
-          <button type="button" className={classes.nav} aria-label={labels.previous} disabled={!canGoPrev} onClick={goPrev}>
-            <ArrowIcon className={classes.navIcon} direction="left" />
+      <div className="cs-proposal-panel">
+        <div className="cs-proposal-stage">
+          <button type="button" className="cs-proposal-nav" aria-label={labels.previous} disabled={!canGoPrev} onClick={goPrev}>
+            <ArrowIcon className="cs-proposal-nav-icon" direction="left" />
           </button>
 
-          <figure className={classes.frame}>
-            <div className={classes.shot} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+          <figure className="cs-proposal-frame">
+            <div className="cs-proposal-shot" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
               <Image
                 key={slide.image}
                 src={slide.image}
@@ -240,68 +209,46 @@ export default function CaseProposalTabs({
                 unoptimized
                 style={{ width: "100%", height: "auto", display: "block" }}
               />
-              {classes.shotOverlay ? (
-                <div className={classes.shotOverlay}>
-                  <button
-                    type="button"
-                    className={`${classes.nav} ${classes.nav}-mobile`}
-                    aria-label={labels.previous}
-                    disabled={!canGoPrev}
-                    onClick={goPrev}
-                  >
-                    <ArrowIcon className={classes.navIcon} direction="left" />
-                  </button>
-                  <button
-                    type="button"
-                    className={`${classes.nav} ${classes.nav}-mobile`}
-                    aria-label={labels.next}
-                    disabled={!canGoNext}
-                    onClick={goNext}
-                  >
-                    <ArrowIcon className={classes.navIcon} direction="right" />
-                  </button>
-                </div>
-              ) : null}
-              <div className={classes.shotCount} aria-label={labels.currentPage}>
+              <div className="cs-proposal-count" aria-label={labels.currentPage}>
                 {slideIndex + 1} / {slides.length}
               </div>
             </div>
-            <figcaption className={classes.caption}>{t(slide.caption)}</figcaption>
-            {classes.mobileControls ? (
-              <div className={classes.mobileControls}>
+            <figcaption className="cs-proposal-caption">{t(slide.caption)}</figcaption>
+            {variant === "wireframe" ? (
+              <div className="cs-proposal-mobile-controls">
                 <button
                   type="button"
-                  className={`${classes.nav} ${classes.nav}-mobile`}
+                  className="cs-proposal-nav cs-proposal-nav--mobile"
                   aria-label={labels.previous}
                   disabled={!canGoPrev}
                   onClick={goPrev}
                 >
-                  <ArrowIcon className={classes.navIcon} direction="left" />
+                  <ArrowIcon className="cs-proposal-nav-icon" direction="left" />
                 </button>
                 <button
                   type="button"
-                  className={`${classes.nav} ${classes.nav}-mobile`}
+                  className="cs-proposal-nav cs-proposal-nav--mobile"
                   aria-label={labels.next}
                   disabled={!canGoNext}
                   onClick={goNext}
                 >
-                  <ArrowIcon className={classes.navIcon} direction="right" />
+                  <ArrowIcon className="cs-proposal-nav-icon" direction="right" />
                 </button>
               </div>
             ) : null}
           </figure>
 
-          <button type="button" className={classes.nav} aria-label={labels.next} disabled={!canGoNext} onClick={goNext}>
-            <ArrowIcon className={classes.navIcon} direction="right" />
+          <button type="button" className="cs-proposal-nav" aria-label={labels.next} disabled={!canGoNext} onClick={goNext}>
+            <ArrowIcon className="cs-proposal-nav-icon" direction="right" />
           </button>
         </div>
 
-        <div className={classes.stepDots} aria-label={labels.stepDots}>
+        <div className="cs-proposal-dots" aria-label={labels.stepDots}>
           {slides.map((item, index) => (
             <button
               key={item.image}
               type="button"
-              className={`${classes.dot}${index === slideIndex ? ` ${classes.dotActive}` : ""}`}
+              className={cx("cs-proposal-dot", index === slideIndex && "is-active")}
               aria-label={`${labels.switchToStep} ${index + 1}`}
               aria-current={index === slideIndex ? "step" : undefined}
               onClick={() => setSlideIndex(index)}
@@ -309,13 +256,13 @@ export default function CaseProposalTabs({
           ))}
         </div>
 
-        <div className={classes.reason}>
-          <p className={classes.reasonTitle}>{t(tab.reasonTitle)}</p>
-          <p className={classes.reasonBody}>{t(tab.reasonBody)}</p>
-          {tab.referenceImages && classes.references && classes.reference ? (
-            <div className={classes.references}>
+        <div className="cs-proposal-reason">
+          <p className="cs-proposal-reason-title">{t(tab.reasonTitle)}</p>
+          <p className="cs-proposal-reason-body">{t(tab.reasonBody)}</p>
+          {tab.referenceImages ? (
+            <div className="cs-proposal-references">
               {tab.referenceImages.map((item) => (
-                <figure key={item.image} className={classes.reference}>
+                <figure key={item.image} className="cs-proposal-reference">
                   <Image
                     src={item.image}
                     alt={t(item.alt)}

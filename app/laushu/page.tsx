@@ -5,6 +5,8 @@ import { getLocale } from "next-intl/server";
 import "../../styles/case-study-laushu.css";
 import {
   CaseCard,
+  CaseFeatureRow,
+  CaseFlowFrame,
   CaseGrid,
   CaseHero,
   CaseMedia,
@@ -14,7 +16,7 @@ import {
   type CaseInfoItem,
   type TocSection,
 } from "../../components/case-study";
-import FeatureConnectors from "../advantech/components/FeatureConnectors";
+import FeatureConnectors from "../../components/case-study/FeatureConnectors";
 import FeatureImageLightbox from "../advantech/components/FeatureImageLightbox";
 import { getNextProject, getProjectBySlug } from "../../data/projects";
 import type { Locale } from "../../i18n/routing";
@@ -547,7 +549,7 @@ function UnderstandSection() {
       </ArticleBlock>
       <div className="laushu-guide-grid">
         {interviewGuide.map((group) => (
-          <article className="laushu-guide-card" key={group.title}>
+          <CaseCard className="laushu-guide-card" key={group.title}>
             <h4>{group.title}</h4>
             <ul>
               {group.items.map((item) => (
@@ -563,7 +565,7 @@ function UnderstandSection() {
                 </li>
               ))}
             </ul>
-          </article>
+          </CaseCard>
         ))}
       </div>
 
@@ -572,7 +574,7 @@ function UnderstandSection() {
       </ArticleBlock>
       <div className="laushu-persona-list">
         {personas.map((p) => (
-          <div className="laushu-persona" key={p.name}>
+          <CaseCard className="laushu-persona" key={p.name}>
             <div className="laushu-persona-copy">
               <strong>{p.name}</strong>
               <span className="laushu-persona-tags">{p.tags}</span>
@@ -585,7 +587,7 @@ function UnderstandSection() {
               height={p.height}
               labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
             />
-          </div>
+          </CaseCard>
         ))}
       </div>
     </section>
@@ -626,15 +628,18 @@ function ConvergeSection() {
 
 function TaskFlowChart({ tag, title, children }: { tag: string; title: string; children: ReactNode }) {
   return (
-    <figure className="laushu-fc-figure">
-      <figcaption className="laushu-fc-cap">
+    <CaseFlowFrame
+      scrollHintLabel="左右滑動查看更多"
+      variant="split"
+      header={
+        <>
         <span className="laushu-fc-badge">{tag}</span>
         <span className="laushu-fc-title">{title}</span>
-      </figcaption>
-      <div className="laushu-fc-scroll">
-        {children}
-      </div>
-    </figure>
+        </>
+      }
+    >
+      {children}
+    </CaseFlowFrame>
   );
 }
 
@@ -693,7 +698,7 @@ function IterateSection() {
       </ArticleBlock>
       <div className="laushu-iter-list">
         {iterationBoards.map((board) => (
-          <article className="laushu-iter-board" key={board.title}>
+          <CaseCard className="laushu-iter-board" key={board.title}>
             <header className="laushu-iter-head">
               <span className="laushu-iter-badge">{board.tag}</span>
               <h3 className="laushu-iter-title">{board.title}</h3>
@@ -709,7 +714,7 @@ function IterateSection() {
               <span className="laushu-iter-arrow" aria-hidden="true" />
               <IterationComparisonCard label="After" image={board.after} alt={`${board.alt} After`} />
             </div>
-          </article>
+          </CaseCard>
         ))}
       </div>
       <ArticleBlock title="測試結果" number="03">
@@ -769,7 +774,9 @@ function PrototypeSection() {
       <p className="laushu-proto-intro">
         根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。
       </p>
-      <FeatureImageLightbox src={`${IMG}/figma-design.png`} alt="Laushu Hi-fi 原型設計總覽" width={1472} height={793} className="laushu-proto-overview" />
+      <CaseMedia className="laushu-proto-overview" variant="full">
+        <FeatureImageLightbox src={`${IMG}/figma-design.png`} alt="Laushu Hi-fi 原型設計總覽" width={1472} height={793} />
+      </CaseMedia>
       <FeatureConnectors />
       <div className="cs-sol-block laushu-proto-block">
         {prototypeFlows.map((flow, gi) => (
@@ -807,23 +814,15 @@ function ProtoStep({
 
   return (
     <>
-      <div className="cs-sol-fr cs-sol-fr-mid">
-        {flip ? (
-          <>
-            <div className="cs-sol-fimg">
-              <FeatureImageLightbox src={step.image} alt={step.alt} width={imageSize.width} height={imageSize.height} />
-            </div>
-            <div className="cs-sol-fnote"><p>{step.note}</p></div>
-          </>
-        ) : (
-          <>
-            <div className="cs-sol-fnote"><p>{step.note}</p></div>
-            <div className="cs-sol-fimg">
-              <FeatureImageLightbox src={step.image} alt={step.alt} width={imageSize.width} height={imageSize.height} />
-            </div>
-          </>
-        )}
-      </div>
+      <CaseFeatureRow
+        flipped={flip}
+        note={<p>{step.note}</p>}
+        media={
+          <CaseMedia variant="full">
+            <FeatureImageLightbox src={step.image} alt={step.alt} width={imageSize.width} height={imageSize.height} />
+          </CaseMedia>
+        }
+      />
       {!isLast ? (
         <div className="cs-sol-fconn" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element -- connector SVG is resized at runtime by FeatureConnectors JS */}
@@ -895,7 +894,7 @@ function ReflectionSection() {
 
 function ResearchTable() {
   return (
-    <div className="laushu-table-wrap">
+    <CaseMedia className="laushu-table-wrap" variant="scroll">
       <table className="laushu-research-table">
         <thead>
           <tr>
@@ -919,7 +918,7 @@ function ResearchTable() {
           ))}
         </tbody>
       </table>
-    </div>
+    </CaseMedia>
   );
 }
 

@@ -1,4 +1,4 @@
-import { CaseSectionHeader, FlowScrollHint } from "../../../components/case-study";
+import { CaseFlowFrame, CaseSectionHeader } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { EcosystemFlowDiagram, TradingFlowDiagram } from "./BackgroundFlowDiagrams";
 
@@ -28,56 +28,48 @@ export default async function BackgroundSection() {
   };
 
   return (
-    <section id="cs-sec-background" className="cs-section ca-section-alt">
+    <section id="cs-sec-background" className="cs-section-surface">
       <CaseSectionHeader kicker={t("專案背景")} title={t("Crypto Arsenal 是做什麼？")} />
 
-      <div className="ca-narrow">
-        <p className="ca-lead">
-          {t("就像傳統金融市場，加密市場裡的交易者透過")}
-          <b>{locale === "en" ? "exchange" : "交易所"}</b>
-          {t("把法幣（如 USD）換成加密貨幣；交易所就像中間人，幫交易者完成買賣、並連到背後的")}
-          <b>{locale === "en" ? "blockchain" : "區塊鏈"}</b>
-          {t("。")}
-        </p>
-        <p className="ca-lead">
-          {t("但加密交易的門檻在於：通常得")}
-          <b>{t("手動盯盤、手動下單")}</b>
-          {t("，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。")}
-        </p>
-      </div>
+      <p className="cs-section-lead">
+        {t("就像傳統金融市場，加密市場裡的交易者透過")}
+        <b>{locale === "en" ? "exchange" : "交易所"}</b>
+        {t("把法幣（如 USD）換成加密貨幣；交易所就像中間人，幫交易者完成買賣、並連到背後的")}
+        <b>{locale === "en" ? "blockchain" : "區塊鏈"}</b>
+        {t("。")}
+      </p>
+      <p className="cs-section-lead">
+        {t("但加密交易的門檻在於：通常得")}
+        <b>{t("手動盯盤、手動下單")}</b>
+        {t("，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。")}
+      </p>
 
-      <FlowScrollHint label={t("左右滑動查看更多")} />
-      <div className="ca-diagram">
-        <div className="ca-diagram-scroll">
+      <CaseFlowFrame
+        scrollHintLabel={t("左右滑動查看更多")}
+        caption={t(
+          "交易者把法幣換成加密貨幣，並透過交易策略在交易所自動交易；Crypto Arsenal 位於「策略」與「交易所」之間負責執行下單。",
+        )}
+      >
           <TradingFlowDiagram labels={tradingFlowLabels} />
-        </div>
-        <p className="ca-diagram-cap">
-          {t(
-            "交易者把法幣換成加密貨幣，並透過交易策略在交易所自動交易；Crypto Arsenal 位於「策略」與「交易所」之間負責執行下單。",
-          )}
-        </p>
-      </div>
+      </CaseFlowFrame>
 
-      <div className="ca-narrow ca-overview-gap">
-        <p className="ca-lead">
+      <div className="cs-section-block--large-gap">
+        <p className="cs-section-lead">
           {t("而 ")}
           <b>Crypto Arsenal</b>
           {t(" 就是一個直接串接交易所、提供交易者自動化策略來交易的平台。它同時服務兩種角色，形成一個策略供需的生態系。")}
         </p>
       </div>
 
-      <FlowScrollHint label={t("左右滑動查看更多")} />
-      <div className="ca-diagram">
-        <div className="ca-diagram-scroll">
+      <CaseFlowFrame
+        scrollHintLabel={t("左右滑動查看更多")}
+        caption={t("開發者建立交易機器人上架、交易者選用機器人；收益在雙方與平台之間流動。")}
+      >
           <EcosystemFlowDiagram labels={ecosystemFlowLabels} />
-        </div>
-        <p className="ca-diagram-cap">
-          {t("開發者建立交易機器人上架、交易者選用機器人；收益在雙方與平台之間流動。")}
-        </p>
-      </div>
+      </CaseFlowFrame>
 
-      <div className="ca-narrow ca-overview-gap">
-        <p className="ca-lead">
+      <div className="cs-section-block--large-gap">
+        <p className="cs-section-lead">
           {t("這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 ")}
           <b>{t("100% 全自動")}</b>
           {t("，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。")}

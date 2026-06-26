@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import CaseProposalTabs, { type CaseProposalTab } from "../../components/CaseProposalTabs";
+import CaseProposalTabs, { type CaseProposalTab } from "../../../components/case-study/CaseProposalTabs";
 import type { Locale } from "../../../i18n/routing";
 import type { WireframeBoard } from "../data";
 import { translateCryptoArsenal } from "../i18n";
@@ -35,9 +35,9 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
 
   return (
     <>
-      <div className="ca-wf-banner">
-        <span className="ca-wf-banner-kicker">{t(board.kicker)}</span>
-        <h3 className="ca-wf-banner-title">{t(board.title)}</h3>
+      <div className="cs-proposal-banner">
+        <span className="cs-proposal-banner-kicker">{t(board.kicker)}</span>
+        <h3 className="cs-proposal-banner-title">{t(board.title)}</h3>
       </div>
 
       <CaseProposalTabs
@@ -45,34 +45,7 @@ export default function WireframeProposalBoard({ board }: WireframeProposalBoard
         defaultTab={board.defaultProposalIndex ?? 0}
         t={t}
         imageSizes="(max-width: 768px) 100vw, 1120px"
-        classes={{
-          root: "ca-wf-board",
-          tabs: "ca-wf-tabs",
-          tab: "ca-wf-tab",
-          tabActive: "is-active",
-          tabAdopted: "is-adopted",
-          tabStar: "ca-wf-tab-star",
-          tabStarInactive: "case-proposal-star-muted",
-          tabStarActive: "ca-wf-tab-star-active",
-          panel: "ca-wf-panel",
-          stage: "ca-wf-stage",
-          nav: "ca-wf-nav",
-          navIcon: "ca-wf-nav-icon",
-          frame: "ca-wf-frame",
-          shot: "ca-wf-shot",
-          shotOverlay: "ca-wf-shot-overlay",
-          shotCount: "ca-wf-shot-count",
-          caption: "ca-wf-cap",
-          mobileControls: "ca-wf-mobile-controls",
-          stepDots: "ca-wf-step-dots",
-          dot: "ca-wf-dot",
-          dotActive: "is-active",
-          reason: "ca-wf-reason",
-          reasonTitle: "ca-wf-reason-title",
-          reasonBody: "ca-wf-reason-body",
-          references: "ca-wf-references",
-          reference: "ca-wf-reference",
-        }}
+        variant="wireframe"
         labels={{
           previous: t("上一張 wireframe"),
           next: t("下一張 wireframe"),

@@ -47,7 +47,7 @@ function connectorOneSvg(width: number, delta: number) {
 }
 
 function imageCenterXInConnector(row: Element | undefined, connectorRect: DOMRect) {
-  const image = row?.querySelector<HTMLElement>(".cs-sol-fimg");
+  const image = row?.querySelector<HTMLElement>(".cs-feature-row-media");
   if (!image) return null;
   return centerX(image.getBoundingClientRect(), connectorRect);
 }
@@ -82,15 +82,15 @@ function updateFeatureConnectors() {
   let positioned = 0;
 
   groups.forEach((group) => {
-    const rows = Array.from(group.querySelectorAll(".cs-sol-fr"));
+    const rows = Array.from(group.querySelectorAll(".cs-feature-row"));
     const connectors = Array.from(group.querySelectorAll(".cs-sol-fconn"));
 
     connectors.forEach((connector, index) => {
       const topRow = rows[index];
       const bottomRow = rows[index + 1];
       const img = connector.querySelector<HTMLImageElement>("img");
-      const topImage = topRow?.querySelector<HTMLElement>(".cs-sol-fimg");
-      const bottomImage = bottomRow?.querySelector<HTMLElement>(".cs-sol-fimg");
+      const topImage = topRow?.querySelector<HTMLElement>(".cs-feature-row-media");
+      const bottomImage = bottomRow?.querySelector<HTMLElement>(".cs-feature-row-media");
 
       if (!topRow || !bottomRow || !img || !topImage || !bottomImage) return;
 
@@ -158,7 +158,7 @@ export function setupFeatureConnectors() {
 
   document.fonts?.ready.then(scheduleUpdate).catch(() => {});
 
-  document.querySelectorAll<HTMLImageElement>(".cs-sol-fconn img, .cs-sol-fimg img").forEach((img) => {
+  document.querySelectorAll<HTMLImageElement>(".cs-sol-fconn img, .cs-feature-row-media img").forEach((img) => {
     img.addEventListener("load", scheduleUpdate);
     if ("decode" in img) {
       img.decode().then(scheduleUpdate).catch(() => {});
@@ -167,7 +167,7 @@ export function setupFeatureConnectors() {
 
   const observer = "ResizeObserver" in window ? new ResizeObserver(scheduleUpdate) : null;
   if (observer) {
-    document.querySelectorAll(".cs-sol-fgroup, .cs-sol-fr, .cs-sol-fimg, .cs-feature-zoom-trigger").forEach((el) => {
+    document.querySelectorAll(".cs-sol-fgroup, .cs-feature-row, .cs-feature-row-media, .cs-feature-zoom-trigger").forEach((el) => {
       observer.observe(el);
     });
   }

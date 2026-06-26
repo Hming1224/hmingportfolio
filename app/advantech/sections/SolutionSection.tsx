@@ -1,13 +1,35 @@
 /* eslint-disable @next/next/no-img-element -- connector SVGs are resized at runtime by FeatureConnectors JS (it rewrites img.src), so raw <img> is intentional here */
-import { CaseSection } from "../../../components/case-study";
+import type { ReactNode } from "react";
+import { CaseFeatureRow, CaseSection } from "../../../components/case-study";
 import ProposalTabs from "../components/ProposalTabs";
 import FeatureImageLightbox from "../components/FeatureImageLightbox";
-import FeatureConnectors from "../components/FeatureConnectors";
+import FeatureConnectors from "../../../components/case-study/FeatureConnectors";
 import AlarmLevelDemo from "../components/AlarmLevelDemo";
 import VimeoPlayer from "../components/VimeoPlayer";
 import { proposalScenario1Tabs, proposalScenario2Tabs } from "../data";
 import { localizeAdvantechTree } from "../i18n";
 import { getAdvantechTranslator } from "../i18n-server";
+
+function FeatureStep({
+  alt,
+  flipped = false,
+  note,
+  src,
+}: {
+  alt: string;
+  flipped?: boolean;
+  note: ReactNode;
+  src: string;
+}) {
+  return (
+    <CaseFeatureRow
+      flipped={flipped}
+      media={<FeatureImageLightbox src={src} alt={alt} width={960} height={540} />}
+      note={note}
+      variant="process"
+    />
+  );
+}
 
 export default async function SolutionSection() {
   const { locale } = await getAdvantechTranslator();
@@ -231,50 +253,37 @@ export default async function SolutionSection() {
               </div>
             </div>
           </div>
-          <div className="cs-sol-fr cs-sol-fr-mid">
-            <div className="cs-sol-fnote">
-              <p>點擊「超約預警」按鈕</p>
-            </div>
-            <div className="cs-sol-fimg">
-              <FeatureImageLightbox src="/projects/advantech/solution/final-f11-01.webp" alt="Feature 1.1 需量分析畫面" width={960} height={540} />
-            </div>
-          </div>
+          <FeatureStep
+            src="/projects/advantech/solution/final-f11-01.webp"
+            alt="Feature 1.1 需量分析畫面"
+            note={<p>點擊「超約預警」按鈕</p>}
+          />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-02.webp" alt="Feature 1.1 AI Chatbot 觸發" width={960} height={540} />
-          </div>
-          <div className="cs-sol-fnote">
-            <p>跳出 AI chatbot，並且自動輸入：請問今日需量預測分析？</p>
-          </div>
-        </div>
+        <FeatureStep
+          flipped
+          src="/projects/advantech/solution/final-f11-02.webp"
+          alt="Feature 1.1 AI Chatbot 觸發"
+          note={<p>跳出 AI chatbot，並且自動輸入：請問今日需量預測分析？</p>}
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fnote">
-            <p>AI chatbot 從資料庫中讀取相關資訊，並整合 LLM 回答框架，提供需量分析與折線圖表。另外，提供問題模組供用戶持續深入提問。</p>
-          </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-03.webp" alt="Feature 1.1 AI 需量分析回覆" width={960} height={540} />
-          </div>
-        </div>
+        <FeatureStep
+          src="/projects/advantech/solution/final-f11-03.webp"
+          alt="Feature 1.1 AI 需量分析回覆"
+          note={<p>AI chatbot 從資料庫中讀取相關資訊，並整合 LLM 回答框架，提供需量分析與折線圖表。另外，提供問題模組供用戶持續深入提問。</p>}
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-04.webp" alt="Feature 1.1 AI 超約建議" width={960} height={540} />
-          </div>
-          <div className="cs-sol-fnote">
-            <p>點擊「請提供給我避免需量超約的建議。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成結構化文字回覆。</p>
-          </div>
-        </div>
+        <FeatureStep
+          flipped
+          src="/projects/advantech/solution/final-f11-04.webp"
+          alt="Feature 1.1 AI 超約建議"
+          note={<p>點擊「請提供給我避免需量超約的建議。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成結構化文字回覆。</p>}
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fnote">
-            <p>點擊「請提供給我高耗能設備排名。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成圖表，依據耗能排名顯示最需要修復的設備列表。</p>
-          </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f11-05.webp" alt="Feature 1.1 高耗能設備排名" width={960} height={540} />
-          </div>
-        </div>
+        <FeatureStep
+          src="/projects/advantech/solution/final-f11-05.webp"
+          alt="Feature 1.1 高耗能設備排名"
+          note={<p>點擊「請提供給我高耗能設備排名。」按鈕，作為新的輸入資訊。AI Chatbot 繼續從資料庫中讀取相關資訊後轉換成圖表，依據耗能排名顯示最需要修復的設備列表。</p>}
+        />
         </div>
 
         <div className="cs-sol-fhr" />
@@ -299,20 +308,18 @@ export default async function SolutionSection() {
               </div>
             </div>
           </div>
-          <div className="cs-sol-fr cs-sol-fr-mid">
-            <div className="cs-sol-fnote">
-              <p>點擊通知按鈕</p>
-            </div>
-            <div className="cs-sol-fimg">
-              <FeatureImageLightbox src="/projects/advantech/solution/final-f12-01.webp" alt="Feature 1.2 系統通知" width={960} height={540} />
-            </div>
-          </div>
+          <FeatureStep
+            src="/projects/advantech/solution/final-f12-01.webp"
+            alt="Feature 1.2 系統通知"
+            note={<p>點擊通知按鈕</p>}
+          />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-02.webp" alt="Feature 1.2 報警等級" width={960} height={540} />
-          </div>
-          <div className="cs-sol-fnote" style={{ gap: 16 }}>
+        <FeatureStep
+          flipped
+          src="/projects/advantech/solution/final-f12-02.webp"
+          alt="Feature 1.2 報警等級"
+          note={
+            <>
             <div className="cs-sol-dpts">
               <div className="cs-sol-dpt">
                 <p className="cs-sol-dpt-l">報警等級</p>
@@ -334,11 +341,14 @@ export default async function SolutionSection() {
                 "低度：超約將於 3 小時內發生",
               ]}
             />
-          </div>
-        </div>
+            </>
+          }
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fnote">
+        <FeatureStep
+          src="/projects/advantech/solution/final-f12-03.webp"
+          alt="Feature 1.2 AI 分析"
+          note={
             <div className="cs-sol-dpts">
               <div className="cs-sol-dpt">
                 <p className="cs-sol-dpt-l">AI 分析摘要</p>
@@ -349,25 +359,22 @@ export default async function SolutionSection() {
                 <p className="cs-sol-dpt-b">提供報警等級、超約時間點、需量走勢圖分析。</p>
               </div>
             </div>
-          </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-03.webp" alt="Feature 1.2 AI 分析" width={960} height={540} />
-          </div>
-        </div>
+          }
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f12-04.webp" alt="Feature 1.2 高耗能設備" width={960} height={540} />
-          </div>
-          <div className="cs-sol-fnote">
+        <FeatureStep
+          flipped
+          src="/projects/advantech/solution/final-f12-04.webp"
+          alt="Feature 1.2 高耗能設備"
+          note={
             <div className="cs-sol-dpts">
               <div className="cs-sol-dpt">
                 <p className="cs-sol-dpt-l">前 15% 高耗能設備排名</p>
                 <p className="cs-sol-dpt-b">根據當前用電量進行排名，提供前 15% 高耗能設備名稱與位置。</p>
               </div>
             </div>
-          </div>
-        </div>
+          }
+        />
         </div>
 
         <div className="cs-sol-fhr" />
@@ -392,20 +399,18 @@ export default async function SolutionSection() {
               </div>
             </div>
           </div>
-          <div className="cs-sol-fr cs-sol-fr-mid">
-            <div className="cs-sol-fnote">
-              <p>點擊通知按鈕</p>
-            </div>
-            <div className="cs-sol-fimg">
-              <FeatureImageLightbox src="/projects/advantech/solution/final-f2-01.webp" alt="Feature 2 模式識別主畫面" width={960} height={540} />
-            </div>
-          </div>
+          <FeatureStep
+            src="/projects/advantech/solution/final-f2-01.webp"
+            alt="Feature 2 模式識別主畫面"
+            note={<p>點擊通知按鈕</p>}
+          />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-02.webp" alt="Feature 2 設備報警等級" width={960} height={540} />
-          </div>
-          <div className="cs-sol-fnote" style={{ gap: 16 }}>
+        <FeatureStep
+          flipped
+          src="/projects/advantech/solution/final-f2-02.webp"
+          alt="Feature 2 設備報警等級"
+          note={
+            <>
             <div className="cs-sol-dpts">
               <div className="cs-sol-dpt">
                 <p className="cs-sol-dpt-l">報警等級</p>
@@ -427,11 +432,14 @@ export default async function SolutionSection() {
                 "低度：設備用電耗能 20% 以下",
               ]}
             />
-          </div>
-        </div>
+            </>
+          }
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fnote">
+        <FeatureStep
+          src="/projects/advantech/solution/final-f2-03.webp"
+          alt="Feature 2 AI 異常分析"
+          note={
             <div className="cs-sol-dpts">
               <div className="cs-sol-dpt">
                 <p className="cs-sol-dpt-l">AI 分析摘要</p>
@@ -442,39 +450,35 @@ export default async function SolutionSection() {
                 <p className="cs-sol-dpt-b">呈現詳細異常事件說明，提供異常設備過去一個月冰水與冷卻水的進出水溫度變化圖，於圖表中顯示該設備發生異常問題的時間點。</p>
               </div>
             </div>
-          </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-03.webp" alt="Feature 2 AI 異常分析" width={960} height={540} />
-          </div>
-        </div>
+          }
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-04.webp" alt="Feature 2 事件分析" width={960} height={540} />
-          </div>
-          <div className="cs-sol-fnote">
+        <FeatureStep
+          flipped
+          src="/projects/advantech/solution/final-f2-04.webp"
+          alt="Feature 2 事件分析"
+          note={
             <div className="cs-sol-dpts">
               <div className="cs-sol-dpt">
                 <p className="cs-sol-dpt-l">事件分析</p>
                 <p className="cs-sol-dpt-b">包含該設備過去發生的詳細事件紀錄，列表中涵蓋事件類別、預期影響、發生時間。</p>
               </div>
             </div>
-          </div>
-        </div>
+          }
+        />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-2.svg" alt="" suppressHydrationWarning /></div>
-        <div className="cs-sol-fr cs-sol-fr-mid">
-          <div className="cs-sol-fnote">
+        <FeatureStep
+          src="/projects/advantech/solution/final-f2-05.webp"
+          alt="Feature 2 故障排除建議"
+          note={
             <div className="cs-sol-dpts">
               <div className="cs-sol-dpt">
                 <p className="cs-sol-dpt-l">故障的建議處理方式</p>
                 <p className="cs-sol-dpt-b">AI 透過維修手冊的資料，結合點位的實際發生異常紀錄，總結故障代碼，指出主要發生原因，並提供排除異常的解決方法。</p>
               </div>
             </div>
-          </div>
-          <div className="cs-sol-fimg">
-            <FeatureImageLightbox src="/projects/advantech/solution/final-f2-05.webp" alt="Feature 2 故障排除建議" width={960} height={540} />
-          </div>
-        </div>
+          }
+        />
         </div>
       </div>
 

@@ -244,8 +244,8 @@ components:
 - **首頁**：`Hero`、`Works`、`AvatarProfile`
 - **Hero 裝飾**（`components/hero-decorations/`）：`StickyNote`、`CursorTag`、`WireframeFrame`、`AiWidgetFrame`、`ToggleDecoration`、`WalPencilDecoration`、`AnnotationPin`、`HeroBottomGroupCenter`、`HeroEntranceController`
 - **About 頁**：`About`、`YearRail`、`app/about-me/` 下的 `AnimatedContent`、`EducatorMasonry`、`GrowthReveal`
-- **案例頁共用**（`components/case-study/`）：`CaseStudyShell`、`CaseSection`、`CaseHeading`、`ZoomableImage`、`FlowScrollHint`
-- **案例頁待共用化**：Hero、Info Grid、Section Header、Media Figure、Card / Grid、Proposal Tabs、Before / After、Metric Grid、Feature Row
+- **案例頁共用**（`components/case-study/`）：`CaseStudyShell`、`CaseSection`、`CaseHeading`、`CaseHero`、`CaseInfoGrid`、`CaseSectionHeader`、`CaseCard`、`CaseGrid`、`CaseMedia`、`CaseMetricGrid`、`CaseProposalTabs`、`CaseBeforeAfter`、`CaseFlowFrame`、`CaseFeatureRow`、`ZoomableImage`、`FlowScrollHint`、`FeatureConnectors`
+- **案例頁仍待收斂**：少數 route 專屬 section 組合、舊 selector 與 visualization 外圍樣式；內容圖形的座標與 SVG path 繼續留在各案例
 - **案例內容視覺**：各案例 route 下的流程圖、connector、產品截圖與專案資料；這些是內容資產，不是另一套 UI system
 - **Contact**：`Contact`
 - **底層 UI**（`components/ui`、`components/animate-ui`）：`dot-pattern`、`SplitText`、`TrueFocus`、`highlight`、`tabs`
@@ -717,6 +717,15 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 }
 ```
 > 新做「同款但不同主色」的卡片時，在 CSS 新增 `.skill-category-card.is-*` variant 覆寫這 3 個區域 token；TSX 只掛 class，不把 hex / rgba 寫進資料陣列。
+
+### 7.7 Case Study Patterns（`components/case-study/`）
+
+- 一般卡片 / 網格 / 媒體：使用 `CaseCard`、`CaseGrid`、`CaseMedia`，結構 class 為 `cs-card-*`、`cs-grid-*`、`cs-media-*`。
+- 段落 lead：使用 `cs-section-lead`；文字色透過 `--cs-section-lead-*` token 調整，不再新增 `ca-lead` / `ca-narrow`。
+- 方案展示：使用 `CaseProposalTabs variant="solution" | "wireframe"`；DOM 與樣式只使用 `cs-proposal-*`，theme 差異透過 variant modifier 與 custom properties 控制，不再新增 `cs-sol-tab-*` 或 `ca-wf-*`。提案 banner 使用 `cs-proposal-banner-*`，route 只提供顏色 token。
+- 前後比較：使用 `CaseBeforeAfter` 與 `cs-before-after-*`；桌機橫排、`≤768px` 直排，箭頭方向由共用 RWD 控制。
+- 流程外框：使用 `CaseFlowFrame variant="default" | "plain" | "split"` 與 `cs-flow-frame-*`；default 為有框說明圖、plain 為無框矩陣容器、split 為 header / scroll panel 分離。route 只提供內容圖形、最小寬與必要 caption / header theme。
+- 功能步驟：使用 `CaseFeatureRow`；原型展示用 `cs-feature-row--prototype`，媒體與說明框不得再掛 `cs-sol-fr` / `cs-sol-fimg` / `cs-sol-fnote`。
 
 ---
 

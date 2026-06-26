@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
-type CaseGridVariant = 'two' | 'three' | 'four' | 'auto';
+type CaseGridVariant = 'two' | 'three' | 'four' | 'auto' | 'stack';
 
 interface CaseGridProps {
   children: ReactNode;
@@ -20,4 +20,3 @@ export default function CaseGrid({
     </div>
   );
 }
-

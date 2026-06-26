@@ -33,15 +33,13 @@
   --cs-bg: #fafdfe;          /* 近白藍：區塊底 */
   --cs-magenta: #e8178a;     /* 洋紅：標註 accent */
   --cs-red: #df001a;         /* 警示紅：alarm critical */
+  --cs-feature-row-line: var(--cs-line-soft);
+  --cs-feature-row-note-color: var(--text-secondary);
 }
 
 /* Responsive overrides moved from the former global stylesheet.
    Keep them before the section rules so the existing Advantech cascade stays intact. */
 @media (min-width: 1024px) and (max-width: 1439px) {
-  .theme-advantech .cs-sol-fnote {
-    padding: 16px;
-  }
-
   .theme-advantech .cs-alarm-demo {
     display: flex;
     align-items: stretch;
@@ -73,18 +71,6 @@
     background: #f6faff;
   }
 
-  .theme-advantech .cs-alarm-demo-default .cs-alarm-after,
-  .theme-advantech .cs-alarm-demo-hover .cs-alarm-before {
-    display: none;
-  }
-
-  .theme-advantech .cs-alarm-demo-hover .cs-alarm-after {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    padding: 0;
-    background: transparent;
-  }
 
   .theme-advantech .cs-alarm-tip {
     position: relative;
@@ -104,9 +90,6 @@
     justify-content: center;
   }
 
-  .theme-advantech .cs-alarm-demo-hover .cs-alarm-after .cs-alarm-state-row {
-    align-self: center;
-  }
 }
 
 @media (max-width: 1023px) {
@@ -119,23 +102,9 @@
     height: 200px;
   }
 
-  /* Section 06 – Feature rows: fc (30%) = 230px at 1023px → unreadable, stack to column */
-  .theme-advantech .cs-sol-fr,
-  .theme-advantech .cs-sol-fr.cs-sol-fr-mid {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .theme-advantech .cs-sol-fc,
-  .theme-advantech .cs-sol-fnote {
+  .theme-advantech .cs-sol-fc {
     flex: unset;
     width: 100%;
-  }
-
-  /* 說明 frame 永遠排在圖片上方，不受 HTML 左右順序影響 */
-  .theme-advantech .cs-sol-fr-mid .cs-sol-fnote {
-    order: -1;
-    margin-top: 40px;
   }
 }
 
@@ -289,25 +258,6 @@
   stroke-linecap: square;
 }
 
-.theme-advantech .cs-role-card-1 {
-  top: 0;
-  left: 0;
-}
-
-.theme-advantech .cs-role-card-2 {
-  top: 0;
-  right: 0;
-}
-
-.theme-advantech .cs-role-card-3 {
-  bottom: 49px;
-  left: 0;
-}
-
-.theme-advantech .cs-role-card-4 {
-  right: 0;
-  bottom: 49px;
-}
 
 .theme-advantech .cs-role-center {
   position: absolute;
@@ -1394,222 +1344,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   white-space: nowrap;
 }
 
-/* Proposal Tabs */
-.theme-advantech .cs-sol-prop {
-  background: transparent;
-  border-radius: 22px;
-  box-shadow: 0px 12px 14px rgba(9, 48, 96, 0.07);
-  overflow: hidden;
-}
-
-.theme-advantech .cs-sol-tabs {
-  display: flex;
-  gap: 4px;
-  align-items: stretch;
-  min-height: 48px;
-  background: transparent;
-}
-
-.theme-advantech .cs-sol-tab {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-width: 0;
-  min-height: 48px;
-  align-self: stretch;
-  padding: 8px;
-  border-radius: 12px 12px 0 0;
-  background: #f1f3f6;
-  font-size: 13px;
-  line-height: 16px;
-  font-weight: 600;
-  color: #7b7b7b;
-  cursor: pointer;
-  text-align: center;
-  border: none;
-  outline: none;
-  transition:
-    color 0.15s,
-    background 0.15s;
-  user-select: none;
-}
-
-.theme-advantech .cs-sol-tab-star {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
-}
-
-.theme-advantech .case-proposal-star-muted {
-  color: #7b7b7b !important;
-}
-
-.theme-advantech .cs-sol-tab-star-active {
-  color: #31afd9;
-}
-
-.theme-advantech .cs-sol-tab-on {
-  background: transparent;
-  color: var(--cs-navy);
-}
-
-.theme-advantech .cs-sol-tab:hover {
-  color: var(--cs-navy);
-}
-
-.theme-advantech .cs-sol-tab:focus-visible {
-  outline: 3px solid var(--purple);
-  outline-offset: -3px;
-}
-
-.theme-advantech .cs-sol-tab-bd {
-  background: white;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: stretch;
-  border-radius: 0 0 20px 20px;
-}
-
-.theme-advantech .cs-sol-stage {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) 44px;
-  align-items: center;
-  gap: 24px;
-}
-
-.theme-advantech .cs-sol-frame {
-  min-width: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.theme-advantech .cs-sol-mock-img {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--cs-line-soft);
-  border-radius: 10px;
-}
-
-/* 頁數指示器：桌機隱藏（改用下方 dots），手機顯示在圖片右下角，沿用 CA 的深色 pill 樣式 */
-.theme-advantech .cs-sol-count {
-  display: none;
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  z-index: 2;
-  align-items: center;
-  justify-content: center;
-  min-width: 52px;
-  min-height: 28px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(82, 87, 101, 0.88);
-  color: #ffffff;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 600;
-  backdrop-filter: blur(10px);
-}
-
-.theme-advantech .cs-sol-cap {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.6;
-  text-align: center;
-  color: var(--text-secondary);
-}
-
-.theme-advantech .cs-sol-nav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  background: white;
-  border: 1px solid var(--cs-line-soft);
-  border-radius: 999px;
-  box-shadow: 0px 8px 18px -8px rgba(9, 48, 96, 0.12);
-  color: var(--purple);
-  cursor: pointer;
-  transition:
-    background 160ms ease,
-    color 160ms ease,
-    opacity 160ms ease;
-}
-
-.theme-advantech .cs-sol-nav-icon {
-  display: block;
-  width: 18px;
-  height: 18px;
-  flex: 0 0 18px;
-}
-
-.theme-advantech .cs-sol-nav-btn:hover:not(:disabled) {
-  background: var(--surface);
-  color: var(--purple-hover);
-}
-
-.theme-advantech .cs-sol-nav-btn:disabled {
-  opacity: 0.32;
-  cursor: not-allowed;
-}
-
-.theme-advantech .cs-sol-step-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-
-.theme-advantech .cs-sol-dot {
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 0;
-  border-radius: 999px;
-  background: #c8d1e3;
-  cursor: pointer;
-  transition:
-    background 0.15s,
-    transform 0.15s,
-    width 0.15s;
-}
-
-.theme-advantech .cs-sol-dot-on {
-  width: 24px;
-  background: var(--purple);
-}
-
-.theme-advantech .cs-sol-dot:hover {
-  transform: scale(1.15);
-}
-
-.theme-advantech .cs-sol-reason {
-  padding-top: 16px;
-  border-top: 1px solid var(--cs-line-soft);
-}
-
-.theme-advantech .cs-sol-txt-h {
-  font-size: var(--fs-body);
-  font-weight: 700;
-  color: var(--cs-navy);
-  margin: 0 0 8px;
-  line-height: 1.5;
-}
-
-.theme-advantech .cs-sol-txt-p {
-  font-size: var(--fs-sm);
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.7;
-}
-
 /* Iteration Boards */
 .theme-advantech .cs-sol-board {
   background: white;
@@ -1755,18 +1489,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   text-align: center;
 }
 
-/* Feature Rows */
-.theme-advantech .cs-sol-fr {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  margin-bottom: 40px;
-}
-
-.theme-advantech .cs-sol-fr-mid {
-  align-items: center;
-}
-
 /* Feature 標題卡：移出第一列、改為 fgroup 直接子元素 → 全寬區塊排在第一張圖上方。
    第一張圖則改成正常的「說明卡（左）＋圖（右）」mid row，與其他流程列同構，
    連接線間距自動統一（見 SolutionSection.tsx）。卡片與下方第一列的間距用 .cs-sol-block 的 gap(28px)。 */
@@ -1841,7 +1563,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 }
 
 /* ≥1440：標題卡已是全寬，卡內兩張說明小卡並排；<1440 維持上下堆疊。
-   只作用在標題卡（.cs-sol-fc）內，不影響步驟說明框（.cs-sol-fnote，30% 窄欄）裡的 dpts。 */
+   只作用在標題卡（.cs-sol-fc）內，不影響共用步驟說明框（.cs-feature-row-note，30% 窄欄）裡的 dpts。 */
 @media (min-width: 1440px) {
   .theme-advantech .cs-sol-fc .cs-sol-dpts {
     flex-direction: row;
@@ -1877,17 +1599,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   margin: 0;
 }
 
-.theme-advantech .cs-sol-fimg {
-  flex: 1;
-  min-width: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--cs-line-soft);
-  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.07);
-}
-
 .theme-advantech .cs-feature-zoom-trigger {
   justify-self: center;
   width: 100%;
@@ -1913,25 +1624,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 .theme-advantech .cs-feature-zoom-trigger:focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: -3px;
-}
-
-.theme-advantech .cs-sol-fnote {
-  flex: 0 0 30%;
-  background: white;
-  border: 1px solid var(--cs-line-soft);
-  border-radius: 16px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-}
-
-.theme-advantech .cs-sol-fnote > p {
-  font-size: var(--fs-sm);
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 22px;
 }
 
 .theme-advantech .cs-alarm-demo {
@@ -2057,10 +1749,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 }
 
 @media (min-width: 1024px) {
-  .theme-advantech .cs-sol-fnote {
-    padding: 16px;
-  }
-
   .theme-advantech .cs-alarm-demo {
     flex-direction: column;
     align-items: stretch;
@@ -2549,21 +2237,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     order: 0;
   }
 
-  .theme-advantech .cs-role-card-1 {
-    order: 1;
-  }
 
-  .theme-advantech .cs-role-card-3 {
-    order: 2;
-  }
-
-  .theme-advantech .cs-role-card-2 {
-    order: 3;
-  }
-
-  .theme-advantech .cs-role-card-4 {
-    order: 4;
-  }
 }
 
 /* ── Mobile ── */
@@ -2615,9 +2289,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     white-space: normal;
   }
 
-  .theme-advantech .cs-persona-grid {
-    grid-template-columns: 1fr;
-  }
 
   .theme-advantech .cs-role-radial {
     display: grid;
@@ -2665,46 +2336,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     display: none;
   }
 
-  .theme-advantech .cs-sol-tab-bd {
-    padding: 20px;
-  }
-
-  .theme-advantech .cs-sol-stage {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  .theme-advantech .cs-sol-frame {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    gap: 12px;
-  }
-
-  .theme-advantech .cs-sol-nav-btn:first-of-type {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: end;
-  }
-
-  .theme-advantech .cs-sol-nav-btn:last-of-type {
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: start;
-  }
-
-  /* 手機改用圖片右下角的頁數指示器（比照 CA），收起 dots */
-  .theme-advantech .cs-sol-step-dots {
-    display: none;
-  }
-
-  .theme-advantech .cs-sol-count {
-    display: inline-flex;
-  }
-
-  .theme-advantech .cs-sol-cap {
-    font-size: 12px;
-  }
-
   /* Iteration design-note box: stack the label above the body text */
   .theme-advantech .cs-sol-dr {
     flex-direction: column;
@@ -2733,10 +2364,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
      doesn't cover the arrow / first state when stacked */
   .theme-advantech .cs-alarm-after {
     margin-top: 80px;
-  }
-
-  .theme-advantech .cs-sol-fr-mid .cs-sol-fnote {
-    margin-top: 0;
   }
 
   .theme-advantech .cs-sol-ba {

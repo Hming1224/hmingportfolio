@@ -1,4 +1,4 @@
-import { CaseCard, CaseMetricGrid, CaseSectionHeader } from "../../../components/case-study";
+import { CaseCard, CaseGrid, CaseMedia, CaseMetricGrid, CaseSectionHeader } from "../../../components/case-study";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 import { impactStats, impactTimes, impactQuotes } from "../data";
 
@@ -7,27 +7,27 @@ export default async function ImpactSection() {
   const quote = (text: string) =>
     locale === "zh-TW" ? `「${text}」` : `“${text}”`;
   return (
-    <section id="cs-sec-impact" className="cs-section ca-section-alt">
+    <section id="cs-sec-impact" className="cs-section-surface">
       <CaseSectionHeader kicker={t("設計成效")} title={t("用內部測試與流程指標驗證")} />
-      <p className="ca-lead ca-narrow">
+      <p className="cs-section-lead">
         {t(
           "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。",
         )}
       </p>
-      <CaseMetricGrid className="ca-impact">
+      <CaseMetricGrid>
         {impactStats.map((stat) => (
-          <CaseCard className="ca-impact-card" key={stat.label} variant="metric">
-            <span className="ca-impact-value">{t(stat.value)}</span>
-            <h3 className="ca-impact-label">{t(stat.label)}</h3>
-            <p className="ca-impact-body">{t(stat.body)}</p>
+          <CaseCard key={stat.label} variant="metric">
+            <span className="cs-metric-value">{t(stat.value)}</span>
+            <h3 className="cs-metric-label">{t(stat.label)}</h3>
+            <p className="cs-metric-body">{t(stat.body)}</p>
           </CaseCard>
         ))}
       </CaseMetricGrid>
-      <div className="ca-impact-compare">
-        <span className="ca-impact-compare-cap">
+      <CaseMedia className="cs-media--small-gap" variant="scroll">
+        <span className="cs-media-label">
           {t("操作時間對比：原本得跳去交易所來回，新版在 CA 內直接完成")}
         </span>
-        <table className="ca-impact-times">
+        <table className="cs-data-table">
           <thead>
             <tr>
               <th scope="col">{t("操作流程")}</th>
@@ -40,33 +40,33 @@ export default async function ImpactSection() {
             {impactTimes.map((row) => (
               <tr key={row.flow}>
                 <th scope="row">{t(row.flow)}</th>
-                <td className="ca-impact-before">
+                <td className="cs-data-table-value--muted">
                   {row.before}
                   {t("秒")}
                 </td>
-                <td className="ca-impact-after">
+                <td className="cs-data-table-value--strong">
                   {row.after}
                   {t("秒")}
                 </td>
-                <td className="ca-impact-cut">{row.cut}</td>
+                <td className="cs-data-table-value--positive">{row.cut}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
-      <div className="ca-impact-quotes">
+      </CaseMedia>
+      <CaseGrid variant="two" className="cs-grid--quote-list">
         {impactQuotes.map((item) => (
-          <article className="ca-impact-quote" key={item.text}>
-            <p className="ca-impact-quote-text">{quote(t(item.text))}</p>
-            <div className="ca-impact-quote-who">
-              <span className="ca-impact-quote-name">{t(item.who)}</span>
-              <span className="ca-impact-quote-line" aria-hidden="true" />
-              <span className="ca-impact-quote-role">{t(item.role)}</span>
+          <CaseCard key={item.text}>
+            <p className="cs-quote-text">{quote(t(item.text))}</p>
+            <div className="cs-quote-meta">
+              <span className="cs-quote-name">{t(item.who)}</span>
+              <span className="cs-quote-line" aria-hidden="true" />
+              <span className="cs-quote-role">{t(item.role)}</span>
             </div>
-          </article>
+          </CaseCard>
         ))}
-      </div>
-      <p className="ca-impact-method">
+      </CaseGrid>
+      <p className="cs-section-note">
         {t(
           "驗證方式：以 5 名內部成員進行任務式可用性測試（請受測者在無提示下完成指定的平倉 / 止盈止損任務）。上述數字為內部測試與設計流程觀察，非線上後台營運數據。",
         )}

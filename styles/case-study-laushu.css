@@ -68,16 +68,6 @@
   border-top: 1px solid var(--laushu-line);
 }
 
-.theme-laushu .laushu-section-tag {
-  display: inline-block;
-  margin-bottom: 12px;
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--laushu-primary-500);
-}
 
 .theme-laushu .laushu-overview-section,
 .theme-laushu .laushu-process-section,
@@ -109,9 +99,6 @@
   margin: 0 auto;
 }
 
-.theme-laushu .laushu-problem-section .laushu-head-title {
-  max-width: 784px;
-}
 
 .theme-laushu .laushu-overview-copy h3,
 .theme-laushu .laushu-overview-intro h3,
@@ -134,17 +121,6 @@
   color: var(--text-secondary);
 }
 
-.theme-laushu .laushu-overview-intro {
-  max-width: var(--laushu-content-max);
-  margin: 0 auto;
-  padding: 36px 40px;
-  border-radius: 20px;
-  background: #f8f2ff;
-}
-
-.theme-laushu .laushu-overview-intro h3 {
-  max-width: 760px;
-}
 
 .theme-laushu .laushu-overview-hero {
   max-width: var(--laushu-content-max);
@@ -260,12 +236,6 @@
   text-align: center;
 }
 
-.theme-laushu .laushu-process-grid {
-  display: grid;
-  gap: 48px;
-  max-width: var(--laushu-content-max);
-  margin: 0 auto;
-}
 
 .theme-laushu .laushu-article {
   max-width: 760px;
@@ -304,14 +274,6 @@
 }
 
 /* Figma 風格：section 標題下的描述句副標 */
-.theme-laushu .laushu-section-lede {
-  max-width: var(--laushu-content-max);
-  margin: -8px auto 40px;
-  font-size: var(--fs-h3);
-  line-height: 1.4;
-  font-weight: 800;
-  color: var(--laushu-primary-700);
-}
 
 /* Figma 風格：小節標題的數字前綴（01 / …） */
 .theme-laushu .laushu-article-num {
@@ -320,24 +282,7 @@
 }
 
 /* Figma 風格 section 標題：眉標 + 論點句（對齊 Figma node 2797:1521） */
-.theme-laushu .laushu-head-eyebrow {
-  margin: 0 0 12px;
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--laushu-primary-500);
-}
 
-.theme-laushu .laushu-head-title {
-  margin: 0 0 24px;
-  max-width: 720px;
-  font-size: var(--fs-h2);
-  line-height: 1.25;
-  font-weight: 700;
-  color: var(--laushu-primary-700);
-}
 
 /* 專案總覽：論點段落（取代舊的紫底框） */
 .theme-laushu .laushu-overview-lead {
@@ -435,41 +380,6 @@
   margin-top: 8px;
 }
 
-.theme-laushu .laushu-image-frame {
-  overflow: hidden;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: var(--laushu-shadow);
-}
-
-.theme-laushu .laushu-image-frame--plain,
-.theme-laushu .laushu-image-frame--flush {
-  box-shadow: none;
-}
-
-.theme-laushu .laushu-image-frame--wide {
-  max-width: 980px;
-}
-
-.theme-laushu .laushu-image-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.theme-laushu .laushu-research-grid {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
-  gap: 24px;
-  align-items: center;
-}
-
-.theme-laushu .laushu-image-grid {
-  display: grid;
-  gap: 24px;
-  max-width: 980px;
-}
 
 .theme-laushu .laushu-persona {
   display: grid;
@@ -505,39 +415,6 @@
   line-height: 1.75;
 }
 
-.theme-laushu .laushu-flow-visuals {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-.theme-laushu .laushu-flow-group {
-  display: grid;
-  gap: 24px;
-}
-
-.theme-laushu .laushu-iteration {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
-  gap: 24px;
-  align-items: center;
-  padding: 24px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
-}
-
-.theme-laushu .laushu-iteration p {
-  margin: 0;
-  padding-left: 18px;
-  border-left: 4px solid var(--laushu-primary-500);
-  color: var(--laushu-tertiary-700);
-  font-size: var(--fs-body);
-  line-height: 1.75;
-  font-weight: 600;
-}
 
 .theme-laushu .laushu-demo-list {
   display: grid;
@@ -553,9 +430,6 @@
   margin-left: auto;
 }
 
-.theme-laushu .laushu-demo-section .laushu-head-title {
-  max-width: 952px;
-}
 
 .theme-laushu .laushu-demo-card {
   --cs-card-gap: 0;
@@ -640,9 +514,6 @@
   margin-left: auto;
 }
 
-.theme-laushu .laushu-learning-section .laushu-head-title {
-  max-width: 952px;
-}
 
 .theme-laushu .laushu-learning-card {
   align-items: flex-start;
@@ -926,20 +797,8 @@
   margin: 8px 0 40px;
 }
 
-.theme-laushu .laushu-fc-figure {
-  margin: 0;
-  padding: 24px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 18px;
-  background: var(--laushu-primary-100);
-}
-
-.theme-laushu .laushu-fc-cap {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
-  flex-wrap: wrap;
+.theme-laushu .cs-flow-frame--split {
+  --cs-flow-header-bg: linear-gradient(162deg, #4852c3 3%, #d0b6f5 101%);
 }
 
 .theme-laushu .laushu-fc-badge {
@@ -958,13 +817,6 @@
   color: var(--laushu-primary-700);
 }
 
-.theme-laushu .laushu-fc-scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 10px;
-  -webkit-overflow-scrolling: touch;
-}
-
 .theme-laushu .laushu-task-flow-svg {
   display: block;
   width: 100%;
@@ -974,7 +826,7 @@
 
 /* 三張流程圖固定在同一個縮放比例（≈ flow3 的 1900/3994 ≈ 0.476 px/單位），
    讓節點與文字大小一致；字級在 foreignObject 內以 viewBox 單位定義，會跟著縮放，不會溢出。
-   寬度固定（非 100%），超出卡片時由 .laushu-fc-scroll 橫向捲動。 */
+   寬度固定（非 100%），超出卡片時由共用 .cs-flow-frame-scroll 橫向捲動。 */
 .theme-laushu .laushu-task-flow-svg--one {
   width: 1018px;
   min-width: 1018px;
@@ -1078,9 +930,6 @@
   margin: 0 auto;
 }
 
-.theme-laushu .laushu-understand-section .laushu-head-title {
-  max-width: 952px;
-}
 
 .theme-laushu .laushu-understand-section > .laushu-article,
 .theme-laushu .laushu-understand-section > .laushu-stakeholder-grid,
@@ -1764,9 +1613,6 @@
   margin-left: auto;
 }
 
-.theme-laushu .laushu-converge-section .laushu-head-title {
-  max-width: 952px;
-}
 
 .theme-laushu .laushu-converge-section > .laushu-article,
 .theme-laushu .laushu-converge-section > .laushu-journey,
@@ -1847,9 +1693,6 @@
   margin-left: auto;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-head-title {
-  max-width: 952px;
-}
 
 .theme-laushu .laushu-iterate-section > .laushu-article,
 .theme-laushu .laushu-iterate-section > .laushu-fc-list,
@@ -1879,24 +1722,6 @@
   margin-bottom: 0;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-fc-figure {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
-.theme-laushu .laushu-iterate-section .laushu-fc-cap {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding: 25px 29px;
-  border: 1px solid #d8deec;
-  border-radius: 16px;
-  background: linear-gradient(162deg, #4852c3 3%, #d0b6f5 101%);
-}
-
 .theme-laushu .laushu-iterate-section .laushu-fc-badge {
   padding: 0;
   border-radius: 0;
@@ -1912,13 +1737,6 @@
   font-size: 24px;
   line-height: 1.3;
   font-weight: 800;
-}
-
-.theme-laushu .laushu-iterate-section .laushu-fc-scroll {
-  padding: 28px;
-  border: 1px solid #d8deec;
-  border-radius: 16px;
-  background: #ffffff;
 }
 
 .theme-laushu .laushu-iterate-section .laushu-iter-list {
@@ -1977,16 +1795,8 @@
   line-height: 1.53;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-iter-figure {
-  overflow: hidden;
-  border-radius: 16px;
-}
 
 @media (max-width: 768px) {
-  .theme-laushu .laushu-iterate-section .laushu-fc-cap {
-    padding: 20px;
-  }
-
   .theme-laushu .laushu-iterate-section .laushu-fc-title,
   .theme-laushu .laushu-iterate-section .laushu-iter-title {
     font-size: 20px;
@@ -2034,9 +1844,6 @@
   margin-left: auto;
 }
 
-.theme-laushu .laushu-prototype-section .laushu-head-title {
-  max-width: 952px;
-}
 
 .theme-laushu .laushu-proto-intro {
   margin-top: 40px;
@@ -2080,17 +1887,6 @@
   display: contents;
 }
 
-.theme-laushu .cs-sol-fr {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  margin-bottom: 40px;
-}
-
-.theme-laushu .cs-sol-fr-mid {
-  align-items: center;
-}
-
 .theme-laushu .cs-sol-fc {
   width: 100%;
   background: #ffffff;
@@ -2120,57 +1916,6 @@
   margin: 0;
   font-size: var(--fs-sm);
   line-height: 1.6;
-  color: #5d6674;
-}
-
-.theme-laushu .cs-sol-fimg {
-  flex: 1 1 626px;
-  min-width: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border: 1px solid var(--laushu-line);
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
-  background: #ffffff;
-}
-
-.theme-laushu .cs-sol-fimg .laushu-image-frame {
-  width: 100%;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.theme-laushu .cs-sol-fimg .cs-feature-zoom-trigger {
-  width: 100%;
-}
-
-.theme-laushu .cs-sol-fimg .cs-zoomable-image-media {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.theme-laushu .cs-sol-fnote {
-  flex: 0 0 286px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  min-height: 98px;
-  padding: 25px;
-  border: 1px solid var(--laushu-line);
-  border-radius: 16px;
-  background: #ffffff;
-}
-
-.theme-laushu .cs-sol-fnote > p {
-  margin: 0;
-  width: 236px;
-  max-width: 100%;
-  font-size: var(--fs-sm);
-  line-height: 1.7;
   color: #5d6674;
 }
 
@@ -2210,21 +1955,9 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-laushu .cs-sol-fr,
-  .theme-laushu .cs-sol-fr-mid {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .theme-laushu .cs-sol-fc,
-  .theme-laushu .cs-sol-fimg,
-  .theme-laushu .cs-sol-fnote {
+  .theme-laushu .cs-sol-fc {
     flex: unset;
     width: 100%;
-  }
-
-  .theme-laushu .cs-sol-fr-mid .cs-sol-fnote {
-    order: -1;
   }
 
   .theme-laushu .cs-sol-fconn {
