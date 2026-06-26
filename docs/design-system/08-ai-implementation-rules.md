@@ -1,0 +1,127 @@
+# AI Implementation Rules
+
+These rules are mandatory for any AI agent modifying the Hming Portfolio repo.
+
+## 1. Source of truth
+
+- `styles/tokens.css` is the only runtime source of truth for design tokens.
+- Markdown / YAML token indexes are documentation mirrors only.
+- Real component code is the source of truth for props, variants, states, and behavior.
+- `/design-system` may document real components; it must not invent components, props, variants, tokens, or examples.
+
+## 2. Branch and worktree boundaries
+
+### Case Study remediation branch
+
+Branch: `codex/design-system-remediation`
+
+Allowed scope:
+
+- `app/{advantech,crypto-arsenal,laushu}/**`
+- `components/case-study/**`
+- `styles/case-study*.css`
+- `styles/tokens.css` only for `--cs-*` additions or corrections when justified
+- `docs/design-system/contracts/case-study-components.md`
+
+Forbidden scope:
+
+- `/design-system` page files
+- `lib/design-system-data.ts`
+- `lib/design-system-docs.ts`
+- `components/design-system/**`
+
+### Design System page alignment branch
+
+Branch: `codex/ds-page-alignment`
+
+Allowed scope:
+
+- `app/design-system/**`
+- `lib/design-system-data.ts`
+- `lib/design-system-docs.ts`
+- `components/design-system/**`
+- `components/DesignSystemPlayground.tsx`
+- `components/ui/Accordion.tsx`
+- `scripts/check-design-tokens.mjs`
+
+Forbidden scope:
+
+- Case Study route files
+- `components/case-study/**`
+- `styles/case-study*.css`
+- Changing values in `styles/tokens.css`
+
+## 3. Token rules
+
+Use the lowest valid token layer.
+
+```text
+foundation token (--hm-* / --fs-* / --text-*)
+  -> case semantic token (--cs-*)
+    -> project theme token (.theme-<slug> color mappings)
+      -> route-local token (--laushu-* / --ca-* only for project-specific visualization)
+        -> one-off local value
+```
+
+Rules:
+
+- Do not create `--hm-*` tokens for one page or one visual.
+- Do not create `--cs-*` tokens unless the same semantic value is shared by Case Study patterns.
+- Do not make components consume primitive color scale tokens directly unless explicitly documented.
+- `.theme-<slug>` may define color and brand semantic tokens only. It must not define layout, spacing, typography, radius, shadow geometry, width, height, grid, or breakpoint rules.
+- One-off narrative visuals may keep local CSS values if they do not affect system consistency.
+
+## 4. Component and pattern rules
+
+- Shared components live in `components/ui/**` or `components/case-study/**`.
+- Reusable Case Study UI belongs in `components/case-study/**` and `styles/case-study.css`.
+- Route-private CSS must be limited to content visualization geometry, project-specific data visuals, or documented exceptions.
+- Do not convert a Hming-approved one-off narrative layout into a generic component unless it repeats with the same information hierarchy and behavior.
+
+## 5. Batch size rules
+
+Never perform broad unbounded replacement.
+
+A valid batch is one of:
+
+- One primitive family across touched pages.
+- One Case Study component migration.
+- One route section group.
+- One DS page documentation category.
+
+Normal diff target: 150–250 net changed lines. Stop and split before 300 lines unless the change is verified dead-code deletion.
+
+## 6. Required green-batch validation
+
+Every batch must run:
+
+1. `git diff --check`
+2. `npm run lint`
+3. `npm run check:tokens`
+4. `npm run build`
+5. If touching case-study CSS or tokens: `npm run audit:architecture`
+6. Browser smoke test for touched routes at `1440 / 1024 / 768 / 390px`
+7. Horizontal overflow = 0
+8. Console errors = 0
+9. Touched interactions still work: tabs, zoom/lightbox, video, TOC, flow scroll, language route
+
+After a green batch, commit and push only the current feature branch. Do not push `main`.
+
+## 7. Contract rule
+
+If a Case Study remediation batch creates, stabilizes, or changes a shared Case Study component, token, primitive, or exception, update:
+
+`docs/design-system/contracts/case-study-components.md`
+
+The DS page alignment branch may document Case Study components only after the contract exists.
+
+## 8. Forbidden prompts
+
+Do not follow prompts like:
+
+- “Align the whole site to the design system.”
+- “Tokenize all CSS values.”
+- “Delete all route CSS.”
+- “Make every case study use the same layout.”
+
+Replace them with bounded audit-first tasks from `plans/00-integrated-execution-order.md`.
