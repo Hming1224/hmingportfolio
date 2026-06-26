@@ -132,8 +132,8 @@ try {
         const painAvatar = firstPain?.querySelector('.cs-avatar');
         const painAvatarImg = firstPain?.querySelector('.cs-avatar-img');
         const firstReflect = document.querySelector('#cs-sec-reflect > .cs-grid .cs-card');
-        const badDecision = document.querySelector('.ca-dcard-bad');
-        const goodDecision = document.querySelector('.ca-dcard-good');
+        const badDecision = document.querySelector('.cs-status-card--bad');
+        const goodDecision = document.querySelector('.cs-status-card--good');
         const researchInfo = document.querySelector('#cs-sec-research .cs-grid--aside-main > .cs-card:first-child');
         const researchPanelHead = researchInfo?.querySelector('.cs-panel-head');
         const researchPanelBody = researchInfo?.querySelector('.cs-panel-body');
@@ -154,6 +154,8 @@ try {
         const iterationDetailLabel = iterationBoard?.querySelector('.cs-detail-label');
         const iterationDetailBody = iterationBoard?.querySelector('.cs-detail-body');
         const iterationDetailParagraph = iterationDetailBody?.querySelector('p');
+        const beforeAfterZoom = iterationBoard?.querySelector('.cs-before-after-zoom');
+        const beforeAfterZoomMedia = iterationBoard?.querySelector('.cs-before-after-zoom-media');
         const impactQuote = document.querySelector('#cs-sec-impact > .cs-grid--quote-list > .cs-card');
         const impactQuoteText = impactQuote?.querySelector('.cs-quote-text');
         const impactQuoteMeta = impactQuote?.querySelector('.cs-quote-meta');
@@ -231,6 +233,8 @@ try {
         const iterationDetailRowStyle = iterationDetailRow ? getComputedStyle(iterationDetailRow) : null;
         const iterationDetailLabelStyle = iterationDetailLabel ? getComputedStyle(iterationDetailLabel) : null;
         const iterationDetailParagraphStyle = iterationDetailParagraph ? getComputedStyle(iterationDetailParagraph) : null;
+        const beforeAfterZoomStyle = beforeAfterZoom ? getComputedStyle(beforeAfterZoom) : null;
+        const beforeAfterZoomMediaStyle = beforeAfterZoomMedia ? getComputedStyle(beforeAfterZoomMedia) : null;
         const impactQuoteStyle = impactQuote ? getComputedStyle(impactQuote) : null;
         const impactQuoteTextStyle = impactQuoteText ? getComputedStyle(impactQuoteText) : null;
         const impactQuoteMetaStyle = impactQuoteMeta ? getComputedStyle(impactQuoteMeta) : null;
@@ -304,11 +308,12 @@ try {
           oldCounts: {
             pain: document.querySelectorAll('.ca-pain-card').length,
             reflect: document.querySelectorAll('.ca-reflect-card').length,
-            decision: document.querySelectorAll('.ca-dcard, .ca-dcard-head, .ca-dcard-body, .ca-steps, .ca-dcard-out').length,
+            decision: document.querySelectorAll('.ca-dcard, .ca-dcard-bad, .ca-dcard-good, .ca-dcard-head, .ca-dcard-body, .ca-steps, .ca-dcard-out').length,
             researchInfo: document.querySelectorAll('.ca-research-info, .ca-research-info-head, .ca-research-info-body').length,
             exchange: document.querySelectorAll('.ca-exchange, .ca-exchange-media, .ca-exchange-img').length,
             iteration: document.querySelectorAll('.ca-iter-board').length,
             iterationText: document.querySelectorAll('.ca-iter-head, .ca-iter-badge, .ca-iter-title, .ca-iter-row, .ca-iter-label, .ca-iter-desc').length,
+            iterationZoom: document.querySelectorAll('.ca-iteration-zoom, .ca-iteration-zoom-img').length,
             impactQuote: document.querySelectorAll('.ca-impact-quote').length,
             roleNode: document.querySelectorAll('.ca-flow-node').length,
             finalMedia: document.querySelectorAll('.ca-final-shot').length,
@@ -346,6 +351,8 @@ try {
             painAvatarImg: document.querySelectorAll('#cs-sec-problem .cs-avatar-img').length,
             reflect: document.querySelectorAll('#cs-sec-reflect > .cs-grid .cs-card').length,
             decision: document.querySelectorAll('#cs-sec-decision > .cs-grid .cs-card').length,
+            decisionBad: document.querySelectorAll('#cs-sec-decision .cs-status-card--bad').length,
+            decisionGood: document.querySelectorAll('#cs-sec-decision .cs-status-card--good').length,
             decisionHead: document.querySelectorAll('#cs-sec-decision .cs-status-head').length,
             decisionBody: document.querySelectorAll('#cs-sec-decision .cs-status-body').length,
             decisionSteps: document.querySelectorAll('#cs-sec-decision .cs-counter-list').length,
@@ -368,6 +375,8 @@ try {
             iterationDetailRow: document.querySelectorAll('#cs-sec-iteration .cs-detail-row').length,
             iterationDetailLabel: document.querySelectorAll('#cs-sec-iteration .cs-detail-label').length,
             iterationDetailBody: document.querySelectorAll('#cs-sec-iteration .cs-detail-body').length,
+            beforeAfterZoom: document.querySelectorAll('#cs-sec-iteration .cs-before-after-zoom').length,
+            beforeAfterZoomMedia: document.querySelectorAll('#cs-sec-iteration .cs-before-after-zoom-media').length,
             impactQuote: document.querySelectorAll('#cs-sec-impact > .cs-grid--quote-list > .cs-card').length,
             impactQuoteText: document.querySelectorAll('#cs-sec-impact .cs-quote-text').length,
             impactQuoteMeta: document.querySelectorAll('#cs-sec-impact .cs-quote-meta').length,
@@ -514,7 +523,9 @@ try {
             labelSize: iterationDetailLabelStyle?.fontSize,
             bodyColor: iterationDetailParagraphStyle?.color,
             bodySize: iterationDetailParagraphStyle?.fontSize,
-            bodyLineHeight: iterationDetailParagraphStyle?.lineHeight
+            bodyLineHeight: iterationDetailParagraphStyle?.lineHeight,
+            zoomBg: beforeAfterZoomStyle?.backgroundColor,
+            zoomMediaRadius: beforeAfterZoomMediaStyle?.borderRadius
           },
           impactQuote: impactQuote && {
             padding: impactQuoteStyle.padding,
@@ -683,6 +694,7 @@ try {
     result.oldCounts.exchange !== 0 ||
     result.oldCounts.iteration !== 0 ||
     result.oldCounts.iterationText !== 0 ||
+    result.oldCounts.iterationZoom !== 0 ||
     result.oldCounts.impactQuote !== 0 ||
     result.oldCounts.roleNode !== 0 ||
     result.oldCounts.finalMedia !== 0 ||
@@ -718,6 +730,8 @@ try {
     result.cardCounts.painAvatarImg !== 6 ||
     result.cardCounts.reflect !== 3 ||
     result.cardCounts.decision !== 2 ||
+    result.cardCounts.decisionBad !== 1 ||
+    result.cardCounts.decisionGood !== 1 ||
     result.cardCounts.decisionHead !== 2 ||
     result.cardCounts.decisionBody !== 2 ||
     result.cardCounts.decisionSteps !== 2 ||
@@ -740,6 +754,8 @@ try {
     result.cardCounts.iterationDetailRow !== 4 ||
     result.cardCounts.iterationDetailLabel !== 4 ||
     result.cardCounts.iterationDetailBody !== 4 ||
+    result.cardCounts.beforeAfterZoom !== 8 ||
+    result.cardCounts.beforeAfterZoomMedia !== 8 ||
     result.cardCounts.impactQuote !== 4 ||
     result.cardCounts.impactQuoteText !== 4 ||
     result.cardCounts.impactQuoteMeta !== 4 ||
@@ -809,6 +825,8 @@ try {
     result.matrix?.cellDisplay !== "flex" ||
     result.matrix?.stepZoomBg !== "rgb(10, 19, 48)" ||
     result.matrix?.calloutDisplay !== "flex" ||
+    result.iteration?.zoomBg !== "rgba(0, 0, 0, 0)" ||
+    result.iteration?.zoomMediaRadius !== "0px" ||
     !result.decision?.badHead.includes("linear-gradient") ||
     !result.decision?.goodHead.includes("linear-gradient") ||
     result.decision.badStep === "rgba(0, 0, 0, 0)" ||

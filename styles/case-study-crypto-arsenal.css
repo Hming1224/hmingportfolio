@@ -221,13 +221,13 @@
   overflow: hidden;
 }
 
-.theme-crypto-arsenal .ca-dcard-bad {
+.theme-crypto-arsenal .cs-status-card--bad {
   --cs-status-head-bg: linear-gradient(90deg, #c2375a, #e094ab);
   --cs-counter-list-index-bg: var(--ca-red);
   --cs-status-outcome-color: var(--ca-red);
 }
 
-.theme-crypto-arsenal .ca-dcard-good {
+.theme-crypto-arsenal .cs-status-card--good {
   --cs-status-head-bg: linear-gradient(90deg, #0ea36d, #8ad4b4);
   --cs-counter-list-index-bg: var(--ca-green);
   --cs-status-outcome-color: var(--ca-green);
@@ -317,14 +317,6 @@
   --cs-detail-body-line-height: 23px;
   --cs-detail-body-paragraph-gap: 23px;
   margin-top: 24px;
-}
-
-.theme-crypto-arsenal .ca-iteration-zoom {
-  background: transparent;
-}
-
-.theme-crypto-arsenal .ca-iteration-zoom-img {
-  border-radius: 0;
 }
 
 /* ── 09 最終介面 ── */
@@ -456,12 +448,6 @@
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-title {
     font-size: 21px;
     line-height: 28px;
-  }
-
-  .theme-crypto-arsenal .cs-before-after-content .ca-iteration-zoom {
-    width: 100%;
-    max-width: 100%;
-    flex: 1 1 auto;
   }
 
   .theme-crypto-arsenal #cs-sec-problem > .cs-grid .cs-card {

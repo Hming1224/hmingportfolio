@@ -26,8 +26,8 @@ function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }
             width={board.width}
             height={board.height}
             sizes="(max-width: 768px) 560px, 480px"
-            className="ca-iteration-zoom"
-            imageClassName="ca-iteration-zoom-img"
+            className="cs-before-after-zoom"
+            imageClassName="cs-before-after-zoom-media"
           />
         }
         after={
@@ -37,8 +37,8 @@ function Board({ board, t }: { board: IterationBoard; t: (s: string) => string }
             width={board.width}
             height={board.height}
             sizes="(max-width: 768px) 560px, 480px"
-            className="ca-iteration-zoom"
-            imageClassName="ca-iteration-zoom-img"
+            className="cs-before-after-zoom"
+            imageClassName="cs-before-after-zoom-media"
           />
         }
       />

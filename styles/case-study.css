@@ -1095,6 +1095,14 @@
   border-radius: 0;
 }
 
+.cs-before-after-zoom {
+  background: transparent;
+}
+
+.cs-before-after-zoom-media {
+  border-radius: 0;
+}
+
 .cs-before-after-arrow {
   display: flex;
   flex-shrink: 0;
@@ -1421,6 +1429,12 @@
   .cs-before-after-content img {
     width: 100%;
     min-width: 0;
+  }
+
+  .cs-before-after-content .cs-before-after-zoom {
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 auto;
   }
 
   .cs-flow-frame--default {

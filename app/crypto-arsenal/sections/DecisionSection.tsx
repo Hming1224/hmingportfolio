@@ -12,7 +12,7 @@ function DecisionCard({
   t: (s: string) => string;
 }) {
   return (
-    <CaseCard className={`ca-dcard-${variant}`}>
+    <CaseCard className={`cs-status-card--${variant}`}>
       <div className="cs-status-head">{t(path.head)}</div>
       <div className="cs-status-body">
         <h3>{t(path.title)}</h3>
