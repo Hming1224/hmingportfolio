@@ -89,7 +89,7 @@
   margin: 0 auto;
 }
 
-.theme-laushu .laushu-problem-section .laushu-head {
+.theme-laushu .laushu-problem-section .cs-section-header--case-wide {
   max-width: var(--laushu-content-max);
   margin: 0 auto;
 }
@@ -125,6 +125,18 @@
   --cs-explainer-pill-weight: 700;
 }
 
+.theme-laushu .cs-section-lead--wide {
+  --cs-section-lead-wide-max: var(--laushu-content-max);
+  --cs-section-lead-color: var(--text-secondary);
+}
+
+.theme-laushu .cs-subsection-title--wide {
+  --cs-subsection-title-wide-max: var(--laushu-content-max);
+  --cs-subsection-title-accent-color: #4852c3;
+  --cs-subsection-title-weight: 800;
+  --cs-subsection-title-line-height: 1.35;
+}
+
 
 .theme-laushu .laushu-overview-section > .cs-showcase-media {
   --cs-showcase-media-max-width: var(--laushu-content-max);
@@ -133,17 +145,8 @@
   --cs-showcase-media-line-height: 0;
 }
 
-.theme-laushu .laushu-summary-grid,
-.theme-laushu .laushu-problem-grid,
-.theme-laushu .laushu-stakeholder-grid,
-.theme-laushu .laushu-usecase-grid {
-  --cs-grid-gap: 20px;
-  max-width: var(--laushu-content-max);
-  margin: 40px auto 0;
-}
-
-.theme-laushu .laushu-stakeholder-grid {
-  margin-top: 0;
+.theme-laushu .cs-topic-grid {
+  --cs-topic-grid-max-width: var(--laushu-content-max);
 }
 
 .theme-laushu .cs-topic-card {
@@ -185,11 +188,15 @@
   --cs-section-title-max: 720px;
 }
 
-.theme-laushu .laushu-head .cs-section-kicker {
+.theme-laushu .cs-section-header--case-wide {
+  --cs-section-header-wide-max: var(--laushu-content-max);
+}
+
+.theme-laushu .cs-section-header--case-wide .cs-section-kicker {
   color: var(--laushu-primary-500);
 }
 
-.theme-laushu .laushu-head .cs-section-title {
+.theme-laushu .cs-section-header--case-wide .cs-section-title {
   margin-bottom: 24px;
   color: var(--laushu-primary-700);
   font-weight: 700;
@@ -202,51 +209,32 @@
 /* Figma 風格 section 標題：眉標 + 論點句（對齊 Figma node 2797:1521） */
 
 
-/* 專案總覽：論點段落（取代舊的紫底框） */
-.theme-laushu .laushu-overview-lead {
-  max-width: var(--laushu-content-max);
-  margin: 0 auto 40px;
-  font-size: var(--fs-body);
-  line-height: 1.8;
-  color: var(--text-secondary);
-}
-
 /* 專案總覽 3 張卡片：Figma 漸層紫底 + 淺陰影 */
-.theme-laushu .laushu-overview-grid .cs-topic-card {
+.theme-laushu .cs-topic-grid--overview .cs-topic-card {
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-overview-grid .cs-topic-card:nth-child(1) {
+.theme-laushu .cs-topic-grid--overview .cs-topic-card:nth-child(1) {
   background: #fbf9ff;
 }
 
-.theme-laushu .laushu-overview-grid .cs-topic-card:nth-child(2) {
+.theme-laushu .cs-topic-grid--overview .cs-topic-card:nth-child(2) {
   background: #f5eeff;
 }
 
-.theme-laushu .laushu-overview-grid .cs-topic-card:nth-child(3) {
+.theme-laushu .cs-topic-grid--overview .cs-topic-card:nth-child(3) {
   background: #e6e2ff;
 }
 
-.theme-laushu .laushu-problem-grid .cs-topic-card {
+.theme-laushu .cs-topic-grid--problem .cs-topic-card {
   padding: 25px;
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-problem-grid .cs-topic-card-kicker {
+.theme-laushu .cs-topic-grid--problem .cs-topic-card-kicker {
   background: #f5eeff;
   line-height: 18px;
 }
-
-.theme-laushu .laushu-problem-cards-title {
-  max-width: var(--laushu-content-max);
-  margin: 40px auto 0;
-  font-size: var(--fs-h3);
-  line-height: 1.35;
-  font-weight: 800;
-  color: #4852c3;
-}
-
 
 .theme-laushu .cs-persona-card {
   --cs-persona-card-border: var(--laushu-line);
@@ -261,7 +249,7 @@
   --cs-video-showcase-list-max-width: var(--laushu-content-max);
 }
 
-.theme-laushu .laushu-demo-section .laushu-head {
+.theme-laushu .laushu-demo-section .cs-section-header--case-wide {
   max-width: var(--laushu-content-max);
   margin-right: auto;
   margin-left: auto;
@@ -295,7 +283,7 @@
   background: #ffffff;
 }
 
-.theme-laushu .laushu-learning-section .laushu-head {
+.theme-laushu .laushu-learning-section .cs-section-header--case-wide {
   max-width: var(--laushu-content-max);
   margin-right: auto;
   margin-left: auto;
@@ -447,32 +435,8 @@
   }
 }
 
-/* 任務測試流程圖（HTML node-flow，手機橫向捲動） */
-.theme-laushu .laushu-fc-list {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  margin: 8px 0 40px;
-}
-
 .theme-laushu .cs-flow-frame--split {
   --cs-flow-header-bg: linear-gradient(162deg, #4852c3 3%, #d0b6f5 101%);
-}
-
-.theme-laushu .laushu-fc-badge {
-  flex: none;
-  padding: 5px 14px;
-  border-radius: 999px;
-  background: var(--laushu-primary-500);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.theme-laushu .laushu-fc-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--laushu-primary-700);
 }
 
 .theme-laushu .laushu-task-flow-svg {
@@ -565,7 +529,7 @@
 
 /* Process / Understand / Converge / Iterate 段內容垂直間距（僅設上邊距，水平對齊維持各自規則） */
 .theme-laushu .laushu-process-section > .cs-article,
-.theme-laushu .laushu-process-section > .laushu-stakeholder-grid,
+.theme-laushu .laushu-process-section > .cs-topic-grid--stakeholder,
 .theme-laushu .laushu-process-section > .laushu-diagram,
 .theme-laushu .laushu-process-section > .laushu-table-wrap,
 .theme-laushu .laushu-process-section > .laushu-survey-flow,
@@ -575,7 +539,7 @@
 .theme-laushu .laushu-process-section > .cs-persona-list,
 .theme-laushu .laushu-process-section > .cs-showcase-media,
 .theme-laushu .laushu-process-section > .laushu-flow-group,
-.theme-laushu .laushu-process-section > .laushu-usecase-grid {
+.theme-laushu .laushu-process-section > .cs-topic-grid--usecase {
   margin-top: 44px;
 }
 
@@ -583,14 +547,14 @@
   background: #ffffff;
 }
 
-.theme-laushu .laushu-understand-section .laushu-head {
+.theme-laushu .laushu-understand-section .cs-section-header--case-wide {
   max-width: var(--laushu-content-max);
   margin: 0 auto;
 }
 
 
 .theme-laushu .laushu-understand-section > .cs-article,
-.theme-laushu .laushu-understand-section > .laushu-stakeholder-grid,
+.theme-laushu .laushu-understand-section > .cs-topic-grid--stakeholder,
 .theme-laushu .laushu-understand-section > .laushu-diagram,
 .theme-laushu .laushu-understand-section > .laushu-table-wrap,
 .theme-laushu .laushu-understand-section > .laushu-survey-flow,
@@ -619,14 +583,14 @@
   color: var(--text-body);
 }
 
-.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .cs-topic-card {
+.theme-laushu .laushu-understand-section .cs-topic-grid--stakeholder .cs-topic-card {
   min-height: 251px;
   padding: 25px;
   background: #fbf9ff;
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-understand-section .laushu-stakeholder-grid .cs-topic-card-kicker {
+.theme-laushu .laushu-understand-section .cs-topic-grid--stakeholder .cs-topic-card-kicker {
   line-height: 18px;
 }
 
@@ -1166,7 +1130,7 @@
   background: #ffffff;
 }
 
-.theme-laushu .laushu-converge-section .laushu-head,
+.theme-laushu .laushu-converge-section .cs-section-header--case-wide,
 .theme-laushu .laushu-converge-section .cs-article {
   max-width: var(--laushu-content-max);
   margin-right: auto;
@@ -1176,7 +1140,7 @@
 
 .theme-laushu .laushu-converge-section > .cs-article,
 .theme-laushu .laushu-converge-section > .cs-showcase-media,
-.theme-laushu .laushu-converge-section > .laushu-usecase-grid {
+.theme-laushu .laushu-converge-section > .cs-topic-grid--usecase {
   margin-top: 40px;
 }
 
@@ -1197,12 +1161,12 @@
   border-radius: 0;
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid {
+.theme-laushu .laushu-converge-section .cs-topic-grid--usecase {
   margin-right: auto;
   margin-left: auto;
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card {
+.theme-laushu .laushu-converge-section .cs-topic-grid--usecase .cs-topic-card {
   min-height: 284px;
   padding: 25px;
   border: 1px solid var(--laushu-line);
@@ -1211,7 +1175,7 @@
   box-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card-art {
+.theme-laushu .laushu-converge-section .cs-topic-grid--usecase .cs-topic-card-art {
   flex: none;
   width: 132px;
   height: 132px;
@@ -1219,19 +1183,19 @@
   background: var(--laushu-primary-200);
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card-art img {
+.theme-laushu .laushu-converge-section .cs-topic-grid--usecase .cs-topic-card-art img {
   width: 84px;
   height: 84px;
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card h4 {
+.theme-laushu .laushu-converge-section .cs-topic-grid--usecase .cs-topic-card h4 {
   margin-bottom: 12px;
   color: var(--laushu-tertiary-700);
   font-size: var(--fs-h4);
   line-height: 1.35;
 }
 
-.theme-laushu .laushu-converge-section .laushu-usecase-grid .cs-topic-card p {
+.theme-laushu .laushu-converge-section .cs-topic-grid--usecase .cs-topic-card p {
   max-width: 254px;
   color: #5d6674;
   font-size: var(--fs-sm);
@@ -1244,9 +1208,9 @@
   background: var(--laushu-tertiary-100);
 }
 
-.theme-laushu .laushu-iterate-section .laushu-head,
+.theme-laushu .laushu-iterate-section .cs-section-header--case-wide,
 .theme-laushu .laushu-iterate-section .cs-article,
-.theme-laushu .laushu-iterate-section .laushu-fc-list,
+.theme-laushu .laushu-iterate-section .cs-flow-frame-list,
 .theme-laushu .laushu-iterate-section .cs-iteration-list {
   max-width: var(--laushu-content-max);
   margin-right: auto;
@@ -1255,7 +1219,7 @@
 
 
 .theme-laushu .laushu-iterate-section > .cs-article,
-.theme-laushu .laushu-iterate-section > .laushu-fc-list,
+.theme-laushu .laushu-iterate-section > .cs-flow-frame-list,
 .theme-laushu .laushu-iterate-section > .cs-iteration-list {
   margin-top: 40px;
 }
@@ -1277,26 +1241,27 @@
   line-height: 1.8;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-fc-list {
-  gap: 40px;
-  margin-bottom: 0;
+.theme-laushu .laushu-iterate-section .cs-flow-frame-list {
+  --cs-flow-frame-list-gap: 40px;
+  --cs-flow-frame-list-margin: 8px auto 0;
+  --cs-flow-frame-list-max-width: var(--laushu-content-max);
 }
 
-.theme-laushu .laushu-iterate-section .laushu-fc-badge {
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--laushu-primary-200);
-  font-size: var(--fs-sm);
-  line-height: 1.75;
-  font-weight: 700;
+.theme-laushu .laushu-iterate-section .cs-flow-frame-badge {
+  --cs-flow-frame-badge-padding: 0;
+  --cs-flow-frame-badge-radius: 0;
+  --cs-flow-frame-badge-bg: transparent;
+  --cs-flow-frame-badge-color: var(--laushu-primary-200);
+  --cs-flow-frame-badge-size: var(--fs-sm);
+  --cs-flow-frame-badge-line-height: 1.75;
+  --cs-flow-frame-badge-weight: 700;
 }
 
-.theme-laushu .laushu-iterate-section .laushu-fc-title {
-  color: #ffffff;
-  font-size: 24px;
-  line-height: 1.3;
-  font-weight: 800;
+.theme-laushu .laushu-iterate-section .cs-flow-frame-title {
+  --cs-flow-frame-title-color: #ffffff;
+  --cs-flow-frame-title-size: 24px;
+  --cs-flow-frame-title-line-height: 1.3;
+  --cs-flow-frame-title-weight: 800;
 }
 
 .theme-laushu .laushu-iterate-section .cs-iteration-list {
@@ -1352,7 +1317,7 @@
 }
 
 @media (max-width: 768px) {
-  .theme-laushu .laushu-iterate-section .laushu-fc-title,
+  .theme-laushu .laushu-iterate-section .cs-flow-frame-title,
   .theme-laushu .laushu-iterate-section .cs-iteration-title {
     font-size: 20px;
   }
@@ -1384,25 +1349,14 @@
   background: var(--laushu-tertiary-100);
 }
 
-.theme-laushu .laushu-prototype-section .laushu-head,
+.theme-laushu .laushu-prototype-section .cs-section-header--case-wide,
 .theme-laushu .laushu-prototype-section > .cs-showcase-media,
-.theme-laushu .laushu-proto-block {
+.theme-laushu .cs-sol-block--prototype {
   max-width: var(--laushu-content-max);
   margin-right: auto;
   margin-left: auto;
 }
 
-
-.theme-laushu .laushu-proto-intro {
-  margin-top: 40px;
-  margin-right: auto;
-  margin-bottom: 0;
-  margin-left: auto;
-  max-width: var(--laushu-content-max);
-  color: #5d6674;
-  font-size: var(--fs-body);
-  line-height: 1.7;
-}
 
 .theme-laushu .laushu-prototype-section > .cs-showcase-media {
   --cs-showcase-media-margin: 40px auto 0;
@@ -1411,7 +1365,12 @@
   --cs-showcase-media-shadow: var(--laushu-shadow);
 }
 
-.theme-laushu .laushu-proto-block {
+.theme-laushu .laushu-prototype-section > .cs-section-lead {
+  --cs-section-lead-color: #5d6674;
+  --cs-section-lead-line-height: 1.7;
+}
+
+.theme-laushu .cs-sol-block--prototype {
   margin-top: 40px;
 }
 

@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { readFile, rm } from "node:fs/promises";
 
 const chromePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const url = "http://localhost:3000/zh-TW/laushu";
+const url = process.env.LAUSHU_VERIFY_URL ?? "http://localhost:3000/zh-TW/laushu";
 const userDataDir = `/private/tmp/hming-laushu-primitives-cdp-${process.pid}-${Date.now()}`;
 const viewports = [
   [1440, 1000],
@@ -124,6 +124,11 @@ try {
       expression: `(() => {
         const doc = document.documentElement;
         const topicCard = document.querySelector('.cs-topic-card');
+        const overviewGrid = document.querySelector('.cs-topic-grid--overview');
+        const problemGrid = document.querySelector('.cs-topic-grid--problem');
+        const stakeholderGrid = document.querySelector('.cs-topic-grid--stakeholder');
+        const usecaseGrid = document.querySelector('.cs-topic-grid--usecase');
+        const usecaseCard = usecaseGrid?.querySelector('.cs-topic-card');
         const topicKicker = document.querySelector('.cs-topic-card-kicker');
         const topicArt = document.querySelector('.cs-topic-card-art');
         const article = document.querySelector('.cs-article');
@@ -179,7 +184,21 @@ try {
         const explainerPill = explainerLayout?.querySelector('.cs-explainer-pill');
         const explainerTitle = explainerLayout?.querySelector('.cs-explainer-title');
         const explainerBody = explainerLayout?.querySelector('p');
+        const headerWide = document.querySelector('.cs-section-header--case-wide');
+        const headerWideKicker = headerWide?.querySelector('.cs-section-kicker');
+        const headerWideTitle = headerWide?.querySelector('.cs-section-title');
+        const sectionLeadWide = document.querySelector('.cs-section-lead--wide');
+        const sectionLeadBottom = document.querySelector('.cs-section-lead--bottom-gap');
+        const prototypeLead = document.querySelector('.laushu-prototype-section > .cs-section-lead');
+        const subsectionTitleWide = document.querySelector('.cs-subsection-title--wide');
+        const flowFrameList = document.querySelector('.cs-flow-frame-list');
+        const flowFrameBadge = document.querySelector('.cs-flow-frame-badge');
+        const flowFrameTitle = document.querySelector('.cs-flow-frame-title');
+        const prototypeBlock = document.querySelector('.cs-sol-block--prototype');
+        const prototypeGroup = document.querySelector('.cs-sol-fgroup--prototype');
         const topicCardStyle = topicCard ? getComputedStyle(topicCard) : null;
+        const usecaseGridStyle = usecaseGrid ? getComputedStyle(usecaseGrid) : null;
+        const usecaseCardStyle = usecaseCard ? getComputedStyle(usecaseCard) : null;
         const topicKickerStyle = topicKicker ? getComputedStyle(topicKicker) : null;
         const topicArtStyle = topicArt ? getComputedStyle(topicArt) : null;
         const articleStyle = article ? getComputedStyle(article) : null;
@@ -233,6 +252,18 @@ try {
         const explainerPillStyle = explainerPill ? getComputedStyle(explainerPill) : null;
         const explainerTitleStyle = explainerTitle ? getComputedStyle(explainerTitle) : null;
         const explainerBodyStyle = explainerBody ? getComputedStyle(explainerBody) : null;
+        const headerWideStyle = headerWide ? getComputedStyle(headerWide) : null;
+        const headerWideKickerStyle = headerWideKicker ? getComputedStyle(headerWideKicker) : null;
+        const headerWideTitleStyle = headerWideTitle ? getComputedStyle(headerWideTitle) : null;
+        const sectionLeadWideStyle = sectionLeadWide ? getComputedStyle(sectionLeadWide) : null;
+        const sectionLeadBottomStyle = sectionLeadBottom ? getComputedStyle(sectionLeadBottom) : null;
+        const prototypeLeadStyle = prototypeLead ? getComputedStyle(prototypeLead) : null;
+        const subsectionTitleWideStyle = subsectionTitleWide ? getComputedStyle(subsectionTitleWide) : null;
+        const flowFrameListStyle = flowFrameList ? getComputedStyle(flowFrameList) : null;
+        const flowFrameBadgeStyle = flowFrameBadge ? getComputedStyle(flowFrameBadge) : null;
+        const flowFrameTitleStyle = flowFrameTitle ? getComputedStyle(flowFrameTitle) : null;
+        const prototypeBlockStyle = prototypeBlock ? getComputedStyle(prototypeBlock) : null;
+        const prototypeGroupStyle = prototypeGroup ? getComputedStyle(prototypeGroup) : null;
         const overflowNodes = [...document.querySelectorAll('body *')].filter((el) => {
           const rect = el.getBoundingClientRect();
           return rect.width > 0 && (rect.right > window.innerWidth + 1 || rect.left < -1);
@@ -257,10 +288,19 @@ try {
             reflection: document.querySelectorAll('.laushu-learning-card, .laushu-learning-num, .laushu-learning-title').length,
             iteration: document.querySelectorAll('.laushu-iter-list, .laushu-iter-board, .laushu-iter-head, .laushu-iter-badge, .laushu-iter-title, .laushu-iter-body, .laushu-iter-label, .laushu-iter-paras, .laushu-iter-compare, .laushu-iter-frame, .laushu-iter-media, .laushu-iter-card, .laushu-iter-arrow').length,
             mediaFrame: document.querySelectorAll('.laushu-form-card, .laushu-overview-hero, .laushu-journey, .laushu-test-result, .laushu-proto-overview').length,
-            explainer: document.querySelectorAll('.laushu-problem-layout, .laushu-problem-copy, .laushu-problem-pill, .laushu-problem-define-title').length
+            explainer: document.querySelectorAll('.laushu-problem-layout, .laushu-problem-copy, .laushu-problem-pill, .laushu-problem-define-title').length,
+            textPrimitive: document.querySelectorAll('.laushu-overview-lead, .laushu-problem-cards-title, .laushu-proto-intro').length,
+            topicGrid: document.querySelectorAll('.laushu-summary-grid, .laushu-overview-grid, .laushu-problem-grid, .laushu-stakeholder-grid, .laushu-usecase-grid').length,
+            flowFrame: document.querySelectorAll('.laushu-fc-list, .laushu-fc-badge, .laushu-fc-title').length,
+            prototype: document.querySelectorAll('.laushu-proto-block, .laushu-proto-group').length,
+            sectionHeader: document.querySelectorAll('.laushu-head').length
           },
           counts: {
             topicCard: document.querySelectorAll('.cs-topic-card').length,
+            topicGridOverview: document.querySelectorAll('.cs-topic-grid--overview').length,
+            topicGridProblem: document.querySelectorAll('.cs-topic-grid--problem').length,
+            topicGridStakeholder: document.querySelectorAll('.cs-topic-grid--stakeholder').length,
+            topicGridUsecase: document.querySelectorAll('.cs-topic-grid--usecase').length,
             topicCardKicker: document.querySelectorAll('.cs-topic-card-kicker').length,
             topicCardIllustrated: document.querySelectorAll('.cs-topic-card--illustrated').length,
             topicCardArt: document.querySelectorAll('.cs-topic-card-art').length,
@@ -306,7 +346,18 @@ try {
             explainerLayout: document.querySelectorAll('.cs-explainer-layout').length,
             explainerCopy: document.querySelectorAll('.cs-explainer-copy').length,
             explainerPill: document.querySelectorAll('.cs-explainer-pill').length,
-            explainerTitle: document.querySelectorAll('.cs-explainer-title').length
+            explainerTitle: document.querySelectorAll('.cs-explainer-title').length,
+            sectionHeaderWide: document.querySelectorAll('.cs-section-header--case-wide').length,
+            sectionLeadWide: document.querySelectorAll('.cs-section-lead--wide').length,
+            sectionLeadBottomGap: document.querySelectorAll('.cs-section-lead--bottom-gap').length,
+            sectionLeadTopGap: document.querySelectorAll('.cs-section-lead--top-gap').length,
+            subsectionTitleWide: document.querySelectorAll('.cs-subsection-title--wide').length,
+            subsectionTitleAccent: document.querySelectorAll('.cs-subsection-title--accent').length,
+            flowFrameList: document.querySelectorAll('.cs-flow-frame-list').length,
+            flowFrameBadge: document.querySelectorAll('.cs-flow-frame-badge').length,
+            flowFrameTitle: document.querySelectorAll('.cs-flow-frame-title').length,
+            prototypeBlock: document.querySelectorAll('.cs-sol-block--prototype').length,
+            prototypeGroup: document.querySelectorAll('.cs-sol-fgroup--prototype').length
           },
           topicCard: topicCard && {
             padding: topicCardStyle.padding,
@@ -314,6 +365,14 @@ try {
             radius: topicCardStyle.borderRadius,
             border: topicCardStyle.borderTopColor,
             shadow: topicCardStyle.boxShadow
+          },
+          usecaseGrid: usecaseGrid && usecaseCard && {
+            display: usecaseGridStyle.display,
+            maxWidth: usecaseGridStyle.maxWidth,
+            marginTop: usecaseGridStyle.marginTop,
+            cardMinHeight: usecaseCardStyle.minHeight,
+            cardPadding: usecaseCardStyle.padding,
+            cardBg: usecaseCardStyle.backgroundColor
           },
           topicKicker: topicKicker && {
             display: topicKickerStyle.display,
@@ -443,6 +502,38 @@ try {
             titleColor: explainerTitleStyle.color,
             titleMarginBottom: explainerTitleStyle.marginBottom,
             bodyLineHeight: explainerBodyStyle.lineHeight
+          },
+          sectionHeader: headerWide && headerWideKicker && headerWideTitle && {
+            maxWidth: headerWideStyle.maxWidth,
+            kickerColor: headerWideKickerStyle.color,
+            titleColor: headerWideTitleStyle.color,
+            titleWeight: headerWideTitleStyle.fontWeight,
+            titleMarginBottom: headerWideTitleStyle.marginBottom
+          },
+          textPrimitive: sectionLeadWide && sectionLeadBottom && prototypeLead && subsectionTitleWide && {
+            leadMaxWidth: sectionLeadWideStyle.maxWidth,
+            leadBottomMargin: sectionLeadBottomStyle.marginBottom,
+            prototypeLineHeight: prototypeLeadStyle.lineHeight,
+            subsectionMaxWidth: subsectionTitleWideStyle.maxWidth,
+            subsectionWeight: subsectionTitleWideStyle.fontWeight,
+            subsectionColor: subsectionTitleWideStyle.color
+          },
+          flowFrame: flowFrameList && flowFrameBadge && flowFrameTitle && {
+            listDisplay: flowFrameListStyle.display,
+            listGap: flowFrameListStyle.rowGap,
+            listMaxWidth: flowFrameListStyle.maxWidth,
+            badgeBg: flowFrameBadgeStyle.backgroundColor,
+            badgeColor: flowFrameBadgeStyle.color,
+            badgeWeight: flowFrameBadgeStyle.fontWeight,
+            titleColor: flowFrameTitleStyle.color,
+            titleWeight: flowFrameTitleStyle.fontWeight
+          },
+          prototype: prototypeBlock && prototypeGroup && {
+            blockDisplay: prototypeBlockStyle.display,
+            blockGap: prototypeBlockStyle.rowGap,
+            blockMaxWidth: prototypeBlockStyle.maxWidth,
+            blockMarginTop: prototypeBlockStyle.marginTop,
+            groupDisplay: prototypeGroupStyle.display
           }
         };
       })()`,
@@ -471,7 +562,16 @@ try {
     result.oldCounts.iteration !== 0 ||
     result.oldCounts.mediaFrame !== 0 ||
     result.oldCounts.explainer !== 0 ||
+    result.oldCounts.textPrimitive !== 0 ||
+    result.oldCounts.topicGrid !== 0 ||
+    result.oldCounts.flowFrame !== 0 ||
+    result.oldCounts.prototype !== 0 ||
+    result.oldCounts.sectionHeader !== 0 ||
     result.counts.topicCard !== 13 ||
+    result.counts.topicGridOverview !== 1 ||
+    result.counts.topicGridProblem !== 1 ||
+    result.counts.topicGridStakeholder !== 1 ||
+    result.counts.topicGridUsecase !== 1 ||
     result.counts.topicCardKicker !== 7 ||
     result.counts.topicCardIllustrated !== 3 ||
     result.counts.topicCardArt !== 3 ||
@@ -518,7 +618,21 @@ try {
     result.counts.explainerCopy !== 1 ||
     result.counts.explainerPill !== 1 ||
     result.counts.explainerTitle !== 1 ||
+    result.counts.sectionHeaderWide !== 8 ||
+    result.counts.sectionLeadWide !== 2 ||
+    result.counts.sectionLeadBottomGap !== 1 ||
+    result.counts.sectionLeadTopGap !== 1 ||
+    result.counts.subsectionTitleWide !== 1 ||
+    result.counts.subsectionTitleAccent !== 1 ||
+    result.counts.flowFrameList !== 1 ||
+    result.counts.flowFrameBadge !== 3 ||
+    result.counts.flowFrameTitle !== 3 ||
+    result.counts.prototypeBlock !== 1 ||
+    result.counts.prototypeGroup !== 3 ||
     result.topicCard?.radius !== "16px" ||
+    result.usecaseGrid?.display !== "grid" ||
+    result.usecaseGrid?.marginTop !== "40px" ||
+    result.usecaseGrid?.cardMinHeight !== "284px" ||
     !["flex", "inline-flex"].includes(result.topicKicker?.display) ||
     result.topicKicker?.fontWeight !== "700" ||
     result.topicArt?.display !== "flex" ||
@@ -587,6 +701,21 @@ try {
     result.explainer?.pillWeight !== "700" ||
     result.explainer?.titleWeight !== "800" ||
     result.explainer?.titleMarginBottom !== "40px" ||
+    result.sectionHeader?.maxWidth !== "1920px" ||
+    result.sectionHeader?.titleWeight !== "700" ||
+    result.sectionHeader?.titleMarginBottom !== "24px" ||
+    result.textPrimitive?.leadBottomMargin !== "40px" ||
+    result.textPrimitive?.prototypeLineHeight !== "27.2px" ||
+    result.textPrimitive?.subsectionWeight !== "800" ||
+    result.flowFrame?.listDisplay !== "flex" ||
+    result.flowFrame?.listGap !== "40px" ||
+    result.flowFrame?.badgeWeight !== "700" ||
+    result.flowFrame?.titleWeight !== "800" ||
+    result.prototype?.blockDisplay !== "flex" ||
+    result.prototype?.blockGap !== "28px" ||
+    result.prototype?.blockMaxWidth !== "1920px" ||
+    result.prototype?.blockMarginTop !== "40px" ||
+    result.prototype?.groupDisplay !== "contents" ||
     result.consoleErrors !== 0
   ));
 

@@ -458,10 +458,10 @@ function OverviewSection() {
   return (
     <section id="cs-sec-overview" className="cs-section laushu-overview-section">
       <LaushuHead eyebrow="專案總覽" title="將紙本勞報單流程轉譯成可測試、可上線的數位體驗。" />
-      <p className="laushu-overview-lead">
+      <p className="cs-section-lead cs-section-lead--wide cs-section-lead--bottom-gap">
         專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
       </p>
-      <CaseGrid variant="three" className="laushu-summary-grid laushu-overview-grid">
+      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--overview">
         {overviewCards.map((card) => (
           <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
         ))}
@@ -501,8 +501,8 @@ function ProblemSection() {
           />
         </CaseMedia>
       </div>
-      <h3 className="laushu-problem-cards-title">現階段勞報單的問題</h3>
-      <CaseGrid variant="three" className="laushu-problem-grid">
+      <h3 className="cs-subsection-title cs-subsection-title--wide cs-subsection-title--top-gap cs-subsection-title--accent">現階段勞報單的問題</h3>
+      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--problem">
         {problemCards.map((card, index) => (
           <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
         ))}
@@ -518,7 +518,7 @@ function UnderstandSection() {
       <ArticleBlock title="彙整使用勞報單流程" number="01">
         <p>訪談勞贖負責人並自行收集資料，了解外包與勞報單簽署流程，釐清會計師、公司、外包工作者三者關係。此平台至少包含四種核心利害關係人：</p>
       </ArticleBlock>
-      <CaseGrid variant="four" className="laushu-stakeholder-grid">
+      <CaseGrid variant="four" className="cs-topic-grid cs-topic-grid--stakeholder">
         {stakeholderCards.map((card, index) => (
           <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
         ))}
@@ -617,7 +617,7 @@ function ConvergeSection() {
       <ArticleBlock title="重要用例" number="02">
         <p>收斂訪談洞見後，使用者最在意、也覺得紙本勞報單最麻煩的三件事：如何有效管理人員、如何改善簽收確認、如何減少回簽次數。據此彙整三個重要用例，進行後續介面流程設計。</p>
       </ArticleBlock>
-      <CaseGrid variant="three" className="laushu-usecase-grid">
+      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--usecase">
         {keyFlows.map((item) => (
           <InfoCard title={item.title} image={item.image} key={item.title}>{item.body}</InfoCard>
         ))}
@@ -633,8 +633,8 @@ function TaskFlowChart({ tag, title, children }: { tag: string; title: string; c
       variant="split"
       header={
         <>
-        <span className="laushu-fc-badge">{tag}</span>
-        <span className="laushu-fc-title">{title}</span>
+        <span className="cs-flow-frame-badge">{tag}</span>
+        <span className="cs-flow-frame-title">{title}</span>
         </>
       }
     >
@@ -688,7 +688,7 @@ function IterateSection() {
         </ul>
         <p>針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表：</p>
       </ArticleBlock>
-      <div className="laushu-fc-list">
+      <div className="cs-flow-frame-list">
         {TaskFlow1()}
         {TaskFlow2()}
         {TaskFlow3()}
@@ -771,16 +771,16 @@ function PrototypeSection() {
   return (
     <section id="cs-sec-prototype" className="cs-section laushu-process-section laushu-prototype-section">
       <LaushuHead eyebrow="原型設計" title="最終 UI flow 展示" />
-      <p className="laushu-proto-intro">
+      <p className="cs-section-lead cs-section-lead--wide cs-section-lead--top-gap">
         根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。
       </p>
       <CaseMedia className="cs-showcase-media cs-showcase-media--framed" variant="full">
         <FeatureImageLightbox src={`${IMG}/figma-design.png`} alt="Laushu Hi-fi 原型設計總覽" width={1472} height={793} />
       </CaseMedia>
       <FeatureConnectors />
-      <div className="cs-sol-block laushu-proto-block">
+      <div className="cs-sol-block cs-sol-block--prototype">
         {prototypeFlows.map((flow, gi) => (
-          <div className="cs-sol-fgroup laushu-proto-group" key={flow.tag}>
+          <div className="cs-sol-fgroup cs-sol-fgroup--prototype" key={flow.tag}>
             {gi > 0 ? <div className="cs-sol-fhr" /> : null}
             <div className="cs-sol-fc">
               <div className="cs-sol-fchead">
@@ -953,5 +953,5 @@ function ArticleBlock({ title, number, kicker, children }: { title: string; numb
 
 /** Figma 風格 section 標題：小寫眉標 + 大論點句 + 分隔線（對齊 Figma node 2797:1521）。 */
 function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return <CaseSectionHeader className="laushu-head" kicker={eyebrow} title={title} />;
+  return <CaseSectionHeader className="cs-section-header--case-wide" kicker={eyebrow} title={title} />;
 }
