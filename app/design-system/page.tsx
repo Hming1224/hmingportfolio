@@ -168,21 +168,14 @@ return (
         </div>
       </section>
 
-      <div className="ds-shell ds-layout">
-        <aside className="ds-toc" aria-label={copy.toc.ariaLabel}>
-          <p>{copy.toc.title}</p>
-          <nav>
-            {copy.toc.items.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </aside>
-
-        <div className="ds-content">
-
-          <section className="ds-section" id="getting-started">
+      <DesignSystemExplorer
+        locale={locale}
+        sections={designSystemSections.slice(1)}
+        docs={designSystemDocs}
+        toc={copy.toc}
+        topContent={
+          <>
+            <section className="ds-section" id="getting-started">
             <div className="ds-section-heading">
               <span />
               <h2>{copy.introduction.heading}</h2>
@@ -259,21 +252,10 @@ return (
               ))}
             </Accordion>
           </section>
-
-          <section className="ds-section" id="components" style={{ borderTop: "1px solid var(--hm-line)", marginTop: "var(--hm-space-2xl)", paddingTop: "var(--hm-space-2xl)" }}>
-            <div className="ds-section-heading">
-              <span />
-              <h2>{locale === "en" ? "Component Explorer" : "元件庫"}</h2>
-              <span />
-            </div>
-            <DesignSystemExplorer
-              locale={locale}
-              sections={designSystemSections.slice(1)}
-              docs={designSystemDocs}
-            />
-          </section>
-
-          <section className="ds-section ds-cta" id="cta">
+        </>
+      }
+      bottomContent={
+        <section className="ds-section ds-cta" id="cta">
             <div>
               <p className="ds-eyebrow">{copy.cta.eyebrow}</p>
               <h2>{copy.cta.title}</h2>
@@ -288,8 +270,8 @@ return (
               </Link>
             </div>
           </section>
-        </div>
-      </div>
+      }
+    />
 
       <Footer />
     </main>
