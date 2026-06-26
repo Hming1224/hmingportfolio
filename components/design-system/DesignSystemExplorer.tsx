@@ -25,10 +25,10 @@ export default function DesignSystemExplorer({
   const activeDoc = docs.find((d) => d.slug === activeSlug);
 
   return (
-    <div className="ds-shell ds-docs-layout" style={{ marginTop: "var(--hm-space-2xl)", alignItems: "flex-start" }}>
-      <aside className="ds-docs-sidebar" style={{ position: "sticky", top: "80px", maxHeight: "calc(100vh - 100px)", overflowY: "auto" }}>
+    <div style={{ width: "min(var(--hm-container), calc(100% - 96px))", margin: "0 auto", display: "grid", gridTemplateColumns: "260px minmax(0, 1fr)", gap: "var(--hm-space-xl)", marginTop: "var(--hm-space-2xl)", alignItems: "flex-start" }}>
+      <aside style={{ position: "sticky", top: "80px", maxHeight: "calc(100vh - 100px)", overflowY: "auto" }}>
         
-        <nav className="ds-docs-sidebar-nav" style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+        <nav style={{ display: "flex", flexDirection: "column", gap: "0" }}>
           
           {/* Top-level page links acting as nav roots */}
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -55,7 +55,7 @@ export default function DesignSystemExplorer({
                 {locale === "zh-TW" && section.labelZh ? section.labelZh : section.label}
               </AccordionHeader>
               <AccordionPanel>
-                <nav className="ds-docs-nav-group" style={{ display: "flex", flexDirection: "column", gap: "4px", padding: "8px 0" }}>
+                <nav style={{ display: "flex", flexDirection: "column", gap: "4px", padding: "8px 0" }}>
                   {section.items.map((item) => {
                     const doc = docs.find((d) => d.slug === item.slug && d.kind === item.kind);
                     if (!doc) return null;
@@ -99,7 +99,7 @@ export default function DesignSystemExplorer({
         </nav>
       </aside>
 
-      <div className="ds-content ds-docs-article" style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ flex: 1, minWidth: 0, display: "grid", gap: "var(--hm-space-xl)" }}>
         {topContent}
         <div id="components" style={{ scrollMarginTop: "100px", marginTop: "var(--hm-space-2xl)", paddingTop: "var(--hm-space-2xl)", borderTop: "1px solid var(--hm-line)" }}>
           {activeDoc ? <DesignSystemDocsPage doc={activeDoc} locale={locale} /> : null}

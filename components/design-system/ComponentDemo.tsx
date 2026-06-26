@@ -42,12 +42,12 @@ export default function ComponentDemo({
   const [activeProposal, setActiveProposal] = useState(1);
 
   if (!type) {
-    return <p className="ds-doc-demo-note">This pattern is documented from its live portfolio usage.</p>;
+    return <p style={{ color: "var(--text-secondary)", fontStyle: "italic", textAlign: "center" }}>This pattern is documented from its live portfolio usage.</p>;
   }
 
   if (type === "button") {
     return (
-      <div className="ds-button-row">
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-sm)", justifyContent: "center" }}>
         <Button>Primary</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="danger">Danger</Button>
@@ -74,7 +74,7 @@ export default function ComponentDemo({
 
   if (type === "language-switcher") {
     return (
-      <div className="ds-doc-language" aria-label={zh ? "語言選單範例" : "Language menu example"}>
+      <div style={{ position: "relative", display: "inline-block", fontFamily: "var(--font-space-grotesk), sans-serif", fontSize: "14px" }} aria-label={zh ? "語言選單範例" : "Language menu example"}>
         <button type="button" aria-expanded="true">
           {zh ? "繁體中文" : "English"} <span aria-hidden="true">⌄</span>
         </button>
@@ -92,7 +92,7 @@ export default function ComponentDemo({
 
   if (type === "navbar") {
     return (
-      <div className="ds-doc-navbar">
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", padding: "16px 24px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-pill)", background: "var(--hm-surface)" }}>
         <strong aria-label="Hming Design">H</strong>
         <nav aria-label={zh ? "主要導覽範例" : "Primary navigation example"}>
           <a href="#preview">{zh ? "作品" : "Projects"}</a>
@@ -106,7 +106,7 @@ export default function ComponentDemo({
 
   if (type === "footer") {
     return (
-      <footer className="ds-doc-footer">
+      <footer style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", padding: "24px", borderTop: "1px solid var(--hm-line)", color: "var(--text-secondary)", fontSize: "14px" }}>
         <p>© Brian Huang 2026</p>
         <div>
           <a href="https://www.linkedin.com" aria-label="LinkedIn">in</a>
@@ -118,7 +118,7 @@ export default function ComponentDemo({
 
   if (type === "scroll-progress") {
     return (
-      <div className="ds-doc-progress-preview">
+      <div style={{ width: "100%", maxWidth: "300px" }}>
         <div><span /></div>
         <p>{zh ? "目前閱讀進度 64%" : "Current reading progress: 64%"}</p>
       </div>
@@ -127,7 +127,7 @@ export default function ComponentDemo({
 
   if (type === "input" || type === "textarea") {
     return (
-      <label className="ds-floating-field ds-doc-field">
+      <label style={{ position: "relative", display: "block", width: "100%", maxWidth: "320px" }}>
         {type === "textarea" ? <textarea placeholder=" " rows={4} /> : <input type="text" placeholder=" " />}
         <span>{type === "textarea" ? "Project context" : "Email address"}</span>
       </label>
@@ -136,7 +136,7 @@ export default function ComponentDemo({
 
   if (type === "select") {
     return (
-      <div className="ds-doc-control-width">
+      <div style={{ width: "100%", maxWidth: "320px" }}>
         <Select
           name="design-discipline"
           options={options}
@@ -150,7 +150,7 @@ export default function ComponentDemo({
 
   if (type === "checkbox") {
     return (
-      <div className="ds-doc-choice-stack">
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         <Checkbox defaultChecked>Selected option</Checkbox>
         <Checkbox>Available option</Checkbox>
         <Checkbox disabled>Disabled option</Checkbox>
@@ -160,7 +160,7 @@ export default function ComponentDemo({
 
   if (type === "radio") {
     return (
-      <div className="ds-doc-choice-stack">
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         <Radio name="demo-radio" defaultChecked>Product designer</Radio>
         <Radio name="demo-radio">Product manager</Radio>
         <Radio name="demo-radio" disabled>Unavailable</Radio>
@@ -170,7 +170,7 @@ export default function ComponentDemo({
 
   if (type === "tabs") {
     return (
-      <div className="ds-doc-tabs" role="tablist" aria-label="Case study views">
+      <div style={{ display: "flex", gap: "8px", borderBottom: "1px solid var(--hm-line)" }} role="tablist" aria-label="Case study views">
         {["Overview", "Research", "Solution"].map((tab) => (
           <button
             type="button"
@@ -189,7 +189,7 @@ export default function ComponentDemo({
 
   if (type === "case-toc") {
     return (
-      <nav className="ds-doc-toc-preview" aria-label={zh ? "案例目錄範例" : "Case table of contents example"}>
+      <nav style={{ display: "flex", flexDirection: "column", gap: "16px", borderLeft: "2px solid var(--hm-line-strong)", paddingLeft: "16px" }} aria-label={zh ? "案例目錄範例" : "Case table of contents example"}>
         {(zh ? ["專案背景", "研究洞察", "設計方案", "成果反思"] : ["Context", "Insights", "Solution", "Outcome"]).map((item, index) => (
           <a className={index === 1 ? "is-active" : undefined} href="#preview" key={item}>
             <span>{String(index + 1).padStart(2, "0")}</span>{item}
@@ -201,7 +201,7 @@ export default function ComponentDemo({
 
   if (type === "year-rail") {
     return (
-      <nav className="ds-doc-year-rail" aria-label={zh ? "年份範例" : "Year navigation example"}>
+      <nav style={{ display: "flex", flexDirection: "column", gap: "12px", alignItems: "center" }} aria-label={zh ? "年份範例" : "Year navigation example"}>
         {["2026", "2025", "2024", "2023"].map((year) => (
           <a className={year === "2025" ? "is-active" : undefined} href="#preview" key={year}>{year}</a>
         ))}
@@ -211,7 +211,7 @@ export default function ComponentDemo({
 
   if (type === "case-next-nav") {
     return (
-      <div className="ds-inline-actions ds-doc-next-nav">
+      <div style={{ display: "flex", gap: "16px", justifyContent: "space-between", width: "100%" }}>
         <Button variant="secondary">← {zh ? "返回首頁" : "Back home"}</Button>
         <Button>{zh ? "下一個專案" : "Next project"} →</Button>
       </div>
@@ -224,7 +224,7 @@ export default function ComponentDemo({
       : [["foundations", "Foundations", "Color, type, spacing, and motion tokens."], ["components", "Components", "States and usage documented from production code."]];
 
     return (
-      <Accordion className="ds-doc-accordion-preview" defaultValue="foundations" type="single">
+      <Accordion style={{ width: "100%", maxWidth: "480px" }} defaultValue="foundations" type="single">
         {items.map(([value, title, body]) => (
           <AccordionItem key={value} value={value}>
             <AccordionHeader>{title}</AccordionHeader>
@@ -239,7 +239,7 @@ export default function ComponentDemo({
 
   if (type === "contact-method") {
     return (
-      <div className="ds-doc-contact-method">
+      <div style={{ display: "flex", alignItems: "center", gap: "16px", padding: "16px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "var(--hm-surface)" }}>
         <span aria-hidden="true">@</span>
         <div><small>Email</small><strong>hmingdesigner@gmail.com</strong></div>
         <Button size="sm" variant="secondary">{zh ? "複製" : "Copy"}</Button>
@@ -249,14 +249,14 @@ export default function ComponentDemo({
 
   if (type === "project-card") {
     return (
-      <article className="ds-doc-project-card">
-        <div className="ds-doc-project-cover">
+      <article style={{ width: "100%", maxWidth: "360px", display: "grid", gap: "16px", padding: "16px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "var(--hm-paper)", boxShadow: "var(--shadow-sm)" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: "var(--hm-radius-md)", overflow: "hidden", background: "var(--hm-surface)" }}>
           <Image src="/projects/advantech/cover/cover.webp" alt="" fill sizes="560px" loading="eager" />
         </div>
         <div>
           <p>Product Design · 2024</p>
           <h3>{zh ? "智慧能源維運系統" : "Smart energy operations system"}</h3>
-          <div className="ds-project-tag-row"><span>UX Research</span><span>UI Design</span></div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "12px" }}><span>UX Research</span><span>UI Design</span></div>
         </div>
       </article>
     );
@@ -264,7 +264,7 @@ export default function ComponentDemo({
 
   if (type === "section-heading") {
     return (
-      <div className="ds-doc-section-heading-preview">
+      <div style={{ display: "flex", alignItems: "center", gap: "16px", width: "100%" }}>
         <span /><h3>{zh ? "精選作品" : "Selected Projects"}</h3><span />
       </div>
     );
@@ -272,7 +272,7 @@ export default function ComponentDemo({
 
   if (type === "tags") {
     return (
-      <div className="ds-project-tag-row">
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "12px" }}>
         <span>Product design</span>
         <span>UX research</span>
         <span>AI collaboration</span>
@@ -282,7 +282,7 @@ export default function ComponentDemo({
 
   if (type === "social-link") {
     return (
-      <div className="ds-doc-social-row">
+      <div style={{ display: "flex", gap: "16px" }}>
         <a href="https://www.linkedin.com" aria-label="LinkedIn">in</a>
         <a href="https://github.com" aria-label="GitHub">GH</a>
       </div>
@@ -291,7 +291,7 @@ export default function ComponentDemo({
 
   if (type === "skill-card") {
     return (
-      <article className="ds-doc-skill-card">
+      <article style={{ padding: "24px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "var(--hm-surface)" }}>
         <p>01 / Product</p>
         <h3>{zh ? "產品設計" : "Product Design"}</h3>
         <ul><li>UX Research</li><li>Interaction Design</li><li>Prototyping</li></ul>
@@ -301,7 +301,7 @@ export default function ComponentDemo({
 
   if (type === "experience-card") {
     return (
-      <article className="ds-doc-experience-card">
+      <article style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "24px", padding: "24px", borderTop: "1px solid var(--hm-line)" }}>
         <time>2024 — 2025</time>
         <div>
           <h3>{zh ? "產品設計師" : "Product Designer"}</h3>
@@ -312,13 +312,13 @@ export default function ComponentDemo({
   }
 
   if (type === "hero-badge") {
-    return <div className="ds-doc-hero-badge"><span aria-hidden="true">✦</span>{zh ? "產品設計師・與 AI 協作" : "Product Designer · Building with AI"}</div>;
+    return <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "8px 16px", borderRadius: "var(--hm-radius-pill)", background: "var(--hm-purple-soft)", color: "var(--hm-purple)", fontSize: "14px", fontWeight: 500 }}><span aria-hidden="true">✦</span>{zh ? "產品設計師・與 AI 協作" : "Product Designer · Building with AI"}</div>;
   }
 
   if (type === "case-hero") {
     return (
-      <article className="ds-doc-case-hero">
-        <div className="ds-doc-case-cover">
+      <article style={{ width: "100%", maxWidth: "640px", display: "grid", gap: "24px", textAlign: "center" }}>
+        <div style={{ position: "relative", width: "100%", aspectRatio: "21/9", borderRadius: "var(--hm-radius-lg)", overflow: "hidden", background: "var(--hm-surface)" }}>
           <Image src="/projects/crypto-arsenal/cover/hero-cover.webp" alt="" fill sizes="720px" loading="eager" />
         </div>
         <div>
@@ -331,7 +331,7 @@ export default function ComponentDemo({
 
   if (type === "case-section") {
     return (
-      <section className="ds-doc-case-section">
+      <section style={{ width: "100%", maxWidth: "560px", display: "grid", gap: "24px" }}>
         <div><span /><h3>{zh ? "研究洞察" : "Research Insights"}/</h3><span /></div>
         <p>{zh ? "用一致的標題、內容寬度與留白建立案例頁閱讀節奏。" : "Consistent headings, content width, and spacing create a stable case-study rhythm."}</p>
       </section>
@@ -341,8 +341,8 @@ export default function ComponentDemo({
   if (type === "proposal-tabs") {
     const proposals = zh ? ["方案 A", "方案 B・採用", "方案 C"] : ["Option A", "Option B · Adopted", "Option C"];
     return (
-      <div className="ds-doc-proposal">
-        <div className="ds-doc-tabs" role="tablist">
+      <div style={{ width: "100%", maxWidth: "560px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", overflow: "hidden" }}>
+        <div style={{ display: "flex", gap: "8px", borderBottom: "1px solid var(--hm-line)" }} role="tablist">
           {proposals.map((tab, index) => (
             <button
               aria-selected={activeProposal === index}
@@ -354,7 +354,7 @@ export default function ComponentDemo({
             >{tab}</button>
           ))}
         </div>
-        <div className="ds-doc-proposal-panel">
+        <div style={{ padding: "24px", background: "var(--hm-surface)" }}>
           <strong>{proposals[activeProposal]}</strong>
           <p>{zh ? "清楚說明提案差異、驗證結果與最終採用理由。" : "Explain the proposal difference, validation result, and adoption rationale."}</p>
         </div>
@@ -366,12 +366,12 @@ export default function ComponentDemo({
     const items = zh
       ? [["時間", "2024.06 — 2024.08"], ["角色", "UI/UX 設計師"], ["團隊", "5 人跨職能團隊"]]
       : [["Timeline", "Jun — Aug 2024"], ["Role", "UI/UX Designer"], ["Team", "5-person cross-functional team"]];
-    return <div className="ds-doc-info-grid">{items.map(([label, value]) => <article key={label}><small>{label}</small><strong>{value}</strong></article>)}</div>;
+    return <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", padding: "24px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)" }}>{items.map(([label, value]) => <article key={label}><small>{label}</small><strong>{value}</strong></article>)}</div>;
   }
 
   if (type === "alert") {
     return (
-      <div className="ds-doc-feedback-stack">
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "480px" }}>
         <Alert tone="success">Design tokens are synchronized.</Alert>
         <Alert tone="warning">Review responsive behavior before release.</Alert>
         <Alert tone="error">Required field is missing.</Alert>
@@ -396,8 +396,8 @@ export default function ComponentDemo({
       <>
         <Button onClick={() => setModalOpen(true)}>Open modal</Button>
         <Modal open={modalOpen} title="Review design-system change" onClose={() => setModalOpen(false)}>
-          <p className="ds-doc-modal-copy">Focus stays inside this dialog. Press Escape or use Close.</p>
-          <div className="ds-inline-actions">
+          <p style={{ color: "var(--text-secondary)", marginBottom: "24px" }}>Focus stays inside this dialog. Press Escape or use Close.</p>
+          <div style={{ display: "flex", gap: "12px" }}>
             <Button onClick={() => setModalOpen(false)}>Confirm</Button>
             <Button variant="secondary" onClick={() => setModalOpen(false)}>Close</Button>
           </div>
@@ -408,7 +408,7 @@ export default function ComponentDemo({
 
   if (type === "skeleton") {
     return (
-      <div className="ds-doc-skeleton-stack" aria-label="Loading preview">
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%", maxWidth: "480px" }} aria-label="Loading preview">
         <Skeleton style={{ width: "42%", height: 18 }} />
         <Skeleton style={{ width: "100%", height: 72 }} />
         <Skeleton style={{ width: "76%", height: 18 }} />
@@ -428,7 +428,7 @@ export default function ComponentDemo({
 
   if (type === "zoom") {
     return (
-      <div className="ds-doc-zoom-wrap">
+      <div style={{ width: "100%", maxWidth: "480px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", overflow: "hidden" }}>
         <ZoomableImage
           alt="Design system project cover"
           src="/projects/advantech/cover/cover.webp"
@@ -440,5 +440,5 @@ export default function ComponentDemo({
     );
   }
 
-  return <p className="ds-doc-demo-note">Live behavior is visible in the linked production source.</p>;
+  return <p style={{ color: "var(--text-secondary)", fontStyle: "italic", textAlign: "center" }}>Live behavior is visible in the linked production source.</p>;
 }

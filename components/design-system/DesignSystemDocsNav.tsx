@@ -40,12 +40,12 @@ function DocsAccordionNav({
   }, [currentKind, currentSlug]);
 
   return (
-    <Accordion className="ds-docs-nav-accordion" defaultValue={currentSection} type="multiple">
+    <Accordion style={{ width: "100%" }} defaultValue={currentSection} type="multiple">
       {designSystemSections.map((section) => (
         <AccordionItem key={section.label} value={sectionValue(section)}>
           <AccordionHeader>{localized(locale, section.label, section.labelZh)}</AccordionHeader>
           <AccordionPanel>
-            <div className="ds-docs-nav-links">
+            <div style={{ display: "flex", flexDirection: "column", gap: "2px", margin: "4px 0", borderLeft: "1px solid var(--hm-line-strong)", marginLeft: "12px", paddingLeft: "12px" }}>
               {section.items.map((item) => {
                 const target = designSystemDocs.find(
                   (candidate) => candidate.kind === item.kind && candidate.slug === item.slug,
@@ -83,7 +83,7 @@ export function DesignSystemDocsMobileNav({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="ds-docs-mobile-menu">
+    <div style={{ marginBottom: "var(--hm-space-md)" }}>
       <button aria-expanded={open} onClick={() => setOpen((current) => !current)} type="button">
         {localized(locale, "Browse docs", "瀏覽文件")}
       </button>

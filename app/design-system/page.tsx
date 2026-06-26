@@ -6,7 +6,7 @@ import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "../..
 import { designSystemDocs } from "../../lib/design-system-docs";
 import { designSystemSections } from "../../lib/design-system-data";
 import DesignSystemExplorer from "../../components/design-system/DesignSystemExplorer";
-import { Link } from "../../i18n/navigation";
+import Button from "../../components/ui/Button";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
 import { designPrinciples } from "../../lib/design-system-data";
@@ -139,29 +139,29 @@ export default async function DesignSystemPage() {
   const copy = getMessages(locale);
 const tokenGroupRows = foundationGroups[locale];
 return (
-    <main className="ds-page">
+    <main style={{ background: "var(--hm-paper)", color: "var(--text-body)", overflowX: "clip" }}>
       <Navbar />
 
-      <section className="ds-hero" aria-labelledby="ds-title">
-        <div className="ds-shell ds-hero-inner">
-          <div className="ds-hero-copy">
-            <p className="ds-eyebrow">{copy.hero.eyebrow}</p>
-            <h1 id="ds-title">{copy.hero.title}</h1>
-            <p className="ds-hero-description">{copy.hero.description}</p>
-            <div className="ds-hero-actions">
-              <a className="ds-anchor-link" href="#getting-started">
+      <section style={{ padding: "148px 0 56px", background: "radial-gradient(circle at top right, color-mix(in srgb, var(--hm-purple-soft) 80%, white) 0%, transparent 34%), linear-gradient(180deg, color-mix(in srgb, var(--hm-surface) 65%, white) 0%, transparent 100%)" }} aria-labelledby="ds-title">
+        <div style={{ width: "min(var(--hm-container), calc(100% - 96px))", margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(0, 1.35fr) minmax(320px, 0.95fr)", gap: "var(--hm-space-lg)", alignItems: "end" }}>
+          <div >
+            <p style={{ margin: "0 0 var(--hm-space-xs)", fontSize: "var(--hm-fs-sm)", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--hm-purple)" }}>{copy.hero.eyebrow}</p>
+            <h1 id="ds-title" style={{ margin: 0, fontSize: "clamp(36px, 5vw, 52px)", lineHeight: 1.18, letterSpacing: "-0.01em", color: "var(--text-heading)" }}>{copy.hero.title}</h1>
+            <p style={{ margin: "var(--hm-space-sm) 0 0", maxWidth: 760, fontSize: 18, lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.hero.description}</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-xs)", marginTop: 28 }}>
+              <Button href="#getting-started">
                 {copy.hero.primaryAction}
-              </a>
-              <a className="ds-anchor-link is-secondary" href="#tokens">
+              </Button>
+              <Button variant="secondary" href="#tokens">
                 {copy.hero.secondaryAction}
-              </a>
+              </Button>
             </div>
           </div>
-          <div className="ds-stats-grid" aria-label={copy.hero.statsAriaLabel}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "var(--hm-space-sm)" }} aria-label={copy.hero.statsAriaLabel}>
             {copy.hero.stats.map((stat) => (
-              <article key={stat.label} className="ds-stat-card">
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
+              <article key={stat.label} style={{ border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)", padding: "var(--hm-space-md)" }}>
+                <strong style={{ display: "block", fontSize: "clamp(28px, 4vw, 40px)", lineHeight: 1, color: "var(--text-heading)" }}>{stat.value}</strong>
+                <span style={{ display: "block", marginTop: "var(--hm-space-2xs)", color: "var(--text-secondary)", lineHeight: 1.5 }}>{stat.label}</span>
               </article>
             ))}
           </div>
@@ -175,55 +175,55 @@ return (
         toc={copy.toc}
         topContent={
           <>
-            <section className="ds-section" id="getting-started">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{copy.introduction.heading}</h2>
-              <span />
+            <section style={{ scrollMarginTop: 112 }} id="getting-started">
+            <div style={{ display: "grid", gridTemplateColumns: "40px auto 1fr", gap: 14, alignItems: "center", marginBottom: "var(--hm-space-md)" }}>
+              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
+              <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 32px)", lineHeight: 1.3, color: "var(--text-heading)" }}>{copy.introduction.heading}</h2>
+              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
             </div>
-            <div className="ds-intro-grid">
-              <article className="ds-soul-card">
-                <h3>{copy.introduction.soulTitle}</h3>
-                <p>{copy.introduction.soulBody}</p>
-                <div className="ds-keyword-row" aria-label={copy.introduction.keywordsAriaLabel}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 18 }}>
+              <article style={{ padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }}>
+                <h3 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{copy.introduction.soulTitle}</h3>
+                <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.introduction.soulBody}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-xs)" }} aria-label={copy.introduction.keywordsAriaLabel}>
                   {copy.introduction.keywords.map((keyword) => (
-                    <span key={keyword}>{keyword}</span>
+                    <span key={keyword} style={{ display: "inline-flex", alignItems: "center", minHeight: 34, padding: "0 14px", borderRadius: "var(--hm-radius-pill)", background: "var(--hm-purple-light)", color: "var(--hm-purple)", fontSize: "var(--hm-fs-sm)", fontWeight: 500 }}>{keyword}</span>
                   ))}
                 </div>
               </article>
-              <article className="ds-architecture-card">
-                <h3>{copy.introduction.architectureTitle}</h3>
-                <p>{copy.introduction.architectureBody}</p>
-                <div className="ds-architecture-split">
+              <article style={{ padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }}>
+                <h3 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{copy.introduction.architectureTitle}</h3>
+                <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.introduction.architectureBody}</p>
+                <div style={{ display: "grid", gap: 14, marginTop: 18 }}>
                   {copy.introduction.architectureCards.map((card) => (
-                    <section key={card.title} className="ds-architecture-pane">
-                      <p className="ds-pane-kicker">{card.kicker}</p>
-                      <h4>{card.title}</h4>
-                      <p>{card.body}</p>
+                    <section key={card.title} style={{ padding: 20, borderRadius: "var(--hm-radius-md)", border: "1px solid var(--hm-line)", background: "var(--hm-surface)" }}>
+                      <p style={{ margin: "0 0 16px", color: "var(--hm-purple)", fontSize: "var(--hm-fs-sm)", fontWeight: 600 }}>{card.kicker}</p>
+                      <h4 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{card.title}</h4>
+                      <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{card.body}</p>
                     </section>
                   ))}
                 </div>
               </article>
             </div>
-            <div className="ds-principles-grid">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 18, marginTop: 18 }}>
               {designPrinciples.map((principle, index) => {
                 const [english, chinese] = principle.split(" / ");
                 return (
-                  <article key={principle} className="ds-principle-card">
-                    <p className="ds-principle-index">0{index + 1}</p>
-                    <h3>{english}</h3>
-                    <p>{chinese}</p>
+                  <article key={principle} style={{ padding: 24, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }}>
+                    <p style={{ margin: "0 0 16px", color: "var(--hm-purple)", fontSize: "var(--hm-fs-sm)", fontWeight: 600 }}>0{index + 1}</p>
+                    <h3 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{english}</h3>
+                    <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{chinese}</p>
                   </article>
                 );
               })}
             </div>
           </section>
 
-          <section className="ds-section" id="foundations">
-            <div className="ds-section-heading">
-              <span />
-              <h2>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
-              <span />
+          <section style={{ scrollMarginTop: 112 }} id="foundations">
+            <div style={{ display: "grid", gridTemplateColumns: "40px auto 1fr", gap: 14, alignItems: "center", marginBottom: "var(--hm-space-md)" }}>
+              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
+              <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 32px)", lineHeight: 1.3, color: "var(--text-heading)" }}>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
+              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
             </div>
             <Accordion type="multiple" defaultValue={["color", "spacing", "motion"]}>
               {tokenGroupRows.map(group => (
@@ -231,8 +231,8 @@ return (
                   <AccordionHeader>{group.title}</AccordionHeader>
                   <AccordionPanel>
                     <p style={{ color: "var(--hm-muted)", marginBottom: "var(--hm-space-md)" }}>{group.description}</p>
-                    <div className="ds-context-table-wrap">
-                      <table className="ds-context-table">
+                    <div style={{ maxWidth: "100%", overflowX: "auto", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 96%, white)" }}>
+                      <table style={{ width: "100%", minWidth: 720, borderCollapse: "collapse" }}>
                         <thead>
                           <tr>
                             {group.columns.map(col => <th key={col}>{col}</th>)}
@@ -255,19 +255,19 @@ return (
         </>
       }
       bottomContent={
-        <section className="ds-section ds-cta" id="cta">
+        <section style={{ scrollMarginTop: 112, padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }} id="cta">
             <div>
-              <p className="ds-eyebrow">{copy.cta.eyebrow}</p>
-              <h2>{copy.cta.title}</h2>
-              <p>{copy.cta.body}</p>
+              <p style={{ margin: "0 0 var(--hm-space-xs)", fontSize: "var(--hm-fs-sm)", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--hm-purple)" }}>{copy.cta.eyebrow}</p>
+              <h2 style={{ margin: 0, fontSize: "clamp(36px, 5vw, 52px)", lineHeight: 1.18, letterSpacing: "-0.01em", color: "var(--text-heading)" }}>{copy.cta.title}</h2>
+              <p style={{ margin: "var(--hm-space-sm) 0 0", maxWidth: 760, fontSize: 18, lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.cta.body}</p>
             </div>
-            <div className="ds-cta-actions">
-              <Link className="ds-anchor-link" href="/#projects">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-xs)", marginTop: "var(--hm-space-md)" }}>
+              <Button href="/#projects">
                 {copy.cta.primaryAction}
-              </Link>
-              <Link className="ds-anchor-link is-secondary" href="/contact">
+              </Button>
+              <Button variant="secondary" href="/contact">
                 {copy.cta.secondaryAction}
-              </Link>
+              </Button>
             </div>
           </section>
       }
