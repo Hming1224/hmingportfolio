@@ -446,7 +446,7 @@ function HeroSection() {
       }}
       coverClassName="laushu-hero-cover"
       infoClassName="laushu-hero-info"
-      infoGridClassName="laushu-info-row"
+      infoGridClassName="cs-info-row--divided"
       meta={<span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>}
       title="Laushu 勞贖｜勞務報酬系統設計優化"
       infoItems={infoItems}
@@ -879,7 +879,7 @@ function ReflectionSection() {
   return (
     <section id="cs-sec-reflection" className="cs-section laushu-learning-section">
       <LaushuHead eyebrow="學習反思" title="線下與線上整合的數位流程考驗" />
-      <CaseGrid variant="three" className="laushu-learning-grid">
+      <CaseGrid variant="three" className="cs-reflection-grid">
         {reflections.map((r, index) => (
           <CaseCard variant="accent" className="cs-reflection-card" key={r.title}>
             <span className="cs-reflection-card-num">{String(index + 1).padStart(2, "0")}</span>
@@ -894,12 +894,12 @@ function ReflectionSection() {
 
 function ResearchTable() {
   return (
-    <CaseMedia className="laushu-table-wrap" variant="scroll">
-      <table className="laushu-research-table">
+    <CaseMedia className="cs-data-table-frame cs-data-table-frame--wide" variant="scroll">
+      <table className="cs-data-table cs-data-table--matrix">
         <thead>
           <tr>
             {researchTable.head.map((h, i) => (
-              <th key={h} className={i === 0 ? "laushu-th-corner" : undefined}>{h}</th>
+              <th key={h} className={i === 0 ? "cs-data-table-corner" : undefined}>{h}</th>
             ))}
           </tr>
         </thead>
