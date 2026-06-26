@@ -89,6 +89,29 @@
   --cs-data-table-muted-color: var(--ca-muted);
   --cs-data-table-strong-color: var(--ca-navy);
   --cs-data-table-positive-color: var(--ca-green);
+  --cs-diagram-currency-color: #334dab;
+  --cs-diagram-graphic-min-width-mobile: 519px;
+  --cs-video-thumb-aspect-ratio: 2184 / 1346;
+  --cs-video-frame-width: min(96vw, calc(96vh * 2336 / 1440));
+  --cs-video-frame-aspect-ratio: 2336 / 1440;
+  --cs-video-focus-outline: rgba(82, 127, 255, 0.72);
+  --cs-comparison-matrix-border-color: var(--ca-line-soft);
+  --cs-comparison-matrix-radius: 20px;
+  --cs-comparison-matrix-shadow: var(--ca-card-shadow);
+  --cs-comparison-matrix-head-bg: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 189px);
+  --cs-comparison-matrix-corner-bg: #dde2fb;
+  --cs-comparison-matrix-step-bg: var(--ca-tint-2);
+  --cs-comparison-matrix-step-color: var(--ca-blue);
+  --cs-comparison-matrix-step-num-bg: var(--ca-blue);
+  --cs-comparison-matrix-label-color: var(--ca-navy);
+  --cs-comparison-matrix-label-shadow: 7px 0 10px -8px rgba(37, 42, 71, 0.12);
+  --cs-comparison-matrix-note-color: var(--ca-blue);
+  --cs-step-zoom-border-color: var(--ca-line-soft);
+  --cs-step-zoom-hover-border-color: var(--ca-blue);
+  --cs-step-zoom-hover-shadow: 0 0 0 3px rgba(55, 106, 220, 0.18);
+  --cs-insight-callout-bg: #e3f5ee;
+  --cs-insight-callout-icon-bg: #11a36e;
+  --cs-insight-callout-color: #0c5a44;
 }
 
 .theme-crypto-arsenal .cs-divider {
@@ -110,47 +133,9 @@
   --cs-flow-caption-color: #000000;
 }
 
-.theme-crypto-arsenal .ca-diagram-graphic {
-  display: block;
-  width: 100%;
-  overflow: visible;
-}
-
-.theme-crypto-arsenal .ca-flow-label {
-  font-family: Inter, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.theme-crypto-arsenal .ca-flow-label-strong {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-
-.theme-crypto-arsenal .ca-flow-currency {
-  fill: #334dab;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-}
-
 @media (max-width: 768px) {
   .theme-crypto-arsenal #cs-sec-background {
     padding-block: 48px;
-  }
-
-  .theme-crypto-arsenal .ca-diagram-graphic {
-    width: 100%;
-    min-width: 519px;
-    max-width: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .theme-crypto-arsenal .ca-diagram-graphic {
-    width: 100%;
-    max-width: 100%;
   }
 }
 
@@ -300,241 +285,6 @@
   margin-top: 64px;
 }
 
-/* ── 交易所操作流程「對比矩陣」（列＝交易所、欄＝步驟）── */
-.theme-crypto-arsenal .ca-matrix {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 24px 26px 26px;
-  background: #ffffff;
-  border: 1px solid var(--ca-line-soft);
-  border-radius: 20px;
-  box-shadow: var(--ca-card-shadow);
-}
-
-.theme-crypto-arsenal .ca-matrix-head {
-  display: grid;
-  column-gap: 16px;
-  align-items: center;
-  margin: -24px -26px 0 -26px;
-  padding: 18px 26px;
-  background: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 189px);
-  border-top-left-radius: 19px;
-  border-top-right-radius: 19px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom: 1px solid var(--ca-line-soft);
-}
-
-.theme-crypto-arsenal .ca-matrix-head .ca-matrix-step {
-  background: transparent;
-}
-
-.theme-crypto-arsenal .ca-matrix-head+.ca-matrix-row {
-  border-top: none;
-}
-
-/* 交易所 logo 左欄在水平捲動時固定（手機橫向比較不會丟失對照） */
-.theme-crypto-arsenal .ca-matrix-corner {
-  position: sticky;
-  left: 0;
-  z-index: 2;
-  align-self: stretch;
-  background: #dde2fb;
-  border-top-left-radius: 19px;
-}
-
-.theme-crypto-arsenal .ca-matrix-step {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 9px 12px;
-  border-radius: 10px;
-  background: var(--ca-tint-2);
-  color: var(--ca-blue);
-  font-size: var(--fs-sm);
-  font-weight: 700;
-  line-height: 1.4;
-  text-wrap: balance;
-}
-
-.theme-crypto-arsenal .ca-matrix-step-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 9px;
-  background-color: var(--ca-blue);
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.theme-crypto-arsenal .ca-matrix-step-text {
-  text-align: left;
-  white-space: pre-line;
-}
-
-.theme-crypto-arsenal .ca-matrix-row {
-  display: grid;
-  column-gap: 16px;
-  align-items: stretch;
-  border-top: 1px solid var(--ca-line-soft);
-}
-
-.theme-crypto-arsenal .ca-matrix-row:last-child .ca-matrix-ex,
-.theme-crypto-arsenal .ca-matrix-row:last-child .ca-matrix-cell {
-  padding-bottom: 0;
-}
-
-.theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) .ca-matrix-ex {
-  padding-bottom: 18px !important;
-}
-
-.theme-crypto-arsenal .ca-matrix-row:has(.ca-matrix-cell-note) .ca-matrix-cell-stack {
-  padding-bottom: 18px !important;
-}
-
-.theme-crypto-arsenal .ca-matrix-ex {
-  position: sticky;
-  left: 0;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-align: center;
-  background: #ffffff;
-  box-shadow: 7px 0 10px -8px rgba(37, 42, 71, 0.12);
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
-
-.theme-crypto-arsenal .ca-matrix-ex::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #ffffff;
-}
-
-.theme-crypto-arsenal .ca-matrix-head+.ca-matrix-row .ca-matrix-ex::before {
-  display: none;
-}
-
-.theme-crypto-arsenal .ca-matrix-ex-logo {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.theme-crypto-arsenal .ca-matrix-ex-name {
-  font-size: var(--fs-sm);
-  font-weight: 700;
-  color: var(--ca-navy);
-  line-height: 1.3;
-}
-
-.theme-crypto-arsenal .ca-matrix-cell-note {
-  position: static !important;
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  transform: none !important;
-  white-space: pre-line !important;
-  margin: 0 !important;
-  font-size: var(--fs-xs, 12px);
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--ca-blue);
-  text-align: center;
-  z-index: 1 !important;
-}
-
-.theme-crypto-arsenal .ca-matrix-cell {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
-
-/* Binance 平倉多一步：同一格內上下堆疊張畫面 + 一句說明 */
-.theme-crypto-arsenal .ca-matrix-cell-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  position: relative !important;
-  z-index: 1;
-}
-
-
-/* 可點放大的步驟縮圖（深框） */
-.theme-crypto-arsenal .ca-step-zoom {
-  border: 1px solid var(--ca-line-soft);
-  border-radius: 10px;
-  background: #0a1330;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
-}
-
-.theme-crypto-arsenal .ca-step-zoom:hover,
-.theme-crypto-arsenal .ca-step-zoom:focus-visible {
-  border-color: var(--ca-blue);
-  box-shadow: 0 0 0 3px rgba(55, 106, 220, 0.18);
-  outline: none;
-}
-
-/* 結論 callout */
-.theme-crypto-arsenal .ca-matrix-synth {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 18px;
-  padding: 14px 18px;
-  border-radius: 12px;
-  background: #e3f5ee;
-}
-
-.theme-crypto-arsenal .ca-matrix-synth-icon {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: #11a36e;
-  color: #ffffff;
-}
-
-.theme-crypto-arsenal .ca-matrix-synth-icon svg {
-  width: 18px;
-  height: 18px;
-}
-
-.theme-crypto-arsenal .ca-matrix-synth p {
-  margin: 0;
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  line-height: 1.6;
-  color: #0c5a44;
-}
-
 /* ── 08 設計元件迭代 ── */
 .theme-crypto-arsenal #cs-sec-iteration > .cs-card {
   --cs-card-gap: 24px;
@@ -589,100 +339,6 @@
 
 .theme-crypto-arsenal #cs-sec-final .cs-media {
   margin: 80px 0 80px;
-}
-
-.theme-crypto-arsenal .ca-final-video-button {
-  position: relative;
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: zoom-in;
-}
-
-.theme-crypto-arsenal .ca-final-video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 2184 / 1346;
-  object-fit: cover;
-  background: #0f172a;
-}
-
-.theme-crypto-arsenal .ca-final-video--masked {
-  background: transparent;
-  -webkit-mask-image: var(--ca-video-mask);
-  mask-image: var(--ca-video-mask);
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-}
-
-.ca-final-video-lightbox-frame.ca-final-video--masked {
-  background: transparent;
-  -webkit-mask-image: var(--ca-video-mask);
-  mask-image: var(--ca-video-mask);
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-}
-
-.ca-final-video-lightbox-media.ca-final-video--masked {
-  background: transparent;
-  -webkit-mask-image: var(--ca-video-mask);
-  mask-image: var(--ca-video-mask);
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-}
-
-.theme-crypto-arsenal .ca-final-video-button:hover .ca-final-video,
-.theme-crypto-arsenal .ca-final-video-button:focus-visible .ca-final-video {
-  filter: brightness(0.96);
-}
-
-.theme-crypto-arsenal .ca-final-video-button:focus-visible {
-  outline: 3px solid rgba(82, 127, 255, 0.72);
-  outline-offset: 6px;
-}
-
-.ca-final-video-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(18px, 4vw, 56px);
-  background: #000000;
-  cursor: zoom-out;
-}
-
-.ca-final-video-lightbox-frame {
-  display: block;
-  width: min(96vw, calc(96vh * 2336 / 1440));
-  max-height: 96vh;
-  aspect-ratio: 2336 / 1440;
-  overflow: hidden;
-  background: transparent;
-  cursor: zoom-out;
-}
-
-.ca-final-video-lightbox-media {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: zoom-out;
 }
 
 /* ── 10 學習反思 ── */

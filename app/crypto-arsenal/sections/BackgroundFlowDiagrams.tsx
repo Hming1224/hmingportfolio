@@ -62,7 +62,7 @@ function FlowLabel({
       x={x}
       y={y}
       textAnchor={anchor}
-      className={strong ? "ca-flow-label ca-flow-label-strong" : "ca-flow-label"}
+      className={strong ? "cs-diagram-label cs-diagram-label-strong" : "cs-diagram-label"}
       fill={blue ? "#376adc" : strong ? "#252a47" : "#6c6e77"}
     >
       {children}
@@ -104,7 +104,7 @@ function FlowWrappedLabel({
   const lines = splitSvgLabel(children, maxWidth);
 
   return (
-    <text x={x} y={y} textAnchor="middle" className="ca-flow-label" fill="#6c6e77">
+    <text x={x} y={y} textAnchor="middle" className="cs-diagram-label" fill="#6c6e77">
       {lines.map((line, index) => (
         <tspan key={line} x={x} dy={index === 0 ? 0 : 18}>
           {line}
@@ -174,7 +174,7 @@ export function TradingFlowDiagram({ labels }: { labels: TradingFlowLabels }) {
   return (
     <svg
       ref={ref}
-      className="ca-diagram-graphic"
+      className="cs-diagram-graphic"
       viewBox={`0 0 ${width} ${TRADING_HEIGHT}`}
       height={TRADING_HEIGHT}
       role="img"
@@ -243,7 +243,7 @@ export function EcosystemFlowDiagram({ labels }: { labels: EcosystemFlowLabels }
   return (
     <svg
       ref={ref}
-      className="ca-diagram-graphic"
+      className="cs-diagram-graphic"
       viewBox={`0 0 ${width} ${ECOSYSTEM_HEIGHT}`}
       height={ECOSYSTEM_HEIGHT}
       role="img"
@@ -285,7 +285,7 @@ export function EcosystemFlowDiagram({ labels }: { labels: EcosystemFlowLabels }
       <g>
         <FlowIcon href="/projects/crypto-arsenal/background/icons/money-bg.svg" x={moneyX} y={money.y} size={money.size} />
         <FlowIcon href="/projects/crypto-arsenal/background/icons/money-ring.svg" x={moneyX} y={money.y} size={26.41} />
-        <text x={moneyX} y="167.5" textAnchor="middle" className="ca-flow-currency">$</text>
+        <text x={moneyX} y="167.5" textAnchor="middle" className="cs-diagram-currency">$</text>
       </g>
     </svg>
   );

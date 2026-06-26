@@ -18,7 +18,7 @@ type StepLightboxProps = {
 
 export default function StepLightbox({
   alt,
-  className = "ca-step-zoom",
+  className = "cs-step-zoom",
   height,
   imageClassName,
   lightboxMode,

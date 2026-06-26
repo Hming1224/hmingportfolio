@@ -43,7 +43,22 @@ async function connect(wsUrl, onEvent) {
     send(method, params = {}) {
       const messageId = ++id;
       ws.send(JSON.stringify({ id: messageId, method, params }));
-      return new Promise((resolve, reject) => pending.set(messageId, { resolve, reject }));
+      return new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          pending.delete(messageId);
+          reject(new Error(`CDP timeout: ${method}`));
+        }, 15000);
+        pending.set(messageId, {
+          resolve: (value) => {
+            clearTimeout(timeout);
+            resolve(value);
+          },
+          reject: (error) => {
+            clearTimeout(timeout);
+            reject(error);
+          },
+        });
+      });
     },
     close() {
       ws.close();
@@ -168,6 +183,25 @@ try {
         const impactMethod = document.querySelector('#cs-sec-impact .cs-section-note');
         const researchFlowBoard = document.querySelector('#cs-sec-research > .cs-card');
         const researchSubflowTitle = researchFlowBoard?.querySelector('.cs-subsection-title');
+        const diagram = document.querySelector('.cs-diagram-graphic');
+        const diagramLabel = document.querySelector('.cs-diagram-label');
+        const diagramStrongLabel = document.querySelector('.cs-diagram-label-strong');
+        const diagramCurrency = document.querySelector('.cs-diagram-currency');
+        const videoButton = document.querySelector('.cs-video-lightbox-button');
+        const videoThumb = document.querySelector('.cs-video-lightbox-thumb');
+        const maskedVideo = document.querySelector('.cs-video-lightbox--masked');
+        const matrix = document.querySelector('.cs-comparison-matrix');
+        const matrixHead = matrix?.querySelector('.cs-comparison-matrix-head');
+        const matrixStep = matrix?.querySelector('.cs-comparison-matrix-step');
+        const matrixStepNum = matrix?.querySelector('.cs-comparison-matrix-step-num');
+        const matrixRow = matrix?.querySelector('.cs-comparison-matrix-row');
+        const matrixLabel = matrix?.querySelector('.cs-comparison-matrix-label');
+        const matrixLabelName = matrix?.querySelector('.cs-comparison-matrix-label-name');
+        const matrixCell = matrix?.querySelector('.cs-comparison-matrix-cell');
+        const matrixNote = matrix?.querySelector('.cs-comparison-matrix-cell-note');
+        const stepZoom = matrix?.querySelector('.cs-step-zoom');
+        const insightCallout = document.querySelector('.cs-insight-callout');
+        const insightCalloutIcon = insightCallout?.querySelector('.cs-insight-callout-icon');
         const painStyle = firstPain ? getComputedStyle(firstPain) : null;
         const reflectStyle = firstReflect ? getComputedStyle(firstReflect) : null;
         const badDecisionStyle = badDecision ? getComputedStyle(badDecision) : null;
@@ -226,6 +260,25 @@ try {
         const impactMethodStyle = impactMethod ? getComputedStyle(impactMethod) : null;
         const researchFlowBoardStyle = researchFlowBoard ? getComputedStyle(researchFlowBoard) : null;
         const researchSubflowTitleStyle = researchSubflowTitle ? getComputedStyle(researchSubflowTitle) : null;
+        const diagramStyle = diagram ? getComputedStyle(diagram) : null;
+        const diagramLabelStyle = diagramLabel ? getComputedStyle(diagramLabel) : null;
+        const diagramStrongLabelStyle = diagramStrongLabel ? getComputedStyle(diagramStrongLabel) : null;
+        const diagramCurrencyStyle = diagramCurrency ? getComputedStyle(diagramCurrency) : null;
+        const videoButtonStyle = videoButton ? getComputedStyle(videoButton) : null;
+        const videoThumbStyle = videoThumb ? getComputedStyle(videoThumb) : null;
+        const maskedVideoStyle = maskedVideo ? getComputedStyle(maskedVideo) : null;
+        const matrixStyle = matrix ? getComputedStyle(matrix) : null;
+        const matrixHeadStyle = matrixHead ? getComputedStyle(matrixHead) : null;
+        const matrixStepStyle = matrixStep ? getComputedStyle(matrixStep) : null;
+        const matrixStepNumStyle = matrixStepNum ? getComputedStyle(matrixStepNum) : null;
+        const matrixRowStyle = matrixRow ? getComputedStyle(matrixRow) : null;
+        const matrixLabelStyle = matrixLabel ? getComputedStyle(matrixLabel) : null;
+        const matrixLabelNameStyle = matrixLabelName ? getComputedStyle(matrixLabelName) : null;
+        const matrixCellStyle = matrixCell ? getComputedStyle(matrixCell) : null;
+        const matrixNoteStyle = matrixNote ? getComputedStyle(matrixNote) : null;
+        const stepZoomStyle = stepZoom ? getComputedStyle(stepZoom) : null;
+        const insightCalloutStyle = insightCallout ? getComputedStyle(insightCallout) : null;
+        const insightCalloutIconStyle = insightCalloutIcon ? getComputedStyle(insightCalloutIcon) : null;
         const painQuoteTextStyle = painQuoteText ? getComputedStyle(painQuoteText) : null;
         const painQuoteMetaStyle = painQuoteMeta ? getComputedStyle(painQuoteMeta) : null;
         const painQuoteNameStyle = painQuoteName ? getComputedStyle(painQuoteName) : null;
@@ -268,6 +321,9 @@ try {
             spacing: document.querySelectorAll('.ca-overview-gap, .ca-decision-close, .ca-research-note').length,
             researchFlowBoard: document.querySelectorAll('.ca-research-flow-board, .ca-subflow-head').length,
             researchSubflowTitle: document.querySelectorAll('.ca-subflow-title').length,
+            diagram: document.querySelectorAll('.ca-diagram-graphic, .ca-flow-label, .ca-flow-label-strong, .ca-flow-currency').length,
+            video: document.querySelectorAll('.ca-final-video-button, .ca-final-video, .ca-final-video--masked, .ca-final-video-lightbox, .ca-final-video-lightbox-frame, .ca-final-video-lightbox-media').length,
+            matrix: document.querySelectorAll('.ca-matrix, .ca-matrix-head, .ca-matrix-corner, .ca-matrix-step, .ca-matrix-step-num, .ca-matrix-step-text, .ca-matrix-row, .ca-matrix-ex, .ca-matrix-ex-logo, .ca-matrix-ex-name, .ca-matrix-cell, .ca-matrix-cell-stack, .ca-matrix-cell-note, .ca-step-zoom, .ca-matrix-synth, .ca-matrix-synth-icon').length,
             researchLayout: document.querySelectorAll('.ca-research-row, .ca-research-shots').length,
             researchChip: document.querySelectorAll('.ca-chip, .ca-chip-label, .ca-chip-body').length,
             researchBrandLabel: document.querySelectorAll('.ca-exchange-label, .ca-exchange-logo, .ca-exchange-name').length,
@@ -336,7 +392,30 @@ try {
             impactCompareLabel: document.querySelectorAll('#cs-sec-impact .cs-media-label').length,
             impactMethod: document.querySelectorAll('#cs-sec-impact .cs-section-note').length,
             researchFlowBoard: document.querySelectorAll('#cs-sec-research > .cs-card').length,
-            researchSubflowTitle: document.querySelectorAll('#cs-sec-research .cs-subsection-title').length
+            researchSubflowTitle: document.querySelectorAll('#cs-sec-research .cs-subsection-title').length,
+            diagram: document.querySelectorAll('.cs-diagram-graphic').length,
+            diagramLabel: document.querySelectorAll('.cs-diagram-label').length,
+            diagramStrongLabel: document.querySelectorAll('.cs-diagram-label-strong').length,
+            diagramCurrency: document.querySelectorAll('.cs-diagram-currency').length,
+            videoButton: document.querySelectorAll('.cs-video-lightbox-button').length,
+            videoThumb: document.querySelectorAll('.cs-video-lightbox-thumb').length,
+            maskedVideo: document.querySelectorAll('.cs-video-lightbox--masked').length,
+            matrix: document.querySelectorAll('.cs-comparison-matrix').length,
+            matrixHead: document.querySelectorAll('.cs-comparison-matrix-head').length,
+            matrixCorner: document.querySelectorAll('.cs-comparison-matrix-corner').length,
+            matrixStep: document.querySelectorAll('.cs-comparison-matrix-step').length,
+            matrixStepNum: document.querySelectorAll('.cs-comparison-matrix-step-num').length,
+            matrixStepText: document.querySelectorAll('.cs-comparison-matrix-step-text').length,
+            matrixRow: document.querySelectorAll('.cs-comparison-matrix-row').length,
+            matrixLabel: document.querySelectorAll('.cs-comparison-matrix-label').length,
+            matrixLabelLogo: document.querySelectorAll('.cs-comparison-matrix-label-logo').length,
+            matrixLabelName: document.querySelectorAll('.cs-comparison-matrix-label-name').length,
+            matrixCell: document.querySelectorAll('.cs-comparison-matrix-cell').length,
+            matrixCellStack: document.querySelectorAll('.cs-comparison-matrix-cell-stack').length,
+            matrixCellNote: document.querySelectorAll('.cs-comparison-matrix-cell-note').length,
+            stepZoom: document.querySelectorAll('.cs-comparison-matrix .cs-step-zoom').length,
+            insightCallout: document.querySelectorAll('.cs-insight-callout').length,
+            insightCalloutIcon: document.querySelectorAll('.cs-insight-callout-icon').length
           },
           pain: firstPain && {
             padding: painStyle.padding,
@@ -531,6 +610,53 @@ try {
             methodMargin: impactMethodStyle.margin,
             methodColor: impactMethodStyle.color,
             methodSize: impactMethodStyle.fontSize
+          },
+          diagram: diagram && diagramLabel && diagramStrongLabel && diagramCurrency && {
+            display: diagramStyle.display,
+            width: diagramStyle.width,
+            minWidth: diagramStyle.minWidth,
+            overflow: diagramStyle.overflow,
+            labelSize: diagramLabelStyle.fontSize,
+            labelWeight: diagramLabelStyle.fontWeight,
+            strongSize: diagramStrongLabelStyle.fontSize,
+            strongWeight: diagramStrongLabelStyle.fontWeight,
+            currencyFill: diagramCurrencyStyle.fill
+          },
+          video: videoButton && videoThumb && maskedVideo && {
+            buttonPosition: videoButtonStyle.position,
+            buttonDisplay: videoButtonStyle.display,
+            thumbDisplay: videoThumbStyle.display,
+            thumbAspectRatio: videoThumbStyle.aspectRatio,
+            thumbObjectFit: videoThumbStyle.objectFit,
+            maskedBackground: maskedVideoStyle.backgroundColor,
+            maskSize: maskedVideoStyle.maskSize || maskedVideoStyle.webkitMaskSize
+          },
+          matrix: matrix && matrixHead && matrixStep && matrixStepNum && matrixRow && matrixLabel && matrixLabelName && matrixCell && stepZoom && insightCallout && insightCalloutIcon && {
+            display: matrixStyle.display,
+            direction: matrixStyle.flexDirection,
+            padding: matrixStyle.padding,
+            border: matrixStyle.borderTopColor,
+            radius: matrixStyle.borderRadius,
+            shadow: matrixStyle.boxShadow,
+            headDisplay: matrixHeadStyle.display,
+            headBg: matrixHeadStyle.backgroundImage,
+            stepDisplay: matrixStepStyle.display,
+            stepColor: matrixStepStyle.color,
+            stepWeight: matrixStepStyle.fontWeight,
+            stepNumBg: matrixStepNumStyle.backgroundColor,
+            rowDisplay: matrixRowStyle.display,
+            rowBorder: matrixRowStyle.borderTopColor,
+            labelPosition: matrixLabelStyle.position,
+            labelBg: matrixLabelStyle.backgroundColor,
+            labelShadow: matrixLabelStyle.boxShadow,
+            labelNameColor: matrixLabelNameStyle.color,
+            cellDisplay: matrixCellStyle.display,
+            noteColor: matrixNoteStyle?.color,
+            stepZoomBorder: stepZoomStyle.borderTopColor,
+            stepZoomBg: stepZoomStyle.backgroundColor,
+            calloutDisplay: insightCalloutStyle.display,
+            calloutBg: insightCalloutStyle.backgroundColor,
+            calloutIconBg: insightCalloutIconStyle.backgroundColor
           }
         };
       })()`,
@@ -569,6 +695,9 @@ try {
     result.oldCounts.spacing !== 0 ||
     result.oldCounts.researchFlowBoard !== 0 ||
     result.oldCounts.researchSubflowTitle !== 0 ||
+    result.oldCounts.diagram !== 0 ||
+    result.oldCounts.video !== 0 ||
+    result.oldCounts.matrix !== 0 ||
     result.oldCounts.researchLayout !== 0 ||
     result.oldCounts.researchChip !== 0 ||
     result.oldCounts.researchBrandLabel !== 0 ||
@@ -636,8 +765,50 @@ try {
     result.cardCounts.impactMethod !== 1 ||
     result.cardCounts.researchFlowBoard !== 2 ||
     result.cardCounts.researchSubflowTitle !== 2 ||
+    result.cardCounts.diagram !== 2 ||
+    result.cardCounts.diagramLabel !== 17 ||
+    result.cardCounts.diagramStrongLabel !== 9 ||
+    result.cardCounts.diagramCurrency !== 1 ||
+    result.cardCounts.videoButton !== 3 ||
+    result.cardCounts.videoThumb !== 3 ||
+    result.cardCounts.maskedVideo !== 3 ||
+    result.cardCounts.matrix !== 2 ||
+    result.cardCounts.matrixHead !== 2 ||
+    result.cardCounts.matrixCorner !== 2 ||
+    result.cardCounts.matrixStep !== 5 ||
+    result.cardCounts.matrixStepNum !== 5 ||
+    result.cardCounts.matrixStepText !== 5 ||
+    result.cardCounts.matrixRow !== 6 ||
+    result.cardCounts.matrixLabel !== 6 ||
+    result.cardCounts.matrixLabelLogo !== 6 ||
+    result.cardCounts.matrixLabelName !== 6 ||
+    result.cardCounts.matrixCell !== 15 ||
+    result.cardCounts.matrixCellStack !== 1 ||
+    result.cardCounts.matrixCellNote !== 1 ||
+    result.cardCounts.stepZoom !== 16 ||
+    result.cardCounts.insightCallout !== 2 ||
+    result.cardCounts.insightCalloutIcon !== 2 ||
     !result.finalBanner?.background.includes("linear-gradient") ||
     result.impactText?.labelDisplay !== "block" ||
+    result.diagram?.display !== "block" ||
+    result.diagram?.overflow !== "visible" ||
+    result.diagram?.labelSize !== "14px" ||
+    result.diagram?.strongSize !== "16px" ||
+    result.video?.buttonPosition !== "relative" ||
+    result.video?.buttonDisplay !== "block" ||
+    result.video?.thumbDisplay !== "block" ||
+    result.video?.thumbObjectFit !== "cover" ||
+    result.matrix?.display !== "flex" ||
+    result.matrix?.direction !== "column" ||
+    result.matrix?.headDisplay !== "grid" ||
+    !result.matrix?.headBg.includes("linear-gradient") ||
+    result.matrix?.stepDisplay !== "flex" ||
+    result.matrix?.stepWeight !== "700" ||
+    result.matrix?.rowDisplay !== "grid" ||
+    result.matrix?.labelPosition !== "sticky" ||
+    result.matrix?.cellDisplay !== "flex" ||
+    result.matrix?.stepZoomBg !== "rgb(10, 19, 48)" ||
+    result.matrix?.calloutDisplay !== "flex" ||
     !result.decision?.badHead.includes("linear-gradient") ||
     !result.decision?.goodHead.includes("linear-gradient") ||
     result.decision.badStep === "rgba(0, 0, 0, 0)" ||

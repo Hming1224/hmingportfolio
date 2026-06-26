@@ -34,43 +34,43 @@ export default function FlowMatrixBoard({ matrix, t }: FlowMatrixBoardProps) {
         scrollHintLabel={t("左右滑動查看更多")}
         variant="plain"
       >
-        <div className="ca-matrix" style={{ minWidth: matrix.stepLabels.length === 3 ? 720 : 560 }}>
-          <div className="ca-matrix-head" style={{ gridTemplateColumns: columns }}>
-            <span className="ca-matrix-corner" aria-hidden="true" />
+        <div className="cs-comparison-matrix" style={{ minWidth: matrix.stepLabels.length === 3 ? 720 : 560 }}>
+          <div className="cs-comparison-matrix-head" style={{ gridTemplateColumns: columns }}>
+            <span className="cs-comparison-matrix-corner" aria-hidden="true" />
             {matrix.stepLabels.map((label) => {
               const translated = t(label);
               const match = translated.match(/^([①-⑨])([a-z]?)\s*([\s\S]*)$/);
 
               if (!match) {
                 return (
-                  <div className="ca-matrix-step" key={label}>
+                  <div className="cs-comparison-matrix-step" key={label}>
                     {translated}
                   </div>
                 );
               }
 
               return (
-                <div className="ca-matrix-step" key={label}>
-                  <span className="ca-matrix-step-num">
+                <div className="cs-comparison-matrix-step" key={label}>
+                  <span className="cs-comparison-matrix-step-num">
                     {CIRCLE_NUMBERS[match[1]] ?? 1}
                     {match[2]}
                   </span>
-                  <span className="ca-matrix-step-text">{match[3]}</span>
+                  <span className="cs-comparison-matrix-step-text">{match[3]}</span>
                 </div>
               );
             })}
           </div>
           {matrix.rows.map((row) => (
-            <div className="ca-matrix-row" style={{ gridTemplateColumns: columns }} key={row.name}>
-              <div className="ca-matrix-ex">
-                <span className="ca-matrix-ex-logo">
+            <div className="cs-comparison-matrix-row" style={{ gridTemplateColumns: columns }} key={row.name}>
+              <div className="cs-comparison-matrix-label">
+                <span className="cs-comparison-matrix-label-logo">
                   <Image src={row.logo} alt="" width={28} height={28} unoptimized />
                 </span>
-                <span className="ca-matrix-ex-name">{row.name}</span>
+                <span className="cs-comparison-matrix-label-name">{row.name}</span>
               </div>
               {row.cells.map((cell) => (
                 <div
-                  className={cell.extraImg ? "ca-matrix-cell ca-matrix-cell-stack" : "ca-matrix-cell"}
+                  className={cell.extraImg ? "cs-comparison-matrix-cell cs-comparison-matrix-cell-stack" : "cs-comparison-matrix-cell"}
                   key={cell.img}
                 >
                   <StepLightbox src={cell.img} alt={t(cell.alt)} width={STEP_W} height={STEP_H} />
@@ -82,15 +82,15 @@ export default function FlowMatrixBoard({ matrix, t }: FlowMatrixBoardProps) {
                       height={STEP_H}
                     />
                   ) : null}
-                  {cell.note ? <span className="ca-matrix-cell-note">{t(cell.note)}</span> : null}
+                  {cell.note ? <span className="cs-comparison-matrix-cell-note">{t(cell.note)}</span> : null}
                 </div>
               ))}
             </div>
           ))}
         </div>
       </CaseFlowFrame>
-      <div className="ca-matrix-synth">
-        <span className="ca-matrix-synth-icon" aria-hidden="true">
+      <div className="cs-insight-callout">
+        <span className="cs-insight-callout-icon" aria-hidden="true">
           <svg
             viewBox="0 0 24 24"
             fill="none"

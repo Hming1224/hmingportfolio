@@ -708,6 +708,230 @@
   }
 }
 
+.cs-comparison-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: var(--cs-comparison-matrix-padding, 24px 26px 26px);
+  border: 1px solid var(--cs-comparison-matrix-border-color, var(--cs-line));
+  border-radius: var(--cs-comparison-matrix-radius, var(--hm-radius-lg));
+  background: var(--cs-comparison-matrix-bg, #ffffff);
+  box-shadow: var(--cs-comparison-matrix-shadow, none);
+}
+
+.cs-comparison-matrix-head {
+  display: grid;
+  align-items: center;
+  column-gap: var(--cs-comparison-matrix-column-gap, 16px);
+  margin: var(--cs-comparison-matrix-head-margin, -24px -26px 0);
+  padding: var(--cs-comparison-matrix-head-padding, 18px 26px);
+  border-bottom: 1px solid var(--cs-comparison-matrix-border-color, var(--cs-line));
+  border-top-left-radius: var(--cs-comparison-matrix-head-radius, calc(var(--cs-comparison-matrix-radius, var(--hm-radius-lg)) - 1px));
+  border-top-right-radius: var(--cs-comparison-matrix-head-radius, calc(var(--cs-comparison-matrix-radius, var(--hm-radius-lg)) - 1px));
+  background: var(--cs-comparison-matrix-head-bg, var(--cs-accent-soft));
+}
+
+.cs-comparison-matrix-head .cs-comparison-matrix-step {
+  background: var(--cs-comparison-matrix-head-step-bg, transparent);
+}
+
+.cs-comparison-matrix-head+.cs-comparison-matrix-row {
+  border-top: none;
+}
+
+.cs-comparison-matrix-corner {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  align-self: stretch;
+  border-top-left-radius: var(--cs-comparison-matrix-head-radius, calc(var(--cs-comparison-matrix-radius, var(--hm-radius-lg)) - 1px));
+  background: var(--cs-comparison-matrix-corner-bg, var(--cs-comparison-matrix-head-bg, var(--cs-accent-soft)));
+}
+
+.cs-comparison-matrix-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cs-comparison-matrix-step-gap, 8px);
+  padding: var(--cs-comparison-matrix-step-padding, 9px 12px);
+  border-radius: var(--cs-comparison-matrix-step-radius, 10px);
+  background: var(--cs-comparison-matrix-step-bg, var(--cs-accent-soft));
+  color: var(--cs-comparison-matrix-step-color, var(--cs-accent));
+  font-size: var(--cs-comparison-matrix-step-size, var(--fs-sm));
+  font-weight: var(--cs-comparison-matrix-step-weight, 700);
+  line-height: var(--cs-comparison-matrix-step-line-height, 1.4);
+  text-wrap: balance;
+}
+
+.cs-comparison-matrix-step-num {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--cs-comparison-matrix-step-num-min-width, 18px);
+  height: var(--cs-comparison-matrix-step-num-height, 18px);
+  padding: var(--cs-comparison-matrix-step-num-padding, 0 5px);
+  border-radius: var(--cs-comparison-matrix-step-num-radius, 9px);
+  background: var(--cs-comparison-matrix-step-num-bg, var(--cs-accent));
+  color: var(--cs-comparison-matrix-step-num-color, #ffffff);
+  font-size: var(--cs-comparison-matrix-step-num-size, 11px);
+  font-weight: var(--cs-comparison-matrix-step-num-weight, 700);
+  line-height: 1;
+}
+
+.cs-comparison-matrix-step-text {
+  text-align: left;
+  white-space: pre-line;
+}
+
+.cs-comparison-matrix-row {
+  display: grid;
+  align-items: stretch;
+  column-gap: var(--cs-comparison-matrix-column-gap, 16px);
+  border-top: 1px solid var(--cs-comparison-matrix-border-color, var(--cs-line));
+}
+
+.cs-comparison-matrix-row:last-child .cs-comparison-matrix-label,
+.cs-comparison-matrix-row:last-child .cs-comparison-matrix-cell {
+  padding-bottom: 0;
+}
+
+.cs-comparison-matrix-row:has(.cs-comparison-matrix-cell-note) .cs-comparison-matrix-label,
+.cs-comparison-matrix-row:has(.cs-comparison-matrix-cell-note) .cs-comparison-matrix-cell-stack {
+  padding-bottom: var(--cs-comparison-matrix-cell-padding-block, 18px) !important;
+}
+
+.cs-comparison-matrix-label {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cs-comparison-matrix-label-gap, 8px);
+  padding-top: var(--cs-comparison-matrix-cell-padding-block, 18px);
+  padding-bottom: var(--cs-comparison-matrix-cell-padding-block, 18px);
+  background: var(--cs-comparison-matrix-label-bg, #ffffff);
+  box-shadow: var(--cs-comparison-matrix-label-shadow, none);
+  text-align: center;
+}
+
+.cs-comparison-matrix-label::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--cs-comparison-matrix-label-bg, #ffffff);
+}
+
+.cs-comparison-matrix-head+.cs-comparison-matrix-row .cs-comparison-matrix-label::before {
+  display: none;
+}
+
+.cs-comparison-matrix-label-logo {
+  width: var(--cs-comparison-matrix-logo-size, 28px);
+  height: var(--cs-comparison-matrix-logo-size, 28px);
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.cs-comparison-matrix-label-name {
+  color: var(--cs-comparison-matrix-label-color, var(--cs-text-heading));
+  font-size: var(--cs-comparison-matrix-label-size, var(--fs-sm));
+  font-weight: var(--cs-comparison-matrix-label-weight, 700);
+  line-height: var(--cs-comparison-matrix-label-line-height, 1.3);
+}
+
+.cs-comparison-matrix-cell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--cs-comparison-matrix-cell-padding-block, 18px);
+  padding-bottom: var(--cs-comparison-matrix-cell-padding-block, 18px);
+}
+
+.cs-comparison-matrix-cell-stack {
+  position: relative !important;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cs-comparison-matrix-cell-stack-gap, 8px);
+}
+
+.cs-comparison-matrix-cell-note {
+  position: static !important;
+  z-index: 1 !important;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  transform: none !important;
+  color: var(--cs-comparison-matrix-note-color, var(--cs-accent));
+  font-size: var(--cs-comparison-matrix-note-size, var(--fs-xs, 12px));
+  font-weight: var(--cs-comparison-matrix-note-weight, 600);
+  line-height: var(--cs-comparison-matrix-note-line-height, 1.4);
+  text-align: center;
+  white-space: pre-line !important;
+}
+
+.cs-step-zoom {
+  border: 1px solid var(--cs-step-zoom-border-color, var(--cs-line));
+  border-radius: var(--cs-step-zoom-radius, 10px);
+  background: var(--cs-step-zoom-bg, #0a1330);
+  transition:
+    border-color var(--hm-duration-fast) var(--hm-ease-standard),
+    box-shadow var(--hm-duration-fast) var(--hm-ease-standard);
+}
+
+.cs-step-zoom:hover,
+.cs-step-zoom:focus-visible {
+  border-color: var(--cs-step-zoom-hover-border-color, var(--cs-accent));
+  box-shadow: var(--cs-step-zoom-hover-shadow, 0 0 0 3px color-mix(in srgb, var(--cs-accent) 18%, transparent));
+  outline: none;
+}
+
+.cs-insight-callout {
+  display: flex;
+  align-items: center;
+  gap: var(--cs-insight-callout-gap, 12px);
+  margin-top: var(--cs-insight-callout-margin-top, 18px);
+  padding: var(--cs-insight-callout-padding, 14px 18px);
+  border-radius: var(--cs-insight-callout-radius, 12px);
+  background: var(--cs-insight-callout-bg, var(--cs-accent-soft));
+}
+
+.cs-insight-callout-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--cs-insight-callout-icon-size, 30px);
+  height: var(--cs-insight-callout-icon-size, 30px);
+  border-radius: var(--cs-insight-callout-icon-radius, 8px);
+  background: var(--cs-insight-callout-icon-bg, var(--cs-accent));
+  color: var(--cs-insight-callout-icon-color, #ffffff);
+}
+
+.cs-insight-callout-icon svg {
+  width: var(--cs-insight-callout-icon-svg-size, 18px);
+  height: var(--cs-insight-callout-icon-svg-size, 18px);
+}
+
+.cs-insight-callout p {
+  margin: 0;
+  color: var(--cs-insight-callout-color, var(--cs-text-heading));
+  font-size: var(--cs-insight-callout-size, var(--fs-sm));
+  font-weight: var(--cs-insight-callout-weight, 600);
+  line-height: var(--cs-insight-callout-line-height, 1.6);
+}
+
 @container (max-width: 280px) {
   .cs-quote-line {
     display: none;
@@ -952,6 +1176,31 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.cs-diagram-graphic {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.cs-diagram-label {
+  font-family: var(--cs-diagram-label-font, Inter, sans-serif);
+  font-size: var(--cs-diagram-label-size, 14px);
+  font-weight: var(--cs-diagram-label-weight, 400);
+}
+
+.cs-diagram-label-strong {
+  font-size: var(--cs-diagram-label-strong-size, 16px);
+  font-weight: var(--cs-diagram-label-strong-weight, 700);
+}
+
+.cs-diagram-currency {
+  fill: var(--cs-diagram-currency-color, var(--cs-accent));
+  font-family: var(--cs-diagram-label-font, Inter, sans-serif);
+  font-size: var(--cs-diagram-currency-size, 16px);
+  font-weight: var(--cs-diagram-currency-weight, 700);
+}
+
 .cs-feature-row {
   display: flex;
   align-items: center;
@@ -1183,6 +1432,10 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  .cs-diagram-graphic {
+    min-width: var(--cs-diagram-graphic-min-width-mobile, 0);
+  }
+
   .cs-flow-frame--split .cs-flow-frame-header {
     padding: 20px;
   }
@@ -1201,6 +1454,12 @@
   cursor: zoom-in;
 }
 
+.cs-zoomable-image.cs-step-zoom {
+  border: 1px solid var(--cs-step-zoom-border-color, var(--cs-line));
+  border-radius: var(--cs-step-zoom-radius, 10px);
+  background: var(--cs-step-zoom-bg, #0a1330);
+}
+
 .cs-zoomable-image-media {
   display: block;
   width: 100%;
@@ -1215,6 +1474,13 @@
 .cs-zoomable-image:focus-visible .cs-zoomable-image-media {
   transform: scale(1.015);
   filter: brightness(1.03);
+}
+
+.cs-zoomable-image.cs-step-zoom:hover,
+.cs-zoomable-image.cs-step-zoom:focus-visible {
+  border-color: var(--cs-step-zoom-hover-border-color, var(--cs-accent));
+  box-shadow: var(--cs-step-zoom-hover-shadow, 0 0 0 3px color-mix(in srgb, var(--cs-accent) 18%, transparent));
+  outline: none;
 }
 
 .cs-zoomable-image:focus-visible {
@@ -1323,6 +1589,76 @@
   background: var(--cs-surface);
   outline: 3px solid var(--purple);
   outline-offset: 3px;
+}
+
+.cs-video-lightbox-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.cs-video-lightbox-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--cs-video-thumb-aspect-ratio, 16 / 9);
+  object-fit: cover;
+  background: var(--cs-video-thumb-bg, #0f172a);
+}
+
+.cs-video-lightbox--masked {
+  background: transparent;
+  -webkit-mask-image: var(--cs-video-mask);
+  mask-image: var(--cs-video-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.cs-video-lightbox-button:hover .cs-video-lightbox-thumb,
+.cs-video-lightbox-button:focus-visible .cs-video-lightbox-thumb {
+  filter: brightness(var(--cs-video-hover-brightness, 0.96));
+}
+
+.cs-video-lightbox-button:focus-visible {
+  outline: 3px solid var(--cs-video-focus-outline, var(--purple));
+  outline-offset: var(--cs-video-focus-offset, 6px);
+}
+
+.cs-video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--cs-video-lightbox-padding, clamp(18px, 4vw, 56px));
+  background: var(--cs-video-lightbox-bg, #000000);
+  cursor: zoom-out;
+}
+
+.cs-video-lightbox-frame {
+  display: block;
+  width: var(--cs-video-frame-width, min(96vw, calc(96vh * 16 / 9)));
+  max-height: var(--cs-video-frame-max-height, 96vh);
+  aspect-ratio: var(--cs-video-frame-aspect-ratio, 16 / 9);
+  overflow: hidden;
+  background: transparent;
+  cursor: zoom-out;
+}
+
+.cs-video-lightbox-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-out;
 }
 
 /* ── 01 Hero ── */
