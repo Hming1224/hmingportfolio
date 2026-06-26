@@ -132,10 +132,6 @@
 }
 
 /* ── Product Background cards ── */
-.theme-advantech .cs-product-grid {
-  --cs-grid-gap: 20px;
-}
-
 .theme-advantech .cs-product-card {
   --cs-card-bg: #dcf1fe;
   --cs-card-border: transparent;
@@ -143,11 +139,6 @@
   --cs-card-padding: 24px;
   --cs-card-radius: 12px;
   overflow: hidden;
-}
-
-.theme-advantech .cs-product-card-header {
-  --cs-flex-cluster-gap: 12px;
-  --cs-flex-cluster-padding: 0;
 }
 
 .theme-advantech .cs-product-logo {

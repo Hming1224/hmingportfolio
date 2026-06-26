@@ -9,9 +9,9 @@ export default async function ProductBackgroundSection() {
       <p className="cs-body-muted" style={{ marginBottom: 32 }}>
         {t("本專案的設計對象為研華科技 WISE-IoT 平台下的兩大能源管理模組。ECOWatch 負責建築能源用量的即時可視化監控；WISE iEMS HVAC 模組則整合 AI 演算法主動優化空調系統能效。兩者共同構成智慧設施管理的核心解決方案，也是本次 AI Chatbot 設計用於整合各項功能的系統。")}
       </p>
-      <CaseGrid variant="two" className="cs-product-grid">
+      <CaseGrid variant="two">
         <CaseCard variant="accent" className="cs-product-card">
-          <div className="cs-product-card-header cs-flex-cluster">
+          <div className="cs-flex-cluster">
             <div className="cs-product-logo cs-object-box">
               <Image src="/projects/advantech/research/ecowatch-icon.webp" alt="ECOWatch" fill style={{ objectFit: "cover" }} unoptimized />
             </div>
@@ -38,7 +38,7 @@ export default async function ProductBackgroundSection() {
         </CaseCard>
 
         <CaseCard variant="accent" className="cs-product-card">
-          <div className="cs-product-card-header cs-flex-cluster">
+          <div className="cs-flex-cluster">
             <div className="cs-product-logo cs-object-box">
               <Image src="/projects/advantech/research/hvac-icon.webp" alt="HVAC" fill style={{ objectFit: "cover" }} unoptimized />
             </div>
