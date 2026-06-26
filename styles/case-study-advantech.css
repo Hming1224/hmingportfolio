@@ -121,16 +121,13 @@
 }
 
 /* ── 02 Overview ── */
-.theme-advantech .cs-overview-body {
+.theme-advantech .cs-overview .cs-overview-body {
   --cs-stack-box-gap: 0;
   --cs-stack-box-margin: 0 0 24px;
 }
 
-.theme-advantech .cs-overview-img {
-  --cs-object-box-width: 100%;
-  --cs-object-box-height: auto;
+.theme-advantech .cs-overview .cs-overview-img {
   --cs-object-box-aspect-ratio: 3000 / 1687;
-  --cs-object-box-radius: 0;
   --cs-object-box-bg: var(--surface);
 }
 

@@ -5,7 +5,7 @@ import { getAdvantechTranslator } from "../i18n-server";
 export default async function OverviewSection() {
   const { t } = await getAdvantechTranslator();
   return (
-    <CaseSection id="cs-sec-overview" title={t("專案背景")}>
+    <CaseSection id="cs-sec-overview" className="cs-overview" title={t("專案背景")}>
       <div className="cs-overview-body cs-stack-box">
         <p className="cs-body">
           {t("這個專案聚焦於透過 UX/UI 設計優化 ECOWatch 與 HVAC 的 AI Chatbot 體驗，以改善使用者操作流程並提升整體可用性。")}
