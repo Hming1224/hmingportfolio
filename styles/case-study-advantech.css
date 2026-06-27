@@ -1199,6 +1199,15 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-object-box-bg-size: cover;
   --cs-object-box-bg-position: center top;
   --cs-object-box-flex-shrink: 0;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 115px;
+  overflow: hidden;
+  border: 1px solid var(--cs-line-soft);
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center top;
 }
 
 .theme-advantech .cs-sol-flow-info {
@@ -1206,6 +1215,13 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-stack-box-left: 27px;
   --cs-stack-box-top: 27px;
   --cs-stack-box-gap: 10px;
+  position: absolute;
+  left: 27px;
+  top: 27px;
+  display: flex;
+  max-width: calc(100% - 54px);
+  flex-direction: column;
+  gap: 10px;
 }
 
 .theme-advantech .cs-sol-flow-label {
@@ -2099,6 +2115,9 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-object-box-height: auto;
     --cs-object-box-min-height: 140px;
     --cs-object-box-bg-position: center;
+    height: auto;
+    min-height: 140px;
+    background-position: center;
   }
 
   .theme-advantech .cs-sol-flow-info {
@@ -2106,6 +2125,12 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-stack-box-inset: auto;
     --cs-stack-box-max-width: 100%;
     --cs-stack-box-padding: 24px;
+    position: relative;
+    inset: auto;
+    left: auto;
+    top: auto;
+    max-width: 100%;
+    padding: 24px;
   }
 
   .theme-advantech .cs-sol-flow-name {

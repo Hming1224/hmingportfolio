@@ -46,8 +46,8 @@ export default async function SolutionSection() {
         <p className="cs-sol-blk-desc cs-text-muted-blue cs-copy-body">先從兩個情境拆出核心使用任務與 AI 介入點，定義後續迭代要驗證的頁面入口、通知方式與建議回饋。</p>
 
         {/* Scenario 1 */}
-        <div className="cs-sol-flow cs-object-box" style={{ backgroundImage: "url('/projects/advantech/solution/flow-sc1.webp')" }}>
-          <div className="cs-sol-flow-info cs-stack-box">
+        <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech/solution/flow-sc1.webp')" }}>
+          <div className="cs-sol-flow-info">
             <p className="cs-sol-flow-label cs-copy-title" style={{ color: "#1a87de" }}>Scenario 1</p>
             <p className="cs-sol-flow-name cs-copy-title">需求管理決策助手：超約預警</p>
           </div>
@@ -55,8 +55,8 @@ export default async function SolutionSection() {
         <ProposalTabs defaultTab={0} tabs={proposalScenario1Tabs} />
 
         {/* Scenario 2 */}
-        <div className="cs-sol-flow cs-object-box" style={{ backgroundImage: "url('/projects/advantech/solution/flow-sc2.webp')" }}>
-          <div className="cs-sol-flow-info cs-stack-box">
+        <div className="cs-sol-flow" style={{ backgroundImage: "url('/projects/advantech/solution/flow-sc2.webp')" }}>
+          <div className="cs-sol-flow-info">
             <p className="cs-sol-flow-label cs-copy-title" style={{ color: "#1e84a6" }}>Scenario 2</p>
             <p className="cs-sol-flow-name cs-copy-title" style={{ color: "#083b4c" }}>設備能效主動維護：模式識別</p>
           </div>
