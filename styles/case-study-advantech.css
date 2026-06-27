@@ -1754,6 +1754,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-stack-box-padding: 24px 24px 28px;
   --cs-stack-box-gap: 16px;
   --cs-stack-box-border: 1px solid;
+  --cs-stack-box-border-width: 1px;
 }
 
 .theme-advantech .cs-sol-vtitle {
@@ -1907,6 +1908,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 .theme-advantech .cs-ns-vision {
   --cs-stack-box-bg: rgba(9, 48, 96, 0.06);
   --cs-stack-box-border: 1px solid rgba(9, 48, 96, 0.15);
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 16px;
   --cs-stack-box-padding: 28px 32px;
   --cs-stack-box-gap: 12px;
