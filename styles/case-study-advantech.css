@@ -2039,6 +2039,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-card-border: rgba(255, 255, 255, 0.22);
   --cs-card-padding: 28px;
   --cs-card-radius: 16px;
+  display: block;
   backdrop-filter: blur(6px);
 }
 
@@ -2051,6 +2052,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-inline-pill-color: rgba(255, 255, 255, 0.75);
   --cs-inline-pill-size: var(--fs-xs);
   --cs-inline-pill-weight: 700;
+  --cs-inline-pill-line-height: 18px;
   letter-spacing: 1px;
 }
 
