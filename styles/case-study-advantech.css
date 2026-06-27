@@ -584,6 +584,7 @@
   --cs-card-border: var(--cs-line);
   --cs-card-padding: 16px;
   --cs-card-radius: 8px;
+  --cs-flex-cluster-padding: 16px;
   --cs-flex-cluster-gap: 16px;
   --cs-flex-cluster-align: flex-start;
 }
@@ -615,10 +616,14 @@
 }
 
 .theme-advantech .cs-comp-category-pill {
+  --cs-inline-pill-display: block;
+  --cs-inline-pill-width: 100%;
   --cs-inline-pill-bg: var(--cs-tint);
   --cs-inline-pill-color: var(--cs-blue);
   --cs-inline-pill-size: var(--fs-xs);
   --cs-inline-pill-weight: 600;
+  --cs-inline-pill-line-height: 1.25;
+  --cs-inline-pill-white-space: normal;
   --cs-inline-pill-padding: 8px 12px;
   --cs-inline-pill-align-self: flex-start;
 }
