@@ -2163,6 +2163,10 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     overflow-wrap: anywhere;
   }
 
+  .theme-advantech .cs-ns-card {
+    --cs-card-padding-mobile: 32px;
+  }
+
   .theme-advantech .cs-sol-flow {
     --cs-object-box-height: auto;
     --cs-object-box-min-height: 140px;
