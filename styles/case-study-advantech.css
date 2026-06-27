@@ -1243,6 +1243,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 .theme-advantech .cs-sol-bapanel {
   --cs-stack-box-flex: 1;
   --cs-stack-box-border: 1px solid var(--cs-line-soft);
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 16px;
   --cs-stack-box-overflow: hidden;
   --cs-stack-box-bg: var(--cs-bg);
