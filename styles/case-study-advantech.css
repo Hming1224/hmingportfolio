@@ -343,6 +343,9 @@
 .theme-advantech .cs-process-content {
   --cs-stack-box-position: relative;
   --cs-stack-box-z-index: 2;
+  --cs-stack-box-overflow: visible;
+  --cs-stack-box-overflow-x: visible;
+  --cs-stack-box-overflow-y: visible;
   --cs-stack-box-padding: 0;
 }
 
@@ -353,6 +356,7 @@
   --cs-tl-step-width: 160px;
   --cs-stack-box-padding: 0;
   --cs-stack-box-overflow-x: auto;
+  --cs-stack-box-overflow-y: auto;
 }
 
 /* Six translated steps wrap to more lines inside the intentionally narrow
@@ -377,6 +381,9 @@
 .theme-advantech .cs-tl-top,
 .theme-advantech .cs-tl-bottom {
   --cs-stack-box-min-width: var(--cs-tl-step-width);
+  --cs-stack-box-overflow: visible;
+  --cs-stack-box-overflow-x: visible;
+  --cs-stack-box-overflow-y: visible;
   --cs-stack-box-padding: 0 8px;
   --cs-stack-box-align: stretch;
 }
@@ -424,13 +431,15 @@
 .theme-advantech .cs-tl-card {
   --cs-stack-box-bg: rgba(255, 255, 255, 0.12);
   --cs-stack-box-border: 1px solid rgba(255, 255, 255, 0.22);
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 12px;
   --cs-stack-box-height: var(--cs-tl-card-height);
-  --cs-stack-box-overflow-x: hidden;
+  --cs-stack-box-min-width: auto;
+  --cs-stack-box-overflow: visible;
+  --cs-stack-box-overflow-x: visible;
+  --cs-stack-box-overflow-y: visible;
   --cs-stack-box-padding: 16px;
   box-sizing: border-box;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   flex-shrink: 0;
 }
 
