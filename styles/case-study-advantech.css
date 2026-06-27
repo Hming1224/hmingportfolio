@@ -587,6 +587,9 @@
   --cs-flex-cluster-padding: 16px;
   --cs-flex-cluster-gap: 16px;
   --cs-flex-cluster-align: flex-start;
+  --cs-flex-cluster-bg: #f5faff;
+  --cs-flex-cluster-border: 1px solid var(--cs-line);
+  --cs-flex-cluster-radius: 8px;
 }
 
 @media (min-width: 1440px) {
