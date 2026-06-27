@@ -264,6 +264,7 @@
 /* ── 06 交易所介面參考 ── */
 .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main {
   --cs-grid-gap: 32px;
+  --cs-grid-margin: 40px 0 0;
 }
 
 .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main > .cs-card:first-child {
@@ -279,6 +280,7 @@
 
 .theme-crypto-arsenal .cs-grid--research-shots {
   --cs-grid-gap: 28px;
+  --cs-grid-margin: 0;
   min-width: 0;
 }
 
@@ -304,6 +306,16 @@
   --cs-card-radius: 20px;
   border: 0;
   margin-top: 64px;
+}
+
+@media (min-width: 769px) {
+  .theme-crypto-arsenal #cs-sec-research > .cs-card {
+    --cs-card-gap: 0;
+    --cs-card-padding: 0;
+    --cs-card-bg: transparent;
+    --cs-card-radius: 0;
+    --cs-card-shadow: none;
+  }
 }
 
 /* ── 08 設計元件迭代 ── */
