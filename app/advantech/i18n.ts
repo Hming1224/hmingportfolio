@@ -114,7 +114,7 @@ const en = {
   "與 PM 確立專案目標，協助釐清設計範圍與核心重點，確保 AI Chatbot 設計聚焦於設施管理的實際工作流程。": "Aligned project goals with the PM and clarified the design scope and priorities so the AI chatbot addressed real facility-management workflows.",
   "使用者訪談與團隊工作坊": "User Interviews and Team Workshop",
   "整理使用者訪談內容，參與團隊工作坊，確保收集的需求與痛點能夠完整對應到專案目標。": "Synthesized interview findings and participated in team workshops to connect user needs and pain points with project goals.",
-  "競品分析與設計機會點": "Competitive Analysis and Design Opportunities",
+  "競品分析與設計機會點": "Competitive Analysis",
   "研究競品功能、設計訪談大綱，協同找出能源管理與設備維護的主要痛點，轉化為設計機會點。": "Researched competitor features, designed interview guides, and translated energy-management and maintenance pain points into design opportunities.",
   "功能設計與原型製作": "Feature Design and Prototyping",
   "負責超約預警與模式識別兩項功能的設計，包含線框稿、互動流程與原型，並製作影片分鏡協助利害關係人對齊。": "Designed overage alerts and pattern-recognition features, including wireframes, interaction flows, prototypes, and video storyboards for stakeholder alignment.",
