@@ -563,6 +563,13 @@
   --cs-flex-cluster-align: flex-start;
 }
 
+@media (min-width: 1440px) {
+  .theme-advantech .cs-comp-ems-media {
+    flex: 0 0 232px;
+    width: 232px;
+  }
+}
+
 .theme-advantech .cs-comp-ems-img {
   --cs-object-box-width: 232px;
   --cs-object-box-height: 163px;
