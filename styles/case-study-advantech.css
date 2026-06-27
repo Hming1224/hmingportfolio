@@ -549,6 +549,27 @@
   --cs-inline-pill-padding: 8px 12px;
 }
 
+@media (min-width: 1024px) {
+  [lang="en"] .theme-advantech .cs-comp-card:nth-child(2) .cs-comp-pill,
+  [lang="en"] .theme-advantech .cs-comp-card:nth-child(3) .cs-comp-pill {
+    --cs-inline-pill-width: fit-content;
+    --cs-inline-pill-line-height: 1.25;
+    --cs-inline-pill-white-space: normal;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  [lang="en"] .theme-advantech .cs-comp-card:nth-child(4) .cs-comp-pill {
+    --cs-inline-pill-width: fit-content;
+    --cs-inline-pill-line-height: 1.25;
+    --cs-inline-pill-white-space: normal;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
 /* === Section 02: EMS Competitor Cards === */
 .theme-advantech .cs-comp-ems-grid {
   --cs-grid-gap: 20px;
