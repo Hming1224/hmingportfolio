@@ -359,6 +359,7 @@
   --cs-tl-step-count: 6;
   --cs-tl-step-width: 160px;
   --cs-stack-box-padding: 0;
+  --cs-stack-box-gap: 0;
   --cs-stack-box-overflow-x: auto;
   --cs-stack-box-overflow-y: auto;
 }
@@ -385,6 +386,7 @@
 .theme-advantech .cs-tl-top,
 .theme-advantech .cs-tl-bottom {
   --cs-stack-box-min-width: var(--cs-tl-step-width);
+  --cs-stack-box-gap: 0;
   --cs-stack-box-overflow: visible;
   --cs-stack-box-overflow-x: visible;
   --cs-stack-box-overflow-y: visible;
