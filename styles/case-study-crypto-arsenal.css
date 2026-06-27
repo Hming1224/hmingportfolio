@@ -20,6 +20,7 @@
   --cs-text-body: #2b2c30;
   --cs-text-secondary: #4a4c52;
   --cs-text-muted: #6c6e77;
+  --cs-hero-cover-bg: #dceefb;
   --cs-shadow-color: rgba(37, 42, 71, 0.12);
   --cs-accent-secondary: #135e78;
   --cs-accent-warning: #c97b1d;
@@ -114,6 +115,10 @@
   --cs-insight-callout-color: #0c5a44;
 }
 
+.theme-crypto-arsenal.cs-page {
+  background: #ffffff;
+}
+
 .theme-crypto-arsenal .cs-divider {
   background: var(--ca-line-soft);
   margin-bottom: 28px;
@@ -122,6 +127,22 @@
 /* ── Hero（圖 + 圖下資訊列，沿用共用 cs-hero-*；此處只補 CA 差異）── */
 .theme-crypto-arsenal .cs-tags {
   color: var(--ca-muted);
+}
+
+.theme-crypto-arsenal .cs-hero-info .cs-info-label {
+  color: #a0a0a0;
+}
+
+@media (max-width: 480px) {
+  .theme-crypto-arsenal .cs-info-row {
+    grid-template-columns: max-content max-content;
+  }
+
+  .theme-crypto-arsenal .cs-info-value,
+  .theme-crypto-arsenal .cs-info-tasks span {
+    overflow-wrap: normal;
+    word-break: normal;
+  }
 }
 
 /* ── 01 專案背景：說明圖卡 ── */
