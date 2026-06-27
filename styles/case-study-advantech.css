@@ -2167,6 +2167,10 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-card-padding-mobile: 32px;
   }
 
+  .theme-advantech .cs-result-card {
+    --cs-card-padding-mobile: 28px;
+  }
+
   .theme-advantech .cs-sol-flow {
     --cs-object-box-height: auto;
     --cs-object-box-min-height: 140px;
