@@ -109,6 +109,10 @@
     --cs-flex-cluster-direction: column;
   }
 
+  .theme-advantech .cs-iv-persona {
+    --cs-flex-cluster-direction: row;
+  }
+
   .theme-advantech .cs-iv-workflow {
     --cs-flex-cluster-direction: column;
     --cs-flex-cluster-align: stretch;
