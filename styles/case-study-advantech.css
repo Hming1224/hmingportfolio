@@ -209,6 +209,30 @@
   --cs-stack-box-overflow: hidden;
 }
 
+.theme-advantech .cs-role-card-1 {
+  --cs-stack-box-top: 0;
+  --cs-stack-box-left: 0;
+  --cs-stack-box-min-height: 0;
+}
+
+.theme-advantech .cs-role-card-2 {
+  --cs-stack-box-top: 0;
+  --cs-stack-box-right: 0;
+  --cs-stack-box-min-height: 0;
+}
+
+.theme-advantech .cs-role-card-3 {
+  --cs-stack-box-top: 410px;
+  --cs-stack-box-left: 0;
+  --cs-stack-box-min-height: 0;
+}
+
+.theme-advantech .cs-role-card-4 {
+  --cs-stack-box-top: 410px;
+  --cs-stack-box-right: 0;
+  --cs-stack-box-min-height: 0;
+}
+
 .theme-advantech .cs-role-connectors {
   position: absolute;
   inset: 0;
