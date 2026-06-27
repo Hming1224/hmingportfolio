@@ -651,23 +651,28 @@
    shares the same grid row → heights auto-align. */
 .theme-advantech .cs-fm-wrap {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: minmax(440px, 1fr) 280px;
   border: 1px solid var(--cs-line);
   overflow-x: auto;
 }
 
 .theme-advantech .cs-fm-header {
   --cs-flex-cluster-gap: 0;
+  --cs-flex-cluster-align: stretch;
   border-bottom: 1px solid var(--cs-line);
   border-right: 1px solid var(--cs-line);
 }
 
 .theme-advantech .cs-fm-module-hd {
   --cs-flex-cluster-width: 120px;
+  --cs-flex-cluster-flex: 0 0 auto;
   --cs-flex-cluster-flex-shrink: 0;
   --cs-flex-cluster-padding: 16px;
   --cs-flex-cluster-bg: var(--cs-tint);
   --cs-flex-cluster-justify: center;
+  --cs-copy-title-flex: 0 0 120px;
+  --cs-copy-title-flex-shrink: 0;
+  --cs-copy-title-width: 120px;
   --cs-copy-title-size: var(--fs-sm);
   --cs-copy-title-weight: 700;
   --cs-copy-title-color: var(--cs-blue);
@@ -681,6 +686,7 @@
   --cs-flex-cell-min-width: 160px;
   --cs-flex-cell-padding: 16px;
   --cs-flex-cell-bg: var(--cs-tint);
+  --cs-copy-title-flex: 1 1 0%;
   --cs-copy-title-size: var(--fs-sm);
   --cs-copy-title-weight: 700;
   --cs-copy-title-color: var(--cs-blue);
@@ -708,6 +714,7 @@
 
 .theme-advantech .cs-fm-row {
   --cs-flex-cluster-gap: 0;
+  --cs-flex-cluster-align: stretch;
   border-bottom: 1px solid var(--cs-line);
   border-right: 1px solid var(--cs-line);
 }
