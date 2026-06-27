@@ -818,6 +818,7 @@
   --cs-stack-box-align-self: stretch;
   --cs-stack-box-bg: var(--cs-bg);
   --cs-stack-box-border: 1px solid var(--cs-line);
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 8px;
   --cs-stack-box-padding: 16px;
   --cs-stack-box-gap: 16px;
@@ -834,6 +835,7 @@
 .theme-advantech .cs-iv-pain {
   --cs-stack-box-bg: #fff7e8;
   --cs-stack-box-border: 1px solid #f2d9a6;
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 8px;
   --cs-stack-box-padding: 16px;
   --cs-stack-box-gap: 8px;
@@ -855,6 +857,7 @@
 .theme-advantech .cs-iv-ai {
   --cs-stack-box-bg: var(--cs-tint);
   --cs-stack-box-border: 1px solid #88b9e8;
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 8px;
   --cs-stack-box-padding: 16px;
   --cs-stack-box-gap: 8px;
@@ -950,6 +953,7 @@
   --cs-stack-box-flex: 1;
   --cs-stack-box-bg: white;
   --cs-stack-box-border: 1px solid var(--cs-line);
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 8px;
   --cs-stack-box-padding: 20px;
   --cs-stack-box-gap: 12px;
