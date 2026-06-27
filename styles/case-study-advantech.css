@@ -979,8 +979,11 @@
 }
 
 .theme-advantech .cs-synthesis-card-heading {
+  --cs-flex-cluster-direction: row;
   --cs-flex-cluster-align: center;
+  --cs-flex-cluster-justify: flex-start;
   --cs-flex-cluster-gap: 10px;
+  --cs-flex-cluster-padding: 0;
 }
 
 .theme-advantech .cs-synthesis-card-title {
@@ -1001,6 +1004,10 @@
   --cs-object-box-border: 1px solid var(--cs-line);
   --cs-object-box-radius: 8px;
   --cs-object-box-min-height: 300px;
+}
+
+.theme-advantech .cs-synthesis-photo img {
+  object-position: right center;
 }
 
 /* ── Design Scenario ── */
