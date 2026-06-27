@@ -1854,6 +1854,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 
 .theme-advantech .cs-ns-header {
   --cs-stack-box-gap: 20px;
+  --cs-stack-box-padding: 0;
 }
 
 .theme-advantech .cs-ns-title {
@@ -1865,6 +1866,8 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 }
 
 .theme-advantech .cs-ns-desc {
+  --cs-copy-body-width: 100%;
+  --cs-copy-body-max-width: 960px;
   --cs-copy-body-size: var(--fs-body);
   --cs-copy-body-color: var(--text-secondary);
   --cs-copy-body-line-height: 1.75;
