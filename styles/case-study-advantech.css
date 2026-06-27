@@ -1100,6 +1100,9 @@
   --cs-inline-pill-size: var(--fs-body);
   --cs-inline-pill-weight: 600;
   --cs-inline-pill-line-height: 1.35;
+  --cs-inline-pill-flex-shrink: 1;
+  --cs-inline-pill-white-space: normal;
+  max-width: 100%;
   overflow-wrap: normal;
   word-break: normal;
   hyphens: manual;
