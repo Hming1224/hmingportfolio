@@ -1087,6 +1087,11 @@
   --cs-stack-box-border-width: 2px;
 }
 
+.theme-advantech .cs-ds-card.cs-ds-card-ai:not(.cs-ds-card-primary),
+.theme-advantech .cs-ds-card.cs-ds-card-func:not(.cs-ds-card-primary) {
+  --cs-stack-box-border-width: 1px;
+}
+
 .theme-advantech .cs-ds-pill {
   --cs-inline-pill-display: inline-block;
   --cs-inline-pill-bg: white;
