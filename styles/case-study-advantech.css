@@ -1214,6 +1214,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 .theme-advantech .cs-sol-board {
   --cs-stack-box-bg: white;
   --cs-stack-box-border: 1px solid var(--cs-line-soft);
+  --cs-stack-box-border-width: 1px;
   --cs-stack-box-radius: 16px;
   --cs-stack-box-padding: 28px;
   --cs-stack-box-gap: 24px;
@@ -1281,6 +1282,8 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-flex-cluster-align: center;
   --cs-flex-cluster-justify: center;
   --cs-flex-cluster-padding: 20px;
+  margin: -28px -28px 0;
+  border-radius: 15px 15px 0 0;
   background: linear-gradient(
     269.56deg,
     rgba(221, 241, 254, 0.2) 0%,
