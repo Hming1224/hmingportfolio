@@ -1640,11 +1640,15 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   }
 
   .theme-advantech .cs-alarm-toggle-btn {
+    --cs-flex-cluster-direction: row;
     --cs-flex-cluster-align: center;
     --cs-flex-cluster-justify: center;
     --cs-flex-cluster-min-width: 0;
+    --cs-flex-cluster-min-height: 0;
+    --cs-flex-cluster-gap: 0;
     --cs-flex-cluster-padding: 8px 8px;
     --cs-flex-cluster-radius: 999px;
+    --cs-flex-cluster-bg: transparent;
     border: 0;
     background: transparent;
     color: var(--muted);
@@ -1682,10 +1686,21 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   }
 
   .theme-advantech .cs-alarm-panel {
+    --cs-flex-cluster-direction: row;
     --cs-flex-cluster-justify: center;
     --cs-flex-cluster-min-height: 76px;
+    --cs-flex-cluster-padding: 0;
     --cs-flex-cluster-radius: 12px;
     --cs-flex-cluster-bg: #f6faff;
+  }
+
+  .theme-advantech .cs-alarm-state-row {
+    --cs-flex-cluster-direction: row;
+    --cs-flex-cluster-align: center;
+    --cs-flex-cluster-justify: center;
+    --cs-flex-cluster-min-height: 0;
+    --cs-flex-cluster-padding: 0;
+    --cs-flex-cluster-bg: transparent;
   }
 
   .theme-advantech .cs-alarm-before,
@@ -2190,8 +2205,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-copy-title-width: auto;
   }
 
-  /* Alarm-level hover demo: stack the two states vertically and point the
-     arrow downwards instead of to the right */
+  /* Alarm-level hover demo keeps the compact public-live horizontal rows. */
   .theme-advantech .cs-alarm-demo {
     --cs-flex-cluster-direction: column;
     --cs-flex-cluster-align: center !important;
@@ -2199,13 +2213,25 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-flex-cluster-padding: 20px 12px 16px !important;
   }
 
-  .theme-advantech .cs-alarm-arrow {
-    display: inline-block;
-    --cs-flex-cluster-transform: rotate(90deg);
+  .theme-advantech .cs-alarm-panel,
+  .theme-advantech .cs-alarm-state-row {
+    --cs-flex-cluster-direction: row;
+    --cs-flex-cluster-align: center;
+    --cs-flex-cluster-justify: flex-start;
+    --cs-flex-cluster-padding: 0;
+    --cs-flex-cluster-bg: transparent;
+    --cs-flex-cluster-margin: 0;
   }
 
-  /* room above the "after" state for its (downward-pointing) tooltip so it
-     doesn't cover the arrow / first state when stacked */
+  .theme-advantech .cs-alarm-arrow {
+    display: inline-block;
+    --cs-flex-cluster-direction: row;
+    --cs-flex-cluster-padding: 0;
+    --cs-flex-cluster-bg: transparent;
+    --cs-flex-cluster-transform: none;
+  }
+
+  /* room above the "after" state for its tooltip */
   .theme-advantech .cs-alarm-after {
     --cs-flex-cluster-margin: 80px 0 0;
   }
