@@ -1483,6 +1483,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 @media (min-width: 1440px) {
   .theme-advantech .cs-sol-fc .cs-sol-dpts {
     --cs-stack-box-direction: row;
+    flex-direction: row;
   }
 
   .theme-advantech .cs-sol-fc .cs-sol-dpt {
