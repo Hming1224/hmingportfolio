@@ -1222,10 +1222,11 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 }
 
 .theme-advantech .cs-sol-blk-desc {
+  --cs-copy-body-width: 100%;
   --cs-copy-body-size: var(--fs-body);
   --cs-copy-body-color: var(--text-secondary);
   --cs-copy-body-line-height: 25px;
-  --cs-copy-body-max-width: 920px;
+  --cs-copy-body-max-width: none;
 }
 
 /* Flow Diagram Banner */
@@ -1906,7 +1907,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 
 .theme-advantech .cs-ns-desc {
   --cs-copy-body-width: 100%;
-  --cs-copy-body-max-width: 960px;
+  --cs-copy-body-max-width: none;
   --cs-copy-body-size: var(--fs-body);
   --cs-copy-body-color: var(--text-secondary);
   --cs-copy-body-line-height: 1.75;
