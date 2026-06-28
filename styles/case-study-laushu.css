@@ -588,7 +588,7 @@
   --cs-guide-list-title-white-space: nowrap;
   --cs-guide-list-padding: 24px 28px 28px;
   --cs-guide-list-gap: 0;
-  --cs-guide-list-row-gap: 0;
+  --cs-guide-list-row-gap: 4px 12px;
   --cs-guide-list-item-padding-bottom: 14px;
   --cs-guide-list-dot-bg: #9261ef;
   --cs-guide-list-line-bg: var(--laushu-primary-200);
