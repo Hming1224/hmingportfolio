@@ -235,6 +235,11 @@
   padding-block: 72px;
 }
 
+.theme-crypto-arsenal #cs-sec-current .cs-media-frame {
+  --cs-media-bg: transparent;
+  overflow: visible;
+}
+
 /* ── 05 兩種平倉路徑：紅綠漸層標頭對比卡 ── */
 .theme-crypto-arsenal #cs-sec-decision > .cs-grid {
   gap: 20px;
