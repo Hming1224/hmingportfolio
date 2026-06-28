@@ -395,6 +395,18 @@
   margin: 80px 0 80px;
 }
 
+.theme-crypto-arsenal #cs-sec-final .cs-media-frame {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
+  width: min(96vw, calc(96vh * 2336 / 1440));
+  aspect-ratio: 2336 / 1440;
+}
+
 /* ── 10 學習反思 ── */
 .theme-crypto-arsenal #cs-sec-reflect > .cs-grid {
   --cs-grid-gap: 20px;
