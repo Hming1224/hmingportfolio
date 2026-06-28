@@ -795,6 +795,35 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-flow-frame-list-max-width: var(--laushu-content-max);
 }
 
+.theme-laushu .laushu-iterate-section .cs-flow-frame-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-laushu .laushu-iterate-section .cs-flow-frame--split {
+  display: contents;
+}
+
+.theme-laushu .laushu-iterate-section .cs-flow-frame--split .cs-flow-frame-header {
+  order: 1;
+}
+
+.theme-laushu .laushu-iterate-section .cs-flow-hint {
+  order: 2;
+}
+
+.theme-laushu .laushu-iterate-section .cs-flow-hint[data-visible="true"] {
+  margin: 0 0 12px;
+}
+
+.theme-laushu .laushu-iterate-section .cs-flow-frame-group:has(> .cs-flow-hint[data-visible="true"]) .cs-flow-frame-header {
+  margin-bottom: 8px;
+}
+
+.theme-laushu .laushu-iterate-section .cs-flow-frame--split .cs-flow-frame-scroll {
+  order: 3;
+}
+
 .theme-laushu .laushu-iterate-section .cs-flow-frame-badge {
   --cs-flow-frame-badge-padding: 0;
   --cs-flow-frame-badge-radius: 0;
