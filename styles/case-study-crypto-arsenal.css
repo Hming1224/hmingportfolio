@@ -511,8 +511,20 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   }
 
   .theme-crypto-arsenal #cs-sec-research > .cs-card {
-    --cs-card-gap: 40px;
-    --cs-card-radius: 16px;
+    --cs-card-gap: 0;
+    --cs-card-padding-mobile: 0;
+    --cs-card-bg: transparent;
+    --cs-card-border: transparent;
+    --cs-card-radius: 0;
+    --cs-card-shadow: none;
+  }
+
+  .theme-crypto-arsenal #cs-sec-research > .cs-card .cs-flow-hint[data-visible="false"] + .cs-flow-frame {
+    margin-top: 24px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-research > .cs-card .cs-flow-frame--plain .cs-flow-frame-scroll {
+    margin-top: 0;
   }
 
   .theme-crypto-arsenal #cs-sec-iteration > .cs-card {
