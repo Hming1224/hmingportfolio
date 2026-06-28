@@ -186,6 +186,20 @@
   gap: 24px;
 }
 
+.theme-crypto-arsenal #cs-sec-problem .cs-avatar {
+  --cs-avatar-size: 46px;
+  --cs-avatar-radius: 12px;
+  line-height: 0;
+}
+
+.theme-crypto-arsenal #cs-sec-problem .cs-avatar--orange {
+  --cs-avatar-bg: #ffe9dc;
+}
+
+.theme-crypto-arsenal #cs-sec-problem .cs-avatar--blue {
+  --cs-avatar-bg: #e7eaff;
+}
+
 @container (max-width: 320px) {
   .theme-crypto-arsenal #cs-sec-problem .cs-quote-meta {
     display: grid;
