@@ -452,6 +452,13 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   --cs-card-shadow: var(--ca-card-shadow);
 }
 
+.theme-crypto-arsenal #cs-sec-impact .cs-media--scroll .cs-media-frame {
+  overflow: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
 .theme-crypto-arsenal #cs-sec-impact > .cs-grid--quote-list > .cs-card {
   --cs-card-gap: 16px;
   --cs-card-padding: 20px 26px;
