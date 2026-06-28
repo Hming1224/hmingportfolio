@@ -1290,10 +1290,12 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 .theme-advantech .cs-sol-bdhd {
   --cs-flex-cluster-gap: 24px;
   --cs-flex-cluster-align: center;
+  --cs-flex-cluster-padding: 0 8px;
   --cs-flex-cluster-overflow: hidden;
 }
 
 .theme-advantech .cs-sol-badge {
+  --cs-inline-pill-width: 160px;
   --cs-inline-pill-padding: 8px 16px;
   --cs-inline-pill-radius: 999px;
   --cs-inline-pill-size: var(--fs-sm);
@@ -1318,9 +1320,12 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-copy-title-size: var(--fs-body);
   --cs-copy-title-weight: 700;
   --cs-copy-title-color: var(--text-secondary);
-  --cs-copy-title-width: 98px;
+  --cs-copy-title-width: 160px;
   --cs-copy-title-flex-shrink: 0;
   --cs-copy-title-line-height: 23px;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: auto;
 }
 
 .theme-advantech .cs-sol-drbody {
@@ -2249,6 +2254,17 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   }
 
   /* Iteration design-note box: stack the label above the body text */
+  .theme-advantech .cs-sol-bdhd {
+    --cs-flex-cluster-direction: column;
+    --cs-flex-cluster-align: flex-start;
+    --cs-flex-cluster-gap: 10px;
+    --cs-flex-cluster-overflow: visible;
+  }
+
+  .theme-advantech .cs-sol-badge {
+    --cs-inline-pill-width: auto;
+  }
+
   .theme-advantech .cs-sol-dr {
     --cs-flex-cluster-direction: column;
     --cs-flex-cluster-gap: 8px;
@@ -2314,13 +2330,6 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 /* 7-inch phones and under: stack each interview-persona card's image above
    its text and centre the whole card content. */
 @media (max-width: 440px) {
-  .theme-advantech .cs-sol-bdhd {
-    --cs-flex-cluster-direction: column;
-    --cs-flex-cluster-align: flex-start;
-    --cs-flex-cluster-gap: 10px;
-    --cs-flex-cluster-overflow: visible;
-  }
-
   .theme-advantech .cs-iv-persona {
     --cs-flex-cluster-direction: column;
     --cs-flex-cluster-align: center;
