@@ -115,6 +115,14 @@
   --cs-topic-grid-max-width: var(--laushu-content-max);
 }
 
+@media (min-width: 769px) and (max-width: 1023px) {
+  .theme-laushu .laushu-overview-section .cs-topic-grid--overview,
+  .theme-laushu .laushu-converge-section .cs-topic-grid--usecase,
+  .theme-laushu .cs-reflection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .theme-laushu .cs-topic-card {
   --cs-topic-card-bg: #ffffff;
   --cs-topic-card-border: var(--laushu-line);
