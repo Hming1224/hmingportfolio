@@ -525,15 +525,15 @@
   --cs-survey-bar-fill-bg: var(--laushu-primary-400);
   --cs-survey-summary-border-color: var(--laushu-primary-500);
   --cs-survey-summary-color: var(--text-body);
-  --cs-survey-insight-bg: linear-gradient(120deg, #f5eeff 0%, #fff8ee 100%);
+  --cs-survey-insight-bg: linear-gradient(120deg, rgba(245, 238, 255, 0.5) 0%, rgba(141, 150, 249, 0.5) 100%);
   --cs-survey-insight-col-border: 1px solid rgba(99, 0, 165, 0.12);
-  --cs-survey-insight-col-bg: rgba(255, 255, 255, 0.86);
-  --cs-survey-insight-label-bg: var(--laushu-primary-200);
-  --cs-survey-insight-label-color: var(--laushu-primary-700);
-  --cs-survey-insight-pain-label-bg: var(--laushu-tertiary-200);
-  --cs-survey-insight-pain-label-color: var(--laushu-tertiary-700);
-  --cs-survey-insight-title-color: var(--laushu-primary-700);
-  --cs-survey-quote-color: var(--laushu-primary-400);
+  --cs-survey-insight-col-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.52) 1%, rgba(248, 246, 255, 0.86) 100%);
+  --cs-survey-insight-label-bg: #decbff;
+  --cs-survey-insight-label-color: #37005f;
+  --cs-survey-insight-pain-label-bg: #decbff;
+  --cs-survey-insight-pain-label-color: #37005f;
+  --cs-survey-insight-title-color: #37005f;
+  --cs-survey-quote-color: #ab5fff;
   --cs-survey-insight-summary-bg: var(--laushu-primary-700);
 }
 
@@ -550,6 +550,56 @@
 .theme-laushu .cs-survey-panel--stats {
   --cs-survey-stats-border: 1px solid var(--laushu-line);
   --cs-survey-stats-bg: #fbf9ff;
+  --cs-survey-stats-radius: 20px;
+}
+
+.theme-laushu .cs-survey-summary {
+  border: 1px solid var(--laushu-line);
+  border-radius: 16px;
+  background: #f5eeff;
+}
+
+.theme-laushu .cs-survey-panel--insight {
+  --cs-survey-insight-radius: 20px;
+}
+
+.theme-laushu .cs-survey-insight-summary {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--laushu-line);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.52) 1%, rgba(248, 246, 255, 0.86) 100%);
+  color: #1f2933;
+  font-weight: 500;
+}
+
+.theme-laushu .cs-survey-insight-summary::before {
+  content: "收斂觀點";
+  display: inline-flex;
+  width: fit-content;
+  min-height: 30px;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #decbff;
+  color: #37005f;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 18px;
+}
+
+html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
+  content: "Convergent perspective";
+}
+
+@media (min-width: 1024px) {
+  .theme-laushu .cs-survey-panel--stats .cs-survey-chart-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .theme-laushu .cs-survey-panel--stats .cs-survey-bar-groups {
+    display: contents;
+  }
 }
 
 .theme-laushu .cs-survey-block-head {

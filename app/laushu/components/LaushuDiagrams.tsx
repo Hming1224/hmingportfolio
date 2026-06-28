@@ -317,7 +317,7 @@ export function SurveyStats({
                 })}
               </svg>
               <div className="cs-survey-donut-center">
-                <strong>38</strong>
+                <strong>39</strong>
                 <span>位填答</span>
               </div>
             </div>
