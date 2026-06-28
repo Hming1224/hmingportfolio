@@ -471,6 +471,12 @@
   --cs-topic-card-kicker-line-height: 18px;
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .theme-laushu .laushu-understand-section .cs-topic-grid--stakeholder {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* 研究策略表格 */
 .theme-laushu .cs-data-table-frame--wide {
   --cs-data-table-frame-max-width: var(--laushu-content-max);
