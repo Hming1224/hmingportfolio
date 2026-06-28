@@ -572,6 +572,44 @@
   --cs-survey-note-color: #1f2933;
 }
 
+@media (max-width: 768px) {
+  .theme-laushu .laushu-understand-section .cs-survey-flow {
+    --cs-survey-flow-gap: 8px;
+    justify-items: center;
+  }
+
+  .theme-laushu .laushu-understand-section .cs-survey-flow-mid {
+    width: min(100%, 288px);
+    gap: 48px;
+  }
+
+  .theme-laushu .laushu-understand-section .cs-survey-flow-mid::before {
+    order: 1;
+    width: 2px;
+    height: 92px;
+    border-radius: 999px;
+    background: #c7c2d6;
+    content: "";
+  }
+
+  .theme-laushu .laushu-understand-section .cs-survey-arrow {
+    order: 3;
+    width: 88px;
+    max-width: 88px;
+    margin-block-end: 40px;
+    transform: rotate(90deg);
+  }
+
+  .theme-laushu .laushu-understand-section .cs-survey-note {
+    order: 2;
+    width: min(100%, 280px);
+    max-width: 280px;
+    line-height: 1.75;
+    text-align: center;
+    text-wrap: pretty;
+  }
+}
+
 .theme-laushu .cs-survey-panel--stats {
   --cs-survey-stats-border: 1px solid var(--laushu-line);
   --cs-survey-stats-bg: #fbf9ff;
