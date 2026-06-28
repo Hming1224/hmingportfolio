@@ -349,6 +349,11 @@
 }
 
 @media (max-width: 768px) {
+  .theme-laushu .laushu-understand-section .cs-guide-list-card,
+  .theme-laushu .laushu-iterate-section .cs-iteration-panel {
+    --cs-card-padding-mobile: 0;
+  }
+
   .theme-laushu .cs-iteration-board {
     --cs-iteration-board-padding-mobile: 20px;
   }
