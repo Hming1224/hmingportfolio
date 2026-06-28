@@ -472,6 +472,10 @@
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
+  .theme-laushu .cs-topic-grid--problem {
+    grid-template-columns: 1fr;
+  }
+
   .theme-laushu .laushu-understand-section .cs-topic-grid--stakeholder {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -848,6 +852,12 @@
   --cs-showcase-media-border: 1px solid var(--laushu-line);
   --cs-showcase-media-radius: 16px;
   --cs-showcase-media-shadow: var(--laushu-shadow);
+}
+
+@media (min-width: 769px) {
+  .theme-laushu .laushu-prototype-section > .cs-showcase-media .cs-media-frame {
+    background: #ffffff url("/projects/laushu/figma-design.png") center / 100% auto no-repeat;
+  }
 }
 
 .theme-laushu .laushu-prototype-section > .cs-section-lead {
