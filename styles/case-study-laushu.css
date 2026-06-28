@@ -130,6 +130,11 @@
   --cs-topic-card-art-bg: var(--laushu-primary-200);
 }
 
+.theme-laushu .cs-topic-card-kicker {
+  align-self: flex-start;
+  width: fit-content;
+}
+
 .theme-laushu .cs-document-preview {
   --cs-document-preview-border: 1px solid var(--laushu-line);
   --cs-document-preview-radius: 18px;
