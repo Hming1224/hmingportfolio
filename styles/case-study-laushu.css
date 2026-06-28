@@ -1059,6 +1059,11 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-sol-fsub-line-height: 1.6;
 }
 
+.theme-laushu .laushu-prototype-section .cs-feature-row--prototype .cs-feature-row-note > p {
+  width: 100%;
+  color: #5d6674;
+}
+
 .theme-laushu .cs-sol-fhr {
   --cs-sol-fhr-bg: var(--laushu-line);
 }
