@@ -91,6 +91,12 @@
   --cs-explainer-pill-weight: 700;
 }
 
+@media (min-width: 769px) {
+  .theme-laushu .laushu-problem-section .cs-explainer-layout {
+    --cs-explainer-layout-align: center;
+  }
+}
+
 .theme-laushu .cs-section-lead--wide {
   --cs-section-lead-wide-max: var(--laushu-content-max);
   --cs-section-lead-color: var(--text-secondary);
