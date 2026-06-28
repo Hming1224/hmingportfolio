@@ -2330,6 +2330,11 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 /* 7-inch phones and under: stack each interview-persona card's image above
    its text and centre the whole card content. */
 @media (max-width: 440px) {
+  html[lang="en"] .theme-advantech .cs-ds-card-head .cs-ds-pill {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
   .theme-advantech .cs-iv-persona {
     --cs-flex-cluster-direction: column;
     --cs-flex-cluster-align: center;
