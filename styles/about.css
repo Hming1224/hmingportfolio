@@ -27,7 +27,7 @@
 }
 
 .about-hero {
-  padding: 48px var(--page-gutter);
+  padding: var(--hm-space-xl) var(--page-gutter);
 }
 
 .about-window-animated-wrap {
@@ -37,7 +37,7 @@
 
 .about-window {
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--hm-radius-md);
   background: var(--ink);
   box-shadow: var(--shadow-lg);
 }
@@ -51,9 +51,9 @@
   place-items: center;
   width: 84px;
   height: 84px;
-  padding: 8px;
+  padding: var(--hm-space-2xs);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 22px;
+  border-radius: var(--hm-radius-lg);
   background: var(--ink);
   box-shadow: var(--shadow-lg);
   transform: translateX(-50%);
@@ -81,14 +81,14 @@
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 18px;
+  border-radius: var(--hm-radius-lg);
   object-fit: cover;
 }
 
 .window-bar {
   display: flex;
   gap: 6px;
-  padding: 8px;
+  padding: var(--hm-space-2xs);
   background: white;
 }
 
@@ -113,9 +113,9 @@
 .about-window-body {
   display: grid;
   grid-template-columns: 360px minmax(0, 1fr);
-  gap: 64px;
+  gap: var(--hm-space-2xl);
   align-items: center;
-  padding: 48px 80px 48px 48px;
+  padding: var(--hm-space-xl) var(--hm-space-3xl) var(--hm-space-xl) var(--hm-space-xl);
 }
 
 .experience-image img {
@@ -124,7 +124,7 @@
 
 .about-intro-copy {
   display: grid;
-  gap: 24px;
+  gap: var(--hm-space-md);
 }
 
 .about-intro-copy h1 {
@@ -156,7 +156,7 @@
 .experience-layout,
 .skills-panel,
 .education-list {
-  margin: 0 var(--page-gutter) 24px;
+  margin: 0 var(--page-gutter) var(--hm-space-md);
 }
 
 /* 尊重「減少動態效果」偏好：直接顯示最終狀態，不播進場動畫 */
@@ -195,7 +195,7 @@
 .experience-layout {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
-  gap: 48px;
+  gap: var(--hm-space-xl);
   align-items: start;
 }
 
@@ -204,13 +204,13 @@
   --year-rail-sticky-top: 80px;
   top: var(--year-rail-sticky-top);
   display: grid;
-  gap: 24px;
+  gap: var(--hm-space-md);
   align-content: center;
   min-height: calc(100vh - var(--year-rail-sticky-top));
-  padding: 12px;
+  padding: var(--hm-space-xs);
   background: white;
   z-index: 10;
-  transition: top 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: top var(--hm-duration-base) var(--hm-ease-out);
 }
 
 .year-rail a {
@@ -220,9 +220,9 @@
   font-weight: 600;
   line-height: 1;
   transition:
-    color 180ms ease,
-    font-size 180ms ease,
-    font-weight 180ms ease;
+    color var(--hm-duration-fast) var(--hm-ease-standard),
+    font-size var(--hm-duration-fast) var(--hm-ease-standard),
+    font-weight var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
 .year-rail a.is-active {
@@ -240,16 +240,16 @@
   display: grid;
   grid-template-columns: 269px minmax(0, 1fr);
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: var(--hm-radius-lg);
   background: white;
   box-shadow: var(--shadow-md);
   opacity: 0;
   transform: translateY(72px);
   scroll-margin-top: 100px;
   transition:
-    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 300ms ease;
+    opacity 620ms var(--hm-ease-out),
+    transform 400ms var(--hm-ease-out),
+    box-shadow 300ms var(--hm-ease-standard);
   will-change: opacity, transform;
 }
 

@@ -93,7 +93,7 @@ function ProjectCard({ project }: { project: ProjectSummary }) {
           </div>
         </div>
         {disabled ? (
-          <Button disabled size="lg">
+          <Button size="lg" disabled>
             {t("comingSoon")}
           </Button>
         ) : (

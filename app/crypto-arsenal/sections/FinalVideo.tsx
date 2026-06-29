@@ -17,7 +17,7 @@ type FinalVideoProps = {
 };
 
 type MaskedVideoStyle = CSSProperties & {
-  "--ca-video-mask"?: string;
+  "--cs-video-mask"?: string;
 };
 
 export default function FinalVideo({ src, label, labels, mask }: FinalVideoProps) {
@@ -25,11 +25,11 @@ export default function FinalVideo({ src, label, labels, mask }: FinalVideoProps
   const [isOpen, setIsOpen] = useState(false);
   const titleId = useId();
   const style: MaskedVideoStyle | undefined = mask
-    ? { "--ca-video-mask": `url(${mask})` }
+    ? { "--cs-video-mask": `url(${mask})` }
     : undefined;
   const videoClassName = mask
-    ? "ca-final-video ca-final-video--masked"
-    : "ca-final-video";
+    ? "cs-video-lightbox-thumb cs-video-lightbox--masked"
+    : "cs-video-lightbox-thumb";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -84,7 +84,7 @@ export default function FinalVideo({ src, label, labels, mask }: FinalVideoProps
       <div
         role="button"
         tabIndex={0}
-        className="ca-final-video-button"
+        className="cs-video-lightbox-button"
         aria-label={`${labels.zoom}${labels.separator}${label}`}
         onClick={() => setIsOpen(true)}
         onKeyDown={(event) => {
@@ -116,7 +116,7 @@ export default function FinalVideo({ src, label, labels, mask }: FinalVideoProps
 
       {isOpen ? createPortal(
         <div
-          className="ca-final-video-lightbox"
+          className="cs-video-lightbox"
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
@@ -136,12 +136,12 @@ export default function FinalVideo({ src, label, labels, mask }: FinalVideoProps
             ×
           </button>
           <div
-            className="ca-final-video-lightbox-frame"
+            className="cs-video-lightbox-frame"
           >
             <video
               className={mask
-                ? "ca-final-video-lightbox-media ca-final-video--masked"
-                : "ca-final-video-lightbox-media"}
+                ? "cs-video-lightbox-media cs-video-lightbox--masked"
+                : "cs-video-lightbox-media"}
               src={src}
               style={style}
               aria-label={label}

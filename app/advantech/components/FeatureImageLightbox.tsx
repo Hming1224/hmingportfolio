@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import type { Locale } from "../../../i18n/routing";
 import { ZoomableImage } from "../../../components/case-study";
 import { translateAdvantech } from "../i18n";
-import { setupFeatureConnectors } from "./FeatureConnectors";
+import { setupFeatureConnectors } from "../../../components/case-study/FeatureConnectors";
 
 type FeatureImageLightboxProps = {
   alt: string;

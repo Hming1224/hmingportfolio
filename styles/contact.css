@@ -2,7 +2,7 @@
 
 .contact-page-section {
   overflow: hidden;
-  background: white;
+  background: var(--hm-paper);
 }
 
 .contact-hero-image {
@@ -20,8 +20,8 @@
 .contact-panel-band {
   display: flex;
   justify-content: center;
-  padding: 80px var(--page-gutter) 120px;
-  background: #fdfdfd;
+  padding: var(--hm-space-3xl) var(--page-gutter) 120px;
+  background: var(--hm-surface);
 }
 
 .contact-split-container {
@@ -30,7 +30,7 @@
      a floor wide enough for the full email on one line (with Copy moved below). */
   grid-template-columns: minmax(340px, 1fr) 2fr;
   width: 100%;
-  gap: 48px;
+  gap: var(--hm-space-xl);
   align-items: start;
 }
 
@@ -48,7 +48,7 @@
 
 .contact-info-card {
   display: grid;
-  gap: 32px;
+  gap: var(--hm-space-lg);
 }
 
 .contact-info-header h2 {
@@ -68,31 +68,31 @@
 
 .contact-methods {
   display: grid;
-  gap: 16px;
+  gap: var(--hm-space-sm);
 }
 
 .contact-method-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 24px;
-  border-radius: 16px;
-  background: white;
+  gap: var(--hm-space-sm);
+  padding: var(--hm-space-md);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-paper);
   border: 1px solid var(--line);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
   text-decoration: none;
   color: inherit;
   cursor: pointer;
   transition:
-    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 260ms ease,
-    box-shadow 260ms ease;
+    transform var(--hm-duration-base) var(--hm-ease-out),
+    border-color var(--hm-duration-base) var(--hm-ease-standard),
+    box-shadow var(--hm-duration-base) var(--hm-ease-standard);
 }
 
 .contact-method-item:hover {
   transform: translateY(-4px);
   border-color: var(--purple-soft);
-  box-shadow: 0 12px 24px rgba(93, 98, 216, 0.08);
+  box-shadow: var(--shadow-purple-soft);
 }
 
 .method-icon-wrap {
@@ -101,11 +101,11 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: var(--hm-radius-md);
   background: var(--purple-soft);
   color: var(--purple);
   flex-shrink: 0;
-  transition: transform 260ms ease;
+  transition: transform var(--hm-duration-base) var(--hm-ease-standard);
 }
 
 .contact-method-item:hover .method-icon-wrap {
@@ -157,16 +157,19 @@
 }
 
 .copy-btn {
-  padding: 8px 16px;
+  padding: var(--hm-space-2xs) var(--hm-space-sm);
   border: 1px solid var(--line);
-  border-radius: 200px;
-  background: white;
+  border-radius: var(--hm-radius-button);
+  background: var(--hm-paper);
   color: var(--muted);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   outline: none;
-  transition: all 180ms ease;
+  transition:
+    color var(--hm-duration-fast) var(--hm-ease-standard),
+    border-color var(--hm-duration-fast) var(--hm-ease-standard),
+    background-color var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
 .copy-btn:hover {
@@ -256,8 +259,8 @@
   color: var(--muted);
   opacity: 0.5;
   transition:
-    transform 260ms ease,
-    opacity 260ms ease;
+    transform var(--hm-duration-base) var(--hm-ease-standard),
+    opacity var(--hm-duration-base) var(--hm-ease-standard);
 }
 
 .contact-method-item:hover .arrow-icon {
@@ -276,10 +279,10 @@
   gap: 32px;
   padding: 48px;
   border-radius: 16px;
-  background: white;
+  background: var(--hm-paper);
   border: 1px solid var(--line);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
-  transition: box-shadow 300ms ease;
+  transition: box-shadow var(--hm-duration-base) var(--hm-ease-standard);
 }
 
 .contact-card:hover {
@@ -336,9 +339,9 @@
   color: var(--ink);
   outline: none;
   transition:
-    box-shadow 200ms ease,
-    border-color 200ms ease,
-    background-color 200ms ease;
+    box-shadow var(--hm-duration-fast) var(--hm-ease-standard),
+    border-color var(--hm-duration-fast) var(--hm-ease-standard),
+    background-color var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
 .form-field textarea {
@@ -354,7 +357,9 @@
   font-size: 16px;
   font-weight: 500;
   pointer-events: none;
-  transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    color var(--hm-duration-fast) var(--hm-ease-standard),
+    transform var(--hm-duration-fast) var(--hm-ease-out);
   transform-origin: left top;
 }
 
@@ -370,9 +375,32 @@
 
 .form-field input:focus,
 .form-field textarea:focus {
-  background: white;
+  background: var(--hm-paper);
   border-color: var(--purple);
   box-shadow: 0 0 0 3px var(--purple-soft);
+}
+
+.form-field.input--error input,
+.form-field.input--error textarea {
+  border-color: var(--hm-error);
+  box-shadow: 0 0 0 3px var(--hm-error-soft);
+}
+
+.form-field.input--error label {
+  color: var(--hm-error);
+}
+
+.form-field.input--success input,
+.form-field.input--success textarea {
+  border-color: var(--hm-success);
+  box-shadow: 0 0 0 3px var(--hm-success-soft);
+}
+
+.form-error {
+  margin: 6px 4px 0;
+  color: var(--hm-error);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
 }
 
 /* --- Submission Button --- */
@@ -385,7 +413,7 @@
 }
 
 .submit-btn.btn-status-success {
-  background: #1fa37e;
+  background: var(--hm-success);
   box-shadow: none;
 }
 

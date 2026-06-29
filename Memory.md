@@ -1,5 +1,26 @@
 # Project Memory
 
+## 2026-06-25 Case Study Design System consolidation start
+
+- 新增 `components/case-study/CaseHero.tsx` 與 `CaseInfoGrid.tsx`，三個已發布案例頁的 Hero / info grid 先共用 DOM 與 API，但保留既有 `cs-hero-*` / `cs-info-*` class，避免第一步就改變視覺。
+- `styles/case-study.css` 開始消費 `--cs-*` semantic tokens；三個專案 theme 只把專案顏色映射到 `--cs-*`，layout / spacing / type geometry 後續逐步從 route CSS 移回共用層。
+- `npm run audit:architecture` 會輸出 case-study CSS inventory，並檢查 `.theme-advantech`、`.theme-crypto-arsenal`、`.theme-laushu` root block 不可直接宣告 layout / spacing / typography geometry。這是後續 Phase 1 防回歸入口。
+- 本輪瀏覽器截圖驗證受阻：Playwright MCP 缺 `chrome-for-testing`，app browser transport closed，本機 Chrome headless 會卡在背景 GCM 訊息；後續若要視覺驗證，優先修復 browser 工具或改用可控的既有 localhost 瀏覽器分頁。
+
+## 2026-06-25 Case Study Design System Phase 3 primitives
+
+- 新增 `CaseGrid`、`CaseCard`、`CaseMedia`、`CaseMetricGrid`，共用樣式集中在 `styles/case-study.css` 的 `.cs-grid` / `.cs-card` / `.cs-media`。route CSS 以 `--cs-grid-gap`、`--cs-card-*`、`--cs-media-*` 調外觀，不應再重寫一般 card / grid / media frame。
+- 第一批遷移：Advantech product / competitor / next-step / result cards；Crypto Arsenal pain / reflection cards；Laushu summary / problem / stakeholder / use-case / learning cards。保留舊 class 作為專案外觀 hook，Phase 6 再刪 dead selector。
+- 設計系統頁同步：Component Gallery matrix 補 CaseHero / CaseGrid / CaseCard / CaseMedia；Token Reference 補 `--cs-*` case-study semantic tokens。
+- 尚未搬：流程圖、timeline、video mask、proposal tabs、before/after、feature row 等有互動或幾何座標的區塊，依原計劃留到 Phase 4 / 5，不要在 Phase 3 用通用 card 硬包。
+
+## 2026-06-24 設計系統 token 補完與 dark mode 停用邊界
+
+- 新增主系統 token：`--hm-space-3xs` 到 `--hm-space-3xl`、`--hm-radius-sm/md/lg/pill/button`、`--hm-container`、`--hm-container-wide`、`--hm-grid-gutter`、`--hm-grid-gutter-lg`，並提供 `.hm-grid` 輕量 helper。新 code 優先吃 token，不直接散寫 16/24/32/48 或 8/12/16/999/200。
+- 設計系統頁與主系統骨架元件的 radius / spacing 應優先使用 `--hm-*`；案例頁 `cs-*` 允許局部例外，但不要把單頁特例反向擴散到全域。
+- 設計系統頁標題一律優先使用 `--fs-*`；一般骨架最大字級維持 `32px`，只有首頁 Hero 主標是刻意例外。
+- dark theme semantic token 保留，但目前網站預設停用。`app/layout.tsx` 不主動在 `<html>` 掛 `.dark` 或 `data-theme="dark"`；若未來重啟 dark mode，再從 theme 啟用流與 `ThemeToggle` 一起設計，不要讓 localStorage 舊值偷偷改變首屏。
+
 ## 2026-06-20 共用 Button component
 
 - 全站 CTA 統一使用 `components/ui/Button.tsx`；支援 `variant="primary|secondary"`、`size="sm|md|lg"`、站內 Link、頁內 anchor 與 native button。
@@ -516,3 +537,10 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **Binance 平倉 4 步排版（Hming 拍板「維持 3 欄」）**：Binance 比別人多一個「輸入金額/數量」中間畫面。做法：`MatrixCell` 加 `extraImg`/`extraAlt`/`note`，把多出的 `close-binance-1b-amount.webp` 塞進步驟①格內**上下堆疊**（`.ca-matrix-cell-stack`），其他兩家不動，保持同欄可比對。
 - **欄號改 ②a/②b 表「二擇一」非先後**（Hming 指定）：限價/市價是 alternative。`ResearchSection.tsx` 解析 regex 改 `^([①-⑨])([a-z]?)\s*(.*)$`，badge 顯示 `2a`/`2b`；`.ca-matrix-step-num` 由固定圓形改 `min-width:18px;padding:0 5px;border-radius:9px`（單字仍近圓、雙字成膠囊）。i18n key 同步改 `②a/②b ...` 並補 note/synthesis EN。
 - **驗證**：localhost:3000（既有 server，未重啟）playwright 量 zh-TW/en、桌機 1440 + 手機 390。badge 1/2a/2b、堆疊格+note、sticky 交易所欄、水平捲動皆正常；22 張矩陣圖 0 broken，新 amount 圖 1493×960，0 console error。
+
+## 2026-06-25 Design system page synchronization rule
+
+- `/design-system` 已升級成完整文件頁結構：Getting Started、Colors、Typography、Spacing、Border Radius、Shadows、Motion、Component Gallery、Primary Button Tokens、Token Reference。
+- **往後任何設計系統升級、新 token、新共用元件或新狀態完成時，都要同步更新 `/design-system` 頁對應區塊與 Token Reference。** 不要只改 code 不改文件頁。
+- Token Reference 以 `styles/tokens.css` 為單一真實來源；若新增 token，必須同步補進設計系統頁的 reference 表與必要說明。
+- 公開網站不放 gap analysis / maturity roadmap；這類內容改放面試或內部輔助文件，例如 `100_Todo/drafts/job-hunt/2026-06-25_設計系統面試對答.md`。

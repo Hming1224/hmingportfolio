@@ -3,12 +3,16 @@
 import { sendGAEvent } from "@next/third-parties/google";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { ArrowRight, Check, Mail, Phone } from "lucide-react";
 import { useState } from "react";
 import AnimatedContent from "../app/about-me/AnimatedContent";
 import { getContactData } from "../data/contact";
 import type { Locale } from "../i18n/routing";
 import { config } from "../lib/config";
 import Button from "./ui/Button";
+import { Toast } from "./ui/Toast";
+
+type RequiredField = "name" | "company" | "email" | "message";
 
 export default function Contact() {
   const locale = useLocale() as Locale;
@@ -19,6 +23,7 @@ export default function Contact() {
   >("idle");
   const [copied, setCopied] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<RequiredField, string>>>({});
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -67,6 +72,24 @@ export default function Contact() {
     }
   };
 
+  const handleInvalid = (
+    event: React.InvalidEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    event.preventDefault();
+    const field = event.currentTarget.name as RequiredField;
+    const message =
+      event.currentTarget.validity.typeMismatch ? t("invalidEmail") : t("required");
+    setFieldErrors((current) => ({ ...current, [field]: message }));
+  };
+
+  const clearFieldError = (
+    event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const field = event.currentTarget.name as RequiredField;
+    if (!fieldErrors[field]) return;
+    setFieldErrors((current) => ({ ...current, [field]: undefined }));
+  };
+
   return (
     <section
       id="contact"
@@ -106,22 +129,9 @@ export default function Contact() {
                 {/* Email Method */}
                 <div
                   className="contact-method-item email-card"
-                  onClick={handleCopyEmail}
                 >
                   <div className="method-icon-wrap">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                      <polyline points="22,6 12,13 2,6" />
-                    </svg>
+                    <Mail aria-hidden="true" size={24} strokeWidth={1.5} />
                   </div>
                   <div className="method-details">
                     <span className="method-label">{t("email")}</span>
@@ -132,6 +142,8 @@ export default function Contact() {
                   <button
                     className={`copy-btn ${copied ? "copied" : ""}`}
                     aria-label={t("copyEmail")}
+                    type="button"
+                    onClick={handleCopyEmail}
                   >
                     {copied ? t("copied") : t("copy")}
                   </button>
@@ -140,21 +152,9 @@ export default function Contact() {
                 {/* Phone Method */}
                 <div
                   className="contact-method-item phone-card"
-                  onClick={handleCopyPhone}
                 >
                   <div className="method-icon-wrap phone">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
+                    <Phone aria-hidden="true" size={24} strokeWidth={1.5} />
                   </div>
                   <div className="method-details">
                     <span className="method-label">{t("phone")}</span>
@@ -165,6 +165,8 @@ export default function Contact() {
                   <button
                     className={`copy-btn ${copiedPhone ? "copied" : ""}`}
                     aria-label={t("copyPhone")}
+                    type="button"
+                    onClick={handleCopyPhone}
                   >
                     {copiedPhone ? t("copied") : t("copy")}
                   </button>
@@ -178,20 +180,7 @@ export default function Contact() {
                   className="contact-method-item social-card"
                 >
                   <div className="method-icon-wrap linkedin">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                      <rect x="2" y="9" width="4" height="12" />
-                      <circle cx="4" cy="4" r="2" />
-                    </svg>
+                    <Image src="/social/linkedin-gray-v2.png" alt="" width={24} height={24} />
                   </div>
                   <div className="method-details">
                     <span className="method-label">LinkedIn</span>
@@ -200,19 +189,7 @@ export default function Contact() {
                     </span>
                   </div>
                   <div className="arrow-icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
+                    <ArrowRight aria-hidden="true" size={18} strokeWidth={1.5} />
                   </div>
                 </a>
 
@@ -224,18 +201,7 @@ export default function Contact() {
                   className="contact-method-item social-card"
                 >
                   <div className="method-icon-wrap github">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                    </svg>
+                    <Image src="/social/github-gray-v2.png" alt="" width={24} height={24} />
                   </div>
                   <div className="method-details">
                     <span className="method-label">GitHub</span>
@@ -244,19 +210,7 @@ export default function Contact() {
                     </span>
                   </div>
                   <div className="arrow-icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
+                    <ArrowRight aria-hidden="true" size={18} strokeWidth={1.5} />
                   </div>
                 </a>
               </div>
@@ -279,38 +233,53 @@ export default function Contact() {
               </div>
 
               <form className="contact-form" onSubmit={handleSubmit}>
-                <div className="form-field">
+                <div className={`form-field ${fieldErrors.name ? "input--error" : ""}`}>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     placeholder=" "
                     required
+                    aria-invalid={Boolean(fieldErrors.name)}
+                    aria-describedby={fieldErrors.name ? "name-error" : undefined}
+                    onInvalid={handleInvalid}
+                    onInput={clearFieldError}
                   />
                   <label htmlFor="name">{t("name")}</label>
+                  {fieldErrors.name ? <p id="name-error" className="form-error">{fieldErrors.name}</p> : null}
                 </div>
 
-                <div className="form-field">
+                <div className={`form-field ${fieldErrors.company ? "input--error" : ""}`}>
                   <input
                     type="text"
                     id="company"
                     name="company"
                     placeholder=" "
                     required
+                    aria-invalid={Boolean(fieldErrors.company)}
+                    aria-describedby={fieldErrors.company ? "company-error" : undefined}
+                    onInvalid={handleInvalid}
+                    onInput={clearFieldError}
                   />
                   <label htmlFor="company">{t("company")}</label>
+                  {fieldErrors.company ? <p id="company-error" className="form-error">{fieldErrors.company}</p> : null}
                 </div>
 
                 <div className="form-row">
-                  <div className="form-field">
+                  <div className={`form-field ${fieldErrors.email ? "input--error" : ""}`}>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       placeholder=" "
                       required
+                      aria-invalid={Boolean(fieldErrors.email)}
+                      aria-describedby={fieldErrors.email ? "email-error" : undefined}
+                      onInvalid={handleInvalid}
+                      onInput={clearFieldError}
                     />
                     <label htmlFor="email">{t("email")}</label>
+                    {fieldErrors.email ? <p id="email-error" className="form-error">{fieldErrors.email}</p> : null}
                   </div>
 
                   <div className="form-field">
@@ -319,78 +288,50 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="form-field is-textarea">
+                <div className={`form-field is-textarea ${fieldErrors.message ? "input--error" : ""}`}>
                   <textarea
                     id="message"
                     name="message"
                     placeholder=" "
                     required
                     rows={4}
+                    aria-invalid={Boolean(fieldErrors.message)}
+                    aria-describedby={fieldErrors.message ? "message-error" : undefined}
+                    onInvalid={handleInvalid}
+                    onInput={clearFieldError}
                   />
                   <label htmlFor="message">{t("message")}</label>
+                  {fieldErrors.message ? <p id="message-error" className="form-error">{fieldErrors.message}</p> : null}
                 </div>
 
                 <Button
                   type="submit"
                   disabled={status === "loading" || status === "success"}
+                  loading={status === "loading"}
+                  loadingLabel={t("sending")}
                   className={`submit-btn btn-status-${status}`}
                   size="lg"
                 >
-                  {status === "idle" && t("submit")}
-                  {status === "loading" && (
-                    <span className="btn-content">
-                      <svg
-                        className="spinner-icon animate-spin"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                          className="opacity-25"
-                        />
-                        <path
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          className="opacity-75"
-                        />
-                      </svg>
-                      {t("sending")}
-                    </span>
-                  )}
                   {status === "success" && (
                     <span className="btn-content">
-                      <svg
-                        className="success-icon"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline
-                          points="20 6 9 17 4 12"
-                          className="checkmark-path"
-                        />
-                      </svg>
+                      <Check aria-hidden="true" size={18} strokeWidth={2} />
                       {t("success")}
                     </span>
                   )}
-                  {status === "error" && t("error")}
+                  {status === "idle" && t("submit")}
+                  {status === "error" && t("submit")}
                 </Button>
               </form>
             </div>
           </AnimatedContent>
         </div>
       </div>
+      {status === "success" ? (
+        <Toast message={t("success")} tone="success" onClose={() => setStatus("idle")} />
+      ) : null}
+      {status === "error" ? (
+        <Toast message={t("error")} tone="error" onClose={() => setStatus("idle")} />
+      ) : null}
     </section>
   );
 }

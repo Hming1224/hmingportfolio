@@ -26,7 +26,7 @@ const en = {
   "：": ": ",
 
   // ── Hero ──
-  "Laushu 勞贖｜勞務報酬系統設計優化": "Laushu｜Labor Remuneration System UX Optimization",
+  "從紙本化繁為簡：勞務報酬系統的數位流程優化": "From Paper to a Smooth Digital Flow:UX Optimization for a Contractor Payment System",
   "檢視目前紙本勞報單使用流程，透過訪談、設計與測試，優化勞贖勞報數位化系統，針對發送勞報單流程，提供設計體驗優化建議。":
     "Reviewing the current paper-based labor remuneration workflow — through interviews, design and testing — to improve Laushu's digital labor-form system, with UX recommendations focused on the form-sending flow.",
   "Laushu 勞贖設計優化專案主視覺": "Laushu UX optimization project hero",
@@ -85,8 +85,8 @@ const en = {
   "學習反思 Reflections": "Reflections",
 
   // ── Overview ──
-  "Laushu 勞贖為已上線的數位化勞報單系統。此設計優化專案與其負責人合作，測試現有紙本勞報單數位化的流程易用性，於上線前提供改善建議。":
-    "Laushu is a live digital labor-remuneration-form system. This UX optimization project, in collaboration with its product owner, tested the usability of digitizing the existing paper-based form flow and delivered improvement recommendations before launch.",
+  "Laushu 勞贖為籌備上線中的數位化勞報單系統。此設計優化專案與其負責人合作，測試現有紙本勞報單數位化的流程易用性，於上線前提供改善建議。":
+    "Laushu is a digital labor-remuneration-form system preparing for launch. This UX optimization project, in collaboration with its product owner, tested the usability of digitizing the existing paper-based form flow and delivered improvement recommendations before launch.",
   "了解紙本勞報單報帳流程、拆解利害關係人需求，並優化數位化勞報單報帳體驗。":
     "Understand the paper-based filing flow, break down stakeholder needs, and improve the digital filing experience.",
   "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。":
@@ -182,6 +182,8 @@ const en = {
   "問卷": "Survey",
   "設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整）。":
     "Designed a survey to screen interviewees and learn which parts of the current form-filling process feel tedious (accountant: create → send → collect → compile).",
+  "設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整），並回收問卷驗證樣本輪廓。":
+    "Designed a survey to screen interviewees, identify which parts of the form-filling process feel tedious (accountant: create → send → collect → compile), and validate the participant profile.",
   "基本資料": "Basic info",
   "身份、年齡、年資": "Identity, age, seniority",
   "使用勞報單經驗": "Labor-form experience",
@@ -189,10 +191,48 @@ const en = {
   "了解建檔的過程感受": "How filing feels",
   "了解目前勞報單填寫過程中，哪些過程感到繁雜。": "Learn which parts of the current form-filling process feel tedious.",
   "會計師：建立 → 發送 → 回收 → 彙整。": "Accountant: create → send → collect → compile.",
+  "問卷結果": "Survey results",
+  "量化精選": "Quantitative highlights",
+  "份問卷收集": "surveys collected",
+  "份有效問卷": "valid responses",
+  "篩選題回答「是」": "answered “yes” to the screening question",
+  "受訪者職業分布": "Participant role distribution",
+  "位填答": "respondents",
+  "一般公司會計": "In-house accountant",
+  "記帳士": "Bookkeeper",
+  "其他": "Other",
+  "處理經驗": "Experience",
+  "未滿 1 年": "Under 1 year",
+  "1–未滿 3 年": "1–under 3 years",
+  "3–未滿 5 年": "3–under 5 years",
+  "5 年以上": "5+ years",
+  "每次處理份數": "Forms handled at a time",
+  "10 份以下": "10 or fewer",
+  "11–50 份": "11–50",
+  "51–200 份": "51–200",
+  "201 份以上": "201 or more",
+  "樣本與原先規劃的 TA 相符，且多數填答者具一年以上實務經驗，能作為後續訪談篩選與研究方向的參考。":
+    "The sample matched the planned target audience, and most respondents had over a year of hands-on experience, making the results useful for interview screening and research direction.",
+  "核心洞察": "Core insight",
+  "單一步驟不難，整體流程卻很耗時": "Each step feels easy, but the full process is time-consuming",
+  "單步驟感受": "Individual steps",
+  "熟悉後多半不覺得困難": "Most steps feel easy once familiar",
+  "照著填就好": "Just follow the form",
+  "電子化後變得很輕鬆": "Digitization made it much easier",
+  "存檔超簡單": "Filing is very simple",
+  "公司已有固定 SOP": "The company already has a standard process",
+  "整體痛點": "End-to-end pain points",
+  "量一大、要追蹤時就變麻煩": "High volume and tracking make it tedious",
+  "整體而言有點麻煩": "Overall, it is somewhat tedious",
+  "等待回簽、追蹤進度比較麻煩": "Waiting for signatures and tracking progress is troublesome",
+  "大量收回勞報單時，處理就會很麻煩": "Handling a large batch of returned forms becomes difficult",
+  "蠻花時間，也覺得很無趣": "It takes time and feels repetitive",
+  "拆開看，每個步驟都不難，甚至已習慣成自然；但合起來、數量增加、需要追蹤回簽進度時，整體就變得花時間又無趣。因此下一步透過深入訪談，先聚焦會自己經手勞報單的公司端。":
+    "Each step is easy in isolation and often habitual. But when combined at scale with signature tracking, the process becomes time-consuming and repetitive. This led us to conduct deeper interviews, focusing first on company-side users who handle the forms themselves.",
   "訪談大綱": "Interview guide",
   "訪談": "Interview",
-  "共搜集 39 份有效問卷，篩選三位受訪者，圍繞以下三個面向深入訪談：":
-    "Collected 39 valid surveys, screened three interviewees, and interviewed in depth around three areas:",
+  "本次共回收 39 份有效問卷。雖然問卷回收對象以會計師／會計人員為主，但實際聯繫訪談者的過程未如預期順利，最終僅成功訪談 1 位會計師。因此，後續利害關係人訪談調整為以公司負責人／負責單位為主要對象，並圍繞以下三個面向進行深入訪談：":
+    "This round collected 39 valid survey responses. Although most respondents were accountants or accounting staff, recruiting interview participants did not go as smoothly as expected, and only one accountant was ultimately interviewed. As a result, the follow-up stakeholder interviews shifted toward company owners or responsible teams as the primary participants, exploring the following three areas in depth:",
   "所屬公司工作流程": "Company workflow",
   "處理勞報起訖過程": "End-to-end form handling",
   "建立、發送勞報單到收回領據和最後結果過程。": "From creating and sending forms to collecting receipts and the final outcome.",
@@ -334,15 +374,15 @@ const en = {
     "Merge multiple form records with clear line items, cutting counter-signs and tax-prep time.",
 
   // ── Reflection ──
-  "從使用者出發的線上化策略思考": "A digitization strategy that starts from the user",
-  "設計線上化流程時，首要是釐清哪些是不可或缺的核心步驟，哪些可轉化為更便捷的數位形式。唯有從使用者需求出發，才能真正掌握該數位化的重點功能。本專案因時間限制，優先聚焦核心利害關係人——公司端——進行流程盤點與優化。實作過程中也意識到，專案要真正推動上線，需進一步納入更多商業面向與跨部門的決策考量。":
-    "When designing a digital flow, the first task is to clarify which steps are essential and which can become more convenient digital forms. Only by starting from user needs can you truly identify the key features worth digitizing. Due to time constraints, this project prioritized the core stakeholder — the company side — for flow mapping and optimization. Through the build I also realized that taking a project truly live requires weaving in more business considerations and cross-department decisions.",
+  "以替代研究策略推進流程驗證": "Advancing flow validation with alternative research strategies",
+  "如果重新執行一次，我會在研究初期建立主要與替代受訪者名單，降低招募不順對研究進度的影響。當無法訪談核心利害關係人時，會改以協作角色訪談、非同步訪談或流程文件分析補足資訊缺口。\n\n設計策略上，會先將已掌握的會計人員流程定義為 MVP 假設，並透過第一版上線後的任務完成率、錯誤率與使用者回饋進行驗證。若初版成效不如預期，再依據實際使用情境推出 v2 上線版本，持續優化流程。":
+    "If I were to run the project again, I would build both primary and backup participant lists early in the research phase to reduce the impact of recruiting delays. When core stakeholders cannot be interviewed, I would use collaborator interviews, asynchronous interviews, or process document analysis to fill the information gaps.\n\nStrategically, I would first define the accounting-staff workflow already understood as an MVP hypothesis, then validate it after the first release through task completion rate, error rate, and user feedback. If the initial version underperforms, I would use real usage scenarios to shape a v2 release and continue improving the flow.",
   "介面用詞與說明，本身就是體驗": "Interface wording and guidance are part of the experience",
   "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」——像把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。":
     "Labor forms involve professional concepts — tax rates, filing categories, supplementary health insurance — that users don't necessarily understand. Looking back, many iterations were really about \"rewording\" and \"adding guidance\": replacing the unintuitive term \"income recipient\" with plainer language, adding a line of explanation where people got stuck, and surfacing the withholding percentage directly. It made me realize interface copy is itself part of the experience — translating jargon into the user's language often lowers the barrier more than adding another feature.",
-  "用可驗證的小步迭代推進設計": "Advancing design through small, verifiable iterations",
-  "Laushu 是準備上線的系統，這次是在既有流程上做優化，而不是從零重來。過程中要一邊尊重原本的流程與限制，一邊找出真正值得改的地方。透過放聲思考測試加上 SUS 量表去驗證每一次調整，讓我學會用「可以被驗證的小步迭代」往前推，而不是一次大改；也更清楚設計要能落地，得把開發成本與既有限制一起算進來。":
-    "Laushu was a system preparing to launch, so this project optimized an existing flow rather than starting from scratch. I had to respect the original flow and constraints while finding what was genuinely worth changing. Validating each adjustment with think-aloud testing and the SUS scale taught me to move forward in small, verifiable iterations instead of one big overhaul — and made it clearer that for design to ship, development cost and existing constraints have to be factored in too.",
+  "從流程優化走向商業導入驗證": "From flow optimization to business adoption validation",
+  "若後續繼續推進，我會將重點從流程可用性延伸到商業導入驗證。Laushu 不只是勞務報酬單的線上化工具，更需要釐清誰是實際使用者、誰是導入決策者，以及系統能為公司降低多少行政與溝通成本。\n\n因此，下一步會補充訪談公司負責人、財務／人資主管與會計事務所，了解不同角色對導入工具的決策標準。同時將 UX 指標轉化為更具商業意義的成效指標，例如處理時間、錯誤率、來回確認次數與人力成本變化，進一步評估產品是否具備 B2B SaaS、按使用量計費，或作為會計事務所工具包的商業潛力。":
+    "If the project continues, I would extend the focus from flow usability to business adoption validation. Laushu is not only a tool for digitizing labor-remuneration forms; it also needs to clarify who the actual users are, who makes adoption decisions, and how much administrative and communication cost the system can reduce for companies.\n\nThe next step would be to interview company owners, finance or HR leads, and accounting firms to understand each role's decision criteria for adopting the tool. I would also translate UX metrics into more business-relevant outcome metrics, such as processing time, error rate, back-and-forth confirmation count, and labor cost change, to further evaluate whether the product has potential as a B2B SaaS product, a usage-based service, or part of an accounting-firm toolkit.",
 
   // ── Design iteration boards ──
   "設計迭代與元件迭代": "Design & component iterations",

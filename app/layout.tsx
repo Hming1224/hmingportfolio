@@ -51,6 +51,7 @@ export default async function RootLayout({
     <html
       lang={locale === "zh-TW" ? "zh-Hant-TW" : "en"}
       className={spaceGrotesk.variable}
+      suppressHydrationWarning
     >
       <body>
         <ScrollBehaviorFix />

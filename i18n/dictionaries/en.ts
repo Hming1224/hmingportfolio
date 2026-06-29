@@ -7,7 +7,7 @@ const messages = {
     about: "About",
     contact: "Contact",
     resume: "Resume",
-    resumeHref: "/Brian_Huang_Resume.html",
+    resumeHref: "/Brian_Huang_Resume.pdf",
   },
   language: {
     select: "Select language",
@@ -44,6 +44,8 @@ const messages = {
     submit: "Send Message",
     sending: "Sending...",
     success: "Message Sent!",
+    required: "This field is required",
+    invalidEmail: "Enter a valid email address",
     error: "Something went wrong. Please try again.",
   },
   footer: {

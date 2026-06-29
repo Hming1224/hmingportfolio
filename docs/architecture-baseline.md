@@ -31,6 +31,36 @@ Ownership checks:
 - Route-specific CSS is imported only by its route.
 - About and contact static content live in their matching `data/` files.
 
+## Case study consolidation guard
+
+Run `npm run audit:architecture` after changing case study CSS or case study
+components. The audit now includes:
+
+- route CSS isolation for Advantech, Crypto Arsenal, and Laushu;
+- case-study CSS class / declaration inventory;
+- theme root guard: `.theme-advantech`, `.theme-crypto-arsenal`, and
+  `.theme-laushu` may define tokens, but must not define layout / spacing /
+  typography geometry directly.
+
+Current Phase 1 / 2 baseline:
+
+- shared case-study CSS consumes `--cs-*` semantic tokens;
+- each project theme maps its project colors into `--cs-*`;
+- Hero / info-grid DOM for the three published case studies is routed through
+  shared `CaseHero` and `CaseInfoGrid`, while preserving existing class names
+  and visual CSS ownership.
+
+Current Phase 3 baseline:
+
+- shared case-study card / grid / media primitives live in
+  `components/case-study/` as `CaseGrid`, `CaseCard`, `CaseMedia`, and
+  `CaseMetricGrid`;
+- `styles/case-study.css` owns the generic `.cs-grid`, `.cs-card`, and
+  `.cs-media` frame rules;
+- route CSS should use `--cs-grid-*`, `--cs-card-*`, and `--cs-media-*`
+  variables for project-specific appearance instead of redefining the generic
+  frame.
+
 ## Workspace strategy
 
 - **Iterations Retention Strategy**: The `iterations/` directory stores design-verification history (screenshots and matching `iteration.md` logs). To prevent repository size bloat:

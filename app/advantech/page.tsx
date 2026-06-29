@@ -43,19 +43,21 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AdventechPage() {
   const locale = (await getLocale()) as Locale;
   const t = (text: string) => translateAdvantech(locale, text);
+  const tocLabel = (zh: string, en: string) => (locale === "en" ? en : zh);
   const project = getProjectBySlug("advantech", locale);
   const nextProject = getNextProject(project.slug, locale);
+  const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
   const tocSections: TocSection[] = [
-    { id: "cs-sec-overview", title: t("專案背景") },
-    { id: "cs-sec-background", title: t("產品背景") },
-    { id: "cs-sec-role", title: t("我的角色") },
-    { id: "cs-sec-process", title: t("設計流程") },
-    { id: "cs-sec-analysis", title: t("競品分析") },
-    { id: "cs-sec-interview", title: t("使用者訪談") },
-    { id: "cs-sec-scenario", title: t("設計情境") },
-    { id: "cs-sec-solution", title: t("設計成果") },
-    { id: "cs-sec-next", title: t("下一步") },
-    { id: "cs-sec-result", title: t("學習反思") },
+    { id: "cs-sec-overview", title: tocLabel("專案總覽", "Overview") },
+    { id: "cs-sec-background", title: tocLabel("產品脈絡", "Product Context") },
+    { id: "cs-sec-role", title: tocLabel("我的角色", "My Role") },
+    { id: "cs-sec-process", title: tocLabel("設計流程", "Design Process") },
+    { id: "cs-sec-analysis", title: tocLabel("分析洞察", "Analysis") },
+    { id: "cs-sec-interview", title: tocLabel("使用者研究", "User Research") },
+    { id: "cs-sec-scenario", title: tocLabel("設計策略", "Design Strategy") },
+    { id: "cs-sec-solution", title: tocLabel("設計方案", "Solution") },
+    { id: "cs-sec-next", title: tocLabel("下一步", "Next Steps") },
+    { id: "cs-sec-result", title: tocLabel("Reflections", "Reflections") },
   ];
 
   return (
@@ -65,7 +67,7 @@ export default async function AdventechPage() {
       nextNav={{
         nextHref: nextProject.status === "published" ? nextProject.href : undefined,
         homeLabel: t("返回首頁"),
-        nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProjectLabel}`,
       }}
       hero={<HeroSection />}
     >

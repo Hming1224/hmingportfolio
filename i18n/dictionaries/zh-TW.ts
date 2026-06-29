@@ -44,6 +44,8 @@ const messages = {
     submit: "送出訊息",
     sending: "傳送中...",
     success: "送出成功！",
+    required: "此欄位為必填",
+    invalidEmail: "請輸入有效的 Email",
     error: "傳送失敗，請重試",
   },
   footer: {

@@ -3,10 +3,11 @@ import type {
   ButtonHTMLAttributes,
   ReactNode,
 } from "react";
+import { Loader2 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "secondary";
+type ButtonVariant = "primary" | "secondary" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
 type SharedProps = {
@@ -14,6 +15,8 @@ type SharedProps = {
   className?: string;
   size?: ButtonSize;
   variant?: ButtonVariant;
+  loading?: boolean;
+  loadingLabel?: string;
 };
 
 type ButtonElementProps = SharedProps &
@@ -34,13 +37,22 @@ export default function Button({
   className,
   size = "md",
   variant = "primary",
+  loading = false,
+  loadingLabel = "Loading",
   ...props
 }: ButtonProps) {
   const classes = cn(
     "ds-button",
     `ds-button-${variant}`,
     `ds-button-${size}`,
+    loading && "is-loading",
     className,
+  );
+  const content = (
+    <span className="ds-button-content">
+      {loading ? <Loader2 aria-hidden="true" className="ds-button-spinner" size={18} strokeWidth={2} /> : null}
+      <span>{loading ? loadingLabel : children}</span>
+    </span>
   );
 
   if ("href" in props && props.href) {
@@ -55,14 +67,14 @@ export default function Button({
     if (isNativeAnchor) {
       return (
         <a {...anchorProps} className={classes} href={href}>
-          {children}
+          {content}
         </a>
       );
     }
 
     return (
       <Link {...anchorProps} className={classes} href={href} prefetch={prefetch}>
-        {children}
+        {content}
       </Link>
     );
   }
@@ -72,10 +84,12 @@ export default function Button({
   return (
     <button
       {...buttonProps}
+      aria-busy={loading || undefined}
       className={classes}
+      disabled={loading || buttonProps.disabled}
       type={buttonProps.type ?? "button"}
     >
-      {children}
+      {content}
     </button>
   );
 }
