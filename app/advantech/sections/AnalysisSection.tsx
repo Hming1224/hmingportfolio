@@ -9,7 +9,11 @@ export default async function AnalysisSection() {
   const aiTools = translateAdvantechData(locale, compAiTools);
   const emsItems = translateAdvantechData(locale, compEmsItems);
   return localizeAdvantechTree(locale,
-    <CaseSection id="cs-sec-analysis" title={t("從競品功能比較，定義 GenAI Chatbot 的設計機會")}>
+    <CaseSection
+      id="cs-sec-analysis"
+      kicker={t("分析洞察")}
+      title={t("從 AI 工具與 EMS 競品中找出 GenAI 聊天機器人的機會。")}
+    >
       <p className="cs-body-muted" style={{ marginBottom: 36 }}>
         {t("透過產業 AI 工具、能源管理系統競品與 AI 功能模組比較，釐清聊天機器人不只是搜尋入口，而是能協助使用者完成問題來源、異常診斷與節能決策的工作流程介面。")}
       </p>

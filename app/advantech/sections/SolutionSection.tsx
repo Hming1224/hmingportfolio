@@ -32,16 +32,21 @@ function FeatureStep({
 }
 
 export default async function SolutionSection() {
-  const { locale } = await getAdvantechTranslator();
+  const { locale, t } = await getAdvantechTranslator();
   return localizeAdvantechTree(locale,
-    <CaseSection id="cs-sec-solution" surface className="cs-solution-section" title="設計發想、迭代與最終方案">
+    <CaseSection
+      id="cs-sec-solution"
+      surface
+      className="cs-solution-section"
+      kicker={t("設計方案")}
+      title={t("從情境發想、迭代到最終 AI 聊天機器人體驗。")}
+    >
       <p className="cs-body-muted" style={{ marginBottom: 56 }}>
         依據前述定義的設計情境，後續迭代將聚焦在幾個會直接影響決策判斷的介面：AI Chatbot、超約預警分析視窗、設備能耗異常分析視窗，以及其中的圖表、資料表與 AI 建議區塊。
       </p>
 
-      {/* ── BrainStorming Block ── */}
+      {/* ── Ideation Block ── */}
       <div className="cs-sol-block">
-        <span className="cs-sol-tag cs-inline-pill" style={{ background: "#e0f8fc", color: "#0072bd" }}>BrainStorming</span>
         <h3 className="cs-sol-blk-title cs-copy-title">2 種情境的設計發想</h3>
         <p className="cs-sol-blk-desc cs-text-muted-blue cs-copy-body">先從兩個情境拆出核心使用任務與 AI 介入點，定義後續迭代要驗證的頁面入口、通知方式與建議回饋。</p>
 
@@ -64,9 +69,8 @@ export default async function SolutionSection() {
         <ProposalTabs defaultTab={0} tabs={proposalScenario2Tabs} />
       </div>
 
-      {/* ── Design Iteration Block ── */}
+      {/* ── Iteration Block ── */}
       <div className="cs-sol-block">
-        <span className="cs-sol-tag cs-inline-pill" style={{ background: "#f6f1fd", color: "#7d4fb9", borderRadius: 999 }}>Design Iteration</span>
         <h3 className="cs-sol-blk-title cs-copy-title">兩種情境的頁面與元件迭代</h3>
         <p className="cs-sol-blk-desc cs-text-muted-blue cs-copy-body">迭代時主要檢視資訊優先級是否清楚、資料呈現是否符合廠務人員的判讀習慣，以及使用者能否在最少的操作成本下，從異常提示一路理解原因並採取下一步行動。</p>
 
@@ -228,7 +232,6 @@ export default async function SolutionSection() {
 
       {/* ── Final Feature Block ── */}
       <div className="cs-sol-block">
-        <span className="cs-sol-tag cs-inline-pill" style={{ background: "#fff4e3", color: "#f69418" }}>Final UI Design</span>
         <h3 className="cs-sol-blk-title cs-copy-title">最終 3 種 feature 的介面細節</h3>
         <p className="cs-sol-blk-desc cs-text-muted-blue cs-copy-body">最終介面聚焦在告警提示、進階分析與建議生成，讓使用者能從異常發現一路走到決策行動。</p>
         <FeatureConnectors />

@@ -20,7 +20,12 @@ export default async function ProcessSection() {
       </div>
       <div className="cs-process-overlay cs-object-box" />
       <div className="cs-process-content cs-stack-box">
-        <CaseHeading title={t("設計流程")} tone="white" style={{ marginBottom: 8 }} />
+        <CaseHeading
+          kicker={locale === "en" ? "DESIGN PROCESS" : t("設計流程")}
+          title={t("從研究洞察推進到 AI 聊天機器人介面設計。")}
+          tone="white"
+          style={{ marginBottom: 8 }}
+        />
         <FlowScrollHint label={t("左右滑動查看更多")} />
         <div className="cs-timeline-alt cs-stack-box">
           {/* Row 1: cards above axis (01, 03, 05) */}

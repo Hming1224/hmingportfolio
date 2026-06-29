@@ -18,7 +18,11 @@ export default async function ScenarioSection() {
   const { locale, t } = await getAdvantechTranslator();
   const localizedScenarios = translateAdvantechData(locale, scenarios);
   return localizeAdvantechTree(locale,
-    <CaseSection id="cs-sec-scenario" title={t("AI 應用情境：從底層機制到介面落地")}>
+    <CaseSection
+      id="cs-sec-scenario"
+      kicker={t("設計策略")}
+      title={t("將使用者痛點轉化為兩個可落地的 AI 情境。")}
+    >
       <p className="cs-body-muted" style={{ marginBottom: 48 }}>
         {t("專案研究過後，團隊透過工作坊討論功能優先級，將使用者痛點轉譯為兩個可落地的 AI 應用情境。每個情境都從底層 AI 機制出發，對應到核心功能，最後落到使用者會接觸的介面呈現。")}
       </p>

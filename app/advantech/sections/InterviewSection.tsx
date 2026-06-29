@@ -4,9 +4,14 @@ import { localizeAdvantechTree } from "../i18n";
 import { getAdvantechTranslator } from "../i18n-server";
 
 export default async function InterviewSection() {
-  const { locale } = await getAdvantechTranslator();
+  const { locale, t } = await getAdvantechTranslator();
   return localizeAdvantechTree(locale,
-    <CaseSection id="cs-sec-interview" surface title="透過專案訪談，理解能源與廠務管理的實際工作流程">
+    <CaseSection
+      id="cs-sec-interview"
+      surface
+      kicker={t("使用者研究")}
+      title={t("透過訪談理解真實的能源與場域管理工作流程。")}
+    >
       <p className="cs-body-muted" style={{ marginBottom: 36 }}>
         訪談內部廠務人員與系統整合商（SI），釐清終端使用者在設備能耗盤查、能源分析與報告產出中的痛點，並找出生成式 AI 在 iEMS 中能切入的工作節點。
       </p>

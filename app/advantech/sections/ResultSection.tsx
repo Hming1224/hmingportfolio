@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseCard, CaseGrid, CaseHeading } from "../../../components/case-study";
+import { CaseCard, CaseGrid } from "../../../components/case-study";
 import { resultCards } from "../data";
 import { localizeAdvantechTree, translateAdvantechData } from "../i18n";
 import { getAdvantechTranslator } from "../i18n-server";
@@ -19,7 +19,11 @@ export default async function ResultSection() {
       </div>
       <div className="cs-result-overlay cs-object-box" />
       <div className="cs-result-content cs-stack-box">
-        <CaseHeading title={t("我學到了什麼...")} tone="white" style={{ marginBottom: 8 }} />
+        <p className="cs-result-kicker cs-section-kicker">REFLECTIONS</p>
+        <h2 className="cs-heading-white" style={{ marginBottom: 8 }}>
+          {t("設計真正融入工作流程、並建立信任感的 AI 體驗。")}
+        </h2>
+        <div className="cs-divider-white" />
         <CaseGrid variant="two" className="cs-result-grid">
           {cards.map((item) => (
             <CaseCard key={item.num} className="cs-result-card">

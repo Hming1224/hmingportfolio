@@ -5,7 +5,12 @@ import { getAdvantechTranslator } from "../i18n-server";
 export default async function ProductBackgroundSection() {
   const { t } = await getAdvantechTranslator();
   return (
-    <CaseSection id="cs-sec-background" surface title={t("認識 ECOWatch 與 HVAC 模組")}>
+    <CaseSection
+      id="cs-sec-background"
+      surface
+      kicker={t("產品脈絡")}
+      title={t("理解聊天機器人背後的 ECOWatch 與 HVAC 模組。")}
+    >
       <p className="cs-body-muted" style={{ marginBottom: 32 }}>
         {t("本專案的設計對象為研華科技 WISE-IoT 平台下的兩大能源管理模組。ECOWatch 負責建築能源用量的即時可視化監控；WISE iEMS HVAC 模組則整合 AI 演算法主動優化空調系統能效。兩者共同構成智慧設施管理的核心解決方案，也是本次 AI Chatbot 設計用於整合各項功能的系統。")}
       </p>

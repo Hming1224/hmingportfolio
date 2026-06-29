@@ -8,7 +8,11 @@ export default async function RoleSection() {
   const { locale, t } = await getAdvantechTranslator();
   const cards = translateAdvantechData(locale, roleCards);
   return localizeAdvantechTree(locale,
-    <CaseSection id="cs-sec-role" title={t("我在這個專案做了什麼...")}>
+    <CaseSection
+      id="cs-sec-role"
+      kicker={locale === "en" ? t("我的角色標籤") : t("我的角色")}
+      title={t("從範疇定義、研究到原型，推進 AI 聊天機器人工作流程。")}
+    >
       <div className="cs-role-radial cs-stack-box">
         <svg
           className="cs-role-connectors"
