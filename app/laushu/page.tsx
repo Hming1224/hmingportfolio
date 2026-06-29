@@ -12,6 +12,7 @@ import {
   CaseMedia,
   CaseSectionHeader,
   CaseStudyShell,
+  FlowScrollHint,
   ZoomableImage,
   type CaseInfoItem,
   type TocSection,
@@ -418,7 +419,7 @@ export default async function LaushuPage() {
       {localizeLaushuTree(locale, ProblemSection())}
       {localizeLaushuTree(locale, UnderstandSection())}
       {localizeLaushuTree(locale, ConvergeSection())}
-      {localizeLaushuTree(locale, IterateSection())}
+      {localizeLaushuTree(locale, IterateSection(t("← 左右滑動查看更多")))}
       {localizeLaushuTree(locale, PrototypeSection())}
       {localizeLaushuTree(locale, DemoSection())}
       {localizeLaushuTree(locale, ReflectionSection())}
@@ -627,10 +628,20 @@ function ConvergeSection() {
   );
 }
 
-function TaskFlowChart({ tag, title, children }: { tag: string; title: string; children: ReactNode }) {
+function TaskFlowChart({
+  tag,
+  title,
+  scrollHintLabel,
+  children,
+}: {
+  tag: string;
+  title: string;
+  scrollHintLabel: string;
+  children: ReactNode;
+}) {
   return (
     <CaseFlowFrame
-      scrollHintLabel="左右滑動查看更多"
+      scrollHintLabel={scrollHintLabel}
       variant="split"
       header={
         <>
@@ -644,40 +655,43 @@ function TaskFlowChart({ tag, title, children }: { tag: string; title: string; c
   );
 }
 
-function TaskFlow1() {
+function TaskFlow1(scrollHintLabel: string) {
   return (
     <TaskFlowChart
       tag="操作流程 1"
       title="建立外包人員資料庫，便於掌管人員個人資料"
+      scrollHintLabel={scrollHintLabel}
     >
       {TaskFlowOneDiagram()}
     </TaskFlowChart>
   );
 }
 
-function TaskFlow2() {
+function TaskFlow2(scrollHintLabel: string) {
   return (
     <TaskFlowChart
       tag="操作流程 2"
       title="建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽"
+      scrollHintLabel={scrollHintLabel}
     >
       {TaskFlowTwoDiagram()}
     </TaskFlowChart>
   );
 }
 
-function TaskFlow3() {
+function TaskFlow3(scrollHintLabel: string) {
   return (
     <TaskFlowChart
       tag="操作流程 3"
       title="合併多張勞務報酬單，減少回簽次數與調整稅額"
+      scrollHintLabel={scrollHintLabel}
     >
       {TaskFlowThreeDiagram()}
     </TaskFlowChart>
   );
 }
 
-function IterateSection() {
+function IterateSection(scrollHintLabel: string) {
   return (
     <section id="cs-sec-iterate" className="cs-section laushu-process-section laushu-iterate-section">
       <LaushuHead eyebrow="測試與迭代" title="從任務測試中，修正既有的流程與介面問題" />
@@ -690,9 +704,9 @@ function IterateSection() {
         <p>針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表：</p>
       </ArticleBlock>
       <div className="cs-flow-frame-list">
-        {TaskFlow1()}
-        {TaskFlow2()}
-        {TaskFlow3()}
+        {TaskFlow1(scrollHintLabel)}
+        {TaskFlow2(scrollHintLabel)}
+        {TaskFlow3(scrollHintLabel)}
       </div>
       <ArticleBlock title="設計介面、元件迭代" number="02">
         <p>這次介面與元件迭代聚焦在降低判斷成本、提升核對效率。透過調整資訊排序、用詞、提示文字與列表呈現，讓使用者能更快找到正確資料、理解欄位意義，並在寄出或合併前完成確認，降低錯填、漏填與誤合併的風險。</p>
@@ -895,31 +909,34 @@ function ReflectionSection() {
 
 function ResearchTable() {
   return (
-    <CaseMedia className="cs-data-table-frame cs-data-table-frame--wide" variant="scroll">
-      <table className="cs-data-table cs-data-table--matrix">
-        <thead>
-          <tr>
-            {researchTable.head.map((h, i) => (
-              <th key={h} className={i === 0 ? "cs-data-table-corner" : undefined}>{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {researchTable.rows.map((row) => (
-            <tr key={row.label}>
-              <th scope="row">{row.label}</th>
-              {row.cells.map((cell, ci) => (
-                <td key={ci}>
-                  <ul>
-                    {cell.map((c) => (<li key={c}>{c}</li>))}
-                  </ul>
-                </td>
+    <>
+      <FlowScrollHint label="← 左右滑動查看更多" />
+      <CaseMedia className="cs-data-table-frame cs-data-table-frame--wide" variant="scroll">
+        <table className="cs-data-table cs-data-table--matrix">
+          <thead>
+            <tr>
+              {researchTable.head.map((h, i) => (
+                <th key={h} className={i === 0 ? "cs-data-table-corner" : undefined}>{h}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </CaseMedia>
+          </thead>
+          <tbody>
+            {researchTable.rows.map((row) => (
+              <tr key={row.label}>
+                <th scope="row">{row.label}</th>
+                {row.cells.map((cell, ci) => (
+                  <td key={ci}>
+                    <ul>
+                      {cell.map((c) => (<li key={c}>{c}</li>))}
+                    </ul>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </CaseMedia>
+    </>
   );
 }
 

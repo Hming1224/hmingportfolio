@@ -255,6 +255,10 @@
   --cs-video-showcase-body-color: #5d6674;
 }
 
+.theme-laushu .cs-flow-hint-icon {
+  display: none;
+}
+
 .theme-laushu .cs-reflection-grid {
   --cs-reflection-grid-max-width: var(--laushu-content-max);
 }
@@ -484,6 +488,7 @@
 .theme-laushu .laushu-understand-section > .cs-article,
 .theme-laushu .laushu-understand-section > .cs-topic-grid--stakeholder,
 .theme-laushu .laushu-understand-section > .cs-diagram-frame,
+.theme-laushu .laushu-understand-section > .cs-flow-hint,
 .theme-laushu .laushu-understand-section > .cs-data-table-frame,
 .theme-laushu .laushu-understand-section > .cs-survey-flow,
 .theme-laushu .laushu-understand-section > .cs-survey-panel--stats,
@@ -491,6 +496,14 @@
 .theme-laushu .laushu-understand-section > .cs-guide-list-grid,
 .theme-laushu .laushu-understand-section > .cs-persona-list {
   margin-top: 40px;
+}
+
+.theme-laushu .laushu-understand-section > .cs-flow-hint[data-visible="true"] {
+  margin-bottom: 12px;
+}
+
+.theme-laushu .laushu-understand-section > .cs-flow-hint[data-visible="true"] + .cs-data-table-frame {
+  margin-top: 0;
 }
 
 .theme-laushu .laushu-understand-section .cs-article {
@@ -592,36 +605,51 @@
   --cs-survey-note-color: #1f2933;
 }
 
-@media (max-width: 768px) {
+.theme-laushu .cs-survey-arrow--mobile {
+  display: none;
+}
+
+.theme-laushu .cs-survey-arrow-line {
+  display: none;
+}
+
+.theme-laushu .cs-survey-arrow-line--desktop {
+  display: block;
+}
+
+@media (max-width: 900px) {
   .theme-laushu .laushu-understand-section .cs-survey-flow {
-    --cs-survey-flow-gap: 8px;
+    --cs-survey-flow-columns: 1fr;
+    --cs-survey-flow-gap: 24px;
     justify-items: center;
   }
 
   .theme-laushu .laushu-understand-section .cs-survey-flow-mid {
     width: min(100%, 288px);
-    gap: 48px;
-  }
-
-  .theme-laushu .laushu-understand-section .cs-survey-flow-mid::before {
-    order: 1;
-    width: 2px;
-    height: 92px;
-    border-radius: 999px;
-    background: #c7c2d6;
-    content: "";
+    gap: 16px;
   }
 
   .theme-laushu .laushu-understand-section .cs-survey-arrow {
-    order: 3;
     width: 88px;
     max-width: 88px;
-    margin-block-end: 40px;
+    height: 88px;
     transform: rotate(90deg);
+    transform-origin: center;
+  }
+
+  .theme-laushu .laushu-understand-section .cs-survey-arrow-line {
+    display: block;
+  }
+
+  .theme-laushu .laushu-understand-section .cs-survey-arrow-line--desktop {
+    display: none;
+  }
+
+  .theme-laushu .laushu-understand-section .cs-survey-arrow--mobile {
+    display: block;
   }
 
   .theme-laushu .laushu-understand-section .cs-survey-note {
-    order: 2;
     width: min(100%, 280px);
     max-width: 280px;
     line-height: 1.75;
@@ -1105,6 +1133,23 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
     --cs-video-showcase-video-height-mobile: auto;
     --cs-video-showcase-video-min-height-mobile: 0;
     --cs-video-showcase-video-aspect-ratio-mobile: 16 / 9;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .cs-video-showcase-media-wrap,
+  .theme-laushu .cs-video-showcase-media,
+  .theme-laushu .cs-video-showcase-video {
+    border-radius: var(--cs-video-showcase-card-radius);
+  }
+
+  .theme-laushu .cs-video-showcase-media-wrap,
+  .theme-laushu .cs-video-showcase-media {
+    overflow: hidden;
+  }
+
+  .theme-laushu .cs-video-showcase-copy {
+    --cs-video-showcase-copy-padding: 24px 0 28px;
   }
 }
 

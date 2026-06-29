@@ -213,9 +213,14 @@ export function SurveyFlow({ note }: { note: ReactNode }) {
       <div className="cs-survey-flow-mid">
         <svg viewBox="0 0 200 40" className="cs-survey-arrow" aria-hidden="true">
           <ArrowDefs id="laushu-arrow-survey" />
-          <path d="M4 20 H188" stroke="#c7c2d6" strokeWidth="2" fill="none" markerEnd="url(#laushu-arrow-survey)" />
+          <path className="cs-survey-arrow-line" d="M4 20 H188" stroke="#c7c2d6" strokeWidth="2" fill="none" />
+          <path className="cs-survey-arrow-line cs-survey-arrow-line--desktop" d="M4 20 H188" stroke="#c7c2d6" strokeWidth="2" fill="none" markerEnd="url(#laushu-arrow-survey)" />
         </svg>
         <div className="cs-survey-note">{note}</div>
+        <svg viewBox="0 0 200 40" className="cs-survey-arrow cs-survey-arrow--mobile" aria-hidden="true">
+          <ArrowDefs id="laushu-arrow-survey-mobile" />
+          <path d="M4 20 H188" stroke="#c7c2d6" strokeWidth="2" fill="none" markerEnd="url(#laushu-arrow-survey-mobile)" />
+        </svg>
       </div>
       <div className="cs-survey-node">
         <strong>會計師</strong>

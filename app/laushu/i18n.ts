@@ -23,6 +23,7 @@ const en = {
   "學習反思": "Reflections",
   "返回首頁": "Back to Home",
   "下一個專案": "Next Project",
+  "← 左右滑動查看更多": "← Scroll horizontally to see more",
   "：": ": ",
 
   // ── Hero ──
