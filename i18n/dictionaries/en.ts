@@ -8,7 +8,7 @@ const messages = {
     designSystem: "Design System",
     contact: "Contact",
     resume: "Resume",
-    resumeHref: "/Brian_Huang_Resume.html",
+    resumeHref: "/Brian_Huang_Resume.pdf",
   },
   language: {
     select: "Select language",
