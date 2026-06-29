@@ -46,6 +46,7 @@ export default async function AdventechPage() {
   const tocLabel = (zh: string, en: string) => (locale === "en" ? en : zh);
   const project = getProjectBySlug("advantech", locale);
   const nextProject = getNextProject(project.slug, locale);
+  const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
   const tocSections: TocSection[] = [
     { id: "cs-sec-overview", title: tocLabel("專案總覽", "Overview") },
     { id: "cs-sec-background", title: tocLabel("產品脈絡", "Product Context") },
@@ -66,7 +67,7 @@ export default async function AdventechPage() {
       nextNav={{
         nextHref: nextProject.status === "published" ? nextProject.href : undefined,
         homeLabel: t("返回首頁"),
-        nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProjectLabel}`,
       }}
       hero={<HeroSection />}
     >

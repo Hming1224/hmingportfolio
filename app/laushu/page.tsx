@@ -390,6 +390,7 @@ export default async function LaushuPage() {
   const t = (text: string) => translateLaushu(locale, text);
   const project = getProjectBySlug("laushu", locale);
   const nextProject = getNextProject(project.slug, locale);
+  const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
 
   const tocSections: TocSection[] = [
     { id: "cs-sec-overview", title: t("專案總覽") },
@@ -409,7 +410,7 @@ export default async function LaushuPage() {
       nextNav={{
         nextHref: nextProject.status === "published" ? nextProject.href : undefined,
         homeLabel: t("返回首頁"),
-        nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProjectLabel}`,
       }}
       hero={localizeLaushuTree(locale, HeroSection())}
     >

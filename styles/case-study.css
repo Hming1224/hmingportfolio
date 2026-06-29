@@ -3727,6 +3727,24 @@
   background: #fff;
 }
 
+.cs-next-project-button {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.cs-next-project-button .ds-button-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.cs-next-project-button .ds-button-content > span {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 1199px) {
   .cs-info-row {
     grid-template-columns: repeat(3, max-content);

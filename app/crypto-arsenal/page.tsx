@@ -43,6 +43,7 @@ export default async function CryptoArsenalPage() {
   const t = (text: string) => translateCryptoArsenal(locale, text);
   const project = getProjectBySlug("crypto-arsenal", locale);
   const nextProject = getNextProject(project.slug, locale);
+  const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
   const tocSections: TocSection[] = [
     { id: "cs-sec-background", title: t("專案背景") },
     { id: "cs-sec-role", title: t("工作模式") },
@@ -64,7 +65,7 @@ export default async function CryptoArsenalPage() {
       nextNav={{
         nextHref: nextProject.status === "published" ? nextProject.href : undefined,
         homeLabel: t("返回首頁"),
-        nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProjectLabel}`,
       }}
       hero={<HeroSection />}
     >
