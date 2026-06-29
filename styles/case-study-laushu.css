@@ -172,6 +172,12 @@
   --cs-section-title-max: 720px;
 }
 
+@media (min-width: 1441px) {
+  .theme-laushu {
+    --cs-section-title-max: none;
+  }
+}
+
 .theme-laushu .cs-section-header--case-wide {
   --cs-section-header-wide-max: var(--laushu-content-max);
 }

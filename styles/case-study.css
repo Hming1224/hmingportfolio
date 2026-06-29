@@ -3345,6 +3345,12 @@
   margin: 0 0 24px;
 }
 
+@media (min-width: 1441px) {
+  .cs-title {
+    max-width: none;
+  }
+}
+
 .cs-info-row {
   display: grid;
   grid-template-columns: repeat(5, max-content);
