@@ -316,6 +316,16 @@
   --cs-media-radius: 10px;
 }
 
+@media (max-width: 1200px) {
+  .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main > .cs-card:first-child {
+    max-width: none;
+  }
+}
+
 .theme-crypto-arsenal #cs-sec-research > .cs-card {
   --cs-card-gap: 48px;
   --cs-card-padding: 28px;
