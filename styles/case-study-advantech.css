@@ -2150,8 +2150,8 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .theme-advantech .cs-hero-info {
-    padding-right: 24px;
-    padding-left: 24px;
+    padding-right: var(--page-gutter);
+    padding-left: var(--page-gutter);
   }
 
   .theme-advantech .cs-badge {
