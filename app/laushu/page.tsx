@@ -448,7 +448,7 @@ function HeroSection() {
       infoClassName="laushu-hero-info"
       infoGridClassName="cs-info-row--divided"
       meta={<span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>}
-      title="Laushu 勞贖｜勞務報酬系統設計優化"
+      title="從紙本化繁為簡：勞務報酬系統的數位流程優化"
       infoItems={infoItems}
     />
   );

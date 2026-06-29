@@ -21,8 +21,8 @@ const en = {
   "：": ": ",
 
   // ── Hero ──
-  "策略倉位資訊顯示、手動平倉與止盈止損":
-    "Strategy Position Display, Manual Close, and Take-Profit / Stop-Loss",
+  "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計":
+    "Giving Traders Back Control: Manual Close & Take-Profit / Stop-Loss Flow Design for a Quant Trading Platform",
   "時間進程": "Timeline",
   "我的角色": "My Role",
   "UIUX設計師": "UI/UX Designer",

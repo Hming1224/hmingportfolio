@@ -72,7 +72,7 @@ const en = {
   "原型設計": "Prototyping",
   "提案與功能迭代": "Concept Proposals & Feature Iteration",
   "產品行銷影片": "Product Marketing Videos",
-  "以生成式 AI 聊天機器人驅動智慧能源與空調維運系統介面設計": "Designing a GenAI Chatbot for Smarter Energy and HVAC Operations",
+  "賦能廠務人員與系統整合商：以生成式 AI 優化 EcoWatch 與 HVAC 維運使用流程": "Empowering Facility Operators and System Integrators: Streamlining EcoWatch and HVAC Operations via Generative AI",
   "這個專案聚焦於透過 UX/UI 設計優化 ECOWatch 與 HVAC 的 AI Chatbot 體驗，以改善使用者操作流程並提升整體可用性。": "This project focused on improving the AI chatbot experience across ECOWatch and HVAC through UX/UI design, streamlining user workflows and improving overall usability.",
   "透過競品研究與終端使用者訪談，我們挖掘出關鍵的市場需求與使用者痛點，進一步作為聊天機器人介面設計方向的依據。設計過程中並非只是單純加入 AI 功能，而是更著重於思考生成式 AI 如何更有效地支援實際的設施管理任務。透過與後端工程師密切合作，我們將這些洞察轉化為更流暢、高效且友善的互動體驗。": "Through competitive research and end-user interviews, we uncovered key market needs and user pain points that shaped the chatbot interface. Rather than simply adding AI features, we explored how generative AI could meaningfully support real facility-management tasks. Working closely with backend engineers, we translated these insights into a smoother, more efficient, and approachable experience.",
   "WISE-iEMS 系統介面與 AI Chatbot 概覽": "Overview of the WISE-iEMS interface and AI chatbot",

@@ -26,7 +26,7 @@ const en = {
   "：": ": ",
 
   // ── Hero ──
-  "Laushu 勞贖｜勞務報酬系統設計優化": "Laushu｜Labor Remuneration System UX Optimization",
+  "從紙本化繁為簡：勞務報酬系統的數位流程優化": "From Paper to a Smooth Digital Flow:UX Optimization for a Contractor Payment System",
   "檢視目前紙本勞報單使用流程，透過訪談、設計與測試，優化勞贖勞報數位化系統，針對發送勞報單流程，提供設計體驗優化建議。":
     "Reviewing the current paper-based labor remuneration workflow — through interviews, design and testing — to improve Laushu's digital labor-form system, with UX recommendations focused on the form-sending flow.",
   "Laushu 勞贖設計優化專案主視覺": "Laushu UX optimization project hero",
