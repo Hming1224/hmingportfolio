@@ -58,6 +58,7 @@ export default async function HeroSection() {
       meta={<span className="cs-tags">WEB・FinTech・Crypto・UX Design・UI Design</span>}
       title={t("重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計")}
       infoItems={infoItems}
+      infoGridClassName="cs-info-row--divided"
     />
   );
 }

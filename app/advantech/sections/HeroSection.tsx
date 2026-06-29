@@ -76,6 +76,7 @@ export default async function HeroSection() {
       }
       title={t("賦能廠務人員與系統整合商：以生成式 AI 優化 EcoWatch 與 HVAC 維運使用流程")}
       infoItems={infoItems}
+      infoGridClassName="cs-info-row--divided"
     />
   );
 }
