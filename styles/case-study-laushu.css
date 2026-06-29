@@ -883,6 +883,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 
 .theme-laushu .laushu-iterate-section .cs-flow-frame--split .cs-flow-frame-header {
   order: 1;
+  border-color: #d8deec;
 }
 
 .theme-laushu .laushu-iterate-section .cs-flow-hint {
