@@ -19,7 +19,6 @@ import {
 } from "./animate-ui/primitives/base/tabs";
 import SplitText from "./animate-ui/primitives/texts/SplitText";
 import Button from "./ui/Button";
-import { EmptyState } from "./ui/EmptyState";
 
 function useScrollReveal() {
   const listRef = useRef<HTMLDivElement>(null);
@@ -94,7 +93,9 @@ function ProjectCard({ project }: { project: ProjectSummary }) {
           </div>
         </div>
         {disabled ? (
-          <EmptyState className="project-empty-state" title={t("comingSoon")} />
+          <Button size="lg" disabled>
+            {t("comingSoon")}
+          </Button>
         ) : (
           <Button href={project.href ?? "/"} size="lg">
             {t("learnMore")}
