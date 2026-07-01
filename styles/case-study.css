@@ -3323,10 +3323,10 @@
 
 .cs-tags {
   display: inline;
-  font-size: 12px;
-  font-style: italic;
-  font-weight: 500;
-  color: var(--cs-text-muted);
+  color: var(--cs-tags-color, var(--cs-text-muted));
+  font-size: var(--cs-tags-font-size, 12px);
+  font-style: var(--cs-tags-font-style, italic);
+  font-weight: var(--cs-tags-font-weight, 500);
 }
 
 .cs-hero-meta {
