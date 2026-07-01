@@ -170,6 +170,64 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - 流程外框：使用 `CaseFlowFrame variant="default" | "plain" | "split"` 與 `cs-flow-frame-*`；default 為有框說明圖、plain 為無框矩陣容器、split 為 header / scroll panel 分離。route 只提供內容圖形、最小寬與必要 caption / header theme。
 - 功能步驟：使用 `CaseFeatureRow`；原型展示用 `cs-feature-row--prototype`，媒體與說明框不得再掛 `cs-sol-fr` / `cs-sol-fimg` / `cs-sol-fnote`。
 
+#### CaseMedia contract
+
+`CaseMedia` owns only the shared media container anatomy:
+- `<figure>`
+- `.cs-media-frame`
+- optional `.cs-media-caption`
+
+`CaseMedia` does not own image crop, aspect ratio, `object-fit`, route-specific showcase layout, video-specific behavior, or diagram / flow / matrix geometry.
+
+#### ZoomableImage contract
+
+`ZoomableImage` owns shared image display, zoom trigger, and image lightbox behavior.
+
+It owns:
+- image display through `next/image`
+- zoom trigger
+- localized trigger / close labels
+- lightbox overlay
+- dialog semantics
+- Escape close
+- backdrop close
+- body scroll lock
+
+It does not own route-specific crop / ratio, showcase composition, video playback, video lightbox behavior, or flow / matrix / diagram layout.
+
+#### Lightbox behavior
+
+Lightbox controls are media controls, not Button / LinkButton / CTA.
+
+Image lightbox and video lightbox should not be merged unless anatomy, behavior, and accessibility requirements are proven consistent. `ZoomableImage` is the shared image-lightbox contract. Crypto `FinalVideo` and other video media remain local components until a separate video media contract is approved.
+
+#### Accessibility notes
+
+Current `ZoomableImage` includes:
+- trigger `aria-label`
+- lightbox `role="dialog"`
+- `aria-modal="true"`
+- localized close label
+- Escape close
+- backdrop close
+
+Known future improvement:
+- If focus trap / return-focus behavior is not implemented in code, document it as a future accessibility improvement rather than claiming it exists.
+
+#### Exclusions
+
+Do not include these in the `ZoomableImage` / image lightbox contract:
+- video playback
+- video lightbox behavior
+- native video controls
+- route-specific showcase layout
+- document preview layout
+- prototype preview layout
+- image crop / aspect ratio / object-fit
+- flow / matrix / diagram geometry
+- FlowScrollHint / overflow affordance
+- Button / LinkButton / CTA primitive behavior
+
 ---
 
 ---
