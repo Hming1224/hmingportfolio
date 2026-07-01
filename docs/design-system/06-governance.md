@@ -66,10 +66,14 @@
 - **其他螢幕截圖 / 流程圖 (Screenshot/Flow)**：最大寬度 `1600px`（小於此寬度則維持原尺寸）。
 
 ### 11.3 可放大圖片互動與對齊
-- **所有可點擊放大的圖片必須使用共用 `ZoomableImage` 互動模式**，並保留 hover / focus 的放大提示，不要在各專案頁另外手刻 lightbox。
+- **Image lightbox / zoomable image 使用共用 `ZoomableImage` contract**，並保留 hover / focus 的放大提示；不要為圖片在各專案頁另外手刻 image lightbox。
+- **Video lightbox / Crypto `FinalVideo` 目前仍是 local component**，直到獨立 video media contract 通過前，不併入 `ZoomableImage`。
+- **Native video controls 與 route-specific video showcase 不屬於 `ZoomableImage` contract**；media / lightbox controls 也不屬於 Button / LinkButton / CTA primitive。
+- **不要合併 image lightbox 與 video lightbox**，除非 anatomy、behavior、accessibility requirements 已證明一致並通過新的 component contract。
 - **縮圖與 lightbox 圖片都必須水平置中顯示**：縮圖容器、觸發按鈕與圖片本體都要用 `margin-inline: auto` 或等效的 `place-items: center`，避免圖片在卡片或 Final UI 區塊中偏左 / 偏右。
 - **放大後必須使用 `object-fit: contain`**，不可裁切 UI 畫面；需要全螢幕檢視的 before / after 或細節稿可使用 fullscreen lightbox，但仍要完整保留圖片比例。
 - **圖片清晰度不足時優先重新輸出高解析來源**，不要用 CSS 銳化或放大濾鏡硬補；Lightbox 用圖建議至少 `2560px` 寬，細節多的流程圖或 UI 截圖可提高到 `3200px+`。
+- **Focus trap / return-focus behavior 屬於 accessibility backlog**：除非 production code 已實作並驗證，不要在治理文件中宣稱 `ZoomableImage` 已具備這些行為。
 
 ### 11.4 目錄結構與分類
 專案圖片放置於 `/public/projects/<slug>/`，並統一依階段劃分子目錄，避免檔案混亂：

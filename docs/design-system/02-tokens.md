@@ -191,13 +191,15 @@ components:
     backgroundColor: "{map.color-primary-disabled}"
     textColor: "{map.color-on-primary}"
   button-secondary:         # Button variant="secondary"
-    backgroundColor: "transparent"
+    backgroundColor: "{colors.paper}"
     textColor: "{colors.muted}"
-    border: "1px solid {colors.line-strong}"
+    outline: "inset 0 0 0 2px {colors.line-strong}"
     rounded: "{map.radius-pill}"
     height: "{map.height-control-md}"
   button-secondary-hover:
-    backgroundColor: "{colors.surface}"
+    backgroundColor: "{colors.purple-light}"
+    textColor: "{colors.purple}"
+    outline: "inset 0 0 0 2px {colors.purple}"
   input:                    # .form-field input/textarea
     backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
@@ -207,14 +209,17 @@ components:
     border: "1px solid {colors.purple}"
   input-error:
     border: "1px solid {colors.error}"
-  tag:                      # .tone-xxx scoped；bg/text 由各專案 tone token 提供
-    rounded: "{radius.pill}"
+  tag:                      # .project-tags span；bg/text 由各專案 tone token 提供，不等同 global pill
+    rounded: "4px"
+    minHeight: "27px"       # mobile resets to 0 in production CSS
+    padding: "4px 8px"
   project-card:             # .project-card
-    backgroundColor: "{colors.paper}"
-    rounded: "{radius.lg}"
-    shadow: "{shadow.sm}"
+    backgroundColor: "{colors.surface}"
+    rounded: "{radius.md}"  # production value: 12px
+    shadow: "none"
   project-card-hover:
-    shadow: "{shadow.card-hover}"
+    overlay: "project scrim opacity 0.18 + image scale 1.03 + .project-info reveal"
+    governance: "ProjectCard hover overlay and CTA layout are do-not-touch unless explicitly approved."
 ```
 
 ---

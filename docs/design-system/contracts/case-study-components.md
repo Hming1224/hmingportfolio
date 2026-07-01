@@ -1,5 +1,16 @@
 # Case Study DS Contract
 
+> **Current status — legacy handoff / audit template**
+>
+> This document is historical coordination material from the Case Study remediation flow.
+> The current source of truth for stable case-study component contracts is
+> [`docs/design-system/03-components.md`](../03-components.md).
+>
+> Do not use this file as implementation instruction without checking current production
+> code first. Any stale branch names, checklist state, remediation wording, or contract
+> gaps below should be treated as historical context unless a current task explicitly
+> revalidates them.
+
 This file is the handoff contract from the Case Study remediation branch to the `/design-system` documentation branch.
 
 The remediation branch writes this file. The DS page alignment branch reads it.
@@ -9,7 +20,8 @@ The remediation branch writes this file. The DS page alignment branch reads it.
 - Contract state: `active-template`
 - Source branch: `codex/design-system-remediation`
 - Consumer branch: `codex/ds-page-alignment`
-- Rule: do not document a Case Study component on `/design-system` unless it has a contract entry here.
+- Historical rule: do not document a Case Study component on `/design-system` unless it has a contract entry here.
+- Current rule: use `docs/design-system/03-components.md` plus current production code as the source of truth before implementation.
 
 ## Contract entry template
 
