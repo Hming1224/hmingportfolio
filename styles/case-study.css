@@ -1105,7 +1105,7 @@
   padding: var(--cs-card-padding, 24px);
   border: 1px solid var(--cs-card-border, var(--cs-line));
   border-radius: var(--cs-card-radius, var(--hm-radius-lg));
-  background: var(--cs-card-bg, #ffffff);
+  background: var(--cs-card-bg, var(--cs-card-bg-default, #ffffff));
   box-shadow: var(--cs-card-shadow, none);
 }
 
@@ -2230,7 +2230,7 @@
   overflow: hidden;
   border: 1px solid var(--cs-media-border, var(--cs-line));
   border-radius: var(--cs-media-radius, var(--hm-radius-lg));
-  background: var(--cs-media-bg, #ffffff);
+  background: var(--cs-media-bg, var(--cs-media-bg-default, #ffffff));
 }
 
 .cs-media--full .cs-media-frame {
