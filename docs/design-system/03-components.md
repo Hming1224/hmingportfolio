@@ -10,6 +10,56 @@
 
 **形狀**：Pill `border-radius: 200px`（見 6.1）。
 
+#### Contract: Button
+
+`Button` 表示 command / action control：submit、save、copy、confirm、destructive action 等。
+
+- 沒有 `href` 時，`components/ui/Button.tsx` renders native `<button>`。
+- 適用於在當前頁面中觸發操作，而不是導向另一個 destination。
+- `loading` / `disabled` command state 只適用於 real Button。
+- `danger` 只用於 destructive / high-risk command action。
+
+#### Contract: LinkButton
+
+`LinkButton` 是 usage contract，不是獨立 component；目前仍使用 `components/ui/Button.tsx` with `href`。
+
+- 有 `href` 時，語意上是 navigation，不是 command。
+- 適用於 internal route、hash anchor、external URL、`mailto:`、`tel:`。
+- 不建議使用 `loading` state；如果 navigation 需要 pending feedback，應由 route / navigation pattern 處理。
+- External LinkButton 在目的地不明顯時可加入 external affordance，但目前不強制。
+
+#### CTA usage role
+
+CTA 是 usage role，不是 component。CTA 可以是 Button，也可以是 LinkButton，取決於語意。
+
+- Conversion navigation（例如「查看作品」、「了解更多」）是 LinkButton。
+- Form submit（例如「送出」）是 Button。
+- Primary CTA 使用 shared purple treatment，不跟 project tone。
+- Prefer one primary CTA per section or decision moment.
+- Disabled CTA placeholder 必須不可點，使用 disabled Button behavior。
+- 在重複 anatomy / behavior 尚未穩定前，不新增 CTA component。
+
+#### Loading / disabled / danger
+
+- `loading` 只建議用於 real Button actions。
+- `disabled` 表示 non-interactive。
+- `disabled` 不應該用來 styling 仍可導航的 anchor。
+- `danger` 只用於 destructive / high-risk command action。
+- `danger` 不用於一般 navigation、普通強調、或 project tone。
+- Disabled project placeholders 不應該看起來可點擊。
+
+#### Exclusions
+
+以下不屬於本 Button / LinkButton primitive contract；可以在未來做 token audit，但不要合併成 Button variant：
+
+- ProjectCard CTA layout and hover overlay
+- `ZoomableImage`、media、video、lightbox controls
+- mobile menu button
+- language switcher trigger and menu items
+- `CaseProposalTabs` tabs、carousel nav、dots
+- Project tabs
+- `CaseTOC` links
+
 #### 尺寸階層（sm / md / lg）
 | 階層 | 桌機 ≥1024 | 平板 769–1023 | 手機 ≤768 | 左右 padding | 字級 | 用在哪 | 對應 class |
 |---|---|---|---|---|---|---|---|
