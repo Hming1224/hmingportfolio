@@ -1,16 +1,21 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
-type CaseSectionHeaderTone = 'default' | 'secondary' | 'warning' | 'inverse';
+export type CaseSectionHeaderTone = 'default' | 'secondary' | 'warning' | 'inverse';
 
-interface CaseSectionHeaderProps {
+export interface CaseSectionHeaderProps {
   className?: string;
   description?: ReactNode;
   kicker?: ReactNode;
   title: ReactNode;
+  /** Controls semantic color tokens only; section geometry stays owned by the shared CSS shell. */
   tone?: CaseSectionHeaderTone;
 }
 
+/**
+ * Shared case-study section heading: kicker, h2 title, optional description, and divider.
+ * Route-specific storytelling layout should wrap this component instead of changing its DOM.
+ */
 export default function CaseSectionHeader({
   className,
   description,

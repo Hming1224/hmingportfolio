@@ -16,6 +16,8 @@ export { default as ZoomableImage } from './ZoomableImage';
 export { default as FlowScrollHint } from './FlowScrollHint';
 export { default as FeatureConnectors } from './FeatureConnectors';
 export { setupFeatureConnectors } from './FeatureConnectors';
+export { type CaseHeadingProps, type CaseHeadingTone } from './CaseHeading';
 export { type CaseInfoItem } from './CaseInfoGrid';
 export { type CaseProposalTab } from './CaseProposalTabs';
+export { type CaseSectionHeaderProps, type CaseSectionHeaderTone } from './CaseSectionHeader';
 export { type TocSection } from '../CaseTOC';
