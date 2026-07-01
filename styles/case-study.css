@@ -208,16 +208,16 @@
 
 .cs-divider {
   width: 100%;
-  height: 1px;
-  background: var(--cs-line);
-  margin-bottom: 24px;
+  height: var(--cs-divider-height, 1px);
+  background: var(--cs-divider-bg, var(--cs-line));
+  margin-bottom: var(--cs-divider-margin-bottom, 24px);
 }
 
 .cs-divider-white {
   width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.15);
-  margin-bottom: 36px;
+  background: var(--cs-divider-white-bg, rgba(255, 255, 255, 0.15));
+  margin-bottom: var(--cs-divider-white-margin-bottom, 36px);
 }
 
 .cs-sub-heading {
@@ -2244,10 +2244,10 @@
 }
 
 .cs-media-caption {
-  margin-top: 16px;
-  color: var(--cs-text-secondary);
-  font-size: var(--fs-sm);
-  line-height: 1.6;
+  margin-top: var(--cs-media-caption-margin-top, 16px);
+  color: var(--cs-media-caption-color, var(--cs-text-secondary));
+  font-size: var(--cs-media-caption-font-size, var(--fs-sm));
+  line-height: var(--cs-media-caption-line-height, 1.6);
 }
 
 .cs-media-label {
