@@ -228,6 +228,94 @@ Do not include these in the `ZoomableImage` / image lightbox contract:
 - FlowScrollHint / overflow affordance
 - Button / LinkButton / CTA primitive behavior
 
+#### DataTable / responsive table wrapper contract
+
+Native data tables should use semantic table markup by default: `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>`, and `scope` when applicable.
+
+The table wrapper owns horizontal scrolling, not the page. Responsive table behavior should preserve the two-dimensional relationship of rows and columns.
+
+Do not replace a semantic data table with a `div` data grid unless there is a specific interaction requirement that native table semantics cannot support.
+
+Table surface, border, radius, shadow, typography, and cell padding may use design token aliases only when the refactor is visual-preserving.
+
+#### Scroll container contract
+
+A scroll container owns overflow for content that cannot responsibly reflow without losing meaning.
+
+Page-level horizontal overflow must remain `0`.
+
+Horizontal scrolling is acceptable when content requires two-dimensional layout for meaning or functionality, such as data tables, comparison matrices, flow diagrams, timelines, or wide SVG diagrams.
+
+Do not casually change `overflow-x`, `min-width`, `grid-template-columns`, SVG coordinates, connector lines, or mobile scroll behavior.
+
+`CaseMedia variant="scroll"`, table wrapper, and `CaseFlowFrame` are related scroll-container patterns but not the same component contract.
+
+#### FlowScrollHint contract
+
+`FlowScrollHint` is an overflow affordance.
+
+It is not an interactive control, Button, LinkButton, CTA, media control, or navigation.
+
+Current behavior: it detects whether the following sibling contains a real horizontal scroll container and toggles visibility through `data-visible`.
+
+Current accessibility behavior: `aria-hidden="true"`, so it is decorative instructional UI.
+
+Whether it should remain decorative or become accessible instructional text is a designer / accessibility decision.
+
+#### CaseFlowFrame contract
+
+`CaseFlowFrame` is a shared component for flow or diagram content.
+
+It owns the outer frame composition:
+- group wrapper
+- optional `FlowScrollHint`
+- `<figure>`
+- optional header
+- scroll region
+- optional caption
+
+It may provide shared variants such as `default`, `plain`, and `split`.
+
+It does not own inner diagram geometry, SVG connectors, SVG coordinates, matrix columns, sticky label logic, or route-specific min-width values.
+
+Route-local or colocated components provide the visualization content.
+
+#### Comparison matrix / diagram governance
+
+Comparison matrices, flow diagrams, timelines, and wide SVG diagrams can remain local or colocated components when their geometry is part of the storytelling.
+
+Sticky labels, grid columns, SVG path data, connector endpoints, node coordinates, and min-width values are local implementation details unless proven stable across multiple cases.
+
+Design token aliases may apply only to visual surface values when visual-preserving.
+
+Do not merge data table, comparison matrix, flow diagram, and wide SVG diagram into one shared component.
+
+#### Accessibility notes
+
+Native data tables should preserve table semantics and header relationships.
+
+For data tables or grids that need two-dimensional relationships, horizontal scrolling can be acceptable under reflow exceptions, but scrolling must stay inside the scroll container.
+
+Page-level horizontal overflow must remain `0`.
+
+`FlowScrollHint` currently acts as decorative scroll affordance. If it becomes accessible instructional text later, update its semantics and validation checklist explicitly.
+
+If a non-native data grid is introduced, document ARIA table/grid semantics and keyboard expectations before implementation.
+
+#### Exclusions
+
+Do not include these in the shared DataTable / ScrollContainer contract:
+- comparison matrix geometry
+- flow diagram geometry
+- timeline geometry
+- wide SVG diagram coordinates
+- SVG connector lines and endpoints
+- route-specific `min-width`
+- route-specific `grid-template-columns`
+- `CaseMedia` image crop / aspect ratio / object-fit
+- Button / LinkButton / CTA behavior
+- media / lightbox controls
+
 ---
 
 ---
