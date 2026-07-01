@@ -18,6 +18,12 @@ export { default as FeatureConnectors } from './FeatureConnectors';
 export { setupFeatureConnectors } from './FeatureConnectors';
 export { type CaseHeadingProps, type CaseHeadingTone } from './CaseHeading';
 export { type CaseInfoItem } from './CaseInfoGrid';
+export { type CaseMediaProps, type CaseMediaVariant } from './CaseMedia';
 export { type CaseProposalTab } from './CaseProposalTabs';
 export { type CaseSectionHeaderProps, type CaseSectionHeaderTone } from './CaseSectionHeader';
 export { type TocSection } from '../CaseTOC';
+export {
+  type ZoomableImageLabels,
+  type ZoomableImageLightboxMode,
+  type ZoomableImageProps,
+} from './ZoomableImage';
