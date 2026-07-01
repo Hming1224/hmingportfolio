@@ -2,7 +2,7 @@
 
 > 建立日期：2026-06-08（Mon）
 > 規劃者：Claude（Opus 4.8）
-> 狀態：**計劃完成，待開新 session 執行**
+> 狀態：✅ 已完成（2026-06-30 歸檔）— 已超前執行：`app/globals.css` 從 7666 行縮到 6 行，樣式全數拆進模組化的 `styles/`（about / home / contact / case-study*.css）並 token 化（`styles/tokens.css` 1485 行）。
 > 目標專案：`400_Projects/hmingportfolio`（獨立 repo）
 > 目標專案絕對路徑：`/Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio`
 > 本計劃存放位置：母 repo `100_Todo/plans/`
