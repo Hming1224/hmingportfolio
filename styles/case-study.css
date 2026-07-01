@@ -1397,12 +1397,12 @@
   align-self: var(--cs-inline-pill-align-self, auto);
   justify-content: var(--cs-inline-pill-justify, center);
   padding: var(--cs-inline-pill-padding, 4px 8px);
-  border: var(--cs-inline-pill-border, 0);
-  border-radius: var(--cs-inline-pill-radius, 999px);
-  background: var(--cs-inline-pill-bg, var(--cs-accent-soft));
-  color: var(--cs-inline-pill-color, var(--cs-accent));
-  font-size: var(--cs-inline-pill-size, var(--fs-xs));
-  font-weight: var(--cs-inline-pill-weight, 600);
+  border: var(--cs-inline-pill-border, var(--cs-inline-pill-border-default, 0));
+  border-radius: var(--cs-inline-pill-radius, var(--cs-inline-pill-radius-default, 999px));
+  background: var(--cs-inline-pill-bg, var(--cs-inline-pill-bg-default, var(--cs-accent-soft)));
+  color: var(--cs-inline-pill-color, var(--cs-inline-pill-color-default, var(--cs-accent)));
+  font-size: var(--cs-inline-pill-size, var(--cs-inline-pill-size-default, var(--fs-xs)));
+  font-weight: var(--cs-inline-pill-weight, var(--cs-inline-pill-weight-default, 600));
   line-height: var(--cs-inline-pill-line-height, 1);
   text-align: var(--cs-inline-pill-text-align, center);
   white-space: var(--cs-inline-pill-white-space, nowrap);
