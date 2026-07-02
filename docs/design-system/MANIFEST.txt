@@ -9,6 +9,7 @@ docs/design-system/07-content-and-motion.md
 docs/design-system/08-ai-implementation-rules.md
 docs/design-system/09-integrated-workflow.md
 docs/design-system/MANIFEST.txt
+docs/design-system/audit/MANIFEST.txt
 docs/design-system/audit/ai-audit-task-template.md
 docs/design-system/audit/design-audit-2026-06-08.md
 docs/design-system/audit/design-audit-2026-06-25.md
