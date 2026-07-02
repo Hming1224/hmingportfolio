@@ -7,6 +7,7 @@ These rules are mandatory for any AI agent modifying the Hming Portfolio repo.
 - `styles/tokens.css` is the only runtime source of truth for design tokens.
 - Markdown / YAML token indexes are documentation mirrors only.
 - Real component code is the source of truth for props, variants, states, and behavior.
+- Current production code is the source of truth for visual behavior. If a design-system rule conflicts with current production UI, stop and re-audit before changing code.
 - `/design-system` may document real components; it must not invent components, props, variants, tokens, or examples.
 
 ## 2. Branch and worktree boundaries
@@ -68,8 +69,11 @@ Rules:
 - Do not create `--hm-*` tokens for one page or one visual.
 - Do not create `--cs-*` tokens unless the same semantic value is shared by Case Study patterns.
 - Do not make components consume primitive color scale tokens directly unless explicitly documented.
-- `.theme-<slug>` may define color and brand semantic tokens only. It must not define layout, spacing, typography, radius, shadow geometry, width, height, grid, or breakpoint rules.
-- One-off narrative visuals may keep local CSS values if they do not affect system consistency.
+- Target state: `.theme-<slug>` should primarily define semantic color, surface, text, and brand mappings.
+- Current production CSS may still contain transitional route-specific or colocated component custom properties for spacing, radius, layout, min-width, matrix, flow, timeline, and diagram geometry. These transitional variables must not trigger an immediate route CSS refactor.
+- Design token aliases are allowed only when they are visual-preserving and the component contract or visual baseline is clear.
+- Visualization geometry, matrix columns, timeline geometry, SVG connector coordinates, and route-specific min-width should remain local or colocated unless a component abstraction assessment proves reuse is safe.
+- One-off narrative visuals may keep local CSS values if they preserve storytelling or prevent visual regression.
 
 ## 4. Component and pattern rules
 

@@ -3,6 +3,7 @@
 > 用途：給 AI agent / Codex / Claude / Gemini 執行 Design System 重構時使用。
 > 目標：每次只做一個可驗證、可回滾的小批次，避免一次大改造成視覺 regression。
 > 適用專案：Hming Portfolio Design System remediation。
+> 狀態：這是一份 visual-preserving implementation batch template，必須搭配 current production code 與目前的 docs contracts 解讀。不要用此 template 強迫 route CSS refactor。
 
 ---
 
@@ -166,7 +167,7 @@ foundation token（--hm-* / --fs-* / --text-*）
 - 不為單一頁面新增 --hm-* token
 - 不把一次性裝飾位置 token 化
 - 不讓 component 直接吃 primitive color token
-- 不在 .theme-* 裡寫 layout / spacing / typography / radius / shadow geometry
+- target state 偏好不在 .theme-* 裡寫 layout / spacing / typography / radius / shadow geometry；但 production 中既有 local / colocated component variables 可保留，直到 visual-preserving migration 被明確批准
 ```
 
 ---

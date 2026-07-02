@@ -1,5 +1,9 @@
 # Design System Implementation Task Order
 
+> **Status:** historical audit / target-state planning artifact.
+> This document is not the current source of truth for implementation. Current component contracts live in `docs/design-system/03-components.md`; current governance boundaries live in `docs/design-system/06-governance.md`; production code remains the source of truth.
+> Treat stale branch names, task order, and remediation wording as historical context unless a current task explicitly revalidates them.
+
 請依照以下順序交付 AI 執行，避免一次大改造成視覺破壞。
 
 ## Phase 1 — Audit Only
@@ -102,7 +106,7 @@ CaseFlowFrame
 
 ```txt
 每次只處理一個案例頁
-.theme-xxx 只保留 --cs-* color tokens
+.theme-xxx 以只保留 semantic color / surface / text token mappings 作為 target state；production 中既有 transitional route-specific / colocated variables 不應觸發立即重構
 visualization geometry 可以保留 local values
 ```
 
