@@ -64,11 +64,13 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 | `--text-muted` | `#8e8e9c` | 最弱（同 `--muted`）|
 | `--text-on-dark` | `#ffffff` | 深色背景上的大標（由 `.cs-heading-white` 消費，用於圖片/overlay 上的白標題）|
 
-**分層 theming（案例頁唯一允許的專屬 UI 差異）：**
+**分層 theming（案例頁 target-state governance）：**
 - 全域 `:root` 只放「綁定規則 + 中性預設」。
-- 每個案例頁在 `<main class="cs-page theme-xxx">` 掛 theme，只能指定共用 semantic case tokens，例如 `--cs-accent`、`--cs-accent-strong`、`--cs-accent-soft`、`--cs-surface`、`--cs-line`、`--cs-text-heading`。
+- 每個案例頁在 `<main class="cs-page theme-xxx">` 掛 theme；target state 是優先指定共用 semantic color / surface / text tokens，例如 `--cs-accent`、`--cs-accent-strong`、`--cs-accent-soft`、`--cs-surface`、`--cs-line`、`--cs-text-heading`。
 - 共用元件只能消費 `--cs-*` semantic token，不得直接讀 `--ca-*`、`--laushu-*`、`--advantech-*`。
-- `.theme-xxx` 不得包含 `display`、`grid-template-*`、`gap`、`padding`、`margin`、`width`、`height`、`font-size`、`border-radius` 或 breakpoint override。
+- Production code is the source of truth：目前 route CSS 仍有 transitional route-specific 或 colocated component custom properties，用於 spacing、radius、layout、min-width、matrix、flow、timeline 與 diagram geometry。這些現況不代表應立即重構 route CSS。
+- Route-specific visualization geometry 與 section composition 若能保留 storytelling 或避免 visual regression，可以留在 local / colocated CSS。
+- 未來 cleanup 必須是 visual-preserving refactor；只有在 component contract 與 visual baseline 都明確時，才遷移這些變數。
 - **深色 section**：目前不保留深色 section class。`.cs-heading-white` 仍用於圖片 / overlay 上的白標題，所以只保留 `--text-on-dark` 單一 token。
 
 ### 2.5 每個專案的 Tone 色
@@ -112,12 +114,13 @@ token 的價值＝**重複次數 × 會不會改**，不是看顏色「重不重
 
 案例頁（`cs-*`）內部有大量視覺色（插圖、流程圖、資訊卡藍色系）。
 
-> **規則：案例頁只允許顏色因專案而異，其他 UI 規則一律共用。**
+> **target state：案例頁主要透過 semantic color / surface / text tokens 表達專案差異，穩定 shell 的 UI 規則一律共用。**
 > - 該頁內**重複用 ≥2 次**的色 → 在 `.theme-xxx` 映射到統一的 `--cs-*` semantic token。
 > - **只用一次**的 → 直接寫 hex。
 > - 一頁內不要冒出 5 種藍，色也要成套。
 > - 專案色可影響文字、背景、邊框、圖表與 shadow color；shadow 的 offset / blur / spread 必須使用共用規格。
-> - 禁止用 theme selector 改變 component geometry 或 RWD。
+> - Current production CSS 仍包含 route-specific 或 colocated component variables，涵蓋 spacing、radius、layout、min-width、matrix、flow、timeline 與 diagram geometry。這是 transitional production reality，不是立即 refactor 指令。
+> - Route-specific visualization geometry 和 storytelling section composition 可保留 local / colocated；只有在 visual-preserving、component contract 清楚、且 visual baseline 可驗證時才遷移。
 
 ---
 

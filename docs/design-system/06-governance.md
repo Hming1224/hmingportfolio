@@ -20,7 +20,7 @@
 - **不要用純黑**：文字最深 `--ink (#343434)`
 - **不要讓 accent 大面積出現**：`--purple` 只用於 CTA 和 active
 - **不要把單一專案才用的色塞進全域 `:root`**：用區域 token（見 2.0）
-- **不要在 `.theme-xxx` 寫 layout**：theme 只能設定顏色 token
+- **不要把 `.theme-xxx` 的 target state 當成 production reality**：target state 是優先放 semantic color / surface / text tokens；current production code 仍可能保留 route-specific 或 colocated component variables，清理前必須先確認 component contract 與 visual baseline。
 - **不要用 `ca-*` / `laushu-*` / 專案私有 `cs-*` 重做既有 UI pattern**
 - **不要把案例頁的有色陰影尺寸擴散成另一套 elevation**
 - **不要在手機版保留 hover-only 互動**：改成靜態或點擊觸發
@@ -41,11 +41,22 @@
 ### 10.1 Case Study CSS Ownership
 
 - `styles/case-study.css`：Case Study shell 與共用 pattern 的單一樣式來源。
-- `components/case-study/`：共用 React component 與 pattern API。
-- `.theme-<slug>`：只宣告 `--cs-*` 顏色 token。
-- 專案 route：只組合共用 component、提供內容與資料。
-- 專案 visualization component：可管理流程圖節點、SVG path、connector 與圖像比例；不得重做 section / card / typography / spacing / RWD shell。
-- 若同一 pattern 在第二個案例出現，不是「考慮」共用，而是必須先抽成 `components/case-study/` 再使用。
+- `components/case-study/`：共用 React component 與 pattern API；stable component contracts 以 [03-components.md](./03-components.md) 為準。
+- `.theme-<slug>`：target state 是優先宣告 `--cs-*` semantic color / surface / text tokens。Current production code 仍可能有 transitional route-specific 或 colocated component custom properties；這些不是立即重構 route CSS 的指令。
+- 專案 route：組合共用 component、提供內容與資料；必要時可保留 local / colocated visualization component。
+- 專案 visualization component：可管理流程圖節點、SVG path、connector、min-width、grid columns、timeline / matrix geometry 與圖像比例；不得重做已穩定的 shared shell anatomy。
+- 若同一 pattern 在第二個案例出現，先 audit stable component anatomy、responsive behavior 與 visual regression risk；可以只共用 design tokens 或 shell，不一定直接抽 shared component。
+
+### 10.2 Matrix / Diagram Governance
+
+- Comparison matrix geometry should remain local / colocated unless its anatomy and responsive behavior are stable across cases.
+- Flow diagram geometry should remain local / colocated.
+- Timeline geometry should remain local / colocated.
+- Wide SVG diagram coordinates, connectors, min-width values, and grid columns are local implementation details.
+- Design token aliases may apply only to visual surface values when the refactor is visual-preserving.
+- Data table, comparison matrix, flow diagram, timeline, and wide SVG diagram must not be merged into one shared component.
+- ProjectCard hover overlay and CaseTOC floating navigation are protected interaction patterns; do not change them unless explicitly approved.
+- For DataTable, ScrollContainer, FlowScrollHint, CaseFlowFrame, and media/lightbox component contracts, see [03-components.md](./03-components.md).
 
 ---
 
@@ -136,9 +147,14 @@ Design System 落地禁止一次大改，必須依照 `audit/implementation-task
 
 ## Cross-branch integration governance
 
-The repository uses two coordinated implementation plans:
+Historical context:
 
-1. Case Study remediation updates real Case Study code and writes `contracts/case-study-components.md`.
-2. DS page alignment consumes that contract and updates `/design-system`.
+1. Earlier Case Study remediation work wrote `contracts/case-study-components.md`.
+2. Earlier DS page alignment work consumed that contract and updated `/design-system`.
 
-The DS page branch must not document Case Study components before a contract entry exists. The Case Study branch must not change DS page files. Both branches must follow `08-ai-implementation-rules.md`.
+Current implementation instruction:
+
+- Do not use stale branch names, remediation checklists, or historical handoff docs as current implementation instruction without checking production code.
+- `03-components.md` is the current source of truth for stable component contracts.
+- Production code is the source of truth when docs and code disagree.
+- AI / Agent changes must still follow `08-ai-implementation-rules.md`.
