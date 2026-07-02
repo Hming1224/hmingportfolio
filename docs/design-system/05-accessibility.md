@@ -70,13 +70,13 @@ Component accessibility contracts live in [03-components.md](./03-components.md)
 
 - [implemented] `FlowScrollHint` is `aria-hidden="true"` and currently decorative.
 - [implemented] It is a scroll affordance, not an interactive control, CTA, navigation, or media control.
-- [needs decision] Whether it should remain decorative or become accessible instructional text is a designer / accessibility decision.
+- [decided] It remains decorative. See `06-governance.md` Standardization Decisions（2026-07-02）.
 
 ### Non-native matrix / data grid
 
 - [partial] Crypto `FlowMatrixBoard` is a div-based comparison matrix, not native table and not ARIA grid.
-- [future improvement] If promoted to a semantic data grid, document ARIA table / grid semantics and keyboard expectations before implementation.
-- [needs decision] Decide whether each non-native matrix is a visual storytelling diagram or a data grid.
+- [decided] Non-native matrices remain visual storytelling diagrams and should not be promoted to ARIA grid semantics.
+- [future improvement] A visually-hidden text summary can be added later if the content needs a non-visual equivalent.
 
 ### Focus-visible / keyboard baseline
 

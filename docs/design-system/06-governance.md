@@ -60,6 +60,20 @@
 
 ---
 
+## Standardization Decisions（2026-07-02 拍板）
+
+- `.theme-*` keeps the target-state direction: prioritize semantic color / surface / text tokens. Do not proactively clean transitional route variables; only consolidate them when a scoped task already touches that section and the change is visual-preserving.
+- `FlowScrollHint` remains an `aria-hidden` decorative scroll affordance. Do not upgrade it to accessible instructional text unless a future accessibility task explicitly reopens the decision.
+- Comparison matrix, including Crypto `FlowMatrixBoard`, is a visual storytelling diagram. Do not add ARIA grid semantics. A visually-hidden text summary remains an optional future improvement.
+- StatusBadge / severity taxonomy is deferred until a real production usage scenario exists.
+- External `LinkButton` external affordance remains optional, not mandatory.
+- CTA primary density remains a guideline: prefer one primary CTA per viewport / decision moment. Do not enforce it as a hard rule.
+- Project tag radius remains `4px`.
+- Card radius / shadow values should not be forcibly converged. Keep each component's current production values unless a scoped visual-preserving task explicitly changes them.
+- Video media accessibility contract is deferred until a second video scenario appears and shared component anatomy / accessibility behavior can be assessed.
+
+---
+
 ---
 
 ## 11. 圖片與媒體資產規範

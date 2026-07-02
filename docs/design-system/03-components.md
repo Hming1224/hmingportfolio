@@ -260,7 +260,7 @@ Current behavior: it detects whether the following sibling contains a real horiz
 
 Current accessibility behavior: `aria-hidden="true"`, so it is decorative instructional UI.
 
-Whether it should remain decorative or become accessible instructional text is a designer / accessibility decision.
+Standardization decision（2026-07-02）: `FlowScrollHint` remains decorative. See `06-governance.md` Standardization Decisions.
 
 #### CaseFlowFrame contract
 
