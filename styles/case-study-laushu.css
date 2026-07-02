@@ -1005,6 +1005,81 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-iteration-copy-line-height: 1.53;
 }
 
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative {
+  --cs-before-after-narrative-gap: var(--cs-iteration-board-gap);
+  --cs-before-after-narrative-header-gap: 24px;
+  --cs-before-after-narrative-badge-padding: 9px 14px;
+  --cs-before-after-narrative-badge-bg: #4852c3;
+  --cs-before-after-narrative-badge-size: var(--fs-sm);
+  --cs-before-after-narrative-badge-weight: 600;
+  --cs-before-after-narrative-badge-line-height: 17px;
+  --cs-before-after-narrative-title-color: var(--laushu-tertiary-700);
+  --cs-before-after-narrative-title-size: 24px;
+  --cs-before-after-narrative-title-weight: 800;
+  --cs-before-after-narrative-title-line-height: 1.25;
+  --cs-before-after-narrative-point-columns: 98px minmax(0, 1fr);
+  --cs-before-after-narrative-point-gap: 24px;
+  --cs-before-after-narrative-point-label-color: #5d6674;
+  --cs-before-after-narrative-point-label-size: 15px;
+  --cs-before-after-narrative-point-label-weight: 800;
+  --cs-before-after-narrative-point-label-line-height: 1.53;
+  --cs-before-after-narrative-point-content-color: #5d6674;
+  --cs-before-after-narrative-point-content-size: 15px;
+  --cs-before-after-narrative-point-content-line-height: 1.53;
+  --cs-before-after-narrative-comparison-gap: var(--cs-iteration-compare-gap, 24px);
+  --cs-before-after-narrative-panel-border: #d8deec;
+  --cs-before-after-narrative-panel-radius: 16px;
+  --cs-before-after-narrative-panel-bg: #fbf9ff;
+  --cs-before-after-narrative-panel-head-padding: var(--cs-iteration-panel-caption-padding, 16px);
+  --cs-before-after-narrative-panel-head-bg: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, #ced2ff 100%);
+  --cs-before-after-narrative-panel-head-color: #241b31;
+  --cs-before-after-narrative-panel-head-size: var(--cs-iteration-panel-caption-size, 18px);
+  --cs-before-after-narrative-panel-head-weight: var(--cs-iteration-panel-caption-weight, 700);
+  --cs-before-after-narrative-panel-head-line-height: 31.5px;
+  --cs-before-after-narrative-panel-body-padding: var(--cs-iteration-panel-media-padding, 18px);
+  --cs-before-after-narrative-connector-color: #6f56bd;
+  --cs-before-after-narrative-connector-width: 41px;
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-badge {
+  width: fit-content;
+  flex: var(--cs-iteration-badge-flex, 0 0 95px);
+  white-space: nowrap;
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-point-content p {
+  margin: 0;
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-point-content p+p {
+  margin-top: var(--cs-iteration-copy-gap);
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-panel--laushu-w-1412 {
+  flex-grow: 1412;
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-panel--laushu-w-1440 {
+  flex-grow: 1440;
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-panel--laushu-w-2957 {
+  flex-grow: 2957;
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-panel-head {
+  display: flex;
+  min-height: var(--cs-iteration-panel-caption-min-height, 64px);
+  align-items: center;
+  justify-content: center;
+  font-family: var(--cs-iteration-panel-caption-font, var(--font-space-grotesk), sans-serif);
+  letter-spacing: -0.44px;
+}
+
+.theme-laushu .laushu-iterate-section .cs-before-after-narrative-panel-body {
+  min-height: var(--cs-iteration-panel-media-min-height, calc(100% - 64px));
+}
+
 @media (max-width: 768px) {
   .theme-laushu .laushu-iterate-section .cs-flow-frame-title,
   .theme-laushu .laushu-iterate-section .cs-iteration-title {
@@ -1019,6 +1094,24 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 
   .theme-laushu .laushu-iterate-section .cs-iteration-badge {
     --cs-iteration-badge-width-mobile: auto;
+  }
+
+  .theme-laushu .laushu-iterate-section .cs-before-after-narrative {
+    --cs-before-after-narrative-point-columns-mobile: 1fr;
+    --cs-before-after-narrative-point-gap-mobile: 12px;
+    --cs-before-after-narrative-header-direction-mobile: column;
+    --cs-before-after-narrative-header-align-mobile: flex-start;
+    --cs-before-after-narrative-header-gap-mobile: 12px;
+    --cs-before-after-narrative-title-size: 20px;
+  }
+
+  .theme-laushu .laushu-iterate-section .cs-before-after-narrative-badge {
+    width: auto;
+    flex-basis: var(--cs-iteration-badge-flex-basis-mobile, auto);
+  }
+
+  .theme-laushu .laushu-iterate-section .cs-before-after-narrative-panel {
+    width: 100%;
   }
 }
 

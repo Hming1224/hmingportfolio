@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { getLocale } from "next-intl/server";
 import "../../styles/case-study-laushu.css";
 import {
+  BeforeAfterNarrativeFrame,
   CaseCard,
   CaseFeatureRow,
   CaseFlowFrame,
@@ -310,6 +311,16 @@ const iterationBoards = [
     alt: "Laushu 設計迭代 合併清單顯示",
   },
 ];
+
+type IterationImage = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+function getIterationPanelClass(image: IterationImage) {
+  return `cs-before-after-narrative-panel--laushu-w-${image.width}`;
+}
 
 const PROTO = `${IMG}/proto`;
 
@@ -713,23 +724,30 @@ function IterateSection(scrollHintLabel: string) {
       </ArticleBlock>
       <div className="cs-iteration-list">
         {iterationBoards.map((board) => (
-          <CaseCard className="cs-iteration-board" key={board.title}>
-            <header className="cs-iteration-head">
-              <span className="cs-iteration-badge">{board.tag}</span>
-              <h3 className="cs-iteration-title">{board.title}</h3>
-            </header>
-            <div className="cs-iteration-body">
-              <p className="cs-iteration-label">{board.label}</p>
-              <div className="cs-iteration-copy">
-                {board.paras.map((p, i) => (<p key={i}>{p}</p>))}
-              </div>
-            </div>
-            <div className="cs-iteration-compare">
-              <IterationComparisonCard label="Before" image={board.before} alt={`${board.alt} Before`} />
-              <span className="cs-iteration-arrow" aria-hidden="true" />
-              <IterationComparisonCard label="After" image={board.after} alt={`${board.alt} After`} />
-            </div>
-          </CaseCard>
+          <BeforeAfterNarrativeFrame
+            key={board.title}
+            className="cs-iteration-board"
+            badge={board.tag}
+            title={board.title}
+            points={[
+              {
+                label: board.label,
+                content: (
+                  <>
+                    {board.paras.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </>
+                ),
+              },
+            ]}
+            beforeLabel="Before"
+            afterLabel="After"
+            beforeClassName={getIterationPanelClass(board.before)}
+            afterClassName={getIterationPanelClass(board.after)}
+            before={<IterationComparisonMedia image={board.before} alt={`${board.alt} Before`} />}
+            after={<IterationComparisonMedia image={board.after} alt={`${board.alt} After`} />}
+          />
         ))}
       </div>
       <ArticleBlock title="測試結果" number="03">
@@ -748,37 +766,22 @@ function IterateSection(scrollHintLabel: string) {
   );
 }
 
-function IterationComparisonCard({
-  label,
+function IterationComparisonMedia({
   image,
   alt,
 }: {
-  label: "Before" | "After";
-  image: {
-    src: string;
-    width: number;
-    height: number;
-  };
+  image: IterationImage;
   alt: string;
 }) {
   return (
-    <CaseCard
-      as="figure"
-      className="cs-iteration-panel"
-      style={{ flexGrow: image.width }}
-    >
-      <figcaption>{label}</figcaption>
-      <div className="cs-iteration-panel-media">
-        <ZoomableImage
-          src={image.src}
-          alt={alt}
-          width={image.width}
-          height={image.height}
-          className="cs-iteration-panel-image"
-          labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
-        />
-      </div>
-    </CaseCard>
+    <ZoomableImage
+      src={image.src}
+      alt={alt}
+      width={image.width}
+      height={image.height}
+      className="cs-iteration-panel-image"
+      labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
+    />
   );
 }
 
