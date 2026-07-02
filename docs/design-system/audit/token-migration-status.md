@@ -1,5 +1,9 @@
 # Token Migration Status
 
+> **Status:** historical migration record.
+> `--hm-*` migration is complete as of the current production token layer. Future token work should use current `styles/tokens.css` and `docs/design-system/02-tokens.md` as references.
+> Do not treat the checklist below as current implementation backlog unless a current audit revalidates it.
+
 這份文件追蹤 `--hm-*` Token v2 的遷移規則與狀態。
 
 ## 13. Token v2：`--hm-*` 單一前綴

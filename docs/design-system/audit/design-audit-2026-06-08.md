@@ -1,5 +1,9 @@
 # 設計系統審查報告（hmingportfolio）
 
+> **Status:** historical design audit snapshot.
+> Architecture, file sizes, and implementation recommendations may be outdated.
+> Do not use this file as current implementation guidance without checking current production code and current design-system docs.
+
 > 產出日期：2026-06-08（第二輪完整掃描補充見文末「附錄」）
 > 範圍：審查 `design.md` ↔ `app/globals.css`（7666 行 / 740 條 class）↔ 4 頁路由 + 25 個元件，只列不一致、**不動 code**
 > 對應計畫：`100_Todo/plans/2026-06-08-設計系統審查與重構.md`

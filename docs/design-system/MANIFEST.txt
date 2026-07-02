@@ -10,7 +10,9 @@ docs/design-system/08-ai-implementation-rules.md
 docs/design-system/09-integrated-workflow.md
 docs/design-system/MANIFEST.txt
 docs/design-system/audit/ai-audit-task-template.md
+docs/design-system/audit/design-audit-2026-06-08.md
 docs/design-system/audit/design-audit-2026-06-25.md
+docs/design-system/audit/green-batch-template.md
 docs/design-system/audit/implementation-task-order.md
 docs/design-system/audit/token-migration-status.md
 docs/design-system/changelog.md

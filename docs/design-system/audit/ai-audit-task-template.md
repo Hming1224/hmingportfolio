@@ -1,5 +1,9 @@
 # AI Design System Audit Task Template
 
+> **Status:** historical audit template.
+> Do not execute this file directly as a current implementation task. Interpret this template against current production code and current docs contracts before use.
+> Current source of truth: `docs/design-system/03-components.md`, `docs/design-system/06-governance.md`, and production code.
+
 這份模板用於要求 AI 先掃描 Design System 違規點，只產出報告，不直接修改 code。
 
 ## Prompt
@@ -17,7 +21,7 @@
 - box-shadow hardcoded
 - transition duration hardcoded
 - z-index hardcoded
-- .theme-* 中是否出現 layout / spacing / typography / radius / shadow geometry / breakpoint 規則
+- .theme-* 中是否出現 layout / spacing / typography / radius / shadow geometry / breakpoint 規則；這是 target-state audit signal，不代表 production 中既有 transitional route-specific / colocated variables 必須立即重構
 - 元件是否直接使用 primitive token，例如 --hm-purple-600、--hm-peach-600
 - 是否新增 ca-* / laushu-* / advantech-* class 來重做既有 cs-* pattern
 

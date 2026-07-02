@@ -12,6 +12,10 @@ These rules are mandatory for any AI agent modifying the Hming Portfolio repo.
 
 ## 2. Branch and worktree boundaries
 
+Historical branch context — this section describes the 2026-06 remediation branch era scope. Current maintenance work follows `AGENTS.md`, scoped user tasks, production code as source of truth, and focused commits on `main` when explicitly approved.
+
+Focused docs-only commits on `main` are allowed only when explicitly approved and scoped. Do not use this historical branch guidance to block an approved docs-only checkpoint, and do not use it to widen a task beyond the requested files.
+
 ### Case Study remediation branch
 
 Branch: `codex/design-system-remediation`
@@ -109,15 +113,17 @@ Every batch must run:
 8. Console errors = 0
 9. Touched interactions still work: tabs, zoom/lightbox, video, TOC, flow scroll, language route
 
-After a green batch, commit and push only the current feature branch. Do not push `main`.
+For historical feature-branch remediation work, commit and push only the current feature branch. The earlier "Do not push main" rule belongs to that historical branch flow. For current scoped maintenance work, follow the explicit task instructions; focused docs-only commits on `main` are allowed only when explicitly approved and scoped.
 
 ## 7. Contract rule
 
-If a Case Study remediation batch creates, stabilizes, or changes a shared Case Study component, token, primitive, or exception, update:
+Current component contract source of truth:
 
-`docs/design-system/contracts/case-study-components.md`
+`docs/design-system/03-components.md`
 
-The DS page alignment branch may document Case Study components only after the contract exists.
+`docs/design-system/contracts/case-study-components.md` is a historical / legacy handoff reference. Do not use it as current implementation instruction without checking current production code and `03-components.md`.
+
+If a scoped batch creates, stabilizes, or changes a shared Case Study component, token, primitive, or exception, update the current component contract source of truth and any specifically requested governance docs. Keep the diff focused; do not update legacy handoff files unless the task explicitly asks for it.
 
 ## 8. Forbidden prompts
 
