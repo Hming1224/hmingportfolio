@@ -378,7 +378,43 @@
   --cs-detail-body-size: 15px;
   --cs-detail-body-line-height: 23px;
   --cs-detail-body-paragraph-gap: 23px;
+  --cs-before-after-narrative-header-gap: var(--cs-card-heading-gap);
+  --cs-before-after-narrative-badge-padding: var(--cs-pill-badge-padding);
+  --cs-before-after-narrative-badge-bg: var(--cs-pill-badge-bg);
+  --cs-before-after-narrative-badge-size: var(--cs-pill-badge-size);
+  --cs-before-after-narrative-badge-weight: var(--cs-pill-badge-weight);
+  --cs-before-after-narrative-badge-line-height: var(--cs-pill-badge-line-height);
+  --cs-before-after-narrative-title-min-width: var(--cs-card-heading-title-min-width);
+  --cs-before-after-narrative-title-color: var(--cs-card-heading-title-color);
+  --cs-before-after-narrative-title-size: var(--cs-card-heading-title-size);
+  --cs-before-after-narrative-title-line-height: var(--cs-card-heading-title-line-height);
+  --cs-before-after-narrative-point-columns: 98px minmax(0, 1fr);
+  --cs-before-after-narrative-point-gap: var(--cs-detail-row-gap);
+  --cs-before-after-narrative-point-label-color: var(--cs-detail-label-color);
+  --cs-before-after-narrative-point-label-size: var(--cs-detail-label-size);
+  --cs-before-after-narrative-point-label-line-height: var(--cs-detail-label-line-height);
+  --cs-before-after-narrative-point-content-color: var(--cs-detail-body-color);
+  --cs-before-after-narrative-point-content-size: var(--cs-detail-body-size);
+  --cs-before-after-narrative-point-content-line-height: var(--cs-detail-body-line-height);
+  --cs-before-after-narrative-panel-bg: var(--ca-bg-soft);
+  --cs-before-after-narrative-panel-head-bg: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
+  --cs-before-after-narrative-panel-head-color: var(--cs-accent);
+  --cs-before-after-narrative-panel-head-line-height: 31.5px;
   margin-top: 24px;
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
+  flex: var(--cs-pill-badge-flex);
+  width: var(--cs-pill-badge-width);
+  white-space: var(--cs-pill-badge-white-space);
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point-content p {
+  margin: 0;
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point-content p+p {
+  margin-top: var(--cs-detail-body-paragraph-gap);
 }
 
 .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-panel {
@@ -511,6 +547,26 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-title {
     min-width: 0;
   }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-header {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
+    flex: none;
+    width: auto;
+    padding: 9px 14px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-title {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -549,6 +605,28 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-title {
+    font-size: 21px;
+    line-height: 28px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
+    width: fit-content;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration > .cs-before-after-narrative {
+    --cs-card-gap: 20px;
+    --cs-card-radius: 16px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-title {
     font-size: 21px;
     line-height: 28px;
   }
