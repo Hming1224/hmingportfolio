@@ -1,7 +1,7 @@
 # AI Design System Audit Task Template
 
-> **Status:** historical audit template.
-> Do not execute this file directly as a current implementation task. Interpret this template against current production code and current docs contracts before use.
+> **Status:** reusable audit template.
+> It must be interpreted against current production code and current docs contracts. Do not treat target-state rules as current production violations.
 > Current source of truth: `docs/design-system/03-components.md`, `docs/design-system/06-governance.md`, and production code.
 
 這份模板用於要求 AI 先掃描 Design System 違規點，只產出報告，不直接修改 code。
