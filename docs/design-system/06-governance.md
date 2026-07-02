@@ -72,6 +72,17 @@
 - Card radius / shadow values should not be forcibly converged. Keep each component's current production values unless a scoped visual-preserving task explicitly changes them.
 - Video media accessibility contract is deferred until a second video scenario appears and shared component anatomy / accessibility behavior can be assessed.
 
+### Reuse Assessment（2026-07-02）
+
+- Reflection cards: keep local. Anatomy is similar, but Laushu's gradient surface and number pill are storytelling identity. Keep the shared layer at `CaseCard` + `CaseGrid` + design tokens.
+- Feature / insight cards: keep local, share tokens only. The three case studies use materially different anatomy and storytelling roles.
+- Before-after variants: do not expand `CaseBeforeAfter`. Advantech iteration variants remain local.
+- Metadata chips: share tokens only. Do not add a generic Tag / Pill primitive.
+- Simple research cards: the existing shared shell (`CaseCard` + `CaseMedia`) is sufficient.
+- Data table wrapper: deferred. The behavior is already defined in `03-components.md`; do not extract a shared wrapper component yet.
+- Scroll affordance: `FlowScrollHint` is already a shared component. Do not expand its contract.
+- Reopen condition: use the rule of three. If any pattern appears in a third case study with stable anatomy, rerun component abstraction assessment. Adding a new case study such as `nccuspace` should trigger this review.
+
 ---
 
 ---

@@ -35,6 +35,7 @@ Design System 必須覆蓋整個作品集，案例頁不能因為內容不同就
 - This file only describes reuse direction: stable shell anatomy should be shared; route-specific storytelling geometry can stay local / colocated.
 - Design token aliases may be introduced for visual surface values only when the change is visual-preserving.
 - Comparison matrix, flow diagram, timeline, and wide SVG diagram should remain local / colocated unless their component anatomy and responsive behavior are proven stable across cases.
+- 2026-07-02 reuse assessment is complete; outcomes and reopen conditions are recorded in `06-governance.md` under Reuse Assessment.
 
 ---
 
