@@ -83,6 +83,32 @@
 - Scroll affordance: `FlowScrollHint` is already a shared component. Do not expand its contract.
 - Reopen condition: use the rule of three. If any pattern appears in a third case study with stable anatomy, rerun component abstraction assessment. Adding a new case study such as `nccuspace` should trigger this review.
 
+### Before / After Narrative Frame Assessment
+
+Decision:
+Approve `BeforeAfterNarrativeFrame` as a proposed shared layout frame candidate, not an implemented component.
+- Keep `CaseBeforeAfter` as the simple two-panel shared component.
+- Do not expand `CaseBeforeAfter` with storytelling-specific props.
+- If future implementation is approved, create a separate slot-based layout frame.
+- Keep media wrappers, annotations, redlines, proportional media sizing, and route-specific storytelling geometry local / colocated.
+
+Reason:
+The repeated structure across Advantech, Laushu, and Crypto Arsenal is the Layer 2 narrative frame, not the Layer 3 media internals. A slot-based frame can share layout and responsive behavior while preserving local media and annotation needs.
+
+Implementation gate:
+No production code changes are approved by this docs update. Future implementation must be split into:
+1. component introduction without route adoption;
+2. one-case visual-preserving migration;
+3. route / viewport smoke;
+4. only then additional migrations.
+
+Suggested migration order if approved:
+1. Crypto Arsenal first, because it already uses simple `CaseBeforeAfter`.
+2. Laushu second, preserving proportional image sizing inside slots.
+3. Advantech last, because it has redline and 360px / 640px annotations.
+
+Production code is source of truth. Target-state is not production reality. Local / colocated storytelling geometry remains allowed.
+
 ---
 
 ---

@@ -37,6 +37,87 @@ Design System 必須覆蓋整個作品集，案例頁不能因為內容不同就
 - Comparison matrix, flow diagram, timeline, and wide SVG diagram should remain local / colocated unless their component anatomy and responsive behavior are proven stable across cases.
 - 2026-07-02 reuse assessment is complete; outcomes and reopen conditions are recorded in `06-governance.md` under Reuse Assessment.
 
+### Before / After Narrative Pattern
+
+> **Status:** Shared design pattern; proposed slot-based layout frame; not yet implemented.
+
+`CaseBeforeAfter` is the existing simple shared component for simple two-panel media comparisons. `BeforeAfterNarrativeFrame` is a proposed future layout frame for the broader narrative anatomy. Advantech, Laushu, and Crypto Arsenal show repeated Layer 2 anatomy, but only Crypto currently uses `CaseBeforeAfter`.
+
+#### Layered anatomy
+
+Layer 1: Narrative pattern
+- before state
+- design change rationale
+- after state
+
+Layer 2: Proposed shared layout frame
+- badge / context label
+- title
+- optional intro
+- label / copy points
+- before slot
+- connector slot
+- after slot
+- desktop horizontal comparison
+- mobile stacked comparison
+
+Layer 3: Local / colocated content
+- media wrappers
+- screenshot content
+- redline / measurement annotation
+- proportional image sizing
+- dark screenshot readability
+- route-specific visual geometry
+
+#### Proposed component contract
+
+Planning contract only. Not implemented in production.
+
+```ts
+import type { ReactNode } from "react";
+
+export type BeforeAfterNarrativePoint = {
+  label: ReactNode;
+  content: ReactNode;
+};
+
+export type BeforeAfterNarrativeFrameProps = {
+  badge: ReactNode;
+  title: ReactNode;
+  intro?: ReactNode;
+  points?: BeforeAfterNarrativePoint[];
+  before: ReactNode;
+  after: ReactNode;
+  beforeLabel?: ReactNode;
+  afterLabel?: ReactNode;
+  connector?: ReactNode;
+  tone?: "blue" | "cyan" | "purple" | "neutral";
+  className?: string;
+  headerClassName?: string;
+  bodyClassName?: string;
+  comparisonClassName?: string;
+  beforeClassName?: string;
+  afterClassName?: string;
+};
+```
+
+#### Explicit exclusions
+
+Do not add props for:
+- redline
+- 360px / 640px annotations
+- image `flexGrow`
+- screenshot crop
+- media wrapper type
+- route-specific board geometry
+- project-specific copy
+
+These stay in slot content or local / colocated components.
+
+#### Governance
+
+Do not expand `CaseBeforeAfter` to cover the broader narrative pattern. If implemented later, create a separate slot-based frame instead. Adopt one route at a time with visual-preserving migration and smoke testing.
+
 ---
 
 ---
