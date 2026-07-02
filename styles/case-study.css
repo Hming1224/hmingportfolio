@@ -2427,6 +2427,143 @@
   transform: rotate(-90deg);
 }
 
+.cs-before-after-narrative {
+  --cs-card-gap: var(--cs-before-after-narrative-gap, 24px);
+  --cs-before-after-narrative-accent: var(--cs-accent);
+  --cs-before-after-narrative-accent-soft: var(--cs-accent-soft);
+  --cs-before-after-narrative-line: var(--cs-line);
+}
+
+.cs-before-after-narrative[data-tone="blue"] {
+  --cs-before-after-narrative-accent: var(--hm-blue);
+  --cs-before-after-narrative-accent-soft: var(--hm-blue-soft);
+}
+
+.cs-before-after-narrative[data-tone="cyan"] {
+  --cs-before-after-narrative-accent: var(--cs-accent);
+  --cs-before-after-narrative-accent-soft: var(--cs-accent-soft);
+}
+
+.cs-before-after-narrative[data-tone="purple"] {
+  --cs-before-after-narrative-accent: var(--hm-purple);
+  --cs-before-after-narrative-accent-soft: var(--hm-purple-soft);
+}
+
+.cs-before-after-narrative-header {
+  display: flex;
+  align-items: var(--cs-before-after-narrative-header-align, center);
+  gap: var(--cs-before-after-narrative-header-gap, 16px);
+  flex-wrap: wrap;
+}
+
+.cs-before-after-narrative-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: var(--cs-before-after-narrative-badge-padding, 6px 12px);
+  border-radius: var(--cs-before-after-narrative-badge-radius, 999px);
+  background: var(--cs-before-after-narrative-badge-bg, var(--cs-before-after-narrative-accent));
+  color: var(--cs-before-after-narrative-badge-color, #ffffff);
+  font-size: var(--cs-before-after-narrative-badge-size, var(--fs-xs));
+  font-weight: var(--cs-before-after-narrative-badge-weight, 700);
+  line-height: var(--cs-before-after-narrative-badge-line-height, 1.25);
+  text-align: center;
+}
+
+.cs-before-after-narrative-title {
+  flex: 1;
+  min-width: var(--cs-before-after-narrative-title-min-width, 0);
+  margin: 0;
+  color: var(--cs-before-after-narrative-title-color, var(--cs-text-heading));
+  font-size: var(--cs-before-after-narrative-title-size, var(--fs-h4));
+  font-weight: var(--cs-before-after-narrative-title-weight, 700);
+  line-height: var(--cs-before-after-narrative-title-line-height, 1.35);
+}
+
+.cs-before-after-narrative-intro {
+  color: var(--cs-before-after-narrative-intro-color, var(--cs-text-secondary));
+  font-size: var(--cs-before-after-narrative-intro-size, var(--fs-sm));
+  line-height: var(--cs-before-after-narrative-intro-line-height, 1.6);
+}
+
+.cs-before-after-narrative-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs-before-after-narrative-body-gap, 16px);
+}
+
+.cs-before-after-narrative-point {
+  display: grid;
+  grid-template-columns: var(--cs-before-after-narrative-point-columns, 120px minmax(0, 1fr));
+  gap: var(--cs-before-after-narrative-point-gap, 16px);
+}
+
+.cs-before-after-narrative-point-label {
+  color: var(--cs-before-after-narrative-point-label-color, var(--cs-text-secondary));
+  font-size: var(--cs-before-after-narrative-point-label-size, var(--fs-sm));
+  font-weight: var(--cs-before-after-narrative-point-label-weight, 700);
+  line-height: var(--cs-before-after-narrative-point-label-line-height, 1.55);
+}
+
+.cs-before-after-narrative-point-content {
+  min-width: 0;
+  color: var(--cs-before-after-narrative-point-content-color, var(--cs-text-secondary));
+  font-size: var(--cs-before-after-narrative-point-content-size, var(--fs-sm));
+  line-height: var(--cs-before-after-narrative-point-content-line-height, 1.6);
+}
+
+.cs-before-after-narrative-comparison {
+  display: flex;
+  align-items: stretch;
+  gap: var(--cs-before-after-narrative-comparison-gap, 24px);
+}
+
+.cs-before-after-narrative-panel {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--cs-before-after-narrative-panel-border, var(--cs-before-after-narrative-line));
+  border-radius: var(--cs-before-after-narrative-panel-radius, var(--hm-radius-lg));
+  background: var(--cs-before-after-narrative-panel-bg, var(--cs-surface-soft));
+}
+
+.cs-before-after-narrative-panel-head {
+  padding: var(--cs-before-after-narrative-panel-head-padding, 16px);
+  background: var(--cs-before-after-narrative-panel-head-bg, var(--cs-before-after-narrative-accent-soft));
+  color: var(--cs-before-after-narrative-panel-head-color, var(--cs-before-after-narrative-accent));
+  font-size: var(--cs-before-after-narrative-panel-head-size, 18px);
+  font-weight: var(--cs-before-after-narrative-panel-head-weight, 700);
+  line-height: var(--cs-before-after-narrative-panel-head-line-height, 1.5);
+  text-align: center;
+}
+
+.cs-before-after-narrative-panel-body {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: var(--cs-before-after-narrative-panel-body-padding, 18px);
+}
+
+.cs-before-after-narrative-connector {
+  display: flex;
+  flex-shrink: 0;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  width: var(--cs-before-after-narrative-connector-width, 41px);
+  color: var(--cs-before-after-narrative-connector-color, var(--cs-before-after-narrative-accent));
+}
+
+.cs-before-after-narrative-connector svg {
+  width: 41px;
+  height: 47px;
+  transform: rotate(-90deg);
+}
+
 .cs-flow-frame {
   --cs-flow-caption-color: var(--cs-text-heading);
   margin: 36px 0 0;
@@ -2985,6 +3122,30 @@
     width: 100%;
     max-width: 100%;
     flex: 1 1 auto;
+  }
+
+  .cs-before-after-narrative-header {
+    align-items: var(--cs-before-after-narrative-header-align-mobile, flex-start);
+    flex-direction: var(--cs-before-after-narrative-header-direction-mobile, column);
+    gap: var(--cs-before-after-narrative-header-gap-mobile, 12px);
+  }
+
+  .cs-before-after-narrative-comparison {
+    flex-direction: column;
+    gap: var(--cs-before-after-narrative-comparison-gap-mobile, 16px);
+  }
+
+  .cs-before-after-narrative-point {
+    grid-template-columns: var(--cs-before-after-narrative-point-columns-mobile, 1fr);
+    gap: var(--cs-before-after-narrative-point-gap-mobile, 8px);
+  }
+
+  .cs-before-after-narrative-connector {
+    align-self: center;
+  }
+
+  .cs-before-after-narrative-connector svg {
+    transform: none;
   }
 
   .cs-flow-frame--default {
