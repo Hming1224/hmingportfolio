@@ -620,6 +620,373 @@
   margin-top: var(--hm-space-xs);
 }
 
+.demoFallback {
+  margin: 0;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+}
+
+.demoBadge,
+.demoUsageLine {
+  margin: 0;
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.5;
+}
+
+.demoReferenceCard,
+.contractOnlyDemo,
+.contactFieldDemo,
+.worksTabsDemo,
+.projectCardDemoWrap {
+  display: grid;
+  gap: var(--hm-space-sm);
+  width: 100%;
+  max-width: 720px;
+  min-width: 0;
+}
+
+.demoReferenceCard,
+.contractOnlyDemo {
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.demoReferenceCard h3,
+.demoReferenceCard p,
+.demoReferenceCard ul,
+.liveSkillCardDemo p,
+.liveSkillCardDemo h3,
+.liveSkillCardDemo ul,
+.liveExperienceSummary h3,
+.liveExperienceSummary p,
+.liveExperienceCardDemo p,
+.liveExperienceCardDemo h3 {
+  margin: 0;
+}
+
+.demoReferenceCard h3,
+.liveSkillCardDemo h3,
+.liveExperienceSummary h3,
+.liveExperienceCardDemo h3 {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.35;
+}
+
+.demoReferenceCard p,
+.demoReferenceCard li,
+.liveSkillCardDemo li,
+.liveExperienceSummary p,
+.liveExperienceSummary span,
+.liveExperienceCardDemo strong,
+.liveExperienceCardDemo span {
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.demoReferenceCard ul,
+.liveSkillCardDemo ul {
+  padding-left: var(--hm-space-md);
+}
+
+.liveButtonDemo,
+.liveTabsList,
+.liveSocialLinks,
+.liveTagDemo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-xs);
+  align-items: center;
+  justify-content: center;
+}
+
+.liveFooterDemo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--hm-space-md);
+  padding: var(--hm-space-md);
+  border-top: 1px solid var(--hm-line);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+}
+
+.liveFooterDemo p {
+  margin: 0;
+}
+
+.liveSocialLinks a {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-paper);
+}
+
+.liveFloatingField {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 420px;
+}
+
+.liveFloatingField input,
+.liveFloatingField textarea {
+  width: 100%;
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+  color: var(--text-heading);
+  font: inherit;
+  line-height: 1.5;
+}
+
+.liveFloatingField input {
+  min-height: 56px;
+  padding: var(--hm-space-sm) var(--hm-space-sm) var(--hm-space-2xs);
+}
+
+.liveFloatingField textarea {
+  min-height: 132px;
+  padding: var(--hm-space-md) var(--hm-space-sm) var(--hm-space-sm);
+  resize: vertical;
+}
+
+.liveFloatingField span {
+  position: absolute;
+  top: var(--hm-space-2xs);
+  left: var(--hm-space-sm);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-xs);
+  pointer-events: none;
+}
+
+.liveTabsList {
+  justify-content: flex-start;
+  padding: var(--hm-space-2xs);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-surface);
+}
+
+.liveTabsList button {
+  min-height: 40px;
+  padding: 0 var(--hm-space-sm);
+  border: 0;
+  border-radius: var(--hm-radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: var(--hm-fw-semibold);
+  cursor: pointer;
+}
+
+.liveTabsList .isSelectedDemoTab {
+  background: var(--hm-paper);
+  color: var(--hm-purple);
+  box-shadow: var(--shadow-sm);
+}
+
+.liveTabsPanel {
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+
+.tabProjectSummary {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.tabProjectSummary strong {
+  color: var(--text-heading);
+  line-height: 1.45;
+}
+
+.tabProjectSummary span {
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+}
+
+.yearRailDemo {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--hm-space-md);
+  align-items: stretch;
+  width: 100%;
+  max-width: 560px;
+}
+
+.liveYearRail {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  align-content: start;
+  padding-right: var(--hm-space-sm);
+  border-right: 1px solid var(--hm-line);
+}
+
+.liveYearRail a {
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  text-decoration: none;
+}
+
+.liveYearRail .isActiveYear {
+  color: var(--hm-purple);
+  font-weight: var(--hm-fw-bold);
+}
+
+.liveExperienceSummary,
+.liveSkillCardDemo,
+.liveExperienceCardDemo,
+.contactMethodsDemo article {
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.contactMethodsDemo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+  width: 100%;
+  max-width: 720px;
+}
+
+.contactMethodsDemo article {
+  display: grid;
+  gap: var(--hm-space-2xs);
+}
+
+.contactMethodsDemo small,
+.liveExperienceCardDemo p,
+.liveSkillCardDemo p,
+.liveExperienceSummary time {
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.contactMethodsDemo strong {
+  color: var(--text-heading);
+  overflow-wrap: anywhere;
+}
+
+.projectCardDemoWrap {
+  max-width: 760px;
+}
+
+.projectCardDemo {
+  width: min(100%, 720px);
+  min-height: 460px;
+  margin: 0 auto;
+}
+
+.projectCardDemo :global(.project-info) {
+  gap: var(--hm-space-sm);
+}
+
+.projectCardDemo :global(.project-title h3),
+.projectCardDemo :global(.project-description) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.projectCardDemo :global(.project-title h3) {
+  -webkit-line-clamp: 2;
+}
+
+.projectCardDemo :global(.project-description) {
+  -webkit-line-clamp: 3;
+}
+
+.liveSectionHeadingDemo {
+  display: grid;
+  grid-template-columns: var(--hm-space-xl) auto var(--hm-space-xl);
+  align-items: center;
+  gap: var(--hm-space-xs);
+  width: 100%;
+  justify-content: center;
+}
+
+.liveSectionHeadingDemo span {
+  height: 1px;
+  background: var(--hm-line-strong);
+}
+
+.liveSectionHeadingDemo h3 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h3);
+}
+
+.liveTagDemo {
+  justify-content: flex-start;
+}
+
+.liveTagDemo span {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--hm-map-height-control-sm);
+  padding: 0 var(--hm-space-xs);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-pill);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+}
+
+.liveExperienceCardDemo {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: var(--hm-space-md);
+  width: 100%;
+  max-width: 640px;
+}
+
+.experienceImageDemo {
+  position: relative;
+  min-height: 128px;
+  overflow: hidden;
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.experienceImageDemo img {
+  object-fit: cover;
+}
+
+.liveExperienceCardDemo div:last-child {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  align-content: center;
+}
+
+.liveHeroBadgeDemo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 var(--hm-space-sm);
+  border: 1px solid color-mix(in srgb, var(--hm-purple) 24%, var(--hm-line));
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple-light);
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
 @media (max-width: 900px) {
   .heroInner {
     width: min(100% - 40px, 760px);
@@ -683,5 +1050,20 @@
 
   .foundationPanelHeader {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .liveFooterDemo,
+  .yearRailDemo,
+  .liveExperienceCardDemo,
+  .contactMethodsDemo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .liveFooterDemo {
+    align-items: flex-start;
+  }
+
+  .projectCardDemo {
+    min-height: 380px;
   }
 }
