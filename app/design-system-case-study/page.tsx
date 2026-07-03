@@ -352,7 +352,8 @@ export default function DesignSystemCaseStudyPage() {
       tocSections={tocSections}
       nextNav={{
         homeLabel: "返回首頁",
-        nextLabel: "下一個專案：Phase 3 待串接",
+        nextHref: "/laushu",
+        nextLabel: "下一個專案：勞務報酬系統數位流程優化",
       }}
       hero={<Hero />}
     >

@@ -1098,6 +1098,16 @@
   color: var(--tag-text);
 }
 
+.tone-design-system {
+  --tag-bg: #f0f1ff;
+  --tag-text: #363986;
+}
+
+.tone-design-system .project-tags span {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
 .project-empty-state {
   margin-top: auto;
   padding: 16px;

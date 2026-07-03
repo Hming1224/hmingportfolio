@@ -60,6 +60,24 @@ const zhProjects: ProjectSummary[] = [
       "量化交易平台 Crypto Arsenal 的策略倉位顯示、手動平倉與止盈止損功能設計案例研究。",
   },
   {
+    slug: "design-system-case-study",
+    title: "把自己的作品集當產品做：一套邊用邊長出來的 Design System",
+    navigationTitle: "作品集 Design System 建置與治理",
+    date: "2026.05 - 2026.07",
+    description:
+      "在打造這個作品集網站的過程中，我把網站本身當成產品，自發建立一套 design system：從 design tokens、元件契約到與 AI 協作的治理規則。這一頁記錄的不是完美結果，而是翻車、修正、再長出制度的三次轉折。",
+    cover: "/projects/design-system-case-study/cover/cover.webp",
+    logo: "/projects/design-system-case-study/cover/logo.webp",
+    tags: ["Design System", "自發專案", "AI 協作", "設計治理"],
+    tone: "design-system",
+    category: "school",
+    status: "published",
+    href: "/design-system-case-study",
+    nextProjectSlug: "laushu",
+    seoDescription:
+      "把作品集當產品經營：design tokens、component contract 與 AI 協作治理的 design system 建置案例研究。",
+  },
+  {
     slug: "laushu",
     title: "從紙本化繁為簡：勞務報酬系統的數位流程優化",
     navigationTitle: "勞務報酬系統數位流程優化",
@@ -144,6 +162,24 @@ const enProjects: ProjectSummary[] = [
     nextProjectSlug: "tba",
     seoDescription:
       "A case study on position visibility, manual closing, and take-profit / stop-loss flows for the Crypto Arsenal quantitative trading platform.",
+  },
+  {
+    slug: "design-system-case-study",
+    title: "Treating My Portfolio as a Product: A Design System That Grew Through Iteration",
+    navigationTitle: "Portfolio Design System & Governance",
+    date: "2026.05 - 2026.07",
+    description:
+      "While building this portfolio site, I treated it as a real product and built a design system from scratch — design tokens, component contracts, and AI-collaboration governance. This case documents the turning points and recoveries, not just the polished result.",
+    cover: "/projects/design-system-case-study/cover/cover.webp",
+    logo: "/projects/design-system-case-study/cover/logo.webp",
+    tags: ["Design System", "Self-initiated", "AI Collaboration", "Design Governance"],
+    tone: "design-system",
+    category: "school",
+    status: "published",
+    href: "/design-system-case-study",
+    nextProjectSlug: "laushu",
+    seoDescription:
+      "A case study on building and governing a portfolio design system: design tokens, component contracts, and AI-collaboration workflow.",
   },
   {
     slug: "laushu",
