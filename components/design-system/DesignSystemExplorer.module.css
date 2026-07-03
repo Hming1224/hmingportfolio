@@ -225,6 +225,56 @@
   scroll-margin-top: 112px;
 }
 
+.aboutCard {
+  display: grid;
+  gap: var(--hm-space-md);
+  padding: var(--hm-space-lg);
+  scroll-margin-top: 112px;
+}
+
+.aboutBody {
+  max-width: 820px;
+}
+
+.decisionFrame {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.decisionLabel,
+.placeholderLabel {
+  margin: 0;
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.decisionSummary {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.caseStudyPlaceholder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hm-space-xs);
+  padding: var(--hm-space-sm) var(--hm-space-md);
+  border: 1px dashed var(--hm-line-strong);
+  border-radius: var(--hm-radius-md);
+  background: color-mix(in srgb, var(--hm-paper) 70%, var(--hm-surface));
+}
+
+.placeholderText {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 .shell {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);

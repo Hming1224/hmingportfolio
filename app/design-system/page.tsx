@@ -134,6 +134,22 @@ export default async function DesignSystemPage() {
         toc={copy.toc}
         topContent={
           <>
+            <section className={`${styles.card} ${styles.aboutCard}`} key="about-system" id="about-system">
+              <div className={styles.aboutBody}>
+                <p className={styles.eyebrow}>{copy.about.eyebrow}</p>
+                <h2 className={styles.sectionTitle}>{copy.about.title}</h2>
+                <p className={styles.cardBody}>{copy.about.body}</p>
+              </div>
+              <div className={styles.decisionFrame}>
+                <p className={styles.decisionLabel}>{copy.about.frameworkLabel}</p>
+                <p className={styles.decisionSummary}>{copy.about.framework}</p>
+              </div>
+              <div aria-disabled="true" className={styles.caseStudyPlaceholder}>
+                <span className={styles.placeholderLabel}>{copy.about.caseStudyLabel}</span>
+                <span className={styles.placeholderText}>{copy.about.caseStudyPlaceholder}</span>
+              </div>
+            </section>
+
             <section className={styles.section} key="getting-started" id="getting-started">
             <div className={styles.sectionHeader}>
               <span className={styles.sectionRule} />

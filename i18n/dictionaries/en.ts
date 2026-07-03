@@ -72,11 +72,23 @@ const messages = {
       ariaLabel: "Design system section navigation",
       title: "On this page",
       items: [
+        { href: "#about-system", label: "About this system" },
         { href: "#getting-started", label: "Getting Started" },
         { href: "#foundations", label: "Foundations & Tokens" },
         { href: "#components", label: "Component Explorer" },
         { href: "#cta", label: "Where to go next" },
       ],
+    },
+    about: {
+      eyebrow: "About this system",
+      title: "Built from the live portfolio, not a separate style guide",
+      body:
+        "This is the design system currently used on hmingdesign.com. It covers design tokens, shared components, and case-study patterns, and it will keep evolving as the portfolio changes.",
+      frameworkLabel: "Decision framework",
+      framework:
+        "Repeated value → token · repeated shell → slot composition · unclear purpose → component contract · repeated structure and behavior → componentize · story-specific work → local component",
+      caseStudyLabel: "Design system case study",
+      caseStudyPlaceholder: "Case study placeholder: coming later, no link yet.",
     },
     introduction: {
       heading: "Getting Started",

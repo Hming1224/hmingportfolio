@@ -72,11 +72,23 @@ const messages = {
       ariaLabel: "設計系統頁段落導覽",
       title: "快速導覽",
       items: [
+        { href: "#about-system", label: "系統定位" },
         { href: "#getting-started", label: "系統概念" },
         { href: "#foundations", label: "基礎與 Tokens" },
         { href: "#components", label: "元件庫" },
         { href: "#cta", label: "下一步" },
       ],
+    },
+    about: {
+      eyebrow: "About this system",
+      title: "這是從正式作品集長出來的系統，不是另外做的一份樣式表",
+      body:
+        "這套 design system 目前實際用在 hmingdesign.com。它整理了 design tokens、shared components 與案例頁 patterns，之後也會跟著作品集一起持續調整。",
+      frameworkLabel: "判斷框架",
+      framework:
+        "值重複 → token · 外框重複 → slot composition · 用途易混淆 → component contract · 結構與行為都重複 → componentize · 承載特定故事 → local component",
+      caseStudyLabel: "Design system case study",
+      caseStudyPlaceholder: "案例頁位置先預留，之後再補；本輪不放假連結。",
     },
     introduction: {
       heading: "Getting Started",
