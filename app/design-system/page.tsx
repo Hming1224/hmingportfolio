@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "../../components/ui/Accordion";
 import { designSystemDocs } from "../../lib/design-system-docs";
-import { designSystemSections } from "../../lib/design-system-data";
+import { designSystemSections, designSystemTokenRows } from "../../lib/design-system-data";
 import DesignSystemExplorer from "../../components/design-system/DesignSystemExplorer";
 import Button from "../../components/ui/Button";
 import type { Locale } from "../../i18n/routing";
@@ -35,87 +35,44 @@ function getMessages(locale: Locale) {
   return messageMap[locale].designSystem;
 }
 
+function buildFoundationGroups(locale: Locale): TokenGroup[] {
+  const zh = locale === "zh-TW";
+  const columns = zh ? ["Token", "值", "用途"] : ["Token", "Value", "Usage"];
+  const rowsFor = (types: Array<(typeof designSystemTokenRows)[number]["type"]>) =>
+    designSystemTokenRows
+      .filter((row) => types.includes(row.type))
+      .map((row) => [row.token, row.value, zh ? row.usageZh ?? row.usage : row.usage]);
 
-
-
-const foundationGroups: Record<Locale, TokenGroup[]> = {
-  en: [
+  return [
     {
       id: "color",
-      title: "Color tokens",
-      description: "Real portfolio color tokens and semantic aliases from tokens.css.",
-      columns: ["Token", "Value", "Usage"],
-      rows: [
-        ["--hm-purple", "var(--hm-purple-600)", "Primary CTA"],
-        ["--hm-paper / --hm-surface", "#fff / #f9f9f9", "Page and soft surface"],
-        ["--text-heading / body / secondary", "semantic text", "Type hierarchy"],
-        ["--hm-success / warning / error / info", "semantic states", "System feedback"],
-      ],
+      title: zh ? "色彩與語意 tokens" : "Color and semantic tokens",
+      description: zh
+        ? "直接鏡像 styles/tokens.css：primitive 色階、semantic alias、status、case-study tone 與 chart palette。"
+        : "Mirrors styles/tokens.css: primitive scales, semantic aliases, status colors, case-study tones, and chart palette.",
+      columns,
+      rows: rowsFor(["color"]),
     },
     {
-      id: "spacing",
-      title: "Spacing and rhythm",
-      description: "T-shirt spacing tokens plus the exceptions documented in design-system.md.",
-      columns: ["Token", "Value", "Usage"],
-      rows: [
-        ["--hm-space-sm", "16px", "Compact section spacing"],
-        ["--hm-space-md", "24px", "Default card spacing"],
-        ["--hm-space-lg", "32px", "Large block spacing"],
-        ["--hm-space-3xl", "80px", "Major breathing room"],
-      ],
+      id: "structure",
+      title: zh ? "字級、間距與版面" : "Type, spacing, and layout",
+      description: zh
+        ? "收錄響應式字級、4px / T-shirt spacing、container、gutter、z-index 與 breakpoint reference。"
+        : "Documents responsive type, 4px / T-shirt spacing, container, gutter, z-index, and breakpoint references.",
+      columns,
+      rows: rowsFor(["type", "spacing", "layout"]),
     },
     {
-      id: "motion",
-      title: "Motion and elevation",
-      description: "Motion, radius, and shadow tokens that shape the tactile feeling of the interface.",
-      columns: ["Category", "Token", "Usage"],
-      rows: [
-        ["Radius", "--hm-radius-button", "Primary button pill"],
-        ["Shadow", "--shadow-card-hover", "Project card hover"],
-        ["Duration", "--hm-duration-base", "Default transition"],
-        ["Easing", "--hm-ease-out", "Settle and hover easing"],
-      ],
+      id: "surface",
+      title: zh ? "圓角、陰影與動效" : "Radius, shadows, and motion",
+      description: zh
+        ? "對齊 02-tokens.md 的 radius、elevation、duration 與 easing；不在頁面新增 runtime token。"
+        : "Aligned to 02-tokens.md for radius, elevation, duration, and easing; this page does not create runtime tokens.",
+      columns,
+      rows: rowsFor(["radius", "shadow", "motion"]),
     },
-  ],
-  "zh-TW": [
-    {
-      id: "color",
-      title: "色彩 tokens",
-      description: "來自 tokens.css 的真實作品集色票與語意別名。",
-      columns: ["Token", "值", "用途"],
-      rows: [
-        ["--hm-purple", "var(--hm-purple-600)", "主要 CTA"],
-        ["--hm-paper / --hm-surface", "#fff / #f9f9f9", "頁面與柔和 surface"],
-        ["--text-heading / body / secondary", "語意文字", "閱讀層級"],
-        ["--hm-success / warning / error / info", "狀態色", "系統回饋"],
-      ],
-    },
-    {
-      id: "spacing",
-      title: "間距與節奏",
-      description: "以 T-shirt 間距 token 為主，搭配文件裡定義的少數例外。",
-      columns: ["Token", "值", "用途"],
-      rows: [
-        ["--hm-space-sm", "16px", "緊湊區塊間距"],
-        ["--hm-space-md", "24px", "預設卡片內距"],
-        ["--hm-space-lg", "32px", "大型 block 間距"],
-        ["--hm-space-3xl", "80px", "大段留白"],
-      ],
-    },
-    {
-      id: "motion",
-      title: "動效與立體感",
-      description: "塑造介面手感的 motion、radius 與 shadow token。",
-      columns: ["類別", "Token", "用途"],
-      rows: [
-        ["Radius", "--hm-radius-button", "主要按鈕膠囊圓角"],
-        ["Shadow", "--shadow-card-hover", "專案卡 hover"],
-        ["Duration", "--hm-duration-base", "預設 transition"],
-        ["Easing", "--hm-ease-out", "hover 與 settle easing"],
-      ],
-    },
-  ],
-};
+  ];
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = (await getLocale()) as Locale;
@@ -137,7 +94,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DesignSystemPage() {
   const locale = (await getLocale()) as Locale;
   const copy = getMessages(locale);
-  const tokenGroupRows = foundationGroups[locale];
+  const tokenGroupRows = buildFoundationGroups(locale);
 
   return (
     <main style={{ background: "var(--hm-paper)", color: "var(--text-body)" }}>
@@ -226,7 +183,7 @@ export default async function DesignSystemPage() {
               <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 32px)", lineHeight: 1.3, color: "var(--text-heading)" }}>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
               <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
             </div>
-            <Accordion type="multiple" defaultValue={["color", "spacing", "motion"]}>
+            <Accordion type="multiple" defaultValue={["color", "structure", "surface"]}>
               {tokenGroupRows.map(group => (
                 <AccordionItem key={group.id} value={group.id}>
                   <AccordionHeader>{group.title}</AccordionHeader>
