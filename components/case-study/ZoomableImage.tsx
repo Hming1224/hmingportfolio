@@ -4,24 +4,33 @@ import Image from "next/image";
 import { useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
 
-type ZoomableImageLabels = {
+export type ZoomableImageLabels = {
   close: string;
   separator: string;
   zoom: string;
 };
 
-type ZoomableImageProps = {
+export type ZoomableImageLightboxMode = "default" | "fullscreen";
+
+export type ZoomableImageProps = {
   alt: string;
   className?: string;
   height: number;
   imageClassName?: string;
+  /** Localized UI labels; separator preserves the existing accessible label format. */
   labels: ZoomableImageLabels;
-  lightboxMode?: "default" | "fullscreen";
+  /** Controls lightbox chrome only. Route-specific media layout, crop, and ratio stay in CSS. */
+  lightboxMode?: ZoomableImageLightboxMode;
+  /** Passed through to next/image unchanged; choose per route/media context. */
   sizes?: string;
   src: string;
   width: number;
 };
 
+/**
+ * Shared zoom trigger and lightbox behavior for case-study media.
+ * Keep image sizing/cropping decisions outside this component unless the lightbox contract changes.
+ */
 export default function ZoomableImage({
   alt,
   className,

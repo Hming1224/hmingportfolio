@@ -63,11 +63,11 @@ export default function CaseStudyShell({
           {homeLabel}
         </Button>
         {nextLinkHref ? (
-          <Button href={nextLinkHref}>
+          <Button className="cs-next-project-button" href={nextLinkHref}>
             {nextLabel}
           </Button>
         ) : (
-          <Button disabled>
+          <Button className="cs-next-project-button" disabled>
             {nextLabel}
           </Button>
         )}

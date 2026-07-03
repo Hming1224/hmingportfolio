@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { getLocale } from "next-intl/server";
 import "../../styles/case-study-laushu.css";
 import {
+  BeforeAfterNarrativeFrame,
   CaseCard,
   CaseFeatureRow,
   CaseFlowFrame,
@@ -12,6 +13,7 @@ import {
   CaseMedia,
   CaseSectionHeader,
   CaseStudyShell,
+  FlowScrollHint,
   ZoomableImage,
   type CaseInfoItem,
   type TocSection,
@@ -49,7 +51,7 @@ const roleItems = [
 const overviewCards = [
   {
     title: "目標",
-    body: "Laushu 勞贖為已上線的數位化勞報單系統。此設計優化專案與其負責人合作，測試現有紙本勞報單數位化的流程易用性，於上線前提供改善建議。",
+    body: "Laushu 勞贖為籌備上線中的數位化勞報單系統。此設計優化專案與其負責人合作，測試現有紙本勞報單數位化的流程易用性，於上線前提供改善建議。",
   },
   {
     title: "需求",
@@ -310,6 +312,16 @@ const iterationBoards = [
   },
 ];
 
+type IterationImage = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+function getIterationPanelClass(image: IterationImage) {
+  return `cs-before-after-narrative-panel--laushu-w-${image.width}`;
+}
+
 const PROTO = `${IMG}/proto`;
 
 const protoImageSizes: Record<string, { width: number; height: number }> = {
@@ -390,6 +402,7 @@ export default async function LaushuPage() {
   const t = (text: string) => translateLaushu(locale, text);
   const project = getProjectBySlug("laushu", locale);
   const nextProject = getNextProject(project.slug, locale);
+  const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
 
   const tocSections: TocSection[] = [
     { id: "cs-sec-overview", title: t("專案總覽") },
@@ -409,7 +422,7 @@ export default async function LaushuPage() {
       nextNav={{
         nextHref: nextProject.status === "published" ? nextProject.href : undefined,
         homeLabel: t("返回首頁"),
-        nextLabel: `${t("下一個專案")}${t("：")}${nextProject.title}`,
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProjectLabel}`,
       }}
       hero={localizeLaushuTree(locale, HeroSection())}
     >
@@ -417,7 +430,7 @@ export default async function LaushuPage() {
       {localizeLaushuTree(locale, ProblemSection())}
       {localizeLaushuTree(locale, UnderstandSection())}
       {localizeLaushuTree(locale, ConvergeSection())}
-      {localizeLaushuTree(locale, IterateSection())}
+      {localizeLaushuTree(locale, IterateSection(t("← 左右滑動查看更多")))}
       {localizeLaushuTree(locale, PrototypeSection())}
       {localizeLaushuTree(locale, DemoSection())}
       {localizeLaushuTree(locale, ReflectionSection())}
@@ -446,9 +459,9 @@ function HeroSection() {
       }}
       coverClassName="laushu-hero-cover"
       infoClassName="laushu-hero-info"
-      infoGridClassName="laushu-info-row"
+      infoGridClassName="cs-info-row--divided"
       meta={<span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>}
-      title="Laushu 勞贖｜勞務報酬系統設計優化"
+      title="從紙本化繁為簡：勞務報酬系統的數位流程優化"
       infoItems={infoItems}
     />
   );
@@ -458,15 +471,15 @@ function OverviewSection() {
   return (
     <section id="cs-sec-overview" className="cs-section laushu-overview-section">
       <LaushuHead eyebrow="專案總覽" title="將紙本勞報單流程轉譯成可測試、可上線的數位體驗。" />
-      <p className="laushu-overview-lead">
+      <p className="cs-section-lead cs-section-lead--wide cs-section-lead--bottom-gap">
         專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
       </p>
-      <CaseGrid variant="three" className="laushu-summary-grid laushu-overview-grid">
+      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--overview">
         {overviewCards.map((card) => (
           <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
         ))}
       </CaseGrid>
-      <CaseMedia className="laushu-overview-hero" variant="full">
+      <CaseMedia className="cs-showcase-media" variant="full">
         <Image
           src={`${IMG}/overview-hero.png`}
           alt="Laushu 勞務報酬系統介面總覽"
@@ -483,15 +496,15 @@ function ProblemSection() {
   return (
     <section id="cs-sec-problem" className="cs-section laushu-problem-section">
       <LaushuHead eyebrow="問題定義" title="過去建立紙本勞報單費時費力，但最後紙本單據僅作為佐證用。" />
-      <div className="laushu-problem-layout">
-        <div className="laushu-problem-copy">
-          <span className="laushu-problem-pill">科普小知識</span>
-          <h4 className="laushu-problem-define-title">勞報單是什麼？</h4>
+      <div className="cs-explainer-layout">
+        <div className="cs-explainer-copy">
+          <span className="cs-explainer-pill">科普小知識</span>
+          <h4 className="cs-explainer-title">勞報單是什麼？</h4>
           <p>
             勞務報酬單，簡稱「勞報單」，為公司支付「酬勞」給「個人」時使用的證明單據，可作為公司支出的證明，並列入領到酬勞者的綜合所得稅中。
           </p>
         </div>
-        <CaseMedia className="laushu-form-card" caption="勞報單範例" variant="full">
+        <CaseMedia className="cs-document-preview" caption="勞報單範例" variant="full">
           <Image
             src={`${IMG}/labor-form-example.png`}
             alt="勞務報酬單範例"
@@ -501,8 +514,8 @@ function ProblemSection() {
           />
         </CaseMedia>
       </div>
-      <h3 className="laushu-problem-cards-title">現階段勞報單的問題</h3>
-      <CaseGrid variant="three" className="laushu-problem-grid">
+      <h3 className="cs-subsection-title cs-subsection-title--wide cs-subsection-title--top-gap cs-subsection-title--accent">現階段勞報單的問題</h3>
+      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--problem">
         {problemCards.map((card, index) => (
           <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
         ))}
@@ -518,7 +531,7 @@ function UnderstandSection() {
       <ArticleBlock title="彙整使用勞報單流程" number="01">
         <p>訪談勞贖負責人並自行收集資料，了解外包與勞報單簽署流程，釐清會計師、公司、外包工作者三者關係。此平台至少包含四種核心利害關係人：</p>
       </ArticleBlock>
-      <CaseGrid variant="four" className="laushu-stakeholder-grid">
+      <CaseGrid variant="four" className="cs-topic-grid cs-topic-grid--stakeholder">
         {stakeholderCards.map((card, index) => (
           <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
         ))}
@@ -545,7 +558,7 @@ function UnderstandSection() {
       })}
 
       <ArticleBlock title="訪談大綱" number="04">
-        <p>共搜集 39 份有效問卷，篩選三位受訪者，圍繞以下三個面向深入訪談：</p>
+        <p>本次共回收 39 份有效問卷。雖然問卷回收對象以會計師／會計人員為主，但實際聯繫訪談者的過程未如預期順利，最終僅成功訪談 1 位會計師。因此，後續利害關係人訪談調整為以公司負責人／負責單位為主要對象，並圍繞以下三個面向進行深入訪談：</p>
       </ArticleBlock>
       <div className="cs-guide-list-grid">
         {interviewGuide.map((group) => (
@@ -602,7 +615,7 @@ function ConvergeSection() {
         <p>挖掘使用者在建立、發放、回簽、建檔勞報單流程中的痛點，並首先聚焦會自己經手勞報單的公司端。</p>
       </ArticleBlock>
       <CaseMedia
-        className="laushu-journey"
+        className="cs-showcase-media cs-showcase-media--caption-center"
         caption="以前兩位受訪者為主，盤點建立 → 發放 → 回簽 → 建檔的完整歷程與痛點"
         variant="full"
       >
@@ -617,7 +630,7 @@ function ConvergeSection() {
       <ArticleBlock title="重要用例" number="02">
         <p>收斂訪談洞見後，使用者最在意、也覺得紙本勞報單最麻煩的三件事：如何有效管理人員、如何改善簽收確認、如何減少回簽次數。據此彙整三個重要用例，進行後續介面流程設計。</p>
       </ArticleBlock>
-      <CaseGrid variant="three" className="laushu-usecase-grid">
+      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--usecase">
         {keyFlows.map((item) => (
           <InfoCard title={item.title} image={item.image} key={item.title}>{item.body}</InfoCard>
         ))}
@@ -626,15 +639,25 @@ function ConvergeSection() {
   );
 }
 
-function TaskFlowChart({ tag, title, children }: { tag: string; title: string; children: ReactNode }) {
+function TaskFlowChart({
+  tag,
+  title,
+  scrollHintLabel,
+  children,
+}: {
+  tag: string;
+  title: string;
+  scrollHintLabel: string;
+  children: ReactNode;
+}) {
   return (
     <CaseFlowFrame
-      scrollHintLabel="左右滑動查看更多"
+      scrollHintLabel={scrollHintLabel}
       variant="split"
       header={
         <>
-        <span className="laushu-fc-badge">{tag}</span>
-        <span className="laushu-fc-title">{title}</span>
+        <span className="cs-flow-frame-badge">{tag}</span>
+        <span className="cs-flow-frame-title">{title}</span>
         </>
       }
     >
@@ -643,40 +666,43 @@ function TaskFlowChart({ tag, title, children }: { tag: string; title: string; c
   );
 }
 
-function TaskFlow1() {
+function TaskFlow1(scrollHintLabel: string) {
   return (
     <TaskFlowChart
       tag="操作流程 1"
       title="建立外包人員資料庫，便於掌管人員個人資料"
+      scrollHintLabel={scrollHintLabel}
     >
       {TaskFlowOneDiagram()}
     </TaskFlowChart>
   );
 }
 
-function TaskFlow2() {
+function TaskFlow2(scrollHintLabel: string) {
   return (
     <TaskFlowChart
       tag="操作流程 2"
       title="建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽"
+      scrollHintLabel={scrollHintLabel}
     >
       {TaskFlowTwoDiagram()}
     </TaskFlowChart>
   );
 }
 
-function TaskFlow3() {
+function TaskFlow3(scrollHintLabel: string) {
   return (
     <TaskFlowChart
       tag="操作流程 3"
       title="合併多張勞務報酬單，減少回簽次數與調整稅額"
+      scrollHintLabel={scrollHintLabel}
     >
       {TaskFlowThreeDiagram()}
     </TaskFlowChart>
   );
 }
 
-function IterateSection() {
+function IterateSection(scrollHintLabel: string) {
   return (
     <section id="cs-sec-iterate" className="cs-section laushu-process-section laushu-iterate-section">
       <LaushuHead eyebrow="測試與迭代" title="從任務測試中，修正既有的流程與介面問題" />
@@ -688,39 +714,46 @@ function IterateSection() {
         </ul>
         <p>針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表：</p>
       </ArticleBlock>
-      <div className="laushu-fc-list">
-        {TaskFlow1()}
-        {TaskFlow2()}
-        {TaskFlow3()}
+      <div className="cs-flow-frame-list">
+        {TaskFlow1(scrollHintLabel)}
+        {TaskFlow2(scrollHintLabel)}
+        {TaskFlow3(scrollHintLabel)}
       </div>
       <ArticleBlock title="設計介面、元件迭代" number="02">
         <p>這次介面與元件迭代聚焦在降低判斷成本、提升核對效率。透過調整資訊排序、用詞、提示文字與列表呈現，讓使用者能更快找到正確資料、理解欄位意義，並在寄出或合併前完成確認，降低錯填、漏填與誤合併的風險。</p>
       </ArticleBlock>
       <div className="cs-iteration-list">
         {iterationBoards.map((board) => (
-          <CaseCard className="cs-iteration-board" key={board.title}>
-            <header className="cs-iteration-head">
-              <span className="cs-iteration-badge">{board.tag}</span>
-              <h3 className="cs-iteration-title">{board.title}</h3>
-            </header>
-            <div className="cs-iteration-body">
-              <p className="cs-iteration-label">{board.label}</p>
-              <div className="cs-iteration-copy">
-                {board.paras.map((p, i) => (<p key={i}>{p}</p>))}
-              </div>
-            </div>
-            <div className="cs-iteration-compare">
-              <IterationComparisonCard label="Before" image={board.before} alt={`${board.alt} Before`} />
-              <span className="cs-iteration-arrow" aria-hidden="true" />
-              <IterationComparisonCard label="After" image={board.after} alt={`${board.alt} After`} />
-            </div>
-          </CaseCard>
+          <BeforeAfterNarrativeFrame
+            key={board.title}
+            className="cs-iteration-board"
+            badge={board.tag}
+            title={board.title}
+            points={[
+              {
+                label: board.label,
+                content: (
+                  <>
+                    {board.paras.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </>
+                ),
+              },
+            ]}
+            beforeLabel="Before"
+            afterLabel="After"
+            beforeClassName={getIterationPanelClass(board.before)}
+            afterClassName={getIterationPanelClass(board.after)}
+            before={<IterationComparisonMedia image={board.before} alt={`${board.alt} Before`} />}
+            after={<IterationComparisonMedia image={board.after} alt={`${board.alt} After`} />}
+          />
         ))}
       </div>
       <ArticleBlock title="測試結果" number="03">
         <p>根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。</p>
       </ArticleBlock>
-      <CaseMedia className="laushu-test-result" variant="full">
+      <CaseMedia className="cs-showcase-media" variant="full">
         <ZoomableImage
           src={`${IMG}/test-result.png`}
           alt="Laushu 任務測試與 SUS 結果"
@@ -733,37 +766,22 @@ function IterateSection() {
   );
 }
 
-function IterationComparisonCard({
-  label,
+function IterationComparisonMedia({
   image,
   alt,
 }: {
-  label: "Before" | "After";
-  image: {
-    src: string;
-    width: number;
-    height: number;
-  };
+  image: IterationImage;
   alt: string;
 }) {
   return (
-    <CaseCard
-      as="figure"
-      className="cs-iteration-panel"
-      style={{ flexGrow: image.width }}
-    >
-      <figcaption>{label}</figcaption>
-      <div className="cs-iteration-panel-media">
-        <ZoomableImage
-          src={image.src}
-          alt={alt}
-          width={image.width}
-          height={image.height}
-          className="cs-iteration-panel-image"
-          labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
-        />
-      </div>
-    </CaseCard>
+    <ZoomableImage
+      src={image.src}
+      alt={alt}
+      width={image.width}
+      height={image.height}
+      className="cs-iteration-panel-image"
+      labels={{ close: "關閉放大圖片", separator: "：", zoom: "點擊放大" }}
+    />
   );
 }
 
@@ -771,16 +789,16 @@ function PrototypeSection() {
   return (
     <section id="cs-sec-prototype" className="cs-section laushu-process-section laushu-prototype-section">
       <LaushuHead eyebrow="原型設計" title="最終 UI flow 展示" />
-      <p className="laushu-proto-intro">
+      <p className="cs-section-lead cs-section-lead--wide cs-section-lead--top-gap">
         根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。
       </p>
-      <CaseMedia className="laushu-proto-overview" variant="full">
+      <CaseMedia className="cs-showcase-media cs-showcase-media--framed" variant="full">
         <FeatureImageLightbox src={`${IMG}/figma-design.png`} alt="Laushu Hi-fi 原型設計總覽" width={1472} height={793} />
       </CaseMedia>
       <FeatureConnectors />
-      <div className="cs-sol-block laushu-proto-block">
+      <div className="cs-sol-block cs-sol-block--prototype">
         {prototypeFlows.map((flow, gi) => (
-          <div className="cs-sol-fgroup laushu-proto-group" key={flow.tag}>
+          <div className="cs-sol-fgroup cs-sol-fgroup--prototype" key={flow.tag}>
             {gi > 0 ? <div className="cs-sol-fhr" /> : null}
             <div className="cs-sol-fc">
               <div className="cs-sol-fchead">
@@ -862,16 +880,16 @@ function DemoSection() {
 
 const reflections = [
   {
-    title: "從使用者出發的線上化策略思考",
-    body: "設計線上化流程時，首要是釐清哪些是不可或缺的核心步驟，哪些可轉化為更便捷的數位形式。唯有從使用者需求出發，才能真正掌握該數位化的重點功能。本專案因時間限制，優先聚焦核心利害關係人——公司端——進行流程盤點與優化。實作過程中也意識到，專案要真正推動上線，需進一步納入更多商業面向與跨部門的決策考量。",
+    title: "以替代研究策略推進流程驗證",
+    body: "如果重新執行一次，我會在研究初期建立主要與替代受訪者名單，降低招募不順對研究進度的影響。當無法訪談核心利害關係人時，會改以協作角色訪談、非同步訪談或流程文件分析補足資訊缺口。\n\n設計策略上，會先將已掌握的會計人員流程定義為 MVP 假設，並透過第一版上線後的任務完成率、錯誤率與使用者回饋進行驗證。若初版成效不如預期，再依據實際使用情境推出 v2 上線版本，持續優化流程。",
   },
   {
     title: "介面用詞與說明，本身就是體驗",
     body: "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」——像把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。",
   },
   {
-    title: "用可驗證的小步迭代推進設計",
-    body: "Laushu 是準備上線的系統，這次是在既有流程上做優化，而不是從零重來。過程中要一邊尊重原本的流程與限制，一邊找出真正值得改的地方。透過放聲思考測試加上 SUS 量表去驗證每一次調整，讓我學會用「可以被驗證的小步迭代」往前推，而不是一次大改；也更清楚設計要能落地，得把開發成本與既有限制一起算進來。",
+    title: "從流程優化走向商業導入驗證",
+    body: "若後續繼續推進，我會將重點從流程可用性延伸到商業導入驗證。Laushu 不只是勞務報酬單的線上化工具，更需要釐清誰是實際使用者、誰是導入決策者，以及系統能為公司降低多少行政與溝通成本。\n\n因此，下一步會補充訪談公司負責人、財務／人資主管與會計事務所，了解不同角色對導入工具的決策標準。同時將 UX 指標轉化為更具商業意義的成效指標，例如處理時間、錯誤率、來回確認次數與人力成本變化，進一步評估產品是否具備 B2B SaaS、按使用量計費，或作為會計事務所工具包的商業潛力。",
   },
 ];
 
@@ -879,7 +897,7 @@ function ReflectionSection() {
   return (
     <section id="cs-sec-reflection" className="cs-section laushu-learning-section">
       <LaushuHead eyebrow="學習反思" title="線下與線上整合的數位流程考驗" />
-      <CaseGrid variant="three" className="laushu-learning-grid">
+      <CaseGrid variant="three" className="cs-reflection-grid">
         {reflections.map((r, index) => (
           <CaseCard variant="accent" className="cs-reflection-card" key={r.title}>
             <span className="cs-reflection-card-num">{String(index + 1).padStart(2, "0")}</span>
@@ -894,31 +912,34 @@ function ReflectionSection() {
 
 function ResearchTable() {
   return (
-    <CaseMedia className="laushu-table-wrap" variant="scroll">
-      <table className="laushu-research-table">
-        <thead>
-          <tr>
-            {researchTable.head.map((h, i) => (
-              <th key={h} className={i === 0 ? "laushu-th-corner" : undefined}>{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {researchTable.rows.map((row) => (
-            <tr key={row.label}>
-              <th scope="row">{row.label}</th>
-              {row.cells.map((cell, ci) => (
-                <td key={ci}>
-                  <ul>
-                    {cell.map((c) => (<li key={c}>{c}</li>))}
-                  </ul>
-                </td>
+    <>
+      <FlowScrollHint label="← 左右滑動查看更多" />
+      <CaseMedia className="cs-data-table-frame cs-data-table-frame--wide" variant="scroll">
+        <table className="cs-data-table cs-data-table--matrix">
+          <thead>
+            <tr>
+              {researchTable.head.map((h, i) => (
+                <th key={h} className={i === 0 ? "cs-data-table-corner" : undefined}>{h}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </CaseMedia>
+          </thead>
+          <tbody>
+            {researchTable.rows.map((row) => (
+              <tr key={row.label}>
+                <th scope="row">{row.label}</th>
+                {row.cells.map((cell, ci) => (
+                  <td key={ci}>
+                    <ul>
+                      {cell.map((c) => (<li key={c}>{c}</li>))}
+                    </ul>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </CaseMedia>
+    </>
   );
 }
 
@@ -953,5 +974,5 @@ function ArticleBlock({ title, number, kicker, children }: { title: string; numb
 
 /** Figma 風格 section 標題：小寫眉標 + 大論點句 + 分隔線（對齊 Figma node 2797:1521）。 */
 function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return <CaseSectionHeader className="laushu-head" kicker={eyebrow} title={title} />;
+  return <CaseSectionHeader className="cs-section-header--case-wide" kicker={eyebrow} title={title} />;
 }

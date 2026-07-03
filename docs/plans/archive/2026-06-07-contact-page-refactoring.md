@@ -2,7 +2,7 @@
 
 > 建立時間：2026-06-07 21:46
 > 類型：新功能
-> 狀態：待執行
+> 狀態：✅ 已完成（2026-06-30 歸檔）— Contact 頁已上線，雙欄版面 + floating label + Formspree 表單與 loading / success / error 狀態皆已實作運作於正式站；後續資料化由 `2026-06-09-data-structure-refactoring` 接手。
 
 ---
 

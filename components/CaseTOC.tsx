@@ -12,12 +12,26 @@ interface CaseTOCProps {
   sections: TocSection[];
 }
 
+type TocScrollLock = {
+  id: string;
+  fallbackId: number;
+  cleanup: () => void;
+};
+
 export default function CaseTOC({ sections }: CaseTOCProps) {
   const locale = useLocale() as Locale;
   const [activeId, setActiveId] = useState<string>(sections[0]?.id ?? '');
   const [visible, setVisible] = useState(false);
   const navRef = useRef<HTMLElement>(null);
-  const ignoreNextRef = useRef(false);
+  const scrollLockRef = useRef<TocScrollLock | null>(null);
+
+  const clearScrollLock = () => {
+    const lock = scrollLockRef.current;
+    if (!lock) return;
+    window.clearTimeout(lock.fallbackId);
+    lock.cleanup();
+    scrollLockRef.current = null;
+  };
 
   // 第一個內容 section 到達 navbar 下緣後才淡入；避免 hero / section 預覽露出時 TOC 太早出現。
   useEffect(() => {
@@ -56,7 +70,7 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (ignoreNextRef.current) return;
+        if (scrollLockRef.current) return;
         // Pick the topmost intersecting entry
         const visible = entries
           .filter((e) => e.isIntersecting)
@@ -74,16 +88,39 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
     return () => observer.disconnect();
   }, [sections]);
 
+  useEffect(() => clearScrollLock, []);
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const target = document.getElementById(id);
     if (!target) return;
 
+    clearScrollLock();
     setActiveId(id);
-    ignoreNextRef.current = true;
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Resume observer after scroll settles
-    setTimeout(() => { ignoreNextRef.current = false; }, 1000);
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const releaseLock = () => {
+      const lock = scrollLockRef.current;
+      if (!lock || lock.id !== id) return;
+      clearScrollLock();
+      setActiveId(id);
+    };
+    const handleScrollEnd = () => releaseLock();
+    const distance = Math.abs(target.getBoundingClientRect().top);
+    const fallbackMs = prefersReducedMotion ? 250 : Math.min(4200, Math.max(1400, distance * 0.9));
+    const fallbackId = window.setTimeout(releaseLock, fallbackMs);
+
+    scrollLockRef.current = {
+      id,
+      fallbackId,
+      cleanup: () => window.removeEventListener('scrollend', handleScrollEnd),
+    };
+
+    window.addEventListener('scrollend', handleScrollEnd, { once: true });
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
   };
 
   return (

@@ -22,19 +22,19 @@ export default function VimeoPlayer({ videoId, poster, title }: Props) {
   const locale = useLocale() as Locale;
 
   return (
-    <div className="cs-sol-vplayer">
+    <div className="cs-sol-vplayer cs-object-box">
       {active ? (
         <iframe
           src={`https://player.vimeo.com/video/${videoId}?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&app_id=58479`}
           title={title}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
-          className="cs-sol-vframe"
+          className="cs-sol-vframe cs-object-box"
         />
       ) : (
         <button
           type="button"
-          className="cs-sol-vplay"
+          className="cs-sol-vplay cs-object-box"
           aria-label={`${translateAdvantech(locale, "播放")}${translateAdvantech(locale, "：")}${title}`}
           onClick={() => setActive(true)}
         >

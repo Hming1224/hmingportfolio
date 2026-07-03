@@ -74,8 +74,9 @@ export default async function HeroSection() {
           <span className="cs-tags">WEB・B2B・AI Chatbot・UX Design・UI Design</span>
         </>
       }
-      title={t("以生成式 AI 聊天機器人驅動智慧能源與空調維運系統介面設計")}
+      title={t("賦能廠務人員與系統整合商：以生成式 AI 優化 EcoWatch 與 HVAC 維運使用流程")}
       infoItems={infoItems}
+      infoGridClassName="cs-info-row--divided"
     />
   );
 }

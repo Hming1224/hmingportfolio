@@ -20,6 +20,7 @@
   --cs-text-body: #2b2c30;
   --cs-text-secondary: #4a4c52;
   --cs-text-muted: #6c6e77;
+  --cs-hero-cover-bg: #dceefb;
   --cs-shadow-color: rgba(37, 42, 71, 0.12);
   --cs-accent-secondary: #135e78;
   --cs-accent-warning: #c97b1d;
@@ -114,6 +115,10 @@
   --cs-insight-callout-color: #0c5a44;
 }
 
+.theme-crypto-arsenal.cs-page {
+  background: #ffffff;
+}
+
 .theme-crypto-arsenal .cs-divider {
   background: var(--ca-line-soft);
   margin-bottom: 28px;
@@ -122,6 +127,22 @@
 /* ── Hero（圖 + 圖下資訊列，沿用共用 cs-hero-*；此處只補 CA 差異）── */
 .theme-crypto-arsenal .cs-tags {
   color: var(--ca-muted);
+}
+
+.theme-crypto-arsenal .cs-hero-info .cs-info-label {
+  color: #a0a0a0;
+}
+
+@media (max-width: 480px) {
+  .theme-crypto-arsenal .cs-info-row {
+    grid-template-columns: max-content max-content;
+  }
+
+  .theme-crypto-arsenal .cs-info-value,
+  .theme-crypto-arsenal .cs-info-tasks span {
+    overflow-wrap: normal;
+    word-break: normal;
+  }
 }
 
 /* ── 01 專案背景：說明圖卡 ── */
@@ -165,6 +186,20 @@
   gap: 24px;
 }
 
+.theme-crypto-arsenal #cs-sec-problem .cs-avatar {
+  --cs-avatar-size: 46px;
+  --cs-avatar-radius: 12px;
+  line-height: 0;
+}
+
+.theme-crypto-arsenal #cs-sec-problem .cs-avatar--orange {
+  --cs-avatar-bg: #ffe9dc;
+}
+
+.theme-crypto-arsenal #cs-sec-problem .cs-avatar--blue {
+  --cs-avatar-bg: #e7eaff;
+}
+
 @container (max-width: 320px) {
   .theme-crypto-arsenal #cs-sec-problem .cs-quote-meta {
     display: grid;
@@ -198,6 +233,11 @@
 /* ── 04 介面現況：合成流程圖 ── */
 .theme-crypto-arsenal #cs-sec-current {
   padding-block: 72px;
+}
+
+.theme-crypto-arsenal #cs-sec-current .cs-media-frame {
+  --cs-media-bg: transparent;
+  overflow: visible;
 }
 
 /* ── 05 兩種平倉路徑：紅綠漸層標頭對比卡 ── */
@@ -243,6 +283,7 @@
 /* ── 06 交易所介面參考 ── */
 .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main {
   --cs-grid-gap: 32px;
+  --cs-grid-margin: 40px 0 0;
 }
 
 .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main > .cs-card:first-child {
@@ -258,6 +299,7 @@
 
 .theme-crypto-arsenal .cs-grid--research-shots {
   --cs-grid-gap: 28px;
+  --cs-grid-margin: 0;
   min-width: 0;
 }
 
@@ -274,6 +316,16 @@
   --cs-media-radius: 10px;
 }
 
+@media (max-width: 1200px) {
+  .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-crypto-arsenal #cs-sec-research .cs-grid--aside-main > .cs-card:first-child {
+    max-width: none;
+  }
+}
+
 .theme-crypto-arsenal #cs-sec-research > .cs-card {
   --cs-card-gap: 48px;
   --cs-card-padding: 28px;
@@ -283,6 +335,16 @@
   --cs-card-radius: 20px;
   border: 0;
   margin-top: 64px;
+}
+
+@media (min-width: 769px) {
+  .theme-crypto-arsenal #cs-sec-research > .cs-card {
+    --cs-card-gap: 0;
+    --cs-card-padding: 0;
+    --cs-card-bg: transparent;
+    --cs-card-radius: 0;
+    --cs-card-shadow: none;
+  }
 }
 
 /* ── 08 設計元件迭代 ── */
@@ -316,7 +378,53 @@
   --cs-detail-body-size: 15px;
   --cs-detail-body-line-height: 23px;
   --cs-detail-body-paragraph-gap: 23px;
+  --cs-before-after-narrative-header-gap: var(--cs-card-heading-gap);
+  --cs-before-after-narrative-badge-padding: var(--cs-pill-badge-padding);
+  --cs-before-after-narrative-badge-bg: var(--cs-pill-badge-bg);
+  --cs-before-after-narrative-badge-size: var(--cs-pill-badge-size);
+  --cs-before-after-narrative-badge-weight: var(--cs-pill-badge-weight);
+  --cs-before-after-narrative-badge-line-height: var(--cs-pill-badge-line-height);
+  --cs-before-after-narrative-title-min-width: var(--cs-card-heading-title-min-width);
+  --cs-before-after-narrative-title-color: var(--cs-card-heading-title-color);
+  --cs-before-after-narrative-title-size: var(--cs-card-heading-title-size);
+  --cs-before-after-narrative-title-line-height: var(--cs-card-heading-title-line-height);
+  --cs-before-after-narrative-point-columns: 98px minmax(0, 1fr);
+  --cs-before-after-narrative-point-gap: var(--cs-detail-row-gap);
+  --cs-before-after-narrative-point-label-color: var(--cs-detail-label-color);
+  --cs-before-after-narrative-point-label-size: var(--cs-detail-label-size);
+  --cs-before-after-narrative-point-label-line-height: var(--cs-detail-label-line-height);
+  --cs-before-after-narrative-point-content-color: var(--cs-detail-body-color);
+  --cs-before-after-narrative-point-content-size: var(--cs-detail-body-size);
+  --cs-before-after-narrative-point-content-line-height: var(--cs-detail-body-line-height);
+  --cs-before-after-narrative-panel-bg: var(--ca-bg-soft);
+  --cs-before-after-narrative-panel-head-bg: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
+  --cs-before-after-narrative-panel-head-color: var(--cs-accent);
+  --cs-before-after-narrative-panel-head-line-height: 31.5px;
   margin-top: 24px;
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
+  flex: var(--cs-pill-badge-flex);
+  width: var(--cs-pill-badge-width);
+  white-space: var(--cs-pill-badge-white-space);
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point-content p {
+  margin: 0;
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point-content p+p {
+  margin-top: var(--cs-detail-body-paragraph-gap);
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-panel {
+  --cs-card-padding-mobile: 0;
+  --cs-card-shadow: none;
+  background: var(--ca-bg-soft);
+}
+
+.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-head {
+  background: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
 }
 
 /* ── 09 最終介面 ── */
@@ -331,6 +439,18 @@
 
 .theme-crypto-arsenal #cs-sec-final .cs-media {
   margin: 80px 0 80px;
+}
+
+.theme-crypto-arsenal #cs-sec-final .cs-media-frame {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
+  width: min(96vw, calc(96vh * 2336 / 1440));
+  aspect-ratio: 2336 / 1440;
 }
 
 /* ── 10 學習反思 ── */
@@ -378,6 +498,13 @@
   --cs-card-shadow: var(--ca-card-shadow);
 }
 
+.theme-crypto-arsenal #cs-sec-impact .cs-media--scroll .cs-media-frame {
+  overflow: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
 .theme-crypto-arsenal #cs-sec-impact > .cs-grid--quote-list > .cs-card {
   --cs-card-gap: 16px;
   --cs-card-padding: 20px 26px;
@@ -420,6 +547,26 @@
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-title {
     min-width: 0;
   }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-header {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
+    flex: none;
+    width: auto;
+    padding: 9px 14px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-title {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -430,8 +577,20 @@
   }
 
   .theme-crypto-arsenal #cs-sec-research > .cs-card {
-    --cs-card-gap: 40px;
-    --cs-card-radius: 16px;
+    --cs-card-gap: 0;
+    --cs-card-padding-mobile: 0;
+    --cs-card-bg: transparent;
+    --cs-card-border: transparent;
+    --cs-card-radius: 0;
+    --cs-card-shadow: none;
+  }
+
+  .theme-crypto-arsenal #cs-sec-research > .cs-card .cs-flow-hint[data-visible="false"] + .cs-flow-frame {
+    margin-top: 24px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-research > .cs-card .cs-flow-frame--plain .cs-flow-frame-scroll {
+    margin-top: 0;
   }
 
   .theme-crypto-arsenal #cs-sec-iteration > .cs-card {
@@ -446,6 +605,28 @@
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-title {
+    font-size: 21px;
+    line-height: 28px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
+    width: fit-content;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration > .cs-before-after-narrative {
+    --cs-card-gap: 20px;
+    --cs-card-radius: 16px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-title {
     font-size: 21px;
     line-height: 28px;
   }

@@ -1,16 +1,21 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
-type CaseMediaVariant = 'contained' | 'full' | 'zoomable' | 'scroll';
+export type CaseMediaVariant = 'contained' | 'full' | 'zoomable' | 'scroll';
 
-interface CaseMediaProps {
+export interface CaseMediaProps {
   caption?: ReactNode;
   children: ReactNode;
   className?: string;
   contentClassName?: string;
+  /** Selects the shared media shell only; image ratio, crop, and route-specific layout stay in route-local CSS. */
   variant?: CaseMediaVariant;
 }
 
+/**
+ * Shared case-study media shell.
+ * Use contained/full/zoomable/scroll for stable frame behavior, not for storytelling-specific geometry.
+ */
 export default function CaseMedia({
   caption,
   children,
@@ -27,4 +32,3 @@ export default function CaseMedia({
     </figure>
   );
 }
-

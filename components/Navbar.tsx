@@ -106,9 +106,6 @@ export default function Navbar() {
         <Link href="/about-me" onClick={() => setOpen(false)}>
           {t('about')}
         </Link>
-        <Link href="/design-system" onClick={() => setOpen(false)}>
-          {t('designSystem')}
-        </Link>
         <Link href="/contact" onClick={() => setOpen(false)}>
           {t('contact')}
         </Link>

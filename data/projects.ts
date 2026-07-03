@@ -7,6 +7,7 @@ export interface ProjectSummary {
   slug: string;
   cardId?: string;
   title: string;
+  navigationTitle?: string;
   date: string;
   description: string;
   cover: string;
@@ -24,7 +25,8 @@ const zhProjects: ProjectSummary[] = [
   {
     slug: "advantech",
     cardId: "project-advantech-wiseiems",
-    title: "生成式AI能源管理系統",
+    title: "賦能廠務人員與系統整合商：以生成式 AI 優化 EcoWatch 與 HVAC 維運使用流程",
+    navigationTitle: "生成式 AI 能源與 HVAC 維運設計",
     date: "2024.06 - 2024.08",
     description:
       "生成式AI能源管理系統是研華科技研發與設計給工廠人員、廠長用於監督公司內部各樓層用電、碳排情形的一套數據平台。專案目標是將原有系統導入AI chatbot提升能源管理的效率。",
@@ -41,7 +43,8 @@ const zhProjects: ProjectSummary[] = [
   },
   {
     slug: "crypto-arsenal",
-    title: "虛擬貨幣量化交易平台",
+    title: "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計",
+    navigationTitle: "手動平倉與止盈止損流程設計",
     date: "2023.06 - 2023.08",
     description:
       "這是一個自動化之量化交易平台，用戶可以選擇有潛力的投資標的進行買賣，也可以訂閱創作者上架的交易機器人之策略。專案的目標是滿足已啟動交易的策略機器人下可以順利手動平倉或添加止盈止損訂單之流程設計與開發。",
@@ -58,7 +61,8 @@ const zhProjects: ProjectSummary[] = [
   },
   {
     slug: "laushu",
-    title: "Laushu 勞務報酬系統",
+    title: "從紙本化繁為簡：勞務報酬系統的數位流程優化",
+    navigationTitle: "勞務報酬系統數位流程優化",
     date: "2024.02 - 2024.04",
     description:
       "勞務報酬系統旨在解決企業外包工作給工作者時，需要進行勞報單簽收、帳單稅務清繳等事宜，透過協助企業快速制定勞報單、整理稅務資料來提升工作效率。",
@@ -74,7 +78,8 @@ const zhProjects: ProjectSummary[] = [
   {
     slug: "nccuspace",
     cardId: "project4",
-    title: "NCCU Space 政大場地預約管理系統",
+    title: "從繁瑣搜尋到一目了然：政大圖書館討論室預約系統體驗重構",
+    navigationTitle: "政大圖書館討論室預約系統重構",
     date: "2023.10 - 2023.12",
     description:
       "NCCUSpace是一款專注於提升政大學生預約校園空間的資訊服務平台。專案致力於減低預約流程複雜度與客製化預約空間。",
@@ -88,7 +93,8 @@ const zhProjects: ProjectSummary[] = [
   {
     slug: "tba",
     cardId: "project3",
-    title: "TBA 數位證書資訊平台",
+    title: "從發證、持有到驗證：基於國泰 DID Wallet 的 Web3 數位憑證平台",
+    navigationTitle: "Web3 數位憑證平台",
     date: "2022.12 - 2023.02",
     description:
       "本專案與國泰數位發展中心技術團隊合作，開發一款以Web3為基礎的數位證書服務平台。這次專案共歷時2個月，我主要負責使用者體驗設計、Web 介面設計、用戶研究，以及用戶測試。",
@@ -105,7 +111,8 @@ const enProjects: ProjectSummary[] = [
   {
     slug: "advantech",
     cardId: "project-advantech-wiseiems",
-    title: "GenAI-Powered Energy Management System",
+    title: "Empowering Facility Operators and System Integrators: Streamlining EcoWatch and HVAC Operations via Generative AI",
+    navigationTitle: "GenAI EcoWatch and HVAC Operations",
     date: "2024.06 - 2024.08",
     description:
       "A data platform designed with Advantech for factory teams and managers to monitor energy use and carbon emissions across facilities. The project introduced an AI chatbot to make energy management faster and more actionable.",
@@ -122,7 +129,8 @@ const enProjects: ProjectSummary[] = [
   },
   {
     slug: "crypto-arsenal",
-    title: "Quantitative Crypto Trading Platform",
+    title: "Giving Traders Back Control: Manual Close & Take-Profit / Stop-Loss Flow Design for a Quant Trading Platform",
+    navigationTitle: "Manual Close & Take-Profit / Stop-Loss Flow Design",
     date: "2023.06 - 2023.08",
     description:
       "An automated quantitative trading platform where users can trade promising assets and subscribe to strategies published by bot creators. I designed and developed flows for reviewing personal holdings and scaling into positions.",
@@ -139,7 +147,8 @@ const enProjects: ProjectSummary[] = [
   },
   {
     slug: "laushu",
-    title: "Laushu Contractor Payment System",
+    title: "From Paper to a Smooth Digital Flow:UX Optimization for a Contractor Payment System",
+    navigationTitle: "Contractor Payment System UX Optimization",
     date: "2024.02 - 2024.04",
     description:
       "A contractor payment system that helps companies prepare payment forms, collect signatures, and organize tax records when working with external professionals, reducing administrative effort and improving efficiency.",
@@ -155,7 +164,8 @@ const enProjects: ProjectSummary[] = [
   {
     slug: "nccuspace",
     cardId: "project4",
-    title: "NCCU Space Campus Booking System",
+    title: "From Endless Searching to One-Glance Booking ：Redesigning Study Room Booking for NCCU Library",
+    navigationTitle: "NCCU Study Room Booking Redesign",
     date: "2023.10 - 2023.12",
     description:
       "An information service that helps NCCU students book campus spaces more easily. The project focused on simplifying a complex reservation flow and helping students find spaces that match their needs.",
@@ -169,7 +179,8 @@ const enProjects: ProjectSummary[] = [
   {
     slug: "tba",
     cardId: "project3",
-    title: "TBA Digital Credential Platform",
+    title: "From Issuing to Holding to Verifying: A Web3 Digital Credential Platform Built on Cathay's DID Wallet",
+    navigationTitle: "Web3 Digital Credential Platform",
     date: "2022.12 - 2023.02",
     description:
       "A Web3-based digital credential service developed with Cathay Financial Holdings' digital technology team. During the two-month project, I led UX design, web interface design, user research, and usability testing.",

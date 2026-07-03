@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { readFile, rm } from "node:fs/promises";
 
 const chromePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const url = "http://localhost:3000/zh-TW/laushu";
+const url = process.env.LAUSHU_VERIFY_URL ?? "http://localhost:3000/zh-TW/laushu";
 const userDataDir = `/private/tmp/hming-laushu-primitives-cdp-${process.pid}-${Date.now()}`;
 const viewports = [
   [1440, 1000],
@@ -123,7 +123,28 @@ try {
       returnByValue: true,
       expression: `(() => {
         const doc = document.documentElement;
+        const infoRowDivided = document.querySelector('.cs-info-row--divided');
+        const tableFrame = document.querySelector('.cs-data-table-frame--wide');
+        const matrixTable = document.querySelector('.cs-data-table--matrix');
+        const matrixCorner = matrixTable?.querySelector('.cs-data-table-corner');
+        const matrixCell = matrixTable?.querySelector('tbody td');
+        const surveyFlow = document.querySelector('.cs-survey-flow');
+        const surveyNode = surveyFlow?.querySelector('.cs-survey-node');
+        const surveyPanelStats = document.querySelector('.cs-survey-panel--stats');
+        const surveyPanelInsight = document.querySelector('.cs-survey-panel--insight');
+        const surveyStatGrid = document.querySelector('.cs-survey-stat-grid');
+        const surveyChartGrid = document.querySelector('.cs-survey-chart-grid');
+        const surveyDonutSegment = document.querySelector('.cs-survey-donut-segment');
+        const surveyBarGroups = document.querySelector('.cs-survey-bar-groups');
+        const surveyBarFill = document.querySelector('.cs-survey-bar-fill');
+        const surveyInsightGrid = document.querySelector('.cs-survey-insight-grid');
+        const surveyInsightLabel = document.querySelector('.cs-survey-insight-label');
         const topicCard = document.querySelector('.cs-topic-card');
+        const overviewGrid = document.querySelector('.cs-topic-grid--overview');
+        const problemGrid = document.querySelector('.cs-topic-grid--problem');
+        const stakeholderGrid = document.querySelector('.cs-topic-grid--stakeholder');
+        const usecaseGrid = document.querySelector('.cs-topic-grid--usecase');
+        const usecaseCard = usecaseGrid?.querySelector('.cs-topic-card');
         const topicKicker = document.querySelector('.cs-topic-card-kicker');
         const topicArt = document.querySelector('.cs-topic-card-art');
         const article = document.querySelector('.cs-article');
@@ -148,6 +169,7 @@ try {
         const videoMeta = videoCard?.querySelector('.cs-video-showcase-meta');
         const video = videoCard?.querySelector('.cs-video-showcase-video');
         const videoCopy = videoCard?.querySelector('.cs-video-showcase-copy');
+        const reflectionGrid = document.querySelector('.cs-reflection-grid');
         const reflectionCard = document.querySelector('.cs-reflection-card');
         const reflectionNum = reflectionCard?.querySelector('.cs-reflection-card-num');
         const reflectionTitle = reflectionCard?.querySelector('.cs-reflection-card-title');
@@ -165,7 +187,71 @@ try {
         const iterationPanelMedia = iterationPanel?.querySelector('.cs-iteration-panel-media');
         const iterationPanelImage = iterationPanel?.querySelector('.cs-iteration-panel-image');
         const iterationArrow = iterationBoard?.querySelector('.cs-iteration-arrow');
+        const documentPreview = document.querySelector('.cs-document-preview');
+        const documentPreviewFrame = documentPreview?.querySelector('.cs-media-frame');
+        const documentPreviewCaption = documentPreview?.querySelector('.cs-media-caption');
+        const showcaseMedia = document.querySelector('.cs-showcase-media');
+        const showcaseFrame = showcaseMedia?.querySelector('.cs-media-frame');
+        const showcaseCaptionCenter = document.querySelector('.cs-showcase-media--caption-center');
+        const showcaseCaption = showcaseCaptionCenter?.querySelector('.cs-media-caption');
+        const showcaseFramed = document.querySelector('.cs-showcase-media--framed');
+        const showcaseFramedFrame = showcaseFramed?.querySelector('.cs-media-frame');
+        const explainerLayout = document.querySelector('.cs-explainer-layout');
+        const explainerCopy = explainerLayout?.querySelector('.cs-explainer-copy');
+        const explainerPill = explainerLayout?.querySelector('.cs-explainer-pill');
+        const explainerTitle = explainerLayout?.querySelector('.cs-explainer-title');
+        const explainerBody = explainerLayout?.querySelector('p');
+        const headerWide = document.querySelector('.cs-section-header--case-wide');
+        const headerWideKicker = headerWide?.querySelector('.cs-section-kicker');
+        const headerWideTitle = headerWide?.querySelector('.cs-section-title');
+        const sectionLeadWide = document.querySelector('.cs-section-lead--wide');
+        const sectionLeadBottom = document.querySelector('.cs-section-lead--bottom-gap');
+        const prototypeLead = document.querySelector('.laushu-prototype-section > .cs-section-lead');
+        const subsectionTitleWide = document.querySelector('.cs-subsection-title--wide');
+        const diagramFrame = document.querySelector('.cs-diagram-frame--flow');
+        const diagramGraphic = document.querySelector('.cs-diagram-graphic--flow');
+        const diagramNodeLabel = document.querySelector('.cs-diagram-label--node');
+        const diagramEdgeLabel = document.querySelector('.cs-diagram-label--edge');
+        const taskFlowOne = document.querySelector('.cs-task-flow-graphic--one');
+        const taskFlowTwo = document.querySelector('.cs-task-flow-graphic--two');
+        const taskFlowThree = document.querySelector('.cs-task-flow-graphic--three');
+        const taskFlowConnector = document.querySelector('.cs-task-flow-connector');
+        const taskFlowNodeCopy = document.querySelector('.cs-task-flow-node-copy');
+        const taskFlowEdgeLabel = document.querySelector('.cs-task-flow-edge-label');
+        const flowFrameList = document.querySelector('.cs-flow-frame-list');
+        const flowFrameBadge = document.querySelector('.cs-flow-frame-badge');
+        const flowFrameTitle = document.querySelector('.cs-flow-frame-title');
+        const prototypeBlock = document.querySelector('.cs-sol-block--prototype');
+        const prototypeGroup = document.querySelector('.cs-sol-fgroup--prototype');
+        const prototypeCard = document.querySelector('.cs-sol-fc');
+        const prototypeCardHead = document.querySelector('.cs-sol-fchead');
+        const prototypeCardBody = document.querySelector('.cs-sol-fcbody');
+        const prototypeTitle = document.querySelector('.cs-sol-ftitle');
+        const prototypeSub = document.querySelector('.cs-sol-fsub');
+        const prototypeRule = document.querySelector('.cs-sol-fhr');
+        const prototypeConnector = document.querySelector('.cs-sol-fconn');
+        const prototypeConnectorImg = prototypeConnector?.querySelector('img');
+        const infoRowDividedStyle = infoRowDivided ? getComputedStyle(infoRowDivided) : null;
+        const tableFrameStyle = tableFrame ? getComputedStyle(tableFrame) : null;
+        const matrixTableStyle = matrixTable ? getComputedStyle(matrixTable) : null;
+        const matrixHead = matrixTable?.querySelector('thead th:not(.cs-data-table-corner)');
+        const matrixHeadStyle = matrixHead ? getComputedStyle(matrixHead) : null;
+        const matrixCornerStyle = matrixCorner ? getComputedStyle(matrixCorner) : null;
+        const matrixCellStyle = matrixCell ? getComputedStyle(matrixCell) : null;
+        const surveyFlowStyle = surveyFlow ? getComputedStyle(surveyFlow) : null;
+        const surveyNodeStyle = surveyNode ? getComputedStyle(surveyNode) : null;
+        const surveyPanelStatsStyle = surveyPanelStats ? getComputedStyle(surveyPanelStats) : null;
+        const surveyPanelInsightStyle = surveyPanelInsight ? getComputedStyle(surveyPanelInsight) : null;
+        const surveyStatGridStyle = surveyStatGrid ? getComputedStyle(surveyStatGrid) : null;
+        const surveyChartGridStyle = surveyChartGrid ? getComputedStyle(surveyChartGrid) : null;
+        const surveyDonutSegmentStyle = surveyDonutSegment ? getComputedStyle(surveyDonutSegment) : null;
+        const surveyBarGroupsStyle = surveyBarGroups ? getComputedStyle(surveyBarGroups) : null;
+        const surveyBarFillStyle = surveyBarFill ? getComputedStyle(surveyBarFill) : null;
+        const surveyInsightGridStyle = surveyInsightGrid ? getComputedStyle(surveyInsightGrid) : null;
+        const surveyInsightLabelStyle = surveyInsightLabel ? getComputedStyle(surveyInsightLabel) : null;
         const topicCardStyle = topicCard ? getComputedStyle(topicCard) : null;
+        const usecaseGridStyle = usecaseGrid ? getComputedStyle(usecaseGrid) : null;
+        const usecaseCardStyle = usecaseCard ? getComputedStyle(usecaseCard) : null;
         const topicKickerStyle = topicKicker ? getComputedStyle(topicKicker) : null;
         const topicArtStyle = topicArt ? getComputedStyle(topicArt) : null;
         const articleStyle = article ? getComputedStyle(article) : null;
@@ -190,6 +276,7 @@ try {
         const videoMetaStyle = videoMeta ? getComputedStyle(videoMeta) : null;
         const videoStyle = video ? getComputedStyle(video) : null;
         const videoCopyStyle = videoCopy ? getComputedStyle(videoCopy) : null;
+        const reflectionGridStyle = reflectionGrid ? getComputedStyle(reflectionGrid) : null;
         const reflectionCardStyle = reflectionCard ? getComputedStyle(reflectionCard) : null;
         const reflectionNumStyle = reflectionNum ? getComputedStyle(reflectionNum) : null;
         const reflectionTitleStyle = reflectionTitle ? getComputedStyle(reflectionTitle) : null;
@@ -207,6 +294,48 @@ try {
         const iterationPanelMediaStyle = iterationPanelMedia ? getComputedStyle(iterationPanelMedia) : null;
         const iterationPanelImageStyle = iterationPanelImage ? getComputedStyle(iterationPanelImage) : null;
         const iterationArrowStyle = iterationArrow ? getComputedStyle(iterationArrow) : null;
+        const documentPreviewStyle = documentPreview ? getComputedStyle(documentPreview) : null;
+        const documentPreviewFrameStyle = documentPreviewFrame ? getComputedStyle(documentPreviewFrame) : null;
+        const documentPreviewCaptionStyle = documentPreviewCaption ? getComputedStyle(documentPreviewCaption) : null;
+        const showcaseMediaStyle = showcaseMedia ? getComputedStyle(showcaseMedia) : null;
+        const showcaseFrameStyle = showcaseFrame ? getComputedStyle(showcaseFrame) : null;
+        const showcaseCaptionStyle = showcaseCaption ? getComputedStyle(showcaseCaption) : null;
+        const showcaseFramedFrameStyle = showcaseFramedFrame ? getComputedStyle(showcaseFramedFrame) : null;
+        const explainerLayoutStyle = explainerLayout ? getComputedStyle(explainerLayout) : null;
+        const explainerCopyStyle = explainerCopy ? getComputedStyle(explainerCopy) : null;
+        const explainerPillStyle = explainerPill ? getComputedStyle(explainerPill) : null;
+        const explainerTitleStyle = explainerTitle ? getComputedStyle(explainerTitle) : null;
+        const explainerBodyStyle = explainerBody ? getComputedStyle(explainerBody) : null;
+        const headerWideStyle = headerWide ? getComputedStyle(headerWide) : null;
+        const headerWideKickerStyle = headerWideKicker ? getComputedStyle(headerWideKicker) : null;
+        const headerWideTitleStyle = headerWideTitle ? getComputedStyle(headerWideTitle) : null;
+        const sectionLeadWideStyle = sectionLeadWide ? getComputedStyle(sectionLeadWide) : null;
+        const sectionLeadBottomStyle = sectionLeadBottom ? getComputedStyle(sectionLeadBottom) : null;
+        const prototypeLeadStyle = prototypeLead ? getComputedStyle(prototypeLead) : null;
+        const subsectionTitleWideStyle = subsectionTitleWide ? getComputedStyle(subsectionTitleWide) : null;
+        const diagramFrameStyle = diagramFrame ? getComputedStyle(diagramFrame) : null;
+        const diagramGraphicStyle = diagramGraphic ? getComputedStyle(diagramGraphic) : null;
+        const diagramNodeLabelStyle = diagramNodeLabel ? getComputedStyle(diagramNodeLabel) : null;
+        const diagramEdgeLabelStyle = diagramEdgeLabel ? getComputedStyle(diagramEdgeLabel) : null;
+        const taskFlowOneStyle = taskFlowOne ? getComputedStyle(taskFlowOne) : null;
+        const taskFlowTwoStyle = taskFlowTwo ? getComputedStyle(taskFlowTwo) : null;
+        const taskFlowThreeStyle = taskFlowThree ? getComputedStyle(taskFlowThree) : null;
+        const taskFlowConnectorStyle = taskFlowConnector ? getComputedStyle(taskFlowConnector) : null;
+        const taskFlowNodeCopyStyle = taskFlowNodeCopy ? getComputedStyle(taskFlowNodeCopy) : null;
+        const taskFlowEdgeLabelStyle = taskFlowEdgeLabel ? getComputedStyle(taskFlowEdgeLabel) : null;
+        const flowFrameListStyle = flowFrameList ? getComputedStyle(flowFrameList) : null;
+        const flowFrameBadgeStyle = flowFrameBadge ? getComputedStyle(flowFrameBadge) : null;
+        const flowFrameTitleStyle = flowFrameTitle ? getComputedStyle(flowFrameTitle) : null;
+        const prototypeBlockStyle = prototypeBlock ? getComputedStyle(prototypeBlock) : null;
+        const prototypeGroupStyle = prototypeGroup ? getComputedStyle(prototypeGroup) : null;
+        const prototypeCardStyle = prototypeCard ? getComputedStyle(prototypeCard) : null;
+        const prototypeCardHeadStyle = prototypeCardHead ? getComputedStyle(prototypeCardHead) : null;
+        const prototypeCardBodyStyle = prototypeCardBody ? getComputedStyle(prototypeCardBody) : null;
+        const prototypeTitleStyle = prototypeTitle ? getComputedStyle(prototypeTitle) : null;
+        const prototypeSubStyle = prototypeSub ? getComputedStyle(prototypeSub) : null;
+        const prototypeRuleStyle = prototypeRule ? getComputedStyle(prototypeRule) : null;
+        const prototypeConnectorStyle = prototypeConnector ? getComputedStyle(prototypeConnector) : null;
+        const prototypeConnectorImgStyle = prototypeConnectorImg ? getComputedStyle(prototypeConnectorImg) : null;
         const overflowNodes = [...document.querySelectorAll('body *')].filter((el) => {
           const rect = el.getBoundingClientRect();
           return rect.width > 0 && (rect.right > window.innerWidth + 1 || rect.left < -1);
@@ -228,11 +357,51 @@ try {
             guide: document.querySelectorAll('.laushu-guide-grid, .laushu-guide-card, .laushu-guide-marker, .laushu-guide-dot, .laushu-guide-line, .laushu-guide-item').length,
             persona: document.querySelectorAll('.laushu-persona-list, .laushu-persona, .laushu-persona-copy, .laushu-persona-tags').length,
             videoShowcase: document.querySelectorAll('.laushu-demo-list, .laushu-demo-card, .laushu-demo-media-wrap, .laushu-demo-media, .laushu-demo-meta, .laushu-demo-video, .laushu-demo-copy').length,
-            reflection: document.querySelectorAll('.laushu-learning-card, .laushu-learning-num, .laushu-learning-title').length,
-            iteration: document.querySelectorAll('.laushu-iter-list, .laushu-iter-board, .laushu-iter-head, .laushu-iter-badge, .laushu-iter-title, .laushu-iter-body, .laushu-iter-label, .laushu-iter-paras, .laushu-iter-compare, .laushu-iter-frame, .laushu-iter-media, .laushu-iter-card, .laushu-iter-arrow').length
+            reflection: document.querySelectorAll('.laushu-learning-grid, .laushu-learning-card, .laushu-learning-num, .laushu-learning-title').length,
+            iteration: document.querySelectorAll('.laushu-iter-list, .laushu-iter-board, .laushu-iter-head, .laushu-iter-badge, .laushu-iter-title, .laushu-iter-body, .laushu-iter-label, .laushu-iter-paras, .laushu-iter-compare, .laushu-iter-frame, .laushu-iter-media, .laushu-iter-card, .laushu-iter-arrow').length,
+            mediaFrame: document.querySelectorAll('.laushu-form-card, .laushu-overview-hero, .laushu-journey, .laushu-test-result, .laushu-proto-overview').length,
+            explainer: document.querySelectorAll('.laushu-problem-layout, .laushu-problem-copy, .laushu-problem-pill, .laushu-problem-define-title').length,
+            textPrimitive: document.querySelectorAll('.laushu-overview-lead, .laushu-problem-cards-title, .laushu-proto-intro').length,
+            topicGrid: document.querySelectorAll('.laushu-summary-grid, .laushu-overview-grid, .laushu-problem-grid, .laushu-stakeholder-grid, .laushu-usecase-grid').length,
+            flowFrame: document.querySelectorAll('.laushu-fc-list, .laushu-fc-badge, .laushu-fc-title').length,
+            prototype: document.querySelectorAll('.laushu-proto-block, .laushu-proto-group').length,
+            sectionHeader: document.querySelectorAll('.laushu-head').length,
+            heroInfo: document.querySelectorAll('.laushu-info-row').length,
+            table: document.querySelectorAll('.laushu-table-wrap, .laushu-research-table, .laushu-th-corner').length,
+            survey: document.querySelectorAll('.laushu-survey-flow, .laushu-survey-node, .laushu-survey-mid, .laushu-survey-arrow, .laushu-survey-note, .laushu-survey-stats, .laushu-survey-block-head, .laushu-survey-chart-grid, .laushu-survey-bars, .laushu-survey-bar-groups, .laushu-survey-summary, .laushu-stat-grid, .laushu-stat-card, .laushu-donut-card, .laushu-donut-layout, .laushu-donut, .laushu-donut-track, .laushu-donut-segment, .laushu-donut-center, .laushu-donut-legend, .laushu-donut-dot, .laushu-bar-list, .laushu-bar-row, .laushu-bar-label, .laushu-bar, .laushu-bar-fill, .laushu-insight, .laushu-insight-grid, .laushu-insight-col, .laushu-insight-col-pain, .laushu-insight-label, .laushu-insight-summary').length,
+            flowGeometry: document.querySelectorAll('.laushu-diagram, .laushu-flow-svg, .laushu-flow-node-label, .laushu-flow-edge-label, .laushu-task-flow-svg, .laushu-task-flow-svg--one, .laushu-task-flow-svg--two, .laushu-task-flow-svg--three, .laushu-task-connector, .laushu-task-node-copy, .laushu-task-edge-label, .laushu-flow-group, .laushu-flow-visuals').length
           },
           counts: {
+            infoRowDivided: document.querySelectorAll('.cs-info-row--divided').length,
+            dataTableFrame: document.querySelectorAll('.cs-data-table-frame--wide').length,
+            matrixTable: document.querySelectorAll('.cs-data-table--matrix').length,
+            matrixCorner: document.querySelectorAll('.cs-data-table-corner').length,
+            surveyFlow: document.querySelectorAll('.cs-survey-flow').length,
+            surveyNode: document.querySelectorAll('.cs-survey-node').length,
+            surveyFlowMid: document.querySelectorAll('.cs-survey-flow-mid').length,
+            surveyArrow: document.querySelectorAll('.cs-survey-arrow').length,
+            surveyNote: document.querySelectorAll('.cs-survey-note').length,
+            surveyPanelStats: document.querySelectorAll('.cs-survey-panel--stats').length,
+            surveyPanelInsight: document.querySelectorAll('.cs-survey-panel--insight').length,
+            surveyBlockHead: document.querySelectorAll('.cs-survey-block-head').length,
+            surveyStatGrid: document.querySelectorAll('.cs-survey-stat-grid').length,
+            surveyStatCard: document.querySelectorAll('.cs-survey-stat-card').length,
+            surveyChartGrid: document.querySelectorAll('.cs-survey-chart-grid').length,
+            surveyDonutCard: document.querySelectorAll('.cs-survey-donut-card').length,
+            surveyBars: document.querySelectorAll('.cs-survey-bars').length,
+            surveyDonut: document.querySelectorAll('.cs-survey-donut').length,
+            surveyDonutSegment: document.querySelectorAll('.cs-survey-donut-segment').length,
+            surveyDonutLegend: document.querySelectorAll('.cs-survey-donut-legend').length,
+            surveyBarGroups: document.querySelectorAll('.cs-survey-bar-groups').length,
+            surveyBarFill: document.querySelectorAll('.cs-survey-bar-fill').length,
+            surveyInsightCol: document.querySelectorAll('.cs-survey-insight-col').length,
+            surveyInsightLabel: document.querySelectorAll('.cs-survey-insight-label').length,
+            surveyInsightSummary: document.querySelectorAll('.cs-survey-insight-summary').length,
             topicCard: document.querySelectorAll('.cs-topic-card').length,
+            topicGridOverview: document.querySelectorAll('.cs-topic-grid--overview').length,
+            topicGridProblem: document.querySelectorAll('.cs-topic-grid--problem').length,
+            topicGridStakeholder: document.querySelectorAll('.cs-topic-grid--stakeholder').length,
+            topicGridUsecase: document.querySelectorAll('.cs-topic-grid--usecase').length,
             topicCardKicker: document.querySelectorAll('.cs-topic-card-kicker').length,
             topicCardIllustrated: document.querySelectorAll('.cs-topic-card--illustrated').length,
             topicCardArt: document.querySelectorAll('.cs-topic-card-art').length,
@@ -255,6 +424,7 @@ try {
             videoShowcaseMeta: document.querySelectorAll('.cs-video-showcase-meta').length,
             videoShowcaseVideo: document.querySelectorAll('.cs-video-showcase-video').length,
             videoShowcaseCopy: document.querySelectorAll('.cs-video-showcase-copy').length,
+            reflectionGrid: document.querySelectorAll('.cs-reflection-grid').length,
             reflectionCard: document.querySelectorAll('.cs-reflection-card').length,
             reflectionNum: document.querySelectorAll('.cs-reflection-card-num').length,
             reflectionTitle: document.querySelectorAll('.cs-reflection-card-title').length,
@@ -270,7 +440,92 @@ try {
             iterationPanel: document.querySelectorAll('.cs-iteration-panel').length,
             iterationPanelMedia: document.querySelectorAll('.cs-iteration-panel-media').length,
             iterationPanelImage: document.querySelectorAll('.cs-iteration-panel-image').length,
-            iterationArrow: document.querySelectorAll('.cs-iteration-arrow').length
+            iterationArrow: document.querySelectorAll('.cs-iteration-arrow').length,
+            documentPreview: document.querySelectorAll('.cs-document-preview').length,
+            showcaseMedia: document.querySelectorAll('.cs-showcase-media').length,
+            showcaseCaptionCenter: document.querySelectorAll('.cs-showcase-media--caption-center').length,
+            showcaseFramed: document.querySelectorAll('.cs-showcase-media--framed').length,
+            explainerLayout: document.querySelectorAll('.cs-explainer-layout').length,
+            explainerCopy: document.querySelectorAll('.cs-explainer-copy').length,
+            explainerPill: document.querySelectorAll('.cs-explainer-pill').length,
+            explainerTitle: document.querySelectorAll('.cs-explainer-title').length,
+            sectionHeaderWide: document.querySelectorAll('.cs-section-header--case-wide').length,
+            sectionLeadWide: document.querySelectorAll('.cs-section-lead--wide').length,
+            sectionLeadBottomGap: document.querySelectorAll('.cs-section-lead--bottom-gap').length,
+            sectionLeadTopGap: document.querySelectorAll('.cs-section-lead--top-gap').length,
+            subsectionTitleWide: document.querySelectorAll('.cs-subsection-title--wide').length,
+            subsectionTitleAccent: document.querySelectorAll('.cs-subsection-title--accent').length,
+            diagramFrameFlow: document.querySelectorAll('.cs-diagram-frame--flow').length,
+            diagramGraphicFlow: document.querySelectorAll('.cs-diagram-graphic--flow').length,
+            diagramNodeLabel: document.querySelectorAll('.cs-diagram-label--node').length,
+            diagramEdgeLabel: document.querySelectorAll('.cs-diagram-label--edge').length,
+            taskFlowGraphic: document.querySelectorAll('.cs-task-flow-graphic').length,
+            taskFlowOne: document.querySelectorAll('.cs-task-flow-graphic--one').length,
+            taskFlowTwo: document.querySelectorAll('.cs-task-flow-graphic--two').length,
+            taskFlowThree: document.querySelectorAll('.cs-task-flow-graphic--three').length,
+            taskFlowConnector: document.querySelectorAll('.cs-task-flow-connector').length,
+            taskFlowNodeCopy: document.querySelectorAll('.cs-task-flow-node-copy').length,
+            taskFlowEdgeLabel: document.querySelectorAll('.cs-task-flow-edge-label').length,
+            flowFrameList: document.querySelectorAll('.cs-flow-frame-list').length,
+            flowFrameBadge: document.querySelectorAll('.cs-flow-frame-badge').length,
+            flowFrameTitle: document.querySelectorAll('.cs-flow-frame-title').length,
+            prototypeBlock: document.querySelectorAll('.cs-sol-block--prototype').length,
+            prototypeGroup: document.querySelectorAll('.cs-sol-fgroup--prototype').length,
+            prototypeCard: document.querySelectorAll('.cs-sol-fc').length,
+            prototypeCardHead: document.querySelectorAll('.cs-sol-fchead').length,
+            prototypeCardBody: document.querySelectorAll('.cs-sol-fcbody').length,
+            prototypeTitle: document.querySelectorAll('.cs-sol-ftitle').length,
+            prototypeSub: document.querySelectorAll('.cs-sol-fsub').length,
+            prototypeRule: document.querySelectorAll('.cs-sol-fhr').length,
+            prototypeConnector: document.querySelectorAll('.cs-sol-fconn').length
+          },
+          heroInfo: infoRowDivided && {
+            paddingTop: infoRowDividedStyle.paddingTop,
+            borderTopWidth: infoRowDividedStyle.borderTopWidth,
+            borderTopStyle: infoRowDividedStyle.borderTopStyle,
+            borderTopColor: infoRowDividedStyle.borderTopColor
+          },
+          dataTable: tableFrame && matrixTable && matrixCorner && matrixCell && {
+            frameMaxWidth: tableFrameStyle.maxWidth,
+            frameOverflowX: tableFrameStyle.overflowX,
+            tableMinWidth: matrixTableStyle.minWidth,
+            tableBorderCollapse: matrixTableStyle.borderCollapse,
+            headHeight: matrixHeadStyle.height,
+            headBg: matrixHeadStyle.backgroundColor,
+            cornerBg: matrixCornerStyle.backgroundColor,
+            cornerColor: matrixCornerStyle.color,
+            cellPadding: matrixCellStyle.padding,
+            cellBorderTop: matrixCellStyle.borderTopWidth + " " + matrixCellStyle.borderTopStyle,
+            cellColor: matrixCellStyle.color,
+            cellLineHeight: matrixCellStyle.lineHeight
+          },
+          survey: surveyFlow && surveyNode && surveyPanelStats && surveyPanelInsight && surveyStatGrid && surveyChartGrid && surveyDonutSegment && surveyBarGroups && surveyBarFill && surveyInsightGrid && surveyInsightLabel && {
+            flowDisplay: surveyFlowStyle.display,
+            flowColumns: surveyFlowStyle.gridTemplateColumns,
+            flowMaxWidth: surveyFlowStyle.maxWidth,
+            nodeDisplay: surveyNodeStyle.display,
+            nodeMinHeight: surveyNodeStyle.minHeight,
+            nodeRadius: surveyNodeStyle.borderRadius,
+            nodeBg: surveyNodeStyle.backgroundColor,
+            statsPadding: surveyPanelStatsStyle.padding,
+            statsRadius: surveyPanelStatsStyle.borderRadius,
+            statsBg: surveyPanelStatsStyle.backgroundColor,
+            statGridDisplay: surveyStatGridStyle.display,
+            statGridColumns: surveyStatGridStyle.gridTemplateColumns,
+            chartGridDisplay: surveyChartGridStyle.display,
+            chartGridColumns: surveyChartGridStyle.gridTemplateColumns,
+            donutStrokeWidth: surveyDonutSegmentStyle.strokeWidth,
+            barGroupsDisplay: surveyBarGroupsStyle.display,
+            barGroupsColumns: surveyBarGroupsStyle.gridTemplateColumns,
+            barFillDisplay: surveyBarFillStyle.display,
+            barFillBg: surveyBarFillStyle.backgroundColor,
+            insightPadding: surveyPanelInsightStyle.padding,
+            insightRadius: surveyPanelInsightStyle.borderRadius,
+            insightBg: surveyPanelInsightStyle.backgroundImage,
+            insightGridDisplay: surveyInsightGridStyle.display,
+            insightGridColumns: surveyInsightGridStyle.gridTemplateColumns,
+            insightLabelDisplay: surveyInsightLabelStyle.display,
+            insightLabelRadius: surveyInsightLabelStyle.borderRadius
           },
           topicCard: topicCard && {
             padding: topicCardStyle.padding,
@@ -278,6 +533,14 @@ try {
             radius: topicCardStyle.borderRadius,
             border: topicCardStyle.borderTopColor,
             shadow: topicCardStyle.boxShadow
+          },
+          usecaseGrid: usecaseGrid && usecaseCard && {
+            display: usecaseGridStyle.display,
+            maxWidth: usecaseGridStyle.maxWidth,
+            marginTop: usecaseGridStyle.marginTop,
+            cardMinHeight: usecaseCardStyle.minHeight,
+            cardPadding: usecaseCardStyle.padding,
+            cardBg: usecaseCardStyle.backgroundColor
           },
           topicKicker: topicKicker && {
             display: topicKickerStyle.display,
@@ -344,7 +607,12 @@ try {
             videoObjectFit: videoStyle.objectFit,
             copyDisplay: videoCopyStyle.display
           },
-          reflection: reflectionCard && reflectionNum && reflectionTitle && {
+          reflection: reflectionGrid && reflectionCard && reflectionNum && reflectionTitle && {
+            gridDisplay: reflectionGridStyle.display,
+            gridGap: reflectionGridStyle.gap,
+            gridMaxWidth: reflectionGridStyle.maxWidth,
+            gridMarginTop: reflectionGridStyle.marginTop,
+            gridAlignItems: reflectionGridStyle.alignItems,
             cardAlignItems: reflectionCardStyle.alignItems,
             cardRadius: reflectionCardStyle.borderRadius,
             numDisplay: reflectionNumStyle.display,
@@ -378,6 +646,106 @@ try {
             imageDisplay: iterationPanelImageStyle.display,
             arrowPosition: iterationArrowStyle.position,
             arrowTransform: iterationArrowStyle.transform
+          },
+          mediaFrame: documentPreview && documentPreviewFrame && documentPreviewCaption && showcaseMedia && showcaseFrame && showcaseCaption && showcaseFramedFrame && {
+            documentDisplay: documentPreviewStyle.display,
+            documentPadding: documentPreviewFrameStyle.padding,
+            documentRadius: documentPreviewFrameStyle.borderRadius,
+            documentBorder: documentPreviewFrameStyle.borderTopStyle,
+            documentShadow: documentPreviewFrameStyle.boxShadow,
+            documentCaptionAlign: documentPreviewCaptionStyle.textAlign,
+            showcaseDisplay: showcaseMediaStyle.display,
+            showcaseRadius: showcaseFrameStyle.borderRadius,
+            showcaseOverflow: showcaseFrameStyle.overflow,
+            captionAlign: showcaseCaptionStyle.textAlign,
+            captionWeight: showcaseCaptionStyle.fontWeight,
+            framedRadius: showcaseFramedFrameStyle.borderRadius,
+            framedBorder: showcaseFramedFrameStyle.borderTopStyle,
+            framedShadow: showcaseFramedFrameStyle.boxShadow
+          },
+          explainer: explainerLayout && explainerCopy && explainerPill && explainerTitle && explainerBody && {
+            layoutDisplay: explainerLayoutStyle.display,
+            layoutColumns: explainerLayoutStyle.gridTemplateColumns,
+            layoutAlign: explainerLayoutStyle.alignItems,
+            copyMinWidth: explainerCopyStyle.minWidth,
+            pillDisplay: explainerPillStyle.display,
+            pillRadius: explainerPillStyle.borderRadius,
+            pillWeight: explainerPillStyle.fontWeight,
+            titleWeight: explainerTitleStyle.fontWeight,
+            titleColor: explainerTitleStyle.color,
+            titleMarginBottom: explainerTitleStyle.marginBottom,
+            bodyLineHeight: explainerBodyStyle.lineHeight
+          },
+          sectionHeader: headerWide && headerWideKicker && headerWideTitle && {
+            maxWidth: headerWideStyle.maxWidth,
+            kickerColor: headerWideKickerStyle.color,
+            titleColor: headerWideTitleStyle.color,
+            titleWeight: headerWideTitleStyle.fontWeight,
+            titleMarginBottom: headerWideTitleStyle.marginBottom
+          },
+          textPrimitive: sectionLeadWide && sectionLeadBottom && prototypeLead && subsectionTitleWide && {
+            leadMaxWidth: sectionLeadWideStyle.maxWidth,
+            leadBottomMargin: sectionLeadBottomStyle.marginBottom,
+            prototypeLineHeight: prototypeLeadStyle.lineHeight,
+            subsectionMaxWidth: subsectionTitleWideStyle.maxWidth,
+            subsectionWeight: subsectionTitleWideStyle.fontWeight,
+            subsectionColor: subsectionTitleWideStyle.color
+          },
+          flowGeometry: diagramFrame && diagramGraphic && diagramNodeLabel && diagramEdgeLabel && taskFlowOne && taskFlowTwo && taskFlowThree && taskFlowConnector && taskFlowNodeCopy && taskFlowEdgeLabel && {
+            diagramFrameDisplay: diagramFrameStyle.display,
+            diagramFrameMaxWidth: diagramFrameStyle.maxWidth,
+            diagramFrameOverflowX: diagramFrameStyle.overflowX,
+            diagramGraphicDisplay: diagramGraphicStyle.display,
+            diagramGraphicMinWidth: diagramGraphicStyle.minWidth,
+            diagramNodeSize: diagramNodeLabelStyle.fontSize,
+            diagramNodeWeight: diagramNodeLabelStyle.fontWeight,
+            diagramEdgeSize: diagramEdgeLabelStyle.fontSize,
+            diagramEdgeWeight: diagramEdgeLabelStyle.fontWeight,
+            taskOneWidth: taskFlowOneStyle.width,
+            taskOneMinWidth: taskFlowOneStyle.minWidth,
+            taskTwoWidth: taskFlowTwoStyle.width,
+            taskTwoMinWidth: taskFlowTwoStyle.minWidth,
+            taskThreeWidth: taskFlowThreeStyle.width,
+            taskThreeMinWidth: taskFlowThreeStyle.minWidth,
+            taskConnectorStrokeWidth: taskFlowConnectorStyle.strokeWidth,
+            taskNodeDisplay: taskFlowNodeCopyStyle.display,
+            taskNodeFontSize: taskFlowNodeCopyStyle.fontSize,
+            taskNodeFontWeight: taskFlowNodeCopyStyle.fontWeight,
+            taskEdgeDisplay: taskFlowEdgeLabelStyle.display,
+            taskEdgeFontSize: taskFlowEdgeLabelStyle.fontSize
+          },
+          flowFrame: flowFrameList && flowFrameBadge && flowFrameTitle && {
+            listDisplay: flowFrameListStyle.display,
+            listGap: flowFrameListStyle.rowGap,
+            listMaxWidth: flowFrameListStyle.maxWidth,
+            badgeBg: flowFrameBadgeStyle.backgroundColor,
+            badgeColor: flowFrameBadgeStyle.color,
+            badgeWeight: flowFrameBadgeStyle.fontWeight,
+            titleColor: flowFrameTitleStyle.color,
+            titleWeight: flowFrameTitleStyle.fontWeight
+          },
+          prototype: prototypeBlock && prototypeGroup && prototypeCard && prototypeCardHead && prototypeCardBody && prototypeTitle && prototypeSub && prototypeRule && prototypeConnector && prototypeConnectorImg && {
+            blockDisplay: prototypeBlockStyle.display,
+            blockGap: prototypeBlockStyle.rowGap,
+            blockMaxWidth: prototypeBlockStyle.maxWidth,
+            blockMarginTop: prototypeBlockStyle.marginTop,
+            groupDisplay: prototypeGroupStyle.display,
+            cardWidth: prototypeCardStyle.width,
+            cardOverflow: prototypeCardStyle.overflow,
+            cardRadius: prototypeCardStyle.borderRadius,
+            cardBorder: prototypeCardStyle.borderTopStyle,
+            cardHeadPadding: prototypeCardHeadStyle.padding,
+            cardBodyPadding: prototypeCardBodyStyle.padding,
+            titleWeight: prototypeTitleStyle.fontWeight,
+            titleLineHeight: prototypeTitleStyle.lineHeight,
+            subLineHeight: prototypeSubStyle.lineHeight,
+            ruleHeight: prototypeRuleStyle.height,
+            ruleMarginBottom: prototypeRuleStyle.marginBottom,
+            connectorDisplay: prototypeConnectorStyle.display,
+            connectorWidth: prototypeConnectorStyle.width,
+            connectorMarginTop: prototypeConnectorStyle.marginTop,
+            connectorMarginBottom: prototypeConnectorStyle.marginBottom,
+            connectorImgDisplay: prototypeConnectorImgStyle.display
           }
         };
       })()`,
@@ -404,7 +772,47 @@ try {
     result.oldCounts.videoShowcase !== 0 ||
     result.oldCounts.reflection !== 0 ||
     result.oldCounts.iteration !== 0 ||
+    result.oldCounts.mediaFrame !== 0 ||
+    result.oldCounts.explainer !== 0 ||
+    result.oldCounts.textPrimitive !== 0 ||
+    result.oldCounts.topicGrid !== 0 ||
+    result.oldCounts.flowFrame !== 0 ||
+    result.oldCounts.prototype !== 0 ||
+    result.oldCounts.sectionHeader !== 0 ||
+    result.oldCounts.heroInfo !== 0 ||
+    result.oldCounts.table !== 0 ||
+    result.oldCounts.survey !== 0 ||
+    result.oldCounts.flowGeometry !== 0 ||
+    result.counts.infoRowDivided !== 1 ||
+    result.counts.dataTableFrame !== 1 ||
+    result.counts.matrixTable !== 1 ||
+    result.counts.matrixCorner !== 1 ||
+    result.counts.surveyFlow !== 1 ||
+    result.counts.surveyNode !== 2 ||
+    result.counts.surveyFlowMid !== 1 ||
+    result.counts.surveyArrow !== 1 ||
+    result.counts.surveyNote !== 1 ||
+    result.counts.surveyPanelStats !== 1 ||
+    result.counts.surveyPanelInsight !== 1 ||
+    result.counts.surveyBlockHead !== 2 ||
+    result.counts.surveyStatGrid !== 1 ||
+    result.counts.surveyStatCard !== 3 ||
+    result.counts.surveyChartGrid !== 1 ||
+    result.counts.surveyDonutCard !== 1 ||
+    result.counts.surveyBars !== 2 ||
+    result.counts.surveyDonut !== 1 ||
+    result.counts.surveyDonutSegment !== 4 ||
+    result.counts.surveyDonutLegend !== 1 ||
+    result.counts.surveyBarGroups !== 1 ||
+    result.counts.surveyBarFill !== 8 ||
+    result.counts.surveyInsightCol !== 2 ||
+    result.counts.surveyInsightLabel !== 2 ||
+    result.counts.surveyInsightSummary !== 1 ||
     result.counts.topicCard !== 13 ||
+    result.counts.topicGridOverview !== 1 ||
+    result.counts.topicGridProblem !== 1 ||
+    result.counts.topicGridStakeholder !== 1 ||
+    result.counts.topicGridUsecase !== 1 ||
     result.counts.topicCardKicker !== 7 ||
     result.counts.topicCardIllustrated !== 3 ||
     result.counts.topicCardArt !== 3 ||
@@ -427,6 +835,7 @@ try {
     result.counts.videoShowcaseMeta !== 3 ||
     result.counts.videoShowcaseVideo !== 3 ||
     result.counts.videoShowcaseCopy !== 3 ||
+    result.counts.reflectionGrid !== 1 ||
     result.counts.reflectionCard !== 3 ||
     result.counts.reflectionNum !== 3 ||
     result.counts.reflectionTitle !== 3 ||
@@ -443,7 +852,74 @@ try {
     result.counts.iterationPanelMedia !== 12 ||
     result.counts.iterationPanelImage !== 12 ||
     result.counts.iterationArrow !== 6 ||
+    result.counts.documentPreview !== 1 ||
+    result.counts.showcaseMedia !== 4 ||
+    result.counts.showcaseCaptionCenter !== 1 ||
+    result.counts.showcaseFramed !== 1 ||
+    result.counts.explainerLayout !== 1 ||
+    result.counts.explainerCopy !== 1 ||
+    result.counts.explainerPill !== 1 ||
+    result.counts.explainerTitle !== 1 ||
+    result.counts.sectionHeaderWide !== 8 ||
+    result.counts.sectionLeadWide !== 2 ||
+    result.counts.sectionLeadBottomGap !== 1 ||
+    result.counts.sectionLeadTopGap !== 1 ||
+    result.counts.subsectionTitleWide !== 1 ||
+    result.counts.subsectionTitleAccent !== 1 ||
+    result.counts.diagramFrameFlow !== 1 ||
+    result.counts.diagramGraphicFlow !== 1 ||
+    result.counts.diagramNodeLabel !== 3 ||
+    result.counts.diagramEdgeLabel !== 5 ||
+    result.counts.taskFlowGraphic !== 3 ||
+    result.counts.taskFlowOne !== 1 ||
+    result.counts.taskFlowTwo !== 1 ||
+    result.counts.taskFlowThree !== 1 ||
+    result.counts.taskFlowConnector !== 50 ||
+    result.counts.taskFlowNodeCopy !== 42 ||
+    result.counts.taskFlowEdgeLabel !== 9 ||
+    result.counts.flowFrameList !== 1 ||
+    result.counts.flowFrameBadge !== 3 ||
+    result.counts.flowFrameTitle !== 3 ||
+    result.counts.prototypeBlock !== 1 ||
+    result.counts.prototypeGroup !== 3 ||
+    result.counts.prototypeCard !== 3 ||
+    result.counts.prototypeCardHead !== 3 ||
+    result.counts.prototypeCardBody !== 3 ||
+    result.counts.prototypeTitle !== 3 ||
+    result.counts.prototypeSub !== 3 ||
+    result.counts.prototypeRule !== 2 ||
+    result.counts.prototypeConnector !== 12 ||
+    result.heroInfo?.paddingTop !== "8px" ||
+    result.heroInfo?.borderTopWidth !== "1px" ||
+    result.heroInfo?.borderTopStyle !== "solid" ||
+    result.dataTable?.frameMaxWidth !== "1920px" ||
+    result.dataTable?.frameOverflowX !== "auto" ||
+    result.dataTable?.tableMinWidth !== "952px" ||
+    result.dataTable?.tableBorderCollapse !== "separate" ||
+    !["51px", "53px"].includes(result.dataTable?.headHeight) ||
+    result.dataTable?.cellPadding !== "15px 16px" ||
+    result.dataTable?.cellBorderTop !== "1px solid" ||
+    result.survey?.flowDisplay !== "grid" ||
+    result.survey?.flowMaxWidth !== "1920px" ||
+    result.survey?.nodeDisplay !== "flex" ||
+    result.survey?.nodeMinHeight !== "137px" ||
+    result.survey?.nodeRadius !== "20px" ||
+    result.survey?.statsPadding !== (result.viewport.startsWith("390") ? "24px" : "32px") ||
+    result.survey?.statsRadius !== "20px" ||
+    result.survey?.statGridDisplay !== "grid" ||
+    result.survey?.chartGridDisplay !== "grid" ||
+    result.survey?.donutStrokeWidth !== "18px" ||
+    result.survey?.barGroupsDisplay !== "grid" ||
+    result.survey?.barFillDisplay !== "block" ||
+    result.survey?.insightPadding !== (result.viewport.startsWith("390") ? "24px" : "32px") ||
+    result.survey?.insightRadius !== "20px" ||
+    result.survey?.insightGridDisplay !== "grid" ||
+    !["inline-flex", "flex"].includes(result.survey?.insightLabelDisplay) ||
+    result.survey?.insightLabelRadius !== "999px" ||
     result.topicCard?.radius !== "16px" ||
+    result.usecaseGrid?.display !== "grid" ||
+    result.usecaseGrid?.marginTop !== "40px" ||
+    result.usecaseGrid?.cardMinHeight !== "284px" ||
     !["flex", "inline-flex"].includes(result.topicKicker?.display) ||
     result.topicKicker?.fontWeight !== "700" ||
     result.topicArt?.display !== "flex" ||
@@ -470,6 +946,11 @@ try {
     result.videoShowcase?.videoDisplay !== "block" ||
     result.videoShowcase?.videoObjectFit !== "cover" ||
     result.videoShowcase?.copyDisplay !== "flex" ||
+    result.reflection?.gridDisplay !== "grid" ||
+    result.reflection?.gridGap !== "24px" ||
+    result.reflection?.gridMaxWidth !== "1920px" ||
+    result.reflection?.gridMarginTop !== "24px" ||
+    result.reflection?.gridAlignItems !== "stretch" ||
     result.reflection?.cardAlignItems !== "flex-start" ||
     result.reflection?.cardRadius !== "16px" ||
     !["inline-flex", "flex"].includes(result.reflection?.numDisplay) ||
@@ -494,6 +975,74 @@ try {
     result.iteration?.mediaDisplay !== "flex" ||
     result.iteration?.imageDisplay !== "block" ||
     result.iteration?.arrowPosition !== "relative" ||
+    result.mediaFrame?.documentPadding !== (result.viewport.startsWith("390") ? "20px" : "28px") ||
+    result.mediaFrame?.documentRadius !== "18px" ||
+    result.mediaFrame?.documentBorder !== "solid" ||
+    result.mediaFrame?.documentCaptionAlign !== "center" ||
+    result.mediaFrame?.showcaseRadius !== "20px" ||
+    result.mediaFrame?.showcaseOverflow !== "hidden" ||
+    result.mediaFrame?.captionAlign !== "center" ||
+    result.mediaFrame?.captionWeight !== "700" ||
+    result.mediaFrame?.framedRadius !== "16px" ||
+    result.mediaFrame?.framedBorder !== "solid" ||
+    result.explainer?.layoutDisplay !== "grid" ||
+    result.explainer?.layoutAlign !== "start" ||
+    result.explainer?.copyMinWidth !== "0px" ||
+    !["inline-flex", "flex"].includes(result.explainer?.pillDisplay) ||
+    result.explainer?.pillRadius !== "999px" ||
+    result.explainer?.pillWeight !== "700" ||
+    result.explainer?.titleWeight !== "800" ||
+    result.explainer?.titleMarginBottom !== "40px" ||
+    result.sectionHeader?.maxWidth !== "1920px" ||
+    result.sectionHeader?.titleWeight !== "700" ||
+    result.sectionHeader?.titleMarginBottom !== "24px" ||
+    result.textPrimitive?.leadBottomMargin !== "40px" ||
+    result.textPrimitive?.prototypeLineHeight !== "27.2px" ||
+    result.textPrimitive?.subsectionWeight !== "800" ||
+    result.flowGeometry?.diagramFrameDisplay !== "block" ||
+    result.flowGeometry?.diagramFrameMaxWidth !== "1000px" ||
+    result.flowGeometry?.diagramFrameOverflowX !== "auto" ||
+    result.flowGeometry?.diagramGraphicDisplay !== "block" ||
+    result.flowGeometry?.diagramGraphicMinWidth !== (result.viewport.startsWith("390") ? "0px" : "560px") ||
+    result.flowGeometry?.diagramNodeSize !== "24px" ||
+    result.flowGeometry?.diagramNodeWeight !== "800" ||
+    result.flowGeometry?.diagramEdgeSize !== "20px" ||
+    result.flowGeometry?.diagramEdgeWeight !== "600" ||
+    result.flowGeometry?.taskOneWidth !== "1018px" ||
+    result.flowGeometry?.taskOneMinWidth !== "1018px" ||
+    result.flowGeometry?.taskTwoWidth !== "950px" ||
+    result.flowGeometry?.taskTwoMinWidth !== "950px" ||
+    result.flowGeometry?.taskThreeWidth !== "1900px" ||
+    result.flowGeometry?.taskThreeMinWidth !== "1900px" ||
+    result.flowGeometry?.taskConnectorStrokeWidth !== "2px" ||
+    result.flowGeometry?.taskNodeDisplay !== "flex" ||
+    result.flowGeometry?.taskNodeFontSize !== "23px" ||
+    result.flowGeometry?.taskNodeFontWeight !== "500" ||
+    result.flowGeometry?.taskEdgeDisplay !== "flex" ||
+    result.flowGeometry?.taskEdgeFontSize !== "17px" ||
+    result.flowFrame?.listDisplay !== "flex" ||
+    result.flowFrame?.listGap !== "40px" ||
+    result.flowFrame?.badgeWeight !== "700" ||
+    result.flowFrame?.titleWeight !== "800" ||
+    result.prototype?.blockDisplay !== "flex" ||
+    result.prototype?.blockGap !== "28px" ||
+    result.prototype?.blockMaxWidth !== "1920px" ||
+    result.prototype?.blockMarginTop !== "40px" ||
+    result.prototype?.groupDisplay !== "contents" ||
+    result.prototype?.cardWidth !== (result.viewport.startsWith("390") ? "301.219px" : "958px") ||
+    result.prototype?.cardOverflow !== "hidden" ||
+    result.prototype?.cardRadius !== "18px" ||
+    result.prototype?.cardBorder !== "solid" ||
+    result.prototype?.cardHeadPadding !== "24px 28px" ||
+    result.prototype?.cardBodyPadding !== "24px 28px 28px" ||
+    result.prototype?.titleWeight !== "800" ||
+    result.prototype?.subLineHeight !== "22.4px" ||
+    result.prototype?.ruleHeight !== "1px" ||
+    result.prototype?.ruleMarginBottom !== "40px" ||
+    result.prototype?.connectorDisplay !== (result.viewport.startsWith("390") ? "none" : "block") ||
+    (result.viewport.startsWith("390") ? false : result.prototype?.connectorMarginTop !== "-68px") ||
+    (result.viewport.startsWith("390") ? false : result.prototype?.connectorMarginBottom !== "-28px") ||
+    (result.viewport.startsWith("390") ? false : result.prototype?.connectorImgDisplay !== "block") ||
     result.consoleErrors !== 0
   ));
 

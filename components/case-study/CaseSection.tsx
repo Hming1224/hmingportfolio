@@ -5,6 +5,8 @@ import CaseHeading from './CaseHeading';
 interface CaseSectionProps {
   /** TOC 錨點 id，例如 'cs-sec-overview'。 */
   id: string;
+  /** section eyebrow / kicker，例如 'OVERVIEW'。 */
+  kicker?: string;
   /** section 標題（自動接 CaseHeading 的標題 + 分隔線）。 */
   title: string;
   /** true → 淺灰底（cs-section-surface）；false → 白底（cs-section）。 */
@@ -21,6 +23,7 @@ interface CaseSectionProps {
  */
 export default function CaseSection({
   id,
+  kicker,
   title,
   surface = false,
   className,
@@ -28,7 +31,7 @@ export default function CaseSection({
 }: CaseSectionProps) {
   return (
     <section id={id} className={cn(surface ? 'cs-section-surface' : 'cs-section', className)}>
-      <CaseHeading title={title} />
+      <CaseHeading kicker={kicker} title={title} />
       {children}
     </section>
   );

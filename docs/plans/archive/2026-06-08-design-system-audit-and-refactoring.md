@@ -1,7 +1,7 @@
 # 設計系統審查與重構計畫（hmingportfolio）
 
 > 建立日期：2026-06-08
-> 狀態：📋 待執行（規劃完成，待開新 session 執行）
+> 狀態：✅ 已完成 / 被取代（2026-06-30 歸檔）— 本輪審查與重構已被後續更完整的 2026-06-25 / 06-27 design-system remediation 取代並超越：DS 已拆成 `docs/design-system/` 編號文件包、token 化落地於 `styles/tokens.css`、AI 落地規則收進 `08-ai-implementation-rules.md`。
 > 規劃 session：2026-06-07 深夜 → 2026-06-08
 
 ---

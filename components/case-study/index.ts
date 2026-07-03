@@ -4,6 +4,8 @@ export { default as CaseInfoGrid } from './CaseInfoGrid';
 export { default as CaseGrid } from './CaseGrid';
 export { default as CaseCard } from './CaseCard';
 export { default as CaseBeforeAfter } from './CaseBeforeAfter';
+export { BeforeAfterPanel } from './BeforeAfterPanel';
+export { BeforeAfterNarrativeFrame } from './BeforeAfterNarrativeFrame';
 export { default as CaseFeatureRow } from './CaseFeatureRow';
 export { default as CaseFlowFrame } from './CaseFlowFrame';
 export { default as CaseMedia } from './CaseMedia';
@@ -16,6 +18,25 @@ export { default as ZoomableImage } from './ZoomableImage';
 export { default as FlowScrollHint } from './FlowScrollHint';
 export { default as FeatureConnectors } from './FeatureConnectors';
 export { setupFeatureConnectors } from './FeatureConnectors';
+export {
+  type BeforeAfterNarrativeFrameProps,
+  type BeforeAfterNarrativePoint,
+  type BeforeAfterNarrativeTone,
+} from './BeforeAfterNarrativeFrame';
+export {
+  type BeforeAfterPanelProps,
+  type BeforeAfterPanelTone,
+} from './BeforeAfterPanel';
+export { type CaseCardProps, type CaseCardVariant } from './CaseCard';
+export { type CaseGridProps, type CaseGridVariant } from './CaseGrid';
+export { type CaseHeadingProps, type CaseHeadingTone } from './CaseHeading';
 export { type CaseInfoItem } from './CaseInfoGrid';
+export { type CaseMediaProps, type CaseMediaVariant } from './CaseMedia';
 export { type CaseProposalTab } from './CaseProposalTabs';
+export { type CaseSectionHeaderProps, type CaseSectionHeaderTone } from './CaseSectionHeader';
 export { type TocSection } from '../CaseTOC';
+export {
+  type ZoomableImageLabels,
+  type ZoomableImageLightboxMode,
+  type ZoomableImageProps,
+} from './ZoomableImage';

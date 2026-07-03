@@ -48,7 +48,7 @@ function FlowNode({
         width={visualSize * 0.8}
         height={visualSize * 0.8}
       >
-        <div className="laushu-task-node-copy">{children}</div>
+        <div className="cs-task-flow-node-copy">{children}</div>
       </foreignObject>
     </g>
   );
@@ -73,7 +73,7 @@ function Connector({
 }) {
   return (
     <g>
-      <path d={d} className="laushu-task-connector" markerEnd={`url(#${marker})`} />
+      <path d={d} className="cs-task-flow-connector" markerEnd={`url(#${marker})`} />
       {label ? (
         <foreignObject
           x={(labelX ?? 0) - labelWidth / 2}
@@ -81,7 +81,7 @@ function Connector({
           width={labelWidth}
           height={labelHeight}
         >
-          <div className="laushu-task-edge-label">{label}</div>
+          <div className="cs-task-flow-edge-label">{label}</div>
         </foreignObject>
       ) : null}
     </g>
@@ -91,7 +91,7 @@ function Connector({
 export function TaskFlowOneDiagram() {
   const marker = "task-flow-1-arrow";
   return (
-    <svg viewBox="0 0 2140 1360" className="laushu-task-flow-svg laushu-task-flow-svg--one" role="img" aria-label="建立外包人員資料庫任務流程圖">
+    <svg viewBox="0 0 2140 1360" className="cs-task-flow-graphic cs-task-flow-graphic--one" role="img" aria-label="建立外包人員資料庫任務流程圖">
       <FlowDefs id={marker} />
 
       {/* 外包人員資料頁 → 三個主要任務 */}
@@ -150,7 +150,7 @@ export function TaskFlowOneDiagram() {
 export function TaskFlowTwoDiagram() {
   const marker = "task-flow-2-arrow";
   return (
-    <svg viewBox="0 0 1995 1132" className="laushu-task-flow-svg laushu-task-flow-svg--two" role="img" aria-label="建立勞務報酬單任務流程圖">
+    <svg viewBox="0 0 1995 1132" className="cs-task-flow-graphic cs-task-flow-graphic--two" role="img" aria-label="建立勞務報酬單任務流程圖">
       <FlowDefs id={marker} />
       <g transform="translate(0 93)">
 
@@ -209,7 +209,7 @@ export function TaskFlowThreeDiagram() {
   const marker = "task-flow-3-arrow";
   const size = 257;
   return (
-    <svg viewBox="0 0 3994 617" className="laushu-task-flow-svg laushu-task-flow-svg--three" role="img" aria-label="合併多張勞務報酬單任務流程圖">
+    <svg viewBox="0 0 3994 617" className="cs-task-flow-graphic cs-task-flow-graphic--three" role="img" aria-label="合併多張勞務報酬單任務流程圖">
       <FlowDefs id={marker} />
 
       {/* 第一段依 Figma 為反向：建立勞報單頁 → 建立外包人員資訊 */}
