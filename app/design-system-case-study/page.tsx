@@ -52,20 +52,58 @@ const tocSections: TocSection[] = [
   { id: "cs-sec-reflection", title: "Reflection" },
 ];
 
+function IconRepeat() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17 2.5 21 6.5l-4 4" />
+      <path d="M3 11V9a3 3 0 0 1 3-3h15" />
+      <path d="M7 21.5 3 17.5l4-4" />
+      <path d="M21 13v2a3 3 0 0 1-3 3H3" />
+    </svg>
+  );
+}
+
+function IconAgents() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="5.5" cy="6" r="2.5" />
+      <circle cx="18.5" cy="6" r="2.5" />
+      <circle cx="12" cy="18" r="2.5" />
+      <path d="M7.6 7.6 10.2 16" />
+      <path d="M16.4 7.6 13.8 16" />
+      <path d="M8 6h8" />
+    </svg>
+  );
+}
+
+function IconBadgeCheck() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 2.5l2.4 1.8 3-.3 1.1 2.8 2.8 1.1-.3 3 1.8 2.4-1.8 2.4.3 3-2.8 1.1-1.1 2.8-3-.3-2.4 1.8-2.4-1.8-3 .3-1.1-2.8-2.8-1.1.3-3L1.2 13.3 3 10.9l-.3-3 2.8-1.1 1.1-2.8 3 .3z" />
+      <path d="M8.5 12.5l2.4 2.4 4.6-5" />
+    </svg>
+  );
+}
+
 const whyCards = [
   {
+    icon: <IconRepeat />,
     title: "頁面迭代太頻繁",
     body: "同一種「前後對比」版型，三個案例頁各寫了三套 code；顏色、間距很多直接寫死。改一個地方，另外兩頁不會跟著動。",
   },
   {
+    icon: <IconAgents />,
     title: "多個 AI agent 同時協作",
     body: "我用 Claude、Codex 等多個 AI 幫忙寫 code。沒有共同規範時，每個 AI 都有自己的寫法，越幫越亂。",
   },
   {
+    icon: <IconBadgeCheck />,
     title: "想用業界的工作方式驗證自己",
     body: "與其在履歷上寫「了解 design system」，不如真的建一套、真的維護它，把過程攤開給大家看。",
   },
 ];
+
+const benchmarkChips = ["對標 Ant Design", "對標 Material Design", "Figma Make 互動雛形"];
 
 const turningPoints = [
   {
@@ -125,15 +163,15 @@ const frameworkRows = [
 
 const evolutionSteps = [
   {
-    title: "第一階段：各自實作",
+    title: "各自實作",
     body: "三頁各寫各的，視覺相近但 code 完全獨立。樣式還沒穩定前抽共用，只會抽出一個誰都不滿意的元件。",
   },
   {
-    title: "第二階段：先 audit，再抽出敘事外框",
+    title: "先 audit，再抽出敘事外框",
     body: "盤點後確認，三頁重複的是「版面配置與 RWD 行為」，不是內容物。所以抽成 slot-based 的 BeforeAfterNarrativeFrame。",
   },
   {
-    title: "第三階段：再拆出視覺外殼",
+    title: "再拆出視覺外殼",
     body: "把「有標籤的面板」再拆成 BeforeAfterPanel，並做 compatibility bridge，保留舊 CSS class 掛鉤，讓已上線頁面零視覺變動遷移。",
   },
 ];
@@ -327,7 +365,10 @@ export default function DesignSystemCaseStudyPage() {
         </p>
         <CaseGrid variant="three" className="ds-case-card-grid">
           {whyCards.map((card) => (
-            <CaseCard key={card.title}>
+            <CaseCard className="ds-case-icon-card" key={card.title}>
+              <span className="ds-case-icon" aria-hidden="true">
+                {card.icon}
+              </span>
               <h3>{card.title}</h3>
               <p>{card.body}</p>
             </CaseCard>
@@ -347,6 +388,13 @@ export default function DesignSystemCaseStudyPage() {
         <p className="cs-section-lead">
           不從零發明，先看業界最好的系統長什麼樣。
         </p>
+        <div className="ds-case-benchmarks" aria-hidden="true">
+          {benchmarkChips.map((chip) => (
+            <span className="ds-case-benchmark-chip" key={chip}>
+              {chip}
+            </span>
+          ))}
+        </div>
         <CaseCard className="ds-case-narrative-card">
           <p>
             我拿 <b>Ant Design</b> 和 <b>Google Material Design</b> 當基準，逐項對照自己的網站做 <b>gap analysis</b>：顏色有沒有分層？間距、圓角、字級有沒有規則？元件狀態（hover / focus / disabled）齊不齊？盤點下來列出了十幾個缺口。
@@ -423,7 +471,9 @@ export default function DesignSystemCaseStudyPage() {
                 <tr key={signal}>
                   <th scope="row">{signal}</th>
                   <td>{action}</td>
-                  <td>{term}</td>
+                  <td>
+                    <span className="ds-case-term-pill">{term}</span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -438,9 +488,12 @@ export default function DesignSystemCaseStudyPage() {
         <p className="cs-section-lead">
           同一個版型寫了三次之後，才動手抽象——而且分三步走，不是一次到位。
         </p>
-        <CaseGrid variant="three" className="ds-case-card-grid">
-          {evolutionSteps.map((step) => (
-            <CaseCard key={step.title}>
+        <CaseGrid variant="three" className="ds-case-card-grid ds-case-stage-grid">
+          {evolutionSteps.map((step, index) => (
+            <CaseCard className="ds-case-stage-card" key={step.title}>
+              <span className="ds-case-stage-chip" aria-hidden="true">
+                STEP {String(index + 1).padStart(2, "0")}
+              </span>
               <h3>{step.title}</h3>
               <p>{step.body}</p>
             </CaseCard>

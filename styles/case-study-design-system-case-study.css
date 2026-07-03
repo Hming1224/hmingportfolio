@@ -348,6 +348,115 @@
   background: var(--cs-accent);
 }
 
+/* ── Why：圖標卡片 ── */
+
+.ds-case-icon-card {
+  align-content: start;
+}
+
+.ds-case-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 4px;
+  border-radius: 14px;
+  background: var(--cs-accent-soft);
+  color: var(--cs-accent-strong);
+}
+
+.ds-case-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Starting Point：對標籤 ── */
+
+.ds-case-benchmarks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.ds-case-benchmark-chip {
+  display: inline-block;
+  padding: 7px 14px;
+  border: 1px solid var(--cs-line-strong);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+/* ── Turning Points：時間軸連接線 ── */
+
+.ds-case-timeline {
+  position: relative;
+}
+
+.ds-case-timeline::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  left: 52px;
+  width: 2px;
+  background: var(--cs-line-strong);
+}
+
+.ds-case-timeline__item {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Framework：術語 pill ── */
+
+.ds-case-term-pill {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--cs-accent-soft);
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ── Evolution A：階段卡與箭頭 ── */
+
+.ds-case-stage-card {
+  position: relative;
+  align-content: start;
+}
+
+.ds-case-stage-chip {
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 4px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--cs-accent);
+  color: #ffffff;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.ds-case-stage-card:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -19px;
+  z-index: 2;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--cs-line-strong);
+  border-right: 2px solid var(--cs-line-strong);
+  transform: translateY(-50%) rotate(45deg);
+}
+
 /* ── Evolution B：煞車卡片 ── */
 
 .ds-case-brake-card {
@@ -527,6 +636,13 @@
   background: var(--cs-accent);
 }
 
+@media (max-width: 1023px) {
+  /* 兩欄排版時換行箭頭會亂指，先隱藏；≤768 單欄時再改為向下箭頭 */
+  .ds-case-stage-card:not(:last-child)::after {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   .ds-case-workflow {
     padding: 24px;
@@ -571,6 +687,19 @@
 
   .ds-case-timeline__item {
     grid-template-columns: 1fr;
+  }
+
+  .ds-case-timeline::before {
+    display: none;
+  }
+
+  .ds-case-stage-card:not(:last-child)::after {
+    display: block;
+    top: auto;
+    right: auto;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
   }
 
   .ds-case-timeline__item h3,
