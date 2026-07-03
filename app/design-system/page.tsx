@@ -137,13 +137,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DesignSystemPage() {
   const locale = (await getLocale()) as Locale;
   const copy = getMessages(locale);
-const tokenGroupRows = foundationGroups[locale];
-return (
-    <main style={{ background: "var(--hm-paper)", color: "var(--text-body)", overflowX: "clip" }}>
+  const tokenGroupRows = foundationGroups[locale];
+
+  return (
+    <main style={{ background: "var(--hm-paper)", color: "var(--text-body)" }}>
       <Navbar />
 
       <section style={{ padding: "148px 0 56px", background: "radial-gradient(circle at top right, color-mix(in srgb, var(--hm-purple-soft) 80%, white) 0%, transparent 34%), linear-gradient(180deg, color-mix(in srgb, var(--hm-surface) 65%, white) 0%, transparent 100%)" }} aria-labelledby="ds-title">
-        <div style={{ width: "min(var(--hm-container), calc(100% - 96px))", margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(0, 1.35fr) minmax(320px, 0.95fr)", gap: "var(--hm-space-lg)", alignItems: "end" }}>
+        <div style={{ width: "min(var(--hm-container), calc(100% - 96px))", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))", gap: "var(--hm-space-lg)", alignItems: "end" }}>
           <div >
             <p style={{ margin: "0 0 var(--hm-space-xs)", fontSize: "var(--hm-fs-sm)", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--hm-purple)" }}>{copy.hero.eyebrow}</p>
             <h1 id="ds-title" style={{ margin: 0, fontSize: "clamp(36px, 5vw, 52px)", lineHeight: 1.18, letterSpacing: "-0.01em", color: "var(--text-heading)" }}>{copy.hero.title}</h1>
@@ -157,7 +158,7 @@ return (
               </Button>
             </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "var(--hm-space-sm)" }} aria-label={copy.hero.statsAriaLabel}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(150px, 100%), 1fr))", gap: "var(--hm-space-sm)" }} aria-label={copy.hero.statsAriaLabel}>
             {copy.hero.stats.map((stat) => (
               <article key={stat.label} style={{ border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)", padding: "var(--hm-space-md)" }}>
                 <strong style={{ display: "block", fontSize: "clamp(28px, 4vw, 40px)", lineHeight: 1, color: "var(--text-heading)" }}>{stat.value}</strong>
@@ -241,7 +242,7 @@ return (
                         <tbody>
                           {group.rows.map(row => (
                             <tr key={row[0]}>
-                              {row.map(cell => <td key={cell}>{cell}</td>)}
+                              {row.map((cell, cellIndex) => <td key={`${row[0]}-${cellIndex}`}>{cell}</td>)}
                             </tr>
                           ))}
                         </tbody>

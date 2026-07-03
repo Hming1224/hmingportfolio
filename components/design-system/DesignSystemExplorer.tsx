@@ -1,9 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "@/components/ui/Accordion";
-import type { DesignSystemDoc, DesignSystemLocale } from "@/lib/design-system-docs";
+import type { DesignSystemDoc, DesignSystemDocKind, DesignSystemLocale } from "@/lib/design-system-docs";
 import DesignSystemDocsPage from "./DesignSystemDocsPage";
+import styles from "./DesignSystemExplorer.module.css";
+
+type DesignSystemSection = {
+  label: string;
+  labelZh?: string;
+  items: Array<{ kind: DesignSystemDocKind; slug: string }>;
+};
+
+function localized(locale: DesignSystemLocale, english: string, chinese?: string) {
+  return locale === "zh-TW" && chinese ? chinese : english;
+}
 
 export default function DesignSystemExplorer({
   locale,
@@ -14,94 +25,83 @@ export default function DesignSystemExplorer({
   bottomContent,
 }: {
   locale: DesignSystemLocale;
-  sections: Array<{ label: string; labelZh?: string; items: Array<{ kind: string; slug: string }> }>;
+  sections: DesignSystemSection[];
   docs: DesignSystemDoc[];
   toc: { title: string; items: Array<{ href: string; label: string }> };
-  topContent?: React.ReactNode;
-  bottomContent?: React.ReactNode;
+  topContent?: ReactNode;
+  bottomContent?: ReactNode;
 }) {
-  const [activeSlug, setActiveSlug] = useState<string>(docs[0]?.slug ?? "");
-
-  const activeDoc = docs.find((d) => d.slug === activeSlug);
+  const firstDoc = sections
+    .flatMap((section) => section.items)
+    .map((item) => docs.find((doc) => doc.slug === item.slug && doc.kind === item.kind))
+    .find(Boolean);
+  const [activeSlug, setActiveSlug] = useState<string>(firstDoc?.slug ?? docs[0]?.slug ?? "");
+  const activeDoc = docs.find((doc) => doc.slug === activeSlug);
+  const ctaItem = toc.items.find((item) => item.href === "#cta") ?? toc.items[toc.items.length - 1];
+  const gettingStartedItem = toc.items[0];
+  const foundationsItem = toc.items.find((item) => item.href === "#foundations") ?? toc.items[1];
 
   return (
-    <div style={{ width: "min(var(--hm-container), calc(100% - 96px))", margin: "0 auto", display: "grid", gridTemplateColumns: "260px minmax(0, 1fr)", gap: "var(--hm-space-xl)", marginTop: "var(--hm-space-2xl)", alignItems: "flex-start" }}>
-      <aside style={{ position: "sticky", top: "80px", maxHeight: "calc(100vh - 100px)", overflowY: "auto" }}>
-        
-        <nav style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-          
-          {/* Top-level page links acting as nav roots */}
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <a 
-              href={toc.items[0].href} 
-              className="hm-accordion-trigger" 
-              style={{ textDecoration: "none", cursor: "pointer", display: "flex", alignItems: "center" }}
-            >
-              {toc.items[0].label}
+    <div className={styles.shell}>
+      <aside className={styles.sidebar}>
+        <nav aria-label={toc.title} className={styles.nav}>
+          {gettingStartedItem ? (
+            <a className={styles.rootLink} href={gettingStartedItem.href}>
+              {gettingStartedItem.label}
             </a>
-            <a 
-              href={toc.items[1].href} 
-              className="hm-accordion-trigger" 
-              style={{ textDecoration: "none", cursor: "pointer", display: "flex", alignItems: "center" }}
-            >
-              {toc.items[1].label}
+          ) : null}
+          {foundationsItem ? (
+            <a className={styles.rootLink} href={foundationsItem.href}>
+              {foundationsItem.label}
             </a>
-          </div>
+          ) : null}
 
-          <Accordion type="single" defaultValue={sections[0]?.label}>
-          {sections.map((section) => (
-            <AccordionItem key={section.label} value={section.label}>
-              <AccordionHeader>
-                {locale === "zh-TW" && section.labelZh ? section.labelZh : section.label}
-              </AccordionHeader>
+          <Accordion className={styles.rootAccordion} defaultValue="component-explorer" type="single">
+            <AccordionItem value="component-explorer">
+              <AccordionHeader>{localized(locale, "Component Explorer", "元件總覽")}</AccordionHeader>
               <AccordionPanel>
-                <nav style={{ display: "flex", flexDirection: "column", gap: "4px", padding: "8px 0" }}>
-                  {section.items.map((item) => {
-                    const doc = docs.find((d) => d.slug === item.slug && d.kind === item.kind);
-                    if (!doc) return null;
-                    const isActive = activeSlug === doc.slug;
-                    return (
-                      <a
-                        key={doc.slug}
-                        href="#components"
-                        onClick={() => setActiveSlug(doc.slug)}
-                        className={`ds-docs-nav-link ${isActive ? "is-active" : ""}`}
-                        style={{
-                          display: "block",
-                          textAlign: "left",
-                          textDecoration: "none",
-                          padding: "6px 12px",
-                          borderRadius: "4px",
-                          fontSize: "var(--hm-fs-sm)",
-                          color: isActive ? "var(--hm-purple)" : "var(--hm-ink)",
-                          fontWeight: isActive ? 600 : 400,
-                        }}
-                      >
-                        {locale === "zh-TW" && doc.titleZh ? doc.titleZh : doc.title}
-                      </a>
-                    );
-                  })}
-                </nav>
+                <Accordion className={styles.categoryAccordion} defaultValue={sections[0]?.label} type="single">
+                  {sections.map((section) => (
+                    <AccordionItem key={section.label} value={section.label}>
+                      <AccordionHeader>{localized(locale, section.label, section.labelZh)}</AccordionHeader>
+                      <AccordionPanel>
+                        <div className={styles.componentList}>
+                          {section.items.map((item) => {
+                            const doc = docs.find((candidate) => candidate.slug === item.slug && candidate.kind === item.kind);
+                            if (!doc) return null;
+                            const isActive = activeSlug === doc.slug;
+                            return (
+                              <a
+                                aria-current={isActive ? "page" : undefined}
+                                className={`${styles.componentLink}${isActive ? ` ${styles.active}` : ""}`}
+                                href="#components"
+                                key={`${doc.kind}-${doc.slug}`}
+                                onClick={() => setActiveSlug(doc.slug)}
+                              >
+                                {localized(locale, doc.title, doc.titleZh)}
+                              </a>
+                            );
+                          })}
+                        </div>
+                      </AccordionPanel>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </AccordionPanel>
             </AccordionItem>
-          ))}
-        </Accordion>
+          </Accordion>
 
-          <div style={{ display: "flex", flexDirection: "column", marginTop: "var(--hm-space-xs)" }}>
-            <a 
-              href={toc.items[3].href} 
-              className="hm-accordion-trigger" 
-              style={{ textDecoration: "none", cursor: "pointer", display: "flex", alignItems: "center" }}
-            >
-              {toc.items[3].label}
+          {ctaItem ? (
+            <a className={styles.rootLink} href={ctaItem.href}>
+              {ctaItem.label}
             </a>
-          </div>
+          ) : null}
         </nav>
       </aside>
 
-      <div style={{ flex: 1, minWidth: 0, display: "grid", gap: "var(--hm-space-xl)" }}>
+      <div className={styles.content}>
         {topContent}
-        <div id="components" style={{ scrollMarginTop: "100px", marginTop: "var(--hm-space-2xl)", paddingTop: "var(--hm-space-2xl)", borderTop: "1px solid var(--hm-line)" }}>
+        <div className={styles.activeDoc} id="components">
           {activeDoc ? <DesignSystemDocsPage doc={activeDoc} locale={locale} /> : null}
         </div>
         {bottomContent}

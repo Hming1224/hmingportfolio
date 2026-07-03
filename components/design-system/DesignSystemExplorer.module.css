@@ -1,0 +1,108 @@
+.shell {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: flex-start;
+  gap: var(--hm-space-xl);
+  width: min(var(--hm-container), calc(100% - 96px));
+  margin: var(--hm-space-2xl) auto 0;
+}
+
+.sidebar {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.nav,
+.componentList {
+  display: grid;
+  gap: var(--hm-space-2xs);
+}
+
+.rootAccordion,
+.categoryAccordion {
+  gap: 0;
+}
+
+.categoryAccordion {
+  padding-left: var(--hm-space-sm);
+  border-left: 1px solid var(--hm-line-strong);
+}
+
+.rootLink,
+.componentLink {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  border-radius: var(--hm-radius-sm);
+  text-decoration: none;
+}
+
+.rootLink {
+  padding: var(--hm-space-2xs) 0;
+  color: var(--hm-muted);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.componentLink {
+  padding: 6px var(--hm-space-xs);
+  color: var(--hm-ink);
+  font-size: var(--hm-fs-sm);
+}
+
+.rootLink:hover,
+.componentLink:hover,
+.componentLink.active {
+  background: var(--hm-purple-light);
+  color: var(--hm-purple);
+}
+
+.componentLink.active {
+  font-weight: var(--hm-fw-semibold);
+}
+
+.content {
+  display: grid;
+  min-width: 0;
+  gap: var(--hm-space-xl);
+}
+
+.activeDoc {
+  margin-top: var(--hm-space-2xl);
+  padding-top: var(--hm-space-2xl);
+  border-top: 1px solid var(--hm-line);
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100% - 40px, 760px);
+    gap: var(--hm-space-lg);
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding: var(--hm-space-sm);
+    border: 1px solid var(--hm-line);
+    border-radius: var(--hm-radius-lg);
+    background: color-mix(in srgb, var(--hm-paper) 96%, white);
+  }
+
+  .categoryAccordion {
+    padding-left: var(--hm-space-xs);
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100% - 32px, 480px);
+    margin-top: var(--hm-space-xl);
+  }
+}
