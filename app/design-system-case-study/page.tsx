@@ -147,15 +147,17 @@ function Hero() {
   }));
 
   return (
-    <section className="ds-case-hero">
-      <div className="ds-case-hero__visual">
-        <Image
-          src={`${ASSET}/cover/cover.webp`}
-          alt="Design System Case Study cover showing tokens, component cards, and governance workflow."
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 48vw"
-        />
+    <section>
+      <div className="cs-hero-cover ds-case-hero__visual">
+        <div className="cs-hero-cover-img">
+          <Image
+            src={`${ASSET}/cover/cover.webp`}
+            alt="Design System Case Study cover showing tokens, component cards, and governance workflow."
+            fill
+            priority
+            sizes="100vw"
+          />
+        </div>
       </div>
 
       <div className="cs-hero-info ds-case-hero__info">

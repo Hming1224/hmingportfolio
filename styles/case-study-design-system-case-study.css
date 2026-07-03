@@ -27,33 +27,12 @@
   background: var(--cs-line-strong);
 }
 
-.ds-case-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  min-height: min(860px, 100svh);
-  padding-top: 80px;
-  background:
-    linear-gradient(135deg, rgba(240, 241, 255, 0.96), rgba(255, 255, 255, 0.98) 58%),
-    #ffffff;
-}
-
-.ds-case-hero__visual {
-  position: relative;
-  min-height: 520px;
-  overflow: hidden;
-}
-
 .ds-case-hero__visual img {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
   object-fit: cover;
-  object-position: 32% center;
+  object-position: center top;
 }
 
 .ds-case-hero__info {
-  align-self: center;
   background: transparent;
 }
 
@@ -253,30 +232,7 @@
   background: var(--cs-accent);
 }
 
-@media (max-width: 1024px) {
-  .ds-case-hero {
-    grid-template-columns: 1fr;
-    min-height: 0;
-  }
-
-  .ds-case-hero__visual {
-    min-height: 360px;
-  }
-
-  .ds-case-hero__visual img {
-    object-position: center;
-  }
-
-  .ds-case-hero__info {
-    padding-top: 56px;
-  }
-}
-
 @media (max-width: 768px) {
-  .ds-case-hero__visual {
-    min-height: 280px;
-  }
-
   .ds-case-hero__subtitle {
     line-height: 1.7;
   }
