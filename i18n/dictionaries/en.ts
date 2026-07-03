@@ -63,12 +63,23 @@ const messages = {
         "Repeated value → token · repeated shell → slot composition · unclear purpose → component contract · repeated structure and behavior → componentize · story-specific work → local component",
       primaryAction: "See Getting Started",
       secondaryAction: "See Token Reference",
-      statsAriaLabel: "Design system summary stats",
-      stats: [
-        { value: "6", label: "portfolio routes documented" },
-        { value: "40+", label: "component contracts indexed" },
-        { value: "10", label: "docs 00-09 aligned" },
-        { value: "0", label: "runtime token values changed here" },
+      highlightsAriaLabel: "System highlights",
+      highlights: [
+        {
+          title: "Token discipline",
+          lead: "Runtime token values stay untouched.",
+          body: "This page documents the live token source instead of creating page-only design values.",
+        },
+        {
+          title: "Contract-first components",
+          lead: "Each shared component is documented by responsibility, props, and usage boundaries.",
+          body: "The goal is to prevent visual reuse from becoming unclear product behavior.",
+        },
+        {
+          title: "Intentional local exceptions",
+          lead: "Project-specific patterns are marked instead of forced into shared components.",
+          body: "Some UI should stay local when it carries a specific story, flow, or case-study logic.",
+        },
       ],
     },
     toc: {

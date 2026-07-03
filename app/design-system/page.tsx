@@ -63,19 +63,20 @@ export default async function DesignSystemPage() {
                 {copy.hero.secondaryAction}
               </Button>
             </div>
-            <div className={styles.heroDecisionFrame}>
-              <p className={styles.heroDecisionLabel}>{copy.hero.frameworkLabel}</p>
-              <p className={styles.heroDecisionSummary}>{copy.hero.framework}</p>
-            </div>
           </div>
-          <div className={styles.statsGrid} aria-label={copy.hero.statsAriaLabel}>
-            {copy.hero.stats.map((stat) => (
-              <article className={styles.statCard} key={stat.label}>
-                <strong className={styles.statValue}>{stat.value}</strong>
-                <span className={styles.statLabel}>{stat.label}</span>
+          <div className={styles.highlightsGrid} aria-label={copy.hero.highlightsAriaLabel}>
+            {copy.hero.highlights.map((highlight) => (
+              <article className={styles.highlightCard} key={highlight.title}>
+                <h2 className={styles.highlightTitle}>{highlight.title}</h2>
+                <p className={styles.highlightLead}>{highlight.lead}</p>
+                <p className={styles.highlightBody}>{highlight.body}</p>
               </article>
             ))}
           </div>
+        </div>
+        <div className={styles.heroDecisionFrame}>
+          <p className={styles.heroDecisionLabel}>{copy.hero.frameworkLabel}</p>
+          <p className={styles.heroDecisionSummary}>{copy.hero.framework}</p>
         </div>
       </section>
 

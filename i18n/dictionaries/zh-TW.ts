@@ -63,12 +63,23 @@ const messages = {
         "值重複 → token · 外框重複 → slot composition · 用途易混淆 → component contract · 結構與行為都重複 → componentize · 承載特定故事 → local component",
       primaryAction: "看 Getting Started",
       secondaryAction: "看 Token Reference",
-      statsAriaLabel: "設計系統概覽數據",
-      stats: [
-        { value: "6", label: "已文件化作品集路由" },
-        { value: "40+", label: "已索引元件契約" },
-        { value: "10", label: "docs 00-09 已對齊" },
-        { value: "0", label: "本頁改動 runtime token 值" },
+      highlightsAriaLabel: "系統亮點",
+      highlights: [
+        {
+          title: "Token discipline",
+          lead: "不為文件站新增 runtime token 值。",
+          body: "這頁只文件化正式站正在使用的 token，不為了頁面視覺另外建立一套樣式值。",
+        },
+        {
+          title: "Contract-first components",
+          lead: "每個 shared component 都用 responsibility、props、usage boundary 來文件化。",
+          body: "重點不是把畫面抽共用，而是避免共用元件變成用途不清的視覺拼裝。",
+        },
+        {
+          title: "Intentional local exceptions",
+          lead: "專案特定 pattern 會被標註，而不是硬抽成 shared component。",
+          body: "當 UI 承載特定故事、流程或案例邏輯時，它應該保留在 local scope。",
+        },
       ],
     },
     toc: {
