@@ -7,6 +7,7 @@ import {
   CaseGrid,
   CaseInfoGrid,
   CaseMedia,
+  CaseMetricGrid,
   CaseSection,
   CaseStudyShell,
   type TocSection,
@@ -45,6 +46,7 @@ const tocSections: TocSection[] = [
   { id: "cs-sec-framework", title: "決策框架" },
   { id: "cs-sec-evolution-a", title: "演化實例 A" },
   { id: "cs-sec-evolution-b", title: "演化實例 B" },
+  { id: "cs-sec-evolution-c", title: "演化實例 C" },
   { id: "cs-sec-governance", title: "Governance 與 AI 協作" },
   { id: "cs-sec-outcome", title: "Outcome" },
   { id: "cs-sec-reflection", title: "Reflection" },
@@ -136,27 +138,119 @@ const evolutionSteps = [
   },
 ];
 
-const stopRules = [
-  "Advantech 的兩塊多重對比版面，刻意保留在頁面本地。",
-  "各案例頁的反思卡片，評估後決定不抽共用。",
-  "通用 Tag 元件、資料表格外框等 pattern，先等第三個案例出現、結構穩定後再重啟評估。",
+const brakeCases = [
+  {
+    verdict: "KEEP LOCAL",
+    title: "各案例頁的反思卡片",
+    temptation: "三個案例頁都有反思卡片，結構相似，看起來是現成的共用候選。",
+    judgment:
+      "Laushu 的漸層底色和數字圓標不是裝飾，是那一頁的敘事識別；硬統一等於把三頁的個性磨掉。",
+    decision: "共用層停在底層的卡片外殼、Grid 和 tokens，版型各自保留。",
+  },
+  {
+    verdict: "KEEP LOCAL",
+    title: "Advantech 的多重對比版面",
+    temptation: "已經有共用的 Before / After 外框了，把這兩塊也塞進去，就「全站統一」了。",
+    judgment:
+      "共用外框的契約是「一個外框、一組對比」；這兩塊是多組對比同框，語意不符。硬塞進去，元件會為了遷就例外長出一堆開關。",
+    decision: "刻意保留在頁面本地；等真的出現第二個多重對比場景，再設計新的契約。",
+  },
+  {
+    verdict: "DEFERRED",
+    title: "通用 Tag、表格外框、影片燈箱",
+    temptation: "「以後一定用得到」，先做起來放著。",
+    judgment:
+      "都還沒有第三個使用場景。需求出現之前抽的元件是用猜的，而猜錯的抽象比重複的 code 更貴。",
+    decision: "行為先寫進文件、元件緩建；等 rule of three 條件成立再重啟評估。",
+  },
 ];
 
-const outcomes = [
-  "Design tokens：顏色、間距、圓角、字級全部變數化，案例頁換主題色只要新增一組 tone。",
-  "共用元件庫：案例頁由共用的 Section、Card、Grid、Media、Before / After 外框組成。",
-  "10 份規格文件：從 tokens 到 AI 實作規則，讓「code 是唯一真相、文件是穩定契約」。",
-  "自動化防漂移：check:tokens、連結完整性與架構稽核腳本協助先抓錯。",
-  "可複用的 AI 協作工作流：audit → implementation → validation → smoke → commit。",
-  "這一頁本身就是證據：用這套系統的共用元件組出來，沒有新增或修改任何共用元件。",
+const semanticRows = [
+  ["Button", "在當下情境執行操作（command action）", "送出表單、複製 email、打開 lightbox"],
+  ["Link", "帶使用者前往目的地（navigation action）", "去案例頁、回首頁、開外部 prototype"],
+  ["LinkButton", "語意是 Link、視覺長得像 Button", "View case study、Next project"],
+  ["CTA", "不是元件，是這一顆在畫面上的「角色」（usage role）", "Hero 主按鈕、卡片的 Learn More"],
+];
+
+const decisionLog = [
+  "專案標籤圓角固定 4px——不再每頁各自發揮。",
+  "一個畫面原則上只放一顆 primary CTA——是 guideline 不是硬規則，但偏離要有理由。",
+  "Dark mode：token 先備好、公開切換先不開——場景不足前，不增加維護面。",
+  "StatusBadge 這類「還沒有真實使用場景」的元件，一律緩建。",
+  "未上線的案子用 disabled 底色呈現，不做假連結騙點擊。",
+];
+
+const outcomeMetrics = [
+  {
+    value: "300+",
+    label: "design tokens",
+    body: "顏色、間距、圓角、字級、動畫全部變數化，集中在單一 tokens.css。",
+  },
+  {
+    value: "19",
+    label: "共用 case-study 元件",
+    body: "Section、Card、Grid、Media、Before / After 外框，組出全站的案例頁。",
+  },
+  {
+    value: "10",
+    label: "規格文件",
+    body: "從 tokens、元件契約到 AI 實作規則——code 是唯一真相，文件是穩定契約。",
+  },
+  {
+    value: "19 → 5",
+    label: "圓角收斂",
+    body: "盤點時全站實際用了 19 種硬寫的圓角值，收斂成 5 階 token。",
+  },
+  {
+    value: "17 → 0",
+    label: "動畫硬寫歸零",
+    body: "17 處硬寫的 duration / easing 全數 token 化。",
+  },
+  {
+    value: "3",
+    label: "頁面零視覺變動遷移",
+    body: "三個已上線案例頁在抽象過程中完成遷移，畫面一個像素都沒變。",
+  },
+];
+
+const guardrails = [
+  {
+    name: "check:tokens",
+    body: "掃出寫死的顏色值，防止 token 化的成果隨著日常修改慢慢流失。",
+  },
+  {
+    name: "check-links",
+    body: "比對 code 裡引用的每張圖是否真的存在，防止死連結上線。",
+  },
+  {
+    name: "arch-audit",
+    body: "稽核每個案例頁的 CSS 有沒有乖乖待在自己的 theme 範圍內，並監控肥大檔案。",
+  },
 ];
 
 const reflections = [
-  "「規劃完美再執行」是幻覺。真正有用的是把「診斷」和「動手」拆開。",
-  "和 AI 協作的關鍵不是下指令，是共同建立守則。",
-  "語彙要跟業界對齊，對齊的語彙才能和工程師與其他設計師溝通。",
-  "「先寫三次再抽象」比「先設計好再實作」更誠實。",
-  "下一步：新增案例頁時重跑 rule of three 評估；補齊元件的無障礙契約；讓 /design-system 文件站成為對外的完整規格入口。",
+  {
+    title: "「規劃完美再執行」是幻覺",
+    body: "第一版雛形和完整計劃書都擋不住翻車。真正救回來的是把「診斷」和「動手」拆開——先 audit 再 implement。順序，比計劃書的厚度重要。",
+  },
+  {
+    title: "和 AI 協作，重點是共同立守則",
+    body: "翻車之後我沒有少用 AI，反而把 AI 當共事者：一起檢討錯在哪、一起把結論寫成雙方都遵守的工作流。AI 的表現上限，取決於你給它的邊界有多清楚。",
+  },
+  {
+    title: "語彙要跟業界對齊",
+    body: "我一開始自己發明了幾個詞（例如把外框元件叫 shell），後來逐一查證，改成業界通用的說法。自創詞只有自己懂；對齊的語彙，才能和工程師站在同一張圖上討論。",
+  },
+  {
+    title: "把「搞懂」寫下來，才算真的懂",
+    body: "每釐清一個概念——token 和 alias 差在哪、Button 和 LinkButton 為什麼要分——就整理成一篇學習筆記，目前累積了 4 篇。寫不出來，就代表其實還沒懂。",
+  },
+];
+
+const nextSteps = [
+  "新增案例頁時，重跑一輪 rule of three 評估。",
+  "補齊元件的無障礙契約：focus 管理與報讀語意。",
+  "讓 /design-system 文件站成為對外的完整規格入口。",
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -368,64 +462,180 @@ export default function DesignSystemCaseStudyPage() {
 
       <CaseSection id="cs-sec-evolution-b" kicker="EVOLUTION B" title="演化實例 B：知道何時「不要」抽象" surface>
         <p className="cs-section-lead">
-          成熟的系統不是什麼都共用，而是講得出「為什麼這個刻意不共用」。
+          成熟的系統不是什麼都共用，而是每個「刻意不共用」都講得出理由。
         </p>
-        <CaseCard className="ds-case-list-card">
-          <ul>
-            {stopRules.map((rule) => (
-              <li key={rule}>{rule}</li>
-            ))}
-          </ul>
+        <p className="cs-section-lead">
+          有了共用元件之後，最大的誘惑是把所有長得像的東西都塞進去——那正是翻車的老路。所以每次手癢之前，我強迫自己把「誘惑、判斷、決定」寫下來：
+        </p>
+        <CaseGrid variant="three" className="ds-case-card-grid">
+          {brakeCases.map((item) => (
+            <CaseCard className="ds-case-brake-card" key={item.title}>
+              <span
+                className={`ds-case-verdict${item.verdict === "DEFERRED" ? " ds-case-verdict--deferred" : ""}`}
+              >
+                {item.verdict}
+              </span>
+              <h3>{item.title}</h3>
+              <p>
+                <strong>誘惑</strong>
+                {item.temptation}
+              </p>
+              <p>
+                <strong>判斷</strong>
+                {item.judgment}
+              </p>
+              <p>
+                <strong>決定</strong>
+                {item.decision}
+              </p>
+            </CaseCard>
+          ))}
+        </CaseGrid>
+        <CaseCard className="ds-case-narrative-card">
+          <p>
+            最有代表性的一次：我曾一口氣盤點 8 個「看起來可以抽」的 pattern，<b>結論是一個都不抽</b>。那次盤點的產出不是任何新元件，而是 8 條寫進治理文件的「為什麼不抽」——對我來說，這比多抽三個元件更能證明系統是被「治理」的，不是被「堆」出來的。
+          </p>
         </CaseCard>
         <blockquote className="ds-case-quote">
           抽象是有成本的。每多一個共用元件，就多一份契約要維護、多一群頁面被綁在一起。
         </blockquote>
       </CaseSection>
 
-      <CaseSection id="cs-sec-governance" kicker="GOVERNANCE" title="Governance 與 AI 協作：讓規則管人，也管 AI">
+      <CaseSection id="cs-sec-evolution-c" kicker="EVOLUTION C" title="演化實例 C：語意分不清時，先拆文件、不拆 code">
+        <p className="cs-section-lead">
+          不是每個問題都要用「改 code」來解決。
+        </p>
+        <p className="cs-section-lead">
+          整理全站按鈕時，我卡在一個看起來很小的問題：
+        </p>
+        <blockquote className="ds-case-quote ds-case-quote--question">
+          「View case study」長得像按鈕，那它是 Button 嗎？
+        </blockquote>
+        <p className="cs-section-lead">
+          全站有十幾個這種「像按鈕的東西」，不先分類清楚，之後 token 化和抽元件都會踩空。查證業界做法（W3C、Material Design）後，我把它們拆成四個概念：
+        </p>
+        <div className="ds-case-table-frame">
+          <table className="ds-case-table">
+            <thead>
+              <tr>
+                <th>概念</th>
+                <th>是什麼</th>
+                <th>例子</th>
+              </tr>
+            </thead>
+            <tbody>
+              {semanticRows.map(([term, meaning, examples]) => (
+                <tr key={term}>
+                  <th scope="row">{term}</th>
+                  <td>{meaning}</td>
+                  <td>{examples}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <CaseCard className="ds-case-narrative-card">
+          <p>
+            為什麼要分這麼細？因為使用者對兩者的預期不同：link 可以右鍵開新分頁、複製網址；button 是觸發一個當下的操作。Screen reader 也會把兩者報讀成不同角色——語意用錯，輔助科技的使用者會對點擊結果有錯誤期待。
+          </p>
+          <p>
+            最後的決策是<b>「文件拆、code 不拆」</b>：在規格文件裡把 Button 和 LinkButton 的 contract 分開寫清楚；code 維持同一個 Button 元件（有 href 就 render 成連結）。因為現階段把 code 拆成兩個元件，只會製造一波 import 搬移和 regression 風險——語意的問題，用文件就能解決，就不要動 code。
+          </p>
+          <p>
+            這正是決策框架第三列「用途易混淆 → Component Contract」的實際案例：抽象不是只有「抽元件」一種形式，把契約寫清楚，本身就是一種系統化。
+          </p>
+        </CaseCard>
+      </CaseSection>
+
+      <CaseSection id="cs-sec-governance" kicker="GOVERNANCE" title="Governance 與 AI 協作：讓規則管人，也管 AI" surface>
         <p className="cs-section-lead">
           規範如果只存在人腦裡，AI 讀不到，就等於不存在。
         </p>
+        <p className="cs-section-lead">
+          這套系統比較特別的地方：主要的「使用者」除了我，還有多個 AI agent。治理最後沉澱成兩層，加一本帳：
+        </p>
         <CaseGrid variant="two" className="ds-case-card-grid">
           <CaseCard>
-            <h3>文件層</h3>
+            <h3>文件層——AI 動手前必讀</h3>
             <p>
-              10 份規格文件（overview、tokens、components、patterns、accessibility、governance…），任何 AI 動 code 前都要先讀。元件的職責邊界用 component contract 寫死。
+              10 份規格文件（overview、tokens、components、patterns、accessibility、governance…）。元件的職責邊界用 component contract 寫死：哪些 props 可以用、哪些行為不保證、遇到什麼情況必須停下來回報，而不是自己猜。
             </p>
           </CaseCard>
           <CaseCard>
-            <h3>流程層</h3>
+            <h3>流程層——每張工單都有權限邊界</h3>
             <p>
-              AI 改 code 一律走分段權限：audit 階段只能看不能改；implementation 不能 commit；commit 只能提交指定檔案。
+              AI 改 code 一律走分段權限，每張工單白紙黑字寫「這一段只能做什麼、禁止做什麼」：audit 只能看不能改；implementation 不能 commit；commit 只能提交指定檔案；驗證過了才能 push。防的就是 AI「順手」擴大範圍。
             </p>
           </CaseCard>
         </CaseGrid>
-      </CaseSection>
-
-      <CaseSection id="cs-sec-outcome" kicker="OUTCOME" title="產出與防護網" surface>
-        <p className="cs-section-lead">
-          系統的價值不在建好那一刻，在它能不能防止之後的劣化。
-        </p>
-        <CaseCard className="ds-case-list-card">
-          <ul>
-            {outcomes.map((outcome) => (
-              <li key={outcome}>{outcome}</li>
+        <div className="ds-case-decision-log">
+          <h3>決策帳——吵過的架，不吵第二次</h3>
+          <p>
+            所有標準化決策逐項拍板後寫進治理文件，變成查得到的紀錄。摘幾條實際的：
+          </p>
+          <ol>
+            {decisionLog.map((entry) => (
+              <li key={entry}>{entry}</li>
             ))}
-          </ul>
-        </CaseCard>
+          </ol>
+        </div>
+        <blockquote className="ds-case-quote">
+          治理的價值不是「管住」，是讓每一次協作都不用重新解釋一遍脈絡。
+        </blockquote>
       </CaseSection>
 
-      <CaseSection id="cs-sec-reflection" kicker="REFLECTION" title="學到什麼">
+      <CaseSection id="cs-sec-outcome" kicker="OUTCOME" title="產出與防護網">
+        <p className="cs-section-lead">
+          系統的價值不在建好那一刻，在它能不能防止之後的劣化。先看數字：
+        </p>
+        <CaseMetricGrid className="ds-case-card-grid">
+          {outcomeMetrics.map((metric) => (
+            <CaseCard variant="metric" key={metric.label}>
+              <span className="cs-metric-value">{metric.value}</span>
+              <h3 className="cs-metric-label">{metric.label}</h3>
+              <p className="cs-metric-body">{metric.body}</p>
+            </CaseCard>
+          ))}
+        </CaseMetricGrid>
+        <p className="cs-section-lead ds-case-guard-lead">
+          再看防護網——劣化會被工具先抓到，不用等人眼：
+        </p>
+        <CaseGrid variant="three" className="ds-case-card-grid ds-case-guard-grid">
+          {guardrails.map((guard) => (
+            <CaseCard key={guard.name}>
+              <h3 className="ds-case-guard-name">{guard.name}</h3>
+              <p>{guard.body}</p>
+            </CaseCard>
+          ))}
+        </CaseGrid>
+        <blockquote className="ds-case-quote">
+          這一頁本身就是證據：你正在看的這個 case study 頁面，就是用這套系統的 19 個共用元件組出來的——沒有為它新增或修改任何一個共用元件。
+        </blockquote>
+      </CaseSection>
+
+      <CaseSection id="cs-sec-reflection" kicker="REFLECTION" title="學到什麼" surface>
         <p className="cs-section-lead">
           這個專案最有價值的產出，是那三次轉折，不是最後的系統。
         </p>
-        <CaseCard className="ds-case-list-card">
+        <CaseGrid variant="two" className="ds-case-card-grid">
+          {reflections.map((item, index) => (
+            <CaseCard className="ds-case-reflection-card" key={item.title}>
+              <span className="ds-case-reflection-index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </CaseCard>
+          ))}
+        </CaseGrid>
+        <div className="ds-case-next">
+          <h3>下一步</h3>
           <ul>
-            {reflections.map((reflection) => (
-              <li key={reflection}>{reflection}</li>
+            {nextSteps.map((step) => (
+              <li key={step}>{step}</li>
             ))}
           </ul>
-        </CaseCard>
+        </div>
       </CaseSection>
     </CaseStudyShell>
   );
