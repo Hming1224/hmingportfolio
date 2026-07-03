@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { getLocale } from "next-intl/server";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from "../../components/ui/Accordion";
 import { designSystemDocs } from "../../lib/design-system-docs";
 import { designSystemSections, designSystemTokenRows } from "../../lib/design-system-data";
 import DesignSystemExplorer from "../../components/design-system/DesignSystemExplorer";
@@ -25,7 +26,6 @@ type TokenGroup = {
   title: string;
   description: string;
   previewRows: Array<(typeof designSystemTokenRows)[number]>;
-  columns: string[];
   rows: Array<(typeof designSystemTokenRows)[number]>;
 };
 
@@ -40,7 +40,6 @@ function getMessages(locale: Locale) {
 
 function buildFoundationGroups(locale: Locale): TokenGroup[] {
   const zh = locale === "zh-TW";
-  const columns = zh ? ["Token", "值", "用途"] : ["Token", "Value", "Usage"];
   const rowsFor = (types: Array<(typeof designSystemTokenRows)[number]["type"]>) =>
     designSystemTokenRows
       .filter((row) => types.includes(row.type))
@@ -62,11 +61,7 @@ function buildFoundationGroups(locale: Locale): TokenGroup[] {
       description: zh
         ? "照 Figma Make 的 primitive → semantic → component 節奏呈現，但 token 名稱和值以目前 code 為準。"
         : "Presented in the primitive → semantic → component rhythm from Figma Make, with names and values kept from code.",
-      previewRows: colorRows.filter((row) =>
-        row.token.includes("purple") ||
-        ["--hm-paper", "--hm-surface", "--hm-ink", "--hm-muted", "--hm-line"].includes(row.token),
-      ),
-      columns,
+      previewRows: colorRows,
       rows: colorRows,
     },
     {
@@ -77,7 +72,6 @@ function buildFoundationGroups(locale: Locale): TokenGroup[] {
         ? "字級列出目前 code 內的 responsive token 值；preview 使用桌機值呈現層級。"
         : "Type scale values come from the current code data; previews use the desktop value to show hierarchy.",
       previewRows: typeRows,
-      columns,
       rows: typeRows,
     },
     {
@@ -88,7 +82,6 @@ function buildFoundationGroups(locale: Locale): TokenGroup[] {
         ? "以目前 code 的 spacing token 命名和值呈現視覺刻度，不搬 Figma 內已過期的命名。"
         : "Visualizes the spacing scale with the current code names and values, without copying stale names from Figma.",
       previewRows: spacingRows,
-      columns,
       rows: spacingRows,
     },
     {
@@ -99,7 +92,6 @@ function buildFoundationGroups(locale: Locale): TokenGroup[] {
         ? "用 pill 與 card 兩種語意呈現目前 code 的 radius token。"
         : "Shows the current radius tokens through pill and card semantics.",
       previewRows: radiusRows,
-      columns,
       rows: radiusRows,
     },
     {
@@ -110,7 +102,6 @@ function buildFoundationGroups(locale: Locale): TokenGroup[] {
         ? "以 elevation preview 表示陰影層級；值仍來自目前 token data。"
         : "Uses elevation previews to show depth while keeping values from the current token data.",
       previewRows: shadowRows,
-      columns,
       rows: shadowRows,
     },
     {
@@ -121,7 +112,6 @@ function buildFoundationGroups(locale: Locale): TokenGroup[] {
         ? "把 duration 與 easing 放在同一個 motion panel，對齊 Figma Make 的文件節奏。"
         : "Keeps duration and easing in one motion panel, matching the documentation rhythm from Figma Make.",
       previewRows: motionRows,
-      columns,
       rows: motionRows,
     },
     {
@@ -132,7 +122,6 @@ function buildFoundationGroups(locale: Locale): TokenGroup[] {
         ? "Figma Foundation 沒有獨立 layout 頁，但 production code 有 container、gutter、z-index 與 breakpoint reference，保留在 token reference。"
         : "Figma has no separate layout foundation page, but production code includes container, gutter, z-index, and breakpoint references, so they stay in the token reference.",
       previewRows: layoutRows,
-      columns,
       rows: layoutRows,
     },
   ];
@@ -367,43 +356,29 @@ export default async function DesignSystemPage() {
                   : "排版跟 Figma Make 的 foundation pages 對齊：先有類別定位、再用 preview 看 token 語意，最後保留 token / value / usage 對照。名稱和值仍以目前 code 為準。"}
               </p>
             </div>
-            <div className={styles.foundationStack}>
+            <Accordion className={styles.foundationAccordion} defaultValue="colors" type="single">
               {tokenGroupRows.map((group) => (
-                <article className={styles.foundationPanel} key={group.id}>
-                  <header className={styles.foundationPanelHeader}>
-                    <div>
-                      <p className={styles.foundationEyebrow}>{group.eyebrow}</p>
-                      <h3 className={styles.foundationTitle}>{group.title}</h3>
-                      <p className={styles.foundationDescription}>{group.description}</p>
-                    </div>
-                    <span className={styles.foundationCount}>
-                      {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
+                <AccordionItem className={styles.foundationPanel} key={group.id} value={group.id}>
+                  <AccordionHeader className={styles.foundationAccordionHeader}>
+                    <span className={styles.foundationPanelHeader}>
+                      <span>
+                        <span className={styles.foundationEyebrow}>{group.eyebrow}</span>
+                        <span className={styles.foundationTitle}>{group.title}</span>
+                      </span>
+                      <span className={styles.foundationCount}>
+                        {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
+                      </span>
                     </span>
-                  </header>
-                  <div className={`${styles.tokenPreviewGrid} ${styles[`tokenPreviewGrid_${group.id}`]}`}>
-                    {group.previewRows.map((row) => renderTokenPreview(row, locale))}
-                  </div>
-                  <div className={styles.tableShell}>
-                    <table className={styles.tokenTable}>
-                      <thead>
-                        <tr>
-                          {group.columns.map((col) => <th key={col}>{col}</th>)}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {group.rows.map((row) => (
-                          <tr key={row.token}>
-                            <td>{row.token}</td>
-                            <td>{row.value}</td>
-                            <td>{getTokenUsage(row, locale)}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </article>
+                  </AccordionHeader>
+                  <AccordionPanel className={styles.foundationAccordionPanel}>
+                    <p className={styles.foundationDescription}>{group.description}</p>
+                    <div className={`${styles.tokenPreviewGrid} ${styles[`tokenPreviewGrid_${group.id}`]}`}>
+                      {group.previewRows.map((row) => renderTokenPreview(row, locale))}
+                    </div>
+                  </AccordionPanel>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </section>
         </>
       }
