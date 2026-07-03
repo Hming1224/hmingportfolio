@@ -59,7 +59,7 @@ export default async function DesignSystemPage() {
               <Button href="#getting-started">
                 {copy.hero.primaryAction}
               </Button>
-              <Button variant="secondary" href="#components">
+              <Button variant="secondary" href="#reference">
                 {copy.hero.secondaryAction}
               </Button>
             </div>

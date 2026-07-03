@@ -444,56 +444,51 @@
   overflow-y: auto;
 }
 
-.nav,
-.componentList {
+.nav {
   display: grid;
   gap: var(--hm-space-2xs);
 }
 
-.rootAccordion,
-.categoryAccordion {
-  gap: 0;
-}
-
-.categoryAccordion {
-  padding-left: var(--hm-space-sm);
-  border-left: 1px solid var(--hm-line-strong);
-}
-
 .rootLink,
-.componentLink {
+.switcherButton {
   display: flex;
   align-items: center;
-  min-height: 36px;
   border-radius: var(--hm-radius-sm);
-  text-decoration: none;
 }
 
 .rootLink {
+  min-height: 36px;
   padding: var(--hm-space-2xs) 0;
   color: var(--hm-muted);
   font-size: var(--hm-fs-xs);
   font-weight: var(--hm-fw-bold);
   letter-spacing: 0.06em;
+  text-decoration: none;
   text-transform: uppercase;
 }
 
-.componentLink {
-  padding: 6px var(--hm-space-xs);
+.switcherButton {
+  min-height: 40px;
+  padding: 6px var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  background: var(--hm-paper);
   color: var(--hm-ink);
   font-size: var(--hm-fs-sm);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .rootLink:hover,
 .rootLink.active,
-.componentLink:hover,
-.componentLink.active {
+.switcherButton:hover,
+.switcherButton.active {
   background: var(--hm-purple-light);
   color: var(--hm-purple);
 }
 
 .rootLink.active,
-.componentLink.active {
+.switcherButton.active {
   font-weight: var(--hm-fw-semibold);
 }
 
@@ -503,11 +498,34 @@
   gap: var(--hm-space-xl);
 }
 
-.activeDoc {
-  margin-top: var(--hm-space-2xl);
+.categorySection {
+  display: grid;
+  gap: var(--hm-space-md);
   padding-top: var(--hm-space-2xl);
   border-top: 1px solid var(--hm-line);
   scroll-margin-top: 100px;
+}
+
+.categoryHeader {
+  display: grid;
+  gap: var(--hm-space-2xs);
+}
+
+.categoryTitle {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: clamp(var(--hm-fs-h2), 3vw, 40px);
+  line-height: 1.25;
+}
+
+.sectionSwitcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-2xs);
+}
+
+.activeDoc {
+  min-width: 0;
 }
 
 .docHeader {
@@ -618,9 +636,6 @@
     background: color-mix(in srgb, var(--hm-paper) 96%, white);
   }
 
-  .categoryAccordion {
-    padding-left: var(--hm-space-xs);
-  }
 }
 
 @media (max-width: 640px) {
