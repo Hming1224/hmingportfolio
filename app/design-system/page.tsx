@@ -12,6 +12,7 @@ import { createLocalizedMetadata } from "../../lib/metadata";
 import { designPrinciples } from "../../lib/design-system-data";
 import enMessages from "../../i18n/dictionaries/en";
 import zhMessages from "../../i18n/dictionaries/zh-TW";
+import styles from "../../components/design-system/DesignSystemExplorer.module.css";
 
 type Messages = typeof enMessages;
 
@@ -97,16 +98,16 @@ export default async function DesignSystemPage() {
   const tokenGroupRows = buildFoundationGroups(locale);
 
   return (
-    <main style={{ background: "var(--hm-paper)", color: "var(--text-body)" }}>
+    <main className={styles.page}>
       <Navbar />
 
-      <section style={{ padding: "148px 0 56px", background: "radial-gradient(circle at top right, color-mix(in srgb, var(--hm-purple-soft) 80%, white) 0%, transparent 34%), linear-gradient(180deg, color-mix(in srgb, var(--hm-surface) 65%, white) 0%, transparent 100%)" }} aria-labelledby="ds-title">
-        <div style={{ width: "min(var(--hm-container), calc(100% - 96px))", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))", gap: "var(--hm-space-lg)", alignItems: "end" }}>
-          <div >
-            <p style={{ margin: "0 0 var(--hm-space-xs)", fontSize: "var(--hm-fs-sm)", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--hm-purple)" }}>{copy.hero.eyebrow}</p>
-            <h1 id="ds-title" style={{ margin: 0, fontSize: "clamp(36px, 5vw, 52px)", lineHeight: 1.18, letterSpacing: "-0.01em", color: "var(--text-heading)" }}>{copy.hero.title}</h1>
-            <p style={{ margin: "var(--hm-space-sm) 0 0", maxWidth: 760, fontSize: 18, lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.hero.description}</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-xs)", marginTop: 28 }}>
+      <section className={styles.hero} aria-labelledby="ds-title">
+        <div className={styles.heroInner}>
+          <div>
+            <p className={styles.eyebrow}>{copy.hero.eyebrow}</p>
+            <h1 className={styles.heroTitle} id="ds-title">{copy.hero.title}</h1>
+            <p className={styles.heroDescription}>{copy.hero.description}</p>
+            <div className={styles.actions}>
               <Button href="#getting-started">
                 {copy.hero.primaryAction}
               </Button>
@@ -115,11 +116,11 @@ export default async function DesignSystemPage() {
               </Button>
             </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(150px, 100%), 1fr))", gap: "var(--hm-space-sm)" }} aria-label={copy.hero.statsAriaLabel}>
+          <div className={styles.statsGrid} aria-label={copy.hero.statsAriaLabel}>
             {copy.hero.stats.map((stat) => (
-              <article key={stat.label} style={{ border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)", padding: "var(--hm-space-md)" }}>
-                <strong style={{ display: "block", fontSize: "clamp(28px, 4vw, 40px)", lineHeight: 1, color: "var(--text-heading)" }}>{stat.value}</strong>
-                <span style={{ display: "block", marginTop: "var(--hm-space-2xs)", color: "var(--text-secondary)", lineHeight: 1.5 }}>{stat.label}</span>
+              <article className={styles.statCard} key={stat.label}>
+                <strong className={styles.statValue}>{stat.value}</strong>
+                <span className={styles.statLabel}>{stat.label}</span>
               </article>
             ))}
           </div>
@@ -133,64 +134,64 @@ export default async function DesignSystemPage() {
         toc={copy.toc}
         topContent={
           <>
-            <section key="getting-started" style={{ scrollMarginTop: 112 }} id="getting-started">
-            <div style={{ display: "grid", gridTemplateColumns: "40px auto 1fr", gap: 14, alignItems: "center", marginBottom: "var(--hm-space-md)" }}>
-              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
-              <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 32px)", lineHeight: 1.3, color: "var(--text-heading)" }}>{copy.introduction.heading}</h2>
-              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
+            <section className={styles.section} key="getting-started" id="getting-started">
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionRule} />
+              <h2 className={styles.sectionTitle}>{copy.introduction.heading}</h2>
+              <span className={styles.sectionRule} />
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 18 }}>
-              <article style={{ padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }}>
-                <h3 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{copy.introduction.soulTitle}</h3>
-                <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.introduction.soulBody}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-xs)" }} aria-label={copy.introduction.keywordsAriaLabel}>
+            <div className={styles.twoColumnGrid}>
+              <article className={styles.card}>
+                <h3 className={styles.cardTitle}>{copy.introduction.soulTitle}</h3>
+                <p className={styles.cardBody}>{copy.introduction.soulBody}</p>
+                <div className={styles.keywordList} aria-label={copy.introduction.keywordsAriaLabel}>
                   {copy.introduction.keywords.map((keyword) => (
-                    <span key={keyword} style={{ display: "inline-flex", alignItems: "center", minHeight: 34, padding: "0 14px", borderRadius: "var(--hm-radius-pill)", background: "var(--hm-purple-light)", color: "var(--hm-purple)", fontSize: "var(--hm-fs-sm)", fontWeight: 500 }}>{keyword}</span>
+                    <span className={styles.pill} key={keyword}>{keyword}</span>
                   ))}
                 </div>
               </article>
-              <article style={{ padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }}>
-                <h3 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{copy.introduction.architectureTitle}</h3>
-                <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.introduction.architectureBody}</p>
-                <div style={{ display: "grid", gap: 14, marginTop: 18 }}>
+              <article className={styles.card}>
+                <h3 className={styles.cardTitle}>{copy.introduction.architectureTitle}</h3>
+                <p className={styles.cardBody}>{copy.introduction.architectureBody}</p>
+                <div className={styles.nestedGrid}>
                   {copy.introduction.architectureCards.map((card) => (
-                    <section key={card.title} style={{ padding: 20, borderRadius: "var(--hm-radius-md)", border: "1px solid var(--hm-line)", background: "var(--hm-surface)" }}>
-                      <p style={{ margin: "0 0 16px", color: "var(--hm-purple)", fontSize: "var(--hm-fs-sm)", fontWeight: 600 }}>{card.kicker}</p>
-                      <h4 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{card.title}</h4>
-                      <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{card.body}</p>
+                    <section className={styles.nestedCard} key={card.title}>
+                      <p className={styles.kicker}>{card.kicker}</p>
+                      <h4 className={styles.nestedTitle}>{card.title}</h4>
+                      <p className={styles.nestedBody}>{card.body}</p>
                     </section>
                   ))}
                 </div>
               </article>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 18, marginTop: 18 }}>
+            <div className={styles.principleGrid}>
               {designPrinciples.map((principle, index) => {
                 const [english, chinese] = principle.split(" / ");
                 return (
-                  <article key={principle} style={{ padding: 24, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }}>
-                    <p style={{ margin: "0 0 16px", color: "var(--hm-purple)", fontSize: "var(--hm-fs-sm)", fontWeight: 600 }}>0{index + 1}</p>
-                    <h3 style={{ margin: 0, fontSize: "var(--hm-fs-h4)", lineHeight: 1.4, color: "var(--text-heading)" }}>{english}</h3>
-                    <p style={{ margin: "var(--hm-space-2xs) 0 0", lineHeight: 1.7, color: "var(--text-secondary)" }}>{chinese}</p>
+                  <article className={styles.card} key={principle}>
+                    <p className={styles.principleIndex}>0{index + 1}</p>
+                    <h3 className={styles.principleTitle}>{english}</h3>
+                    <p className={styles.principleBody}>{chinese}</p>
                   </article>
                 );
               })}
             </div>
           </section>
 
-          <section key="foundations" style={{ scrollMarginTop: 112 }} id="foundations">
-            <div style={{ display: "grid", gridTemplateColumns: "40px auto 1fr", gap: 14, alignItems: "center", marginBottom: "var(--hm-space-md)" }}>
-              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
-              <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 32px)", lineHeight: 1.3, color: "var(--text-heading)" }}>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
-              <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
+          <section className={styles.section} key="foundations" id="foundations">
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionRule} />
+              <h2 className={styles.sectionTitle}>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
+              <span className={styles.sectionRule} />
             </div>
             <Accordion type="multiple" defaultValue={["color", "structure", "surface"]}>
               {tokenGroupRows.map(group => (
                 <AccordionItem key={group.id} value={group.id}>
                   <AccordionHeader>{group.title}</AccordionHeader>
                   <AccordionPanel>
-                    <p style={{ color: "var(--hm-muted)", marginBottom: "var(--hm-space-md)" }}>{group.description}</p>
-                    <div style={{ maxWidth: "100%", overflowX: "auto", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 96%, white)" }}>
-                      <table style={{ width: "100%", minWidth: 720, borderCollapse: "collapse" }}>
+                    <p className={styles.mutedText}>{group.description}</p>
+                    <div className={styles.tableShell}>
+                      <table className={styles.tokenTable}>
                         <thead>
                           <tr>
                             {group.columns.map(col => <th key={col}>{col}</th>)}
@@ -213,13 +214,13 @@ export default async function DesignSystemPage() {
         </>
       }
       bottomContent={
-        <section key="cta" style={{ scrollMarginTop: 112, padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }} id="cta">
+        <section className={styles.cta} key="cta" id="cta">
             <div>
-              <p style={{ margin: "0 0 var(--hm-space-xs)", fontSize: "var(--hm-fs-sm)", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--hm-purple)" }}>{copy.cta.eyebrow}</p>
-              <h2 style={{ margin: 0, fontSize: "clamp(36px, 5vw, 52px)", lineHeight: 1.18, letterSpacing: "-0.01em", color: "var(--text-heading)" }}>{copy.cta.title}</h2>
-              <p style={{ margin: "var(--hm-space-sm) 0 0", maxWidth: 760, fontSize: 18, lineHeight: 1.7, color: "var(--text-secondary)" }}>{copy.cta.body}</p>
+              <p className={styles.eyebrow}>{copy.cta.eyebrow}</p>
+              <h2 className={styles.ctaTitle}>{copy.cta.title}</h2>
+              <p className={styles.ctaBody}>{copy.cta.body}</p>
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-xs)", marginTop: "var(--hm-space-md)" }}>
+            <div className={styles.actions}>
               <Button href="/#projects">
                 {copy.cta.primaryAction}
               </Button>
