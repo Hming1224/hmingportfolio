@@ -39,9 +39,15 @@ Design System 必須覆蓋整個作品集，案例頁不能因為內容不同就
 
 ### Before / After Narrative Pattern
 
-> **Status:** Shared design pattern; proposed slot-based layout frame; not yet implemented.
+> **Status:** Implemented shared pattern with partial route adoption.
 
-`CaseBeforeAfter` is the existing simple shared component for simple two-panel media comparisons. `BeforeAfterNarrativeFrame` is a proposed future layout frame for the broader narrative anatomy. Advantech, Laushu, and Crypto Arsenal show repeated Layer 2 anatomy, but only Crypto currently uses `CaseBeforeAfter`.
+`CaseBeforeAfter` is the existing simple shared component for simple two-panel media comparisons. `BeforeAfterNarrativeFrame` is the implemented shared slot-based layout frame for the broader narrative anatomy. Crypto IterationSection and Laushu iteration board have adopted it; Advantech Board 1 has adopted it as a pilot. Advantech Board 2 / Board 3 remain deferred / route-local.
+
+Adoption status:
+- Crypto IterationSection: adopted
+- Laushu iteration board: adopted
+- Advantech Board 1: pilot adopted
+- Advantech Board 2 / Board 3: deferred / route-local
 
 #### Layered anatomy
 
@@ -50,7 +56,7 @@ Layer 1: Narrative pattern
 - design change rationale
 - after state
 
-Layer 2: Proposed shared layout frame
+Layer 2: `BeforeAfterNarrativeFrame` shared layout frame
 - badge / context label
 - title
 - optional intro
@@ -69,9 +75,9 @@ Layer 3: Local / colocated content
 - dark screenshot readability
 - route-specific visual geometry
 
-#### Proposed component contract
+#### Implemented component contract
 
-Planning contract only. Not implemented in production.
+Current production contract:
 
 ```ts
 import type { ReactNode } from "react";
@@ -114,9 +120,18 @@ Do not add props for:
 
 These stay in slot content or local / colocated components.
 
+Shared-frame boundaries:
+- media wrappers stay local
+- annotations stay local
+- image sizing stays local
+- route geometry stays local
+- `figure` / `figcaption` semantics are not guaranteed by the shared frame
+
+Laushu migration intentionally did not preserve the previous `figure` / `figcaption` panel semantics. Do not overclaim accessibility semantics from the shared frame.
+
 #### Governance
 
-Do not expand `CaseBeforeAfter` to cover the broader narrative pattern. If implemented later, create a separate slot-based frame instead. Adopt one route at a time with visual-preserving migration and smoke testing.
+Do not expand `CaseBeforeAfter` to cover the broader narrative pattern. Use `BeforeAfterNarrativeFrame` for single-comparison narrative frames when the Layer 2 anatomy is stable. Keep multi-comparison scenario boards local until a separate multi-comparison contract is designed. Adopt one route at a time with visual-preserving migration and smoke testing.
 
 ---
 

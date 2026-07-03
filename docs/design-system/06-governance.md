@@ -86,28 +86,28 @@
 ### Before / After Narrative Frame Assessment
 
 Decision:
-Approve `BeforeAfterNarrativeFrame` as a proposed shared layout frame candidate, not an implemented component.
+`BeforeAfterNarrativeFrame` is the implemented shared slot-based layout frame for single-comparison before / after narrative frames.
 - Keep `CaseBeforeAfter` as the simple two-panel shared component.
 - Do not expand `CaseBeforeAfter` with storytelling-specific props.
-- If future implementation is approved, create a separate slot-based layout frame.
+- Use `BeforeAfterNarrativeFrame` for single-comparison narrative frames when Layer 2 anatomy is stable.
+- Keep multi-comparison scenario boards local until a separate multi-comparison contract is designed.
 - Keep media wrappers, annotations, redlines, proportional media sizing, and route-specific storytelling geometry local / colocated.
 
+Current production status:
+- Crypto IterationSection: adopted.
+- Laushu iteration board: adopted.
+- Advantech Board 1: pilot adopted.
+- Advantech Board 2 / Board 3: deferred / route-local.
+
 Reason:
-The repeated structure across Advantech, Laushu, and Crypto Arsenal is the Layer 2 narrative frame, not the Layer 3 media internals. A slot-based frame can share layout and responsive behavior while preserving local media and annotation needs.
+The repeated structure across Advantech, Laushu, and Crypto Arsenal is the Layer 2 narrative frame, not the Layer 3 media internals. The slot-based frame shares layout and responsive behavior while preserving local media and annotation needs.
 
-Implementation gate:
-No production code changes are approved by this docs update. Future implementation must be split into:
-1. component introduction without route adoption;
-2. one-case visual-preserving migration;
-3. route / viewport smoke;
-4. only then additional migrations.
+Known tradeoffs:
+- Laushu `figure` / `figcaption` panel semantics were not preserved in the current migration.
+- `/en/advantech` at 390px showed a transient 2px overflow once; follow-up could not reproduce it, no confirmed offender was identified, and no fix was applied.
+- Advantech full migration remains deferred.
 
-Suggested migration order if approved:
-1. Crypto Arsenal first, because it already uses simple `CaseBeforeAfter`.
-2. Laushu second, preserving proportional image sizing inside slots.
-3. Advantech last, because it has redline and 360px / 640px annotations.
-
-Production code is source of truth. Target-state is not production reality. Local / colocated storytelling geometry remains allowed.
+Production code remains source of truth. Target-state wording must not be treated as production reality. Local / colocated storytelling geometry remains allowed.
 
 ---
 

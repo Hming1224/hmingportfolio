@@ -167,8 +167,33 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - 段落 lead：使用 `cs-section-lead`；文字色透過 `--cs-section-lead-*` token 調整，不再新增 `ca-lead` / `ca-narrow`。
 - 方案展示：使用 `CaseProposalTabs variant="solution" | "wireframe"`；DOM 與樣式只使用 `cs-proposal-*`，theme 差異透過 variant modifier 與 custom properties 控制，不再新增 `cs-sol-tab-*` 或 `ca-wf-*`。提案 banner 使用 `cs-proposal-banner-*`，route 只提供顏色 token。
 - 前後比較：使用 `CaseBeforeAfter` 與 `cs-before-after-*`；桌機橫排、`≤768px` 直排，箭頭方向由共用 RWD 控制。
+- 敘事型前後比較：使用 `BeforeAfterNarrativeFrame` 與 `cs-before-after-narrative-*`；它是 implemented shared slot-based narrative layout frame，用於 single-comparison narrative frames。Crypto IterationSection、Laushu iteration board、Advantech Board 1 pilot 已採用；Advantech Board 2 / Board 3 仍 deferred / route-local。
 - 流程外框：使用 `CaseFlowFrame variant="default" | "plain" | "split"` 與 `cs-flow-frame-*`；default 為有框說明圖、plain 為無框矩陣容器、split 為 header / scroll panel 分離。route 只提供內容圖形、最小寬與必要 caption / header theme。
 - 功能步驟：使用 `CaseFeatureRow`；原型展示用 `cs-feature-row--prototype`，媒體與說明框不得再掛 `cs-sol-fr` / `cs-sol-fimg` / `cs-sol-fnote`。
+
+#### BeforeAfterNarrativeFrame contract
+
+`BeforeAfterNarrativeFrame` is an implemented shared slot-based narrative layout frame. It shares stable Layer 2 anatomy for a single before / after narrative while allowing route-local media and storytelling content to remain colocated in slots.
+
+It owns:
+- outer `CaseCard` shell
+- header / badge / title anatomy
+- optional intro
+- label / copy points anatomy
+- before / after slot layout
+- decorative connector
+- `data-tone` hook
+
+It does not own:
+- media wrappers
+- `ZoomableImage` / `StepLightbox` / `FeatureImageLightbox` behavior
+- redline annotation
+- 360px / 640px labels
+- image sizing / `flexGrow` / crop
+- route-specific storytelling geometry
+- `figure` / `figcaption` semantics
+
+`CaseBeforeAfter` remains the simple two-panel comparison component. Do not expand `CaseBeforeAfter` into the broader narrative frame.
 
 #### CaseMedia contract
 
