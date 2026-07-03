@@ -450,7 +450,7 @@
 }
 
 .rootLink,
-.switcherButton {
+.componentLink {
   display: flex;
   align-items: center;
   border-radius: var(--hm-radius-sm);
@@ -467,28 +467,43 @@
   text-transform: uppercase;
 }
 
-.switcherButton {
-  min-height: 40px;
-  padding: 6px var(--hm-space-sm);
-  border: 1px solid var(--hm-line);
-  background: var(--hm-paper);
+.categoryAccordion {
+  gap: 0;
+}
+
+.navAccordionItem {
+  border-bottom: 1px solid var(--hm-line);
+}
+
+.activeAccordionHeader :global(.hm-accordion-trigger) {
+  color: var(--hm-purple);
+}
+
+.componentList {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  padding: 0 0 var(--hm-space-xs) var(--hm-space-sm);
+  border-left: 1px solid var(--hm-line-strong);
+}
+
+.componentLink {
+  min-height: 36px;
+  padding: 6px var(--hm-space-xs);
   color: var(--hm-ink);
   font-size: var(--hm-fs-sm);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .rootLink:hover,
 .rootLink.active,
-.switcherButton:hover,
-.switcherButton.active {
+.componentLink:hover,
+.componentLink.active {
   background: var(--hm-purple-light);
   color: var(--hm-purple);
 }
 
 .rootLink.active,
-.switcherButton.active {
+.componentLink.active {
   font-weight: var(--hm-fw-semibold);
 }
 
@@ -504,24 +519,6 @@
   padding-top: var(--hm-space-2xl);
   border-top: 1px solid var(--hm-line);
   scroll-margin-top: 100px;
-}
-
-.categoryHeader {
-  display: grid;
-  gap: var(--hm-space-2xs);
-}
-
-.categoryTitle {
-  margin: 0;
-  color: var(--text-heading);
-  font-size: clamp(var(--hm-fs-h2), 3vw, 40px);
-  line-height: 1.25;
-}
-
-.sectionSwitcher {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--hm-space-2xs);
 }
 
 .activeDoc {

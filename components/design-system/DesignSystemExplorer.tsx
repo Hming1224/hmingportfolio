@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "@/components/ui/Accordion";
 import type { DesignSystemDoc, DesignSystemDocKind, DesignSystemLocale } from "@/lib/design-system-docs";
 import DesignSystemDocsPage from "./DesignSystemDocsPage";
 import styles from "./DesignSystemExplorer.module.css";
@@ -44,12 +45,17 @@ export default function DesignSystemExplorer({
   );
   const [activeSlugs, setActiveSlugs] = useState<Record<string, string>>(initialActiveSlugs);
   const [activeAnchor, setActiveAnchor] = useState("#getting-started");
+  const [openSection, setOpenSection] = useState<string>(sections[0]?.label ?? "");
   const ctaItem = toc.items.find((item) => item.href === "#cta") ?? toc.items[toc.items.length - 1];
   const gettingStartedItem = toc.items[0];
 
   useEffect(() => {
     const updateActiveAnchor = () => {
-      setActiveAnchor(window.location.hash || "#getting-started");
+      const hash = window.location.hash || "#getting-started";
+      const matchingSection = sections.find((section) => hash === `#${sectionId(section)}`);
+
+      setActiveAnchor(hash);
+      if (matchingSection) setOpenSection(matchingSection.label);
     };
 
     updateActiveAnchor();
@@ -58,7 +64,7 @@ export default function DesignSystemExplorer({
     return () => {
       window.removeEventListener("hashchange", updateActiveAnchor);
     };
-  }, []);
+  }, [sections]);
 
   return (
     <div className={styles.shell}>
@@ -75,22 +81,63 @@ export default function DesignSystemExplorer({
             </a>
           ) : null}
 
-          {sections.map((section) => {
-            const href = `#${sectionId(section)}`;
-            const isActive = activeAnchor === href;
+          <Accordion
+            className={styles.categoryAccordion}
+            onValueChange={(value) => {
+              const nextValue = Array.isArray(value) ? value[0] : value;
+              if (!nextValue) return;
 
-            return (
-              <a
-                aria-current={isActive ? "page" : undefined}
-                className={`${styles.rootLink}${isActive ? ` ${styles.active}` : ""}`}
-                href={href}
-                key={section.label}
-                onClick={() => setActiveAnchor(href)}
-              >
-                {localized(locale, section.label, section.labelZh)}
-              </a>
-            );
-          })}
+              const nextSection = sections.find((section) => section.label === nextValue);
+              if (!nextSection) return;
+
+              const href = `#${sectionId(nextSection)}`;
+              setOpenSection(nextValue);
+              setActiveAnchor(href);
+              window.history.replaceState(null, "", href);
+              document.getElementById(sectionId(nextSection))?.scrollIntoView({ block: "start" });
+            }}
+            type="single"
+            value={openSection}
+          >
+            {sections.map((section) => {
+              const id = sectionId(section);
+              const href = `#${id}`;
+              const isSectionActive = activeAnchor === href;
+
+              return (
+                <AccordionItem className={styles.navAccordionItem} key={section.label} value={section.label}>
+                  <AccordionHeader className={isSectionActive ? styles.activeAccordionHeader : undefined}>
+                    {localized(locale, section.label, section.labelZh)}
+                  </AccordionHeader>
+                  <AccordionPanel>
+                    <div className={styles.componentList}>
+                      {section.items.map((item) => {
+                        const doc = docs.find((candidate) => candidate.slug === item.slug && candidate.kind === item.kind);
+                        if (!doc) return null;
+                        const isActive = activeAnchor === href && activeSlugs[section.label] === doc.slug;
+
+                        return (
+                          <a
+                            aria-current={isActive ? "page" : undefined}
+                            className={`${styles.componentLink}${isActive ? ` ${styles.active}` : ""}`}
+                            href={href}
+                            key={`${doc.kind}-${doc.slug}`}
+                            onClick={() => {
+                              setOpenSection(section.label);
+                              setActiveAnchor(href);
+                              setActiveSlugs((current) => ({ ...current, [section.label]: doc.slug }));
+                            }}
+                          >
+                            {localized(locale, doc.title, doc.titleZh)}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </AccordionPanel>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
 
           {ctaItem ? (
             <a
@@ -114,33 +161,6 @@ export default function DesignSystemExplorer({
 
           return (
             <section className={styles.categorySection} id={id} key={section.label}>
-              <header className={styles.categoryHeader}>
-                <p className={styles.eyebrow}>{localized(locale, "Documentation section", "文件分類")}</p>
-                <h2 className={styles.categoryTitle}>{localized(locale, section.label, section.labelZh)}</h2>
-              </header>
-              <div className={styles.sectionSwitcher} aria-label={localized(locale, `${section.label} entries`, `${localized(locale, section.label, section.labelZh)}條目`)}>
-                {section.items.map((item) => {
-                  const doc = docs.find((candidate) => candidate.slug === item.slug && candidate.kind === item.kind);
-                  if (!doc) return null;
-                  const isActive = activeSlug === doc.slug;
-
-                  return (
-                    <button
-                      aria-pressed={isActive}
-                      className={`${styles.switcherButton}${isActive ? ` ${styles.active}` : ""}`}
-                      key={`${doc.kind}-${doc.slug}`}
-                      onClick={() => {
-                        setActiveAnchor(`#${id}`);
-                        setActiveSlugs((current) => ({ ...current, [section.label]: doc.slug }));
-                        window.history.replaceState(null, "", `#${id}`);
-                      }}
-                      type="button"
-                    >
-                      {localized(locale, doc.title, doc.titleZh)}
-                    </button>
-                  );
-                })}
-              </div>
               <div className={styles.activeDoc}>
                 {activeDoc ? <DesignSystemDocsPage doc={activeDoc} locale={locale} /> : null}
               </div>
