@@ -45,20 +45,37 @@
 }
 
 .ds-case-info-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 48px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 40px;
+  margin-top: 42px;
 }
 
 .ds-case-info-grid .cs-info-card {
   width: auto;
+  min-width: 0;
 }
 
 .ds-case-info-grid .cs-info-value {
   display: grid;
-  gap: 4px;
+  gap: 6px;
+  color: var(--hm-ink);
+  font-size: clamp(16px, 1.16vw, 18px);
+  font-weight: 700;
+  line-height: 1.45;
   overflow-wrap: normal;
   word-break: normal;
   hyphens: manual;
+}
+
+.ds-case-info-grid .cs-info-label {
+  margin-bottom: 10px;
+  color: var(--cs-text-muted);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+}
+
+.ds-case-info-grid > .cs-info-card:nth-child(4) {
+  grid-column: auto;
 }
 
 .theme-design-system-case-study .cs-card {
@@ -233,6 +250,11 @@
 }
 
 @media (max-width: 768px) {
+  .ds-case-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 18px;
+  }
+
   .ds-case-hero__subtitle {
     line-height: 1.7;
   }
@@ -267,5 +289,10 @@
 @media (max-width: 480px) {
   .ds-case-info-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ds-case-info-grid .cs-info-value {
+    font-size: 16px;
   }
 }

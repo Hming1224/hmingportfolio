@@ -23,12 +23,19 @@ type InfoItem = {
 };
 
 const infoItems: InfoItem[] = [
-  { label: "類型", value: ["Design System", "Self-initiated Side Project"] },
-  { label: "角色", value: ["產品設計師", "獨立作業，與 AI agents 協作"] },
-  { label: "方法", value: ["Gap Analysis", "Design Tokens", "Component Contract", "Governance", "AI 協作工作流"] },
-  { label: "工具", value: ["Figma Make", "Next.js", "CSS Custom Properties", "Claude / Codex / ChatGPT", "Git"] },
-  { label: "時間", value: ["2026.05 - 2026.07", "持續維護中"] },
-  { label: "產出", value: ["Token 系統", "共用元件", "10 份規格文件", "自動化防漂移腳本", "AI 分段工作流"] },
+  { label: "時間", value: ["2026.06-2026.07 still updating"] },
+  { label: "角色", value: ["Product Designer"] },
+  { label: "負責項目", value: ["研究整理", "系統規劃", "元件盤點", "AI 協作流程設計", "前端實作驗證"] },
+  {
+    label: "產出",
+    value: [
+      "Design system documentation",
+      "Markdown 規格文件",
+      "design tokens",
+      "共用 case-study components",
+      "validation scripts",
+    ],
+  },
 ];
 
 const tocSections: TocSection[] = [
@@ -170,7 +177,7 @@ function Hero() {
         <p className="ds-case-hero__subtitle">
           這是我在製作作品集網站期間，自發啟動的 side project。它不是一次規劃到位的成果——中間翻過車：太早共用元件造成一堆 regression、設計文件和實際 code 脫節。這一頁記錄的就是我怎麼和 AI 一起把問題修掉，並把每次踩坑變成可以重複使用的工作流程。
         </p>
-        <CaseInfoGrid items={heroInfoItems} className="ds-case-info-grid" />
+        <CaseInfoGrid items={heroInfoItems} className="cs-info-row--divided ds-case-info-grid" />
       </div>
     </section>
   );
