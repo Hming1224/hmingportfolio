@@ -54,18 +54,18 @@ const messages = {
   },
   designSystem: {
     hero: {
-      eyebrow: "Portfolio System Behind the Scenes",
-      title: "Turning a portfolio into a design system that can actually scale",
+      eyebrow: "Portfolio Design System",
+      title: "A live documentation site for the portfolio system",
       description:
-        "This page does more than showcase visuals. It opens up the design language, component rules, and maintenance logic behind the portfolio. The layout follows the document-site prototype, but every token name and value is grounded in the real code so this page can serve interviews, collaboration, and future expansion.",
+        "This page documents the real tokens, component contracts, case-study patterns, and local exceptions used across the portfolio. It is a working reference for design engineering decisions, not a separate marketing story.",
       primaryAction: "See Getting Started",
       secondaryAction: "See Token Reference",
       statsAriaLabel: "Design system summary stats",
       stats: [
-        { value: "4", label: "core routes" },
-        { value: "25+", label: "shared components organized" },
-        { value: "307", label: "case-study-specific cs-* classes" },
-        { value: "41%", label: "of CSS dedicated to bespoke layouts" },
+        { value: "6", label: "portfolio routes documented" },
+        { value: "40+", label: "component contracts indexed" },
+        { value: "10", label: "docs 00-09 aligned" },
+        { value: "0", label: "runtime token values changed here" },
       ],
     },
     toc: {
@@ -87,17 +87,17 @@ const messages = {
       keywords: ["Memorable weight", "Warmth", "Restrained personality"],
       architectureTitle: "Two-layer architecture",
       architectureBody:
-        "Not every line of CSS is treated as a design system artifact. The reusable layer holds shared tokens, components, and patterns, while a large part of `cs-*` remains bespoke layout for specific case studies.",
+        "Not every repeated-looking layout should become a shared component. The reusable layer holds tokens, stable shells, and contracts; route-local geometry stays close to the story it explains.",
       architectureCards: [
         {
           kicker: "Reusable system layer",
           title: "Reusable system layer",
-          body: "This includes color tokens, type scale, buttons, forms, navigation, project cards, footer, and shared About-page patterns. It is the common language for future pages and UI work.",
+          body: "This includes runtime tokens, UI primitives, navigation, project-card behavior, and case-study shells such as cards, grids, media, section headers, and before / after frames.",
         },
         {
-          kicker: "Case-study-specific layer",
-          title: "Case-study-specific layer",
-          body: "`cs-*` currently covers about 307 classes, roughly 41% of the CSS. Those rules are tailored for case-study storytelling such as Advantech, not forced into global reusable primitives.",
+          kicker: "Local storytelling layer",
+          title: "Local storytelling layer",
+          body: "Flow diagrams, matrices, connector endpoints, scenario boards, and media crop rules can stay local when their geometry carries the case-study story.",
         },
       ],
     },

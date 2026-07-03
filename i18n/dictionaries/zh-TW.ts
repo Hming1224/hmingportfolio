@@ -54,18 +54,18 @@ const messages = {
   },
   designSystem: {
     hero: {
-      eyebrow: "Portfolio System Behind the Scenes",
-      title: "把作品集做成一套真的能延伸的設計系統",
+      eyebrow: "Portfolio Design System",
+      title: "作品集設計系統的 live 文件站",
       description:
-        "這頁不只展示視覺成果，而是把這個作品集背後的設計語言、元件規則與維護方式完整攤開。版型參考文件站雛形，但所有 token 名稱與數值都回到真實 code，讓這頁能當作面試、協作與後續擴充的共同基準。",
+        "這頁記錄作品集實際使用中的 token、元件契約、案例頁 pattern 與 local exception。它是設計工程決策的工作文件，不是另一篇行銷敘事。",
       primaryAction: "看 Getting Started",
       secondaryAction: "看 Token Reference",
       statsAriaLabel: "設計系統概覽數據",
       stats: [
-        { value: "4", label: "核心路由" },
-        { value: "25+", label: "已整理共用元件" },
-        { value: "307", label: "案例頁專屬 cs-* class" },
-        { value: "41%", label: "專屬 layout 佔全 CSS 比例" },
+        { value: "6", label: "已文件化作品集路由" },
+        { value: "40+", label: "已索引元件契約" },
+        { value: "10", label: "docs 00-09 已對齊" },
+        { value: "0", label: "本頁改動 runtime token 值" },
       ],
     },
     toc: {
@@ -87,17 +87,17 @@ const messages = {
       keywords: ["有滯度", "不冰冷", "克制有個性"],
       architectureTitle: "兩層架構概覽",
       architectureBody:
-        "這個作品集不是把所有 CSS 都當成設計系統。真正可複用的是共用骨架、token 與元件；大量案例頁 `cs-*` 則是單一案例專屬 layout。",
+        "不是所有看起來重複的 layout 都該抽成共用元件。可複用層負責 token、穩定外框與 contract；跟故事綁在一起的幾何，留在 route-local。",
       architectureCards: [
         {
           kicker: "Reusable system layer",
           title: "可複用系統層",
-          body: "包含色彩 token、字級、按鈕、表單、導覽、專案卡、Footer 與 About 頁共用 pattern。這層是未來新增頁面與元件的共同語言。",
+          body: "包含 runtime token、UI primitives、導覽、ProjectCard 行為，以及案例頁的 card、grid、media、section header、before / after frame 等穩定外框。",
         },
         {
-          kicker: "Case-study-specific layer",
-          title: "案例頁專屬層",
-          body: "`cs-*` 目前約 307 條 class，約佔整體 41%。它們是 Advantech 等案例頁的高度客製版面，不強行當成全站共用元件。",
+          kicker: "Local storytelling layer",
+          title: "Local 敘事層",
+          body: "流程圖、矩陣、connector 端點、scenario board 與媒體裁切規則，如果幾何本身承載案例故事，就可以留在 local。",
         },
       ],
     },
