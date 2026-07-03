@@ -129,6 +129,22 @@ Shared-frame boundaries:
 
 Laushu migration intentionally did not preserve the previous `figure` / `figcaption` panel semantics. Do not overclaim accessibility semantics from the shared frame.
 
+#### Panel-level subcomponent: BeforeAfterPanel
+
+`BeforeAfterPanel` is the implemented visual shell for a single before / after state panel. It is currently unused by production routes.
+
+Current adopted routes still render panels through `BeforeAfterNarrativeFrame` internals:
+- Crypto IterationSection: adopted `BeforeAfterNarrativeFrame`
+- Laushu iteration board: adopted `BeforeAfterNarrativeFrame`
+- Advantech Board 1: pilot adopted `BeforeAfterNarrativeFrame`
+- Advantech Board 2 / Board 3: deferred / route-local
+
+A future Option C may evaluate whether `BeforeAfterNarrativeFrame` should use `BeforeAfterPanel` internally. That evaluation must happen separately and include route / viewport smoke because it would affect Crypto, Laushu, and Advantech Board 1.
+
+`CaseBeforeAfter` remains a separate simple two-panel comparison component. `BeforeAfterPanel` is not a replacement for `BeforeAfterNarrativeFrame` or `CaseBeforeAfter`.
+
+`BeforeAfterPanel` owns only the state panel visual shell. Media, annotations, redline labels, image sizing, and route-specific geometry remain slot content or route-local.
+
 #### Governance
 
 Do not expand `CaseBeforeAfter` to cover the broader narrative pattern. Use `BeforeAfterNarrativeFrame` for single-comparison narrative frames when the Layer 2 anatomy is stable. Keep multi-comparison scenario boards local until a separate multi-comparison contract is designed. Adopt one route at a time with visual-preserving migration and smoke testing.

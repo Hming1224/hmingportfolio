@@ -195,6 +195,54 @@ It does not own:
 
 `CaseBeforeAfter` remains the simple two-panel comparison component. Do not expand `CaseBeforeAfter` into the broader narrative frame.
 
+#### BeforeAfterPanel contract
+
+`BeforeAfterPanel` is an implemented shared visual shell component for a single before / after state panel.
+
+Current status:
+- implemented and exported from `components/case-study`
+- not yet route-adopted
+- not used internally by `BeforeAfterNarrativeFrame`
+- not used internally by `CaseBeforeAfter`
+
+It owns:
+- panel container
+- header container
+- visible title
+- body container
+- `children` slot
+- optional `data-tone` hook
+- scoped visual shell selectors: `cs-before-after-state-panel-*`
+
+It does not own:
+- media wrappers
+- `ZoomableImage` / `StepLightbox` / `FeatureImageLightbox` behavior
+- redline annotation
+- 360px / 640px labels
+- image width / `flexGrow` / crop
+- route-specific media geometry
+- route-specific storytelling geometry
+- `figure` / `figcaption` semantics
+
+Current props contract:
+
+```ts
+import type { ReactNode } from "react";
+
+export type BeforeAfterPanelTone = "blue" | "cyan" | "purple" | "neutral";
+
+export type BeforeAfterPanelProps = {
+  title: ReactNode;
+  children: ReactNode;
+  tone?: BeforeAfterPanelTone;
+  className?: string;
+  headerClassName?: string;
+  bodyClassName?: string;
+};
+```
+
+The component uses `children` for slot-based composition. It is a visual shell only: it does not add interactive behavior, does not add `aria-label` by default, and does not guarantee `figure` / `figcaption` semantics.
+
 #### CaseMedia contract
 
 `CaseMedia` owns only the shared media container anatomy:

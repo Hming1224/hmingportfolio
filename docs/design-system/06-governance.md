@@ -109,6 +109,24 @@ Known tradeoffs:
 
 Production code remains source of truth. Target-state wording must not be treated as production reality. Local / colocated storytelling geometry remains allowed.
 
+### BeforeAfterPanel Governance Note
+
+Current decision:
+- `BeforeAfterPanel` is implemented as a shared visual shell component.
+- It is not route-adopted yet.
+- It must not be treated as a production replacement for existing route panels until a separate adoption plan is approved.
+- `BeforeAfterNarrativeFrame` and `CaseBeforeAfter` remain unchanged.
+
+Allowed future path:
+- Option C planning may evaluate whether `BeforeAfterNarrativeFrame` should use `BeforeAfterPanel` internally.
+- Any such refactor would affect Crypto, Laushu, and Advantech Board 1, and must include route / viewport smoke.
+- `CaseBeforeAfter` should not be refactored to use `BeforeAfterPanel` without a separate compatibility audit.
+
+Boundaries:
+- `BeforeAfterPanel` is a visual shell, not a semantic figure component.
+- It does not guarantee `figure` / `figcaption` semantics.
+- Media wrappers, annotations, image sizing, and route-specific storytelling geometry stay local.
+
 ---
 
 ---
