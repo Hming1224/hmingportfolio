@@ -67,7 +67,7 @@ const zhProjects: ProjectSummary[] = [
     description:
       "在打造這個作品集網站的過程中，我把網站本身當成產品，自發建立一套 design system：從 design tokens、元件契約到與 AI 協作的治理規則。這一頁記錄的不是完美結果，而是翻車、修正、再長出制度的三次轉折。",
     cover: "/projects/design-system-case-study/cover/cover.webp",
-    logo: "/projects/design-system-case-study/cover/logo.webp",
+    logo: "/projects/design-system-case-study/cover/logo-bh-static.webp",
     tags: ["Design System", "自發專案", "AI 協作", "設計治理"],
     tone: "design-system",
     category: "school",
@@ -171,7 +171,7 @@ const enProjects: ProjectSummary[] = [
     description:
       "While building this portfolio site, I treated it as a real product and built a design system from scratch — design tokens, component contracts, and AI-collaboration governance. This case documents the turning points and recoveries, not just the polished result.",
     cover: "/projects/design-system-case-study/cover/cover.webp",
-    logo: "/projects/design-system-case-study/cover/logo.webp",
+    logo: "/projects/design-system-case-study/cover/logo-bh-static.webp",
     tags: ["Design System", "Self-initiated", "AI Collaboration", "Design Governance"],
     tone: "design-system",
     category: "school",
