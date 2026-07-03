@@ -82,7 +82,15 @@ export const designSystemSections = [
     items: [
       "case-hero",
       "case-section",
+      "case-section-header",
+      "case-card",
+      "case-grid",
+      "case-media",
+      "case-before-after",
+      "before-after-narrative-frame",
+      "before-after-panel",
       "zoomable-image",
+      "flow-scroll-hint",
       "proposal-tabs",
       "case-info-card",
     ].map((slug) => ({ kind: "component" as const, slug })),
@@ -98,7 +106,7 @@ export const designSystemSections = [
   {
     label: "Reference",
     labelZh: "參考資料",
-    items: ["tokens", "button-tokens", "gaps", "plan"].map((slug) => ({
+    items: ["tokens", "button-tokens", "local-exceptions", "gaps", "plan"].map((slug) => ({
       kind: "reference" as const,
       slug,
     })),
