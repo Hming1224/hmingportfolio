@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { cn } from '../../lib/utils';
+import { BeforeAfterPanel } from './BeforeAfterPanel';
 import CaseCard from './CaseCard';
 
 export type BeforeAfterNarrativeTone = 'blue' | 'cyan' | 'purple' | 'neutral';
@@ -45,14 +46,29 @@ function NarrativePanel({
   children,
   className,
   label,
+  tone,
 }: {
   children: ReactNode;
   className?: string;
   label?: ReactNode;
+  tone: BeforeAfterNarrativeTone;
 }) {
+  if (label) {
+    return (
+      <BeforeAfterPanel
+        title={label}
+        tone={tone}
+        className={cn('cs-before-after-narrative-panel', className)}
+        headerClassName="cs-before-after-narrative-panel-head"
+        bodyClassName="cs-before-after-narrative-panel-body"
+      >
+        {children}
+      </BeforeAfterPanel>
+    );
+  }
+
   return (
     <div className={cn('cs-before-after-narrative-panel', className)}>
-      {label ? <div className="cs-before-after-narrative-panel-head">{label}</div> : null}
       <div className="cs-before-after-narrative-panel-body">{children}</div>
     </div>
   );
@@ -114,11 +130,11 @@ export function BeforeAfterNarrativeFrame({
       ) : null}
 
       <div className={cn('cs-before-after-narrative-comparison', comparisonClassName)}>
-        <NarrativePanel className={beforeClassName} label={beforeLabel}>
+        <NarrativePanel className={beforeClassName} label={beforeLabel} tone={tone}>
           {before}
         </NarrativePanel>
         {connector ?? <DefaultConnector />}
-        <NarrativePanel className={afterClassName} label={afterLabel}>
+        <NarrativePanel className={afterClassName} label={afterLabel} tone={tone}>
           {after}
         </NarrativePanel>
       </div>

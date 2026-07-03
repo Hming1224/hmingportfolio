@@ -2594,6 +2594,14 @@
   text-align: center;
 }
 
+.cs-before-after-narrative-panel-head .cs-before-after-state-panel-title {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: inherit;
+}
+
 .cs-before-after-narrative-panel-body {
   display: flex;
   flex: 1;
