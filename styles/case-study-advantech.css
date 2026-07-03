@@ -1406,6 +1406,79 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   --cs-copy-title-text-align: center;
 }
 
+.theme-advantech #cs-sec-solution .cs-before-after-narrative.cs-sol-board {
+  --cs-card-bg: white;
+  --cs-card-border: var(--cs-line-soft);
+  --cs-card-radius: 16px;
+  --cs-card-padding: 28px;
+  --cs-card-gap: 24px;
+  --cs-before-after-narrative-header-gap: 24px;
+  --cs-before-after-narrative-body-gap: 24px;
+  --cs-before-after-narrative-point-columns: 160px minmax(0, 1fr);
+  --cs-before-after-narrative-point-gap: 24px;
+  --cs-before-after-narrative-point-label-color: var(--text-secondary);
+  --cs-before-after-narrative-point-label-size: var(--fs-body);
+  --cs-before-after-narrative-point-label-weight: 700;
+  --cs-before-after-narrative-point-label-line-height: 23px;
+  --cs-before-after-narrative-point-content-color: var(--text-secondary);
+  --cs-before-after-narrative-point-content-size: var(--fs-body);
+  --cs-before-after-narrative-point-content-line-height: 23px;
+  --cs-before-after-narrative-comparison-gap: 24px;
+  --cs-before-after-narrative-panel-border: var(--cs-line-soft);
+  --cs-before-after-narrative-panel-radius: 16px;
+  --cs-before-after-narrative-panel-bg: var(--cs-bg);
+  --cs-before-after-narrative-panel-head-padding: 20px;
+  --cs-before-after-narrative-panel-head-bg: linear-gradient(
+    269.56deg,
+    rgba(221, 241, 254, 0.2) 0%,
+    rgb(221, 241, 254) 62.975%
+  );
+  --cs-before-after-narrative-panel-head-color: var(--cs-teal);
+  --cs-before-after-narrative-panel-head-size: var(--fs-h3);
+  --cs-before-after-narrative-panel-head-weight: 700;
+  --cs-before-after-narrative-panel-head-line-height: 1.5;
+  --cs-before-after-narrative-panel-body-padding: 20px;
+  --cs-before-after-narrative-connector-width: 40px;
+  --cs-before-after-narrative-connector-color: #0070c0;
+}
+
+.theme-advantech #cs-sec-solution .cs-before-after-narrative-header {
+  padding: 0 8px;
+  overflow: hidden;
+}
+
+.theme-advantech #cs-sec-solution .cs-before-after-narrative-badge {
+  width: 160px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #ebf6fe;
+  color: #0072bd;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.theme-advantech #cs-sec-solution .cs-before-after-narrative-title {
+  color: var(--cs-navy);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.theme-advantech #cs-sec-solution .cs-before-after-narrative-point-label {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.theme-advantech #cs-sec-solution .cs-before-after-narrative-point-content p {
+  margin: 0;
+}
+
+.theme-advantech #cs-sec-solution .cs-before-after-narrative-point-content p+p {
+  margin-top: 1em;
+}
+
 /* Feature 標題卡：移出第一列、改為 fgroup 直接子元素 → 全寬區塊排在第一張圖上方。
    第一張圖則改成正常的「說明卡（左）＋圖（右）」mid row，與其他流程列同構，
    連接線間距自動統一（見 SolutionSection.tsx）。卡片與下方第一列的間距用 .cs-sol-block 的 gap(28px)。 */
@@ -2314,6 +2387,22 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 
   .theme-advantech .cs-sol-arrow {
     --cs-flex-cluster-transform: rotate(90deg);
+  }
+
+  .theme-advantech #cs-sec-solution .cs-before-after-narrative-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    overflow: visible;
+  }
+
+  .theme-advantech #cs-sec-solution .cs-before-after-narrative-badge {
+    width: auto;
+  }
+
+  .theme-advantech #cs-sec-solution .cs-before-after-narrative.cs-sol-board {
+    --cs-before-after-narrative-point-columns-mobile: 1fr;
+    --cs-before-after-narrative-point-gap-mobile: 8px;
   }
 
   /* Section 04 – Interview Synthesis */

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- connector SVGs are resized at runtime by FeatureConnectors JS (it rewrites img.src), so raw <img> is intentional here */
 import type { ReactNode } from "react";
-import { CaseFeatureRow, CaseSection } from "../../../components/case-study";
+import { BeforeAfterNarrativeFrame, CaseFeatureRow, CaseSection } from "../../../components/case-study";
 import ProposalTabs from "../components/ProposalTabs";
 import FeatureImageLightbox from "../components/FeatureImageLightbox";
 import FeatureConnectors from "../../../components/case-study/FeatureConnectors";
@@ -75,48 +75,46 @@ export default async function SolutionSection() {
         <p className="cs-sol-blk-desc cs-text-muted-blue cs-copy-body">迭代時主要檢視資訊優先級是否清楚、資料呈現是否符合廠務人員的判讀習慣，以及使用者能否在最少的操作成本下，從異常提示一路理解原因並採取下一步行動。</p>
 
         {/* Board 1: Scenario 1 - AI Chatbot 元件 */}
-        <div className="cs-sol-board cs-stack-box">
-          <div className="cs-sol-bdhd cs-flex-cluster">
-            <span className="cs-sol-badge cs-inline-pill" style={{ background: "#ebf6fe", color: "#0072bd" }}>Scenario 1</span>
-            <p className="cs-sol-bdtitle cs-copy-title">AI Chatbot 元件</p>
-          </div>
-          <div className="cs-sol-dr cs-flex-cluster">
-            <p className="cs-sol-drlabel cs-copy-title">修正視窗寬度</p>
-            <p className="cs-sol-drbody cs-copy-body">最初，ECOWatch 與 HVAC 的預設聊天視窗寬度設定為 360px。然而，當使用者需要查看詳細分析內容時，必須點擊按鈕展開聊天視窗，這增加了額外操作步驟，也中斷了整體使用體驗。為了提升可用性，我們將預設聊天視窗寬度<strong>從 360px 調整為 640px</strong>，使其與展開後的版本一致，讓使用者能更直接、順暢地瀏覽分析內容。</p>
-          </div>
-          <div className="cs-sol-dr cs-flex-cluster">
-            <p className="cs-sol-drlabel cs-copy-title">需量走勢圖精細化</p>
-            <div className="cs-sol-drbody cs-copy-body">
-              <p style={{ margin: 0 }}>原本的圖表主要呈現單一時間點的異常狀況，使用者只能看到局部的超約警示與數值，較難理解該異常在整體用電趨勢中的位置，也無法快速判斷後續是否仍存在超約風險。</p>
-              <p style={{ margin: "1em 0 0" }}>調整後的圖表擴展為完整的需量分析視覺化，補上更清楚的時間軸、kW 單位、目標需量線與預測需量線，讓使用者能同時掌握歷史用電趨勢與未來預測變化。透過不同顏色區分谷時段、尖時段與預測區段，並加入圖例說明與關鍵數值標記，使用者可以更直覺地判讀高風險時段、比較目標值與預測值，進一步支援後續的能源調度與決策。</p>
-            </div>
-          </div>
-          <div className="cs-sol-ba cs-flex-cluster">
-            <div className="cs-sol-bapanel cs-stack-box">
-              <div className="cs-sol-bahd cs-flex-cluster">Before</div>
-              <div className="cs-sol-bacontent cs-flex-cluster">
-                <div style={{ width: "calc(min(607px, 100%) * 360 / 607)", display: "flex", flexDirection: "column" }}>
-                  <FeatureImageLightbox src="/projects/advantech/solution/iter-chatbot-before.webp" alt="AI Chatbot before: 360px chat window" width={360} height={461} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="360px" />
-                  <div className="cs-sol-redline cs-flex-cluster" style={{ width: "100%" }}>
-                    <span className="cs-sol-redline-label cs-copy-title">360px</span>
-                  </div>
-                </div>
+        <BeforeAfterNarrativeFrame
+          className="cs-sol-board"
+          badge="Scenario 1"
+          title="AI Chatbot 元件"
+          points={[
+            {
+              label: "修正視窗寬度",
+              content: (
+                <p>最初，ECOWatch 與 HVAC 的預設聊天視窗寬度設定為 360px。然而，當使用者需要查看詳細分析內容時，必須點擊按鈕展開聊天視窗，這增加了額外操作步驟，也中斷了整體使用體驗。為了提升可用性，我們將預設聊天視窗寬度<strong>從 360px 調整為 640px</strong>，使其與展開後的版本一致，讓使用者能更直接、順暢地瀏覽分析內容。</p>
+              ),
+            },
+            {
+              label: "需量走勢圖精細化",
+              content: (
+                <>
+                  <p>原本的圖表主要呈現單一時間點的異常狀況，使用者只能看到局部的超約警示與數值，較難理解該異常在整體用電趨勢中的位置，也無法快速判斷後續是否仍存在超約風險。</p>
+                  <p>調整後的圖表擴展為完整的需量分析視覺化，補上更清楚的時間軸、kW 單位、目標需量線與預測需量線，讓使用者能同時掌握歷史用電趨勢與未來預測變化。透過不同顏色區分谷時段、尖時段與預測區段，並加入圖例說明與關鍵數值標記，使用者可以更直覺地判讀高風險時段、比較目標值與預測值，進一步支援後續的能源調度與決策。</p>
+                </>
+              ),
+            },
+          ]}
+          beforeLabel="Before"
+          afterLabel="After"
+          before={(
+            <div style={{ width: "calc(min(607px, 100%) * 360 / 607)", display: "flex", flexDirection: "column" }}>
+              <FeatureImageLightbox src="/projects/advantech/solution/iter-chatbot-before.webp" alt="AI Chatbot before: 360px chat window" width={360} height={461} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="360px" />
+              <div className="cs-sol-redline cs-flex-cluster" style={{ width: "100%" }}>
+                <span className="cs-sol-redline-label cs-copy-title">360px</span>
               </div>
             </div>
-            <div className="cs-sol-arrow cs-flex-cluster" aria-hidden="true"><svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" style={{ transform: "rotate(-90deg)" }}><path d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z" fill="#0070C0" /></svg></div>
-            <div className="cs-sol-bapanel cs-stack-box">
-              <div className="cs-sol-bahd cs-flex-cluster">After</div>
-              <div className="cs-sol-bacontent cs-flex-cluster">
-                <div style={{ width: "min(607px, 100%)", display: "flex", flexDirection: "column" }}>
-                  <FeatureImageLightbox src="/projects/advantech/solution/iter-chatbot-after.webp" alt="AI Chatbot after: 640px chat window" width={607} height={452} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="607px" />
-                  <div className="cs-sol-redline cs-flex-cluster" style={{ width: "100%" }}>
-                    <span className="cs-sol-redline-label cs-copy-title">640px</span>
-                  </div>
-                </div>
+          )}
+          after={(
+            <div style={{ width: "min(607px, 100%)", display: "flex", flexDirection: "column" }}>
+              <FeatureImageLightbox src="/projects/advantech/solution/iter-chatbot-after.webp" alt="AI Chatbot after: 640px chat window" width={607} height={452} className="cs-sol-iteration-zoom" imageClassName="cs-sol-iteration-zoom-img" sizes="607px" />
+              <div className="cs-sol-redline cs-flex-cluster" style={{ width: "100%" }}>
+                <span className="cs-sol-redline-label cs-copy-title">640px</span>
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        />
 
         {/* Board 2: Scenario 1 - 超約預警分析視窗 */}
         <div className="cs-sol-board cs-stack-box">
