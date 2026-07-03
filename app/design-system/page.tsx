@@ -133,7 +133,7 @@ export default async function DesignSystemPage() {
         toc={copy.toc}
         topContent={
           <>
-            <section style={{ scrollMarginTop: 112 }} id="getting-started">
+            <section key="getting-started" style={{ scrollMarginTop: 112 }} id="getting-started">
             <div style={{ display: "grid", gridTemplateColumns: "40px auto 1fr", gap: 14, alignItems: "center", marginBottom: "var(--hm-space-md)" }}>
               <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
               <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 32px)", lineHeight: 1.3, color: "var(--text-heading)" }}>{copy.introduction.heading}</h2>
@@ -177,7 +177,7 @@ export default async function DesignSystemPage() {
             </div>
           </section>
 
-          <section style={{ scrollMarginTop: 112 }} id="foundations">
+          <section key="foundations" style={{ scrollMarginTop: 112 }} id="foundations">
             <div style={{ display: "grid", gridTemplateColumns: "40px auto 1fr", gap: 14, alignItems: "center", marginBottom: "var(--hm-space-md)" }}>
               <span style={{ height: 1, background: "var(--hm-line-strong)" }} />
               <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 32px)", lineHeight: 1.3, color: "var(--text-heading)" }}>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
@@ -213,7 +213,7 @@ export default async function DesignSystemPage() {
         </>
       }
       bottomContent={
-        <section style={{ scrollMarginTop: 112, padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }} id="cta">
+        <section key="cta" style={{ scrollMarginTop: 112, padding: 28, border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", background: "color-mix(in srgb, var(--hm-paper) 92%, white)", boxShadow: "var(--shadow-sm)" }} id="cta">
             <div>
               <p style={{ margin: "0 0 var(--hm-space-xs)", fontSize: "var(--hm-fs-sm)", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--hm-purple)" }}>{copy.cta.eyebrow}</p>
               <h2 style={{ margin: 0, fontSize: "clamp(36px, 5vw, 52px)", lineHeight: 1.18, letterSpacing: "-0.01em", color: "var(--text-heading)" }}>{copy.cta.title}</h2>
