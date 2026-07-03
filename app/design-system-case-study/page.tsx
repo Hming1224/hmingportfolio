@@ -83,6 +83,36 @@ const turningPoints = [
   },
 ];
 
+const workflowSteps = [
+  {
+    title: "Audit",
+    body: "先盤點現況、找出 regression 風險與影響範圍，確認要改的是哪一層。",
+  },
+  {
+    title: "Implementation",
+    body: "一次只改一個明確範圍，避免把 layout、token、component API 和文案混在同一批修改。",
+  },
+  {
+    title: "Validation",
+    body: "跑靜態檢查與 build，確認格式、lint、token 使用與 production build 都通過。",
+  },
+  {
+    title: "Smoke",
+    body: "用瀏覽器檢查主要 routes 與斷點，確認水平溢出、console error、section anchor、互動狀態沒有回歸。",
+  },
+  {
+    title: "Commit",
+    body: "驗證通過後才建立 checkpoint commit，讓每個改動都可以被追蹤與 rollback。",
+  },
+  {
+    title: "Push",
+    body: "推到 feature branch，保留 main 穩定，等 preview 與人工確認後再合併。",
+  },
+];
+
+const workflowSummary =
+  "先診斷，再小範圍改動；每一步都驗證，最後才建立 checkpoint。";
+
 const frameworkRows = [
   ["同一個「值」到處重複", "抽成變數", "Design Tokens"],
   ["「外框」重複、內容物每次不同", "只抽外框，內容留空給各頁自己填", "Slot-based Composition"],
@@ -262,18 +292,23 @@ export default function DesignSystemCaseStudyPage() {
             </CaseCard>
           ))}
         </div>
-        <CaseMedia
-          className="ds-case-media ds-case-media--workflow"
-          caption="翻車後沉澱出的 AI 分段工作流：先診斷，再小範圍改動，最後驗證與 checkpoint。"
-        >
-          <Image
-            src={`${ASSET}/solution/ai-workflow.webp`}
-            alt="Workflow diagram showing audit, implementation, validation, smoke, commit, and push."
-            width={1600}
-            height={760}
-            sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
-          />
-        </CaseMedia>
+        <div className="ds-case-workflow" aria-labelledby="ds-case-workflow-title">
+          <div className="ds-case-workflow__header">
+            <h3 id="ds-case-workflow-title">AI collaboration workflow</h3>
+            <p>{workflowSummary}</p>
+          </div>
+          <ol className="ds-case-workflow__list">
+            {workflowSteps.map((step, index) => (
+              <li className="ds-case-workflow__item" key={step.title}>
+                <span className="ds-case-workflow__index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h4>{step.title}</h4>
+                <p>{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </CaseSection>
 
       <CaseSection id="cs-sec-framework" kicker="FRAMEWORK" title="決策框架：什麼該抽象、什麼不該" surface>
