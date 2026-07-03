@@ -4,6 +4,7 @@ export { default as CaseInfoGrid } from './CaseInfoGrid';
 export { default as CaseGrid } from './CaseGrid';
 export { default as CaseCard } from './CaseCard';
 export { default as CaseBeforeAfter } from './CaseBeforeAfter';
+export { BeforeAfterPanel } from './BeforeAfterPanel';
 export { BeforeAfterNarrativeFrame } from './BeforeAfterNarrativeFrame';
 export { default as CaseFeatureRow } from './CaseFeatureRow';
 export { default as CaseFlowFrame } from './CaseFlowFrame';
@@ -22,6 +23,10 @@ export {
   type BeforeAfterNarrativePoint,
   type BeforeAfterNarrativeTone,
 } from './BeforeAfterNarrativeFrame';
+export {
+  type BeforeAfterPanelProps,
+  type BeforeAfterPanelTone,
+} from './BeforeAfterPanel';
 export { type CaseCardProps, type CaseCardVariant } from './CaseCard';
 export { type CaseGridProps, type CaseGridVariant } from './CaseGrid';
 export { type CaseHeadingProps, type CaseHeadingTone } from './CaseHeading';

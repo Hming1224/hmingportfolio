@@ -2427,6 +2427,60 @@
   transform: rotate(-90deg);
 }
 
+.cs-before-after-state-panel {
+  --cs-before-after-state-panel-accent: var(--cs-accent);
+  --cs-before-after-state-panel-accent-soft: var(--cs-accent-soft);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--cs-before-after-state-panel-border, 1px solid var(--cs-line-soft, rgba(17, 24, 39, 0.12)));
+  border-radius: var(--cs-before-after-state-panel-radius, 16px);
+  background: var(--cs-before-after-state-panel-bg, #ffffff);
+}
+
+.cs-before-after-state-panel[data-tone="blue"] {
+  --cs-before-after-state-panel-accent: var(--hm-blue);
+  --cs-before-after-state-panel-accent-soft: var(--hm-blue-soft);
+}
+
+.cs-before-after-state-panel[data-tone="cyan"] {
+  --cs-before-after-state-panel-accent: var(--cs-accent);
+  --cs-before-after-state-panel-accent-soft: var(--cs-accent-soft);
+}
+
+.cs-before-after-state-panel[data-tone="purple"] {
+  --cs-before-after-state-panel-accent: var(--hm-purple);
+  --cs-before-after-state-panel-accent-soft: var(--hm-purple-soft);
+}
+
+.cs-before-after-state-panel-head {
+  display: flex;
+  min-height: var(--cs-before-after-state-panel-head-height, 56px);
+  align-items: center;
+  justify-content: var(--cs-before-after-state-panel-head-justify, center);
+  padding: var(--cs-before-after-state-panel-head-padding, 14px 18px);
+  background: var(--cs-before-after-state-panel-head-bg, var(--cs-before-after-state-panel-accent-soft));
+}
+
+.cs-before-after-state-panel-title {
+  margin: 0;
+  color: var(--cs-before-after-state-panel-title-color, var(--cs-before-after-state-panel-accent));
+  font-size: var(--cs-before-after-state-panel-title-size, 18px);
+  font-weight: var(--cs-before-after-state-panel-title-weight, 700);
+  line-height: var(--cs-before-after-state-panel-title-line-height, 1.35);
+  text-align: var(--cs-before-after-state-panel-title-align, center);
+}
+
+.cs-before-after-state-panel-body {
+  display: flex;
+  flex-direction: column;
+  align-items: var(--cs-before-after-state-panel-body-align, stretch);
+  justify-content: var(--cs-before-after-state-panel-body-justify, center);
+  padding: var(--cs-before-after-state-panel-body-padding, 18px);
+  background: var(--cs-before-after-state-panel-body-bg, transparent);
+}
+
 .cs-before-after-narrative {
   --cs-card-gap: var(--cs-before-after-narrative-gap, 24px);
   --cs-before-after-narrative-accent: var(--cs-accent);
