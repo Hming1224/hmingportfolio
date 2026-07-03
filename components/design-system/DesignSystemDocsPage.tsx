@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemDoc, DesignSystemLocale } from "@/lib/design-system-docs";
 import { designSystemTokenRows } from "@/lib/design-system-data";
-import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from "@/components/ui/Accordion";
 import ComponentDemo from "./ComponentDemo";
 import styles from "./DesignSystemExplorer.module.css";
 
@@ -142,29 +141,25 @@ function FoundationTokenReference({
 
   return (
     <section className={styles.docSection}>
-      <Accordion className={styles.foundationAccordion} defaultValue={groups[0]?.id} type="single">
+      <div className={styles.foundationStack}>
         {groups.map((group) => (
-          <AccordionItem className={styles.foundationPanel} key={group.id} value={group.id}>
-            <AccordionHeader className={styles.foundationAccordionHeader}>
-              <span className={styles.foundationPanelHeader}>
-                <span>
-                  <span className={styles.foundationEyebrow}>{doc.category}</span>
-                  <span className={styles.foundationTitle}>{group.title}</span>
-                </span>
-                <span className={styles.foundationCount}>
-                  {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
-                </span>
-              </span>
-            </AccordionHeader>
-            <AccordionPanel className={styles.foundationAccordionPanel}>
-              <p className={styles.foundationDescription}>{group.description}</p>
-              <div className={`${styles.tokenPreviewGrid} ${styles[`tokenPreviewGrid_${doc.slug}`] ?? ""}`}>
-                {group.rows.map((row) => renderTokenPreview(row, locale))}
+          <article className={styles.foundationPanel} key={group.id}>
+            <header className={styles.foundationPanelHeader}>
+              <div>
+                <p className={styles.foundationEyebrow}>{doc.category}</p>
+                <h2 className={styles.foundationTitle}>{group.title}</h2>
+                <p className={styles.foundationDescription}>{group.description}</p>
               </div>
-            </AccordionPanel>
-          </AccordionItem>
+              <span className={styles.foundationCount}>
+                {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
+              </span>
+            </header>
+            <div className={`${styles.tokenPreviewGrid} ${styles[`tokenPreviewGrid_${doc.slug}`] ?? ""}`}>
+              {group.rows.map((row) => renderTokenPreview(row, locale))}
+            </div>
+          </article>
         ))}
-      </Accordion>
+      </div>
     </section>
   );
 }

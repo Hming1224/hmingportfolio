@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import { getLocale } from "next-intl/server";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from "../../components/ui/Accordion";
 import { designSystemDocs } from "../../lib/design-system-docs";
-import { designSystemSections, designSystemTokenRows } from "../../lib/design-system-data";
+import { designSystemSections } from "../../lib/design-system-data";
 import DesignSystemExplorer from "../../components/design-system/DesignSystemExplorer";
 import Button from "../../components/ui/Button";
 import type { Locale } from "../../i18n/routing";
@@ -17,18 +15,6 @@ import styles from "../../components/design-system/DesignSystemExplorer.module.c
 
 type Messages = typeof enMessages;
 
-
-
-
-type TokenGroup = {
-  id: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  previewRows: Array<(typeof designSystemTokenRows)[number]>;
-  rows: Array<(typeof designSystemTokenRows)[number]>;
-};
-
 const messageMap: Record<Locale, Messages> = {
   en: enMessages,
   "zh-TW": zhMessages,
@@ -36,191 +22,6 @@ const messageMap: Record<Locale, Messages> = {
 
 function getMessages(locale: Locale) {
   return messageMap[locale].designSystem;
-}
-
-function buildFoundationGroups(locale: Locale): TokenGroup[] {
-  const zh = locale === "zh-TW";
-  const rowsFor = (types: Array<(typeof designSystemTokenRows)[number]["type"]>) =>
-    designSystemTokenRows
-      .filter((row) => types.includes(row.type))
-      .map((row) => row);
-
-  const colorRows = rowsFor(["color"]);
-  const typeRows = rowsFor(["type"]);
-  const spacingRows = rowsFor(["spacing"]);
-  const radiusRows = rowsFor(["radius"]);
-  const shadowRows = rowsFor(["shadow"]);
-  const motionRows = rowsFor(["motion"]);
-  const layoutRows = rowsFor(["layout"]);
-
-  return [
-    {
-      id: "colors",
-      eyebrow: "FOUNDATION",
-      title: zh ? "Color System" : "Color System",
-      description: zh
-        ? "照 Figma Make 的 primitive → semantic → component 節奏呈現，但 token 名稱和值以目前 code 為準。"
-        : "Presented in the primitive → semantic → component rhythm from Figma Make, with names and values kept from code.",
-      previewRows: colorRows,
-      rows: colorRows,
-    },
-    {
-      id: "typography",
-      eyebrow: "FOUNDATION",
-      title: zh ? "Typography" : "Typography",
-      description: zh
-        ? "字級列出目前 code 內的 responsive token 值；preview 使用桌機值呈現層級。"
-        : "Type scale values come from the current code data; previews use the desktop value to show hierarchy.",
-      previewRows: typeRows,
-      rows: typeRows,
-    },
-    {
-      id: "spacing",
-      eyebrow: "FOUNDATION",
-      title: zh ? "Spacing" : "Spacing",
-      description: zh
-        ? "以目前 code 的 spacing token 命名和值呈現視覺刻度，不搬 Figma 內已過期的命名。"
-        : "Visualizes the spacing scale with the current code names and values, without copying stale names from Figma.",
-      previewRows: spacingRows,
-      rows: spacingRows,
-    },
-    {
-      id: "radius",
-      eyebrow: "FOUNDATION",
-      title: zh ? "Border Radius" : "Border Radius",
-      description: zh
-        ? "用 pill 與 card 兩種語意呈現目前 code 的 radius token。"
-        : "Shows the current radius tokens through pill and card semantics.",
-      previewRows: radiusRows,
-      rows: radiusRows,
-    },
-    {
-      id: "shadows",
-      eyebrow: "FOUNDATION",
-      title: zh ? "Shadows & Elevation" : "Shadows & Elevation",
-      description: zh
-        ? "以 elevation preview 表示陰影層級；值仍來自目前 token data。"
-        : "Uses elevation previews to show depth while keeping values from the current token data.",
-      previewRows: shadowRows,
-      rows: shadowRows,
-    },
-    {
-      id: "motion",
-      eyebrow: "FOUNDATION",
-      title: zh ? "Motion" : "Motion",
-      description: zh
-        ? "把 duration 與 easing 放在同一個 motion panel，對齊 Figma Make 的文件節奏。"
-        : "Keeps duration and easing in one motion panel, matching the documentation rhythm from Figma Make.",
-      previewRows: motionRows,
-      rows: motionRows,
-    },
-    {
-      id: "layout",
-      eyebrow: "REFERENCE",
-      title: zh ? "Layout Reference" : "Layout Reference",
-      description: zh
-        ? "Figma Foundation 沒有獨立 layout 頁，但 production code 有 container、gutter、z-index 與 breakpoint reference，保留在 token reference。"
-        : "Figma has no separate layout foundation page, but production code includes container, gutter, z-index, and breakpoint references, so they stay in the token reference.",
-      previewRows: layoutRows,
-      rows: layoutRows,
-    },
-  ];
-}
-
-function getTokenUsage(row: (typeof designSystemTokenRows)[number], locale: Locale) {
-  return locale === "zh-TW" ? row.usageZh ?? row.usage : row.usage;
-}
-
-function tokenPreviewStyle(row: (typeof designSystemTokenRows)[number]) {
-  const value = row.value.split(" / ")[0];
-  const cssValue = value.startsWith("#") || value.startsWith("rgb") || value.startsWith("var(")
-    ? value
-    : `var(${row.token})`;
-
-  return {
-    "--token-preview": cssValue,
-    "--token-size": value,
-    "--token-radius": value,
-    "--token-shadow": row.value,
-    "--token-duration": value,
-    "--token-type-size": value,
-  } as CSSProperties;
-}
-
-function renderTokenPreview(row: (typeof designSystemTokenRows)[number], locale: Locale) {
-  if (row.type === "color") {
-    return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.colorSwatch} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
-    );
-  }
-
-  if (row.type === "type") {
-    return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <strong className={styles.typeSample} style={tokenPreviewStyle(row)}>Aa</strong>
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
-    );
-  }
-
-  if (row.type === "spacing") {
-    return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.spacingSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
-    );
-  }
-
-  if (row.type === "radius") {
-    return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.radiusSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
-    );
-  }
-
-  if (row.type === "shadow") {
-    return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.shadowSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
-    );
-  }
-
-  if (row.type === "motion") {
-    return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.motionSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
-    );
-  }
-
-  return (
-    <article className={styles.tokenPreviewCard} key={row.token}>
-      <strong className={styles.layoutSample}>{row.value}</strong>
-      <code>{row.token}</code>
-      <p>{getTokenUsage(row, locale)}</p>
-    </article>
-  );
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -243,7 +44,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DesignSystemPage() {
   const locale = (await getLocale()) as Locale;
   const copy = getMessages(locale);
-  const tokenGroupRows = buildFoundationGroups(locale);
 
   return (
     <main className={styles.page}>
@@ -259,7 +59,7 @@ export default async function DesignSystemPage() {
               <Button href="#getting-started">
                 {copy.hero.primaryAction}
               </Button>
-              <Button variant="secondary" href="#tokens">
+              <Button variant="secondary" href="#components">
                 {copy.hero.secondaryAction}
               </Button>
             </div>
@@ -277,7 +77,7 @@ export default async function DesignSystemPage() {
 
       <DesignSystemExplorer
         locale={locale}
-        sections={designSystemSections.slice(1)}
+        sections={designSystemSections}
         docs={designSystemDocs}
         toc={copy.toc}
         topContent={
@@ -342,44 +142,6 @@ export default async function DesignSystemPage() {
             </div>
           </section>
 
-          <section className={styles.section} key="foundations" id="foundations">
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionRule} />
-              <h2 className={styles.sectionTitle}>{locale === "en" ? "Foundations & Tokens" : "基礎與 Tokens"}</h2>
-              <span className={styles.sectionRule} />
-            </div>
-            <div className={styles.foundationIntro}>
-              <p className={styles.eyebrow}>FOUNDATION</p>
-              <p className={styles.cardBody}>
-                {locale === "en"
-                  ? "The layout follows the Figma Make foundation pages: a focused category intro, visual token previews, then the token/value/usage reference. Names and values remain sourced from the current code."
-                  : "排版跟 Figma Make 的 foundation pages 對齊：先有類別定位、再用 preview 看 token 語意，最後保留 token / value / usage 對照。名稱和值仍以目前 code 為準。"}
-              </p>
-            </div>
-            <Accordion className={styles.foundationAccordion} defaultValue="colors" type="single">
-              {tokenGroupRows.map((group) => (
-                <AccordionItem className={styles.foundationPanel} key={group.id} value={group.id}>
-                  <AccordionHeader className={styles.foundationAccordionHeader}>
-                    <span className={styles.foundationPanelHeader}>
-                      <span>
-                        <span className={styles.foundationEyebrow}>{group.eyebrow}</span>
-                        <span className={styles.foundationTitle}>{group.title}</span>
-                      </span>
-                      <span className={styles.foundationCount}>
-                        {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
-                      </span>
-                    </span>
-                  </AccordionHeader>
-                  <AccordionPanel className={styles.foundationAccordionPanel}>
-                    <p className={styles.foundationDescription}>{group.description}</p>
-                    <div className={`${styles.tokenPreviewGrid} ${styles[`tokenPreviewGrid_${group.id}`]}`}>
-                      {group.previewRows.map((row) => renderTokenPreview(row, locale))}
-                    </div>
-                  </AccordionPanel>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </section>
         </>
       }
       bottomContent={

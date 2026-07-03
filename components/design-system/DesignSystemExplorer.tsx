@@ -39,7 +39,6 @@ export default function DesignSystemExplorer({
   const activeDoc = docs.find((doc) => doc.slug === activeSlug);
   const ctaItem = toc.items.find((item) => item.href === "#cta") ?? toc.items[toc.items.length - 1];
   const gettingStartedItem = toc.items[0];
-  const foundationsItem = toc.items.find((item) => item.href === "#foundations") ?? toc.items[1];
 
   return (
     <div className={styles.shell}>
@@ -50,12 +49,6 @@ export default function DesignSystemExplorer({
               {gettingStartedItem.label}
             </a>
           ) : null}
-          {foundationsItem ? (
-            <a className={styles.rootLink} href={foundationsItem.href}>
-              {foundationsItem.label}
-            </a>
-          ) : null}
-
           <Accordion className={styles.rootAccordion} defaultValue="component-explorer" type="single">
             <AccordionItem value="component-explorer">
               <AccordionHeader>{localized(locale, "Component Explorer", "元件總覽")}</AccordionHeader>

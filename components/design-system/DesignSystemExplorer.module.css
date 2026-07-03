@@ -206,53 +206,19 @@
   font-weight: var(--hm-fw-semibold);
 }
 
-.foundationIntro {
-  max-width: 760px;
-  margin-bottom: var(--hm-space-md);
-}
-
-.foundationAccordion {
+.foundationStack {
   display: grid;
   gap: var(--hm-space-lg);
 }
 
 .foundationPanel {
   display: grid;
+  gap: var(--hm-space-md);
+  padding: var(--hm-space-lg);
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-lg);
   background: var(--hm-paper);
   box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-
-.foundationAccordionHeader {
-  margin: 0;
-}
-
-.foundationAccordion :global(.hm-accordion-trigger) {
-  align-items: center;
-  min-height: auto;
-  padding: var(--hm-space-lg);
-  background: var(--hm-paper);
-}
-
-.foundationAccordion :global(.hm-accordion-trigger > span) {
-  flex: 1;
-  min-width: 0;
-}
-
-.foundationAccordion :global(.hm-accordion-icon) {
-  flex: 0 0 auto;
-}
-
-.foundationAccordionPanel {
-  display: grid;
-  gap: var(--hm-space-md);
-  padding: 0 var(--hm-space-lg) var(--hm-space-lg);
-}
-
-.foundationPanel[data-state="closed"] {
-  box-shadow: none;
 }
 
 .foundationPanelHeader {
@@ -699,17 +665,10 @@
   }
 
   .card,
+  .foundationPanel,
   .cta,
   .demoSurface {
     padding: var(--hm-space-md);
-  }
-
-  .foundationAccordion :global(.hm-accordion-trigger) {
-    padding: var(--hm-space-md);
-  }
-
-  .foundationAccordionPanel {
-    padding: 0 var(--hm-space-md) var(--hm-space-md);
   }
 
   .foundationPanelHeader {
