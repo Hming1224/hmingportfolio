@@ -11,9 +11,12 @@ export type DesignSystemDoc = {
   category: string;
   source?: string;
   usage: string[];
+  usageZh?: string[];
   states?: string[];
+  statesZh?: string[];
   tokens?: string[];
   accessibility?: string[];
+  accessibilityZh?: string[];
   references?: string[];
   demo?: string;
 };
@@ -49,19 +52,22 @@ type ComponentSeed = {
   source: string;
   demo?: string;
   states?: string[];
+  statesZh?: string[];
   tokens?: string[];
   usage?: string[];
+  usageZh?: string[];
   accessibility?: string[];
+  accessibilityZh?: string[];
 };
 
 const componentSeeds: ComponentSeed[] = [
-  { slug: "button", title: "Button", titleZh: "按鈕", category: "General", source: "components/ui/Button.tsx", demo: "button", states: ["default", "hover", "focus", "active", "disabled", "loading", "size: sm/md/lg", "variant: primary/secondary/danger"], tokens: ["--hm-btn-primary-bg", "--hm-btn-height-md", "--hm-btn-radius", "--hm-btn-transition-duration", "--hm-btn-font-size-md"], usage: ["作為畫面上主要的 CTA (Call to Action)。", "支援多種 variants 與 sizes。"], accessibility: ["使用 <button> 或 <a> (當傳入 href 時)。", "loading 狀態會設定 aria-busy 且 disabled。"] },
-  { slug: "language-switcher", title: "LanguageSwitcher", titleZh: "語系切換", category: "General", source: "components/LanguageSwitcher.tsx", demo: "language-switcher", states: ["closed", "open", "selected", "loading"], usage: ["放在全站導覽列尾端，保留使用者目前所在路徑與 hash。", "切換期間顯示 loading，完成後同步更新文件語系。"], tokens: ["--hm-surface", "--hm-ink", "--hm-line", "--hm-radius-md"], accessibility: ["使用 button 與 aria-expanded 標示選單狀態。"] },
-  { slug: "navbar", title: "Navbar", titleZh: "導覽列", category: "Shell", source: "components/Navbar.tsx", demo: "navbar", states: ["default", "hidden on scroll", "mobile open", "language menu open"], usage: ["作為全站主要導覽與品牌入口。", "向下捲動時暫時收起，停止或向上捲動時恢復。"], tokens: ["--hm-paper", "--hm-ink", "--hm-line", "--hm-duration-slow", "--hm-ease-out", "--hm-space-md", "--hm-shadow-sm"], accessibility: ["使用 <nav> 標籤，並管理內部對話框與按鈕的焦點。"] },
-  { slug: "footer", title: "Footer", titleZh: "頁腳", category: "Shell", source: "components/Footer.tsx", demo: "footer", states: ["default", "social hover", "mobile stacked"], usage: ["放在一般頁面與案例頁最底部。", "只收錄必要版權資訊與外部社群連結。"], tokens: ["--hm-surface", "--hm-ink", "--hm-muted", "--hm-space-xl"], accessibility: ["使用 <footer> 標籤。"] },
-  { slug: "scroll-progress", title: "ScrollProgress", titleZh: "滾動進度條", category: "Shell", source: "components/ScrollProgress.tsx", demo: "scroll-progress", states: ["0%", "in progress", "100%"], usage: ["用於內容較長的案例頁，提供閱讀進度提示。", "固定在視窗頂端，不占用文件排版高度。"], tokens: ["--hm-purple", "--hm-duration-fast"], accessibility: ["使用 aria-hidden 避免螢幕閱讀器讀取冗餘進度資訊。"] },
-  { slug: "tabs", title: "Tabs", titleZh: "標籤頁", category: "Navigation", source: "components/animate-ui/primitives/base/tabs.tsx", demo: "tabs", states: ["default", "hover", "focus", "selected", "disabled"], tokens: ["--hm-surface", "--hm-ink", "--hm-muted", "--hm-radius-md", "--hm-duration-fast"], usage: ["用於切換同層級且互斥的內容檢視。"], accessibility: ["使用 role=tablist, role=tab, role=tabpanel。", "支援左右方向鍵切換標籤。"] },
-  { slug: "case-toc", title: "CaseTOC", titleZh: "案例目錄", category: "Navigation", source: "components/CaseTOC.tsx", demo: "case-toc", states: ["hidden before content", "visible", "active section"], usage: ["用於案例頁長篇內容的章節定位。", "進入第一個內容 section 後才顯示，並跟隨閱讀位置更新 active item。"], tokens: ["--hm-ink", "--hm-muted", "--hm-duration-fast"], accessibility: ["使用 <nav> 並為目錄連結提供描述。"] },
+  { slug: "button", title: "Button / LinkButton", titleZh: "按鈕 / 連結按鈕", category: "General", source: "components/ui/Button.tsx", demo: "button", states: ["default", "hover", "focus", "active", "disabled", "loading", "size: sm/md/lg", "variant: primary/secondary/danger"], tokens: ["--hm-btn-primary-bg", "--hm-btn-height-md", "--hm-btn-radius", "--hm-btn-transition-duration", "--hm-btn-font-size-md"], usage: ["Use as a command button when no href is provided.", "When href is provided, treat it as a LinkButton contract for navigation.", "Do not use danger for normal navigation or project tone."], usageZh: ["沒有 href 時才是 command button。", "有 href 時視為 LinkButton contract，用於導頁或錨點。", "danger 只用於破壞性操作，不用於一般導覽或專案色。"], accessibility: ["Renders a native button or anchor according to href.", "Loading state sets aria-busy and disables repeat action."], accessibilityZh: ["依 href 輸出 button 或 anchor 語意。", "loading 狀態會設定 aria-busy 並避免重複送出。"] },
+  { slug: "language-switcher", title: "LanguageSwitcher", titleZh: "語系切換", category: "General", source: "components/LanguageSwitcher.tsx", demo: "language-switcher", states: ["closed", "open", "selected", "loading"], usage: ["Lives at the end of the global navbar.", "Preserves the current route and hash when switching locale."], usageZh: ["放在全站導覽列尾端。", "切換語系時保留目前路徑與 hash。"], tokens: ["--hm-surface", "--hm-ink", "--hm-line", "--hm-radius-md"], accessibility: ["Uses button semantics with aria-expanded for the menu trigger."], accessibilityZh: ["選單 trigger 使用 button 與 aria-expanded 標示狀態。"] },
+  { slug: "navbar", title: "Navbar", titleZh: "導覽列", category: "Shell", source: "components/Navbar.tsx", demo: "navbar", states: ["default", "hidden on scroll", "mobile open", "language menu open"], usage: ["Global brand and primary navigation shell.", "Scroll hides and restores the navbar without changing page layout."], usageZh: ["全站品牌與主要導覽骨架。", "向下捲動暫時收起，停止或向上捲動時恢復，不改變頁面排版。"], tokens: ["--hm-paper", "--hm-ink", "--hm-line", "--hm-duration-slow", "--hm-ease-out", "--hm-space-md", "--hm-shadow-sm"], accessibility: ["Uses nav semantics and keeps the mobile menu button state explicit."], accessibilityZh: ["使用 nav 語意，手機選單按鈕需明確標示展開狀態。"] },
+  { slug: "footer", title: "Footer", titleZh: "頁腳", category: "Shell", source: "components/Footer.tsx", demo: "footer", states: ["default", "social hover", "mobile stacked"], usage: ["Closes general pages and case-study pages.", "Keeps copyright and external social links minimal."], usageZh: ["放在一般頁面與案例頁最底部。", "只保留必要版權資訊與外部社群連結。"], tokens: ["--hm-surface", "--hm-ink", "--hm-muted", "--hm-space-xl"], accessibility: ["Uses footer semantics and accessible names for social links."], accessibilityZh: ["使用 footer 語意，社群圖示需有可讀名稱。"] },
+  { slug: "scroll-progress", title: "ScrollProgress", titleZh: "滾動進度條", category: "Shell", source: "components/ScrollProgress.tsx", demo: "scroll-progress", states: ["0%", "in progress", "100%"], usage: ["Supports long case-study reading progress.", "Stays fixed without taking document layout space."], usageZh: ["用於較長案例頁的閱讀進度提示。", "固定在視窗頂端，不占用文件排版高度。"], tokens: ["--hm-purple", "--hm-duration-fast"], accessibility: ["Decorative progress should stay aria-hidden unless reopened as an accessible status feature."], accessibilityZh: ["裝飾型進度提示維持 aria-hidden，除非未來重新定義為可讀狀態。"] },
+  { slug: "tabs", title: "Tabs", titleZh: "標籤頁", category: "Navigation", source: "components/animate-ui/primitives/base/tabs.tsx", demo: "tabs", states: ["default", "hover", "focus", "selected", "disabled"], tokens: ["--hm-surface", "--hm-ink", "--hm-muted", "--hm-radius-md", "--hm-duration-fast"], usage: ["Switches mutually exclusive views at the same hierarchy level."], usageZh: ["用於切換同層級、互斥的內容檢視。"], accessibility: ["Use tablist, tab, and tabpanel semantics when the production component provides tabs."], accessibilityZh: ["正式 tabs 需維持 tablist、tab、tabpanel 語意。"] },
+  { slug: "case-toc", title: "CaseTOC", titleZh: "案例目錄", category: "Navigation", source: "components/CaseTOC.tsx", demo: "case-toc", states: ["hidden before content", "visible", "active section"], usage: ["Protected floating navigation pattern for long case-study pages.", "Do not change the interaction unless explicitly approved."], usageZh: ["案例頁長篇內容的受保護浮動導覽 pattern。", "未明確批准前不要改互動或浮動行為。"], tokens: ["--hm-ink", "--hm-muted", "--hm-duration-fast"], accessibility: ["Uses nav semantics with section links."], accessibilityZh: ["使用 nav 語意與章節連結。"] },
   { slug: "year-rail", title: "YearRail", titleZh: "年份導覽", category: "Navigation", source: "components/YearRail.tsx", demo: "year-rail", states: ["default", "active year", "reduced motion"], usage: ["用於 About 經歷時間軸，快速跳到指定年份。", "目前年份依閱讀焦點自動更新。"], tokens: ["--hm-muted", "--hm-ink", "--hm-purple", "--hm-duration-fast"], accessibility: ["提供 aria-label 與可聚焦按鈕。"] },
   { slug: "case-next-nav", title: "CaseNextNav", titleZh: "下一案例導覽", category: "Navigation", source: "components/case-study/CaseStudyShell.tsx", demo: "case-next-nav", states: ["previous", "next", "disabled"], usage: ["放在案例正文與 Footer 之間。", "提供返回首頁與前往下一個案例的明確出口。"], tokens: ["--hm-surface", "--hm-ink", "--hm-duration-fast"], accessibility: ["包含前往下一個專案的明確提示文字。"] },
   { slug: "accordion", title: "Accordion", titleZh: "手風琴", category: "Navigation", source: "components/ui/Accordion.tsx", demo: "accordion", states: ["collapsed", "expanded", "single", "multiple", "keyboard focus"], tokens: ["--hm-line", "--hm-surface", "--hm-radius-sm", "--hm-duration-fast", "--hm-ease-out"], usage: ["用於可分組的長列表導覽或文件區塊，例如 Design System sidebar。", "預設展開目前所在分類；需要多分類同時開啟時使用 multiple 模式。"], accessibility: ["Header 使用 button，並同步 aria-expanded 與 aria-controls。", "Panel 使用 role=\"region\" 並以 aria-labelledby 關聯 header。", "支援 Enter、Space 切換，方向鍵可在 header 之間移動焦點。"] },
@@ -71,7 +77,7 @@ const componentSeeds: ComponentSeed[] = [
   { slug: "select", title: "Select", titleZh: "下拉選單", category: "Data Entry", source: "components/ui/Select.tsx", demo: "select", states: ["placeholder", "open", "selected", "focus", "error", "disabled"], tokens: ["--hm-surface", "--hm-line", "--hm-ink", "--hm-muted", "--hm-radius-md", "--hm-duration-fast"], usage: ["當選項超過 4 個時使用。", "支援鍵盤導覽與焦點管理。"] },
   { slug: "checkbox", title: "Checkbox", titleZh: "核取方塊", category: "Data Entry", source: "components/ui/Checkbox.tsx", demo: "checkbox", states: ["unchecked", "checked", "focus", "error", "disabled"], tokens: ["--hm-purple", "--hm-line", "--hm-surface", "--hm-radius-sm"], usage: ["用於多選或獨立的開關設定。"] },
   { slug: "radio", title: "Radio", titleZh: "單選按鈕", category: "Data Entry", source: "components/ui/Radio.tsx", demo: "radio", states: ["unchecked", "checked", "focus", "error", "disabled"], tokens: ["--hm-purple", "--hm-line", "--hm-surface", "--hm-radius-pill"], usage: ["用於少於 4 個選項的單選互斥情境。"] },
-  { slug: "project-card", title: "ProjectCard", titleZh: "專案卡片", category: "Data Display", source: "components/Works.tsx", demo: "project-card", states: ["default", "three-layer hover", "coming soon"], usage: ["作品列表的主要內容單位，整合封面、角色、日期、摘要與標籤。", "只有已公開案例顯示進入案例的 CTA。"], tokens: ["--hm-surface", "--hm-ink", "--hm-muted", "--hm-radius-lg", "--hm-shadow-card-hover", "--hm-duration-base"], accessibility: ["整張卡片包覆在 <a> 或提供單一明確的跳轉點。"] },
+  { slug: "project-card", title: "ProjectCard", titleZh: "專案卡片", category: "Data Display", source: "components/Works.tsx", demo: "project-card", states: ["default", "three-layer hover", "coming soon"], usage: ["Primary content unit in Selected Work.", "The hover overlay, scrim, image scale, and info panel are protected interaction details.", "Coming Soon cards must not look clickable."], usageZh: ["Selected Work 的主要內容單位。", "hover overlay、scrim、圖片縮放與資訊面板是受保護互動細節。", "Coming Soon 卡片不能看起來可點。"], tokens: ["--hm-surface", "--hm-ink", "--hm-muted", "--hm-radius-lg", "--hm-shadow-card-hover", "--hm-duration-base"], accessibility: ["Published projects provide one clear navigation target; disabled placeholders stay non-interactive."], accessibilityZh: ["已公開案例提供單一明確導覽目標；未上線 placeholder 維持不可互動。"] },
   { slug: "section-heading", title: "SectionHeading", titleZh: "區塊標題", category: "Data Display", source: "app/about-me/page.tsx", demo: "section-heading", states: ["default", "responsive"], usage: ["分隔首頁與 About 的主要內容章節。", "左右線段只輔助層級，不取代清楚的標題文字。"], tokens: ["--hm-ink", "--hm-line", "--hm-space-md"], accessibility: ["使用 <h2> 或適當的層級。"] },
   { slug: "project-tag", title: "ProjectTag", titleZh: "專案標籤", category: "Data Display", source: "components/Works.tsx", demo: "tags", states: ["default", "project tone"], usage: ["標示專案使用的技術、角色或分類。"], tokens: ["--hm-surface", "--hm-ink", "--hm-radius-pill"], accessibility: ["不應作為可點擊元素，僅供展示。"] },
   { slug: "social-link", title: "SocialLink", titleZh: "社群連結", category: "Data Display", source: "components/Footer.tsx", demo: "social-link", states: ["default", "hover", "focus"], usage: ["用圖示連到 LinkedIn、GitHub 等外部個人頁面。", "新視窗開啟時必須加上安全 rel 屬性。"], tokens: ["--hm-muted", "--hm-ink", "--hm-duration-fast"], accessibility: ["提供 aria-label 說明圖示意義。"] },
@@ -104,13 +110,16 @@ const components: DesignSystemDoc[] = componentSeeds.map((item) => ({
     `Use ${item.title} only where its documented interaction and information hierarchy apply.`,
     "Prefer the shared implementation over duplicating page-specific markup.",
   ],
+  usageZh: item.usageZh,
   states: item.states,
+  statesZh: item.statesZh,
   tokens: item.tokens ?? ["--hm-ink", "--hm-surface", "--hm-line", "--hm-duration-fast"],
   accessibility: item.accessibility ?? [
     "Keyboard focus must remain visible.",
     "Do not rely on color alone to communicate state.",
     "Interactive controls need an accessible name.",
   ],
+  accessibilityZh: item.accessibilityZh,
   references: [item.source],
 }));
 

@@ -14,6 +14,9 @@ export default function DesignSystemDocsPage({
 }) {
   const title = localized(locale, doc.title, doc.titleZh);
   const description = localized(locale, doc.description, doc.descriptionZh);
+  const usage = locale === "zh-TW" && doc.usageZh ? doc.usageZh : doc.usage;
+  const states = locale === "zh-TW" && doc.statesZh ? doc.statesZh : doc.states;
+  const accessibility = locale === "zh-TW" && doc.accessibilityZh ? doc.accessibilityZh : doc.accessibility;
 
   return (
     <article >
@@ -36,15 +39,15 @@ export default function DesignSystemDocsPage({
       <section style={{ marginTop: "var(--hm-space-xl)" }}>
         <h2 style={{ fontSize: "var(--hm-fs-h3)", margin: "0 0 var(--hm-space-sm)" }}>{localized(locale, "When to use", "使用時機")}</h2>
         <ul style={{ paddingLeft: "var(--hm-space-md)", margin: 0, color: "var(--text-secondary)", lineHeight: 1.7 }}>
-          {doc.usage.map((item) => <li key={item} style={{ paddingLeft: "4px", marginBottom: "4px" }}>{item}</li>)}
+          {usage.map((item) => <li key={item} style={{ paddingLeft: "4px", marginBottom: "4px" }}>{item}</li>)}
         </ul>
       </section>
 
-      {doc.states?.length ? (
+      {states?.length ? (
         <section style={{ marginTop: "var(--hm-space-xl)" }}>
           <h2 style={{ fontSize: "var(--hm-fs-h3)", margin: "0 0 var(--hm-space-sm)" }}>{localized(locale, "States", "狀態")}</h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--hm-space-xs)", marginTop: "var(--hm-space-xs)" }}>
-            {doc.states.map((state) => <span key={state} style={{ display: "inline-flex", alignItems: "center", minHeight: 32, padding: "0 12px", borderRadius: "var(--hm-radius-pill)", background: "var(--hm-surface)", border: "1px solid var(--hm-line-strong)", fontSize: "var(--hm-fs-sm)" }}>{state}</span>)}
+            {states.map((state) => <span key={state} style={{ display: "inline-flex", alignItems: "center", minHeight: 32, padding: "0 12px", borderRadius: "var(--hm-radius-pill)", background: "var(--hm-surface)", border: "1px solid var(--hm-line-strong)", fontSize: "var(--hm-fs-sm)" }}>{state}</span>)}
           </div>
         </section>
       ) : null}
@@ -58,11 +61,11 @@ export default function DesignSystemDocsPage({
         </section>
       ) : null}
 
-      {doc.accessibility?.length ? (
+      {accessibility?.length ? (
         <section style={{ marginTop: "var(--hm-space-xl)" }}>
           <h2 style={{ fontSize: "var(--hm-fs-h3)", margin: "0 0 var(--hm-space-sm)" }}>Accessibility</h2>
           <ul style={{ paddingLeft: "var(--hm-space-md)", margin: 0, color: "var(--text-secondary)", lineHeight: 1.7 }}>
-            {doc.accessibility.map((item) => <li key={item} style={{ paddingLeft: "4px", marginBottom: "4px" }}>{item}</li>)}
+            {accessibility.map((item) => <li key={item} style={{ paddingLeft: "4px", marginBottom: "4px" }}>{item}</li>)}
           </ul>
         </section>
       ) : null}
