@@ -20,6 +20,10 @@ function sectionId(section: DesignSystemSection) {
   return section.label.toLowerCase().replaceAll(" ", "-");
 }
 
+function sectionForAnchor(sections: DesignSystemSection[], anchor: string) {
+  return sections.find((section) => anchor === `#${sectionId(section)}`);
+}
+
 export default function DesignSystemExplorer({
   locale,
   sections,
@@ -52,7 +56,7 @@ export default function DesignSystemExplorer({
   useEffect(() => {
     const updateActiveAnchor = () => {
       const hash = window.location.hash || "#getting-started";
-      const matchingSection = sections.find((section) => hash === `#${sectionId(section)}`);
+      const matchingSection = sectionForAnchor(sections, hash);
 
       setActiveAnchor(hash);
       if (matchingSection) setOpenSection(matchingSection.label);
@@ -63,6 +67,48 @@ export default function DesignSystemExplorer({
 
     return () => {
       window.removeEventListener("hashchange", updateActiveAnchor);
+    };
+  }, [sections]);
+
+  useEffect(() => {
+    const sectionAnchors = [
+      "#getting-started",
+      ...sections.map((section) => `#${sectionId(section)}`),
+      "#cta",
+    ];
+    let frameId = 0;
+
+    const updateActiveAnchorFromScroll = () => {
+      const scrollOffset = window.scrollY + 180;
+      const currentAnchor = sectionAnchors.reduce((current, anchor) => {
+        const target = document.getElementById(anchor.slice(1));
+        if (!target) return current;
+
+        const sectionTop = target.getBoundingClientRect().top + window.scrollY;
+        return sectionTop <= scrollOffset ? anchor : current;
+      }, sectionAnchors[0]);
+      const matchingSection = sectionForAnchor(sections, currentAnchor);
+
+      setActiveAnchor(currentAnchor);
+      if (matchingSection) setOpenSection(matchingSection.label);
+    };
+
+    const scheduleUpdate = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(() => {
+        frameId = 0;
+        updateActiveAnchorFromScroll();
+      });
+    };
+
+    updateActiveAnchorFromScroll();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, [sections]);
 
