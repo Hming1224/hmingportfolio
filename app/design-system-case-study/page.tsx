@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import "../../styles/case-study-design-system-case-study.css";
@@ -5,6 +6,7 @@ import {
   CaseCard,
   CaseGrid,
   CaseInfoGrid,
+  CaseMedia,
   CaseSection,
   CaseStudyShell,
   type TocSection,
@@ -13,6 +15,7 @@ import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
 
 const SLUG = "design-system-case-study";
+const ASSET = "/projects/design-system-case-study";
 
 type InfoItem = {
   label: string;
@@ -145,18 +148,14 @@ function Hero() {
 
   return (
     <section className="ds-case-hero">
-      <div className="ds-case-hero__visual" aria-hidden="true">
-        <div className="ds-case-hero__token-row">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="ds-case-hero__frame">
-          <span>tokens</span>
-          <span>components</span>
-          <span>governance</span>
-        </div>
+      <div className="ds-case-hero__visual">
+        <Image
+          src={`${ASSET}/cover/cover.webp`}
+          alt="Design System Case Study cover showing tokens, component cards, and governance workflow."
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 48vw"
+        />
       </div>
 
       <div className="cs-hero-info ds-case-hero__info">
@@ -226,9 +225,18 @@ export default function DesignSystemCaseStudyPage() {
             但這裡也埋下了第一個伏筆：<b>規劃是規劃，code 是 code。雛形畫得再完整，不等於網站真的照它運作。</b>
           </p>
         </CaseCard>
-        <div className="ds-case-media-placeholder">
-          Figma Make 雛形截圖將於 Phase 2 置入
-        </div>
+        <CaseMedia
+          className="ds-case-media"
+          caption="Figma Make 第一版互動雛形：先把 design system 的方向變成可以討論的介面。"
+        >
+          <Image
+            src={`${ASSET}/research/figma-make-prototype.webp`}
+            alt="Figma Make prototype screenshot for Hming Design System."
+            width={1440}
+            height={960}
+            sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
+          />
+        </CaseMedia>
       </CaseSection>
 
       <CaseSection id="cs-sec-turning-points" kicker="TURNING POINTS" title="三次轉折：這個專案真正的主線">
@@ -245,9 +253,18 @@ export default function DesignSystemCaseStudyPage() {
             </CaseCard>
           ))}
         </div>
-        <div className="ds-case-flow-placeholder">
-          audit → implementation → validation → smoke → commit → push
-        </div>
+        <CaseMedia
+          className="ds-case-media ds-case-media--workflow"
+          caption="翻車後沉澱出的 AI 分段工作流：先診斷，再小範圍改動，最後驗證與 checkpoint。"
+        >
+          <Image
+            src={`${ASSET}/solution/ai-workflow.webp`}
+            alt="Workflow diagram showing audit, implementation, validation, smoke, commit, and push."
+            width={1600}
+            height={760}
+            sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
+          />
+        </CaseMedia>
       </CaseSection>
 
       <CaseSection id="cs-sec-framework" kicker="FRAMEWORK" title="決策框架：什麼該抽象、什麼不該" surface>
@@ -291,9 +308,18 @@ export default function DesignSystemCaseStudyPage() {
             </CaseCard>
           ))}
         </CaseGrid>
-        <div className="ds-case-media-placeholder">
-          Before / After 對比圖將於 Phase 2 置入
-        </div>
+        <CaseMedia
+          className="ds-case-media"
+          caption="Before / After pattern 從三頁各自實作，演化成 slot-based narrative frame。"
+        >
+          <Image
+            src={`${ASSET}/solution/before-after-evolution.webp`}
+            alt="Before and after diagram showing three local implementations evolving into shared narrative frame and panel shell."
+            width={1600}
+            height={900}
+            sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
+          />
+        </CaseMedia>
       </CaseSection>
 
       <CaseSection id="cs-sec-evolution-b" kicker="EVOLUTION B" title="演化實例 B：知道何時「不要」抽象" surface>
