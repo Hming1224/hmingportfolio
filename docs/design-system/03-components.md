@@ -201,8 +201,8 @@ It does not own:
 
 Current status:
 - implemented and exported from `components/case-study`
-- not yet route-adopted
-- not used internally by `BeforeAfterNarrativeFrame`
+- used internally by `BeforeAfterNarrativeFrame` for labeled before / after panels
+- not directly route-adopted
 - not used internally by `CaseBeforeAfter`
 
 It owns:
@@ -242,6 +242,10 @@ export type BeforeAfterPanelProps = {
 ```
 
 The component uses `children` for slot-based composition. It is a visual shell only: it does not add interactive behavior, does not add `aria-label` by default, and does not guarantee `figure` / `figcaption` semantics.
+
+`BeforeAfterPanel` is now used internally by `BeforeAfterNarrativeFrame` for labeled before / after panels. Production routes still adopt `BeforeAfterNarrativeFrame`, not `BeforeAfterPanel` directly.
+
+`CaseBeforeAfter` remains a separate simple two-panel comparison component. `CaseBeforeAfter` has not been refactored to use `BeforeAfterPanel`.
 
 #### CaseMedia contract
 

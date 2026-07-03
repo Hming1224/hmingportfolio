@@ -113,13 +113,14 @@ Production code remains source of truth. Target-state wording must not be treate
 
 Current decision:
 - `BeforeAfterPanel` is implemented as a shared visual shell component.
-- It is not route-adopted yet.
+- It is now used internally by `BeforeAfterNarrativeFrame` for labeled panels.
+- It is not directly route-adopted.
 - It must not be treated as a production replacement for existing route panels until a separate adoption plan is approved.
-- `BeforeAfterNarrativeFrame` and `CaseBeforeAfter` remain unchanged.
+- `CaseBeforeAfter` remains unchanged.
 
 Allowed future path:
-- Option C planning may evaluate whether `BeforeAfterNarrativeFrame` should use `BeforeAfterPanel` internally.
-- Any such refactor would affect Crypto, Laushu, and Advantech Board 1, and must include route / viewport smoke.
+- C1 compatibility bridge completed the internal `BeforeAfterNarrativeFrame` usage while preserving legacy narrative panel class hooks for route CSS compatibility.
+- Future work should focus on whether any route-local panels or `CaseBeforeAfter` should adopt the shell, but only after separate planning and smoke requirements.
 - `CaseBeforeAfter` should not be refactored to use `BeforeAfterPanel` without a separate compatibility audit.
 
 Boundaries:

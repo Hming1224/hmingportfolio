@@ -131,15 +131,15 @@ Laushu migration intentionally did not preserve the previous `figure` / `figcapt
 
 #### Panel-level subcomponent: BeforeAfterPanel
 
-`BeforeAfterPanel` is the implemented visual shell for a single before / after state panel. It is currently unused by production routes.
+`BeforeAfterPanel` is the implemented visual shell for a single before / after state panel. It is now used inside `BeforeAfterNarrativeFrame` for labeled panels.
 
-Current adopted routes still render panels through `BeforeAfterNarrativeFrame` internals:
+Production routes still adopt `BeforeAfterNarrativeFrame`, not `BeforeAfterPanel` directly:
 - Crypto IterationSection: adopted `BeforeAfterNarrativeFrame`
 - Laushu iteration board: adopted `BeforeAfterNarrativeFrame`
 - Advantech Board 1: pilot adopted `BeforeAfterNarrativeFrame`
 - Advantech Board 2 / Board 3: deferred / route-local
 
-A future Option C may evaluate whether `BeforeAfterNarrativeFrame` should use `BeforeAfterPanel` internally. That evaluation must happen separately and include route / viewport smoke because it would affect Crypto, Laushu, and Advantech Board 1.
+The C1 compatibility bridge completed this internal use while preserving legacy narrative panel class hooks for route CSS compatibility. Existing route-scoped CSS continues to apply through `.cs-before-after-narrative-panel*` classes.
 
 `CaseBeforeAfter` remains a separate simple two-panel comparison component. `BeforeAfterPanel` is not a replacement for `BeforeAfterNarrativeFrame` or `CaseBeforeAfter`.
 
