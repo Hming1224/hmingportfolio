@@ -31,6 +31,83 @@ const options = [
   { label: "Design system", value: "system" },
 ];
 
+const caseExamples = {
+  en: {
+    caseHeroTitle: "Giving Traders Back Control: Manual Close & Take-Profit / Stop-Loss Flow Design for a Quant Trading Platform",
+    caseHeroMeta: "WEB · FinTech · Crypto · UX Design · UI Design",
+    caseHeroItems: [
+      ["Timeline", "2023.06 - 2023.08"],
+      ["Team", "1 product owner · 1 UI/UX designer · 2 full-stack engineers"],
+      ["Role", "UI/UX Designer"],
+      ["Scope", "Secondary research · wireframes · prototype · handoff video"],
+    ],
+    sectionKicker: "Problem Definition",
+    sectionTitle: "Users could see strategy PnL, but not the actual position state",
+    sectionDescription: "The shared CaseSectionHeader keeps the kicker, title, and optional description consistent before route-specific diagrams or media appear.",
+    cardTitle: "Supporting insight",
+    cardBody: "Strategy traders needed to understand side, size, entry price, mark price, PnL, and TP / SL distance without leaving Crypto Arsenal.",
+    cardMeta: "Crypto Arsenal / ProblemSection",
+    gridTitle: "Three repeated pain cards",
+    gridItems: ["Position state is unclear", "Manual close lacks confidence", "TP / SL setup needs stronger context"],
+    mediaCaption: "CaseMedia wraps competitor screenshots and product UI while leaving crop, ratio, and storytelling geometry to the route.",
+    beforeTitle: "AI Chatbot component",
+    beforeBody: "Advantech Board 1 uses BeforeAfterNarrativeFrame to compare a 360px chat window against a 640px version that better supports detailed analysis.",
+    beforePoint: "The shared frame owns the narrative shell and panels; the route owns screenshots, redlines, and the specific design judgment.",
+    panelInternal: "Internal-only anatomy",
+    panelBody: "BeforeAfterPanel is used inside BeforeAfterNarrativeFrame for labeled state panels. Routes adopt the frame, not this panel directly.",
+    caseBeforeAfterBody: "No current direct route adoption was found in Advantech, Crypto Arsenal, or Laushu. It remains an independent simple two-panel component; `.cs-before-after-panel` belongs to CaseBeforeAfter.",
+    flowTitle: "Overflow affordance for wide analysis boards",
+    flowBody: "FlowScrollHint appears before wide content such as Advantech AI feature matrices and process boards. It signals horizontal overflow; it is not a standalone visual component.",
+    proposalTitle: "Advantech proposal tabs",
+    proposalTabs: ["Proposal 1: Alert bar", "Proposal 2: System notification · adopted", "Proposal 3: Chart button · adopted"],
+    proposalBody: "Scenario 1 compares notification patterns for overage risk analysis. The adopted variants are marked with text and visual state.",
+    zoomCaption: "ZoomableImage is used through case media and lightbox wrappers for real product screenshots.",
+    localExceptions: [
+      "Advantech Board 2 / 3: route-local multi-comparison boards in SolutionSection.",
+      "CaseTOC: protected floating navigation in CaseStudyShell.",
+      "Laushu task flow: route-local diagram geometry and connector endpoints.",
+      "Crypto matrix / FlowMatrixBoard: visual storytelling matrix, not a shared ARIA grid.",
+    ],
+  },
+  "zh-TW": {
+    caseHeroTitle: "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計",
+    caseHeroMeta: "WEB · FinTech · Crypto · UX Design · UI Design",
+    caseHeroItems: [
+      ["時間進程", "2023.06 - 2023.08"],
+      ["團隊成員", "1 位產品負責人 · 1 位 UIUX 設計師 · 2 位全端工程師"],
+      ["我的角色", "UIUX 設計師"],
+      ["負責項目", "二手研究 · 線框稿 · 原型設計 · 設計交付影片"],
+    ],
+    sectionKicker: "問題定義",
+    sectionTitle: "用戶痛點：整體策略賺賠看得到，倉位狀態卻看不見",
+    sectionDescription: "CaseSectionHeader 統一 kicker、title 與 optional description，讓 route-specific diagram 或 media 出現前先建立清楚段落層級。",
+    cardTitle: "Supporting insight",
+    cardBody: "交易者需要在 Crypto Arsenal 裡直接理解倉位方向、數量、入場價、標記價、浮動盈虧，以及距離止盈 / 止損還有多遠。",
+    cardMeta: "Crypto Arsenal / ProblemSection",
+    gridTitle: "三張重複痛點卡",
+    gridItems: ["倉位狀態不清楚", "手動平倉缺乏信心", "止盈止損設定需要更完整語境"],
+    mediaCaption: "CaseMedia 負責包裝競品截圖與產品畫面；裁切比例、圖片重點與敘事幾何仍由 route 決定。",
+    beforeTitle: "AI Chatbot 元件",
+    beforeBody: "Advantech Board 1 使用 BeforeAfterNarrativeFrame，比較 360px 聊天視窗與更適合閱讀詳細分析的 640px 版本。",
+    beforePoint: "共用 frame 負責敘事外殼與 panel；route 負責截圖、redline 與具體設計判斷。",
+    panelInternal: "Internal-only anatomy",
+    panelBody: "BeforeAfterPanel 只在 BeforeAfterNarrativeFrame 內部呈現 labeled state panel。正式 route 採用的是 frame，不是直接採用 panel。",
+    caseBeforeAfterBody: "用 rg 檢查 Advantech、Crypto Arsenal、Laushu 後，未找到目前直接 route adoption。它仍是獨立的簡單兩欄比較元件；`.cs-before-after-panel` selector 邊界屬於 CaseBeforeAfter。",
+    flowTitle: "寬版分析 board 的 overflow affordance",
+    flowBody: "FlowScrollHint 出現在 Advantech AI 功能矩陣與流程 board 這類寬版內容前，用來提示可以橫向滑動；它不是獨立視覺元件。",
+    proposalTitle: "Advantech proposal tabs",
+    proposalTabs: ["提案一：警示通知欄", "提案二：系統通知 · 採用", "提案三：圖表按鈕 · 採用"],
+    proposalBody: "Scenario 1 比較需量超約分析的通知入口，採用方案需要同時用文字與視覺狀態標記。",
+    zoomCaption: "ZoomableImage 透過案例 media 與 lightbox wrapper 使用於真實產品截圖。",
+    localExceptions: [
+      "Advantech Board 2 / 3：SolutionSection 內的 route-local 多比較 board。",
+      "CaseTOC：CaseStudyShell 裡受保護的浮動導覽。",
+      "Laushu task flow：route-local diagram geometry 與 connector endpoints。",
+      "Crypto matrix / FlowMatrixBoard：視覺敘事矩陣，不是 shared ARIA grid。",
+    ],
+  },
+} satisfies Record<DesignSystemLocale, Record<string, string | string[] | string[][]>>;
+
 function getCopy(locale: DesignSystemLocale) {
   const zh = locale === "zh-TW";
 
@@ -100,6 +177,7 @@ export default function ComponentDemo({
 }) {
   const zh = locale === "zh-TW";
   const copy = getCopy(locale);
+  const caseCopy = caseExamples[locale];
   const projects = getProjects(locale);
   const featuredProject = projects.find((project) => project.slug === "advantech") ?? projects[0];
   const comingSoonProject = projects.find((project) => project.status === "coming-soon");
@@ -491,13 +569,21 @@ export default function ComponentDemo({
 
   if (type === "case-hero") {
     return (
-      <article style={{ width: "100%", maxWidth: "640px", display: "grid", gap: "24px", textAlign: "center" }}>
-        <div style={{ position: "relative", width: "100%", aspectRatio: "21/9", borderRadius: "var(--hm-radius-lg)", overflow: "hidden", background: "var(--hm-surface)" }}>
+      <article className={styles.caseHeroDemo}>
+        <div className={styles.caseHeroMediaDemo}>
           <Image src="/projects/crypto-arsenal/cover/hero-cover.webp" alt="" fill sizes="720px" loading="eager" />
         </div>
-        <div>
-          <p>WEB · FinTech · UX/UI</p>
-          <h3>{zh ? "策略倉位資訊與風險控制介面" : "Position insights and risk controls"}</h3>
+        <div className={styles.caseHeroCopyDemo}>
+          <p>{caseCopy.caseHeroMeta}</p>
+          <h3>{caseCopy.caseHeroTitle}</h3>
+          <div className={styles.caseInfoGridDemo}>
+            {caseCopy.caseHeroItems.map(([label, value]) => (
+              <article key={label}>
+                <small>{label}</small>
+                <strong>{value}</strong>
+              </article>
+            ))}
+          </div>
         </div>
       </article>
     );
@@ -505,22 +591,159 @@ export default function ComponentDemo({
 
   if (type === "case-section") {
     return (
-      <section style={{ width: "100%", maxWidth: "560px", display: "grid", gap: "24px" }}>
-        <div><span /><h3>{zh ? "研究洞察" : "Research Insights"}/</h3><span /></div>
-        <p>{zh ? "用一致的標題、內容寬度與留白建立案例頁閱讀節奏。" : "Consistent headings, content width, and spacing create a stable case-study rhythm."}</p>
+      <section className={styles.caseSectionDemo}>
+        <p className={styles.demoUsageLine}>Crypto Arsenal / ProblemSection</p>
+        <header className={styles.caseSectionHeaderDemo}>
+          <span>{caseCopy.sectionKicker}</span>
+          <h3>{caseCopy.sectionTitle}</h3>
+          <p>{caseCopy.sectionDescription}</p>
+        </header>
+      </section>
+    );
+  }
+
+  if (type === "case-section-header") {
+    return (
+      <section className={styles.caseSectionDemo}>
+        <p className={styles.demoUsageLine}>Crypto Arsenal / CaseSectionHeader</p>
+        <header className={styles.caseSectionHeaderDemo}>
+          <span>{caseCopy.sectionKicker}</span>
+          <h3>{caseCopy.sectionTitle}</h3>
+          <p>{caseCopy.sectionDescription}</p>
+        </header>
+      </section>
+    );
+  }
+
+  if (type === "case-card") {
+    return (
+      <article className={styles.caseCardDemo}>
+        <p className={styles.demoUsageLine}>{caseCopy.cardMeta}</p>
+        <h3>{caseCopy.cardTitle}</h3>
+        <p>{caseCopy.cardBody}</p>
+        <span>{zh ? "responsibility: insight / decision / evidence / structured content" : "responsibility: insight / decision / evidence / structured content"}</span>
+      </article>
+    );
+  }
+
+  if (type === "case-grid") {
+    return (
+      <section className={styles.caseGridDemo}>
+        <p className={styles.demoUsageLine}>Crypto Arsenal / ProblemSection</p>
+        <h3>{caseCopy.gridTitle}</h3>
+        <div>
+          {caseCopy.gridItems.map((item, index) => (
+            <article className={styles.caseCardDemo} key={item}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p>{item}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (type === "case-media") {
+    return (
+      <figure className={styles.caseMediaDemo}>
+        <div className={styles.caseMediaFrameDemo}>
+          <Image src="/projects/crypto-arsenal/final/final-close-position.webp" alt="" fill sizes="720px" />
+        </div>
+        <figcaption>{caseCopy.mediaCaption}</figcaption>
+      </figure>
+    );
+  }
+
+  if (type === "case-before-after") {
+    return (
+      <ReferenceCard
+        locale={locale}
+        title={zh ? "CaseBeforeAfter 是獨立元件，目前沒有直接 route adoption" : "CaseBeforeAfter is independent with no current direct route adoption"}
+        description={caseCopy.caseBeforeAfterBody}
+        items={[
+          "components/case-study/CaseBeforeAfter.tsx",
+          ".cs-before-after-panel belongs to CaseBeforeAfter",
+          zh ? "不要混同為 BeforeAfterNarrativeFrame 的 replacement" : "Do not treat it as a BeforeAfterNarrativeFrame replacement",
+        ]}
+      />
+    );
+  }
+
+  if (type === "before-after-narrative") {
+    return (
+      <section className={styles.beforeAfterNarrativeDemo}>
+        <p className={styles.demoUsageLine}>Advantech / SolutionSection / Board 1</p>
+        <div className={styles.beforeAfterHeaderDemo}>
+          <span>Scenario 1</span>
+          <h3>{caseCopy.beforeTitle}</h3>
+          <p>{caseCopy.beforeBody}</p>
+        </div>
+        <div className={styles.beforeAfterPointDemo}>
+          <strong>{zh ? "修正視窗寬度" : "Window width refinement"}</strong>
+          <p>{caseCopy.beforePoint}</p>
+        </div>
+        <div className={styles.beforeAfterPanelsDemo}>
+          <article>
+            <span>Before</span>
+            <div className={styles.beforeAfterImageDemo}>
+              <Image src="/projects/advantech/solution/iter-chatbot-before.webp" alt="" fill sizes="320px" />
+            </div>
+            <strong>360px</strong>
+          </article>
+          <article>
+            <span>After</span>
+            <div className={styles.beforeAfterImageDemo}>
+              <Image src="/projects/advantech/solution/iter-chatbot-after.webp" alt="" fill sizes="320px" />
+            </div>
+            <strong>640px</strong>
+          </article>
+        </div>
+      </section>
+    );
+  }
+
+  if (type === "before-after-panel") {
+    return (
+      <ReferenceCard
+        locale={locale}
+        title={caseCopy.panelInternal}
+        description={caseCopy.panelBody}
+        items={[
+          "used inside BeforeAfterNarrativeFrame",
+          "not directly adopted by routes",
+          "not used by CaseBeforeAfter",
+        ]}
+      />
+    );
+  }
+
+  if (type === "flow-scroll-hint") {
+    return (
+      <section className={styles.flowHintDemo}>
+        <p className={styles.demoUsageLine}>Advantech / AnalysisSection · ProcessSection · ScenarioSection</p>
+        <h3>{caseCopy.flowTitle}</h3>
+        <p>{caseCopy.flowBody}</p>
+        <div className={styles.flowHintStripDemo} aria-hidden="true">
+          <span>{zh ? "設備管理" : "Equipment"}</span>
+          <span>{zh ? "現有 WISE iEMS AI 功能" : "Current WISE iEMS AI features"}</span>
+          <span>{zh ? "EMS 競品 AI 模組" : "EMS competitor AI modules"}</span>
+          <span>{zh ? "可發展機會點" : "Opportunity"}</span>
+        </div>
       </section>
     );
   }
 
   if (type === "proposal-tabs") {
-    const proposals = zh ? ["方案 A", "方案 B・採用", "方案 C"] : ["Option A", "Option B · Adopted", "Option C"];
+    const proposals = caseCopy.proposalTabs;
     return (
-      <div style={{ width: "100%", maxWidth: "560px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", overflow: "hidden" }}>
-        <div style={{ display: "flex", gap: "8px", borderBottom: "1px solid var(--hm-line)" }} role="tablist">
+      <div className={styles.proposalTabsDemo}>
+        <p className={styles.demoUsageLine}>Advantech / ProposalTabs / Scenario 1</p>
+        <h3>{caseCopy.proposalTitle}</h3>
+        <div className={styles.liveTabsList} role="tablist">
           {proposals.map((tab, index) => (
             <button
               aria-selected={activeProposal === index}
-              className={activeProposal === index ? "is-active" : undefined}
+              className={activeProposal === index ? styles.isSelectedDemoTab : undefined}
               key={tab}
               onClick={() => setActiveProposal(index)}
               role="tab"
@@ -528,19 +751,25 @@ export default function ComponentDemo({
             >{tab}</button>
           ))}
         </div>
-        <div style={{ padding: "24px", background: "var(--hm-surface)" }}>
+        <div className={styles.proposalPanelDemo}>
           <strong>{proposals[activeProposal]}</strong>
-          <p>{zh ? "清楚說明提案差異、驗證結果與最終採用理由。" : "Explain the proposal difference, validation result, and adoption rationale."}</p>
+          <p>{caseCopy.proposalBody}</p>
         </div>
       </div>
     );
   }
 
   if (type === "case-info-card") {
-    const items = zh
-      ? [["時間", "2024.06 — 2024.08"], ["角色", "UI/UX 設計師"], ["團隊", "5 人跨職能團隊"]]
-      : [["Timeline", "Jun — Aug 2024"], ["Role", "UI/UX Designer"], ["Team", "5-person cross-functional team"]];
-    return <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", padding: "24px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)" }}>{items.map(([label, value]) => <article key={label}><small>{label}</small><strong>{value}</strong></article>)}</div>;
+    return (
+      <div className={styles.caseInfoGridDemo}>
+        {caseCopy.caseHeroItems.map(([label, value]) => (
+          <article key={label}>
+            <small>{label}</small>
+            <strong>{value}</strong>
+          </article>
+        ))}
+      </div>
+    );
   }
 
   if (type === "alert") {
@@ -606,15 +835,18 @@ export default function ComponentDemo({
 
   if (type === "zoom") {
     return (
-      <div style={{ width: "100%", maxWidth: "480px", border: "1px solid var(--hm-line)", borderRadius: "var(--hm-radius-lg)", overflow: "hidden" }}>
-        <ZoomableImage
-          alt="Design system project cover"
-          src="/projects/advantech/cover/cover.webp"
-          width={1280}
-          height={720}
-          labels={{ close: zh ? "關閉" : "Close", separator: ": ", zoom: zh ? "放大圖片" : "Zoom image" }}
-        />
-      </div>
+      <figure className={styles.caseMediaDemo}>
+        <div className={styles.zoomImageDemo}>
+          <ZoomableImage
+            alt={zh ? "Crypto Arsenal 最終平倉流程介面" : "Crypto Arsenal final close-position flow UI"}
+            src="/projects/crypto-arsenal/final/final-close-position.webp"
+            width={1440}
+            height={900}
+            labels={{ close: zh ? "關閉" : "Close", separator: ": ", zoom: zh ? "放大圖片" : "Zoom image" }}
+          />
+        </div>
+        <figcaption>{caseCopy.zoomCaption}</figcaption>
+      </figure>
     );
   }
 
