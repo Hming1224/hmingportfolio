@@ -6,6 +6,7 @@ import { getAboutData } from "@/data/about";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
+import { CaseTOCView, type TocSection } from "../CaseTOC";
 import ProjectCard from "../ProjectCard";
 import Button from "../ui/Button";
 import { Skeleton } from "../ui/Skeleton";
@@ -97,6 +98,33 @@ const caseExamples = {
   },
 } satisfies Record<DesignSystemLocale, Record<string, string | string[] | string[][]>>;
 
+const advantechTocSections = {
+  en: [
+    { id: "cs-sec-overview", title: "Overview" },
+    { id: "cs-sec-background", title: "Product Context" },
+    { id: "cs-sec-role", title: "My Role" },
+    { id: "cs-sec-process", title: "Design Process" },
+    { id: "cs-sec-analysis", title: "Analysis" },
+    { id: "cs-sec-interview", title: "User Research" },
+    { id: "cs-sec-scenario", title: "Design Strategy" },
+    { id: "cs-sec-solution", title: "Solution" },
+    { id: "cs-sec-next", title: "Next Steps" },
+    { id: "cs-sec-result", title: "Reflections" },
+  ],
+  "zh-TW": [
+    { id: "cs-sec-overview", title: "專案總覽" },
+    { id: "cs-sec-background", title: "產品脈絡" },
+    { id: "cs-sec-role", title: "我的角色" },
+    { id: "cs-sec-process", title: "設計流程" },
+    { id: "cs-sec-analysis", title: "分析洞察" },
+    { id: "cs-sec-interview", title: "使用者研究" },
+    { id: "cs-sec-scenario", title: "設計策略" },
+    { id: "cs-sec-solution", title: "設計方案" },
+    { id: "cs-sec-next", title: "下一步" },
+    { id: "cs-sec-result", title: "Reflections" },
+  ],
+} satisfies Record<DesignSystemLocale, TocSection[]>;
+
 const localExceptionExamples = {
   en: [
     {
@@ -110,7 +138,7 @@ const localExceptionExamples = {
       pattern: "CaseTOC",
       liveUsage: "CaseStudyShell across Advantech, Crypto Arsenal, and Laushu case routes (`components/CaseTOC.tsx`).",
       whyLocal: "It is shaped by long-form case reading, section anchors, scroll position, and production visibility rules. On desktop it floats beside the case body; at the production narrow breakpoint it stays hidden.",
-      boundary: "Protected case-study navigation pattern, local to the case-study reading experience. It is not part of the live component examples and should not be wrapped into a generic docs TOC.",
+      boundary: "Protected case-study navigation pattern, local to the case-study reading experience. The visible catalog example uses the production CaseTOC visual state; it should not be wrapped into a generic docs TOC.",
       extraction: "Revisit only if another long-form product story needs the same floating anchor model and scroll behavior.",
     },
     {
@@ -161,7 +189,7 @@ const localExceptionExamples = {
       pattern: "CaseTOC",
       liveUsage: "Advantech、Crypto Arsenal、Laushu case routes 的 CaseStudyShell（`components/CaseTOC.tsx`）。",
       whyLocal: "它依案例頁長篇閱讀、section anchor、scroll position 與正式站 visibility rules 設計；桌機浮在案例正文旁，窄版斷點維持隱藏。",
-      boundary: "Protected case-study navigation pattern，屬於 case-study reading experience。它不放在 live component examples，也不應包裝成 generic docs TOC。",
+      boundary: "Protected case-study navigation pattern，屬於 case-study reading experience。visible catalog example 使用 production CaseTOC 視覺狀態，不應包裝成 generic docs TOC。",
       extraction: "只有當另一個長篇產品故事也需要相同 floating anchor model 與 scroll behavior，才重新評估。",
     },
     {
@@ -690,6 +718,38 @@ export default function ComponentDemo({
           <span>{firstExperience.date}</span>
         </article>
       </div>
+    );
+  }
+
+  if (type === "case-toc") {
+    const sections = advantechTocSections[locale];
+
+    return (
+      <section className={styles.caseTocDemo} aria-label={zh ? "CaseTOC production 視覺狀態" : "CaseTOC production visual state"}>
+        <p className={styles.demoUsageLine}>{zh ? "真實使用位置：CaseStudyShell / Advantech case route" : "Real usage: CaseStudyShell / Advantech case route"}</p>
+        <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
+          <div className="cs-toc-layout">
+            <aside className="cs-toc-aside">
+              <CaseTOCView
+                sections={sections}
+                activeId="cs-sec-analysis"
+                visible
+                ariaLabel={zh ? "頁內目錄" : "Table of contents"}
+                onSectionClick={(event) => event.preventDefault()}
+              />
+            </aside>
+            <div className={styles.caseTocRouteCrop} aria-hidden="true">
+              <span>{zh ? "案例正文區域" : "Case body crop"}</span>
+              <strong>Advantech</strong>
+              <p>{zh ? "Analysis section active state" : "Analysis section active state"}</p>
+            </div>
+          </div>
+        </div>
+        <ul className={styles.caseTocNotes}>
+          <li>{zh ? "範例說明：這裡用文件站的展示外框呈現 production 視覺狀態；完整 scroll 行為屬於正式案例頁。" : "Example note: shown in a docs-controlled shell to preserve the production visual state; scroll behavior belongs to the live case route."}</li>
+          <li>{zh ? "手機說明：正式站手機斷點會隱藏 CaseTOC，避免佔用閱讀空間。" : "Mobile note: on production mobile breakpoints, CaseTOC is hidden to protect reading space."}</li>
+        </ul>
+      </section>
     );
   }
 

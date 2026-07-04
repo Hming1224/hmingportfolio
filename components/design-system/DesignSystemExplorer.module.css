@@ -1269,6 +1269,76 @@
   font-weight: var(--hm-fw-bold);
 }
 
+.caseTocDemo {
+  display: grid;
+  gap: var(--hm-space-sm);
+  width: 100%;
+}
+
+.caseTocPreviewShell {
+  width: 100%;
+  padding: var(--hm-space-lg);
+  overflow: hidden;
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--cs-surface);
+}
+
+.caseTocPreviewShell :global(.cs-toc-layout) {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+  gap: var(--hm-space-lg);
+  align-items: start;
+}
+
+.caseTocPreviewShell :global(.cs-toc) {
+  position: static;
+  z-index: 0;
+  max-height: none;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.caseTocRouteCrop {
+  display: grid;
+  gap: var(--hm-space-xs);
+  min-height: 260px;
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-md);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.62)),
+    var(--cs-surface-soft);
+  color: var(--cs-text-secondary);
+}
+
+.caseTocRouteCrop span {
+  color: var(--cs-accent);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.caseTocRouteCrop strong {
+  color: var(--cs-text-heading);
+  font-size: var(--hm-fs-h3);
+  line-height: 1.25;
+}
+
+.caseTocRouteCrop p {
+  margin: 0;
+}
+
+.caseTocNotes {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
+}
+
 .liveExperienceSummary,
 .liveSkillCardDemo,
 .liveExperienceCardDemo,
@@ -1711,6 +1781,16 @@
 .returnBarDismiss:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--hm-purple) 42%, transparent);
   outline-offset: 2px;
+}
+
+@media (max-width: 1300px) {
+  .caseTocPreviewShell :global(.cs-toc-layout) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .caseTocRouteCrop {
+    min-height: 180px;
+  }
 }
 
 @media (max-width: 900px) {

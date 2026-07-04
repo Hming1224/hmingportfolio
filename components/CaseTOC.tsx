@@ -1,6 +1,6 @@
 'use client';
 import { useLocale } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState, type MouseEvent } from 'react';
 import type { Locale } from '../i18n/routing';
 
 export interface TocSection {
@@ -12,11 +12,50 @@ interface CaseTOCProps {
   sections: TocSection[];
 }
 
+export interface CaseTOCViewProps {
+  sections: TocSection[];
+  activeId: string;
+  visible?: boolean;
+  ariaLabel: string;
+  onSectionClick?: (event: MouseEvent<HTMLAnchorElement>, id: string) => void;
+}
+
 type TocScrollLock = {
   id: string;
   fallbackId: number;
   cleanup: () => void;
 };
+
+export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function CaseTOCView(
+  { sections, activeId, visible = false, ariaLabel, onSectionClick },
+  ref,
+) {
+  return (
+    <nav
+      ref={ref}
+      className={`cs-toc${visible ? ' is-visible' : ''}`}
+      aria-label={ariaLabel}
+    >
+      <ul className="cs-toc-list">
+        {sections.map(({ id, title }) => (
+          <li
+            key={id}
+            className={`cs-toc-item${activeId === id ? ' cs-toc-item--active' : ''}`}
+          >
+            <a
+              href={`#${id}`}
+              className="cs-toc-link"
+              onClick={(event) => onSectionClick?.(event, id)}
+              aria-current={activeId === id ? 'true' : undefined}
+            >
+              {title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+});
 
 export default function CaseTOC({ sections }: CaseTOCProps) {
   const locale = useLocale() as Locale;
@@ -90,7 +129,7 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
 
   useEffect(() => clearScrollLock, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const target = document.getElementById(id);
     if (!target) return;
@@ -124,28 +163,13 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
   };
 
   return (
-    <nav
+    <CaseTOCView
       ref={navRef}
-      className={`cs-toc${visible ? ' is-visible' : ''}`}
-      aria-label={locale === 'en' ? 'Table of contents' : '頁內目錄'}
-    >
-      <ul className="cs-toc-list">
-        {sections.map(({ id, title }) => (
-          <li
-            key={id}
-            className={`cs-toc-item${activeId === id ? ' cs-toc-item--active' : ''}`}
-          >
-            <a
-              href={`#${id}`}
-              className="cs-toc-link"
-              onClick={(e) => handleClick(e, id)}
-              aria-current={activeId === id ? 'true' : undefined}
-            >
-              {title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+      sections={sections}
+      activeId={activeId}
+      visible={visible}
+      ariaLabel={locale === 'en' ? 'Table of contents' : '頁內目錄'}
+      onSectionClick={handleClick}
+    />
   );
 }
