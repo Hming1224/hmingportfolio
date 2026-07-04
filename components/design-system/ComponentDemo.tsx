@@ -1,20 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { getAboutData } from "@/data/about";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
 import Button from "../ui/Button";
-import { Alert } from "../ui/Alert";
-import { Checkbox } from "../ui/Checkbox";
-import { EmptyState } from "../ui/EmptyState";
-import { Modal } from "../ui/Modal";
-import { Radio } from "../ui/Radio";
-import { Select } from "../ui/Select";
-import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import ZoomableImage from "../case-study/ZoomableImage";
 import {
@@ -25,12 +17,6 @@ import {
 } from "../ui/Accordion";
 import { registerDesignSystemReturnTarget } from "./DesignSystemReturnBar";
 import styles from "./DesignSystemExplorer.module.css";
-
-const options = [
-  { label: "Product design", value: "product" },
-  { label: "UX research", value: "research" },
-  { label: "Design system", value: "system" },
-];
 
 const caseExamples = {
   en: {
@@ -236,6 +222,9 @@ function getCopy(locale: DesignSystemLocale) {
     referenceStyle: zh ? "Reference-style example" : "Reference-style example",
     liveUsage: zh ? "真實使用位置" : "Live usage",
     source: zh ? "來源" : "Source",
+    noLiveUsage: zh ? "目前正式作品集 route 尚未直接使用。" : "No current live usage in portfolio routes.",
+    futureContract: zh ? "這個 contract 先保留給未來產品介面或維護一致性。" : "This contract exists for future product surfaces or maintenance consistency.",
+    notProductionExample: zh ? "這不是目前正式站的 production example。" : "This is not a current production example.",
     navbarBehavior: zh
       ? ["locale-aware links", "desktop / mobile 共用 nav items", "LanguageSwitcher 放在 Navbar 內", "scroll hide / restore"]
       : ["locale-aware links", "shared desktop / mobile nav items", "LanguageSwitcher lives inside Navbar", "scroll hide / restore"],
@@ -278,19 +267,40 @@ function ReferenceCard({
 }
 
 function ContractOnlyCard({
-  children,
   locale,
+  title,
+  status = "contract-only",
+  recommendation,
+  source,
 }: {
-  children: ReactNode;
   locale: DesignSystemLocale;
+  title: string;
+  status?: "contract-only" | "candidate" | "backlog";
+  recommendation: string;
+  source?: string;
 }) {
   const copy = getCopy(locale);
+  const zh = locale === "zh-TW";
+  const statusLabel = {
+    "contract-only": zh ? "Contract-only" : "Contract-only",
+    candidate: zh ? "Candidate" : "Candidate",
+    backlog: zh ? "Backlog" : "Backlog",
+  }[status];
 
   return (
-    <div className={styles.contractOnlyDemo}>
-      <p className={styles.demoBadge}>{copy.contractOnly}</p>
-      {children}
-    </div>
+    <article className={styles.contractOnlyDemo}>
+      <div>
+        <p className={styles.demoBadge}>{statusLabel}</p>
+        <h3>{title}</h3>
+        {source ? <code className={styles.contractSource}>{source}</code> : null}
+      </div>
+      <ul>
+        <li>{copy.noLiveUsage}</li>
+        <li>{copy.futureContract}</li>
+        <li>{copy.notProductionExample}</li>
+      </ul>
+      <p>{recommendation}</p>
+    </article>
   );
 }
 
@@ -312,8 +322,6 @@ export default function ComponentDemo({
   const firstSkill = aboutData.skillCategories[0];
   const firstExperience = aboutData.experiences[0];
   const [copied, setCopied] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectValue, setSelectValue] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [activeTab, setActiveTab] = useState("enterprise");
   const [activeProposal, setActiveProposal] = useState(1);
@@ -552,41 +560,37 @@ export default function ComponentDemo({
 
   if (type === "select") {
     return (
-      <ContractOnlyCard locale={locale}>
-        <div style={{ width: "100%", maxWidth: "320px" }}>
-          <Select
-            name="design-discipline"
-            options={options}
-            value={selectValue}
-            onChange={setSelectValue}
-            placeholder={zh ? "選擇設計分類" : "Choose a discipline"}
-          />
-        </div>
-      </ContractOnlyCard>
+      <ContractOnlyCard
+        locale={locale}
+        title={zh ? "Select contract 尚未進入正式作品集" : "Select contract is not in the live portfolio yet"}
+        recommendation={zh ? "若未來 Contact form 增加詢問類型或服務分類，且選項超過四個，再先導入 production flow 後回頭文件化。" : "If the Contact form later adds inquiry type or service-category choices with more than four options, implement it in production first and document the real flow afterward."}
+        source="components/ui/Select.tsx"
+        status="candidate"
+      />
     );
   }
 
   if (type === "checkbox") {
     return (
-      <ContractOnlyCard locale={locale}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <Checkbox defaultChecked>{zh ? "已選選項" : "Selected option"}</Checkbox>
-          <Checkbox>{zh ? "可選選項" : "Available option"}</Checkbox>
-          <Checkbox disabled>{zh ? "停用選項" : "Disabled option"}</Checkbox>
-        </div>
-      </ContractOnlyCard>
+      <ContractOnlyCard
+        locale={locale}
+        title={zh ? "Checkbox contract 目前只保留為候選" : "Checkbox contract is currently a candidate"}
+        recommendation={zh ? "作品集目前沒有多選設定或同意事項需要它；不要為了保留元件而塞進 Contact form。" : "The portfolio currently has no multi-select setting or consent task that needs it; do not force it into the Contact form just to keep the component visible."}
+        source="components/ui/Checkbox.tsx"
+        status="candidate"
+      />
     );
   }
 
   if (type === "radio") {
     return (
-      <ContractOnlyCard locale={locale}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <Radio name="demo-radio" defaultChecked>{zh ? "產品設計師" : "Product designer"}</Radio>
-          <Radio name="demo-radio">{zh ? "產品經理" : "Product manager"}</Radio>
-          <Radio name="demo-radio" disabled>{zh ? "不可用" : "Unavailable"}</Radio>
-        </div>
-      </ContractOnlyCard>
+      <ContractOnlyCard
+        locale={locale}
+        title={zh ? "Radio contract 尚未有正式使用情境" : "Radio contract has no current production context"}
+        recommendation={zh ? "只有當未來表單出現少量互斥選項，且真的能降低填寫成本時，才導入 production。" : "Introduce it only when a future form has a small set of mutually exclusive options and the control genuinely reduces form effort."}
+        source="components/ui/Radio.tsx"
+        status="candidate"
+      />
     );
   }
 
@@ -1061,12 +1065,13 @@ export default function ComponentDemo({
 
   if (type === "alert") {
     return (
-      <ContractOnlyCard locale={locale}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "480px" }}>
-          <Alert tone="success">{zh ? "Design tokens 已同步。" : "Design tokens are synchronized."}</Alert>
-          <Alert tone="warning">{zh ? "發布前請檢查 RWD。" : "Review responsive behavior before release."}</Alert>
-        </div>
-      </ContractOnlyCard>
+      <ContractOnlyCard
+        locale={locale}
+        title={zh ? "Alert contract 目前沒有獨立 live usage" : "Alert contract has no standalone live usage yet"}
+        recommendation={zh ? "Contact form 若未來需要可持續顯示的錯誤摘要，可以先導入 production；目前 Toast 已承擔送出成功 / 失敗回饋。" : "If the Contact form later needs a persistent error summary, implement it in production first. Today, Toast already handles send success and failure feedback."}
+        source="components/ui/Alert.tsx"
+        status="contract-only"
+      />
     );
   }
 
@@ -1083,40 +1088,37 @@ export default function ComponentDemo({
 
   if (type === "modal") {
     return (
-      <ContractOnlyCard locale={locale}>
-        <Button onClick={() => setModalOpen(true)}>{zh ? "開啟 modal contract" : "Open modal contract"}</Button>
-        <Modal open={modalOpen} title={zh ? "檢查 design-system 變更" : "Review design-system change"} onClose={() => setModalOpen(false)}>
-          <p style={{ color: "var(--text-secondary)", marginBottom: "24px" }}>{zh ? "這是 contract-only preview；目前作品集沒有 live modal flow。" : "This is a contract-only preview; the portfolio has no live modal flow today."}</p>
-          <div style={{ display: "flex", gap: "12px" }}>
-            <Button onClick={() => setModalOpen(false)}>{zh ? "確認" : "Confirm"}</Button>
-            <Button variant="secondary" onClick={() => setModalOpen(false)}>{zh ? "關閉" : "Close"}</Button>
-          </div>
-        </Modal>
-      </ContractOnlyCard>
+      <ContractOnlyCard
+        locale={locale}
+        title={zh ? "Modal 先放在 backlog，不作為目前 example" : "Modal stays in backlog, not as a current example"}
+        recommendation={zh ? "正式作品集目前沒有必須中斷使用者並要求回應的任務；若未來有真實阻斷式流程，再先完成 production UX 後文件化。" : "The live portfolio has no task that must interrupt the user for a response. If a real blocking flow appears later, implement the production UX first and document it afterward."}
+        source="components/ui/Modal.tsx"
+        status="backlog"
+      />
     );
   }
 
   if (type === "skeleton") {
     return (
-      <ContractOnlyCard locale={locale}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%", maxWidth: "480px" }} aria-label={zh ? "載入預覽" : "Loading preview"}>
-          <Skeleton style={{ width: "42%", height: 18 }} />
-          <Skeleton style={{ width: "100%", height: 72 }} />
-          <Skeleton style={{ width: "76%", height: 18 }} />
-        </div>
-      </ContractOnlyCard>
+      <ContractOnlyCard
+        locale={locale}
+        title={zh ? "Skeleton 目前沒有 loading surface" : "Skeleton has no current loading surface"}
+        recommendation={zh ? "作品集多數內容是靜態頁；只有當未來資料延遲會造成 layout shift 時，才需要先導入 production loading state。" : "Most portfolio surfaces are static. Use this only when future data latency would otherwise cause layout shift in a production surface."}
+        source="components/ui/Skeleton.tsx"
+        status="backlog"
+      />
     );
   }
 
   if (type === "empty") {
     return (
-      <ContractOnlyCard locale={locale}>
-        <EmptyState
-          title={zh ? "沒有符合的元件" : "No matching component"}
-          description={zh ? "清除篩選或改看其他分類。" : "Clear filters or browse another category."}
-          action={<Button size="sm">{zh ? "清除篩選" : "Clear filters"}</Button>}
-        />
-      </ContractOnlyCard>
+      <ContractOnlyCard
+        locale={locale}
+        title={zh ? "EmptyState 目前沒有列表空狀態" : "EmptyState has no current list-empty surface"}
+        recommendation={zh ? "目前作品集沒有搜尋、篩選或資料列表空狀態。等 production 出現真實無資料情境，再用真實文案文件化。" : "The portfolio currently has no search, filter, or list-empty state. Document it with real copy only after a production no-data case exists."}
+        source="components/ui/EmptyState.tsx"
+        status="backlog"
+      />
     );
   }
 

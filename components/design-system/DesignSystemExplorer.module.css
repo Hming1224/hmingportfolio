@@ -305,65 +305,64 @@
   white-space: nowrap;
 }
 
-.tokenPreviewGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-  gap: var(--hm-space-sm);
-}
-
-.tokenPreviewGrid_colors {
-  grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
-}
-
-.tokenPreviewGrid_typography,
-.tokenPreviewGrid_spacing,
-.tokenPreviewGrid_layout {
-  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-}
-
-.tokenPreviewCard {
-  display: grid;
-  align-content: start;
-  gap: var(--hm-space-2xs);
-  min-width: 0;
-  padding: var(--hm-space-sm);
+.tokenTableWrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-md);
-  background: color-mix(in srgb, var(--hm-paper) 90%, var(--hm-surface));
+  background: var(--hm-paper);
 }
 
-.tokenPreviewCard code {
+.tokenTable {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.tokenTable th,
+.tokenTable td {
+  padding: var(--hm-space-xs) var(--hm-space-sm);
+  border-bottom: 1px solid var(--hm-line);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.55;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.tokenTable th {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tokenTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.tokenTable code {
   color: var(--text-heading);
   font-size: var(--hm-fs-sm);
   overflow-wrap: anywhere;
 }
 
-.tokenPreviewCard span:not(.colorSwatch, .spacingSample, .radiusSample, .shadowSample, .motionSample) {
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  overflow-wrap: anywhere;
-}
-
-.tokenPreviewCard p {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  line-height: 1.55;
-}
-
 .colorSwatch {
   display: block;
-  width: 100%;
-  min-height: 72px;
+  width: 56px;
+  min-height: 32px;
   border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-md);
+  border-radius: var(--hm-radius-sm);
   background: var(--token-preview);
 }
 
 .typeSample {
   display: flex;
   align-items: center;
-  min-height: 72px;
+  min-height: 40px;
   color: var(--text-heading);
   font-size: var(--token-type-size);
   line-height: 1;
@@ -382,8 +381,8 @@
 .shadowSample,
 .motionSample {
   display: block;
-  width: 88px;
-  height: 64px;
+  width: 56px;
+  height: 40px;
   border: 1px solid var(--hm-line);
   background: var(--hm-paper);
 }
@@ -420,9 +419,9 @@
 .layoutSample {
   display: flex;
   align-items: center;
-  min-height: 72px;
+  min-height: 40px;
   color: var(--hm-purple);
-  font-size: var(--hm-fs-h4);
+  font-size: var(--hm-fs-sm);
   overflow-wrap: anywhere;
 }
 
@@ -656,9 +655,17 @@
   background: var(--hm-paper);
 }
 
+.contractOnlyDemo {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--hm-surface) 72%, var(--hm-paper));
+}
+
 .demoReferenceCard h3,
+.contractOnlyDemo h3,
 .demoReferenceCard p,
+.contractOnlyDemo p,
 .demoReferenceCard ul,
+.contractOnlyDemo ul,
 .liveSkillCardDemo p,
 .liveSkillCardDemo h3,
 .liveSkillCardDemo ul,
@@ -670,6 +677,7 @@
 }
 
 .demoReferenceCard h3,
+.contractOnlyDemo h3,
 .liveSkillCardDemo h3,
 .liveExperienceSummary h3,
 .liveExperienceCardDemo h3 {
@@ -680,6 +688,8 @@
 
 .demoReferenceCard p,
 .demoReferenceCard li,
+.contractOnlyDemo p,
+.contractOnlyDemo li,
 .liveSkillCardDemo li,
 .liveExperienceSummary p,
 .liveExperienceSummary span,
@@ -690,8 +700,14 @@
 }
 
 .demoReferenceCard ul,
+.contractOnlyDemo ul,
 .liveSkillCardDemo ul {
   padding-left: var(--hm-space-md);
+}
+
+.contractSource {
+  width: fit-content;
+  margin-top: var(--hm-space-2xs);
 }
 
 .liveTabsList,

@@ -39,79 +39,86 @@ function tokenPreviewStyle(row: TokenRow) {
   } as CSSProperties;
 }
 
-function renderTokenPreview(row: TokenRow, locale: DesignSystemLocale) {
+function renderTokenPreviewCell(row: TokenRow) {
   if (row.type === "color") {
     return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.colorSwatch} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
+      <span className={styles.colorSwatch} style={tokenPreviewStyle(row)} />
     );
   }
 
   if (row.type === "type") {
     return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <strong className={styles.typeSample} style={tokenPreviewStyle(row)}>Aa</strong>
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
+      <strong className={styles.typeSample} style={tokenPreviewStyle(row)}>Aa</strong>
     );
   }
 
   if (row.type === "spacing") {
     return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.spacingSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
+      <span className={styles.spacingSample} style={tokenPreviewStyle(row)} />
     );
   }
 
   if (row.type === "radius") {
     return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.radiusSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
+      <span className={styles.radiusSample} style={tokenPreviewStyle(row)} />
     );
   }
 
   if (row.type === "shadow") {
     return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.shadowSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
+      <span className={styles.shadowSample} style={tokenPreviewStyle(row)} />
     );
   }
 
   if (row.type === "motion") {
     return (
-      <article className={styles.tokenPreviewCard} key={row.token}>
-        <span className={styles.motionSample} style={tokenPreviewStyle(row)} />
-        <code>{row.token}</code>
-        <span>{row.value}</span>
-        <p>{getTokenUsage(row, locale)}</p>
-      </article>
+      <span className={styles.motionSample} style={tokenPreviewStyle(row)} />
     );
   }
 
   return (
-    <article className={styles.tokenPreviewCard} key={row.token}>
-      <strong className={styles.layoutSample}>{row.value}</strong>
-      <code>{row.token}</code>
-      <p>{getTokenUsage(row, locale)}</p>
-    </article>
+    <strong className={styles.layoutSample}>{row.value}</strong>
+  );
+}
+
+function TokenTable({
+  locale,
+  rows,
+  variant,
+}: {
+  locale: DesignSystemLocale;
+  rows: TokenRow[];
+  variant: "foundation" | "reference";
+}) {
+  const isReference = variant === "reference";
+
+  return (
+    <div className={styles.tokenTableWrap}>
+      <table className={styles.tokenTable}>
+        <thead>
+          <tr>
+            <th>{localized(locale, "Token", "Token")}</th>
+            <th>{localized(locale, "Value", "值")}</th>
+            {isReference ? <th>{localized(locale, "Type", "類型")}</th> : null}
+            {isReference ? <th>{localized(locale, "Scope", "範圍")}</th> : null}
+            <th>{localized(locale, "Usage", "用途")}</th>
+            {!isReference ? <th>{localized(locale, "Preview", "預覽")}</th> : null}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.token}>
+              <td><code>{row.token}</code></td>
+              <td><code>{row.value}</code></td>
+              {isReference ? <td>{row.type}</td> : null}
+              {isReference ? <td>{row.scope}</td> : null}
+              <td>{getTokenUsage(row, locale)}</td>
+              {!isReference ? <td>{renderTokenPreviewCell(row)}</td> : null}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -154,9 +161,7 @@ function FoundationTokenReference({
                 {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
               </span>
             </header>
-            <div className={`${styles.tokenPreviewGrid} ${styles[`tokenPreviewGrid_${doc.slug}`] ?? ""}`}>
-              {group.rows.map((row) => renderTokenPreview(row, locale))}
-            </div>
+            <TokenTable locale={locale} rows={group.rows} variant={isTokenReference ? "reference" : "foundation"} />
           </article>
         ))}
       </div>
