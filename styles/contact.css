@@ -484,6 +484,14 @@
   gap: 12px;
 }
 
+.contact-review-actions .ds-button-primary {
+  order: 2;
+}
+
+.contact-review-actions .ds-button-secondary {
+  order: 1;
+}
+
 .contact-review-skeleton {
   width: min(100%, 260px);
   height: 18px;
@@ -515,8 +523,9 @@
     grid-template-columns: 1fr;
   }
 
-  .contact-review-actions .ds-button-primary {
-    order: -1;
+  .contact-review-actions .ds-button-primary,
+  .contact-review-actions .ds-button-secondary {
+    order: 0;
   }
 }
 

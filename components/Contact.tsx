@@ -429,9 +429,6 @@ export default function Contact() {
             </dl>
           ) : null}
           <div className="contact-review-actions">
-            <Button type="button" variant="secondary" onClick={closeReviewModal} disabled={status === "loading"}>
-              {t("reviewCancel")}
-            </Button>
             <Button
               type="button"
               onClick={handleConfirmSend}
@@ -440,6 +437,9 @@ export default function Contact() {
               disabled={status === "loading"}
             >
               {t("reviewConfirm")}
+            </Button>
+            <Button type="button" variant="secondary" onClick={closeReviewModal} disabled={status === "loading"}>
+              {t("reviewCancel")}
             </Button>
           </div>
         </div>
