@@ -706,7 +706,6 @@
 
 .buttonSpecDemo {
   display: grid;
-  gap: var(--hm-space-xs);
   width: 100%;
   max-width: 720px;
   min-width: 0;
@@ -718,10 +717,12 @@
   align-items: center;
   gap: var(--hm-space-sm);
   min-width: 0;
-  padding: var(--hm-space-sm);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-md);
-  background: var(--hm-paper);
+  padding: var(--hm-space-sm) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--hm-line) 54%, transparent);
+}
+
+.buttonSpecRow:last-child {
+  border-bottom: 0;
 }
 
 .buttonSpecRow p {
@@ -745,6 +746,11 @@
   flex: 0 0 auto;
   width: auto;
   white-space: nowrap;
+}
+
+.buttonSpecCta {
+  min-width: 172px;
+  padding-inline: var(--hm-btn-padding-inline-md);
 }
 
 .languageSwitcherDemo {

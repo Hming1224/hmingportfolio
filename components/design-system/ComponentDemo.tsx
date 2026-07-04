@@ -375,7 +375,7 @@ export default function ComponentDemo({
         <div className={styles.buttonSpecRow} data-button-spec-row>
           <p>CTA Button(Default)</p>
           <div className={styles.buttonSpecControls}>
-            <Button onClick={() => undefined} size="lg" type="button">
+            <Button className={styles.buttonSpecCta} onClick={() => undefined} size="lg" type="button">
               {zh ? "了解更多" : "Learn More"}
             </Button>
           </div>
@@ -383,7 +383,7 @@ export default function ComponentDemo({
         <div className={styles.buttonSpecRow} data-button-spec-row>
           <p>CTA Button(Disabled)</p>
           <div className={styles.buttonSpecControls}>
-            <Button size="lg" disabled>
+            <Button className={styles.buttonSpecCta} size="lg" disabled>
               {zh ? "即將上線" : "Coming Soon"}
             </Button>
           </div>
@@ -391,7 +391,7 @@ export default function ComponentDemo({
         <div className={styles.buttonSpecRow} data-button-spec-row>
           <p>CTA Button(Processing)</p>
           <div className={styles.buttonSpecControls}>
-            <Button loading loadingLabel={zh ? "傳送中..." : "Sending..."}>
+            <Button className={styles.buttonSpecCta} loading loadingLabel={zh ? "傳送中..." : "Sending..."}>
               {zh ? "送出訊息" : "Send Message"}
             </Button>
           </div>
