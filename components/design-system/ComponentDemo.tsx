@@ -6,7 +6,7 @@ import { getAboutData } from "@/data/about";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
-import { CaseTOCView, type TocSection } from "../CaseTOC";
+import CaseTOC, { type TocSection } from "../CaseTOC";
 import ProjectCard from "../ProjectCard";
 import Button from "../ui/Button";
 import { Skeleton } from "../ui/Skeleton";
@@ -100,28 +100,28 @@ const caseExamples = {
 
 const advantechTocSections = {
   en: [
-    { id: "cs-sec-overview", title: "Overview" },
-    { id: "cs-sec-background", title: "Product Context" },
-    { id: "cs-sec-role", title: "My Role" },
-    { id: "cs-sec-process", title: "Design Process" },
-    { id: "cs-sec-analysis", title: "Analysis" },
-    { id: "cs-sec-interview", title: "User Research" },
-    { id: "cs-sec-scenario", title: "Design Strategy" },
-    { id: "cs-sec-solution", title: "Solution" },
-    { id: "cs-sec-next", title: "Next Steps" },
-    { id: "cs-sec-result", title: "Reflections" },
+    { id: "cs-sec-ds-toc-overview", title: "Overview" },
+    { id: "cs-sec-ds-toc-background", title: "Product Context" },
+    { id: "cs-sec-ds-toc-role", title: "My Role" },
+    { id: "cs-sec-ds-toc-process", title: "Design Process" },
+    { id: "cs-sec-ds-toc-analysis", title: "Analysis" },
+    { id: "cs-sec-ds-toc-interview", title: "User Research" },
+    { id: "cs-sec-ds-toc-scenario", title: "Design Strategy" },
+    { id: "cs-sec-ds-toc-solution", title: "Solution" },
+    { id: "cs-sec-ds-toc-next", title: "Next Steps" },
+    { id: "cs-sec-ds-toc-result", title: "Reflections" },
   ],
   "zh-TW": [
-    { id: "cs-sec-overview", title: "專案總覽" },
-    { id: "cs-sec-background", title: "產品脈絡" },
-    { id: "cs-sec-role", title: "我的角色" },
-    { id: "cs-sec-process", title: "設計流程" },
-    { id: "cs-sec-analysis", title: "分析洞察" },
-    { id: "cs-sec-interview", title: "使用者研究" },
-    { id: "cs-sec-scenario", title: "設計策略" },
-    { id: "cs-sec-solution", title: "設計方案" },
-    { id: "cs-sec-next", title: "下一步" },
-    { id: "cs-sec-result", title: "Reflections" },
+    { id: "cs-sec-ds-toc-overview", title: "專案總覽" },
+    { id: "cs-sec-ds-toc-background", title: "產品脈絡" },
+    { id: "cs-sec-ds-toc-role", title: "我的角色" },
+    { id: "cs-sec-ds-toc-process", title: "設計流程" },
+    { id: "cs-sec-ds-toc-analysis", title: "分析洞察" },
+    { id: "cs-sec-ds-toc-interview", title: "使用者研究" },
+    { id: "cs-sec-ds-toc-scenario", title: "設計策略" },
+    { id: "cs-sec-ds-toc-solution", title: "設計方案" },
+    { id: "cs-sec-ds-toc-next", title: "下一步" },
+    { id: "cs-sec-ds-toc-result", title: "Reflections" },
   ],
 } satisfies Record<DesignSystemLocale, TocSection[]>;
 
@@ -730,24 +730,26 @@ export default function ComponentDemo({
         <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
           <div className="cs-toc-layout">
             <aside className="cs-toc-aside">
-              <CaseTOCView
-                sections={sections}
-                activeId="cs-sec-analysis"
-                visible
-                ariaLabel={zh ? "頁內目錄" : "Table of contents"}
-                onSectionClick={(event) => event.preventDefault()}
-              />
+              <CaseTOC sections={sections} />
             </aside>
-            <div className={styles.caseTocRouteCrop} aria-hidden="true">
-              <span>{zh ? "案例正文區域" : "Case body crop"}</span>
-              <strong>Advantech</strong>
-              <p>{zh ? "Analysis section active state" : "Analysis section active state"}</p>
+            <div className={styles.caseTocRouteCrop}>
+              {sections.map((section, index) => (
+                <section
+                  className={styles.caseTocWireSection}
+                  id={section.id}
+                  key={section.id}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h4>{section.title}</h4>
+                  <div aria-hidden="true" />
+                </section>
+              ))}
             </div>
           </div>
         </div>
         <ul className={styles.caseTocNotes}>
-          <li>{zh ? "範例說明：這裡用文件站的展示外框呈現 production 視覺狀態；完整 scroll 行為屬於正式案例頁。" : "Example note: shown in a docs-controlled shell to preserve the production visual state; scroll behavior belongs to the live case route."}</li>
-          <li>{zh ? "手機說明：正式站手機斷點會隱藏 CaseTOC，避免佔用閱讀空間。" : "Mobile note: on production mobile breakpoints, CaseTOC is hidden to protect reading space."}</li>
+          <li>{zh ? "行為：點擊章節標題會移到右側對應大標；active state 跟隨目前可見大標。" : "Behavior: clicking a section label moves to the matching case heading; the active state follows the visible heading."}</li>
+          <li>{zh ? "正式邊界：正式案例頁在窄版斷點會隱藏這個浮動導覽。" : "Production boundary: live case routes hide this floating navigation at narrow breakpoints."}</li>
         </ul>
       </section>
     );

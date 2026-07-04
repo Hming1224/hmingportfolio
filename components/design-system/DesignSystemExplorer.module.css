@@ -1286,24 +1286,41 @@
 
 .caseTocPreviewShell :global(.cs-toc-layout) {
   display: grid;
-  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
   gap: var(--hm-space-lg);
   align-items: start;
 }
 
 .caseTocPreviewShell :global(.cs-toc) {
+  display: block;
   position: static;
   z-index: 0;
+  width: 100%;
+  max-width: none;
   max-height: none;
+  padding: var(--hm-space-md);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--cs-line);
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
 
+.caseTocPreviewShell :global(.cs-toc-link) {
+  padding-top: var(--hm-space-xs);
+  padding-bottom: var(--hm-space-xs);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.35;
+}
+
 .caseTocRouteCrop {
   display: grid;
-  gap: var(--hm-space-xs);
-  min-height: 260px;
+  gap: var(--hm-space-sm);
+  max-height: 520px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
   padding: var(--hm-space-lg);
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-md);
@@ -1313,20 +1330,47 @@
   color: var(--cs-text-secondary);
 }
 
-.caseTocRouteCrop span {
+.caseTocWireSection {
+  display: grid;
+  gap: var(--hm-space-xs);
+  min-height: 360px;
+  align-content: start;
+  padding: var(--hm-space-md);
+  border: 1px solid color-mix(in srgb, var(--cs-line) 76%, transparent);
+  border-radius: var(--hm-radius-md);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.caseTocWireSection span {
   color: var(--cs-accent);
   font-size: var(--hm-fs-sm);
   font-weight: var(--hm-fw-semibold);
 }
 
-.caseTocRouteCrop strong {
+.caseTocWireSection h4 {
+  margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--hm-fs-h3);
   line-height: 1.25;
 }
 
-.caseTocRouteCrop p {
-  margin: 0;
+.caseTocWireSection div {
+  display: grid;
+  gap: var(--hm-space-xs);
+  margin-top: var(--hm-space-md);
+}
+
+.caseTocWireSection div::before,
+.caseTocWireSection div::after {
+  content: "";
+  display: block;
+  height: 12px;
+  border-radius: var(--hm-radius-pill);
+  background: color-mix(in srgb, var(--cs-line) 54%, white);
+}
+
+.caseTocWireSection div::after {
+  width: 64%;
 }
 
 .caseTocNotes {
@@ -1783,7 +1827,7 @@
   outline-offset: 2px;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 900px) {
   .caseTocPreviewShell :global(.cs-toc-layout) {
     grid-template-columns: minmax(0, 1fr);
   }
