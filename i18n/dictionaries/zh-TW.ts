@@ -48,6 +48,12 @@ const messages = {
     required: "此欄位為必填",
     invalidEmail: "請輸入有效的 Email",
     error: "傳送失敗，請重試",
+    reviewTitle: "確認送出內容",
+    reviewDescription: "送出前，請再確認一次你的聯絡資訊與訊息內容。",
+    reviewCancel: "返回修改",
+    reviewClose: "關閉確認視窗",
+    reviewConfirm: "確認送出",
+    reviewSending: "送出中...",
   },
   footer: {
     socialLinks: "社群連結",

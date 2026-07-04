@@ -48,6 +48,12 @@ const messages = {
     required: "This field is required",
     invalidEmail: "Enter a valid email address",
     error: "Something went wrong. Please try again.",
+    reviewTitle: "Review your message",
+    reviewDescription: "Please confirm the details before sending.",
+    reviewCancel: "Cancel",
+    reviewClose: "Close review",
+    reviewConfirm: "Confirm Send",
+    reviewSending: "Sending...",
   },
   footer: {
     socialLinks: "Social links",
