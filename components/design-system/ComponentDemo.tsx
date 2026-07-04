@@ -6,6 +6,7 @@ import { getAboutData } from "@/data/about";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
+import ProjectCard from "../ProjectCard";
 import Button from "../ui/Button";
 import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
@@ -786,72 +787,13 @@ export default function ComponentDemo({
   }
 
   if (type === "project-card") {
-    const projectCardAnatomy = zh
-      ? [
-          "封面影像 + scrim",
-          "logo / 標題 / 日期資訊",
-          "描述文案 + tags",
-          "CTA",
-          "hover / focus overlay 邊界",
-        ]
-      : [
-          "cover media + scrim",
-          "logo / title / date metadata",
-          "description + tags",
-          "CTA",
-          "hover / focus overlay boundary",
-        ];
-
     return (
-      <div className={styles.projectCardDemoWrap}>
+      <div className={styles.projectCardLiveWrap}>
         <p className={styles.demoUsageLine}>Homepage / Selected Works</p>
-        <article className={`project-card tone-${featuredProject.tone} card-visible ${styles.projectCardDemo}`}>
-          <div className="project-media">
-            <Image
-              className="project-image"
-              src={featuredProject.cover}
-              alt={featuredProject.title}
-              fill
-              sizes="(max-width: 768px) calc(100vw - 48px), 720px"
-            />
-            <div className="project-scrim" />
-          </div>
-          <div className="project-info">
-            <div className="project-meta">
-              <div className="project-logo-wrap">
-                <Image src={featuredProject.logo} alt="" fill sizes="168px" />
-              </div>
-              <div className="project-title">
-                <h3>{featuredProject.title}</h3>
-                <p>{featuredProject.date}</p>
-              </div>
-              <p className="project-description">{featuredProject.description}</p>
-              <div className="project-tags">
-                {featuredProject.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-            <Button href={featuredProject.href ?? "/"} size="lg">
-              {zh ? "了解更多" : "Learn More"}
-            </Button>
-          </div>
-        </article>
-        <ul className={styles.demoReferenceList}>
-          {projectCardAnatomy.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <p className={styles.demoMutedNote}>
-          {zh
-            ? "此範例反映首頁 Selected Works 的作品探索卡片；hover overlay 屬於這個 local pattern，不抽成 generic Card。"
-            : "This example reflects the Homepage Selected Works exploration card; the hover overlay belongs to this local pattern, not a generic Card."}
-        </p>
-        {comingSoonProject ? (
-          <p className={styles.demoUsageLine}>
-            {zh ? `Coming Soon 狀態使用不可點擊 CTA：${comingSoonProject.navigationTitle ?? comingSoonProject.title}` : `Coming Soon state uses a disabled CTA: ${comingSoonProject.navigationTitle ?? comingSoonProject.title}`}
-          </p>
-        ) : null}
+        <div className={`projects-list ${styles.projectCardLivePreview}`}>
+          <ProjectCard project={featuredProject} />
+          {comingSoonProject ? <ProjectCard project={comingSoonProject} /> : null}
+        </div>
       </div>
     );
   }

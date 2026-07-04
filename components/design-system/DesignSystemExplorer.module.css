@@ -640,7 +640,7 @@
 .contactFieldDemo,
 .worksTabsDemo,
 .caseTocDemoWrap,
-.projectCardDemoWrap {
+.projectCardLiveWrap {
   display: grid;
   gap: var(--hm-space-sm);
   width: 100%;
@@ -1355,33 +1355,9 @@
   overflow-wrap: anywhere;
 }
 
-.projectCardDemoWrap {
-  max-width: 760px;
-}
-
-.projectCardDemo {
-  width: min(100%, 720px);
-  min-height: 460px;
-  margin: 0 auto;
-}
-
-.projectCardDemo :global(.project-info) {
-  gap: var(--hm-space-sm);
-}
-
-.projectCardDemo :global(.project-title h3),
-.projectCardDemo :global(.project-description) {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-}
-
-.projectCardDemo :global(.project-title h3) {
-  -webkit-line-clamp: 2;
-}
-
-.projectCardDemo :global(.project-description) {
-  -webkit-line-clamp: 3;
+.projectCardLivePreview {
+  max-width: 100%;
+  margin: 0;
 }
 
 .liveSectionHeadingDemo {
@@ -1902,7 +1878,9 @@
     min-height: 150px;
   }
 
-  .projectCardDemo {
-    min-height: 380px;
+  .projectCardLivePreview {
+    width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+    margin-left: calc(50% - 50vw + 24px);
   }
 }
