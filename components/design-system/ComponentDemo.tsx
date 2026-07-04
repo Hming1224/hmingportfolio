@@ -109,8 +109,8 @@ const localExceptionExamples = {
     {
       pattern: "CaseTOC",
       liveUsage: "CaseStudyShell across Advantech, Crypto Arsenal, and Laushu case routes (`components/CaseTOC.tsx`).",
-      whyLocal: "It is shaped by long-form case reading, section anchors, scroll position, and floating navigation behavior.",
-      boundary: "Protected case-study navigation pattern, local to the case-study reading experience. It should not be wrapped into a generic docs TOC.",
+      whyLocal: "It is shaped by long-form case reading, section anchors, scroll position, and production visibility rules. On desktop it floats beside the case body; at the production narrow breakpoint it stays hidden.",
+      boundary: "Protected case-study navigation pattern, local to the case-study reading experience. It is not part of the live component examples and should not be wrapped into a generic docs TOC.",
       extraction: "Revisit only if another long-form product story needs the same floating anchor model and scroll behavior.",
     },
     {
@@ -160,8 +160,8 @@ const localExceptionExamples = {
     {
       pattern: "CaseTOC",
       liveUsage: "Advantech、Crypto Arsenal、Laushu case routes 的 CaseStudyShell（`components/CaseTOC.tsx`）。",
-      whyLocal: "它依案例頁長篇閱讀、section anchor、scroll position 與 floating navigation 行為設計。",
-      boundary: "Protected case-study navigation pattern，屬於 case-study reading experience，不應包裝成 generic docs TOC。",
+      whyLocal: "它依案例頁長篇閱讀、section anchor、scroll position 與正式站 visibility rules 設計；桌機浮在案例正文旁，窄版斷點維持隱藏。",
+      boundary: "Protected case-study navigation pattern，屬於 case-study reading experience。它不放在 live component examples，也不應包裝成 generic docs TOC。",
       extraction: "只有當另一個長篇產品故事也需要相同 floating anchor model 與 scroll behavior，才重新評估。",
     },
     {
@@ -671,54 +671,6 @@ export default function ComponentDemo({
             </article>
           ))}
         </div>
-      </div>
-    );
-  }
-
-  if (type === "case-toc") {
-    const tocItems = zh
-      ? [
-          "專案總覽",
-          "產品脈絡",
-          "我的角色",
-          "設計流程",
-          "分析洞察",
-          "設計方案",
-          "Reflections",
-        ]
-      : [
-          "Overview",
-          "Product Context",
-          "My Role",
-          "Design Process",
-          "Analysis",
-          "Solution",
-          "Reflections",
-        ];
-
-    return (
-      <div className={styles.caseTocDemoWrap}>
-        <p className={styles.demoUsageLine}>
-          {zh ? "Advantech 案例頁 / CaseStudyShell 浮動導覽" : "Advantech case route / CaseStudyShell floating navigation"}
-        </p>
-        <nav className={styles.caseTocDemo} aria-label={zh ? "案例目錄範例" : "Case table of contents example"}>
-          {tocItems.map((item, index) => (
-            <a
-              className={index === 4 ? styles.isActiveCaseTocItem : undefined}
-              href="#preview"
-              key={item}
-              aria-current={index === 4 ? "true" : undefined}
-            >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              {item}
-            </a>
-          ))}
-        </nav>
-        <ul className={styles.demoReferenceList}>
-          <li>{zh ? "依案例頁長篇閱讀區塊顯示，不是一般文件 TOC。" : "Shown for long case-study reading sections, not as a generic docs TOC."}</li>
-          <li>{zh ? "active section 由 scroll position 與 section anchors 驅動。" : "Active section follows scroll position and section anchors."}</li>
-          <li>{zh ? "floating / visibility 行為受 case-study layout 約束。" : "Floating and visibility behavior is constrained by the case-study layout."}</li>
-        </ul>
       </div>
     );
   }
