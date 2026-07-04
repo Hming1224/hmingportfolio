@@ -147,13 +147,6 @@ const localExceptionExamples = {
       boundary: "No current direct route adoption. `.cs-before-after-panel` belongs to CaseBeforeAfter and is not a BeforeAfterNarrativeFrame selector.",
       extraction: "Revisit if a live route adopts it repeatedly or if it needs a documented migration path.",
     },
-    {
-      pattern: "No-live / contract-only components",
-      liveUsage: "Radio and Alert are future candidates. Select, Checkbox, and EmptyState remain backlog contracts.",
-      whyLocal: "They stay out of the live catalog until a production route adopts the contract with a real task.",
-      boundary: "Future candidates: Radio and Alert. Backlog contracts: Select, Checkbox, and EmptyState.",
-      extraction: "Document them in the live catalog only after a real portfolio route adopts them.",
-    },
   ],
   "zh-TW": [
     {
@@ -204,13 +197,6 @@ const localExceptionExamples = {
       whyLocal: "它仍是獨立的簡單兩欄比較元件，尚未 refactor 成 BeforeAfterNarrativeFrame。",
       boundary: "目前沒有直接 route adoption。`.cs-before-after-panel` 屬於 CaseBeforeAfter，不是 BeforeAfterNarrativeFrame selector。",
       extraction: "若 live route 重複採用，或需要正式 migration path，再重新評估。",
-    },
-    {
-      pattern: "No-live / contract-only components",
-      liveUsage: "Radio、Alert 是 future candidates；Select、Checkbox、EmptyState 保留為 backlog contracts。",
-      whyLocal: "正式 route 採用並出現真實任務前，不放進 live catalog。",
-      boundary: "Future candidates：Radio、Alert。Backlog contracts：Select、Checkbox、EmptyState。",
-      extraction: "等正式作品集 route 真的採用後，才回到 live catalog 文件化。",
     },
   ],
 } satisfies Record<DesignSystemLocale, Array<Record<"pattern" | "liveUsage" | "whyLocal" | "boundary" | "extraction", string>>>;
@@ -1033,8 +1019,8 @@ export default function ComponentDemo({
           <h3>{zh ? "刻意保留在 local scope 的 pattern" : "What stays local"}</h3>
           <p>
             {zh
-              ? "這些不是遺漏或不一致，而是依 component boundary、story-specific UI 與 reuse threshold 做出的保留判斷。"
-              : "These are not gaps or inconsistencies; they are boundary decisions based on story-specific UI and the reuse threshold."}
+              ? "這些 pattern 依 component boundary、story-specific UI 與 reuse threshold 決定保留在 local scope。"
+              : "These patterns stay local based on component boundaries, story-specific UI, and the reuse threshold."}
           </p>
         </div>
         <div className={styles.localExceptionGrid}>

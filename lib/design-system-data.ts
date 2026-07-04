@@ -103,7 +103,7 @@ export const designSystemSections = [
   {
     label: "Reference",
     labelZh: "參考資料",
-    items: ["tokens", "button-tokens", "local-exceptions", "gaps", "plan"].map((slug) => ({
+    items: ["tokens", "local-exceptions", "future-backlog"].map((slug) => ({
       kind: "reference" as const,
       slug,
     })),
