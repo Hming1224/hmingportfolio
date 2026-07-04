@@ -599,6 +599,23 @@
   padding-left: var(--hm-space-3xs);
 }
 
+.anatomyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-xs);
+}
+
+.anatomyCard {
+  min-width: 0;
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
+}
+
 .statePill {
   padding: 0 var(--hm-space-xs);
   border: 1px solid var(--hm-line-strong);
@@ -1682,15 +1699,7 @@
   font-weight: var(--hm-fw-semibold);
 }
 
-.beforeAfterStateSlot ul {
-  display: grid;
-  gap: var(--hm-space-3xs);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.beforeAfterStateSlot li {
+.beforeAfterStateSlot span {
   color: var(--text-secondary);
   font-size: var(--hm-fs-sm);
   line-height: 1.5;
@@ -1930,6 +1939,7 @@
   .yearRailDemo,
   .liveExperienceCardDemo,
   .contactMethodsDemo,
+  .anatomyGrid,
   .caseInfoGridDemo,
   .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);

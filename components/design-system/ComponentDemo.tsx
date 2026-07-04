@@ -43,7 +43,6 @@ const caseExamples = {
     gridItems: ["Position state is unclear", "Manual close lacks confidence", "TP / SL setup needs stronger context"],
     mediaCaption: "CaseMedia wraps competitor screenshots and product UI while leaving crop, ratio, and storytelling geometry to the route.",
     beforeTitle: "AI Chatbot component",
-    beforePoint: "Default chatbot width changed from 360px to 640px for better readability.",
     caseBeforeAfterContext: "Simple source-level comparison primitive.",
     narrativeContext: "Live case-study narrative frame.",
     flowTitle: "Overflow affordance for wide analysis boards",
@@ -78,7 +77,6 @@ const caseExamples = {
     gridItems: ["倉位狀態不清楚", "手動平倉缺乏信心", "止盈止損設定需要更完整語境"],
     mediaCaption: "CaseMedia 負責包裝競品截圖與產品畫面；裁切比例、圖片重點與敘事幾何仍由 route 決定。",
     beforeTitle: "AI Chatbot 元件",
-    beforePoint: "聊天視窗預設寬度從 360px 調整為 640px，讓分析內容更容易閱讀。",
     caseBeforeAfterContext: "簡單的 source-level 比較 primitive。",
     narrativeContext: "正式案例頁使用的敘事型 before / after frame。",
     flowTitle: "寬版分析 board 的 overflow affordance",
@@ -1029,20 +1027,14 @@ export default function ComponentDemo({
             afterLabel={zh ? "After 狀態" : "After state"}
             before={
               <div className={styles.beforeAfterStateSlot}>
-                <strong>{zh ? "Baseline layout" : "Baseline layout"}</strong>
-                <ul>
-                  <li>{zh ? "資訊密度偏高" : "Dense information"}</li>
-                  <li>{zh ? "動作優先級不清楚" : "Unclear action priority"}</li>
-                </ul>
+                <strong>{zh ? "Baseline" : "Baseline"}</strong>
+                <span>{zh ? "資訊密度偏高" : "Dense layout"}</span>
               </div>
             }
             after={
               <div className={styles.beforeAfterStateSlot}>
-                <strong>{zh ? "Refined layout" : "Refined layout"}</strong>
-                <ul>
-                  <li>{zh ? "層級重新整理" : "Clearer hierarchy"}</li>
-                  <li>{zh ? "主要動作更明確" : "Primary action is clearer"}</li>
-                </ul>
+                <strong>{zh ? "Refined" : "Refined"}</strong>
+                <span>{zh ? "層級更清楚" : "Clearer hierarchy"}</span>
               </div>
             }
           />
@@ -1059,12 +1051,6 @@ export default function ComponentDemo({
           <BeforeAfterNarrativeFrame
             badge="Scenario 1"
             title={caseCopy.beforeTitle}
-            points={[
-              {
-                label: zh ? "修正視窗寬度" : "Window width refinement",
-                content: <p>{caseCopy.beforePoint}</p>,
-              },
-            ]}
             beforeLabel="Before"
             afterLabel="After"
             before={

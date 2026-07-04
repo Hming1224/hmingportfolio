@@ -181,6 +181,7 @@ export default function DesignSystemDocsPage({
   const usage = locale === "zh-TW" && doc.usageZh ? doc.usageZh : doc.usage;
   const states = locale === "zh-TW" && doc.statesZh ? doc.statesZh : doc.states;
   const accessibility = locale === "zh-TW" && doc.accessibilityZh ? doc.accessibilityZh : doc.accessibility;
+  const anatomy = locale === "zh-TW" && doc.anatomyZh ? doc.anatomyZh : doc.anatomy;
 
   return (
     <article>
@@ -210,6 +211,15 @@ export default function DesignSystemDocsPage({
           {usage.map((item) => <li className={styles.docListItem} key={item}>{item}</li>)}
         </ul>
       </section>
+
+      {anatomy?.length ? (
+        <section className={styles.docSection}>
+          <h2 className={styles.docSectionTitle}>{localized(locale, "Anatomy / Internal parts", "結構 / internal parts")}</h2>
+          <div className={styles.anatomyGrid}>
+            {anatomy.map((item) => <article className={styles.anatomyCard} key={item}>{item}</article>)}
+          </div>
+        </section>
+      ) : null}
 
       {states?.length ? (
         <section className={styles.docSection}>
