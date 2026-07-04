@@ -42,8 +42,8 @@ const caseExamples = {
     beforeBody: "Advantech Board 1 uses BeforeAfterNarrativeFrame to compare a 360px chat window against a 640px version that better supports detailed analysis.",
     beforePoint: "The shared frame owns the narrative shell and panels; the route owns screenshots, redlines, and the specific design judgment.",
     panelInternal: "Internal-only anatomy",
-    panelBody: "BeforeAfterPanel is used inside BeforeAfterNarrativeFrame for labeled state panels. Routes adopt the frame, not this panel directly.",
-    caseBeforeAfterBody: "No current direct route adoption was found in Advantech, Crypto Arsenal, or Laushu. It remains an independent simple two-panel component; `.cs-before-after-panel` belongs to CaseBeforeAfter.",
+    panelBody: "The exported BeforeAfterPanel renders labeled state panels inside BeforeAfterNarrativeFrame. Routes adopt the narrative frame, not this panel as a standalone production pattern.",
+    caseBeforeAfterBody: "CaseBeforeAfter is an independent two-panel comparison component with no current direct route adoption in Advantech, Crypto Arsenal, or Laushu. Its `.cs-before-after-panel` selector belongs to this component boundary, not BeforeAfterNarrativeFrame.",
     flowTitle: "Overflow affordance for wide analysis boards",
     flowBody: "FlowScrollHint appears before wide content such as Advantech AI feature matrices and process boards. It signals horizontal overflow; it is not a standalone visual component.",
     proposalTitle: "Advantech proposal tabs",
@@ -79,8 +79,8 @@ const caseExamples = {
     beforeBody: "Advantech Board 1 使用 BeforeAfterNarrativeFrame，比較 360px 聊天視窗與更適合閱讀詳細分析的 640px 版本。",
     beforePoint: "共用 frame 負責敘事外殼與 panel；route 負責截圖、redline 與具體設計判斷。",
     panelInternal: "Internal-only anatomy",
-    panelBody: "BeforeAfterPanel 只在 BeforeAfterNarrativeFrame 內部呈現 labeled state panel。正式 route 採用的是 frame，不是直接採用 panel。",
-    caseBeforeAfterBody: "用 rg 檢查 Advantech、Crypto Arsenal、Laushu 後，未找到目前直接 route adoption。它仍是獨立的簡單兩欄比較元件；`.cs-before-after-panel` selector 邊界屬於 CaseBeforeAfter。",
+    panelBody: "exported BeforeAfterPanel 只負責在 BeforeAfterNarrativeFrame 內呈現 labeled state panels。正式 route 採用的是 narrative frame，不是把這個 panel 當成獨立 production pattern。",
+    caseBeforeAfterBody: "CaseBeforeAfter 是獨立的兩欄比較元件；Advantech、Crypto Arsenal、Laushu 目前正式案例頁沒有直接使用。它的 `.cs-before-after-panel` selector 屬於自己的 component boundary，不屬於 BeforeAfterNarrativeFrame。",
     flowTitle: "寬版分析 board 的 overflow affordance",
     flowBody: "FlowScrollHint 出現在 Advantech AI 功能矩陣與流程 board 這類寬版內容前，用來提示可以橫向滑動；它不是獨立視覺元件。",
     proposalTitle: "Advantech proposal tabs",
@@ -136,7 +136,7 @@ const localExceptionExamples = {
     {
       pattern: "BeforeAfterPanel",
       liveUsage: "Internal part of BeforeAfterNarrativeFrame (`components/case-study/BeforeAfterPanel.tsx`).",
-      whyLocal: "Routes adopt BeforeAfterNarrativeFrame; the panel only renders labeled internal state panels inside that frame.",
+      whyLocal: "Routes adopt BeforeAfterNarrativeFrame; the exported panel only renders labeled state panels inside that frame.",
       boundary: "Internal-only anatomy. It is not directly route-adopted and not exposed as an independent route-level pattern.",
       extraction: "Revisit only if panel composition becomes a standalone shared contract outside the narrative frame.",
     },
@@ -187,7 +187,7 @@ const localExceptionExamples = {
     {
       pattern: "BeforeAfterPanel",
       liveUsage: "BeforeAfterNarrativeFrame 的 internal part（`components/case-study/BeforeAfterPanel.tsx`）。",
-      whyLocal: "正式 route 採用 BeforeAfterNarrativeFrame；panel 只負責在 frame 內呈現 labeled internal state panels。",
+      whyLocal: "正式 route 採用 BeforeAfterNarrativeFrame；exported panel 只負責在 frame 內呈現 labeled state panels。",
       boundary: "Internal-only anatomy。它沒有被 route 直接採用，也不是獨立 route-level pattern。",
       extraction: "只有 panel composition 離開 narrative frame 後成為獨立 shared contract，才重新評估。",
     },
@@ -675,14 +675,50 @@ export default function ComponentDemo({
   }
 
   if (type === "case-toc") {
+    const tocItems = zh
+      ? [
+          "專案總覽",
+          "產品脈絡",
+          "我的角色",
+          "設計流程",
+          "分析洞察",
+          "設計方案",
+          "Reflections",
+        ]
+      : [
+          "Overview",
+          "Product Context",
+          "My Role",
+          "Design Process",
+          "Analysis",
+          "Solution",
+          "Reflections",
+        ];
+
     return (
-      <nav style={{ display: "flex", flexDirection: "column", gap: "16px", borderLeft: "2px solid var(--hm-line-strong)", paddingLeft: "16px" }} aria-label={zh ? "案例目錄範例" : "Case table of contents example"}>
-        {(zh ? ["專案背景", "研究洞察", "設計方案", "成果反思"] : ["Context", "Insights", "Solution", "Outcome"]).map((item, index) => (
-          <a className={index === 1 ? "is-active" : undefined} href="#preview" key={item}>
-            <span>{String(index + 1).padStart(2, "0")}</span>{item}
-          </a>
-        ))}
-      </nav>
+      <div className={styles.caseTocDemoWrap}>
+        <p className={styles.demoUsageLine}>
+          {zh ? "Advantech 案例頁 / CaseStudyShell 浮動導覽" : "Advantech case route / CaseStudyShell floating navigation"}
+        </p>
+        <nav className={styles.caseTocDemo} aria-label={zh ? "案例目錄範例" : "Case table of contents example"}>
+          {tocItems.map((item, index) => (
+            <a
+              className={index === 4 ? styles.isActiveCaseTocItem : undefined}
+              href="#preview"
+              key={item}
+              aria-current={index === 4 ? "true" : undefined}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {item}
+            </a>
+          ))}
+        </nav>
+        <ul className={styles.demoReferenceList}>
+          <li>{zh ? "依案例頁長篇閱讀區塊顯示，不是一般文件 TOC。" : "Shown for long case-study reading sections, not as a generic docs TOC."}</li>
+          <li>{zh ? "active section 由 scroll position 與 section anchors 驅動。" : "Active section follows scroll position and section anchors."}</li>
+          <li>{zh ? "floating / visibility 行為受 case-study layout 約束。" : "Floating and visibility behavior is constrained by the case-study layout."}</li>
+        </ul>
+      </div>
     );
   }
 
@@ -750,9 +786,25 @@ export default function ComponentDemo({
   }
 
   if (type === "project-card") {
+    const projectCardAnatomy = zh
+      ? [
+          "封面影像 + scrim",
+          "logo / 標題 / 日期資訊",
+          "描述文案 + tags",
+          "CTA",
+          "hover / focus overlay 邊界",
+        ]
+      : [
+          "cover media + scrim",
+          "logo / title / date metadata",
+          "description + tags",
+          "CTA",
+          "hover / focus overlay boundary",
+        ];
+
     return (
       <div className={styles.projectCardDemoWrap}>
-        <p className={styles.demoUsageLine}>Homepage / Selected Work</p>
+        <p className={styles.demoUsageLine}>Homepage / Selected Works</p>
         <article className={`project-card tone-${featuredProject.tone} card-visible ${styles.projectCardDemo}`}>
           <div className="project-media">
             <Image
@@ -785,6 +837,16 @@ export default function ComponentDemo({
             </Button>
           </div>
         </article>
+        <ul className={styles.demoReferenceList}>
+          {projectCardAnatomy.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className={styles.demoMutedNote}>
+          {zh
+            ? "此範例反映首頁 Selected Works 的作品探索卡片；hover overlay 屬於這個 local pattern，不抽成 generic Card。"
+            : "This example reflects the Homepage Selected Works exploration card; the hover overlay belongs to this local pattern, not a generic Card."}
+        </p>
         {comingSoonProject ? (
           <p className={styles.demoUsageLine}>
             {zh ? `Coming Soon 狀態使用不可點擊 CTA：${comingSoonProject.navigationTitle ?? comingSoonProject.title}` : `Coming Soon state uses a disabled CTA: ${comingSoonProject.navigationTitle ?? comingSoonProject.title}`}
@@ -954,8 +1016,9 @@ export default function ComponentDemo({
         description={caseCopy.caseBeforeAfterBody}
         items={[
           "components/case-study/CaseBeforeAfter.tsx",
+          zh ? "目前 Advantech / Crypto Arsenal / Laushu 正式案例頁沒有直接使用" : "No current direct route adoption in Advantech / Crypto Arsenal / Laushu",
           ".cs-before-after-panel belongs to CaseBeforeAfter",
-          zh ? "不要混同為 BeforeAfterNarrativeFrame 的 replacement" : "Do not treat it as a BeforeAfterNarrativeFrame replacement",
+          zh ? "邊界：不是 BeforeAfterNarrativeFrame 的替代元件，也不作為 live route example 呈現" : "Boundary: not a BeforeAfterNarrativeFrame replacement or live route example",
         ]}
       />
     );
@@ -1001,9 +1064,10 @@ export default function ComponentDemo({
         title={caseCopy.panelInternal}
         description={caseCopy.panelBody}
         items={[
-          "used inside BeforeAfterNarrativeFrame",
-          "not directly adopted by routes",
-          "not used by CaseBeforeAfter",
+          "components/case-study/BeforeAfterPanel.tsx",
+          zh ? "供 BeforeAfterNarrativeFrame 內部 state panels 使用" : "Used inside BeforeAfterNarrativeFrame state panels",
+          zh ? "沒有 direct route adoption，也不是 standalone production pattern" : "No direct route adoption; not a standalone production pattern",
+          zh ? "CaseBeforeAfter 有自己的內部 panel function 與 selector 邊界" : "CaseBeforeAfter has its own internal panel function and selector boundary",
         ]}
       />
     );

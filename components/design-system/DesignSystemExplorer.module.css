@@ -639,6 +639,7 @@
 .contractOnlyDemo,
 .contactFieldDemo,
 .worksTabsDemo,
+.caseTocDemoWrap,
 .projectCardDemoWrap {
   display: grid;
   gap: var(--hm-space-sm);
@@ -703,6 +704,23 @@
 .contractOnlyDemo ul,
 .liveSkillCardDemo ul {
   padding-left: var(--hm-space-md);
+}
+
+.demoReferenceList {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  margin: 0;
+  padding-left: var(--hm-space-md);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
+}
+
+.demoMutedNote {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
 }
 
 .contractSource {
@@ -1203,6 +1221,54 @@
 .liveTabsPanel {
   display: grid;
   gap: var(--hm-space-xs);
+}
+
+.caseTocDemoWrap {
+  max-width: 520px;
+}
+
+.caseTocDemo {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: color-mix(in srgb, var(--hm-paper) 86%, var(--hm-surface));
+  box-shadow: var(--shadow-sm);
+}
+
+.caseTocDemo a {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
+  border-radius: var(--hm-radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-medium);
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.caseTocDemo a span {
+  color: var(--hm-muted);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.caseTocDemo a:hover,
+.caseTocDemo a:focus-visible,
+.caseTocDemo .isActiveCaseTocItem {
+  background: var(--hm-purple-light);
+  color: var(--hm-purple);
+}
+
+.caseTocDemo a:hover span,
+.caseTocDemo a:focus-visible span,
+.caseTocDemo .isActiveCaseTocItem span {
+  color: var(--hm-purple);
 }
 
 .tabProjectSummary {
