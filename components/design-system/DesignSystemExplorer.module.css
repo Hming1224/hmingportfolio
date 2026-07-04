@@ -769,6 +769,141 @@
   padding-inline: var(--hm-btn-padding-inline-md);
 }
 
+.contactModalDemo {
+  display: grid;
+  gap: var(--hm-space-sm);
+  width: 100%;
+  max-width: 760px;
+  min-width: 0;
+}
+
+.contactModalFrame {
+  display: grid;
+  gap: var(--hm-space-md);
+  min-width: 0;
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-paper);
+  box-shadow: var(--hm-shadow-md);
+}
+
+.contactModalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--hm-space-md);
+  min-width: 0;
+}
+
+.contactModalHeader h3,
+.contactModalHeader p,
+.contactReviewListDemo,
+.contactReviewRowDemo dd,
+.contactFlowNotes {
+  margin: 0;
+}
+
+.contactModalHeader h3 {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.3;
+}
+
+.contactModalHeader p,
+.contactReviewRowDemo dt,
+.contactFlowNotes li {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.contactModalClose {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: var(--hm-ink);
+  font-size: var(--hm-fs-h3);
+  line-height: 1;
+}
+
+.contactReviewListDemo {
+  display: grid;
+}
+
+.contactReviewRowDemo {
+  display: grid;
+  grid-template-columns: minmax(128px, 0.34fr) minmax(0, 1fr);
+  gap: var(--hm-space-sm);
+  padding: var(--hm-space-sm) 0;
+  border-bottom: 1px solid var(--hm-line);
+}
+
+.contactReviewRowDemo:last-child {
+  border-bottom: 0;
+}
+
+.contactReviewRowDemo dt,
+.contactReviewRowDemo dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contactReviewRowDemo dt {
+  font-weight: var(--hm-fw-semibold);
+}
+
+.contactReviewRowDemo dd {
+  color: var(--text-heading);
+  line-height: 1.6;
+}
+
+.contactReviewActionsDemo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--hm-space-xs);
+}
+
+.contactReviewActionsDemo .contactReviewPrimaryDemo {
+  order: 2;
+}
+
+.contactReviewActionsDemo :global(.ds-button-secondary) {
+  order: 1;
+}
+
+.contactSkeletonStack {
+  display: grid;
+  gap: var(--hm-space-2xs);
+}
+
+.contactSkeletonLine,
+.contactSkeletonLineLong,
+.contactSkeletonLineMedium {
+  display: block;
+  height: 18px;
+}
+
+.contactSkeletonLine {
+  width: min(100%, 260px);
+}
+
+.contactSkeletonLineLong {
+  width: 100%;
+}
+
+.contactSkeletonLineMedium {
+  width: min(72%, 280px);
+}
+
+.contactFlowNotes {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  padding-left: var(--hm-space-md);
+}
+
 .languageSwitcherDemo {
   display: grid;
   gap: var(--hm-space-sm);
@@ -1667,6 +1802,29 @@
   .buttonSpecRow {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
+  }
+
+  .contactModalFrame {
+    padding: var(--hm-space-md);
+  }
+
+  .contactModalHeader {
+    display: grid;
+  }
+
+  .contactModalHeader,
+  .contactReviewRowDemo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contactReviewActionsDemo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contactReviewActionsDemo .contactReviewPrimaryDemo,
+  .contactReviewActionsDemo :global(.ds-button-secondary) {
+    order: 0;
   }
 
   .caseHeroMediaDemo,

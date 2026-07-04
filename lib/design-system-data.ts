@@ -58,9 +58,6 @@ export const designSystemSections = [
       "floating-input",
       "floating-textarea",
       "contact-method",
-      "select",
-      "checkbox",
-      "radio",
     ].map((slug) => ({ kind: "component" as const, slug })),
   },
   {
@@ -98,7 +95,7 @@ export const designSystemSections = [
   {
     label: "Feedback",
     labelZh: "系統回饋",
-    items: ["toast", "alert", "modal", "skeleton", "empty-state"].map((slug) => ({
+    items: ["toast", "modal", "skeleton"].map((slug) => ({
       kind: "component" as const,
       slug,
     })),

@@ -7,6 +7,7 @@ import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
 import Button from "../ui/Button";
+import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import ZoomableImage from "../case-study/ZoomableImage";
 import {
@@ -148,10 +149,10 @@ const localExceptionExamples = {
     },
     {
       pattern: "No-live / contract-only components",
-      liveUsage: "Select, Checkbox, Radio, Alert, Modal, Skeleton, and EmptyState are documented contracts with no current live portfolio route adoption.",
-      whyLocal: "These contracts exist for future product surfaces or maintenance consistency instead of current visual reuse.",
-      boundary: "They stay documented as component contracts, but examples should not imply production usage that does not exist.",
-      extraction: "Revisit when a live route adopts one of these contracts and real usage can replace the contract-only note.",
+      liveUsage: "Radio and Alert are future candidates. Select, Checkbox, and EmptyState remain backlog contracts.",
+      whyLocal: "They stay out of the live catalog until a production route adopts the contract with a real task.",
+      boundary: "Future candidates: Radio and Alert. Backlog contracts: Select, Checkbox, and EmptyState.",
+      extraction: "Document them in the live catalog only after a real portfolio route adopts them.",
     },
   ],
   "zh-TW": [
@@ -206,10 +207,10 @@ const localExceptionExamples = {
     },
     {
       pattern: "No-live / contract-only components",
-      liveUsage: "Select、Checkbox、Radio、Alert、Modal、Skeleton、EmptyState 是目前正式作品集 route 尚未直接使用的 documented contracts。",
-      whyLocal: "這些 contract 先保留給未來產品介面或維護一致性，不代表目前已有正式視覺重用。",
-      boundary: "它們維持 component contract 文件，但 examples 不應暗示不存在的 production usage。",
-      extraction: "當 live route 採用其中一個 contract，並能用真實使用情境取代 contract-only note 時再更新。",
+      liveUsage: "Radio、Alert 是 future candidates；Select、Checkbox、EmptyState 保留為 backlog contracts。",
+      whyLocal: "正式 route 採用並出現真實任務前，不放進 live catalog。",
+      boundary: "Future candidates：Radio、Alert。Backlog contracts：Select、Checkbox、EmptyState。",
+      extraction: "等正式作品集 route 真的採用後，才回到 live catalog 文件化。",
     },
   ],
 } satisfies Record<DesignSystemLocale, Array<Record<"pattern" | "liveUsage" | "whyLocal" | "boundary" | "extraction", string>>>;
@@ -230,6 +231,63 @@ function getCopy(locale: DesignSystemLocale) {
       : ["locale-aware links", "shared desktop / mobile nav items", "LanguageSwitcher lives inside Navbar", "scroll hide / restore"],
     contactToastSuccess: zh ? "送出成功！" : "Message Sent!",
     contactToastError: zh ? "傳送失敗，請重試" : "Something went wrong. Please try again.",
+    modalDemo: {
+      usage: zh ? "Contact form / 送出前確認" : "Contact form / review-before-submit",
+      title: zh ? "確認送出內容" : "Review your message",
+      description: zh ? "送出前，請再確認一次你的聯絡資訊與訊息內容。" : "Please confirm the details before sending.",
+      fields: zh
+        ? [
+            ["你的姓名", "黃宣銘"],
+            ["服務單位", "Hming Design"],
+            ["電子信箱", "hello@hmingdesign.com"],
+            ["手機號碼", "0912 345 678"],
+            ["訊息內容", "想了解作品集設計系統與案例頁整理方式。"],
+          ]
+        : [
+            ["Your name", "Brian Huang"],
+            ["Company / Organization", "Hming Design"],
+            ["Email", "hello@hmingdesign.com"],
+            ["Phone", "0912 345 678"],
+            ["Your message", "I would like to discuss the portfolio design system and case-study documentation."],
+          ],
+      cancel: zh ? "返回修改" : "Cancel",
+      confirm: zh ? "確認送出" : "Confirm Send",
+      flow: zh
+        ? [
+            "Real usage：Contact form",
+            "Purpose：送出前確認訊息內容",
+            "Flow：送出訊息 → 確認 Modal → 確認送出 → Toast 成功 / 失敗",
+            "Boundary：Modal 不負責結果回饋，結果由 Toast 承擔",
+            "Accessibility：primary action DOM order 已與 keyboard order 對齊",
+          ]
+        : [
+            "Real usage: Contact form",
+            "Purpose: review message before sending",
+            "Flow: Send Message → Review Modal → Confirm Send → Toast success / error",
+            "Boundary: Modal does not own result feedback; Toast handles the outcome",
+            "Accessibility: primary action DOM order matches keyboard order",
+          ],
+    },
+    skeletonDemo: {
+      usage: zh ? "Contact confirmation Modal / pending summary" : "Contact confirmation Modal / pending summary",
+      title: zh ? "確認送出內容" : "Review your message",
+      description: zh ? "送出中，摘要區暫時顯示處理狀態。" : "Sending; the summary area temporarily shows a processing state.",
+      confirm: zh ? "送出中..." : "Sending...",
+      cancel: zh ? "返回修改" : "Cancel",
+      notes: zh
+        ? [
+            "Real usage：Contact confirmation Modal pending state",
+            "Purpose：確認送出後，告訴使用者表單仍在處理中",
+            "Boundary：Skeleton 只支援 summary area，不取代 Button loading",
+            "Result：完成後由 Toast 顯示成功或失敗",
+          ]
+        : [
+            "Real usage: Contact confirmation Modal pending state",
+            "Purpose: show the submission is still processing",
+            "Boundary: Skeleton supports the summary area; it does not replace Button loading",
+            "Result: Toast shows success or failure when processing completes",
+          ],
+    },
     localExceptionFields: {
       liveUsage: zh ? "真實使用位置" : "Live usage",
       whyLocal: zh ? "為什麼保留 local" : "Why it stays local",
@@ -1087,26 +1145,85 @@ export default function ComponentDemo({
   }
 
   if (type === "modal") {
+    const modal = copy.modalDemo;
+
     return (
-      <ContractOnlyCard
-        locale={locale}
-        title={zh ? "Modal 先放在 backlog，不作為目前 example" : "Modal stays in backlog, not as a current example"}
-        recommendation={zh ? "正式作品集目前沒有必須中斷使用者並要求回應的任務；若未來有真實阻斷式流程，再先完成 production UX 後文件化。" : "The live portfolio has no task that must interrupt the user for a response. If a real blocking flow appears later, implement the production UX first and document it afterward."}
-        source="components/ui/Modal.tsx"
-        status="backlog"
-      />
+      <div className={styles.contactModalDemo}>
+        <p className={styles.demoUsageLine}>{modal.usage}</p>
+        <article className={styles.contactModalFrame} aria-label={modal.title}>
+          <header className={styles.contactModalHeader}>
+            <div>
+              <h3>{modal.title}</h3>
+              <p>{modal.description}</p>
+            </div>
+            <span aria-hidden="true" className={styles.contactModalClose}>×</span>
+          </header>
+          <dl className={styles.contactReviewListDemo}>
+            {modal.fields.map(([label, value]) => (
+              <div key={label} className={styles.contactReviewRowDemo}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className={styles.contactReviewActionsDemo}>
+            <Button type="button" className={styles.contactReviewPrimaryDemo}>{modal.confirm}</Button>
+            <Button type="button" variant="secondary">{modal.cancel}</Button>
+          </div>
+        </article>
+        <ul className={styles.contactFlowNotes}>
+          {modal.flow.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </div>
     );
   }
 
   if (type === "skeleton") {
+    const skeleton = copy.skeletonDemo;
+
     return (
-      <ContractOnlyCard
-        locale={locale}
-        title={zh ? "Skeleton 目前沒有 loading surface" : "Skeleton has no current loading surface"}
-        recommendation={zh ? "作品集多數內容是靜態頁；只有當未來資料延遲會造成 layout shift 時，才需要先導入 production loading state。" : "Most portfolio surfaces are static. Use this only when future data latency would otherwise cause layout shift in a production surface."}
-        source="components/ui/Skeleton.tsx"
-        status="backlog"
-      />
+      <div className={styles.contactModalDemo}>
+        <p className={styles.demoUsageLine}>{skeleton.usage}</p>
+        <article className={styles.contactModalFrame} aria-label={skeleton.title}>
+          <header className={styles.contactModalHeader}>
+            <div>
+              <h3>{skeleton.title}</h3>
+              <p>{skeleton.description}</p>
+            </div>
+            <span aria-hidden="true" className={styles.contactModalClose}>×</span>
+          </header>
+          <dl className={styles.contactReviewListDemo} aria-busy="true">
+            <div className={styles.contactReviewRowDemo}>
+              <dt>{zh ? "你的姓名" : "Your name"}</dt>
+              <dd><Skeleton className={styles.contactSkeletonLine} /></dd>
+            </div>
+            <div className={styles.contactReviewRowDemo}>
+              <dt>{zh ? "電子信箱" : "Email"}</dt>
+              <dd><Skeleton className={styles.contactSkeletonLine} /></dd>
+            </div>
+            <div className={styles.contactReviewRowDemo}>
+              <dt>{zh ? "訊息內容" : "Your message"}</dt>
+              <dd className={styles.contactSkeletonStack}>
+                <Skeleton className={styles.contactSkeletonLineLong} />
+                <Skeleton className={styles.contactSkeletonLineMedium} />
+              </dd>
+            </div>
+          </dl>
+          <div className={styles.contactReviewActionsDemo}>
+            <Button type="button" loading loadingLabel={skeleton.confirm} className={styles.contactReviewPrimaryDemo}>
+              {skeleton.confirm}
+            </Button>
+            <Button type="button" variant="secondary" disabled>{skeleton.cancel}</Button>
+          </div>
+        </article>
+        <ul className={styles.contactFlowNotes}>
+          {skeleton.notes.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </div>
     );
   }
 
