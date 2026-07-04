@@ -481,7 +481,6 @@ export default function ComponentDemo({
 
         <ul className={styles.languageUsageNotes}>
           <li>{demoZh ? "真實使用位置：全站 Navbar" : "Real usage: global site header"}</li>
-          <li>{demoZh ? "展示語境：文件站以 navbar 截取示意呈現，只有語言切換器可互動" : "Context: shown inside a navbar crop; only the language switcher is interactive in this docs example"}</li>
           <li>{demoZh ? "行為：正式站切換語言時會保留目前 route 與 hash" : "Behavior: preserves the current route and hash when switching locale in production"}</li>
           <li>{demoZh ? "狀態：closed / open / selected / loading" : "States: closed / open / selected / loading"}</li>
         </ul>
@@ -494,7 +493,7 @@ export default function ComponentDemo({
       <ReferenceCard
         locale={locale}
         title={zh ? "真實 Navbar 是全站唯一導覽外殼" : "The real Navbar is the single global navigation shell"}
-        description={zh ? "這裡改用 anatomy / behavior reference，不在 docs example 裡嵌入第二個全站 navbar。" : "This example uses anatomy and behavior notes instead of embedding a second global navbar inside the docs page."}
+        description={zh ? "它負責品牌入口、主要頁面導覽、履歷入口與語系切換。" : "It carries the brand entry, primary page navigation, resume access, and locale switching."}
         items={[
           zh ? "主要連結：Projects、About、Design System、Contact、Resume" : "Primary links: Projects, About, Design System, Contact, Resume",
           ...copy.navbarBehavior,
