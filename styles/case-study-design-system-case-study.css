@@ -209,8 +209,8 @@
 
 .ds-case-workflow__list {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 24px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -251,6 +251,11 @@
   border-top: 1px solid var(--cs-line-strong);
   border-right: 1px solid var(--cs-line-strong);
   transform: rotate(45deg);
+}
+
+.ds-case-workflow__item:nth-child(3)::before,
+.ds-case-workflow__item:nth-child(3)::after {
+  display: none;
 }
 
 .ds-case-workflow__index {
@@ -422,6 +427,50 @@
   font-size: var(--fs-sm);
   font-weight: 700;
   line-height: 1.4;
+}
+
+/* ── Section glossary notes ── */
+
+.ds-case-term-notes {
+  max-width: 1040px;
+  margin-top: 32px;
+  border-top: 1px solid var(--cs-line);
+  padding-top: 22px;
+}
+
+.ds-case-term-notes h3 {
+  margin: 0 0 14px;
+  color: var(--cs-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.ds-case-term-notes dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 24px;
+  margin: 0;
+}
+
+.ds-case-term-note {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ds-case-term-note dt {
+  color: var(--cs-text-heading);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.ds-case-term-note dd {
+  margin: 0;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
 }
 
 /* ── Evolution A：階段卡與箭頭 ── */
@@ -736,6 +785,10 @@
   .ds-case-next {
     padding: 20px 22px;
   }
+
+  .ds-case-term-notes dl {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -759,5 +812,16 @@
 
   .ds-case-workflow__index {
     grid-row: auto;
+  }
+
+  .ds-case-term-notes {
+    margin-top: 26px;
+    padding-top: 18px;
+  }
+
+  .ds-case-term-notes h3,
+  .ds-case-term-note dt,
+  .ds-case-term-note dd {
+    font-size: var(--fs-xs);
   }
 }

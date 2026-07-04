@@ -23,6 +23,11 @@ type InfoItem = {
   value: string[];
 };
 
+type TermNote = {
+  term: string;
+  description: string;
+};
+
 const infoItems: InfoItem[] = [
   { label: "時間", value: ["2026.06-2026.07 still updating"] },
   { label: "角色", value: ["Product Designer"] },
@@ -85,21 +90,37 @@ function IconBadgeCheck() {
   );
 }
 
+function TermNotes({ items }: { items: TermNote[] }) {
+  return (
+    <aside className="ds-case-term-notes" aria-label="專有名詞註釋">
+      <h3>名詞註釋</h3>
+      <dl>
+        {items.map((item) => (
+          <div className="ds-case-term-note" key={item.term}>
+            <dt>{item.term}</dt>
+            <dd>{item.description}</dd>
+          </div>
+        ))}
+      </dl>
+    </aside>
+  );
+}
+
 const whyCards = [
   {
     icon: <IconRepeat />,
     title: "頁面迭代太頻繁",
-    body: "同一種「前後對比」版型，三個案例頁各寫了三套 code；顏色、間距很多直接寫死。改一個地方，另外兩頁不會跟著動。",
+    body: "同一種「前後對比」版型，在不同案例頁各自實作；顏色、間距也散落在各頁 CSS 裡。當網站越來越大，任何微調都可能變成重複修改。",
   },
   {
     icon: <IconAgents />,
-    title: "多個 AI agent 同時協作",
-    body: "我用 Claude、Codex 等多個 AI 幫忙寫 code。沒有共同規範時，每個 AI 都有自己的寫法，越幫越亂。",
+    title: "AI 協作需要明確邊界",
+    body: "我會使用 AI 協助盤點、實作與檢查，但如果沒有共同規範，每次修改都可能採用不同寫法。AI 要能穩定協作，前提是規則、權限和驗證方式都被寫清楚。",
   },
   {
     icon: <IconBadgeCheck />,
     title: "想用業界的工作方式驗證自己",
-    body: "與其在履歷上寫「了解 design system」，不如真的建一套、真的維護它，把過程攤開給大家看。",
+    body: "與其只在履歷上寫「了解 design system」，我更想用自己的作品集做一次完整實作：從規則建立、元件盤點到長期維護，讓能力被具體過程驗證。",
   },
 ];
 
@@ -108,17 +129,17 @@ const benchmarkChips = ["對標 Ant Design", "對標 Material Design", "Figma Ma
 const turningPoints = [
   {
     title: "轉折一：設計文件和實際 code 脫節",
-    body: "第一版規劃寫成了設計文件，但實際 code 裡還是有很多寫死的值、每頁自己的 CSS 解法。文件說一套、code 做一套，兩邊越差越遠。",
-    lesson: "production code 是唯一真相（source of truth），文件描述的「理想狀態」不能被當成現況。",
+    body: "第一版規劃整理成了設計文件，但實際網站裡仍有許多寫死的顏色、間距和每頁各自的 CSS 解法。文件描述的是理想狀態，卻沒有同步反映 production code 的真實狀況。",
+    lesson: "後來我把 production code 視為 source of truth：先盤點實際狀態，再更新文件和規則。",
   },
   {
-    title: "轉折二：完整計劃書直接丟給 AI 執行，越修越糟",
-    body: "AI 一口氣大範圍改動，把幾個案例頁的特殊敘事版型硬套進共用元件，造成邊框疊加、間距跑掉、手機版排版溢出。",
-    lesson: "問題不在 AI 不夠聰明，而是沒有先 audit 就 implement。",
+    title: "轉折二：沒有先 audit 的大範圍修改，造成視覺回歸",
+    body: "早期我曾讓 AI 依照完整計劃一次處理多個案例頁，結果把原本屬於單頁敘事的版型過早推進共用層，造成邊框疊加、間距跑掉和手機版水平溢出。",
+    lesson: "問題不在於 AI 能不能執行，而是每次動手前都必須先釐清影響範圍和層級。",
   },
   {
-    title: "轉折三：把翻車經驗變成制度",
-    body: "我把翻車過程拿去和 ChatGPT、Claude 反覆討論，最後收斂出一套分段工作流，之後所有改動都照這個節奏走。",
+    title: "轉折三：把風險收斂成可重複的流程",
+    body: "後來我把 AI 協作拆成診斷、實作、驗證和回歸檢查的分段流程。AI 仍然可以協助執行，但每一步都有明確邊界、驗證條件和可回溯的 checkpoint。",
     lesson: "audit → implementation → validation → smoke → commit → push。",
   },
 ];
@@ -126,53 +147,73 @@ const turningPoints = [
 const workflowSteps = [
   {
     title: "Audit",
-    body: "先盤點現況、找出 regression 風險與影響範圍，確認要改的是哪一層。",
+    body: "先盤點現況與風險，確認這次要改的是樣式、元件、內容，還是頁面結構。",
   },
   {
     title: "Implementation",
-    body: "一次只改一個明確範圍，避免把 layout、token、component API 和文案混在同一批修改。",
+    body: "一次只修改一個明確範圍，避免把太多問題混在同一批改動裡。",
   },
   {
     title: "Validation",
-    body: "跑靜態檢查與 build，確認格式、lint、token 使用與 production build 都通過。",
+    body: "用 lint、token 檢查與 build 確認基礎品質。",
   },
   {
     title: "Smoke",
-    body: "用瀏覽器檢查主要 routes 與斷點，確認水平溢出、console error、section anchor、互動狀態沒有回歸。",
+    body: "在主要頁面與斷點快速檢查畫面、互動與 console，確認沒有明顯回歸。",
   },
   {
     title: "Commit",
-    body: "驗證通過後才建立 checkpoint commit，讓每個改動都可以被追蹤與 rollback。",
+    body: "驗證通過後才建立 checkpoint，讓每次改動都可以被追蹤。",
   },
   {
     title: "Push",
-    body: "推到 feature branch，保留 main 穩定，等 preview 與人工確認後再合併。",
+    body: "先推到 feature branch，經過 preview 與人工確認後再合併到 main。",
   },
 ];
 
 const workflowSummary =
-  "先診斷，再小範圍改動；每一步都驗證，最後才建立 checkpoint。";
+  "先診斷，再小範圍改動；每一步都驗證，最後才建立可回溯的 checkpoint。";
 
 const frameworkRows = [
-  ["同一個「值」到處重複", "抽成變數", "Design Tokens"],
-  ["「外框」重複、內容物每次不同", "只抽外框，內容留空給各頁自己填", "Slot-based Composition"],
-  ["兩個元件長很像、用途容易混淆", "白紙黑字寫清楚各自的職責與邊界", "Component Contract"],
-  ["結構＋行為都重複、且出現三次以上", "抽成共用元件", "Componentization（Rule of Three）"],
-  ["只服務某一頁的特定故事", "刻意不抽，跟頁面放一起", "Local Component（colocation）"],
+  [
+    "顏色、間距、字級等值反覆出現",
+    "先收斂成 design token，讓不同頁面共用同一組基礎規則，而不是急著抽 component。",
+    "Design Tokens",
+  ],
+  [
+    "外框和排列方式重複，但內容每次不同",
+    "只抽出穩定的外框，把內容區塊留給各頁替換，讓一致性和敘事彈性同時存在。",
+    "Slot-based Composition",
+  ],
+  [
+    "兩個元件長得像，但用途容易混淆",
+    "先寫清楚各自適合承載什麼內容、有哪些狀態、什麼情境下不該使用。",
+    "Component Contract",
+  ],
+  [
+    "同樣結構和行為穩定重複出現",
+    "等使用場景足夠明確，再抽成共用元件，避免太早把例外綁進核心 API。",
+    "Componentization（Rule of Three）",
+  ],
+  [
+    "只服務某一頁的特定敘事",
+    "刻意留在頁面本地，讓它貼近內容，不為了表面統一而增加共用層負擔。",
+    "Local Component（colocation）",
+  ],
 ];
 
 const evolutionSteps = [
   {
     title: "各自實作",
-    body: "三頁各寫各的，視覺相近但 code 完全獨立。樣式還沒穩定前抽共用，只會抽出一個誰都不滿意的元件。",
+    body: "不同案例頁各自實作類似的 Before / After 版型，視覺相近但 code 完全獨立。這時如果直接抽共用，只會把還沒穩定的差異綁在一起。",
   },
   {
     title: "先 audit，再抽出敘事外框",
-    body: "盤點後確認，三頁重複的是「版面配置與 RWD 行為」，不是內容物。所以抽成 slot-based 的 BeforeAfterNarrativeFrame。",
+    body: "盤點後確認，真正重複的是版面配置與 RWD 行為，不是內容本身。所以我抽出 slot-based 的敘事外框，讓各頁保留自己的文案、圖片和說明節奏。",
   },
   {
     title: "再拆出視覺外殼",
-    body: "把「有標籤的面板」再拆成 BeforeAfterPanel，並做 compatibility bridge，保留舊 CSS class 掛鉤，讓已上線頁面零視覺變動遷移。",
+    body: "第二步才把「有標籤的面板」拆成更底層的視覺外殼，並保留既有樣式掛鉤，讓已上線頁面可以在不改變畫面的情況下遷移。",
   },
 ];
 
@@ -182,7 +223,7 @@ const brakeCases = [
     title: "各案例頁的反思卡片",
     temptation: "三個案例頁都有反思卡片，結構相似，看起來是現成的共用候選。",
     judgment:
-      "Laushu 的漸層底色和數字圓標不是裝飾，是那一頁的敘事識別；硬統一等於把三頁的個性磨掉。",
+      "有些反思卡片的背景、標號和排列方式其實是那一頁的敘事識別；硬統一會讓不同案例的語氣被磨平。",
     decision: "共用層停在底層的卡片外殼、Grid 和 tokens，版型各自保留。",
   },
   {
@@ -190,7 +231,7 @@ const brakeCases = [
     title: "Advantech 的多重對比版面",
     temptation: "已經有共用的 Before / After 外框了，把這兩塊也塞進去，就「全站統一」了。",
     judgment:
-      "共用外框的契約是「一個外框、一組對比」；這兩塊是多組對比同框，語意不符。硬塞進去，元件會為了遷就例外長出一堆開關。",
+      "既有共用外框的契約是「一個外框、一組對比」；這類版面是多組對比同框，語意不同。硬塞進去，元件會為了遷就例外長出太多開關。",
     decision: "刻意保留在頁面本地；等真的出現第二個多重對比場景，再設計新的契約。",
   },
   {
@@ -198,7 +239,7 @@ const brakeCases = [
     title: "通用 Tag、表格外框、影片燈箱",
     temptation: "「以後一定用得到」，先做起來放著。",
     judgment:
-      "都還沒有第三個使用場景。需求出現之前抽的元件是用猜的，而猜錯的抽象比重複的 code 更貴。",
+      "都還沒有足夠穩定的使用場景。需求出現之前抽的元件多半是在猜，而猜錯的抽象比重複的 code 更難維護。",
     decision: "行為先寫進文件、元件緩建；等 rule of three 條件成立再重啟評估。",
   },
 ];
@@ -227,12 +268,12 @@ const outcomeMetrics = [
   {
     value: "19",
     label: "共用 case-study 元件",
-    body: "Section、Card、Grid、Media、Before / After 外框，組出全站的案例頁。",
+    body: "Section、Card、Grid、Media、Before / After 外框，支撐目前作品集案例頁的主要敘事結構。",
   },
   {
     value: "10",
     label: "規格文件",
-    body: "從 tokens、元件契約到 AI 實作規則——code 是唯一真相，文件是穩定契約。",
+    body: "從 tokens、元件契約到 AI-assisted workflow，讓規則不只存在腦中，也能被重複執行。",
   },
   {
     value: "19 → 5",
@@ -247,33 +288,33 @@ const outcomeMetrics = [
   {
     value: "3",
     label: "頁面零視覺變動遷移",
-    body: "三個已上線案例頁在抽象過程中完成遷移，畫面一個像素都沒變。",
+    body: "三個已上線案例頁在抽象過程中完成遷移，視覺呈現維持原本狀態。",
   },
 ];
 
 const guardrails = [
   {
-    name: "check:tokens",
-    body: "掃出寫死的顏色值，防止 token 化的成果隨著日常修改慢慢流失。",
+    name: "Token check",
+    body: "檢查是否又出現寫死的顏色值，避免設計規則在日常修改中慢慢流失。",
   },
   {
-    name: "check-links",
-    body: "比對 code 裡引用的每張圖是否真的存在，防止死連結上線。",
+    name: "Asset check",
+    body: "確認頁面引用的圖片和媒體都真的存在，避免作品集上線後出現失效素材。",
   },
   {
-    name: "arch-audit",
-    body: "稽核每個案例頁的 CSS 有沒有乖乖待在自己的 theme 範圍內，並監控肥大檔案。",
+    name: "Architecture audit",
+    body: "檢查案例頁樣式是否維持在自己的範圍內，避免單頁調整影響到其他作品。",
   },
 ];
 
 const reflections = [
   {
-    title: "「規劃完美再執行」是幻覺",
-    body: "第一版雛形和完整計劃書都擋不住翻車。真正救回來的是把「診斷」和「動手」拆開——先 audit 再 implement。順序，比計劃書的厚度重要。",
+    title: "先診斷，再動手，比一次規劃到位更重要",
+    body: "第一版雛形和完整計劃書都無法保證執行安全。真正讓專案穩定下來的，是把「診斷」和「動手」拆開：先 audit，再 implementation。順序比計劃書的厚度更重要。",
   },
   {
-    title: "和 AI 協作，重點是共同立守則",
-    body: "翻車之後我沒有少用 AI，反而把 AI 當共事者：一起檢討錯在哪、一起把結論寫成雙方都遵守的工作流。AI 的表現上限，取決於你給它的邊界有多清楚。",
+    title: "AI 協作的重點是邊界和驗證",
+    body: "這次經驗沒有讓我少用 AI，而是讓我更清楚地把 AI 放在可管理的流程裡。AI 可以協助盤點和執行，但任務邊界、驗證條件和 rollback 節點必須由我先設計好。",
   },
   {
     title: "語彙要跟業界對齊",
@@ -281,7 +322,7 @@ const reflections = [
   },
   {
     title: "把「搞懂」寫下來，才算真的懂",
-    body: "每釐清一個概念——token 和 alias 差在哪、Button 和 LinkButton 為什麼要分——就整理成一篇學習筆記，目前累積了 4 篇。寫不出來，就代表其實還沒懂。",
+    body: "每釐清一個概念——token 和 alias 差在哪、Button 和 LinkButton 為什麼要分——我都整理成規格或筆記。寫不出來，通常代表自己還沒有真的想清楚。",
   },
 ];
 
@@ -295,7 +336,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = (await getLocale()) as Locale;
   const title = "把自己的作品集當產品做：一套邊用邊長出來的 Design System";
   const description =
-    "Hming 在製作作品集網站期間自發建立 Design System 的 side project，記錄設計系統、AI 協作工作流與抽象決策。";
+    "我在製作作品集網站期間，把網站本身當成產品管理，建立 design system、元件規則與 AI-assisted workflow。";
 
   return createLocalizedMetadata(locale, `/${SLUG}`, {
     en: { title, description },
@@ -337,7 +378,7 @@ function Hero() {
           把自己的作品集當產品做：一套邊用邊長出來的 Design System
         </h1>
         <p className="ds-case-hero__subtitle">
-          這是我在製作作品集網站期間，自發啟動的 side project。它不是一次規劃到位的成果——中間翻過車：太早共用元件造成一堆 regression、設計文件和實際 code 脫節。這一頁記錄的就是我怎麼和 AI 一起把問題修掉，並把每次踩坑變成可以重複使用的工作流程。
+          這是我在製作作品集網站期間，自發啟動的 side project。我把網站本身當成產品管理，逐步建立 design tokens、元件契約和 AI-assisted workflow。這一頁記錄的不是一次規劃到位的成果，而是我如何在重複樣式、元件邊界和 AI 協作風險逐漸出現後，把問題收斂成可維護、可驗證、可回溯的工作流程。
         </p>
         <CaseInfoGrid items={heroInfoItems} className="cs-info-row--divided ds-case-info-grid" />
       </div>
@@ -378,6 +419,20 @@ export default function DesignSystemCaseStudyPage() {
         <blockquote className="ds-case-quote">
           把「規則」從人的腦中搬出來，變成 code 和文件都讀得到的單一來源（single source of truth）。
         </blockquote>
+        <TermNotes
+          items={[
+            {
+              term: "Design system",
+              description:
+                "這裡指一套管理介面規則的方法，包含設計變數、元件使用方式、內容版型和維護流程。",
+            },
+            {
+              term: "Single source of truth",
+              description:
+                "指團隊判斷時只依賴同一個可信來源，避免文件、設計稿和實作各說各話。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection
@@ -419,6 +474,20 @@ export default function DesignSystemCaseStudyPage() {
             sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
           />
         </CaseMedia>
+        <TermNotes
+          items={[
+            {
+              term: "Gap analysis",
+              description:
+                "Gap analysis 是把現況和目標標準放在一起比對，找出缺口和優先改善項目。",
+            },
+            {
+              term: "Figma Make",
+              description:
+                "Figma Make 是用來快速產生互動雛形的工具，這裡用來把系統規劃先做成可討論的介面。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection id="cs-sec-turning-points" kicker="TURNING POINTS" title="三次轉折：這個專案真正的主線">
@@ -438,7 +507,10 @@ export default function DesignSystemCaseStudyPage() {
         <div className="ds-case-workflow" aria-labelledby="ds-case-workflow-title">
           <div className="ds-case-workflow__header">
             <h3 id="ds-case-workflow-title">AI collaboration workflow</h3>
-            <p>{workflowSummary}</p>
+            <p>
+              我設計這套 AI-assisted workflow，是為了讓 AI 協作可以被管理、驗證與回溯。
+              {workflowSummary}
+            </p>
           </div>
           <ol className="ds-case-workflow__list">
             {workflowSteps.map((step, index) => (
@@ -452,6 +524,30 @@ export default function DesignSystemCaseStudyPage() {
             ))}
           </ol>
         </div>
+        <TermNotes
+          items={[
+            {
+              term: "Regression",
+              description:
+                "Regression 指修改後意外破壞原本正常的畫面或互動。",
+            },
+            {
+              term: "Smoke testing",
+              description:
+                "Smoke testing 是快速檢查主要頁面、斷點與互動是否仍正常，用來及早發現明顯問題。",
+            },
+            {
+              term: "Rollback",
+              description:
+                "Rollback 是在改動出問題時，能回到上一個穩定版本。",
+            },
+            {
+              term: "Production code as source of truth",
+              description:
+                "這裡指最終判斷以實際上線程式碼為準，而不是只看文件或設計稿。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection id="cs-sec-framework" kicker="FRAMEWORK" title="決策框架：什麼該抽象、什麼不該" surface>
@@ -483,6 +579,30 @@ export default function DesignSystemCaseStudyPage() {
         <blockquote className="ds-case-quote">
           重複的是「值」就 token 化；重複的是「殼」就留 slot；重複的是「整件事」才做成共用元件；只出現一次的，讓它留在原地。
         </blockquote>
+        <TermNotes
+          items={[
+            {
+              term: "Design tokens",
+              description:
+                "Design tokens 是把顏色、字級、間距等設計決策集中管理的變數，讓不同頁面能維持一致。",
+            },
+            {
+              term: "Component contract",
+              description:
+                "Component contract 指的是元件的使用規則，例如它適合承載什麼內容、有哪些狀態、什麼情境下不該使用。",
+            },
+            {
+              term: "Slot-based composition",
+              description:
+                "Slot-based composition 是讓元件保留固定結構，但開放部分內容區塊被替換，兼顧一致性與彈性。",
+            },
+            {
+              term: "Rule of three",
+              description:
+                "Rule of three 是一個實務判斷原則：同樣結構真的重複出現多次後，再考慮抽象成共用元件。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection id="cs-sec-evolution-a" kicker="EVOLUTION A" title="演化實例 A：Before / After 版型的三段抽象">
@@ -512,6 +632,20 @@ export default function DesignSystemCaseStudyPage() {
             sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
           />
         </CaseMedia>
+        <TermNotes
+          items={[
+            {
+              term: "Slot-based narrative frame",
+              description:
+                "這裡指固定版面結構、開放內容替換的敘事外框，讓不同案例能共用排列方式但保留自己的內容。",
+            },
+            {
+              term: "Local implementation",
+              description:
+                "Local implementation 是先在單一頁面完成實作，等模式穩定後再評估是否抽到共用層。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection id="cs-sec-evolution-b" kicker="EVOLUTION B" title="演化實例 B：知道何時「不要」抽象" surface>
@@ -519,7 +653,7 @@ export default function DesignSystemCaseStudyPage() {
           成熟的系統不是什麼都共用，而是每個「刻意不共用」都講得出理由。
         </p>
         <p className="cs-section-lead">
-          有了共用元件之後，最大的誘惑是把所有長得像的東西都塞進去——那正是翻車的老路。所以每次手癢之前，我強迫自己把「誘惑、判斷、決定」寫下來：
+          有了共用元件之後，最大的誘惑是把所有長得像的東西都塞進去。為了避免過早抽象，每次想共用之前，我都會先把「誘惑、判斷、決定」寫下來：
         </p>
         <CaseGrid variant="three" className="ds-case-card-grid">
           {brakeCases.map((item) => (
@@ -553,6 +687,20 @@ export default function DesignSystemCaseStudyPage() {
         <blockquote className="ds-case-quote">
           抽象是有成本的。每多一個共用元件，就多一份契約要維護、多一群頁面被綁在一起。
         </blockquote>
+        <TermNotes
+          items={[
+            {
+              term: "Local component",
+              description:
+                "Local component 是只服務單一頁面或單一敘事情境的元件，不一定要抽成全站共用。",
+            },
+            {
+              term: "Component abstraction",
+              description:
+                "Component abstraction 是把重複的結構整理成共用元件，但它同時會增加使用規則和維護成本。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection id="cs-sec-evolution-c" kicker="EVOLUTION C" title="演化實例 C：語意分不清時，先拆文件、不拆 code">
@@ -599,33 +747,52 @@ export default function DesignSystemCaseStudyPage() {
             這正是決策框架第三列「用途易混淆 → Component Contract」的實際案例：抽象不是只有「抽元件」一種形式，把契約寫清楚，本身就是一種系統化。
           </p>
         </CaseCard>
+        <TermNotes
+          items={[
+            {
+              term: "LinkButton",
+              description:
+                "LinkButton 是語意上帶使用者前往另一個位置、視覺上看起來像按鈕的連結。",
+            },
+            {
+              term: "Screen reader",
+              description:
+                "Screen reader 是協助視障使用者讀取畫面內容的輔助科技，會依照 HTML 語意報讀不同角色。",
+            },
+            {
+              term: "Component contract",
+              description:
+                "Component contract 指的是元件的使用規則，例如它適合承載什麼內容、有哪些狀態、什麼情境下不該使用。",
+            },
+          ]}
+        />
       </CaseSection>
 
-      <CaseSection id="cs-sec-governance" kicker="GOVERNANCE" title="Governance 與 AI 協作：讓規則管人，也管 AI" surface>
+      <CaseSection id="cs-sec-governance" kicker="GOVERNANCE" title="Governance 與 AI 協作：讓流程可管理、可驗證" surface>
         <p className="cs-section-lead">
-          規範如果只存在人腦裡，AI 讀不到，就等於不存在。
+          規範如果只存在人腦裡，就很難被穩定執行。
         </p>
         <p className="cs-section-lead">
-          這套系統比較特別的地方：主要的「使用者」除了我，還有多個 AI agent。治理最後沉澱成兩層，加一本帳：
+          這套系統比較特別的地方，是我把 AI 也視為需要被管理的協作者。治理最後沉澱成兩層，加一本帳：
         </p>
         <CaseGrid variant="two" className="ds-case-card-grid">
           <CaseCard>
-            <h3>文件層——AI 動手前必讀</h3>
+            <h3>文件層——把規則寫成可執行的邊界</h3>
             <p>
-              10 份規格文件（overview、tokens、components、patterns、accessibility、governance…）。元件的職責邊界用 component contract 寫死：哪些 props 可以用、哪些行為不保證、遇到什麼情況必須停下來回報，而不是自己猜。
+              10 份規格文件整理了 tokens、components、patterns、accessibility 與 governance。元件的職責邊界用 component contract 寫清楚：適合承載什麼內容、哪些行為不保證、遇到不明確情境時必須停下來確認。
             </p>
           </CaseCard>
           <CaseCard>
             <h3>流程層——每張工單都有權限邊界</h3>
             <p>
-              AI 改 code 一律走分段權限，每張工單白紙黑字寫「這一段只能做什麼、禁止做什麼」：audit 只能看不能改；implementation 不能 commit；commit 只能提交指定檔案；驗證過了才能 push。防的就是 AI「順手」擴大範圍。
+              AI-assisted implementation 一律走分段權限，每張任務都寫清楚「這一段只能做什麼、禁止做什麼」：audit 只看不改；implementation 不負責 commit；commit 只提交指定檔案；驗證通過後才 push。這樣可以避免修改範圍在過程中失控。
             </p>
           </CaseCard>
         </CaseGrid>
         <div className="ds-case-decision-log">
-          <h3>決策帳——吵過的架，不吵第二次</h3>
+          <h3>決策帳——做過的取捨，不重複討論</h3>
           <p>
-            所有標準化決策逐項拍板後寫進治理文件，變成查得到的紀錄。摘幾條實際的：
+            所有標準化決策逐項整理後寫進治理文件，變成查得到的紀錄。摘幾條實際的：
           </p>
           <ol>
             {decisionLog.map((entry) => (
@@ -636,6 +803,25 @@ export default function DesignSystemCaseStudyPage() {
         <blockquote className="ds-case-quote">
           治理的價值不是「管住」，是讓每一次協作都不用重新解釋一遍脈絡。
         </blockquote>
+        <TermNotes
+          items={[
+            {
+              term: "AI-assisted workflow",
+              description:
+                "這裡指由我設定目標、邊界和驗證條件，再讓 AI 協助盤點或執行部分任務的工作流程。",
+            },
+            {
+              term: "Feature branch",
+              description:
+                "Feature branch 是先把改動放在獨立分支驗證，避免直接影響正式站的版本。",
+            },
+            {
+              term: "Preview",
+              description:
+                "Preview 是合併到正式版本前的預覽環境，用來做最後的畫面和流程確認。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection id="cs-sec-outcome" kicker="OUTCOME" title="產出與防護網">
@@ -665,6 +851,20 @@ export default function DesignSystemCaseStudyPage() {
         <blockquote className="ds-case-quote">
           這一頁本身就是證據：你正在看的這個 case study 頁面，就是用這套系統的 19 個共用元件組出來的——沒有為它新增或修改任何一個共用元件。
         </blockquote>
+        <TermNotes
+          items={[
+            {
+              term: "Validation script",
+              description:
+                "Validation script 是自動檢查規則是否被破壞的小工具，例如檢查 token 使用、素材連結或架構邊界。",
+            },
+            {
+              term: "Architecture audit",
+              description:
+                "Architecture audit 是檢查檔案和樣式是否仍符合約定，避免單頁修改慢慢影響到全站。",
+            },
+          ]}
+        />
       </CaseSection>
 
       <CaseSection id="cs-sec-reflection" kicker="REFLECTION" title="學到什麼" surface>
