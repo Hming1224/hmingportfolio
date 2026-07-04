@@ -1553,8 +1553,6 @@
 
 .caseHeroCopyDemo,
 .caseSectionHeaderDemo,
-.beforeAfterSourceIntro,
-.beforeAfterAnatomyDemo,
 .localExceptionsIntro,
 .proposalPanelDemo {
   display: grid;
@@ -1573,8 +1571,6 @@
 .caseSectionHeaderDemo h3,
 .caseCardDemo h3,
 .caseGridDemo h3,
-.beforeAfterSourceIntro h3,
-.beforeAfterAnatomyDemo h4,
 .flowHintDemo h3,
 .localExceptionsIntro h3,
 .proposalTabsDemo h3 {
@@ -1589,9 +1585,6 @@
 .caseCardDemo p,
 .caseCardDemo span,
 .caseMediaDemo figcaption,
-.beforeAfterSourceIntro p,
-.beforeAfterAnatomyDemo p,
-.beforeAfterAnatomyDemo li,
 .flowHintDemo p,
 .localExceptionsIntro p,
 .proposalPanelDemo p {
@@ -1689,32 +1682,22 @@
   font-weight: var(--hm-fw-semibold);
 }
 
-.beforeAfterStateSlot p {
-  margin: 0 auto;
-  max-width: 24rem;
+.beforeAfterStateSlot ul {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.beforeAfterStateSlot li {
   color: var(--text-secondary);
   font-size: var(--hm-fs-sm);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .beforeAfterMediaSlot {
   justify-items: center;
-}
-
-.beforeAfterAnatomyDemo {
-  padding-top: var(--hm-space-sm);
-  border-top: 1px solid var(--hm-line);
-}
-
-.beforeAfterAnatomyDemo h4 {
-  font-size: var(--hm-fs-h4);
-}
-
-.beforeAfterAnatomyDemo ul {
-  display: grid;
-  gap: var(--hm-space-3xs);
-  margin: 0;
-  padding-inline-start: 1.1rem;
 }
 
 .proposalPanelDemo strong {
