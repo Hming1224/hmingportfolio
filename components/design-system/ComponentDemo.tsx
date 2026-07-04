@@ -23,6 +23,7 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "../ui/Accordion";
+import { registerDesignSystemReturnTarget } from "./DesignSystemReturnBar";
 import styles from "./DesignSystemExplorer.module.css";
 
 const options = [
@@ -350,19 +351,51 @@ export default function ComponentDemo({
   }
 
   if (type === "button") {
+    const registerButtonReturn = () => {
+      registerDesignSystemReturnTarget({
+        locale,
+        scrollY: window.scrollY,
+        target: `${window.location.pathname}#general`,
+      });
+    };
+
     return (
-      <div className={styles.liveButtonDemo}>
-        <Button href="/#projects">{zh ? "查看作品" : "View My Work"}</Button>
-        <Button href="/about-me" variant="secondary">{zh ? "我的歷程" : "My Journey"}</Button>
-        <Button href={featuredProject.href ?? "/"} size="lg">
-          {zh ? "了解更多" : "Learn More"}
-        </Button>
-        <Button size="lg" disabled>
-          {zh ? "即將上線" : "Coming Soon"}
-        </Button>
-        <Button loading loadingLabel={zh ? "傳送中..." : "Sending..."}>
-          {zh ? "送出訊息" : "Send Message"}
-        </Button>
+      <div className={styles.buttonSpecDemo}>
+        <div className={styles.buttonSpecRow} data-button-spec-row>
+          <p>Link Button</p>
+          <div className={styles.buttonSpecControls}>
+            <Button href="/#projects" onClick={registerButtonReturn}>
+              {zh ? "查看作品" : "View My Work"}
+            </Button>
+            <Button href="/about-me" onClick={registerButtonReturn} variant="secondary">
+              {zh ? "我的歷程" : "My Journey"}
+            </Button>
+          </div>
+        </div>
+        <div className={styles.buttonSpecRow} data-button-spec-row>
+          <p>CTA Button(Default)</p>
+          <div className={styles.buttonSpecControls}>
+            <Button onClick={() => undefined} size="lg" type="button">
+              {zh ? "了解更多" : "Learn More"}
+            </Button>
+          </div>
+        </div>
+        <div className={styles.buttonSpecRow} data-button-spec-row>
+          <p>CTA Button(Disabled)</p>
+          <div className={styles.buttonSpecControls}>
+            <Button size="lg" disabled>
+              {zh ? "即將上線" : "Coming Soon"}
+            </Button>
+          </div>
+        </div>
+        <div className={styles.buttonSpecRow} data-button-spec-row>
+          <p>CTA Button(Processing)</p>
+          <div className={styles.buttonSpecControls}>
+            <Button loading loadingLabel={zh ? "傳送中..." : "Sending..."}>
+              {zh ? "送出訊息" : "Send Message"}
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
