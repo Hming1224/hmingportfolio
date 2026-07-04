@@ -537,15 +537,50 @@
   min-width: 0;
 }
 
+.docArticle {
+  width: min(100%, 880px);
+  margin: 0 auto;
+}
+
+.componentDocArticle {
+  width: min(100%, 804px);
+}
+
+.referenceDocArticle {
+  width: min(100%, 880px);
+}
+
 .docHeader {
   margin-bottom: var(--hm-space-xl);
 }
 
+.docTitleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hm-space-xs);
+  margin-bottom: var(--hm-space-xs);
+}
+
 .docTitle {
-  margin: 0 0 var(--hm-space-xs);
+  margin: 0;
   color: var(--text-heading);
   font-size: clamp(var(--hm-fs-h1), 4vw, 44px);
   line-height: 1.2;
+}
+
+.docStatus {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 var(--hm-space-xs);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-surface);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-semibold);
+  letter-spacing: 0;
 }
 
 .docDescription {
@@ -583,8 +618,19 @@
   align-items: center;
   justify-content: center;
   min-height: 240px;
-  margin-top: var(--hm-space-md);
   padding: var(--hm-space-xl);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: color-mix(in srgb, var(--hm-surface) 78%, var(--hm-paper));
+  box-shadow: var(--hm-shadow-sm);
+}
+
+.exampleLabel {
+  margin: 0 0 var(--hm-space-xs);
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.5;
 }
 
 .docList {
@@ -616,6 +662,51 @@
   line-height: 1.65;
 }
 
+.behaviorTableWrap,
+.componentTokenTableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.behaviorTable,
+.componentTokenTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.behaviorTable th,
+.behaviorTable td,
+.componentTokenTable th,
+.componentTokenTable td {
+  padding: var(--hm-space-sm);
+  border-bottom: 1px solid var(--hm-line);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
+  text-align: left;
+  vertical-align: top;
+}
+
+.behaviorTable th,
+.componentTokenTable th {
+  width: 32%;
+  color: var(--text-heading);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.behaviorTable tr:last-child th,
+.behaviorTable tr:last-child td,
+.componentTokenTable tr:last-child th,
+.componentTokenTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.componentTokenTable code {
+  color: var(--hm-purple);
+}
+
 .statePill {
   padding: 0 var(--hm-space-xs);
   border: 1px solid var(--hm-line-strong);
@@ -634,6 +725,37 @@
 .referenceList {
   gap: var(--hm-space-2xs);
   margin-top: var(--hm-space-xs);
+}
+
+.referenceCardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+}
+
+.referenceCard {
+  min-width: 0;
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.referenceCardLabel {
+  margin: 0 0 var(--hm-space-3xs);
+  color: var(--text-muted);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.referenceCardValue {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .demoFallback {
@@ -1940,9 +2062,25 @@
   .liveExperienceCardDemo,
   .contactMethodsDemo,
   .anatomyGrid,
+  .referenceCardGrid,
   .caseInfoGridDemo,
   .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .behaviorTable th,
+  .behaviorTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .behaviorTable th {
+    padding-bottom: var(--hm-space-3xs);
+    border-bottom: 0;
+  }
+
+  .behaviorTable td {
+    padding-top: 0;
   }
 
   .liveFooterDemo {

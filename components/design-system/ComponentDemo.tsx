@@ -43,8 +43,6 @@ const caseExamples = {
     gridItems: ["Position state is unclear", "Manual close lacks confidence", "TP / SL setup needs stronger context"],
     mediaCaption: "CaseMedia wraps competitor screenshots and product UI while leaving crop, ratio, and storytelling geometry to the route.",
     beforeTitle: "AI Chatbot component",
-    caseBeforeAfterContext: "Simple source-level comparison primitive.",
-    narrativeContext: "Live case-study narrative frame.",
     flowTitle: "Overflow affordance for wide analysis boards",
     flowBody: "FlowScrollHint appears before wide content such as Advantech AI feature matrices and process boards. It signals horizontal overflow; it is not a standalone visual component.",
     proposalTitle: "Advantech proposal tabs",
@@ -77,8 +75,6 @@ const caseExamples = {
     gridItems: ["倉位狀態不清楚", "手動平倉缺乏信心", "止盈止損設定需要更完整語境"],
     mediaCaption: "CaseMedia 負責包裝競品截圖與產品畫面；裁切比例、圖片重點與敘事幾何仍由 route 決定。",
     beforeTitle: "AI Chatbot 元件",
-    caseBeforeAfterContext: "簡單的 source-level 比較 primitive。",
-    narrativeContext: "正式案例頁使用的敘事型 before / after frame。",
     flowTitle: "寬版分析 board 的 overflow affordance",
     flowBody: "FlowScrollHint 出現在 Advantech AI 功能矩陣與流程 board 這類寬版內容前，用來提示可以橫向滑動；它不是獨立視覺元件。",
     proposalTitle: "Advantech proposal tabs",
@@ -1020,7 +1016,6 @@ export default function ComponentDemo({
   if (type === "case-before-after") {
     return (
       <section className={styles.beforeAfterSourceDemo}>
-        <p className={styles.demoUsageLine}>{caseCopy.caseBeforeAfterContext}</p>
         <div className="cs-page">
           <CaseBeforeAfter
             beforeLabel={zh ? "Before 狀態" : "Before state"}
@@ -1046,7 +1041,6 @@ export default function ComponentDemo({
   if (type === "before-after-narrative") {
     return (
       <section className={styles.beforeAfterNarrativeDemo}>
-        <p className={styles.demoUsageLine}>{caseCopy.narrativeContext}</p>
         <div className="cs-page">
           <BeforeAfterNarrativeFrame
             badge="Scenario 1"
