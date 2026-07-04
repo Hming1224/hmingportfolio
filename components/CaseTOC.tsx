@@ -10,6 +10,9 @@ export interface TocSection {
 
 interface CaseTOCProps {
   sections: TocSection[];
+  activeSectionId?: string;
+  visible?: boolean;
+  onNavigate?: (id: string) => void;
 }
 
 export interface CaseTOCViewProps {
@@ -57,12 +60,19 @@ export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function Ca
   );
 });
 
-export default function CaseTOC({ sections }: CaseTOCProps) {
+export default function CaseTOC({
+  sections,
+  activeSectionId,
+  visible: visibleOverride,
+  onNavigate,
+}: CaseTOCProps) {
   const locale = useLocale() as Locale;
   const [activeId, setActiveId] = useState<string>(sections[0]?.id ?? '');
   const [visible, setVisible] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const scrollLockRef = useRef<TocScrollLock | null>(null);
+  const resolvedActiveId = activeSectionId ?? activeId;
+  const resolvedVisible = visibleOverride ?? visible;
 
   const clearScrollLock = () => {
     const lock = scrollLockRef.current;
@@ -74,6 +84,8 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
 
   // 第一個內容 section 到達 navbar 下緣後才淡入；避免 hero / section 預覽露出時 TOC 太早出現。
   useEffect(() => {
+    if (visibleOverride !== undefined) return;
+
     const region = navRef.current?.closest('.cs-toc-layout');
     const firstSection = document.getElementById(sections[0]?.id ?? '');
     if (!region || !firstSection) return;
@@ -104,9 +116,11 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
       window.removeEventListener('hashchange', updateVisibility);
       window.removeEventListener('load', updateVisibility);
     };
-  }, [sections]);
+  }, [sections, visibleOverride]);
 
   useEffect(() => {
+    if (activeSectionId !== undefined) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (scrollLockRef.current) return;
@@ -125,12 +139,19 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
     });
 
     return () => observer.disconnect();
-  }, [sections]);
+  }, [sections, activeSectionId]);
 
   useEffect(() => clearScrollLock, []);
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    if (onNavigate) {
+      clearScrollLock();
+      setActiveId(id);
+      onNavigate(id);
+      return;
+    }
+
     const target = document.getElementById(id);
     if (!target) return;
 
@@ -166,8 +187,8 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
     <CaseTOCView
       ref={navRef}
       sections={sections}
-      activeId={activeId}
-      visible={visible}
+      activeId={resolvedActiveId}
+      visible={resolvedVisible}
       ariaLabel={locale === 'en' ? 'Table of contents' : '頁內目錄'}
       onSectionClick={handleClick}
     />

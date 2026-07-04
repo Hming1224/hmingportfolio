@@ -377,6 +377,93 @@ function ContractOnlyCard({
   );
 }
 
+function CaseTocInteractiveDemo({ locale }: { locale: DesignSystemLocale }) {
+  const zh = locale === "zh-TW";
+  const sections = advantechTocSections[locale];
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [activeSectionId, setActiveSectionId] = useState(sections[0]?.id ?? "");
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visibleEntries[0]?.target.id) {
+          setActiveSectionId(visibleEntries[0].target.id);
+        }
+      },
+      {
+        root: container,
+        rootMargin: "0px 0px -58% 0px",
+        threshold: 0,
+      },
+    );
+
+    sections.forEach(({ id }) => {
+      const section = container.querySelector<HTMLElement>(`#${id}`);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, [sections]);
+
+  const handleNavigate = (id: string) => {
+    const container = scrollContainerRef.current;
+    const target = container?.querySelector<HTMLElement>(`#${id}`);
+    if (!container || !target) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    const top = container.scrollTop + targetRect.top - containerRect.top;
+    const pageX = window.scrollX;
+    const pageY = window.scrollY;
+
+    setActiveSectionId(id);
+    container.scrollTo({ top, behavior: "auto" });
+    window.requestAnimationFrame(() => window.scrollTo(pageX, pageY));
+  };
+
+  return (
+    <section className={styles.caseTocDemo} aria-label={zh ? "CaseTOC production 視覺狀態" : "CaseTOC production visual state"}>
+      <p className={styles.demoUsageLine}>{zh ? "真實使用位置：CaseStudyShell / Advantech case route" : "Real usage: CaseStudyShell / Advantech case route"}</p>
+      <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
+        <div className="cs-toc-layout">
+          <aside className="cs-toc-aside">
+            <CaseTOC
+              sections={sections}
+              activeSectionId={activeSectionId}
+              visible
+              onNavigate={handleNavigate}
+            />
+          </aside>
+          <div className={styles.caseTocRouteCrop} ref={scrollContainerRef}>
+            {sections.map((section, index) => (
+              <section
+                className={styles.caseTocWireSection}
+                id={section.id}
+                key={section.id}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h4>{section.title}</h4>
+                <div aria-hidden="true" />
+              </section>
+            ))}
+          </div>
+        </div>
+      </div>
+      <ul className={styles.caseTocNotes}>
+        <li>{zh ? "行為：點擊章節標題只會移動右側示意內容；active state 跟隨右側目前可見大標。" : "Behavior: clicking a section label only moves the right-side sample content; the active state follows the visible heading inside that container."}</li>
+        <li>{zh ? "正式邊界：正式案例頁仍使用自己的頁面 scroll 與窄版隱藏規則。" : "Production boundary: live case routes still use their own page scroll and narrow-breakpoint visibility rules."}</li>
+      </ul>
+    </section>
+  );
+}
+
 export default function ComponentDemo({
   type,
   locale,
@@ -722,37 +809,7 @@ export default function ComponentDemo({
   }
 
   if (type === "case-toc") {
-    const sections = advantechTocSections[locale];
-
-    return (
-      <section className={styles.caseTocDemo} aria-label={zh ? "CaseTOC production 視覺狀態" : "CaseTOC production visual state"}>
-        <p className={styles.demoUsageLine}>{zh ? "真實使用位置：CaseStudyShell / Advantech case route" : "Real usage: CaseStudyShell / Advantech case route"}</p>
-        <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
-          <div className="cs-toc-layout">
-            <aside className="cs-toc-aside">
-              <CaseTOC sections={sections} />
-            </aside>
-            <div className={styles.caseTocRouteCrop}>
-              {sections.map((section, index) => (
-                <section
-                  className={styles.caseTocWireSection}
-                  id={section.id}
-                  key={section.id}
-                >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <h4>{section.title}</h4>
-                  <div aria-hidden="true" />
-                </section>
-              ))}
-            </div>
-          </div>
-        </div>
-        <ul className={styles.caseTocNotes}>
-          <li>{zh ? "行為：點擊章節標題會移到右側對應大標；active state 跟隨目前可見大標。" : "Behavior: clicking a section label moves to the matching case heading; the active state follows the visible heading."}</li>
-          <li>{zh ? "正式邊界：正式案例頁在窄版斷點會隱藏這個浮動導覽。" : "Production boundary: live case routes hide this floating navigation at narrow breakpoints."}</li>
-        </ul>
-      </section>
-    );
+    return <CaseTocInteractiveDemo key={locale} locale={locale} />;
   }
 
   if (type === "case-next-nav") {

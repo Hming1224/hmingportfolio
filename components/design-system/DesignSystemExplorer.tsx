@@ -24,6 +24,25 @@ function sectionForAnchor(sections: DesignSystemSection[], anchor: string) {
   return sections.find((section) => anchor === `#${sectionId(section)}`);
 }
 
+function docSectionForAnchor(
+  sections: DesignSystemSection[],
+  docs: DesignSystemDoc[],
+  anchor: string,
+) {
+  const slug = anchor.replace(/^#/, "");
+  if (!slug) return null;
+
+  for (const section of sections) {
+    const doc = section.items
+      .map((item) => docs.find((candidate) => candidate.slug === item.slug && candidate.kind === item.kind))
+      .find((candidate) => candidate?.slug === slug);
+
+    if (doc) return { section, doc };
+  }
+
+  return null;
+}
+
 export default function DesignSystemExplorer({
   locale,
   sections,
@@ -57,6 +76,18 @@ export default function DesignSystemExplorer({
     const updateActiveAnchor = () => {
       const hash = window.location.hash || "#getting-started";
       const matchingSection = sectionForAnchor(sections, hash);
+      const matchingDoc = docSectionForAnchor(sections, docs, hash);
+
+      if (matchingDoc) {
+        const href = `#${sectionId(matchingDoc.section)}`;
+        setActiveAnchor(href);
+        setOpenSection(matchingDoc.section.label);
+        setActiveSlugs((current) => ({ ...current, [matchingDoc.section.label]: matchingDoc.doc.slug }));
+        window.requestAnimationFrame(() => {
+          document.getElementById(sectionId(matchingDoc.section))?.scrollIntoView({ block: "start" });
+        });
+        return;
+      }
 
       setActiveAnchor(hash);
       if (matchingSection) setOpenSection(matchingSection.label);
@@ -68,7 +99,7 @@ export default function DesignSystemExplorer({
     return () => {
       window.removeEventListener("hashchange", updateActiveAnchor);
     };
-  }, [sections]);
+  }, [docs, sections]);
 
   useEffect(() => {
     const sectionAnchors = [
