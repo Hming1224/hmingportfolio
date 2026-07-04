@@ -514,6 +514,10 @@
     display: grid;
     grid-template-columns: 1fr;
   }
+
+  .contact-review-actions .ds-button-primary {
+    order: -1;
+  }
 }
 
 .spinner-icon {
