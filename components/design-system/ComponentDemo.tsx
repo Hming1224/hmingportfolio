@@ -11,6 +11,8 @@ import ProjectCard from "../ProjectCard";
 import Button from "../ui/Button";
 import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
+import CaseBeforeAfter from "../case-study/CaseBeforeAfter";
+import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import ZoomableImage from "../case-study/ZoomableImage";
 import {
   Accordion,
@@ -43,6 +45,13 @@ const caseExamples = {
     beforeTitle: "AI Chatbot component",
     beforeBody: "Advantech Board 1 uses BeforeAfterNarrativeFrame to compare a 360px chat window against a 640px version that better supports detailed analysis.",
     beforePoint: "The shared frame owns the narrative shell and panels; the route owns screenshots, redlines, and the specific design judgment.",
+    anatomyTitle: "Anatomy / internal parts",
+    anatomyItems: [
+      "Frame: CaseCard shell, header, badge, title, narrative points, comparison layout, and connector.",
+      "Before panel / After panel: rendered by the internal BeforeAfterPanel visual shell inside the frame.",
+      "Narrative copy: supplied by the case route; the frame only owns the repeatable label / content anatomy.",
+      "Local boundaries: media wrappers, redlines, screenshot sizing, and project-specific judgment stay in the route.",
+    ],
     panelInternal: "Internal-only anatomy",
     panelBody: "The exported BeforeAfterPanel renders labeled state panels inside BeforeAfterNarrativeFrame. Routes adopt the narrative frame, not this panel as a standalone production pattern.",
     caseBeforeAfterBody: "CaseBeforeAfter is an independent two-panel comparison component with no current direct route adoption in Advantech, Crypto Arsenal, or Laushu. Its `.cs-before-after-panel` selector belongs to this component boundary, not BeforeAfterNarrativeFrame.",
@@ -80,6 +89,13 @@ const caseExamples = {
     beforeTitle: "AI Chatbot 元件",
     beforeBody: "Advantech Board 1 使用 BeforeAfterNarrativeFrame，比較 360px 聊天視窗與更適合閱讀詳細分析的 640px 版本。",
     beforePoint: "共用 frame 負責敘事外殼與 panel；route 負責截圖、redline 與具體設計判斷。",
+    anatomyTitle: "Anatomy / internal parts",
+    anatomyItems: [
+      "Frame：CaseCard 外框、header、badge、title、narrative points、comparison layout 與 connector。",
+      "Before panel / After panel：由 frame 內部的 BeforeAfterPanel visual shell 呈現。",
+      "Narrative copy：由案例 route 提供；frame 只負責可重複的 label / content anatomy。",
+      "Local boundaries：media wrapper、redline、截圖尺寸與專案特定判斷保留在 route。",
+    ],
     panelInternal: "Internal-only anatomy",
     panelBody: "exported BeforeAfterPanel 只負責在 BeforeAfterNarrativeFrame 內呈現 labeled state panels。正式 route 採用的是 narrative frame，不是把這個 panel 當成獨立 production pattern。",
     caseBeforeAfterBody: "CaseBeforeAfter 是獨立的兩欄比較元件；Advantech、Crypto Arsenal、Laushu 目前正式案例頁沒有直接使用。它的 `.cs-before-after-panel` selector 屬於自己的 component boundary，不屬於 BeforeAfterNarrativeFrame。",
@@ -1023,66 +1039,89 @@ export default function ComponentDemo({
 
   if (type === "case-before-after") {
     return (
-      <ReferenceCard
-        locale={locale}
-        title={zh ? "CaseBeforeAfter 是獨立元件，目前沒有直接 route adoption" : "CaseBeforeAfter is independent with no current direct route adoption"}
-        description={caseCopy.caseBeforeAfterBody}
-        items={[
-          "components/case-study/CaseBeforeAfter.tsx",
-          zh ? "目前 Advantech / Crypto Arsenal / Laushu 正式案例頁沒有直接使用" : "No current direct route adoption in Advantech / Crypto Arsenal / Laushu",
-          ".cs-before-after-panel belongs to CaseBeforeAfter",
-          zh ? "邊界：不是 BeforeAfterNarrativeFrame 的替代元件，也不作為 live route example 呈現" : "Boundary: not a BeforeAfterNarrativeFrame replacement or live route example",
-        ]}
-      />
-    );
-  }
-
-  if (type === "before-after-narrative") {
-    return (
-      <section className={styles.beforeAfterNarrativeDemo}>
-        <p className={styles.demoUsageLine}>Advantech / SolutionSection / Board 1</p>
-        <div className={styles.beforeAfterHeaderDemo}>
-          <span>Scenario 1</span>
-          <h3>{caseCopy.beforeTitle}</h3>
-          <p>{caseCopy.beforeBody}</p>
+      <section className={styles.beforeAfterSourceDemo}>
+        <div className={styles.beforeAfterSourceIntro}>
+          <p className={styles.demoUsageLine}>Source-level reusable component</p>
+          <h3>{zh ? "CaseBeforeAfter 是獨立的兩欄 before / after component" : "CaseBeforeAfter is an independent two-panel before / after component"}</h3>
+          <p>{caseCopy.caseBeforeAfterBody}</p>
         </div>
-        <div className={styles.beforeAfterPointDemo}>
-          <strong>{zh ? "修正視窗寬度" : "Window width refinement"}</strong>
-          <p>{caseCopy.beforePoint}</p>
+        <div className="cs-page">
+          <CaseBeforeAfter
+            beforeLabel={zh ? "Before 狀態" : "Before state"}
+            afterLabel={zh ? "After 狀態" : "After state"}
+            before={
+              <div className={styles.beforeAfterStateSlot}>
+                <strong>{zh ? "原始流程" : "Original flow"}</strong>
+                <p>{zh ? "資訊密度與操作順序仍需要重新整理。" : "Information density and task order still need refinement."}</p>
+              </div>
+            }
+            after={
+              <div className={styles.beforeAfterStateSlot}>
+                <strong>{zh ? "調整後流程" : "Refined flow"}</strong>
+                <p>{zh ? "同一組內容可被放入 component slots，不宣稱目前 route adoption。" : "The same source component can render slot content without claiming route adoption."}</p>
+              </div>
+            }
+          />
         </div>
-        <div className={styles.beforeAfterPanelsDemo}>
-          <article>
-            <span>Before</span>
-            <div className={styles.beforeAfterImageDemo}>
-              <Image src="/projects/advantech/solution/iter-chatbot-before.webp" alt="" fill sizes="320px" />
-            </div>
-            <strong>360px</strong>
-          </article>
-          <article>
-            <span>After</span>
-            <div className={styles.beforeAfterImageDemo}>
-              <Image src="/projects/advantech/solution/iter-chatbot-after.webp" alt="" fill sizes="320px" />
-            </div>
-            <strong>640px</strong>
-          </article>
-        </div>
+        <ul className={styles.caseTocNotes}>
+          <li>{zh ? "目前沒有 Advantech / Crypto Arsenal / Laushu direct route adoption。" : "No current direct route adoption in Advantech / Crypto Arsenal / Laushu."}</li>
+          <li>{zh ? "這不是 live case route pattern，也不是 BeforeAfterNarrativeFrame 的替代元件。" : "This is not a live case route pattern and not a BeforeAfterNarrativeFrame replacement."}</li>
+          <li>{zh ? "`.cs-before-after-panel` selector boundary 屬於 CaseBeforeAfter。" : "The `.cs-before-after-panel` selector boundary belongs to CaseBeforeAfter."}</li>
+        </ul>
       </section>
     );
   }
 
-  if (type === "before-after-panel") {
+  if (type === "before-after-narrative") {
+    const anatomyItems = caseCopy.anatomyItems as string[];
+
     return (
-      <ReferenceCard
-        locale={locale}
-        title={caseCopy.panelInternal}
-        description={caseCopy.panelBody}
-        items={[
-          "components/case-study/BeforeAfterPanel.tsx",
-          zh ? "供 BeforeAfterNarrativeFrame 內部 state panels 使用" : "Used inside BeforeAfterNarrativeFrame state panels",
-          zh ? "沒有 direct route adoption，也不是 standalone production pattern" : "No direct route adoption; not a standalone production pattern",
-          zh ? "CaseBeforeAfter 有自己的內部 panel function 與 selector 邊界" : "CaseBeforeAfter has its own internal panel function and selector boundary",
-        ]}
-      />
+      <section className={styles.beforeAfterNarrativeDemo}>
+        <p className={styles.demoUsageLine}>Advantech / SolutionSection / Board 1</p>
+        <div className="cs-page">
+          <BeforeAfterNarrativeFrame
+            badge="Scenario 1"
+            title={caseCopy.beforeTitle}
+            points={[
+              {
+                label: zh ? "修正視窗寬度" : "Window width refinement",
+                content: <p>{caseCopy.beforePoint}</p>,
+              },
+            ]}
+            beforeLabel="Before"
+            afterLabel="After"
+            before={
+              <div className={styles.beforeAfterMediaSlot}>
+                <div className={styles.beforeAfterImageDemo}>
+                  <Image src="/projects/advantech/solution/iter-chatbot-before.webp" alt="" fill sizes="320px" />
+                </div>
+                <strong>360px</strong>
+              </div>
+            }
+            after={
+              <div className={styles.beforeAfterMediaSlot}>
+                <div className={styles.beforeAfterImageDemo}>
+                  <Image src="/projects/advantech/solution/iter-chatbot-after.webp" alt="" fill sizes="320px" />
+                </div>
+                <strong>640px</strong>
+              </div>
+            }
+          />
+        </div>
+        <div className={styles.beforeAfterAnatomyDemo}>
+          <h4>{caseCopy.anatomyTitle}</h4>
+          <ul>
+            {anatomyItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p>
+            {zh
+              ? "BeforeAfterPanel 在這裡只作為 frame 內部 visual shell 被 render；它不是 standalone route-level pattern，也沒有 direct route adoption。"
+              : "BeforeAfterPanel is rendered here only as the frame's internal visual shell; it is not a standalone route-level pattern and has no direct route adoption."}
+          </p>
+        </div>
+      </section>
     );
   }
 

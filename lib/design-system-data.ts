@@ -85,7 +85,6 @@ export const designSystemSections = [
       "case-media",
       "case-before-after",
       "before-after-narrative-frame",
-      "before-after-panel",
       "zoomable-image",
       "flow-scroll-hint",
       "proposal-tabs",

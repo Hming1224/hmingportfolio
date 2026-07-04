@@ -1504,6 +1504,7 @@
 .caseCardDemo,
 .caseGridDemo,
 .caseMediaDemo,
+.beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
 .localExceptionsDemo,
@@ -1518,6 +1519,7 @@
 .caseHeroDemo,
 .caseSectionDemo,
 .caseCardDemo,
+.beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
 .localExceptionsDemo,
@@ -1551,8 +1553,8 @@
 
 .caseHeroCopyDemo,
 .caseSectionHeaderDemo,
-.beforeAfterHeaderDemo,
-.beforeAfterPointDemo,
+.beforeAfterSourceIntro,
+.beforeAfterAnatomyDemo,
 .localExceptionsIntro,
 .proposalPanelDemo {
   display: grid;
@@ -1560,8 +1562,7 @@
 }
 
 .caseHeroCopyDemo p,
-.caseSectionHeaderDemo span,
-.beforeAfterHeaderDemo span {
+.caseSectionHeaderDemo span {
   margin: 0;
   color: var(--hm-purple);
   font-size: var(--hm-fs-sm);
@@ -1572,7 +1573,8 @@
 .caseSectionHeaderDemo h3,
 .caseCardDemo h3,
 .caseGridDemo h3,
-.beforeAfterHeaderDemo h3,
+.beforeAfterSourceIntro h3,
+.beforeAfterAnatomyDemo h4,
 .flowHintDemo h3,
 .localExceptionsIntro h3,
 .proposalTabsDemo h3 {
@@ -1587,8 +1589,9 @@
 .caseCardDemo p,
 .caseCardDemo span,
 .caseMediaDemo figcaption,
-.beforeAfterHeaderDemo p,
-.beforeAfterPointDemo p,
+.beforeAfterSourceIntro p,
+.beforeAfterAnatomyDemo p,
+.beforeAfterAnatomyDemo li,
 .flowHintDemo p,
 .localExceptionsIntro p,
 .proposalPanelDemo p {
@@ -1661,21 +1664,59 @@
   font-size: var(--hm-fs-sm);
 }
 
-.beforeAfterPanelsDemo {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--hm-space-sm);
+.beforeAfterSourceDemo :global(.cs-before-after),
+.beforeAfterNarrativeDemo :global(.cs-before-after-narrative) {
+  width: 100%;
 }
 
-.beforeAfterPanelsDemo article {
+.beforeAfterStateSlot,
+.beforeAfterMediaSlot {
   display: grid;
   gap: var(--hm-space-2xs);
+  width: 100%;
   min-width: 0;
 }
 
-.beforeAfterPanelsDemo span,
-.beforeAfterPanelsDemo strong,
-.beforeAfterPointDemo strong,
+.beforeAfterStateSlot {
+  min-height: 168px;
+  align-content: center;
+  text-align: center;
+}
+
+.beforeAfterStateSlot strong,
+.beforeAfterMediaSlot strong {
+  color: var(--text-heading);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.beforeAfterStateSlot p {
+  margin: 0 auto;
+  max-width: 24rem;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.6;
+}
+
+.beforeAfterMediaSlot {
+  justify-items: center;
+}
+
+.beforeAfterAnatomyDemo {
+  padding-top: var(--hm-space-sm);
+  border-top: 1px solid var(--hm-line);
+}
+
+.beforeAfterAnatomyDemo h4 {
+  font-size: var(--hm-fs-h4);
+}
+
+.beforeAfterAnatomyDemo ul {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  margin: 0;
+  padding-inline-start: 1.1rem;
+}
+
 .proposalPanelDemo strong {
   color: var(--text-heading);
   font-weight: var(--hm-fw-semibold);
@@ -1907,8 +1948,7 @@
   .liveExperienceCardDemo,
   .contactMethodsDemo,
   .caseInfoGridDemo,
-  .caseGridDemo > div,
-  .beforeAfterPanelsDemo {
+  .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);
   }
 
