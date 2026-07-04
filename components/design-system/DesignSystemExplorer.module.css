@@ -994,6 +994,7 @@
 .caseMediaDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
+.localExceptionsDemo,
 .proposalTabsDemo {
   display: grid;
   gap: var(--hm-space-sm);
@@ -1007,6 +1008,7 @@
 .caseCardDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
+.localExceptionsDemo,
 .proposalTabsDemo {
   padding: var(--hm-space-md);
   border: 1px solid var(--hm-line);
@@ -1039,6 +1041,7 @@
 .caseSectionHeaderDemo,
 .beforeAfterHeaderDemo,
 .beforeAfterPointDemo,
+.localExceptionsIntro,
 .proposalPanelDemo {
   display: grid;
   gap: var(--hm-space-2xs);
@@ -1059,6 +1062,7 @@
 .caseGridDemo h3,
 .beforeAfterHeaderDemo h3,
 .flowHintDemo h3,
+.localExceptionsIntro h3,
 .proposalTabsDemo h3 {
   margin: 0;
   color: var(--text-heading);
@@ -1074,6 +1078,7 @@
 .beforeAfterHeaderDemo p,
 .beforeAfterPointDemo p,
 .flowHintDemo p,
+.localExceptionsIntro p,
 .proposalPanelDemo p {
   color: var(--text-secondary);
   line-height: 1.65;
@@ -1187,6 +1192,55 @@
   color: var(--text-heading);
   font-size: var(--hm-fs-sm);
   font-weight: var(--hm-fw-semibold);
+}
+
+.localExceptionGrid {
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+
+.localExceptionCard {
+  display: grid;
+  gap: var(--hm-space-xs);
+  min-width: 0;
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.localExceptionCard h4 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.35;
+}
+
+.localExceptionCard dl {
+  display: grid;
+  gap: var(--hm-space-xs);
+  margin: 0;
+}
+
+.localExceptionCard div {
+  display: grid;
+  gap: var(--hm-space-3xs);
+}
+
+.localExceptionCard dt {
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.localExceptionCard dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 
 .proposalPanelDemo {
