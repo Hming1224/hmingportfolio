@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getAboutData } from "@/data/about";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
@@ -316,6 +316,34 @@ export default function ComponentDemo({
   const [toastVisible, setToastVisible] = useState(false);
   const [activeTab, setActiveTab] = useState("enterprise");
   const [activeProposal, setActiveProposal] = useState(1);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const [languageDemoLocale, setLanguageDemoLocale] = useState<DesignSystemLocale>(locale);
+  const languageDemoRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!languageMenuOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!languageDemoRef.current?.contains(event.target as Node)) {
+        setLanguageMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setLanguageMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [languageMenuOpen]);
 
   if (!type) {
     return <p className={styles.demoFallback}>{zh ? "此 pattern 以正式作品集使用情境為準。" : "This pattern is documented from its live portfolio usage."}</p>;
@@ -355,17 +383,76 @@ export default function ComponentDemo({
   }
 
   if (type === "language-switcher") {
+    const languageOptions = [
+      { locale: "en" as const, label: "English", shortLabel: "EN" },
+      { locale: "zh-TW" as const, label: "繁體中文", shortLabel: "繁體中文" },
+    ];
+    const currentLanguage = languageOptions.find((option) => option.locale === languageDemoLocale) ?? languageOptions[0];
+    const demoZh = languageDemoLocale === "zh-TW";
+    const navContextItems = zh
+      ? ["Selected Work", "About", "Design System", "Contact", "Resume"]
+      : ["Selected Work", "About", "Design System", "Contact", "Resume"];
+
     return (
-      <ReferenceCard
-        locale={locale}
-        title={zh ? "LanguageSwitcher 只在全站 Navbar 內使用" : "LanguageSwitcher lives inside the global Navbar"}
-        description={zh ? "文件站不嵌入第二個可操作語系選單，避免和目前頁面的 locale routing 互相干擾。" : "The docs do not embed a second interactive locale menu because the real component is coupled to current route preservation."}
-        items={[
-          zh ? "使用位置：global site header" : "Usage location: global site header",
-          zh ? "行為：切換語系時保留目前 route 與 hash" : "Behavior: preserves the current route and hash when switching locale",
-          zh ? "狀態：closed / open / selected / loading" : "States: closed / open / selected / loading",
-        ]}
-      />
+      <section className={styles.languageSwitcherDemo}>
+        <div className={styles.languageNavbarCrop} aria-label={zh ? "Navbar 語境中的語系切換示意" : "Language switcher in navbar context"}>
+          <div className={styles.languageNavbarContext} aria-hidden="true">
+            <span className={styles.languageBrandMark}>H</span>
+            <div className={styles.languageNavLinks}>
+              {navContextItems.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          </div>
+
+          <div ref={languageDemoRef} className={`${styles.languageDemoSwitcher} ${languageMenuOpen ? styles.isLanguageDemoOpen : ""}`}>
+            <button
+              autoFocus
+              aria-expanded={languageMenuOpen}
+              aria-haspopup="menu"
+              aria-label={demoZh ? "選擇語言，文件站安全示意" : "Select language, docs-safe demo"}
+              className={styles.languageDemoTrigger}
+              onClick={() => setLanguageMenuOpen((open) => !open)}
+              type="button"
+            >
+              <span>{currentLanguage.shortLabel}</span>
+              <svg viewBox="0 0 12 12" aria-hidden="true">
+                <path d="m2.5 4.5 3.5 3 3.5-3" />
+              </svg>
+            </button>
+
+            <div className={styles.languageDemoMenu} role="menu" aria-label={demoZh ? "語言選單示意" : "Language menu demo"}>
+              {languageOptions.map((option) => {
+                const selected = option.locale === languageDemoLocale;
+
+                return (
+                  <button
+                    aria-checked={selected}
+                    className={selected ? styles.isLanguageDemoSelected : undefined}
+                    key={option.locale}
+                    onClick={() => {
+                      setLanguageDemoLocale(option.locale);
+                      setLanguageMenuOpen(false);
+                    }}
+                    role="menuitemradio"
+                    type="button"
+                  >
+                    <span>{option.label}</span>
+                    {selected ? <span aria-hidden="true">✓</span> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <ul className={styles.languageUsageNotes}>
+          <li>{demoZh ? "真實使用位置：全站 Navbar" : "Real usage: global site header"}</li>
+          <li>{demoZh ? "展示語境：文件站以 navbar 截取示意呈現，只有語言切換器可互動" : "Context: shown inside a navbar crop; only the language switcher is interactive in this docs example"}</li>
+          <li>{demoZh ? "行為：正式站切換語言時會保留目前 route 與 hash" : "Behavior: preserves the current route and hash when switching locale in production"}</li>
+          <li>{demoZh ? "狀態：closed / open / selected / loading" : "States: closed / open / selected / loading"}</li>
+        </ul>
+      </section>
     );
   }
 
