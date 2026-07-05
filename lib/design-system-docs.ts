@@ -11,13 +11,21 @@ export type DesignSystemAnatomyPart = {
 export type DesignSystemCodeGuidance = {
   importPath: string;
   example: string;
-  props: Array<{ name: string; type: string; description: string }>;
+  props: Array<{ name: string; type: string; description: string; usedBy?: string }>;
   notes?: string[];
 };
 
 export type DesignSystemTokenMapping = {
   token: string;
   role: string;
+  usage?: string;
+};
+
+export type DesignSystemStateRow = {
+  state: string;
+  appliesTo: string;
+  behavior: string;
+  liveUsage: string;
 };
 
 export type DesignSystemDoc = {
@@ -38,6 +46,8 @@ export type DesignSystemDoc = {
   usageZh?: string[];
   behavior?: Array<{ label: string; description: string }>;
   behaviorZh?: Array<{ label: string; description: string }>;
+  stateRows?: DesignSystemStateRow[];
+  stateRowsZh?: DesignSystemStateRow[];
   states?: string[];
   statesZh?: string[];
   tokens?: string[];
@@ -96,6 +106,8 @@ type ComponentSeed = {
   demo?: string;
   behavior?: Array<{ label: string; description: string }>;
   behaviorZh?: Array<{ label: string; description: string }>;
+  stateRows?: DesignSystemStateRow[];
+  stateRowsZh?: DesignSystemStateRow[];
   states?: string[];
   statesZh?: string[];
   tokens?: string[];
@@ -117,7 +129,136 @@ type ComponentSeed = {
 };
 
 const componentSeeds: ComponentSeed[] = [
-  { slug: "button", title: "Button / LinkButton", titleZh: "按鈕 / 連結按鈕", category: "General", source: "components/ui/Button.tsx", demo: "button", states: ["default", "hover", "focus", "active", "disabled", "loading", "size: sm/md/lg", "variant: primary/secondary/danger"], tokens: ["--hm-btn-primary-bg", "--hm-btn-height-md", "--hm-btn-radius", "--hm-btn-transition-duration", "--hm-btn-font-size-md"], usage: ["Live examples use homepage hero CTAs, Selected Work card CTAs, Contact submit, and case-study next navigation.", "Use as a command button when no href is provided.", "When href is provided, treat it as a LinkButton contract for navigation.", "Do not use danger for normal navigation or project tone."], usageZh: ["範例改用首頁 Hero CTA、Selected Work 卡片 CTA、Contact submit 與案例頁下一步導覽的真實語境。", "沒有 href 時才是 command button。", "有 href 時視為 LinkButton contract，用於導頁或錨點。", "danger 只用於破壞性操作，不用於一般導覽或專案色。"], accessibility: ["Renders a native button or anchor according to href.", "Loading state sets aria-busy and disables repeat action."], accessibilityZh: ["依 href 輸出 button 或 anchor 語意。", "loading 狀態會設定 aria-busy 並避免重複送出。"] },
+  {
+    slug: "button",
+    title: "Button / LinkButton",
+    titleZh: "按鈕 / 連結按鈕",
+    category: "General",
+    source: "components/ui/Button.tsx",
+    hideSourceInHeader: true,
+    status: "Live route component",
+    statusZh: "正式 route 元件",
+    description: "Action components used for form submission, portfolio navigation, and project CTAs.",
+    descriptionZh: "用於表單送出、作品集導覽與專案 CTA 的行動元件。",
+    exampleLabel: "Variant / role and production usage context",
+    exampleLabelZh: "變體 / 角色與正式站使用情境",
+    demo: "button",
+    stateRows: [
+      { state: "Default", appliesTo: "Button / LinkButton", behavior: "Renders the primary or secondary visual treatment from the shared `.ds-button` contract.", liveUsage: "Hero navigation, ProjectCard CTA, Contact submit." },
+      { state: "Hover / focus", appliesTo: "Button / LinkButton", behavior: "Uses shared hover colors and visible focus state from the global token CSS.", liveUsage: "General CTA focus and ProjectCard CTA interactions." },
+      { state: "Active", appliesTo: "Button / LinkButton", behavior: "Primary action uses the active background token while pressed.", liveUsage: "CTA press feedback across navigation and submit actions." },
+      { state: "Disabled", appliesTo: "Button", behavior: "Native button is disabled, non-interactive, and uses class-based disabled styling.", liveUsage: "Coming Soon CTA and unavailable next-project CTA." },
+      { state: "Loading / processing", appliesTo: "Button", behavior: "Sets `aria-busy`, disables repeat action, and swaps label for `loadingLabel` with spinner.", liveUsage: "Contact submit and review confirmation flow." },
+      { state: "Navigation / link behavior", appliesTo: "LinkButton", behavior: "`href` switches the component to anchor / locale-aware Link semantics.", liveUsage: "Hero View My Work / My Journey, ProjectCard CTA, case navigation." },
+    ],
+    stateRowsZh: [
+      { state: "Default", appliesTo: "Button / LinkButton", behavior: "使用共用 `.ds-button` contract 的 primary 或 secondary 視覺樣式。", liveUsage: "Hero 導覽、ProjectCard CTA、Contact submit。" },
+      { state: "Hover / focus", appliesTo: "Button / LinkButton", behavior: "使用 global token CSS 裡的 hover color 與可見 focus state。", liveUsage: "一般 CTA focus 與 ProjectCard CTA 互動。" },
+      { state: "Active", appliesTo: "Button / LinkButton", behavior: "Primary action 按下時使用 active background token。", liveUsage: "導覽與送出動作的 CTA press feedback。" },
+      { state: "Disabled", appliesTo: "Button", behavior: "輸出 disabled native button，不可互動，並使用 class-based disabled styling。", liveUsage: "Coming Soon CTA 與 unavailable next-project CTA。" },
+      { state: "Loading / processing", appliesTo: "Button", behavior: "設定 `aria-busy`、避免重複操作，並用 spinner 與 `loadingLabel` 取代原 label。", liveUsage: "Contact submit 與送出前確認流程。" },
+      { state: "Navigation / link behavior", appliesTo: "LinkButton", behavior: "傳入 `href` 時切換成 anchor / locale-aware Link 語意。", liveUsage: "Hero View My Work / My Journey、ProjectCard CTA、case navigation。" },
+    ],
+    usage: [
+      "Use Button for in-place actions, form submit, disabled states, and loading states.",
+      "Use LinkButton when the action navigates to another route or anchor.",
+      "Use one primary action per section when possible.",
+      "Use disabled state only when the action is unavailable, not as decoration.",
+      "Use loading state for async actions such as Contact submit.",
+    ],
+    usageZh: [
+      "Button 用於原地操作、表單送出、disabled state 與 loading state。",
+      "動作會導到其他 route 或 anchor 時，使用 LinkButton 語意。",
+      "同一個 section 盡量只保留一個 primary action。",
+      "disabled state 只用在動作真的不可用時，不拿來當裝飾。",
+      "async action 例如 Contact submit，才使用 loading state。",
+    ],
+    anatomyParts: [
+      { part: "Root element", description: "Renders native `<button>` when no `href` is provided; renders `<a>` or locale-aware Link when `href` is provided.", owner: "Button.tsx", code: ".ds-button" },
+      { part: "Label", description: "Visible action text passed through `children` or replaced by `loadingLabel` during loading.", owner: "Caller", code: ".ds-button-content span" },
+      { part: "Icon / loader slot", description: "Loader2 spinner appears only when `loading` is true.", owner: "Button.tsx", code: ".ds-button-spinner" },
+      { part: "Disabled state", description: "Native disabled behavior for action buttons; disabled anchors are not part of the current contract.", owner: "Button.tsx", code: ":disabled / [aria-disabled=\"true\"]" },
+      { part: "Link wrapper / href behavior", description: "Hash, http, mailto, and tel use native anchor; internal routes use the i18n Link wrapper.", owner: "Button.tsx", code: "href branch" },
+      { part: "Loading indicator", description: "Loading state sets `aria-busy`, disables the button, and prevents duplicate submit.", owner: "Button.tsx", code: "loading / loadingLabel" },
+    ],
+    anatomyPartsZh: [
+      { part: "Root element", description: "沒有 `href` 時輸出 native `<button>`；有 `href` 時輸出 `<a>` 或 locale-aware Link。", owner: "Button.tsx", code: ".ds-button" },
+      { part: "Label", description: "透過 `children` 傳入可見 action text；loading 時由 `loadingLabel` 取代。", owner: "Caller", code: ".ds-button-content span" },
+      { part: "Icon / loader slot", description: "`loading` 為 true 時才出現 Loader2 spinner。", owner: "Button.tsx", code: ".ds-button-spinner" },
+      { part: "Disabled state", description: "action button 使用 native disabled 行為；目前 contract 不包含 disabled anchor。", owner: "Button.tsx", code: ":disabled / [aria-disabled=\"true\"]" },
+      { part: "Link wrapper / href behavior", description: "hash、http、mailto、tel 使用 native anchor；internal routes 使用 i18n Link wrapper。", owner: "Button.tsx", code: "href branch" },
+      { part: "Loading indicator", description: "loading state 會設定 `aria-busy`、停用 button，避免重複 submit。", owner: "Button.tsx", code: "loading / loadingLabel" },
+    ],
+    codeGuidance: {
+      importPath: "components/ui/Button.tsx",
+      example: "import Button from \"@/components/ui/Button\";\n\n<Button type=\"submit\" loading={isSubmitting} loadingLabel=\"Sending...\">\n  Send Message\n</Button>\n\n<Button href=\"/#projects\">\n  View My Work\n</Button>",
+      props: [
+        { name: "children", type: "ReactNode", usedBy: "Button / LinkButton", description: "Visible action label." },
+        { name: "href", type: "string", usedBy: "LinkButton", description: "Switches rendering to native anchor or locale-aware Link." },
+        { name: "type", type: "ButtonHTMLAttributes<HTMLButtonElement>[\"type\"]", usedBy: "Button", description: "Native button type; defaults to `button` when omitted." },
+        { name: "disabled", type: "boolean", usedBy: "Button", description: "Disables native button actions such as Coming Soon or unavailable submit." },
+        { name: "loading", type: "boolean", usedBy: "Button", description: "Shows spinner, sets `aria-busy`, and disables duplicate action." },
+        { name: "loadingLabel", type: "string", usedBy: "Button", description: "Replaces the visible label while loading." },
+        { name: "variant", type: "\"primary\" | \"secondary\" | \"danger\"", usedBy: "Button / LinkButton", description: "Controls visual treatment; danger is reserved for destructive actions." },
+        { name: "size", type: "\"sm\" | \"md\" | \"lg\"", usedBy: "Button / LinkButton", description: "Controls height and width behavior for compact, default, or full-width CTA contexts." },
+        { name: "className", type: "string", usedBy: "Button / LinkButton", description: "Optional styling hook for route-local layout, not for redefining the contract." },
+      ],
+      notes: ["Button and LinkButton share one implementation; `href` determines the rendered semantic element.", "Use `loading`, not `isLoading`, in the current production API."],
+    },
+    codeGuidanceZh: {
+      importPath: "components/ui/Button.tsx",
+      example: "import Button from \"@/components/ui/Button\";\n\n<Button type=\"submit\" loading={isSubmitting} loadingLabel=\"傳送中...\">\n  送出訊息\n</Button>\n\n<Button href=\"/#projects\">\n  查看作品\n</Button>",
+      props: [
+        { name: "children", type: "ReactNode", usedBy: "Button / LinkButton", description: "可見 action label。" },
+        { name: "href", type: "string", usedBy: "LinkButton", description: "切換成 native anchor 或 locale-aware Link render。" },
+        { name: "type", type: "ButtonHTMLAttributes<HTMLButtonElement>[\"type\"]", usedBy: "Button", description: "native button type；未傳入時預設為 `button`。" },
+        { name: "disabled", type: "boolean", usedBy: "Button", description: "停用 Coming Soon 或 unavailable submit 這類 native button action。" },
+        { name: "loading", type: "boolean", usedBy: "Button", description: "顯示 spinner、設定 `aria-busy`，並避免重複操作。" },
+        { name: "loadingLabel", type: "string", usedBy: "Button", description: "loading 時取代可見 label。" },
+        { name: "variant", type: "\"primary\" | \"secondary\" | \"danger\"", usedBy: "Button / LinkButton", description: "控制視覺樣式；danger 只保留給破壞性操作。" },
+        { name: "size", type: "\"sm\" | \"md\" | \"lg\"", usedBy: "Button / LinkButton", description: "控制 compact、default 或 full-width CTA 情境的高度與寬度行為。" },
+        { name: "className", type: "string", usedBy: "Button / LinkButton", description: "route-local layout 的 optional styling hook，不用來重定義 contract。" },
+      ],
+      notes: ["Button 與 LinkButton 共用同一個 implementation；是否傳入 `href` 決定輸出的語意元素。", "目前 production API 使用 `loading`，不是 `isLoading`。"],
+    },
+    tokenMappings: [
+      { token: "--hm-btn-primary-bg", role: "Primary background", usage: ".ds-button-primary default background." },
+      { token: "--hm-btn-primary-color", role: "Primary text color", usage: ".ds-button-primary foreground." },
+      { token: "--hm-btn-radius", role: "Button radius", usage: "Pill radius shared by Button and LinkButton." },
+      { token: "--hm-btn-height-md / --hm-btn-height-sm", role: "Height", usage: "Controls md and sm button minimum heights." },
+      { token: "--hm-btn-padding-inline-md / --hm-btn-padding-inline-sm", role: "Padding", usage: "Controls horizontal padding for md and sm sizes; lg is full-width." },
+      { token: "--hm-btn-font-weight", role: "Font weight", usage: "Shared label weight." },
+      { token: "--hm-btn-transition-duration", role: "Transition", usage: "Background, color, and shadow transitions." },
+      { token: "--disabled", role: "Disabled background", usage: ".ds-button:disabled class-based state." },
+      { token: ".ds-button-spinner", role: "Loading spinner", usage: "Class-based Loader2 animation; no new token added." },
+    ],
+    tokenMappingsZh: [
+      { token: "--hm-btn-primary-bg", role: "Primary background", usage: ".ds-button-primary default background。" },
+      { token: "--hm-btn-primary-color", role: "Primary text color", usage: ".ds-button-primary foreground。" },
+      { token: "--hm-btn-radius", role: "Button radius", usage: "Button 與 LinkButton 共用的 pill radius。" },
+      { token: "--hm-btn-height-md / --hm-btn-height-sm", role: "Height", usage: "控制 md 與 sm button minimum height。" },
+      { token: "--hm-btn-padding-inline-md / --hm-btn-padding-inline-sm", role: "Padding", usage: "控制 md 與 sm 的水平 padding；lg 是 full-width。" },
+      { token: "--hm-btn-font-weight", role: "Font weight", usage: "共用 label weight。" },
+      { token: "--hm-btn-transition-duration", role: "Transition", usage: "background、color、shadow transitions。" },
+      { token: "--disabled", role: "Disabled background", usage: ".ds-button:disabled class-based state。" },
+      { token: ".ds-button-spinner", role: "Loading spinner", usage: "Class-based Loader2 animation；沒有新增 token。" },
+    ],
+    tokens: ["--hm-btn-primary-bg", "--hm-btn-primary-color", "--hm-btn-radius", "--hm-btn-height-md", "--hm-btn-padding-inline-md", "--hm-btn-font-weight", "--hm-btn-transition-duration", "--disabled"],
+    accessibility: ["Use native button semantics for in-place actions.", "Use link semantics for navigation.", "Disabled buttons must not be interactive.", "Loading state should communicate progress and prevent duplicate submit.", "Visible focus state must remain available.", "LinkButton text should describe the destination."],
+    accessibilityZh: ["原地操作使用 native button 語意。", "導覽使用 link 語意。", "Disabled buttons 必須不可互動。", "Loading state 需要傳達處理中並避免重複送出。", "可見 focus state 必須保留。", "LinkButton 文字需要說明目的地。"],
+    referenceCards: [
+      { label: "Source", value: "components/ui/Button.tsx" },
+      { label: "Live usage", value: "Home hero / Contact form / ProjectCard CTA / case navigation" },
+      { label: "CSS classes", value: ".ds-button / .ds-button-primary / .ds-button-secondary / .ds-button-spinner" },
+      { label: "Boundary", value: "Button = action / submit; LinkButton = navigation via href" },
+    ],
+    referenceCardsZh: [
+      { label: "Source", value: "components/ui/Button.tsx" },
+      { label: "Live usage", value: "Home hero / Contact form / ProjectCard CTA / case navigation" },
+      { label: "CSS classes", value: ".ds-button / .ds-button-primary / .ds-button-secondary / .ds-button-spinner" },
+      { label: "Boundary", value: "Button = action / submit；LinkButton = navigation via href" },
+    ],
+  },
   { slug: "language-switcher", title: "LanguageSwitcher", titleZh: "語系切換", category: "General", source: "components/LanguageSwitcher.tsx", demo: "language-switcher", states: ["closed", "open", "selected", "loading"], usage: ["Real usage: global site header.", "Preserves the current route and hash when switching locale.", "States: closed / open / selected / loading."], usageZh: ["真實使用位置：全站 Navbar。", "切換語系時保留目前 route 與 hash。", "狀態：closed / open / selected / loading。"], tokens: ["--hm-surface", "--hm-ink", "--hm-line", "--hm-radius-md"], accessibility: ["Uses button semantics with aria-expanded for the menu trigger.", "Options use menuitemradio with aria-checked for selected state."], accessibilityZh: ["選單 trigger 使用 button 與 aria-expanded 標示狀態。", "選項使用 menuitemradio 與 aria-checked 表示 selected state。"] },
   { slug: "navbar", title: "Navbar", titleZh: "導覽列", category: "Shell", source: "components/Navbar.tsx", demo: "navbar", states: ["default", "hidden on scroll", "mobile open", "language menu open"], usage: ["Global brand and primary navigation shell.", "Scroll hides and restores the navbar without changing page layout.", "Carries project navigation, resume access, and locale switching in one persistent shell."], usageZh: ["全站品牌與主要導覽骨架。", "向下捲動暫時收起，停止或向上捲動時恢復，不改變頁面排版。", "在同一個穩定外殼中承載作品導覽、履歷入口與語系切換。"], tokens: ["--hm-paper", "--hm-ink", "--hm-line", "--hm-duration-slow", "--hm-ease-out", "--hm-space-md", "--hm-shadow-sm"], accessibility: ["Uses nav semantics and keeps the mobile menu button state explicit."], accessibilityZh: ["使用 nav 語意，手機選單按鈕需明確標示展開狀態。"] },
   { slug: "footer", title: "Footer", titleZh: "頁腳", category: "Shell", source: "components/Footer.tsx", demo: "footer", states: ["default", "social hover", "mobile stacked"], usage: ["Closes general pages and case-study pages.", "Keeps copyright and external social links minimal."], usageZh: ["放在一般頁面與案例頁最底部。", "只保留必要版權資訊與外部社群連結。"], tokens: ["--hm-surface", "--hm-ink", "--hm-muted", "--hm-space-xl"], accessibility: ["Uses footer semantics and accessible names for social links."], accessibilityZh: ["使用 footer 語意，社群圖示需有可讀名稱。"] },
@@ -181,6 +322,8 @@ const components: DesignSystemDoc[] = componentSeeds.map((item) => ({
   usageZh: item.usageZh,
   behavior: item.behavior,
   behaviorZh: item.behaviorZh,
+  stateRows: item.stateRows,
+  stateRowsZh: item.stateRowsZh,
   states: item.states,
   statesZh: item.statesZh,
   tokens: item.tokens ?? ["--hm-ink", "--hm-surface", "--hm-line", "--hm-duration-fast"],

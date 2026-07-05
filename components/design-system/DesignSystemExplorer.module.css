@@ -663,6 +663,7 @@
 }
 
 .behaviorTableWrap,
+.stateTableWrap,
 .anatomyTableWrap,
 .propsTableWrap,
 .componentTokenTableWrap {
@@ -673,6 +674,7 @@
 }
 
 .behaviorTable,
+.stateTable,
 .anatomyTable,
 .propsTable,
 .componentTokenTable {
@@ -682,6 +684,8 @@
 
 .behaviorTable th,
 .behaviorTable td,
+.stateTable th,
+.stateTable td,
 .anatomyTable th,
 .anatomyTable td,
 .propsTable th,
@@ -698,6 +702,7 @@
 }
 
 .behaviorTable th,
+.stateTable th,
 .anatomyTable th,
 .propsTable th,
 .componentTokenTable th {
@@ -708,6 +713,8 @@
 
 .behaviorTable tr:last-child th,
 .behaviorTable tr:last-child td,
+.stateTable tr:last-child th,
+.stateTable tr:last-child td,
 .anatomyTable tr:last-child th,
 .anatomyTable tr:last-child td,
 .propsTable tr:last-child th,
@@ -717,11 +724,13 @@
   border-bottom: 0;
 }
 
+.stateTable,
 .anatomyTable,
 .propsTable {
   min-width: 720px;
 }
 
+.stateTable code,
 .anatomyTable code,
 .propsTable code,
 .componentTokenTable code {
@@ -940,9 +949,24 @@
 
 .buttonSpecDemo {
   display: grid;
+  gap: var(--hm-space-lg);
   width: 100%;
   max-width: 720px;
   min-width: 0;
+}
+
+.buttonSpecGroup {
+  display: grid;
+  gap: var(--hm-space-xs);
+  min-width: 0;
+}
+
+.buttonSpecGroup h3 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-md);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.4;
 }
 
 .buttonSpecRow {

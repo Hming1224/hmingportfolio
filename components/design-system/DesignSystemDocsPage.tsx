@@ -180,6 +180,7 @@ export default function DesignSystemDocsPage({
   const description = localized(locale, doc.description, doc.descriptionZh);
   const usage = locale === "zh-TW" && doc.usageZh ? doc.usageZh : doc.usage;
   const behavior = locale === "zh-TW" && doc.behaviorZh ? doc.behaviorZh : doc.behavior;
+  const stateRows = locale === "zh-TW" && doc.stateRowsZh ? doc.stateRowsZh : doc.stateRows;
   const states = locale === "zh-TW" && doc.statesZh ? doc.statesZh : doc.states;
   const accessibility = locale === "zh-TW" && doc.accessibilityZh ? doc.accessibilityZh : doc.accessibility;
   const anatomy = locale === "zh-TW" && doc.anatomyZh ? doc.anatomyZh : doc.anatomy;
@@ -189,6 +190,8 @@ export default function DesignSystemDocsPage({
   const referenceCards = locale === "zh-TW" && doc.referenceCardsZh ? doc.referenceCardsZh : doc.referenceCards;
   const exampleLabel = locale === "zh-TW" && doc.exampleLabelZh ? doc.exampleLabelZh : doc.exampleLabel;
   const status = locale === "zh-TW" && doc.statusZh ? doc.statusZh : doc.status;
+  const codePropsHaveUsage = codeGuidance?.props.some((item) => item.usedBy);
+  const tokenMappingsHaveUsage = tokenMappings?.some((item) => item.usage);
   const docArticleClassName = [
     styles.docArticle,
     doc.kind === "component" ? styles.componentDocArticle : "",
@@ -227,6 +230,34 @@ export default function DesignSystemDocsPage({
           {usage.map((item) => <li className={styles.docListItem} key={item}>{item}</li>)}
         </ul>
       </section>
+
+      {stateRows?.length ? (
+        <section className={styles.docSection}>
+          <h2 className={styles.docSectionTitle}>{localized(locale, "States / Behavior", "狀態 / 行為")}</h2>
+          <div className={styles.stateTableWrap}>
+            <table className={styles.stateTable}>
+              <thead>
+                <tr>
+                  <th>{localized(locale, "State", "狀態")}</th>
+                  <th>{localized(locale, "Applies to", "適用對象")}</th>
+                  <th>{localized(locale, "Behavior", "行為")}</th>
+                  <th>{localized(locale, "Live usage", "正式站使用")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stateRows.map((item) => (
+                  <tr key={`${item.state}-${item.appliesTo}`}>
+                    <th scope="row">{item.state}</th>
+                    <td>{item.appliesTo}</td>
+                    <td>{item.behavior}</td>
+                    <td>{item.liveUsage}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
 
       {behavior?.length ? (
         <section className={styles.docSection}>
@@ -304,7 +335,8 @@ export default function DesignSystemDocsPage({
                   <tr>
                     <th>{localized(locale, "Prop", "Prop")}</th>
                     <th>{localized(locale, "Type", "Type")}</th>
-                    <th>{localized(locale, "Guidance", "說明")}</th>
+                    {codePropsHaveUsage ? <th>{localized(locale, "Used by", "使用於")}</th> : null}
+                    <th>{localized(locale, "Purpose", "用途")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -312,6 +344,7 @@ export default function DesignSystemDocsPage({
                     <tr key={item.name}>
                       <th scope="row"><code>{item.name}</code></th>
                       <td><code>{item.type}</code></td>
+                      {codePropsHaveUsage ? <td>{item.usedBy}</td> : null}
                       <td>{item.description}</td>
                     </tr>
                   ))}
@@ -335,8 +368,9 @@ export default function DesignSystemDocsPage({
               <table className={styles.componentTokenTable}>
                 <thead>
                   <tr>
-                    <th>{localized(locale, "Token", "Token")}</th>
-                    <th>{localized(locale, "Role", "用途")}</th>
+                    <th>{localized(locale, "Token / class", "Token / class")}</th>
+                    <th>{localized(locale, "Value / role", "值 / 角色")}</th>
+                    {tokenMappingsHaveUsage ? <th>{localized(locale, "Usage", "使用位置")}</th> : null}
                   </tr>
                 </thead>
                 <tbody>
@@ -347,6 +381,7 @@ export default function DesignSystemDocsPage({
                     <tr key={item.token}>
                       <td><code>{item.token}</code></td>
                       <td>{item.role}</td>
+                      {tokenMappingsHaveUsage ? <td>{(item as { usage?: string }).usage}</td> : null}
                     </tr>
                   ))}
                 </tbody>
