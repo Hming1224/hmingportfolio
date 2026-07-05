@@ -1018,17 +1018,17 @@ export default function ComponentDemo({
       <section className={styles.beforeAfterSourceDemo}>
         <div className="cs-page">
           <CaseBeforeAfter
-            beforeLabel={zh ? "Before 狀態" : "Before state"}
-            afterLabel={zh ? "After 狀態" : "After state"}
+            beforeLabel="Before"
+            afterLabel="After"
             before={
               <div className={styles.beforeAfterStateSlot}>
-                <strong>{zh ? "Baseline" : "Baseline"}</strong>
+                <strong>Baseline layout</strong>
                 <span>{zh ? "資訊密度偏高" : "Dense layout"}</span>
               </div>
             }
             after={
               <div className={styles.beforeAfterStateSlot}>
-                <strong>{zh ? "Refined" : "Refined"}</strong>
+                <strong>Refined layout</strong>
                 <span>{zh ? "層級更清楚" : "Clearer hierarchy"}</span>
               </div>
             }

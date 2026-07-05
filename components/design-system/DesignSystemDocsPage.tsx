@@ -183,6 +183,9 @@ export default function DesignSystemDocsPage({
   const states = locale === "zh-TW" && doc.statesZh ? doc.statesZh : doc.states;
   const accessibility = locale === "zh-TW" && doc.accessibilityZh ? doc.accessibilityZh : doc.accessibility;
   const anatomy = locale === "zh-TW" && doc.anatomyZh ? doc.anatomyZh : doc.anatomy;
+  const anatomyParts = locale === "zh-TW" && doc.anatomyPartsZh ? doc.anatomyPartsZh : doc.anatomyParts;
+  const codeGuidance = locale === "zh-TW" && doc.codeGuidanceZh ? doc.codeGuidanceZh : doc.codeGuidance;
+  const tokenMappings = locale === "zh-TW" && doc.tokenMappingsZh ? doc.tokenMappingsZh : doc.tokenMappings;
   const referenceCards = locale === "zh-TW" && doc.referenceCardsZh ? doc.referenceCardsZh : doc.referenceCards;
   const exampleLabel = locale === "zh-TW" && doc.exampleLabelZh ? doc.exampleLabelZh : doc.exampleLabel;
   const status = locale === "zh-TW" && doc.statusZh ? doc.statusZh : doc.status;
@@ -201,7 +204,7 @@ export default function DesignSystemDocsPage({
           {status ? <span className={styles.docStatus}>{status}</span> : null}
         </div>
         <p className={styles.docDescription}>{description}</p>
-        {doc.source ? <code className={styles.codeTag}>{doc.source}</code> : null}
+        {doc.source && !doc.hideSourceInHeader ? <code className={styles.codeTag}>{doc.source}</code> : null}
       </header>
 
       {doc.kind === "component" || doc.demo ? (
@@ -243,20 +246,83 @@ export default function DesignSystemDocsPage({
         </section>
       ) : null}
 
-      {anatomy?.length ? (
-        <section className={styles.docSection}>
-          <h2 className={styles.docSectionTitle}>{localized(locale, "Anatomy / Internal parts", "結構 / internal parts")}</h2>
-          <div className={styles.anatomyGrid}>
-            {anatomy.map((item) => <article className={styles.anatomyCard} key={item}>{item}</article>)}
-          </div>
-        </section>
-      ) : null}
-
       {states?.length ? (
         <section className={styles.docSection}>
           <h2 className={styles.docSectionTitle}>{localized(locale, "States", "狀態")}</h2>
           <div className={styles.stateList}>
             {states.map((state) => <span className={styles.statePill} key={state}>{state}</span>)}
+          </div>
+        </section>
+      ) : null}
+
+      {anatomyParts?.length || anatomy?.length ? (
+        <section className={styles.docSection}>
+          <h2 className={styles.docSectionTitle}>{localized(locale, "Anatomy / Internal parts", "結構 / internal parts")}</h2>
+          {anatomyParts?.length ? (
+            <div className={styles.anatomyTableWrap}>
+              <table className={styles.anatomyTable}>
+                <thead>
+                  <tr>
+                    <th>{localized(locale, "Part", "Part")}</th>
+                    <th>{localized(locale, "What it is", "說明")}</th>
+                    <th>{localized(locale, "Owned by", "Owned by")}</th>
+                    <th>{localized(locale, "Code / class / component", "Code / class / component")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {anatomyParts.map((item) => (
+                    <tr key={`${item.part}-${item.code}`}>
+                      <th scope="row">{item.part}</th>
+                      <td>{item.description}</td>
+                      <td>{item.owner}</td>
+                      <td><code>{item.code}</code></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className={styles.anatomyGrid}>
+              {anatomy?.map((item) => <article className={styles.anatomyCard} key={item}>{item}</article>)}
+            </div>
+          )}
+        </section>
+      ) : null}
+
+      {codeGuidance ? (
+        <section className={styles.docSection}>
+          <h2 className={styles.docSectionTitle}>{localized(locale, "Code guidance", "Code guidance")}</h2>
+          <div className={styles.codeGuidance}>
+            <div className={styles.codeMeta}>
+              <span>{localized(locale, "Import path", "Import path")}</span>
+              <code>{codeGuidance.importPath}</code>
+            </div>
+            <pre className={styles.codeBlock}><code>{codeGuidance.example}</code></pre>
+            <div className={styles.propsTableWrap}>
+              <table className={styles.propsTable}>
+                <thead>
+                  <tr>
+                    <th>{localized(locale, "Prop", "Prop")}</th>
+                    <th>{localized(locale, "Type", "Type")}</th>
+                    <th>{localized(locale, "Guidance", "說明")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {codeGuidance.props.map((item) => (
+                    <tr key={item.name}>
+                      <th scope="row"><code>{item.name}</code></th>
+                      <td><code>{item.type}</code></td>
+                      <td>{item.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {codeGuidance.notes?.length ? (
+              <ul className={styles.docList}>
+                {codeGuidance.notes.map((item) => <li className={styles.docListItem} key={item}>{item}</li>)}
+              </ul>
+            ) : null}
           </div>
         </section>
       ) : null}
@@ -274,10 +340,13 @@ export default function DesignSystemDocsPage({
                   </tr>
                 </thead>
                 <tbody>
-                  {doc.tokens.map((token) => (
-                    <tr key={token}>
-                      <td><code>{token}</code></td>
-                      <td>{localized(locale, "Used by the documented component styling contract.", "作為此元件 styling contract 的依據。")}</td>
+                  {(tokenMappings ?? doc.tokens.map((token) => ({
+                    token,
+                    role: localized(locale, "Used by the documented component styling contract.", "作為此元件 styling contract 的依據。"),
+                  }))).map((item) => (
+                    <tr key={item.token}>
+                      <td><code>{item.token}</code></td>
+                      <td>{item.role}</td>
                     </tr>
                   ))}
                 </tbody>

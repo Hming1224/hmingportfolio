@@ -663,6 +663,8 @@
 }
 
 .behaviorTableWrap,
+.anatomyTableWrap,
+.propsTableWrap,
 .componentTokenTableWrap {
   overflow-x: auto;
   border: 1px solid var(--hm-line);
@@ -671,6 +673,8 @@
 }
 
 .behaviorTable,
+.anatomyTable,
+.propsTable,
 .componentTokenTable {
   width: 100%;
   border-collapse: collapse;
@@ -678,6 +682,10 @@
 
 .behaviorTable th,
 .behaviorTable td,
+.anatomyTable th,
+.anatomyTable td,
+.propsTable th,
+.propsTable td,
 .componentTokenTable th,
 .componentTokenTable td {
   padding: var(--hm-space-sm);
@@ -690,6 +698,8 @@
 }
 
 .behaviorTable th,
+.anatomyTable th,
+.propsTable th,
 .componentTokenTable th {
   width: 32%;
   color: var(--text-heading);
@@ -698,13 +708,65 @@
 
 .behaviorTable tr:last-child th,
 .behaviorTable tr:last-child td,
+.anatomyTable tr:last-child th,
+.anatomyTable tr:last-child td,
+.propsTable tr:last-child th,
+.propsTable tr:last-child td,
 .componentTokenTable tr:last-child th,
 .componentTokenTable tr:last-child td {
   border-bottom: 0;
 }
 
+.anatomyTable,
+.propsTable {
+  min-width: 720px;
+}
+
+.anatomyTable code,
+.propsTable code,
 .componentTokenTable code {
   color: var(--hm-purple);
+}
+
+.codeGuidance {
+  display: grid;
+  gap: var(--hm-space-sm);
+}
+
+.codeMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hm-space-2xs);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.5;
+}
+
+.codeMeta span {
+  color: var(--text-muted);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.codeMeta code,
+.codeBlock {
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.codeMeta code {
+  padding: var(--hm-space-3xs) var(--hm-space-2xs);
+  color: var(--hm-purple);
+}
+
+.codeBlock {
+  overflow-x: auto;
+  margin: 0;
+  padding: var(--hm-space-sm);
+  color: var(--text-heading);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
 }
 
 .statePill {
