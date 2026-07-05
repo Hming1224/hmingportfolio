@@ -63,3 +63,17 @@ Production smoke is an alarm, not a deployment gate. If it fails, the site may a
 5. Fix the smallest relevant scope.
 6. Commit only after targeted checks pass.
 7. Let CI run full regression on push or PR.
+
+## Hard Guardrails For Agents
+
+These exist because a 2026-07-05 incident burned an hour on six force-push CI retries.
+
+1. **Two-strike rule.** If the same test fails after 2 fix attempts, STOP. Report the failing test, your hypothesis, and options. Do not attempt a third fix, do not amend + force-push again.
+2. **Targeted runs only while iterating.** Rerun just the failing case (`npx playwright test <spec> --grep "<name>"`), never the full smoke suite, and never push just to "see if CI passes now".
+3. **Test tasks never touch production files.** If a smoke test exposes a suspected product bug (UI, CSS, content), do not fix it in the same task. Report it; the fix is a separate route-local task. Interim: add an entry to the documented known-issue budget in the affected spec (with a comment and follow-up task), so CI stays green and honest.
+4. **Never widen a check to silence a failure.** Tolerances/budgets are only for documented pre-existing issues, never for changes made in the current task.
+5. **One strategy at a time.** Never modify the test and the product code in the same attempt — you lose the ability to tell which change did what.
+
+## Known Environment Caveat
+
+CI runs Chromium on Linux with different font metrics than macOS/iOS. Zero-tolerance pixel checks on `white-space: nowrap` / `max-content` text can differ by a few px between local and CI. Current documented case: `/en/advantech` `.cs-alarm-tip` (see budget in `tests/smoke/regression.spec.ts`).

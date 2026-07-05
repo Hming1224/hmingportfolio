@@ -28,13 +28,19 @@ export function expectNoConsoleErrors(errors: ConsoleErrors) {
   expect(errors, `Console errors:\n${errors.join("\n")}`).toHaveLength(0);
 }
 
-export async function expectNoHorizontalOverflow(page: Page) {
+// knownIssueBudgetPx: temporary allowance for a documented, pre-existing overflow
+// bug awaiting its own fix task. Never raise a budget to silence a new failure —
+// a new overflow on a route without a budget is a real regression.
+export async function expectNoHorizontalOverflow(page: Page, knownIssueBudgetPx = 0) {
   const overflow = await page.evaluate(() => {
     const doc = document.documentElement;
     return Math.max(0, doc.scrollWidth - doc.clientWidth);
   });
 
-  expect(overflow).toBe(0);
+  expect(
+    overflow,
+    `Horizontal overflow ${overflow}px exceeds allowed ${knownIssueBudgetPx}px at ${page.url()}`,
+  ).toBeLessThanOrEqual(knownIssueBudgetPx);
 }
 
 export async function expectNot404(page: Page, status?: number | null) {
@@ -66,12 +72,12 @@ export async function gotoAndWait(page: Page, route: string) {
   return response;
 }
 
-export async function basicPageSmoke(page: Page, route: string) {
+export async function basicPageSmoke(page: Page, route: string, knownOverflowBudgetPx = 0) {
   const errors = collectConsoleErrors(page);
   const response = await gotoAndWait(page, route);
 
   await expectNot404(page, response?.status());
-  await expectNoHorizontalOverflow(page);
+  await expectNoHorizontalOverflow(page, knownOverflowBudgetPx);
   await expectNavbarDesignSystemLink(page);
   expectNoConsoleErrors(errors);
 }
