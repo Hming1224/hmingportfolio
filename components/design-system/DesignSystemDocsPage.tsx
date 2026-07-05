@@ -320,17 +320,7 @@ function FoundationTokenReference({
   if (isTokenReference) {
     return (
       <section className={styles.docSection}>
-        <article className={styles.foundationPanel}>
-          <header className={styles.foundationPanelHeader}>
-            <div>
-              <p className={styles.foundationEyebrow}>{doc.category}</p>
-              <h2 className={styles.foundationTitle}>{title}</h2>
-              <p className={styles.foundationDescription}>{description}</p>
-            </div>
-            <span className={styles.foundationCount}>
-              {designSystemTokenRows.length} {locale === "en" ? "tokens" : "個 tokens"}
-            </span>
-          </header>
+        <article className={styles.tokenReferencePanel}>
           <TokenReferenceBrowser locale={locale} rows={designSystemTokenRows} />
         </article>
       </section>
@@ -353,7 +343,9 @@ function FoundationTokenReference({
               </span>
             </header>
             <FoundationVisualSamples locale={locale} rows={group.rows} slug={doc.slug} />
-            <TokenTable locale={locale} rows={group.rows} variant={isTokenReference ? "reference" : "foundation"} />
+            {doc.slug === "colors" ? null : (
+              <TokenTable locale={locale} rows={group.rows} variant={isTokenReference ? "reference" : "foundation"} />
+            )}
           </article>
         ))}
       </div>

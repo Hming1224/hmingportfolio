@@ -259,6 +259,16 @@
   box-shadow: var(--shadow-sm);
 }
 
+.tokenReferencePanel {
+  display: grid;
+  gap: var(--hm-space-md);
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-paper);
+  box-shadow: var(--shadow-sm);
+}
+
 .foundationPanelHeader {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -373,9 +383,7 @@
   display: block;
   min-height: 72px;
   border-bottom: 1px solid var(--hm-line);
-  background:
-    linear-gradient(135deg, transparent 0 48%, color-mix(in srgb, var(--hm-line) 72%, transparent) 48% 52%, transparent 52%),
-    var(--token-preview);
+  background: var(--token-preview);
 }
 
 .colorSwatchCard div {
@@ -636,7 +644,7 @@
 
 .tokenTable {
   width: 100%;
-  min-width: 720px;
+  min-width: 840px;
   border-collapse: collapse;
 }
 
@@ -677,6 +685,73 @@
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-sm);
   background: var(--token-preview);
+}
+
+.tokenPreviewCell {
+  width: 96px;
+}
+
+.tokenPreviewSwatch,
+.tokenPreviewBar,
+.tokenPreviewRadius,
+.tokenPreviewShadow,
+.tokenPreviewMotion {
+  display: block;
+  width: 64px;
+  height: 36px;
+  border: 1px solid var(--hm-line);
+  background: var(--hm-paper);
+}
+
+.tokenPreviewSwatch {
+  border-radius: var(--hm-radius-sm);
+  background: var(--token-preview);
+}
+
+.tokenPreviewBar {
+  width: min(var(--token-size), 64px);
+  min-width: 6px;
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple);
+}
+
+.tokenPreviewRadius {
+  border-radius: var(--token-radius);
+}
+
+.tokenPreviewShadow {
+  border-radius: var(--hm-radius-md);
+  box-shadow: var(--token-shadow);
+}
+
+.tokenPreviewMotion {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple-light);
+}
+
+.tokenPreviewMotion::after {
+  position: absolute;
+  top: 50%;
+  left: var(--hm-space-xs);
+  width: var(--hm-space-xs);
+  height: var(--hm-space-xs);
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple);
+  content: "";
+  transform: translateY(-50%);
+  animation: ds-motion-preview var(--token-duration, var(--hm-duration-base)) var(--hm-ease-out) infinite alternate;
+}
+
+.tokenPreviewType {
+  color: var(--text-heading);
+  font-size: var(--token-type-size);
+  line-height: 1;
+}
+
+.tokenPreviewEmpty {
+  color: var(--text-muted);
 }
 
 .typeSample {
@@ -2583,6 +2658,7 @@
 
   .card,
   .foundationPanel,
+  .tokenReferencePanel,
   .cta,
   .demoSurface {
     padding: var(--hm-space-md);
