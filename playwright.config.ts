@@ -20,6 +20,7 @@ export default defineConfig({
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
     baseURL,
+    navigationTimeout: 30_000,
     // Header-only bypass: intentionally no x-vercel-set-bypass-cookie — it
     // triggers a self-redirect that can stack with next-intl locale redirects
     // and stall first navigations.

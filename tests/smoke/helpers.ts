@@ -68,7 +68,10 @@ export async function setViewport(page: Page, width: keyof typeof viewports | nu
 export async function gotoAndWait(page: Page, route: string) {
   const response = await page.goto(route, { waitUntil: "domcontentloaded" });
   await page.locator("main").first().waitFor({ state: "visible" });
-  await page.waitForLoadState("networkidle").catch(() => undefined);
+  // Best-effort settle. Must be bounded: with no timeout this await never
+  // rejects, and on deployed URLs analytics beacons keep the network busy
+  // forever — the test then silently burns its whole 60s budget here.
+  await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => undefined);
   return response;
 }
 
