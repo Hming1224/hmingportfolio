@@ -299,8 +299,6 @@ function FoundationTokenReference({
   doc: DesignSystemDoc;
   locale: DesignSystemLocale;
 }) {
-  const title = localized(locale, doc.title, doc.titleZh);
-  const description = localized(locale, doc.description, doc.descriptionZh);
   const isTokenReference = doc.kind === "reference" && doc.slug === "tokens";
   const foundationRows = designSystemTokenRows.filter((row) => foundationTokenTypes[doc.slug]?.includes(row.type));
   const groups = isTokenReference
@@ -312,8 +310,6 @@ function FoundationTokenReference({
       }))
     : [{
         id: doc.slug,
-        title,
-        description,
         rows: foundationRows,
       }];
 
@@ -332,16 +328,6 @@ function FoundationTokenReference({
       <div className={styles.foundationStack}>
         {groups.map((group) => (
           <article className={styles.foundationPanel} key={group.id}>
-            <header className={styles.foundationPanelHeader}>
-              <div>
-                <p className={styles.foundationEyebrow}>{doc.category}</p>
-                <h2 className={styles.foundationTitle}>{group.title}</h2>
-                <p className={styles.foundationDescription}>{group.description}</p>
-              </div>
-              <span className={styles.foundationCount}>
-                {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
-              </span>
-            </header>
             <FoundationVisualSamples locale={locale} rows={group.rows} slug={doc.slug} />
             {doc.slug === "colors" ? null : (
               <TokenTable locale={locale} rows={group.rows} variant={isTokenReference ? "reference" : "foundation"} />

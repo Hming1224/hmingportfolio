@@ -37,3 +37,11 @@ Apply those shared rules to this project.
   - **👉 建議下一步** (列出下一步建議)
   - **⚠️ 可能遺漏** (提醒潛在或可能被遺漏的細節)
 
+## Design System Documentation IA Rules
+
+- Do not repeat the same heading, label, description, or classification at adjacent hierarchy levels.
+- Parent headings define context; child cards should add new information.
+- Group-level classification does not need to be repeated as a chip on every card in that group.
+- Tags and chips must distinguish variants, states, statuses, or mixed classifications. Do not use chips as decoration.
+- Foundation pages should not duplicate their page title and description inside the content card.
+- Examples and visual samples are for visual/state demonstration only; explanatory content belongs in guidance sections or reference tables.

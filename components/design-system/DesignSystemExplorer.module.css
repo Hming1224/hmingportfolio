@@ -269,52 +269,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-.foundationPanelHeader {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--hm-space-md);
-  align-items: start;
-}
-
-.foundationEyebrow {
-  display: block;
-  margin: 0 0 var(--hm-space-2xs);
-  color: var(--hm-muted);
-  font-size: var(--hm-fs-xs);
-  font-weight: var(--hm-fw-bold);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.foundationTitle {
-  display: block;
-  margin: 0;
-  color: var(--text-heading);
-  font-size: var(--hm-fs-h2);
-  line-height: 1.25;
-}
-
-.foundationDescription {
-  max-width: 760px;
-  margin: var(--hm-space-2xs) 0 0;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-.foundationCount {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--hm-map-height-control-sm);
-  padding: 0 var(--hm-space-xs);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-pill);
-  background: var(--hm-surface);
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  font-weight: var(--hm-fw-medium);
-  white-space: nowrap;
-}
-
 .colorGroupStack,
 .tokenReferenceBrowser {
   display: grid;
@@ -2302,7 +2256,6 @@
 
 .caseHeroCopyDemo,
 .caseSectionHeaderDemo,
-.localExceptionsIntro,
 .proposalPanelDemo {
   display: grid;
   gap: var(--hm-space-2xs);
@@ -2321,7 +2274,6 @@
 .caseCardDemo h3,
 .caseGridDemo h3,
 .flowHintDemo h3,
-.localExceptionsIntro h3,
 .proposalTabsDemo h3 {
   margin: 0;
   color: var(--text-heading);
@@ -2335,7 +2287,6 @@
 .caseCardDemo span,
 .caseMediaDemo figcaption,
 .flowHintDemo p,
-.localExceptionsIntro p,
 .proposalPanelDemo p {
   color: var(--text-secondary);
   line-height: 1.65;
@@ -2526,20 +2477,6 @@
   color: var(--text-heading);
   font-size: var(--hm-fs-h4);
   line-height: 1.35;
-}
-
-.boundaryChip {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  min-height: var(--hm-map-height-control-sm);
-  padding: 0 var(--hm-space-xs);
-  border: 1px solid color-mix(in srgb, var(--hm-purple) 24%, var(--hm-line));
-  border-radius: var(--hm-radius-pill);
-  background: var(--hm-purple-light);
-  color: var(--hm-purple);
-  font-size: var(--hm-fs-xs);
-  font-weight: var(--hm-fw-semibold);
 }
 
 .localExceptionCard dl {
@@ -2754,10 +2691,6 @@
   .cta,
   .demoSurface {
     padding: var(--hm-space-md);
-  }
-
-  .foundationPanelHeader {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .colorSwatchGrid,

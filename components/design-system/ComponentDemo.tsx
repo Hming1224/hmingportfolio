@@ -1157,16 +1157,6 @@ export default function ComponentDemo({
 
     return (
       <section className={styles.localExceptionsDemo} aria-label="Component boundary reference">
-        <div className={styles.localExceptionsIntro}>
-          <p className={styles.demoBadge}>{zh ? "Boundary reference" : "Boundary reference"}</p>
-          <h3>{zh ? "Component 邊界分類" : "Component boundary taxonomy"}</h3>
-          <p>
-            {zh
-              ? "Boundary notes 用來區分哪些 UI 適合放進通用元件目錄，哪些屬於 shared case-study pattern、route-local pattern 或內部組成結構。"
-              : "Boundary notes clarify which UI pieces are general-purpose components, shared case-study patterns, route-local patterns, or internal anatomy."}
-          </p>
-        </div>
-
         <div className={styles.boundaryGroupStack}>
           {groups.map((group) => (
             <section className={styles.boundaryGroup} key={group.classification}>
@@ -1178,7 +1168,6 @@ export default function ComponentDemo({
                 {group.items.map((item) => (
                   <article className={styles.localExceptionCard} key={item.pattern}>
                     <div className={styles.boundaryCardHeader}>
-                      <span className={styles.boundaryChip}>{item.classification}</span>
                       <h5>{item.pattern}</h5>
                     </div>
                     <dl>
