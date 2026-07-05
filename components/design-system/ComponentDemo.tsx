@@ -277,33 +277,6 @@ function getCopy(locale: DesignSystemLocale) {
   };
 }
 
-function ReferenceCard({
-  title,
-  description,
-  items,
-  locale,
-}: {
-  title: string;
-  description: string;
-  items: string[];
-  locale: DesignSystemLocale;
-}) {
-  const copy = getCopy(locale);
-
-  return (
-    <article className={styles.demoReferenceCard}>
-      <p className={styles.demoBadge}>{copy.referenceStyle}</p>
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <ul>
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </article>
-  );
-}
-
 function ContractOnlyCard({
   locale,
   title,
@@ -565,7 +538,7 @@ export default function ComponentDemo({
     const currentLanguage = languageOptions.find((option) => option.locale === languageDemoLocale) ?? languageOptions[0];
     const demoZh = languageDemoLocale === "zh-TW";
     const navContextItems = zh
-      ? ["Selected Work", "About", "Design System", "Contact", "Resume"]
+      ? ["精選案例", "關於我", "Design System", "聯絡資訊", "下載履歷"]
       : ["Selected Work", "About", "Design System", "Contact", "Resume"];
 
     return (
@@ -621,26 +594,45 @@ export default function ComponentDemo({
           </div>
         </div>
 
-        <ul className={styles.languageUsageNotes}>
-          <li>{demoZh ? "真實使用位置：全站 Navbar" : "Real usage: global site header"}</li>
-          <li>{demoZh ? "行為：正式站切換語言時會保留目前 route 與 hash" : "Behavior: preserves the current route and hash when switching locale in production"}</li>
-          <li>{demoZh ? "狀態：closed / open / selected / loading" : "States: closed / open / selected / loading"}</li>
-        </ul>
       </section>
     );
   }
 
   if (type === "navbar") {
+    const navItems = zh
+      ? ["精選案例", "關於我", "Design System", "聯絡資訊", "下載履歷"]
+      : ["Selected Work", "About", "Design System", "Contact", "Resume"];
+
     return (
-      <ReferenceCard
-        locale={locale}
-        title={zh ? "真實 Navbar 是全站唯一導覽外殼" : "The real Navbar is the single global navigation shell"}
-        description={zh ? "它負責品牌入口、主要頁面導覽、履歷入口與語系切換。" : "It carries the brand entry, primary page navigation, resume access, and locale switching."}
-        items={[
-          zh ? "主要連結：Projects、About、Design System、Contact、Resume" : "Primary links: Projects, About, Design System, Contact, Resume",
-          ...copy.navbarBehavior,
-        ]}
-      />
+      <section className={styles.navbarShellDemo} aria-label={zh ? "Navbar shell visual states" : "Navbar shell visual states"}>
+        <div className={styles.navbarDemoFrame}>
+          <div className={styles.navbarDemoLabel}>{zh ? "桌機導覽骨架" : "Desktop shell"}</div>
+          <div className={styles.navbarDemoBar} aria-hidden="true">
+            <span className={styles.navbarDemoBrand}>H</span>
+            <div className={styles.navbarDemoLinks}>
+              {navItems.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+              <span className={styles.navbarDemoLanguage}>{zh ? "繁體中文" : "EN"}</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.navbarDemoFrame}>
+          <div className={styles.navbarDemoLabel}>{zh ? "手機選單骨架" : "Mobile menu shell"}</div>
+          <div className={styles.navbarMobileShell} aria-hidden="true">
+            <div className={styles.navbarMobileTop}>
+              <span className={styles.navbarDemoBrand}>H</span>
+              <span className={styles.navbarMobileButton}><span /><span /></span>
+            </div>
+            <div className={styles.navbarMobilePanel}>
+              {navItems.slice(0, 4).map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+              <span className={styles.navbarDemoLanguage}>{zh ? "繁體中文" : "EN"}</span>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 
