@@ -38,7 +38,7 @@ export const designSystemSections = [
   {
     label: "Shell",
     labelZh: "網站骨架",
-    items: ["navbar", "footer", "scroll-progress"].map((slug) => ({
+    items: ["navbar", "footer"].map((slug) => ({
       kind: "component" as const,
       slug,
     })),
@@ -46,7 +46,7 @@ export const designSystemSections = [
   {
     label: "Navigation",
     labelZh: "導覽",
-    items: ["accordion", "tabs", "year-rail", "case-toc", "case-next-nav"].map((slug) => ({
+    items: ["accordion", "tabs", "year-rail", "case-toc"].map((slug) => ({
       kind: "component" as const,
       slug,
     })),
@@ -88,7 +88,6 @@ export const designSystemSections = [
       "zoomable-image",
       "flow-scroll-hint",
       "proposal-tabs",
-      "case-info-card",
     ].map((slug) => ({ kind: "component" as const, slug })),
   },
   {

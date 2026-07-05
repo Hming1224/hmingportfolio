@@ -33,6 +33,9 @@ function docSectionForAnchor(
     "border-radius": "radius",
     "component-boundaries": "local-exceptions",
     "token-reference": "tokens",
+    "scroll-progress": "local-exceptions",
+    "case-next-nav": "local-exceptions",
+    "case-info-card": "local-exceptions",
   };
   const requestedSlug = anchor.replace(/^#/, "");
   const slug = slugAliases[requestedSlug] ?? requestedSlug;

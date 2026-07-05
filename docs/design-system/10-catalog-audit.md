@@ -6,7 +6,8 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 
 - Checked source areas: `lib/design-system-data.ts`, `lib/design-system-docs.ts`, `components/design-system/ComponentDemo.tsx`, `components/design-system/DesignSystemDocsPage.tsx`, `components/design-system/DesignSystemExplorer.tsx`, `docs/design-system/03-components.md`, `components/`, `app/`, and `styles/`.
 - Requested files `docs/design-system/04-component-boundaries.md` and `docs/design-system/09-roadmap.md` do not exist in the current tree. Related current files are `04-case-study-patterns.md`, `06-governance.md`, and `09-integrated-workflow.md`.
-- Decision terms are recommendations only. No catalog item was moved or removed in this batch.
+- Original Batch 7A decision terms were recommendations only; no catalog item was moved or removed during that audit.
+- Batch 7B-2 update: `ScrollProgress`, `CaseNextNav`, and `CaseInfoCard` were reclassified from the general-purpose component catalog to Component Boundaries / Shared case-study pattern documentation. This preserves their documentation value while placing them in the correct pattern context.
 
 ## Migration Matrix
 
@@ -14,13 +15,13 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Tabs | Visible: Navigation | `components/animate-ui/primitives/base/tabs.tsx` | `components/Works.tsx` homepage Selected Works tabs | Semi-real docs-local tablist using project data, not the actual `Tabs` composition | Medium | Keep visible / standardize later | Real production component and homepage adoption exist, but docs example does not render the actual source component. | Later render the real `Tabs` stack or clearly show production anatomy with source reference. |
 | YearRail | Visible: Navigation | `components/YearRail.tsx` | `app/about-me/page.tsx` experience timeline | Semi-real visual approximation using About data, not the actual component | Medium | Keep visible / standardize later | Real source component and route adoption exist. Its scrollspy behavior is route-context dependent. | Later add code guidance and document route dependency on `.experience-card[data-year]`. |
-| ScrollProgress | Visible: Shell | `components/ScrollProgress.tsx` | `components/case-study/CaseStudyShell.tsx` across case routes | Sample-only static progress display | Medium | Move to Component Boundaries | It is a shell-level reading affordance tied to `CaseStudyShell`, not a standalone component users directly compose. | Later document as case-study shell behavior and remove fake static progress demo. |
-| CaseNextNav | Visible: Navigation | `components/case-study/CaseStudyShell.tsx` | `app/advantech/page.tsx`, `app/crypto-arsenal/page.tsx`, `app/laushu/page.tsx` via `nextNav` prop | Sample-only two-button row | Medium | Move to Component Boundaries | No standalone component exists; it is a `CaseStudyShell` slot/behavior using shared `Button`. | Later document under `CaseStudyShell` anatomy or Component Boundaries. |
+| ScrollProgress | Reclassified to Component Boundaries / Shared case-study pattern | `components/ScrollProgress.tsx` | `components/case-study/CaseStudyShell.tsx` across case routes | Pattern documentation in Component Boundaries | Medium | Move to Component Boundaries | It is a shell-level reading affordance tied to `CaseStudyShell`, not a standalone component users directly compose. | Document as case-study shell behavior, not as a general-purpose progress component. |
+| CaseNextNav | Reclassified to Component Boundaries / Shared case-study pattern | `components/case-study/CaseStudyShell.tsx` | `app/advantech/page.tsx`, `app/crypto-arsenal/page.tsx`, `app/laushu/page.tsx` via `nextNav` prop | Pattern documentation in Component Boundaries | Medium | Move to Component Boundaries | No standalone component exists; it is a `CaseStudyShell` slot/behavior using shared `Button`. | Document as case-study reading-flow navigation, not as generic pagination or global navigation. |
 | FloatingInput | Visible: Data Entry | `components/Contact.tsx` + `styles/contact.css` | Contact page form fields | Semi-real markup using Contact-like CSS, not exported component | Medium | Keep visible / standardize later | Live production usage exists, but it is a Contact form pattern rather than a shared component. | Later decide whether to extract a source component or document as Contact form pattern. |
 | FloatingTextarea | Visible: Data Entry | `components/Contact.tsx` + `styles/contact.css` | Contact page message field | Semi-real markup using Contact-like CSS, not exported component | Medium | Keep visible / standardize later | Live production usage exists, but it is tied to Contact route structure. | Later align with FloatingInput decision; do not duplicate as a separate shared component unless extracted. |
 | CaseHero | Visible: Case Study | `components/case-study/CaseHero.tsx` | Advantech, Crypto Arsenal, Laushu hero sections | Semi-real reference-style anatomy with real Crypto image/content | Low | Keep visible / standardize later | Real shared source and multi-route adoption exist. | Later standardize section order and render closer to production `CaseHero` props if layout remains stable. |
 | ProposalTabs | Visible: Case Study | `components/case-study/CaseProposalTabs.tsx`, `app/advantech/components/ProposalTabs.tsx`, `app/crypto-arsenal/components/WireframeProposalBoard.tsx` | Advantech SolutionSection; Crypto Arsenal WireframeSection | Semi-real docs-local tablist, not actual `CaseProposalTabs` | High | Keep visible / standardize later | Real shared component and multi-route adoption exist, but current example under-represents carousel/image/reference behavior. | Later render actual `CaseProposalTabs` with trimmed real data or document as production preview with limited interaction. |
-| CaseInfoCard | Visible: Case Study | `components/case-study/CaseInfoGrid.tsx` via `CaseHero` | Advantech, Crypto Arsenal, Laushu hero metadata grids | Semi-real metadata grid using live hero items | Medium | Move to Component Boundaries | There is no `CaseInfoCard` component; the actual source is `CaseInfoGrid` inside `CaseHero`. | Later rename/reframe as `CaseInfoGrid` or move under `CaseHero` anatomy. |
+| CaseInfoCard | Reclassified to Component Boundaries / Shared case-study pattern | `components/case-study/CaseInfoGrid.tsx` via `CaseHero` | Advantech, Crypto Arsenal, Laushu hero metadata grids | Pattern documentation in Component Boundaries | Medium | Move to Component Boundaries | There is no `CaseInfoCard` component; the actual source is `CaseInfoGrid` inside `CaseHero`. | Document as case-study overview metadata anatomy, not as a general-purpose Card contract. |
 | Radio | Not visible in current `designSystemSections`; component seed remains | `components/ui/Radio.tsx` | No direct production route usage found | Contract-only card if opened by doc slug | Medium | Future Candidates | Source component exists and styles exist, but no live adoption yet. | Keep as future candidate until a real mutually exclusive choice appears in production. |
 | Alert | Not visible as standalone catalog item; used internally by Toast | `components/ui/Alert.tsx` | `components/ui/Toast.tsx` uses `Alert`; no standalone route usage found | Contract-only card if opened by doc slug | Medium | Move to Reference only | It is source-level and indirectly live through Toast, but not a standalone product pattern. | Reference as Toast internal foundation or future inline feedback contract. |
 | Select | Not visible in current `designSystemSections`; component seed remains | `components/ui/Select.tsx` | No direct production route usage found | Contract-only card if opened by doc slug | Medium | Future Candidates | Source component exists and styles exist, but no live adoption yet. | Revisit only when a real Contact inquiry type or product surface needs select behavior. |
@@ -38,8 +39,6 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 
 ## Remaining Sample-only / Docs-only Examples
 
-- `ScrollProgress`: static percent text and inline width wrapper; does not render production `ScrollProgress`.
-- `CaseNextNav`: sample two-button row; actual behavior is `CaseStudyShell` `nextNav`.
 - `ProposalTabs`: docs-local tablist; actual source is `CaseProposalTabs` with carousel/images/reference images.
 - `YearRail`: visual approximation; actual scrollspy component depends on About page DOM.
 - `Tabs`: docs-local tablist; production uses the animate-ui Tabs composition in `Works`.
@@ -60,14 +59,17 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 
 ### Move to Component Boundaries
 
-- ScrollProgress
-- CaseNextNav
-- CaseInfoCard
 - BeforeAfterPanel
 - ContactMethod
 - SectionHeading
 - SocialLink
 - ExperienceCard
+
+### Reclassified to Component Boundaries / Shared case-study pattern
+
+- ScrollProgress
+- CaseNextNav
+- CaseInfoCard
 
 ### Move to Reference only
 

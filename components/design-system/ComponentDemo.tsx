@@ -197,6 +197,36 @@ const boundaryReferenceItems = {
       nextStep: "Keep visible in Navigation; standardize docs around production CaseTOC behavior.",
     },
     {
+      pattern: "ScrollProgress",
+      classification: "Shared case-study pattern",
+      currentUsage: "Shows reading progress on case-study routes as users move through long-form content.",
+      boundary: "Belongs to the case-study page shell because it depends on document scroll position, route height, viewport behavior, and fixed navigation offsets. It is not a standalone progress indicator for arbitrary tasks.",
+      extractionCondition: "Promote only if non-case-study routes need the same reading-progress affordance with a stable API and shared scroll model.",
+      source: "components/ScrollProgress.tsx / components/case-study/CaseStudyShell.tsx",
+      status: "Case-study shell behavior",
+      nextStep: "Keep documented as a shared case-study pattern.",
+    },
+    {
+      pattern: "CaseNextNav",
+      classification: "Shared case-study pattern",
+      currentUsage: "Guides readers from the end of one case-study route to the next project.",
+      boundary: "Belongs to the case-study reading flow. It depends on case order, locale-aware routes, project metadata, and the ending position of the case template. It is not a generic pagination, breadcrumb, or global navigation component.",
+      extractionCondition: "Promote only if multiple independent content sections need the same next-content navigation pattern outside case-study routes.",
+      source: "components/case-study/CaseStudyShell.tsx",
+      status: "Case-study ending navigation pattern",
+      nextStep: "Keep documented as a shared case-study pattern.",
+    },
+    {
+      pattern: "CaseInfoCard",
+      classification: "Shared case-study pattern",
+      currentUsage: "Displays structured case metadata such as role, timeline, scope, tools, or project context in case-study overview areas.",
+      boundary: "Belongs to the case-study template anatomy. Its meaning comes from the case overview context, not from a general-purpose Card contract.",
+      extractionCondition: "Promote only if the same metadata card contract is reused across independent routes with stable fields, variants, and accessibility requirements.",
+      source: "components/case-study/CaseInfoGrid.tsx / components/case-study/CaseHero.tsx",
+      status: "Case-study hero metadata anatomy",
+      nextStep: "Keep documented as a shared case-study pattern.",
+    },
+    {
       pattern: "Advantech Board 2 / Board 3",
       classification: "Route-local pattern",
       currentUsage: "Advantech SolutionSection scenario boards for overage warning and abnormal energy analysis.",
@@ -267,6 +297,36 @@ const boundaryReferenceItems = {
       source: "components/CaseTOC.tsx",
       status: "Protected case-study navigation pattern",
       nextStep: "保留在 Navigation，並持續以 production CaseTOC 行為為準整理文件。",
+    },
+    {
+      pattern: "ScrollProgress",
+      classification: "Shared case-study pattern",
+      currentUsage: "在案例頁長篇內容中顯示閱讀進度，協助使用者理解目前瀏覽位置。",
+      boundary: "它屬於案例頁 shell 行為，因為依賴整頁 scroll position、route 高度、viewport 行為與 fixed navigation offset；不是任務進度或任意流程的通用 Progress 元件。",
+      extractionCondition: "只有當非案例頁也需要相同閱讀進度 affordance，且具備穩定 API 與共用 scroll model 時，才重新評估抽出。",
+      source: "components/ScrollProgress.tsx / components/case-study/CaseStudyShell.tsx",
+      status: "Case-study shell behavior",
+      nextStep: "維持為 shared case-study pattern 文件。",
+    },
+    {
+      pattern: "CaseNextNav",
+      classification: "Shared case-study pattern",
+      currentUsage: "放在案例頁結尾，引導讀者前往下一個專案。",
+      boundary: "它屬於案例頁閱讀流程，依賴案例順序、locale-aware routes、project metadata 與案例模板結尾位置；不是通用 pagination、breadcrumb 或全站 navigation 元件。",
+      extractionCondition: "只有當多個獨立內容區塊也需要相同 next-content navigation pattern，且不再只綁定案例頁時，才重新評估抽出。",
+      source: "components/case-study/CaseStudyShell.tsx",
+      status: "Case-study ending navigation pattern",
+      nextStep: "維持為 shared case-study pattern 文件。",
+    },
+    {
+      pattern: "CaseInfoCard",
+      classification: "Shared case-study pattern",
+      currentUsage: "在案例頁 overview 區塊呈現角色、時程、範圍、工具或專案背景等結構化 metadata。",
+      boundary: "它屬於案例頁模板的組成結構，語意來自 case overview context，而不是通用 Card component contract。",
+      extractionCondition: "只有當相同 metadata card contract 被多個獨立路由重用，且欄位、variants 與 accessibility requirements 穩定後，才重新評估抽出。",
+      source: "components/case-study/CaseInfoGrid.tsx / components/case-study/CaseHero.tsx",
+      status: "Case-study hero metadata anatomy",
+      nextStep: "維持為 shared case-study pattern 文件。",
     },
     {
       pattern: "Advantech Board 2 / Board 3",
@@ -756,15 +816,6 @@ export default function ComponentDemo({
     );
   }
 
-  if (type === "scroll-progress") {
-    return (
-      <div style={{ width: "100%", maxWidth: "300px" }}>
-        <div><span /></div>
-        <p>{zh ? "目前閱讀進度 64%" : "Current reading progress: 64%"}</p>
-      </div>
-    );
-  }
-
   if (type === "input" || type === "textarea") {
     const id = type === "textarea" ? "message" : "email";
     const label = type === "textarea"
@@ -878,15 +929,6 @@ export default function ComponentDemo({
 
   if (type === "case-toc") {
     return <CaseTocInteractiveDemo key={locale} locale={locale} />;
-  }
-
-  if (type === "case-next-nav") {
-    return (
-      <div style={{ display: "flex", gap: "16px", justifyContent: "space-between", width: "100%" }}>
-        <Button variant="secondary">← {zh ? "返回首頁" : "Back home"}</Button>
-        <Button>{zh ? "下一個專案" : "Next project"} →</Button>
-      </div>
-    );
   }
 
   if (type === "accordion") {
@@ -1258,19 +1300,6 @@ export default function ComponentDemo({
           <strong>{proposals[activeProposal]}</strong>
           <p>{caseCopy.proposalBody}</p>
         </div>
-      </div>
-    );
-  }
-
-  if (type === "case-info-card") {
-    return (
-      <div className={styles.caseInfoGridDemo}>
-        {caseCopy.caseHeroItems.map(([label, value]) => (
-          <article key={label}>
-            <small>{label}</small>
-            <strong>{value}</strong>
-          </article>
-        ))}
       </div>
     );
   }
