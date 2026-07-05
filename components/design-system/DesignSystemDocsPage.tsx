@@ -192,6 +192,7 @@ export default function DesignSystemDocsPage({
   const status = locale === "zh-TW" && doc.statusZh ? doc.statusZh : doc.status;
   const codePropsHaveUsage = codeGuidance?.props.some((item) => item.usedBy);
   const tokenMappingsHaveUsage = tokenMappings?.some((item) => item.usage);
+  const stateRowsUseComponentDocColumns = stateRows?.some((item) => item.trigger || item.whatChanges);
   const docArticleClassName = [
     styles.docArticle,
     doc.kind === "component" ? styles.componentDocArticle : "",
@@ -238,9 +239,9 @@ export default function DesignSystemDocsPage({
             <table className={styles.stateTable}>
               <thead>
                 <tr>
-                  <th>{localized(locale, "State", "狀態")}</th>
-                  <th>{localized(locale, "Applies to", "適用對象")}</th>
-                  <th>{localized(locale, "Behavior", "行為")}</th>
+                  <th>{stateRowsUseComponentDocColumns ? localized(locale, "State / Behavior", "狀態 / 行為") : localized(locale, "State", "狀態")}</th>
+                  <th>{stateRowsUseComponentDocColumns ? localized(locale, "Trigger", "觸發") : localized(locale, "Applies to", "適用對象")}</th>
+                  <th>{stateRowsUseComponentDocColumns ? localized(locale, "What changes", "變化") : localized(locale, "Behavior", "行為")}</th>
                   <th>{localized(locale, "Live usage", "正式站使用")}</th>
                 </tr>
               </thead>
@@ -248,8 +249,8 @@ export default function DesignSystemDocsPage({
                 {stateRows.map((item) => (
                   <tr key={`${item.state}-${item.appliesTo}`}>
                     <th scope="row">{item.state}</th>
-                    <td>{item.appliesTo}</td>
-                    <td>{item.behavior}</td>
+                    <td>{stateRowsUseComponentDocColumns ? item.trigger ?? item.appliesTo : item.appliesTo}</td>
+                    <td>{stateRowsUseComponentDocColumns ? item.whatChanges ?? item.behavior : item.behavior}</td>
                     <td>{item.liveUsage}</td>
                   </tr>
                 ))}
