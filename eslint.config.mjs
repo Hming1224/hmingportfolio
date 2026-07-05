@@ -15,6 +15,10 @@ const eslintConfig = defineConfig([
     // Local agent helpers are not part of the website runtime.
     "scripts/**",
     ".codex/**",
+    // Playwright artifacts are generated verification output.
+    "playwright-report/**",
+    "test-results/**",
+    "blob-report/**",
   ]),
 ]);
 

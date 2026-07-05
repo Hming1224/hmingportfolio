@@ -320,6 +320,7 @@
   --cs-stack-box-position: relative;
   --cs-stack-box-overflow: hidden;
   --cs-stack-box-padding: 72px var(--page-gutter);
+  overflow-x: clip;
 }
 
 .theme-advantech .cs-process-bg-img {
@@ -360,10 +361,13 @@
   --cs-tl-card-height: 196px;
   --cs-tl-step-count: 6;
   --cs-tl-step-width: 160px;
+  --cs-stack-box-width: 100%;
+  --cs-stack-box-max-width: 100%;
   --cs-stack-box-padding: 0;
   --cs-stack-box-gap: 0;
   --cs-stack-box-overflow-x: auto;
-  --cs-stack-box-overflow-y: auto;
+  --cs-stack-box-overflow-y: hidden;
+  contain: inline-size paint;
 }
 
 /* Six translated steps wrap to more lines inside the intentionally narrow
@@ -1837,13 +1841,14 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     position: absolute;
     bottom: calc(100% + 10px);
     left: 50%;
-    width: max-content;
-    max-width: none;
+    box-sizing: border-box;
+    width: min(360px, calc(100vw - 48px));
+    max-width: calc(100vw - 48px);
     padding: 8px 10px;
     transform: translateX(-50%);
     font-size: 12px;
     line-height: 18px;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .theme-advantech .cs-alarm-tip-arrow {
