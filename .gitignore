@@ -59,3 +59,6 @@ public/projects/*/_staging/
 
 # git worktree directory
 /.worktrees/
+
+# 一次性暫存工作區（驗證腳本、debug 產物）— 不進 git
+tmp/
