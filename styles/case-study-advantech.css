@@ -1701,6 +1701,9 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   bottom: calc(100% + 10px);
   left: 50%;
   z-index: 10;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(360px, calc(100vw - 48px));
   transform: translateX(-50%);
   border-radius: 4px;
   padding: 8px 10px;
@@ -1709,7 +1712,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   color: #fff;
   font-size: 12px;
   line-height: 18px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .theme-advantech .cs-alarm-tip p {
@@ -1837,13 +1840,14 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     position: absolute;
     bottom: calc(100% + 10px);
     left: 50%;
+    box-sizing: border-box;
     width: max-content;
-    max-width: none;
+    max-width: min(360px, calc(100vw - 48px));
     padding: 8px 10px;
     transform: translateX(-50%);
     font-size: 12px;
     line-height: 18px;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .theme-advantech .cs-alarm-tip-arrow {

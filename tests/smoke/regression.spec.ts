@@ -23,21 +23,12 @@ const routes = [
   "/zh-TW/laushu",
 ];
 
-// Known pre-existing issue, awaiting its own route-local fix task:
-// /en/advantech .cs-alarm-tip is a nowrap max-content tooltip whose width depends
-// on font metrics — on CI's Linux fonts it pokes ~4px past a 390px viewport
-// (0px on macOS/production fonts). Budgeted here so CI stays honest about every
-// other route. Remove the entry once the tooltip CSS is fixed.
-const knownOverflowBudgetPx: Record<string, number> = {
-  "/en/advantech": 8,
-};
-
 test.describe("site route regression", () => {
   for (const route of routes) {
     for (const width of [1440, 390]) {
       test(`${route} basic smoke at ${width}px`, async ({ page }) => {
         await setViewport(page, width);
-        await basicPageSmoke(page, route, knownOverflowBudgetPx[route] ?? 0);
+        await basicPageSmoke(page, route);
       });
     }
   }
@@ -82,7 +73,7 @@ test.describe("case route regression", () => {
       const mobileErrors = collectConsoleErrors(page);
       await gotoAndWait(page, route);
       await expect(page.locator(".cs-toc").first()).toBeHidden();
-      await expectNoHorizontalOverflow(page, knownOverflowBudgetPx[route] ?? 0);
+      await expectNoHorizontalOverflow(page);
       expectNoConsoleErrors(mobileErrors);
     });
   }
