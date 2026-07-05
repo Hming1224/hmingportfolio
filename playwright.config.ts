@@ -2,6 +2,10 @@ import { defineConfig, devices } from "@playwright/test";
 
 const baseURL = process.env.SMOKE_BASE_URL || "http://127.0.0.1:3100";
 const useRemoteBaseURL = Boolean(process.env.SMOKE_BASE_URL);
+// Vercel Protection Bypass for Automation: preview deployments sit behind
+// Vercel Authentication; this header lets CI through without disabling
+// protection. Secret lives in Vercel project settings + GitHub Actions secrets.
+const vercelBypassSecret = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
 
 export default defineConfig({
   testDir: "./tests",
@@ -16,6 +20,12 @@ export default defineConfig({
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
     baseURL,
+    extraHTTPHeaders: vercelBypassSecret
+      ? {
+          "x-vercel-protection-bypass": vercelBypassSecret,
+          "x-vercel-set-bypass-cookie": "true",
+        }
+      : undefined,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure",

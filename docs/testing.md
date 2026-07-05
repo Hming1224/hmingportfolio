@@ -54,6 +54,10 @@ Husky can also be disabled with `HUSKY=0` for exceptional cases.
 
 Production smoke is an alarm, not a deployment gate. If it fails, the site may already be live; check the Playwright artifact and consider Vercel Instant Rollback.
 
+### Preview Deployment Protection Bypass
+
+Vercel preview URLs sit behind Vercel Authentication, so CI would only ever see the Vercel login wall (every route then fails on the navbar assertion). The workflow passes `VERCEL_AUTOMATION_BYPASS_SECRET` (GitHub Actions secret) and Playwright sends it as the `x-vercel-protection-bypass` header. The secret is generated in Vercel: Project Settings → Deployment Protection → Protection Bypass for Automation. If post-deploy smoke suddenly fails on every route with a missing navbar, first suspect an expired/rotated bypass secret.
+
 ## Agent Development Loop
 
 1. Scope audit: identify touched area and matching smoke script.
