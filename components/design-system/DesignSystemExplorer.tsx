@@ -36,6 +36,7 @@ function docSectionForAnchor(
     "scroll-progress": "local-exceptions",
     "case-next-nav": "local-exceptions",
     "case-info-card": "local-exceptions",
+    "year-rail": "local-exceptions",
   };
   const requestedSlug = anchor.replace(/^#/, "");
   const slug = slugAliases[requestedSlug] ?? requestedSlug;

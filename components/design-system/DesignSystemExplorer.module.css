@@ -1198,6 +1198,7 @@
 .contractOnlyDemo,
 .contactFieldDemo,
 .worksTabsDemo,
+.worksTabsComponent,
 .projectCardLiveWrap {
   display: grid;
   gap: var(--hm-space-sm);
@@ -1895,6 +1896,7 @@
 }
 
 .liveTabsList {
+  position: relative;
   justify-content: flex-start;
   padding: var(--hm-space-2xs);
   border: 1px solid var(--hm-line);
@@ -1902,7 +1904,31 @@
   background: var(--hm-surface);
 }
 
-.liveTabsList button {
+.liveTabsInner {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  gap: var(--hm-space-3xs);
+}
+
+.liveTabsItem {
+  position: relative;
+  flex: 1;
+}
+
+.liveTabsItem :global(.tabs-active-highlight) {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.liveTabsButton {
+  position: relative;
+  z-index: 1;
+  width: 100%;
   min-height: 40px;
   padding: 0 var(--hm-space-sm);
   border: 0;
@@ -1914,13 +1940,34 @@
   cursor: pointer;
 }
 
-.liveTabsList .isSelectedDemoTab {
+.liveTabsList > button {
+  min-height: 40px;
+  padding: 0 var(--hm-space-sm);
+  border: 0;
+  border-radius: var(--hm-radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: var(--hm-fw-semibold);
+  cursor: pointer;
+}
+
+.liveTabsButton[data-state="active"] {
+  color: var(--hm-purple);
+}
+
+.isSelectedDemoTab {
   background: var(--hm-paper);
   color: var(--hm-purple);
   box-shadow: var(--shadow-sm);
 }
 
 .liveTabsPanel {
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+
+.tabProjectList {
   display: grid;
   gap: var(--hm-space-xs);
 }
@@ -1942,34 +1989,6 @@
 .tabProjectSummary span {
   color: var(--text-secondary);
   font-size: var(--hm-fs-sm);
-}
-
-.yearRailDemo {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--hm-space-md);
-  align-items: stretch;
-  width: 100%;
-  max-width: 560px;
-}
-
-.liveYearRail {
-  display: grid;
-  gap: var(--hm-space-2xs);
-  align-content: start;
-  padding-right: var(--hm-space-sm);
-  border-right: 1px solid var(--hm-line);
-}
-
-.liveYearRail a {
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  text-decoration: none;
-}
-
-.liveYearRail .isActiveYear {
-  color: var(--hm-purple);
-  font-weight: var(--hm-fw-bold);
 }
 
 .caseTocDemo {
@@ -2716,7 +2735,6 @@
   }
 
   .liveFooterDemo,
-  .yearRailDemo,
   .liveExperienceCardDemo,
   .contactMethodsDemo,
   .anatomyGrid,

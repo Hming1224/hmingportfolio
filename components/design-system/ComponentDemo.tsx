@@ -21,6 +21,15 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "../ui/Accordion";
+import {
+  Tabs,
+  TabsHighlight,
+  TabsHighlightItem,
+  TabsList,
+  TabsPanel,
+  TabsPanels,
+  TabsTab,
+} from "../animate-ui/primitives/base/tabs";
 import { registerDesignSystemReturnTarget } from "./DesignSystemReturnBar";
 import styles from "./DesignSystemExplorer.module.css";
 
@@ -237,6 +246,16 @@ const boundaryReferenceItems = {
       nextStep: "Keep as route composition until another case repeats the same board structure.",
     },
     {
+      pattern: "YearRail",
+      classification: "Route-local pattern",
+      currentUsage: "About route experience timeline.",
+      boundary: "Bound to `.experience-card[data-year]`, the About page chronology, section anchors, and scroll-reading behavior. It is not a general-purpose timeline or pagination component.",
+      extractionCondition: "Promote only if another independent route needs the same year-anchor rail with shared semantics, keyboard expectations, and route-agnostic section mapping.",
+      source: "components/YearRail.tsx / app/about-me/page.tsx",
+      status: "About timeline navigation pattern",
+      nextStep: "Keep documented as a route-local boundary instead of a visible general-purpose Navigation component.",
+    },
+    {
       pattern: "Laushu task flow",
       classification: "Route-local pattern",
       currentUsage: "Laushu case route task-flow diagrams and route-level flow CSS.",
@@ -337,6 +356,16 @@ const boundaryReferenceItems = {
       source: "app/advantech/sections/SolutionSection.tsx",
       status: "Project-specific visual board",
       nextStep: "在其他案例出現同結構前，維持 route composition。",
+    },
+    {
+      pattern: "YearRail",
+      classification: "Route-local pattern",
+      currentUsage: "About route 的經歷時間軸。",
+      boundary: "綁定 `.experience-card[data-year]`、About 頁 chronology、section anchors 與 scroll-reading behavior；不是通用 timeline 或 pagination 元件。",
+      extractionCondition: "只有當另一個獨立 route 也需要相同 year-anchor rail，且具備共用語意、鍵盤期待與不綁特定 route 的 section mapping 時，才重新評估提升。",
+      source: "components/YearRail.tsx / app/about-me/page.tsx",
+      status: "About timeline navigation pattern",
+      nextStep: "保留在 route-local boundary 文件中，不作為通用 Navigation visible component。",
     },
     {
       pattern: "Laushu task flow",
@@ -583,7 +612,6 @@ export default function ComponentDemo({
   const firstExperience = aboutData.experiences[0];
   const [copied, setCopied] = useState(false);
   const [contactReviewPreviewOpen, setContactReviewPreviewOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("enterprise");
   const [activeProposal, setActiveProposal] = useState(1);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [languageDemoLocale, setLanguageDemoLocale] = useState<DesignSystemLocale>(locale);
@@ -878,51 +906,41 @@ export default function ComponentDemo({
       { value: "enterprise", label: zh ? "企業應用" : "Industry Projects" },
       { value: "school", label: zh ? "學校產出" : "Academic & Side Projects" },
     ];
-    const activeProjects = projects.filter((project) => project.category === activeTab);
 
     return (
       <div className={styles.worksTabsDemo}>
-        <div className={styles.demoUsageLine}>Homepage / Selected Work</div>
-        <div className={styles.liveTabsList} role="tablist" aria-label={zh ? "精選案例分類" : "Selected Work categories"}>
-          {tabs.map((tab) => (
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeTab === tab.value}
-              className={activeTab === tab.value ? styles.isSelectedDemoTab : undefined}
-              key={tab.value}
-              onClick={() => setActiveTab(tab.value)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        <div className={styles.liveTabsPanel} role="tabpanel">
-          {activeProjects.slice(0, 2).map((project) => (
-            <article className={styles.tabProjectSummary} key={project.slug}>
-              <strong>{project.navigationTitle ?? project.title}</strong>
-              <span>{project.status === "coming-soon" ? (zh ? "即將上線" : "Coming Soon") : project.date}</span>
-            </article>
-          ))}
-        </div>
-      </div>
-    );
-  }
+        <Tabs defaultValue="enterprise" className={styles.worksTabsComponent}>
+          <TabsHighlight className={styles.liveTabsList}>
+            <TabsList className={styles.liveTabsInner} aria-label={zh ? "精選案例分類" : "Selected Work categories"}>
+              {tabs.map((tab) => (
+                <TabsHighlightItem className={styles.liveTabsItem} key={tab.value} value={tab.value}>
+                  <TabsTab className={styles.liveTabsButton} value={tab.value}>
+                    {tab.label}
+                  </TabsTab>
+                </TabsHighlightItem>
+              ))}
+            </TabsList>
+          </TabsHighlight>
 
-  if (type === "year-rail") {
-    return (
-      <div className={styles.yearRailDemo}>
-        <nav className={styles.liveYearRail} aria-label={zh ? "About 經歷年份" : "About experience years"}>
-          {aboutData.experienceYears.map((year) => (
-            <a className={year === firstExperience.year ? styles.isActiveYear : undefined} href="#preview" key={year}>{year}</a>
-          ))}
-        </nav>
-        <article className={styles.liveExperienceSummary}>
-          <time>{firstExperience.year}</time>
-          <h3>{firstExperience.title}</h3>
-          <p>{firstExperience.role}</p>
-          <span>{firstExperience.date}</span>
-        </article>
+          <TabsPanels className={styles.liveTabsPanel} mode="wait">
+            {tabs.map((tab) => {
+              const activeProjects = projects.filter((project) => project.category === tab.value);
+
+              return (
+                <TabsPanel key={tab.value} value={tab.value}>
+                  <div className={styles.tabProjectList}>
+                    {activeProjects.slice(0, 2).map((project) => (
+                      <article className={styles.tabProjectSummary} key={project.slug}>
+                        <strong>{project.navigationTitle ?? project.title}</strong>
+                        <span>{project.status === "coming-soon" ? (zh ? "即將上線" : "Coming Soon") : project.date}</span>
+                      </article>
+                    ))}
+                  </div>
+                </TabsPanel>
+              );
+            })}
+          </TabsPanels>
+        </Tabs>
       </div>
     );
   }

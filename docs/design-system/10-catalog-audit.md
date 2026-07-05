@@ -8,13 +8,14 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 - Requested files `docs/design-system/04-component-boundaries.md` and `docs/design-system/09-roadmap.md` do not exist in the current tree. Related current files are `04-case-study-patterns.md`, `06-governance.md`, and `09-integrated-workflow.md`.
 - Original Batch 7A decision terms were recommendations only; no catalog item was moved or removed during that audit.
 - Batch 7B-2 update: `ScrollProgress`, `CaseNextNav`, and `CaseInfoCard` were reclassified from the general-purpose component catalog to Component Boundaries / Shared case-study pattern documentation. This preserves their documentation value while placing them in the correct pattern context.
+- Batch 7C-1 update: `Tabs` stays visible and now renders the real source-level Tabs primitive used by homepage Selected Works. `YearRail` was reclassified from visible Navigation to Component Boundaries / Route-local pattern because it depends on the About timeline DOM and scroll-reading model.
 
 ## Migration Matrix
 
 | Item | Current catalog status | Source file | Production route usage | Current example type | Risk | Recommended decision | Why | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Tabs | Visible: Navigation | `components/animate-ui/primitives/base/tabs.tsx` | `components/Works.tsx` homepage Selected Works tabs | Semi-real docs-local tablist using project data, not the actual `Tabs` composition | Medium | Keep visible / standardize later | Real production component and homepage adoption exist, but docs example does not render the actual source component. | Later render the real `Tabs` stack or clearly show production anatomy with source reference. |
-| YearRail | Visible: Navigation | `components/YearRail.tsx` | `app/about-me/page.tsx` experience timeline | Semi-real visual approximation using About data, not the actual component | Medium | Keep visible / standardize later | Real source component and route adoption exist. Its scrollspy behavior is route-context dependent. | Later add code guidance and document route dependency on `.experience-card[data-year]`. |
+| Tabs | Visible: Navigation | `components/animate-ui/primitives/base/tabs.tsx` | `components/Works.tsx` homepage Selected Works tabs | Real source-level Tabs primitive with production-context project data | Low | Keep visible / standardize later | Real production component and homepage adoption exist; docs now use the actual primitive API instead of a hand-built tablist. | Keep visible; later only polish keyboard limitations if the primitive changes. |
+| YearRail | Reclassified to Component Boundaries / Route-local pattern | `components/YearRail.tsx` | `app/about-me/page.tsx` experience timeline | Pattern documentation in Component Boundaries | Medium | Move to Component Boundaries | Real source exists, but it depends on `.experience-card[data-year]`, About chronology, section anchors, and scroll-reading behavior. | Document as About timeline navigation boundary, not as a general-purpose Navigation component. |
 | ScrollProgress | Reclassified to Component Boundaries / Shared case-study pattern | `components/ScrollProgress.tsx` | `components/case-study/CaseStudyShell.tsx` across case routes | Pattern documentation in Component Boundaries | Medium | Move to Component Boundaries | It is a shell-level reading affordance tied to `CaseStudyShell`, not a standalone component users directly compose. | Document as case-study shell behavior, not as a general-purpose progress component. |
 | CaseNextNav | Reclassified to Component Boundaries / Shared case-study pattern | `components/case-study/CaseStudyShell.tsx` | `app/advantech/page.tsx`, `app/crypto-arsenal/page.tsx`, `app/laushu/page.tsx` via `nextNav` prop | Pattern documentation in Component Boundaries | Medium | Move to Component Boundaries | No standalone component exists; it is a `CaseStudyShell` slot/behavior using shared `Button`. | Document as case-study reading-flow navigation, not as generic pagination or global navigation. |
 | FloatingInput | Visible: Data Entry | `components/Contact.tsx` + `styles/contact.css` | Contact page form fields | Semi-real markup using Contact-like CSS, not exported component | Medium | Keep visible / standardize later | Live production usage exists, but it is a Contact form pattern rather than a shared component. | Later decide whether to extract a source component or document as Contact form pattern. |
@@ -40,8 +41,6 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 ## Remaining Sample-only / Docs-only Examples
 
 - `ProposalTabs`: docs-local tablist; actual source is `CaseProposalTabs` with carousel/images/reference images.
-- `YearRail`: visual approximation; actual scrollspy component depends on About page DOM.
-- `Tabs`: docs-local tablist; production uses the animate-ui Tabs composition in `Works`.
 - Contract-only cards for `Select`, `Checkbox`, `Radio`, and `Alert` are appropriate as non-production signals if they stay out of the visible live catalog.
 
 ## Suggested Grouping Summary
@@ -49,7 +48,6 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 ### Keep visible / standardize later
 
 - Tabs
-- YearRail
 - FloatingInput
 - FloatingTextarea
 - CaseHero
@@ -59,6 +57,7 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 
 ### Move to Component Boundaries
 
+- YearRail
 - BeforeAfterPanel
 - ContactMethod
 - SectionHeading

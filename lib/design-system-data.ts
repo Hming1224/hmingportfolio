@@ -46,7 +46,7 @@ export const designSystemSections = [
   {
     label: "Navigation",
     labelZh: "導覽",
-    items: ["accordion", "tabs", "year-rail", "case-toc"].map((slug) => ({
+    items: ["accordion", "tabs", "case-toc"].map((slug) => ({
       kind: "component" as const,
       slug,
     })),
