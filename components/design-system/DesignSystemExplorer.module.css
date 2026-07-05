@@ -1064,8 +1064,7 @@
 .contactModalHeader h3,
 .contactModalHeader p,
 .contactReviewListDemo,
-.contactReviewRowDemo dd,
-.contactFlowNotes {
+.contactReviewRowDemo dd {
   margin: 0;
 }
 
@@ -1076,8 +1075,7 @@
 }
 
 .contactModalHeader p,
-.contactReviewRowDemo dt,
-.contactFlowNotes li {
+.contactReviewRowDemo dt {
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -1161,12 +1159,6 @@
 
 .contactSkeletonLineMedium {
   width: min(72%, 280px);
-}
-
-.contactFlowNotes {
-  display: grid;
-  gap: var(--hm-space-2xs);
-  padding-left: var(--hm-space-md);
 }
 
 .languageSwitcherDemo {

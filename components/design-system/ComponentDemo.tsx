@@ -240,7 +240,7 @@ function getCopy(locale: DesignSystemLocale) {
     contactToastSuccess: zh ? "送出成功！" : "Message Sent!",
     contactToastError: zh ? "傳送失敗，請重試" : "Something went wrong. Please try again.",
     modalDemo: {
-      usage: zh ? "Contact form / 送出前確認" : "Contact form / review-before-submit",
+      usage: zh ? "Contact 送出前確認" : "Contact review before submit",
       title: zh ? "確認送出內容" : "Review your message",
       description: zh ? "送出前，請再確認一次你的聯絡資訊與訊息內容。" : "Please confirm the details before sending.",
       fields: zh
@@ -260,41 +260,13 @@ function getCopy(locale: DesignSystemLocale) {
           ],
       cancel: zh ? "返回修改" : "Cancel",
       confirm: zh ? "確認送出" : "Confirm Send",
-      flow: zh
-        ? [
-            "Real usage：Contact form",
-            "Purpose：送出前確認訊息內容",
-            "Flow：送出訊息 → 確認 Modal → 確認送出 → Toast 成功 / 失敗",
-            "Boundary：Modal 不負責結果回饋，結果由 Toast 承擔",
-            "Accessibility：primary action DOM order 已與 keyboard order 對齊",
-          ]
-        : [
-            "Real usage: Contact form",
-            "Purpose: review message before sending",
-            "Flow: Send Message → Review Modal → Confirm Send → Toast success / error",
-            "Boundary: Modal does not own result feedback; Toast handles the outcome",
-            "Accessibility: primary action DOM order matches keyboard order",
-          ],
     },
     skeletonDemo: {
-      usage: zh ? "Contact confirmation Modal / pending summary" : "Contact confirmation Modal / pending summary",
+      usage: zh ? "Contact pending summary" : "Contact pending summary",
       title: zh ? "確認送出內容" : "Review your message",
       description: zh ? "送出中，摘要區暫時顯示處理狀態。" : "Sending; the summary area temporarily shows a processing state.",
       confirm: zh ? "送出中..." : "Sending...",
       cancel: zh ? "返回修改" : "Cancel",
-      notes: zh
-        ? [
-            "Real usage：Contact confirmation Modal pending state",
-            "Purpose：確認送出後，告訴使用者表單仍在處理中",
-            "Boundary：Skeleton 只支援 summary area，不取代 Button loading",
-            "Result：完成後由 Toast 顯示成功或失敗",
-          ]
-        : [
-            "Real usage: Contact confirmation Modal pending state",
-            "Purpose: show the submission is still processing",
-            "Boundary: Skeleton supports the summary area; it does not replace Button loading",
-            "Result: Toast shows success or failure when processing completes",
-          ],
     },
     localExceptionFields: {
       liveUsage: zh ? "真實使用位置" : "Live usage",
@@ -1192,7 +1164,7 @@ export default function ComponentDemo({
   if (type === "toast") {
     return (
       <div className={styles.contactToastDemo}>
-        <p className={styles.demoUsageLine}>{zh ? "Contact submit result feedback" : "Contact submit result feedback"}</p>
+        <p className={styles.demoUsageLine}>{zh ? "Contact 送出結果" : "Contact submit result"}</p>
         <div className={styles.contactToastPreviewGrid}>
           <div className={styles.contactToastPreviewSlot}>
             <Toast message={copy.contactToastSuccess} tone="success" duration={600000} onClose={() => undefined} />
@@ -1236,11 +1208,6 @@ export default function ComponentDemo({
             </div>
           </div>
         </Modal>
-        <ul className={styles.contactFlowNotes}>
-          {modal.flow.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
       </div>
     );
   }
@@ -1283,11 +1250,6 @@ export default function ComponentDemo({
             <Button type="button" variant="secondary" disabled>{skeleton.cancel}</Button>
           </div>
         </article>
-        <ul className={styles.contactFlowNotes}>
-          {skeleton.notes.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
       </div>
     );
   }

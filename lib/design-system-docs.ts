@@ -536,8 +536,6 @@ const componentSeeds: ComponentSeed[] = [
     statusZh: "正式元件",
     description: "A non-blocking feedback message for Contact submit results.",
     descriptionZh: "用於 Contact 送出結果的非阻斷式回饋訊息。",
-    exampleLabel: "Contact submit feedback",
-    exampleLabelZh: "Contact 送出結果回饋",
     demo: "toast",
     stateRows: [
       { state: "Success result", appliesTo: "Toast", trigger: "Contact submit request resolves successfully.", behavior: "A success toast appears and the form can return to the normal task flow.", whatChanges: "`Toast` renders `Alert` with `tone=\"success\"` inside `.hm-toast-region`.", liveUsage: "Contact form success feedback." },
@@ -647,8 +645,6 @@ const componentSeeds: ComponentSeed[] = [
     statusZh: "正式元件",
     description: "A confirmation dialog used to review a Contact message before sending.",
     descriptionZh: "用於送出前檢視 Contact 訊息內容的確認對話框。",
-    exampleLabel: "Contact review before submit",
-    exampleLabelZh: "Contact 送出前確認",
     demo: "modal",
     stateRows: [
       { state: "Open", appliesTo: "Modal", trigger: "Contact form submit passes field validation and opens the review step.", behavior: "A blocking dialog appears with the submitted summary.", whatChanges: "`Modal` renders `.hm-modal-backdrop` and `.hm-modal` with dialog semantics.", liveUsage: "Contact review-before-submit confirmation." },
@@ -769,8 +765,6 @@ const componentSeeds: ComponentSeed[] = [
     statusZh: "正式元件",
     description: "A loading placeholder used in the Contact review modal while the message is being submitted.",
     descriptionZh: "Contact review modal 送出訊息時使用的載入 placeholder。",
-    exampleLabel: "Contact pending summary",
-    exampleLabelZh: "Contact pending summary",
     demo: "skeleton",
     stateRows: [
       { state: "Pending", appliesTo: "Skeleton", trigger: "Contact status becomes `loading` after Confirm Send.", behavior: "Skeleton rows replace the review summary values while submission is pending.", whatChanges: "Contact renders `Skeleton` inside `.contact-review-row dd` and sets `aria-busy` on the list.", liveUsage: "Contact confirmation Modal pending summary." },
