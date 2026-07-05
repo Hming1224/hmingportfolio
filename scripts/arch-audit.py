@@ -8,8 +8,9 @@ CASE_STUDY_CSS = [
     'styles/case-study-advantech.css',
     'styles/case-study-crypto-arsenal.css',
     'styles/case-study-laushu.css',
+    'styles/case-study-design-system-case-study.css',
 ]
-CASE_STUDY_THEMES = {'theme-advantech', 'theme-crypto-arsenal', 'theme-laushu'}
+CASE_STUDY_THEMES = {'theme-advantech', 'theme-crypto-arsenal', 'theme-laushu', 'theme-design-system-case-study'}
 LAYOUT_PROPS = {
     'display', 'position', 'inset', 'top', 'right', 'bottom', 'left',
     'grid', 'grid-template', 'grid-template-columns', 'grid-template-rows',
@@ -53,6 +54,7 @@ def audit_css_isolation():
         'styles/case-study-advantech.css': ['app/advantech/page.tsx', 'app/advantech/sections/'],
         'styles/case-study-crypto-arsenal.css': ['app/crypto-arsenal/page.tsx', 'app/crypto-arsenal/sections/'],
         'styles/case-study-laushu.css': ['app/laushu/page.tsx'],
+        'styles/case-study-design-system-case-study.css': ['app/design-system-case-study/page.tsx'],
         'styles/contact.css': ['app/contact/page.tsx', 'components/Contact.tsx'],
         'styles/about.css': ['app/about-me/page.tsx', 'components/About.tsx'],
         'styles/home.css': ['app/page.tsx', 'components/Hero.tsx', 'components/Works.tsx']

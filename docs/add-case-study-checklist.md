@@ -16,6 +16,7 @@
 - 建 `app/<slug>/page.tsx`。
 - 建 `styles/case-study-<slug>.css`，**只在這支 page.tsx `import`**（route-scoped，不要進 `app/globals.css`）。
 - 不要把新案例的 CSS 寫進 `case-study.css`（那是共用骨架）或別的案例 CSS。
+- **把新的 route CSS 登記進 `scripts/arch-audit.py` 的 `route_css_rules`**（加一行：CSS 路徑 → 允許 import 的檔案）。沒登記的話 `npm run audit:architecture` 不會檢查它，隔離規則等於沒生效（2026-07-05 audit 就是漏了 DS case study 才補這條）。
 
 ## 3. 用共用骨架
 
@@ -34,7 +35,8 @@
   .theme-advantech .cs-sol-board { ... }
   ```
   這樣即使未來 import 方式改變，私有規則也不會污染其他案例。
-- 區域色票放 `.theme-<slug> { --... }`，不要進全域 `:root`（見 `design-system.md §2.7`）。
+- 區域色票放 `.theme-<slug> { --... }`，不要進全域 `:root`，**也不要在 `styles/tokens.css` 裡另建一份 `.theme-<slug>`**（theme 唯一定義處就是這支 route CSS；見 `design-system/08-ai-implementation-rules.md §3`）。
+- `@media` 斷點邊界照 `08-ai-implementation-rules.md §3「Breakpoint boundary rules」`：mobile 用 `max-width: 768px` / `min-width: 769px`、tablet 用 `max-width: 1023px` / `min-width: 1024px`，同檔不要混用不同邊界值。
 - 共用骨架類（上面 §3 那些）**保持裸寫、不要冠 `.theme-<slug>`**，它們屬於 `case-study.css`，加 scope 反而是錯誤歸屬。需要調共用元件的 RWD，改 `case-study.css`，不要在案例 CSS 裡複製覆寫。
 
 ## 5. Section 元件
