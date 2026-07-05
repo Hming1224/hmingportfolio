@@ -6,8 +6,18 @@
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
+    "start:test": "next start -p 3100",
     "lint": "eslint",
     "check:tokens": "node scripts/check-design-tokens.mjs",
+    "verify:quick": "git diff --check && npm run lint && npm run check:tokens",
+    "verify:build": "npm run verify:quick && npm run build",
+    "smoke:ds": "playwright test tests/smoke/design-system.spec.ts --project=chromium",
+    "smoke:contact": "playwright test tests/smoke/contact.spec.ts --project=chromium",
+    "smoke:regression": "playwright test tests/smoke/regression.spec.ts --project=chromium",
+    "smoke:all": "playwright test tests/smoke --project=chromium",
+    "verify:ds": "npm run verify:build && npm run smoke:ds",
+    "verify:full": "npm run verify:build && npm run smoke:all",
+    "prepare": "husky",
     "audit:architecture": "python3 scripts/arch-audit.py",
     "knip": "knip"
   },
@@ -25,12 +35,14 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "husky": "^9.1.7",
     "knip": "^6.17.1",
     "tailwindcss": "^4",
     "typescript": "^5"

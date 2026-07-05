@@ -1,0 +1,6 @@
+if [ "$SKIP_VERIFY" = "1" ]; then
+  echo "SKIP_VERIFY=1 set; skipping pre-push verification."
+  exit 0
+fi
+
+npm run verify:build
