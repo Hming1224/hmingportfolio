@@ -28,97 +28,13 @@ export function expectNoConsoleErrors(errors: ConsoleErrors) {
   expect(errors, `Console errors:\n${errors.join("\n")}`).toHaveLength(0);
 }
 
-async function waitForLayoutSettled(page: Page) {
-  await page
-    .evaluate(async () => {
-      if ("fonts" in document) {
-        await document.fonts.ready;
-      }
-    })
-    .catch(() => undefined);
-
-  await page.evaluate(
-    () =>
-      new Promise<void>((resolve) => {
-        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
-      }),
-  );
-}
-
-async function getHorizontalOverflowState(page: Page) {
-  return page.evaluate(() => {
-    const doc = document.documentElement;
-    const viewportWidth = doc.clientWidth;
-    const documentOverflow = Math.max(0, doc.scrollWidth - viewportWidth);
-
-    function selectorFor(element: HTMLElement) {
-      const className = typeof element.className === "string" ? element.className.trim() : "";
-      return `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ""}${
-        className ? `.${className.replace(/\s+/g, ".")}` : ""
-      }`;
-    }
-
-    function hasContainingOverflowAncestor(element: HTMLElement) {
-      let current = element.parentElement;
-
-      while (current && current !== document.body) {
-        const style = getComputedStyle(current);
-        const overflowX = style.overflowX;
-        if (overflowX === "auto" || overflowX === "scroll" || overflowX === "hidden" || overflowX === "clip") {
-          return true;
-        }
-        current = current.parentElement;
-      }
-
-      return false;
-    }
-
-    const offenders = Array.from(document.querySelectorAll<HTMLElement>("body *"))
-      .map((element) => {
-        const rect = element.getBoundingClientRect();
-        const overflow = Math.max(0, rect.right - viewportWidth, -rect.left);
-        return {
-          selector: selectorFor(element),
-          left: Math.round(rect.left),
-          right: Math.round(rect.right),
-          width: Math.round(rect.width),
-          overflow: Math.ceil(overflow),
-          contained: hasContainingOverflowAncestor(element),
-          overflowX: getComputedStyle(element).overflowX,
-        };
-      })
-      .filter((item) => item.width > 0 && item.overflow > 0);
-
-    const uncontainedOffenders = offenders.filter((item) => !item.contained);
-    const uncontainedOverflow = Math.max(0, ...uncontainedOffenders.map((item) => item.overflow));
-
-    return {
-      overflow: uncontainedOffenders.length > 0 ? uncontainedOverflow : offenders.length === 0 ? documentOverflow : 0,
-      documentOverflow,
-      offenders: offenders.slice(0, 8),
-      uncontainedOffenders: uncontainedOffenders.slice(0, 8),
-    };
-  });
-}
-
-async function getHorizontalOverflowDiagnostics(page: Page) {
-  const state = await getHorizontalOverflowState(page);
-  return `document overflow=${state.documentOverflow}; uncontainedOffenders=${JSON.stringify(
-    state.uncontainedOffenders,
-  )}; offenders=${JSON.stringify(state.offenders)}`;
-}
-
 export async function expectNoHorizontalOverflow(page: Page) {
-  await waitForLayoutSettled(page);
-  try {
-    await expect.poll(async () => (await getHorizontalOverflowState(page)).overflow, {
-      message: "Expected uncontained horizontal overflow to settle at 0px",
-    }).toBe(0);
-  } catch (error) {
-    const diagnostics = await getHorizontalOverflowDiagnostics(page).catch(() => "Overflow diagnostics unavailable");
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`${message}\n\n${diagnostics}`);
-  }
+  const overflow = await page.evaluate(() => {
+    const doc = document.documentElement;
+    return Math.max(0, doc.scrollWidth - doc.clientWidth);
+  });
+
+  expect(overflow).toBe(0);
 }
 
 export async function expectNot404(page: Page, status?: number | null) {
