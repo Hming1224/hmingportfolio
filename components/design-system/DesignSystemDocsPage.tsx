@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { DesignSystemDoc, DesignSystemLocale } from "@/lib/design-system-docs";
 import { designSystemTokenRows } from "@/lib/design-system-data";
 import ComponentDemo from "./ComponentDemo";
+import TokenReferenceBrowser from "./TokenReferenceBrowser";
 import styles from "./DesignSystemExplorer.module.css";
 
 function localized(locale: DesignSystemLocale, english: string, chinese: string) {
@@ -25,9 +26,12 @@ function getTokenUsage(row: TokenRow, locale: DesignSystemLocale) {
 
 function tokenPreviewStyle(row: TokenRow) {
   const value = row.value.split(" / ")[0];
+  const canUseTokenVariable = row.token.startsWith("--") && !row.token.includes(" / ");
   const cssValue = value.startsWith("#") || value.startsWith("rgb") || value.startsWith("var(")
     ? value
-    : `var(${row.token})`;
+    : canUseTokenVariable
+      ? `var(${row.token})`
+      : "var(--hm-surface)";
 
   return {
     "--token-preview": cssValue,
@@ -37,6 +41,172 @@ function tokenPreviewStyle(row: TokenRow) {
     "--token-duration": value,
     "--token-type-size": value,
   } as CSSProperties;
+}
+
+function tokenGroupsForColors(rows: TokenRow[], locale: DesignSystemLocale) {
+  const colorRows = rows.filter((row) => row.type === "color");
+  const groups = [
+    {
+      id: "purple",
+      title: "Purple",
+      description: localized(locale, "Primary action and active signal scale.", "主要 CTA 與 active 訊號色階。"),
+      rows: colorRows.filter((row) => /^--hm-purple(?:-|$)/.test(row.token)),
+    },
+    {
+      id: "neutral-surface",
+      title: localized(locale, "Neutral / Surface", "中性色 / Surface"),
+      description: localized(locale, "Page, surface, disabled, and subtle separator colors.", "頁面、surface、disabled 與輕分隔色。"),
+      rows: colorRows.filter((row) => ["--hm-paper", "--hm-surface", "--hm-disabled", "--hm-line", "--hm-line-strong"].includes(row.token)),
+    },
+    {
+      id: "text",
+      title: "Text",
+      description: localized(locale, "Primary, secondary, muted, and route-tone text aliases.", "主要、次要、muted 與 route tone 文字 aliases。"),
+      rows: colorRows.filter((row) => /^--hm-(ink|muted)/.test(row.token) || row.token.startsWith("--text-")),
+    },
+    {
+      id: "accent",
+      title: "Accent",
+      description: localized(locale, "Supporting accent families and chart colors.", "輔助 accent 色系與 chart colors。"),
+      rows: colorRows.filter((row) => /^--hm-(blue|green|peach|brown|chart)(?:-|$)/.test(row.token)),
+    },
+    {
+      id: "status",
+      title: localized(locale, "Status / Feedback", "狀態 / 回饋"),
+      description: localized(locale, "Success, warning, error, and info feedback colors.", "Success、warning、error 與 info 回饋色。"),
+      rows: colorRows.filter((row) => /^--hm-(success|warning|error|info)(?:-|$)/.test(row.token)),
+    },
+    {
+      id: "project-tone",
+      title: "Project Tone",
+      description: localized(locale, "Case-study tone aliases that map to project themes.", "映射到案例主題的 case-study tone aliases。"),
+      rows: colorRows.filter((row) => row.token.startsWith("--cs-") || row.token.startsWith(".tone-")),
+    },
+  ];
+
+  return groups.filter((group) => group.rows.length > 0);
+}
+
+function ColorSwatchCard({ row, locale }: { row: TokenRow; locale: DesignSystemLocale }) {
+  return (
+    <article className={styles.colorSwatchCard}>
+      <span className={styles.colorSwatchPreview} style={tokenPreviewStyle(row)} />
+      <div>
+        <code>{row.token}</code>
+        <p>{row.value}</p>
+        <span>{getTokenUsage(row, locale)}</span>
+      </div>
+    </article>
+  );
+}
+
+function FoundationVisualSamples({
+  slug,
+  rows,
+  locale,
+}: {
+  slug: string;
+  rows: TokenRow[];
+  locale: DesignSystemLocale;
+}) {
+  if (slug === "colors") {
+    const groups = tokenGroupsForColors(rows, locale);
+
+    return (
+      <div className={styles.colorGroupStack}>
+        {groups.map((group) => (
+          <section className={styles.colorGroup} key={group.id}>
+            <header className={styles.colorGroupHeader}>
+              <div>
+                <h3>{group.title}</h3>
+                <p>{group.description}</p>
+              </div>
+              <span>{group.rows.length}</span>
+            </header>
+            <div className={styles.colorSwatchGrid}>
+              {group.rows.map((row) => <ColorSwatchCard key={row.token} locale={locale} row={row} />)}
+            </div>
+          </section>
+        ))}
+      </div>
+    );
+  }
+
+  if (slug === "typography") {
+    return (
+      <div className={styles.foundationSampleGrid}>
+        {rows.map((row) => (
+          <article className={styles.typeScaleCard} key={row.token}>
+            <p style={tokenPreviewStyle(row)}>The quick brown fox</p>
+            <code>{row.token}</code>
+            <span>{row.value}</span>
+            <small>{getTokenUsage(row, locale)}</small>
+          </article>
+        ))}
+      </div>
+    );
+  }
+
+  if (slug === "spacing") {
+    return (
+      <div className={styles.spacingScaleStack}>
+        {rows.map((row) => (
+          <div className={styles.spacingScaleRow} key={row.token}>
+            <code>{row.token}</code>
+            <span className={styles.spacingScaleTrack}>
+              <span style={tokenPreviewStyle(row)} />
+            </span>
+            <span>{row.value}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (slug === "radius") {
+    return (
+      <div className={styles.foundationSampleGrid}>
+        {rows.map((row) => (
+          <article className={styles.radiusScaleCard} key={row.token}>
+            <span style={tokenPreviewStyle(row)} />
+            <code>{row.token}</code>
+            <small>{row.value} · {getTokenUsage(row, locale)}</small>
+          </article>
+        ))}
+      </div>
+    );
+  }
+
+  if (slug === "shadows") {
+    return (
+      <div className={styles.foundationSampleGrid}>
+        {rows.map((row) => (
+          <article className={styles.shadowScaleCard} key={row.token}>
+            <span style={tokenPreviewStyle(row)} />
+            <code>{row.token}</code>
+            <small>{getTokenUsage(row, locale)}</small>
+          </article>
+        ))}
+      </div>
+    );
+  }
+
+  if (slug === "motion") {
+    return (
+      <div className={styles.motionReferenceGrid}>
+        {rows.map((row) => (
+          <article className={styles.motionReferenceCard} key={row.token}>
+            {row.token.includes("duration") ? <span className={styles.motionSample} style={tokenPreviewStyle(row)} /> : null}
+            <code>{row.token}</code>
+            <p>{row.value}</p>
+            <small>{getTokenUsage(row, locale)}</small>
+          </article>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
 }
 
 function renderTokenPreviewCell(row: TokenRow) {
@@ -132,6 +302,7 @@ function FoundationTokenReference({
   const title = localized(locale, doc.title, doc.titleZh);
   const description = localized(locale, doc.description, doc.descriptionZh);
   const isTokenReference = doc.kind === "reference" && doc.slug === "tokens";
+  const foundationRows = designSystemTokenRows.filter((row) => foundationTokenTypes[doc.slug]?.includes(row.type));
   const groups = isTokenReference
     ? (["color", "type", "spacing", "radius", "shadow", "motion", "layout"] as const).map((type) => ({
         id: type,
@@ -143,8 +314,28 @@ function FoundationTokenReference({
         id: doc.slug,
         title,
         description,
-        rows: designSystemTokenRows.filter((row) => foundationTokenTypes[doc.slug]?.includes(row.type)),
+        rows: foundationRows,
       }];
+
+  if (isTokenReference) {
+    return (
+      <section className={styles.docSection}>
+        <article className={styles.foundationPanel}>
+          <header className={styles.foundationPanelHeader}>
+            <div>
+              <p className={styles.foundationEyebrow}>{doc.category}</p>
+              <h2 className={styles.foundationTitle}>{title}</h2>
+              <p className={styles.foundationDescription}>{description}</p>
+            </div>
+            <span className={styles.foundationCount}>
+              {designSystemTokenRows.length} {locale === "en" ? "tokens" : "個 tokens"}
+            </span>
+          </header>
+          <TokenReferenceBrowser locale={locale} rows={designSystemTokenRows} />
+        </article>
+      </section>
+    );
+  }
 
   return (
     <section className={styles.docSection}>
@@ -161,6 +352,7 @@ function FoundationTokenReference({
                 {group.rows.length} {locale === "en" ? "tokens" : "個 tokens"}
               </span>
             </header>
+            <FoundationVisualSamples locale={locale} rows={group.rows} slug={doc.slug} />
             <TokenTable locale={locale} rows={group.rows} variant={isTokenReference ? "reference" : "foundation"} />
           </article>
         ))}

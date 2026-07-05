@@ -29,7 +29,12 @@ function docSectionForAnchor(
   docs: DesignSystemDoc[],
   anchor: string,
 ) {
-  const slug = anchor.replace(/^#/, "");
+  const slugAliases: Record<string, string> = {
+    "border-radius": "radius",
+    "token-reference": "tokens",
+  };
+  const requestedSlug = anchor.replace(/^#/, "");
+  const slug = slugAliases[requestedSlug] ?? requestedSlug;
   if (!slug) return null;
 
   for (const section of sections) {

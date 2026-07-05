@@ -305,6 +305,326 @@
   white-space: nowrap;
 }
 
+.colorGroupStack,
+.tokenReferenceBrowser {
+  display: grid;
+  gap: var(--hm-space-md);
+  min-width: 0;
+}
+
+.colorGroup {
+  display: grid;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+}
+
+.colorGroupHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--hm-space-md);
+  min-width: 0;
+}
+
+.colorGroupHeader h3,
+.colorGroupHeader p {
+  margin: 0;
+}
+
+.colorGroupHeader h3 {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.35;
+}
+
+.colorGroupHeader p {
+  margin-top: var(--hm-space-3xs);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.55;
+}
+
+.colorGroupHeader span,
+.tokenReferenceCount {
+  flex: none;
+  color: var(--text-muted);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.4;
+}
+
+.colorSwatchGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+  min-width: 0;
+}
+
+.colorSwatchCard {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.colorSwatchPreview {
+  display: block;
+  min-height: 72px;
+  border-bottom: 1px solid var(--hm-line);
+  background:
+    linear-gradient(135deg, transparent 0 48%, color-mix(in srgb, var(--hm-line) 72%, transparent) 48% 52%, transparent 52%),
+    var(--token-preview);
+}
+
+.colorSwatchCard div {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  min-width: 0;
+  padding: var(--hm-space-xs);
+}
+
+.colorSwatchCard code,
+.colorSwatchCard p,
+.colorSwatchCard span,
+.typeScaleCard code,
+.typeScaleCard span,
+.typeScaleCard small,
+.radiusScaleCard code,
+.radiusScaleCard small,
+.shadowScaleCard code,
+.shadowScaleCard small,
+.motionReferenceCard code,
+.motionReferenceCard p,
+.motionReferenceCard small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.colorSwatchCard code,
+.typeScaleCard code,
+.radiusScaleCard code,
+.shadowScaleCard code,
+.motionReferenceCard code {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.colorSwatchCard p,
+.motionReferenceCard p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-xs);
+  line-height: 1.45;
+}
+
+.colorSwatchCard span,
+.typeScaleCard small,
+.radiusScaleCard small,
+.shadowScaleCard small,
+.motionReferenceCard small {
+  color: var(--text-muted);
+  font-size: var(--hm-fs-xs);
+  line-height: 1.45;
+}
+
+.foundationSampleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+  min-width: 0;
+}
+
+.typeScaleCard,
+.radiusScaleCard,
+.shadowScaleCard,
+.motionReferenceCard {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.typeScaleCard p {
+  margin: 0 0 var(--hm-space-2xs);
+  color: var(--text-heading);
+  font-size: var(--token-type-size);
+  line-height: 1.2;
+}
+
+.typeScaleCard span {
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-xs);
+  line-height: 1.45;
+}
+
+.spacingScaleStack {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+}
+
+.spacingScaleRow {
+  display: grid;
+  grid-template-columns: minmax(132px, 0.35fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-xs);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.spacingScaleRow code {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-xs);
+  overflow-wrap: anywhere;
+}
+
+.spacingScaleRow > span:last-child {
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-xs);
+  white-space: nowrap;
+}
+
+.spacingScaleTrack {
+  display: block;
+  min-width: 0;
+  height: 24px;
+  border-radius: var(--hm-radius-pill);
+  background: color-mix(in srgb, var(--hm-line) 52%, transparent);
+}
+
+.spacingScaleTrack span {
+  display: block;
+  width: min(var(--token-size), 100%);
+  min-width: 4px;
+  height: 100%;
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple);
+}
+
+.radiusScaleCard span,
+.shadowScaleCard span {
+  display: block;
+  width: 100%;
+  min-height: 92px;
+  border: 1px solid var(--hm-line);
+  background: var(--hm-paper);
+}
+
+.radiusScaleCard span {
+  border-radius: var(--token-radius);
+}
+
+.shadowScaleCard span {
+  border-radius: var(--hm-radius-md);
+  box-shadow: var(--token-shadow);
+}
+
+.motionReferenceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+  min-width: 0;
+}
+
+.motionReferenceCard {
+  background: var(--hm-paper);
+}
+
+.tokenReferenceControls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--hm-space-md);
+  min-width: 0;
+}
+
+.tokenReferenceSearch {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+}
+
+.tokenReferenceSearch label {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.tokenReferenceSearch input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-surface);
+  color: var(--text-heading);
+  font: inherit;
+  font-size: var(--hm-fs-sm);
+}
+
+.tokenReferenceSearch input:focus-visible {
+  border-color: var(--hm-purple);
+  outline: 2px solid color-mix(in srgb, var(--hm-purple) 36%, transparent);
+  outline-offset: 2px;
+}
+
+.tokenReferenceCount {
+  margin: 0 0 11px;
+  white-space: nowrap;
+}
+
+.tokenFilterChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+}
+
+.tokenFilterChips button {
+  min-height: 36px;
+  padding: 0 var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-paper);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--hm-fs-sm);
+  cursor: pointer;
+}
+
+.tokenFilterChips button:hover,
+.tokenFilterChips button:focus-visible,
+.tokenFilterChips .isActiveTokenFilter {
+  border-color: color-mix(in srgb, var(--hm-purple) 42%, var(--hm-line));
+  background: var(--hm-purple-light);
+  color: var(--hm-purple);
+}
+
+.tokenFilterChips button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--hm-purple) 36%, transparent);
+  outline-offset: 2px;
+}
+
+.tokenEmptyState {
+  margin: 0;
+  padding: var(--hm-space-sm);
+  border: 1px dashed var(--hm-line-strong);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.6;
+}
+
 .tokenTableWrap {
   width: 100%;
   max-width: 100%;
@@ -2270,6 +2590,28 @@
 
   .foundationPanelHeader {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .colorSwatchGrid,
+  .foundationSampleGrid,
+  .motionReferenceGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .colorGroupHeader,
+  .tokenReferenceControls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .tokenReferenceCount {
+    margin: 0;
+  }
+
+  .spacingScaleRow {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
   }
 
   .liveFooterDemo,
