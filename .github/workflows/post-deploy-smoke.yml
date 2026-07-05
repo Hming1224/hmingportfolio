@@ -23,7 +23,7 @@ jobs:
     name: Remote smoke
     if: github.event_name == 'workflow_dispatch' || github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     env:
       SMOKE_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.smoke_base_url || github.event.deployment_status.environment_url }}
       SMOKE_ENVIRONMENT: ${{ github.event_name == 'workflow_dispatch' && inputs.environment || github.event.deployment_status.environment }}
@@ -50,6 +50,15 @@ jobs:
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
+
+      - name: Warm up deployment
+        env:
+          BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: |
+          for route in /en /zh-TW /en/about-me /zh-TW/about-me /en/advantech /zh-TW/advantech /en/crypto-arsenal /zh-TW/crypto-arsenal /en/laushu /zh-TW/laushu /en/design-system /zh-TW/design-system /en/contact /zh-TW/contact; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 -H "x-vercel-protection-bypass: $BYPASS" "$SMOKE_BASE_URL$route" || echo "ERR")
+            echo "warmup $route -> $code"
+          done
 
       - name: Smoke regression
         run: npm run smoke:regression

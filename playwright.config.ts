@@ -20,11 +20,11 @@ export default defineConfig({
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
     baseURL,
+    // Header-only bypass: intentionally no x-vercel-set-bypass-cookie — it
+    // triggers a self-redirect that can stack with next-intl locale redirects
+    // and stall first navigations.
     extraHTTPHeaders: vercelBypassSecret
-      ? {
-          "x-vercel-protection-bypass": vercelBypassSecret,
-          "x-vercel-set-bypass-cookie": "true",
-        }
+      ? { "x-vercel-protection-bypass": vercelBypassSecret }
       : undefined,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
