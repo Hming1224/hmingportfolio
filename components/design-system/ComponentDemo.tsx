@@ -9,6 +9,7 @@ import type { DesignSystemLocale } from "@/lib/design-system-docs";
 import CaseTOC, { type TocSection } from "../CaseTOC";
 import ProjectCard from "../ProjectCard";
 import Button from "../ui/Button";
+import { Modal } from "../ui/Modal";
 import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import CaseBeforeAfter from "../case-study/CaseBeforeAfter";
@@ -474,7 +475,7 @@ export default function ComponentDemo({
   const firstSkill = aboutData.skillCategories[0];
   const firstExperience = aboutData.experiences[0];
   const [copied, setCopied] = useState(false);
-  const [toastVisible, setToastVisible] = useState(false);
+  const [contactReviewPreviewOpen, setContactReviewPreviewOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("enterprise");
   const [activeProposal, setActiveProposal] = useState(1);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
@@ -1190,12 +1191,17 @@ export default function ComponentDemo({
 
   if (type === "toast") {
     return (
-      <>
-        <Button onClick={() => setToastVisible(true)}>{zh ? "顯示 Contact toast" : "Show contact toast"}</Button>
-        {toastVisible ? (
-          <Toast message={copy.contactToastSuccess} tone="success" onClose={() => setToastVisible(false)} />
-        ) : null}
-      </>
+      <div className={styles.contactToastDemo}>
+        <p className={styles.demoUsageLine}>{zh ? "Contact submit result feedback" : "Contact submit result feedback"}</p>
+        <div className={styles.contactToastPreviewGrid}>
+          <div className={styles.contactToastPreviewSlot}>
+            <Toast message={copy.contactToastSuccess} tone="success" duration={600000} onClose={() => undefined} />
+          </div>
+          <div className={styles.contactToastPreviewSlot}>
+            <Toast message={copy.contactToastError} tone="error" duration={600000} onClose={() => undefined} />
+          </div>
+        </div>
+      </div>
     );
   }
 
@@ -1205,27 +1211,31 @@ export default function ComponentDemo({
     return (
       <div className={styles.contactModalDemo}>
         <p className={styles.demoUsageLine}>{modal.usage}</p>
-        <article className={styles.contactModalFrame} aria-label={modal.title}>
-          <header className={styles.contactModalHeader}>
-            <div>
-              <h3>{modal.title}</h3>
-              <p>{modal.description}</p>
+        <Button type="button" onClick={() => setContactReviewPreviewOpen(true)}>
+          {zh ? "預覽送出前確認" : "Preview review before submit"}
+        </Button>
+        <Modal
+          closeLabel={zh ? "關閉預覽" : "Close preview"}
+          onClose={() => setContactReviewPreviewOpen(false)}
+          open={contactReviewPreviewOpen}
+          title={modal.title}
+        >
+          <div className="contact-review-modal">
+            <p className="contact-review-description">{modal.description}</p>
+            <dl className="contact-review-list">
+              {modal.fields.map(([label, value]) => (
+                <div key={label} className="contact-review-row">
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="contact-review-actions">
+              <Button type="button" onClick={() => setContactReviewPreviewOpen(false)}>{modal.confirm}</Button>
+              <Button type="button" variant="secondary" onClick={() => setContactReviewPreviewOpen(false)}>{modal.cancel}</Button>
             </div>
-            <span aria-hidden="true" className={styles.contactModalClose}>×</span>
-          </header>
-          <dl className={styles.contactReviewListDemo}>
-            {modal.fields.map(([label, value]) => (
-              <div key={label} className={styles.contactReviewRowDemo}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-          </dl>
-          <div className={styles.contactReviewActionsDemo}>
-            <Button type="button" className={styles.contactReviewPrimaryDemo}>{modal.confirm}</Button>
-            <Button type="button" variant="secondary">{modal.cancel}</Button>
           </div>
-        </article>
+        </Modal>
         <ul className={styles.contactFlowNotes}>
           {modal.flow.map((item) => (
             <li key={item}>{item}</li>

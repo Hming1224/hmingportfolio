@@ -1016,6 +1016,32 @@
   min-width: 0;
 }
 
+.contactToastDemo {
+  display: grid;
+  gap: var(--hm-space-sm);
+  width: 100%;
+}
+
+.contactToastPreviewGrid {
+  display: grid;
+  gap: var(--hm-space-sm);
+}
+
+.contactToastPreviewSlot {
+  display: grid;
+  min-width: 0;
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-surface);
+}
+
+.contactToastPreviewSlot :global(.hm-toast-region) {
+  position: static;
+  width: 100%;
+  animation: none;
+}
+
 .contactModalFrame {
   display: grid;
   gap: var(--hm-space-md);
