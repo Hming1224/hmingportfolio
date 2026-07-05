@@ -31,6 +31,7 @@ function docSectionForAnchor(
 ) {
   const slugAliases: Record<string, string> = {
     "border-radius": "radius",
+    "component-boundaries": "local-exceptions",
     "token-reference": "tokens",
   };
   const requestedSlug = anchor.replace(/^#/, "");

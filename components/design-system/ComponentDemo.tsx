@@ -118,110 +118,208 @@ const advantechTocSections = {
   ],
 } satisfies Record<DesignSystemLocale, TocSection[]>;
 
-const localExceptionExamples = {
+type BoundaryClassification =
+  | "Shared case-study pattern"
+  | "Route-local pattern"
+  | "Internal anatomy"
+  | "Extraction candidate";
+
+type BoundaryReferenceItem = {
+  pattern: string;
+  classification: BoundaryClassification;
+  currentUsage: string;
+  boundary: string;
+  extractionCondition: string;
+  source: string;
+  status: string;
+  nextStep: string;
+};
+
+const boundaryReferenceGroups = {
+  en: [
+    {
+      classification: "Shared case-study pattern",
+      description: "Reusable across case-study routes, but tied to the case-study reading flow or template.",
+    },
+    {
+      classification: "Route-local pattern",
+      description: "Tied to a specific story, dataset, or route composition.",
+    },
+    {
+      classification: "Internal anatomy",
+      description: "Implementation helpers or internal parts whose meaning depends on a parent component or route section.",
+    },
+    {
+      classification: "Extraction candidate",
+      description: "Can be promoted later if the same structure repeats across independent routes.",
+    },
+  ],
+  "zh-TW": [
+    {
+      classification: "Shared case-study pattern",
+      description: "可在案例頁之間重複使用，但仍綁定 case-study reading flow 或案例頁模板。",
+    },
+    {
+      classification: "Route-local pattern",
+      description: "與特定故事、資料結構或 route composition 綁定。",
+    },
+    {
+      classification: "Internal anatomy",
+      description: "依附在 parent component 或 route section 下才有完整意義的內部組成。",
+    },
+    {
+      classification: "Extraction candidate",
+      description: "當同一結構跨獨立 route 重複出現時，可重新評估是否提升為 reusable component。",
+    },
+  ],
+} satisfies Record<DesignSystemLocale, Array<{ classification: BoundaryClassification; description: string }>>;
+
+const boundaryReferenceItems = {
   en: [
     {
       pattern: "ProjectCard hover overlay",
-      liveUsage: "Homepage / Selected Works (`components/Works.tsx`)",
-      whyLocal: "It is bound to project metadata, cover media, logo, tags, CTA, and the protected hover overlay anatomy for portfolio exploration.",
-      boundary: "Local / product-specific pattern. It is not a generic Card because removing project storytelling context would weaken the interaction contract.",
-      extraction: "Revisit only if another product surface needs the same project-story card anatomy, overlay behavior, and CTA model.",
+      classification: "Route-local pattern",
+      currentUsage: "Homepage / Selected Works.",
+      boundary: "Bound to project metadata, cover media, logo, tags, CTA, and the protected hover overlay anatomy for portfolio exploration.",
+      extractionCondition: "Revisit only if another product surface needs the same project-story card anatomy, overlay behavior, and CTA model.",
+      source: "components/Works.tsx",
+      status: "Product-specific portfolio pattern",
+      nextStep: "Keep documented as a route-owned project card pattern.",
     },
     {
       pattern: "CaseTOC",
-      liveUsage: "CaseStudyShell across Advantech, Crypto Arsenal, and Laushu case routes (`components/CaseTOC.tsx`).",
-      whyLocal: "It is shaped by long-form case reading, section anchors, scroll position, and production visibility rules. On desktop it floats beside the case body; at the production narrow breakpoint it stays hidden.",
-      boundary: "Protected case-study navigation pattern, local to the case-study reading experience. The visible catalog example uses the production CaseTOC visual state; it should not be wrapped into a generic docs TOC.",
-      extraction: "Revisit only if another long-form product story needs the same floating anchor model and scroll behavior.",
+      classification: "Shared case-study pattern",
+      currentUsage: "CaseStudyShell across Advantech, Crypto Arsenal, and Laushu case routes.",
+      boundary: "Navigation contract is scoped to case-study section anchors, scroll position, production visibility rules, and desktop floating layout.",
+      extractionCondition: "Revisit only if another long-form product story needs the same floating anchor model and scroll behavior.",
+      source: "components/CaseTOC.tsx",
+      status: "Protected case-study navigation pattern",
+      nextStep: "Keep visible in Navigation; standardize docs around production CaseTOC behavior.",
     },
     {
       pattern: "Advantech Board 2 / Board 3",
-      liveUsage: "Advantech case route, SolutionSection scenario boards for overage warning and abnormal energy analysis.",
-      whyLocal: "The multi-comparison layout, copy density, comparison axes, and AI proposal evaluation are tied to this case's business logic.",
-      boundary: "Project-specific visual board, not a shared component contract.",
-      extraction: "Componentize only when a second case repeats the same structure and interaction needs.",
+      classification: "Route-local pattern",
+      currentUsage: "Advantech SolutionSection scenario boards for overage warning and abnormal energy analysis.",
+      boundary: "Multi-comparison layout, copy density, comparison axes, and AI proposal evaluation are tied to Advantech business logic.",
+      extractionCondition: "Componentize only when a second case repeats the same structure and interaction needs.",
+      source: "app/advantech/sections/SolutionSection.tsx",
+      status: "Project-specific visual board",
+      nextStep: "Keep as route composition until another case repeats the same board structure.",
     },
     {
       pattern: "Laushu task flow",
-      liveUsage: "Laushu case route task-flow diagrams and route-local flow CSS.",
-      whyLocal: "Diagram geometry, connector endpoints, min-width rules, and step relationships are bound to this project flow.",
-      boundary: "Route-local diagram and story-specific flow visualization, not part of the shared component library.",
-      extraction: "Revisit only if multiple routes need the same diagram grammar without case-specific connector logic.",
+      classification: "Route-local pattern",
+      currentUsage: "Laushu case route task-flow diagrams and route-level flow CSS.",
+      boundary: "Diagram geometry, connector endpoints, min-width rules, and step relationships are bound to this project flow.",
+      extractionCondition: "Revisit only if multiple routes need the same diagram grammar without case-specific connector logic.",
+      source: "app/laushu/components/TaskFlowDiagrams.tsx",
+      status: "Story-specific flow visualization",
+      nextStep: "Keep documented as route-owned diagram grammar.",
     },
     {
       pattern: "Crypto matrix / FlowMatrixBoard",
-      liveUsage: "Crypto Arsenal ResearchSection matrices for close-position and TP / SL flow analysis.",
-      whyLocal: "It is a visual storytelling matrix for crypto product risk and decision structure, not a reusable data table.",
-      boundary: "Project-specific matrix and visual storytelling pattern, not a shared ARIA grid or data grid contract.",
-      extraction: "Revisit only if repeated cases need the same matrix semantics, navigation, and accessibility contract.",
+      classification: "Route-local pattern",
+      currentUsage: "Crypto Arsenal ResearchSection matrices for close-position and TP / SL flow analysis.",
+      boundary: "Visual storytelling matrix for crypto product risk and decision structure, not a reusable data table contract.",
+      extractionCondition: "Revisit only if repeated cases need the same matrix semantics, navigation, and accessibility contract.",
+      source: "app/crypto-arsenal/components/FlowMatrixBoard.tsx",
+      status: "Project-specific matrix",
+      nextStep: "Keep referenced as a case-specific matrix pattern.",
     },
     {
       pattern: "BeforeAfterPanel",
-      liveUsage: "Internal part of BeforeAfterNarrativeFrame (`components/case-study/BeforeAfterPanel.tsx`).",
-      whyLocal: "Routes adopt BeforeAfterNarrativeFrame; the exported panel only renders labeled state panels inside that frame.",
-      boundary: "Internal-only anatomy. It is not directly route-adopted and not exposed as an independent route-level pattern.",
-      extraction: "Revisit only if panel composition becomes a standalone shared contract outside the narrative frame.",
+      classification: "Internal anatomy",
+      currentUsage: "Internal part of BeforeAfterNarrativeFrame.",
+      boundary: "Routes adopt BeforeAfterNarrativeFrame; the exported panel renders labeled state panels inside that parent frame.",
+      extractionCondition: "Revisit only if panel composition becomes a standalone shared contract outside the narrative frame.",
+      source: "components/case-study/BeforeAfterPanel.tsx",
+      status: "Internal part",
+      nextStep: "Keep under BeforeAfterNarrativeFrame anatomy and boundary reference.",
     },
     {
       pattern: "CaseBeforeAfter",
-      liveUsage: "Component exists in `components/case-study/CaseBeforeAfter.tsx`; rg found no direct route adoption in current case routes.",
-      whyLocal: "It remains an independent simple two-panel comparison component and has not been refactored into BeforeAfterNarrativeFrame.",
-      boundary: "No current direct route adoption. `.cs-before-after-panel` belongs to CaseBeforeAfter and is not a BeforeAfterNarrativeFrame selector.",
-      extraction: "Revisit if a live route adopts it repeatedly or if it needs a documented migration path.",
+      classification: "Extraction candidate",
+      currentUsage: "Source-level case-study component; no direct route adoption found in current case routes.",
+      boundary: "Independent two-panel comparison component. `.cs-before-after-panel` belongs to CaseBeforeAfter and is not a BeforeAfterNarrativeFrame selector.",
+      extractionCondition: "Revisit if a live route adopts it repeatedly or if it needs a documented migration path.",
+      source: "components/case-study/CaseBeforeAfter.tsx",
+      status: "Source-level component",
+      nextStep: "Keep documented as a candidate until production adoption changes.",
     },
   ],
   "zh-TW": [
     {
       pattern: "ProjectCard hover overlay",
-      liveUsage: "首頁 / Selected Works（`components/Works.tsx`）",
-      whyLocal: "它綁定 project metadata、cover、logo、tags、CTA 與作品探索用的 hover overlay anatomy。",
-      boundary: "Local / product-specific pattern。它不是 generic Card，否則會失去 project storytelling context。",
-      extraction: "只有當其他產品區塊也需要同一套專案卡片 anatomy、overlay 行為與 CTA model，才重新評估抽象化。",
+      classification: "Route-local pattern",
+      currentUsage: "首頁 / Selected Works。",
+      boundary: "綁定 project metadata、cover、logo、tags、CTA 與作品探索用的 hover overlay anatomy。",
+      extractionCondition: "只有當其他產品區塊也需要同一套專案卡片 anatomy、overlay 行為與 CTA model，才重新評估抽象化。",
+      source: "components/Works.tsx",
+      status: "Product-specific portfolio pattern",
+      nextStep: "維持為 route-owned project card pattern。",
     },
     {
       pattern: "CaseTOC",
-      liveUsage: "Advantech、Crypto Arsenal、Laushu case routes 的 CaseStudyShell（`components/CaseTOC.tsx`）。",
-      whyLocal: "它依案例頁長篇閱讀、section anchor、scroll position 與正式站 visibility rules 設計；桌機浮在案例正文旁，窄版斷點維持隱藏。",
-      boundary: "Protected case-study navigation pattern，屬於 case-study reading experience。visible catalog example 使用 production CaseTOC 視覺狀態，不應包裝成 generic docs TOC。",
-      extraction: "只有當另一個長篇產品故事也需要相同 floating anchor model 與 scroll behavior，才重新評估。",
+      classification: "Shared case-study pattern",
+      currentUsage: "Advantech、Crypto Arsenal、Laushu case routes 的 CaseStudyShell。",
+      boundary: "navigation contract 限定在案例頁 section anchors、scroll position、正式站 visibility rules 與桌機 floating layout。",
+      extractionCondition: "只有當另一個長篇產品故事也需要相同 floating anchor model 與 scroll behavior，才重新評估。",
+      source: "components/CaseTOC.tsx",
+      status: "Protected case-study navigation pattern",
+      nextStep: "保留在 Navigation，並持續以 production CaseTOC 行為為準整理文件。",
     },
     {
       pattern: "Advantech Board 2 / Board 3",
-      liveUsage: "Advantech case route 的 SolutionSection，需量超約預警與設備能耗異常分析 scenario boards。",
-      whyLocal: "multi-comparison layout、copy density、comparison axis 與 AI proposal evaluation 都和此案例的 business logic 綁定。",
-      boundary: "Project-specific visual board，不是 shared component contract。",
-      extraction: "只有第二個以上案例出現相同結構與互動需求時，才考慮 componentize。",
+      classification: "Route-local pattern",
+      currentUsage: "Advantech SolutionSection 的需量超約預警與設備能耗異常分析 scenario boards。",
+      boundary: "multi-comparison layout、copy density、comparison axis 與 AI proposal evaluation 都和 Advantech business logic 綁定。",
+      extractionCondition: "只有第二個以上案例出現相同結構與互動需求時，才考慮 componentize。",
+      source: "app/advantech/sections/SolutionSection.tsx",
+      status: "Project-specific visual board",
+      nextStep: "在其他案例出現同結構前，維持 route composition。",
     },
     {
       pattern: "Laushu task flow",
-      liveUsage: "Laushu case route 的任務流程圖與 route-local flow CSS。",
-      whyLocal: "diagram geometry、connector endpoints、min-width rules 與 step relationship 都和此專案流程綁定。",
-      boundary: "Route-local diagram 與 story-specific flow visualization，不屬於 shared component library。",
-      extraction: "只有多個 route 需要同一套 diagram grammar，且不需要塞入 case-specific connector logic，才重新評估。",
+      classification: "Route-local pattern",
+      currentUsage: "Laushu case route 的任務流程圖與 route-level flow CSS。",
+      boundary: "diagram geometry、connector endpoints、min-width rules 與 step relationship 都和此專案流程綁定。",
+      extractionCondition: "只有多個 route 需要同一套 diagram grammar，且不需要塞入 case-specific connector logic，才重新評估。",
+      source: "app/laushu/components/TaskFlowDiagrams.tsx",
+      status: "Story-specific flow visualization",
+      nextStep: "維持為 route-owned diagram grammar。",
     },
     {
       pattern: "Crypto matrix / FlowMatrixBoard",
-      liveUsage: "Crypto Arsenal ResearchSection 的平倉與 TP / SL flow analysis matrices。",
-      whyLocal: "它是用來說明 crypto product risk / decision structure 的 visual storytelling matrix，不是可重用資料表格。",
-      boundary: "Project-specific matrix 與 visual storytelling pattern，不是 shared ARIA grid 或 data grid contract。",
-      extraction: "只有重複案例需要同樣的矩陣語意、導覽與 accessibility contract，才重新評估。",
+      classification: "Route-local pattern",
+      currentUsage: "Crypto Arsenal ResearchSection 的平倉與 TP / SL flow analysis matrices。",
+      boundary: "用來說明 crypto product risk / decision structure 的 visual storytelling matrix，不是 reusable data table contract。",
+      extractionCondition: "只有重複案例需要同樣的矩陣語意、導覽與 accessibility contract，才重新評估。",
+      source: "app/crypto-arsenal/components/FlowMatrixBoard.tsx",
+      status: "Project-specific matrix",
+      nextStep: "維持為 case-specific matrix pattern。",
     },
     {
       pattern: "BeforeAfterPanel",
-      liveUsage: "BeforeAfterNarrativeFrame 的 internal part（`components/case-study/BeforeAfterPanel.tsx`）。",
-      whyLocal: "正式 route 採用 BeforeAfterNarrativeFrame；exported panel 只負責在 frame 內呈現 labeled state panels。",
-      boundary: "Internal-only anatomy。它沒有被 route 直接採用，也不是獨立 route-level pattern。",
-      extraction: "只有 panel composition 離開 narrative frame 後成為獨立 shared contract，才重新評估。",
+      classification: "Internal anatomy",
+      currentUsage: "BeforeAfterNarrativeFrame 的 internal part。",
+      boundary: "正式 route 採用 BeforeAfterNarrativeFrame；exported panel 只在 parent frame 內渲染 labeled state panels。",
+      extractionCondition: "只有 panel composition 離開 narrative frame 後成為獨立 shared contract，才重新評估。",
+      source: "components/case-study/BeforeAfterPanel.tsx",
+      status: "Internal part",
+      nextStep: "保留在 BeforeAfterNarrativeFrame anatomy 與 boundary reference。",
     },
     {
       pattern: "CaseBeforeAfter",
-      liveUsage: "元件存在於 `components/case-study/CaseBeforeAfter.tsx`；rg 未找到目前 case routes 的直接 adoption。",
-      whyLocal: "它仍是獨立的簡單兩欄比較元件，尚未 refactor 成 BeforeAfterNarrativeFrame。",
-      boundary: "目前沒有直接 route adoption。`.cs-before-after-panel` 屬於 CaseBeforeAfter，不是 BeforeAfterNarrativeFrame selector。",
-      extraction: "若 live route 重複採用，或需要正式 migration path，再重新評估。",
+      classification: "Extraction candidate",
+      currentUsage: "source-level case-study component；目前 case routes 未找到 direct adoption。",
+      boundary: "獨立兩欄比較元件。`.cs-before-after-panel` 屬於 CaseBeforeAfter，不是 BeforeAfterNarrativeFrame selector。",
+      extractionCondition: "若 live route 重複採用，或需要正式 migration path，再重新評估。",
+      source: "components/case-study/CaseBeforeAfter.tsx",
+      status: "Source-level component",
+      nextStep: "在 production adoption 改變前，保留為 candidate 文件。",
     },
   ],
-} satisfies Record<DesignSystemLocale, Array<Record<"pattern" | "liveUsage" | "whyLocal" | "boundary" | "extraction", string>>>;
+} satisfies Record<DesignSystemLocale, BoundaryReferenceItem[]>;
 
 function getCopy(locale: DesignSystemLocale) {
   const zh = locale === "zh-TW";
@@ -268,11 +366,15 @@ function getCopy(locale: DesignSystemLocale) {
       confirm: zh ? "送出中..." : "Sending...",
       cancel: zh ? "返回修改" : "Cancel",
     },
-    localExceptionFields: {
-      liveUsage: zh ? "真實使用位置" : "Live usage",
-      whyLocal: zh ? "為什麼保留 local" : "Why it stays local",
-      boundary: zh ? "shared component 邊界" : "Shared boundary",
-      extraction: zh ? "什麼情況才重新評估抽象化" : "Extraction condition",
+    boundaryFields: {
+      classification: zh ? "Classification" : "Classification",
+      currentUsage: zh ? "Current usage" : "Current usage",
+      boundary: zh ? "Boundary" : "Boundary",
+      extractionCondition: zh ? "Extraction condition" : "Extraction condition",
+      item: zh ? "Item" : "Item",
+      source: zh ? "Source / route" : "Source / route",
+      status: zh ? "Status" : "Status",
+      nextStep: zh ? "Next step" : "Next step",
     },
   };
 }
@@ -1044,43 +1146,86 @@ export default function ComponentDemo({
   }
 
   if (type === "local-exceptions") {
-    const fieldLabels = copy.localExceptionFields;
+    const fieldLabels = copy.boundaryFields;
+    const items = boundaryReferenceItems[locale];
+    const groups = boundaryReferenceGroups[locale]
+      .map((group) => ({
+        ...group,
+        items: items.filter((item) => item.classification === group.classification),
+      }))
+      .filter((group) => group.items.length > 0);
 
     return (
-      <section className={styles.localExceptionsDemo} aria-label={zh ? "刻意保留在 local scope 的 patterns" : "What stays local"}>
+      <section className={styles.localExceptionsDemo} aria-label="Component boundary reference">
         <div className={styles.localExceptionsIntro}>
-          <p className={styles.demoBadge}>{zh ? "Governance reference" : "Governance reference"}</p>
-          <h3>{zh ? "刻意保留在 local scope 的 pattern" : "What stays local"}</h3>
+          <p className={styles.demoBadge}>{zh ? "Boundary reference" : "Boundary reference"}</p>
+          <h3>{zh ? "Component 邊界分類" : "Component boundary taxonomy"}</h3>
           <p>
             {zh
-              ? "這些 pattern 依 component boundary、story-specific UI 與 reuse threshold 決定保留在 local scope。"
-              : "These patterns stay local based on component boundaries, story-specific UI, and the reuse threshold."}
+              ? "Boundary notes 用來區分哪些 UI 適合放進通用元件目錄，哪些屬於 shared case-study pattern、route-local pattern 或內部組成結構。"
+              : "Boundary notes clarify which UI pieces are general-purpose components, shared case-study patterns, route-local patterns, or internal anatomy."}
           </p>
         </div>
-        <div className={styles.localExceptionGrid}>
-          {localExceptionExamples[locale].map((item) => (
-            <article className={styles.localExceptionCard} key={item.pattern}>
-              <h4>{item.pattern}</h4>
-              <dl>
-                <div>
-                  <dt>{fieldLabels.liveUsage}</dt>
-                  <dd>{item.liveUsage}</dd>
-                </div>
-                <div>
-                  <dt>{fieldLabels.whyLocal}</dt>
-                  <dd>{item.whyLocal}</dd>
-                </div>
-                <div>
-                  <dt>{fieldLabels.boundary}</dt>
-                  <dd>{item.boundary}</dd>
-                </div>
-                <div>
-                  <dt>{fieldLabels.extraction}</dt>
-                  <dd>{item.extraction}</dd>
-                </div>
-              </dl>
-            </article>
+
+        <div className={styles.boundaryGroupStack}>
+          {groups.map((group) => (
+            <section className={styles.boundaryGroup} key={group.classification}>
+              <header className={styles.boundaryGroupHeader}>
+                <h4>{group.classification}</h4>
+                <p>{group.description}</p>
+              </header>
+              <div className={styles.localExceptionGrid}>
+                {group.items.map((item) => (
+                  <article className={styles.localExceptionCard} key={item.pattern}>
+                    <div className={styles.boundaryCardHeader}>
+                      <span className={styles.boundaryChip}>{item.classification}</span>
+                      <h5>{item.pattern}</h5>
+                    </div>
+                    <dl>
+                      <div>
+                        <dt>{fieldLabels.currentUsage}</dt>
+                        <dd>{item.currentUsage}</dd>
+                      </div>
+                      <div>
+                        <dt>{fieldLabels.boundary}</dt>
+                        <dd>{item.boundary}</dd>
+                      </div>
+                      <div>
+                        <dt>{fieldLabels.extractionCondition}</dt>
+                        <dd>{item.extractionCondition}</dd>
+                      </div>
+                    </dl>
+                  </article>
+                ))}
+              </div>
+            </section>
           ))}
+        </div>
+
+        <div className={styles.boundaryMatrixWrap}>
+          <table className={styles.boundaryMatrix}>
+            <caption>{zh ? "Compact reference matrix" : "Compact reference matrix"}</caption>
+            <thead>
+              <tr>
+                <th>{fieldLabels.item}</th>
+                <th>{fieldLabels.classification}</th>
+                <th>{fieldLabels.source}</th>
+                <th>{fieldLabels.status}</th>
+                <th>{fieldLabels.nextStep}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.pattern}>
+                  <th scope="row">{item.pattern}</th>
+                  <td>{item.classification}</td>
+                  <td>{item.source}</td>
+                  <td>{item.status}</td>
+                  <td>{item.nextStep}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
     );

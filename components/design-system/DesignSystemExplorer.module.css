@@ -2473,6 +2473,7 @@
 
 .localExceptionGrid {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--hm-space-xs);
 }
 
@@ -2486,11 +2487,59 @@
   background: var(--hm-surface);
 }
 
-.localExceptionCard h4 {
+.boundaryGroupStack {
+  display: grid;
+  gap: var(--hm-space-md);
+}
+
+.boundaryGroup {
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+
+.boundaryGroupHeader {
+  display: grid;
+  gap: var(--hm-space-3xs);
+}
+
+.boundaryGroupHeader h4 {
   margin: 0;
   color: var(--text-heading);
   font-size: var(--hm-fs-h4);
   line-height: 1.35;
+}
+
+.boundaryGroupHeader p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.6;
+}
+
+.boundaryCardHeader {
+  display: grid;
+  gap: var(--hm-space-3xs);
+}
+
+.boundaryCardHeader h5 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.35;
+}
+
+.boundaryChip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: var(--hm-map-height-control-sm);
+  padding: 0 var(--hm-space-xs);
+  border: 1px solid color-mix(in srgb, var(--hm-purple) 24%, var(--hm-line));
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple-light);
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-semibold);
 }
 
 .localExceptionCard dl {
@@ -2518,6 +2567,49 @@
   font-size: var(--hm-fs-sm);
   line-height: 1.65;
   overflow-wrap: anywhere;
+}
+
+.boundaryMatrixWrap {
+  overflow-x: auto;
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.boundaryMatrix {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.boundaryMatrix caption {
+  padding: var(--hm-space-sm) var(--hm-space-sm) 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  text-align: left;
+}
+
+.boundaryMatrix th,
+.boundaryMatrix td {
+  padding: var(--hm-space-xs) var(--hm-space-sm);
+  border-bottom: 1px solid var(--hm-line);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.55;
+  text-align: left;
+  vertical-align: top;
+}
+
+.boundaryMatrix thead th,
+.boundaryMatrix tbody th {
+  color: var(--text-heading);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.boundaryMatrix tbody tr:last-child th,
+.boundaryMatrix tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 .proposalPanelDemo {
@@ -2696,6 +2788,7 @@
   .contactMethodsDemo,
   .anatomyGrid,
   .referenceCardGrid,
+  .localExceptionGrid,
   .caseInfoGridDemo,
   .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);

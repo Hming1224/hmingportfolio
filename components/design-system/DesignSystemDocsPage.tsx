@@ -377,6 +377,9 @@ export default function DesignSystemDocsPage({
   const codePropsHaveUsage = codeGuidance?.props.some((item) => item.usedBy);
   const tokenMappingsHaveUsage = tokenMappings?.some((item) => item.usage);
   const stateRowsUseComponentDocColumns = stateRows?.some((item) => item.trigger || item.whatChanges);
+  const demoSectionTitle = doc.demo === "local-exceptions"
+    ? localized(locale, "Boundary reference", "Boundary reference")
+    : localized(locale, "Examples", "範例");
   const docArticleClassName = [
     styles.docArticle,
     doc.kind === "component" ? styles.componentDocArticle : "",
@@ -397,7 +400,7 @@ export default function DesignSystemDocsPage({
 
       {doc.kind === "component" || doc.demo ? (
         <section className={styles.docSection}>
-          <h2 className={styles.docSectionTitle}>{localized(locale, "Examples", "範例")}</h2>
+          <h2 className={styles.docSectionTitle}>{demoSectionTitle}</h2>
           {exampleLabel ? <p className={styles.exampleLabel}>{exampleLabel}</p> : null}
           <div className={styles.demoSurface}>
             <ComponentDemo locale={locale} type={doc.demo} />
