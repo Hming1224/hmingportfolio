@@ -140,8 +140,8 @@ const componentSeeds: ComponentSeed[] = [
     statusZh: "正式 route 元件",
     description: "Action components used for form submission, portfolio navigation, and project CTAs.",
     descriptionZh: "用於表單送出、作品集導覽與專案 CTA 的行動元件。",
-    exampleLabel: "Variant / role and production usage context",
-    exampleLabelZh: "變體 / 角色與正式站使用情境",
+    exampleLabel: "Production usage examples",
+    exampleLabelZh: "正式站使用範例",
     demo: "button",
     stateRows: [
       { state: "Default", appliesTo: "Button / LinkButton", behavior: "Renders the primary or secondary visual treatment from the shared `.ds-button` contract.", liveUsage: "Hero navigation, ProjectCard CTA, Contact submit." },

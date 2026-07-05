@@ -949,24 +949,9 @@
 
 .buttonSpecDemo {
   display: grid;
-  gap: var(--hm-space-lg);
   width: 100%;
   max-width: 720px;
   min-width: 0;
-}
-
-.buttonSpecGroup {
-  display: grid;
-  gap: var(--hm-space-xs);
-  min-width: 0;
-}
-
-.buttonSpecGroup h3 {
-  margin: 0;
-  color: var(--text-heading);
-  font-size: var(--hm-fs-md);
-  font-weight: var(--hm-fw-semibold);
-  line-height: 1.4;
 }
 
 .buttonSpecRow {
@@ -988,6 +973,18 @@
   color: var(--text-secondary);
   font-size: var(--hm-fs-sm);
   font-weight: var(--hm-fw-semibold);
+  line-height: 1.45;
+}
+
+.buttonSpecMeta {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  min-width: 0;
+}
+
+.buttonSpecMeta span {
+  color: var(--text-muted);
+  font-size: var(--hm-fs-xs);
   line-height: 1.45;
 }
 

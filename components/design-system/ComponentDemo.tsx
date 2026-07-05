@@ -521,75 +521,50 @@ export default function ComponentDemo({
 
     return (
       <div className={styles.buttonSpecDemo}>
-        <section className={styles.buttonSpecGroup}>
-          <h3>{zh ? "變體 / 角色" : "Variant / role"}</h3>
-          <div className={styles.buttonSpecRow} data-button-spec-row>
-            <p>LinkButton</p>
-            <div className={styles.buttonSpecControls}>
-              <Button href="/#projects" onClick={registerButtonReturn}>
-                {zh ? "查看作品" : "View My Work"}
-              </Button>
-              <Button href="/about-me" onClick={registerButtonReturn} variant="secondary">
-                {zh ? "我的歷程" : "My Journey"}
-              </Button>
-            </div>
+        <div className={styles.buttonSpecRow} data-button-spec-row>
+          <div className={styles.buttonSpecMeta}>
+            <p>{zh ? "主要導覽" : "Primary navigation"}</p>
+            <span>{zh ? "Hero 導覽 / route anchor" : "Hero navigation / route anchor"}</span>
+            <span>{zh ? "來源：Home hero" : "Source: Home hero"}</span>
           </div>
-          <div className={styles.buttonSpecRow} data-button-spec-row>
-            <p>Button primary</p>
-            <div className={styles.buttonSpecControls}>
-              <Button className={styles.buttonSpecCta} onClick={() => undefined} size="lg" type="button">
-                {zh ? "了解更多" : "Learn More"}
-              </Button>
-            </div>
+          <div className={styles.buttonSpecControls}>
+            <Button href="/#projects" onClick={registerButtonReturn}>
+              {zh ? "查看作品" : "View My Work"}
+            </Button>
+            <Button href="/about-me" onClick={registerButtonReturn} variant="secondary">
+              {zh ? "我的歷程" : "My Journey"}
+            </Button>
           </div>
-          <div className={styles.buttonSpecRow} data-button-spec-row>
-            <p>Button disabled</p>
-            <div className={styles.buttonSpecControls}>
-              <Button className={styles.buttonSpecCta} size="lg" disabled>
-                {zh ? "即將上線" : "Coming Soon"}
-              </Button>
-            </div>
-          </div>
-          <div className={styles.buttonSpecRow} data-button-spec-row>
-            <p>Button loading</p>
-            <div className={styles.buttonSpecControls}>
-              <Button className={styles.buttonSpecCta} loading loadingLabel={zh ? "傳送中..." : "Sending..."}>
-                {zh ? "送出訊息" : "Send Message"}
-              </Button>
-            </div>
-          </div>
-        </section>
+        </div>
 
-        <section className={styles.buttonSpecGroup}>
-          <h3>{zh ? "正式站使用情境" : "Production usage context"}</h3>
-          <div className={styles.buttonSpecRow} data-button-spec-row>
-            <p>{zh ? "Hero navigation" : "Hero navigation"}</p>
-            <div className={styles.buttonSpecControls}>
-              <Button href="/#projects" onClick={registerButtonReturn}>
-                {zh ? "查看作品" : "View My Work"}
-              </Button>
-              <Button href="/about-me" onClick={registerButtonReturn} variant="secondary">
-                {zh ? "我的歷程" : "My Journey"}
-              </Button>
-            </div>
+        <div className={styles.buttonSpecRow} data-button-spec-row>
+          <div className={styles.buttonSpecMeta}>
+            <p>{zh ? "區塊 CTA" : "Section CTA"}</p>
+            <span>{zh ? "Project CTA / 不可用動作" : "Project CTA / unavailable action"}</span>
+            <span>{zh ? "來源：ProjectCard" : "Source: ProjectCard"}</span>
           </div>
-          <div className={styles.buttonSpecRow} data-button-spec-row>
-            <p>{zh ? "Project CTA" : "Project CTA"}</p>
-            <div className={styles.buttonSpecControls}>
-              <Button className={styles.buttonSpecCta} onClick={() => undefined} size="lg" type="button">
-                {zh ? "了解更多" : "Learn More"}
-              </Button>
-            </div>
+          <div className={styles.buttonSpecControls}>
+            <Button className={styles.buttonSpecCta} onClick={() => undefined} size="lg" type="button">
+              {zh ? "了解更多" : "Learn More"}
+            </Button>
+            <Button className={styles.buttonSpecCta} size="lg" disabled>
+              {zh ? "即將上線" : "Coming Soon"}
+            </Button>
           </div>
-          <div className={styles.buttonSpecRow} data-button-spec-row>
-            <p>{zh ? "Contact submit" : "Contact submit"}</p>
-            <div className={styles.buttonSpecControls}>
-              <Button className={styles.buttonSpecCta} loading loadingLabel={zh ? "傳送中..." : "Sending..."} type="submit">
-                {zh ? "送出訊息" : "Send Message"}
-              </Button>
-            </div>
+        </div>
+
+        <div className={styles.buttonSpecRow} data-button-spec-row>
+          <div className={styles.buttonSpecMeta}>
+            <p>{zh ? "非同步送出" : "Async submit"}</p>
+            <span>{zh ? "Contact 送出 loading state" : "Contact submit loading state"}</span>
+            <span>{zh ? "來源：Contact form" : "Source: Contact form"}</span>
           </div>
-        </section>
+          <div className={styles.buttonSpecControls}>
+            <Button className={styles.buttonSpecCta} loading loadingLabel={zh ? "傳送中..." : "Sending..."} type="submit">
+              {zh ? "送出訊息" : "Send Message"}
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
