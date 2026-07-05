@@ -68,15 +68,20 @@ Vercel preview URLs sit behind Vercel Authentication, so CI would only ever see 
 6. Commit only after targeted checks pass.
 7. Let CI run full regression on push or PR.
 
-## Hard Guardrails For Agents
+## CI / Smoke Failure Handling Policy (Hard Guardrails For Agents)
 
-These exist because a 2026-07-05 incident burned an hour on six force-push CI retries.
+Binding policy for every agent working in this repo. It exists because a 2026-07-05 incident burned an hour on six force-push CI retries.
 
-1. **Two-strike rule.** If the same test fails after 2 fix attempts, STOP. Report the failing test, your hypothesis, and options. Do not attempt a third fix, do not amend + force-push again.
-2. **Targeted runs only while iterating.** Rerun just the failing case (`npx playwright test <spec> --grep "<name>"`), never the full smoke suite, and never push just to "see if CI passes now".
-3. **Test tasks never touch production files.** If a smoke test exposes a suspected product bug (UI, CSS, content), do not fix it in the same task. Report it; the fix is a separate route-local task. Interim: add an entry to the documented known-issue budget in the affected spec (with a comment and follow-up task), so CI stays green and honest.
-4. **Never widen a check to silence a failure.** Tolerances/budgets are only for documented pre-existing issues, never for changes made in the current task.
-5. **One strategy at a time.** Never modify the test and the product code in the same attempt — you lose the ability to tell which change did what.
+1. **CI is a detector, not an auto-repair loop.** A red run means "classify the failure" (test bug? environment difference? real regression?), never "keep changing things until green".
+2. **Test tasks must never touch production UI.** No CSS, component, or content edits from within a testing/infra task.
+3. **Suspected production bug → stop and report first.** Do not fix it directly; the fix is a separate route-local task. Interim: a documented known-issue budget in the affected spec (with comment + follow-up task) keeps CI green and honest.
+4. **One repair round per failing test.** A single fix attempt is allowed.
+5. **Still red after that round → stop and output a triage report**: failing test, route, viewport, error, artifact path, your hypothesis, and options. No further attempts, no amend + force-push retries.
+6. **Debug with targeted tests only** (`npx playwright test <spec> --grep "<name>"`). Never rerun the full suite while iterating, and never push just to "see if CI passes now".
+7. **Never skip a failing test** (`test.skip` / `test.fixme` / deleting it). The documented budget in rule 3 is the only sanctioned interim measure.
+8. **Never loosen an assertion to silence a failure.** Tolerances/budgets are only for documented pre-existing issues, never for changes made in the current task.
+9. **Never change tests and production code in the same attempt**, unless the task explicitly allows it — otherwise you cannot tell which change did what.
+10. **Full regression runs only as a gate**: CI on push/PR/main and manual dispatch. It is not a local debug tool.
 
 ## Known Environment Caveat
 

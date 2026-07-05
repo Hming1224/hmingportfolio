@@ -20,6 +20,11 @@ Apply those shared rules to this project.
 - 走分支時善用 Vercel 自動產生的 **Preview 預覽網址**先驗證，確認 build 沒報錯、沒弄壞既有頁面、新功能真的會動，再等 Hming 指示合併。
 - 出問題時記得 Vercel 有 Instant Rollback 可一鍵退回前一個正常版本。
 
+## 測試 / CI 驗證（必讀）
+
+- 驗證指令、hooks、CI/CD 流程與 **CI / Smoke Failure Handling Policy（硬性守則）** 都在 `docs/testing.md`。
+- 動任何測試、或遇到 CI / smoke 紅燈之前，先讀該檔的 policy：CI 是偵測器不是修理工、同一 failing test 最多修 1 輪、debug 只跑 targeted test、測試任務不得改 production UI、不准 skip 或放寬 assertion。
+
 ## Project-specific defaults:
 
 - Treat this as a portfolio-quality frontend project.
