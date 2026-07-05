@@ -1,5 +1,25 @@
 # Project Memory
 
+## 2026-07-05 Design System docs — Example surface 撰寫規範
+
+寫 `/design-system` 元件文件時，Example 區只放「視覺 / 狀態展示」，不要塞用途、流程、邊界、無障礙、真實使用情境或實作說明。這些「為什麼 / 何時 / 如何用」的資訊要移到對應的資訊架構 section，Example 標籤只在需要區分 variant / state 時才出現。
+
+Rule (source of truth, keep verbatim):
+
+- Examples are visual/state demos only.
+- Do not put usage, purpose, flow, boundary, accessibility, real usage, or implementation explanation inside the example surface.
+- If the information explains why/when/how the component is used, move it to:
+  - When to use
+  - States / Behavior
+  - Anatomy
+  - Code guidance
+  - Accessibility
+  - Reference
+- Example labels are allowed only when they distinguish variants or states.
+- If there is only one example, remove the extra purple label.
+
+> 對應 smoke 守門：`tests/smoke/design-system.spec.ts` 已檢查「Example 不塞長文說明」「Reference 不出現 Gap Analysis / Remediation Plan」等內容邊界；改文件時若動到這些結構，先看該 spec 再改，別讓 Example 又長回說明文。
+
 ## 2026-06-25 Case Study Design System consolidation start
 
 - 新增 `components/case-study/CaseHero.tsx` 與 `CaseInfoGrid.tsx`，三個已發布案例頁的 Hero / info grid 先共用 DOM 與 API，但保留既有 `cs-hero-*` / `cs-info-*` class，避免第一步就改變視覺。
