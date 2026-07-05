@@ -7,17 +7,9 @@ import {
   getProjects,
   type ProjectSummary,
 } from "../data/projects";
-import {
-  Tabs,
-  TabsHighlight,
-  TabsHighlightItem,
-  TabsList,
-  TabsPanel,
-  TabsPanels,
-  TabsTab,
-} from "./animate-ui/primitives/base/tabs";
 import ProjectCard from "./ProjectCard";
 import SplitText from "./animate-ui/primitives/texts/SplitText";
+import WorkCategoryTabs from "./WorkCategoryTabs";
 
 function useScrollReveal() {
   const listRef = useRef<HTMLDivElement>(null);
@@ -97,31 +89,20 @@ export default function Works() {
         <span />
       </div>
 
-      <Tabs defaultValue="enterprise" className="project-tabs">
-        <TabsHighlight className="project-tabs-highlight">
-          <TabsList className="project-tabs-list">
-            <TabsHighlightItem value="enterprise" className="project-tabs-item">
-              <TabsTab value="enterprise" className="project-tabs-tab">
-                {t("enterprise")}
-              </TabsTab>
-            </TabsHighlightItem>
-            <TabsHighlightItem value="school" className="project-tabs-item">
-              <TabsTab value="school" className="project-tabs-tab">
-                {t("school")}
-              </TabsTab>
-            </TabsHighlightItem>
-          </TabsList>
-        </TabsHighlight>
-
-        <TabsPanels mode="wait">
-          <TabsPanel value="enterprise">
-            <ProjectList projects={enterpriseProjects} />
-          </TabsPanel>
-          <TabsPanel value="school">
-            <ProjectList projects={schoolProjects} />
-          </TabsPanel>
-        </TabsPanels>
-      </Tabs>
+      <WorkCategoryTabs
+        tabs={[
+          {
+            value: "enterprise",
+            label: t("enterprise"),
+            content: <ProjectList projects={enterpriseProjects} />,
+          },
+          {
+            value: "school",
+            label: t("school"),
+            content: <ProjectList projects={schoolProjects} />,
+          },
+        ]}
+      />
     </section>
   );
 }

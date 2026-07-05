@@ -8,6 +8,7 @@ import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
 import CaseTOC, { type TocSection } from "../CaseTOC";
 import ProjectCard from "../ProjectCard";
+import WorkCategoryTabs from "../WorkCategoryTabs";
 import Button from "../ui/Button";
 import { Modal } from "../ui/Modal";
 import { Skeleton } from "../ui/Skeleton";
@@ -21,15 +22,6 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "../ui/Accordion";
-import {
-  Tabs,
-  TabsHighlight,
-  TabsHighlightItem,
-  TabsList,
-  TabsPanel,
-  TabsPanels,
-  TabsTab,
-} from "../animate-ui/primitives/base/tabs";
 import { registerDesignSystemReturnTarget } from "./DesignSystemReturnBar";
 import styles from "./DesignSystemExplorer.module.css";
 
@@ -909,38 +901,23 @@ export default function ComponentDemo({
 
     return (
       <div className={styles.worksTabsDemo}>
-        <Tabs defaultValue="enterprise" className={styles.worksTabsComponent}>
-          <TabsHighlight className={styles.liveTabsList}>
-            <TabsList className={styles.liveTabsInner} aria-label={zh ? "精選案例分類" : "Selected Work categories"}>
-              {tabs.map((tab) => (
-                <TabsHighlightItem className={styles.liveTabsItem} key={tab.value} value={tab.value}>
-                  <TabsTab className={styles.liveTabsButton} value={tab.value}>
-                    {tab.label}
-                  </TabsTab>
-                </TabsHighlightItem>
-              ))}
-            </TabsList>
-          </TabsHighlight>
+        <WorkCategoryTabs
+          ariaLabel={zh ? "精選案例分類" : "Selected Work categories"}
+          tabs={tabs.map((tab) => {
+            const activeProjects = projects.filter((project) => project.category === tab.value);
 
-          <TabsPanels className={styles.liveTabsPanel} mode="wait">
-            {tabs.map((tab) => {
-              const activeProjects = projects.filter((project) => project.category === tab.value);
-
-              return (
-                <TabsPanel key={tab.value} value={tab.value}>
-                  <div className={styles.tabProjectList}>
-                    {activeProjects.slice(0, 2).map((project) => (
-                      <article className={styles.tabProjectSummary} key={project.slug}>
-                        <strong>{project.navigationTitle ?? project.title}</strong>
-                        <span>{project.status === "coming-soon" ? (zh ? "即將上線" : "Coming Soon") : project.date}</span>
-                      </article>
-                    ))}
-                  </div>
-                </TabsPanel>
-              );
-            })}
-          </TabsPanels>
-        </Tabs>
+            return {
+              ...tab,
+              content: (
+                <div className={`projects-list ${styles.tabProjectList}`}>
+                  {activeProjects.slice(0, 1).map((project) => (
+                    <ProjectCard project={project} key={project.slug} />
+                  ))}
+                </div>
+              ),
+            };
+          })}
+        />
       </div>
     );
   }
