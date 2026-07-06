@@ -50,6 +50,14 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 
 ## Suggested Grouping Summary
 
+### Keep visible / standardized
+
+- CaseSectionHeader
+- CaseCard
+- CaseGrid
+
+Batch 7C-5 standardized these three visible case-study layout components. The docs examples now render the source components directly: `CaseSectionHeader`, `CaseCard`, and `CaseGrid`. The examples use Crypto Arsenal route-shaped content, keep supporting context minimal, and document production usage, API, tokens, accessibility, and boundaries in guidance sections instead of inside the example surface.
+
 ### Keep visible / standardize later
 
 - Tabs

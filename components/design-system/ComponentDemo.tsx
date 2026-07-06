@@ -17,7 +17,7 @@ import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import CaseBeforeAfter from "../case-study/CaseBeforeAfter";
 import CaseHero from "../case-study/CaseHero";
-import type { CaseInfoItem } from "../case-study";
+import { CaseCard, CaseGrid, CaseSectionHeader, type CaseInfoItem } from "../case-study";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import ZoomableImage from "../case-study/ZoomableImage";
 import {
@@ -1162,41 +1162,39 @@ export default function ComponentDemo({
 
   if (type === "case-section-header") {
     return (
-      <section className={styles.caseSectionDemo}>
-        <p className={styles.demoUsageLine}>Crypto Arsenal / CaseSectionHeader</p>
-        <header className={styles.caseSectionHeaderDemo}>
-          <span>{caseCopy.sectionKicker}</span>
-          <h3>{caseCopy.sectionTitle}</h3>
-          <p>{caseCopy.sectionDescription}</p>
-        </header>
+      <section className={`cs-page theme-crypto ${styles.caseSectionHeaderSourceDemo}`}>
+        <CaseSectionHeader
+          description={caseCopy.sectionDescription}
+          kicker={caseCopy.sectionKicker}
+          title={caseCopy.sectionTitle}
+        />
       </section>
     );
   }
 
   if (type === "case-card") {
     return (
-      <article className={styles.caseCardDemo}>
-        <p className={styles.demoUsageLine}>{caseCopy.cardMeta}</p>
-        <h3>{caseCopy.cardTitle}</h3>
-        <p>{caseCopy.cardBody}</p>
-        <span>{zh ? "responsibility: insight / decision / evidence / structured content" : "responsibility: insight / decision / evidence / structured content"}</span>
-      </article>
+      <div className={`cs-page theme-crypto ${styles.caseStudyComponentDemo}`}>
+        <CaseCard className={styles.caseCardSourceDemo}>
+          <p className="cs-card-kicker">{zh ? "痛點 01" : "Pain point 01"}</p>
+          <h3 className={styles.caseCardTitleDemo}>{caseCopy.cardTitle}</h3>
+          <p>{caseCopy.cardBody}</p>
+        </CaseCard>
+      </div>
     );
   }
 
   if (type === "case-grid") {
     return (
-      <section className={styles.caseGridDemo}>
-        <p className={styles.demoUsageLine}>Crypto Arsenal / ProblemSection</p>
-        <h3>{caseCopy.gridTitle}</h3>
-        <div>
+      <section className={`cs-page theme-crypto ${styles.caseStudyComponentDemo}`}>
+        <CaseGrid variant="three" className={styles.caseGridSourceDemo}>
           {caseCopy.gridItems.map((item, index) => (
-            <article className={styles.caseCardDemo} key={item}>
+            <div className={styles.caseGridPlaceholderDemo} key={item}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <p>{item}</p>
-            </article>
+            </div>
           ))}
-        </div>
+        </CaseGrid>
       </section>
     );
   }

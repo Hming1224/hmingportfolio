@@ -2201,6 +2201,8 @@
 .caseSectionDemo,
 .caseCardDemo,
 .caseGridDemo,
+.caseStudyComponentDemo,
+.caseSectionHeaderSourceDemo,
 .caseMediaDemo,
 .beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
@@ -2216,6 +2218,8 @@
 
 .caseSectionDemo,
 .caseCardDemo,
+.caseStudyComponentDemo,
+.caseSectionHeaderSourceDemo,
 .beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
@@ -2224,6 +2228,11 @@
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-lg);
   background: var(--hm-paper);
+}
+
+.caseStudyComponentDemo,
+.caseSectionHeaderSourceDemo {
+  --page-gutter: 0;
 }
 
 .caseHeroDemo {
@@ -2315,6 +2324,45 @@
 
 .caseGridDemo .caseCardDemo p {
   margin: 0;
+}
+
+.caseCardSourceDemo {
+  max-width: 560px;
+}
+
+.caseCardTitleDemo {
+  margin: 0;
+  color: var(--cs-text-heading);
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+}
+
+.caseGridSourceDemo {
+  width: 100%;
+}
+
+.caseGridPlaceholderDemo {
+  display: grid;
+  min-height: 148px;
+  align-content: start;
+  gap: var(--hm-space-xs);
+  padding: var(--hm-space-sm);
+  border: 1px dashed var(--hm-line-strong);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.caseGridPlaceholderDemo span {
+  color: var(--cs-accent);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-bold);
+  letter-spacing: 0.08em;
+}
+
+.caseGridPlaceholderDemo p {
+  margin: 0;
+  color: var(--cs-text-secondary);
+  line-height: 1.55;
 }
 
 .caseMediaFrameDemo {
