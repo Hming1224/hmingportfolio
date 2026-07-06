@@ -9,12 +9,6 @@ function localized(locale: DesignSystemLocale, english: string, chinese: string)
   return locale === "en" ? english : chinese;
 }
 
-const demosWithInternalContextLabel = new Set([
-  "input",
-  "proposal-tabs",
-  "textarea",
-]);
-
 type TokenRow = (typeof designSystemTokenRows)[number];
 
 const foundationTokenTypes: Record<string, TokenRow["type"][]> = {
@@ -369,7 +363,6 @@ export default function DesignSystemDocsPage({
   const codePropsHaveUsage = codeGuidance?.props.some((item) => item.usedBy);
   const tokenMappingsHaveUsage = tokenMappings?.some((item) => item.usage);
   const stateRowsUseComponentDocColumns = stateRows?.some((item) => item.trigger || item.whatChanges);
-  const shouldRenderExampleLabel = Boolean(exampleLabel && !demosWithInternalContextLabel.has(doc.demo ?? ""));
   const demoSectionTitle = doc.demo === "local-exceptions"
     ? localized(locale, "Boundary reference", "Boundary reference")
     : localized(locale, "Examples", "範例");
@@ -394,9 +387,8 @@ export default function DesignSystemDocsPage({
       {doc.kind === "component" || doc.demo ? (
         <section className={styles.docSection}>
           <h2 className={styles.docSectionTitle}>{demoSectionTitle}</h2>
-          {shouldRenderExampleLabel ? <p className={styles.exampleLabel}>{exampleLabel}</p> : null}
           <div className={styles.demoSurface}>
-            <ComponentDemo locale={locale} type={doc.demo} />
+            <ComponentDemo contextLabel={exampleLabel} locale={locale} type={doc.demo} />
           </div>
         </section>
       ) : null}

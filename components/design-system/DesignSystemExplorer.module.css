@@ -2199,12 +2199,15 @@
 }
 
 .caseSectionDemo,
+.caseSectionDemoShell,
 .caseSectionSourceDemo,
+.caseCardDemoShell,
 .caseCardDemo,
 .caseGridDemo,
 .caseStudyComponentDemo,
 .caseSectionHeaderSourceDemo,
 .caseMediaDemo,
+.caseMediaDemoShell,
 .caseMediaSourceDemo,
 .beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
@@ -2221,7 +2224,6 @@
 .caseSectionDemo,
 .caseCardDemo,
 .caseStudyComponentDemo,
-.caseSectionHeaderSourceDemo,
 .beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
@@ -2243,12 +2245,54 @@
   padding: clamp(var(--hm-space-xl), 5vw, var(--hm-space-3xl)) clamp(var(--hm-space-md), 4vw, var(--hm-space-xl));
 }
 
+.caseSectionDemoShell {
+  max-width: 980px;
+}
+
+.caseSectionMediaPlaceholder {
+  display: grid;
+  gap: var(--hm-space-xs);
+  place-content: center;
+  min-height: 220px;
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-lg);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--cs-accent) 12%, transparent), transparent 58%),
+    var(--cs-surface);
+}
+
+.caseSectionMediaPlaceholder span {
+  display: block;
+  width: min(360px, 58vw);
+  height: 12px;
+  border-radius: var(--hm-radius-pill);
+  background: color-mix(in srgb, var(--cs-text-secondary) 18%, transparent);
+}
+
+.caseSectionMediaPlaceholder span:last-child {
+  width: min(260px, 46vw);
+}
+
+.caseCardDemoShell {
+  max-width: 560px;
+}
+
+.caseMediaDemoShell {
+  max-width: 860px;
+}
+
 .caseMediaSourceDemo {
   width: min(100%, 860px);
 }
 
 .caseMediaContentDemo {
   overflow: hidden;
+}
+
+.caseMediaContentDemo img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .caseMediaImageDemo {
@@ -2296,6 +2340,14 @@
 .proposalPanelDemo {
   display: grid;
   gap: var(--hm-space-2xs);
+}
+
+.caseSectionHeaderSourceDemo {
+  max-width: 760px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .caseSectionHeaderDemo span {

@@ -50,7 +50,11 @@ Apply those shared rules to this project.
 - Supporting context may use wireframes or simplified placeholders when it helps explain the subject without distracting from it.
 - Supporting context must not be presented as the documented component.
 - Do not use realistic production-heavy visuals for supporting context if they compete with the documented subject.
+- Any visible catalog item with an Examples section must place its example context label inside the gray example surface.
+- Do not render a single-example context label outside the example surface.
 - A single example should have one context label at most.
-- Prefer placing necessary context inside the example surface.
-- Do not render both an outer label and an identical inner title for the same example.
+- Multiple examples may use labels only when the labels distinguish variants, states, or contexts.
+- Context labels should align with the demo block, not float as a separate heading between Examples and the surface.
+- Do not duplicate an outer label and an inner title with the same meaning.
 - Do not add nested white cards inside example surfaces unless the nested card is the documented subject or production context.
+- Docs wrappers must not distort production media aspect ratios.
