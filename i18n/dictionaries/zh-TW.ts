@@ -5,7 +5,7 @@ const messages = {
     closeMenu: "關閉選單",
     projects: "精選案例",
     about: "關於我",
-    designSystem: "Design System",
+    designSystem: "設計系統",
     contact: "聯絡資訊",
     resume: "下載履歷",
     resumeHref: "/黃宣銘_中文履歷.pdf",
