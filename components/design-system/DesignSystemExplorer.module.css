@@ -1213,6 +1213,18 @@
   line-height: 1.5;
 }
 
+.demoBlock {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  max-width: 980px;
+  min-width: 0;
+}
+
+.demoBlock > .demoUsageLine {
+  justify-self: start;
+}
+
 .demoReferenceCard,
 .contractOnlyDemo,
 .contactFieldDemo,
@@ -2223,9 +2235,6 @@
 
 .caseSectionDemo,
 .caseCardDemo,
-.caseStudyComponentDemo,
-.beforeAfterSourceDemo,
-.beforeAfterNarrativeDemo,
 .flowHintDemo,
 .localExceptionsDemo {
   padding: var(--hm-space-md);
@@ -2875,9 +2884,13 @@
     min-height: 150px;
   }
 
+  .projectCardLiveWrap,
   .projectCardLivePreview {
     width: calc(100vw - 48px);
     max-width: calc(100vw - 48px);
-    margin-left: calc(50% - 50vw + 24px);
+  }
+
+  .projectCardLivePreview {
+    margin-left: 0;
   }
 }

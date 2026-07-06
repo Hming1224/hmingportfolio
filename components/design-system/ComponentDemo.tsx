@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
 import { proposalScenario1Tabs } from "@/app/advantech/data";
@@ -534,38 +535,42 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
   };
 
   return (
-    <section className={styles.caseTocDemo} aria-label={zh ? "CaseTOC production 視覺狀態" : "CaseTOC production visual state"}>
-      <DemoContextLabel>{contextLabel ?? (zh ? "真實使用位置：CaseStudyShell / Advantech case route" : "Real usage: CaseStudyShell / Advantech case route")}</DemoContextLabel>
-      <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
-        <div className="cs-toc-layout">
-          <aside className="cs-toc-aside">
-            <CaseTOC
-              sections={sections}
-              activeSectionId={activeSectionId}
-              visible
-              onNavigate={handleNavigate}
-            />
-          </aside>
-          <div className={styles.caseTocRouteCrop} ref={scrollContainerRef}>
-            {sections.map((section, index) => (
-              <section
-                className={styles.caseTocWireSection}
-                id={section.id}
-                key={section.id}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h4>{section.title}</h4>
-                <div aria-hidden="true" />
-              </section>
-            ))}
+    <DemoBlock
+      className={styles.caseTocDemo}
+      contextLabel={contextLabel ?? (zh ? "真實使用位置：CaseStudyShell / Advantech case route" : "Real usage: CaseStudyShell / Advantech case route")}
+    >
+      <section aria-label={zh ? "CaseTOC production 視覺狀態" : "CaseTOC production visual state"}>
+        <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
+          <div className="cs-toc-layout">
+            <aside className="cs-toc-aside">
+              <CaseTOC
+                sections={sections}
+                activeSectionId={activeSectionId}
+                visible
+                onNavigate={handleNavigate}
+              />
+            </aside>
+            <div className={styles.caseTocRouteCrop} ref={scrollContainerRef}>
+              {sections.map((section, index) => (
+                <section
+                  className={styles.caseTocWireSection}
+                  id={section.id}
+                  key={section.id}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h4>{section.title}</h4>
+                  <div aria-hidden="true" />
+                </section>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <ul className={styles.caseTocNotes}>
-        <li>{zh ? "行為：點擊章節標題只會移動右側示意內容；active state 跟隨右側目前可見大標。" : "Behavior: clicking a section label only moves the right-side sample content; the active state follows the visible heading inside that container."}</li>
-        <li>{zh ? "正式邊界：正式案例頁仍使用自己的頁面 scroll 與窄版隱藏規則。" : "Production boundary: live case routes still use their own page scroll and narrow-breakpoint visibility rules."}</li>
-      </ul>
-    </section>
+        <ul className={styles.caseTocNotes}>
+          <li>{zh ? "行為：點擊章節標題只會移動右側示意內容；active state 跟隨右側目前可見大標。" : "Behavior: clicking a section label only moves the right-side sample content; the active state follows the visible heading inside that container."}</li>
+          <li>{zh ? "正式邊界：正式案例頁仍使用自己的頁面 scroll 與窄版隱藏規則。" : "Production boundary: live case routes still use their own page scroll and narrow-breakpoint visibility rules."}</li>
+        </ul>
+      </section>
+    </DemoBlock>
   );
 }
 
@@ -575,6 +580,23 @@ function DemoContextLabel({ children }: { children?: string }) {
   }
 
   return <p className={styles.demoUsageLine}>{children}</p>;
+}
+
+function DemoBlock({
+  children,
+  className,
+  contextLabel,
+}: {
+  children: ReactNode;
+  className?: string;
+  contextLabel?: string;
+}) {
+  return (
+    <div className={[styles.demoBlock, className].filter(Boolean).join(" ")}>
+      <DemoContextLabel>{contextLabel}</DemoContextLabel>
+      {children}
+    </div>
+  );
 }
 
 export default function ComponentDemo({
@@ -641,8 +663,7 @@ export default function ComponentDemo({
     };
 
     return (
-      <div className={styles.buttonSpecDemo}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
+      <DemoBlock className={styles.buttonSpecDemo} contextLabel={contextLabel}>
         <div className={styles.buttonSpecRow} data-button-spec-row>
           <div className={styles.buttonSpecMeta}>
             <p>{zh ? "主要導覽" : "Primary navigation"}</p>
@@ -687,7 +708,7 @@ export default function ComponentDemo({
             </Button>
           </div>
         </div>
-      </div>
+      </DemoBlock>
     );
   }
 
@@ -718,7 +739,7 @@ export default function ComponentDemo({
       : ["Selected Work", "About", "Design System", "Contact", "Resume"];
 
     return (
-      <section className={styles.languageSwitcherDemo}>
+      <DemoBlock className={styles.languageSwitcherDemo} contextLabel={contextLabel}>
         <div className={styles.languageNavbarCrop} aria-label={zh ? "Navbar 語境中的語系切換示意" : "Language switcher in navbar context"}>
           <div className={styles.languageNavbarContext} aria-hidden="true">
             <span className={styles.languageBrandMark}>H</span>
@@ -770,7 +791,7 @@ export default function ComponentDemo({
           </div>
         </div>
 
-      </section>
+      </DemoBlock>
     );
   }
 
@@ -834,8 +855,7 @@ export default function ComponentDemo({
     const fieldContextLabel = contextLabel ?? (zh ? "Contact form field pattern" : "Contact form field pattern");
 
     return (
-      <div className={styles.contactFieldDemo}>
-        <DemoContextLabel>{fieldContextLabel}</DemoContextLabel>
+      <DemoBlock className={styles.contactFieldDemo} contextLabel={fieldContextLabel}>
         {type === "textarea" ? (
           <div className={styles.contactFieldGrid}>
             <div className="form-field is-textarea">
@@ -864,7 +884,7 @@ export default function ComponentDemo({
             </div>
           </div>
         )}
-      </div>
+      </DemoBlock>
     );
   }
 
@@ -911,8 +931,7 @@ export default function ComponentDemo({
     ];
 
     return (
-      <div className={styles.worksTabsDemo}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
+      <DemoBlock className={styles.worksTabsDemo} contextLabel={contextLabel}>
         <WorkCategoryTabs
           ariaLabel={zh ? "精選案例分類" : "Selected Work categories"}
           tabs={tabs.map((tab) => {
@@ -937,7 +956,7 @@ export default function ComponentDemo({
             };
           })}
         />
-      </div>
+      </DemoBlock>
     );
   }
 
@@ -983,13 +1002,12 @@ export default function ComponentDemo({
 
   if (type === "project-card") {
     return (
-      <div className={styles.projectCardLiveWrap}>
-        <DemoContextLabel>{contextLabel ?? "Homepage / Selected Works"}</DemoContextLabel>
+      <DemoBlock className={styles.projectCardLiveWrap} contextLabel={contextLabel ?? "Homepage / Selected Works"}>
         <div className={`projects-list ${styles.projectCardLivePreview}`}>
           <ProjectCard project={featuredProject} />
           {comingSoonProject ? <ProjectCard project={comingSoonProject} /> : null}
         </div>
-      </div>
+      </DemoBlock>
     );
   }
 
@@ -1138,103 +1156,105 @@ export default function ComponentDemo({
     ];
 
     return (
-      <div className={`cs-page theme-advantech ${styles.caseHeroDemo}`}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
-        <CaseHero
-          cover={{
-            src: "/projects/advantech/cover/hero-cover.webp",
-            alt: "WISE-iEMS ECOWatch UI",
-            unoptimized: true,
-          }}
-          meta={
-            <>
-              <span className="cs-badge">Early Design Project</span>
-              <span className="cs-tags">WEB・B2B・AI Chatbot・UX Design・UI Design</span>
-            </>
-          }
-          title={zh
-            ? "賦能廠務人員與系統整合商：以生成式 AI 優化 EcoWatch 與 HVAC 維運使用流程"
-            : "Empowering Facility Operators and System Integrators: Streamlining EcoWatch and HVAC Operations via Generative AI"}
-          infoItems={infoItems}
-          infoGridClassName="cs-info-row--divided"
-        />
-      </div>
+      <DemoBlock contextLabel={contextLabel}>
+        <div className={`cs-page theme-advantech ${styles.caseHeroDemo}`}>
+          <CaseHero
+            cover={{
+              src: "/projects/advantech/cover/hero-cover.webp",
+              alt: "WISE-iEMS ECOWatch UI",
+              unoptimized: true,
+            }}
+            meta={
+              <>
+                <span className="cs-badge">Early Design Project</span>
+                <span className="cs-tags">WEB・B2B・AI Chatbot・UX Design・UI Design</span>
+              </>
+            }
+            title={zh
+              ? "賦能廠務人員與系統整合商：以生成式 AI 優化 EcoWatch 與 HVAC 維運使用流程"
+              : "Empowering Facility Operators and System Integrators: Streamlining EcoWatch and HVAC Operations via Generative AI"}
+            infoItems={infoItems}
+            infoGridClassName="cs-info-row--divided"
+          />
+        </div>
+      </DemoBlock>
     );
   }
 
   if (type === "case-section") {
     return (
-      <div className={`cs-page theme-advantech ${styles.caseSectionDemoShell}`}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
-        <CaseSection
-          id="cs-sec-ds-case-section-demo"
-          className={`cs-overview ${styles.caseSectionSourceDemo}`}
-          kicker={zh ? "專案總覽" : "Project Overview"}
-          title={zh ? "為能源與 HVAC 工作流程設計更聰明的 GenAI 聊天機器人。" : "Designing a smarter GenAI chatbot for energy and HVAC workflows."}
-        >
-          <div className="cs-overview-body cs-stack-box">
-            <p className="cs-body">{caseCopy.sectionBody}</p>
-            <p className="cs-body-muted">
-              {zh
-                ? "透過競品研究與終端使用者訪談，section children 承接內文、補充說明與後續媒體內容。"
-                : "Competitive research and interviews flow through the section children as body copy, supporting notes, and media context."}
-            </p>
-          </div>
-          <div className={`cs-overview-img cs-object-box ${styles.caseSectionMediaPlaceholder}`} aria-hidden="true">
-            <span />
-            <span />
-          </div>
-        </CaseSection>
-      </div>
+      <DemoBlock className={styles.caseSectionDemoShell} contextLabel={contextLabel}>
+        <div className="cs-page theme-advantech">
+          <CaseSection
+            id="cs-sec-ds-case-section-demo"
+            className={`cs-overview ${styles.caseSectionSourceDemo}`}
+            kicker={zh ? "專案總覽" : "Project Overview"}
+            title={zh ? "為能源與 HVAC 工作流程設計更聰明的 GenAI 聊天機器人。" : "Designing a smarter GenAI chatbot for energy and HVAC workflows."}
+          >
+            <div className="cs-overview-body cs-stack-box">
+              <p className="cs-body">{caseCopy.sectionBody}</p>
+              <p className="cs-body-muted">
+                {zh
+                  ? "透過競品研究與終端使用者訪談，section children 承接內文、補充說明與後續媒體內容。"
+                  : "Competitive research and interviews flow through the section children as body copy, supporting notes, and media context."}
+              </p>
+            </div>
+            <div className={`cs-overview-img cs-object-box ${styles.caseSectionMediaPlaceholder}`} aria-hidden="true">
+              <span />
+              <span />
+            </div>
+          </CaseSection>
+        </div>
+      </DemoBlock>
     );
   }
 
   if (type === "case-section-header") {
     return (
-      <section className={`cs-page theme-crypto-arsenal ${styles.caseSectionHeaderSourceDemo}`}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
-        <CaseSectionHeader
-          kicker={caseCopy.sectionKicker}
-          title={caseCopy.sectionTitle}
-        />
-        <p className="cs-section-lead">{caseCopy.sectionDescription}</p>
-      </section>
+      <DemoBlock className={styles.caseSectionHeaderDemoShell} contextLabel={contextLabel}>
+        <section className={`cs-page theme-crypto-arsenal ${styles.caseSectionHeaderSourceDemo}`}>
+          <CaseSectionHeader
+            kicker={caseCopy.sectionKicker}
+            title={caseCopy.sectionTitle}
+          />
+          <p className="cs-section-lead">{caseCopy.sectionDescription}</p>
+        </section>
+      </DemoBlock>
     );
   }
 
   if (type === "case-card") {
     return (
-      <div className={styles.caseCardDemoShell}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
+      <DemoBlock className={styles.caseCardDemoShell} contextLabel={contextLabel}>
         <CaseCard className={`theme-crypto-arsenal ${styles.caseCardSourceDemo}`}>
           <p className="cs-card-kicker">{zh ? "痛點 01" : "Pain point 01"}</p>
           <h3 className={styles.caseCardTitleDemo}>{caseCopy.cardTitle}</h3>
           <p>{caseCopy.cardBody}</p>
         </CaseCard>
-      </div>
+      </DemoBlock>
     );
   }
 
   if (type === "case-grid") {
     return (
-      <section className={`cs-page theme-crypto ${styles.caseStudyComponentDemo}`}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
-        <CaseGrid variant="three" className={styles.caseGridSourceDemo}>
-          {caseCopy.gridItems.map((item, index) => (
-            <div className={styles.caseGridPlaceholderDemo} key={item}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{item}</p>
-            </div>
-          ))}
-        </CaseGrid>
-      </section>
+      <DemoBlock className={styles.caseStudyComponentDemo} contextLabel={contextLabel}>
+        <section className="cs-page theme-crypto">
+          <CaseGrid variant="three" className={styles.caseGridSourceDemo}>
+            {caseCopy.gridItems.map((item, index) => (
+              <div className={styles.caseGridPlaceholderDemo} key={item}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>{item}</p>
+              </div>
+            ))}
+          </CaseGrid>
+        </section>
+      </DemoBlock>
     );
   }
 
   if (type === "case-media") {
     return (
-      <div className={styles.caseMediaDemoShell}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
+      <DemoBlock className={styles.caseMediaDemoShell} contextLabel={contextLabel}>
         <CaseMedia
           caption={caseCopy.mediaCaption}
           className={`theme-crypto-arsenal ${styles.caseMediaSourceDemo}`}
@@ -1251,15 +1271,14 @@ export default function ComponentDemo({
             unoptimized
           />
         </CaseMedia>
-      </div>
+      </DemoBlock>
     );
   }
 
   if (type === "case-before-after") {
     return (
-      <section className={styles.beforeAfterSourceDemo}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
-        <div className="cs-page">
+      <DemoBlock className={styles.beforeAfterSourceDemo} contextLabel={contextLabel}>
+        <div className="cs-page theme-crypto-arsenal">
           <CaseBeforeAfter
             beforeLabel="Before"
             afterLabel="After"
@@ -1277,15 +1296,14 @@ export default function ComponentDemo({
             }
           />
         </div>
-      </section>
+      </DemoBlock>
     );
   }
 
   if (type === "before-after-narrative") {
     return (
-      <section className={styles.beforeAfterNarrativeDemo}>
-        <DemoContextLabel>{contextLabel}</DemoContextLabel>
-        <div className="cs-page">
+      <DemoBlock className={styles.beforeAfterNarrativeDemo} contextLabel={contextLabel}>
+        <div className="cs-page theme-advantech">
           <BeforeAfterNarrativeFrame
             badge="Scenario 1"
             title={caseCopy.beforeTitle}
@@ -1309,7 +1327,7 @@ export default function ComponentDemo({
             }
           />
         </div>
-      </section>
+      </DemoBlock>
     );
   }
 
@@ -1406,10 +1424,9 @@ export default function ComponentDemo({
 
   if (type === "proposal-tabs") {
     return (
-      <div className={`${styles.proposalTabsDemo} theme-advantech`}>
-        <DemoContextLabel>{contextLabel ?? "Advantech / SolutionSection / Scenario 1"}</DemoContextLabel>
+      <DemoBlock className={`${styles.proposalTabsDemo} theme-advantech`} contextLabel={contextLabel ?? "Advantech / SolutionSection / Scenario 1"}>
         <AdvantechProposalTabs defaultTab={1} tabs={proposalScenario1Tabs} />
-      </div>
+      </DemoBlock>
     );
   }
 
@@ -1427,8 +1444,7 @@ export default function ComponentDemo({
 
   if (type === "toast") {
     return (
-      <div className={styles.contactToastDemo}>
-        <DemoContextLabel>{contextLabel ?? (zh ? "Contact 送出結果" : "Contact submit result")}</DemoContextLabel>
+      <DemoBlock className={styles.contactToastDemo} contextLabel={contextLabel ?? (zh ? "Contact 送出結果" : "Contact submit result")}>
         <div className={styles.contactToastPreviewGrid}>
           <div className={styles.contactToastPreviewSlot}>
             <Toast message={copy.contactToastSuccess} tone="success" duration={600000} onClose={() => undefined} />
@@ -1437,7 +1453,7 @@ export default function ComponentDemo({
             <Toast message={copy.contactToastError} tone="error" duration={600000} onClose={() => undefined} />
           </div>
         </div>
-      </div>
+      </DemoBlock>
     );
   }
 
@@ -1445,8 +1461,7 @@ export default function ComponentDemo({
     const modal = copy.modalDemo;
 
     return (
-      <div className={styles.contactModalDemo}>
-        <DemoContextLabel>{contextLabel ?? modal.usage}</DemoContextLabel>
+      <DemoBlock className={styles.contactModalDemo} contextLabel={contextLabel ?? modal.usage}>
         <Button type="button" onClick={() => setContactReviewPreviewOpen(true)}>
           {zh ? "預覽送出前確認" : "Preview review before submit"}
         </Button>
@@ -1472,7 +1487,7 @@ export default function ComponentDemo({
             </div>
           </div>
         </Modal>
-      </div>
+      </DemoBlock>
     );
   }
 
@@ -1480,8 +1495,7 @@ export default function ComponentDemo({
     const skeleton = copy.skeletonDemo;
 
     return (
-      <div className={styles.contactModalDemo}>
-        <DemoContextLabel>{contextLabel ?? skeleton.usage}</DemoContextLabel>
+      <DemoBlock className={styles.contactModalDemo} contextLabel={contextLabel ?? skeleton.usage}>
         <article className={styles.contactModalFrame} aria-label={skeleton.title}>
           <header className={styles.contactModalHeader}>
             <div>
@@ -1514,7 +1528,7 @@ export default function ComponentDemo({
             <Button type="button" variant="secondary" disabled>{skeleton.cancel}</Button>
           </div>
         </article>
-      </div>
+      </DemoBlock>
     );
   }
 

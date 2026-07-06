@@ -52,9 +52,14 @@ Apply those shared rules to this project.
 - Do not use realistic production-heavy visuals for supporting context if they compete with the documented subject.
 - Any visible catalog item with an Examples section must place its example context label inside the gray example surface.
 - Do not render a single-example context label outside the example surface.
+- Context labels belong inside the gray example surface but outside the documented component.
+- Place context labels 20px above the documented component.
+- Align context labels with the documented component / demo block left edge.
+- Do not place context labels inside the production component.
 - A single example should have one context label at most.
 - Multiple examples may use labels only when the labels distinguish variants, states, or contexts.
 - Context labels should align with the demo block, not float as a separate heading between Examples and the surface.
 - Do not duplicate an outer label and an inner title with the same meaning.
 - Do not add nested white cards inside example surfaces unless the nested card is the documented subject or production context.
+- Do not wrap framed/card-like documented subjects in additional docs-only card surfaces.
 - Docs wrappers must not distort production media aspect ratios.
