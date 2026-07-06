@@ -603,13 +603,11 @@ const componentSeeds: ComponentSeed[] = [
     usage: [
       "Use as the global route navigation shell.",
       "Use for all public portfolio routes.",
-      "Do not reuse it inside docs examples or nested sections as an interactive nav.",
       "Keep page section offsets aligned with fixed navbar height.",
     ],
     usageZh: [
       "作為全站 route navigation shell 使用。",
       "用於所有 public portfolio routes。",
-      "不要把它作為互動導覽重複放進 docs examples 或巢狀 section。",
       "頁面 section offset 需與 fixed navbar height 對齊。",
     ],
     anatomyParts: [
@@ -642,7 +640,6 @@ const componentSeeds: ComponentSeed[] = [
         "Navbar is an app shell component, not a reusable section component.",
         "Mount it once per public route shell, alongside route content and Footer.",
         "It depends on `next-intl`, `@/i18n/navigation`, `AnimatedLogo`, and `LanguageSwitcher`.",
-        "Do not duplicate full LanguageSwitcher behavior in Navbar documentation examples.",
       ],
     },
     codeGuidanceZh: {
@@ -655,7 +652,6 @@ const componentSeeds: ComponentSeed[] = [
         "Navbar 是 app shell component，不是可重複塞進 section 的元件。",
         "每個 public route shell 只掛一次，與 route content、Footer 並列。",
         "它依賴 `next-intl`、`@/i18n/navigation`、`AnimatedLogo` 與 `LanguageSwitcher`。",
-        "Navbar 文件範例不要重複完整 LanguageSwitcher 互動。",
       ],
     },
     tokenMappings: [
@@ -681,15 +677,13 @@ const componentSeeds: ComponentSeed[] = [
       "Root uses a `nav` landmark with a localized accessible label.",
       "Mobile menu button exposes open state through `aria-expanded` and localized labels.",
       "Links and the resume target remain keyboard focusable.",
-      "Current implementation does not add `aria-current`; add it only when route-aware active state is implemented.",
-      "Docs examples should avoid duplicate nested navigation landmarks.",
+      "The current implementation does not mark the active route with `aria-current`.",
     ],
     accessibilityZh: [
       "Root 使用 `nav` landmark 並提供 localized accessible label。",
       "手機 menu button 透過 `aria-expanded` 與 localized label 暴露開啟狀態。",
       "連結與履歷入口維持可鍵盤聚焦。",
-      "目前實作尚未加入 `aria-current`；只有導入 route-aware active state 時再補。",
-      "文件範例應避免重複巢狀 navigation landmarks。",
+      "目前實作沒有用 `aria-current` 標示所在頁面。",
     ],
     referenceCards: [
       { label: "Source path", value: "components/Navbar.tsx" },
@@ -1135,7 +1129,7 @@ const componentSeeds: ComponentSeed[] = [
         { name: "aria-invalid", type: "boolean", description: "Set from Contact field error state." },
         { name: "aria-describedby", type: "string | undefined", description: "Points to the inline `.form-error` copy when present." },
       ],
-      notes: ["There is no exported `FloatingInput` component today; this catalog entry documents the production Contact field pattern.", "Do not invent additional props unless this pattern is extracted into a source component."],
+      notes: ["There is no exported `FloatingInput` component today; this catalog entry documents the production Contact field pattern."],
     },
     codeGuidanceZh: {
       importPath: "components/Contact.tsx / styles/contact.css",
@@ -1148,7 +1142,7 @@ const componentSeeds: ComponentSeed[] = [
         { name: "aria-invalid", type: "boolean", description: "由 Contact field error state 設定。" },
         { name: "aria-describedby", type: "string | undefined", description: "有 `.form-error` 時指向 inline error copy。" },
       ],
-      notes: ["目前沒有 exported `FloatingInput` component；此 catalog entry 文件化的是 production Contact field pattern。", "除非這個 pattern 被抽成 source component，不要發明額外 props。"],
+      notes: ["目前沒有 exported `FloatingInput` component；此 catalog entry 文件化的是 production Contact field pattern。"],
     },
     tokenMappings: [
       { token: ".form-field", role: "Field root", usage: "Relative positioning and width for label / input composition." },
@@ -2078,8 +2072,8 @@ const componentSeeds: ComponentSeed[] = [
       { token: ".cs-media--full", role: "Full variant", usage: "移除 contained frame styling，用於 full media context。" },
       { token: ".cs-media--scroll", role: "Scroll variant", usage: "支援水平捲動 table 或寬版 media。" },
     ],
-    accessibility: ["Meaningful media must provide useful alt text through the child image or component.", "Decorative media should be marked appropriately by the child content.", "Caption text should describe the media, not replace required alt text.", "Only document keyboard or focus behavior when the child component implements interaction."],
-    accessibilityZh: ["有意義的 media 必須透過 child image 或 component 提供有用 alt text。", "裝飾性 media 應由 child content 正確標示。", "caption 應描述媒體內容，不取代必要 alt text。", "只有 child component 真的實作互動時，才文件化 keyboard 或 focus behavior。"],
+    accessibility: ["Meaningful media must provide useful alt text through the child image or component.", "Decorative media should be marked appropriately by the child content.", "Caption text should describe the media, not replace required alt text.", "CaseMedia itself is not interactive; keyboard and focus behavior belongs to interactive child components."],
+    accessibilityZh: ["有意義的 media 必須透過 child image 或 component 提供有用 alt text。", "裝飾性 media 應由 child content 正確標示。", "caption 應描述媒體內容，不取代必要 alt text。", "CaseMedia 本身沒有互動；keyboard 與 focus 行為屬於有互動的 child component。"],
     tokens: [".cs-media", ".cs-media-frame", ".cs-media-caption", ".cs-media--contained", ".cs-media--full", ".cs-media--zoomable", ".cs-media--scroll"],
     referenceCards: [
       { label: "Source", value: "components/case-study/CaseMedia.tsx" },
@@ -2200,8 +2194,8 @@ const componentSeeds: ComponentSeed[] = [
       { token: "--purple / --hm-duration-fast / --hm-ease-standard", role: "從 production CSS 繼承的 focus outline 與 interaction motion。" },
     ],
     tokens: [".cs-zoomable-image", ".cs-zoomable-image-media", ".cs-zoomable-icon", ".cs-zoomable-lightbox", ".cs-zoomable-lightbox-close", "--purple", "--hm-duration-fast"],
-    accessibility: ["Use meaningful alt text because it labels both the trigger image and the dialog title.", "The trigger is a button and remains keyboard reachable.", "The lightbox uses dialog semantics with `aria-modal` and a localized close label.", "Escape, close button, and backdrop mouse down close the lightbox.", "Focus trap / return-focus is not implemented in the current source; do not claim it until the component adds it."],
-    accessibilityZh: ["使用有意義的 alt，因為它同時標示 trigger image 與 dialog title。", "Trigger 是 button，鍵盤可以操作。", "Lightbox 使用 dialog 語意、`aria-modal` 與在地化 close label。", "Escape、close button 與 backdrop mouse down 都會關閉 lightbox。", "目前 source 尚未實作 focus trap / return-focus；元件加入前不要宣稱已支援。"],
+    accessibility: ["Use meaningful alt text because it labels both the trigger image and the dialog title.", "The trigger is a button and remains keyboard reachable.", "The lightbox uses dialog semantics with `aria-modal` and a localized close label.", "Escape, close button, and backdrop mouse down close the lightbox.", "Focus trap / return-focus is not implemented in the current source."],
+    accessibilityZh: ["使用有意義的 alt，因為它同時標示 trigger image 與 dialog title。", "Trigger 是 button，鍵盤可以操作。", "Lightbox 使用 dialog 語意、`aria-modal` 與在地化 close label。", "Escape、close button 與 backdrop mouse down 都會關閉 lightbox。", "目前 source 尚未實作 focus trap / return-focus。"],
     referenceCards: [
       { label: "Source", value: "components/case-study/ZoomableImage.tsx" },
       { label: "Live usage", value: "Laushu media sections; Advantech FeatureImageLightbox; Crypto Arsenal StepLightbox" },
