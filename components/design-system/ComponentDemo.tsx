@@ -1174,13 +1174,11 @@ export default function ComponentDemo({
 
   if (type === "case-card") {
     return (
-      <div className={`cs-page theme-crypto ${styles.caseStudyComponentDemo}`}>
-        <CaseCard className={styles.caseCardSourceDemo}>
-          <p className="cs-card-kicker">{zh ? "痛點 01" : "Pain point 01"}</p>
-          <h3 className={styles.caseCardTitleDemo}>{caseCopy.cardTitle}</h3>
-          <p>{caseCopy.cardBody}</p>
-        </CaseCard>
-      </div>
+      <CaseCard className={`theme-crypto-arsenal ${styles.caseCardSourceDemo}`}>
+        <p className="cs-card-kicker">{zh ? "痛點 01" : "Pain point 01"}</p>
+        <h3 className={styles.caseCardTitleDemo}>{caseCopy.cardTitle}</h3>
+        <p>{caseCopy.cardBody}</p>
+      </CaseCard>
     );
   }
 
