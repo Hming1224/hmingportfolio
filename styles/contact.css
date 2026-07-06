@@ -352,15 +352,22 @@
 .form-field label {
   position: absolute;
   left: 16px;
-  top: 20px;
+  top: 28px;
+  transform: translateY(-50%);
   color: var(--muted);
   font-size: 16px;
   font-weight: 500;
   pointer-events: none;
   transition:
     color var(--hm-duration-fast) var(--hm-ease-standard),
+    top var(--hm-duration-fast) var(--hm-ease-out),
     transform var(--hm-duration-fast) var(--hm-ease-out);
   transform-origin: left top;
+}
+
+.form-field.is-textarea label {
+  top: 16px;
+  transform: none;
 }
 
 /* Floating behavior when active */
@@ -368,7 +375,8 @@
 .form-field input:not(:placeholder-shown) ~ label,
 .form-field textarea:focus ~ label,
 .form-field textarea:not(:placeholder-shown) ~ label {
-  transform: translateY(-12px) scale(0.75);
+  top: 8px;
+  transform: scale(0.75);
   color: var(--purple);
   font-weight: 600;
 }
