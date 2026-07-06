@@ -21,12 +21,6 @@ import { CaseCard, CaseGrid, CaseMedia, CaseSection, CaseSectionHeader, type Cas
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import FlowScrollHint from "../case-study/FlowScrollHint";
 import ZoomableImage from "../case-study/ZoomableImage";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionItem,
-  AccordionPanel,
-} from "../ui/Accordion";
 import { registerDesignSystemReturnTarget } from "./DesignSystemReturnBar";
 import styles from "./DesignSystemExplorer.module.css";
 
@@ -109,6 +103,7 @@ type BoundaryClassification =
   | "Shared case-study pattern"
   | "Route-local pattern"
   | "Internal anatomy"
+  | "Internal documentation shell anatomy"
   | "Extraction candidate";
 
 type BoundaryReferenceItem = {
@@ -141,6 +136,10 @@ const boundaryReferenceGroups = {
       description: "Implementation helpers or internal parts whose meaning depends on a parent component or route section.",
     },
     {
+      classification: "Internal documentation shell anatomy",
+      description: "Parts that only exist to support the design-system documentation shell itself (its sidebar navigation, docs layout), not a general-purpose portfolio component.",
+    },
+    {
       classification: "Extraction candidate",
       description: "Can be promoted later if the same structure repeats across independent routes.",
     },
@@ -161,6 +160,10 @@ const boundaryReferenceGroups = {
     {
       classification: "Internal anatomy",
       description: "依附在 parent component 或 route section 下才有完整意義的內部組成。",
+    },
+    {
+      classification: "Internal documentation shell anatomy",
+      description: "只為了支援 design-system documentation shell 本身（如 sidebar navigation、docs layout）而存在的部分，不是通用 portfolio component。",
     },
     {
       classification: "Extraction candidate",
@@ -200,6 +203,16 @@ const boundaryReferenceItems = {
       source: "components/Works.tsx / app/about-me/page.tsx / styles/home.css",
       status: "Shared content hierarchy pattern",
       nextStep: "Keep referenced through Component Boundaries and Typography until a stable component API exists.",
+    },
+    {
+      pattern: "Accordion",
+      classification: "Internal documentation shell anatomy",
+      currentUsage: "Used inside the Design System documentation sidebar to expand and collapse navigation groups.",
+      boundary: "Accordion currently belongs to the documentation shell. It is not documented as a general-purpose portfolio component because its live usage, styling, and behavior are tied to the design-system navigation sidebar.",
+      extractionCondition: "Promote only if the same disclosure pattern is reused across independent product surfaces with a stable item, trigger, panel, keyboard, and accessibility contract.",
+      source: "components/ui/Accordion.tsx / components/design-system/DesignSystemExplorer.tsx / components/design-system/DesignSystemDocsNav.tsx",
+      status: "Documentation shell navigation anatomy",
+      nextStep: "Keep documented through Component Boundaries; revisit only if the same disclosure contract is adopted outside the documentation shell.",
     },
     {
       pattern: "CaseTOC",
@@ -382,6 +395,16 @@ const boundaryReferenceItems = {
       source: "components/Works.tsx / app/about-me/page.tsx / styles/home.css",
       status: "Shared content hierarchy pattern",
       nextStep: "在穩定 component API 出現前，維持於 Component Boundaries 與 Typography reference 中說明。",
+    },
+    {
+      pattern: "Accordion",
+      classification: "Internal documentation shell anatomy",
+      currentUsage: "用於 Design System 文件側邊欄，展開或收合導覽分類。",
+      boundary: "Accordion 目前屬於 documentation shell 的內部組成；因為它的 live usage、樣式與互動行為都綁定 design-system navigation sidebar，所以不作為通用 portfolio component 文件化。",
+      extractionCondition: "只有當相同 disclosure pattern 被多個獨立產品區塊重用，且 item、trigger、panel、keyboard 與 accessibility contract 穩定後，才重新評估提升為 visible component。",
+      source: "components/ui/Accordion.tsx / components/design-system/DesignSystemExplorer.tsx / components/design-system/DesignSystemDocsNav.tsx",
+      status: "Documentation shell navigation anatomy",
+      nextStep: "維持透過 Component Boundaries 說明；只有當相同 disclosure contract 在 documentation shell 之外被採用時才重新評估。",
     },
     {
       pattern: "CaseTOC",
@@ -1108,27 +1131,6 @@ export default function ComponentDemo({
 
   if (type === "case-toc") {
     return <CaseTocInteractiveDemo contextLabel={contextLabel} key={locale} locale={locale} />;
-  }
-
-  if (type === "accordion") {
-    const items = zh
-      ? [["foundations", "基礎規範", "色彩、字級、間距與 motion token。"], ["components", "元件", "以 production code 為準的元件狀態與使用方式。"]]
-      : [["foundations", "Foundations", "Color, type, spacing, and motion tokens."], ["components", "Components", "States and usage documented from production code."]];
-
-    return (
-      <DemoBlock className={styles.accordionDemo} contextLabel={contextLabel ?? (zh ? "Design System 分類導覽" : "Design System category navigation")}>
-        <Accordion className={styles.accordionPreview} defaultValue="foundations" type="single">
-          {items.map(([value, title, body]) => (
-            <AccordionItem key={value} value={value}>
-              <AccordionHeader>{title}</AccordionHeader>
-              <AccordionPanel>
-                <p>{body}</p>
-              </AccordionPanel>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </DemoBlock>
-    );
   }
 
   if (type === "project-card") {

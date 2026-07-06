@@ -18,6 +18,7 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 - Batch 7D-3A update: `SectionHeading` was reclassified from the visible Data Display catalog to Component Boundaries / Shared pattern, with a Typography reference note. Evidence: About has a local `function SectionHeading`, Home / Works uses the `.section-heading` markup convention, and there is no standalone exported component or stable component API.
 - Batch 7D-3B update: `HeroBadge` was reclassified from the visible Data Display catalog to Component Boundaries / Internal anatomy. `SkillCategoryCard` was reclassified from the visible Data Display catalog to Component Boundaries / Route-local pattern.
 - Batch 7E update: `Accordion` stays visible and is now standardized as a live component. The docs example renders the real `Accordion` source component; live route usage exists in Design System Explorer category navigation and DesignSystemDocsNav sidebar / mobile menu.
+- Batch 7F update: `Accordion` was reclassified from the visible Navigation catalog to Component Boundaries / Internal documentation shell anatomy. Usage evidence shows the only adopters are Design System Explorer category navigation and DesignSystemDocsNav sidebar / mobile menu, both part of the design-system documentation shell itself; no public product route renders `Accordion`, and the prior docs example rendered a generic two-item disclosure that did not match the sidebar's dynamic category composition, active state, and chevron indicator.
 
 ## Migration Matrix
 
@@ -40,7 +41,7 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 | Checkbox | Not visible in current `designSystemSections`; component seed remains | `components/ui/Checkbox.tsx` | No component usage found; text/media references to checkbox appear inside Crypto case content only | Contract-only card if opened by doc slug | Medium | Future Candidates | Source component exists, but current Crypto references are case content, not this UI component adoption. | Keep out of visible live catalog until production form/list usage exists. |
 | EmptyState | Not visible in current `designSystemSections`; component seed remains | `components/ui/EmptyState.tsx` | No direct production route usage found | Backlog-style doc entry | Low | Backlog | Source exists but no live route needs empty/search/filter state yet. | Keep as backlog until a real empty state appears. |
 | BeforeAfterPanel | Reference / internal anatomy through BeforeAfterNarrativeFrame and Component Boundaries | `components/case-study/BeforeAfterPanel.tsx` | Internal usage by `BeforeAfterNarrativeFrame`; no direct route adoption | Anatomy/internal part, not standalone example | Low | Move to Component Boundaries | It is an internal visual shell, not an independent route-level pattern. | Keep documentation under BeforeAfterNarrativeFrame anatomy and Component Boundaries only. |
-| Accordion | Visible: Navigation | `components/ui/Accordion.tsx` | Design System Explorer category navigation; DesignSystemDocsNav sidebar / mobile menu | Production-backed live component example using real Accordion parts | Low | Keep visible / standardized | Standalone source component exists and is used by the docs route; it exposes single / multiple modes, real trigger buttons, aria state, region panels, and arrow-key focus movement. | Standardized in Batch 7E; keep visible as a disclosure component, not tabs, pagination, or global navigation. |
+| Accordion | Reclassified to Component Boundaries / Internal documentation shell anatomy | `components/ui/Accordion.tsx` | Design System Explorer category navigation; DesignSystemDocsNav sidebar / mobile menu | Pattern documentation in Component Boundaries | Low | Move to Component Boundaries | Standalone source component exists, but its only adopters are the design-system documentation shell's own sidebar navigation (Explorer category nav and DesignSystemDocsNav); no public product route renders it. | Keep documented through Component Boundaries; promote only if the same disclosure contract is reused across independent product surfaces with a stable item, trigger, panel, keyboard, and accessibility contract. |
 | ContactMethod | Reclassified to Component Boundaries / Internal anatomy | `components/Contact.tsx` / `styles/contact.css` | Contact route information card for email, phone, LinkedIn, and GitHub actions | Parent anatomy reference | Medium | Move to Component Boundaries | No standalone exported component or stable independent API exists; `.contact-method-item` belongs to the Contact route information card and uses route-specific copy / copy actions / external links. | Keep under Contact section boundaries; promote only if contact method cards repeat across independent surfaces with stable icon, label, action, and accessibility behavior. |
 | SectionHeading | Reclassified to Component Boundaries / Shared pattern | `components/Works.tsx`, `app/about-me/page.tsx`, `styles/home.css` | Homepage and About section headings | Pattern documentation in Component Boundaries plus Typography reference note | Medium | Move to Component Boundaries | About has local `function SectionHeading`, Home / Works uses the `.section-heading` markup convention, and no standalone exported component or stable component API exists. | Keep as a shared content hierarchy pattern; promote only after a real shared component API is extracted. |
 | ProjectTag | Reclassified to Component Boundaries / Internal anatomy | `components/ProjectCard.tsx` / `styles/home.css` | Selected Works project metadata inside `ProjectCard` | Parent anatomy reference | Low | Move to Component Boundaries | No standalone exported tag component or independent API exists; tags are rendered as `.project-tags span` inside `ProjectCard` and toned by the parent project card. | Keep under ProjectCard anatomy and Component Boundaries; promote only if a stable tag contract repeats across independent parent components. |
@@ -65,7 +66,6 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 - CaseMedia
 - ZoomableImage
 - FlowScrollHint
-- Accordion
 
 Batch 7C-5 standardized these three visible case-study layout components. The docs examples now render the source components directly: `CaseSectionHeader`, `CaseCard`, and `CaseGrid`. The examples use Crypto Arsenal route-shaped content, keep supporting context minimal, and document production usage, API, tokens, accessibility, and boundaries in guidance sections instead of inside the example surface.
 
@@ -109,6 +109,10 @@ Batch 7E standardized `Accordion`. It remains visible because it has a real sour
 
 - ExperienceCard
 - SkillCategoryCard
+
+### Reclassified to Component Boundaries / Internal documentation shell anatomy
+
+- Accordion
 
 ### Move to Reference only
 
