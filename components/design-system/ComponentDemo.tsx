@@ -17,7 +17,7 @@ import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import CaseBeforeAfter from "../case-study/CaseBeforeAfter";
 import CaseHero from "../case-study/CaseHero";
-import { CaseCard, CaseGrid, CaseSectionHeader, type CaseInfoItem } from "../case-study";
+import { CaseCard, CaseGrid, CaseMedia, CaseSection, CaseSectionHeader, type CaseInfoItem } from "../case-study";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import ZoomableImage from "../case-study/ZoomableImage";
 import {
@@ -34,12 +34,13 @@ const caseExamples = {
     sectionKicker: "Problem Definition",
     sectionTitle: "Users could see strategy PnL, but not the actual position state",
     sectionDescription: "The shared CaseSectionHeader keeps the kicker, title, and optional description consistent before route-specific diagrams or media appear.",
+    sectionBody: "Major case-study sections carry headings, anchors, and body content while preserving the reading rhythm used across Advantech.",
     cardTitle: "Supporting insight",
     cardBody: "Strategy traders needed to understand side, size, entry price, mark price, PnL, and TP / SL distance without leaving Crypto Arsenal.",
     cardMeta: "Crypto Arsenal / ProblemSection",
     gridTitle: "Three repeated pain cards",
     gridItems: ["Position state is unclear", "Manual close lacks confidence", "TP / SL setup needs stronger context"],
-    mediaCaption: "CaseMedia wraps competitor screenshots and product UI while leaving crop, ratio, and storytelling geometry to the route.",
+    mediaCaption: "Crypto Arsenal current-state product UI",
     beforeTitle: "AI Chatbot component",
     flowTitle: "Overflow affordance for wide analysis boards",
     flowBody: "FlowScrollHint appears before wide content such as Advantech AI feature matrices and process boards. It signals horizontal overflow; it is not a standalone visual component.",
@@ -55,12 +56,13 @@ const caseExamples = {
     sectionKicker: "問題定義",
     sectionTitle: "用戶痛點：整體策略賺賠看得到，倉位狀態卻看不見",
     sectionDescription: "CaseSectionHeader 統一 kicker、title 與 optional description，讓 route-specific diagram 或 media 出現前先建立清楚段落層級。",
+    sectionBody: "主要案例 section 會承載標題、anchor 與內文內容，同時維持 Advantech 案例頁使用的閱讀節奏。",
     cardTitle: "Supporting insight",
     cardBody: "交易者需要在 Crypto Arsenal 裡直接理解倉位方向、數量、入場價、標記價、浮動盈虧，以及距離止盈 / 止損還有多遠。",
     cardMeta: "Crypto Arsenal / ProblemSection",
     gridTitle: "三張重複痛點卡",
     gridItems: ["倉位狀態不清楚", "手動平倉缺乏信心", "止盈止損設定需要更完整語境"],
-    mediaCaption: "CaseMedia 負責包裝競品截圖與產品畫面；裁切比例、圖片重點與敘事幾何仍由 route 決定。",
+    mediaCaption: "Crypto Arsenal 介面現況產品畫面",
     beforeTitle: "AI Chatbot 元件",
     flowTitle: "寬版分析 board 的 overflow affordance",
     flowBody: "FlowScrollHint 出現在 Advantech AI 功能矩陣與流程 board 這類寬版內容前，用來提示可以橫向滑動；它不是獨立視覺元件。",
@@ -1149,14 +1151,17 @@ export default function ComponentDemo({
 
   if (type === "case-section") {
     return (
-      <section className={styles.caseSectionDemo}>
-        <p className={styles.demoUsageLine}>Crypto Arsenal / ProblemSection</p>
-        <header className={styles.caseSectionHeaderDemo}>
-          <span>{caseCopy.sectionKicker}</span>
-          <h3>{caseCopy.sectionTitle}</h3>
-          <p>{caseCopy.sectionDescription}</p>
-        </header>
-      </section>
+      <div className="cs-page theme-advantech">
+        <CaseSection
+          id="cs-sec-ds-case-section-demo"
+          className={styles.caseSectionSourceDemo}
+          kicker={zh ? "專案總覽" : "Project Overview"}
+          surface
+          title={zh ? "為能源與 HVAC 工作流程設計更聰明的 GenAI 聊天機器人。" : "Designing a smarter GenAI chatbot for energy and HVAC workflows."}
+        >
+          <p className="cs-body">{caseCopy.sectionBody}</p>
+        </CaseSection>
+      </div>
     );
   }
 
@@ -1199,12 +1204,22 @@ export default function ComponentDemo({
 
   if (type === "case-media") {
     return (
-      <figure className={styles.caseMediaDemo}>
-        <div className={styles.caseMediaFrameDemo}>
-          <Image src="/projects/crypto-arsenal/final/final-close-position.webp" alt="" fill sizes="720px" />
+      <CaseMedia
+        caption={caseCopy.mediaCaption}
+        className={`theme-crypto-arsenal ${styles.caseMediaSourceDemo}`}
+        contentClassName={styles.caseMediaContentDemo}
+        variant="full"
+      >
+        <div className={styles.caseMediaImageDemo}>
+          <Image
+            src="/projects/crypto-arsenal/current/current-state-figure.png"
+            alt={zh ? "Crypto Arsenal 策略詳情頁現況" : "Crypto Arsenal current strategy detail UI"}
+            fill
+            sizes="720px"
+            unoptimized
+          />
         </div>
-        <figcaption>{caseCopy.mediaCaption}</figcaption>
-      </figure>
+      </CaseMedia>
     );
   }
 

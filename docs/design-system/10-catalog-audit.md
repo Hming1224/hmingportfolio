@@ -55,8 +55,12 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 - CaseSectionHeader
 - CaseCard
 - CaseGrid
+- CaseSection
+- CaseMedia
 
 Batch 7C-5 standardized these three visible case-study layout components. The docs examples now render the source components directly: `CaseSectionHeader`, `CaseCard`, and `CaseGrid`. The examples use Crypto Arsenal route-shaped content, keep supporting context minimal, and document production usage, API, tokens, accessibility, and boundaries in guidance sections instead of inside the example surface.
+
+Batch 7C-6 kept `CaseSection` and `CaseMedia` visible. `CaseSection` is a live source-level section wrapper used across Advantech sections; its example now renders the real `CaseSection` with simplified section body content. `CaseMedia` is a live source-level media shell used in Crypto Arsenal, Advantech, and Laushu; its example now renders the real `CaseMedia` around route-shaped screenshot content. Both entries document live usage, source files, real props, boundaries, tokens, and accessibility without presenting docs-only visual shells as the documented subject.
 
 ### Keep visible / standardize later
 

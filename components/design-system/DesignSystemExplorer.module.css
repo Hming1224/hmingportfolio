@@ -2199,11 +2199,13 @@
 }
 
 .caseSectionDemo,
+.caseSectionSourceDemo,
 .caseCardDemo,
 .caseGridDemo,
 .caseStudyComponentDemo,
 .caseSectionHeaderSourceDemo,
 .caseMediaDemo,
+.caseMediaSourceDemo,
 .beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
@@ -2233,6 +2235,26 @@
 .caseStudyComponentDemo,
 .caseSectionHeaderSourceDemo {
   --page-gutter: 0;
+}
+
+.caseSectionSourceDemo {
+  --cs-section-title-max: 760px;
+  width: min(100%, 920px);
+  padding: clamp(var(--hm-space-xl), 5vw, var(--hm-space-3xl)) clamp(var(--hm-space-md), 4vw, var(--hm-space-xl));
+}
+
+.caseMediaSourceDemo {
+  width: min(100%, 860px);
+}
+
+.caseMediaContentDemo {
+  overflow: hidden;
+}
+
+.caseMediaImageDemo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 
 .caseHeroDemo {
