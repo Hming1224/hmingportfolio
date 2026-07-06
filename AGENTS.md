@@ -49,3 +49,7 @@ Apply those shared rules to this project.
 - Supporting context may use wireframes or simplified placeholders when it helps explain the subject without distracting from it.
 - Supporting context must not be presented as the documented component.
 - Do not use realistic production-heavy visuals for supporting context if they compete with the documented subject.
+- A single example should have one context label at most.
+- Prefer placing necessary context inside the example surface.
+- Do not render both an outer label and an identical inner title for the same example.
+- Do not add nested white cards inside example surfaces unless the nested card is the documented subject or production context.

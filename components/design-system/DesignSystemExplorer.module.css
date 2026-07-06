@@ -2242,12 +2242,15 @@
 .beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
-.localExceptionsDemo,
-.proposalTabsDemo {
+.localExceptionsDemo {
   padding: var(--hm-space-md);
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-lg);
   background: var(--hm-paper);
+}
+
+.proposalTabsDemo {
+  max-width: 100%;
 }
 
 .proposalTabsDemo :global(.cs-proposal) {
