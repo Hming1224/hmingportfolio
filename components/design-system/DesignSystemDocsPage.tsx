@@ -19,6 +19,7 @@ type IconographyGalleryGroup = {
     name: string;
     usage: string;
     source: string;
+    accessibility: string;
     preview: ReactNode;
     tone?: "success" | "error" | "social";
   }>;
@@ -35,14 +36,6 @@ const foundationTokenTypes: Record<string, TokenRow["type"][]> = {
 
 function getTokenUsage(row: TokenRow, locale: DesignSystemLocale) {
   return locale === "zh-TW" ? row.usageZh ?? row.usage : row.usage;
-}
-
-function InlineChevronPreview() {
-  return (
-    <svg viewBox="0 0 12 12" aria-hidden="true">
-      <path d="m2.5 4.5 3.5 3 3.5-3" />
-    </svg>
-  );
 }
 
 function InlineProposalArrowPreview() {
@@ -68,20 +61,16 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
       items: [
         {
           name: "ChevronDown",
-          usage: localized(locale, "Accordion section indicator", "Accordion 展開 / 收合指示"),
-          source: "lucide-react",
+          usage: localized(locale, "Accordion / dropdown indicator", "Accordion / dropdown 展開指示"),
+          source: localized(locale, "lucide-react; LanguageSwitcher uses inline SVG variant", "lucide-react；LanguageSwitcher 使用 inline SVG variant"),
+          accessibility: localized(locale, "Decorative; trigger owns expanded state or label", "裝飾性；trigger 承擔展開狀態或 label"),
           preview: <ChevronDown aria-hidden="true" size={28} strokeWidth={2} />,
-        },
-        {
-          name: "Dropdown chevron",
-          usage: "LanguageSwitcher",
-          source: "inline SVG",
-          preview: <InlineChevronPreview />,
         },
         {
           name: "Arrow",
           usage: "CaseProposalTabs",
           source: "inline SVG",
+          accessibility: localized(locale, "Hidden inside labelled nav buttons", "放在具 label 的 nav buttons 內並隱藏"),
           preview: <InlineProposalArrowPreview />,
         },
       ],
@@ -94,23 +83,28 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           name: "X",
           usage: localized(locale, "Modal close / Alert dismiss", "Modal 關閉 / Alert 關閉"),
           source: "lucide-react",
+          accessibility: localized(locale, "Icon-only close button uses aria-label", "Icon-only close button 使用 aria-label"),
           preview: <X aria-hidden="true" size={28} strokeWidth={1.8} />,
         },
         {
-          name: "Mail / Phone",
-          usage: localized(locale, "Contact method cards", "Contact 聯絡方式卡片"),
+          name: "Mail",
+          usage: localized(locale, "Contact email method", "Contact email 聯絡方式"),
           source: "lucide-react",
-          preview: (
-            <>
-              <Mail aria-hidden="true" size={24} strokeWidth={1.6} />
-              <Phone aria-hidden="true" size={24} strokeWidth={1.6} />
-            </>
-          ),
+          accessibility: localized(locale, "Decorative beside visible email label", "在可見 email label 旁作為裝飾"),
+          preview: <Mail aria-hidden="true" size={26} strokeWidth={1.6} />,
+        },
+        {
+          name: "Phone",
+          usage: localized(locale, "Contact phone method", "Contact phone 聯絡方式"),
+          source: "lucide-react",
+          accessibility: localized(locale, "Decorative beside visible phone label", "在可見 phone label 旁作為裝飾"),
+          preview: <Phone aria-hidden="true" size={26} strokeWidth={1.6} />,
         },
         {
           name: "ArrowRight",
           usage: localized(locale, "Contact social card link", "Contact 社群卡片連結"),
           source: "lucide-react",
+          accessibility: localized(locale, "Decorative beside visible link text", "在可見連結文字旁作為裝飾"),
           preview: <ArrowRight aria-hidden="true" size={28} strokeWidth={1.7} />,
         },
       ],
@@ -123,6 +117,7 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           name: "CheckCircle2",
           usage: localized(locale, "Alert / Toast success", "Alert / Toast 成功"),
           source: "lucide-react",
+          accessibility: localized(locale, "Status support; text and role carry meaning", "輔助狀態；文字與 role 承擔語意"),
           preview: <CheckCircle2 aria-hidden="true" size={28} strokeWidth={1.7} />,
           tone: "success",
         },
@@ -130,6 +125,7 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           name: "AlertCircle",
           usage: localized(locale, "Alert / Toast error", "Alert / Toast 錯誤"),
           source: "lucide-react",
+          accessibility: localized(locale, "Status support; not color-only", "輔助狀態；不只靠顏色"),
           preview: <AlertCircle aria-hidden="true" size={28} strokeWidth={1.7} />,
           tone: "error",
         },
@@ -137,6 +133,7 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           name: "Check",
           usage: localized(locale, "Contact submit success", "Contact 送出成功"),
           source: "lucide-react",
+          accessibility: localized(locale, "Paired with visible success copy", "搭配可見成功文案"),
           preview: <Check aria-hidden="true" size={28} strokeWidth={2} />,
           tone: "success",
         },
@@ -150,6 +147,7 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           name: "LinkedIn",
           usage: localized(locale, "Footer / Contact social links", "Footer / Contact 社群連結"),
           source: "image asset",
+          accessibility: localized(locale, "Anchor owns accessible name", "Anchor 承擔 accessible name"),
           preview: <Image alt="" aria-hidden="true" height={32} src="/social/linkedin-gray-v2.png" width={32} />,
           tone: "social",
         },
@@ -157,6 +155,7 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           name: "GitHub",
           usage: localized(locale, "Footer / Contact social links", "Footer / Contact 社群連結"),
           source: "image asset",
+          accessibility: localized(locale, "Image uses empty alt inside labelled link", "圖片在具 label 的連結內使用空 alt"),
           preview: <Image alt="" aria-hidden="true" height={32} src="/social/github-gray-v2.png" width={32} />,
           tone: "social",
         },
@@ -168,14 +167,13 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
 function iconographyMatrix(locale: DesignSystemLocale) {
   return [
     {
-      context: "LanguageSwitcher",
-      purpose: localized(locale, "Dropdown indicator and selected-item check.", "下拉指示，以及目前選取項目的勾勾。"),
-      accessibility: localized(locale, "The trigger and menu carry the labels; the chevron and check mark are decorative.", "label 由按鈕和選單負責；箭頭和勾勾只是裝飾。"),
-    },
-    {
-      context: "Accordion",
-      purpose: localized(locale, "Shows whether a section is expanded or collapsed.", "顯示 section 目前是展開還是收合。"),
-      accessibility: localized(locale, "The button announces the open state through aria-expanded; the chevron is hidden.", "展開狀態由按鈕的 aria-expanded 說明；箭頭本身是隱藏的。"),
+      context: "Disclosure / dropdown indicators",
+      purpose: localized(
+        locale,
+        "Accordion uses ChevronDown; LanguageSwitcher uses a scoped inline SVG variant for the same dropdown affordance.",
+        "Accordion 使用 ChevronDown；LanguageSwitcher 使用 scoped inline SVG variant 呈現同一種 dropdown affordance。",
+      ),
+      accessibility: localized(locale, "The trigger owns aria-expanded or label; the chevron shape is decorative.", "展開狀態或 label 由 trigger 承擔；chevron shape 是裝飾性。"),
     },
     {
       context: "Modal",
@@ -193,9 +191,14 @@ function iconographyMatrix(locale: DesignSystemLocale) {
       accessibility: localized(locale, "Each link is named by an aria-label on the anchor; the image uses an empty alt.", "每個連結的名稱由 anchor 的 aria-label 提供；圖片用空 alt。"),
     },
     {
-      context: "Contact methods",
-      purpose: localized(locale, "Email, phone, copy, and social link cues.", "標示 email、電話、複製和社群連結。"),
-      accessibility: localized(locale, "Icons are decorative; the visible labels and copy buttons carry the meaning.", "icon 只是裝飾，語意由看得到的文字和複製按鈕承擔。"),
+      context: "Contact email method",
+      purpose: localized(locale, "Mail icon marks the email contact method.", "Mail icon 標示 email 聯絡方式。"),
+      accessibility: localized(locale, "The icon is decorative; visible email label and copy button carry meaning.", "icon 是裝飾性；可見 email label 與複製按鈕承擔語意。"),
+    },
+    {
+      context: "Contact phone method",
+      purpose: localized(locale, "Phone icon marks the phone contact method.", "Phone icon 標示 phone 聯絡方式。"),
+      accessibility: localized(locale, "The icon is decorative; visible phone label and copy button carry meaning.", "icon 是裝飾性；可見 phone label 與複製按鈕承擔語意。"),
     },
     {
       context: "CaseProposalTabs",
@@ -237,6 +240,7 @@ function IconographyReference({ locale }: { locale: DesignSystemLocale }) {
                       <p>{item.usage}</p>
                       <div className={styles.iconMeta}>
                         <span>{item.source}</span>
+                        <span>{item.accessibility}</span>
                       </div>
                     </div>
                   </article>
