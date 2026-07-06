@@ -10,7 +10,9 @@ function localized(locale: DesignSystemLocale, english: string, chinese: string)
 }
 
 const demosWithInternalContextLabel = new Set([
+  "input",
   "proposal-tabs",
+  "textarea",
 ]);
 
 type TokenRow = (typeof designSystemTokenRows)[number];

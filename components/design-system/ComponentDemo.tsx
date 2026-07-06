@@ -832,22 +832,39 @@ export default function ComponentDemo({
   }
 
   if (type === "input" || type === "textarea") {
-    const id = type === "textarea" ? "message" : "email";
-    const label = type === "textarea"
-      ? zh ? "訊息內容" : "Your message"
-      : zh ? "電子信箱" : "Email";
+    const contextLabel = zh ? "Contact form field pattern" : "Contact form field pattern";
 
     return (
       <div className={styles.contactFieldDemo}>
-        <p className={styles.demoUsageLine}>{zh ? "Contact page / contact form" : "Contact page / contact form"}</p>
-        <label className={styles.liveFloatingField} htmlFor={`demo-${id}`}>
-          {type === "textarea" ? (
-            <textarea id={`demo-${id}`} name={id} placeholder=" " rows={4} defaultValue={zh ? "想聊聊作品集、產品設計或 AI 協作。" : "I would like to talk about portfolio work, product design, or AI collaboration."} />
-          ) : (
-            <input id={`demo-${id}`} name={id} type="email" placeholder=" " defaultValue={contactData.email} />
-          )}
-          <span>{label}</span>
-        </label>
+        <p className={styles.demoUsageLine}>{contextLabel}</p>
+        {type === "textarea" ? (
+          <div className={styles.contactFieldGrid}>
+            <div className="form-field is-textarea">
+              <textarea id="demo-message-empty" name="message" placeholder=" " rows={4} required />
+              <label htmlFor="demo-message-empty">{zh ? "訊息內容" : "Your message"}</label>
+            </div>
+            <div className="form-field is-textarea">
+              <textarea id="demo-message-filled" name="message-preview" placeholder=" " rows={4} defaultValue={zh ? "想聊聊作品集、產品設計或網站合作。" : "I would like to talk about portfolio work, product design, or website collaboration."} required />
+              <label htmlFor="demo-message-filled">{zh ? "訊息內容" : "Your message"}</label>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.contactFieldGrid}>
+            <div className="form-field">
+              <input id="demo-name-empty" name="name" type="text" placeholder=" " required />
+              <label htmlFor="demo-name-empty">{zh ? "你的姓名" : "Your name"}</label>
+            </div>
+            <div className="form-field">
+              <input id="demo-email-filled" name="email" type="email" placeholder=" " defaultValue={contactData.email} required />
+              <label htmlFor="demo-email-filled">{zh ? "電子信箱" : "Email"}</label>
+            </div>
+            <div className="form-field input--error">
+              <input id="demo-company-error" name="company" type="text" placeholder=" " aria-invalid="true" aria-describedby="demo-company-error-message" required />
+              <label htmlFor="demo-company-error">{zh ? "服務單位" : "Company"}</label>
+              <p id="demo-company-error-message" className="form-error">{zh ? "此欄位為必填" : "This field is required"}</p>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
