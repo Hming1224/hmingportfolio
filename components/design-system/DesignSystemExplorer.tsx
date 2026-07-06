@@ -45,6 +45,7 @@ function docSectionForAnchor(
     "hero-badge": "local-exceptions",
     "skill-category-card": "local-exceptions",
     "accordion": "local-exceptions",
+    "iconography": "icons",
   };
   const requestedSlug = anchor.replace(/^#/, "");
   const slug = slugAliases[requestedSlug] ?? requestedSlug;

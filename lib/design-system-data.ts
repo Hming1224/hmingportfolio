@@ -23,7 +23,7 @@ export const designSystemSections = [
   {
     label: "Foundations",
     labelZh: "基礎規範",
-    items: ["colors", "typography", "spacing", "radius", "shadows", "motion"].map(
+    items: ["colors", "typography", "spacing", "radius", "shadows", "motion", "icons"].map(
       (slug) => ({ kind: "foundation" as const, slug }),
     ),
   },
