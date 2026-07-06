@@ -812,6 +812,35 @@
   max-width: 100%;
 }
 
+.navMeasure {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  white-space: nowrap;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.measureAccordionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--hm-space-xs);
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.measureIcon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
 .rootLink,
 .componentLink {
   display: flex;
@@ -858,7 +887,7 @@
   min-height: 36px;
   padding: 6px var(--hm-space-xs);
   color: var(--hm-ink);
-  font-size: var(--hm-fs-sm);
+  font-size: var(--hm-fs-xs);
   text-decoration: none;
 }
 

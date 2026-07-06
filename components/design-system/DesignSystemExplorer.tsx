@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "@/components/ui/Accordion";
 import type { DesignSystemDoc, DesignSystemDocKind, DesignSystemLocale } from "@/lib/design-system-docs";
 import DesignSystemDocsPage from "./DesignSystemDocsPage";
@@ -88,6 +88,19 @@ export default function DesignSystemExplorer({
   const [activeAnchor, setActiveAnchor] = useState("#getting-started");
   const [openSection, setOpenSection] = useState<string>(sections[0]?.label ?? "");
   const gettingStartedItem = toc.items[0];
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [navWidth, setNavWidth] = useState<number | null>(null);
+
+  useLayoutEffect(() => {
+    const container = measureRef.current;
+    if (!container) return;
+
+    const widths = Array.from(container.children).map(
+      (el) => (el as HTMLElement).getBoundingClientRect().width,
+    );
+    const max = Math.max(0, ...widths);
+    setNavWidth(max > 0 ? Math.ceil(max) : null);
+  }, [locale, sections, docs, gettingStartedItem]);
 
   useEffect(() => {
     const updateActiveAnchor = () => {
@@ -163,7 +176,32 @@ export default function DesignSystemExplorer({
   return (
     <div className={styles.shell}>
       <aside className={styles.sidebar}>
-        <nav aria-label={toc.title} className={styles.nav}>
+        <div aria-hidden="true" className={styles.navMeasure} ref={measureRef}>
+          {gettingStartedItem ? <span className={styles.rootLink}>{gettingStartedItem.label}</span> : null}
+          {sections.map((section) => (
+            <span className={styles.measureAccordionHeader} key={`measure-header-${section.label}`}>
+              <span>{localized(locale, section.label, section.labelZh)}</span>
+              <span className={styles.measureIcon} />
+            </span>
+          ))}
+          {sections.flatMap((section) =>
+            section.items.map((item) => {
+              const doc = docs.find((candidate) => candidate.slug === item.slug && candidate.kind === item.kind);
+              if (!doc) return null;
+              return (
+                <div className={styles.componentList} key={`measure-${doc.kind}-${doc.slug}`}>
+                  <span className={styles.componentLink}>{localized(locale, doc.title, doc.titleZh)}</span>
+                </div>
+              );
+            }),
+          )}
+        </div>
+
+        <nav
+          aria-label={toc.title}
+          className={styles.nav}
+          style={navWidth ? { width: navWidth } : undefined}
+        >
           {gettingStartedItem ? (
             <a
               aria-current={activeAnchor === gettingStartedItem.href ? "page" : undefined}
