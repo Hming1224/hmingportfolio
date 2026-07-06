@@ -19,7 +19,6 @@ type IconographyGalleryGroup = {
     name: string;
     usage: string;
     source: string;
-    accessibility: string;
     preview: ReactNode;
     tone?: "success" | "error" | "social";
   }>;
@@ -65,47 +64,42 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
   return [
     {
       title: localized(locale, "Navigation", "導覽"),
-      description: localized(locale, "Indicators for hierarchy, dropdowns, and movement.", "輔助層級、下拉與移動方向的 indicators。"),
+      description: localized(locale, "Show hierarchy, open state, and direction.", "指出層級、展開狀態和移動方向。"),
       items: [
         {
           name: "ChevronDown",
-          usage: localized(locale, "Accordion section indicator", "Accordion section indicator"),
+          usage: localized(locale, "Accordion section indicator", "Accordion 展開 / 收合指示"),
           source: "lucide-react",
-          accessibility: localized(locale, "Decorative; button owns aria-expanded", "裝飾性；button 承擔 aria-expanded"),
           preview: <ChevronDown aria-hidden="true" size={28} strokeWidth={2} />,
         },
         {
           name: "Dropdown chevron",
           usage: "LanguageSwitcher",
           source: "inline SVG",
-          accessibility: localized(locale, "Decorative; trigger owns label", "裝飾性；trigger 承擔 label"),
           preview: <InlineChevronPreview />,
         },
         {
           name: "Arrow",
           usage: "CaseProposalTabs",
           source: "inline SVG",
-          accessibility: localized(locale, "Hidden inside labelled nav buttons", "放在具 label 的 nav buttons 內並隱藏"),
           preview: <InlineProposalArrowPreview />,
         },
       ],
     },
     {
       title: localized(locale, "Actions", "操作"),
-      description: localized(locale, "Icons that support close, contact, and movement actions.", "輔助關閉、聯絡與移動動作的 icons。"),
+      description: localized(locale, "Support close, contact, and follow-through actions.", "輔助關閉、聯絡這類操作。"),
       items: [
         {
           name: "X",
-          usage: localized(locale, "Modal close / Alert dismiss", "Modal close / Alert dismiss"),
+          usage: localized(locale, "Modal close / Alert dismiss", "Modal 關閉 / Alert 關閉"),
           source: "lucide-react",
-          accessibility: localized(locale, "Icon-only button uses aria-label", "Icon-only button 使用 aria-label"),
           preview: <X aria-hidden="true" size={28} strokeWidth={1.8} />,
         },
         {
           name: "Mail / Phone",
-          usage: localized(locale, "Contact method cards", "Contact method cards"),
+          usage: localized(locale, "Contact method cards", "Contact 聯絡方式卡片"),
           source: "lucide-react",
-          accessibility: localized(locale, "Decorative beside visible labels", "在可見 label 旁作為裝飾"),
           preview: (
             <>
               <Mail aria-hidden="true" size={24} strokeWidth={1.6} />
@@ -115,38 +109,34 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
         },
         {
           name: "ArrowRight",
-          usage: localized(locale, "Contact social card movement", "Contact social card movement"),
+          usage: localized(locale, "Contact social card link", "Contact 社群卡片連結"),
           source: "lucide-react",
-          accessibility: localized(locale, "Decorative beside visible link text", "在可見連結文字旁作為裝飾"),
           preview: <ArrowRight aria-hidden="true" size={28} strokeWidth={1.7} />,
         },
       ],
     },
     {
       title: localized(locale, "Status", "狀態"),
-      description: localized(locale, "Feedback icons support tone but do not replace text.", "Feedback icons 支援 tone，但不取代文字。"),
+      description: localized(locale, "Reinforce feedback tone; the message itself stays in text.", "狀態 icon 只是輔助，訊息本身還是用文字講清楚。"),
       items: [
         {
           name: "CheckCircle2",
-          usage: localized(locale, "Alert / Toast success", "Alert / Toast success"),
+          usage: localized(locale, "Alert / Toast success", "Alert / Toast 成功"),
           source: "lucide-react",
-          accessibility: localized(locale, "Status support; text and role carry meaning", "輔助狀態；文字與 role 承擔語意"),
           preview: <CheckCircle2 aria-hidden="true" size={28} strokeWidth={1.7} />,
           tone: "success",
         },
         {
           name: "AlertCircle",
-          usage: localized(locale, "Alert / Toast error", "Alert / Toast error"),
+          usage: localized(locale, "Alert / Toast error", "Alert / Toast 錯誤"),
           source: "lucide-react",
-          accessibility: localized(locale, "Status support; not color-only", "輔助狀態；不只靠顏色"),
           preview: <AlertCircle aria-hidden="true" size={28} strokeWidth={1.7} />,
           tone: "error",
         },
         {
           name: "Check",
-          usage: localized(locale, "Contact submit success", "Contact submit success"),
+          usage: localized(locale, "Contact submit success", "Contact 送出成功"),
           source: "lucide-react",
-          accessibility: localized(locale, "Paired with visible success copy", "搭配可見成功文案"),
           preview: <Check aria-hidden="true" size={28} strokeWidth={2} />,
           tone: "success",
         },
@@ -154,68 +144,22 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
     },
     {
       title: localized(locale, "Social / external", "社群 / 外部連結"),
-      description: localized(locale, "Image assets currently represent social destinations.", "目前社群目的地由 image assets 呈現。"),
+      description: localized(locale, "Social links currently use image assets.", "社群連結目前用圖片素材呈現。"),
       items: [
         {
           name: "LinkedIn",
-          usage: localized(locale, "Footer / Contact social links", "Footer / Contact social links"),
+          usage: localized(locale, "Footer / Contact social links", "Footer / Contact 社群連結"),
           source: "image asset",
-          accessibility: localized(locale, "Anchor owns accessible name", "Anchor 承擔 accessible name"),
           preview: <Image alt="" aria-hidden="true" height={32} src="/social/linkedin-gray-v2.png" width={32} />,
           tone: "social",
         },
         {
           name: "GitHub",
-          usage: localized(locale, "Footer / Contact social links", "Footer / Contact social links"),
+          usage: localized(locale, "Footer / Contact social links", "Footer / Contact 社群連結"),
           source: "image asset",
-          accessibility: localized(locale, "Image uses empty alt", "Image 使用空 alt"),
           preview: <Image alt="" aria-hidden="true" height={32} src="/social/github-gray-v2.png" width={32} />,
           tone: "social",
         },
-      ],
-    },
-  ];
-}
-
-function iconographyGroups(locale: DesignSystemLocale) {
-  return [
-    {
-      title: localized(locale, "Use icons as support", "Icon 作為輔助"),
-      description: localized(
-        locale,
-        "Icons should make navigation, actions, or feedback easier to scan.",
-        "Icon 應該讓導覽、操作或回饋更容易掃讀。",
-      ),
-      rows: [
-        localized(locale, "Pair with visible labels unless the meaning is obvious.", "除非意思非常明確，否則搭配可見 label。"),
-        localized(locale, "Do not make critical actions icon-only without an accessible name.", "關鍵操作不要只靠 icon，icon-only 必須有 accessible name。"),
-        localized(locale, "Contexts: Navbar, Contact, Modal, Alert / Toast.", "Contexts: Navbar、Contact、Modal、Alert / Toast。"),
-      ],
-    },
-    {
-      title: localized(locale, "Keep sources honest", "誠實標示來源"),
-      description: localized(
-        locale,
-        "The portfolio mixes package icons, scoped inline SVG, and social image assets.",
-        "作品集混用 package icons、scoped inline SVG 與 social image assets。",
-      ),
-      rows: [
-        localized(locale, "`lucide-react` is the primary package source.", "`lucide-react` 是主要 package source。"),
-        localized(locale, "Inline SVG stays local when the shape belongs to one route pattern.", "形狀只屬於單一路由 pattern 時，inline SVG 保留在 local。"),
-        localized(locale, "Social icons are image assets, not a shared icon API.", "Social icons 是 image assets，不是 shared icon API。"),
-      ],
-    },
-    {
-      title: localized(locale, "Let containers own interaction", "互動由容器承擔"),
-      description: localized(
-        locale,
-        "Icon state follows the button, link, alert, or route pattern that contains it.",
-        "Icon 狀態跟隨承載它的 button、link、alert 或 route pattern。",
-      ),
-      rows: [
-        localized(locale, "Focus belongs to the interactive control, not the icon.", "Focus 屬於互動控制項，不屬於 icon 本身。"),
-        localized(locale, "Status icons support text and roles; they are not the only cue.", "Status icons 輔助文字與 role，不是唯一線索。"),
-        localized(locale, "No dedicated icon token scale exists today.", "目前沒有 dedicated icon token scale。"),
       ],
     },
   ];
@@ -225,52 +169,38 @@ function iconographyMatrix(locale: DesignSystemLocale) {
   return [
     {
       context: "LanguageSwitcher",
-      purpose: localized(locale, "Dropdown indicator and selected item check.", "下拉指示與目前選取項目 check。"),
-      source: "components/LanguageSwitcher.tsx",
-      accessibility: localized(locale, "Trigger and menu own labels; SVG / check mark are decorative.", "Trigger 與 menu 負責 label；SVG / check mark 為裝飾。"),
-      styling: localized(locale, "Inline SVG follows trigger text color and open state.", "Inline SVG 跟隨 trigger 文字色與 open state。"),
+      purpose: localized(locale, "Dropdown indicator and selected-item check.", "下拉指示，以及目前選取項目的勾勾。"),
+      accessibility: localized(locale, "The trigger and menu carry the labels; the chevron and check mark are decorative.", "label 由按鈕和選單負責；箭頭和勾勾只是裝飾。"),
     },
     {
       context: "Accordion",
-      purpose: localized(locale, "Disclosure indicator for expanded / collapsed sections.", "表示 section 展開 / 收合的 disclosure indicator。"),
-      source: "components/ui/Accordion.tsx",
-      accessibility: localized(locale, "Button owns aria-expanded; chevron is aria-hidden.", "Button 承擔 aria-expanded；chevron 為 aria-hidden。"),
-      styling: localized(locale, "lucide ChevronDown rotates through existing motion tokens.", "lucide ChevronDown 透過既有 motion tokens 旋轉。"),
+      purpose: localized(locale, "Shows whether a section is expanded or collapsed.", "顯示 section 目前是展開還是收合。"),
+      accessibility: localized(locale, "The button announces the open state through aria-expanded; the chevron is hidden.", "展開狀態由按鈕的 aria-expanded 說明；箭頭本身是隱藏的。"),
     },
     {
       context: "Modal",
-      purpose: localized(locale, "Close action.", "關閉動作。"),
-      source: "components/ui/Modal.tsx",
-      accessibility: localized(locale, "Icon-only close button uses closeLabel as aria-label.", "Icon-only close button 使用 closeLabel 作為 aria-label。"),
-      styling: localized(locale, "lucide X inherits icon button color and focus treatment.", "lucide X 繼承 icon button 的顏色與 focus treatment。"),
+      purpose: localized(locale, "Close action.", "關閉視窗。"),
+      accessibility: localized(locale, "The icon-only close button gets its name from an aria-label.", "關閉按鈕只有 icon，名稱靠 aria-label 提供。"),
     },
     {
       context: "Alert / Toast",
-      purpose: localized(locale, "Status tone and optional dismiss action.", "狀態 tone 與 optional dismiss action。"),
-      source: "components/ui/Alert.tsx / Toast.tsx",
-      accessibility: localized(locale, "Status icon is hidden; role=status or role=alert carries feedback semantics.", "Status icon 隱藏；role=status 或 role=alert 承擔回饋語意。"),
-      styling: localized(locale, "lucide status icons follow the alert tone classes.", "lucide status icons 跟隨 alert tone classes。"),
+      purpose: localized(locale, "Reinforces the success / error tone next to the message.", "在訊息旁邊強化成功 / 錯誤的語氣。"),
+      accessibility: localized(locale, "The status icon is hidden; the text and role=status / role=alert carry the meaning.", "狀態 icon 是隱藏的，語意由文字和 role=status / role=alert 承擔。"),
     },
     {
       context: "Footer social links",
-      purpose: localized(locale, "LinkedIn and GitHub external links.", "LinkedIn 與 GitHub 外部連結。"),
-      source: "components/Footer.tsx",
-      accessibility: localized(locale, "Anchor aria-label names each social link; images use empty alt.", "Anchor aria-label 命名各社群連結；圖片使用空 alt。"),
-      styling: localized(locale, "Image assets swap gray / color states through existing footer CSS.", "Image assets 透過既有 footer CSS 切換灰階 / 彩色狀態。"),
+      purpose: localized(locale, "LinkedIn and GitHub external links.", "LinkedIn 和 GitHub 外部連結。"),
+      accessibility: localized(locale, "Each link is named by an aria-label on the anchor; the image uses an empty alt.", "每個連結的名稱由 anchor 的 aria-label 提供；圖片用空 alt。"),
     },
     {
       context: "Contact methods",
-      purpose: localized(locale, "Email, phone, social, copy, and external movement cues.", "Email、phone、social、copy 與外部移動提示。"),
-      source: "components/Contact.tsx",
-      accessibility: localized(locale, "Mail / phone / arrow icons are decorative; copy buttons and visible labels carry meaning.", "Mail / phone / arrow icons 為裝飾；copy buttons 與可見 label 承擔語意。"),
-      styling: localized(locale, "lucide icons and social image assets inherit the contact card tone.", "lucide icons 與 social image assets 繼承 contact card tone。"),
+      purpose: localized(locale, "Email, phone, copy, and social link cues.", "標示 email、電話、複製和社群連結。"),
+      accessibility: localized(locale, "Icons are decorative; the visible labels and copy buttons carry the meaning.", "icon 只是裝飾，語意由看得到的文字和複製按鈕承擔。"),
     },
     {
       context: "CaseProposalTabs",
-      purpose: localized(locale, "Previous / next arrows and adopted-option marker.", "上一張 / 下一張 arrows 與 adopted-option marker。"),
-      source: "components/case-study/CaseProposalTabs.tsx",
-      accessibility: localized(locale, "Arrow buttons use aria-label; inline SVGs are hidden.", "Arrow buttons 使用 aria-label；inline SVGs 為 hidden。"),
-      styling: localized(locale, "Route-specific inline SVG uses currentColor inside the case-study pattern.", "Route-specific inline SVG 在 case-study pattern 內使用 currentColor。"),
+      purpose: localized(locale, "Previous / next arrows and the adopted-option marker.", "上一張 / 下一張箭頭，以及採用方案的標記。"),
+      accessibility: localized(locale, "Arrow buttons use aria-label; the inline SVGs are hidden.", "箭頭按鈕有 aria-label；inline SVG 本身是隱藏的。"),
     },
   ];
 }
@@ -307,7 +237,6 @@ function IconographyReference({ locale }: { locale: DesignSystemLocale }) {
                       <p>{item.usage}</p>
                       <div className={styles.iconMeta}>
                         <span>{item.source}</span>
-                        <span>{item.accessibility}</span>
                       </div>
                     </div>
                   </article>
@@ -316,26 +245,13 @@ function IconographyReference({ locale }: { locale: DesignSystemLocale }) {
             </section>
           ))}
         </div>
-        <div className={styles.iconographyGroupGrid}>
-          {iconographyGroups(locale).map((group) => (
-            <article className={styles.iconographyGroupCard} key={group.title}>
-              <h3>{group.title}</h3>
-              <p>{group.description}</p>
-              <ul>
-                {group.rows.map((row) => <li key={row}>{row}</li>)}
-              </ul>
-            </article>
-          ))}
-        </div>
         <div className={styles.referenceMatrixWrap}>
           <table className={styles.referenceMatrix}>
             <thead>
               <tr>
                 <th>{localized(locale, "Context", "情境")}</th>
                 <th>{localized(locale, "Icon purpose", "Icon 用途")}</th>
-                <th>{localized(locale, "Source / component", "Source / component")}</th>
-                <th>{localized(locale, "Accessibility", "Accessibility")}</th>
-                <th>{localized(locale, "Styling note", "Styling note")}</th>
+                <th>{localized(locale, "Accessibility", "無障礙做法")}</th>
               </tr>
             </thead>
             <tbody>
@@ -343,9 +259,7 @@ function IconographyReference({ locale }: { locale: DesignSystemLocale }) {
                 <tr key={row.context}>
                   <th scope="row">{row.context}</th>
                   <td>{row.purpose}</td>
-                  <td><code>{row.source}</code></td>
                   <td>{row.accessibility}</td>
-                  <td>{row.styling}</td>
                 </tr>
               ))}
             </tbody>

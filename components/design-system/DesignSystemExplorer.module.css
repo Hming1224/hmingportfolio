@@ -1382,45 +1382,6 @@
   overflow-wrap: anywhere;
 }
 
-.iconographyGroupGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--hm-space-sm);
-}
-
-.iconographyGroupCard {
-  min-width: 0;
-  padding: var(--hm-space-sm);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-md);
-  background: var(--hm-surface);
-}
-
-.iconographyGroupCard h3 {
-  margin: 0 0 var(--hm-space-2xs);
-  color: var(--text-heading);
-  font-size: var(--hm-fs-sm);
-  font-weight: var(--hm-fw-bold);
-  line-height: 1.4;
-}
-
-.iconographyGroupCard p {
-  margin: 0 0 var(--hm-space-xs);
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  line-height: 1.6;
-}
-
-.iconographyGroupCard ul {
-  display: grid;
-  gap: var(--hm-space-2xs);
-  margin: 0;
-  padding-left: var(--hm-space-sm);
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  line-height: 1.6;
-}
-
 .referenceMatrixWrap {
   width: 100%;
   max-width: 100%;
@@ -3063,7 +3024,6 @@
   .liveFooterDemo,
   .anatomyGrid,
   .referenceCardGrid,
-  .iconographyGroupGrid,
   .localExceptionGrid,
   .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);
