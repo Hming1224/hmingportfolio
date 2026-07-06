@@ -39,6 +39,8 @@ function docSectionForAnchor(
     "year-rail": "local-exceptions",
     "project-tag": "local-exceptions",
     "social-link": "local-exceptions",
+    "contact-method": "local-exceptions",
+    "experience-card": "local-exceptions",
   };
   const requestedSlug = anchor.replace(/^#/, "");
   const slug = slugAliases[requestedSlug] ?? requestedSlug;

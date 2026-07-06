@@ -57,7 +57,6 @@ export const designSystemSections = [
     items: [
       "floating-input",
       "floating-textarea",
-      "contact-method",
     ].map((slug) => ({ kind: "component" as const, slug })),
   },
   {
@@ -67,7 +66,6 @@ export const designSystemSections = [
       "project-card",
       "section-heading",
       "skill-category-card",
-      "experience-card",
       "hero-badge",
     ].map((slug) => ({ kind: "component" as const, slug })),
   },

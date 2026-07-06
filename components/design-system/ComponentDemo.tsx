@@ -234,6 +234,16 @@ const boundaryReferenceItems = {
       nextStep: "Keep referenced under Footer anatomy and this boundary reference.",
     },
     {
+      pattern: "ContactMethod",
+      classification: "Internal anatomy",
+      currentUsage: "Used inside the Contact route information card to present email, phone, LinkedIn, and GitHub actions.",
+      boundary: "Belongs to Contact section anatomy. It presents contact options within that route context, but does not currently expose a standalone contact-method component contract.",
+      extractionCondition: "Promote only if contact method cards are reused across independent surfaces with stable icon, label, action, and accessibility behavior.",
+      source: "components/Contact.tsx / styles/contact.css",
+      status: "Contact route internal anatomy",
+      nextStep: "Keep documented through Contact section boundaries rather than a standalone Data Entry catalog item.",
+    },
+    {
       pattern: "Advantech Board 2 / Board 3",
       classification: "Route-local pattern",
       currentUsage: "Advantech SolutionSection scenario boards for overage warning and abnormal energy analysis.",
@@ -252,6 +262,16 @@ const boundaryReferenceItems = {
       source: "components/YearRail.tsx / app/about-me/page.tsx",
       status: "About timeline navigation pattern",
       nextStep: "Keep documented as a route-local boundary instead of a visible general-purpose Navigation component.",
+    },
+    {
+      pattern: "ExperienceCard",
+      classification: "Route-local pattern",
+      currentUsage: "Used inside the About route experience timeline and paired with YearRail anchors.",
+      boundary: "Belongs to the About timeline reading flow and YearRail anchor model. It is not a general-purpose card component.",
+      extractionCondition: "Promote only if the same experience card contract is reused across independent routes with stable fields, timeline behavior, and accessibility requirements.",
+      source: "app/about-me/page.tsx / components/YearRail.tsx",
+      status: "About timeline content pattern",
+      nextStep: "Keep documented with the About timeline / YearRail boundary.",
     },
     {
       pattern: "Laushu task flow",
@@ -366,6 +386,16 @@ const boundaryReferenceItems = {
       nextStep: "維持在 Footer anatomy 與這份 boundary reference 中說明。",
     },
     {
+      pattern: "ContactMethod",
+      classification: "Internal anatomy",
+      currentUsage: "用在 Contact route 的資訊卡中，呈現 email、電話、LinkedIn 與 GitHub actions。",
+      boundary: "屬於 Contact 區塊的內部組成，用來在該路由脈絡中呈現聯絡方式；目前沒有獨立的 contact-method component contract。",
+      extractionCondition: "只有當 contact method cards 被多個獨立 surface 重用，且 icon、label、action 與 accessibility 行為穩定時，才重新評估提升為獨立元件。",
+      source: "components/Contact.tsx / styles/contact.css",
+      status: "Contact route internal anatomy",
+      nextStep: "維持在 Contact section boundaries 中說明，不作為獨立 Data Entry catalog item。",
+    },
+    {
       pattern: "Advantech Board 2 / Board 3",
       classification: "Route-local pattern",
       currentUsage: "Advantech SolutionSection 的需量超約預警與設備能耗異常分析 scenario boards。",
@@ -384,6 +414,16 @@ const boundaryReferenceItems = {
       source: "components/YearRail.tsx / app/about-me/page.tsx",
       status: "About timeline navigation pattern",
       nextStep: "保留在 route-local boundary 文件中，不作為通用 Navigation visible component。",
+    },
+    {
+      pattern: "ExperienceCard",
+      classification: "Route-local pattern",
+      currentUsage: "用在 About route 的 experience timeline，並與 YearRail anchors 配對。",
+      boundary: "屬於 About 頁面的時間軸模式，語意依賴 About route 的內容模型、YearRail anchor 與時間序閱讀流程；不是通用 Card component。",
+      extractionCondition: "只有當相同 experience card contract 被多個獨立 routes 重用，且欄位、timeline behavior 與 accessibility requirements 穩定時，才重新評估提升。",
+      source: "app/about-me/page.tsx / components/YearRail.tsx",
+      status: "About timeline content pattern",
+      nextStep: "維持在 About timeline / YearRail boundary 中說明。",
     },
     {
       pattern: "Laushu task flow",
@@ -658,7 +698,6 @@ export default function ComponentDemo({
   const contactData = getContactData(locale);
   const aboutData = getAboutData(locale);
   const firstSkill = aboutData.skillCategories[0];
-  const firstExperience = aboutData.experiences[0];
   const [copied, setCopied] = useState(false);
   const [contactReviewPreviewOpen, setContactReviewPreviewOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
@@ -1024,23 +1063,6 @@ export default function ComponentDemo({
     );
   }
 
-  if (type === "contact-method") {
-    return (
-      <div className={styles.contactMethodsDemo}>
-        <article>
-          <small>{zh ? "電子信箱" : "Email"}</small>
-          <strong>{contactData.email}</strong>
-          <Button size="sm" variant="secondary">{zh ? "複製" : "Copy"}</Button>
-        </article>
-        <article>
-          <small>{zh ? "電話" : "Phone"}</small>
-          <strong>{contactData.phone}</strong>
-          <Button size="sm" variant="secondary">{zh ? "複製" : "Copy"}</Button>
-        </article>
-      </div>
-    );
-  }
-
   if (type === "project-card") {
     return (
       <DemoBlock className={styles.projectCardLiveWrap} contextLabel={contextLabel ?? "Homepage / Selected Works"}>
@@ -1070,22 +1092,6 @@ export default function ComponentDemo({
             <li key={skill}>{skill}</li>
           ))}
         </ul>
-      </article>
-    );
-  }
-
-  if (type === "experience-card") {
-    return (
-      <article className={styles.liveExperienceCardDemo}>
-        <div className={styles.experienceImageDemo}>
-          <Image src={firstExperience.image} alt="" fill sizes="240px" />
-        </div>
-        <div>
-          <p>{firstExperience.year}</p>
-          <h3>{firstExperience.title}</h3>
-          <strong>{firstExperience.role}</strong>
-          <span>{firstExperience.date}</span>
-        </div>
       </article>
     );
   }

@@ -38,12 +38,12 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 | EmptyState | Not visible in current `designSystemSections`; component seed remains | `components/ui/EmptyState.tsx` | No direct production route usage found | Backlog-style doc entry | Low | Backlog | Source exists but no live route needs empty/search/filter state yet. | Keep as backlog until a real empty state appears. |
 | BeforeAfterPanel | Reference / internal anatomy through BeforeAfterNarrativeFrame and Component Boundaries | `components/case-study/BeforeAfterPanel.tsx` | Internal usage by `BeforeAfterNarrativeFrame`; no direct route adoption | Anatomy/internal part, not standalone example | Low | Move to Component Boundaries | It is an internal visual shell, not an independent route-level pattern. | Keep documentation under BeforeAfterNarrativeFrame anatomy and Component Boundaries only. |
 | Accordion | Visible: Navigation | `components/ui/Accordion.tsx` | Design System sidebar/mobile docs navigation | Docs-real usage context | Low | Keep visible / standardize later | It is a real shared component used by the docs route. | Later add standard code guidance if needed. |
-| ContactMethod | Visible: Data Entry | `components/Contact.tsx` | Contact page contact methods | Semi-real route-local card | Medium | Move to Component Boundaries | Not an exported shared component; it is Contact page composition. | Later document with Contact form patterns rather than shared UI catalog. |
+| ContactMethod | Reclassified to Component Boundaries / Internal anatomy | `components/Contact.tsx` / `styles/contact.css` | Contact route information card for email, phone, LinkedIn, and GitHub actions | Parent anatomy reference | Medium | Move to Component Boundaries | No standalone exported component or stable independent API exists; `.contact-method-item` belongs to the Contact route information card and uses route-specific copy / copy actions / external links. | Keep under Contact section boundaries; promote only if contact method cards repeat across independent surfaces with stable icon, label, action, and accessibility behavior. |
 | SectionHeading | Visible: Data Display | `app/about-me/page.tsx` / homepage sections | Homepage and About section headings | Sample/reference-style heading | Medium | Move to Component Boundaries | No shared component source; it is a repeated layout convention. | Later define as page-section pattern or keep in reference only. |
 | ProjectTag | Reclassified to Component Boundaries / Internal anatomy | `components/ProjectCard.tsx` / `styles/home.css` | Selected Works project metadata inside `ProjectCard` | Parent anatomy reference | Low | Move to Component Boundaries | No standalone exported tag component or independent API exists; tags are rendered as `.project-tags span` inside `ProjectCard` and toned by the parent project card. | Keep under ProjectCard anatomy and Component Boundaries; promote only if a stable tag contract repeats across independent parent components. |
 | SocialLink | Reclassified to Component Boundaries / Internal anatomy | `components/Footer.tsx` / `styles/tokens.css` | Footer LinkedIn and GitHub links | Parent anatomy reference | Low | Move to Component Boundaries | No standalone exported social link component exists; `.social-link` is a Footer anchor pattern with icon swap and external-link accessibility behavior. | Keep under Footer anatomy and Component Boundaries; promote only if the same social link contract repeats across independent surfaces. |
 | SkillCategoryCard | Visible: Data Display | `app/about-me/page.tsx` | About skills section | Likely route-local pattern | Medium | Needs Hming decision | Could be useful for About content, but not clearly a shared component. | Decide whether About route-local patterns belong in visible catalog. |
-| ExperienceCard | Visible: Data Display | `app/about-me/page.tsx` | About timeline | Likely route-local pattern tied to YearRail scrollspy | Medium | Move to Component Boundaries | It is part of About timeline behavior, not a standalone shared component. | Document with YearRail/About timeline boundary. |
+| ExperienceCard | Reclassified to Component Boundaries / Route-local pattern | `app/about-me/page.tsx` / `components/YearRail.tsx` | About route experience timeline with `.experience-card[data-year]` anchors | Parent route pattern reference | Medium | Move to Component Boundaries | No standalone exported component exists; the card meaning depends on About route chronology, `data-year`, `id=\"year-*\"`, and the YearRail anchor / scroll-reading model. | Keep under About timeline / YearRail boundaries; promote only if the same experience-card contract repeats across independent routes. |
 | HeroBadge | Visible: Data Display | Hero / availability badge | Homepage hero | Sample/reference-style badge | Medium | Needs Hming decision | Could be a public brand signal, but may be too small/local for catalog visibility. | Decide whether tiny hero atoms should remain visible or move under Hero anatomy. |
 
 ## Remaining Sample-only / Docs-only Examples
@@ -82,9 +82,7 @@ Batch 7C-7 kept `ZoomableImage` and `FlowScrollHint` visible. `ZoomableImage` is
 
 - YearRail
 - BeforeAfterPanel
-- ContactMethod
 - SectionHeading
-- ExperienceCard
 
 ### Reclassified to Component Boundaries / Shared case-study pattern
 
@@ -96,6 +94,11 @@ Batch 7C-7 kept `ZoomableImage` and `FlowScrollHint` visible. `ZoomableImage` is
 
 - ProjectTag
 - SocialLink
+- ContactMethod
+
+### Reclassified to Component Boundaries / Route-local pattern
+
+- ExperienceCard
 
 ### Move to Reference only
 

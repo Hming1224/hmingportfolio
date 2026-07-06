@@ -1268,17 +1268,14 @@
 .liveSkillCardDemo h3,
 .liveSkillCardDemo ul,
 .liveExperienceSummary h3,
-.liveExperienceSummary p,
-.liveExperienceCardDemo p,
-.liveExperienceCardDemo h3 {
+.liveExperienceSummary p {
   margin: 0;
 }
 
 .demoReferenceCard h3,
 .contractOnlyDemo h3,
 .liveSkillCardDemo h3,
-.liveExperienceSummary h3,
-.liveExperienceCardDemo h3 {
+.liveExperienceSummary h3 {
   color: var(--text-heading);
   font-size: var(--hm-fs-h4);
   line-height: 1.35;
@@ -1290,9 +1287,7 @@
 .contractOnlyDemo li,
 .liveSkillCardDemo li,
 .liveExperienceSummary p,
-.liveExperienceSummary span,
-.liveExperienceCardDemo strong,
-.liveExperienceCardDemo span {
+.liveExperienceSummary span {
   color: var(--text-secondary);
   line-height: 1.65;
 }
@@ -2095,40 +2090,18 @@
 }
 
 .liveExperienceSummary,
-.liveSkillCardDemo,
-.liveExperienceCardDemo,
-.contactMethodsDemo article {
+.liveSkillCardDemo {
   padding: var(--hm-space-md);
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-md);
   background: var(--hm-paper);
 }
 
-.contactMethodsDemo {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--hm-space-sm);
-  width: 100%;
-  max-width: 720px;
-}
-
-.contactMethodsDemo article {
-  display: grid;
-  gap: var(--hm-space-2xs);
-}
-
-.contactMethodsDemo small,
-.liveExperienceCardDemo p,
 .liveSkillCardDemo p,
 .liveExperienceSummary time {
   color: var(--hm-purple);
   font-size: var(--hm-fs-sm);
   font-weight: var(--hm-fw-semibold);
-}
-
-.contactMethodsDemo strong {
-  color: var(--text-heading);
-  overflow-wrap: anywhere;
 }
 
 .projectCardLivePreview {
@@ -2154,32 +2127,6 @@
   margin: 0;
   color: var(--text-heading);
   font-size: var(--hm-fs-h3);
-}
-
-.liveExperienceCardDemo {
-  display: grid;
-  grid-template-columns: 160px minmax(0, 1fr);
-  gap: var(--hm-space-md);
-  width: 100%;
-  max-width: 640px;
-}
-
-.experienceImageDemo {
-  position: relative;
-  min-height: 128px;
-  overflow: hidden;
-  border-radius: var(--hm-radius-md);
-  background: var(--hm-surface);
-}
-
-.experienceImageDemo img {
-  object-fit: cover;
-}
-
-.liveExperienceCardDemo div:last-child {
-  display: grid;
-  gap: var(--hm-space-3xs);
-  align-content: center;
 }
 
 .liveHeroBadgeDemo {
@@ -2832,8 +2779,6 @@
   }
 
   .liveFooterDemo,
-  .liveExperienceCardDemo,
-  .contactMethodsDemo,
   .anatomyGrid,
   .referenceCardGrid,
   .localExceptionGrid,
