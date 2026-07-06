@@ -120,7 +120,7 @@ const whyCards = [
   {
     icon: <IconBadgeCheck />,
     title: "想用業界的工作方式驗證自己",
-    body: "與其只在履歷上寫「了解 design system」，我更想用自己的作品集做一次完整實作：從規則建立、元件盤點到長期維護，讓能力被具體過程驗證。",
+    body: "與其只在履歷上寫「了解 design system」，我更想用自己的作品集實際做一次：從規則建立、元件盤點到長期維護，把整個過程走一遍、也記錄下來。",
   },
 ];
 
@@ -135,10 +135,10 @@ const turningPoints = [
   {
     title: "轉折二：沒有先 audit 的大範圍修改，造成視覺回歸",
     body: "早期我曾讓 AI 依照完整計劃一次處理多個案例頁，結果把原本屬於單頁敘事的版型過早推進共用層，造成邊框疊加、間距跑掉和手機版水平溢出。",
-    lesson: "問題不在於 AI 能不能執行，而是每次動手前都必須先釐清影響範圍和層級。",
+    lesson: "這次學到的是：不管誰來執行，動手前都要先釐清影響範圍和層級。",
   },
   {
-    title: "轉折三：把風險收斂成可重複的流程",
+    title: "轉折三：把風險整理成可重複的流程",
     body: "後來我把 AI 協作拆成診斷、實作、驗證和回歸檢查的分段流程。AI 仍然可以協助執行，但每一步都有明確邊界、驗證條件和可回溯的 checkpoint。",
     lesson: "audit → implementation → validation → smoke → commit → push。",
   },
@@ -318,7 +318,7 @@ const reflections = [
   },
   {
     title: "語彙要跟業界對齊",
-    body: "我一開始自己發明了幾個詞（例如把外框元件叫 shell），後來逐一查證，改成業界通用的說法。自創詞只有自己懂；對齊的語彙，才能和工程師站在同一張圖上討論。",
+    body: "我一開始自己發明了幾個詞（例如把外框元件叫 shell），後來逐一查證，改成業界通用的說法。自創詞只有自己懂；改用大家共同的說法，才能和工程師順利討論。",
   },
   {
     title: "把「搞懂」寫下來，才算真的懂",
@@ -378,7 +378,7 @@ function Hero() {
           把自己的作品集當產品做：一套邊用邊長出來的 Design System
         </h1>
         <p className="ds-case-hero__subtitle">
-          這是我在製作作品集網站期間，自發啟動的 side project。我把網站本身當成產品管理，逐步建立 design tokens、元件契約和 AI-assisted workflow。這一頁記錄的不是一次規劃到位的成果，而是我如何在重複樣式、元件邊界和 AI 協作風險逐漸出現後，把問題收斂成可維護、可驗證、可回溯的工作流程。
+          這是我在製作作品集網站期間，自發啟動的 side project。我把網站本身當成產品管理，逐步建立 design tokens、元件契約和 AI-assisted workflow。這一頁記錄的不是一次規劃到位的成果，而是我在重複樣式、元件邊界和 AI 協作風險逐漸出現後，怎麼把問題整理成可維護、可驗證、可回溯的工作流程。
         </p>
         <CaseInfoGrid items={heroInfoItems} className="cs-info-row--divided ds-case-info-grid" />
       </div>
@@ -400,7 +400,7 @@ export default function DesignSystemCaseStudyPage() {
     >
       <CaseSection id="cs-sec-why" kicker="WHY" title="為什麼要幫自己的作品集建 Design System？">
         <p className="cs-section-lead">
-          問題不是「沒有設計」，而是「設計散落在每一頁」。
+          網站不是沒有設計，只是設計散落在每一頁，沒有集中管理的地方。
         </p>
         <p className="cs-section-lead">
           作品集網站是用「先把畫面做出來」的方式快速成形的——這個起點沒有錯，它讓內容先能展示。但隨著頁面越改越多，三個問題越來越明顯：
@@ -490,9 +490,9 @@ export default function DesignSystemCaseStudyPage() {
         />
       </CaseSection>
 
-      <CaseSection id="cs-sec-turning-points" kicker="TURNING POINTS" title="三次轉折：這個專案真正的主線">
+      <CaseSection id="cs-sec-turning-points" kicker="TURNING POINTS" title="三次轉折：這個專案學到最多的三段">
         <p className="cs-section-lead">
-          系統不是建好的，是修出來的。每次轉折都逼我改掉一個天真的假設。
+          這套系統很難說是一次「建」好的，比較像是一路修出來的——每次轉折，都讓我放掉一個原本以為理所當然的假設。
         </p>
         <div className="ds-case-timeline">
           {turningPoints.map((item, index) => (
@@ -552,7 +552,7 @@ export default function DesignSystemCaseStudyPage() {
 
       <CaseSection id="cs-sec-framework" kicker="FRAMEWORK" title="決策框架：什麼該抽象、什麼不該" surface>
         <p className="cs-section-lead">
-          轉折二的核心病因，後來變成一條判斷路徑。不是所有長得像的東西都該共用。
+          轉折二踩過的坑，後來被我整理成一條判斷路徑：不是所有長得像的東西都該共用。
         </p>
         <div className="ds-case-table-frame">
           <table className="ds-case-table">
@@ -650,7 +650,7 @@ export default function DesignSystemCaseStudyPage() {
 
       <CaseSection id="cs-sec-evolution-b" kicker="EVOLUTION B" title="演化實例 B：知道何時「不要」抽象" surface>
         <p className="cs-section-lead">
-          成熟的系統不是什麼都共用，而是每個「刻意不共用」都講得出理由。
+          我後來的理解是：系統不一定要什麼都共用，但每個「刻意不共用」的地方，最好都講得出理由。
         </p>
         <p className="cs-section-lead">
           有了共用元件之後，最大的誘惑是把所有長得像的東西都塞進去。為了避免過早抽象，每次想共用之前，我都會先把「誘惑、判斷、決定」寫下來：
@@ -681,7 +681,7 @@ export default function DesignSystemCaseStudyPage() {
         </CaseGrid>
         <CaseCard className="ds-case-narrative-card">
           <p>
-            最有代表性的一次：我曾一口氣盤點 8 個「看起來可以抽」的 pattern，<b>結論是一個都不抽</b>。那次盤點的產出不是任何新元件，而是 8 條寫進治理文件的「為什麼不抽」——對我來說，這比多抽三個元件更能證明系統是被「治理」的，不是被「堆」出來的。
+            印象最深的一次：我曾一口氣盤點 8 個「看起來可以抽」的 pattern，<b>結論是一個都不抽</b>。那次盤點沒有產出任何新元件，留下的是 8 條寫進治理文件的「為什麼不抽」。對我來說，把不做的理由寫清楚，跟多做幾個元件一樣重要。
           </p>
         </CaseCard>
         <blockquote className="ds-case-quote">
@@ -773,7 +773,7 @@ export default function DesignSystemCaseStudyPage() {
           規範如果只存在人腦裡，就很難被穩定執行。
         </p>
         <p className="cs-section-lead">
-          這套系統比較特別的地方，是我把 AI 也視為需要被管理的協作者。治理最後沉澱成兩層，加一本帳：
+          這套系統和一般做法比較不一樣的地方，是我把 AI 也當成需要被管理的協作者。相關規則最後整理成兩層文件，加上一份決策紀錄：
         </p>
         <CaseGrid variant="two" className="ds-case-card-grid">
           <CaseCard>
@@ -790,7 +790,7 @@ export default function DesignSystemCaseStudyPage() {
           </CaseCard>
         </CaseGrid>
         <div className="ds-case-decision-log">
-          <h3>決策帳——做過的取捨，不重複討論</h3>
+          <h3>決策紀錄——做過的取捨，寫下來就不用重複討論</h3>
           <p>
             所有標準化決策逐項整理後寫進治理文件，變成查得到的紀錄。摘幾條實際的：
           </p>
@@ -801,7 +801,7 @@ export default function DesignSystemCaseStudyPage() {
           </ol>
         </div>
         <blockquote className="ds-case-quote">
-          治理的價值不是「管住」，是讓每一次協作都不用重新解釋一遍脈絡。
+          把規則寫下來之後，每一次協作都不用重新解釋一遍脈絡——這是這些文件帶給我最實際的好處。
         </blockquote>
         <TermNotes
           items={[
@@ -826,7 +826,7 @@ export default function DesignSystemCaseStudyPage() {
 
       <CaseSection id="cs-sec-outcome" kicker="OUTCOME" title="產出與防護網">
         <p className="cs-section-lead">
-          系統的價值不在建好那一刻，在它能不能防止之後的劣化。先看數字：
+          系統建好只是開始，更重要的是它能不能防止之後慢慢走樣。先看幾個數字：
         </p>
         <CaseMetricGrid className="ds-case-card-grid">
           {outcomeMetrics.map((metric) => (
@@ -838,7 +838,7 @@ export default function DesignSystemCaseStudyPage() {
           ))}
         </CaseMetricGrid>
         <p className="cs-section-lead ds-case-guard-lead">
-          再看防護網——劣化會被工具先抓到，不用等人眼：
+          再看防護網——規則被打破時，讓工具先發現，不用只靠人工檢查：
         </p>
         <CaseGrid variant="three" className="ds-case-card-grid ds-case-guard-grid">
           {guardrails.map((guard) => (
@@ -849,7 +849,7 @@ export default function DesignSystemCaseStudyPage() {
           ))}
         </CaseGrid>
         <blockquote className="ds-case-quote">
-          這一頁本身就是證據：你正在看的這個 case study 頁面，就是用這套系統的 19 個共用元件組出來的——沒有為它新增或修改任何一個共用元件。
+          順帶一提：你正在看的這一頁，就是用這套系統現有的共用元件組出來的，過程中沒有新增或修改任何一個共用元件。
         </blockquote>
         <TermNotes
           items={[
@@ -869,7 +869,7 @@ export default function DesignSystemCaseStudyPage() {
 
       <CaseSection id="cs-sec-reflection" kicker="REFLECTION" title="學到什麼" surface>
         <p className="cs-section-lead">
-          這個專案最有價值的產出，是那三次轉折，不是最後的系統。
+          回頭看，這個專案讓我收穫最多的，是那三次轉折的過程，而不只是最後的系統。
         </p>
         <CaseGrid variant="two" className="ds-case-card-grid">
           {reflections.map((item, index) => (
