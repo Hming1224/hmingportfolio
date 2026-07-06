@@ -2235,7 +2235,6 @@
 
 .caseSectionDemo,
 .caseCardDemo,
-.flowHintDemo,
 .localExceptionsDemo {
   padding: var(--hm-space-md);
   border: 1px solid var(--hm-line);
@@ -2331,8 +2330,7 @@
 }
 
 .caseMediaFrameDemo,
-.beforeAfterImageDemo,
-.zoomImageDemo {
+.beforeAfterImageDemo {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--hm-line);
@@ -2505,12 +2503,33 @@
   min-height: 180px;
 }
 
+.flowHintSourceDemo {
+  width: 100%;
+  max-width: 760px;
+  min-width: 0;
+  margin-top: 4px;
+}
+
+.flowHintScrollFrame {
+  overflow-x: auto;
+  padding: var(--hm-space-xs);
+  padding-bottom: var(--hm-space-2xs);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.flowHintScrollFrame:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 3px;
+}
+
 .flowHintStripDemo {
   display: grid;
-  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  grid-template-columns: repeat(5, minmax(200px, 1fr));
   gap: var(--hm-space-xs);
-  overflow-x: auto;
-  padding-bottom: var(--hm-space-2xs);
+  width: max-content;
+  min-width: 1120px;
 }
 
 .flowHintStripDemo span {
@@ -2660,9 +2679,16 @@
   background: var(--hm-surface);
 }
 
+.zoomableImageDemoShell {
+  max-width: 760px;
+}
+
+.zoomableImageMediaDemo {
+  width: min(100%, 760px);
+}
+
 .zoomImageDemo {
   width: 100%;
-  max-width: 560px;
 }
 
 .returnBar {

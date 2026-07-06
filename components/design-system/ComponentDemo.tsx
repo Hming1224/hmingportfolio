@@ -20,6 +20,7 @@ import CaseBeforeAfter from "../case-study/CaseBeforeAfter";
 import CaseHero from "../case-study/CaseHero";
 import { CaseCard, CaseGrid, CaseMedia, CaseSection, CaseSectionHeader, type CaseInfoItem } from "../case-study";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
+import FlowScrollHint from "../case-study/FlowScrollHint";
 import ZoomableImage from "../case-study/ZoomableImage";
 import {
   Accordion,
@@ -1408,17 +1409,24 @@ export default function ComponentDemo({
 
   if (type === "flow-scroll-hint") {
     return (
-      <section className={styles.flowHintDemo}>
-        <DemoContextLabel>{contextLabel ?? "Advantech / AnalysisSection · ProcessSection · ScenarioSection"}</DemoContextLabel>
-        <h3>{caseCopy.flowTitle}</h3>
-        <p>{caseCopy.flowBody}</p>
-        <div className={styles.flowHintStripDemo} aria-hidden="true">
-          <span>{zh ? "設備管理" : "Equipment"}</span>
-          <span>{zh ? "現有 WISE iEMS AI 功能" : "Current WISE iEMS AI features"}</span>
-          <span>{zh ? "EMS 競品 AI 模組" : "EMS competitor AI modules"}</span>
-          <span>{zh ? "可發展機會點" : "Opportunity"}</span>
+      <DemoBlock className={styles.flowHintDemo} contextLabel={contextLabel ?? "Advantech / AnalysisSection · ProcessSection · ScenarioSection"}>
+        <div className={`cs-page theme-advantech ${styles.flowHintSourceDemo}`}>
+          <FlowScrollHint label={zh ? "左右滑動查看更多" : "Swipe horizontally for more"} />
+          <div
+            aria-label={zh ? "寬版分析 board 範例" : "Wide analysis board example"}
+            className={styles.flowHintScrollFrame}
+            tabIndex={0}
+          >
+            <div className={styles.flowHintStripDemo}>
+              <span>{zh ? "設備管理" : "Equipment"}</span>
+              <span>{zh ? "現有 WISE iEMS AI 功能" : "Current WISE iEMS AI features"}</span>
+              <span>{zh ? "EMS 競品 AI 模組" : "EMS competitor AI modules"}</span>
+              <span>{zh ? "可發展機會點" : "Opportunity"}</span>
+              <span>{zh ? "設計決策證據" : "Decision evidence"}</span>
+            </div>
+          </div>
         </div>
-      </section>
+      </DemoBlock>
     );
   }
 
@@ -1546,18 +1554,25 @@ export default function ComponentDemo({
 
   if (type === "zoom") {
     return (
-      <figure className={styles.caseMediaDemo}>
-        <div className={styles.zoomImageDemo}>
-          <ZoomableImage
-            alt={zh ? "Crypto Arsenal 最終平倉流程介面" : "Crypto Arsenal final close-position flow UI"}
-            src="/projects/crypto-arsenal/final/final-close-position.webp"
-            width={1440}
-            height={900}
-            labels={{ close: zh ? "關閉" : "Close", separator: ": ", zoom: zh ? "放大圖片" : "Zoom image" }}
-          />
+      <DemoBlock className={styles.zoomableImageDemoShell} contextLabel={contextLabel ?? "Laushu / IterateSection"}>
+        <div className="cs-page theme-laushu">
+          <CaseMedia
+            caption={zh ? "Laushu 設計迭代後的列表資料呈現區" : "Laushu iterated list data view"}
+            className={styles.zoomableImageMediaDemo}
+            variant="full"
+          >
+            <ZoomableImage
+              alt={zh ? "Laushu 設計迭代後的列表資料呈現區" : "Laushu iterated list data view"}
+              className={styles.zoomImageDemo}
+              src="/projects/laushu/iterate/ui-list-after.png"
+              width={1440}
+              height={1024}
+              labels={{ close: zh ? "關閉" : "Close", separator: ": ", zoom: zh ? "放大圖片" : "Zoom image" }}
+              sizes="min(100vw, 760px)"
+            />
+          </CaseMedia>
         </div>
-        <figcaption>{caseCopy.zoomCaption}</figcaption>
-      </figure>
+      </DemoBlock>
     );
   }
 
