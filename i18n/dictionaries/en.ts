@@ -61,30 +61,27 @@ const messages = {
   designSystem: {
     hero: {
       eyebrow: "Portfolio Design System",
-      title: "A live documentation site for the portfolio system",
+      title: "One person maintains this whole portfolio — this system is how",
       description:
-        "This is the design system currently used on hmingdesign.com. It documents the real design tokens, shared components, case-study patterns, and local exceptions used across the portfolio. It is a working reference for design engineering decisions, not a separate marketing story.",
+        "This is the design system running on hmingdesign.com today. It documents the real tokens, shared components, case-study patterns — and the parts that deliberately stay unshared. The point is not that a design system exists; it is the judgment behind each decision.",
       frameworkLabel: "Decision framework",
       framework:
         "Repeated value → token · repeated shell → slot composition · unclear purpose → component contract · repeated structure and behavior → componentize · story-specific work → local component",
-      primaryAction: "See Getting Started",
-      secondaryAction: "See Token Reference",
-      highlightsAriaLabel: "System highlights",
+      primaryAction: "Browse live components",
+      secondaryAction: "See how I decide boundaries",
+      highlightsAriaLabel: "What this system demonstrates",
       highlights: [
         {
-          title: "Token discipline",
-          lead: "Runtime token values stay untouched.",
-          body: "This page documents the live token source instead of creating page-only design values.",
+          title: "Token governance",
+          lead: "Every color, type size, and spacing step has a name — change it once, the whole site follows.",
         },
         {
-          title: "Contract-first components",
-          lead: "Each shared component is documented by responsibility, props, and usage boundaries.",
-          body: "The goal is to prevent visual reuse from becoming unclear product behavior.",
+          title: "Component boundary judgment",
+          lead: "Seeing a layout twice does not automatically make it a component. The reasoning is documented here.",
         },
         {
-          title: "Intentional local exceptions",
-          lead: "Project-specific patterns are marked instead of forced into shared components.",
-          body: "Some UI should stay local when it carries a specific story, flow, or case-study logic.",
+          title: "Intentional exceptions",
+          lead: "Some case-study UI deliberately stays unshared, and the reasons are written down.",
         },
       ],
     },

@@ -60,31 +60,28 @@ const messages = {
   },
   designSystem: {
     hero: {
-      eyebrow: "Portfolio Design System",
-      title: "作品集設計系統的 live 文件站",
+      eyebrow: "作品集設計系統",
+      title: "一個人維護整個作品集，靠的是這套系統",
       description:
-        "這是目前實際用在 hmingdesign.com 的 design system 文件站，整理真實使用中的 design tokens、shared components、案例頁 patterns 與 local exceptions。它是設計工程決策的工作參考，不是另外包裝出來的行銷故事。",
+        "這是 hmingdesign.com 正在使用的設計系統。它記錄了實際的 token、共用元件、案例頁模式，以及哪些東西刻意不共用。重點不是「做了一個設計系統」，而是每個決定背後的判斷。",
       frameworkLabel: "判斷框架",
       framework:
         "值重複 → token · 外框重複 → slot composition · 用途易混淆 → component contract · 結構與行為都重複 → componentize · 承載特定故事 → local component",
-      primaryAction: "看 Getting Started",
-      secondaryAction: "看 Token Reference",
-      highlightsAriaLabel: "系統亮點",
+      primaryAction: "看正式元件",
+      secondaryAction: "看我怎麼取捨",
+      highlightsAriaLabel: "這套系統展示的能力",
       highlights: [
         {
-          title: "Token discipline",
-          lead: "不為文件站新增 runtime token 值。",
-          body: "這頁只文件化正式站正在使用的 token，不為了頁面視覺另外建立一套樣式值。",
+          title: "Token 治理",
+          lead: "顏色、字級、間距全部有名字，改一處、全站跟著改。",
         },
         {
-          title: "Contract-first components",
-          lead: "每個 shared component 都用 responsibility、props、usage boundary 來文件化。",
-          body: "重點不是把畫面抽共用，而是避免共用元件變成用途不清的視覺拼裝。",
+          title: "元件邊界判斷",
+          lead: "同一個排版出現兩次，不代表要抽成元件——這裡記錄了為什麼。",
         },
         {
-          title: "Intentional local exceptions",
-          lead: "專案特定 pattern 會被標註，而不是硬抽成 shared component。",
-          body: "當 UI 承載特定故事、流程或案例邏輯時，它應該保留在 local scope。",
+          title: "刻意的例外",
+          lead: "案例頁裡有些東西就是不共用，原因都寫清楚了。",
         },
       ],
     },

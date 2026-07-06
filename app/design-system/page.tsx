@@ -56,10 +56,10 @@ export default async function DesignSystemPage() {
             <h1 className={styles.heroTitle} id="ds-title">{copy.hero.title}</h1>
             <p className={styles.heroDescription}>{copy.hero.description}</p>
             <div className={styles.actions}>
-              <Button href="#getting-started">
+              <Button href="#general">
                 {copy.hero.primaryAction}
               </Button>
-              <Button variant="secondary" href="#tokens">
+              <Button variant="secondary" href="#component-boundaries">
                 {copy.hero.secondaryAction}
               </Button>
             </div>
@@ -69,7 +69,6 @@ export default async function DesignSystemPage() {
               <article className={styles.highlightCard} key={highlight.title}>
                 <h2 className={styles.highlightTitle}>{highlight.title}</h2>
                 <p className={styles.highlightLead}>{highlight.lead}</p>
-                <p className={styles.highlightBody}>{highlight.body}</p>
               </article>
             ))}
           </div>
