@@ -830,9 +830,14 @@ export default function DesignSystemDocsPage({
             ))}
           </div>
         ) : (
-          <div className={styles.referenceList}>
-            {(doc.references ?? ["docs/design-system.md"]).map((item) => <code className={styles.codeTag} key={item}>{item}</code>)}
-          </div>
+          <>
+            <p className={styles.docDescription}>
+              {localized(locale, "Paths refer to files in this site's source repository.", "以上路徑對應本站原始碼 repo 中的檔案。")}
+            </p>
+            <div className={styles.referenceList}>
+              {(doc.references ?? ["docs/design-system.md"]).map((item) => <code className={styles.codeTag} key={item}>{item}</code>)}
+            </div>
+          </>
         )}
       </section>
     </article>
