@@ -711,7 +711,7 @@ export default function DesignSystemDocsPage({
 
       {anatomyParts?.length || anatomy?.length ? (
         <section className={styles.docSection}>
-          <h2 className={styles.docSectionTitle}>{localized(locale, "Anatomy / Internal parts", "結構 / internal parts")}</h2>
+          <h2 className={styles.docSectionTitle}>{localized(locale, "Anatomy / Internal parts", "結構 / 內部組成")}</h2>
           {anatomyParts?.length ? (
             <div className={styles.anatomyTableWrap}>
               <table className={styles.anatomyTable}>
@@ -820,7 +820,7 @@ export default function DesignSystemDocsPage({
 
       {accessibility?.length ? (
         <section className={styles.docSection}>
-          <h2 className={styles.docSectionTitle}>Accessibility</h2>
+          <h2 className={styles.docSectionTitle}>{localized(locale, "Accessibility", "無障礙")}</h2>
           <ul className={styles.docList}>
             {accessibility.map((item) => <li className={styles.docListItem} key={item}>{item}</li>)}
           </ul>
