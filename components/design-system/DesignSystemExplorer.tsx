@@ -37,6 +37,8 @@ function docSectionForAnchor(
     "case-next-nav": "local-exceptions",
     "case-info-card": "local-exceptions",
     "year-rail": "local-exceptions",
+    "project-tag": "local-exceptions",
+    "social-link": "local-exceptions",
   };
   const requestedSlug = anchor.replace(/^#/, "");
   const slug = slugAliases[requestedSlug] ?? requestedSlug;

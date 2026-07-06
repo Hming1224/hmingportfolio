@@ -1326,8 +1326,7 @@
 }
 
 .liveTabsList,
-.liveSocialLinks,
-.liveTagDemo {
+.liveSocialLinks {
   display: flex;
   flex-wrap: wrap;
   gap: var(--hm-space-xs);
@@ -2155,21 +2154,6 @@
   margin: 0;
   color: var(--text-heading);
   font-size: var(--hm-fs-h3);
-}
-
-.liveTagDemo {
-  justify-content: flex-start;
-}
-
-.liveTagDemo span {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--hm-map-height-control-sm);
-  padding: 0 var(--hm-space-xs);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-pill);
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
 }
 
 .liveExperienceCardDemo {

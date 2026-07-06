@@ -40,8 +40,8 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 | Accordion | Visible: Navigation | `components/ui/Accordion.tsx` | Design System sidebar/mobile docs navigation | Docs-real usage context | Low | Keep visible / standardize later | It is a real shared component used by the docs route. | Later add standard code guidance if needed. |
 | ContactMethod | Visible: Data Entry | `components/Contact.tsx` | Contact page contact methods | Semi-real route-local card | Medium | Move to Component Boundaries | Not an exported shared component; it is Contact page composition. | Later document with Contact form patterns rather than shared UI catalog. |
 | SectionHeading | Visible: Data Display | `app/about-me/page.tsx` / homepage sections | Homepage and About section headings | Sample/reference-style heading | Medium | Move to Component Boundaries | No shared component source; it is a repeated layout convention. | Later define as page-section pattern or keep in reference only. |
-| ProjectTag | Visible: Data Display | `components/Works.tsx` / `components/ProjectCard.tsx` | Selected Works project metadata | Sample/reference-style tags | Low | Keep visible / standardize later | Real production visual token/pattern exists in project cards. | Later ground example directly in ProjectCard anatomy. |
-| SocialLink | Visible: Data Display | `components/Footer.tsx` | Footer social links | Semi-real footer links | Low | Move to Component Boundaries | It is part of Footer anatomy, not a standalone component. | Later move under Footer anatomy/reference. |
+| ProjectTag | Reclassified to Component Boundaries / Internal anatomy | `components/ProjectCard.tsx` / `styles/home.css` | Selected Works project metadata inside `ProjectCard` | Parent anatomy reference | Low | Move to Component Boundaries | No standalone exported tag component or independent API exists; tags are rendered as `.project-tags span` inside `ProjectCard` and toned by the parent project card. | Keep under ProjectCard anatomy and Component Boundaries; promote only if a stable tag contract repeats across independent parent components. |
+| SocialLink | Reclassified to Component Boundaries / Internal anatomy | `components/Footer.tsx` / `styles/tokens.css` | Footer LinkedIn and GitHub links | Parent anatomy reference | Low | Move to Component Boundaries | No standalone exported social link component exists; `.social-link` is a Footer anchor pattern with icon swap and external-link accessibility behavior. | Keep under Footer anatomy and Component Boundaries; promote only if the same social link contract repeats across independent surfaces. |
 | SkillCategoryCard | Visible: Data Display | `app/about-me/page.tsx` | About skills section | Likely route-local pattern | Medium | Needs Hming decision | Could be useful for About content, but not clearly a shared component. | Decide whether About route-local patterns belong in visible catalog. |
 | ExperienceCard | Visible: Data Display | `app/about-me/page.tsx` | About timeline | Likely route-local pattern tied to YearRail scrollspy | Medium | Move to Component Boundaries | It is part of About timeline behavior, not a standalone shared component. | Document with YearRail/About timeline boundary. |
 | HeroBadge | Visible: Data Display | Hero / availability badge | Homepage hero | Sample/reference-style badge | Medium | Needs Hming decision | Could be a public brand signal, but may be too small/local for catalog visibility. | Decide whether tiny hero atoms should remain visible or move under Hero anatomy. |
@@ -77,7 +77,6 @@ Batch 7C-7 kept `ZoomableImage` and `FlowScrollHint` visible. `ZoomableImage` is
 - CaseHero
 - ProposalTabs
 - Accordion
-- ProjectTag
 
 ### Move to Component Boundaries
 
@@ -85,7 +84,6 @@ Batch 7C-7 kept `ZoomableImage` and `FlowScrollHint` visible. `ZoomableImage` is
 - BeforeAfterPanel
 - ContactMethod
 - SectionHeading
-- SocialLink
 - ExperienceCard
 
 ### Reclassified to Component Boundaries / Shared case-study pattern
@@ -93,6 +91,11 @@ Batch 7C-7 kept `ZoomableImage` and `FlowScrollHint` visible. `ZoomableImage` is
 - ScrollProgress
 - CaseNextNav
 - CaseInfoCard
+
+### Reclassified to Component Boundaries / Internal anatomy
+
+- ProjectTag
+- SocialLink
 
 ### Move to Reference only
 

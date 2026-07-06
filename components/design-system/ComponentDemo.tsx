@@ -174,6 +174,16 @@ const boundaryReferenceItems = {
       nextStep: "Keep documented as a route-owned project card pattern.",
     },
     {
+      pattern: "ProjectTag",
+      classification: "Internal anatomy",
+      currentUsage: "Used inside ProjectCard to display Selected Work project metadata and tone tags.",
+      boundary: "Belongs to ProjectCard anatomy. It communicates metadata within the Selected Work card, but does not currently expose a standalone tag component contract.",
+      extractionCondition: "Promote only if tags are reused across independent parent components with a stable tone, status, or metadata API.",
+      source: "components/ProjectCard.tsx / styles/home.css",
+      status: "ProjectCard internal anatomy",
+      nextStep: "Keep documented through ProjectCard anatomy and this boundary reference.",
+    },
+    {
       pattern: "CaseTOC",
       classification: "Shared case-study pattern",
       currentUsage: "CaseStudyShell across Advantech, Crypto Arsenal, and Laushu case routes.",
@@ -212,6 +222,16 @@ const boundaryReferenceItems = {
       source: "components/case-study/CaseInfoGrid.tsx / components/case-study/CaseHero.tsx",
       status: "Case-study hero metadata anatomy",
       nextStep: "Keep documented as a shared case-study pattern.",
+    },
+    {
+      pattern: "SocialLink",
+      classification: "Internal anatomy",
+      currentUsage: "Used inside Footer social link group for LinkedIn and GitHub profile links.",
+      boundary: "Belongs to Footer anatomy. Its meaning depends on the footer closure surface, external-link behavior, icon swap, and accessible label.",
+      extractionCondition: "Promote only if the same social link contract is reused across independent surfaces with stable icon, label, external-link, and accessibility behavior.",
+      source: "components/Footer.tsx / styles/tokens.css",
+      status: "Footer internal anatomy",
+      nextStep: "Keep referenced under Footer anatomy and this boundary reference.",
     },
     {
       pattern: "Advantech Board 2 / Board 3",
@@ -286,6 +306,16 @@ const boundaryReferenceItems = {
       nextStep: "維持為 route-owned project card pattern。",
     },
     {
+      pattern: "ProjectTag",
+      classification: "Internal anatomy",
+      currentUsage: "用在 ProjectCard 裡，呈現 Selected Work card 的 project metadata 與 tone tags。",
+      boundary: "屬於 ProjectCard 的內部組成，用來在 Selected Work card 裡呈現專案 metadata；目前沒有獨立的 tag component contract。",
+      extractionCondition: "只有當 tags 被多個獨立 parent components 重用，且具備穩定 tone、status 或 metadata API 時，才重新評估提升為獨立元件。",
+      source: "components/ProjectCard.tsx / styles/home.css",
+      status: "ProjectCard internal anatomy",
+      nextStep: "維持在 ProjectCard anatomy 與這份 boundary reference 中說明。",
+    },
+    {
       pattern: "CaseTOC",
       classification: "Shared case-study pattern",
       currentUsage: "Advantech、Crypto Arsenal、Laushu case routes 的 CaseStudyShell。",
@@ -324,6 +354,16 @@ const boundaryReferenceItems = {
       source: "components/case-study/CaseInfoGrid.tsx / components/case-study/CaseHero.tsx",
       status: "Case-study hero metadata anatomy",
       nextStep: "維持為 shared case-study pattern 文件。",
+    },
+    {
+      pattern: "SocialLink",
+      classification: "Internal anatomy",
+      currentUsage: "用在 Footer social link group，連到 LinkedIn 與 GitHub profile。",
+      boundary: "屬於 Footer 的內部組成；語意依賴 footer 收尾區塊、外部連結行為、icon swap 與 accessible label。",
+      extractionCondition: "只有當同一套 social link contract 被多個獨立 surface 重用，且 icon、label、external-link 與 accessibility 行為穩定時，才重新評估提升為獨立元件。",
+      source: "components/Footer.tsx / styles/tokens.css",
+      status: "Footer internal anatomy",
+      nextStep: "維持在 Footer anatomy 與這份 boundary reference 中說明。",
     },
     {
       pattern: "Advantech Board 2 / Board 3",
@@ -1016,29 +1056,6 @@ export default function ComponentDemo({
     return (
       <div className={styles.liveSectionHeadingDemo}>
         <span /><h3>{zh ? "精選案例" : "Selected Work"}</h3><span />
-      </div>
-    );
-  }
-
-  if (type === "tags") {
-    return (
-      <div className={styles.liveTagDemo}>
-        {featuredProject.tags.map((tag) => (
-          <span key={tag}>{tag}</span>
-        ))}
-      </div>
-    );
-  }
-
-  if (type === "social-link") {
-    return (
-      <div className={styles.liveSocialLinks}>
-        <a href={contactData.socials.linkedin.href} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-          <Image src="/social/linkedin-gray-v2.png" alt="" width={40} height={40} />
-        </a>
-        <a href={contactData.socials.github.href} aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-          <Image src="/social/github-gray-v2.png" alt="" width={40} height={40} />
-        </a>
       </div>
     );
   }

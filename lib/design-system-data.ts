@@ -66,8 +66,6 @@ export const designSystemSections = [
     items: [
       "project-card",
       "section-heading",
-      "project-tag",
-      "social-link",
       "skill-category-card",
       "experience-card",
       "hero-badge",
