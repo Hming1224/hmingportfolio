@@ -1238,6 +1238,13 @@
   background: color-mix(in srgb, var(--hm-surface) 72%, var(--hm-paper));
 }
 
+.contactFieldDemo {
+  width: min(100%, 460px);
+  max-width: 460px;
+  justify-self: center;
+  text-align: left;
+}
+
 .demoReferenceCard h3,
 .contractOnlyDemo h3,
 .demoReferenceCard p,
@@ -1878,7 +1885,7 @@
 .contactFieldGrid {
   display: grid;
   gap: var(--hm-space-md);
-  width: min(100%, 460px);
+  width: 100%;
 }
 
 .contactFieldGrid :global(.form-field) {
