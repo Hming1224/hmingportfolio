@@ -61,15 +61,12 @@ const messages = {
   designSystem: {
     hero: {
       eyebrow: "Portfolio Design System",
-      title: "One person maintains this whole portfolio — this system is how",
+      title: "A design system I put together while maintaining this portfolio",
       description:
-        "This is the design system running on hmingdesign.com today. It documents the real tokens, shared components, case-study patterns — and the parts that deliberately stay unshared. The point is not that a design system exists; it is the judgment behind each decision.",
-      frameworkLabel: "Decision framework",
-      framework:
-        "Repeated value → token · repeated shell → slot composition · unclear purpose → component contract · repeated structure and behavior → componentize · story-specific work → local component",
+        "This is the design system running on hmingdesign.com today. I document the tokens, shared components, and case-study patterns I actually use — along with the parts that deliberately stay unshared — so each change has a reference, and readers can follow the reasoning behind the decisions.",
       primaryAction: "Browse live components",
       secondaryAction: "See how I decide boundaries",
-      highlightsAriaLabel: "What this system demonstrates",
+      highlightsAriaLabel: "System highlights",
       highlights: [
         {
           title: "Token governance",

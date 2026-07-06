@@ -73,10 +73,6 @@ export default async function DesignSystemPage() {
             ))}
           </div>
         </div>
-        <div className={styles.heroDecisionFrame}>
-          <p className={styles.heroDecisionLabel}>{copy.hero.frameworkLabel}</p>
-          <p className={styles.heroDecisionSummary}>{copy.hero.framework}</p>
-        </div>
       </section>
 
       <DesignSystemExplorer

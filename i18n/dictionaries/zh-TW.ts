@@ -61,15 +61,12 @@ const messages = {
   designSystem: {
     hero: {
       eyebrow: "作品集設計系統",
-      title: "一個人維護整個作品集，靠的是這套系統",
+      title: "邊維護作品集，邊整理出來的設計系統",
       description:
-        "這是 hmingdesign.com 正在使用的設計系統。它記錄了實際的 token、共用元件、案例頁模式，以及哪些東西刻意不共用。重點不是「做了一個設計系統」，而是每個決定背後的判斷。",
-      frameworkLabel: "判斷框架",
-      framework:
-        "值重複 → token · 外框重複 → slot composition · 用途易混淆 → component contract · 結構與行為都重複 → componentize · 承載特定故事 → local component",
+        "這是 hmingdesign.com 正在使用的設計系統。我把實際用到的 token、共用元件和案例頁模式記錄下來，也記下哪些東西刻意不共用——讓自己每次改動都有依據，也讓看的人了解每個決定的原因。",
       primaryAction: "看正式元件",
       secondaryAction: "看我怎麼取捨",
-      highlightsAriaLabel: "這套系統展示的能力",
+      highlightsAriaLabel: "系統重點",
       highlights: [
         {
           title: "Token 治理",
