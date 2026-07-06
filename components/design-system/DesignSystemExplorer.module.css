@@ -351,6 +351,7 @@
 .radiusScaleCard code,
 .radiusScaleCard small,
 .shadowScaleCard code,
+.shadowScaleCard p,
 .shadowScaleCard small,
 .motionReferenceCard code,
 .motionReferenceCard p,
@@ -370,6 +371,7 @@
 }
 
 .colorSwatchCard p,
+.shadowScaleCard p,
 .motionReferenceCard p {
   margin: 0;
   color: var(--text-secondary);
@@ -428,7 +430,7 @@
 
 .spacingScaleRow {
   display: grid;
-  grid-template-columns: minmax(132px, 0.35fr) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(160px, 0.42fr) minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--hm-space-sm);
   min-width: 0;
@@ -438,10 +440,28 @@
   background: var(--hm-surface);
 }
 
+.spacingScaleRow > div {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  min-width: 0;
+}
+
+.spacingScaleRow code,
+.spacingScaleRow small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .spacingScaleRow code {
   color: var(--text-heading);
   font-size: var(--hm-fs-xs);
-  overflow-wrap: anywhere;
+  font-weight: var(--hm-fw-semibold);
+}
+
+.spacingScaleRow small {
+  color: var(--text-muted);
+  font-size: var(--hm-fs-xs);
+  line-height: 1.45;
 }
 
 .spacingScaleRow > span:last-child {

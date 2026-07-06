@@ -389,7 +389,10 @@ function FoundationVisualSamples({
       <div className={styles.spacingScaleStack}>
         {rows.map((row) => (
           <div className={styles.spacingScaleRow} key={row.token}>
-            <code>{row.token}</code>
+            <div>
+              <code>{row.token}</code>
+              <small>{getTokenUsage(row, locale)}</small>
+            </div>
             <span className={styles.spacingScaleTrack}>
               <span style={tokenPreviewStyle(row)} />
             </span>
@@ -421,6 +424,7 @@ function FoundationVisualSamples({
           <article className={styles.shadowScaleCard} key={row.token}>
             <span style={tokenPreviewStyle(row)} />
             <code>{row.token}</code>
+            <p>{row.value}</p>
             <small>{getTokenUsage(row, locale)}</small>
           </article>
         ))}
@@ -446,89 +450,6 @@ function FoundationVisualSamples({
   return null;
 }
 
-function renderTokenPreviewCell(row: TokenRow) {
-  if (row.type === "color") {
-    return (
-      <span className={styles.colorSwatch} style={tokenPreviewStyle(row)} />
-    );
-  }
-
-  if (row.type === "type") {
-    return (
-      <strong className={styles.typeSample} style={tokenPreviewStyle(row)}>Aa</strong>
-    );
-  }
-
-  if (row.type === "spacing") {
-    return (
-      <span className={styles.spacingSample} style={tokenPreviewStyle(row)} />
-    );
-  }
-
-  if (row.type === "radius") {
-    return (
-      <span className={styles.radiusSample} style={tokenPreviewStyle(row)} />
-    );
-  }
-
-  if (row.type === "shadow") {
-    return (
-      <span className={styles.shadowSample} style={tokenPreviewStyle(row)} />
-    );
-  }
-
-  if (row.type === "motion") {
-    return (
-      <span className={styles.motionSample} style={tokenPreviewStyle(row)} />
-    );
-  }
-
-  return (
-    <strong className={styles.layoutSample}>{row.value}</strong>
-  );
-}
-
-function TokenTable({
-  locale,
-  rows,
-  variant,
-}: {
-  locale: DesignSystemLocale;
-  rows: TokenRow[];
-  variant: "foundation" | "reference";
-}) {
-  const isReference = variant === "reference";
-
-  return (
-    <div className={styles.tokenTableWrap}>
-      <table className={styles.tokenTable}>
-        <thead>
-          <tr>
-            <th>{localized(locale, "Token", "Token")}</th>
-            <th>{localized(locale, "Value", "值")}</th>
-            {isReference ? <th>{localized(locale, "Type", "類型")}</th> : null}
-            {isReference ? <th>{localized(locale, "Scope", "範圍")}</th> : null}
-            <th>{localized(locale, "Usage", "用途")}</th>
-            {!isReference ? <th>{localized(locale, "Preview", "預覽")}</th> : null}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.token}>
-              <td><code>{row.token}</code></td>
-              <td><code>{row.value}</code></td>
-              {isReference ? <td>{row.type}</td> : null}
-              {isReference ? <td>{row.scope}</td> : null}
-              <td>{getTokenUsage(row, locale)}</td>
-              {!isReference ? <td>{renderTokenPreviewCell(row)}</td> : null}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 function FoundationTokenReference({
   doc,
   locale,
@@ -542,17 +463,6 @@ function FoundationTokenReference({
   }
 
   const foundationRows = designSystemTokenRows.filter((row) => foundationTokenTypes[doc.slug]?.includes(row.type));
-  const groups = isTokenReference
-    ? (["color", "type", "spacing", "radius", "shadow", "motion", "layout"] as const).map((type) => ({
-        id: type,
-        title: type === "type" ? localized(locale, "Typography", "字體與排版") : type,
-        description: localized(locale, "Current code token names, values, scope, and usage.", "目前 code 內的 token 名稱、值、scope 與用途。"),
-        rows: designSystemTokenRows.filter((row) => row.type === type),
-      }))
-    : [{
-        id: doc.slug,
-        rows: foundationRows,
-      }];
 
   if (isTokenReference) {
     return (
@@ -567,14 +477,9 @@ function FoundationTokenReference({
   return (
     <section className={styles.docSection}>
       <div className={styles.foundationStack}>
-        {groups.map((group) => (
-          <article className={styles.foundationPanel} key={group.id}>
-            <FoundationVisualSamples locale={locale} rows={group.rows} slug={doc.slug} />
-            {doc.slug === "colors" ? null : (
-              <TokenTable locale={locale} rows={group.rows} variant={isTokenReference ? "reference" : "foundation"} />
-            )}
-          </article>
-        ))}
+        <article className={styles.foundationPanel}>
+          <FoundationVisualSamples locale={locale} rows={foundationRows} slug={doc.slug} />
+        </article>
       </div>
     </section>
   );
