@@ -808,6 +808,8 @@
 .nav {
   display: grid;
   gap: var(--hm-space-2xs);
+  width: max-content;
+  max-width: 100%;
 }
 
 .rootLink,
@@ -819,7 +821,7 @@
 
 .rootLink {
   min-height: 36px;
-  padding: var(--hm-space-2xs) 0;
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
   color: var(--hm-muted);
   font-size: var(--hm-fs-xs);
   font-weight: var(--hm-fw-bold);
@@ -834,6 +836,11 @@
 
 .navAccordionItem {
   border-bottom: 1px solid var(--hm-line);
+}
+
+.categoryAccordion :global(.hm-accordion-trigger) {
+  padding-left: var(--hm-space-xs);
+  padding-right: var(--hm-space-xs);
 }
 
 .activeAccordionHeader :global(.hm-accordion-trigger) {

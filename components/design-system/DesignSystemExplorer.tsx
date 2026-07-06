@@ -87,7 +87,6 @@ export default function DesignSystemExplorer({
   const [activeSlugs, setActiveSlugs] = useState<Record<string, string>>(initialActiveSlugs);
   const [activeAnchor, setActiveAnchor] = useState("#getting-started");
   const [openSection, setOpenSection] = useState<string>(sections[0]?.label ?? "");
-  const ctaItem = toc.items.find((item) => item.href === "#cta") ?? toc.items[toc.items.length - 1];
   const gettingStartedItem = toc.items[0];
 
   useEffect(() => {
@@ -233,17 +232,6 @@ export default function DesignSystemExplorer({
               );
             })}
           </Accordion>
-
-          {ctaItem ? (
-            <a
-              aria-current={activeAnchor === ctaItem.href ? "page" : undefined}
-              className={`${styles.rootLink}${activeAnchor === ctaItem.href ? ` ${styles.active}` : ""}`}
-              href={ctaItem.href}
-              onClick={() => setActiveAnchor(ctaItem.href)}
-            >
-              {ctaItem.label}
-            </a>
-          ) : null}
         </nav>
       </aside>
 
