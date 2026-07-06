@@ -1006,7 +1006,7 @@ button {
   --hm-alert-color: var(--hm-info);
   --hm-alert-soft: var(--hm-info-soft);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   padding: 14px 16px;
   border: 1px solid color-mix(in srgb, var(--hm-alert-color) 28%, transparent);
