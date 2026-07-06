@@ -50,7 +50,7 @@ const caseExamples = {
   "zh-TW": {
     sectionKicker: "問題定義",
     sectionTitle: "用戶痛點：整體策略賺賠看得到，倉位狀態卻看不見",
-    sectionDescription: "CaseSectionHeader 統一 kicker、title 與 optional description，讓 route-specific diagram 或 media 出現前先建立清楚段落層級。",
+    sectionDescription: "CaseSectionHeader 統一 kicker、title 與 optional description，讓 頁面限定 diagram 或 media 出現前先建立清楚段落層級。",
     sectionBody: "主要案例 section 會承載標題、anchor 與內文內容，同時維持 Advantech 案例頁使用的閱讀節奏。",
     cardTitle: "Supporting insight",
     cardBody: "交易者需要在 Crypto Arsenal 裡直接理解倉位方向、數量、入場價、標記價、浮動盈虧，以及距離止盈 / 止損還有多遠。",
@@ -59,13 +59,13 @@ const caseExamples = {
     gridItems: ["倉位狀態不清楚", "手動平倉缺乏信心", "止盈止損設定需要更完整語境"],
     mediaCaption: "Crypto Arsenal 介面現況產品畫面",
     beforeTitle: "AI Chatbot 元件",
-    flowTitle: "寬版分析 board 的 overflow affordance",
+    flowTitle: "寬版分析 board 的 overflow 提示",
     flowBody: "FlowScrollHint 出現在 Advantech AI 功能矩陣與流程 board 這類寬版內容前，用來提示可以橫向滑動；它不是獨立視覺元件。",
     zoomCaption: "ZoomableImage 透過案例 media 與 lightbox wrapper 使用於真實產品截圖。",
     localExceptions: [
-      "Advantech Board 2 / 3：SolutionSection 內的 route-local 多比較 board。",
+      "Advantech Board 2 / 3：SolutionSection 內的 頁面限定多比較 board。",
       "CaseTOC：CaseStudyShell 裡受保護的浮動導覽。",
-      "Laushu task flow：route-local diagram geometry 與 connector endpoints。",
+      "Laushu task flow：頁面限定 diagram geometry 與 connector endpoints。",
       "Crypto matrix / FlowMatrixBoard：視覺敘事矩陣，不是 shared ARIA grid。",
     ],
   },
@@ -147,7 +147,7 @@ const boundaryReferenceGroups = {
   "zh-TW": [
     {
       classification: "Shared pattern",
-      description: "跨公開頁面重複使用的內容或版面慣例；在抽出獨立 component API 前，先以 pattern 管理。",
+      description: "跨公開頁面重複使用的內容或版面慣例；在抽出獨立 元件 API 前，先以 模式 管理。",
     },
     {
       classification: "Shared case-study pattern",
@@ -155,19 +155,19 @@ const boundaryReferenceGroups = {
     },
     {
       classification: "Route-local pattern",
-      description: "與特定故事、資料結構或 route composition 綁定。",
+      description: "與特定故事、資料結構或 頁面組成綁定。",
     },
     {
       classification: "Internal anatomy",
-      description: "依附在 parent component 或 route section 下才有完整意義的內部組成。",
+      description: "依附在 parent 元件 或 頁面 section 下才有完整意義的內部組成。",
     },
     {
       classification: "Internal documentation shell anatomy",
-      description: "只為了支援 design-system documentation shell 本身（如 sidebar navigation、docs layout）而存在的部分，不是通用 portfolio component。",
+      description: "只為了支援 design-system 文件站骨架 本身（如 sidebar navigation、docs 版面）而存在的部分，不是通用 作品集元件。",
     },
     {
       classification: "Extraction candidate",
-      description: "當同一結構跨獨立 route 重複出現時，可重新評估是否提升為 reusable component。",
+      description: "當同一結構跨獨立頁面 重複出現時，可重新評估是否提升為 可重用元件。",
     },
   ],
 } satisfies Record<DesignSystemLocale, Array<{ classification: BoundaryClassification; description: string }>>;
@@ -349,99 +349,99 @@ const boundaryReferenceItems = {
     {
       pattern: "ProjectCard hover overlay",
       classification: "Route-local pattern",
-      currentUsage: "首頁 / Selected Works。",
-      boundary: "綁定 project metadata、cover、logo、tags、CTA 與作品探索用的 hover overlay anatomy。",
-      extractionCondition: "只有當其他產品區塊也需要同一套專案卡片 anatomy、overlay 行為與 CTA model，才重新評估抽象化。",
+      currentUsage: "首頁 Selected Works 區塊。",
+      boundary: "綁定 project metadata、cover、logo、tags、CTA 與作品探索用的 hover overlay 內部組成。",
+      extractionCondition: "只有當其他產品區塊也需要同一套專案卡片 內部組成、overlay 行為與 CTA model，才重新評估抽象化。",
       source: "components/Works.tsx",
       status: "Product-specific portfolio pattern",
-      nextStep: "維持為 route-owned project card pattern。",
+      nextStep: "維持為 頁面自有 project card 模式。",
     },
     {
       pattern: "ProjectTag",
       classification: "Internal anatomy",
       currentUsage: "用在 ProjectCard 裡，呈現 Selected Work card 的 project metadata 與 tone tags。",
-      boundary: "屬於 ProjectCard 的內部組成，用來在 Selected Work card 裡呈現專案 metadata；目前沒有獨立的 tag component contract。",
-      extractionCondition: "只有當 tags 被多個獨立 parent components 重用，且具備穩定 tone、status 或 metadata API 時，才重新評估提升為獨立元件。",
+      boundary: "屬於 ProjectCard 的內部組成，用來在 Selected Work card 裡呈現專案 metadata；目前沒有獨立的 tag 元件契約。",
+      extractionCondition: "只有當 tags 被多個獨立 parent 元件重用，且具備穩定 tone、狀態 或 metadata API 時，才重新評估提升為獨立元件。",
       source: "components/ProjectCard.tsx / styles/home.css",
       status: "ProjectCard internal anatomy",
-      nextStep: "維持在 ProjectCard anatomy 與這份 boundary reference 中說明。",
+      nextStep: "維持在 ProjectCard 內部組成 與這份 邊界參考 中說明。",
     },
     {
       pattern: "SectionHeading",
       classification: "Shared pattern",
       currentUsage: "用於 Home 與 About 等頁面的主要內容區塊開頭，維持一致的 section heading 層級與閱讀節奏。",
-      boundary: "SectionHeading 目前是內容層級慣例，不是獨立 React component；在結構、props 與使用契約被抽出前，不應被文件化為 generic heading component。",
-      extractionCondition: "只有當相同 heading 結構被抽成共用 component，且欄位、語意 heading 規則、spacing 行為與 RWD 需求穩定後，才重新評估提升為 visible component。",
+      boundary: "SectionHeading 目前是內容層級慣例，不是獨立 React 元件；在結構、props 與使用契約被抽出前，不應被文件化為 通用 heading 元件。",
+      extractionCondition: "只有當相同 heading 結構被抽成共用 元件，且欄位、語意 heading 規則、間距 行為與 RWD 需求穩定後，才重新評估提升為 visible 元件。",
       source: "components/Works.tsx / app/about-me/page.tsx / styles/home.css",
       status: "Shared content hierarchy pattern",
-      nextStep: "在穩定 component API 出現前，維持於 Component Boundaries 與 Typography reference 中說明。",
+      nextStep: "在穩定 元件 API 出現前，維持於 Component Boundaries 與 Typography reference 中說明。",
     },
     {
       pattern: "Accordion",
       classification: "Internal documentation shell anatomy",
       currentUsage: "用於 Design System 文件側邊欄，展開或收合導覽分類。",
-      boundary: "Accordion 目前屬於 documentation shell 的內部組成；因為它的 live usage、樣式與互動行為都綁定 design-system navigation sidebar，所以不作為通用 portfolio component 文件化。",
-      extractionCondition: "只有當相同 disclosure pattern 被多個獨立產品區塊重用，且 item、trigger、panel、keyboard 與 accessibility contract 穩定後，才重新評估提升為 visible component。",
+      boundary: "Accordion 目前屬於 文件站骨架 的內部組成；因為它的 實際使用位置、樣式與互動行為都綁定 design-system navigation sidebar，所以不作為通用 作品集元件 文件化。",
+      extractionCondition: "只有當相同 disclosure 模式 被多個獨立產品區塊重用，且 item、觸發、panel、keyboard 與 accessibility 契約穩定後，才重新評估提升為 visible 元件。",
       source: "components/ui/Accordion.tsx / components/design-system/DesignSystemExplorer.tsx / components/design-system/DesignSystemDocsNav.tsx",
       status: "Documentation shell navigation anatomy",
-      nextStep: "維持透過 Component Boundaries 說明；只有當相同 disclosure contract 在 documentation shell 之外被採用時才重新評估。",
+      nextStep: "維持透過 Component Boundaries 說明；只有當相同 disclosure 契約 在 文件站骨架 之外被採用時才重新評估。",
     },
     {
       pattern: "ScrollProgress",
       classification: "Shared case-study pattern",
       currentUsage: "在案例頁長篇內容中顯示閱讀進度，協助使用者理解目前瀏覽位置。",
-      boundary: "它屬於案例頁 shell 行為，因為依賴整頁 scroll position、route 高度、viewport 行為與 fixed navigation offset；不是任務進度或任意流程的通用 Progress 元件。",
-      extractionCondition: "只有當非案例頁也需要相同閱讀進度 affordance，且具備穩定 API 與共用 scroll model 時，才重新評估抽出。",
+      boundary: "它屬於案例頁 骨架 行為，因為依賴整頁 scroll position、頁面高度、視窗行為與 fixed navigation offset；不是任務進度或任意流程的通用 Progress 元件。",
+      extractionCondition: "只有當非案例頁也需要相同閱讀進度 提示，且具備穩定 API 與共用 scroll model 時，才重新評估抽出。",
       source: "components/ScrollProgress.tsx / components/case-study/CaseStudyShell.tsx",
       status: "Case-study shell behavior",
-      nextStep: "維持為 shared case-study pattern 文件。",
+      nextStep: "維持為 共享案例頁模式文件。",
     },
     {
       pattern: "CaseNextNav",
       classification: "Shared case-study pattern",
       currentUsage: "放在案例頁結尾，引導讀者前往下一個專案。",
-      boundary: "它屬於案例頁閱讀流程，依賴案例順序、locale-aware routes、project metadata 與案例模板結尾位置；不是通用 pagination、breadcrumb 或全站 navigation 元件。",
-      extractionCondition: "只有當多個獨立內容區塊也需要相同 next-content navigation pattern，且不再只綁定案例頁時，才重新評估抽出。",
+      boundary: "它屬於案例頁閱讀流程，依賴案例順序、locale-aware 頁面、project metadata 與案例模板結尾位置；不是通用 pagination、breadcrumb 或全站 navigation 元件。",
+      extractionCondition: "只有當多個獨立內容區塊也需要相同 next-content navigation 模式，且不再只綁定案例頁時，才重新評估抽出。",
       source: "components/case-study/CaseStudyShell.tsx",
       status: "Case-study ending navigation pattern",
-      nextStep: "維持為 shared case-study pattern 文件。",
+      nextStep: "維持為 共享案例頁模式文件。",
     },
     {
       pattern: "CaseInfoCard",
       classification: "Shared case-study pattern",
       currentUsage: "在案例頁 overview 區塊呈現角色、時程、範圍、工具或專案背景等結構化 metadata。",
-      boundary: "它屬於案例頁模板的組成結構，語意來自 case overview context，而不是通用 Card component contract。",
-      extractionCondition: "只有當相同 metadata card contract 被多個獨立路由重用，且欄位、variants 與 accessibility requirements 穩定後，才重新評估抽出。",
+      boundary: "它屬於案例頁模板的組成結構，語意來自 case overview 脈絡，而不是通用 Card 元件契約。",
+      extractionCondition: "只有當相同 metadata card 契約被多個獨立路由重用，且欄位、variants 與 accessibility requirements 穩定後，才重新評估抽出。",
       source: "components/case-study/CaseInfoGrid.tsx / components/case-study/CaseHero.tsx",
       status: "Case-study hero metadata anatomy",
-      nextStep: "維持為 shared case-study pattern 文件。",
+      nextStep: "維持為 共享案例頁模式文件。",
     },
     {
       pattern: "SocialLink",
       classification: "Internal anatomy",
       currentUsage: "用在 Footer social link group，連到 LinkedIn 與 GitHub profile。",
-      boundary: "屬於 Footer 的內部組成；語意依賴 footer 收尾區塊、外部連結行為、icon swap 與 accessible label。",
-      extractionCondition: "只有當同一套 social link contract 被多個獨立 surface 重用，且 icon、label、external-link 與 accessibility 行為穩定時，才重新評估提升為獨立元件。",
+      boundary: "屬於 Footer 的內部組成；語意依賴 footer 收尾區塊、外部連結行為、icon swap 與 accessible 標籤。",
+      extractionCondition: "只有當同一套 social link 契約被多個獨立 表面重用，且 icon、標籤、external-link 與 accessibility 行為穩定時，才重新評估提升為獨立元件。",
       source: "components/Footer.tsx / styles/tokens.css",
       status: "Footer internal anatomy",
-      nextStep: "維持在 Footer anatomy 與這份 boundary reference 中說明。",
+      nextStep: "維持在 Footer 內部組成 與這份 邊界參考 中說明。",
     },
     {
       pattern: "HeroBadge",
       classification: "Internal anatomy",
       currentUsage: "用於首頁 Hero 內的小型身份／狀態提示；About education 區塊也借用相同 class 以維持視覺一致性。",
-      boundary: "HeroBadge 目前是 Hero 的內部組成，不是獨立 Badge component；它尚未提供穩定的 label、tone、icon 或 status API。",
-      extractionCondition: "只有當 badge-like UI 在多個獨立區塊中重複出現，且 label、tone、icon、語意與 accessibility 契約穩定後，才重新評估抽出。",
+      boundary: "HeroBadge 目前是 Hero 的內部組成，不是獨立 Badge 元件；它尚未提供穩定的 標籤、tone、icon 或 狀態 API。",
+      extractionCondition: "只有當 badge-like UI 在多個獨立區塊中重複出現，且 標籤、tone、icon、語意與 accessibility 契約穩定後，才重新評估抽出。",
       source: "components/Hero.tsx / app/about-me/page.tsx / styles/home.css",
       status: "Hero internal anatomy",
-      nextStep: "維持為 Hero anatomy；若 contract 重複出現，未來再評估 generic Badge。",
+      nextStep: "維持為 Hero 內部組成；若 契約重複出現，未來再評估 通用 Badge。",
     },
     {
       pattern: "ContactMethod",
       classification: "Internal anatomy",
-      currentUsage: "用在 Contact route 的資訊卡中，呈現 email、電話、LinkedIn 與 GitHub actions。",
-      boundary: "屬於 Contact 區塊的內部組成，用來在該路由脈絡中呈現聯絡方式；目前沒有獨立的 contact-method component contract。",
-      extractionCondition: "只有當 contact method cards 被多個獨立 surface 重用，且 icon、label、action 與 accessibility 行為穩定時，才重新評估提升為獨立元件。",
+      currentUsage: "用在 Contact 頁面 的資訊卡中，呈現 email、電話、LinkedIn 與 GitHub actions。",
+      boundary: "屬於 Contact 區塊的內部組成，用來在該路由脈絡中呈現聯絡方式；目前沒有獨立的 contact-method 元件契約。",
+      extractionCondition: "只有當 contact method cards 被多個獨立 表面重用，且 icon、標籤、action 與 accessibility 行為穩定時，才重新評估提升為獨立元件。",
       source: "components/Contact.tsx / styles/contact.css",
       status: "Contact route internal anatomy",
       nextStep: "維持在 Contact section boundaries 中說明，不作為獨立 Data Entry catalog item。",
@@ -450,71 +450,71 @@ const boundaryReferenceItems = {
       pattern: "Advantech Board 2 / Board 3",
       classification: "Route-local pattern",
       currentUsage: "Advantech SolutionSection 的需量超約預警與設備能耗異常分析 scenario boards。",
-      boundary: "multi-comparison layout、copy density、comparison axis 與 AI proposal evaluation 都和 Advantech business logic 綁定。",
+      boundary: "multi-comparison 版面、copy density、comparison axis 與 AI proposal evaluation 都和 Advantech business logic 綁定。",
       extractionCondition: "只有第二個以上案例出現相同結構與互動需求時，才考慮 componentize。",
       source: "app/advantech/sections/SolutionSection.tsx",
       status: "Project-specific visual board",
-      nextStep: "在其他案例出現同結構前，維持 route composition。",
+      nextStep: "在其他案例出現同結構前，維持 頁面組成。",
     },
     {
       pattern: "YearRail",
       classification: "Route-local pattern",
-      currentUsage: "About route 的經歷時間軸。",
+      currentUsage: "About 頁面 的經歷時間軸。",
       boundary: "綁定 `.experience-card[data-year]`、About 頁 chronology、section anchors 與 scroll-reading behavior；不是通用 timeline 或 pagination 元件。",
-      extractionCondition: "只有當另一個獨立 route 也需要相同 year-anchor rail，且具備共用語意、鍵盤期待與不綁特定 route 的 section mapping 時，才重新評估提升。",
+      extractionCondition: "只有當另一個獨立頁面 也需要相同 year-anchor rail，且具備共用語意、鍵盤期待與不綁特定 頁面 的 section mapping 時，才重新評估提升。",
       source: "components/YearRail.tsx / app/about-me/page.tsx",
       status: "About timeline navigation pattern",
-      nextStep: "保留在 route-local boundary 文件中，不作為通用 Navigation visible component。",
+      nextStep: "保留在 頁面限定 邊界 文件中，不作為通用 Navigation visible 元件。",
     },
     {
       pattern: "ExperienceCard",
       classification: "Route-local pattern",
-      currentUsage: "用在 About route 的 experience timeline，並與 YearRail anchors 配對。",
-      boundary: "屬於 About 頁面的時間軸模式，語意依賴 About route 的內容模型、YearRail anchor 與時間序閱讀流程；不是通用 Card component。",
-      extractionCondition: "只有當相同 experience card contract 被多個獨立 routes 重用，且欄位、timeline behavior 與 accessibility requirements 穩定時，才重新評估提升。",
+      currentUsage: "用在 About 頁面 的 experience timeline，並與 YearRail anchors 配對。",
+      boundary: "屬於 About 頁面的時間軸模式，語意依賴 About 頁面 的內容模型、YearRail anchor 與時間序閱讀流程；不是通用 Card 元件。",
+      extractionCondition: "只有當相同 experience card 契約被多個獨立頁面 重用，且欄位、timeline behavior 與 accessibility requirements 穩定時，才重新評估提升。",
       source: "app/about-me/page.tsx / components/YearRail.tsx",
       status: "About timeline content pattern",
-      nextStep: "維持在 About timeline / YearRail boundary 中說明。",
+      nextStep: "維持在 About timeline / YearRail 邊界 中說明。",
     },
     {
       pattern: "SkillCategoryCard",
       classification: "Route-local pattern",
       currentUsage: "用於 About 頁面的 skills 區塊，整理能力分類、工具與學習重點。",
-      boundary: "SkillCategoryCard 屬於 About route 的內容模型；其欄位、tone class 與語意都依賴 About skills 的敘事結構。",
-      extractionCondition: "只有當相同 skill/category card contract 被多個獨立路由重用，且欄位、variants 與 accessibility requirements 穩定後，才重新評估抽出。",
+      boundary: "SkillCategoryCard 屬於 About 頁面 的內容模型；其欄位、tone class 與語意都依賴 About skills 的敘事結構。",
+      extractionCondition: "只有當相同 skill/category card 契約被多個獨立路由重用，且欄位、variants 與 accessibility requirements 穩定後，才重新評估抽出。",
       source: "app/about-me/page.tsx / data/about.ts / styles/about.css",
       status: "About skills content pattern",
-      nextStep: "維持為 About route pattern，不作為 generic Data Display card。",
+      nextStep: "維持為 About 頁面模式，不作為 通用 Data Display card。",
     },
     {
       pattern: "Laushu task flow",
       classification: "Route-local pattern",
-      currentUsage: "Laushu case route 的任務流程圖與 route-level flow CSS。",
+      currentUsage: "Laushu 案例頁 的任務流程圖與 頁面-level flow CSS。",
       boundary: "diagram geometry、connector endpoints、min-width rules 與 step relationship 都和此專案流程綁定。",
-      extractionCondition: "只有多個 route 需要同一套 diagram grammar，且不需要塞入 case-specific connector logic，才重新評估。",
+      extractionCondition: "只有多個 頁面 需要同一套 diagram grammar，且不需要塞入 case-specific connector logic，才重新評估。",
       source: "app/laushu/components/TaskFlowDiagrams.tsx",
       status: "Story-specific flow visualization",
-      nextStep: "維持為 route-owned diagram grammar。",
+      nextStep: "維持為 頁面自有 diagram grammar。",
     },
     {
       pattern: "Crypto matrix / FlowMatrixBoard",
       classification: "Route-local pattern",
       currentUsage: "Crypto Arsenal ResearchSection 的平倉與 TP / SL flow analysis matrices。",
-      boundary: "用來說明 crypto product risk / decision structure 的 visual storytelling matrix，不是 reusable data table contract。",
-      extractionCondition: "只有重複案例需要同樣的矩陣語意、導覽與 accessibility contract，才重新評估。",
+      boundary: "用來說明 crypto product risk / decision structure 的 visual storytelling matrix，不是 可重用 data table 契約。",
+      extractionCondition: "只有重複案例需要同樣的矩陣語意、導覽與 accessibility 契約，才重新評估。",
       source: "app/crypto-arsenal/components/FlowMatrixBoard.tsx",
       status: "Project-specific matrix",
-      nextStep: "維持為 case-specific matrix pattern。",
+      nextStep: "維持為 case-specific matrix 模式。",
     },
     {
       pattern: "BeforeAfterPanel",
       classification: "Internal anatomy",
       currentUsage: "BeforeAfterNarrativeFrame 的 internal part。",
-      boundary: "BeforeAfterPanel 是 BeforeAfterNarrativeFrame 的 internal anatomy。正式 route 採用 parent frame；panel 只在該 frame 內渲染 labeled state panels。",
-      extractionCondition: "只有 panel 離開 BeforeAfterNarrativeFrame，並在多個獨立 parent 中形成 standalone shared contract，才重新評估。",
+      boundary: "BeforeAfterPanel 是 BeforeAfterNarrativeFrame 的 內部組成。正式頁面 採用 parent frame；panel 只在該 frame 內渲染 labeled state panels。",
+      extractionCondition: "只有 panel 離開 BeforeAfterNarrativeFrame，並在多個獨立 parent 中形成 獨立 shared 契約，才重新評估。",
       source: "components/case-study/BeforeAfterPanel.tsx",
       status: "Internal part",
-      nextStep: "保留在 BeforeAfterNarrativeFrame anatomy；不要呈現成 standalone route-level pattern。",
+      nextStep: "保留在 BeforeAfterNarrativeFrame 內部組成；不要呈現成 獨立頁面層級模式。",
     },
   ],
 } satisfies Record<DesignSystemLocale, BoundaryReferenceItem[]>;
@@ -523,13 +523,13 @@ function getCopy(locale: DesignSystemLocale) {
   const zh = locale === "zh-TW";
 
   return {
-    contractOnly: zh ? "Contract-only：作品集目前沒有正式使用" : "Contract-only: no current live usage in portfolio",
+    contractOnly: zh ? "僅保留契約：作品集目前沒有正式使用" : "Contract-only: no current live usage in portfolio",
     referenceStyle: zh ? "Reference-style example" : "Reference-style example",
     liveUsage: zh ? "真實使用位置" : "Live usage",
     source: zh ? "來源" : "Source",
-    noLiveUsage: zh ? "目前正式作品集 route 尚未直接使用。" : "No current live usage in portfolio routes.",
-    futureContract: zh ? "這個 contract 先保留給未來產品介面或維護一致性。" : "This contract exists for future product surfaces or maintenance consistency.",
-    notProductionExample: zh ? "這不是目前正式站的 production example。" : "This is not a current production example.",
+    noLiveUsage: zh ? "目前正式作品集頁面尚未直接使用。" : "No current live usage in portfolio routes.",
+    futureContract: zh ? "這個 契約 先保留給未來產品介面或維護一致性。" : "This contract exists for future product surfaces or maintenance consistency.",
+    notProductionExample: zh ? "這不是目前正式站範例。" : "This is not a current production example.",
     navbarBehavior: zh
       ? ["locale-aware links", "desktop / mobile 共用 nav items", "LanguageSwitcher 放在 Navbar 內", "scroll hide / restore"]
       : ["locale-aware links", "shared desktop / mobile nav items", "LanguageSwitcher lives inside Navbar", "scroll hide / restore"],
@@ -669,7 +669,7 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
   return (
     <DemoBlock
       className={styles.caseTocDemo}
-      contextLabel={contextLabel ?? (zh ? "真實使用位置：CaseStudyShell / Advantech case route" : "Real usage: CaseStudyShell / Advantech case route")}
+      contextLabel={contextLabel ?? (zh ? "真實使用位置：CaseStudyShell / Advantech 案例頁" : "Real usage: CaseStudyShell / Advantech case route")}
     >
       <section aria-label={zh ? "CaseTOC production 視覺狀態" : "CaseTOC production visual state"}>
         <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
@@ -779,7 +779,7 @@ export default function ComponentDemo({
   }, [languageMenuOpen]);
 
   if (!type) {
-    return <p className={styles.demoFallback}>{zh ? "此 pattern 以正式作品集使用情境為準。" : "This pattern is documented from its live portfolio usage."}</p>;
+    return <p className={styles.demoFallback}>{zh ? "此 模式 以正式作品集使用情境為準。" : "This pattern is documented from its live portfolio usage."}</p>;
   }
 
   if (type === "button") {
@@ -796,7 +796,7 @@ export default function ComponentDemo({
         <div className={styles.buttonSpecRow} data-button-spec-row>
           <div className={styles.buttonSpecMeta}>
             <p>{zh ? "主要導覽" : "Primary navigation"}</p>
-            <span>{zh ? "Hero 導覽 / route anchor" : "Hero navigation / route anchor"}</span>
+            <span>{zh ? "Hero 導覽 / 頁面 anchor" : "Hero navigation / route anchor"}</span>
             <span>{zh ? "來源：Home hero" : "Source: Home hero"}</span>
           </div>
           <div className={styles.buttonSpecControls}>
@@ -1021,7 +1021,7 @@ export default function ComponentDemo({
     return (
       <ContractOnlyCard
         locale={locale}
-        title={zh ? "Select contract 尚未進入正式作品集" : "Select contract is not in the live portfolio yet"}
+        title={zh ? "Select 契約 尚未進入正式作品集" : "Select contract is not in the live portfolio yet"}
         recommendation={zh ? "若未來 Contact form 增加詢問類型或服務分類，且選項超過四個，再先導入 production flow 後回頭文件化。" : "If the Contact form later adds inquiry type or service-category choices with more than four options, implement it in production first and document the real flow afterward."}
         source="components/ui/Select.tsx"
         status="candidate"
@@ -1033,7 +1033,7 @@ export default function ComponentDemo({
     return (
       <ContractOnlyCard
         locale={locale}
-        title={zh ? "Checkbox contract 目前只保留為候選" : "Checkbox contract is currently a candidate"}
+        title={zh ? "Checkbox 契約 目前只保留為候選" : "Checkbox contract is currently a candidate"}
         recommendation={zh ? "作品集目前沒有多選設定或同意事項需要它；不要為了保留元件而塞進 Contact form。" : "The portfolio currently has no multi-select setting or consent task that needs it; do not force it into the Contact form just to keep the component visible."}
         source="components/ui/Checkbox.tsx"
         status="candidate"
@@ -1045,7 +1045,7 @@ export default function ComponentDemo({
     return (
       <ContractOnlyCard
         locale={locale}
-        title={zh ? "Radio contract 尚未有正式使用情境" : "Radio contract has no current production context"}
+        title={zh ? "Radio 契約 尚未有正式使用情境" : "Radio contract has no current production context"}
         recommendation={zh ? "只有當未來表單出現少量互斥選項，且真的能降低填寫成本時，才導入 production。" : "Introduce it only when a future form has a small set of mutually exclusive options and the control genuinely reduces form effort."}
         source="components/ui/Radio.tsx"
         status="candidate"
@@ -1469,7 +1469,7 @@ export default function ComponentDemo({
     return (
       <ContractOnlyCard
         locale={locale}
-        title={zh ? "Alert contract 目前沒有獨立 live usage" : "Alert contract has no standalone live usage yet"}
+        title={zh ? "Alert 契約 目前沒有獨立 實際使用位置" : "Alert contract has no standalone live usage yet"}
         recommendation={zh ? "Contact form 若未來需要可持續顯示的錯誤摘要，可以先導入 production；目前 Toast 已承擔送出成功 / 失敗回饋。" : "If the Contact form later needs a persistent error summary, implement it in production first. Today, Toast already handles send success and failure feedback."}
         source="components/ui/Alert.tsx"
         status="contract-only"
@@ -1603,5 +1603,5 @@ export default function ComponentDemo({
     );
   }
 
-  return <p className={styles.demoFallback}>{zh ? "正式行為請參考連結的 production source。" : "Live behavior is visible in the linked production source."}</p>;
+  return <p className={styles.demoFallback}>{zh ? "正式行為請參考連結的 production 原始碼。" : "Live behavior is visible in the linked production source."}</p>;
 }

@@ -159,9 +159,9 @@ function iconographyMatrix(locale: DesignSystemLocale) {
       purpose: localized(
         locale,
         "Accordion uses ChevronDown; LanguageSwitcher uses a scoped inline SVG variant for the same dropdown affordance.",
-        "Accordion 使用 ChevronDown；LanguageSwitcher 使用 scoped inline SVG variant 呈現同一種 dropdown affordance。",
+        "Accordion 使用 ChevronDown；LanguageSwitcher 使用 scoped inline SVG variant 呈現同一種 dropdown 提示。",
       ),
-      accessibility: localized(locale, "The trigger owns aria-expanded or label; the chevron shape is decorative.", "展開狀態或 label 由 trigger 承擔；chevron shape 是裝飾性。"),
+      accessibility: localized(locale, "The trigger owns aria-expanded or label; the chevron shape is decorative.", "展開狀態或標籤由觸發元素承擔；chevron shape 是裝飾性。"),
     },
     {
       context: "Modal",
@@ -181,12 +181,12 @@ function iconographyMatrix(locale: DesignSystemLocale) {
     {
       context: "Contact email method",
       purpose: localized(locale, "Mail icon marks the email contact method.", "Mail icon 標示 email 聯絡方式。"),
-      accessibility: localized(locale, "The icon is decorative; visible email label and copy button carry meaning.", "icon 是裝飾性；可見 email label 與複製按鈕承擔語意。"),
+      accessibility: localized(locale, "The icon is decorative; visible email label and copy button carry meaning.", "icon 是裝飾性；可見 email 標籤與複製按鈕承擔語意。"),
     },
     {
       context: "Contact phone method",
       purpose: localized(locale, "Phone icon marks the phone contact method.", "Phone icon 標示 phone 聯絡方式。"),
-      accessibility: localized(locale, "The icon is decorative; visible phone label and copy button carry meaning.", "icon 是裝飾性；可見 phone label 與複製按鈕承擔語意。"),
+      accessibility: localized(locale, "The icon is decorative; visible phone label and copy button carry meaning.", "icon 是裝飾性；可見 phone 標籤與複製按鈕承擔語意。"),
     },
     {
       context: "CaseProposalTabs",
@@ -291,14 +291,14 @@ function tokenGroupsForColors(rows: TokenRow[], locale: DesignSystemLocale) {
     },
     {
       id: "neutral-surface",
-      title: localized(locale, "Neutral / Surface", "中性色 / Surface"),
-      description: localized(locale, "Page, surface, disabled, and subtle separator colors.", "頁面、surface、disabled 與輕分隔色。"),
+      title: localized(locale, "Neutral / Surface", "中性色 / 表面"),
+      description: localized(locale, "Page, surface, disabled, and subtle separator colors.", "頁面、表面、disabled 與輕分隔色。"),
       rows: colorRows.filter((row) => ["--hm-paper", "--hm-surface", "--hm-disabled", "--hm-line", "--hm-line-strong"].includes(row.token)),
     },
     {
       id: "text",
       title: "Text",
-      description: localized(locale, "Primary, secondary, muted, and route-tone text aliases.", "主要、次要、muted 與 route tone 文字 aliases。"),
+      description: localized(locale, "Primary, secondary, muted, and route-tone text aliases.", "主要、次要、muted 與 頁面 tone 文字 aliases。"),
       rows: colorRows.filter((row) => /^--hm-(ink|muted)/.test(row.token) || row.token.startsWith("--text-")),
     },
     {
@@ -790,7 +790,7 @@ export default function DesignSystemDocsPage({
                 <tbody>
                   {(tokenMappings ?? doc.tokens.map((token) => ({
                     token,
-                    role: localized(locale, "Used by the documented component styling contract.", "作為此元件 styling contract 的依據。"),
+                    role: localized(locale, "Used by the documented component styling contract.", "作為此元件 styling 契約的依據。"),
                   }))).map((item) => (
                     <tr key={item.token}>
                       <td><code>{item.token}</code></td>
