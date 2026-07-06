@@ -1226,6 +1226,14 @@
   justify-self: start;
 }
 
+.accordionDemo {
+  justify-items: center;
+}
+
+.accordionPreview {
+  width: min(100%, 480px);
+}
+
 .demoReferenceCard,
 .contractOnlyDemo,
 .contactFieldDemo,

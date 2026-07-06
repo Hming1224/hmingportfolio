@@ -1116,16 +1116,18 @@ export default function ComponentDemo({
       : [["foundations", "Foundations", "Color, type, spacing, and motion tokens."], ["components", "Components", "States and usage documented from production code."]];
 
     return (
-      <Accordion style={{ width: "100%", maxWidth: "480px" }} defaultValue="foundations" type="single">
-        {items.map(([value, title, body]) => (
-          <AccordionItem key={value} value={value}>
-            <AccordionHeader>{title}</AccordionHeader>
-            <AccordionPanel>
-              <p>{body}</p>
-            </AccordionPanel>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <DemoBlock className={styles.accordionDemo} contextLabel={contextLabel ?? (zh ? "Design System 分類導覽" : "Design System category navigation")}>
+        <Accordion className={styles.accordionPreview} defaultValue="foundations" type="single">
+          {items.map(([value, title, body]) => (
+            <AccordionItem key={value} value={value}>
+              <AccordionHeader>{title}</AccordionHeader>
+              <AccordionPanel>
+                <p>{body}</p>
+              </AccordionPanel>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </DemoBlock>
     );
   }
 
