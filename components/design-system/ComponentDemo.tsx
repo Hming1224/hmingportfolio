@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
+import { proposalScenario1Tabs } from "@/app/advantech/data";
 import { getAboutData } from "@/data/about";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
@@ -47,9 +49,6 @@ const caseExamples = {
     beforeTitle: "AI Chatbot component",
     flowTitle: "Overflow affordance for wide analysis boards",
     flowBody: "FlowScrollHint appears before wide content such as Advantech AI feature matrices and process boards. It signals horizontal overflow; it is not a standalone visual component.",
-    proposalTitle: "Advantech proposal tabs",
-    proposalTabs: ["Proposal 1: Alert bar", "Proposal 2: System notification · adopted", "Proposal 3: Chart button · adopted"],
-    proposalBody: "Scenario 1 compares notification patterns for overage risk analysis. The adopted variants are marked with text and visual state.",
     zoomCaption: "ZoomableImage is used through case media and lightbox wrappers for real product screenshots.",
     localExceptions: [
       "Advantech Board 2 / 3: route-local multi-comparison boards in SolutionSection.",
@@ -79,9 +78,6 @@ const caseExamples = {
     beforeTitle: "AI Chatbot 元件",
     flowTitle: "寬版分析 board 的 overflow affordance",
     flowBody: "FlowScrollHint 出現在 Advantech AI 功能矩陣與流程 board 這類寬版內容前，用來提示可以橫向滑動；它不是獨立視覺元件。",
-    proposalTitle: "Advantech proposal tabs",
-    proposalTabs: ["提案一：警示通知欄", "提案二：系統通知 · 採用", "提案三：圖表按鈕 · 採用"],
-    proposalBody: "Scenario 1 比較需量超約分析的通知入口，採用方案需要同時用文字與視覺狀態標記。",
     zoomCaption: "ZoomableImage 透過案例 media 與 lightbox wrapper 使用於真實產品截圖。",
     localExceptions: [
       "Advantech Board 2 / 3：SolutionSection 內的 route-local 多比較 board。",
@@ -604,7 +600,6 @@ export default function ComponentDemo({
   const firstExperience = aboutData.experiences[0];
   const [copied, setCopied] = useState(false);
   const [contactReviewPreviewOpen, setContactReviewPreviewOpen] = useState(false);
-  const [activeProposal, setActiveProposal] = useState(1);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [languageDemoLocale, setLanguageDemoLocale] = useState<DesignSystemLocale>(locale);
   const languageDemoRef = useRef<HTMLDivElement | null>(null);
@@ -1281,27 +1276,10 @@ export default function ComponentDemo({
   }
 
   if (type === "proposal-tabs") {
-    const proposals = caseCopy.proposalTabs;
     return (
-      <div className={styles.proposalTabsDemo}>
-        <p className={styles.demoUsageLine}>Advantech / ProposalTabs / Scenario 1</p>
-        <h3>{caseCopy.proposalTitle}</h3>
-        <div className={styles.liveTabsList} role="tablist">
-          {proposals.map((tab, index) => (
-            <button
-              aria-selected={activeProposal === index}
-              className={activeProposal === index ? styles.isSelectedDemoTab : undefined}
-              key={tab}
-              onClick={() => setActiveProposal(index)}
-              role="tab"
-              type="button"
-            >{tab}</button>
-          ))}
-        </div>
-        <div className={styles.proposalPanelDemo}>
-          <strong>{proposals[activeProposal]}</strong>
-          <p>{caseCopy.proposalBody}</p>
-        </div>
+      <div className={`${styles.proposalTabsDemo} theme-advantech`}>
+        <p className={styles.demoUsageLine}>Advantech / SolutionSection / Scenario 1</p>
+        <AdvantechProposalTabs defaultTab={1} tabs={proposalScenario1Tabs} />
       </div>
     );
   }

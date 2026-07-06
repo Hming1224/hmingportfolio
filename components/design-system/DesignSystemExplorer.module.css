@@ -871,24 +871,32 @@
 .content {
   display: grid;
   min-width: 0;
+  overflow-x: clip;
   gap: var(--hm-space-xl);
 }
 
 .categorySection {
   display: grid;
   gap: var(--hm-space-md);
+  min-width: 0;
+  overflow-x: clip;
   padding-top: var(--hm-space-2xl);
   border-top: 1px solid var(--hm-line);
   scroll-margin-top: 100px;
 }
 
 .activeDoc {
+  max-width: 100%;
   min-width: 0;
+  overflow-x: clip;
 }
 
 .docArticle {
   width: min(100%, 880px);
+  max-width: 100%;
+  min-width: 0;
   margin: 0 auto;
+  overflow-x: clip;
 }
 
 .componentDocArticle {
@@ -953,6 +961,9 @@
 }
 
 .docSection {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
   margin-top: var(--hm-space-xl);
 }
 
@@ -1016,6 +1027,9 @@
 .anatomyTableWrap,
 .propsTableWrap,
 .componentTokenTableWrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-md);
@@ -1089,6 +1103,7 @@
 .codeGuidance {
   display: grid;
   gap: var(--hm-space-sm);
+  min-width: 0;
 }
 
 .codeMeta {
@@ -1096,6 +1111,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--hm-space-2xs);
+  max-width: 100%;
+  min-width: 0;
   color: var(--text-secondary);
   font-size: var(--hm-fs-sm);
   line-height: 1.5;
@@ -1108,6 +1125,8 @@
 
 .codeMeta code,
 .codeBlock {
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-md);
   background: var(--hm-surface);
@@ -2213,7 +2232,7 @@
   display: grid;
   gap: var(--hm-space-sm);
   width: 100%;
-  max-width: 760px;
+  max-width: 980px;
   min-width: 0;
 }
 
@@ -2229,6 +2248,10 @@
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-lg);
   background: var(--hm-paper);
+}
+
+.proposalTabsDemo :global(.cs-proposal) {
+  min-width: 0;
 }
 
 .caseHeroMediaDemo,
