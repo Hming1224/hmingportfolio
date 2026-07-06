@@ -46,6 +46,7 @@ Apply those shared rules to this project.
 - Foundation pages should not duplicate their page title and description inside the content card.
 - Examples and visual samples are for visual/state demonstration only; explanatory content belongs in guidance sections or reference tables.
 - The documented subject must be production-backed.
+- Production-backed examples must match the live route composition, styling, slot order, and data shape; rendering the right component with the wrong children structure is not enough.
 - Supporting context may use wireframes or simplified placeholders when it helps explain the subject without distracting from it.
 - Supporting context must not be presented as the documented component.
 - Do not use realistic production-heavy visuals for supporting context if they compete with the documented subject.

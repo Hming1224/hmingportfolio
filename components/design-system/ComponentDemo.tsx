@@ -1162,12 +1162,12 @@ export default function ComponentDemo({
 
   if (type === "case-section-header") {
     return (
-      <section className={`cs-page theme-crypto ${styles.caseSectionHeaderSourceDemo}`}>
+      <section className={`cs-page theme-crypto-arsenal ${styles.caseSectionHeaderSourceDemo}`}>
         <CaseSectionHeader
-          description={caseCopy.sectionDescription}
           kicker={caseCopy.sectionKicker}
           title={caseCopy.sectionTitle}
         />
+        <p className="cs-section-lead">{caseCopy.sectionDescription}</p>
       </section>
     );
   }
