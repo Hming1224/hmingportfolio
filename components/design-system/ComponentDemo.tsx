@@ -16,6 +16,8 @@ import { Modal } from "../ui/Modal";
 import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import CaseBeforeAfter from "../case-study/CaseBeforeAfter";
+import CaseHero from "../case-study/CaseHero";
+import type { CaseInfoItem } from "../case-study";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import ZoomableImage from "../case-study/ZoomableImage";
 import {
@@ -1059,24 +1061,25 @@ export default function ComponentDemo({
   }
 
   if (type === "case-hero") {
+    const infoItems: CaseInfoItem[] = caseCopy.caseHeroItems.map(([label, value]) => ({
+      label,
+      value,
+    }));
+
     return (
-      <article className={styles.caseHeroDemo}>
-        <div className={styles.caseHeroMediaDemo}>
-          <Image src="/projects/crypto-arsenal/cover/hero-cover.webp" alt="" fill sizes="720px" loading="eager" />
-        </div>
-        <div className={styles.caseHeroCopyDemo}>
-          <p>{caseCopy.caseHeroMeta}</p>
-          <h3>{caseCopy.caseHeroTitle}</h3>
-          <div className={styles.caseInfoGridDemo}>
-            {caseCopy.caseHeroItems.map(([label, value]) => (
-              <article key={label}>
-                <small>{label}</small>
-                <strong>{value}</strong>
-              </article>
-            ))}
-          </div>
-        </div>
-      </article>
+      <div className={`cs-page theme-crypto-arsenal ${styles.caseHeroDemo}`}>
+        <CaseHero
+          cover={{
+            src: "/projects/crypto-arsenal/cover/hero-cover.webp",
+            alt: zh ? "Crypto Arsenal 量化交易平台介面主視覺" : "Crypto Arsenal quantitative trading platform interface",
+            unoptimized: true,
+          }}
+          meta={<span className="cs-tags">{caseCopy.caseHeroMeta}</span>}
+          title={caseCopy.caseHeroTitle}
+          infoItems={infoItems}
+          infoGridClassName="cs-info-row--divided"
+        />
+      </div>
     );
   }
 

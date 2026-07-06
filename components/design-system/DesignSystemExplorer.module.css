@@ -2198,7 +2198,6 @@
   font-weight: var(--hm-fw-semibold);
 }
 
-.caseHeroDemo,
 .caseSectionDemo,
 .caseCardDemo,
 .caseGridDemo,
@@ -2215,7 +2214,6 @@
   min-width: 0;
 }
 
-.caseHeroDemo,
 .caseSectionDemo,
 .caseCardDemo,
 .beforeAfterSourceDemo,
@@ -2228,6 +2226,40 @@
   background: var(--hm-paper);
 }
 
+.caseHeroDemo {
+  --page-gutter: clamp(20px, 5vw, 48px);
+  display: block;
+  width: 100%;
+  max-width: 980px;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-paper);
+}
+
+.caseHeroDemo :global(.cs-hero-cover) {
+  height: clamp(220px, 28vw, 360px);
+}
+
+.caseHeroDemo :global(.cs-hero-info) {
+  padding: var(--hm-space-lg) var(--page-gutter);
+}
+
+.caseHeroDemo :global(.cs-hero-meta) {
+  margin-bottom: var(--hm-space-sm);
+}
+
+.caseHeroDemo :global(.cs-title) {
+  margin-bottom: var(--hm-space-md);
+  font-size: clamp(2rem, 4vw, 3.75rem);
+}
+
+.caseHeroDemo :global(.cs-info-row) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+}
+
 .proposalTabsDemo {
   max-width: 100%;
 }
@@ -2236,7 +2268,6 @@
   min-width: 0;
 }
 
-.caseHeroMediaDemo,
 .caseMediaFrameDemo,
 .beforeAfterImageDemo,
 .zoomImageDemo {
@@ -2247,24 +2278,17 @@
   background: var(--hm-surface);
 }
 
-.caseHeroMediaDemo {
-  min-height: 220px;
-}
-
-.caseHeroMediaDemo img,
 .caseMediaFrameDemo img,
 .beforeAfterImageDemo img {
   object-fit: cover;
 }
 
-.caseHeroCopyDemo,
 .caseSectionHeaderDemo,
 .proposalPanelDemo {
   display: grid;
   gap: var(--hm-space-2xs);
 }
 
-.caseHeroCopyDemo p,
 .caseSectionHeaderDemo span {
   margin: 0;
   color: var(--hm-purple);
@@ -2272,7 +2296,6 @@
   font-weight: var(--hm-fw-semibold);
 }
 
-.caseHeroCopyDemo h3,
 .caseSectionHeaderDemo h3,
 .caseCardDemo h3,
 .caseGridDemo h3,
@@ -2284,7 +2307,6 @@
   line-height: 1.3;
 }
 
-.caseHeroCopyDemo p,
 .caseSectionHeaderDemo p,
 .caseCardDemo p,
 .caseCardDemo span,
@@ -2293,36 +2315,6 @@
 .proposalPanelDemo p {
   color: var(--text-secondary);
   line-height: 1.65;
-}
-
-.caseInfoGridDemo {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--hm-space-xs);
-  width: 100%;
-  max-width: 760px;
-}
-
-.caseInfoGridDemo article {
-  display: grid;
-  gap: var(--hm-space-3xs);
-  min-width: 0;
-  padding: var(--hm-space-sm);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-md);
-  background: var(--hm-surface);
-}
-
-.caseInfoGridDemo small {
-  color: var(--hm-purple);
-  font-size: var(--hm-fs-xs);
-  font-weight: var(--hm-fw-semibold);
-}
-
-.caseInfoGridDemo strong {
-  color: var(--text-heading);
-  font-size: var(--hm-fs-sm);
-  line-height: 1.5;
 }
 
 .caseCardDemo {
@@ -2724,7 +2716,6 @@
   .anatomyGrid,
   .referenceCardGrid,
   .localExceptionGrid,
-  .caseInfoGridDemo,
   .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -2776,9 +2767,12 @@
     order: 0;
   }
 
-  .caseHeroMediaDemo,
   .caseMediaFrameDemo {
     min-height: 180px;
+  }
+
+  .caseHeroDemo :global(.cs-info-row) {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .beforeAfterImageDemo {
