@@ -41,6 +41,7 @@ function docSectionForAnchor(
     "social-link": "local-exceptions",
     "contact-method": "local-exceptions",
     "experience-card": "local-exceptions",
+    "section-heading": "local-exceptions",
   };
   const requestedSlug = anchor.replace(/^#/, "");
   const slug = slugAliases[requestedSlug] ?? requestedSlug;

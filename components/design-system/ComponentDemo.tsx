@@ -106,6 +106,7 @@ const advantechTocSections = {
 } satisfies Record<DesignSystemLocale, TocSection[]>;
 
 type BoundaryClassification =
+  | "Shared pattern"
   | "Shared case-study pattern"
   | "Route-local pattern"
   | "Internal anatomy"
@@ -125,6 +126,10 @@ type BoundaryReferenceItem = {
 const boundaryReferenceGroups = {
   en: [
     {
+      classification: "Shared pattern",
+      description: "Repeated content or layout conventions shared across public pages before they become standalone component APIs.",
+    },
+    {
       classification: "Shared case-study pattern",
       description: "Reusable across case-study routes, but tied to the case-study reading flow or template.",
     },
@@ -142,6 +147,10 @@ const boundaryReferenceGroups = {
     },
   ],
   "zh-TW": [
+    {
+      classification: "Shared pattern",
+      description: "跨公開頁面重複使用的內容或版面慣例；在抽出獨立 component API 前，先以 pattern 管理。",
+    },
     {
       classification: "Shared case-study pattern",
       description: "可在案例頁之間重複使用，但仍綁定 case-study reading flow 或案例頁模板。",
@@ -182,6 +191,16 @@ const boundaryReferenceItems = {
       source: "components/ProjectCard.tsx / styles/home.css",
       status: "ProjectCard internal anatomy",
       nextStep: "Keep documented through ProjectCard anatomy and this boundary reference.",
+    },
+    {
+      pattern: "SectionHeading",
+      classification: "Shared pattern",
+      currentUsage: "Used as a shared heading convention across Home and About sections to introduce major content blocks.",
+      boundary: "SectionHeading is currently a content hierarchy convention, not a standalone React component. It should not be documented as a generic heading component until the structure, props, and usage contract are extracted.",
+      extractionCondition: "Promote only if the same heading structure is extracted into a shared component with stable fields, semantic heading rules, spacing behavior, and responsive requirements.",
+      source: "components/Works.tsx / app/about-me/page.tsx / styles/home.css",
+      status: "Shared content hierarchy pattern",
+      nextStep: "Keep referenced through Component Boundaries and Typography until a stable component API exists.",
     },
     {
       pattern: "CaseTOC",
@@ -334,6 +353,16 @@ const boundaryReferenceItems = {
       source: "components/ProjectCard.tsx / styles/home.css",
       status: "ProjectCard internal anatomy",
       nextStep: "維持在 ProjectCard anatomy 與這份 boundary reference 中說明。",
+    },
+    {
+      pattern: "SectionHeading",
+      classification: "Shared pattern",
+      currentUsage: "用於 Home 與 About 等頁面的主要內容區塊開頭，維持一致的 section heading 層級與閱讀節奏。",
+      boundary: "SectionHeading 目前是內容層級慣例，不是獨立 React component；在結構、props 與使用契約被抽出前，不應被文件化為 generic heading component。",
+      extractionCondition: "只有當相同 heading 結構被抽成共用 component，且欄位、語意 heading 規則、spacing 行為與 RWD 需求穩定後，才重新評估提升為 visible component。",
+      source: "components/Works.tsx / app/about-me/page.tsx / styles/home.css",
+      status: "Shared content hierarchy pattern",
+      nextStep: "在穩定 component API 出現前，維持於 Component Boundaries 與 Typography reference 中說明。",
     },
     {
       pattern: "CaseTOC",
@@ -1071,14 +1100,6 @@ export default function ComponentDemo({
           {comingSoonProject ? <ProjectCard project={comingSoonProject} /> : null}
         </div>
       </DemoBlock>
-    );
-  }
-
-  if (type === "section-heading") {
-    return (
-      <div className={styles.liveSectionHeadingDemo}>
-        <span /><h3>{zh ? "精選案例" : "Selected Work"}</h3><span />
-      </div>
     );
   }
 
