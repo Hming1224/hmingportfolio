@@ -1264,9 +1264,6 @@
 .contractOnlyDemo p,
 .demoReferenceCard ul,
 .contractOnlyDemo ul,
-.liveSkillCardDemo p,
-.liveSkillCardDemo h3,
-.liveSkillCardDemo ul,
 .liveExperienceSummary h3,
 .liveExperienceSummary p {
   margin: 0;
@@ -1274,7 +1271,6 @@
 
 .demoReferenceCard h3,
 .contractOnlyDemo h3,
-.liveSkillCardDemo h3,
 .liveExperienceSummary h3 {
   color: var(--text-heading);
   font-size: var(--hm-fs-h4);
@@ -1285,7 +1281,6 @@
 .demoReferenceCard li,
 .contractOnlyDemo p,
 .contractOnlyDemo li,
-.liveSkillCardDemo li,
 .liveExperienceSummary p,
 .liveExperienceSummary span {
   color: var(--text-secondary);
@@ -1293,8 +1288,7 @@
 }
 
 .demoReferenceCard ul,
-.contractOnlyDemo ul,
-.liveSkillCardDemo ul {
+.contractOnlyDemo ul {
   padding-left: var(--hm-space-md);
 }
 
@@ -2089,15 +2083,13 @@
   line-height: 1.65;
 }
 
-.liveExperienceSummary,
-.liveSkillCardDemo {
+.liveExperienceSummary {
   padding: var(--hm-space-md);
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-md);
   background: var(--hm-paper);
 }
 
-.liveSkillCardDemo p,
 .liveExperienceSummary time {
   color: var(--hm-purple);
   font-size: var(--hm-fs-sm);
@@ -2107,19 +2099,6 @@
 .projectCardLivePreview {
   max-width: 100%;
   margin: 0;
-}
-
-.liveHeroBadgeDemo {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0 var(--hm-space-sm);
-  border: 1px solid color-mix(in srgb, var(--hm-purple) 24%, var(--hm-line));
-  border-radius: var(--hm-radius-pill);
-  background: var(--hm-purple-light);
-  color: var(--hm-purple);
-  font-size: var(--hm-fs-sm);
-  font-weight: var(--hm-fw-semibold);
 }
 
 .caseSectionDemo,

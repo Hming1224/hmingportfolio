@@ -62,11 +62,7 @@ export const designSystemSections = [
   {
     label: "Data Display",
     labelZh: "資料展示",
-    items: [
-      "project-card",
-      "skill-category-card",
-      "hero-badge",
-    ].map((slug) => ({ kind: "component" as const, slug })),
+    items: ["project-card"].map((slug) => ({ kind: "component" as const, slug })),
   },
   {
     label: "Case Study",

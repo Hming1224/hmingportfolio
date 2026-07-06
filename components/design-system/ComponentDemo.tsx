@@ -5,7 +5,6 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
 import { proposalScenario1Tabs } from "@/app/advantech/data";
-import { getAboutData } from "@/data/about";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
@@ -253,6 +252,16 @@ const boundaryReferenceItems = {
       nextStep: "Keep referenced under Footer anatomy and this boundary reference.",
     },
     {
+      pattern: "HeroBadge",
+      classification: "Internal anatomy",
+      currentUsage: "Used inside the homepage Hero as a small identity/status cue. A similar class is reused in the About education area for visual consistency.",
+      boundary: "HeroBadge is currently Hero anatomy, not a standalone Badge component. It does not expose a stable label, tone, icon, or status API.",
+      extractionCondition: "Promote only if badge-like UI appears across independent surfaces with a shared contract for label, tone, icon, semantics, and accessibility.",
+      source: "components/Hero.tsx / app/about-me/page.tsx / styles/home.css",
+      status: "Hero internal anatomy",
+      nextStep: "Keep as Hero anatomy; a generic Badge can be considered later if the contract repeats.",
+    },
+    {
       pattern: "ContactMethod",
       classification: "Internal anatomy",
       currentUsage: "Used inside the Contact route information card to present email, phone, LinkedIn, and GitHub actions.",
@@ -291,6 +300,16 @@ const boundaryReferenceItems = {
       source: "app/about-me/page.tsx / components/YearRail.tsx",
       status: "About timeline content pattern",
       nextStep: "Keep documented with the About timeline / YearRail boundary.",
+    },
+    {
+      pattern: "SkillCategoryCard",
+      classification: "Route-local pattern",
+      currentUsage: "Used in the About skills section to group capabilities, tools, and learning focus areas.",
+      boundary: "SkillCategoryCard belongs to the About route content model. Its fields, tone classes, and meaning depend on the About skills storytelling structure.",
+      extractionCondition: "Promote only if the same skill/category card contract is reused across independent routes with stable fields, variants, and accessibility requirements.",
+      source: "app/about-me/page.tsx / data/about.ts / styles/about.css",
+      status: "About skills content pattern",
+      nextStep: "Keep documented as an About route pattern, not a generic Data Display card.",
     },
     {
       pattern: "Laushu task flow",
@@ -415,6 +434,16 @@ const boundaryReferenceItems = {
       nextStep: "維持在 Footer anatomy 與這份 boundary reference 中說明。",
     },
     {
+      pattern: "HeroBadge",
+      classification: "Internal anatomy",
+      currentUsage: "用於首頁 Hero 內的小型身份／狀態提示；About education 區塊也借用相同 class 以維持視覺一致性。",
+      boundary: "HeroBadge 目前是 Hero 的內部組成，不是獨立 Badge component；它尚未提供穩定的 label、tone、icon 或 status API。",
+      extractionCondition: "只有當 badge-like UI 在多個獨立區塊中重複出現，且 label、tone、icon、語意與 accessibility 契約穩定後，才重新評估抽出。",
+      source: "components/Hero.tsx / app/about-me/page.tsx / styles/home.css",
+      status: "Hero internal anatomy",
+      nextStep: "維持為 Hero anatomy；若 contract 重複出現，未來再評估 generic Badge。",
+    },
+    {
       pattern: "ContactMethod",
       classification: "Internal anatomy",
       currentUsage: "用在 Contact route 的資訊卡中，呈現 email、電話、LinkedIn 與 GitHub actions。",
@@ -453,6 +482,16 @@ const boundaryReferenceItems = {
       source: "app/about-me/page.tsx / components/YearRail.tsx",
       status: "About timeline content pattern",
       nextStep: "維持在 About timeline / YearRail boundary 中說明。",
+    },
+    {
+      pattern: "SkillCategoryCard",
+      classification: "Route-local pattern",
+      currentUsage: "用於 About 頁面的 skills 區塊，整理能力分類、工具與學習重點。",
+      boundary: "SkillCategoryCard 屬於 About route 的內容模型；其欄位、tone class 與語意都依賴 About skills 的敘事結構。",
+      extractionCondition: "只有當相同 skill/category card contract 被多個獨立路由重用，且欄位、variants 與 accessibility requirements 穩定後，才重新評估抽出。",
+      source: "app/about-me/page.tsx / data/about.ts / styles/about.css",
+      status: "About skills content pattern",
+      nextStep: "維持為 About route pattern，不作為 generic Data Display card。",
     },
     {
       pattern: "Laushu task flow",
@@ -725,8 +764,6 @@ export default function ComponentDemo({
   const featuredProject = projects.find((project) => project.slug === "advantech") ?? projects[0];
   const comingSoonProject = projects.find((project) => project.status === "coming-soon");
   const contactData = getContactData(locale);
-  const aboutData = getAboutData(locale);
-  const firstSkill = aboutData.skillCategories[0];
   const [copied, setCopied] = useState(false);
   const [contactReviewPreviewOpen, setContactReviewPreviewOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
@@ -1101,24 +1138,6 @@ export default function ComponentDemo({
         </div>
       </DemoBlock>
     );
-  }
-
-  if (type === "skill-card") {
-    return (
-      <article className={styles.liveSkillCardDemo}>
-        <p>{zh ? "About / 專業技能" : "About / Skills"}</p>
-        <h3>{firstSkill.title}</h3>
-        <ul>
-          {firstSkill.skills.slice(0, 5).map((skill) => (
-            <li key={skill}>{skill}</li>
-          ))}
-        </ul>
-      </article>
-    );
-  }
-
-  if (type === "hero-badge") {
-    return <div className={styles.liveHeroBadgeDemo}>{zh ? "可接案 / 產品設計與 AI 協作" : "Available / Product design and AI collaboration"}</div>;
   }
 
   if (type === "case-hero") {

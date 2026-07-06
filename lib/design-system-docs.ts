@@ -1361,8 +1361,6 @@ const componentSeeds: ComponentSeed[] = [
       { label: "Boundary", value: "專案敘事卡片，不是 generic Card" },
     ],
   },
-  { slug: "skill-category-card", title: "SkillCategoryCard", titleZh: "技能分類卡", category: "Data Display", source: "app/about-me/page.tsx", demo: "skill-card", states: ["default", "hover", "focus"], usage: ["將技能依 Product、Design、AI 等主題分組。", "內容保持可掃讀，不將每個單項技能再做成卡片。"], tokens: ["--hm-surface", "--hm-ink", "--hm-radius-md", "--hm-duration-base"], accessibility: ["確保列表使用 <ul> 與 <li> 語意。"] },
-  { slug: "hero-badge", title: "HeroBadge", titleZh: "Hero 徽章", category: "Data Display", source: "components/Hero.tsx", demo: "hero-badge", states: ["default", "animated", "reduced motion"], usage: ["在首頁 Hero 簡短標示目前職涯定位或求職狀態。", "只保留一個核心訊息，避免取代主標題。"], tokens: ["--hm-purple", "--hm-surface", "--hm-radius-pill", "--hm-duration-base"], accessibility: ["動畫必須尊重 prefers-reduced-motion。"] },
   {
     slug: "case-hero",
     title: "CaseHero",
@@ -2820,8 +2818,11 @@ const references: DesignSystemDoc[] = [
     demo: "local-exceptions",
     references: [
       "components/Works.tsx",
+      "components/Hero.tsx",
       "app/about-me/page.tsx",
+      "data/about.ts",
       "styles/home.css",
+      "styles/about.css",
       "components/CaseTOC.tsx",
       "components/case-study/CaseStudyShell.tsx",
       "components/ScrollProgress.tsx",

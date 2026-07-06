@@ -16,6 +16,7 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 - Batch 7C-4 update: `CaseHero` stays visible because the shared `CaseHero` source is adopted by Advantech, Crypto Arsenal, and Laushu hero sections. The docs example now renders the real `CaseHero` component with Advantech route-shaped timeline, team, responsibilities, and software metadata instead of a string-joined reconstruction.
 - Batch 7C-7 update: `ZoomableImage` and `FlowScrollHint` stay visible because both are real case-study source components with production route usage. `ZoomableImage` now renders the real interactive component with a production image inside `CaseMedia`; `FlowScrollHint` now renders the real component immediately before a genuine horizontal overflow sibling so its own visibility contract is exercised.
 - Batch 7D-3A update: `SectionHeading` was reclassified from the visible Data Display catalog to Component Boundaries / Shared pattern, with a Typography reference note. Evidence: About has a local `function SectionHeading`, Home / Works uses the `.section-heading` markup convention, and there is no standalone exported component or stable component API.
+- Batch 7D-3B update: `HeroBadge` was reclassified from the visible Data Display catalog to Component Boundaries / Internal anatomy. `SkillCategoryCard` was reclassified from the visible Data Display catalog to Component Boundaries / Route-local pattern.
 
 ## Migration Matrix
 
@@ -43,9 +44,9 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 | SectionHeading | Reclassified to Component Boundaries / Shared pattern | `components/Works.tsx`, `app/about-me/page.tsx`, `styles/home.css` | Homepage and About section headings | Pattern documentation in Component Boundaries plus Typography reference note | Medium | Move to Component Boundaries | About has local `function SectionHeading`, Home / Works uses the `.section-heading` markup convention, and no standalone exported component or stable component API exists. | Keep as a shared content hierarchy pattern; promote only after a real shared component API is extracted. |
 | ProjectTag | Reclassified to Component Boundaries / Internal anatomy | `components/ProjectCard.tsx` / `styles/home.css` | Selected Works project metadata inside `ProjectCard` | Parent anatomy reference | Low | Move to Component Boundaries | No standalone exported tag component or independent API exists; tags are rendered as `.project-tags span` inside `ProjectCard` and toned by the parent project card. | Keep under ProjectCard anatomy and Component Boundaries; promote only if a stable tag contract repeats across independent parent components. |
 | SocialLink | Reclassified to Component Boundaries / Internal anatomy | `components/Footer.tsx` / `styles/tokens.css` | Footer LinkedIn and GitHub links | Parent anatomy reference | Low | Move to Component Boundaries | No standalone exported social link component exists; `.social-link` is a Footer anchor pattern with icon swap and external-link accessibility behavior. | Keep under Footer anatomy and Component Boundaries; promote only if the same social link contract repeats across independent surfaces. |
-| SkillCategoryCard | Visible: Data Display | `app/about-me/page.tsx` | About skills section | Likely route-local pattern | Medium | Needs Hming decision | Could be useful for About content, but not clearly a shared component. | Decide whether About route-local patterns belong in visible catalog. |
+| SkillCategoryCard | Reclassified to Component Boundaries / Route-local pattern | `app/about-me/page.tsx`, `data/about.ts`, `styles/about.css` | About skills section | Pattern documentation in Component Boundaries | Medium | Move to Component Boundaries | No standalone exported component or stable independent API exists; the card is generated from About `skillCategories`, `toneClass`, and route-specific skills storytelling. | Keep as an About route pattern; promote only if the same skill/category card contract repeats across independent routes. |
 | ExperienceCard | Reclassified to Component Boundaries / Route-local pattern | `app/about-me/page.tsx` / `components/YearRail.tsx` | About route experience timeline with `.experience-card[data-year]` anchors | Parent route pattern reference | Medium | Move to Component Boundaries | No standalone exported component exists; the card meaning depends on About route chronology, `data-year`, `id=\"year-*\"`, and the YearRail anchor / scroll-reading model. | Keep under About timeline / YearRail boundaries; promote only if the same experience-card contract repeats across independent routes. |
-| HeroBadge | Visible: Data Display | Hero / availability badge | Homepage hero | Sample/reference-style badge | Medium | Needs Hming decision | Could be a public brand signal, but may be too small/local for catalog visibility. | Decide whether tiny hero atoms should remain visible or move under Hero anatomy. |
+| HeroBadge | Reclassified to Component Boundaries / Internal anatomy | `components/Hero.tsx`, `app/about-me/page.tsx`, `styles/home.css` | Homepage Hero identity/status cue; About education badge reuses the class for visual consistency | Hero anatomy reference | Medium | Move to Component Boundaries | No standalone exported component or stable Badge API exists; `.hero-badge` belongs to Hero anatomy and does not define a generic label, tone, icon, or status contract. | Keep as Hero anatomy; consider generic Badge later only if the contract repeats across independent surfaces. |
 
 ## Remaining Sample-only / Docs-only Examples
 
@@ -99,10 +100,12 @@ Batch 7C-7 kept `ZoomableImage` and `FlowScrollHint` visible. `ZoomableImage` is
 - ProjectTag
 - SocialLink
 - ContactMethod
+- HeroBadge
 
 ### Reclassified to Component Boundaries / Route-local pattern
 
 - ExperienceCard
+- SkillCategoryCard
 
 ### Move to Reference only
 
@@ -117,11 +120,6 @@ Batch 7C-7 kept `ZoomableImage` and `FlowScrollHint` visible. `ZoomableImage` is
 ### Backlog
 
 - EmptyState
-
-### Needs Hming decision
-
-- SkillCategoryCard
-- HeroBadge
 
 ## No Runtime Changes
 
