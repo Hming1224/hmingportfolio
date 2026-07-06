@@ -93,16 +93,8 @@ const messages = {
       title: "快速導覽",
       items: [
         { href: "#getting-started", label: "系統概念" },
-        { href: "#foundations", label: "基礎規範" },
-        { href: "#general", label: "一般元件" },
-        { href: "#shell", label: "網站骨架" },
-        { href: "#navigation", label: "導覽" },
-        { href: "#data-entry", label: "資料輸入" },
-        { href: "#data-display", label: "資料展示" },
-        { href: "#case-study", label: "案例頁" },
-        { href: "#feedback", label: "系統回饋" },
-        { href: "#reference", label: "參考資料" },
-        { href: "#cta", label: "下一步" },
+        { href: "#catalog", label: "Design System 目錄" },
+        { href: "#where-to-go-next", label: "下一步" },
       ],
     },
     introduction: {

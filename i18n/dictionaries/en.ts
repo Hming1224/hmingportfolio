@@ -93,16 +93,8 @@ const messages = {
       title: "On this page",
       items: [
         { href: "#getting-started", label: "Getting Started" },
-        { href: "#foundations", label: "Foundations" },
-        { href: "#general", label: "General" },
-        { href: "#shell", label: "Shell" },
-        { href: "#navigation", label: "Navigation" },
-        { href: "#data-entry", label: "Data Entry" },
-        { href: "#data-display", label: "Data Display" },
-        { href: "#case-study", label: "Case Study" },
-        { href: "#feedback", label: "Feedback" },
-        { href: "#reference", label: "Reference" },
-        { href: "#cta", label: "Where to go next" },
+        { href: "#catalog", label: "Design System Catalog" },
+        { href: "#where-to-go-next", label: "Where to go next" },
       ],
     },
     introduction: {

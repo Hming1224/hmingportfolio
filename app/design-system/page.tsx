@@ -59,7 +59,7 @@ export default async function DesignSystemPage() {
               <Button href="#getting-started">
                 {copy.hero.primaryAction}
               </Button>
-              <Button variant="secondary" href="#reference">
+              <Button variant="secondary" href="#tokens">
                 {copy.hero.secondaryAction}
               </Button>
             </div>
@@ -134,7 +134,7 @@ export default async function DesignSystemPage() {
         </>
       }
       bottomContent={
-        <section className={styles.cta} key="cta" id="cta">
+        <section className={styles.cta} key="where-to-go-next" id="where-to-go-next">
             <div>
               <p className={styles.eyebrow}>{copy.cta.eyebrow}</p>
               <h2 className={styles.ctaTitle}>{copy.cta.title}</h2>

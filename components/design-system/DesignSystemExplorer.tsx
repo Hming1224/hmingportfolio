@@ -24,6 +24,12 @@ function sectionForAnchor(sections: DesignSystemSection[], anchor: string) {
   return sections.find((section) => anchor === `#${sectionId(section)}`);
 }
 
+function firstDocInSection(section: DesignSystemSection, docs: DesignSystemDoc[]) {
+  return section.items
+    .map((item) => docs.find((doc) => doc.slug === item.slug && doc.kind === item.kind))
+    .find(Boolean);
+}
+
 function docSectionForAnchor(
   sections: DesignSystemSection[],
   docs: DesignSystemDoc[],
@@ -33,6 +39,9 @@ function docSectionForAnchor(
     "border-radius": "radius",
     "component-boundaries": "local-exceptions",
     "token-reference": "tokens",
+    reference: "tokens",
+    "future-candidates": "future-backlog",
+    backlog: "future-backlog",
     "scroll-progress": "local-exceptions",
     "case-next-nav": "local-exceptions",
     "case-info-card": "local-exceptions",
@@ -77,20 +86,40 @@ export default function DesignSystemExplorer({
   topContent?: ReactNode;
   bottomContent?: ReactNode;
 }) {
-  const initialActiveSlugs = Object.fromEntries(
-    sections.map((section) => [
-      section.label,
-      section.items
-        .map((item) => docs.find((doc) => doc.slug === item.slug && doc.kind === item.kind))
-        .find(Boolean)?.slug ?? "",
-    ]),
-  );
-  const [activeSlugs, setActiveSlugs] = useState<Record<string, string>>(initialActiveSlugs);
+  const initialCatalogSection = sections[0];
+  const initialCatalogDoc = initialCatalogSection ? firstDocInSection(initialCatalogSection, docs) : undefined;
+  const [activeCatalogItem, setActiveCatalogItem] = useState({
+    sectionLabel: initialCatalogSection?.label ?? "",
+    slug: initialCatalogDoc?.slug ?? "",
+  });
   const [activeAnchor, setActiveAnchor] = useState("#getting-started");
   const [openSection, setOpenSection] = useState<string>(sections[0]?.label ?? "");
   const gettingStartedItem = toc.items[0];
   const measureRef = useRef<HTMLDivElement>(null);
   const [navWidth, setNavWidth] = useState<number | null>(null);
+
+  const activeCatalogDoc = docs.find((doc) => doc.slug === activeCatalogItem.slug);
+
+  const activateCatalogDoc = (
+    section: DesignSystemSection,
+    doc: DesignSystemDoc,
+    options: { updateHash?: boolean; scroll?: boolean } = {},
+  ) => {
+    const { updateHash = true, scroll = true } = options;
+    setOpenSection(section.label);
+    setActiveAnchor("#catalog");
+    setActiveCatalogItem({ sectionLabel: section.label, slug: doc.slug });
+
+    if (updateHash) {
+      window.history.pushState(null, "", `#${doc.slug}`);
+    }
+
+    if (scroll) {
+      window.requestAnimationFrame(() => {
+        document.getElementById("catalog")?.scrollIntoView({ block: "start" });
+      });
+    }
+  };
 
   useLayoutEffect(() => {
     const container = measureRef.current;
@@ -110,33 +139,50 @@ export default function DesignSystemExplorer({
       const matchingDoc = docSectionForAnchor(sections, docs, hash);
 
       if (matchingDoc) {
-        const href = `#${sectionId(matchingDoc.section)}`;
-        setActiveAnchor(href);
-        setOpenSection(matchingDoc.section.label);
-        setActiveSlugs((current) => ({ ...current, [matchingDoc.section.label]: matchingDoc.doc.slug }));
+        activateCatalogDoc(matchingDoc.section, matchingDoc.doc, { updateHash: false });
+        return;
+      }
+
+      if (hash === "#where-to-go-next" || hash === "#next-step" || hash === "#cta") {
+        setActiveAnchor("#where-to-go-next");
         window.requestAnimationFrame(() => {
-          document.getElementById(sectionId(matchingDoc.section))?.scrollIntoView({ block: "start" });
+          document.getElementById("where-to-go-next")?.scrollIntoView({ block: "start" });
         });
         return;
       }
 
+      if (hash === "#getting-started") {
+        setActiveAnchor(hash);
+        window.requestAnimationFrame(() => {
+          document.getElementById("getting-started")?.scrollIntoView({ block: "start" });
+        });
+        return;
+      }
+
+      if (matchingSection) {
+        const doc = firstDocInSection(matchingSection, docs);
+        if (doc) activateCatalogDoc(matchingSection, doc, { updateHash: false });
+        return;
+      }
+
       setActiveAnchor(hash);
-      if (matchingSection) setOpenSection(matchingSection.label);
     };
 
     updateActiveAnchor();
     window.addEventListener("hashchange", updateActiveAnchor);
+    window.addEventListener("popstate", updateActiveAnchor);
 
     return () => {
       window.removeEventListener("hashchange", updateActiveAnchor);
+      window.removeEventListener("popstate", updateActiveAnchor);
     };
   }, [docs, sections]);
 
   useEffect(() => {
     const sectionAnchors = [
       "#getting-started",
-      ...sections.map((section) => `#${sectionId(section)}`),
-      "#cta",
+      "#catalog",
+      "#where-to-go-next",
     ];
     let frameId = 0;
 
@@ -218,24 +264,21 @@ export default function DesignSystemExplorer({
             className={styles.categoryAccordion}
             onValueChange={(value) => {
               const nextValue = Array.isArray(value) ? value[0] : value;
-              if (!nextValue) return;
+              if (!nextValue) {
+                setOpenSection("");
+                return;
+              }
 
               const nextSection = sections.find((section) => section.label === nextValue);
               if (!nextSection) return;
 
-              const href = `#${sectionId(nextSection)}`;
               setOpenSection(nextValue);
-              setActiveAnchor(href);
-              window.history.replaceState(null, "", href);
-              document.getElementById(sectionId(nextSection))?.scrollIntoView({ block: "start" });
             }}
             type="single"
             value={openSection}
           >
             {sections.map((section) => {
-              const id = sectionId(section);
-              const href = `#${id}`;
-              const isSectionActive = activeAnchor === href;
+              const isSectionActive = activeAnchor === "#catalog" && activeCatalogItem.sectionLabel === section.label;
 
               return (
                 <AccordionItem className={styles.navAccordionItem} key={section.label} value={section.label}>
@@ -247,18 +290,17 @@ export default function DesignSystemExplorer({
                       {section.items.map((item) => {
                         const doc = docs.find((candidate) => candidate.slug === item.slug && candidate.kind === item.kind);
                         if (!doc) return null;
-                        const isActive = activeAnchor === href && activeSlugs[section.label] === doc.slug;
+                        const isActive = activeAnchor === "#catalog" && activeCatalogItem.sectionLabel === section.label && activeCatalogItem.slug === doc.slug;
 
                         return (
                           <a
                             aria-current={isActive ? "page" : undefined}
                             className={`${styles.componentLink}${isActive ? ` ${styles.active}` : ""}`}
-                            href={href}
+                            href={`#${doc.slug}`}
                             key={`${doc.kind}-${doc.slug}`}
-                            onClick={() => {
-                              setOpenSection(section.label);
-                              setActiveAnchor(href);
-                              setActiveSlugs((current) => ({ ...current, [section.label]: doc.slug }));
+                            onClick={(event) => {
+                              event.preventDefault();
+                              activateCatalogDoc(section, doc);
                             }}
                           >
                             {localized(locale, doc.title, doc.titleZh)}
@@ -276,19 +318,11 @@ export default function DesignSystemExplorer({
 
       <div className={styles.content}>
         {topContent}
-        {sections.map((section) => {
-          const id = sectionId(section);
-          const activeSlug = activeSlugs[section.label];
-          const activeDoc = docs.find((doc) => doc.slug === activeSlug);
-
-          return (
-            <section className={styles.categorySection} id={id} key={section.label}>
-              <div className={styles.activeDoc}>
-                {activeDoc ? <DesignSystemDocsPage doc={activeDoc} locale={locale} /> : null}
-              </div>
-            </section>
-          );
-        })}
+        <section className={styles.categorySection} id="catalog">
+          <div className={styles.activeDoc}>
+            {activeCatalogDoc ? <DesignSystemDocsPage doc={activeCatalogDoc} locale={locale} /> : null}
+          </div>
+        </section>
         {bottomContent}
       </div>
     </div>
