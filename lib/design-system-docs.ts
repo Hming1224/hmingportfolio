@@ -823,6 +823,7 @@ const componentSeeds: ComponentSeed[] = [
       notes: [
         "Use `WorkCategoryTabs` when matching the homepage Selected Work pattern.",
         "The wrapper keeps the production `project-tabs*` structure and styles shared between homepage and docs.",
+        "The tabs control is production-backed; the panel content in this documentation example is simplified wireframe context so the control remains the focus.",
         "Keyboard arrow navigation is not currently implemented by the primitive.",
       ],
     },
@@ -838,6 +839,7 @@ const componentSeeds: ComponentSeed[] = [
       notes: [
         "需要對齊首頁 Selected Work pattern 時，使用 `WorkCategoryTabs`。",
         "這個 wrapper 讓首頁與文件站共用正式 `project-tabs*` 結構與樣式。",
+        "Tabs 控制元件沿用正式站實作；文件中的 panel 內容使用簡化 wireframe context，讓焦點留在切換控制本體。",
         "目前 primitive 尚未實作方向鍵切換。",
       ],
     },

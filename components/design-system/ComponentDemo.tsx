@@ -904,14 +904,21 @@ export default function ComponentDemo({
         <WorkCategoryTabs
           ariaLabel={zh ? "精選案例分類" : "Selected Work categories"}
           tabs={tabs.map((tab) => {
-            const activeProjects = projects.filter((project) => project.category === tab.value);
+            const itemCount = tab.value === "enterprise" ? 3 : 2;
 
             return {
               ...tab,
               content: (
-                <div className={`projects-list ${styles.tabProjectList}`}>
-                  {activeProjects.slice(0, 1).map((project) => (
-                    <ProjectCard project={project} key={project.slug} />
+                <div className={styles.tabsWireframePanel} aria-label={`${tab.label} panel context`}>
+                  {Array.from({ length: itemCount }, (_, index) => (
+                    <div className={styles.tabsWireframeCard} key={`${tab.value}-${index}`}>
+                      <span className={styles.tabsWireframeThumb} />
+                      <span className={styles.tabsWireframeLines}>
+                        <span className={styles.tabsWireframeLine} />
+                        <span className={styles.tabsWireframeLine} />
+                        <span className={styles.tabsWireframeLine} />
+                      </span>
+                    </div>
                   ))}
                 </div>
               ),

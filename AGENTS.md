@@ -45,3 +45,7 @@ Apply those shared rules to this project.
 - Tags and chips must distinguish variants, states, statuses, or mixed classifications. Do not use chips as decoration.
 - Foundation pages should not duplicate their page title and description inside the content card.
 - Examples and visual samples are for visual/state demonstration only; explanatory content belongs in guidance sections or reference tables.
+- The documented subject must be production-backed.
+- Supporting context may use wireframes or simplified placeholders when it helps explain the subject without distracting from it.
+- Supporting context must not be presented as the documented component.
+- Do not use realistic production-heavy visuals for supporting context if they compete with the documented subject.

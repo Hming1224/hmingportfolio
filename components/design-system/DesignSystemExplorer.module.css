@@ -1921,8 +1921,53 @@
   box-shadow: var(--shadow-sm);
 }
 
-.tabProjectList {
-  gap: var(--hm-space-lg);
+.tabsWireframePanel {
+  display: grid;
+  gap: var(--hm-space-sm);
+  max-width: 640px;
+}
+
+.tabsWireframeCard {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--hm-space-sm);
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: color-mix(in srgb, var(--hm-paper) 82%, var(--hm-surface));
+}
+
+.tabsWireframeThumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--hm-radius-sm);
+  background: color-mix(in srgb, var(--hm-purple-soft) 48%, var(--hm-paper));
+}
+
+.tabsWireframeLines {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+}
+
+.tabsWireframeLine {
+  display: block;
+  height: 10px;
+  border-radius: var(--hm-radius-pill);
+  background: color-mix(in srgb, var(--text-secondary) 16%, transparent);
+}
+
+.tabsWireframeLine:nth-child(1) {
+  width: min(240px, 80%);
+}
+
+.tabsWireframeLine:nth-child(2) {
+  width: min(320px, 100%);
+}
+
+.tabsWireframeLine:nth-child(3) {
+  width: min(180px, 56%);
 }
 
 .caseTocDemo {
