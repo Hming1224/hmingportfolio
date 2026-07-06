@@ -2238,28 +2238,6 @@
   background: var(--hm-paper);
 }
 
-.caseHeroDemo :global(.cs-hero-cover) {
-  height: clamp(220px, 28vw, 360px);
-}
-
-.caseHeroDemo :global(.cs-hero-info) {
-  padding: var(--hm-space-lg) var(--page-gutter);
-}
-
-.caseHeroDemo :global(.cs-hero-meta) {
-  margin-bottom: var(--hm-space-sm);
-}
-
-.caseHeroDemo :global(.cs-title) {
-  margin-bottom: var(--hm-space-md);
-  font-size: clamp(2rem, 4vw, 3.75rem);
-}
-
-.caseHeroDemo :global(.cs-info-row) {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--hm-space-sm);
-}
-
 .proposalTabsDemo {
   max-width: 100%;
 }
@@ -2769,10 +2747,6 @@
 
   .caseMediaFrameDemo {
     min-height: 180px;
-  }
-
-  .caseHeroDemo :global(.cs-info-row) {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .beforeAfterImageDemo {

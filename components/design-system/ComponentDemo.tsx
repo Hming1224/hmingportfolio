@@ -31,14 +31,6 @@ import styles from "./DesignSystemExplorer.module.css";
 
 const caseExamples = {
   en: {
-    caseHeroTitle: "Giving Traders Back Control: Manual Close & Take-Profit / Stop-Loss Flow Design for a Quant Trading Platform",
-    caseHeroMeta: "WEB · FinTech · Crypto · UX Design · UI Design",
-    caseHeroItems: [
-      ["Timeline", "2023.06 - 2023.08"],
-      ["Team", "1 product owner · 1 UI/UX designer · 2 full-stack engineers"],
-      ["Role", "UI/UX Designer"],
-      ["Scope", "Secondary research · wireframes · prototype · handoff video"],
-    ],
     sectionKicker: "Problem Definition",
     sectionTitle: "Users could see strategy PnL, but not the actual position state",
     sectionDescription: "The shared CaseSectionHeader keeps the kicker, title, and optional description consistent before route-specific diagrams or media appear.",
@@ -60,14 +52,6 @@ const caseExamples = {
     ],
   },
   "zh-TW": {
-    caseHeroTitle: "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計",
-    caseHeroMeta: "WEB · FinTech · Crypto · UX Design · UI Design",
-    caseHeroItems: [
-      ["時間進程", "2023.06 - 2023.08"],
-      ["團隊成員", "1 位產品負責人 · 1 位 UIUX 設計師 · 2 位全端工程師"],
-      ["我的角色", "UIUX 設計師"],
-      ["負責項目", "二手研究 · 線框稿 · 原型設計 · 設計交付影片"],
-    ],
     sectionKicker: "問題定義",
     sectionTitle: "用戶痛點：整體策略賺賠看得到，倉位狀態卻看不見",
     sectionDescription: "CaseSectionHeader 統一 kicker、title 與 optional description，讓 route-specific diagram 或 media 出現前先建立清楚段落層級。",
@@ -1061,21 +1045,101 @@ export default function ComponentDemo({
   }
 
   if (type === "case-hero") {
-    const infoItems: CaseInfoItem[] = caseCopy.caseHeroItems.map(([label, value]) => ({
-      label,
-      value,
-    }));
+    const infoItems: CaseInfoItem[] = [
+      {
+        label: zh ? "時間進程" : "Timeline",
+        value: (
+          <span className="cs-info-value--timeline">
+            <span>2024.06</span>
+            <span className="cs-info-timeline-sep" aria-hidden="true">–</span>
+            <span>2024.08</span>
+          </span>
+        ),
+      },
+      {
+        label: zh ? "團隊成員" : "Team",
+        value: zh ? (
+          <>
+            2 位設計師
+            <br />
+            2 位後端工程師
+            <br />
+            1 位 PM
+          </>
+        ) : (
+          <>
+            2 Designers
+            <br />
+            2 Backend Engineers
+            <br />
+            1 PM
+          </>
+        ),
+      },
+      { label: zh ? "我的角色" : "My Role", value: zh ? "UIUX 設計師" : "UI/UX Designer" },
+      {
+        label: zh ? "負責項目" : "Responsibilities",
+        value: zh ? (
+          <>
+            競品分析
+            <br />
+            終端使用者訪談
+            <br />
+            線框稿
+            <br />
+            原型設計
+            <br />
+            產品行銷影片
+          </>
+        ) : (
+          <>
+            Competitive Analysis
+            <br />
+            End-user Interviews
+            <br />
+            Wireframing
+            <br />
+            Prototyping
+            <br />
+            Product Marketing Videos
+          </>
+        ),
+      },
+      {
+        label: zh ? "使用軟體" : "Software Used",
+        value: (
+          <>
+            Figma
+            <br />
+            FigJam
+            <br />
+            Canva
+            <br />
+            Screen studio
+            <br />
+            Adobe After Effects
+          </>
+        ),
+      },
+    ];
 
     return (
-      <div className={`cs-page theme-crypto-arsenal ${styles.caseHeroDemo}`}>
+      <div className={`cs-page theme-advantech ${styles.caseHeroDemo}`}>
         <CaseHero
           cover={{
-            src: "/projects/crypto-arsenal/cover/hero-cover.webp",
-            alt: zh ? "Crypto Arsenal 量化交易平台介面主視覺" : "Crypto Arsenal quantitative trading platform interface",
+            src: "/projects/advantech/cover/hero-cover.webp",
+            alt: "WISE-iEMS ECOWatch UI",
             unoptimized: true,
           }}
-          meta={<span className="cs-tags">{caseCopy.caseHeroMeta}</span>}
-          title={caseCopy.caseHeroTitle}
+          meta={
+            <>
+              <span className="cs-badge">Early Design Project</span>
+              <span className="cs-tags">WEB・B2B・AI Chatbot・UX Design・UI Design</span>
+            </>
+          }
+          title={zh
+            ? "賦能廠務人員與系統整合商：以生成式 AI 優化 EcoWatch 與 HVAC 維運使用流程"
+            : "Empowering Facility Operators and System Integrators: Streamlining EcoWatch and HVAC Operations via Generative AI"}
           infoItems={infoItems}
           infoGridClassName="cs-info-row--divided"
         />

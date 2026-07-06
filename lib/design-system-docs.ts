@@ -1377,8 +1377,8 @@ const componentSeeds: ComponentSeed[] = [
     statusZh: "正式案例元件",
     description: "Introduces a case study with cover media, project metadata, and overview context.",
     descriptionZh: "用於案例頁開頭，以封面、專案 metadata 與 overview context 建立閱讀入口。",
-    exampleLabel: "Crypto Arsenal / HeroSection",
-    exampleLabelZh: "Crypto Arsenal / HeroSection",
+    exampleLabel: "Advantech / HeroSection",
+    exampleLabelZh: "Advantech / HeroSection",
     demo: "case-hero",
     usage: [
       "Use at the start of case-study routes.",
@@ -1424,7 +1424,7 @@ const componentSeeds: ComponentSeed[] = [
     ],
     codeGuidance: {
       importPath: "components/case-study/CaseHero.tsx",
-      example: "import { CaseHero, type CaseInfoItem } from \"@/components/case-study\";\n\nconst infoItems: CaseInfoItem[] = [\n  { label: \"Timeline\", value: \"2023.06 - 2023.08\" },\n  { label: \"Role\", value: \"UI/UX Designer\" },\n];\n\n<CaseHero\n  cover={{ src: \"/projects/crypto-arsenal/cover/hero-cover.webp\", alt: \"Crypto Arsenal quantitative trading platform interface\" }}\n  meta={<span className=\"cs-tags\">WEB・FinTech・UX Design</span>}\n  title=\"Giving Traders Back Control\"\n  infoItems={infoItems}\n  infoGridClassName=\"cs-info-row--divided\"\n/>",
+      example: "import { CaseHero, type CaseInfoItem } from \"@/components/case-study\";\n\nconst infoItems: CaseInfoItem[] = [\n  {\n    label: \"Timeline\",\n    value: <span className=\"cs-info-value--timeline\"><span>2024.06</span><span className=\"cs-info-timeline-sep\" aria-hidden=\"true\">–</span><span>2024.08</span></span>,\n  },\n  { label: \"Team\", value: <>2 Designers<br />2 Backend Engineers<br />1 PM</> },\n  { label: \"My Role\", value: \"UI/UX Designer\" },\n  { label: \"Responsibilities\", value: <>Competitive Analysis<br />End-user Interviews<br />Wireframing<br />Prototyping<br />Product Marketing Videos</> },\n];\n\n<CaseHero\n  cover={{ src: \"/projects/advantech/cover/hero-cover.webp\", alt: \"WISE-iEMS ECOWatch UI\", unoptimized: true }}\n  meta={<><span className=\"cs-badge\">Early Design Project</span><span className=\"cs-tags\">WEB・B2B・AI Chatbot・UX Design・UI Design</span></>}\n  title=\"Empowering Facility Operators and System Integrators\"\n  infoItems={infoItems}\n  infoGridClassName=\"cs-info-row--divided\"\n/>",
       props: [
         { name: "cover", type: "{ src: string; alt: string; objectPosition?: CSSProperties['objectPosition']; sizes?: string; unoptimized?: boolean }", description: "Production cover image data for the case hero." },
         { name: "meta", type: "ReactNode", description: "Optional project tags or badge content above the title." },
@@ -1439,7 +1439,7 @@ const componentSeeds: ComponentSeed[] = [
     },
     codeGuidanceZh: {
       importPath: "components/case-study/CaseHero.tsx",
-      example: "import { CaseHero, type CaseInfoItem } from \"@/components/case-study\";\n\nconst infoItems: CaseInfoItem[] = [\n  { label: \"時間進程\", value: \"2023.06 - 2023.08\" },\n  { label: \"我的角色\", value: \"UI/UX Designer\" },\n];\n\n<CaseHero\n  cover={{ src: \"/projects/crypto-arsenal/cover/hero-cover.webp\", alt: \"Crypto Arsenal 量化交易平台介面主視覺\" }}\n  meta={<span className=\"cs-tags\">WEB・FinTech・UX Design</span>}\n  title=\"重掌交易主控權\"\n  infoItems={infoItems}\n  infoGridClassName=\"cs-info-row--divided\"\n/>",
+      example: "import { CaseHero, type CaseInfoItem } from \"@/components/case-study\";\n\nconst infoItems: CaseInfoItem[] = [\n  {\n    label: \"時間進程\",\n    value: <span className=\"cs-info-value--timeline\"><span>2024.06</span><span className=\"cs-info-timeline-sep\" aria-hidden=\"true\">–</span><span>2024.08</span></span>,\n  },\n  { label: \"團隊成員\", value: <>2 位設計師<br />2 位後端工程師<br />1 位 PM</> },\n  { label: \"我的角色\", value: \"UIUX 設計師\" },\n  { label: \"負責項目\", value: <>競品分析<br />終端使用者訪談<br />線框稿<br />原型設計<br />產品行銷影片</> },\n];\n\n<CaseHero\n  cover={{ src: \"/projects/advantech/cover/hero-cover.webp\", alt: \"WISE-iEMS ECOWatch UI\", unoptimized: true }}\n  meta={<><span className=\"cs-badge\">Early Design Project</span><span className=\"cs-tags\">WEB・B2B・AI Chatbot・UX Design・UI Design</span></>}\n  title=\"賦能廠務人員與系統整合商\"\n  infoItems={infoItems}\n  infoGridClassName=\"cs-info-row--divided\"\n/>",
       props: [
         { name: "cover", type: "{ src: string; alt: string; objectPosition?: CSSProperties['objectPosition']; sizes?: string; unoptimized?: boolean }", description: "案例 Hero 使用的正式封面圖片資料。" },
         { name: "meta", type: "ReactNode", description: "標題上方的 optional project tags 或 badge content。" },
