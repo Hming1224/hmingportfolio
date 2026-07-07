@@ -16,9 +16,9 @@ import Button from "../ui/Button";
 import { Modal } from "../ui/Modal";
 import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
-import CaseBeforeAfter from "../case-study/CaseBeforeAfter";
 import CaseHero from "../case-study/CaseHero";
 import { CaseCard, CaseGrid, CaseMedia, CaseSection, CaseSectionHeader, type CaseInfoItem } from "../case-study";
+import { BeforeAfterPanel } from "../case-study/BeforeAfterPanel";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import FlowScrollHint from "../case-study/FlowScrollHint";
 import ZoomableImage from "../case-study/ZoomableImage";
@@ -109,19 +109,74 @@ function FakeImagePlaceholder({ className }: { className?: string }) {
   return (
     <div className={classNames(styles.fakeImagePlaceholder, className)} aria-hidden="true">
       <svg className={styles.fakeImageIcon} viewBox="0 0 71 71" fill="none" focusable="false">
-        <rect className={styles.fakeImageIconBase} width="71" height="71" rx="12" />
-        <path className={styles.fakeImageIconBack} d="M10 71L40 36.5L71 67.5V71H10Z" />
-        <path className={styles.fakeImageIconFront} d="M0 71L33 33L66 71H0Z" />
-        <circle className={styles.fakeImageIconSun} cx="20" cy="17" r="7" />
+        <path
+          className={styles.fakeImageIconBase}
+          d="M 0 0 L 10.44109120965004 0 L 60.53152185678482 0 L 71 0 L 71 10.644176229834557 L 71 43.78931784629822 L 71 59.89065110683441 L 71 71 L 59.980786979198456 71 L 10.950571119785309 71 L 0 71 L 0 59.95735055208206 L 0 57.754618406295776 L 0 10.541073724627495 L 0 0 Z"
+        />
+        <path
+          className={styles.fakeImageIconBack}
+          d="M 41.80194388769793 0 C 43.29682664574073 1.1746894529978236 44.94355051349451 3.0824684555983355 46.35086208188811 4.474040746285784 L 56.71305518789667 14.846905128580254 L 59.648457070178736 17.831609126149264 C 60.05220022636033 18.23833376120072 60.915431831459884 19.134707235211238 61.35155487060547 19.445540239594514 L 61.35155487060547 35.546874034948345 L 61.35155487060547 46.65622329711914 L 50.332346210199105 46.65622329711914 L 1.302128806430777 46.65622329711914 C 1.1162391605571804 46.518244776249844 0.29301365682114766 46.41840102309877 0 46.3615455529562 L 0.11579088731718001 46.30746148858347 C 0.3415487000946761 45.87133842986728 1.2801493205829197 44.9091640661386 1.644925694362062 44.50001268377386 L 4.58879143610356 41.22694074955207 L 13.3945252227849 31.454872878121165 C 16.294570125662016 28.230335625669387 19.23039202696976 25.036514778556686 22.126623432169186 21.808302888456577 C 22.50235488341662 21.38944448377676 22.964962991908315 20.912273655495458 23.263315525641058 20.441482626877743 C 24.05915338529929 19.937479676746477 26.646355263367656 16.68375414240003 27.47318632164048 15.852762927665152 C 28.127856262861684 15.062818589822665 29.028462750484348 14.337148935847168 29.659350436854787 13.539022954991959 C 31.276819106634846 11.49264203187684 33.159218612045265 9.701762290685025 34.88616875865891 7.768953670822734 L 38.61138203429239 3.611294121292656 C 39.66112813960873 2.418577308076304 40.7192632521274 1.1552754744915696 41.80194388769793 0 Z"
+          transform="translate(9.648427963256836 24.343820571899414)"
+        />
+        <path
+          className={styles.fakeImageIconFront}
+          d="M 0 24.506232566968002 C 0.30208420961245047 24.35147475301826 3.2546149574303738 20.89216402277708 3.7431837171636007 20.354117153994412 L 16.97537927847001 5.815619229955173 C 18.65989590210146 3.972046014779992 20.52635006563251 1.7769413512914578 22.237144989736542 0 C 22.601574683775983 0.49547458268765027 23.413844780453754 1.3172447909033198 23.859605520204475 1.7908785502076117 L 26.84257647310243 4.942821836222285 C 28.89547491729705 7.111303166068087 30.89040782524377 9.406944326464647 32.91175842285156 11.536874893570694 C 32.61340588266872 12.007665887224555 32.15079776417588 12.484836680068204 31.77506630480548 12.903695053641005 C 28.87883483699226 16.131906703994137 25.943012872214815 19.325727313913955 23.04296790664146 22.55026432689166 L 14.23723392958846 32.32233147258838 L 11.29336812420336 35.59540316373161 C 10.928591742538096 36.00455451571024 9.989991101758191 36.9667288079819 9.764233284100024 37.4028518343089 L 9.648442394279554 37.456935894665015 C 9.941456057435381 37.513791360585145 10.764681578968773 37.6136351063212 10.95057122886113 37.75161361694336 L 0 37.75161361694336 L 0 26.70896462233114 L 0 24.506232566968002 Z"
+          transform="translate(0 33.24834442138672)"
+        />
+        <path
+          className={styles.fakeImageIconSun}
+          d="M 6.160112212890684 0.036917607842692185 C 9.929629812039547 -0.35268102840194215 13.301921791875753 2.38567321905466 13.694432512494954 6.154844183075747 C 14.086943233114155 9.924084444948095 11.351154046911448 13.298456755861942 7.582260657395511 13.693879618621752 C 3.809276314323436 14.089718499922785 0.4303985674438772 11.350325210369915 0.037471828296543434 7.5770635571595655 C -0.35545491085079034 3.8037323416023407 2.3865039246812882 0.4269322626285499 6.160112212890684 0.036917607842692185 Z"
+          transform="translate(12.90068244934082 10.328210830688477)"
+        />
       </svg>
     </div>
   );
 }
 
 function BeforeAfterDemoSlot() {
+  return <FakeImagePlaceholder className={styles.beforeAfterPanelImagePlaceholder} />;
+}
+
+function BeforeAfterNarrativeConnector() {
   return (
-    <div className={styles.beforeAfterStateSlot}>
-      <FakeImagePlaceholder className={styles.beforeAfterPanelImagePlaceholder} />
+    <div className="cs-before-after-narrative-connector" aria-hidden="true">
+      <svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" focusable="false">
+        <path
+          d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function BeforeAfterNarrativeComparisonDemo() {
+  return (
+    <div
+      className={classNames(
+        "cs-before-after-narrative cs-before-after-narrative-comparison",
+        styles.beforeAfterComparisonDemo,
+      )}
+    >
+      <BeforeAfterPanel
+        title="Before"
+        tone="cyan"
+        className="cs-before-after-narrative-panel"
+        headerClassName="cs-before-after-narrative-panel-head"
+        bodyClassName="cs-before-after-narrative-panel-body"
+      >
+        <BeforeAfterDemoSlot />
+      </BeforeAfterPanel>
+      <BeforeAfterNarrativeConnector />
+      <BeforeAfterPanel
+        title="After"
+        tone="cyan"
+        className="cs-before-after-narrative-panel"
+        headerClassName="cs-before-after-narrative-panel-head"
+        bodyClassName="cs-before-after-narrative-panel-body"
+      >
+        <BeforeAfterDemoSlot />
+      </BeforeAfterPanel>
     </div>
   );
 }
@@ -1369,13 +1424,8 @@ export default function ComponentDemo({
   if (type === "case-before-after") {
     return (
       <DemoBlock className={styles.beforeAfterSourceDemo} contextLabel={contextLabel}>
-        <div className="cs-page theme-crypto-arsenal">
-          <CaseBeforeAfter
-            beforeLabel="Before"
-            afterLabel="After"
-            before={<BeforeAfterDemoSlot />}
-            after={<BeforeAfterDemoSlot />}
-          />
+        <div className="cs-page theme-advantech">
+          <BeforeAfterNarrativeComparisonDemo />
         </div>
       </DemoBlock>
     );

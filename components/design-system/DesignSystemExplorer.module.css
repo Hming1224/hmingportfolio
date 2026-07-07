@@ -2332,6 +2332,7 @@
 
 .tabsWireframeThumb .fakeImageIcon {
   width: clamp(24px, 36%, 34px);
+  min-width: 0;
 }
 
 .tabsWireframeLines {
@@ -2586,32 +2587,38 @@
   overflow: hidden;
   border: 0;
   border-radius: var(--hm-radius-md);
-  background: color-mix(in srgb, var(--hm-surface) 84%, var(--hm-purple-soft));
+  background: color-mix(in srgb, var(--hm-paper) 58%, var(--hm-disabled));
 }
 
 .fakeImageIcon {
-  width: clamp(44px, 16.2%, 71px);
+  display: block;
+  width: 16.1731207289%;
+  min-width: 44px;
   aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--hm-radius-md);
 }
 
 .fakeImageIconBase {
-  fill: color-mix(in srgb, var(--text-secondary) 14%, var(--hm-surface));
+  fill: var(--hm-disabled);
 }
 
 .fakeImageIconBack {
-  fill: color-mix(in srgb, var(--text-secondary) 38%, var(--hm-surface));
+  fill: color-mix(in srgb, var(--hm-disabled) 62%, var(--text-secondary));
 }
 
 .fakeImageIconFront {
-  fill: color-mix(in srgb, var(--text-secondary) 62%, var(--hm-surface));
+  fill: color-mix(in srgb, var(--hm-disabled) 26%, var(--text-secondary));
 }
 
 .fakeImageIconSun {
-  fill: color-mix(in srgb, var(--hm-paper) 92%, var(--hm-surface));
+  fill: color-mix(in srgb, var(--hm-paper) 64%, var(--hm-disabled));
 }
 
 .caseSectionMediaPlaceholder {
-  min-height: 220px;
+  --cs-object-box-aspect-ratio: 439 / 209;
+  --cs-object-box-height: auto;
+  min-height: 0;
   border-radius: var(--hm-radius-lg);
 }
 
@@ -2850,35 +2857,20 @@
   font-size: var(--hm-fs-sm);
 }
 
-.beforeAfterSourceDemo :global(.cs-before-after),
+.beforeAfterSourceDemo :global(.cs-before-after-narrative-comparison),
 .beforeAfterNarrativeDemo :global(.cs-before-after-narrative) {
   width: 100%;
 }
 
-.beforeAfterStateSlot {
-  display: grid;
-  gap: var(--hm-space-2xs);
-  width: 100%;
-  min-width: 0;
-}
-
-.beforeAfterStateSlot {
-  min-height: 240px;
-  align-content: center;
-  justify-items: center;
-  text-align: center;
-}
-
 .beforeAfterPanelImagePlaceholder {
-  width: min(439px, 82%);
+  width: 100%;
   max-width: 100%;
   border-radius: var(--hm-radius-md);
 }
 
-.beforeAfterStateSlot span {
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  line-height: 1.5;
+.beforeAfterComparisonDemo {
+  --cs-before-after-narrative-panel-body-padding: var(--hm-space-md);
+  --cs-before-after-narrative-comparison-gap: var(--hm-space-lg);
 }
 
 .beforeAfterNarrativeTitlePlaceholder,
