@@ -87,7 +87,7 @@ const messages = {
       title: "快速導覽",
       items: [
         { href: "#getting-started", label: "系統概念" },
-        { href: "#see-more", label: "下一步" },
+        { href: "#see-more", label: "看更多" },
       ],
     },
     introduction: {
@@ -314,8 +314,7 @@ const messages = {
       columns: ["Token", "Value", "Type", "Scope", "Usage"],
     },
     cta: {
-      eyebrow: "Next Step",
-      workspaceTitle: "看更多",
+      eyebrow: "看更多",
       title: "如果你想看這套系統怎麼落到真實案例裡",
       body: "可以直接回到作品案例，看同一套判斷怎麼被應用在 IoT、企業 SaaS 與內容敘事上。也歡迎直接找我聊聊，怎麼把設計思維接到產品與工程。",
       primaryAction: "回到精選案例",
