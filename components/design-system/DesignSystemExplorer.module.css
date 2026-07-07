@@ -30,9 +30,6 @@
     );
   opacity: var(--ds-hero-opacity, 1);
   transform: translateY(var(--ds-hero-y, 0)) scale(var(--ds-hero-scale, 1)) translateZ(0);
-  transition:
-    opacity var(--hm-duration-reveal) var(--hm-ease-emphasized),
-    transform var(--hm-duration-reveal) var(--hm-ease-emphasized);
   will-change: opacity, transform;
 }
 
@@ -909,9 +906,6 @@
     translateY(var(--ds-shell-y, 72px))
     scale(var(--ds-shell-scale, 0.98))
     translateZ(0);
-  transition:
-    opacity var(--hm-duration-reveal) var(--hm-ease-emphasized),
-    transform var(--hm-duration-reveal) var(--hm-ease-emphasized);
   will-change: opacity, transform;
 }
 

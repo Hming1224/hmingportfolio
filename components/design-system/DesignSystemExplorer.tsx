@@ -225,15 +225,22 @@ export default function DesignSystemExplorer({
 
     const setProgress = (progress: number) => {
       const clampedProgress = Math.min(1, Math.max(0, progress));
-      const heroOpacity = Math.max(0.001, 1 - clampedProgress);
-      const shellOpacity = Math.max(0.001, clampedProgress);
+      const segmentProgress = (start: number, end: number) => {
+        if (clampedProgress <= start) return 0;
+        if (clampedProgress >= end) return 1;
+        return (clampedProgress - start) / (end - start);
+      };
+      const heroExitProgress = segmentProgress(0.42, 0.74);
+      const shellEnterProgress = segmentProgress(0.84, 1);
+      const heroOpacity = Math.max(0.001, 1 - heroExitProgress);
+      const shellOpacity = Math.max(0.001, shellEnterProgress);
 
       root.style.setProperty("--ds-hero-opacity", heroOpacity.toFixed(3));
       root.style.setProperty("--ds-shell-opacity", shellOpacity.toFixed(3));
-      root.style.setProperty("--ds-hero-y", `${Math.round(-72 * clampedProgress)}px`);
-      root.style.setProperty("--ds-shell-y", `${Math.round(72 * (1 - clampedProgress))}px`);
-      root.style.setProperty("--ds-hero-scale", (1 - 0.02 * clampedProgress).toFixed(3));
-      root.style.setProperty("--ds-shell-scale", (0.98 + 0.02 * clampedProgress).toFixed(3));
+      root.style.setProperty("--ds-hero-y", `${Math.round(-72 * heroExitProgress)}px`);
+      root.style.setProperty("--ds-shell-y", `${Math.round(72 * (1 - shellEnterProgress))}px`);
+      root.style.setProperty("--ds-hero-scale", (1 - 0.02 * heroExitProgress).toFixed(3));
+      root.style.setProperty("--ds-shell-scale", (0.98 + 0.02 * shellEnterProgress).toFixed(3));
     };
 
     const clearProgress = () => {
@@ -264,8 +271,7 @@ export default function DesignSystemExplorer({
       const end = Math.max(start + 1, shellTop - 120);
       const progress = (window.scrollY - start) / (end - start);
 
-      const workspaceEntered = window.scrollY >= shellTop - window.innerHeight * 0.5;
-      const snappedProgress = workspaceEntered || progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
+      const snappedProgress = progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
       setProgress(snappedProgress);
 
       if (snappedProgress > 0.02) {
