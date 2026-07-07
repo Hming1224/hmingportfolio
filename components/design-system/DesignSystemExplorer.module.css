@@ -21,7 +21,7 @@
 .heroInner {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-  align-items: end;
+  align-items: center;
   gap: var(--hm-space-lg);
   width: min(var(--hm-container), calc(100% - calc(var(--hm-space-xl) * 2)));
   margin-inline: auto;

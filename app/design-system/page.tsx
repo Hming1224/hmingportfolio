@@ -54,14 +54,6 @@ export default async function DesignSystemPage() {
             <p className={styles.eyebrow}>{copy.hero.eyebrow}</p>
             <h1 className={styles.heroTitle} id="ds-title">{copy.hero.title}</h1>
             <p className={styles.heroDescription}>{copy.hero.description}</p>
-            <div className={styles.actions}>
-              <Button href="#general">
-                {copy.hero.primaryAction}
-              </Button>
-              <Button variant="secondary" href="#component-boundaries">
-                {copy.hero.secondaryAction}
-              </Button>
-            </div>
           </div>
           <div className={styles.highlightsGrid} aria-label={copy.hero.highlightsAriaLabel}>
             {copy.hero.highlights.map((highlight) => (

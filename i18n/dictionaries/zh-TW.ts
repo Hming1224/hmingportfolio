@@ -60,10 +60,10 @@ const messages = {
   },
   designSystem: {
     hero: {
-      eyebrow: "作品集設計系統",
-      title: "邊維護作品集，邊整理出來的設計系統",
+      eyebrow: "Co-worked with AI agent",
+      title: "為作品集打造的設計系統",
       description:
-        "這是 hmingdesign.com 正在使用的設計系統。我把實際用到的 token、共用元件和案例頁模式記錄下來，也記下哪些東西刻意不共用——讓自己每次改動都有依據，也讓看的人了解每個決定的原因。",
+        "這是 hmingdesign.com 正在使用的設計系統。我和 AI 一起研究並盤點實際用到的 token、共用元件與案例頁模式，整理出哪些可以重用、哪些應該刻意留在 local。這份文件不只呈現規劃後的結果，也提供每個元件使用方法和規則。",
       primaryAction: "看正式元件",
       secondaryAction: "看我怎麼取捨",
       highlightsAriaLabel: "系統重點",

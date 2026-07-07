@@ -60,10 +60,10 @@ const messages = {
   },
   designSystem: {
     hero: {
-      eyebrow: "Portfolio Design System",
-      title: "A design system I put together while maintaining this portfolio",
+      eyebrow: "Co-worked with AI agent",
+      title: "A Portfolio-Driven Design System",
       description:
-        "This is the design system running on hmingdesign.com today. I document the tokens, shared components, and case-study patterns I actually use — along with the parts that deliberately stay unshared — so each change has a reference, and readers can follow the reasoning behind the decisions.",
+        "This is the design system currently used on hmingdesign.com. I worked with AI to research and audit the real tokens, shared components, and case-study patterns in use, then documented what can be reused and what should intentionally stay local. This reference presents the organized result, along with usage guidance and rules for each component.",
       primaryAction: "Browse live components",
       secondaryAction: "See how I decide boundaries",
       highlightsAriaLabel: "System highlights",
