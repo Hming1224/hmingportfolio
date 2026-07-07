@@ -2698,7 +2698,7 @@
   word-break: break-word;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1280px) {
   .caseHeroDemo .caseHeroInfoGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2712,7 +2712,18 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1100px) {
+  .caseHeroDemo .caseHeroInfoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .caseHeroDemo .caseHeroInfoGrid > :global(.cs-info-card:nth-child(4)),
+  .caseHeroDemo .caseHeroInfoGrid > :global(.cs-info-card:nth-child(5)) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 560px) {
   .caseHeroDemo .caseHeroInfoGrid {
     grid-template-columns: 1fr;
   }
