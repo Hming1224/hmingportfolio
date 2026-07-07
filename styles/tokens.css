@@ -747,6 +747,7 @@ button {
   padding: 10px 12px;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .language-switcher {
@@ -791,6 +792,7 @@ button {
   color: var(--ink);
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
   transition:
     border-color 180ms ease,
@@ -1325,6 +1327,30 @@ button {
 
 .social-link:hover .social-logo-gray {
   opacity: 0;
+}
+
+@media (min-width: 769px) and (max-width: 900px) {
+  .site-nav {
+    gap: 12px;
+    padding-inline: clamp(32px, 5.2vw, 48px);
+  }
+
+  .nav-top {
+    min-width: 84px;
+  }
+
+  .nav-links a {
+    padding-inline: 8px;
+  }
+
+  .language-switcher {
+    margin-left: 4px;
+  }
+
+  .language-switcher-trigger {
+    min-width: 64px;
+    padding-inline: 10px;
+  }
 }
 
 @media (max-width: 768px) {
