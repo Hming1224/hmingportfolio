@@ -103,12 +103,12 @@ const messages = {
         "不是所有看起來重複的 layout 都該抽成共用元件。可複用層負責 token、穩定外框與 contract；跟故事綁在一起的幾何，留在 route-local。",
       architectureCards: [
         {
-          kicker: "Reusable system layer",
+          kicker: "Layer 01",
           title: "可複用系統層",
           body: "包含 runtime token、UI primitives、導覽、ProjectCard 行為，以及案例頁的 card、grid、media、section header、before / after frame 等穩定外框。",
         },
         {
-          kicker: "Local storytelling layer",
+          kicker: "Layer 02",
           title: "Local 敘事層",
           body: "流程圖、矩陣、connector 端點、scenario board 與媒體裁切規則，如果幾何本身承載案例故事，就可以留在 local。",
         },

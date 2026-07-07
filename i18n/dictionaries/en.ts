@@ -103,12 +103,12 @@ const messages = {
         "Not every repeated-looking layout should become a shared component. The reusable layer holds tokens, stable shells, and contracts; route-local geometry stays close to the story it explains.",
       architectureCards: [
         {
-          kicker: "Reusable system layer",
+          kicker: "Layer 01",
           title: "Reusable system layer",
           body: "This includes runtime tokens, UI primitives, navigation, project-card behavior, and case-study shells such as cards, grids, media, section headers, and before / after frames.",
         },
         {
-          kicker: "Local storytelling layer",
+          kicker: "Layer 02",
           title: "Local storytelling layer",
           body: "Flow diagrams, matrices, connector endpoints, scenario boards, and media crop rules can stay local when their geometry carries the case-study story.",
         },

@@ -88,35 +88,20 @@ export default async function DesignSystemPage() {
               <h2 className={styles.sectionTitle}>{copy.introduction.heading}</h2>
               <span className={styles.sectionRule} />
             </div>
-            <div className={styles.twoColumnGrid}>
-              <article className={styles.card}>
-                <h3 className={styles.cardTitle}>{copy.introduction.soulTitle}</h3>
-                <p className={styles.cardBody}>{copy.introduction.soulBody}</p>
-                <div className={styles.keywordList} aria-label={copy.introduction.keywordsAriaLabel}>
-                  {copy.introduction.keywords.map((keyword) => (
-                    <span className={styles.pill} key={keyword}>{keyword}</span>
-                  ))}
-                </div>
-              </article>
-              <article className={styles.card}>
-                <h3 className={styles.cardTitle}>{copy.introduction.architectureTitle}</h3>
-                <p className={styles.cardBody}>{copy.introduction.architectureBody}</p>
-                <div className={styles.nestedGrid}>
-                  {copy.introduction.architectureCards.map((card) => (
-                    <section className={styles.nestedCard} key={card.title}>
-                      <p className={styles.kicker}>{card.kicker}</p>
-                      <h4 className={styles.nestedTitle}>{card.title}</h4>
-                      <p className={styles.nestedBody}>{card.body}</p>
-                    </section>
-                  ))}
-                </div>
-              </article>
-            </div>
+            <article className={styles.card}>
+              <h3 className={styles.cardTitle}>{copy.introduction.soulTitle}</h3>
+              <p className={styles.cardBody}>{copy.introduction.soulBody}</p>
+              <div className={styles.keywordList} aria-label={copy.introduction.keywordsAriaLabel}>
+                {copy.introduction.keywords.map((keyword) => (
+                  <span className={styles.pill} key={keyword}>{keyword}</span>
+                ))}
+              </div>
+            </article>
             <div className={styles.principleGrid}>
               {designPrinciples.map((principle, index) => {
                 const [english, chinese] = principle.split(" / ");
                 return (
-                  <article className={styles.card} key={principle}>
+                  <article className={`${styles.card} ${styles.principleCard}`} key={principle}>
                     <p className={styles.principleIndex}>0{index + 1}</p>
                     <h3 className={styles.principleTitle}>{english}</h3>
                     <p className={styles.principleBody}>{chinese}</p>
@@ -124,6 +109,19 @@ export default async function DesignSystemPage() {
                 );
               })}
             </div>
+            <article className={styles.card}>
+              <h3 className={styles.cardTitle}>{copy.introduction.architectureTitle}</h3>
+              <p className={styles.cardBody}>{copy.introduction.architectureBody}</p>
+              <div className={styles.nestedGrid}>
+                {copy.introduction.architectureCards.map((card) => (
+                  <section className={styles.nestedCard} key={card.title}>
+                    <p className={styles.kicker}>{card.kicker}</p>
+                    <h4 className={styles.nestedTitle}>{card.title}</h4>
+                    <p className={styles.nestedBody}>{card.body}</p>
+                  </section>
+                ))}
+              </div>
+            </article>
           </section>
 
         </>

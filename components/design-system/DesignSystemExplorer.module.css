@@ -159,11 +159,19 @@
 }
 
 .principleGrid {
-  margin-top: var(--hm-space-sm);
+  margin: var(--hm-space-sm) 0;
 }
 
 .card {
   padding: var(--hm-space-lg);
+}
+
+.principleCard {
+  padding: var(--hm-space-md);
+}
+
+.principleGrid article:last-child {
+  grid-column: 1 / -1;
 }
 
 .nestedCard {
@@ -229,6 +237,10 @@
   display: grid;
   gap: var(--hm-space-xs);
   margin-top: var(--hm-space-sm);
+}
+
+.nestedGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .kicker,
@@ -2951,7 +2963,8 @@
   }
 
   .twoColumnGrid,
-  .principleGrid {
+  .principleGrid,
+  .nestedGrid {
     grid-template-columns: minmax(0, 1fr);
   }
 
