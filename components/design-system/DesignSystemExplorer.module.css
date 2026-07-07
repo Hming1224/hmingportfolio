@@ -43,7 +43,7 @@
 
 .heroInner {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  grid-template-columns: minmax(0, 0.96fr) minmax(360px, 1.04fr);
   align-items: center;
   gap: var(--hm-space-lg);
   width: min(var(--hm-container), calc(100% - calc(var(--hm-space-xl) * 2)));
@@ -70,6 +70,19 @@
   color: var(--text-heading);
   font-size: clamp(var(--hm-fs-h1), 5vw, 52px);
   line-height: 1.18;
+}
+
+.heroTitle {
+  display: block !important;
+  width: 100%;
+  overflow: visible !important;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.heroTitle :global(.split-line),
+.heroTitle :global(.split-word) {
+  white-space: normal;
 }
 
 .heroDescription,
@@ -3214,6 +3227,14 @@
 
   .caseTocRouteCrop {
     min-height: 180px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .heroInner {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: var(--hm-space-xl);
   }
 }
 
