@@ -26,7 +26,7 @@ const messages = {
   works: {
     heading: "精選案例",
     enterprise: "企業應用",
-    school: "學校產出",
+    school: "學校與個人專案",
     comingSoon: "即將上線",
     learnMore: "了解更多",
   },

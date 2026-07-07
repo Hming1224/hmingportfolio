@@ -1056,7 +1056,7 @@ export default function ComponentDemo({
   if (type === "tabs") {
     const tabs = [
       { value: "enterprise", label: zh ? "企業應用" : "Industry Projects" },
-      { value: "school", label: zh ? "學校產出" : "Academic & Side Projects" },
+      { value: "school", label: zh ? "學校與個人專案" : "Academic & Side Projects" },
     ];
 
     return (

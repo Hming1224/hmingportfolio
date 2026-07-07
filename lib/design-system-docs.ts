@@ -849,7 +849,7 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Focus", appliesTo: "TabsTab", trigger: "Keyboard Tab reaches a tab button.", behavior: "Native button focus remains available through the browser and page CSS.", whatChanges: "No custom roving tabindex is implemented in the primitive.", liveUsage: "Keyboard access to homepage project categories." },
     ],
     stateRowsZh: [
-      { state: "Active tab", appliesTo: "TabsTab", trigger: "tab value 與目前 Tabs 脈絡 value 相同。", behavior: "active tab 取得 selected styling，並決定顯示的 panel。", whatChanges: "`aria-selected=\"true\"`、`data-state=\"active\"`、active highlight 與對應 `TabsPanel`。", liveUsage: "首頁 Selected Work：企業應用 / 學校產出。" },
+      { state: "Active tab", appliesTo: "TabsTab", trigger: "tab value 與目前 Tabs 脈絡 value 相同。", behavior: "active tab 取得 selected styling，並決定顯示的 panel。", whatChanges: "`aria-selected=\"true\"`、`data-state=\"active\"`、active highlight 與對應 `TabsPanel`。", liveUsage: "首頁 Selected Work：企業應用 / 學校與個人專案。" },
       { state: "Inactive tab", appliesTo: "TabsTab", trigger: "tab value 與目前 Tabs 脈絡 value 不同。", behavior: "tab 仍可點擊，但視覺上退為次要。", whatChanges: "`aria-selected=\"false\"` 與 `data-state=\"inactive\"`。", liveUsage: "首頁分類切換。" },
       { state: "Panel switch", appliesTo: "TabsPanels", trigger: "tab 改變目前 value。", behavior: "只渲染對應 panel，並透過 AnimatePresence 轉場。", whatChanges: "active `TabsPanel` 透過 primitive 淡入 / 位移。", liveUsage: "專案列表在 Selected Work section 內切換，不離開頁面。" },
       { state: "Focus", appliesTo: "TabsTab", trigger: "鍵盤 Tab 抵達 tab button。", behavior: "透過 native button 與頁面 CSS 保留 focus。", whatChanges: "primitive 目前沒有自訂 roving tabindex。", liveUsage: "鍵盤可抵達首頁專案分類。" },
