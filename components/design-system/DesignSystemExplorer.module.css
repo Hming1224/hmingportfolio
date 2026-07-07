@@ -4,6 +4,10 @@
 }
 
 .hero {
+  display: grid;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 100svh;
   padding: calc(var(--hm-space-3xl) + var(--hm-space-xl)) 0 var(--hm-space-xl);
   background:
     radial-gradient(
