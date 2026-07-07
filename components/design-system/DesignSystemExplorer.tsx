@@ -132,10 +132,11 @@ export default function DesignSystemExplorer({
         return;
       }
 
-      const sidebar = shellRef.current?.querySelector(`.${styles.sidebar}`);
+      const shellElement = shellRef.current;
+      const sidebar = shellElement?.querySelector(`.${styles.sidebar}`);
       const anchorText = textRect(document.querySelector("[data-ds-toc-root='getting-started']"));
       const workspaceText = textRect(workspace.querySelector("p,h1,h2,h3"));
-      if (!sidebar || !anchorText || !workspaceText) {
+      if (!shellElement || !sidebar || !anchorText || !workspaceText) {
         workspace.scrollIntoView({ block: "start" });
         return;
       }
@@ -144,8 +145,9 @@ export default function DesignSystemExplorer({
       const stickyTop = Number.parseFloat(window.getComputedStyle(sidebar).top) || sidebarRect.top;
       const anchorInset = anchorText.top - sidebarRect.top;
       const targetTop = stickyTop + anchorInset;
+      const stickyScrollTop = shellElement.offsetTop - stickyTop + 2;
       window.scrollTo({
-        top: window.scrollY + workspaceText.top - targetTop,
+        top: Math.max(window.scrollY + workspaceText.top - targetTop, stickyScrollTop),
       });
     });
 
@@ -262,7 +264,8 @@ export default function DesignSystemExplorer({
       const end = Math.max(start + 1, shellTop - 120);
       const progress = (window.scrollY - start) / (end - start);
 
-      const snappedProgress = progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
+      const workspaceEntered = window.scrollY >= shellTop - window.innerHeight * 0.5;
+      const snappedProgress = workspaceEntered || progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
       setProgress(snappedProgress);
 
       if (snappedProgress > 0.02) {

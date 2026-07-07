@@ -985,6 +985,15 @@
   border-radius: var(--hm-radius-sm);
 }
 
+.rootLink:focus,
+.rootLink:focus-visible,
+.componentLink:focus,
+.componentLink:focus-visible,
+.categoryAccordion :global(.hm-accordion-trigger:focus),
+.categoryAccordion :global(.hm-accordion-trigger:focus-visible) {
+  outline: 0;
+}
+
 .rootLink {
   min-height: 36px;
   padding: var(--hm-space-2xs) var(--hm-space-xs);
