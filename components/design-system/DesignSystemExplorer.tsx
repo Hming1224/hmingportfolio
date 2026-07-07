@@ -93,7 +93,7 @@ export default function DesignSystemExplorer({
   seeMoreContent?: ReactNode;
 }) {
   const [activeWorkspace, setActiveWorkspace] = useState<ActiveWorkspace>({ type: "getting-started" });
-  const [openSection, setOpenSection] = useState<string>(sections[0]?.label ?? "");
+  const [openSections, setOpenSections] = useState<string[]>(() => sections[0]?.label ? [sections[0].label] : []);
   const gettingStartedItem = toc.items[0];
   const nextStepItem = toc.items.find((item) => item.href === "#see-more") ?? toc.items[toc.items.length - 1];
   const measureRef = useRef<HTMLDivElement>(null);
@@ -152,7 +152,7 @@ export default function DesignSystemExplorer({
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [workspaceScrollRequest, activeWorkspace, openSection]);
+  }, [workspaceScrollRequest]);
 
   const activateCatalogDoc = useCallback(
     (
@@ -161,7 +161,7 @@ export default function DesignSystemExplorer({
       options: { updateHash?: boolean; scroll?: boolean } = {},
     ) => {
       const { updateHash = true, scroll = true } = options;
-      setOpenSection(section.label);
+      setOpenSections((current) => current.includes(section.label) ? current : [...current, section.label]);
       setActiveWorkspace({ type: "doc", sectionLabel: section.label, slug: doc.slug });
 
       if (updateHash) {
@@ -191,7 +191,7 @@ export default function DesignSystemExplorer({
   const activateSeeMore = useCallback((options: { updateHash?: boolean; scroll?: boolean } = {}) => {
     const { updateHash = true, scroll = true } = options;
     setActiveWorkspace({ type: "see-more" });
-    setOpenSection("");
+    setOpenSections([]);
 
     if (updateHash) {
       window.history.pushState(null, "", "#see-more");
@@ -377,19 +377,10 @@ export default function DesignSystemExplorer({
           <Accordion
             className={styles.categoryAccordion}
             onValueChange={(value) => {
-              const nextValue = Array.isArray(value) ? value[0] : value;
-              if (!nextValue) {
-                setOpenSection("");
-                return;
-              }
-
-              const nextSection = sections.find((section) => section.label === nextValue);
-              if (!nextSection) return;
-
-              setOpenSection(nextValue);
+              setOpenSections(Array.isArray(value) ? value : value ? [value] : []);
             }}
-            type="single"
-            value={openSection}
+            type="multiple"
+            value={openSections}
           >
             {sections.map((section) => {
               const isSectionActive = activeWorkspace.type === "doc" && activeWorkspace.sectionLabel === section.label;

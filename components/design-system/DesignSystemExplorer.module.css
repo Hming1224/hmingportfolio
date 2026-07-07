@@ -939,6 +939,7 @@
   top: 112px;
   max-height: calc(100vh - 132px);
   overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 .nav {
