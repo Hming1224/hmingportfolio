@@ -8,7 +8,6 @@ import DesignSystemExplorer from "../../components/design-system/DesignSystemExp
 import Button from "../../components/ui/Button";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
-import { designPrinciples } from "../../lib/design-system-data";
 import enMessages from "../../i18n/dictionaries/en";
 import zhMessages from "../../i18n/dictionaries/zh-TW";
 import styles from "../../components/design-system/DesignSystemExplorer.module.css";
@@ -88,6 +87,10 @@ export default async function DesignSystemPage() {
               <h2 className={styles.sectionTitle}>{copy.introduction.heading}</h2>
               <span className={styles.sectionRule} />
             </div>
+            <div className={styles.groupHeader}>
+              <p className={styles.groupKicker}>{copy.introduction.soulKicker}</p>
+              <p className={styles.groupLead}>{copy.introduction.soulLead}</p>
+            </div>
             <article className={styles.card}>
               <h3 className={styles.cardTitle}>{copy.introduction.soulTitle}</h3>
               <p className={styles.cardBody}>{copy.introduction.soulBody}</p>
@@ -97,17 +100,24 @@ export default async function DesignSystemPage() {
                 ))}
               </div>
             </article>
+            <div className={styles.groupHeader}>
+              <p className={styles.groupKicker}>{copy.introduction.principlesKicker}</p>
+              <p className={styles.groupLead}>{copy.introduction.principlesLead}</p>
+            </div>
             <div className={styles.principleGrid}>
-              {designPrinciples.map((principle, index) => {
-                const [english, chinese] = principle.split(" / ");
+              {copy.introduction.principles.map((principle, index) => {
                 return (
-                  <article className={`${styles.card} ${styles.principleCard}`} key={principle}>
+                  <article className={`${styles.card} ${styles.principleCard}`} key={principle.title}>
                     <p className={styles.principleIndex}>0{index + 1}</p>
-                    <h3 className={styles.principleTitle}>{english}</h3>
-                    <p className={styles.principleBody}>{chinese}</p>
+                    <h3 className={styles.principleTitle}>{principle.title}</h3>
+                    <p className={styles.principleDesc}>{principle.desc}</p>
                   </article>
                 );
               })}
+            </div>
+            <div className={styles.groupHeader}>
+              <p className={styles.groupKicker}>{copy.introduction.architectureKicker}</p>
+              <p className={styles.groupLead}>{copy.introduction.architectureLead}</p>
             </div>
             <article className={styles.card}>
               <h3 className={styles.cardTitle}>{copy.introduction.architectureTitle}</h3>

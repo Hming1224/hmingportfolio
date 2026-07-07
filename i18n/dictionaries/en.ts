@@ -98,6 +98,42 @@ const messages = {
         "It is not built to show off. It is built so design leaders and hiring teams in IoT, SaaS, and fintech can immediately sense a repeatable standard behind the portfolio. Stable, precise, and lasting matters more than visual tricks.",
       keywordsAriaLabel: "Design soul keywords",
       keywords: ["Memorable weight", "Warmth", "Restrained personality"],
+      soulKicker: "01 The Soul",
+      soulLead: "The feeling this system should leave behind.",
+      principlesKicker: "02 The Principles",
+      principlesLead: "The criteria that turn that feeling into design decisions.",
+      principles: [
+        {
+          title: "Set the character before decoration",
+          desc: "Define the tone first: weight, warmth, and restrained personality. The home page uses cursor tags and sticky notes for character instead of piling on effects.",
+        },
+        {
+          title: "Colors change, the frame holds",
+          desc: "Each case study can carry its own tone, but cards, information architecture, and layout stay consistent. The three case-study pages share one pattern and only swap the `tone-xxx` layer.",
+        },
+        {
+          title: "The main actor stays obvious",
+          desc: "Purple stays reserved for CTAs and active states instead of large surfaces, so interviewers keep their attention on the work itself.",
+        },
+        {
+          title: "Interaction adds meaning, not spectacle",
+          desc: "Motion has a job. Home and About use entrance animation to feel alive; case-study pages stay restrained so the work remains the focus.",
+        },
+        {
+          title: "Density still needs room to breathe",
+          desc: "Even dense case-study pages keep a baseline of breathing room, including at least 24px of text padding. Dense information should not feel cramped.",
+        },
+        {
+          title: "Design must be catchable by engineering",
+          desc: "Colors, type, and spacing have token names so one change can propagate across the site. The handoff is maintainable specification, not just a static image.",
+        },
+        {
+          title: "Every reachable state deserves design",
+          desc: "Hover, active, focus, and disabled states are designed. Unpublished work uses disabled styling so people do not mistake it for a clickable case.",
+        },
+      ],
+      architectureKicker: "03 The Architecture",
+      architectureLead: "How those criteria become a maintainable two-layer structure.",
       architectureTitle: "Two-layer architecture",
       architectureBody:
         "Not every repeated-looking layout should become a shared component. The reusable layer holds tokens, stable shells, and contracts; route-local geometry stays close to the story it explains.",

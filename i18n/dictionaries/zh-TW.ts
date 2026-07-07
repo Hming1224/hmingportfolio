@@ -98,6 +98,42 @@ const messages = {
         "它不是為了炫技，而是要讓 IoT、SaaS、金融科技領域的設計主管或招募者，一眼看出這個作品集背後有可複用的判斷標準。穩、準、耐看，比一時的花招更重要。",
       keywordsAriaLabel: "設計靈魂關鍵字",
       keywords: ["有滯度", "不冰冷", "克制有個性"],
+      soulKicker: "01 設計靈魂",
+      soulLead: "這套系統想給人的感覺。",
+      principlesKicker: "02 設計原則",
+      principlesLead: "把感覺變成可判斷的準則。",
+      principles: [
+        {
+          title: "先立氣質，再談裝飾",
+          desc: "先定「有滯度、不冰冷、克制有個性」的調性，才加視覺元素。首頁靠 cursor tag、便利貼營造個性，而不是堆特效。",
+        },
+        {
+          title: "顏色可以換，框架不能散",
+          desc: "每個案例有自己的主色 tone，但卡片、資訊架構、排版全站一致；三個案例頁共用同一套 Case Study pattern，只換 `tone-xxx`。",
+        },
+        {
+          title: "主角永遠要清楚",
+          desc: "紫色只留給 CTA 與 active，不大面積出現。面試官的視線該落在作品本身，不被 accent 或裝飾搶走。",
+        },
+        {
+          title: "互動是補語意，不是加特效",
+          desc: "動畫分場合：首頁與 About 有入場動畫營造生命感，案例頁幾乎收手，讓注意力留在案子上。",
+        },
+        {
+          title: "密度再高，也要能呼吸",
+          desc: "資訊量大的案例頁仍守住留白底線（文字最少 24px 內距），高密度不等於擁擠。",
+        },
+        {
+          title: "設計要能被工程接住",
+          desc: "每個顏色、字級、間距都有 token 名字，改一次全站跟著改。設計交付的是可維護的規格，不是一張圖。",
+        },
+        {
+          title: "每個可到達的狀態都要被設計",
+          desc: "hover / active / focus / disabled 都要處理；未上線案子用 disabled 底色不讓人誤點——完整度體現在邊角狀態。",
+        },
+      ],
+      architectureKicker: "03 架構概覽",
+      architectureLead: "把準則落地成兩層結構。",
       architectureTitle: "兩層架構概覽",
       architectureBody:
         "不是所有看起來重複的 layout 都該抽成共用元件。可複用層負責 token、穩定外框與 contract；跟故事綁在一起的幾何，留在 route-local。",

@@ -166,6 +166,25 @@
   padding: var(--hm-space-lg);
 }
 
+.groupHeader {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  margin: var(--hm-space-md) 0 var(--hm-space-sm);
+}
+
+.groupKicker {
+  margin: 0;
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.groupLead {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
 .principleCard {
   padding: var(--hm-space-md);
 }
@@ -193,6 +212,7 @@
 .cardBody,
 .nestedBody,
 .principleBody,
+.principleDesc,
 .mutedText {
   color: var(--text-secondary);
   line-height: 1.7;
@@ -200,7 +220,8 @@
 
 .cardBody,
 .nestedBody,
-.principleBody {
+.principleBody,
+.principleDesc {
   margin: var(--hm-space-2xs) 0 0;
 }
 
