@@ -2578,16 +2578,25 @@
     var(--cs-surface);
 }
 
-.caseSectionMediaPlaceholder span {
+.caseSectionTextPlaceholder {
+  display: grid;
+  gap: var(--hm-space-xs);
+  width: min(100%, 760px);
+}
+
+.caseSectionTextPlaceholder span {
   display: block;
-  width: min(360px, 58vw);
-  height: 12px;
+  height: 14px;
   border-radius: var(--hm-radius-pill);
   background: color-mix(in srgb, var(--cs-text-secondary) 18%, transparent);
 }
 
-.caseSectionMediaPlaceholder span:last-child {
-  width: min(260px, 46vw);
+.caseSectionTextPlaceholder span:first-child {
+  width: min(720px, 100%);
+}
+
+.caseSectionTextPlaceholder span:last-child {
+  width: min(520px, 72%);
 }
 
 .caseCardDemoShell {
@@ -2782,9 +2791,27 @@
 }
 
 .beforeAfterStateSlot {
-  min-height: 168px;
+  min-height: 220px;
   align-content: center;
+  justify-items: center;
   text-align: center;
+}
+
+.beforeAfterPanelImagePlaceholder {
+  width: min(220px, 72%);
+  aspect-ratio: 4 / 3;
+  border: 1px solid color-mix(in srgb, var(--hm-line-strong) 62%, transparent);
+  border-radius: var(--hm-radius-md);
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 1px),
+      color-mix(in srgb, var(--hm-line-strong) 50%, transparent) calc(50% - 1px),
+      color-mix(in srgb, var(--hm-line-strong) 50%, transparent) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    color-mix(in srgb, var(--hm-paper) 86%, var(--hm-surface));
+  box-shadow: var(--shadow-sm);
 }
 
 .beforeAfterStateSlot strong,
@@ -2803,6 +2830,36 @@
   justify-items: center;
 }
 
+.beforeAfterNarrativeTitlePlaceholder,
+.beforeAfterNarrativeTextPlaceholder span {
+  display: block;
+  border-radius: var(--hm-radius-pill);
+  background: color-mix(in srgb, var(--cs-text-secondary) 20%, transparent);
+}
+
+.beforeAfterNarrativeTitlePlaceholder {
+  width: min(420px, 100%);
+  height: 28px;
+}
+
+.beforeAfterNarrativeTextPlaceholder {
+  display: grid;
+  gap: var(--hm-space-xs);
+  width: min(760px, 100%);
+}
+
+.beforeAfterNarrativeTextPlaceholder span {
+  height: 12px;
+}
+
+.beforeAfterNarrativeTextPlaceholder span:first-child {
+  width: min(720px, 100%);
+}
+
+.beforeAfterNarrativeTextPlaceholder span:last-child {
+  width: min(520px, 72%);
+}
+
 .proposalPanelDemo strong {
   color: var(--text-heading);
   font-weight: var(--hm-fw-semibold);
@@ -2810,6 +2867,15 @@
 
 .beforeAfterImageDemo {
   min-height: 180px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 1px),
+      color-mix(in srgb, var(--hm-line-strong) 42%, transparent) calc(50% - 1px),
+      color-mix(in srgb, var(--hm-line-strong) 42%, transparent) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    color-mix(in srgb, var(--hm-paper) 86%, var(--hm-surface));
 }
 
 .flowHintSourceDemo {

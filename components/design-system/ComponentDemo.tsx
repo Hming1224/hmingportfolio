@@ -745,7 +745,6 @@ export default function ComponentDemo({
   const caseCopy = caseExamples[locale];
   const projects = getProjects(locale);
   const featuredProject = projects.find((project) => project.slug === "advantech") ?? projects[0];
-  const comingSoonProject = projects.find((project) => project.status === "coming-soon");
   const contactData = getContactData(locale);
   const [copied, setCopied] = useState(false);
   const [contactReviewPreviewOpen, setContactReviewPreviewOpen] = useState(false);
@@ -1098,7 +1097,6 @@ export default function ComponentDemo({
       <DemoBlock className={styles.projectCardLiveWrap} contextLabel={contextLabel ?? "Homepage / Selected Works"}>
         <div className={`projects-list ${styles.projectCardLivePreview}`}>
           <ProjectCard project={featuredProject} />
-          {comingSoonProject ? <ProjectCard project={comingSoonProject} /> : null}
         </div>
       </DemoBlock>
     );
@@ -1220,17 +1218,12 @@ export default function ComponentDemo({
             title={zh ? "為能源與 HVAC 工作流程設計更聰明的 GenAI 聊天機器人。" : "Designing a smarter GenAI chatbot for energy and HVAC workflows."}
           >
             <div className="cs-overview-body cs-stack-box">
-              <p className="cs-body">{caseCopy.sectionBody}</p>
-              <p className="cs-body-muted">
-                {zh
-                  ? "透過競品研究與終端使用者訪談，section children 承接內文、補充說明與後續媒體內容。"
-                  : "Competitive research and interviews flow through the section children as body copy, supporting notes, and media context."}
-              </p>
+              <div className={styles.caseSectionTextPlaceholder} aria-hidden="true">
+                <span />
+                <span />
+              </div>
             </div>
-            <div className={`cs-overview-img cs-object-box ${styles.caseSectionMediaPlaceholder}`} aria-hidden="true">
-              <span />
-              <span />
-            </div>
+            <div className={`cs-overview-img cs-object-box ${styles.caseSectionMediaPlaceholder}`} aria-hidden="true" />
           </CaseSection>
         </div>
       </DemoBlock>
@@ -1284,7 +1277,6 @@ export default function ComponentDemo({
     return (
       <DemoBlock className={styles.caseMediaDemoShell} contextLabel={contextLabel}>
         <CaseMedia
-          caption={caseCopy.mediaCaption}
           className={`theme-crypto-arsenal ${styles.caseMediaSourceDemo}`}
           contentClassName={styles.caseMediaContentDemo}
           variant="full"
@@ -1312,12 +1304,14 @@ export default function ComponentDemo({
             afterLabel="After"
             before={
               <div className={styles.beforeAfterStateSlot}>
+                <div className={styles.beforeAfterPanelImagePlaceholder} aria-hidden="true" />
                 <strong>Baseline layout</strong>
                 <span>{zh ? "資訊密度偏高" : "Dense layout"}</span>
               </div>
             }
             after={
               <div className={styles.beforeAfterStateSlot}>
+                <div className={styles.beforeAfterPanelImagePlaceholder} aria-hidden="true" />
                 <strong>Refined layout</strong>
                 <span>{zh ? "層級更清楚" : "Clearer hierarchy"}</span>
               </div>
@@ -1334,22 +1328,24 @@ export default function ComponentDemo({
         <div className="cs-page theme-advantech">
           <BeforeAfterNarrativeFrame
             badge="Scenario 1"
-            title={caseCopy.beforeTitle}
+            intro={<div className={styles.beforeAfterNarrativeTextPlaceholder} aria-hidden="true"><span /><span /></div>}
+            title={
+              <>
+                <span className="sr-only">{caseCopy.beforeTitle}</span>
+                <span className={styles.beforeAfterNarrativeTitlePlaceholder} aria-hidden="true" />
+              </>
+            }
             beforeLabel="Before"
             afterLabel="After"
             before={
               <div className={styles.beforeAfterMediaSlot}>
-                <div className={styles.beforeAfterImageDemo}>
-                  <Image src="/projects/advantech/solution/iter-chatbot-before.webp" alt="" fill sizes="320px" />
-                </div>
+                <div className={styles.beforeAfterImageDemo} aria-hidden="true" />
                 <strong>360px</strong>
               </div>
             }
             after={
               <div className={styles.beforeAfterMediaSlot}>
-                <div className={styles.beforeAfterImageDemo}>
-                  <Image src="/projects/advantech/solution/iter-chatbot-after.webp" alt="" fill sizes="320px" />
-                </div>
+                <div className={styles.beforeAfterImageDemo} aria-hidden="true" />
                 <strong>640px</strong>
               </div>
             }
