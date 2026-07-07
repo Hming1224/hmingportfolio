@@ -257,6 +257,8 @@ const decisionLog = [
   "Dark mode：token 先備好、公開切換先不開——場景不足前，不增加維護面。",
   "StatusBadge 這類「還沒有真實使用場景」的元件，一律緩建。",
   "未上線的案子用 disabled 底色呈現，不做假連結騙點擊。",
+  "文件目錄只列 production 真的在用的元件——文件站上線後，把 30 個項目全數稽核過一輪，確認每一項都對得上實際頁面。",
+  "文件站本身也吃同一套規則：讀者看的內容和維護用的規則分開寫，文件也走一樣的 audit → 修正 → 驗收流程。",
 ];
 
 const outcomeMetrics = [
@@ -329,7 +331,7 @@ const reflections = [
 const nextSteps = [
   "新增案例頁時，重跑一輪 rule of three 評估。",
   "補齊元件的無障礙契約：focus 管理與報讀語意。",
-  "讓 /design-system 文件站成為對外的完整規格入口。",
+  "文件站上線後，新增元件時同步更新目錄，並定期重跑一次使用性稽核。",
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
