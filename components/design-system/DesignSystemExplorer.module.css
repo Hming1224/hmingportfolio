@@ -28,8 +28,8 @@
       color-mix(in srgb, var(--hm-surface) 65%, var(--hm-paper)) 0%,
       transparent 100%
     );
-  opacity: 1;
-  transform: translateY(0) scale(1) translateZ(0);
+  opacity: var(--ds-hero-opacity, 1);
+  transform: translateY(var(--ds-hero-y, 0)) scale(var(--ds-hero-scale, 1)) translateZ(0);
   transition:
     opacity var(--hm-duration-reveal) var(--hm-ease-emphasized),
     transform var(--hm-duration-reveal) var(--hm-ease-emphasized);
@@ -37,8 +37,11 @@
 }
 
 :global(html[data-ds-workspace-visible="true"]) .hero {
-  opacity: 0.001;
-  transform: translateY(-120px) scale(0.96) translateZ(0);
+  opacity: var(--ds-hero-opacity, 0.001);
+  transform:
+    translateY(var(--ds-hero-y, -72px))
+    scale(var(--ds-hero-scale, 0.98))
+    translateZ(0);
 }
 
 .heroInner {
@@ -879,8 +882,11 @@
   gap: var(--hm-space-xl);
   width: min(var(--hm-container), calc(100% - 96px));
   margin: var(--hm-space-2xl) auto var(--hm-space-3xl);
-  opacity: 0.001;
-  transform: translateY(120px) scale(0.96) translateZ(0);
+  opacity: var(--ds-shell-opacity, 0.001);
+  transform:
+    translateY(var(--ds-shell-y, 72px))
+    scale(var(--ds-shell-scale, 0.98))
+    translateZ(0);
   transition:
     opacity var(--hm-duration-reveal) var(--hm-ease-emphasized),
     transform var(--hm-duration-reveal) var(--hm-ease-emphasized);
@@ -899,8 +905,11 @@
 }
 
 :global(html[data-ds-workspace-visible="true"]) .shell {
-  opacity: 1;
-  transform: translateY(0) scale(1) translateZ(0);
+  opacity: var(--ds-shell-opacity, 1);
+  transform:
+    translateY(var(--ds-shell-y, 0))
+    scale(var(--ds-shell-scale, 1))
+    translateZ(0);
 }
 
 .sidebar {
@@ -1102,7 +1111,9 @@
 
 .seeMoreArticle {
   display: grid;
+  align-content: center;
   gap: var(--hm-space-md);
+  min-height: calc(100svh - 180px);
 }
 
 .seeMoreHeader {

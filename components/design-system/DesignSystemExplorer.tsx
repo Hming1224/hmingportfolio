@@ -176,32 +176,71 @@ export default function DesignSystemExplorer({
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (reducedMotion || typeof IntersectionObserver === "undefined") {
+    const setProgress = (progress: number) => {
+      const clampedProgress = Math.min(1, Math.max(0, progress));
+      const heroOpacity = Math.max(0.001, 1 - clampedProgress);
+      const shellOpacity = Math.max(0.001, clampedProgress);
+
+      root.style.setProperty("--ds-hero-opacity", heroOpacity.toFixed(3));
+      root.style.setProperty("--ds-shell-opacity", shellOpacity.toFixed(3));
+      root.style.setProperty("--ds-hero-y", `${Math.round(-72 * clampedProgress)}px`);
+      root.style.setProperty("--ds-shell-y", `${Math.round(72 * (1 - clampedProgress))}px`);
+      root.style.setProperty("--ds-hero-scale", (1 - 0.02 * clampedProgress).toFixed(3));
+      root.style.setProperty("--ds-shell-scale", (0.98 + 0.02 * clampedProgress).toFixed(3));
+    };
+
+    const clearProgress = () => {
+      root.style.removeProperty("--ds-hero-opacity");
+      root.style.removeProperty("--ds-shell-opacity");
+      root.style.removeProperty("--ds-hero-y");
+      root.style.removeProperty("--ds-shell-y");
+      root.style.removeProperty("--ds-hero-scale");
+      root.style.removeProperty("--ds-shell-scale");
+    };
+
+    if (reducedMotion) {
       root.dataset.dsWorkspaceVisible = "true";
+      setProgress(1);
       return () => {
         delete root.dataset.dsWorkspaceVisible;
+        clearProgress();
       };
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          root.dataset.dsWorkspaceVisible = "true";
-        } else {
-          delete root.dataset.dsWorkspaceVisible;
-        }
-      },
-      {
-        rootMargin: "0px 0px 0px 0px",
-        threshold: 0.01,
-      },
-    );
+    let frame = 0;
 
-    observer.observe(shell);
+    const updateProgress = () => {
+      frame = 0;
+
+      const shellTop = shell.offsetTop;
+      const start = Math.max(0, shellTop - window.innerHeight - 120);
+      const end = Math.max(start + 1, shellTop - 120);
+      const progress = (window.scrollY - start) / (end - start);
+
+      setProgress(progress);
+
+      if (progress > 0.02) {
+        root.dataset.dsWorkspaceVisible = "true";
+      } else {
+        delete root.dataset.dsWorkspaceVisible;
+      }
+    };
+
+    const requestProgressUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+    window.addEventListener("resize", requestProgressUpdate);
 
     return () => {
-      observer.disconnect();
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestProgressUpdate);
+      window.removeEventListener("resize", requestProgressUpdate);
       delete root.dataset.dsWorkspaceVisible;
+      clearProgress();
     };
   }, []);
 
