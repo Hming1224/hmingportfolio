@@ -976,19 +976,19 @@
 }
 
 .docArticle {
-  width: min(100%, 880px);
-  max-width: 100%;
+  width: 100%;
+  max-width: none;
   min-width: 0;
   margin: 0;
   overflow-x: clip;
 }
 
 .componentDocArticle {
-  width: min(100%, 804px);
+  width: 100%;
 }
 
 .referenceDocArticle {
-  width: min(100%, 880px);
+  width: 100%;
 }
 
 .docHeader {
