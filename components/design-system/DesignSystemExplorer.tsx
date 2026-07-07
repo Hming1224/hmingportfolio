@@ -93,7 +93,7 @@ export default function DesignSystemExplorer({
   seeMoreContent?: ReactNode;
 }) {
   const [activeWorkspace, setActiveWorkspace] = useState<ActiveWorkspace>({ type: "getting-started" });
-  const [openSections, setOpenSections] = useState<string[]>(() => sections[0]?.label ? [sections[0].label] : []);
+  const [openSection, setOpenSection] = useState<string>("");
   const gettingStartedItem = toc.items[0];
   const nextStepItem = toc.items.find((item) => item.href === "#see-more") ?? toc.items[toc.items.length - 1];
   const measureRef = useRef<HTMLDivElement>(null);
@@ -161,7 +161,7 @@ export default function DesignSystemExplorer({
       options: { updateHash?: boolean; scroll?: boolean } = {},
     ) => {
       const { updateHash = true, scroll = true } = options;
-      setOpenSections((current) => current.includes(section.label) ? current : [...current, section.label]);
+      setOpenSection(section.label);
       setActiveWorkspace({ type: "doc", sectionLabel: section.label, slug: doc.slug });
 
       if (updateHash) {
@@ -177,6 +177,7 @@ export default function DesignSystemExplorer({
 
   const activateGettingStarted = useCallback((options: { updateHash?: boolean; scroll?: boolean } = {}) => {
     const { updateHash = true, scroll = true } = options;
+    setOpenSection("");
     setActiveWorkspace({ type: "getting-started" });
 
     if (updateHash) {
@@ -191,7 +192,7 @@ export default function DesignSystemExplorer({
   const activateSeeMore = useCallback((options: { updateHash?: boolean; scroll?: boolean } = {}) => {
     const { updateHash = true, scroll = true } = options;
     setActiveWorkspace({ type: "see-more" });
-    setOpenSections([]);
+    setOpenSection("");
 
     if (updateHash) {
       window.history.pushState(null, "", "#see-more");
@@ -261,9 +262,10 @@ export default function DesignSystemExplorer({
       const end = Math.max(start + 1, shellTop - 120);
       const progress = (window.scrollY - start) / (end - start);
 
-      setProgress(progress);
+      const snappedProgress = progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
+      setProgress(snappedProgress);
 
-      if (progress > 0.02) {
+      if (snappedProgress > 0.02) {
         root.dataset.dsWorkspaceVisible = "true";
       } else {
         delete root.dataset.dsWorkspaceVisible;
@@ -377,10 +379,11 @@ export default function DesignSystemExplorer({
           <Accordion
             className={styles.categoryAccordion}
             onValueChange={(value) => {
-              setOpenSections(Array.isArray(value) ? value : value ? [value] : []);
+              const nextValue = Array.isArray(value) ? value[0] : value;
+              setOpenSection(nextValue ?? "");
             }}
-            type="multiple"
-            value={openSections}
+            type="single"
+            value={openSection}
           >
             {sections.map((section) => {
               const isSectionActive = activeWorkspace.type === "doc" && activeWorkspace.sectionLabel === section.label;
