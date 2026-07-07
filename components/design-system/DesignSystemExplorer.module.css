@@ -78,6 +78,8 @@
   overflow: visible !important;
   white-space: normal;
   overflow-wrap: break-word;
+  text-wrap: balance;
+  word-break: keep-all;
 }
 
 .heroTitle :global(.split-line),
@@ -87,11 +89,15 @@
 
 .heroDescription,
 .ctaBody {
-  max-width: 760px;
   margin: var(--hm-space-sm) 0 0;
   color: var(--text-secondary);
   font-size: var(--hm-fs-h4);
   line-height: 1.7;
+}
+
+.heroDescription {
+  width: 100%;
+  max-width: none;
 }
 
 .ctaBody {
@@ -3230,7 +3236,7 @@
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1279px) {
   .heroInner {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
