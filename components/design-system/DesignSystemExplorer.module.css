@@ -982,7 +982,7 @@
   gap: var(--hm-space-md);
   min-width: 0;
   overflow-x: clip;
-  padding-top: var(--hm-space-sm);
+  padding-top: var(--hm-space-md);
   scroll-margin-top: 100px;
 }
 
