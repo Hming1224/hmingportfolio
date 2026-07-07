@@ -185,6 +185,10 @@
   margin: var(--hm-space-lg) 0 var(--hm-space-sm);
 }
 
+.section > .groupHeader:first-child {
+  margin-top: 0;
+}
+
 .groupTitle {
   margin: 0;
   color: var(--text-heading);
@@ -862,8 +866,8 @@
 
 .sidebar {
   position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 100px);
+  top: 112px;
+  max-height: calc(100vh - 132px);
   overflow-y: auto;
 }
 
