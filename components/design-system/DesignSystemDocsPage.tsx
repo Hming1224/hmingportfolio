@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AlertCircle, ArrowRight, Check, CheckCircle2, ChevronDown, ChevronRight, Mail, Phone, X } from "lucide-react";
+import { AlertCircle, ArrowRight, Check, CheckCircle2, ChevronDown, ChevronRight, Mail, Menu, PanelLeftOpen, Phone, X } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import type { DesignSystemDoc, DesignSystemLocale } from "@/lib/design-system-docs";
 import { designSystemTokenRows } from "@/lib/design-system-data";
@@ -54,6 +54,18 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           usage: "CaseProposalTabs",
           source: "lucide-react",
           preview: <ChevronRight aria-hidden="true" size={28} strokeWidth={1.8} />,
+        },
+        {
+          name: "PanelLeftOpen",
+          usage: localized(locale, "Design System component list drawer", "Design System 元件清單 drawer"),
+          source: "lucide-react",
+          preview: <PanelLeftOpen aria-hidden="true" size={28} strokeWidth={1.8} />,
+        },
+        {
+          name: "Menu",
+          usage: localized(locale, "Global mobile navigation affordance", "全站手機導覽提示"),
+          source: "lucide-react reference / CSS implementation",
+          preview: <Menu aria-hidden="true" size={28} strokeWidth={1.8} />,
         },
       ],
     },
@@ -147,6 +159,15 @@ function iconographyMatrix(locale: DesignSystemLocale) {
         "Accordion 與 LanguageSwitcher 都使用 ChevronDown 呈現同一種 dropdown 提示。",
       ),
       accessibility: localized(locale, "The trigger owns aria-expanded or label; the chevron shape is decorative.", "展開狀態或標籤由觸發元素承擔；chevron shape 是裝飾性。"),
+    },
+    {
+      context: "Responsive navigation triggers",
+      purpose: localized(
+        locale,
+        "PanelLeftOpen opens the Design System component list drawer; the mobile navbar uses a compact menu affordance for route navigation.",
+        "PanelLeftOpen 開啟 Design System 元件清單 drawer；手機版 Navbar 使用精簡選單提示進行頁面導覽。",
+      ),
+      accessibility: localized(locale, "Both triggers expose their open state with aria-expanded and rely on labels for the control name.", "兩個 trigger 都用 aria-expanded 暴露開啟狀態，控制名稱由 label 提供。"),
     },
     {
       context: "Modal",

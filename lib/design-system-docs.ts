@@ -224,12 +224,12 @@ const foundations: DesignSystemDoc[] = [
       "icon 顏色跟著旁邊的文字或狀態色走；hover 和 focus 狀態屬於包住它的按鈕或連結，不屬於 icon 本身。",
     ],
     behavior: [
-      { label: "Package icons", description: "`lucide-react` is the primary source for UI icons: close, chevrons, status marks, and contact cues." },
+      { label: "Package icons", description: "`lucide-react` is the primary source for UI icons: close, chevrons, status marks, contact cues, and responsive navigation triggers." },
       { label: "Local SVG", description: "Highly custom route diagrams can keep local SVG paths, but shared UI indicators use `lucide-react`." },
       { label: "Image assets", description: "LinkedIn and GitHub social links use `/social/*` image files rather than icon components." },
     ],
     behaviorZh: [
-      { label: "Package icons", description: "`lucide-react` 是 UI icon 的主要來源：關閉、箭頭、狀態符號和聯絡提示都來自這裡。" },
+      { label: "Package icons", description: "`lucide-react` 是 UI icon 的主要來源：關閉、箭頭、狀態符號、聯絡提示與 responsive navigation trigger 都來自這裡。" },
       { label: "Local SVG", description: "高度客製的案例圖表可以保留 local SVG path，但共用 UI 指示符統一使用 `lucide-react`。" },
       { label: "Image assets", description: "LinkedIn 和 GitHub 社群連結用的是 `/social/*` 圖片檔，不是 icon 元件。" },
     ],

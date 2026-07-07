@@ -3272,6 +3272,10 @@
     color: var(--hm-purple);
   }
 
+  :global(html[data-nav-hidden="true"]) .sidebarToggle {
+    top: 16px;
+  }
+
   .sidebarBackdrop {
     position: fixed;
     inset: 0;
@@ -3305,7 +3309,9 @@
     bottom: 0;
     left: 0;
     z-index: 50;
-    width: min(360px, calc(100vw - 48px));
+    width: fit-content;
+    min-width: 248px;
+    max-width: calc(100vw - 48px);
     max-height: none;
     padding: max(96px, env(safe-area-inset-top)) var(--hm-space-sm) var(--hm-space-md);
     overflow-y: auto;

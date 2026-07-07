@@ -98,6 +98,7 @@ export default function DesignSystemExplorer({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const gettingStartedItem = toc.items[0];
   const nextStepItem = toc.items.find((item) => item.href === "#see-more") ?? toc.items[toc.items.length - 1];
+  const drawerLabel = localized(locale, "Component list", "元件清單");
   const measureRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const [navWidth, setNavWidth] = useState<number | null>(null);
@@ -363,12 +364,13 @@ export default function DesignSystemExplorer({
       <button
         aria-expanded={sidebarOpen}
         aria-controls="design-system-nav-drawer"
+        aria-label={drawerLabel}
         className={styles.sidebarToggle}
         onClick={() => setSidebarOpen((open) => !open)}
         type="button"
       >
         <PanelLeftOpen aria-hidden="true" size={18} strokeWidth={2} />
-        <span>{toc.title}</span>
+        <span>{drawerLabel}</span>
       </button>
       <button
         aria-hidden="true"
