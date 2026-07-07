@@ -2683,8 +2683,8 @@
   background: var(--hm-paper);
 }
 
-.caseHeroDemo :global(.cs-info-row) {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 136px), 1fr));
+.caseHeroDemo .caseHeroInfoGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   justify-content: stretch;
   gap: 18px 20px;
 }
@@ -2696,6 +2696,31 @@
 .caseHeroDemo :global(.cs-info-value) {
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+@media (max-width: 1100px) {
+  .caseHeroDemo .caseHeroInfoGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .caseHeroDemo .caseHeroInfoGrid > :global(.cs-info-card:nth-child(4)) {
+    grid-column: 1;
+  }
+
+  .caseHeroDemo .caseHeroInfoGrid > :global(.cs-info-card:nth-child(5)) {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .caseHeroDemo .caseHeroInfoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .caseHeroDemo .caseHeroInfoGrid > :global(.cs-info-card:nth-child(4)),
+  .caseHeroDemo .caseHeroInfoGrid > :global(.cs-info-card:nth-child(5)) {
+    grid-column: auto;
+  }
 }
 
 .proposalTabsDemo {
