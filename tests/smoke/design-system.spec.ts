@@ -25,7 +25,7 @@ test.describe("design system route smoke", () => {
         await expectNot404(page, response?.status());
         await expectNoHorizontalOverflow(page);
         await expectNavbarDesignSystemLink(page);
-        await expect(page.getByText(/Portfolio Design System|作品集設計系統/).first()).toBeVisible();
+        await expect(page.getByText("Co-worked with AI agent").first()).toBeVisible();
         await expect(page.locator("nav").filter({ hasText: /Foundations|基礎規範/ }).first()).toBeVisible();
         await expect(page.getByRole("button", { name: /Foundations|基礎規範/ }).first()).toBeVisible();
         expectNoConsoleErrors(errors);

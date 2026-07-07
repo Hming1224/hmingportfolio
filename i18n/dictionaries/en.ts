@@ -97,9 +97,9 @@ const messages = {
         "It is not built to show off. It is built so design leaders and hiring teams in IoT, SaaS, and fintech can immediately sense a repeatable standard behind the portfolio. Stable, precise, and lasting matters more than visual tricks.",
       keywordsAriaLabel: "Design soul keywords",
       keywords: ["Memorable weight", "Warmth", "Restrained personality"],
-      soulKicker: "01 The Soul",
+      soulKicker: "01 / Design character",
       soulLead: "The feeling this system should leave behind.",
-      principlesKicker: "02 The Principles",
+      principlesKicker: "02 / Design principles",
       principlesLead: "The criteria that turn that feeling into design decisions.",
       principles: [
         {
@@ -131,7 +131,7 @@ const messages = {
           desc: "Hover, active, focus, and disabled states are designed. Unpublished work uses disabled styling so people do not mistake it for a clickable case.",
         },
       ],
-      architectureKicker: "03 The Architecture",
+      architectureKicker: "03 / System architecture",
       architectureLead: "How those criteria become a maintainable two-layer structure.",
       architectureTitle: "Two-layer architecture",
       architectureBody:

@@ -206,9 +206,9 @@ const foundations: DesignSystemDoc[] = [
     kind: "foundation",
     slug: "icons",
     title: "Icons / Iconography",
-    titleZh: "Icons / Iconography",
+    titleZh: "圖標",
     description: "Iconography guidelines for navigation, status, actions, and external links across the portfolio.",
-    descriptionZh: "用於規範作品集中的導覽、狀態、操作與外部連結圖示。",
+    descriptionZh: "用於規範作品集中的導覽、狀態、操作與外部連結圖標。",
     category: "Foundations",
     hideSourceInHeader: true,
     usage: [

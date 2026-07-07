@@ -172,15 +172,16 @@
 
 .groupHeader {
   display: grid;
-  gap: var(--hm-space-2xs);
-  margin: var(--hm-space-md) 0 var(--hm-space-sm);
+  gap: var(--hm-space-xs);
+  margin: var(--hm-space-lg) 0 var(--hm-space-sm);
 }
 
-.groupKicker {
+.groupTitle {
   margin: 0;
-  color: var(--hm-purple);
-  font-size: var(--hm-fs-sm);
-  font-weight: var(--hm-fw-semibold);
+  color: var(--text-heading);
+  font-size: 32px;
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.25;
 }
 
 .groupLead {
@@ -3052,6 +3053,10 @@
 
   .sectionHeader {
     grid-template-columns: var(--hm-space-lg) auto 1fr;
+  }
+
+  .groupTitle {
+    font-size: 24px;
   }
 
   .card,

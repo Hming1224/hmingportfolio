@@ -74,13 +74,8 @@ export default async function DesignSystemPage() {
         gettingStartedContent={
           <article className={styles.docArticle} id="getting-started" key="getting-started">
             <section className={styles.section} key="getting-started">
-              <div className={styles.sectionHeader}>
-                <span className={styles.sectionRule} />
-                <h2 className={styles.sectionTitle}>{copy.introduction.heading}</h2>
-                <span className={styles.sectionRule} />
-              </div>
               <div className={styles.groupHeader}>
-                <p className={styles.groupKicker}>{copy.introduction.soulKicker}</p>
+                <h2 className={styles.groupTitle}>{copy.introduction.soulKicker}</h2>
                 <p className={styles.groupLead}>{copy.introduction.soulLead}</p>
               </div>
               <article className={styles.card}>
@@ -93,7 +88,7 @@ export default async function DesignSystemPage() {
                 </div>
               </article>
               <div className={styles.groupHeader}>
-                <p className={styles.groupKicker}>{copy.introduction.principlesKicker}</p>
+                <h2 className={styles.groupTitle}>{copy.introduction.principlesKicker}</h2>
                 <p className={styles.groupLead}>{copy.introduction.principlesLead}</p>
               </div>
               <div className={styles.principleGrid}>
@@ -108,7 +103,7 @@ export default async function DesignSystemPage() {
                 })}
               </div>
               <div className={styles.groupHeader}>
-                <p className={styles.groupKicker}>{copy.introduction.architectureKicker}</p>
+                <h2 className={styles.groupTitle}>{copy.introduction.architectureKicker}</h2>
                 <p className={styles.groupLead}>{copy.introduction.architectureLead}</p>
               </div>
               <article className={styles.card}>

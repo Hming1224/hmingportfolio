@@ -97,9 +97,9 @@ const messages = {
         "它不是為了炫技，而是要讓 IoT、SaaS、金融科技領域的設計主管或招募者，一眼看出這個作品集背後有可複用的判斷標準。穩、準、耐看，比一時的花招更重要。",
       keywordsAriaLabel: "設計靈魂關鍵字",
       keywords: ["有滯度", "不冰冷", "克制有個性"],
-      soulKicker: "01 設計靈魂",
+      soulKicker: "01 / 設計靈魂",
       soulLead: "這套系統想給人的感覺。",
-      principlesKicker: "02 設計原則",
+      principlesKicker: "02 / 設計原則",
       principlesLead: "把感覺變成可判斷的準則。",
       principles: [
         {
@@ -131,7 +131,7 @@ const messages = {
           desc: "hover / active / focus / disabled 都要處理；未上線案子用 disabled 底色不讓人誤點——完整度體現在邊角狀態。",
         },
       ],
-      architectureKicker: "03 架構概覽",
+      architectureKicker: "03 / 架構概覽",
       architectureLead: "把準則落地成兩層結構。",
       architectureTitle: "兩層架構概覽",
       architectureBody:
