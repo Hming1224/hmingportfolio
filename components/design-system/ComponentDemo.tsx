@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
+import { painCards } from "@/app/crypto-arsenal/data";
 import { proposalScenario1Tabs } from "@/app/advantech/data";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
@@ -70,6 +71,35 @@ const caseExamples = {
     ],
   },
 } satisfies Record<DesignSystemLocale, Record<string, string | string[] | string[][]>>;
+
+const cryptoPainCardDemo = {
+  en: {
+    quote:
+      "I can see how much the strategy earned, but the interface does not show whether the current position is long or short, or whether it is gaining or losing.",
+    name: "Strategy developer A",
+    role: "Trader following automated strategies",
+    tone: painCards[0].tone,
+  },
+  "zh-TW": {
+    ...painCards[0],
+  },
+} satisfies Record<DesignSystemLocale, {
+  quote: string;
+  name: string;
+  role: string;
+  tone: "orange" | "blue";
+}>;
+
+const cryptoPainAvatarIcons = {
+  orange: {
+    src: "/projects/crypto-arsenal/problem/icons/developer.svg",
+    size: 36,
+  },
+  blue: {
+    src: "/projects/crypto-arsenal/problem/icons/trader.svg",
+    size: 32,
+  },
+} as const;
 
 const advantechTocSections = {
   en: [
@@ -1245,12 +1275,28 @@ export default function ComponentDemo({
   }
 
   if (type === "case-card") {
+    const card = cryptoPainCardDemo[locale];
+    const avatar = cryptoPainAvatarIcons[card.tone];
+
     return (
       <DemoBlock className={styles.caseCardDemoShell} contextLabel={contextLabel}>
         <CaseCard className={`theme-crypto-arsenal ${styles.caseCardSourceDemo}`}>
-          <p className="cs-card-kicker">{zh ? "痛點 01" : "Pain point 01"}</p>
-          <h3 className={styles.caseCardTitleDemo}>{caseCopy.cardTitle}</h3>
-          <p>{caseCopy.cardBody}</p>
+          <p className="cs-quote-text">{card.quote}</p>
+          <div className="cs-quote-meta">
+            <span className={`cs-avatar cs-avatar--${card.tone}`}>
+              <Image
+                className="cs-avatar-img"
+                src={avatar.src}
+                alt=""
+                width={avatar.size}
+                height={avatar.size}
+                aria-hidden="true"
+              />
+            </span>
+            <span className="cs-quote-name">{card.name}</span>
+            <span className="cs-quote-line" aria-hidden="true" />
+            <span className="cs-quote-role">{card.role}</span>
+          </div>
         </CaseCard>
       </DemoBlock>
     );
@@ -1305,15 +1351,11 @@ export default function ComponentDemo({
             before={
               <div className={styles.beforeAfterStateSlot}>
                 <div className={styles.beforeAfterPanelImagePlaceholder} aria-hidden="true" />
-                <strong>Baseline layout</strong>
-                <span>{zh ? "資訊密度偏高" : "Dense layout"}</span>
               </div>
             }
             after={
               <div className={styles.beforeAfterStateSlot}>
                 <div className={styles.beforeAfterPanelImagePlaceholder} aria-hidden="true" />
-                <strong>Refined layout</strong>
-                <span>{zh ? "層級更清楚" : "Clearer hierarchy"}</span>
               </div>
             }
           />
