@@ -137,12 +137,21 @@
 
 .highlightCard {
   padding: var(--hm-space-md);
-  border-color: color-mix(in srgb, var(--hm-paper) 88%, transparent);
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--hm-paper) 60%, transparent) 0%,
-    color-mix(in srgb, var(--hm-paper) 20%, transparent) 100%
-  );
+  border-color: transparent;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--hm-paper) 60%, transparent) 0%,
+      color-mix(in srgb, var(--hm-paper) 20%, transparent) 100%
+    ) padding-box,
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--hm-purple-light) 72%, var(--hm-paper)) 0%,
+      color-mix(in srgb, var(--hm-paper) 92%, transparent) 100%
+    ) border-box;
+  box-shadow:
+    0 20px 38px -26px color-mix(in srgb, var(--hm-purple) 22%, transparent),
+    var(--shadow-sm);
   backdrop-filter: blur(18px);
 }
 
