@@ -97,6 +97,7 @@ export default function DesignSystemExplorer({
   const gettingStartedItem = toc.items[0];
   const nextStepItem = toc.items.find((item) => item.href === "#see-more") ?? toc.items[toc.items.length - 1];
   const measureRef = useRef<HTMLDivElement>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
   const [navWidth, setNavWidth] = useState<number | null>(null);
 
   const activeCatalogDoc = activeWorkspace.type === "doc"
@@ -169,6 +170,42 @@ export default function DesignSystemExplorer({
   }, [locale, sections, docs, gettingStartedItem, nextStepItem]);
 
   useEffect(() => {
+    const shell = shellRef.current;
+    if (!shell || typeof window === "undefined") return;
+
+    const root = document.documentElement;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion || typeof IntersectionObserver === "undefined") {
+      root.dataset.dsWorkspaceVisible = "true";
+      return () => {
+        delete root.dataset.dsWorkspaceVisible;
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          root.dataset.dsWorkspaceVisible = "true";
+        } else {
+          delete root.dataset.dsWorkspaceVisible;
+        }
+      },
+      {
+        rootMargin: "0px 0px -58% 0px",
+        threshold: 0.01,
+      },
+    );
+
+    observer.observe(shell);
+
+    return () => {
+      observer.disconnect();
+      delete root.dataset.dsWorkspaceVisible;
+    };
+  }, []);
+
+  useEffect(() => {
     const updateActiveAnchor = () => {
       const hash = window.location.hash || "#getting-started";
       const slug = hash.replace(/^#/, "");
@@ -210,7 +247,7 @@ export default function DesignSystemExplorer({
   }, [activateCatalogDoc, activateGettingStarted, activateSeeMore, docs, sections]);
 
   return (
-    <div className={styles.shell}>
+    <div className={styles.shell} ref={shellRef}>
       <aside className={styles.sidebar}>
         <div aria-hidden="true" className={styles.navMeasure} ref={measureRef}>
           {gettingStartedItem ? <span className={styles.rootLink}>{gettingStartedItem.label}</span> : null}
