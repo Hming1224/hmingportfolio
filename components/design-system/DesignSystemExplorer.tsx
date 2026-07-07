@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { PanelLeftOpen } from "lucide-react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "@/components/ui/Accordion";
 import type { DesignSystemDoc, DesignSystemDocKind, DesignSystemLocale } from "@/lib/design-system-docs";
 import DesignSystemDocsPage from "./DesignSystemDocsPage";
@@ -94,6 +95,7 @@ export default function DesignSystemExplorer({
 }) {
   const [activeWorkspace, setActiveWorkspace] = useState<ActiveWorkspace>({ type: "getting-started" });
   const [openSection, setOpenSection] = useState<string>("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const gettingStartedItem = toc.items[0];
   const nextStepItem = toc.items.find((item) => item.href === "#see-more") ?? toc.items[toc.items.length - 1];
   const measureRef = useRef<HTMLDivElement>(null);
@@ -340,9 +342,45 @@ export default function DesignSystemExplorer({
     };
   }, [activateCatalogDoc, activateGettingStarted, activateSeeMore, docs, sections]);
 
+  useEffect(() => {
+    if (!sidebarOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [sidebarOpen]);
+
   return (
     <div className={styles.shell} ref={shellRef}>
-      <aside className={styles.sidebar}>
+      <button
+        aria-expanded={sidebarOpen}
+        aria-controls="design-system-nav-drawer"
+        className={styles.sidebarToggle}
+        onClick={() => setSidebarOpen((open) => !open)}
+        type="button"
+      >
+        <PanelLeftOpen aria-hidden="true" size={18} strokeWidth={2} />
+        <span>{toc.title}</span>
+      </button>
+      <button
+        aria-hidden="true"
+        className={`${styles.sidebarBackdrop}${sidebarOpen ? ` ${styles.sidebarBackdropOpen}` : ""}`}
+        onClick={() => setSidebarOpen(false)}
+        tabIndex={-1}
+        type="button"
+      />
+      <aside
+        className={`${styles.sidebar}${sidebarOpen ? ` ${styles.sidebarOpen}` : ""}`}
+        id="design-system-nav-drawer"
+      >
         <div aria-hidden="true" className={styles.navMeasure} ref={measureRef}>
           {gettingStartedItem ? <span className={styles.rootLink}>{gettingStartedItem.label}</span> : null}
           {sections.map((section) => (
@@ -379,6 +417,7 @@ export default function DesignSystemExplorer({
               onClick={(event) => {
                 event.preventDefault();
                 activateGettingStarted();
+                setSidebarOpen(false);
               }}
             >
               {gettingStartedItem.label}
@@ -418,6 +457,7 @@ export default function DesignSystemExplorer({
                             onClick={(event) => {
                               event.preventDefault();
                               activateCatalogDoc(section, doc);
+                              setSidebarOpen(false);
                             }}
                           >
                             {localized(locale, doc.title, doc.titleZh)}
@@ -439,6 +479,7 @@ export default function DesignSystemExplorer({
               onClick={(event) => {
                 event.preventDefault();
                 activateSeeMore();
+                setSidebarOpen(false);
               }}
             >
               {nextStepItem.label}
