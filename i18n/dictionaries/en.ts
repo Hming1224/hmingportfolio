@@ -92,19 +92,17 @@ const messages = {
     },
     introduction: {
       heading: "Getting Started",
-      soulTitle: "The system should feel careful, tasteful, and grounded in real product work.",
+      soulTitle: "The system should feel refined, warm, and guided by consistent judgment.",
       soulBody:
-        "It is not built to show off. It is built so design leaders and hiring teams in IoT, SaaS, and fintech can immediately sense a repeatable standard behind the portfolio. Stable, precise, and lasting matters more than visual tricks.",
+        "It organizes the tokens, shared components, and case-study patterns used across the portfolio into clear rules, so each screen can keep a steady rhythm while preserving the character of each project. From color and spacing to component boundaries, every adjustment has a reference point to check against.",
       keywordsAriaLabel: "Design soul keywords",
-      keywords: ["Memorable weight", "Warmth", "Restrained personality"],
+      keywords: ["Refined", "Warm", "Stable with character"],
       soulKicker: "01 / Design character",
-      soulLead: "The feeling this system should leave behind.",
       principlesKicker: "02 / Design principles",
-      principlesLead: "The criteria that turn that feeling into design decisions.",
       principles: [
         {
           title: "Set the character before decoration",
-          desc: "Define the tone first: weight, warmth, and restrained personality. The home page uses cursor tags and sticky notes for character instead of piling on effects.",
+          desc: "Define the tone first: refined, warm, and stable with character. The home page uses cursor tags and sticky notes for character instead of piling on effects.",
         },
         {
           title: "Colors change, the frame holds",
@@ -132,7 +130,6 @@ const messages = {
         },
       ],
       architectureKicker: "03 / System architecture",
-      architectureLead: "How those criteria become a maintainable two-layer structure.",
       architectureTitle: "Two-layer architecture",
       architectureBody:
         "Not every repeated-looking layout should become a shared component. The reusable layer holds tokens, stable shells, and contracts; route-local geometry stays close to the story it explains.",

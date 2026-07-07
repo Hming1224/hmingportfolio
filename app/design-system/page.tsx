@@ -76,7 +76,6 @@ export default async function DesignSystemPage() {
             <section className={styles.section} key="getting-started">
               <div className={styles.groupHeader}>
                 <h2 className={styles.groupTitle}>{copy.introduction.soulKicker}</h2>
-                <p className={styles.groupLead}>{copy.introduction.soulLead}</p>
               </div>
               <article className={styles.card}>
                 <h3 className={styles.cardTitle}>{copy.introduction.soulTitle}</h3>
@@ -89,7 +88,6 @@ export default async function DesignSystemPage() {
               </article>
               <div className={styles.groupHeader}>
                 <h2 className={styles.groupTitle}>{copy.introduction.principlesKicker}</h2>
-                <p className={styles.groupLead}>{copy.introduction.principlesLead}</p>
               </div>
               <div className={styles.principleGrid}>
                 {copy.introduction.principles.map((principle, index) => {
@@ -104,7 +102,6 @@ export default async function DesignSystemPage() {
               </div>
               <div className={styles.groupHeader}>
                 <h2 className={styles.groupTitle}>{copy.introduction.architectureKicker}</h2>
-                <p className={styles.groupLead}>{copy.introduction.architectureLead}</p>
               </div>
               <article className={styles.card}>
                 <h3 className={styles.cardTitle}>{copy.introduction.architectureTitle}</h3>

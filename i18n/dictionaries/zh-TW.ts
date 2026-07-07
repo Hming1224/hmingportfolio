@@ -92,19 +92,17 @@ const messages = {
     },
     introduction: {
       heading: "Getting Started",
-      soulTitle: "這套系統想讓人感覺：仔細、有品味，而且做過真東西。",
+      soulTitle: "這套系統想讓人感覺：細緻、有溫度，而且有一致的判斷。",
       soulBody:
-        "它不是為了炫技，而是要讓 IoT、SaaS、金融科技領域的設計主管或招募者，一眼看出這個作品集背後有可複用的判斷標準。穩、準、耐看，比一時的花招更重要。",
+        "它把作品集裡實際用到的 token、共用元件與案例頁模式整理成清楚的規則，讓每個畫面都能維持穩定的節奏，也保留不同專案自己的個性。從顏色、間距到元件邊界，每一次調整都有可以回頭檢查的依據。",
       keywordsAriaLabel: "設計靈魂關鍵字",
-      keywords: ["有滯度", "不冰冷", "克制有個性"],
+      keywords: ["細緻", "有溫度", "穩定有個性"],
       soulKicker: "01 / 設計靈魂",
-      soulLead: "這套系統想給人的感覺。",
       principlesKicker: "02 / 設計原則",
-      principlesLead: "把感覺變成可判斷的準則。",
       principles: [
         {
           title: "先立氣質，再談裝飾",
-          desc: "先定「有滯度、不冰冷、克制有個性」的調性，才加視覺元素。首頁靠 cursor tag、便利貼營造個性，而不是堆特效。",
+          desc: "先定「細緻、有溫度、穩定有個性」的調性，才加視覺元素。首頁靠 cursor tag、便利貼營造個性，而不是堆特效。",
         },
         {
           title: "顏色可以換，框架不能散",
@@ -132,7 +130,6 @@ const messages = {
         },
       ],
       architectureKicker: "03 / 架構概覽",
-      architectureLead: "把準則落地成兩層結構。",
       architectureTitle: "兩層架構概覽",
       architectureBody:
         "不是所有看起來重複的 layout 都該抽成共用元件。可複用層負責 token、穩定外框與 contract；跟故事綁在一起的幾何，留在 route-local。",
