@@ -87,8 +87,7 @@ const messages = {
       title: "On this page",
       items: [
         { href: "#getting-started", label: "Getting Started" },
-        { href: "#catalog", label: "Design System Catalog" },
-        { href: "#where-to-go-next", label: "Where to go next" },
+        { href: "#see-more", label: "Next Step" },
       ],
     },
     introduction: {
@@ -316,6 +315,7 @@ const messages = {
     },
     cta: {
       eyebrow: "Next step",
+      workspaceTitle: "See more",
       title: "If you want to see how this system lands inside real case-study work",
       body: "Go back to the selected projects to see the same thinking applied to IoT, enterprise SaaS, and narrative-heavy product work. Or reach out and we can talk about how design thinking connects to product and engineering.",
       primaryAction: "Back to selected work",

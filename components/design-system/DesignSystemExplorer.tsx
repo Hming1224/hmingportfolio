@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "@/components/ui/Accordion";
 import type { DesignSystemDoc, DesignSystemDocKind, DesignSystemLocale } from "@/lib/design-system-docs";
 import DesignSystemDocsPage from "./DesignSystemDocsPage";
@@ -36,6 +36,7 @@ function docSectionForAnchor(
   anchor: string,
 ) {
   const slugAliases: Record<string, string> = {
+    catalog: "colors",
     "border-radius": "radius",
     "component-boundaries": "local-exceptions",
     "token-reference": "tokens",
@@ -71,55 +72,90 @@ function docSectionForAnchor(
   return null;
 }
 
+type ActiveWorkspace =
+  | { type: "getting-started" }
+  | { type: "doc"; sectionLabel: string; slug: string }
+  | { type: "see-more" };
+
 export default function DesignSystemExplorer({
   locale,
   sections,
   docs,
   toc,
-  topContent,
-  bottomContent,
+  gettingStartedContent,
+  seeMoreContent,
 }: {
   locale: DesignSystemLocale;
   sections: DesignSystemSection[];
   docs: DesignSystemDoc[];
   toc: { title: string; items: Array<{ href: string; label: string }> };
-  topContent?: ReactNode;
-  bottomContent?: ReactNode;
+  gettingStartedContent?: ReactNode;
+  seeMoreContent?: ReactNode;
 }) {
-  const initialCatalogSection = sections[0];
-  const initialCatalogDoc = initialCatalogSection ? firstDocInSection(initialCatalogSection, docs) : undefined;
-  const [activeCatalogItem, setActiveCatalogItem] = useState({
-    sectionLabel: initialCatalogSection?.label ?? "",
-    slug: initialCatalogDoc?.slug ?? "",
-  });
-  const [activeAnchor, setActiveAnchor] = useState("#getting-started");
+  const [activeWorkspace, setActiveWorkspace] = useState<ActiveWorkspace>({ type: "getting-started" });
   const [openSection, setOpenSection] = useState<string>(sections[0]?.label ?? "");
   const gettingStartedItem = toc.items[0];
+  const nextStepItem = toc.items.find((item) => item.href === "#see-more") ?? toc.items[toc.items.length - 1];
   const measureRef = useRef<HTMLDivElement>(null);
   const [navWidth, setNavWidth] = useState<number | null>(null);
 
-  const activeCatalogDoc = docs.find((doc) => doc.slug === activeCatalogItem.slug);
+  const activeCatalogDoc = activeWorkspace.type === "doc"
+    ? docs.find((doc) => doc.slug === activeWorkspace.slug)
+    : undefined;
 
-  const activateCatalogDoc = (
-    section: DesignSystemSection,
-    doc: DesignSystemDoc,
-    options: { updateHash?: boolean; scroll?: boolean } = {},
-  ) => {
+  const scrollToWorkspace = useCallback(() => {
+    window.requestAnimationFrame(() => {
+      document.getElementById("design-system-workspace")?.scrollIntoView({ block: "start" });
+    });
+  }, []);
+
+  const activateCatalogDoc = useCallback(
+    (
+      section: DesignSystemSection,
+      doc: DesignSystemDoc,
+      options: { updateHash?: boolean; scroll?: boolean } = {},
+    ) => {
+      const { updateHash = true, scroll = true } = options;
+      setOpenSection(section.label);
+      setActiveWorkspace({ type: "doc", sectionLabel: section.label, slug: doc.slug });
+
+      if (updateHash) {
+        window.history.pushState(null, "", `#${doc.slug}`);
+      }
+
+      if (scroll) {
+        scrollToWorkspace();
+      }
+    },
+    [scrollToWorkspace],
+  );
+
+  const activateGettingStarted = useCallback((options: { updateHash?: boolean; scroll?: boolean } = {}) => {
     const { updateHash = true, scroll = true } = options;
-    setOpenSection(section.label);
-    setActiveAnchor("#catalog");
-    setActiveCatalogItem({ sectionLabel: section.label, slug: doc.slug });
+    setActiveWorkspace({ type: "getting-started" });
 
     if (updateHash) {
-      window.history.pushState(null, "", `#${doc.slug}`);
+      window.history.pushState(null, "", "#getting-started");
     }
 
     if (scroll) {
-      window.requestAnimationFrame(() => {
-        document.getElementById("catalog")?.scrollIntoView({ block: "start" });
-      });
+      scrollToWorkspace();
     }
-  };
+  }, [scrollToWorkspace]);
+
+  const activateSeeMore = useCallback((options: { updateHash?: boolean; scroll?: boolean } = {}) => {
+    const { updateHash = true, scroll = true } = options;
+    setActiveWorkspace({ type: "see-more" });
+    setOpenSection("");
+
+    if (updateHash) {
+      window.history.pushState(null, "", "#see-more");
+    }
+
+    if (scroll) {
+      scrollToWorkspace();
+    }
+  }, [scrollToWorkspace]);
 
   useLayoutEffect(() => {
     const container = measureRef.current;
@@ -130,32 +166,27 @@ export default function DesignSystemExplorer({
     );
     const max = Math.max(0, ...widths);
     setNavWidth(max > 0 ? Math.ceil(max) : null);
-  }, [locale, sections, docs, gettingStartedItem]);
+  }, [locale, sections, docs, gettingStartedItem, nextStepItem]);
 
   useEffect(() => {
     const updateActiveAnchor = () => {
       const hash = window.location.hash || "#getting-started";
+      const slug = hash.replace(/^#/, "");
       const matchingSection = sectionForAnchor(sections, hash);
       const matchingDoc = docSectionForAnchor(sections, docs, hash);
 
+      if (slug === "getting-started" || !slug) {
+        activateGettingStarted({ updateHash: false, scroll: Boolean(window.location.hash) });
+        return;
+      }
+
+      if (slug === "see-more" || slug === "where-to-go-next" || slug === "next-step" || slug === "cta") {
+        activateSeeMore({ updateHash: false });
+        return;
+      }
+
       if (matchingDoc) {
         activateCatalogDoc(matchingDoc.section, matchingDoc.doc, { updateHash: false });
-        return;
-      }
-
-      if (hash === "#where-to-go-next" || hash === "#next-step" || hash === "#cta") {
-        setActiveAnchor("#where-to-go-next");
-        window.requestAnimationFrame(() => {
-          document.getElementById("where-to-go-next")?.scrollIntoView({ block: "start" });
-        });
-        return;
-      }
-
-      if (hash === "#getting-started") {
-        setActiveAnchor(hash);
-        window.requestAnimationFrame(() => {
-          document.getElementById("getting-started")?.scrollIntoView({ block: "start" });
-        });
         return;
       }
 
@@ -165,7 +196,7 @@ export default function DesignSystemExplorer({
         return;
       }
 
-      setActiveAnchor(hash);
+      activateGettingStarted({ updateHash: false, scroll: false });
     };
 
     updateActiveAnchor();
@@ -176,49 +207,7 @@ export default function DesignSystemExplorer({
       window.removeEventListener("hashchange", updateActiveAnchor);
       window.removeEventListener("popstate", updateActiveAnchor);
     };
-  }, [docs, sections]);
-
-  useEffect(() => {
-    const sectionAnchors = [
-      "#getting-started",
-      "#catalog",
-      "#where-to-go-next",
-    ];
-    let frameId = 0;
-
-    const updateActiveAnchorFromScroll = () => {
-      const scrollOffset = window.scrollY + 180;
-      const currentAnchor = sectionAnchors.reduce((current, anchor) => {
-        const target = document.getElementById(anchor.slice(1));
-        if (!target) return current;
-
-        const sectionTop = target.getBoundingClientRect().top + window.scrollY;
-        return sectionTop <= scrollOffset ? anchor : current;
-      }, sectionAnchors[0]);
-      const matchingSection = sectionForAnchor(sections, currentAnchor);
-
-      setActiveAnchor(currentAnchor);
-      if (matchingSection) setOpenSection(matchingSection.label);
-    };
-
-    const scheduleUpdate = () => {
-      if (frameId) return;
-      frameId = window.requestAnimationFrame(() => {
-        frameId = 0;
-        updateActiveAnchorFromScroll();
-      });
-    };
-
-    updateActiveAnchorFromScroll();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-
-    return () => {
-      if (frameId) window.cancelAnimationFrame(frameId);
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-    };
-  }, [sections]);
+  }, [activateCatalogDoc, activateGettingStarted, activateSeeMore, docs, sections]);
 
   return (
     <div className={styles.shell}>
@@ -242,6 +231,7 @@ export default function DesignSystemExplorer({
               );
             }),
           )}
+          {nextStepItem ? <span className={styles.rootLink}>{nextStepItem.label}</span> : null}
         </div>
 
         <nav
@@ -251,10 +241,13 @@ export default function DesignSystemExplorer({
         >
           {gettingStartedItem ? (
             <a
-              aria-current={activeAnchor === gettingStartedItem.href ? "page" : undefined}
-              className={`${styles.rootLink}${activeAnchor === gettingStartedItem.href ? ` ${styles.active}` : ""}`}
+              aria-current={activeWorkspace.type === "getting-started" ? "page" : undefined}
+              className={`${styles.rootLink}${activeWorkspace.type === "getting-started" ? ` ${styles.active}` : ""}`}
               href={gettingStartedItem.href}
-              onClick={() => setActiveAnchor(gettingStartedItem.href)}
+              onClick={(event) => {
+                event.preventDefault();
+                activateGettingStarted();
+              }}
             >
               {gettingStartedItem.label}
             </a>
@@ -278,7 +271,7 @@ export default function DesignSystemExplorer({
             value={openSection}
           >
             {sections.map((section) => {
-              const isSectionActive = activeAnchor === "#catalog" && activeCatalogItem.sectionLabel === section.label;
+              const isSectionActive = activeWorkspace.type === "doc" && activeWorkspace.sectionLabel === section.label;
 
               return (
                 <AccordionItem className={styles.navAccordionItem} key={section.label} value={section.label}>
@@ -290,7 +283,7 @@ export default function DesignSystemExplorer({
                       {section.items.map((item) => {
                         const doc = docs.find((candidate) => candidate.slug === item.slug && candidate.kind === item.kind);
                         if (!doc) return null;
-                        const isActive = activeAnchor === "#catalog" && activeCatalogItem.sectionLabel === section.label && activeCatalogItem.slug === doc.slug;
+                        const isActive = activeWorkspace.type === "doc" && activeWorkspace.sectionLabel === section.label && activeWorkspace.slug === doc.slug;
 
                         return (
                           <a
@@ -313,17 +306,31 @@ export default function DesignSystemExplorer({
               );
             })}
           </Accordion>
+
+          {nextStepItem ? (
+            <a
+              aria-current={activeWorkspace.type === "see-more" ? "page" : undefined}
+              className={`${styles.rootLink}${activeWorkspace.type === "see-more" ? ` ${styles.active}` : ""}`}
+              href={nextStepItem.href}
+              onClick={(event) => {
+                event.preventDefault();
+                activateSeeMore();
+              }}
+            >
+              {nextStepItem.label}
+            </a>
+          ) : null}
         </nav>
       </aside>
 
       <div className={styles.content}>
-        {topContent}
-        <section className={styles.categorySection} id="catalog">
+        <section className={styles.categorySection} id="design-system-workspace">
           <div className={styles.activeDoc}>
-            {activeCatalogDoc ? <DesignSystemDocsPage doc={activeCatalogDoc} locale={locale} /> : null}
+            {activeWorkspace.type === "getting-started" ? gettingStartedContent : null}
+            {activeWorkspace.type === "doc" && activeCatalogDoc ? <DesignSystemDocsPage doc={activeCatalogDoc} locale={locale} /> : null}
+            {activeWorkspace.type === "see-more" ? seeMoreContent : null}
           </div>
         </section>
-        {bottomContent}
       </div>
     </div>
   );

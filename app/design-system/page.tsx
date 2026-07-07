@@ -79,81 +79,82 @@ export default async function DesignSystemPage() {
         sections={designSystemSections}
         docs={designSystemDocs}
         toc={copy.toc}
-        topContent={
-          <>
-            <section className={styles.section} key="getting-started" id="getting-started">
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionRule} />
-              <h2 className={styles.sectionTitle}>{copy.introduction.heading}</h2>
-              <span className={styles.sectionRule} />
-            </div>
-            <div className={styles.groupHeader}>
-              <p className={styles.groupKicker}>{copy.introduction.soulKicker}</p>
-              <p className={styles.groupLead}>{copy.introduction.soulLead}</p>
-            </div>
-            <article className={styles.card}>
-              <h3 className={styles.cardTitle}>{copy.introduction.soulTitle}</h3>
-              <p className={styles.cardBody}>{copy.introduction.soulBody}</p>
-              <div className={styles.keywordList} aria-label={copy.introduction.keywordsAriaLabel}>
-                {copy.introduction.keywords.map((keyword) => (
-                  <span className={styles.pill} key={keyword}>{keyword}</span>
-                ))}
+        gettingStartedContent={
+          <article className={styles.docArticle} id="getting-started" key="getting-started">
+            <section className={styles.section} key="getting-started">
+              <div className={styles.sectionHeader}>
+                <span className={styles.sectionRule} />
+                <h2 className={styles.sectionTitle}>{copy.introduction.heading}</h2>
+                <span className={styles.sectionRule} />
               </div>
-            </article>
-            <div className={styles.groupHeader}>
-              <p className={styles.groupKicker}>{copy.introduction.principlesKicker}</p>
-              <p className={styles.groupLead}>{copy.introduction.principlesLead}</p>
-            </div>
-            <div className={styles.principleGrid}>
-              {copy.introduction.principles.map((principle, index) => {
-                return (
-                  <article className={`${styles.card} ${styles.principleCard}`} key={principle.title}>
-                    <p className={styles.principleIndex}>0{index + 1}</p>
-                    <h3 className={styles.principleTitle}>{principle.title}</h3>
-                    <p className={styles.principleDesc}>{principle.desc}</p>
-                  </article>
-                );
-              })}
-            </div>
-            <div className={styles.groupHeader}>
-              <p className={styles.groupKicker}>{copy.introduction.architectureKicker}</p>
-              <p className={styles.groupLead}>{copy.introduction.architectureLead}</p>
-            </div>
-            <article className={styles.card}>
-              <h3 className={styles.cardTitle}>{copy.introduction.architectureTitle}</h3>
-              <p className={styles.cardBody}>{copy.introduction.architectureBody}</p>
-              <div className={styles.nestedGrid}>
-                {copy.introduction.architectureCards.map((card) => (
-                  <section className={styles.nestedCard} key={card.title}>
-                    <p className={styles.kicker}>{card.kicker}</p>
-                    <h4 className={styles.nestedTitle}>{card.title}</h4>
-                    <p className={styles.nestedBody}>{card.body}</p>
-                  </section>
-                ))}
+              <div className={styles.groupHeader}>
+                <p className={styles.groupKicker}>{copy.introduction.soulKicker}</p>
+                <p className={styles.groupLead}>{copy.introduction.soulLead}</p>
               </div>
-            </article>
-          </section>
-
-        </>
-      }
-      bottomContent={
-        <section className={styles.cta} key="where-to-go-next" id="where-to-go-next">
-            <div>
+              <article className={styles.card}>
+                <h3 className={styles.cardTitle}>{copy.introduction.soulTitle}</h3>
+                <p className={styles.cardBody}>{copy.introduction.soulBody}</p>
+                <div className={styles.keywordList} aria-label={copy.introduction.keywordsAriaLabel}>
+                  {copy.introduction.keywords.map((keyword) => (
+                    <span className={styles.pill} key={keyword}>{keyword}</span>
+                  ))}
+                </div>
+              </article>
+              <div className={styles.groupHeader}>
+                <p className={styles.groupKicker}>{copy.introduction.principlesKicker}</p>
+                <p className={styles.groupLead}>{copy.introduction.principlesLead}</p>
+              </div>
+              <div className={styles.principleGrid}>
+                {copy.introduction.principles.map((principle, index) => {
+                  return (
+                    <article className={`${styles.card} ${styles.principleCard}`} key={principle.title}>
+                      <p className={styles.principleIndex}>0{index + 1}</p>
+                      <h3 className={styles.principleTitle}>{principle.title}</h3>
+                      <p className={styles.principleDesc}>{principle.desc}</p>
+                    </article>
+                  );
+                })}
+              </div>
+              <div className={styles.groupHeader}>
+                <p className={styles.groupKicker}>{copy.introduction.architectureKicker}</p>
+                <p className={styles.groupLead}>{copy.introduction.architectureLead}</p>
+              </div>
+              <article className={styles.card}>
+                <h3 className={styles.cardTitle}>{copy.introduction.architectureTitle}</h3>
+                <p className={styles.cardBody}>{copy.introduction.architectureBody}</p>
+                <div className={styles.nestedGrid}>
+                  {copy.introduction.architectureCards.map((card) => (
+                    <section className={styles.nestedCard} key={card.title}>
+                      <p className={styles.kicker}>{card.kicker}</p>
+                      <h4 className={styles.nestedTitle}>{card.title}</h4>
+                      <p className={styles.nestedBody}>{card.body}</p>
+                    </section>
+                  ))}
+                </div>
+              </article>
+            </section>
+          </article>
+        }
+        seeMoreContent={
+          <article className={styles.docArticle} id="see-more" key="see-more">
+            <header className={styles.docHeader}>
               <p className={styles.eyebrow}>{copy.cta.eyebrow}</p>
-              <h2 className={styles.ctaTitle}>{copy.cta.title}</h2>
-              <p className={styles.ctaBody}>{copy.cta.body}</p>
-            </div>
-            <div className={styles.actions}>
-              <Button href="/#projects">
-                {copy.cta.primaryAction}
-              </Button>
-              <Button variant="secondary" href="/contact">
-                {copy.cta.secondaryAction}
-              </Button>
-            </div>
-          </section>
-      }
-    />
+              <h2 className={styles.docTitle}>{copy.cta.workspaceTitle}</h2>
+              <p className={styles.docDescription}>{copy.cta.body}</p>
+            </header>
+            <section className={styles.cta} key="see-more">
+              <div className={styles.actions}>
+                <Button href="/#projects">
+                  {copy.cta.primaryAction}
+                </Button>
+                <Button variant="secondary" href="/contact">
+                  {copy.cta.secondaryAction}
+                </Button>
+              </div>
+            </section>
+          </article>
+        }
+      />
 
       <Footer />
     </main>
