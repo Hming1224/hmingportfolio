@@ -2325,10 +2325,13 @@
 }
 
 .tabsWireframeThumb {
-  display: block;
+  width: 72px;
   aspect-ratio: 4 / 3;
   border-radius: var(--hm-radius-sm);
-  background: color-mix(in srgb, var(--hm-purple-soft) 48%, var(--hm-paper));
+}
+
+.tabsWireframeThumb .fakeImageIcon {
+  width: clamp(24px, 36%, 34px);
 }
 
 .tabsWireframeLines {
@@ -2574,29 +2577,42 @@
   max-width: 980px;
 }
 
-.caseSectionMediaPlaceholder {
-  position: relative;
+.fakeImagePlaceholder {
   display: grid;
-  gap: var(--hm-space-xs);
-  place-content: center;
-  min-height: 220px;
-  border: 1px solid var(--cs-line);
-  border-radius: var(--hm-radius-lg);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--cs-accent) 12%, transparent), transparent 58%),
-    var(--cs-surface);
+  place-items: center;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 439 / 209;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--hm-radius-md);
+  background: color-mix(in srgb, var(--hm-surface) 84%, var(--hm-purple-soft));
 }
 
-.caseSectionMediaPlaceholder::before,
-.beforeAfterPanelImagePlaceholder::before,
-.beforeAfterImageDemo::before {
-  content: "";
-  display: block;
-  width: clamp(48px, 9vw, 84px);
+.fakeImageIcon {
+  width: clamp(44px, 16.2%, 71px);
   aspect-ratio: 1;
-  background: color-mix(in srgb, var(--text-secondary) 52%, transparent);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg width='144' height='144' viewBox='0 0 144 144' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='144' height='144' rx='24' fill='black'/%3E%3Ccircle cx='39' cy='34' r='14' fill='white'/%3E%3Cpath d='M0 115L45 70L82 107L104 85L144 125V144H0V115Z' fill='white'/%3E%3Cpath d='M45 70L82 107L47 144H0V115L45 70Z' fill='black' fill-opacity='.32'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg width='144' height='144' viewBox='0 0 144 144' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='144' height='144' rx='24' fill='black'/%3E%3Ccircle cx='39' cy='34' r='14' fill='white'/%3E%3Cpath d='M0 115L45 70L82 107L104 85L144 125V144H0V115Z' fill='white'/%3E%3Cpath d='M45 70L82 107L47 144H0V115L45 70Z' fill='black' fill-opacity='.32'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.fakeImageIconBase {
+  fill: color-mix(in srgb, var(--text-secondary) 14%, var(--hm-surface));
+}
+
+.fakeImageIconBack {
+  fill: color-mix(in srgb, var(--text-secondary) 38%, var(--hm-surface));
+}
+
+.fakeImageIconFront {
+  fill: color-mix(in srgb, var(--text-secondary) 62%, var(--hm-surface));
+}
+
+.fakeImageIconSun {
+  fill: color-mix(in srgb, var(--hm-paper) 92%, var(--hm-surface));
+}
+
+.caseSectionMediaPlaceholder {
+  min-height: 220px;
+  border-radius: var(--hm-radius-lg);
 }
 
 .caseSectionTextPlaceholder {
@@ -2683,8 +2699,7 @@
   min-width: 0;
 }
 
-.caseMediaFrameDemo,
-.beforeAfterImageDemo {
+.caseMediaFrameDemo {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--hm-line);
@@ -2692,8 +2707,7 @@
   background: var(--hm-surface);
 }
 
-.caseMediaFrameDemo img,
-.beforeAfterImageDemo img {
+.caseMediaFrameDemo img {
   object-fit: cover;
 }
 
@@ -2841,8 +2855,7 @@
   width: 100%;
 }
 
-.beforeAfterStateSlot,
-.beforeAfterMediaSlot {
+.beforeAfterStateSlot {
   display: grid;
   gap: var(--hm-space-2xs);
   width: 100%;
@@ -2857,31 +2870,15 @@
 }
 
 .beforeAfterPanelImagePlaceholder {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(280px, 78%);
-  aspect-ratio: 4 / 3;
-  border: 1px solid color-mix(in srgb, var(--hm-line-strong) 62%, transparent);
+  width: min(439px, 82%);
+  max-width: 100%;
   border-radius: var(--hm-radius-md);
-  background: color-mix(in srgb, var(--hm-paper) 86%, var(--hm-surface));
-  box-shadow: var(--shadow-sm);
-}
-
-.beforeAfterStateSlot strong,
-.beforeAfterMediaSlot strong {
-  color: var(--text-heading);
-  font-weight: var(--hm-fw-semibold);
 }
 
 .beforeAfterStateSlot span {
   color: var(--text-secondary);
   font-size: var(--hm-fs-sm);
   line-height: 1.5;
-}
-
-.beforeAfterMediaSlot {
-  justify-items: center;
 }
 
 .beforeAfterNarrativeTitlePlaceholder,
@@ -2917,13 +2914,6 @@
 .proposalPanelDemo strong {
   color: var(--text-heading);
   font-weight: var(--hm-fw-semibold);
-}
-
-.beforeAfterImageDemo {
-  display: grid;
-  place-items: center;
-  min-height: 180px;
-  background: color-mix(in srgb, var(--hm-paper) 86%, var(--hm-surface));
 }
 
 .flowHintSourceDemo {
@@ -3360,10 +3350,6 @@
 
   .caseMediaFrameDemo {
     min-height: 180px;
-  }
-
-  .beforeAfterImageDemo {
-    min-height: 150px;
   }
 
   .projectCardLiveWrap,

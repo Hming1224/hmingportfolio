@@ -101,6 +101,31 @@ const cryptoPainAvatarIcons = {
   },
 } as const;
 
+function classNames(...classes: Array<string | false | null | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
+
+function FakeImagePlaceholder({ className }: { className?: string }) {
+  return (
+    <div className={classNames(styles.fakeImagePlaceholder, className)} aria-hidden="true">
+      <svg className={styles.fakeImageIcon} viewBox="0 0 71 71" fill="none" focusable="false">
+        <rect className={styles.fakeImageIconBase} width="71" height="71" rx="12" />
+        <path className={styles.fakeImageIconBack} d="M10 71L40 36.5L71 67.5V71H10Z" />
+        <path className={styles.fakeImageIconFront} d="M0 71L33 33L66 71H0Z" />
+        <circle className={styles.fakeImageIconSun} cx="20" cy="17" r="7" />
+      </svg>
+    </div>
+  );
+}
+
+function BeforeAfterDemoSlot() {
+  return (
+    <div className={styles.beforeAfterStateSlot}>
+      <FakeImagePlaceholder className={styles.beforeAfterPanelImagePlaceholder} />
+    </div>
+  );
+}
+
 const advantechTocSections = {
   en: [
     { id: "cs-sec-ds-toc-overview", title: "Overview" },
@@ -1101,7 +1126,7 @@ export default function ComponentDemo({
                 <div className={styles.tabsWireframePanel} aria-label={`${tab.label} panel context`}>
                   {Array.from({ length: itemCount }, (_, index) => (
                     <div className={styles.tabsWireframeCard} key={`${tab.value}-${index}`}>
-                      <span className={styles.tabsWireframeThumb} />
+                      <FakeImagePlaceholder className={styles.tabsWireframeThumb} />
                       <span className={styles.tabsWireframeLines}>
                         <span className={styles.tabsWireframeLine} />
                         <span className={styles.tabsWireframeLine} />
@@ -1253,7 +1278,7 @@ export default function ComponentDemo({
                 <span />
               </div>
             </div>
-            <div className={`cs-overview-img cs-object-box ${styles.caseSectionMediaPlaceholder}`} aria-hidden="true" />
+            <FakeImagePlaceholder className={`cs-overview-img cs-object-box ${styles.caseSectionMediaPlaceholder}`} />
           </CaseSection>
         </div>
       </DemoBlock>
@@ -1348,16 +1373,8 @@ export default function ComponentDemo({
           <CaseBeforeAfter
             beforeLabel="Before"
             afterLabel="After"
-            before={
-              <div className={styles.beforeAfterStateSlot}>
-                <div className={styles.beforeAfterPanelImagePlaceholder} aria-hidden="true" />
-              </div>
-            }
-            after={
-              <div className={styles.beforeAfterStateSlot}>
-                <div className={styles.beforeAfterPanelImagePlaceholder} aria-hidden="true" />
-              </div>
-            }
+            before={<BeforeAfterDemoSlot />}
+            after={<BeforeAfterDemoSlot />}
           />
         </div>
       </DemoBlock>
@@ -1379,18 +1396,8 @@ export default function ComponentDemo({
             }
             beforeLabel="Before"
             afterLabel="After"
-            before={
-              <div className={styles.beforeAfterMediaSlot}>
-                <div className={styles.beforeAfterImageDemo} aria-hidden="true" />
-                <strong>360px</strong>
-              </div>
-            }
-            after={
-              <div className={styles.beforeAfterMediaSlot}>
-                <div className={styles.beforeAfterImageDemo} aria-hidden="true" />
-                <strong>640px</strong>
-              </div>
-            }
+            before={<BeforeAfterDemoSlot />}
+            after={<BeforeAfterDemoSlot />}
           />
         </div>
       </DemoBlock>
