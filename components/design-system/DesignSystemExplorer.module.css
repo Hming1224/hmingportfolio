@@ -1048,6 +1048,26 @@
   margin-top: var(--hm-space-sm);
 }
 
+.seeMoreArticle {
+  display: grid;
+  gap: var(--hm-space-md);
+}
+
+.seeMoreHeader {
+  display: grid;
+  gap: var(--hm-space-xs);
+  margin-bottom: 0;
+}
+
+.seeMoreActions {
+  display: block;
+}
+
+.seeMoreActions .actions {
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
 .docSection {
   max-width: 100%;
   min-width: 0;

@@ -136,13 +136,13 @@ export default async function DesignSystemPage() {
           </article>
         }
         seeMoreContent={
-          <article className={styles.docArticle} id="see-more" key="see-more">
-            <header className={styles.docHeader}>
+          <article className={`${styles.docArticle} ${styles.seeMoreArticle}`} id="see-more" key="see-more">
+            <header className={`${styles.docHeader} ${styles.seeMoreHeader}`}>
               <p className={styles.eyebrow}>{copy.cta.eyebrow}</p>
               <h2 className={styles.docTitle}>{copy.cta.workspaceTitle}</h2>
               <p className={styles.docDescription}>{copy.cta.body}</p>
             </header>
-            <section className={styles.cta} key="see-more">
+            <section className={styles.seeMoreActions} key="see-more">
               <div className={styles.actions}>
                 <Button href="/#projects">
                   {copy.cta.primaryAction}
