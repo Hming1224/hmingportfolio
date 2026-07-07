@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
@@ -999,9 +1000,7 @@ export default function ComponentDemo({
               type="button"
             >
               <span>{currentLanguage.shortLabel}</span>
-              <svg viewBox="0 0 12 12" aria-hidden="true">
-                <path d="m2.5 4.5 3.5 3 3.5-3" />
-              </svg>
+              <ChevronDown aria-hidden="true" size={12} strokeWidth={1.8} />
             </button>
 
             <div className={styles.languageDemoMenu} role="menu" aria-label={demoZh ? "語言選單示意" : "Language menu demo"}>

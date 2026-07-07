@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 
@@ -67,25 +68,8 @@ function defaultRenderTabLabel(label: string) {
 }
 
 function ArrowIcon({ className, direction }: { className: string; direction: "left" | "right" }) {
-  return (
-    <svg
-      className={className}
-      aria-hidden="true"
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d={direction === "left" ? "M10.875 4.5L6.375 9L10.875 13.5" : "M7.125 4.5L11.625 9L7.125 13.5"}
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+  const Icon = direction === "left" ? ChevronLeft : ChevronRight;
+  return <Icon className={className} aria-hidden="true" size={18} strokeWidth={1.8} />;
 }
 
 function StarIcon({ className }: { className: string }) {

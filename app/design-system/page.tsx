@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import SplitText from "../../components/animate-ui/primitives/texts/SplitText";
 import { designSystemDocs } from "../../lib/design-system-docs";
 import { designSystemSections } from "../../lib/design-system-data";
 import DesignSystemExplorer from "../../components/design-system/DesignSystemExplorer";
 import Button from "../../components/ui/Button";
+import AnimatedContent from "../about-me/AnimatedContent";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
 import enMessages from "../../i18n/dictionaries/en";
@@ -51,16 +53,60 @@ export default async function DesignSystemPage() {
       <section className={styles.hero} aria-labelledby="ds-title">
         <div className={styles.heroInner}>
           <div>
-            <p className={styles.eyebrow}>{copy.hero.eyebrow}</p>
-            <h1 className={styles.heroTitle} id="ds-title">{copy.hero.title}</h1>
-            <p className={styles.heroDescription}>{copy.hero.description}</p>
+            <AnimatedContent
+              className={styles.heroRevealItem}
+              distance={120}
+              duration={0.95}
+              scale={0.96}
+              ease="power3.out"
+              threshold={0.05}
+            >
+              <p className={styles.eyebrow}>{copy.hero.eyebrow}</p>
+            </AnimatedContent>
+            <SplitText
+              tag="h1"
+              id="ds-title"
+              text={copy.hero.title}
+              className={styles.heroTitle}
+              delay={42}
+              duration={0.72}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 34 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-80px"
+              textAlign="inherit"
+            />
+            <AnimatedContent
+              className={styles.heroRevealItem}
+              delay={0.12}
+              distance={120}
+              duration={0.95}
+              scale={0.96}
+              ease="power3.out"
+              threshold={0.05}
+            >
+              <p className={styles.heroDescription}>{copy.hero.description}</p>
+            </AnimatedContent>
           </div>
           <div className={styles.highlightsGrid} aria-label={copy.hero.highlightsAriaLabel}>
-            {copy.hero.highlights.map((highlight) => (
-              <article className={styles.highlightCard} key={highlight.title}>
-                <h2 className={styles.highlightTitle}>{highlight.title}</h2>
-                <p className={styles.highlightLead}>{highlight.lead}</p>
-              </article>
+            {copy.hero.highlights.map((highlight, index) => (
+              <AnimatedContent
+                className={styles.highlightRevealItem}
+                delay={(index + 1) * 0.12}
+                distance={120}
+                duration={0.95}
+                scale={0.96}
+                ease="power3.out"
+                threshold={0.05}
+                key={highlight.title}
+              >
+                <article className={styles.highlightCard}>
+                  <h2 className={styles.highlightTitle}>{highlight.title}</h2>
+                  <p className={styles.highlightLead}>{highlight.lead}</p>
+                </article>
+              </AnimatedContent>
             ))}
           </div>
         </div>
@@ -72,7 +118,7 @@ export default async function DesignSystemPage() {
         docs={designSystemDocs}
         toc={copy.toc}
         gettingStartedContent={
-          <article className={styles.docArticle} id="getting-started" key="getting-started">
+          <article className={`${styles.docArticle} ${styles.gettingStartedArticle}`} id="getting-started" key="getting-started">
             <section className={styles.section} key="getting-started">
               <div className={styles.groupHeader}>
                 <h2 className={styles.groupTitle}>{copy.introduction.soulKicker}</h2>

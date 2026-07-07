@@ -225,12 +225,12 @@ const foundations: DesignSystemDoc[] = [
     ],
     behavior: [
       { label: "Package icons", description: "`lucide-react` is the primary source for UI icons: close, chevrons, status marks, and contact cues." },
-      { label: "Inline SVG", description: "When a shape only appears in one place (LanguageSwitcher, CaseProposalTabs), it stays as a local inline SVG instead of joining a shared set." },
+      { label: "Local SVG", description: "Highly custom route diagrams can keep local SVG paths, but shared UI indicators use `lucide-react`." },
       { label: "Image assets", description: "LinkedIn and GitHub social links use `/social/*` image files rather than icon components." },
     ],
     behaviorZh: [
       { label: "Package icons", description: "`lucide-react` 是 UI icon 的主要來源：關閉、箭頭、狀態符號和聯絡提示都來自這裡。" },
-      { label: "Inline SVG", description: "只在單一元件出現的形狀（LanguageSwitcher、CaseProposalTabs），直接寫成該元件內的 inline SVG，不硬抽成共用。" },
+      { label: "Local SVG", description: "高度客製的案例圖表可以保留 local SVG path，但共用 UI 指示符統一使用 `lucide-react`。" },
       { label: "Image assets", description: "LinkedIn 和 GitHub 社群連結用的是 `/social/*` 圖片檔，不是 icon 元件。" },
     ],
     accessibility: [
@@ -479,7 +479,7 @@ const componentSeeds: ComponentSeed[] = [
     anatomyParts: [
       { part: "Trigger button", description: "Button that opens and closes the language menu.", owner: "LanguageSwitcher.tsx", code: ".language-switcher-trigger" },
       { part: "Current locale label", description: "Localized short label from `useTranslations(\"language\")`.", owner: "i18n dictionaries", code: "language.current" },
-      { part: "Chevron", description: "Inline SVG affordance that rotates with the open state.", owner: "LanguageSwitcher.tsx / tokens.css", code: ".language-switcher-trigger svg" },
+      { part: "Chevron", description: "`lucide-react` ChevronDown affordance that rotates with the open state.", owner: "LanguageSwitcher.tsx / tokens.css", code: "ChevronDown / .language-switcher-trigger svg" },
       { part: "Dropdown panel", description: "Menu container for available locale options.", owner: "LanguageSwitcher.tsx", code: ".language-switcher-menu" },
       { part: "Option row", description: "Button rendered for each `languageOptions` item.", owner: "LanguageSwitcher.tsx", code: "role=\"menuitemradio\"" },
       { part: "Selected checkmark", description: "Visible selected indicator for the active locale.", owner: "LanguageSwitcher.tsx", code: "aria-checked / ✓" },
@@ -488,7 +488,7 @@ const componentSeeds: ComponentSeed[] = [
     anatomyPartsZh: [
       { part: "Trigger button", description: "開啟與關閉語系選單的 button。", owner: "LanguageSwitcher.tsx", code: ".language-switcher-trigger" },
       { part: "Current locale label", description: "來自 `useTranslations(\"language\")` 的當前語系短標籤。", owner: "i18n dictionaries", code: "language.current" },
-      { part: "Chevron", description: "隨 open state 旋轉的 inline SVG 提示。", owner: "LanguageSwitcher.tsx / tokens.css", code: ".language-switcher-trigger svg" },
+      { part: "Chevron", description: "隨 open state 旋轉的 `lucide-react` ChevronDown 提示。", owner: "LanguageSwitcher.tsx / tokens.css", code: "ChevronDown / .language-switcher-trigger svg" },
       { part: "Dropdown panel", description: "承載可選語系的 選單 container。", owner: "LanguageSwitcher.tsx", code: ".language-switcher-menu" },
       { part: "Option row", description: "由每個 `languageOptions` item render 的 button。", owner: "LanguageSwitcher.tsx", code: "role=\"menuitemradio\"" },
       { part: "Selected checkmark", description: "目前語系的可見 selected indicator。", owner: "LanguageSwitcher.tsx", code: "aria-checked / ✓" },

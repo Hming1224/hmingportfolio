@@ -53,6 +53,11 @@
   margin-inline: auto;
 }
 
+.heroRevealItem,
+.highlightRevealItem {
+  min-width: 0;
+}
+
 .eyebrow {
   margin: 0 0 var(--hm-space-xs);
   color: var(--hm-purple);
@@ -217,6 +222,10 @@
 
 .section > .groupHeader:first-child {
   margin-top: 0;
+}
+
+.gettingStartedArticle .section > .groupHeader:first-child {
+  margin-top: calc(-1 * var(--hm-space-sm));
 }
 
 .groupTitle {
@@ -1793,10 +1802,6 @@
 .contactToastPreviewSlot {
   display: grid;
   min-width: 0;
-  padding: var(--hm-space-sm);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-lg);
-  background: var(--hm-surface);
 }
 
 .contactToastPreviewSlot :global(.hm-toast-region) {

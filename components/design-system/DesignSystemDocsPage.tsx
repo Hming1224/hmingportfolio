@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AlertCircle, ArrowRight, Check, CheckCircle2, ChevronDown, Mail, Phone, X } from "lucide-react";
+import { AlertCircle, ArrowRight, Check, CheckCircle2, ChevronDown, ChevronRight, Mail, Phone, X } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import type { DesignSystemDoc, DesignSystemLocale } from "@/lib/design-system-docs";
 import { designSystemTokenRows } from "@/lib/design-system-data";
@@ -37,21 +37,6 @@ function getTokenUsage(row: TokenRow, locale: DesignSystemLocale) {
   return locale === "zh-TW" ? row.usageZh ?? row.usage : row.usage;
 }
 
-function InlineProposalArrowPreview() {
-  return (
-    <svg viewBox="0 0 18 18" aria-hidden="true">
-      <path
-        d="M7.125 4.5L11.625 9L7.125 13.5"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
 function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup[] {
   return [
     {
@@ -61,14 +46,14 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
         {
           name: "ChevronDown",
           usage: localized(locale, "Accordion / dropdown indicator", "Accordion / dropdown 展開指示"),
-          source: localized(locale, "lucide-react; LanguageSwitcher uses inline SVG variant", "lucide-react；LanguageSwitcher 使用 inline SVG variant"),
+          source: "lucide-react",
           preview: <ChevronDown aria-hidden="true" size={28} strokeWidth={2} />,
         },
         {
-          name: "Arrow",
+          name: "ChevronRight",
           usage: "CaseProposalTabs",
-          source: "inline SVG",
-          preview: <InlineProposalArrowPreview />,
+          source: "lucide-react",
+          preview: <ChevronRight aria-hidden="true" size={28} strokeWidth={1.8} />,
         },
       ],
     },
@@ -158,8 +143,8 @@ function iconographyMatrix(locale: DesignSystemLocale) {
       context: "Disclosure / dropdown indicators",
       purpose: localized(
         locale,
-        "Accordion uses ChevronDown; LanguageSwitcher uses a scoped inline SVG variant for the same dropdown affordance.",
-        "Accordion 使用 ChevronDown；LanguageSwitcher 使用 scoped inline SVG variant 呈現同一種 dropdown 提示。",
+        "Accordion and LanguageSwitcher use ChevronDown for the same dropdown affordance.",
+        "Accordion 與 LanguageSwitcher 都使用 ChevronDown 呈現同一種 dropdown 提示。",
       ),
       accessibility: localized(locale, "The trigger owns aria-expanded or label; the chevron shape is decorative.", "展開狀態或標籤由觸發元素承擔；chevron shape 是裝飾性。"),
     },
@@ -191,7 +176,7 @@ function iconographyMatrix(locale: DesignSystemLocale) {
     {
       context: "CaseProposalTabs",
       purpose: localized(locale, "Previous / next arrows and the adopted-option marker.", "上一張 / 下一張箭頭，以及採用方案的標記。"),
-      accessibility: localized(locale, "Arrow buttons use aria-label; the inline SVGs are hidden.", "箭頭按鈕有 aria-label；inline SVG 本身是隱藏的。"),
+      accessibility: localized(locale, "Arrow buttons use aria-label; the lucide chevrons are decorative.", "箭頭按鈕有 aria-label；lucide chevron 本身是裝飾性的。"),
     },
   ];
 }

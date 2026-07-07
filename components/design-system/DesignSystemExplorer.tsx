@@ -99,16 +99,60 @@ export default function DesignSystemExplorer({
   const measureRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const [navWidth, setNavWidth] = useState<number | null>(null);
+  const [workspaceScrollRequest, setWorkspaceScrollRequest] = useState(0);
 
   const activeCatalogDoc = activeWorkspace.type === "doc"
     ? docs.find((doc) => doc.slug === activeWorkspace.slug)
     : undefined;
 
   const scrollToWorkspace = useCallback(() => {
-    window.requestAnimationFrame(() => {
-      document.getElementById("design-system-workspace")?.scrollIntoView({ block: "start" });
-    });
+    setWorkspaceScrollRequest((request) => request + 1);
   }, []);
+
+  useLayoutEffect(() => {
+    if (!workspaceScrollRequest) return;
+
+    let frame = 0;
+
+    const textRect = (element: Element | null) => {
+      if (!element) return null;
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      const rect = range.getBoundingClientRect();
+      range.detach();
+      return rect;
+    };
+
+    frame = window.requestAnimationFrame(() => {
+      const workspace = document.getElementById("design-system-workspace");
+      if (!workspace) return;
+
+      if (window.matchMedia("(max-width: 900px)").matches) {
+        workspace.scrollIntoView({ block: "start" });
+        return;
+      }
+
+      const sidebar = shellRef.current?.querySelector(`.${styles.sidebar}`);
+      const anchorText = textRect(document.querySelector("[data-ds-toc-root='getting-started']"));
+      const workspaceText = textRect(workspace.querySelector("p,h1,h2,h3"));
+      if (!sidebar || !anchorText || !workspaceText) {
+        workspace.scrollIntoView({ block: "start" });
+        return;
+      }
+
+      const sidebarRect = sidebar.getBoundingClientRect();
+      const stickyTop = Number.parseFloat(window.getComputedStyle(sidebar).top) || sidebarRect.top;
+      const anchorInset = anchorText.top - sidebarRect.top;
+      const targetTop = stickyTop + anchorInset;
+      window.scrollTo({
+        top: window.scrollY + workspaceText.top - targetTop,
+      });
+    });
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [workspaceScrollRequest, activeWorkspace, openSection]);
 
   const activateCatalogDoc = useCallback(
     (
@@ -319,6 +363,7 @@ export default function DesignSystemExplorer({
             <a
               aria-current={activeWorkspace.type === "getting-started" ? "page" : undefined}
               className={`${styles.rootLink}${activeWorkspace.type === "getting-started" ? ` ${styles.active}` : ""}`}
+              data-ds-toc-root="getting-started"
               href={gettingStartedItem.href}
               onClick={(event) => {
                 event.preventDefault();
