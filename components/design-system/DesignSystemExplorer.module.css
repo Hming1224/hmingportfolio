@@ -1210,6 +1210,7 @@
   justify-content: center;
   min-height: 240px;
   padding: var(--hm-space-xl);
+  overflow: hidden;
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-lg);
   background: color-mix(in srgb, var(--hm-surface) 78%, var(--hm-paper));
@@ -1824,11 +1825,11 @@
   width: 100%;
   max-width: 560px;
   min-width: 0;
-  overflow: hidden;
 }
 
-.contactModalDemo :global(.hm-modal) {
+.skeletonModalDemo :global(.hm-modal) {
   z-index: 0;
+  box-shadow: none;
 }
 
 .contactToastDemo {

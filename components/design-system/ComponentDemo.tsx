@@ -1634,7 +1634,7 @@ export default function ComponentDemo({
     const modal = copy.modalDemo;
 
     return (
-      <DemoBlock className={styles.contactModalDemo} contextLabel={contextLabel ?? copy.skeletonDemo.usage}>
+      <DemoBlock className={`${styles.contactModalDemo} ${styles.skeletonModalDemo}`} contextLabel={contextLabel ?? copy.skeletonDemo.usage}>
         <article className="hm-modal" aria-label={modal.title}>
           <header className="hm-modal-header">
             <h2>{modal.title}</h2>
