@@ -3377,6 +3377,19 @@
   }
 }
 
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: clamp(30px, 5vw, 38.4px);
+    line-height: 1.14;
+    word-break: normal;
+  }
+
+  .heroTitle :global(.split-line),
+  .heroTitle :global(.split-word) {
+    display: inline !important;
+  }
+}
+
 @media (max-width: 640px) {
   .hero {
     padding-top: calc(var(--hm-space-3xl) + var(--hm-space-md));
@@ -3389,17 +3402,6 @@
   .eyebrow {
     font-size: var(--hm-fs-xs);
     letter-spacing: 0.08em;
-  }
-
-  .heroTitle {
-    font-size: clamp(30px, 8vw, 36px);
-    line-height: 1.14;
-    word-break: normal;
-  }
-
-  .heroTitle :global(.split-line),
-  .heroTitle :global(.split-word) {
-    display: inline !important;
   }
 
   .heroDescription {
