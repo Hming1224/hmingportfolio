@@ -1306,6 +1306,7 @@ button {
   place-items: center;
   width: 40px;
   height: 40px;
+  --social-icon-color: var(--text-secondary);
 }
 
 .social-logo {
@@ -1313,20 +1314,15 @@ button {
   display: block;
   width: 40px;
   height: 40px;
-  object-fit: contain;
-  transition: opacity 180ms ease;
+  background-color: var(--social-icon-color);
+  -webkit-mask: var(--social-icon) center / contain no-repeat;
+  mask: var(--social-icon) center / contain no-repeat;
+  transition: background-color var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
-.social-logo-color {
-  opacity: 0;
-}
-
-.social-link:hover .social-logo-color {
-  opacity: 1;
-}
-
-.social-link:hover .social-logo-gray {
-  opacity: 0;
+.social-link:hover,
+.social-link:focus-visible {
+  --social-icon-color: var(--hm-purple);
 }
 
 @media (min-width: 769px) and (max-width: 900px) {

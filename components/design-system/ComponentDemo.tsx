@@ -23,6 +23,7 @@ import { BeforeAfterPanel } from "../case-study/BeforeAfterPanel";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import FlowScrollHint from "../case-study/FlowScrollHint";
 import ZoomableImage from "../case-study/ZoomableImage";
+import FooterContent from "../FooterContent";
 import { registerDesignSystemReturnTarget } from "./DesignSystemReturnBar";
 import styles from "./DesignSystemExplorer.module.css";
 
@@ -359,7 +360,7 @@ const boundaryReferenceItems = {
       pattern: "SocialLink",
       classification: "Internal anatomy",
       currentUsage: "Used inside Footer social link group for LinkedIn and GitHub profile links.",
-      boundary: "Belongs to Footer anatomy. Its meaning depends on the footer closure surface, external-link behavior, icon swap, and accessible label.",
+      boundary: "Belongs to Footer anatomy. Its meaning depends on the footer closure surface, external-link behavior, icon mask color state, and accessible label.",
       extractionCondition: "Promote only if the same social link contract is reused across independent surfaces with stable icon, label, external-link, and accessibility behavior.",
       source: "components/Footer.tsx / styles/tokens.css",
       status: "Footer internal anatomy",
@@ -531,7 +532,7 @@ const boundaryReferenceItems = {
       pattern: "SocialLink",
       classification: "Internal anatomy",
       currentUsage: "用在 Footer social link group，連到 LinkedIn 與 GitHub profile。",
-      boundary: "屬於 Footer 的內部組成；語意依賴 footer 收尾區塊、外部連結行為、icon swap 與 accessible 標籤。",
+      boundary: "屬於 Footer 的內部組成；語意依賴 footer 收尾區塊、外部連結行為、icon mask color state 與 accessible 標籤。",
       extractionCondition: "只有當同一套 social link 契約被多個獨立 表面重用，且 icon、標籤、external-link 與 accessibility 行為穩定時，才重新評估提升為獨立元件。",
       source: "components/Footer.tsx / styles/tokens.css",
       status: "Footer internal anatomy",
@@ -1073,19 +1074,9 @@ export default function ComponentDemo({
 
   if (type === "footer") {
     return (
-      <footer className={styles.liveFooterDemo}>
-        <p>© Brian Huang 2026 Copyright. All Rights Reserved.</p>
-        <div className={styles.liveSocialLinks} aria-label={zh ? "社群連結" : "Social links"}>
-          {[
-            ["LinkedIn", "https://www.linkedin.com/in/brian-huang-a36759128", "/social/linkedin-gray-v2.png"],
-            ["GitHub", "https://github.com/Hming1224", "/social/github-gray-v2.png"],
-          ].map(([label, href, src]) => (
-            <a href={href} key={label} target="_blank" rel="noopener noreferrer" aria-label={label}>
-              <Image src={src} alt="" width={32} height={32} />
-            </a>
-          ))}
-        </div>
-      </footer>
+      <div className={styles.liveFooterDemo}>
+        <FooterContent socialLinksLabel={zh ? "社群連結" : "Social links"} />
+      </div>
     );
   }
 
