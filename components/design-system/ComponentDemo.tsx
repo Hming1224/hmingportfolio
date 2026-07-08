@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
@@ -1625,36 +1625,38 @@ export default function ComponentDemo({
 
     return (
       <DemoBlock className={styles.contactModalDemo} contextLabel={contextLabel ?? copy.skeletonDemo.usage}>
-        <article className={styles.contactModalFrame} aria-label={modal.title}>
-          <header className={styles.contactModalHeader}>
-            <div>
-              <h3>{modal.title}</h3>
-              <p>{modal.description}</p>
-            </div>
-            <span aria-hidden="true" className={styles.contactModalClose}>×</span>
+        <article className="hm-modal" aria-label={modal.title}>
+          <header className="hm-modal-header">
+            <h2>{modal.title}</h2>
+            <button className="hm-icon-button" type="button" aria-label={zh ? "關閉預覽" : "Close preview"}>
+              <X aria-hidden="true" size={20} strokeWidth={1.5} />
+            </button>
           </header>
-          <dl className={styles.contactReviewListDemo} aria-busy="true">
-            {modal.fields.map(([label], index) => (
-              <div className={styles.contactReviewRowDemo} key={label}>
-                <dt>{label}</dt>
-                <dd className={index === modal.fields.length - 1 ? styles.contactSkeletonStack : undefined}>
-                  {index === modal.fields.length - 1 ? (
-                    <>
-                      <Skeleton className={styles.contactSkeletonLineLong} />
-                      <Skeleton className={styles.contactSkeletonLineMedium} />
-                    </>
-                  ) : (
-                    <Skeleton className={styles.contactSkeletonLine} />
-                  )}
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <div className={styles.contactReviewActionsDemo}>
-            <Button type="button" disabled className={styles.contactReviewPrimaryDemo}>
-              {modal.confirm}
-            </Button>
-            <Button type="button" variant="secondary" disabled>{modal.cancel}</Button>
+          <div className="contact-review-modal">
+            <p className="contact-review-description">{modal.description}</p>
+            <dl className="contact-review-list" aria-busy="true">
+              {modal.fields.map(([label], index) => (
+                <div className={`contact-review-row${index === modal.fields.length - 1 ? " is-message" : ""}`} key={label}>
+                  <dt>{label}</dt>
+                  <dd>
+                    {index === modal.fields.length - 1 ? (
+                      <>
+                        <Skeleton className="contact-review-skeleton is-long" />
+                        <Skeleton className="contact-review-skeleton is-medium" />
+                      </>
+                    ) : (
+                      <Skeleton className="contact-review-skeleton" />
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <div className="contact-review-actions">
+              <Button type="button" disabled>
+                {modal.confirm}
+              </Button>
+              <Button type="button" variant="secondary" disabled>{modal.cancel}</Button>
+            </div>
           </div>
         </article>
       </DemoBlock>
