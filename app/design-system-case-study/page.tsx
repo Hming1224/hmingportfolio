@@ -13,8 +13,10 @@ import {
   type TocSection,
 } from "../../components/case-study";
 import Button from "../../components/ui/Button";
+import { getNextProject, getProjectBySlug } from "../../data/projects";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
+import { localizeDsTree, translateDs, translateDsData } from "./i18n";
 
 const SLUG = "design-system-case-study";
 const ASSET = "/projects/design-system-case-study";
@@ -91,10 +93,22 @@ function IconBadgeCheck() {
   );
 }
 
-function TermNotes({ items }: { items: TermNote[] }) {
+function TermNotes({
+  items,
+  title = "名詞註釋",
+  ariaLabel = "專有名詞註釋",
+}: {
+  items: TermNote[];
+  title?: string;
+  ariaLabel?: string;
+}) {
+  const hasCjk = items.some((item) => /[\u4e00-\u9fff]/.test(`${item.term}${item.description}`));
+  const resolvedTitle = title === "名詞註釋" && !hasCjk ? "Terms" : title;
+  const resolvedAriaLabel = ariaLabel === "專有名詞註釋" && !hasCjk ? "Term notes" : ariaLabel;
+
   return (
-    <aside className="ds-case-term-notes" aria-label="專有名詞註釋">
-      <h3>名詞註釋</h3>
+    <aside className="ds-case-term-notes" aria-label={resolvedAriaLabel}>
+      <h3>{resolvedTitle}</h3>
       <dl>
         {items.map((item) => (
           <div className="ds-case-term-note" key={item.term}>
@@ -329,18 +343,17 @@ const reflections = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = (await getLocale()) as Locale;
-  const title = "把自己的作品集當產品做：一套邊用邊長出來的 Design System";
-  const description =
-    "我在製作作品集網站期間，把網站本身當成產品管理，建立 design system、元件規則與 AI-assisted workflow。";
+  const project = getProjectBySlug(SLUG, locale);
+  const description = project.seoDescription ?? project.description;
 
   return createLocalizedMetadata(locale, `/${SLUG}`, {
-    en: { title, description },
-    "zh-TW": { title, description },
+    en: { title: project.title, description },
+    "zh-TW": { title: project.title, description },
   });
 }
 
-function Hero() {
-  const heroInfoItems = infoItems.map((item) => ({
+function Hero({ items }: { items: InfoItem[] }) {
+  const heroInfoItems = items.map((item) => ({
     label: item.label,
     value: (
       <>
@@ -381,18 +394,27 @@ function Hero() {
   );
 }
 
-export default function DesignSystemCaseStudyPage() {
+export default async function DesignSystemCaseStudyPage() {
+  const locale = (await getLocale()) as Locale;
+  const t = (text: string) => translateDs(locale, text);
+  const project = getProjectBySlug(SLUG, locale);
+  const nextProject = getNextProject(project.slug, locale);
+  const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
+  const localizedInfoItems = translateDsData(locale, infoItems);
+  const localizedTocSections = translateDsData(locale, tocSections);
+
   return (
     <CaseStudyShell
       theme="theme-design-system-case-study"
-      tocSections={tocSections}
+      tocSections={localizedTocSections}
       nextNav={{
-        homeLabel: "返回首頁",
-        nextHref: "/laushu",
-        nextLabel: "下一個專案：勞務報酬系統數位流程優化",
+        homeLabel: t("返回首頁"),
+        nextHref: nextProject.status === "published" ? nextProject.href : undefined,
+        nextLabel: `${t("下一個專案")}${t("：")}${nextProjectLabel}`,
       }}
-      hero={<Hero />}
+      hero={localizeDsTree(locale, Hero({ items: localizedInfoItems }))}
     >
+      {localizeDsTree(locale, <>
       <CaseSection id="cs-sec-why" kicker="WHY" title="為什麼要幫自己的作品集建 Design System？">
         <p className="cs-section-lead">
           網站不是沒有設計，只是設計散落在每一頁，沒有集中管理的地方。
@@ -877,6 +899,7 @@ export default function DesignSystemCaseStudyPage() {
           </Button>
         </div>
       </CaseSection>
+      </>)}
     </CaseStudyShell>
   );
 }
