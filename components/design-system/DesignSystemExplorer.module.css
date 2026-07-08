@@ -3244,6 +3244,12 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1279px) {
+  .highlightsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .heroInner {
     width: min(100% - 40px, 760px);
