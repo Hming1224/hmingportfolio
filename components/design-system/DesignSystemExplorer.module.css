@@ -3519,15 +3519,6 @@
     align-items: start;
   }
 
-  .iconGroupHeader {
-    display: grid;
-    align-items: start;
-  }
-
-  .iconGroupHeader > span {
-    justify-self: start;
-  }
-
   .iconGrid {
     grid-template-columns: minmax(0, 1fr);
   }
