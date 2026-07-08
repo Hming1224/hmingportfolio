@@ -1116,6 +1116,10 @@
   margin-bottom: var(--hm-space-xl);
 }
 
+.docArticle:not(.gettingStartedArticle):not(.seeMoreArticle) > .docHeader {
+  margin-top: calc(-1 * var(--hm-space-sm));
+}
+
 .docTitleRow {
   display: flex;
   flex-wrap: wrap;
