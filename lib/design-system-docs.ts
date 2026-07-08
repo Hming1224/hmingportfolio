@@ -178,7 +178,7 @@ const foundations: DesignSystemDoc[] = [
       "較強陰影用於 overlay 與高焦點表面。",
       "Hover elevation 不應造成版面位移。",
     ],
-    tokens: ["--shadow-sm / md / lg / xl", "--hm-shadow-sm / md / lg / xl", "--shadow-card-hover"],
+    tokens: ["--hm-shadow-sm / md / lg / xl", "--hm-shadow-card-hover", "--shadow-* (@deprecated alias)"],
     references: ["styles/tokens.css", "lib/design-system-data.ts", "docs/design-system/02-tokens.md"],
   },
   {

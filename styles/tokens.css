@@ -294,22 +294,23 @@
   --surface: var(--hm-surface);
   --purple-hover: var(--hm-purple-hover);
   --about-accent: #ffd467;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.25);
-  --shadow-card-hover: 0 16px 32px rgba(0, 0, 0, 0.16);
+  /* --hm-shadow-* hold the real values; --shadow-* are @deprecated aliases. */
+  --hm-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --hm-shadow-md: 0 10px 20px rgba(0, 0, 0, 0.12);
+  --hm-shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --hm-shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.25);
+  --hm-shadow-card-hover: 0 16px 32px rgba(0, 0, 0, 0.16);
+  --shadow-sm: var(--hm-shadow-sm);
+  --shadow-md: var(--hm-shadow-md);
+  --shadow-lg: var(--hm-shadow-lg);
+  --shadow-xl: var(--hm-shadow-xl);
+  --shadow-card-hover: var(--hm-shadow-card-hover);
   --shadow-purple-soft: 0 12px 24px rgba(93, 98, 216, 0.08);
   --shadow-photo: -5px 10px 20px rgba(0, 0, 0, 0.12);
   --shadow-soft:
     0 0.6px 0.6px rgba(0, 0, 0, 0.12),
     0 2.3px 2.3px rgba(0, 0, 0, 0.12),
     0 10px 10px rgba(0, 0, 0, 0.12);
-  --hm-shadow-sm: var(--shadow-sm);
-  --hm-shadow-md: var(--shadow-md);
-  --hm-shadow-lg: var(--shadow-lg);
-  --hm-shadow-xl: var(--shadow-xl);
-  --hm-shadow-card-hover: var(--shadow-card-hover);
   --hm-radius-btn: var(--hm-radius-button);
   --hm-page-gutter: var(--page-gutter);
 
