@@ -1822,7 +1822,7 @@
   display: grid;
   gap: var(--hm-space-sm);
   width: 100%;
-  max-width: 760px;
+  max-width: 560px;
   min-width: 0;
 }
 
@@ -1852,11 +1852,11 @@
   display: grid;
   gap: var(--hm-space-md);
   min-width: 0;
-  padding: var(--hm-space-lg);
+  padding: 24px;
   border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius-lg);
+  border-radius: 16px;
   background: var(--hm-paper);
-  box-shadow: var(--hm-shadow-md);
+  box-shadow: var(--shadow-xl);
 }
 
 .contactModalHeader {
@@ -1903,9 +1903,9 @@
 
 .contactReviewRowDemo {
   display: grid;
-  grid-template-columns: minmax(128px, 0.34fr) minmax(0, 1fr);
-  gap: var(--hm-space-sm);
-  padding: var(--hm-space-sm) 0;
+  grid-template-columns: minmax(96px, 0.32fr) minmax(0, 1fr);
+  gap: 16px;
+  padding: 12px 0;
   border-bottom: 1px solid var(--hm-line);
 }
 
@@ -1932,7 +1932,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: var(--hm-space-xs);
+  gap: 12px;
 }
 
 .contactReviewActionsDemo .contactReviewPrimaryDemo {

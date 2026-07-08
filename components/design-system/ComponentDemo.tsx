@@ -1621,40 +1621,40 @@ export default function ComponentDemo({
   }
 
   if (type === "skeleton") {
-    const skeleton = copy.skeletonDemo;
+    const modal = copy.modalDemo;
 
     return (
-      <DemoBlock className={styles.contactModalDemo} contextLabel={contextLabel ?? skeleton.usage}>
-        <article className={styles.contactModalFrame} aria-label={skeleton.title}>
+      <DemoBlock className={styles.contactModalDemo} contextLabel={contextLabel ?? copy.skeletonDemo.usage}>
+        <article className={styles.contactModalFrame} aria-label={modal.title}>
           <header className={styles.contactModalHeader}>
             <div>
-              <h3>{skeleton.title}</h3>
-              <p>{skeleton.description}</p>
+              <h3>{modal.title}</h3>
+              <p>{modal.description}</p>
             </div>
             <span aria-hidden="true" className={styles.contactModalClose}>×</span>
           </header>
           <dl className={styles.contactReviewListDemo} aria-busy="true">
-            <div className={styles.contactReviewRowDemo}>
-              <dt>{zh ? "你的姓名" : "Your name"}</dt>
-              <dd><Skeleton className={styles.contactSkeletonLine} /></dd>
-            </div>
-            <div className={styles.contactReviewRowDemo}>
-              <dt>{zh ? "電子信箱" : "Email"}</dt>
-              <dd><Skeleton className={styles.contactSkeletonLine} /></dd>
-            </div>
-            <div className={styles.contactReviewRowDemo}>
-              <dt>{zh ? "訊息內容" : "Your message"}</dt>
-              <dd className={styles.contactSkeletonStack}>
-                <Skeleton className={styles.contactSkeletonLineLong} />
-                <Skeleton className={styles.contactSkeletonLineMedium} />
-              </dd>
-            </div>
+            {modal.fields.map(([label], index) => (
+              <div className={styles.contactReviewRowDemo} key={label}>
+                <dt>{label}</dt>
+                <dd className={index === modal.fields.length - 1 ? styles.contactSkeletonStack : undefined}>
+                  {index === modal.fields.length - 1 ? (
+                    <>
+                      <Skeleton className={styles.contactSkeletonLineLong} />
+                      <Skeleton className={styles.contactSkeletonLineMedium} />
+                    </>
+                  ) : (
+                    <Skeleton className={styles.contactSkeletonLine} />
+                  )}
+                </dd>
+              </div>
+            ))}
           </dl>
           <div className={styles.contactReviewActionsDemo}>
-            <Button type="button" loading loadingLabel={skeleton.confirm} className={styles.contactReviewPrimaryDemo}>
-              {skeleton.confirm}
+            <Button type="button" disabled className={styles.contactReviewPrimaryDemo}>
+              {modal.confirm}
             </Button>
-            <Button type="button" variant="secondary" disabled>{skeleton.cancel}</Button>
+            <Button type="button" variant="secondary" disabled>{modal.cancel}</Button>
           </div>
         </article>
       </DemoBlock>
