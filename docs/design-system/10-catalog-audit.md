@@ -20,6 +20,7 @@ Batch 7A audit only. This file records remaining catalog candidates and recommen
 - Batch 7E update: `Accordion` stays visible and is now standardized as a live component. The docs example renders the real `Accordion` source component; live route usage exists in Design System Explorer category navigation and DesignSystemDocsNav sidebar / mobile menu.
 - Batch Foundations Icons update: `Icons / Iconography` was added as a Foundations reference, not as a visible component catalog item. Current evidence shows shared UI indicators use `lucide-react`, while highly custom route diagrams can still use local inline SVG and social links use image assets; no stable generic `<Icon />` API exists.
 - Batch 7F update: `Accordion` was reclassified from the visible Navigation catalog to Component Boundaries / Internal documentation shell anatomy. Usage evidence shows the only adopters are Design System Explorer category navigation and DesignSystemDocsNav sidebar / mobile menu, both part of the design-system documentation shell itself; no public product route renders `Accordion`, and the prior docs example rendered a generic two-item disclosure that did not match the sidebar's dynamic category composition, active state, and chevron indicator.
+- DemoBlock label spacing contract update: visible example context labels use a 16px visual gap above the documented component, remain inside the gray example surface, and align to the demo block left edge. This records the docs contract only; it does not change production UI or `styles/tokens.css`.
 
 ## Migration Matrix
 

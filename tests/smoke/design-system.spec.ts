@@ -110,6 +110,57 @@ test.describe("ProjectCard docs", () => {
   });
 });
 
+test.describe("DemoBlock label contract", () => {
+  for (const route of [
+    "/en/design-system#tabs",
+    "/en/design-system#case-hero",
+    "/en/design-system#modal",
+    "/en/design-system#skeleton",
+  ]) {
+    test(`${route} keeps context label spacing inside example surface`, async ({ page }) => {
+      await setViewport(page, 1024);
+      const errors = collectConsoleErrors(page);
+      await openDesignSystemDoc(page, route);
+
+      const metrics = await page.locator("[class*=demoSurface]").first().evaluate((surface) => {
+        const block = surface.querySelector<HTMLElement>("[class*=demoBlock]");
+        const label = surface.querySelector<HTMLElement>("[class*=demoUsageLine]");
+        if (!block || !label) return null;
+
+        const surfaceRect = surface.getBoundingClientRect();
+        const blockRect = block.getBoundingClientRect();
+        const labelRect = label.getBoundingClientRect();
+        const component = Array.from(block.children).find((child) => child !== label) as HTMLElement | undefined;
+        const componentRect = component?.getBoundingClientRect();
+
+        return {
+          labelCount: surface.querySelectorAll("[class*=demoUsageLine]").length,
+          labelInsideSurface:
+            labelRect.left >= surfaceRect.left - 1 &&
+            labelRect.right <= surfaceRect.right + 1 &&
+            labelRect.top >= surfaceRect.top - 1 &&
+            labelRect.bottom <= surfaceRect.bottom + 1,
+          labelOutsideComponent: componentRect ? labelRect.bottom <= componentRect.top : false,
+          visualGap: componentRect ? componentRect.top - labelRect.bottom : null,
+          leftDelta: Math.abs(labelRect.left - blockRect.left),
+        };
+      });
+
+      expect(metrics).not.toBeNull();
+      if (!metrics) return;
+
+      expect(metrics.labelCount).toBe(1);
+      expect(metrics.labelInsideSurface).toBe(true);
+      expect(metrics.labelOutsideComponent).toBe(true);
+      expect(metrics.visualGap).not.toBeNull();
+      expect(Math.abs((metrics.visualGap ?? 0) - 16)).toBeLessThanOrEqual(1);
+      expect(metrics.leftDelta).toBeLessThanOrEqual(1);
+      await expectNoHorizontalOverflow(page);
+      expectNoConsoleErrors(errors);
+    });
+  }
+});
+
 test.describe("Before / After docs", () => {
   for (const route of [
     "/en/design-system#case-before-after",

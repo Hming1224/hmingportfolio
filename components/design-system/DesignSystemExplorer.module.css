@@ -1687,7 +1687,7 @@
 
 .demoBlock {
   display: grid;
-  gap: 20px;
+  gap: var(--hm-space-sm);
   width: 100%;
   max-width: 980px;
   min-width: 0;

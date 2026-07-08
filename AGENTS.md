@@ -53,7 +53,7 @@ Apply those shared rules to this project.
 - Any visible catalog item with an Examples section must place its example context label inside the gray example surface.
 - Do not render a single-example context label outside the example surface.
 - Context labels belong inside the gray example surface but outside the documented component.
-- Place context labels 20px above the documented component.
+- Place context labels with a 16px visual gap above the documented component.
 - Align context labels with the documented component / demo block left edge.
 - Do not place context labels inside the production component.
 - A single example should have one context label at most.
