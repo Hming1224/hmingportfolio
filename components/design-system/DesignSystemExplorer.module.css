@@ -1496,7 +1496,6 @@
 
 .iconCard {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
   align-items: start;
   min-width: 0;
   gap: var(--hm-space-xs);
@@ -1574,6 +1573,7 @@
 
 .iconCard h4 {
   margin: 0;
+  min-height: calc(var(--hm-space-lg) + var(--hm-space-2xs));
   color: var(--text-heading);
   font-size: var(--hm-fs-sm);
   font-weight: var(--hm-fw-bold);
@@ -3291,6 +3291,10 @@
 
   .iconGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .iconCard {
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   .sidebar {
