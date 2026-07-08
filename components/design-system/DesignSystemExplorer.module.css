@@ -2749,36 +2749,46 @@
 }
 
 .caseCardSourceDemo {
+  --page-gutter: 0;
+  width: 100%;
+}
+
+.caseCardSourceDemo :global(#cs-sec-problem > .cs-grid) {
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 0;
+}
+
+.caseCardSourceDemo :global(#cs-sec-problem > .cs-grid .cs-card) {
   --cs-card-bg: #ffffff;
-  --cs-card-border: var(--ca-line-soft);
-  --cs-card-shadow: var(--ca-card-shadow);
+  --cs-card-border: #d8deec;
+  --cs-card-shadow: 0 2px 16px rgba(37, 42, 71, 0.05);
   --cs-card-padding: 30px 32px;
   --cs-card-radius: 16px;
-  --cs-quote-text-color: var(--ca-ink);
+  --cs-quote-text-color: #1d2737;
   --cs-quote-text-size: 17px;
   --cs-quote-text-weight: 500;
   --cs-quote-text-line-height: 1.6;
   --cs-quote-text-letter-spacing: -0.025em;
-  --cs-quote-name-color: var(--ca-ink);
-  --cs-quote-line-color: var(--ca-line-soft);
-  --cs-quote-role-color: var(--ca-muted);
+  --cs-quote-name-color: #1d2737;
+  --cs-quote-line-color: #d8deec;
+  --cs-quote-role-color: #6c6e77;
   --cs-quote-role-line-height: 1.9;
   container-type: inline-size;
   justify-content: space-between;
-  max-width: 560px;
+  gap: 24px;
 }
 
-.caseCardSourceDemo :global(.cs-avatar) {
+.caseCardSourceDemo :global(#cs-sec-problem .cs-avatar) {
   --cs-avatar-size: 46px;
   --cs-avatar-radius: 12px;
   line-height: 0;
 }
 
-.caseCardSourceDemo :global(.cs-avatar--orange) {
+.caseCardSourceDemo :global(#cs-sec-problem .cs-avatar--orange) {
   --cs-avatar-bg: #ffe9dc;
 }
 
-.caseCardSourceDemo :global(.cs-avatar--blue) {
+.caseCardSourceDemo :global(#cs-sec-problem .cs-avatar--blue) {
   --cs-avatar-bg: #e7eaff;
 }
 
@@ -2789,25 +2799,44 @@
 .caseGridPlaceholderDemo {
   display: grid;
   min-height: 148px;
-  align-content: start;
-  gap: var(--hm-space-xs);
+  align-content: space-between;
+  gap: var(--hm-space-md);
   padding: var(--hm-space-sm);
   border: 1px dashed var(--hm-line-strong);
   border-radius: var(--hm-radius-md);
   background: var(--hm-surface);
 }
 
-.caseGridPlaceholderDemo span {
-  color: var(--cs-accent);
-  font-size: var(--hm-fs-xs);
-  font-weight: var(--hm-fw-bold);
-  letter-spacing: 0.08em;
+.caseGridPlaceholderDemo > span {
+  display: block;
+  width: 42px;
+  height: 12px;
+  border-radius: var(--hm-radius-pill);
+  background: color-mix(in srgb, var(--cs-accent) 28%, transparent);
 }
 
-.caseGridPlaceholderDemo p {
-  margin: 0;
-  color: var(--cs-text-secondary);
-  line-height: 1.55;
+.caseGridPlaceholderDemo div {
+  display: grid;
+  gap: var(--hm-space-2xs);
+}
+
+.caseGridPlaceholderDemo div span {
+  display: block;
+  height: 10px;
+  border-radius: var(--hm-radius-pill);
+  background: color-mix(in srgb, var(--cs-text-secondary) 18%, transparent);
+}
+
+.caseGridPlaceholderDemo div span:nth-child(1) {
+  width: min(100%, 220px);
+}
+
+.caseGridPlaceholderDemo div span:nth-child(2) {
+  width: min(78%, 172px);
+}
+
+.caseGridPlaceholderDemo div span:nth-child(3) {
+  width: min(48%, 112px);
 }
 
 .caseMediaFrameDemo {

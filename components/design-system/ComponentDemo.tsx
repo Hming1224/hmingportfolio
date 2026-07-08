@@ -1359,24 +1359,30 @@ export default function ComponentDemo({
 
     return (
       <DemoBlock className={styles.caseCardDemoShell} contextLabel={contextLabel}>
-        <CaseCard className={`theme-crypto-arsenal ${styles.caseCardSourceDemo}`}>
-          <p className="cs-quote-text">{card.quote}</p>
-          <div className="cs-quote-meta">
-            <span className={`cs-avatar cs-avatar--${card.tone}`}>
-              <Image
-                className="cs-avatar-img"
-                src={avatar.src}
-                alt=""
-                width={avatar.size}
-                height={avatar.size}
-                aria-hidden="true"
-              />
-            </span>
-            <span className="cs-quote-name">{card.name}</span>
-            <span className="cs-quote-line" aria-hidden="true" />
-            <span className="cs-quote-role">{card.role}</span>
-          </div>
-        </CaseCard>
+        <section className={`cs-page theme-crypto-arsenal ${styles.caseCardSourceDemo}`}>
+          <section id="cs-sec-problem">
+            <CaseGrid variant="three">
+              <CaseCard>
+                <p className="cs-quote-text">{card.quote}</p>
+                <div className="cs-quote-meta">
+                  <span className={`cs-avatar cs-avatar--${card.tone}`}>
+                    <Image
+                      className="cs-avatar-img"
+                      src={avatar.src}
+                      alt=""
+                      width={avatar.size}
+                      height={avatar.size}
+                      aria-hidden="true"
+                    />
+                  </span>
+                  <span className="cs-quote-name">{card.name}</span>
+                  <span className="cs-quote-line" aria-hidden="true" />
+                  <span className="cs-quote-role">{card.role}</span>
+                </div>
+              </CaseCard>
+            </CaseGrid>
+          </section>
+        </section>
       </DemoBlock>
     );
   }
@@ -1384,12 +1390,16 @@ export default function ComponentDemo({
   if (type === "case-grid") {
     return (
       <DemoBlock className={styles.caseStudyComponentDemo} contextLabel={contextLabel}>
-        <section className="cs-page theme-crypto">
+        <section className="cs-page theme-crypto-arsenal">
           <CaseGrid variant="three" className={styles.caseGridSourceDemo}>
             {caseCopy.gridItems.map((item, index) => (
-              <div className={styles.caseGridPlaceholderDemo} key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <p>{item}</p>
+              <div className={styles.caseGridPlaceholderDemo} key={item} aria-label={`${zh ? "網格項目" : "Grid item"} ${index + 1}`}>
+                <span aria-hidden="true" />
+                <div aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
               </div>
             ))}
           </CaseGrid>
