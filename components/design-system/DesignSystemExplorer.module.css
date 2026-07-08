@@ -1573,7 +1573,7 @@
 
 .iconCard h4 {
   margin: 0;
-  min-height: calc(var(--hm-space-lg) + var(--hm-space-2xs));
+  min-height: 1.35em;
   color: var(--text-heading);
   font-size: var(--hm-fs-sm);
   font-weight: var(--hm-fw-bold);
@@ -3295,6 +3295,10 @@
 
   .iconCard {
     grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .iconCard h4 {
+    min-height: calc(var(--hm-space-lg) + var(--hm-space-2xs));
   }
 
   .sidebar {
