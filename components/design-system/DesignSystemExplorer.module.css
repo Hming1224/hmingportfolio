@@ -1048,11 +1048,16 @@
 }
 
 .componentLink {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
   min-height: 36px;
   padding: 6px var(--hm-space-xs);
   color: var(--hm-ink);
   font-size: var(--hm-fs-xs);
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .rootLink:hover,

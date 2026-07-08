@@ -112,6 +112,21 @@ export default function DesignSystemExplorer({
     setWorkspaceScrollRequest((request) => request + 1);
   }, []);
 
+  const shouldScrollAfterNavSelect = useCallback(() => (
+    !window.matchMedia("(max-width: 900px)").matches
+  ), []);
+
+  const runAfterMobileDrawerClose = useCallback((callback: () => void) => {
+    if (shouldScrollAfterNavSelect()) {
+      callback();
+      setSidebarOpen(false);
+      return;
+    }
+
+    setSidebarOpen(false);
+    window.setTimeout(callback, 560);
+  }, [shouldScrollAfterNavSelect]);
+
   useLayoutEffect(() => {
     if (!workspaceScrollRequest) return;
 
@@ -497,8 +512,9 @@ export default function DesignSystemExplorer({
               href={gettingStartedItem.href}
               onClick={(event) => {
                 event.preventDefault();
-                activateGettingStarted();
-                setSidebarOpen(false);
+                runAfterMobileDrawerClose(() => {
+                  activateGettingStarted({ scroll: shouldScrollAfterNavSelect() });
+                });
               }}
             >
               {gettingStartedItem.label}
@@ -537,8 +553,9 @@ export default function DesignSystemExplorer({
                             key={`${doc.kind}-${doc.slug}`}
                             onClick={(event) => {
                               event.preventDefault();
-                              activateCatalogDoc(section, doc);
-                              setSidebarOpen(false);
+                              runAfterMobileDrawerClose(() => {
+                                activateCatalogDoc(section, doc, { scroll: shouldScrollAfterNavSelect() });
+                              });
                             }}
                           >
                             {localized(locale, doc.title, doc.titleZh)}
@@ -559,8 +576,9 @@ export default function DesignSystemExplorer({
               href={nextStepItem.href}
               onClick={(event) => {
                 event.preventDefault();
-                activateSeeMore();
-                setSidebarOpen(false);
+                runAfterMobileDrawerClose(() => {
+                  activateSeeMore({ scroll: shouldScrollAfterNavSelect() });
+                });
               }}
             >
               {nextStepItem.label}
