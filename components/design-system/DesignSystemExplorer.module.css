@@ -370,6 +370,116 @@
   box-shadow: var(--shadow-sm);
 }
 
+.tokenModelPanel {
+  display: grid;
+  gap: var(--hm-space-lg);
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.tokenModelHeader {
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+
+.tokenModelLead {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-body);
+  line-height: 1.7;
+}
+
+.tokenModelFlow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+}
+
+.tokenModelCard {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: color-mix(in srgb, var(--hm-surface) 74%, var(--hm-paper));
+}
+
+.tokenModelIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--hm-line);
+  border-radius: 999px;
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.tokenModelTitle {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.25;
+}
+
+.tokenModelExample {
+  display: block;
+  min-width: 0;
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  overflow-wrap: anywhere;
+}
+
+.tokenModelBody {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-body);
+  line-height: 1.65;
+}
+
+.tokenModelRules {
+  display: grid;
+  gap: var(--hm-space-sm);
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.tokenModelRules h3 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+}
+
+.tokenModelRules ul {
+  display: grid;
+  gap: var(--hm-space-xs);
+  margin: 0;
+  padding-left: var(--hm-space-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.tokenModelReferenceLink {
+  margin: 0;
+}
+
+.tokenModelReferenceLink a {
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-body);
+  font-weight: var(--hm-fw-semibold);
+  text-decoration: none;
+}
+
 .colorGroupStack,
 .tokenReferenceBrowser {
   display: grid;
@@ -2675,6 +2785,12 @@
   }
 }
 
+@media (max-width: 1279px) {
+  .tokenModelFlow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1100px) {
   .caseHeroDemo .caseHeroInfoGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3491,6 +3607,7 @@
 
   .card,
   .foundationPanel,
+  .tokenModelPanel,
   .tokenReferencePanel,
   .cta,
   .demoSurface {
@@ -3527,6 +3644,7 @@
   .anatomyGrid,
   .referenceCardGrid,
   .localExceptionGrid,
+  .tokenModelFlow,
   .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);
   }

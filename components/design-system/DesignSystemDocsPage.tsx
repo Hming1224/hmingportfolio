@@ -481,11 +481,14 @@ function FoundationTokenReference({
 
   if (isTokenReference) {
     return (
-      <section className={styles.docSection}>
-        <article className={styles.tokenReferencePanel}>
-          <TokenReferenceBrowser locale={locale} rows={designSystemTokenRows} />
-        </article>
-      </section>
+      <>
+        <TokenModelReference locale={locale} />
+        <section className={styles.docSection} id="token-reference">
+          <article className={styles.tokenReferencePanel}>
+            <TokenReferenceBrowser locale={locale} rows={designSystemTokenRows} />
+          </article>
+        </section>
+      </>
     );
   }
 
@@ -496,6 +499,109 @@ function FoundationTokenReference({
           <FoundationVisualSamples locale={locale} rows={foundationRows} slug={doc.slug} />
         </article>
       </div>
+    </section>
+  );
+}
+
+function TokenModelReference({ locale }: { locale: DesignSystemLocale }) {
+  const steps = [
+    {
+      title: localized(locale, "Base tokens", "基礎 token"),
+      example: "--hm-purple-600 · --hm-space-md · --fs-body",
+      body: localized(
+        locale,
+        "Named values from styles/tokens.css provide the shared base for color, spacing, type, radius, shadow, motion, and layout.",
+        "styles/tokens.css 裡的命名值提供全站共用基底，涵蓋色彩、間距、字級、圓角、陰影、動效與版面。",
+      ),
+    },
+    {
+      title: localized(locale, "Semantic roles", "語意角色"),
+      example: "--hm-surface · --hm-ink · --hm-line · --hm-success",
+      body: localized(
+        locale,
+        "Aliases translate base values into UI roles such as surfaces, text, borders, actions, and feedback.",
+        "Aliases 把基礎值轉成 UI 使用角色，例如 surface、文字、邊框、操作與回饋。",
+      ),
+    },
+    {
+      title: localized(locale, "Component usage", "元件使用"),
+      example: "Button · ProjectCard · Modal · CaseHero",
+      body: localized(
+        locale,
+        "Components consume reusable roles and documented class mappings, so styling follows the same vocabulary across screens.",
+        "元件使用可重用的 role 與已文件化的 class mapping，讓不同畫面沿用同一套語彙。",
+      ),
+    },
+    {
+      title: localized(locale, "Project tone / local exception", "專案語氣 / 局部例外"),
+      example: "--cs-accent · .tone-advantech · Component Boundaries",
+      body: localized(
+        locale,
+        "Case-study tones and route-local patterns keep project character while staying traceable to the documented system.",
+        "案例 tone 與 route-local pattern 保留專案個性，同時仍能回到文件化的系統脈絡。",
+      ),
+    },
+  ];
+  const rules = locale === "zh-TW"
+    ? [
+        "先使用全站共用 token，再評估局部樣式。",
+        "Surface、文字、邊框、操作與回饋色優先對應語意角色。",
+        "元件樣式連回可重用的 role 或已文件化的 class mapping。",
+        "案例頁需要專案識別時，使用 project tone 保留視覺語氣。",
+        "與路由敘事強綁的差異，記錄在 Component Boundaries。",
+      ]
+    : [
+        "Start with shared tokens before introducing local styling.",
+        "Use semantic roles for surfaces, text, borders, actions, and feedback.",
+        "Keep component styling tied to reusable roles or documented class mappings.",
+        "Use project tone when a case study needs its own visual identity.",
+        "Record route-specific storytelling differences in Component Boundaries.",
+      ];
+
+  return (
+    <section className={styles.docSection} id="token-model" aria-labelledby="token-model-title">
+      <article className={styles.tokenModelPanel}>
+        <div className={styles.tokenModelHeader}>
+          <p className={styles.exampleLabel}>{localized(locale, "Token inheritance", "Token 繼承邏輯")}</p>
+          <h2 className={styles.docSectionTitle} id="token-model-title">
+            {localized(locale, "Token model", "Token 繼承模型")}
+          </h2>
+          <p className={styles.tokenModelLead}>
+            {localized(
+              locale,
+              "The system moves from shared values to semantic roles, then into component usage and project-specific tone.",
+              "這套系統從共用基礎值出發，接到語意角色，再進入元件使用與專案語氣。",
+            )}
+          </p>
+        </div>
+        <div className={styles.tokenModelFlow}>
+          {steps.map((step, index) => (
+            <article className={styles.tokenModelCard} key={step.title}>
+              <span className={styles.tokenModelIndex}>{String(index + 1).padStart(2, "0")}</span>
+              <h3 className={styles.tokenModelTitle}>{step.title}</h3>
+              <code className={styles.tokenModelExample}>{step.example}</code>
+              <p className={styles.tokenModelBody}>{step.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className={styles.tokenModelRules}>
+          <h3>{localized(locale, "Usage rules", "使用規則")}</h3>
+          <ul>
+            {rules.map((rule) => (
+              <li key={rule}>{rule}</li>
+            ))}
+          </ul>
+        </div>
+        <p className={styles.tokenModelReferenceLink}>
+          <a href="#token-reference">
+            {localized(
+              locale,
+              "Use Token Reference for the full searchable list of token names, values, scopes, and previews.",
+              "完整 token 名稱、數值、scope 與 preview 請使用 Token Reference 查表。",
+            )}
+          </a>
+        </p>
+      </article>
     </section>
   );
 }
