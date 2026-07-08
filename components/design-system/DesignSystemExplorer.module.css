@@ -1497,6 +1497,7 @@
 .iconCard {
   display: grid;
   align-items: start;
+  align-content: start;
   min-width: 0;
   gap: var(--hm-space-xs);
   padding: var(--hm-space-sm);
