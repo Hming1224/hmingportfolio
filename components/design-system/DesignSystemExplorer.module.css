@@ -1496,14 +1496,22 @@
 
 .iconCard {
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   align-items: start;
-  align-content: start;
+  align-content: stretch;
   min-width: 0;
   gap: var(--hm-space-xs);
   padding: var(--hm-space-sm);
   border: 1px solid var(--hm-line);
   border-radius: var(--hm-radius-md);
   background: var(--hm-surface);
+}
+
+.iconCard > div {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  flex-direction: column;
 }
 
 .iconPreview {
@@ -1592,7 +1600,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--hm-space-3xs);
-  margin-top: var(--hm-space-xs);
+  margin-top: auto;
+  padding-top: var(--hm-space-xs);
 }
 
 .iconMeta span {
@@ -1601,8 +1610,8 @@
   min-width: 0;
   padding: 0.25rem 0.45rem;
   border-radius: 999px;
-  background: var(--hm-paper);
-  color: var(--text-muted);
+  background: var(--hm-purple-light);
+  color: var(--hm-purple-500);
   font-size: var(--hm-fs-xs);
   font-weight: var(--hm-fw-semibold);
   line-height: 1.35;
@@ -3296,10 +3305,7 @@
 
   .iconCard {
     grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .iconCard h4 {
-    min-height: calc(var(--hm-space-lg) + var(--hm-space-2xs));
+    grid-template-rows: minmax(0, 1fr);
   }
 
   .sidebar {
