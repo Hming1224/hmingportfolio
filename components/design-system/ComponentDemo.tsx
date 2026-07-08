@@ -793,6 +793,11 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
                 onNavigate={handleNavigate}
               />
             </aside>
+            <p className={styles.caseTocMobileNote}>
+              {zh
+                ? "手機版正式案例頁不使用側邊目錄；目錄會直接隱藏，這裡只保留可捲動的假 section 示意閱讀位置。"
+                : "Mobile case pages do not use the side table of contents; it is hidden, so this example keeps only the scrollable section preview."}
+            </p>
             <div className={styles.caseTocRouteCrop} ref={scrollContainerRef}>
               {sections.map((section, index) => (
                 <section

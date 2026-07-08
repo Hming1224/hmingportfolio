@@ -2338,6 +2338,14 @@
   line-height: 1.35;
 }
 
+.caseTocMobileNote {
+  display: none;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
+}
+
 .caseTocRouteCrop {
   display: grid;
   gap: var(--hm-space-sm);
@@ -3128,6 +3136,14 @@
 @media (max-width: 900px) {
   .caseTocPreviewShell :global(.cs-toc-layout) {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .caseTocPreviewShell :global(.cs-toc-aside) {
+    display: none;
+  }
+
+  .caseTocMobileNote {
+    display: block;
   }
 
   .caseTocRouteCrop {
