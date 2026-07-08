@@ -1,6 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 import { PanelLeftOpen } from "lucide-react";
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from "@/components/ui/Accordion";
 import type { DesignSystemDoc, DesignSystemDocKind, DesignSystemLocale } from "@/lib/design-system-docs";
@@ -101,6 +110,7 @@ export default function DesignSystemExplorer({
   const drawerLabel = localized(locale, "Component list", "元件清單");
   const measureRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
+  const pointerNavHandledRef = useRef(false);
   const [navWidth, setNavWidth] = useState<number | null>(null);
   const [workspaceScrollRequest, setWorkspaceScrollRequest] = useState(0);
 
@@ -112,12 +122,22 @@ export default function DesignSystemExplorer({
     setWorkspaceScrollRequest((request) => request + 1);
   }, []);
 
-  const shouldScrollAfterNavSelect = useCallback(() => (
-    !window.matchMedia("(max-width: 900px)").matches
+  const isMobileNavLayout = useCallback(() => (
+    window.matchMedia("(max-width: 900px)").matches
   ), []);
 
+  const shouldScrollAfterNavSelect = useCallback(() => {
+    if (isMobileNavLayout()) return false;
+
+    const workspace = document.getElementById("design-system-workspace");
+    if (!workspace) return true;
+
+    const rect = workspace.getBoundingClientRect();
+    return rect.top > window.innerHeight || rect.bottom < 0;
+  }, [isMobileNavLayout]);
+
   const runAfterMobileDrawerClose = useCallback((callback: () => void) => {
-    if (shouldScrollAfterNavSelect()) {
+    if (!isMobileNavLayout()) {
       callback();
       setSidebarOpen(false);
       return;
@@ -125,7 +145,32 @@ export default function DesignSystemExplorer({
 
     setSidebarOpen(false);
     window.setTimeout(callback, 560);
-  }, [shouldScrollAfterNavSelect]);
+  }, [isMobileNavLayout]);
+
+  const handleNavPointerSelect = useCallback((
+    event: PointerEvent<HTMLAnchorElement>,
+    callback: () => void,
+  ) => {
+    if (!isMobileNavLayout()) return;
+
+    event.preventDefault();
+    pointerNavHandledRef.current = true;
+    runAfterMobileDrawerClose(callback);
+  }, [isMobileNavLayout, runAfterMobileDrawerClose]);
+
+  const handleNavClickSelect = useCallback((
+    event: MouseEvent<HTMLAnchorElement>,
+    callback: () => void,
+  ) => {
+    event.preventDefault();
+
+    if (pointerNavHandledRef.current) {
+      pointerNavHandledRef.current = false;
+      return;
+    }
+
+    runAfterMobileDrawerClose(callback);
+  }, [runAfterMobileDrawerClose]);
 
   useLayoutEffect(() => {
     if (!workspaceScrollRequest) return;
@@ -510,9 +555,13 @@ export default function DesignSystemExplorer({
               className={`${styles.rootLink}${activeWorkspace.type === "getting-started" ? ` ${styles.active}` : ""}`}
               data-ds-toc-root="getting-started"
               href={gettingStartedItem.href}
+              onPointerDown={(event) => {
+                handleNavPointerSelect(event, () => {
+                  activateGettingStarted({ scroll: shouldScrollAfterNavSelect() });
+                });
+              }}
               onClick={(event) => {
-                event.preventDefault();
-                runAfterMobileDrawerClose(() => {
+                handleNavClickSelect(event, () => {
                   activateGettingStarted({ scroll: shouldScrollAfterNavSelect() });
                 });
               }}
@@ -551,9 +600,13 @@ export default function DesignSystemExplorer({
                             className={`${styles.componentLink}${isActive ? ` ${styles.active}` : ""}`}
                             href={`#${doc.slug}`}
                             key={`${doc.kind}-${doc.slug}`}
+                            onPointerDown={(event) => {
+                              handleNavPointerSelect(event, () => {
+                                activateCatalogDoc(section, doc, { scroll: shouldScrollAfterNavSelect() });
+                              });
+                            }}
                             onClick={(event) => {
-                              event.preventDefault();
-                              runAfterMobileDrawerClose(() => {
+                              handleNavClickSelect(event, () => {
                                 activateCatalogDoc(section, doc, { scroll: shouldScrollAfterNavSelect() });
                               });
                             }}
@@ -574,9 +627,13 @@ export default function DesignSystemExplorer({
               aria-current={activeWorkspace.type === "see-more" ? "page" : undefined}
               className={`${styles.rootLink}${activeWorkspace.type === "see-more" ? ` ${styles.active}` : ""}`}
               href={nextStepItem.href}
+              onPointerDown={(event) => {
+                handleNavPointerSelect(event, () => {
+                  activateSeeMore({ scroll: shouldScrollAfterNavSelect() });
+                });
+              }}
               onClick={(event) => {
-                event.preventDefault();
-                runAfterMobileDrawerClose(() => {
+                handleNavClickSelect(event, () => {
                   activateSeeMore({ scroll: shouldScrollAfterNavSelect() });
                 });
               }}
