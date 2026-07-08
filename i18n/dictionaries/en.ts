@@ -69,16 +69,16 @@ const messages = {
       highlightsAriaLabel: "System highlights",
       highlights: [
         {
-          title: "Token governance",
-          lead: "Every color, type size, and spacing step has a name — change it once, the whole site follows.",
+          title: "Traceable tokens",
+          lead: "Colors, type, and spacing are clearly named, so every adjustment follows the same rules and keeps the whole site consistent.",
         },
         {
-          title: "Component boundary judgment",
-          lead: "Seeing a layout twice does not automatically make it a component. The reasoning is documented here.",
+          title: "Reusable with intention",
+          lead: "Reusable pieces become components, while case-study storytelling keeps enough flexibility to make the system adaptable.",
         },
         {
-          title: "Intentional exceptions",
-          lead: "Some case-study UI deliberately stays unshared, and the reasons are written down.",
+          title: "Room for project character",
+          lead: "Each case study keeps its own rhythm and context, while shared foundations keep the overall experience consistent across pages.",
         },
       ],
     },
