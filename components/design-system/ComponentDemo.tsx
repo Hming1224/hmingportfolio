@@ -1205,6 +1205,11 @@ export default function ComponentDemo({
   if (type === "project-card") {
     return (
       <DemoBlock className={styles.projectCardLiveWrap} contextLabel={contextLabel ?? "Homepage / Selected Works"}>
+        <p className={styles.projectCardMobileNote}>
+          {zh
+            ? "手機版沒有 hover；ProjectCard 會直接使用直向排列，讓圖片、資訊與 CTA 常駐顯示。"
+            : "Mobile does not use hover; ProjectCard stays stacked with the image, information, and CTA always visible."}
+        </p>
         <div className={`projects-list ${styles.projectCardLivePreview}`}>
           <ProjectCard project={featuredProject} />
         </div>
