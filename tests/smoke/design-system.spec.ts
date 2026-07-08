@@ -75,9 +75,22 @@ test.describe("CaseTOC scoped demo", () => {
       await expect(roleLink).toHaveAttribute("aria-current", "true");
 
       const afterWindowScroll = await page.evaluate(() => window.scrollY);
-      const hostScrollTop = await scrollHost.evaluate((element) => element.scrollTop);
       expect(Math.abs(afterWindowScroll - beforeWindowScroll)).toBeLessThanOrEqual(8);
-      expect(hostScrollTop).toBeGreaterThan(0);
+      await expect
+        .poll(() => scrollHost.evaluate((element) => element.scrollTop))
+        .toBeGreaterThan(0);
+      await expect
+        .poll(() =>
+          scrollHost.evaluate((element) => {
+            const target = element.querySelector<HTMLElement>("#cs-sec-ds-toc-role");
+            if (!target) return false;
+
+            const hostRect = element.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            return targetRect.top >= hostRect.top - 1 && targetRect.top <= hostRect.bottom + 1;
+          }),
+        )
+        .toBe(true);
 
       await scrollHost.evaluate((element) => {
         const target = element.querySelector<HTMLElement>("#cs-sec-ds-toc-analysis");
