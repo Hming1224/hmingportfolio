@@ -1452,7 +1452,7 @@
 
 .iconGroupHeader {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--hm-space-sm);
   min-width: 0;
@@ -1496,6 +1496,8 @@
 
 .iconCard {
   display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
   min-width: 0;
   gap: var(--hm-space-xs);
   padding: var(--hm-space-sm);
@@ -1527,6 +1529,31 @@
   width: 2rem;
   height: 2rem;
   object-fit: contain;
+}
+
+.navbarMenuIconPreview {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  position: relative;
+}
+
+.navbarMenuIconPreview span {
+  position: absolute;
+  left: 0.75rem;
+  width: 1.25rem;
+  height: 0.125rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.navbarMenuIconPreview span:first-child {
+  top: 1rem;
+}
+
+.navbarMenuIconPreview span:last-child {
+  top: 1.625rem;
 }
 
 .iconToneSuccess {

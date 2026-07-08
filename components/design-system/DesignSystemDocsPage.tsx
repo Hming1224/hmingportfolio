@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AlertCircle, ArrowRight, Check, CheckCircle2, ChevronDown, ChevronRight, Mail, Menu, PanelLeftOpen, Phone, X } from "lucide-react";
+import { AlertCircle, ArrowRight, Check, CheckCircle2, ChevronDown, ChevronRight, Mail, PanelLeftOpen, Phone, X } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import type { DesignSystemDoc, DesignSystemLocale } from "@/lib/design-system-docs";
 import { designSystemTokenRows } from "@/lib/design-system-data";
@@ -37,6 +37,15 @@ function getTokenUsage(row: TokenRow, locale: DesignSystemLocale) {
   return locale === "zh-TW" ? row.usageZh ?? row.usage : row.usage;
 }
 
+function NavbarMenuIconPreview() {
+  return (
+    <span aria-hidden="true" className={styles.navbarMenuIconPreview}>
+      <span />
+      <span />
+    </span>
+  );
+}
+
 function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup[] {
   return [
     {
@@ -62,10 +71,10 @@ function iconographyGallery(locale: DesignSystemLocale): IconographyGalleryGroup
           preview: <PanelLeftOpen aria-hidden="true" size={28} strokeWidth={1.8} />,
         },
         {
-          name: "Menu",
+          name: "Navbar menu",
           usage: localized(locale, "Global mobile navigation affordance", "全站手機導覽提示"),
-          source: "lucide-react reference / CSS implementation",
-          preview: <Menu aria-hidden="true" size={28} strokeWidth={1.8} />,
+          source: "Navbar.tsx / .menu-button",
+          preview: <NavbarMenuIconPreview />,
         },
       ],
     },
@@ -164,8 +173,8 @@ function iconographyMatrix(locale: DesignSystemLocale) {
       context: "Responsive navigation triggers",
       purpose: localized(
         locale,
-        "PanelLeftOpen opens the Design System component list drawer; the mobile navbar uses a compact menu affordance for route navigation.",
-        "PanelLeftOpen 開啟 Design System 元件清單 drawer；手機版 Navbar 使用精簡選單提示進行頁面導覽。",
+        "PanelLeftOpen opens the Design System component list drawer; the mobile navbar uses the two-line `.menu-button` affordance from the real Navbar.",
+        "PanelLeftOpen 開啟 Design System 元件清單 drawer；手機版 Navbar 沿用正式 Navbar 的雙線 `.menu-button` 提示。",
       ),
       accessibility: localized(locale, "Both triggers expose their open state with aria-expanded and rely on labels for the control name.", "兩個 trigger 都用 aria-expanded 暴露開啟狀態，控制名稱由 label 提供。"),
     },
