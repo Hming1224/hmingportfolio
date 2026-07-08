@@ -45,7 +45,7 @@
   display: grid;
   grid-template-columns: minmax(0, 0.96fr) minmax(360px, 1.04fr);
   align-items: center;
-  gap: var(--hm-space-lg);
+  gap: clamp(calc(var(--hm-space-xl) + var(--hm-space-md)), 5vw, var(--hm-space-3xl));
   width: min(var(--hm-container), calc(100% - calc(var(--hm-space-xl) * 2)));
   margin-inline: auto;
 }
