@@ -233,8 +233,8 @@ export default function DesignSystemExplorer({
         if (clampedProgress >= end) return 1;
         return (clampedProgress - start) / (end - start);
       };
-      const heroExitProgress = segmentProgress(0.42, 0.74);
-      const shellEnterProgress = segmentProgress(0.84, 1);
+      const heroExitProgress = segmentProgress(0.42, 0.72);
+      const shellEnterProgress = segmentProgress(0.72, 0.86);
       const heroOpacity = Math.max(0.001, 1 - heroExitProgress);
       const shellOpacity = Math.max(0.001, shellEnterProgress);
 
@@ -265,6 +265,8 @@ export default function DesignSystemExplorer({
     }
 
     let frame = 0;
+    let lastScrollY = window.scrollY;
+    let gateSnapping = false;
 
     const updateProgress = () => {
       frame = 0;
@@ -273,6 +275,27 @@ export default function DesignSystemExplorer({
       const start = Math.max(0, shellTop - window.innerHeight - 120);
       const end = Math.max(start + 1, shellTop - 120);
       const progress = (window.scrollY - start) / (end - start);
+      const scrollingDown = window.scrollY >= lastScrollY;
+
+      if (!gateSnapping && progress > 0.5 && progress < 0.98) {
+        gateSnapping = true;
+        const target = scrollingDown ? end : start;
+        setProgress(scrollingDown ? 1 : 0);
+
+        if (scrollingDown) {
+          root.dataset.dsWorkspaceVisible = "true";
+        } else {
+          delete root.dataset.dsWorkspaceVisible;
+        }
+
+        window.scrollTo({ top: target, behavior: "auto" });
+        lastScrollY = target;
+        window.setTimeout(() => {
+          gateSnapping = false;
+          requestProgressUpdate();
+        }, 80);
+        return;
+      }
 
       const snappedProgress = progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
       setProgress(snappedProgress);
@@ -282,6 +305,8 @@ export default function DesignSystemExplorer({
       } else {
         delete root.dataset.dsWorkspaceVisible;
       }
+
+      lastScrollY = window.scrollY;
     };
 
     const requestProgressUpdate = () => {
