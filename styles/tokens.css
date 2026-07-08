@@ -416,33 +416,12 @@
 }
 
 /* ── 專案主題（換色盤）──
-   每個案例頁在 <main class="cs-page theme-xxx"> 掛一個 theme，
-   只覆寫大標主色 --text-heading；其餘文字階梯沿用全域中性值。
-   新增專案＝在這裡加一行 .theme-xxx { --text-heading: 主色 } 即可。 */
-.theme-advantech {
-  --text-heading: #093060;
-  --cs-accent: #005796;
-  --cs-accent-strong: #093060;
-  --cs-accent-soft: #e5effa;
-  --cs-surface-soft: #fafcfe;
-  --cs-line: #cbdef4;
-  --cs-line-strong: #d5dfec;
-  --cs-text-heading: #093060;
-  --cs-shadow-color: rgba(9, 48, 96, 0.12);
-  /* 研華主色：深藍 */
-}
-
-.theme-crypto-arsenal {
-  --text-heading: #252a47;
-  --cs-accent: #376adc;
-  --cs-accent-strong: #252a47;
-  --cs-accent-soft: #e8eafa;
-  --cs-line: #d8deec;
-  --cs-line-strong: #d8deec;
-  --cs-text-heading: #252a47;
-  --cs-shadow-color: rgba(37, 42, 71, 0.12);
-  /* Crypto Arsenal 主色：深 navy（Figma node 2574-83 primary base） */
-}
+   每個案例頁在 <main class="cs-page theme-xxx"> 掛一個 theme，覆寫大標主色
+   與 --cs-* 語意色；其餘中性階沿用全域值。
+   Theme 一律定義在該案例的 route CSS（styles/case-study-<slug>.css），
+   不放這裡（見 docs/design-system/08-ai-implementation-rules.md §3）。
+   舊的 .theme-advantech / .theme-crypto-arsenal 重複區塊已於 2026-07-09 移除，
+   值已合併進各自的 route CSS。 */
 
 * {
   box-sizing: border-box;

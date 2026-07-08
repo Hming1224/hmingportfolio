@@ -9,6 +9,8 @@
    scope 在 .theme-crypto-arsenal，不進全域 :root（見 docs/design-system.md §2.7）。
    色票來源：Figma node 2574-83（APPROVED.md 已定案）。 */
 .theme-crypto-arsenal {
+  /* Migrated from the former tokens.css .theme-crypto-arsenal duplicate (2026-07-09). */
+  --text-heading: #252a47;
   --cs-accent: #376adc;
   --cs-accent-strong: #252a47;
   --cs-accent-soft: #e8eafa;

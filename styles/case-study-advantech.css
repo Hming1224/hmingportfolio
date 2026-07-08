@@ -11,6 +11,9 @@
    只收斂「重複 ≥2 次、角色明確」的藍/石板/近黑系統色；
    只用一次或近乎重複的極淡藍底維持 hex，留待後續合併。 */
 .theme-advantech {
+  /* Migrated from the former tokens.css .theme-advantech duplicate (2026-07-09). */
+  --text-heading: #093060;
+  --cs-line-strong: #d5dfec;
   --cs-accent: #005796;
   --cs-accent-strong: #093060;
   --cs-accent-soft: #e5effa;
