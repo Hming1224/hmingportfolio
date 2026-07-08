@@ -1843,9 +1843,17 @@
 }
 
 .contactToastPreviewSlot :global(.hm-toast-region) {
-  position: static;
+  position: static !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: auto !important;
   width: 100%;
   animation: none;
+}
+
+.contactToastPreviewSlot :global(.hm-alert) {
+  position: relative;
+  z-index: 0;
 }
 
 .languageSwitcherDemo {
