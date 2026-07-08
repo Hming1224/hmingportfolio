@@ -1306,7 +1306,7 @@ button {
   place-items: center;
   width: 40px;
   height: 40px;
-  --social-icon-color: var(--text-secondary);
+  --social-icon-color: var(--hm-ink);
 }
 
 .social-logo {
