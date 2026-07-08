@@ -12,6 +12,7 @@ import {
   CaseStudyShell,
   type TocSection,
 } from "../../components/case-study";
+import Button from "../../components/ui/Button";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
 
@@ -119,12 +120,10 @@ const whyCards = [
   },
   {
     icon: <IconBadgeCheck />,
-    title: "想用業界的工作方式驗證自己",
-    body: "與其只在履歷上寫「了解 design system」，我更想用自己的作品集實際做一次：從規則建立、元件盤點到長期維護，把整個過程走一遍、也記錄下來。",
+    title: "把理解落到真實作品裡",
+    body: "與其停留在「知道 design system」的理解，我更想用自己的作品集實際做一次：從規則建立、元件盤點到長期維護，把整個過程走一遍、也記錄下來。",
   },
 ];
-
-const benchmarkChips = ["對標 Ant Design", "對標 Material Design", "Figma Make 互動雛形"];
 
 const turningPoints = [
   {
@@ -263,34 +262,34 @@ const decisionLog = [
 
 const outcomeMetrics = [
   {
-    value: "300+",
-    label: "design tokens",
-    body: "顏色、間距、圓角、字級、動畫全部變數化，集中在單一 tokens.css。",
+    value: "268",
+    label: "runtime design tokens",
+    body: "以 styles/tokens.css 為 source of truth，目前掃到 268 個唯一 CSS custom properties，集中管理顏色、字級、間距、圓角、陰影與 motion。",
   },
   {
     value: "19",
     label: "共用 case-study 元件",
-    body: "Section、Card、Grid、Media、Before / After 外框，支撐目前作品集案例頁的主要敘事結構。",
+    body: "CaseStudyShell、Section、Card、Grid、Media、Before / After 等 19 個共用元件，支撐 4 個案例頁的主要敘事結構。",
   },
   {
     value: "10",
-    label: "規格文件",
-    body: "從 tokens、元件契約到 AI-assisted workflow，讓規則不只存在腦中，也能被重複執行。",
+    label: "核心規格文件",
+    body: "docs/design-system/00–09 收斂成 10 份核心文件，涵蓋 foundations、tokens、components、patterns、governance 與 workflow。",
   },
   {
-    value: "19 → 5",
-    label: "圓角收斂",
-    body: "盤點時全站實際用了 19 種硬寫的圓角值，收斂成 5 階 token。",
+    value: "5",
+    label: "核心圓角 token",
+    body: "目前 production token 層以 sm / md / lg / pill / button 作為主要圓角尺度，讓新元件優先吃同一組規則。",
   },
   {
-    value: "17 → 0",
-    label: "動畫硬寫歸零",
-    body: "17 處硬寫的 duration / easing 全數 token 化。",
+    value: "19",
+    label: "motion tokens",
+    body: "duration、easing、transition 相關 token 集中在 tokens.css；route-specific 動畫可以保留，但共用節奏先回到同一層管理。",
   },
   {
     value: "3",
-    label: "頁面零視覺變動遷移",
-    body: "三個已上線案例頁在抽象過程中完成遷移，視覺呈現維持原本狀態。",
+    label: "validation scripts",
+    body: "check-design-tokens、check-links 與 architecture audit 負責檢查 token、素材連結和樣式 ownership，讓規則不是只靠人工記得。",
   },
 ];
 
@@ -319,19 +318,13 @@ const reflections = [
     body: "這次經驗沒有讓我少用 AI，而是讓我更清楚地把 AI 放在可管理的流程裡。AI 可以協助盤點和執行，但任務邊界、驗證條件和 rollback 節點必須由我先設計好。",
   },
   {
-    title: "語彙要跟業界對齊",
-    body: "我一開始自己發明了幾個詞（例如把外框元件叫 shell），後來逐一查證，改成業界通用的說法。自創詞只有自己懂；改用大家共同的說法，才能和工程師順利討論。",
+    title: "語彙要能被共同理解",
+    body: "我一開始自己發明了幾個詞（例如把外框元件叫 shell），後來逐一查證，改成設計與工程更常使用的說法。自創詞只有自己懂；改用大家共同的語彙，才能和工程師順利討論。",
   },
   {
     title: "把「搞懂」寫下來，才算真的懂",
     body: "每釐清一個概念——token 和 alias 差在哪、Button 和 LinkButton 為什麼要分——我都整理成規格或筆記。寫不出來，通常代表自己還沒有真的想清楚。",
   },
-];
-
-const nextSteps = [
-  "新增案例頁時，重跑一輪 rule of three 評估。",
-  "補齊元件的無障礙契約：focus 管理與報讀語意。",
-  "文件站上線後，新增元件時同步更新目錄，並定期重跑一次使用性稽核。",
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -440,19 +433,12 @@ export default function DesignSystemCaseStudyPage() {
       <CaseSection
         id="cs-sec-starting-point"
         kicker="STARTING POINT"
-        title="起點：對標成熟系統，用 Figma Make 做第一版"
+        title="起點：參考成熟系統，用 Figma Make 做第一版"
         surface
       >
         <p className="cs-section-lead">
-          不從零發明，先看業界最好的系統長什麼樣。
+          不從零發明，先看成熟系統如何整理規則、元件與文件。
         </p>
-        <div className="ds-case-benchmarks" aria-hidden="true">
-          {benchmarkChips.map((chip) => (
-            <span className="ds-case-benchmark-chip" key={chip}>
-              {chip}
-            </span>
-          ))}
-        </div>
         <CaseCard className="ds-case-narrative-card">
           <p>
             我拿 <b>Ant Design</b> 和 <b>Google Material Design</b> 當基準，逐項對照自己的網站做 <b>gap analysis</b>：顏色有沒有分層？間距、圓角、字級有沒有規則？元件狀態（hover / focus / disabled）齊不齊？盤點下來列出了十幾個缺口。
@@ -473,7 +459,7 @@ export default function DesignSystemCaseStudyPage() {
             alt="Figma Make prototype screenshot for Hming Design System."
             width={1440}
             height={960}
-            sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
+            sizes="(max-width: 768px) calc(100vw - 48px), calc(100vw - 96px)"
           />
         </CaseMedia>
         <TermNotes
@@ -562,7 +548,7 @@ export default function DesignSystemCaseStudyPage() {
               <tr>
                 <th>看到的訊號</th>
                 <th>對應做法</th>
-                <th>業界說法</th>
+                <th>通用說法</th>
               </tr>
             </thead>
             <tbody>
@@ -631,7 +617,7 @@ export default function DesignSystemCaseStudyPage() {
             alt="Before and after diagram showing three local implementations evolving into shared narrative frame and panel shell."
             width={1600}
             height={900}
-            sizes="(max-width: 768px) calc(100vw - 48px), 1120px"
+            sizes="(max-width: 768px) calc(100vw - 48px), calc(100vw - 96px)"
           />
         </CaseMedia>
         <TermNotes
@@ -712,11 +698,11 @@ export default function DesignSystemCaseStudyPage() {
         <p className="cs-section-lead">
           整理全站按鈕時，我卡在一個看起來很小的問題：
         </p>
-        <blockquote className="ds-case-quote ds-case-quote--question">
+        <p className="ds-case-question-callout">
           「View case study」長得像按鈕，那它是 Button 嗎？
-        </blockquote>
+        </p>
         <p className="cs-section-lead">
-          全站有十幾個這種「像按鈕的東西」，不先分類清楚，之後 token 化和抽元件都會踩空。查證業界做法（W3C、Material Design）後，我把它們拆成四個概念：
+          全站有十幾個這種「像按鈕的東西」，不先分類清楚，之後 token 化和抽元件都會踩空。查證 W3C 與 Material Design 的相關定義後，我把它們拆成四個概念：
         </p>
         <div className="ds-case-table-frame">
           <table className="ds-case-table">
@@ -850,9 +836,6 @@ export default function DesignSystemCaseStudyPage() {
             </CaseCard>
           ))}
         </CaseGrid>
-        <blockquote className="ds-case-quote">
-          順帶一提：你正在看的這一頁，就是用這套系統現有的共用元件組出來的，過程中沒有新增或修改任何一個共用元件。
-        </blockquote>
         <TermNotes
           items={[
             {
@@ -884,13 +867,14 @@ export default function DesignSystemCaseStudyPage() {
             </CaseCard>
           ))}
         </CaseGrid>
-        <div className="ds-case-next">
-          <h3>下一步</h3>
-          <ul>
-            {nextSteps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ul>
+        <div className="ds-case-design-system-cta">
+          <div>
+            <h3>查看實作後的 Design System 文件</h3>
+            <p>這套規則最後整理成可瀏覽的文件頁，包含 tokens、components、patterns 與 governance。</p>
+          </div>
+          <Button className="ds-case-design-system-cta__button" href="/design-system">
+            前往 Design System
+          </Button>
         </div>
       </CaseSection>
     </CaseStudyShell>
