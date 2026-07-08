@@ -233,15 +233,15 @@ export default function DesignSystemExplorer({
         if (clampedProgress >= end) return 1;
         return (clampedProgress - start) / (end - start);
       };
-      const heroExitProgress = segmentProgress(0.42, 0.72);
-      const shellEnterProgress = segmentProgress(0.72, 0.86);
+      const heroExitProgress = segmentProgress(0.24, 0.56);
+      const shellEnterProgress = segmentProgress(0.56, 1);
       const heroOpacity = Math.max(0.001, 1 - heroExitProgress);
       const shellOpacity = Math.max(0.001, shellEnterProgress);
 
       root.style.setProperty("--ds-hero-opacity", heroOpacity.toFixed(3));
       root.style.setProperty("--ds-shell-opacity", shellOpacity.toFixed(3));
       root.style.setProperty("--ds-hero-y", `${Math.round(-72 * heroExitProgress)}px`);
-      root.style.setProperty("--ds-shell-y", `${Math.round(72 * (1 - shellEnterProgress))}px`);
+      root.style.setProperty("--ds-shell-y", `${Math.round(96 * (1 - shellEnterProgress))}px`);
       root.style.setProperty("--ds-hero-scale", (1 - 0.02 * heroExitProgress).toFixed(3));
       root.style.setProperty("--ds-shell-scale", (0.98 + 0.02 * shellEnterProgress).toFixed(3));
     };
@@ -265,11 +265,74 @@ export default function DesignSystemExplorer({
     }
 
     let frame = 0;
+    let gateAnimationFrame = 0;
     let lastScrollY = window.scrollY;
-    let gateSnapping = false;
+    let gateAnimating = false;
+
+    const setWorkspaceVisibility = (progress: number) => {
+      if (progress > 0.02) {
+        root.dataset.dsWorkspaceVisible = "true";
+      } else {
+        delete root.dataset.dsWorkspaceVisible;
+      }
+    };
+
+    const animateGate = (
+      fromY: number,
+      toY: number,
+      fromProgress: number,
+      toProgress: number,
+    ) => {
+      gateAnimating = true;
+      const duration = 720;
+      const startTime = window.performance.now();
+      const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+      const easeInOutCubic = (t: number) => (
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+      );
+      const easeOutBack = (t: number) => {
+        const c1 = 0.72;
+        const c3 = c1 + 1;
+        return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+      };
+
+      const tick = (time: number) => {
+        const elapsed = Math.min(1, (time - startTime) / duration);
+        const scrollEase = easeOutBack(elapsed);
+        const progressEase = (easeInOutCubic(elapsed) + easeOutCubic(elapsed)) / 2;
+        const distance = toY - fromY;
+        const maxOvershoot = distance === 0 ? 0 : 24 / Math.abs(distance);
+        const boundedScrollEase = Math.min(1 + maxOvershoot, Math.max(0 - maxOvershoot, scrollEase));
+        const currentY = fromY + distance * boundedScrollEase;
+        const currentProgress = fromProgress + (toProgress - fromProgress) * progressEase;
+
+        setProgress(currentProgress);
+        setWorkspaceVisibility(currentProgress);
+        window.scrollTo({ top: currentY, behavior: "auto" });
+        lastScrollY = currentY;
+
+        if (elapsed < 1) {
+          gateAnimationFrame = window.requestAnimationFrame(tick);
+          return;
+        }
+
+        gateAnimating = false;
+        gateAnimationFrame = 0;
+        window.scrollTo({ top: toY, behavior: "auto" });
+        setProgress(toProgress);
+        setWorkspaceVisibility(toProgress);
+        lastScrollY = toY;
+        requestProgressUpdate();
+      };
+
+      if (gateAnimationFrame) window.cancelAnimationFrame(gateAnimationFrame);
+      gateAnimationFrame = window.requestAnimationFrame(tick);
+    };
 
     const updateProgress = () => {
       frame = 0;
+
+      if (gateAnimating) return;
 
       const shellTop = shell.offsetTop;
       const start = Math.max(0, shellTop - window.innerHeight - 120);
@@ -277,34 +340,24 @@ export default function DesignSystemExplorer({
       const progress = (window.scrollY - start) / (end - start);
       const scrollingDown = window.scrollY >= lastScrollY;
 
-      if (!gateSnapping && progress > 0.5 && progress < 0.98) {
-        gateSnapping = true;
+      const crossedGate = scrollingDown
+        ? progress > 0.25 && progress < 0.98
+        : progress > 0.02 && progress < 0.75;
+
+      if (crossedGate) {
         const target = scrollingDown ? end : start;
-        setProgress(scrollingDown ? 1 : 0);
-
-        if (scrollingDown) {
-          root.dataset.dsWorkspaceVisible = "true";
-        } else {
-          delete root.dataset.dsWorkspaceVisible;
-        }
-
-        window.scrollTo({ top: target, behavior: "auto" });
-        lastScrollY = target;
-        window.setTimeout(() => {
-          gateSnapping = false;
-          requestProgressUpdate();
-        }, 80);
+        animateGate(
+          window.scrollY,
+          target,
+          Math.min(1, Math.max(0, progress)),
+          scrollingDown ? 1 : 0,
+        );
         return;
       }
 
       const snappedProgress = progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
       setProgress(snappedProgress);
-
-      if (snappedProgress > 0.02) {
-        root.dataset.dsWorkspaceVisible = "true";
-      } else {
-        delete root.dataset.dsWorkspaceVisible;
-      }
+      setWorkspaceVisibility(snappedProgress);
 
       lastScrollY = window.scrollY;
     };
@@ -320,6 +373,7 @@ export default function DesignSystemExplorer({
 
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
+      if (gateAnimationFrame) window.cancelAnimationFrame(gateAnimationFrame);
       window.removeEventListener("scroll", requestProgressUpdate);
       window.removeEventListener("resize", requestProgressUpdate);
       delete root.dataset.dsWorkspaceVisible;
