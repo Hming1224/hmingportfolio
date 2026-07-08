@@ -747,6 +747,7 @@ button {
   padding: 10px 12px;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .language-switcher {
@@ -791,6 +792,7 @@ button {
   color: var(--ink);
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
   transition:
     border-color 180ms ease,
@@ -1006,7 +1008,7 @@ button {
   --hm-alert-color: var(--hm-info);
   --hm-alert-soft: var(--hm-info-soft);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   padding: 14px 16px;
   border: 1px solid color-mix(in srgb, var(--hm-alert-color) 28%, transparent);
@@ -1304,6 +1306,7 @@ button {
   place-items: center;
   width: 40px;
   height: 40px;
+  --social-icon-color: var(--hm-ink);
 }
 
 .social-logo {
@@ -1311,20 +1314,39 @@ button {
   display: block;
   width: 40px;
   height: 40px;
-  object-fit: contain;
-  transition: opacity 180ms ease;
+  background-color: var(--social-icon-color);
+  -webkit-mask: var(--social-icon) center / contain no-repeat;
+  mask: var(--social-icon) center / contain no-repeat;
+  transition: background-color var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
-.social-logo-color {
-  opacity: 0;
+.social-link:hover,
+.social-link:focus-visible {
+  --social-icon-color: var(--hm-purple);
 }
 
-.social-link:hover .social-logo-color {
-  opacity: 1;
-}
+@media (min-width: 769px) and (max-width: 900px) {
+  .site-nav {
+    gap: 12px;
+    padding-inline: clamp(32px, 5.2vw, 48px);
+  }
 
-.social-link:hover .social-logo-gray {
-  opacity: 0;
+  .nav-top {
+    min-width: 84px;
+  }
+
+  .nav-links a {
+    padding-inline: 8px;
+  }
+
+  .language-switcher {
+    margin-left: 4px;
+  }
+
+  .language-switcher-trigger {
+    min-width: 64px;
+    padding-inline: 10px;
+  }
 }
 
 @media (max-width: 768px) {

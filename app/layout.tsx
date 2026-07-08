@@ -4,6 +4,7 @@ import { getLocale } from "next-intl/server";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import ScrollBehaviorFix from "../components/ScrollBehaviorFix";
 import MicrosoftClarity from "../components/MicrosoftClarity";
+import DesignSystemReturnBar from "../components/design-system/DesignSystemReturnBar";
 import { siteUrl } from "../lib/metadata";
 import "./globals.css";
 
@@ -56,6 +57,7 @@ export default async function RootLayout({
       <body>
         <ScrollBehaviorFix />
         {children}
+        <DesignSystemReturnBar />
         <MicrosoftClarity />
       </body>
       {gaId ? <GoogleAnalytics gaId={gaId} /> : null}

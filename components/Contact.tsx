@@ -4,26 +4,32 @@ import { sendGAEvent } from "@next/third-parties/google";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, Check, Mail, Phone } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AnimatedContent from "../app/about-me/AnimatedContent";
 import { getContactData } from "../data/contact";
 import type { Locale } from "../i18n/routing";
 import { config } from "../lib/config";
 import Button from "./ui/Button";
+import { Modal } from "./ui/Modal";
+import { Skeleton } from "./ui/Skeleton";
 import { Toast } from "./ui/Toast";
 
 type RequiredField = "name" | "company" | "email" | "message";
+type ContactSubmission = Record<"name" | "company" | "email" | "phone" | "message", string>;
 
 export default function Contact() {
   const locale = useLocale() as Locale;
   const t = useTranslations("contact");
   const contactData = getContactData(locale);
+  const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [copied, setCopied] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<RequiredField, string>>>({});
+  const [reviewOpen, setReviewOpen] = useState(false);
+  const [pendingSubmission, setPendingSubmission] = useState<ContactSubmission | null>(null);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -39,19 +45,49 @@ export default function Contact() {
     setTimeout(() => setCopiedPhone(false), 2000);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("loading");
-
-    const form = e.currentTarget;
+  const getSubmissionFromForm = (form: HTMLFormElement): ContactSubmission => {
     const data = new FormData(form);
+    return {
+      name: String(data.get("name") ?? "").trim(),
+      company: String(data.get("company") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      phone: String(data.get("phone") ?? "").trim(),
+      message: String(data.get("message") ?? "").trim(),
+    };
+  };
+
+  const buildFormData = (submission: ContactSubmission) => {
+    const data = new FormData();
+    Object.entries(submission).forEach(([key, value]) => {
+      if (value) data.append(key, value);
+    });
+    return data;
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (status === "loading") return;
+
+    setFieldErrors({});
+    setPendingSubmission(getSubmissionFromForm(e.currentTarget));
+    setReviewOpen(true);
+  };
+
+  const closeReviewModal = () => {
+    if (status === "loading") return;
+    setReviewOpen(false);
+  };
+
+  const handleConfirmSend = async () => {
+    if (!pendingSubmission || status === "loading") return;
+    setStatus("loading");
 
     try {
       const response = await fetch(
         `https://formspree.io/f/${config.formspreeId}`,
         {
           method: "POST",
-          body: data,
+          body: buildFormData(pendingSubmission),
           headers: {
             Accept: "application/json",
           },
@@ -59,14 +95,18 @@ export default function Contact() {
       );
 
       if (response.ok) {
+        setReviewOpen(false);
         setStatus("success");
         sendGAEvent("event", "contact_form_submit", { locale });
-        form.reset();
+        formRef.current?.reset();
+        setPendingSubmission(null);
       } else {
+        setReviewOpen(false);
         setStatus("error");
         setTimeout(() => setStatus("idle"), 3000);
       }
     } catch {
+      setReviewOpen(false);
       setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
     }
@@ -232,7 +272,7 @@ export default function Contact() {
                 <p>{t("formSubtitle")}</p>
               </div>
 
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
                 <div className={`form-field ${fieldErrors.name ? "input--error" : ""}`}>
                   <input
                     type="text"
@@ -332,6 +372,78 @@ export default function Contact() {
       {status === "error" ? (
         <Toast message={t("error")} tone="error" onClose={() => setStatus("idle")} />
       ) : null}
+      <Modal
+        closeLabel={t("reviewClose")}
+        onClose={closeReviewModal}
+        open={reviewOpen}
+        title={t("reviewTitle")}
+      >
+        <div className="contact-review-modal">
+          <p className="contact-review-description">{t("reviewDescription")}</p>
+          {pendingSubmission ? (
+            <dl className="contact-review-list" aria-busy={status === "loading" || undefined}>
+              {status === "loading" ? (
+                <>
+                  <div className="contact-review-row">
+                    <dt>{t("name")}</dt>
+                    <dd><Skeleton className="contact-review-skeleton" /></dd>
+                  </div>
+                  <div className="contact-review-row">
+                    <dt>{t("email")}</dt>
+                    <dd><Skeleton className="contact-review-skeleton" /></dd>
+                  </div>
+                  <div className="contact-review-row is-message">
+                    <dt>{t("message")}</dt>
+                    <dd>
+                      <Skeleton className="contact-review-skeleton is-long" />
+                      <Skeleton className="contact-review-skeleton is-medium" />
+                    </dd>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="contact-review-row">
+                    <dt>{t("name")}</dt>
+                    <dd>{pendingSubmission.name}</dd>
+                  </div>
+                  <div className="contact-review-row">
+                    <dt>{t("company")}</dt>
+                    <dd>{pendingSubmission.company}</dd>
+                  </div>
+                  <div className="contact-review-row">
+                    <dt>{t("email")}</dt>
+                    <dd>{pendingSubmission.email}</dd>
+                  </div>
+                  {pendingSubmission.phone ? (
+                    <div className="contact-review-row">
+                      <dt>{t("phone")}</dt>
+                      <dd>{pendingSubmission.phone}</dd>
+                    </div>
+                  ) : null}
+                  <div className="contact-review-row is-message">
+                    <dt>{t("message")}</dt>
+                    <dd>{pendingSubmission.message}</dd>
+                  </div>
+                </>
+              )}
+            </dl>
+          ) : null}
+          <div className="contact-review-actions">
+            <Button
+              type="button"
+              onClick={handleConfirmSend}
+              loading={status === "loading"}
+              loadingLabel={t("reviewSending")}
+              disabled={status === "loading"}
+            >
+              {t("reviewConfirm")}
+            </Button>
+            <Button type="button" variant="secondary" onClick={closeReviewModal} disabled={status === "loading"}>
+              {t("reviewCancel")}
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </section>
   );
 }

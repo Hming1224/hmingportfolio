@@ -27,6 +27,7 @@ export interface SplitTextProps {
   to?: gsap.TweenVars;
   threshold?: number;
   rootMargin?: string;
+  resetOnLeave?: boolean;
   textAlign?: CSSProperties['textAlign'];
   onLetterAnimationComplete?: () => void;
 }
@@ -43,6 +44,7 @@ export default function SplitText({
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
   rootMargin = '-100px',
+  resetOnLeave = true,
   textAlign = 'center',
   tag = 'p',
   onLetterAnimationComplete,
@@ -146,10 +148,12 @@ export default function SplitText({
               tween.restart();
             },
             onLeave: () => {
+              if (!resetOnLeave) return;
               tween.pause(0);
               gsap.set(targets, { ...from });
             },
             onLeaveBack: () => {
+              if (!resetOnLeave) return;
               tween.pause(0);
               gsap.set(targets, { ...from });
             },
@@ -183,6 +187,7 @@ export default function SplitText({
         JSON.stringify(to),
         threshold,
         rootMargin,
+        resetOnLeave,
         fontsLoaded,
       ],
       scope: ref,
