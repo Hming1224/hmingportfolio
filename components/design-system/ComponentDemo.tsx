@@ -813,10 +813,6 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
             </div>
           </div>
         </div>
-        <ul className={styles.caseTocNotes}>
-          <li>{zh ? "行為：點擊章節標題只會移動右側示意內容；active state 跟隨右側目前可見大標。" : "Behavior: clicking a section label only moves the right-side sample content; the active state follows the visible heading inside that container."}</li>
-          <li>{zh ? "正式邊界：正式案例頁仍使用自己的頁面 scroll 與窄版隱藏規則。" : "Production boundary: live case routes still use their own page scroll and narrow-breakpoint visibility rules."}</li>
-        </ul>
       </section>
     </DemoBlock>
   );
@@ -1352,7 +1348,6 @@ export default function ComponentDemo({
             kicker={caseCopy.sectionKicker}
             title={caseCopy.sectionTitle}
           />
-          <p className="cs-section-lead">{caseCopy.sectionDescription}</p>
         </section>
       </DemoBlock>
     );
@@ -1685,7 +1680,6 @@ export default function ComponentDemo({
       <DemoBlock className={styles.zoomableImageDemoShell} contextLabel={contextLabel ?? "Laushu / IterateSection"}>
         <div className="cs-page theme-laushu">
           <CaseMedia
-            caption={zh ? "Laushu 設計迭代後的列表資料呈現區" : "Laushu iterated list data view"}
             className={styles.zoomableImageMediaDemo}
             variant="full"
           >

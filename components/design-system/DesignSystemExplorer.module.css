@@ -2404,16 +2404,6 @@
   width: 64%;
 }
 
-.caseTocNotes {
-  display: grid;
-  gap: var(--hm-space-2xs);
-  margin: 0;
-  padding-left: 1.2em;
-  color: var(--text-secondary);
-  font-size: var(--hm-fs-sm);
-  line-height: 1.65;
-}
-
 .liveExperienceSummary {
   padding: var(--hm-space-md);
   border: 1px solid var(--hm-line);
