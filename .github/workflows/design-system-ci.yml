@@ -3,11 +3,14 @@ name: Design System CI
 on:
   push:
     branches:
-      - codex/ds-page-alignment
       - main
   pull_request:
     branches:
       - main
+
+concurrency:
+  group: ds-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   verify:

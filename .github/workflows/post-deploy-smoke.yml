@@ -18,10 +18,17 @@ on:
           - Preview
           - Production
 
+concurrency:
+  group: post-deploy-smoke-${{ github.event.deployment_status.environment || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   smoke:
     name: Remote smoke
-    if: github.event_name == 'workflow_dispatch' || github.event.deployment_status.state == 'success'
+    # deployment_status fires on every Vercel deploy; only auto-run for Production.
+    # Preview correctness is already gated by Design System CI on the same commit.
+    # Use workflow_dispatch to smoke a Preview URL on demand.
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && contains(github.event.deployment_status.environment, 'Production'))
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
