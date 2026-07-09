@@ -136,7 +136,7 @@ const foundations: DesignSystemDoc[] = [
       "中刻度用於卡片內距與同一 section 的節奏。",
       "大刻度用於 section 間距與主要頁面留白。",
     ],
-    tokens: ["--hm-space-1…20", "--hm-space-3xs…3xl", "--hm-page-gutter"],
+    tokens: ["--hm-space-3xs…3xl", "--hm-page-gutter"],
     references: ["styles/tokens.css", "lib/design-system-data.ts", "docs/design-system/02-tokens.md"],
   },
   {
@@ -178,7 +178,7 @@ const foundations: DesignSystemDoc[] = [
       "較強陰影用於 overlay 與高焦點表面。",
       "Hover elevation 不應造成版面位移。",
     ],
-    tokens: ["--shadow-sm / md / lg / xl", "--hm-shadow-sm / md / lg / xl", "--shadow-card-hover"],
+    tokens: ["--hm-shadow-sm / md / lg / xl", "--hm-shadow-card-hover", "--shadow-* (@deprecated alias)"],
     references: ["styles/tokens.css", "lib/design-system-data.ts", "docs/design-system/02-tokens.md"],
   },
   {
