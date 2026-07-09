@@ -982,32 +982,17 @@ export default function ComponentDemo({
     return <p className={styles.demoFallback}>{zh ? "此 模式 以正式作品集使用情境為準。" : "This pattern is documented from its live portfolio usage."}</p>;
   }
 
-  if (type === "motion-examples") {
+  if (type === "motion-brand-row") {
     return (
-      <div className={styles.motionExamplesGrid}>
-        <DemoBlock className={styles.motionExampleBlock} contextLabel={zh ? "Logo 動畫" : "Logo animation"}>
-          <article className={styles.motionProductionExample}>
-            <div className={styles.motionLogoPreviewFrame}>
-              <MotionLogoAnimationPreview label={zh ? "Navbar 品牌標誌動畫預覽" : "Navbar brand mark animation preview"} />
-            </div>
-            <div className={styles.motionProductionExampleCopy}>
-              <h3>{zh ? "Navbar 品牌標誌使用的互動動畫。" : "Navbar brand mark animation used for identity feedback."}</h3>
-              <p>{zh ? "來源：components/AnimatedLogo.tsx + components/brandLogoAnim.json" : "Source: components/AnimatedLogo.tsx + components/brandLogoAnim.json"}</p>
-            </div>
-          </article>
-        </DemoBlock>
-
-        <DemoBlock className={styles.motionExampleBlock} contextLabel={zh ? "語言切換 loading 動畫" : "Language loading animation"}>
-          <article className={styles.motionProductionExample}>
-            <div className={styles.motionLoadingPreviewFrame}>
-              <MotionLanguageLoadingPreview label={zh ? "語言切換載入中" : "Language switching loading"} />
-            </div>
-            <div className={styles.motionProductionExampleCopy}>
-              <h3>{zh ? "語言切換時顯示的等待回饋。" : "Pending feedback shown while switching locale."}</h3>
-              <p>{zh ? "來源：LanguageSwitcher loading overlay + /animations/language-loading.json" : "Source: LanguageSwitcher loading overlay + /animations/language-loading.json"}</p>
-            </div>
-          </article>
-        </DemoBlock>
+      <div className={styles.motionBehaviorExamples}>
+        <figure>
+          <MotionLogoAnimationPreview label={zh ? "Navbar 品牌標誌動畫預覽" : "Navbar brand mark animation preview"} />
+          <figcaption>{zh ? "Logo 動畫 · AnimatedLogo.tsx" : "Logo animation · AnimatedLogo.tsx"}</figcaption>
+        </figure>
+        <figure>
+          <MotionLanguageLoadingPreview label={zh ? "語言切換載入中" : "Language switching loading"} />
+          <figcaption>{zh ? "Loading 動畫 · LanguageSwitcher.tsx" : "Loading animation · LanguageSwitcher.tsx"}</figcaption>
+        </figure>
       </div>
     );
   }

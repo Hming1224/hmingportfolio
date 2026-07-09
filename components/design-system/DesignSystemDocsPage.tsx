@@ -352,36 +352,9 @@ function motionPreviewStyle(row: TokenRow) {
 function MotionFoundationVisualReference({ rows, locale }: { rows: TokenRow[]; locale: DesignSystemLocale }) {
   const durationRows = rows.filter((row) => row.token.includes("duration"));
   const easingRows = rows.filter((row) => row.token.includes("ease"));
-  const roleCards = [
-    {
-      title: localized(locale, "Brand feedback", "Brand feedback"),
-      body: localized(locale, "Identity motion belongs to concrete brand moments such as the navbar mark and locale loading.", "品牌動效放在明確品牌時刻，例如 Navbar 標誌與語言 loading。"),
-    },
-    {
-      title: localized(locale, "Loading feedback", "Loading feedback"),
-      body: localized(locale, "Pending states use visible feedback while keeping the original task context intact.", "等待狀態保留原本任務脈絡，同時給出清楚回饋。"),
-    },
-    {
-      title: localized(locale, "Interaction feedback", "Interaction feedback"),
-      body: localized(locale, "Disclosure, tabs, overlays, and toast movement should clarify state changes, not decorate them.", "展開、tabs、overlay 與 toast 動態用來說清楚狀態變化，不只做裝飾。"),
-    },
-    {
-      title: localized(locale, "Reduced motion", "Reduced motion"),
-      body: localized(locale, "Preserve state changes while reducing non-essential movement.", "保留狀態變化，減少非必要位移與循環動畫。"),
-    },
-  ];
 
   return (
     <div className={styles.motionFoundationStack}>
-      <section className={styles.motionRoleGrid} aria-label={localized(locale, "Motion roles", "Motion roles")}>
-        {roleCards.map((card) => (
-          <article className={styles.motionRoleCard} key={card.title}>
-            <h3>{card.title}</h3>
-            <p>{card.body}</p>
-          </article>
-        ))}
-      </section>
-
       <section className={styles.motionTokenPanel}>
         <header className={styles.motionTokenHeader}>
           <div>
@@ -784,10 +757,15 @@ export default function DesignSystemDocsPage({
           <div className={styles.behaviorTableWrap}>
             <table className={styles.behaviorTable}>
               <tbody>
-                {behavior.map((item) => (
+                {behavior.map((item, index) => (
                   <tr key={item.label}>
                     <th scope="row">{item.label}</th>
-                    <td>{item.description}</td>
+                    <td>
+                      <p className={styles.behaviorDescription}>{item.description}</p>
+                      {doc.slug === "motion" && index === 0 ? (
+                        <ComponentDemo locale={locale} type="motion-brand-row" />
+                      ) : null}
+                    </td>
                   </tr>
                 ))}
               </tbody>
