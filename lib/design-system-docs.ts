@@ -199,6 +199,34 @@ const foundations: DesignSystemDoc[] = [
       "明顯介面移動使用 base 或 slow duration。",
       "非必要動畫需尊重 reduced-motion 行為。",
     ],
+    behavior: [
+      {
+        label: "Brand motion",
+        description: "Brand motion is used for identity and clear state feedback, such as the navbar logo animation and the language-switch loading overlay. It adds character without making motion the only source of meaning.",
+      },
+      {
+        label: "Interaction motion",
+        description: "Interaction motion makes state changes easier to follow. Disclosure, switching, overlays, and feedback states should use existing duration and easing tokens where possible.",
+      },
+      {
+        label: "Reduced motion",
+        description: "Motion should respect reduced-motion preferences. When reduced motion is enabled, the interface should preserve state information while reducing non-essential movement, loops, and decorative effects.",
+      },
+    ],
+    behaviorZh: [
+      {
+        label: "Brand motion",
+        description: "Brand motion 用於品牌識別與明確狀態回饋，例如 Navbar logo animation 與語言切換時的 loading overlay。它讓互動更有記憶點，但不把動畫當成唯一資訊來源。",
+      },
+      {
+        label: "Interaction motion",
+        description: "Interaction motion 用來讓狀態變化更容易被理解。展開、切換、浮層與回饋狀態會優先沿用既有 duration / easing token，讓互動節奏一致。",
+      },
+      {
+        label: "Reduced motion",
+        description: "Motion 需要尊重 reduced-motion 設定。當使用者偏好降低動態時，介面應保留狀態資訊，但減少非必要位移、循環與裝飾性動畫。",
+      },
+    ],
     tokens: ["--hm-duration-*", "--hm-ease-*"],
     references: ["styles/tokens.css", "lib/design-system-data.ts", "docs/design-system/02-tokens.md"],
   },
@@ -2463,6 +2491,7 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Error result", appliesTo: "Toast", trigger: "Contact submit request fails or returns a non-ok response.", behavior: "An error toast appears without blocking the user from retrying.", whatChanges: "`Toast` renders `Alert` with `tone=\"error\"`; Alert exposes `role=\"alert\"`.", liveUsage: "Contact form error feedback." },
       { state: "Auto-dismiss / dismiss", appliesTo: "Toast", trigger: "`duration` timer completes or the dismiss button is clicked.", behavior: "`onClose` clears the Contact result state.", whatChanges: "The toast unmounts after the default 3000ms timer or manual dismiss.", liveUsage: "Contact success / error status cleanup." },
       { state: "Non-blocking feedback", appliesTo: "Toast", trigger: "Async submit has finished and no blocking decision remains.", behavior: "The message floats above the page while the user can continue.", whatChanges: "`.hm-toast-region` uses fixed bottom-right positioning and does not open a dialog.", liveUsage: "Result feedback after the Contact review modal closes." },
+      { state: "Enter animation", appliesTo: "Toast", trigger: "A success or error result is rendered.", behavior: "Toast uses a short enter animation to introduce the result without taking over the task flow.", whatChanges: "`.hm-toast-region` applies `--hm-duration-base` with `--hm-ease-out`.", liveUsage: "Contact success / error result feedback." },
       { state: "Contact submit result", appliesTo: "Contact flow", trigger: "Modal confirmation hands the final result state to Contact.", behavior: "Toast owns success / error messaging; Modal does not display final results.", whatChanges: "Contact renders `<Toast message={t(\"success\" | \"error\")} tone=\"success\" | \"error\" />`.", liveUsage: "Contact submit flow." },
     ],
     stateRowsZh: [
@@ -2470,6 +2499,7 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Error result", appliesTo: "Toast", trigger: "Contact submit request 失敗或回傳 non-ok response。", behavior: "顯示錯誤 toast，但不阻斷使用者重試。", whatChanges: "`Toast` render `tone=\"error\"` 的 `Alert`；Alert 暴露 `role=\"alert\"`。", liveUsage: "Contact form 錯誤回饋。" },
       { state: "Auto-dismiss / dismiss", appliesTo: "Toast", trigger: "`duration` timer 結束或使用者點擊 dismiss button。", behavior: "`onClose` 清掉 Contact result state。", whatChanges: "toast 會在預設 3000ms timer 或手動 dismiss 後 unmount。", liveUsage: "Contact success / error status cleanup。" },
       { state: "Non-blocking feedback", appliesTo: "Toast", trigger: "async submit 已完成，且沒有需要阻斷處理的決策。", behavior: "訊息浮在頁面上方，使用者仍可繼續操作。", whatChanges: "`.hm-toast-region` 使用 fixed bottom-right positioning，不開啟 dialog。", liveUsage: "Contact review modal 關閉後的結果回饋。" },
+      { state: "Enter animation", appliesTo: "Toast", trigger: "success 或 error 結果被 render。", behavior: "Toast 使用短進場動畫帶出結果，不接管原本任務流程。", whatChanges: "`.hm-toast-region` 套用 `--hm-duration-base` 與 `--hm-ease-out`。", liveUsage: "Contact success / error result feedback。" },
       { state: "Contact submit result", appliesTo: "Contact flow", trigger: "Modal confirmation 將最終結果 state 交回 Contact。", behavior: "Toast 負責成功 / 失敗訊息；Modal 不顯示最終結果。", whatChanges: "Contact render `<Toast message={t(\"success\" | \"error\")} tone=\"success\" | \"error\" />`。", liveUsage: "Contact submit flow。" },
     ],
     usage: [
@@ -2575,6 +2605,7 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Escape close", appliesTo: "Modal", trigger: "Escape key is pressed while `open` is true.", behavior: "The component calls `onClose`.", whatChanges: "Production Contact `onClose` ignores close while loading.", liveUsage: "Keyboard dismissal before send starts." },
       { state: "Mobile button order", appliesTo: "Contact review actions", trigger: "Viewport reaches the Contact mobile footer breakpoint.", behavior: "Buttons stack to preserve tappable width.", whatChanges: "Desktop visual order uses secondary left / primary right; mobile CSS resets both orders to natural DOM order.", liveUsage: "Contact review modal on mobile." },
       { state: "Result handoff to Toast", appliesTo: "Contact flow", trigger: "The submit request resolves.", behavior: "Modal closes and result feedback is shown by Toast.", whatChanges: "Success / error state renders Toast; Modal does not own final result messaging.", liveUsage: "Contact success / error feedback." },
+      { state: "Minimal motion", appliesTo: "Modal", trigger: "The review dialog opens or closes.", behavior: "Modal uses the overlay and dialog layer as the primary state change; it does not define a strong motion contract yet.", whatChanges: "Backdrop, scroll lock, and centered dialog communicate the blocking state without adding a new animation state.", liveUsage: "Contact review-before-submit confirmation." },
     ],
     stateRowsZh: [
       { state: "Open", appliesTo: "Modal", trigger: "Contact form submit 通過欄位驗證並進入 review step。", behavior: "顯示阻斷式 dialog，呈現送出摘要。", whatChanges: "`Modal` render `.hm-modal-backdrop` 與具 dialog 語意的 `.hm-modal`。", liveUsage: "Contact 送出前確認。" },
@@ -2584,6 +2615,7 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Escape close", appliesTo: "Modal", trigger: "`open` 為 true 時按下 Escape。", behavior: "元件呼叫 `onClose`。", whatChanges: "Production Contact 的 `onClose` 會在 loading 時忽略關閉。", liveUsage: "送出開始前的鍵盤關閉。" },
       { state: "Mobile button order", appliesTo: "Contact review actions", trigger: "視窗 進入 Contact mobile footer 斷點。", behavior: "buttons 堆疊，保留可點擊寬度。", whatChanges: "桌機視覺 order 是 secondary left / primary right；手機 CSS 將兩者重設為自然 DOM order。", liveUsage: "手機 Contact review modal。" },
       { state: "Result handoff to Toast", appliesTo: "Contact flow", trigger: "submit request 完成。", behavior: "Modal 關閉，結果回饋由 Toast 顯示。", whatChanges: "success / error state render Toast；Modal 不負責最終結果訊息。", liveUsage: "Contact 成功 / 失敗回饋。" },
+      { state: "Minimal motion", appliesTo: "Modal", trigger: "review dialog 開啟或關閉。", behavior: "Modal 主要透過 overlay 與 dialog layer 表示狀態變化；目前沒有定義強 motion contract。", whatChanges: "backdrop、scroll lock 與置中的 dialog 傳達阻斷狀態，不新增假的 animation state。", liveUsage: "Contact 送出前確認。" },
     ],
     usage: [
       "Use when the user should review or confirm a decision before a non-trivial action.",
@@ -2692,12 +2724,14 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Loaded", appliesTo: "Contact review summary", trigger: "Before sending, or after the pending state ends.", behavior: "Real summary content is shown instead of placeholders.", whatChanges: "Name, company, email, optional phone, and message values replace Skeleton rows.", liveUsage: "Contact review-before-submit summary." },
       { state: "Relation to Button loading", appliesTo: "Contact flow", trigger: "Submit request is in flight.", behavior: "Button loading communicates action progress; Skeleton only supports the summary region.", whatChanges: "Primary Button uses `loading` / `loadingLabel`, while Skeleton appears in the review list.", liveUsage: "Contact confirm-send state." },
       { state: "Relation to Toast result", appliesTo: "Contact flow", trigger: "Submit request resolves.", behavior: "Skeleton disappears with the modal; Toast communicates the final success or error result.", whatChanges: "Modal closes and Contact renders Toast based on `success` or `error`.", liveUsage: "Contact result feedback." },
+      { state: "Shimmer motion", appliesTo: "Skeleton", trigger: "Skeleton is visible during pending content.", behavior: "The shimmer uses `--hm-duration-enter`; it supports loading perception but is not the only loading signal.", whatChanges: "Global reduced-motion rules reduce animation behavior for motion-sensitive users.", liveUsage: "Contact confirmation Modal pending summary." },
     ],
     stateRowsZh: [
       { state: "Pending", appliesTo: "Skeleton", trigger: "Confirm Send 後 Contact 狀態 變成 `loading`。", behavior: "送出 pending 時，Skeleton rows 取代 review summary values。", whatChanges: "Contact 在 `.contact-review-row dd` 內 render `Skeleton`，並在 list 上設定 `aria-busy`。", liveUsage: "Contact confirmation Modal pending summary。" },
       { state: "Loaded", appliesTo: "Contact review summary", trigger: "送出前，或 pending state 結束後。", behavior: "顯示真實 summary content，而不是 placeholders。", whatChanges: "name、company、email、optional phone 與 message values 取代 Skeleton rows。", liveUsage: "Contact 送出前 summary。" },
       { state: "Relation to Button loading", appliesTo: "Contact flow", trigger: "submit request 正在進行。", behavior: "Button loading 傳達 action progress；Skeleton 只支援 summary region。", whatChanges: "Primary Button 使用 `loading` / `loadingLabel`，Skeleton 出現在 review list。", liveUsage: "Contact confirm-send state。" },
       { state: "Relation to Toast result", appliesTo: "Contact flow", trigger: "submit request 完成。", behavior: "Skeleton 會隨 modal 消失；最終成功或錯誤結果由 Toast 傳達。", whatChanges: "Modal 關閉，Contact 依 `success` 或 `error` render Toast。", liveUsage: "Contact result feedback。" },
+      { state: "Shimmer motion", appliesTo: "Skeleton", trigger: "pending content 期間 Skeleton 可見。", behavior: "shimmer 使用 `--hm-duration-enter`；它支援 loading perception，但不是唯一的 loading 訊號。", whatChanges: "全域 reduced-motion rules 會為 motion-sensitive users 降低動畫行為。", liveUsage: "Contact confirmation Modal pending summary。" },
     ],
     usage: [
       "Use when a content region is waiting for async work.",
@@ -2829,6 +2863,74 @@ const components: DesignSystemDoc[] = componentSeeds.map((item) => ({
 const references: DesignSystemDoc[] = [
   {
     kind: "reference",
+    slug: "loading-state",
+    title: "Loading state",
+    titleZh: "載入狀態",
+    description: "Current production loading feedback patterns across language switching, Contact submit, Skeleton placeholders, and final result feedback.",
+    descriptionZh: "整理目前正式站中語言切換、Contact 送出、Skeleton placeholder 與最終結果回饋的 loading 分工。",
+    category: "Feedback",
+    status: "Reference only",
+    statusZh: "參考文件",
+    usage: [
+      "Loading states communicate that the system is processing.",
+      "Language switching uses the brand loading overlay.",
+      "Contact submit uses spinner and checkmark feedback for action progress and completion.",
+      "Content placeholders use Skeleton when a specific content region is pending.",
+      "Toast communicates the final success or error result after processing finishes.",
+    ],
+    usageZh: [
+      "Loading state 用來說明系統正在處理，而不是取代內容本身。",
+      "語言切換使用品牌 loading overlay。",
+      "Contact submit 使用 spinner / checkmark 傳達 action progress 與 completion。",
+      "特定內容區域 pending 時使用 Skeleton。",
+      "處理完成後，最終成功或錯誤結果由 Toast 傳達。",
+    ],
+    behavior: [
+      { label: "Overlay / loading", description: "Used for global or flow-level waiting, such as locale switching pending feedback." },
+      { label: "Spinner / checkmark", description: "Used for action progress and completion in the Contact submit flow." },
+      { label: "Skeleton", description: "Used for pending content regions, especially Contact review summary placeholders." },
+      { label: "Toast", description: "Used for final result feedback after the pending state resolves." },
+    ],
+    behaviorZh: [
+      { label: "Overlay / loading", description: "用於全局或流程層級等待，例如 locale switching pending feedback。" },
+      { label: "Spinner / checkmark", description: "用於 Contact submit flow 的 action progress 與 completion。" },
+      { label: "Skeleton", description: "用於 pending content region，尤其是 Contact review summary placeholders。" },
+      { label: "Toast", description: "用於 pending state 完成後的最終結果回饋。" },
+    ],
+    tokenMappings: [
+      { token: "components/LanguageSwitcher.tsx", role: "Brand loading overlay", usage: "Locale switching pending feedback with reduced-motion handling." },
+      { token: ".ds-button-spinner", role: "Action progress", usage: "Button loading state for async submit work." },
+      { token: ".contact-review-skeleton / .hm-skeleton", role: "Content placeholder", usage: "Pending summary values inside the Contact review modal." },
+      { token: ".hm-toast-region", role: "Result feedback", usage: "Final success or error feedback after processing." },
+    ],
+    tokenMappingsZh: [
+      { token: "components/LanguageSwitcher.tsx", role: "Brand loading overlay", usage: "具 reduced-motion handling 的語言切換 pending feedback。" },
+      { token: ".ds-button-spinner", role: "Action progress", usage: "async submit work 的 Button loading state。" },
+      { token: ".contact-review-skeleton / .hm-skeleton", role: "Content placeholder", usage: "Contact review modal 內的 pending summary values。" },
+      { token: ".hm-toast-region", role: "Result feedback", usage: "處理完成後的成功或錯誤結果回饋。" },
+    ],
+    referenceCards: [
+      { label: "Boundary", value: "Documented feedback states, not a Loading component API" },
+      { label: "Brand overlay", value: "components/LanguageSwitcher.tsx" },
+      { label: "Action progress", value: "components/ui/Button.tsx / components/Contact.tsx" },
+      { label: "Content placeholder", value: "components/ui/Skeleton.tsx" },
+    ],
+    referenceCardsZh: [
+      { label: "邊界", value: "文件化 feedback states，不新增 Loading component API" },
+      { label: "Brand overlay", value: "components/LanguageSwitcher.tsx" },
+      { label: "Action progress", value: "components/ui/Button.tsx / components/Contact.tsx" },
+      { label: "Content placeholder", value: "components/ui/Skeleton.tsx" },
+    ],
+    references: [
+      "components/LanguageSwitcher.tsx",
+      "components/ui/Button.tsx",
+      "components/Contact.tsx",
+      "components/ui/Skeleton.tsx",
+      "components/ui/Toast.tsx",
+    ],
+  },
+  {
+    kind: "reference",
     slug: "tokens",
     title: "Token Reference",
     titleZh: "Token 總表",
@@ -2876,7 +2978,14 @@ const references: DesignSystemDoc[] = [
     references: [
       "components/Works.tsx",
       "components/Hero.tsx",
+      "components/AnimatedLogo.tsx",
+      "components/LanguageSwitcher.tsx",
       "app/about-me/page.tsx",
+      "app/about-me/GenieReveal.tsx",
+      "app/about-me/AnimatedContent.tsx",
+      "app/about-me/EducatorMasonry.tsx",
+      "components/AvatarProfile.tsx",
+      "components/hero-decorations/HeroEntranceController.tsx",
       "data/about.ts",
       "styles/home.css",
       "styles/about.css",

@@ -297,6 +297,16 @@ const boundaryReferenceItems = {
       nextStep: "Keep documented as a route-owned project card pattern.",
     },
     {
+      pattern: "Route-local narrative motion",
+      classification: "Route-local pattern",
+      currentUsage: "Home hero decorations, Design System scroll gate, About Genie / Avatar / educator masonry motion, and case-study narrative visuals.",
+      boundary: "These motion patterns support page-specific storytelling and rhythm. They are documented as route-local patterns rather than reusable motion components until a stable cross-route motion contract emerges.",
+      extractionCondition: "Revisit only if the same motion contract repeats across independent routes with stable timing, trigger, reduced-motion, and accessibility expectations.",
+      source: "styles/home.css / components/design-system/DesignSystemExplorer.tsx / app/about-me/",
+      status: "Route-local narrative motion",
+      nextStep: "Keep as documented motion boundaries; AvatarProfile reduced-motion remains a follow-up production task.",
+    },
+    {
       pattern: "ProjectTag",
       classification: "Internal anatomy",
       currentUsage: "Used inside ProjectCard to display Selected Work project metadata and tone tags.",
@@ -467,6 +477,16 @@ const boundaryReferenceItems = {
       source: "components/Works.tsx",
       status: "Product-specific portfolio pattern",
       nextStep: "維持為 頁面自有 project card 模式。",
+    },
+    {
+      pattern: "Route-local narrative motion",
+      classification: "Route-local pattern",
+      currentUsage: "Home hero decorations、Design System scroll gate、About Genie / Avatar / educator masonry motion，以及案例頁敘事視覺動效。",
+      boundary: "這些動畫服務於特定頁面的敘事與節奏，會被記錄，但不升級為通用 motion component。若未來相同 motion contract 跨多個獨立區塊重用，再評估抽出。",
+      extractionCondition: "只有當相同 motion contract 跨獨立路由重複出現，且 timing、trigger、reduced-motion 與 accessibility expectations 穩定後，才重新評估提升。",
+      source: "styles/home.css / components/design-system/DesignSystemExplorer.tsx / app/about-me/",
+      status: "Route-local narrative motion",
+      nextStep: "維持在 motion boundary 文件中；AvatarProfile reduced-motion 保留為後續 production task。",
     },
     {
       pattern: "ProjectTag",

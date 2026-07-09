@@ -74,10 +74,13 @@ export const designSystemSections = [
   {
     label: "Feedback",
     labelZh: "系統回饋",
-    items: ["toast", "modal", "skeleton"].map((slug) => ({
-      kind: "component" as const,
-      slug,
-    })),
+    items: [
+      { kind: "reference" as const, slug: "loading-state" },
+      ...["toast", "modal", "skeleton"].map((slug) => ({
+        kind: "component" as const,
+        slug,
+      })),
+    ],
   },
   {
     label: "Reference",
