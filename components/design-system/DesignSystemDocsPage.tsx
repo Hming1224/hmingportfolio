@@ -339,6 +339,160 @@ function tokenGroupsForColors(rows: TokenRow[], locale: DesignSystemLocale) {
   return groups.filter((group) => group.rows.length > 0);
 }
 
+function motionPreviewStyle(row: TokenRow) {
+  const isDuration = row.token.includes("duration");
+  const isEasing = row.token.includes("ease");
+
+  return {
+    "--motion-duration": isDuration ? `var(${row.token})` : "var(--hm-duration-base)",
+    "--motion-ease": isEasing ? `var(${row.token})` : "var(--hm-ease-out)",
+  } as CSSProperties;
+}
+
+function MotionVisualCard({
+  title,
+  body,
+  meta,
+  variant,
+}: {
+  title: string;
+  body: string;
+  meta: string;
+  variant: "brand" | "interaction" | "loading" | "reduced";
+}) {
+  return (
+    <article className={styles.motionOverviewCard}>
+      <div className={styles.motionOverviewVisual}>
+        {variant === "brand" ? (
+          <>
+            <span className={styles.motionBrandMark}>B</span>
+            <span className={styles.motionBrandPulse} />
+          </>
+        ) : null}
+        {variant === "interaction" ? (
+          <>
+            <span className={styles.motionTabTrack}>
+              <span />
+            </span>
+            <span className={styles.motionDisclosureLine} />
+          </>
+        ) : null}
+        {variant === "loading" ? (
+          <>
+            <span className={styles.motionSkeletonLine} />
+            <span className={styles.motionSkeletonLine} />
+            <span className={styles.motionLoadingDot} />
+          </>
+        ) : null}
+        {variant === "reduced" ? (
+          <>
+            <span className={styles.motionCompareLane}>
+              <span />
+            </span>
+            <span className={`${styles.motionCompareLane} ${styles.motionCompareLaneReduced}`}>
+              <span />
+            </span>
+          </>
+        ) : null}
+      </div>
+      <div className={styles.motionOverviewCopy}>
+        <h3>{title}</h3>
+        <p>{body}</p>
+        <span>{meta}</span>
+      </div>
+    </article>
+  );
+}
+
+function MotionFoundationVisualReference({ rows, locale }: { rows: TokenRow[]; locale: DesignSystemLocale }) {
+  const durationRows = rows.filter((row) => row.token.includes("duration"));
+  const easingRows = rows.filter((row) => row.token.includes("ease"));
+  const overviewCards = [
+    {
+      title: "Brand motion",
+      body: localized(locale, "Logo animation / Language loading", "Logo animation / 語言 loading"),
+      meta: localized(locale, "identity + pending feedback", "identity + pending feedback"),
+      variant: "brand" as const,
+    },
+    {
+      title: "Interaction motion",
+      body: localized(locale, "Disclosure, dropdown, tabs, overlays", "Disclosure、dropdown、tabs、overlays"),
+      meta: localized(locale, "state change clarity", "state change clarity"),
+      variant: "interaction" as const,
+    },
+    {
+      title: "Loading motion",
+      body: localized(locale, "Skeleton / loading / submit feedback", "Skeleton / loading / 送出回饋"),
+      meta: localized(locale, "processing state", "processing state"),
+      variant: "loading" as const,
+    },
+    {
+      title: "Reduced motion",
+      body: localized(
+        locale,
+        "Preserve state changes while reducing non-essential movement.",
+        "保留狀態變化，減少非必要位移與循環動畫。",
+      ),
+      meta: localized(locale, "meaning over movement", "meaning over movement"),
+      variant: "reduced" as const,
+    },
+  ];
+
+  return (
+    <div className={styles.motionFoundationStack}>
+      <section className={styles.motionOverviewGrid} aria-label={localized(locale, "Motion visual overview", "Motion visual overview")}>
+        {overviewCards.map((card) => (
+          <MotionVisualCard key={card.title} {...card} />
+        ))}
+      </section>
+
+      <section className={styles.motionTokenPanel}>
+        <header className={styles.motionTokenHeader}>
+          <div>
+            <h3>{localized(locale, "Duration scale", "Duration scale")}</h3>
+            <p>{localized(locale, "Short previews show the relative rhythm of the existing timing tokens.", "用短 preview 看出既有 timing token 的快慢節奏。")}</p>
+          </div>
+        </header>
+        <div className={styles.motionDurationList}>
+          {durationRows.map((row) => (
+            <article className={styles.motionDurationRow} key={row.token}>
+              <div>
+                <code>{row.token}</code>
+                <span>{row.value}</span>
+              </div>
+              <span className={styles.motionDurationTrack} style={motionPreviewStyle(row)}>
+                <span />
+              </span>
+              <p>{getTokenUsage(row, locale)}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.motionTokenPanel}>
+        <header className={styles.motionTokenHeader}>
+          <div>
+            <h3>{localized(locale, "Easing reference", "Easing reference")}</h3>
+            <p>{localized(locale, "Each curve changes how the same state movement accelerates and settles.", "同一段狀態移動，會因 easing curve 呈現不同加速與收尾。")}</p>
+          </div>
+        </header>
+        <div className={styles.motionEasingGrid}>
+          {easingRows.map((row) => (
+            <article className={styles.motionEasingCard} key={row.token}>
+              <span className={styles.motionEasingPreview} style={motionPreviewStyle(row)}>
+                <span />
+              </span>
+              <code>{row.token}</code>
+              <p>{row.value}</p>
+              <small>{getTokenUsage(row, locale)}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function ColorSwatchCard({ row, locale }: { row: TokenRow; locale: DesignSystemLocale }) {
   return (
     <article className={styles.colorSwatchCard}>
@@ -448,18 +602,7 @@ function FoundationVisualSamples({
   }
 
   if (slug === "motion") {
-    return (
-      <div className={styles.motionReferenceGrid}>
-        {rows.map((row) => (
-          <article className={styles.motionReferenceCard} key={row.token}>
-            {row.token.includes("duration") ? <span className={styles.motionSample} style={tokenPreviewStyle(row)} /> : null}
-            <code>{row.token}</code>
-            <p>{row.value}</p>
-            <small>{getTokenUsage(row, locale)}</small>
-          </article>
-        ))}
-      </div>
-    );
+    return <MotionFoundationVisualReference locale={locale} rows={rows} />;
   }
 
   return null;
