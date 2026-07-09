@@ -189,6 +189,7 @@ const foundations: DesignSystemDoc[] = [
     description: "Duration and easing tokens for state changes, hover feedback, reveals, and page entry motion.",
     descriptionZh: "用於狀態切換、hover 回饋、reveal 與頁面進場的 duration / easing tokens。",
     category: "Foundations",
+    demo: "motion-examples",
     usage: [
       "Use fast durations for micro-interactions.",
       "Use base or slow durations for visible interface movement.",

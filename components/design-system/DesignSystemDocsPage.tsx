@@ -349,100 +349,36 @@ function motionPreviewStyle(row: TokenRow) {
   } as CSSProperties;
 }
 
-function MotionVisualCard({
-  title,
-  body,
-  meta,
-  variant,
-}: {
-  title: string;
-  body: string;
-  meta: string;
-  variant: "brand" | "interaction" | "loading" | "reduced";
-}) {
-  return (
-    <article className={styles.motionOverviewCard}>
-      <div className={styles.motionOverviewVisual}>
-        {variant === "brand" ? (
-          <>
-            <span className={styles.motionBrandMark}>B</span>
-            <span className={styles.motionBrandPulse} />
-          </>
-        ) : null}
-        {variant === "interaction" ? (
-          <>
-            <span className={styles.motionTabTrack}>
-              <span />
-            </span>
-            <span className={styles.motionDisclosureLine} />
-          </>
-        ) : null}
-        {variant === "loading" ? (
-          <>
-            <span className={styles.motionSkeletonLine} />
-            <span className={styles.motionSkeletonLine} />
-            <span className={styles.motionLoadingDot} />
-          </>
-        ) : null}
-        {variant === "reduced" ? (
-          <>
-            <span className={styles.motionCompareLane}>
-              <span />
-            </span>
-            <span className={`${styles.motionCompareLane} ${styles.motionCompareLaneReduced}`}>
-              <span />
-            </span>
-          </>
-        ) : null}
-      </div>
-      <div className={styles.motionOverviewCopy}>
-        <h3>{title}</h3>
-        <p>{body}</p>
-        <span>{meta}</span>
-      </div>
-    </article>
-  );
-}
-
 function MotionFoundationVisualReference({ rows, locale }: { rows: TokenRow[]; locale: DesignSystemLocale }) {
   const durationRows = rows.filter((row) => row.token.includes("duration"));
   const easingRows = rows.filter((row) => row.token.includes("ease"));
-  const overviewCards = [
+  const roleCards = [
     {
-      title: "Brand motion",
-      body: localized(locale, "Logo animation / Language loading", "Logo animation / 語言 loading"),
-      meta: localized(locale, "identity + pending feedback", "identity + pending feedback"),
-      variant: "brand" as const,
+      title: localized(locale, "Brand feedback", "Brand feedback"),
+      body: localized(locale, "Identity motion belongs to concrete brand moments such as the navbar mark and locale loading.", "品牌動效放在明確品牌時刻，例如 Navbar 標誌與語言 loading。"),
     },
     {
-      title: "Interaction motion",
-      body: localized(locale, "Disclosure, dropdown, tabs, overlays", "Disclosure、dropdown、tabs、overlays"),
-      meta: localized(locale, "state change clarity", "state change clarity"),
-      variant: "interaction" as const,
+      title: localized(locale, "Loading feedback", "Loading feedback"),
+      body: localized(locale, "Pending states use visible feedback while keeping the original task context intact.", "等待狀態保留原本任務脈絡，同時給出清楚回饋。"),
     },
     {
-      title: "Loading motion",
-      body: localized(locale, "Skeleton / loading / submit feedback", "Skeleton / loading / 送出回饋"),
-      meta: localized(locale, "processing state", "processing state"),
-      variant: "loading" as const,
+      title: localized(locale, "Interaction feedback", "Interaction feedback"),
+      body: localized(locale, "Disclosure, tabs, overlays, and toast movement should clarify state changes, not decorate them.", "展開、tabs、overlay 與 toast 動態用來說清楚狀態變化，不只做裝飾。"),
     },
     {
-      title: "Reduced motion",
-      body: localized(
-        locale,
-        "Preserve state changes while reducing non-essential movement.",
-        "保留狀態變化，減少非必要位移與循環動畫。",
-      ),
-      meta: localized(locale, "meaning over movement", "meaning over movement"),
-      variant: "reduced" as const,
+      title: localized(locale, "Reduced motion", "Reduced motion"),
+      body: localized(locale, "Preserve state changes while reducing non-essential movement.", "保留狀態變化，減少非必要位移與循環動畫。"),
     },
   ];
 
   return (
     <div className={styles.motionFoundationStack}>
-      <section className={styles.motionOverviewGrid} aria-label={localized(locale, "Motion visual overview", "Motion visual overview")}>
-        {overviewCards.map((card) => (
-          <MotionVisualCard key={card.title} {...card} />
+      <section className={styles.motionRoleGrid} aria-label={localized(locale, "Motion roles", "Motion roles")}>
+        {roleCards.map((card) => (
+          <article className={styles.motionRoleCard} key={card.title}>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
         ))}
       </section>
 

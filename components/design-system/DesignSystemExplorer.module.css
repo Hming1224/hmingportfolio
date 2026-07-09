@@ -738,6 +738,41 @@
   min-width: 0;
 }
 
+.motionRoleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+  min-width: 0;
+}
+
+.motionRoleCard {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.motionRoleCard h3,
+.motionRoleCard p {
+  margin: 0;
+}
+
+.motionRoleCard h3 {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.3;
+}
+
+.motionRoleCard p {
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.55;
+}
+
 .motionOverviewGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1394,7 +1429,9 @@
 }
 
 @media (max-width: 1180px) {
-  .motionOverviewGrid {
+  .motionExamplesGrid,
+  .motionOverviewGrid,
+  .motionRoleGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1405,6 +1442,8 @@
 
 @media (max-width: 720px) {
   .motionOverviewGrid,
+  .motionRoleGrid,
+  .motionExamplesGrid,
   .motionEasingGrid {
     grid-template-columns: 1fr;
   }
@@ -2210,6 +2249,97 @@
 .demoBlock > .demoUsageLine {
   color: var(--hm-purple);
   justify-self: start;
+}
+
+.motionExamplesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-md);
+  width: 100%;
+  min-width: 0;
+}
+
+.motionExampleBlock {
+  max-width: none;
+}
+
+.motionProductionExample {
+  display: grid;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-paper);
+}
+
+.motionLogoPreviewFrame,
+.motionLoadingPreviewFrame {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  overflow: hidden;
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--hm-purple-light) 66%, transparent), transparent 42%),
+    var(--hm-surface);
+}
+
+.motionLogoAnimation {
+  display: block;
+  width: min(100%, 260px);
+  aspect-ratio: 1200 / 556;
+}
+
+.motionLogoAnimation svg,
+.motionLoadingAnimation svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.motionLoadingPreview {
+  display: grid;
+  place-items: center;
+  width: 128px;
+  min-height: 128px;
+  padding: var(--hm-space-xs) 0;
+  border: 1px solid var(--hm-line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--hm-paper) 94%, white);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(16px);
+}
+
+.motionLoadingAnimation {
+  display: block;
+  width: 128px;
+  height: 128px;
+}
+
+.motionProductionExampleCopy {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  min-width: 0;
+}
+
+.motionProductionExampleCopy h3,
+.motionProductionExampleCopy p {
+  margin: 0;
+}
+
+.motionProductionExampleCopy h3 {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.35;
+}
+
+.motionProductionExampleCopy p {
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .demoReferenceCard,
