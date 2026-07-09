@@ -525,7 +525,7 @@
   --cs-grid-gap: 16px;
 }
 
-@media (min-width: 768px) and (max-width: 1439px) {
+@media (min-width: 769px) and (max-width: 1439px) {
   .theme-advantech .cs-comp-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -654,7 +654,7 @@
   --cs-marker-list-line-height: 21px;
 }
 
-@media (min-width: 768px) and (max-width: 1439px) {
+@media (min-width: 769px) and (max-width: 1439px) {
   .theme-advantech .cs-comp-ems-card {
     --cs-flex-cluster-direction: column;
   }
