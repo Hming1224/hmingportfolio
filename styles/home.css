@@ -271,7 +271,7 @@
   animation: float-y 4s ease-in-out infinite;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .hero-decoration-stage {
     position: absolute;
     top: 0;
@@ -1208,7 +1208,7 @@
   left: 68px;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 769px) and (max-width: 1023px) {
   .hero {
     --hero-copy-y: 42svh;
     --hero-copy-top: 42%;
@@ -1534,7 +1534,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 769px) and (max-width: 1023px) {
   .hero h1 {
     font-size: 36px;
   }
@@ -1624,7 +1624,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .hero-frame-large {
     left: auto;
     right: -3%;
