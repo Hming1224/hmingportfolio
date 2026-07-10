@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ChevronDown, X } from "lucide-react";
+import lottie, { type AnimationItem } from "lottie-web";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
@@ -10,6 +11,7 @@ import { proposalScenario1Tabs } from "@/app/advantech/data";
 import { getContactData } from "@/data/contact";
 import { getProjects } from "@/data/projects";
 import type { DesignSystemLocale } from "@/lib/design-system-docs";
+import brandLogoAnimationData from "../brandLogoAnim.json";
 import CaseTOC, { type TocSection } from "../CaseTOC";
 import ProjectCard from "../ProjectCard";
 import WorkCategoryTabs from "../WorkCategoryTabs";
@@ -297,6 +299,16 @@ const boundaryReferenceItems = {
       nextStep: "Keep documented as a route-owned project card pattern.",
     },
     {
+      pattern: "Route-local narrative motion",
+      classification: "Route-local pattern",
+      currentUsage: "Home hero decorations, Design System scroll gate, About Genie / Avatar / educator masonry motion, and case-study narrative visuals.",
+      boundary: "These motion patterns support page-specific storytelling and rhythm. They are documented as route-local patterns rather than reusable motion components until a stable cross-route motion contract emerges.",
+      extractionCondition: "Revisit only if the same motion contract repeats across independent routes with stable timing, trigger, reduced-motion, and accessibility expectations.",
+      source: "styles/home.css / components/design-system/DesignSystemExplorer.tsx / app/about-me/",
+      status: "Route-local narrative motion",
+      nextStep: "Keep as documented motion boundaries; AvatarProfile reduced-motion remains a follow-up production task.",
+    },
+    {
       pattern: "ProjectTag",
       classification: "Internal anatomy",
       currentUsage: "Used inside ProjectCard to display Selected Work project metadata and tone tags.",
@@ -467,6 +479,16 @@ const boundaryReferenceItems = {
       source: "components/Works.tsx",
       status: "Product-specific portfolio pattern",
       nextStep: "維持為 頁面自有 project card 模式。",
+    },
+    {
+      pattern: "Route-local narrative motion",
+      classification: "Route-local pattern",
+      currentUsage: "Home hero decorations、Design System scroll gate、About Genie / Avatar / educator masonry motion，以及案例頁敘事視覺動效。",
+      boundary: "這些動畫服務於特定頁面的敘事與節奏，會被記錄，但不升級為通用 motion component。若未來相同 motion contract 跨多個獨立區塊重用，再評估抽出。",
+      extractionCondition: "只有當相同 motion contract 跨獨立路由重複出現，且 timing、trigger、reduced-motion 與 accessibility expectations 穩定後，才重新評估提升。",
+      source: "styles/home.css / components/design-system/DesignSystemExplorer.tsx / app/about-me/",
+      status: "Route-local narrative motion",
+      nextStep: "維持在 motion boundary 文件中；AvatarProfile reduced-motion 保留為後續 production task。",
     },
     {
       pattern: "ProjectTag",
@@ -844,6 +866,79 @@ function DemoBlock({
   );
 }
 
+function MotionLanguageLoadingPreview({ label }: { label: string }) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const animation: AnimationItem = lottie.loadAnimation({
+      container,
+      renderer: "svg",
+      loop: !reducedMotion,
+      autoplay: !reducedMotion,
+      path: "/animations/language-loading.json",
+    });
+
+    if (reducedMotion) {
+      const showFirstFrame = () => animation.goToAndStop(0, true);
+      animation.addEventListener("DOMLoaded", showFirstFrame);
+    }
+
+    return () => {
+      animation.destroy();
+    };
+  }, []);
+
+  return (
+    <div className={styles.motionLoadingPreview} role="status" aria-label={label}>
+      <div ref={containerRef} className={styles.motionLoadingAnimation} aria-hidden="true" />
+    </div>
+  );
+}
+
+function MotionLogoAnimationPreview({ label }: { label: string }) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const animation: AnimationItem = lottie.loadAnimation({
+      container,
+      renderer: "svg",
+      loop: !reducedMotion,
+      autoplay: !reducedMotion,
+      animationData: brandLogoAnimationData as object,
+    });
+
+    const showFinalFrame = () => animation.goToAndStop(Math.max(animation.totalFrames - 1, 0), true);
+    if (reducedMotion) {
+      animation.addEventListener("DOMLoaded", showFinalFrame);
+    }
+
+    return () => {
+      if (reducedMotion) {
+        animation.removeEventListener("DOMLoaded", showFinalFrame);
+      }
+      animation.destroy();
+    };
+  }, []);
+
+  return (
+    <div className={styles.motionLogoAnimation} aria-label={label} role="img">
+      <div ref={containerRef} className={styles.motionLogoAnimationCanvas} aria-hidden="true" />
+    </div>
+  );
+}
+
 export default function ComponentDemo({
   type,
   locale,
@@ -892,6 +987,55 @@ export default function ComponentDemo({
 
   if (!type) {
     return <p className={styles.demoFallback}>{zh ? "此 模式 以正式作品集使用情境為準。" : "This pattern is documented from its live portfolio usage."}</p>;
+  }
+
+  if (type === "motion-production-examples") {
+    const labels = {
+      usedIn: zh ? "使用位置" : "Used in",
+      trigger: zh ? "觸發方式" : "Trigger",
+      source: zh ? "來源" : "Source",
+      timingOwner: zh ? "時間軸管理" : "Timing owner",
+      tokenRelation: zh ? "Token 關係" : "Token relation",
+      fallback: zh ? "替代狀態" : "Fallback",
+    };
+
+    return (
+      <div className={styles.motionProductionGrid}>
+        <article className={styles.motionAnimationCard} data-motion-animation="logo">
+          <div className={`${styles.motionAnimationPreview} ${styles.motionLogoScene}`}>
+            <MotionLogoAnimationPreview label={zh ? "Navbar 品牌標誌動畫" : "Navbar brand mark animation"} />
+          </div>
+          <div className={styles.motionAnimationContent}>
+            <h4>{zh ? "Logo animation" : "Logo animation"}</h4>
+            <dl className={styles.motionAnimationMeta}>
+              <div><dt>{labels.usedIn}</dt><dd>{zh ? "Navbar 品牌標誌" : "Navbar brand mark"}</dd></div>
+              <div><dt>{labels.trigger}</dt><dd>{zh ? "Hover 時循環；離開回到 final frame；pointer down 或 click 單次重播" : "Hover loops; leave restores the final frame; pointer down or click replays once"}</dd></div>
+              <div><dt>{labels.source}</dt><dd><code>AnimatedLogo.tsx · brandLogoAnim.json</code></dd></div>
+              <div><dt>{labels.timingOwner}</dt><dd>Lottie JSON timeline</dd></div>
+              <div><dt>{labels.tokenRelation}</dt><dd>{zh ? "不使用 --hm-duration-* 或 --hm-ease-*" : "Independent of --hm-duration-* and --hm-ease-*"}</dd></div>
+              <div><dt>{labels.fallback}</dt><dd>{zh ? "reduced-motion 下顯示 final static frame" : "Final static frame under reduced-motion"}</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article className={styles.motionAnimationCard} data-motion-animation="language-loading">
+          <div className={`${styles.motionAnimationPreview} ${styles.motionLoadingScene}`}>
+            <MotionLanguageLoadingPreview label={zh ? "語言切換載入中" : "Language switching loading"} />
+          </div>
+          <div className={styles.motionAnimationContent}>
+            <h4>{zh ? "Language loading animation" : "Language loading animation"}</h4>
+            <dl className={styles.motionAnimationMeta}>
+              <div><dt>{labels.usedIn}</dt><dd>{zh ? "Locale 切換等待回饋" : "Locale switching pending feedback"}</dd></div>
+              <div><dt>{labels.trigger}</dt><dd>{zh ? "使用者選擇另一個 locale 後進入 pending state" : "Pending state after the user selects another locale"}</dd></div>
+              <div><dt>{labels.source}</dt><dd><code>LanguageSwitcher.tsx · language-loading.json</code></dd></div>
+              <div><dt>{labels.timingOwner}</dt><dd>{zh ? "Lottie JSON timeline 與 locale pending control" : "Lottie JSON timeline and locale pending control"}</dd></div>
+              <div><dt>{labels.tokenRelation}</dt><dd>{zh ? "不使用 Motion duration 或 easing token" : "Independent of Motion duration and easing tokens"}</dd></div>
+              <div><dt>{labels.fallback}</dt><dd>{zh ? "reduced-motion 下保留 loading status 並顯示 first static frame" : "Loading status with the first static frame under reduced-motion"}</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    );
   }
 
   if (type === "button") {

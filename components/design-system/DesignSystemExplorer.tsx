@@ -49,6 +49,8 @@ function docSectionForAnchor(
     catalog: "colors",
     "border-radius": "radius",
     "component-boundaries": "local-exceptions",
+    "token-inheritance": "tokens",
+    "token-model": "tokens",
     "token-reference": "tokens",
     reference: "tokens",
     "future-candidates": "future-backlog",

@@ -370,6 +370,116 @@
   box-shadow: var(--shadow-sm);
 }
 
+.tokenModelPanel {
+  display: grid;
+  gap: var(--hm-space-lg);
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-lg);
+  background: var(--hm-paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.tokenModelHeader {
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+
+.tokenModelLead {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-body);
+  line-height: 1.7;
+}
+
+.tokenModelFlow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+}
+
+.tokenModelCard {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: color-mix(in srgb, var(--hm-surface) 74%, var(--hm-paper));
+}
+
+.tokenModelIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--hm-line);
+  border-radius: 999px;
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.tokenModelTitle {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.25;
+}
+
+.tokenModelExample {
+  display: block;
+  min-width: 0;
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  overflow-wrap: anywhere;
+}
+
+.tokenModelBody {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-body);
+  line-height: 1.65;
+}
+
+.tokenModelRules {
+  display: grid;
+  gap: var(--hm-space-sm);
+  padding: var(--hm-space-md);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.tokenModelRules h3 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+}
+
+.tokenModelRules ul {
+  display: grid;
+  gap: var(--hm-space-xs);
+  margin: 0;
+  padding-left: var(--hm-space-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.tokenModelReferenceLink {
+  margin: 0;
+}
+
+.tokenModelReferenceLink a {
+  color: var(--hm-purple);
+  font-size: var(--hm-fs-body);
+  font-weight: var(--hm-fw-semibold);
+  text-decoration: none;
+}
+
 .colorGroupStack,
 .tokenReferenceBrowser {
   display: grid;
@@ -620,6 +730,160 @@
 
 .motionReferenceCard {
   background: var(--hm-paper);
+}
+
+.motionFoundationStack {
+  display: grid;
+  gap: var(--hm-space-xl);
+  min-width: 0;
+}
+
+.motionDurationRow,
+.motionEasingCard {
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.motionVisualSection {
+  display: grid;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.motionTokenHeader h3,
+.motionTokenHeader p {
+  margin: 0;
+}
+
+.motionTokenHeader h3 {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.3;
+}
+
+.motionTokenHeader p {
+  margin-top: var(--hm-space-3xs);
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.55;
+}
+
+.motionDurationList {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+}
+
+.motionDurationRow {
+  display: grid;
+  grid-template-columns: minmax(176px, 0.3fr) minmax(180px, 0.32fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-xs);
+}
+
+.motionDurationRow > div {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  min-width: 0;
+}
+
+.motionDurationRow code,
+.motionEasingCard code {
+  color: var(--text-heading);
+  font-size: var(--hm-fs-xs);
+  font-weight: var(--hm-fw-semibold);
+  overflow-wrap: anywhere;
+}
+
+.motionDurationRow span,
+.motionDurationRow p,
+.motionEasingCard p,
+.motionEasingCard small {
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-xs);
+  line-height: 1.45;
+}
+
+.motionDurationRow p {
+  margin: 0;
+}
+
+.motionDurationTrack,
+.motionEasingPreview {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-paper);
+}
+
+.motionDurationTrack {
+  height: 30px;
+}
+
+.motionDurationTrack span,
+.motionEasingPreview span {
+  position: absolute;
+  top: 50%;
+  left: var(--hm-space-2xs);
+  width: var(--hm-space-xs);
+  height: var(--hm-space-xs);
+  border-radius: var(--hm-radius-pill);
+  background: var(--hm-purple);
+  transform: translateY(-50%);
+  animation:
+    ds-motion-token-run var(--motion-duration, var(--hm-duration-base))
+    var(--motion-ease, var(--hm-ease-out))
+    infinite alternate;
+}
+
+.motionEasingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+  min-width: 0;
+}
+
+.motionEasingCard {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+  padding: var(--hm-space-xs);
+}
+
+.motionEasingPreview {
+  height: 38px;
+}
+
+.motionEasingPreview span {
+  animation-duration: var(--hm-duration-enter);
+}
+
+.motionEasingCard p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.motionEasingCard small {
+  display: block;
+}
+
+@keyframes ds-motion-token-run {
+  from {
+    transform: translate(0, -50%);
+  }
+
+  to {
+    transform: translate(calc(100% + 112px), -50%);
+  }
 }
 
 .tokenReferenceControls {
@@ -902,6 +1166,27 @@
 
   to {
     transform: translate(48px, -50%);
+  }
+}
+
+@media (max-width: 1180px) {
+  .motionDurationRow {
+    grid-template-columns: minmax(150px, 0.34fr) minmax(160px, 0.34fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .motionEasingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .motionDurationRow {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .motionDurationTrack {
+    width: 100%;
   }
 }
 
@@ -1696,6 +1981,150 @@
 .demoBlock > .demoUsageLine {
   color: var(--hm-purple);
   justify-self: start;
+}
+
+.motionProductionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+  width: 100%;
+  min-width: 0;
+}
+
+.motionAnimationCard {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--hm-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-surface);
+}
+
+.motionAnimationPreview {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  overflow: hidden;
+  border-radius: var(--hm-radius-md);
+  background: var(--hm-paper);
+}
+
+.motionLogoAnimation {
+  display: block;
+  width: min(82%, 320px);
+  aspect-ratio: 1200 / 556;
+}
+
+.motionLogoAnimationCanvas,
+.motionLogoAnimationCanvas svg,
+.motionLoadingAnimation svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.motionLogoAnimationCanvas {
+  aspect-ratio: 1200 / 556;
+}
+
+.motionLoadingScene {
+  background: rgba(242, 243, 247, 0.68);
+}
+
+.motionLoadingPreview {
+  display: grid;
+  place-items: center;
+  width: min(100%, 128px);
+  min-height: 128px;
+  padding: var(--hm-space-xs) 0;
+  border: 1px solid var(--hm-line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--hm-paper) 94%, white);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(16px);
+}
+
+.motionLoadingAnimation {
+  display: block;
+  width: 100%;
+  max-width: 128px;
+  aspect-ratio: 1;
+}
+
+.motionAnimationContent {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-xs);
+  min-width: 0;
+}
+
+.motionAnimationContent h4 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: var(--hm-fs-h4);
+  line-height: 1.3;
+}
+
+.motionAnimationMeta {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+}
+
+.motionAnimationMeta > div {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.3fr) minmax(0, 1fr);
+  gap: var(--hm-space-xs);
+  padding-block: var(--hm-space-2xs);
+  border-top: 1px solid var(--hm-line);
+}
+
+.motionAnimationMeta dt,
+.motionAnimationMeta dd {
+  min-width: 0;
+  margin: 0;
+  font-size: var(--hm-fs-xs);
+  line-height: 1.5;
+}
+
+.motionAnimationMeta dt {
+  color: var(--text-muted);
+  font-weight: var(--hm-fw-semibold);
+}
+
+.motionAnimationMeta dd {
+  color: var(--text-secondary);
+}
+
+.motionAnimationMeta code {
+  color: inherit;
+  font-size: inherit;
+  overflow-wrap: anywhere;
+}
+
+.tokenReferenceNote {
+  margin: var(--hm-space-xs) 0 0;
+  color: var(--text-secondary);
+  font-size: var(--hm-fs-sm);
+  line-height: 1.65;
+}
+
+@media (max-width: 720px) {
+  .motionProductionGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .motionAnimationPreview {
+    min-height: 210px;
+  }
+
+  .motionAnimationMeta > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--hm-space-3xs);
+  }
 }
 
 .demoReferenceCard,
@@ -2675,6 +3104,12 @@
   }
 }
 
+@media (max-width: 1279px) {
+  .tokenModelFlow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1100px) {
   .caseHeroDemo .caseHeroInfoGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3351,6 +3786,18 @@
     transition: none;
     will-change: auto;
   }
+
+  .motionDurationTrack span,
+  .motionEasingPreview span,
+  .motionSample::after,
+  .tokenPreviewMotion::after {
+    animation: none;
+  }
+
+  .motionDurationTrack span,
+  .motionEasingPreview span {
+    transform: translateY(-50%);
+  }
 }
 
 @media (max-width: 768px) {
@@ -3491,6 +3938,7 @@
 
   .card,
   .foundationPanel,
+  .tokenModelPanel,
   .tokenReferencePanel,
   .cta,
   .demoSurface {
@@ -3527,6 +3975,7 @@
   .anatomyGrid,
   .referenceCardGrid,
   .localExceptionGrid,
+  .tokenModelFlow,
   .caseGridDemo > div {
     grid-template-columns: minmax(0, 1fr);
   }
