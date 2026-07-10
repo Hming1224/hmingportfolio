@@ -2015,17 +2015,7 @@
 .motionLogoAnimation {
   display: block;
   width: min(82%, 320px);
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
   aspect-ratio: 1200 / 556;
-  cursor: pointer;
-}
-
-.motionLogoAnimation:focus-visible {
-  outline: 2px solid var(--hm-purple);
-  outline-offset: var(--hm-space-3xs);
 }
 
 .motionLogoAnimationCanvas,

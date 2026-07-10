@@ -902,9 +902,7 @@ function MotionLanguageLoadingPreview({ label }: { label: string }) {
 }
 
 function MotionLogoAnimationPreview({ label }: { label: string }) {
-  const containerRef = useRef<HTMLSpanElement | null>(null);
-  const animationRef = useRef<AnimationItem | null>(null);
-  const reducedMotionRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -912,69 +910,32 @@ function MotionLogoAnimationPreview({ label }: { label: string }) {
       return;
     }
 
-    reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const animation: AnimationItem = lottie.loadAnimation({
       container,
       renderer: "svg",
-      loop: false,
-      autoplay: false,
+      loop: !reducedMotion,
+      autoplay: !reducedMotion,
       animationData: brandLogoAnimationData as object,
     });
-    animationRef.current = animation;
 
     const showFinalFrame = () => animation.goToAndStop(Math.max(animation.totalFrames - 1, 0), true);
-    animation.addEventListener("DOMLoaded", showFinalFrame);
+    if (reducedMotion) {
+      animation.addEventListener("DOMLoaded", showFinalFrame);
+    }
 
     return () => {
-      animation.removeEventListener("DOMLoaded", showFinalFrame);
+      if (reducedMotion) {
+        animation.removeEventListener("DOMLoaded", showFinalFrame);
+      }
       animation.destroy();
-      animationRef.current = null;
     };
   }, []);
 
-  const showFinalFrame = () => {
-    const animation = animationRef.current;
-    animation?.goToAndStop(Math.max(animation.totalFrames - 1, 0), true);
-  };
-
-  const playOnce = () => {
-    if (!reducedMotionRef.current) {
-      animationRef.current?.goToAndPlay(0, true);
-    }
-  };
-
-  const playLoop = () => {
-    const animation = animationRef.current;
-    if (!animation || reducedMotionRef.current) {
-      return;
-    }
-    animation.loop = true;
-    animation.goToAndPlay(0, true);
-  };
-
-  const stopLoop = () => {
-    const animation = animationRef.current;
-    if (!animation) {
-      return;
-    }
-    animation.loop = false;
-    showFinalFrame();
-  };
-
   return (
-    <button
-      className={styles.motionLogoAnimation}
-      type="button"
-      aria-label={label}
-      onBlur={stopLoop}
-      onClick={playOnce}
-      onFocus={playLoop}
-      onPointerDown={playOnce}
-      onPointerEnter={playLoop}
-      onPointerLeave={stopLoop}
-    >
-      <span ref={containerRef} className={styles.motionLogoAnimationCanvas} aria-hidden="true" />
-    </button>
+    <div className={styles.motionLogoAnimation} aria-label={label} role="img">
+      <div ref={containerRef} className={styles.motionLogoAnimationCanvas} aria-hidden="true" />
+    </div>
   );
 }
 
@@ -1042,7 +1003,7 @@ export default function ComponentDemo({
       <div className={styles.motionProductionGrid}>
         <article className={styles.motionAnimationCard} data-motion-animation="logo">
           <div className={`${styles.motionAnimationPreview} ${styles.motionLogoScene}`}>
-            <MotionLogoAnimationPreview label={zh ? "重播 Navbar 品牌標誌動畫" : "Replay Navbar brand mark animation"} />
+            <MotionLogoAnimationPreview label={zh ? "Navbar 品牌標誌動畫" : "Navbar brand mark animation"} />
           </div>
           <div className={styles.motionAnimationContent}>
             <h4>{zh ? "Logo animation" : "Logo animation"}</h4>
