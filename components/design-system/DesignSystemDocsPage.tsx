@@ -355,7 +355,7 @@ function MotionFoundationVisualReference({ rows, locale }: { rows: TokenRow[]; l
 
   return (
     <div className={styles.motionFoundationStack}>
-      <section className={styles.motionTokenPanel}>
+      <section className={styles.motionVisualSection} data-motion-sample="duration">
         <header className={styles.motionTokenHeader}>
           <div>
             <h3>{localized(locale, "Duration scale", "Duration scale")}</h3>
@@ -378,7 +378,7 @@ function MotionFoundationVisualReference({ rows, locale }: { rows: TokenRow[]; l
         </div>
       </section>
 
-      <section className={styles.motionTokenPanel}>
+      <section className={styles.motionVisualSection} data-motion-sample="easing">
         <header className={styles.motionTokenHeader}>
           <div>
             <h3>{localized(locale, "Easing reference", "Easing reference")}</h3>
@@ -397,6 +397,22 @@ function MotionFoundationVisualReference({ rows, locale }: { rows: TokenRow[]; l
             </article>
           ))}
         </div>
+      </section>
+
+      <section className={styles.motionVisualSection} data-motion-sample="production-animations">
+        <header className={styles.motionTokenHeader}>
+          <div>
+            <h3>{localized(locale, "Production animation examples", "正式動畫範例")}</h3>
+            <p>
+              {localized(
+                locale,
+                "These production Lottie animations use timelines embedded in their animation assets rather than the site’s duration and easing tokens.",
+                "這些正式使用的 Lottie 動畫由動畫資產內建時間軸控制，並未使用網站的 duration 與 easing token。",
+              )}
+            </p>
+          </div>
+        </header>
+        <ComponentDemo locale={locale} type="motion-production-examples" />
       </section>
     </div>
   );
@@ -757,15 +773,10 @@ export default function DesignSystemDocsPage({
           <div className={styles.behaviorTableWrap}>
             <table className={styles.behaviorTable}>
               <tbody>
-                {behavior.map((item, index) => (
+                {behavior.map((item) => (
                   <tr key={item.label}>
                     <th scope="row">{item.label}</th>
-                    <td>
-                      <p className={styles.behaviorDescription}>{item.description}</p>
-                      {doc.slug === "motion" && index === 0 ? (
-                        <ComponentDemo locale={locale} type="motion-brand-row" />
-                      ) : null}
-                    </td>
+                    <td>{item.description}</td>
                   </tr>
                 ))}
               </tbody>
@@ -885,9 +896,20 @@ export default function DesignSystemDocsPage({
               </table>
             </div>
           ) : (
-            <div className={styles.tokenList}>
-              {doc.tokens.map((token) => <code className={`${styles.codeTag} ${styles.tokenCode}`} key={token}>{token}</code>)}
-            </div>
+            <>
+              <div className={styles.tokenList}>
+                {doc.tokens.map((token) => <code className={`${styles.codeTag} ${styles.tokenCode}`} key={token}>{token}</code>)}
+              </div>
+              {doc.slug === "motion" ? (
+                <p className={styles.tokenReferenceNote}>
+                  {localized(
+                    locale,
+                    "Use Token Reference for complete token values and scopes.",
+                    "完整 token 數值與使用範圍請見 Token Reference。",
+                  )}
+                </p>
+              ) : null}
+            </>
           )}
         </section>
       ) : null}

@@ -902,7 +902,9 @@ function MotionLanguageLoadingPreview({ label }: { label: string }) {
 }
 
 function MotionLogoAnimationPreview({ label }: { label: string }) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLSpanElement | null>(null);
+  const animationRef = useRef<AnimationItem | null>(null);
+  const reducedMotionRef = useRef(false);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -910,26 +912,70 @@ function MotionLogoAnimationPreview({ label }: { label: string }) {
       return;
     }
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const animation: AnimationItem = lottie.loadAnimation({
       container,
       renderer: "svg",
-      loop: !reducedMotion,
-      autoplay: !reducedMotion,
+      loop: false,
+      autoplay: false,
       animationData: brandLogoAnimationData as object,
     });
+    animationRef.current = animation;
 
-    if (reducedMotion) {
-      const showFinalFrame = () => animation.goToAndStop(Math.max(animation.totalFrames - 1, 0), true);
-      animation.addEventListener("DOMLoaded", showFinalFrame);
-    }
+    const showFinalFrame = () => animation.goToAndStop(Math.max(animation.totalFrames - 1, 0), true);
+    animation.addEventListener("DOMLoaded", showFinalFrame);
 
     return () => {
+      animation.removeEventListener("DOMLoaded", showFinalFrame);
       animation.destroy();
+      animationRef.current = null;
     };
   }, []);
 
-  return <div ref={containerRef} className={styles.motionLogoAnimation} aria-label={label} role="img" />;
+  const showFinalFrame = () => {
+    const animation = animationRef.current;
+    animation?.goToAndStop(Math.max(animation.totalFrames - 1, 0), true);
+  };
+
+  const playOnce = () => {
+    if (!reducedMotionRef.current) {
+      animationRef.current?.goToAndPlay(0, true);
+    }
+  };
+
+  const playLoop = () => {
+    const animation = animationRef.current;
+    if (!animation || reducedMotionRef.current) {
+      return;
+    }
+    animation.loop = true;
+    animation.goToAndPlay(0, true);
+  };
+
+  const stopLoop = () => {
+    const animation = animationRef.current;
+    if (!animation) {
+      return;
+    }
+    animation.loop = false;
+    showFinalFrame();
+  };
+
+  return (
+    <button
+      className={styles.motionLogoAnimation}
+      type="button"
+      aria-label={label}
+      onBlur={stopLoop}
+      onClick={playOnce}
+      onFocus={playLoop}
+      onPointerDown={playOnce}
+      onPointerEnter={playLoop}
+      onPointerLeave={stopLoop}
+    >
+      <span ref={containerRef} className={styles.motionLogoAnimationCanvas} aria-hidden="true" />
+    </button>
+  );
 }
 
 export default function ComponentDemo({
@@ -982,17 +1028,51 @@ export default function ComponentDemo({
     return <p className={styles.demoFallback}>{zh ? "此 模式 以正式作品集使用情境為準。" : "This pattern is documented from its live portfolio usage."}</p>;
   }
 
-  if (type === "motion-brand-row") {
+  if (type === "motion-production-examples") {
+    const labels = {
+      usedIn: zh ? "使用位置" : "Used in",
+      trigger: zh ? "觸發方式" : "Trigger",
+      source: zh ? "來源" : "Source",
+      timingOwner: zh ? "時間軸管理" : "Timing owner",
+      tokenRelation: zh ? "Token 關係" : "Token relation",
+      fallback: zh ? "替代狀態" : "Fallback",
+    };
+
     return (
-      <div className={styles.motionBehaviorExamples}>
-        <figure>
-          <MotionLogoAnimationPreview label={zh ? "Navbar 品牌標誌動畫預覽" : "Navbar brand mark animation preview"} />
-          <figcaption>{zh ? "Logo 動畫 · AnimatedLogo.tsx" : "Logo animation · AnimatedLogo.tsx"}</figcaption>
-        </figure>
-        <figure>
-          <MotionLanguageLoadingPreview label={zh ? "語言切換載入中" : "Language switching loading"} />
-          <figcaption>{zh ? "Loading 動畫 · LanguageSwitcher.tsx" : "Loading animation · LanguageSwitcher.tsx"}</figcaption>
-        </figure>
+      <div className={styles.motionProductionGrid}>
+        <article className={styles.motionAnimationCard} data-motion-animation="logo">
+          <div className={`${styles.motionAnimationPreview} ${styles.motionLogoScene}`}>
+            <MotionLogoAnimationPreview label={zh ? "重播 Navbar 品牌標誌動畫" : "Replay Navbar brand mark animation"} />
+          </div>
+          <div className={styles.motionAnimationContent}>
+            <h4>{zh ? "Logo animation" : "Logo animation"}</h4>
+            <dl className={styles.motionAnimationMeta}>
+              <div><dt>{labels.usedIn}</dt><dd>{zh ? "Navbar 品牌標誌" : "Navbar brand mark"}</dd></div>
+              <div><dt>{labels.trigger}</dt><dd>{zh ? "Hover 時循環；離開回到 final frame；pointer down 或 click 單次重播" : "Hover loops; leave restores the final frame; pointer down or click replays once"}</dd></div>
+              <div><dt>{labels.source}</dt><dd><code>AnimatedLogo.tsx · brandLogoAnim.json</code></dd></div>
+              <div><dt>{labels.timingOwner}</dt><dd>Lottie JSON timeline</dd></div>
+              <div><dt>{labels.tokenRelation}</dt><dd>{zh ? "不使用 --hm-duration-* 或 --hm-ease-*" : "Independent of --hm-duration-* and --hm-ease-*"}</dd></div>
+              <div><dt>{labels.fallback}</dt><dd>{zh ? "reduced-motion 下顯示 final static frame" : "Final static frame under reduced-motion"}</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article className={styles.motionAnimationCard} data-motion-animation="language-loading">
+          <div className={`${styles.motionAnimationPreview} ${styles.motionLoadingScene}`}>
+            <MotionLanguageLoadingPreview label={zh ? "語言切換載入中" : "Language switching loading"} />
+          </div>
+          <div className={styles.motionAnimationContent}>
+            <h4>{zh ? "Language loading animation" : "Language loading animation"}</h4>
+            <dl className={styles.motionAnimationMeta}>
+              <div><dt>{labels.usedIn}</dt><dd>{zh ? "Locale 切換等待回饋" : "Locale switching pending feedback"}</dd></div>
+              <div><dt>{labels.trigger}</dt><dd>{zh ? "使用者選擇另一個 locale 後進入 pending state" : "Pending state after the user selects another locale"}</dd></div>
+              <div><dt>{labels.source}</dt><dd><code>LanguageSwitcher.tsx · language-loading.json</code></dd></div>
+              <div><dt>{labels.timingOwner}</dt><dd>{zh ? "Lottie JSON timeline 與 locale pending control" : "Lottie JSON timeline and locale pending control"}</dd></div>
+              <div><dt>{labels.tokenRelation}</dt><dd>{zh ? "不使用 Motion duration 或 easing token" : "Independent of Motion duration and easing tokens"}</dd></div>
+              <div><dt>{labels.fallback}</dt><dd>{zh ? "reduced-motion 下保留 loading status 並顯示 first static frame" : "Loading status with the first static frame under reduced-motion"}</dd></div>
+            </dl>
+          </div>
+        </article>
       </div>
     );
   }
