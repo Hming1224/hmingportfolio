@@ -8,7 +8,7 @@ export default async function ImpactSection() {
     locale === "zh-TW" ? `「${text}」` : `“${text}”`;
   return (
     <section id="cs-sec-impact" className="cs-section-surface">
-      <CaseSectionHeader kicker={t("設計成效")} title={t("用內部測試與流程指標驗證")} />
+      <CaseSectionHeader kicker={t("設計成效")} title={t("與交易所相同步數、操作時間減 58%，把既有操作習慣無縫接進 CA")} />
       <p className="cs-section-lead">
         {t(
           "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。",

@@ -49,7 +49,7 @@ export default async function CryptoArsenalPage() {
     { id: "cs-sec-role", title: t("工作模式") },
     { id: "cs-sec-problem", title: t("問題定義") },
     { id: "cs-sec-current", title: t("介面現況") },
-    { id: "cs-sec-decision", title: t("關鍵決策") },
+    { id: "cs-sec-decision", title: t("設計理由") },
     { id: "cs-sec-research", title: t("競品參考") },
     { id: "cs-sec-wireframe", title: t("Wireframe") },
     { id: "cs-sec-iteration", title: t("設計迭代") },

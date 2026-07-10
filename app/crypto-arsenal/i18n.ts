@@ -9,7 +9,7 @@ const en = {
   "工作模式": "My Role",
   "問題定義": "Problem",
   "介面現況": "Current State",
-  "關鍵決策": "Key Decision",
+  "設計理由": "Design Rationale",
   "競品參考": "Benchmark",
   "Wireframe": "Wireframe",
   "設計迭代": "Iteration",
@@ -152,7 +152,8 @@ const en = {
 
   // ── Decision ──
   "問題延伸的後果": "Consequence of the Problem",
-  "兩種平倉路徑，結果天差地遠": "Two Closing Paths, Wildly Different Outcomes",
+  "把手動平倉搬進 CA，策略不再因人為介入被誤殺":
+    "Bringing Manual Close into CA, So Intervention No Longer Kills the Strategy",
   "問題不只是「看不到倉位」，而是使用者為了控制單筆風險去交易所平倉，反而可能讓整支策略報廢——機器人偵測到自己管理的倉位突然消失、狀態錯亂，為風險控管只能停掉策略且無法恢復。":
     "The problem isn't just \"can't see the position.\" When a user closes on the exchange to control single-trade risk, it can wreck the entire strategy — the bot detects that a position it manages has suddenly vanished, its state breaks, and for risk control it can only stop the strategy with no way to recover.",
   "目前在交易所手動平倉": "Closing manually on the exchange (today)",
@@ -393,8 +394,8 @@ const en = {
     "Final UI for manual TP/SL inside CA: the TP/SL entry in the Trading Details dialog",
 
   // ── Design Impact ──
-  "用內部測試與流程指標驗證":
-    "Validated with Internal Testing and Flow-Level Metrics",
+  "與交易所相同步數、操作時間減 58%，把既有操作習慣無縫接進 CA":
+    "Same Steps as the Exchange, 58% Less Time — Existing Habits Carry Straight into CA",
   "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。":
     "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself, such as the number of steps to complete a task and the average time spent on each flow.",
   "3 步": "3 steps",
