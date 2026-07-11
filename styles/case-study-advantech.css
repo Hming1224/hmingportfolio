@@ -183,6 +183,60 @@
   line-height: 1.35;
 }
 
+.theme-advantech .cs-alarm-demo--interactive {
+  --cs-flex-cluster-direction: column;
+  --cs-flex-cluster-align: stretch;
+  --cs-flex-cluster-justify: flex-start;
+  --cs-flex-cluster-gap: var(--hm-space-sm);
+  --cs-flex-cluster-padding: 12px;
+}
+
+.theme-advantech .cs-alarm-demo--interactive .cs-alarm-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  --cs-stack-box-gap: 4px;
+  --cs-stack-box-padding: 4px;
+  --cs-stack-box-radius: 999px;
+  --cs-stack-box-bg: var(--surface);
+}
+
+.theme-advantech .cs-alarm-demo--interactive .cs-alarm-toggle-btn {
+  --cs-flex-cluster-align: center;
+  --cs-flex-cluster-justify: center;
+  --cs-flex-cluster-padding: 10px 12px;
+  --cs-flex-cluster-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme-advantech .cs-alarm-demo--interactive .cs-alarm-toggle-btn[aria-pressed="true"] {
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.theme-advantech .cs-alarm-demo--interactive .cs-alarm-toggle-btn:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: -3px;
+}
+
+.theme-advantech .cs-alarm-demo--interactive .cs-alarm-panel {
+  --cs-flex-cluster-align: center;
+  --cs-flex-cluster-justify: center;
+  --cs-flex-cluster-min-height: 92px;
+  --cs-flex-cluster-padding: 12px;
+  --cs-flex-cluster-radius: 12px;
+  --cs-flex-cluster-bg: #f6faff;
+}
+
+.theme-advantech .cs-alarm-demo--interactive .cs-alarm-after--interactive {
+  --cs-flex-cluster-min-height: 160px;
+  --cs-flex-cluster-padding: 84px 12px 12px;
+}
+
 @media (max-width: 1023px) {
   .theme-advantech .cs-overview-tldr {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -40,7 +40,7 @@ export default async function OverviewSection() {
           <h3 className="cs-overview-prototype-title">{t("切換狀態，看看報警等級如何從標籤變成可判讀的時間資訊。")}</h3>
           <p className="cs-copy-body">{t("這個微互動代表整體設計策略：先揭露風險程度，再補上能支持判斷的情境資訊。")}</p>
         </div>
-        <AlarmLevelDemo tooltipLines={["嚴重：超約將於 1 小時內發生", "中度：超約將於 2 小時內發生", "低度：超約將於 3 小時內發生"]} />
+        <AlarmLevelDemo interactive tooltipLines={["嚴重：超約將於 1 小時內發生", "中度：超約將於 2 小時內發生", "低度：超約將於 3 小時內發生"]} />
       </div>
     </CaseSection>
   );
