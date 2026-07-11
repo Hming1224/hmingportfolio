@@ -13,7 +13,6 @@ const en = {
   "設計目標": "Design goal",
   "解決方案": "Solution",
   "影響": "Impact",
-  "我的角色": "My role",
   "專案快速總覽": "Project at a glance",
   "代表互動": "Representative interaction",
   "讓廠務人員更快看懂異常，也知道下一步怎麼處理。": "Helping facility teams understand anomalies faster — and know what to do next.",
