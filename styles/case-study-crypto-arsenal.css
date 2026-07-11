@@ -126,6 +126,104 @@
   margin-bottom: 28px;
 }
 
+/* ── Project overview ── */
+.theme-crypto-arsenal .cs-overview-tldr {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--hm-space-md);
+  margin: var(--hm-space-xl) 0;
+}
+
+.theme-crypto-arsenal .cs-overview-tldr-item {
+  grid-column: span 2;
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--ca-line-soft);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: var(--ca-card-shadow);
+}
+
+.theme-crypto-arsenal .cs-overview-tldr-item:nth-child(4),
+.theme-crypto-arsenal .cs-overview-tldr-item:nth-child(5) {
+  grid-column: span 3;
+}
+
+.theme-crypto-arsenal .cs-overview-tldr-label,
+.theme-crypto-arsenal .cs-overview-tldr-text,
+.theme-crypto-arsenal .cs-overview-prototype-kicker,
+.theme-crypto-arsenal .cs-overview-prototype-title {
+  margin: 0;
+}
+
+.theme-crypto-arsenal .cs-overview-tldr-label,
+.theme-crypto-arsenal .cs-overview-prototype-kicker {
+  color: var(--ca-blue);
+}
+
+.theme-crypto-arsenal .cs-overview-tldr-text {
+  margin-top: var(--hm-space-sm);
+}
+
+.theme-crypto-arsenal .cs-overview-prototype {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: var(--hm-space-xl);
+  align-items: center;
+  padding: var(--hm-space-xl);
+  border-radius: 16px;
+  background: var(--ca-bg-soft);
+}
+
+.theme-crypto-arsenal .cs-overview-prototype-copy {
+  display: grid;
+  gap: var(--hm-space-sm);
+}
+
+.theme-crypto-arsenal .cs-overview-prototype-title {
+  color: var(--ca-navy);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.35;
+}
+
+.theme-crypto-arsenal .cs-overview-prototype .cs-media {
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .theme-crypto-arsenal .cs-overview-tldr {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-crypto-arsenal .cs-overview-tldr-item,
+  .theme-crypto-arsenal .cs-overview-tldr-item:nth-child(4),
+  .theme-crypto-arsenal .cs-overview-tldr-item:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  .theme-crypto-arsenal .cs-overview-tldr-item:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .theme-crypto-arsenal .cs-overview-prototype {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-crypto-arsenal .cs-overview-tldr {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-crypto-arsenal .cs-overview-tldr-item:last-child {
+    grid-column: auto;
+  }
+
+  .theme-crypto-arsenal .cs-overview-tldr-item,
+  .theme-crypto-arsenal .cs-overview-prototype {
+    padding: var(--hm-space-md);
+  }
+}
+
 /* ── Hero（圖 + 圖下資訊列，沿用共用 cs-hero-*；此處只補 CA 差異）── */
 .theme-crypto-arsenal .cs-tags {
   color: var(--ca-muted);

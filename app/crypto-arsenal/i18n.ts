@@ -5,6 +5,7 @@ import type { Locale } from "../../i18n/routing";
 const en = {
   "左右滑動查看更多": "Swipe to see more",
   // ── TOC ──
+  "專案總覽": "Project Overview",
   "專案背景": "Overview",
   "工作模式": "My Role",
   "問題定義": "Problem",
@@ -19,6 +20,23 @@ const en = {
   "返回首頁": "Back to Home",
   "下一個專案": "Next Project",
   "：": ": ",
+
+  // ── Project Overview ──
+  "問題": "Problem",
+  "設計目標": "Design goal",
+  "解決方案": "Solution",
+  "影響": "Impact",
+  "專案快速總覽": "Project at a glance",
+  "核心流程預覽": "Core flow preview",
+  "把只能回交易所處理的風險控制，帶回量化策略平台內。": "Bringing risk controls that once required an exchange back into the quant-strategy platform.",
+  "這個專案不是單純新增平倉按鈕，而是補上人與自動策略之間缺少的控制流程：讓交易者能在需要時介入，又不讓策略因外部操作失去狀態。": "This project was not simply about adding a close-position button. It filled the missing control flow between people and automated strategies, letting traders intervene when needed without breaking the strategy state through an external action.",
+  "跟隨量化策略的交易者無法在 CA 內主動平倉；若回交易所介入，可能讓策略狀態失效，也讓損益控制變得被動。": "Traders following quant strategies could not close positions inside CA. Intervening on the exchange could break the strategy state and left traders with passive control over profit and loss.",
+  "讓交易者保留人工介入的主控權，同時維持策略系統可理解、可繼續運作的狀態。": "Give traders the ability to intervene manually while keeping the strategy in a state the system can understand and continue running.",
+  "把倉位資訊、限價與市價平倉、止盈止損整合進 CA，延續交易者熟悉的操作模式。": "Integrated position details, limit and market closes, and take-profit / stop-loss controls into CA while preserving familiar trading patterns.",
+  "內部任務測試中，三個核心流程改為在 CA 內完成，平均操作時間比跳回交易所縮短約 58%。": "In internal task testing, completing the three core flows inside CA reduced average operation time by about 58% compared with switching back to the exchange.",
+  "從回饋與競品流程定義問題，負責 user flow、wireframe、UI、內部測試與工程交付。": "Defined the problem through feedback and competitive flows, then owned the user flow, wireframes, UI, internal testing, and engineering handoff.",
+  "直接操作看看：交易者如何在 CA 內完成市價平倉。": "Try the core flow: see how a trader completes a market close inside CA.",
+  "影片進入畫面時會自動播放；可用滑鼠、觸控或 Enter／Space 放大檢視，按 Escape 關閉。": "The video plays when it enters view. Use a mouse, touch, or Enter / Space to open it, then press Escape to close.",
 
   // ── Hero ──
   "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計":

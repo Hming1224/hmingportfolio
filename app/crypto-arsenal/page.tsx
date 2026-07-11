@@ -8,6 +8,7 @@ import { createLocalizedMetadata } from "../../lib/metadata";
 import { translateCryptoArsenal } from "./i18n";
 import {
   HeroSection,
+  OverviewSection,
   BackgroundSection,
   RoleSection,
   ProblemSection,
@@ -45,6 +46,7 @@ export default async function CryptoArsenalPage() {
   const nextProject = getNextProject(project.slug, locale);
   const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
   const tocSections: TocSection[] = [
+    { id: "cs-sec-overview", title: t("專案總覽") },
     { id: "cs-sec-background", title: t("專案背景") },
     { id: "cs-sec-role", title: t("工作模式") },
     { id: "cs-sec-problem", title: t("問題定義") },
@@ -69,6 +71,7 @@ export default async function CryptoArsenalPage() {
       }}
       hero={<HeroSection />}
     >
+      <OverviewSection />
       <BackgroundSection />
       <RoleSection />
       <ProblemSection />
