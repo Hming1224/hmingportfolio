@@ -56,6 +56,12 @@ const en = {
 
   // ── Overview ──
   "總覽 Overview": "Overview",
+  "問題": "Problem",
+  "設計目標": "Design goal",
+  "解決方案": "Solution",
+  "影響": "Impact",
+  "我的角色": "My role",
+  "核心流程預覽": "Core flow preview",
   "目標": "Goal",
   "需求": "Needs",
   "原型": "Prototype",
@@ -75,6 +81,20 @@ const en = {
   "現階段勞報單的問題": "Current problems with labor forms",
   "將紙本勞報單流程轉譯成可測試、可上線的數位體驗。":
     "Translating a paper-based labor-form process into a testable, launch-ready digital experience.",
+  "讓建檔、計算、寄送與回簽，從紙本往返變成一條數位流程。":
+    "Turning record setup, calculation, delivery, and countersigning from paper handoffs into one digital flow.",
+  "紙本勞報單牽涉建檔、稅額計算、寄送與回簽；資訊分散在會計師、公司與外包工作者之間，容易重複輸入與來回確認。":
+    "Paper labor forms involve record setup, tax calculations, delivery, and countersigning. Information is fragmented across accountants, companies, and contractors, creating repeated entry and back-and-forth confirmation.",
+  "在產品上線前，把多方協作的紙本流程轉譯成清楚、可完成的數位任務，並透過測試找出操作門檻。":
+    "Before launch, translate a multi-party paper workflow into clear, completable digital tasks and use testing to uncover usability barriers.",
+  "串起建立外包人員資料庫、建立勞報單與合併單據三個流程，讓資料填寫、稅額計算、寄送與線上回簽在同一套系統完成。":
+    "Connected contractor records, form creation, and form merging so data entry, tax calculation, delivery, and online countersigning can happen in one system.",
+  "任務測試協助團隊找出流程、介面與用詞問題並完成迭代；本案屬上線前驗證，因此不把測試結果包裝成正式營運成效。":
+    "Task testing helped the team identify and iterate on flow, interface, and wording issues. Because this was pre-launch validation, the results are not presented as live business impact.",
+  "協同參與研究與訪談，負責 wireframe、互動原型與易用性測試，將研究發現轉成可操作的介面調整。":
+    "Collaborated on research and interviews, owned wireframes, interactive prototypes, and usability testing, and translated findings into actionable interface changes.",
+  "直接操作看看：一張勞報單如何建立、寄出並等待線上回簽。":
+    "Try the core flow: see how a labor form is created, sent, and prepared for online countersigning.",
 
   // ── Section titles ──
   "專案總覽 Overview": "Overview",

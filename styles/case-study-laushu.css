@@ -117,6 +117,67 @@
   --cs-showcase-media-line-height: 0;
 }
 
+.theme-laushu .laushu-overview-tldr {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--hm-space-md);
+}
+
+.theme-laushu .laushu-overview-tldr > * {
+  grid-column: span 2;
+}
+
+.theme-laushu .laushu-overview-tldr > *:nth-child(4),
+.theme-laushu .laushu-overview-tldr > *:nth-child(5) {
+  grid-column: span 3;
+}
+
+.theme-laushu .laushu-overview-prototype {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: var(--hm-space-xl);
+  align-items: center;
+  max-width: var(--laushu-content-max);
+  margin: var(--hm-space-xl) auto 0;
+  padding: var(--hm-space-xl);
+  border-radius: 20px;
+  background: var(--laushu-tertiary-100);
+}
+
+.theme-laushu .laushu-overview-prototype-copy {
+  display: grid;
+  gap: var(--hm-space-sm);
+}
+
+.theme-laushu .laushu-overview-prototype-copy > * {
+  margin: 0;
+}
+
+.theme-laushu .laushu-overview-prototype-kicker {
+  color: var(--laushu-primary-600);
+  font-weight: 700;
+}
+
+.theme-laushu .laushu-overview-prototype-copy h3 {
+  color: var(--laushu-primary-700);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.35;
+}
+
+.theme-laushu .laushu-overview-prototype-media {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--laushu-line);
+  border-radius: 14px;
+  background: #ffffff;
+  line-height: 0;
+}
+
+.theme-laushu .laushu-overview-prototype-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .theme-laushu .cs-topic-grid {
   --cs-topic-grid-max-width: var(--laushu-content-max);
 }
@@ -126,6 +187,40 @@
   .theme-laushu .laushu-converge-section .cs-topic-grid--usecase,
   .theme-laushu .cs-reflection-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .theme-laushu .laushu-overview-tldr {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-laushu .laushu-overview-tldr > *,
+  .theme-laushu .laushu-overview-tldr > *:nth-child(4),
+  .theme-laushu .laushu-overview-tldr > *:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  .theme-laushu .laushu-overview-tldr > *:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .theme-laushu .laushu-overview-prototype {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-laushu .laushu-overview-tldr {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-laushu .laushu-overview-tldr > *:last-child {
+    grid-column: auto;
+  }
+
+  .theme-laushu .laushu-overview-prototype {
+    padding: var(--hm-space-md);
   }
 }
 
