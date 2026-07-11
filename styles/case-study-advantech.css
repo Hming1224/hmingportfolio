@@ -133,6 +133,87 @@
   --cs-stack-box-margin: 0 0 24px;
 }
 
+.theme-advantech .cs-overview-tldr {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--hm-space-md);
+  margin-bottom: var(--hm-space-xl);
+}
+
+.theme-advantech .cs-overview-tldr-item {
+  grid-column: span 2;
+  --cs-stack-box-gap: var(--hm-space-sm);
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.theme-advantech .cs-overview-tldr-item:nth-child(4),
+.theme-advantech .cs-overview-tldr-item:nth-child(5) {
+  grid-column: span 3;
+}
+
+.theme-advantech .cs-overview-tldr-label,
+.theme-advantech .cs-overview-tldr-text,
+.theme-advantech .cs-overview-prototype-kicker,
+.theme-advantech .cs-overview-prototype-title {
+  margin: 0;
+}
+
+.theme-advantech .cs-overview-tldr-label,
+.theme-advantech .cs-overview-prototype-kicker {
+  color: var(--theme-primary, #005796);
+}
+
+.theme-advantech .cs-overview-prototype {
+  --cs-stack-box-gap: var(--hm-space-lg);
+  padding: var(--hm-space-xl);
+  border-radius: 12px;
+  background: #f1f8fd;
+}
+
+.theme-advantech .cs-overview-prototype-copy {
+  --cs-stack-box-gap: var(--hm-space-xs);
+  max-width: 760px;
+}
+
+.theme-advantech .cs-overview-prototype-title {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.35;
+}
+
+@media (max-width: 1023px) {
+  .theme-advantech .cs-overview-tldr {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-advantech .cs-overview-tldr-item,
+  .theme-advantech .cs-overview-tldr-item:nth-child(4),
+  .theme-advantech .cs-overview-tldr-item:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  .theme-advantech .cs-overview-tldr-item:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-advantech .cs-overview-tldr {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-advantech .cs-overview-tldr-item:last-child {
+    grid-column: auto;
+  }
+
+  .theme-advantech .cs-overview-tldr-item,
+  .theme-advantech .cs-overview-prototype {
+    padding: var(--hm-space-md);
+  }
+}
+
 .theme-advantech .cs-overview .cs-overview-img {
   --cs-object-box-aspect-ratio: 3000 / 1687;
   --cs-object-box-bg: var(--surface);
