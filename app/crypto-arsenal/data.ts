@@ -642,14 +642,14 @@ export interface ImpactStat {
 
 export const impactStats: ImpactStat[] = [
   {
-    value: "5/5",
-    label: "內部測試者完成核心任務",
-    body: "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。",
+    value: "任務洞見",
+    label: "驗證熟悉操作能否轉移",
+    body: "5 名熟悉合約交易的內部成員以既有交易經驗操作；回饋聚焦在流程熟悉度、控制感與是否需要切回交易所。",
   },
   {
-    value: "3 步",
-    label: "與交易所一致的操作步數",
-    body: "平倉流程對齊 Binance / OKX / Bybit 的既有步數，既有交易者幾乎零學習成本即可接續。",
+    value: "相同步數",
+    label: "維持交易所熟悉節奏",
+    body: "平倉流程對齊 Binance / OKX / Bybit 的既有三步節奏；重點是不增加陌生操作，而不是宣稱減少步驟。",
   },
   {
     value: "−58%",

@@ -35,6 +35,13 @@ export default async function OverviewSection() {
         ))}
       </div>
 
+      <aside className="cs-overview-business-note">
+        <p className="cs-overview-business-label cs-copy-title">{t("商業風險")}</p>
+        <p className="cs-copy-body">
+          {t("如果核心風險控制只能回交易所完成，CA 就無法承接完整交易流程；長期可能削弱使用者留在平台操作與持續交易的意願，進一步影響平台的交易抽成機會。這是設計要降低的風險，而不是本案已證明的營運結果。")}
+        </p>
+      </aside>
+
       <div className="cs-overview-prototype">
         <div className="cs-overview-prototype-copy">
           <p className="cs-overview-prototype-kicker cs-copy-title">{t("核心流程預覽")}</p>

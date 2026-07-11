@@ -164,6 +164,24 @@
   margin-top: var(--hm-space-sm);
 }
 
+.theme-crypto-arsenal .cs-overview-business-note {
+  display: grid;
+  gap: var(--hm-space-xs);
+  margin-bottom: var(--hm-space-xl);
+  padding: var(--hm-space-lg);
+  border-left: 4px solid var(--ca-blue);
+  border-radius: 0 12px 12px 0;
+  background: var(--ca-tint-2);
+}
+
+.theme-crypto-arsenal .cs-overview-business-note > * {
+  margin: 0;
+}
+
+.theme-crypto-arsenal .cs-overview-business-label {
+  color: var(--ca-blue);
+}
+
 .theme-crypto-arsenal .cs-overview-prototype {
   display: grid;
   grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);

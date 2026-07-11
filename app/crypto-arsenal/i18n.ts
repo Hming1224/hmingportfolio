@@ -28,6 +28,7 @@ const en = {
   "影響": "Impact",
   "專案快速總覽": "Project at a glance",
   "核心流程預覽": "Core flow preview",
+  "商業風險": "Business risk",
   "把只能回交易所處理的風險控制，帶回量化策略平台內。": "Bringing risk controls that once required an exchange back into the quant-strategy platform.",
   "這個專案不是單純新增平倉按鈕，而是補上人與自動策略之間缺少的控制流程：讓交易者能在需要時介入，又不讓策略因外部操作失去狀態。": "This project was not simply about adding a close-position button. It filled the missing control flow between people and automated strategies, letting traders intervene when needed without breaking the strategy state through an external action.",
   "跟隨量化策略的交易者無法在 CA 內主動平倉；若回交易所介入，可能讓策略狀態失效，也讓損益控制變得被動。": "Traders following quant strategies could not close positions inside CA. Intervening on the exchange could break the strategy state and left traders with passive control over profit and loss.",
@@ -37,6 +38,8 @@ const en = {
   "從回饋與競品流程定義問題，負責 user flow、wireframe、UI、內部測試與工程交付。": "Defined the problem through feedback and competitive flows, then owned the user flow, wireframes, UI, internal testing, and engineering handoff.",
   "直接操作看看：交易者如何在 CA 內完成市價平倉。": "Try the core flow: see how a trader completes a market close inside CA.",
   "影片進入畫面時會自動播放；可用滑鼠、觸控或 Enter／Space 放大檢視，按 Escape 關閉。": "The video plays when it enters view. Use a mouse, touch, or Enter / Space to open it, then press Escape to close.",
+  "如果核心風險控制只能回交易所完成，CA 就無法承接完整交易流程；長期可能削弱使用者留在平台操作與持續交易的意願，進一步影響平台的交易抽成機會。這是設計要降低的風險，而不是本案已證明的營運結果。":
+    "If core risk controls can only be completed on the exchange, CA cannot support the full trading flow. Over time, that could weaken users' willingness to stay and keep trading on the platform, reducing opportunities for transaction-fee revenue. This is a risk the design aims to reduce, not a business outcome this project proved.",
 
   // ── Hero ──
   "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計":
@@ -416,6 +419,16 @@ const en = {
     "Same Steps as the Exchange, 58% Less Time — Existing Habits Carry Straight into CA",
   "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。":
     "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself, such as the number of steps to complete a task and the average time spent on each flow.",
+  "我的驗證假設是：如果 CA 延續交易者熟悉的操作節奏與用詞，他們應該能留在平台內完成平倉與止盈止損，不必切回交易所。我以 5 位熟悉合約交易的內部成員進行任務測試，觀察操作路徑、卡點與時間；小樣本結果用來找洞見，不當成正式成功率。":
+    "My validation hypothesis was that if CA preserved traders' familiar interaction rhythm and terminology, they should be able to complete close and TP/SL tasks inside the platform without returning to the exchange. I ran task tests with five internal members familiar with futures trading, observing paths, friction, and time. The small sample was used to find insights, not presented as a formal success rate.",
+  "任務洞見": "Task insights",
+  "驗證熟悉操作能否轉移": "Testing whether familiar habits transfer",
+  "5 名熟悉合約交易的內部成員以既有交易經驗操作；回饋聚焦在流程熟悉度、控制感與是否需要切回交易所。":
+    "Five internal members familiar with futures trading used their existing trading experience. Feedback focused on familiarity, sense of control, and whether they still needed to switch back to the exchange.",
+  "相同步數": "Same step count",
+  "維持交易所熟悉節奏": "Preserving the exchange's familiar rhythm",
+  "平倉流程對齊 Binance / OKX / Bybit 的既有三步節奏；重點是不增加陌生操作，而不是宣稱減少步驟。":
+    "The close flow matches the familiar three-step rhythm used by Binance, OKX, and Bybit. The point is to avoid adding unfamiliar interactions, not to claim a reduction in steps.",
   "3 步": "3 steps",
   "內部測試者完成核心任務": "Internal testers completing core tasks",
   "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。":
