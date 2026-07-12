@@ -127,8 +127,9 @@ export default function CaseOverview({
           aria-labelledby={`${tabsId}-tab-${activeIndex}`}
           key={activeIndex}
         >
+          <h3 className="cs-overview-stage-title">{activeItem.title}</h3>
+
           <div className="cs-overview-stage-copy">
-            <h3 className="cs-overview-stage-title">{activeItem.title}</h3>
             {activeItem.text ? <p className="cs-overview-stage-text cs-copy-body">{activeItem.text}</p> : null}
             {activeItem.details ? (
               <dl className="cs-overview-stage-details">

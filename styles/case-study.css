@@ -462,6 +462,7 @@
   display: grid;
   grid-template-columns: minmax(var(--cs-overview-copy-min-width), 0.85fr) minmax(0, 1.25fr);
   grid-template-areas:
+    'title title'
     'copy evidence'
     'footer footer';
   gap: var(--cs-overview-stage-gap);
@@ -483,7 +484,9 @@
 }
 
 .cs-overview-stage-title {
-  margin: 0 0 var(--hm-space-md);
+  grid-area: title;
+  width: 100%;
+  margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--cs-overview-stage-title-size);
   font-weight: 800;
@@ -569,9 +572,8 @@
 
 .cs-overview-detail-card[data-variant='highlight'] dd {
   color: var(--cs-text-heading);
-  font-size: var(--fs-body);
   font-weight: 700;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .cs-overview-detail-card[data-variant='quote'] {
@@ -581,9 +583,8 @@
 
 .cs-overview-detail-card[data-variant='quote'] dd {
   color: var(--cs-text-heading);
-  font-size: var(--fs-h4);
   font-weight: 650;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .cs-overview-stage-media,
@@ -707,6 +708,7 @@
   .cs-overview-stage {
     grid-template-columns: 1fr;
     grid-template-areas:
+      'title'
       'copy'
       'evidence'
       'footer';
@@ -766,6 +768,7 @@
   stroke: #b8cce0;
   stroke-linecap: round;
   stroke-width: 3;
+  vector-effect: non-scaling-stroke;
 }
 
 .cs-impact-blueprint-lines .is-signal {
@@ -787,15 +790,6 @@
 
 @keyframes cs-impact-signal {
   to { stroke-dashoffset: -164; }
-}
-
-.cs-impact-blueprint-source-label {
-  position: absolute;
-  top: 7%;
-  left: 4%;
-  color: var(--cs-text-muted);
-  font-size: var(--fs-xs);
-  font-weight: 700;
 }
 
 .cs-impact-blueprint-node {

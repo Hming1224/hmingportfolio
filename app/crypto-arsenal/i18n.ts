@@ -73,24 +73,24 @@ const en = {
   "但加密交易的門檻在於：通常得":
     "But crypto trading has a high barrier: it usually requires ",
   "手動盯盤、手動下單": "manually watching the market and placing orders",
-  "，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
-    ", along with a solid understanding of the market. That's where \"trading strategies\" come in — programs or algorithms that monitor the market and trade more efficiently.",
+  "，還要對市場有一定了解。於是「交易策略」出現了：策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
+    ", along with a solid understanding of the market. That's where \"trading strategies\" come in: programs or algorithms that monitor the market and trade more efficiently.",
   "而 ": "",
   " 就是一個直接串接交易所、提供交易者自動化策略來交易的平台。它同時服務兩種角色，形成一個策略供需的生態系。":
     " is a platform that connects directly to exchanges and provides traders with automated strategies. It serves two roles at once, forming a supply-and-demand ecosystem around strategies.",
   "這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 ":
     "This model creates value for traders, developers, and the platform alike. However, strategies are not ",
   "100% 全自動": "100% fully automated",
-  "，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
+  "，往往仍需要交易者依市場狀況自己微調，這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
     ", so traders often still need to fine-tune them based on market conditions. That's exactly the starting point this \"position display and manual close\" feature set out to solve.",
   "就像傳統金融市場，加密市場裡的交易者透過交易所把法幣（如 USD）換成加密貨幣；交易所就像中間人，幫交易者完成買賣、並連到背後的區塊鏈。":
     "Just like traditional financial markets, traders in crypto markets convert fiat (e.g. USD) into cryptocurrency through exchanges. The exchange acts as the middleman that completes trades and connects to the underlying blockchain.",
-  "但加密交易的門檻在於：通常得手動盯盤、手動下單，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
-    "But crypto trading has a high barrier: it usually requires manually watching the market, placing orders by hand, and a solid understanding of the market. That's where \"trading strategies\" come in — a strategy is a program or algorithm that monitors the market and trades more efficiently on the trader's behalf.",
+  "但加密交易的門檻在於：通常得手動盯盤、手動下單，還要對市場有一定了解。於是「交易策略」出現了：策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
+    "But crypto trading has a high barrier: it usually requires manually watching the market, placing orders by hand, and a solid understanding of the market. That's where \"trading strategies\" come in: a strategy is a program or algorithm that monitors the market and trades more efficiently on the trader's behalf.",
   "而 Crypto Arsenal 就是一個直接串接交易所、提供交易者自動化策略來交易的平台。它同時服務兩種角色，形成一個策略供需的生態系。":
     "Crypto Arsenal is a platform that connects directly to exchanges and provides traders with automated strategies. It serves two roles at once, forming a supply-and-demand ecosystem around strategies.",
-  "這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 100% 全自動，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
-    "This model creates value for traders, developers, and the platform alike. But strategies are not 100% fully automated — traders often still need to fine-tune based on market conditions. That's exactly the starting point this \"position display and manual close\" feature set out to solve.",
+  "這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 100% 全自動，往往仍需要交易者依市場狀況自己微調，這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
+    "This model creates value for traders, developers, and the platform alike. But strategies are not 100% fully automated; traders often still need to fine-tune based on market conditions. That's exactly the starting point this \"position display and manual close\" feature set out to solve.",
   // diagram 1 labels
   "用法幣買進加密貨幣": "Buy crypto with fiat",
   "加密貨幣互換": "Crypto swap",
@@ -175,8 +175,8 @@ const en = {
   "問題延伸的後果": "Consequence of the Problem",
   "把手動平倉搬進 CA，策略不再因人為介入被誤殺":
     "Bringing Manual Close into CA, So Intervention No Longer Kills the Strategy",
-  "問題不只是「看不到倉位」，而是使用者為了控制單筆風險去交易所平倉，反而可能讓整支策略報廢——機器人偵測到自己管理的倉位突然消失、狀態錯亂，為風險控管只能停掉策略且無法恢復。":
-    "The problem isn't just \"can't see the position.\" When a user closes on the exchange to control single-trade risk, it can wreck the entire strategy — the bot detects that a position it manages has suddenly vanished, its state breaks, and for risk control it can only stop the strategy with no way to recover.",
+  "問題不只是「看不到倉位」，而是使用者為了控制單筆風險去交易所平倉，反而可能讓整支策略報廢：機器人偵測到自己管理的倉位突然消失、狀態錯亂，為風險控管只能停掉策略且無法恢復。":
+    "The problem isn't just \"can't see the position.\" When a user closes on the exchange to control single-trade risk, it can wreck the entire strategy: the bot detects that a position it manages has suddenly vanished, its state breaks, and for risk control it can only stop the strategy with no way to recover.",
   "目前在交易所手動平倉": "Closing manually on the exchange (today)",
   "CA 看不懂你的意圖": "CA Can't Read Your Intent",
   "使用者跳出 CA、到交易所手動操作": "User leaves CA and acts on the exchange",

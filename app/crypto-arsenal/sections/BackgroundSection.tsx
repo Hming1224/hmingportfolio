@@ -41,7 +41,7 @@ export default async function BackgroundSection() {
       <p className="cs-section-lead">
         {t("但加密交易的門檻在於：通常得")}
         <b>{t("手動盯盤、手動下單")}</b>
-        {t("，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。")}
+        {t("，還要對市場有一定了解。於是「交易策略」出現了：策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。")}
       </p>
 
       <CaseFlowFrame
@@ -72,7 +72,7 @@ export default async function BackgroundSection() {
         <p className="cs-section-lead">
           {t("這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 ")}
           <b>{t("100% 全自動")}</b>
-          {t("，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。")}
+          {t("，往往仍需要交易者依市場狀況自己微調，這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。")}
         </p>
       </div>
     </section>

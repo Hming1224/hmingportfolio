@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-07-11T11:57:13.702Z",
+  "includeContent": false,
+  "summary": {
+    "ok": true,
+    "status": "ok",
+    "warnings": [
+      "[redacted:133 chars]"
+    ],
+    "context": {
+      "timestamp": "2026-07-11T11:57:13.702Z",
+      "url": "[redacted:97 chars]",
+      "title": "[redacted:19 chars]",
+      "turnCount": 7,
+      "assistantTurnCount": 4
+    }
+  },
+  "steps": [
+    {
+      "id": "bootstrap",
+      "command": "session.bootstrap",
+      "status": "ok",
+      "ok": true,
+      "startedAt": "2026-07-11T11:56:50.407Z",
+      "endedAt": "2026-07-11T11:56:50.564Z",
+      "warnings": [],
+      "dataPreview": {
+        "browserName": "[redacted:6 chars]",
+        "tabId": "[redacted:9 chars]",
+        "url": "[redacted:97 chars]",
+        "loggedIn": true
+      }
+    },
+    {
+      "id": "open",
+      "command": "threads.open",
+      "status": "ok",
+      "ok": true,
+      "startedAt": "2026-07-11T11:56:50.564Z",
+      "endedAt": "2026-07-11T11:56:54.847Z",
+      "warnings": [],
+      "dataPreview": {
+        "url": "[redacted:97 chars]",
+        "title": "[redacted:19 chars]"
+      }
+    },
+    {
+      "id": "ask",
+      "command": "messages.ask",
+      "status": "ok",
+      "ok": true,
+      "startedAt": "2026-07-11T11:56:54.847Z",
+      "endedAt": "2026-07-11T11:57:13.702Z",
+      "warnings": [
+        "Markdown was reconstructed from visible DOM semantics; use response.copy for clipboard Markdown when exact copy fidelity is required."
+      ],
+      "dataPreview": {
+        "prompt": "[redacted:122 chars]",
+        "complete": true,
+        "responseText": "[redacted:122 chars]",
+        "title": "[redacted:19 chars]"
+      }
+    }
+  ],
+  "data": {
+    "prompt": "[redacted:892 chars]",
+    "complete": true,
+    "responseText": "[redacted:1632 chars]",
+    "title": "[redacted:19 chars]"
+  }
+}

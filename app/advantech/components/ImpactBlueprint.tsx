@@ -3,7 +3,6 @@ import { BrainCircuit, Database, Factory, FileChartColumn, MonitorCog, Snowflake
 interface ImpactBlueprintProps {
   ariaLabel: string;
   labels: {
-    source: string;
     ecowatch: string;
     hvac: string;
     hub: string;
@@ -16,7 +15,12 @@ interface ImpactBlueprintProps {
 export default function ImpactBlueprint({ ariaLabel, labels }: ImpactBlueprintProps) {
   return (
     <div className="cs-impact-blueprint" role="img" aria-label={ariaLabel}>
-      <svg className="cs-impact-blueprint-lines" viewBox="0 0 720 430" aria-hidden="true">
+      <svg
+        className="cs-impact-blueprint-lines"
+        viewBox="0 0 720 430"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
         <path id="impact-source-a" d="M144 126 C242 126 240 204 322 204" />
         <path id="impact-source-b" d="M144 304 C242 304 240 226 322 226" />
         <path id="impact-output-a" d="M398 204 C474 204 474 104 574 104" />
@@ -28,8 +32,6 @@ export default function ImpactBlueprint({ ariaLabel, labels }: ImpactBlueprintPr
         <path className="is-signal signal-d" d="M398 215 C492 215 492 215 594 215" />
         <path className="is-signal signal-e" d="M398 226 C474 226 474 326 574 326" />
       </svg>
-
-      <span className="cs-impact-blueprint-source-label">{labels.source}</span>
 
       <div className="cs-impact-blueprint-node" data-node="ecowatch">
         <span><Database aria-hidden="true" /></span>

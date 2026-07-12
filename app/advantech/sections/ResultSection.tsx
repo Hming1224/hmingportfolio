@@ -19,7 +19,9 @@ export default async function ResultSection() {
       </div>
       <div className="cs-result-overlay cs-object-box" />
       <div className="cs-result-content cs-stack-box">
-        <p className="cs-result-kicker cs-section-kicker">REFLECTIONS</p>
+        <p className="cs-result-kicker cs-section-kicker">
+          {locale === "en" ? "REFLECTIONS" : t("學習反思")}
+        </p>
         <h2 className="cs-heading-white" style={{ marginBottom: 8 }}>
           {t("四次關鍵轉折，重新定義我如何設計工業 AI。")}
         </h2>

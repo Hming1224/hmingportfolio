@@ -6,8 +6,14 @@ import { getAdvantechTranslator } from "../i18n-server";
 const overviewItems = [
   {
     label: "問題",
-    title: "系統收齊數據，卻沒有幫兩種使用者做出判斷。",
+    title: "系統收齊數據，卻沒有幫使用者與企業做出判斷。",
     details: [
+      {
+        label: "企業端：管理跨系統、跨廠區風險的人",
+        text: "EcoWatch、HVAC 與不同工廠各自累積資料，企業缺少統一入口比較設備與能源風險；即使資料完整，管理者仍很難快速決定該先處理哪個問題。",
+        icon: "business",
+        variant: "default",
+      },
       {
         label: "廠務人員：天天用系統的人",
         text: "單一機台多出 20% 的能耗，淹沒在上百顆電表的總覽裡；新進人員每天要花 3 小時以上摸熟系統，異常判讀仍依賴資深師傅的經驗，而經驗很難交接。",
@@ -57,16 +63,16 @@ const overviewItems = [
     title: "設計在實習結束前進入開發，並長成跨系統的整合藍圖。",
     details: [
       {
-        label: "落地進度",
-        text: "2.5 個月內交付 2 大模組、4 項功能的完整設計；期中的需量管理設計獲主管認可、直接沿用到期末。實習結束前，需量模組後端已由 RD 動工開發，設備模組排定接續落地。",
-        icon: "business",
-        variant: "default",
-      },
-      {
         label: "iEMS 產品負責人",
         text: "「你們沒有只停在 AI chatbot 本身，而是有把它放回整個能源管理系統裡思考。從短期導入、日常查詢，一路規劃到長期的數據追蹤和報表，這個 blueprint 是清楚的。未來 AI 不應該只存在電腦或手機裡，也要思考怎麼整合到機台面板或現場設備上。」",
         icon: "quote",
         variant: "quote",
+      },
+      {
+        label: "落地進度",
+        text: "2.5 個月內交付 2 大模組、4 項功能的完整設計；期中的需量管理設計獲主管認可、直接沿用到期末。實習結束前，需量模組後端已由 RD 動工開發，設備模組排定接續落地。",
+        icon: "business",
+        variant: "default",
       },
       {
         label: "驗證提醒",
@@ -128,7 +134,6 @@ export default async function OverviewSection() {
         details: item.details.map((detail) => ({
           label: t(detail.label),
           text: t(detail.text),
-          note: "note" in detail ? t(detail.note) : undefined,
           icon: detail.icon,
           variant: detail.variant,
         })),
@@ -142,7 +147,6 @@ export default async function OverviewSection() {
           <ImpactBlueprint
             ariaLabel={t("EcoWatch 與 HVAC 資料透過 AI 與 RAG，流向跨廠區監測、長期報表與機台面板。")}
             labels={{
-              source: t("既有資料來源"),
               ecowatch: "EcoWatch",
               hvac: "HVAC",
               hub: "AI + RAG",
