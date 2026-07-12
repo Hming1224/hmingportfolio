@@ -19,7 +19,7 @@ const messages = {
   hero: {
     badge: "2+ 業界經驗的產品設計師，目前正在尋求新的機會！",
     greeting: "哈囉！我是黃宣銘 Brian Huang",
-    description: "從<shiny>美術</shiny>、<shiny>機械</shiny>到 <shiny>HCI</shiny>，我習慣整合使用者、商業與工程的不同視角，把複雜問題轉化成真正能落地的產品。",
+    description: "從<shiny>美術</shiny>、<shiny>機械</shiny>到<shiny>人機互動</shiny>，我習慣整合使用者、商業與工程的不同視角，把複雜問題轉化成真正能落地的產品。",
     journey: "我的歷程",
     works: "查看作品",
   },

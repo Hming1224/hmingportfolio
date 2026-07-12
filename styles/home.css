@@ -108,11 +108,11 @@
   font-weight: 600;
   background: linear-gradient(
     120deg,
-    var(--ink) 0%,
-    var(--ink) 35%,
-    var(--purple) 50%,
-    var(--ink) 65%,
-    var(--ink) 100%
+    var(--purple-hover) 0%,
+    var(--purple-hover) 35%,
+    var(--purple-soft) 50%,
+    var(--purple-hover) 65%,
+    var(--purple-hover) 100%
   );
   background-size: 200% auto;
   background-clip: text;
@@ -848,7 +848,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-shiny-text {
     animation: none;
-    color: var(--ink);
+    color: var(--purple-hover);
     background: none;
     -webkit-text-fill-color: currentColor;
   }
