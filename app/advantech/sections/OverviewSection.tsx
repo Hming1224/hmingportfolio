@@ -6,17 +6,17 @@ import { getAdvantechTranslator } from "../i18n-server";
 const overviewItems = [
   {
     label: "問題",
-    title: "系統收齊數據，卻沒有幫人做出判斷。",
+    title: "系統收齊數據，卻沒有幫兩種使用者做出判斷。",
     details: [
       {
-        label: "使用者立場",
-        text: "上百顆電表讓單一機台多出的 20% 能耗淹沒在總覽裡；新進廠務每天還要花 3 小時以上摸熟系統，判斷高度依賴個人經驗。",
+        label: "廠務人員：天天用系統的人",
+        text: "單一機台多出 20% 的能耗，淹沒在上百顆電表的總覽裡；新進人員每天要花 3 小時以上摸熟系統，異常判讀仍依賴資深師傅的經驗，而經驗很難交接。",
         icon: "user",
         variant: "default",
       },
       {
-        label: "企業立場",
-        text: "訪談中的客戶一年被超約罰款 300 萬元。數據雖然完整，企業仍缺少能跨系統、跨廠區快速辨識風險的統一方式。",
+        label: "系統整合商 SI：幫客戶導入的人",
+        text: "SI 拿這套系統替客戶做能源顧問，但系統只給 raw data、不給建議——「能省多少、該先關哪一台」答不出來；不熟需量規則的客戶，一年超約罰款高達 300 萬元。",
         icon: "business",
         variant: "default",
       },
@@ -30,11 +30,11 @@ const overviewItems = [
   },
   {
     label: "設計目標",
-    title: "讓 AI 主動出現在廠務需要判斷的地方。",
+    title: "讓 AI 主動出現在需要判斷的地方，而不是等人來問。",
     details: [
       {
-        label: "設計假設",
-        text: "若 AI 能在異常發生時主動帶入時間、地點與設備脈絡，廠務就不必先知道該問什麼，也能更快做出判斷。",
+        label: "訪談推翻的假設",
+        text: "原以為要做「什麼都能問」的聊天機器人，兩場訪談卻指向反面：資深廠務不需要等人來問的 AI，SI 更提醒回應超過 3 秒使用者就失去耐心。AI 應該在異常發生時主動帶入時間、地點與設備脈絡，讓人不必先知道該問什麼。",
         icon: "hypothesis",
         variant: "default",
       },
@@ -54,8 +54,14 @@ const overviewItems = [
   },
   {
     label: "影響",
-    title: "AI 從單一功能，成為跨系統、跨廠區的整合藍圖。",
+    title: "設計在實習結束前進入開發，並長成跨系統的整合藍圖。",
     details: [
+      {
+        label: "落地進度",
+        text: "2.5 個月內交付 2 大模組、4 項功能的完整設計；期中的需量管理設計獲主管認可、直接沿用到期末。實習結束前，需量模組後端已由 RD 動工開發，設備模組排定接續落地。",
+        icon: "business",
+        variant: "default",
+      },
       {
         label: "iEMS 產品負責人",
         text: "「你們沒有只停在 AI chatbot 本身，而是有把它放回整個能源管理系統裡思考。從短期導入、日常查詢，一路規劃到長期的數據追蹤和報表，這個 blueprint 是清楚的。未來 AI 不應該只存在電腦或手機裡，也要思考怎麼整合到機台面板或現場設備上。」",
@@ -114,8 +120,8 @@ export default async function OverviewSection() {
     <CaseOverview
       className="cs-overview"
       kicker={t("專案總覽")}
-      title={t("數據散落在系統與廠區之間：讓 AI 成為廠務做判斷的統一入口。")}
-      lead={t("研華 iEMS 已收齊水、電、氣與設備資料，但 EcoWatch、HVAC 與不同廠區仍各自運作，使用者必須靠經驗拼湊風險。我從廠務決策流程出發，將 AI 從被動問答改成能跨系統取數、主動帶入脈絡，並延伸到長期報表與機台面板的整合藍圖。")}
+      title={t("數據散落在系統與廠區之間：讓 AI 成為使用者做判斷的統一入口。")}
+      lead={t("研華 iEMS 已收齊水、電、氣與設備資料，但對廠務人員與系統整合商（SI）這兩種使用者來說，拿到的都還是 raw data：EcoWatch、HVAC 與不同廠區各自運作，風險判斷仍靠經驗拼湊。我從兩種使用者的決策流程出發，把 AI 從被動問答改成能跨系統取數、主動帶入脈絡，並延伸到長期報表與機台面板的整合藍圖。")}
       items={overviewItems.map((item) => ({
         label: t(item.label),
         title: t(item.title),
