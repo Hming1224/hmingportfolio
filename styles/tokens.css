@@ -356,6 +356,44 @@
   --cs-badge-bg: #4c4c4c;
   --cs-badge-text: #ffffff;
   --cs-shadow-color: rgba(0, 0, 0, 0.12);
+
+  /* Shared case-study overview / walkthrough geometry and type. */
+  --cs-focus-ring-width: 3px;
+  --cs-focus-ring-offset: 2px;
+  --cs-overview-to-showcase-gap: var(--hm-space-lg);
+  --cs-overview-stage-gap: var(--hm-space-lg);
+  --cs-overview-stage-padding: var(--hm-space-lg);
+  --cs-overview-tab-min-height: var(--hm-space-2xl);
+  --cs-overview-copy-min-width: 17.5rem;
+  --cs-overview-media-min-height: 20rem;
+  --cs-overview-icon-size: 2.25rem;
+  --cs-overview-icon-glyph-size: var(--fs-h4);
+  --cs-overview-stage-title-size: var(--fs-h3);
+  --cs-overview-evidence-value-size: var(--fs-h1);
+  --cs-overview-evidence-label-size: var(--fs-h3);
+  --cs-overview-active-line-size: 0.1875rem;
+  --cs-overview-control-min-height: var(--hm-btn-height-sm);
+  --cs-overview-motion-duration: var(--hm-duration-fast);
+  --cs-overview-shadow: var(--hm-shadow-sm);
+  --cs-overview-mobile-stage-padding: var(--hm-space-md);
+  --cs-overview-mobile-tab-min-height: var(--hm-btn-height-md-mobile);
+  --cs-overview-tablet-media-min-height: 18.75rem;
+  --cs-overview-mobile-media-min-height: 15rem;
+  --cs-walkthrough-gap: var(--hm-space-md);
+  --cs-walkthrough-padding: var(--hm-space-lg);
+  --cs-walkthrough-copy-gap: var(--hm-space-2xs);
+  --cs-walkthrough-copy-max-width: none;
+  --cs-walkthrough-title-size: var(--fs-h3);
+  --cs-walkthrough-label-size: var(--fs-body);
+  --cs-walkthrough-kicker-size: var(--fs-xs);
+  --cs-walkthrough-stage-gap: var(--hm-space-sm);
+  --cs-walkthrough-tab-min-height: var(--hm-btn-height-md);
+  --cs-walkthrough-button-min-height: var(--hm-btn-height-sm);
+  --cs-walkthrough-dot-size: var(--hm-space-2xs);
+  --cs-walkthrough-dot-active-size: var(--hm-space-md);
+  --cs-walkthrough-motion-duration: var(--hm-duration-fast);
+  --cs-walkthrough-frame-aspect-ratio: 16 / 9;
+  --cs-walkthrough-disabled-opacity: 0.4;
 }
 
 .hm-grid {

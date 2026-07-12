@@ -1,27 +1,75 @@
 import { CaseOverview } from "../../../components/case-study";
+import ImpactBlueprint from "../components/ImpactBlueprint";
 import OutcomeWalkthrough from "../components/OutcomeWalkthrough";
 import { getAdvantechTranslator } from "../i18n-server";
 
 const overviewItems = [
   {
     label: "問題",
-    text: "上百顆電表的廠區裡，單一機台能耗多了 20% 在總覽中看不出來；新進廠務每天要花 3 小時以上摸熟系統；訪談中的客戶實例甚至一年被超約罰款 300 萬元。數據很完整，判斷卻還是靠個人經驗。",
-    stat: { value: "300 萬", label: "一年超約罰款", note: "SI 訪談的客戶實例" },
+    title: "系統收齊數據，卻沒有幫人做出判斷。",
+    details: [
+      {
+        label: "使用者立場",
+        text: "上百顆電表讓單一機台多出的 20% 能耗淹沒在總覽裡；新進廠務每天還要花 3 小時以上摸熟系統，判斷高度依賴個人經驗。",
+        icon: "user",
+        variant: "default",
+      },
+      {
+        label: "企業立場",
+        text: "訪談中的客戶一年被超約罰款 300 萬元。數據雖然完整，企業仍缺少能跨系統、跨廠區快速辨識風險的統一方式。",
+        icon: "business",
+        variant: "default",
+      },
+    ],
+    media: {
+      src: "/projects/advantech/research/ecowatch-demand-analysis-figma.png",
+      alt: "既有 EcoWatch 需量分析介面",
+      caption: "既有 EcoWatch 需量分析：資料完整，但判讀仍靠使用者經驗。",
+      fit: "contain",
+    },
   },
   {
     label: "設計目標",
-    text: "兩場深度訪談推翻了「等人來問」的 chatbot 假設。設計改從圖表分析、系統與 Email 通知、對話問答三個入口切入，讓 AI 在異常發生或使用者回查時，都能把數據轉成下一步建議。",
-    stat: { value: "3 個", label: "AI 工作流入口", note: "圖表 × 通知 × 對話" },
-  },
-  {
-    label: "解決方案",
-    text: "配合每 15 分鐘更新的需量預測，UI 同時呈現即時值、未來 4 小時的超約點與前 15% 高耗電設備；再從圖表或通知帶入時間與地點，直接串起原因分析、風險分級與行動建議。模式識別也沿用同一條判讀路徑。",
-    stat: { value: "15 分鐘", label: "需量預測更新", note: "一次展開未來 4 小時" },
+    title: "讓 AI 主動出現在廠務需要判斷的地方。",
+    details: [
+      {
+        label: "設計假設",
+        text: "若 AI 能在異常發生時主動帶入時間、地點與設備脈絡，廠務就不必先知道該問什麼，也能更快做出判斷。",
+        icon: "hypothesis",
+        variant: "default",
+      },
+      {
+        label: "How might we",
+        text: "我們如何在不改變既有巡檢習慣的前提下，讓 AI 主動把判斷依據送到需要它的人面前？",
+        icon: "question",
+        variant: "highlight",
+      },
+    ],
+    media: {
+      src: "/projects/advantech/research/interview-synthesis-photo.webp",
+      alt: "專案團隊訪談廠務與系統整合相關人員",
+      caption: "從內部廠務與外部 SI 的工作流程，重新定位 AI 應該出現的時機。",
+      fit: "cover",
+    },
   },
   {
     label: "影響",
-    text: "最終提案後，主管肯定我們沒有只做 AI Chatbot，而是把 EcoWatch、HVAC、不同工廠與海外研發中心的資料，規劃成統一入口，並從短期查詢延伸到長期追蹤與報表。這份藍圖也把 RAG 跨庫取數與機台面板納入後續方向；四條功能則已收斂成可開發規格，超約風險進入後端實作。由於尚未進行使用者測試，預設問題能否涵蓋廠務日常仍待驗證。",
-    stat: { value: "跨系統", label: "跨廠區 AI 入口", note: "主管回饋，依會後記憶整理" },
+    title: "AI 從單一功能，成為跨系統、跨廠區的整合藍圖。",
+    details: [
+      {
+        label: "iEMS 產品負責人",
+        text: "「你們沒有只停在 AI chatbot 本身，而是有把它放回整個能源管理系統裡思考。從短期導入、日常查詢，一路規劃到長期的數據追蹤和報表，這個 blueprint 是清楚的。未來 AI 不應該只存在電腦或手機裡，也要思考怎麼整合到機台面板或現場設備上。」",
+        icon: "quote",
+        variant: "quote",
+      },
+      {
+        label: "驗證提醒",
+        text: "「目前還沒有真的找使用者測試，所以現在整理出的問題清單，能不能涵蓋廠務人員每天真正會問的事情，這部分還需要再驗證。」",
+        icon: "validation",
+        variant: "default",
+      },
+    ],
+    visual: "impact-blueprint",
   },
 ] as const;
 
@@ -66,16 +114,38 @@ export default async function OverviewSection() {
     <CaseOverview
       className="cs-overview"
       kicker={t("專案總覽")}
-      title={t("數據收齊了，決策卻還卡在人的經驗：讓 AI 主動把判斷依據送到廠務面前。")}
-      lead={t("研華 iEMS 能源管理系統把水、電、氣的數據收得很完整，但訪談發現使用者拿到的只是 raw data，沒有下一步建議。我把「自由問答的聊天視窗」翻轉成「前台一鍵觸發、異常主動告警」的 GenAI 工作流程，讓現場人員直接收到看得懂的決策建議。")}
+      title={t("數據散落在系統與廠區之間：讓 AI 成為廠務做判斷的統一入口。")}
+      lead={t("研華 iEMS 已收齊水、電、氣與設備資料，但 EcoWatch、HVAC 與不同廠區仍各自運作，使用者必須靠經驗拼湊風險。我從廠務決策流程出發，將 AI 從被動問答改成能跨系統取數、主動帶入脈絡，並延伸到長期報表與機台面板的整合藍圖。")}
       items={overviewItems.map((item) => ({
         label: t(item.label),
-        text: t(item.text),
-        stat: {
-          value: t(item.stat.value),
-          label: t(item.stat.label),
-          note: t(item.stat.note),
-        },
+        title: t(item.title),
+        details: item.details.map((detail) => ({
+          label: t(detail.label),
+          text: t(detail.text),
+          note: "note" in detail ? t(detail.note) : undefined,
+          icon: detail.icon,
+          variant: detail.variant,
+        })),
+        media: "media" in item ? {
+          src: item.media.src,
+          alt: t(item.media.alt),
+          caption: t(item.media.caption),
+          fit: item.media.fit,
+        } : undefined,
+        visual: "visual" in item ? (
+          <ImpactBlueprint
+            ariaLabel={t("EcoWatch 與 HVAC 資料透過 AI 與 RAG，流向跨廠區監測、長期報表與機台面板。")}
+            labels={{
+              source: t("既有資料來源"),
+              ecowatch: "EcoWatch",
+              hvac: "HVAC",
+              hub: "AI + RAG",
+              crossSite: t("跨廠區監測"),
+              reports: t("長期追蹤與報表"),
+              machinePanel: t("機台面板"),
+            }}
+          />
+        ) : undefined,
       }))}
       itemsLabel={t("專案快速總覽")}
       showcase={

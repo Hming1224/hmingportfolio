@@ -1,44 +1,52 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useId, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { Building2, CircleHelp, Lightbulb, Quote, ShieldCheck, UserRound, type LucideIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import CaseSection from './CaseSection';
 
 export interface CaseOverviewStat {
-  /** 大字級數字，例如「3 秒」「−58%」。 */
   value: string;
-  /** 數字代表什麼，一行內講完。 */
   label: string;
-  /** 補充脈絡或數據屬性（例如「訪談客戶實例」），維持證據誠實。 */
   note?: string;
+}
+
+export interface CaseOverviewMedia {
+  src: string;
+  alt: string;
+  caption?: string;
+  fit?: 'cover' | 'contain';
+}
+
+export interface CaseOverviewDetail {
+  label: string;
+  text: string;
+  note?: string;
+  icon?: 'user' | 'business' | 'hypothesis' | 'question' | 'quote' | 'validation';
+  variant?: 'default' | 'highlight' | 'quote';
 }
 
 export interface CaseOverviewItem {
   label: string;
-  text: string;
+  title: string;
+  text?: string;
+  details?: readonly CaseOverviewDetail[];
   stat?: CaseOverviewStat;
+  media?: CaseOverviewMedia;
+  visual?: ReactNode;
 }
 
 export interface CaseOverviewProps {
-  /** TOC 錨點 id，預設 'cs-sec-overview'。 */
   id?: string;
   className?: string;
   kicker: string;
-  /** 結論式標題：一句話講完這個案子改變了什麼。 */
   title: string;
-  /** 標題下的一段導言。 */
   lead?: ReactNode;
-  /** 問題／設計目標／解決方案／影響等摘要，可把對應關鍵數據放進同一格。 */
   items: readonly CaseOverviewItem[];
-  /** 摘要清單的 aria-label。 */
   itemsLabel: string;
-  /** 整案互動走查等展示區塊，由呼叫端組好整塊傳入。 */
   showcase?: ReactNode;
 }
 
-/**
- * 案例頁「專案總覽」共用骨架：
- * 結論標題 → 導言 → 數據與 TL;DR 整合摘要 → 互動展示。
- * 文字一律由呼叫端翻譯後傳入；配色與間距微調交給各案例的 theme CSS。
- */
 export default function CaseOverview({
   id = 'cs-sec-overview',
   className,
@@ -49,29 +57,162 @@ export default function CaseOverview({
   itemsLabel,
   showcase,
 }: CaseOverviewProps) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const tabsId = useId();
+  const activeItem = items[activeIndex] ?? items[0];
+
+  if (!activeItem) return null;
+
+  const selectStep = (index: number) => {
+    setActiveIndex(Math.min(Math.max(index, 0), items.length - 1));
+  };
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const lastIndex = items.length - 1;
+    let nextIndex = activeIndex;
+
+    if (event.key === 'ArrowRight') nextIndex = activeIndex === lastIndex ? 0 : activeIndex + 1;
+    else if (event.key === 'ArrowLeft') nextIndex = activeIndex === 0 ? lastIndex : activeIndex - 1;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = lastIndex;
+    else return;
+
+    event.preventDefault();
+    selectStep(nextIndex);
+    event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]')[nextIndex]?.focus();
+  };
+
+  const previousItem = items[activeIndex - 1];
+  const nextItem = items[activeIndex + 1];
+
   return (
     <CaseSection id={id} className={cn('cs-overview', className)} kicker={kicker} title={title}>
       {lead ? <p className="cs-section-lead cs-overview-lead">{lead}</p> : null}
 
-      <div className="cs-overview-summary" role="list" aria-label={itemsLabel}>
-        {items.map((item) => (
-          <article key={item.label} className="cs-overview-summary-item" role="listitem">
-            {item.stat ? (
-              <div className="cs-overview-stat">
-                <span className="cs-overview-stat-value">{item.stat.value}</span>
-                <span className="cs-overview-stat-label">{item.stat.label}</span>
-                {item.stat.note ? <span className="cs-overview-stat-note">{item.stat.note}</span> : null}
-              </div>
+      <div className="cs-overview-carousel">
+        <div
+          className="cs-overview-steps"
+          role="tablist"
+          aria-label={itemsLabel}
+          onKeyDown={handleTabKeyDown}
+        >
+          {items.map((item, index) => {
+            const selected = index === activeIndex;
+            return (
+              <button
+                key={item.label}
+                id={`${tabsId}-tab-${index}`}
+                type="button"
+                role="tab"
+                aria-controls={`${tabsId}-panel`}
+                aria-selected={selected}
+                tabIndex={selected ? 0 : -1}
+                className="cs-overview-step-tab"
+                data-state={selected ? 'active' : 'inactive'}
+                onClick={() => selectStep(index)}
+              >
+                <span className="cs-overview-step-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <article
+          id={`${tabsId}-panel`}
+          className="cs-overview-stage"
+          role="tabpanel"
+          aria-labelledby={`${tabsId}-tab-${activeIndex}`}
+          key={activeIndex}
+        >
+          <div className="cs-overview-stage-copy">
+            <h3 className="cs-overview-stage-title">{activeItem.title}</h3>
+            {activeItem.text ? <p className="cs-overview-stage-text cs-copy-body">{activeItem.text}</p> : null}
+            {activeItem.details ? (
+              <dl className="cs-overview-stage-details">
+                {activeItem.details.map((detail) => {
+                  const DetailIcon = detail.icon ? overviewDetailIcons[detail.icon] : null;
+                  return (
+                    <div key={detail.label} className="cs-overview-detail-card" data-variant={detail.variant ?? 'default'}>
+                      {DetailIcon ? (
+                        <span className="cs-overview-detail-icon" aria-hidden="true">
+                          <DetailIcon />
+                        </span>
+                      ) : null}
+                      <div className="cs-overview-detail-copy">
+                        <dt>{detail.label}</dt>
+                        <dd>{detail.text}</dd>
+                        {detail.note ? <small>{detail.note}</small> : null}
+                      </div>
+                    </div>
+                  );
+                })}
+              </dl>
             ) : null}
-            <div className="cs-overview-summary-copy">
-              <p className="cs-overview-summary-label cs-copy-title">{item.label}</p>
-              <p className="cs-overview-summary-text cs-copy-body">{item.text}</p>
+          </div>
+
+          <OverviewEvidence item={activeItem} />
+
+          <footer className="cs-overview-stage-footer">
+            <div className="cs-overview-stage-controls">
+              {previousItem ? (
+                <button type="button" onClick={() => selectStep(activeIndex - 1)}>
+                  ← {previousItem.label}
+                </button>
+              ) : null}
+              {nextItem ? (
+                <button type="button" className="cs-overview-stage-next" onClick={() => selectStep(activeIndex + 1)}>
+                  {nextItem.label} →
+                </button>
+              ) : null}
             </div>
-          </article>
-        ))}
+          </footer>
+        </article>
       </div>
 
       {showcase}
     </CaseSection>
+  );
+}
+
+const overviewDetailIcons: Record<NonNullable<CaseOverviewDetail['icon']>, LucideIcon> = {
+  user: UserRound,
+  business: Building2,
+  hypothesis: Lightbulb,
+  question: CircleHelp,
+  quote: Quote,
+  validation: ShieldCheck,
+};
+
+function OverviewEvidence({ item }: { item: CaseOverviewItem }) {
+  if (item.visual) {
+    return <div className="cs-overview-stage-visual">{item.visual}</div>;
+  }
+
+  if (item.media) {
+    return (
+      <figure className="cs-overview-stage-media">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.media.src}
+          alt={item.media.alt}
+          className={`is-${item.media.fit ?? 'cover'}`}
+          draggable={false}
+        />
+        {item.media.caption ? <figcaption>{item.media.caption}</figcaption> : null}
+      </figure>
+    );
+  }
+
+  if (!item.stat) return <div className="cs-overview-stage-evidence" aria-hidden="true" />;
+
+  return (
+    <div className="cs-overview-stage-evidence">
+      <span className="cs-overview-evidence-value">{item.stat.value}</span>
+      <strong className="cs-overview-evidence-label">{item.stat.label}</strong>
+      {item.stat.note ? <span className="cs-overview-evidence-note">{item.stat.note}</span> : null}
+    </div>
   );
 }
