@@ -19,9 +19,8 @@ const messages = {
   hero: {
     badge: "2+ years in industry. Open to opportunities!",
     greeting: "Hi! I'm Brian Huang",
-    positioning: "I’m a product designer who keeps asking: “What is the real problem we need to solve?”",
+    positioning: "I’m a product designer who keeps asking: “<mark>What is the real problem we need to solve?</mark>”",
     description: "With a background spanning mechanical engineering, art, and HCI, I bring user, business, and engineering perspectives together to turn complex problems into products people can actually use.",
-    taglines: "Research needs with empathy|Explore design with curiosity|Build products with clarity",
     journey: "My Journey",
     works: "View My Work",
   },

@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import Button from './ui/Button';
 import SplitText from './animate-ui/primitives/texts/SplitText';
-import TrueFocus from './animate-ui/primitives/texts/TrueFocus';
 import DotPattern from './ui/dot-pattern';
 import CursorTag from './hero-decorations/CursorTag';
 import WireframeFrame from './hero-decorations/WireframeFrame';
@@ -78,22 +77,20 @@ export default async function Hero() {
             textAlign="inherit"
           />
 
-          <div className="hero-positioning">
-            <p className="hero-positioning-primary">{t('positioning')}</p>
-            <p className="hero-positioning-description">{t('description')}</p>
-          </div>
-
-          <div className="hero-taglines">
-            <TrueFocus
-              sentence={t('taglines')}
-              separator="|"
-              blurAmount={2}
-              borderColor="var(--purple)"
-              glowColor="rgba(93, 98, 216, 0.35)"
-              animationDuration={0.7}
-              pauseBetweenAnimations={1.8}
-            />
-          </div>
+          <figure className="hero-quote-card">
+            <span className="hero-quote-mark" aria-hidden="true">“</span>
+            <blockquote className="hero-quote-primary">
+              {t.rich('positioning', {
+                mark: (chunks) => (
+                  <span className="highlight-text hero-highlight-purple">
+                    <span className="highlight-text-mark" aria-hidden="true" />
+                    <span className="highlight-text-content">{chunks}</span>
+                  </span>
+                ),
+              })}
+            </blockquote>
+            <p className="hero-quote-description">{t('description')}</p>
+          </figure>
         </div>
 
         <div className="hero-actions">
