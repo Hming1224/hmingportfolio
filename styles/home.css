@@ -1305,30 +1305,30 @@
     z-index: 1;
   }
 
-  /* 配對等高：data-storage↔how-might、co-work↔product-spec、idea↔user-centric。
+  /* 配對等高：co-work↔how-might、mech↔product-spec、art↔hci。
      left/top = 未旋轉方框左上角（卡片固定 112×112，繞中心旋轉）。 */
-  .hero-sticky-data-storage {
+  .hero-sticky-co-work {
     z-index: 1;
     left: 0;
     top: 27%;
     rotate: -15deg;
   }
 
-  .hero-sticky-co-work {
+  .hero-sticky-mech {
     z-index: 2;
     left: 14%;
     top: 14%;
     rotate: -10deg;
   }
 
-  .hero-sticky-idea {
+  .hero-sticky-art {
     z-index: 3;
     left: 28%;
     top: 0;
     rotate: -5deg;
   }
 
-  .hero-sticky-user-centric {
+  .hero-sticky-hci {
     z-index: 4;
     left: 41%;
     top: 0;

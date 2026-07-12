@@ -24,9 +24,9 @@ export default async function Hero() {
         {/* Floating decorations */}
 
         {/* Cursor tags */}
-        <CursorTag text="Product Design"            color="#4B7BEC" className="hero-decoration hero-cursor-brian" />
-        <CursorTag text="Engineering Collaboration" color="#26DE81" icon="/decorations/cursor-engineers.svg" className="hero-decoration hero-cursor-engineers" />
-        <CursorTag text="User & Business"            color="#FD9644" icon="/decorations/cursor-pm.svg"        className="hero-decoration hero-cursor-pm" />
+        <CursorTag text="User Insights"           color="#4B7BEC" className="hero-decoration hero-cursor-brian" />
+        <CursorTag text="Engineering Feasibility" color="#26DE81" icon="/decorations/cursor-engineers.svg" className="hero-decoration hero-cursor-engineers" />
+        <CursorTag text="Business Goals"          color="#FD9644" icon="/decorations/cursor-pm.svg"        className="hero-decoration hero-cursor-pm" />
 
         {/* 底部四個裝飾包成一個 frame（.hero-bottom-group）。
             桌機/平板：display:contents，四個物件沿用各自的絕對定位，frame 不影響版面。
@@ -43,10 +43,10 @@ export default async function Hero() {
             .hero-sticky-group 在桌機/平板是 display:contents（不影響各卡的絕對定位）；
             ≤768px 變成一個置中的容器，6 張卡改用相對 group 的固定 px 排成對稱扇形。 */}
         <div className="hero-sticky-group">
-          <div className="hero-decoration hero-sticky-1 hero-sticky-idea"><StickyNote text="I have a good idea!"  subtitle="Product Thinking" subtitleColor="#7f714c" color="#FFE299" rotation={-3} /></div>
-          <div className="hero-decoration hero-sticky-2 hero-sticky-user-centric"><StickyNote text="User-Centric Design"  subtitle="User Insights" subtitleColor="#695e7f" color="#D3BDFF" rotation={4}  /></div>
-          <div className="hero-decoration hero-sticky-3 hero-sticky-data-storage"><StickyNote text="Data Storage"         subtitle="Systems Thinking" subtitleColor="#597a77" color="#B3F4EF" rotation={-4} /></div>
-          <div className="hero-decoration hero-sticky-4 hero-sticky-co-work"><StickyNote text="Co-work with AI"      subtitle="AI Collaboration" subtitleColor="#546d7f" color="#A8DAFF" rotation={3}  /></div>
+          <div className="hero-decoration hero-sticky-1 hero-sticky-art"><StickyNote text="Art & Aesthetics"     subtitle="Visual Craft" subtitleColor="#7f714c" color="#FFE299" rotation={-3} /></div>
+          <div className="hero-decoration hero-sticky-2 hero-sticky-hci"><StickyNote text="HCI Research"         subtitle="User Research" subtitleColor="#695e7f" color="#D3BDFF" rotation={4}  /></div>
+          <div className="hero-decoration hero-sticky-3 hero-sticky-co-work"><StickyNote text="Co-work with AI"     subtitle="AI Collaboration" subtitleColor="#597a77" color="#B3F4EF" rotation={-4} /></div>
+          <div className="hero-decoration hero-sticky-4 hero-sticky-mech"><StickyNote text="Mechanical Eng."      subtitle="Systems Thinking" subtitleColor="#546d7f" color="#A8DAFF" rotation={3}  /></div>
           <div className="hero-decoration hero-sticky-5 hero-sticky-product-spec"><StickyNote text="Product Spec"         subtitle="Product Strategy" subtitleColor="#7f5751" color="#FFAFA3" rotation={-5} /></div>
           <div className="hero-decoration hero-sticky-6 hero-sticky-how-might"><StickyNote text="How Might We...?"     subtitle="Problem Framing" subtitleColor="#7f6954" color="#FFD3A8" rotation={5}  /></div>
         </div>
