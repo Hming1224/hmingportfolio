@@ -56,9 +56,28 @@ export function TabsHighlight({ className = '', children, ...props }: HTMLAttrib
   );
 }
 
-export function TabsList({ className = '', children, ...props }: HTMLAttributes<HTMLDivElement>) {
+export type TabsSize = 'medium' | 'small';
+
+export interface TabsListProps extends HTMLAttributes<HTMLDivElement> {
+  compactOnMobile?: boolean;
+  size?: TabsSize;
+}
+
+export function TabsList({
+  className = '',
+  children,
+  compactOnMobile = false,
+  size = 'medium',
+  ...props
+}: TabsListProps) {
   return (
-    <div className={className} role="tablist" {...props}>
+    <div
+      className={className}
+      data-compact-on-mobile={compactOnMobile || undefined}
+      data-size={size}
+      role="tablist"
+      {...props}
+    >
       {children}
     </div>
   );

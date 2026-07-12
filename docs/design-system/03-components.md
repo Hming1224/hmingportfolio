@@ -161,7 +161,21 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 ```
 > 新做「同款但不同主色」的卡片時，在 CSS 新增 `.skill-category-card.is-*` variant 覆寫這 3 個區域 token；TSX 只掛 class，不把 hex / rgba 寫進資料陣列。
 
-### 7.7 Case Study Patterns（`components/case-study/`）
+### 7.7 Tabs / segmented control
+
+共用 primitive：`components/animate-ui/primitives/base/tabs.tsx`。正式 pill 外觀由 `.project-tabs-*` 管理。
+
+| size | Tablist | Tab | 字級 | 適用情境 |
+|---|---:|---:|---:|---|
+| `medium`（預設） | `48px` | `40px` | `--fs-body`（16px） | 一般 section 分類切換 |
+| `small` | `40px` | `32px` | `--fs-xs`（12px） | 手機、窄容器、三個以上長標籤 |
+
+- `TabsList size="medium" | "small"` 控制整組尺寸；`compactOnMobile` 會在 `≤768px` 套用 small 規格。
+- Tab label 必須單行，不可因容器變窄而換行。
+- 顏色透過 `--hm-tabs-bg`、`--hm-tabs-active-bg`、`--hm-tabs-text-color`、`--hm-tabs-text-active-color` 切換；route 可在自己的 theme scope 重新映射，不需覆寫 selector。
+- 首頁 Selected Work 使用 medium；Advantech Outcome Walkthrough 桌機使用 medium、手機使用 small。
+
+### 7.8 Case Study Patterns（`components/case-study/`）
 
 - 一般卡片 / 網格 / 媒體：使用 `CaseCard`、`CaseGrid`、`CaseMedia`，結構 class 為 `cs-card-*`、`cs-grid-*`、`cs-media-*`。
 - 段落 lead：使用 `cs-section-lead`；文字色透過 `--cs-section-lead-*` token 調整，不再新增 `ca-lead` / `ca-narrow`。

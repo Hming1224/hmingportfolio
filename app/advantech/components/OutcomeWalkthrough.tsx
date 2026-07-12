@@ -61,7 +61,12 @@ export default function OutcomeWalkthrough({
       </div>
 
       <TabsHighlight className="project-tabs-highlight cs-walkthrough-tabs">
-        <TabsList className="project-tabs-list cs-walkthrough-tabs-list" aria-label={labels.flows}>
+        <TabsList
+          aria-label={labels.flows}
+          className="project-tabs-list cs-walkthrough-tabs-list"
+          compactOnMobile
+          size="medium"
+        >
           {flows.map((flow) => (
             <TabsHighlightItem value={flow.id} className="project-tabs-item" key={flow.id}>
               <TabsTab value={flow.id} className="project-tabs-tab cs-walkthrough-tab">

@@ -180,6 +180,24 @@
   --hm-btn-transition-duration: var(--hm-map-duration-btn);
   --hm-btn-transition-easing: var(--hm-map-easing-btn);
 
+  /* ── Tabs / segmented controls ── */
+  --hm-tabs-bg: var(--hm-surface);
+  --hm-tabs-active-bg: var(--hm-paper);
+  --hm-tabs-text-color: var(--hm-muted);
+  --hm-tabs-text-active-color: var(--hm-ink);
+  --hm-tabs-active-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+  --hm-tabs-radius: var(--hm-radius-pill);
+  --hm-tabs-gap: 4px;
+  --hm-tabs-padding: 4px;
+  --hm-tabs-height-md: 48px;
+  --hm-tabs-control-height-md: 40px;
+  --hm-tabs-font-size-md: var(--fs-body);
+  --hm-tabs-height-sm: 40px;
+  --hm-tabs-control-height-sm: 32px;
+  --hm-tabs-font-size-sm: var(--fs-xs);
+
   /* ── Motion ── */
   --hm-duration-instant: 100ms;
   --hm-duration-fast: 180ms;
@@ -384,10 +402,8 @@
   --cs-walkthrough-copy-gap: var(--hm-space-2xs);
   --cs-walkthrough-copy-max-width: none;
   --cs-walkthrough-title-size: var(--fs-h3);
-  --cs-walkthrough-label-size: var(--fs-body);
   --cs-walkthrough-kicker-size: var(--fs-xs);
   --cs-walkthrough-stage-gap: var(--hm-space-sm);
-  --cs-walkthrough-tab-min-height: var(--hm-btn-height-md);
   --cs-walkthrough-button-min-height: var(--hm-btn-height-sm);
   --cs-walkthrough-dot-size: var(--hm-space-2xs);
   --cs-walkthrough-dot-active-size: var(--hm-space-md);

@@ -9,6 +9,7 @@ import {
   TabsPanel,
   TabsPanels,
   TabsTab,
+  type TabsSize,
 } from "./animate-ui/primitives/base/tabs";
 
 export type WorkCategoryTab = {
@@ -21,14 +22,18 @@ type WorkCategoryTabsProps = {
   tabs: WorkCategoryTab[];
   ariaLabel?: string;
   className?: string;
+  compactOnMobile?: boolean;
   defaultValue?: string;
+  size?: TabsSize;
 };
 
 export default function WorkCategoryTabs({
   tabs,
   ariaLabel,
   className,
+  compactOnMobile = false,
   defaultValue,
+  size = "medium",
 }: WorkCategoryTabsProps) {
   const initialValue = defaultValue ?? tabs[0]?.value ?? "";
   const rootClassName = ["project-tabs", className].filter(Boolean).join(" ");
@@ -36,7 +41,12 @@ export default function WorkCategoryTabs({
   return (
     <Tabs defaultValue={initialValue} className={rootClassName}>
       <TabsHighlight className="project-tabs-highlight">
-        <TabsList className="project-tabs-list" aria-label={ariaLabel}>
+        <TabsList
+          aria-label={ariaLabel}
+          className="project-tabs-list"
+          compactOnMobile={compactOnMobile}
+          size={size}
+        >
           {tabs.map((tab) => (
             <TabsHighlightItem
               value={tab.value}
