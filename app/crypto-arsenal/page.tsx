@@ -47,13 +47,13 @@ export default async function CryptoArsenalPage() {
   const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
   const tocSections: TocSection[] = [
     { id: "cs-sec-overview", title: t("專案總覽") },
-    { id: "cs-sec-background", title: t("專案背景") },
+    { id: "cs-sec-background", title: t("產品介紹") },
     { id: "cs-sec-role", title: t("工作模式") },
     { id: "cs-sec-problem", title: t("問題定義") },
     { id: "cs-sec-current", title: t("介面現況") },
     { id: "cs-sec-decision", title: t("設計理由") },
     { id: "cs-sec-research", title: t("競品參考") },
-    { id: "cs-sec-wireframe", title: t("Wireframe") },
+    { id: "cs-sec-wireframe", title: t("線框稿") },
     { id: "cs-sec-iteration", title: t("設計迭代") },
     { id: "cs-sec-final", title: t("最終介面") },
     { id: "cs-sec-impact", title: t("設計成效") },

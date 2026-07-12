@@ -29,7 +29,7 @@ export default async function BackgroundSection() {
 
   return (
     <section id="cs-sec-background" className="cs-section-surface">
-      <CaseSectionHeader kicker={t("專案背景")} title={t("Crypto Arsenal 是做什麼？")} />
+      <CaseSectionHeader kicker={t("產品介紹")} title={t("Crypto Arsenal 是做什麼？")} />
 
       <p className="cs-section-lead">
         {t("就像傳統金融市場，加密市場裡的交易者透過")}

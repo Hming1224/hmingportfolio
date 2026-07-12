@@ -7,6 +7,7 @@ const en = {
   // ── TOC ──
   "專案總覽": "Project Overview",
   "專案背景": "Overview",
+  "產品介紹": "Product Introduction",
   "工作模式": "My Role",
   "問題定義": "Problem",
   "介面現況": "Current State",
@@ -58,7 +59,7 @@ const en = {
   "使用軟體": "Software Used",
   "負責項目": "Responsibilities",
   "二手研究": "Secondary Research",
-  "線框稿": "Wireframing",
+  "線框稿": "Wireframe",
   "原型設計": "Prototyping",
   "設計交付影片": "Design Handoff Videos",
   "Crypto Arsenal 量化交易平台介面主視覺": "Crypto Arsenal quantitative trading platform interface",
