@@ -2006,8 +2006,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
   border-left: 6px solid transparent;
 }
 
-@media (min-width: 1024px) {
-  .theme-advantech .cs-alarm-demo {
+.theme-advantech .cs-alarm-demo {
     --cs-flex-cluster-direction: column;
     --cs-flex-cluster-align: stretch;
     --cs-flex-cluster-justify: flex-start;
@@ -2017,7 +2016,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     font-size: 12px;
   }
 
-  .theme-advantech .cs-alarm-toggle {
+.theme-advantech .cs-alarm-toggle {
     display: grid;
     grid-template-columns: 1fr 1fr;
     --cs-stack-box-gap: 4px;
@@ -2027,7 +2026,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-stack-box-bg: var(--surface);
   }
 
-  .theme-advantech .cs-alarm-toggle-btn {
+.theme-advantech .cs-alarm-toggle-btn {
     --cs-flex-cluster-direction: row;
     --cs-flex-cluster-align: center;
     --cs-flex-cluster-justify: center;
@@ -2050,18 +2049,18 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
       box-shadow 180ms ease;
   }
 
-  .theme-advantech .cs-alarm-toggle-btn:hover {
+.theme-advantech .cs-alarm-toggle-btn:hover {
     color: var(--ink);
   }
 
-  .theme-advantech .cs-alarm-mode-default:focus-visible ~ .cs-alarm-toggle .cs-alarm-toggle-default,
-  .theme-advantech .cs-alarm-mode-hover:focus-visible ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
+.theme-advantech .cs-alarm-mode-default:focus-visible ~ .cs-alarm-toggle .cs-alarm-toggle-default,
+.theme-advantech .cs-alarm-mode-hover:focus-visible ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
     outline: 3px solid var(--purple);
     outline-offset: -3px;
   }
 
-  .theme-advantech .cs-alarm-mode-default:checked ~ .cs-alarm-toggle .cs-alarm-toggle-default,
-  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
+.theme-advantech .cs-alarm-mode-default:checked ~ .cs-alarm-toggle .cs-alarm-toggle-default,
+.theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-toggle .cs-alarm-toggle-hover {
     background: #fff;
     color: var(--ink);
     box-shadow:
@@ -2069,11 +2068,11 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
       0 8px 24px rgba(0, 0, 0, 0.08);
   }
 
-  .theme-advantech .cs-alarm-arrow {
+.theme-advantech .cs-alarm-arrow {
     display: none;
   }
 
-  .theme-advantech .cs-alarm-panel {
+.theme-advantech .cs-alarm-panel {
     --cs-flex-cluster-direction: row;
     --cs-flex-cluster-justify: center;
     --cs-flex-cluster-min-height: 76px;
@@ -2082,7 +2081,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-flex-cluster-bg: #f6faff;
   }
 
-  .theme-advantech .cs-alarm-state-row {
+.theme-advantech .cs-alarm-state-row {
     --cs-flex-cluster-direction: row;
     --cs-flex-cluster-align: center;
     --cs-flex-cluster-justify: center;
@@ -2091,17 +2090,17 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-flex-cluster-bg: transparent;
   }
 
-  .theme-advantech .cs-alarm-before,
-  .theme-advantech .cs-alarm-after {
+.theme-advantech .cs-alarm-before,
+.theme-advantech .cs-alarm-after {
     display: none;
   }
 
-  .theme-advantech .cs-alarm-mode-default:checked ~ .cs-alarm-before,
-  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
+.theme-advantech .cs-alarm-mode-default:checked ~ .cs-alarm-before,
+.theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
     display: flex;
   }
 
-  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
+.theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
     --cs-flex-cluster-direction: column;
     --cs-flex-cluster-align: stretch;
     --cs-flex-cluster-gap: 8px;
@@ -2111,7 +2110,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     background: transparent;
   }
 
-  .theme-advantech .cs-alarm-tip {
+.theme-advantech .cs-alarm-tip {
     position: absolute;
     bottom: calc(100% + 10px);
     left: 50%;
@@ -2125,19 +2124,76 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     white-space: normal;
   }
 
-  .theme-advantech .cs-alarm-tip-arrow {
+.theme-advantech .cs-alarm-tip-arrow {
     right: auto;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .theme-advantech .cs-alarm-state-row {
+.theme-advantech .cs-alarm-state-row {
     justify-content: center;
   }
 
-  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after .cs-alarm-state-row {
+.theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after .cs-alarm-state-row {
     align-self: center;
-  }
+}
+
+/* Shared animated Tabs contract used by Selected Works and the overview. */
+.theme-advantech .cs-alarm-demo {
+  --cs-flex-cluster-direction: column;
+  --cs-flex-cluster-align: stretch;
+  --cs-flex-cluster-justify: flex-start;
+  --cs-flex-cluster-min-height: 0;
+  --cs-flex-cluster-gap: 10px;
+  --cs-flex-cluster-padding: 12px;
+}
+
+.theme-advantech .cs-alarm-tabs {
+  width: 100%;
+  max-width: none;
+}
+
+.theme-advantech .cs-alarm-toggle {
+  --hm-tabs-bg: var(--hm-blue-50);
+  --hm-tabs-active-bg: var(--cs-surface);
+  --hm-tabs-text-color: var(--hm-ink);
+  --hm-tabs-text-active-color: var(--hm-ink);
+  display: inline-flex;
+  width: 100%;
+}
+
+.theme-advantech .cs-alarm-panels,
+.theme-advantech .cs-alarm-panels > div,
+.theme-advantech .cs-alarm-panels [role="tabpanel"] {
+  width: 100%;
+}
+
+.theme-advantech .cs-alarm-panels .cs-alarm-panel {
+  display: flex;
+  --cs-flex-cluster-direction: row;
+  --cs-flex-cluster-align: center;
+  --cs-flex-cluster-justify: center;
+  --cs-flex-cluster-min-height: 76px;
+  --cs-flex-cluster-padding: 0;
+  --cs-flex-cluster-radius: 12px;
+  --cs-flex-cluster-bg: #f6faff;
+}
+
+.theme-advantech .cs-alarm-panels .cs-alarm-after {
+  --cs-flex-cluster-direction: column;
+  --cs-flex-cluster-align: stretch;
+  --cs-flex-cluster-min-height: 90px;
+  margin-top: 0;
+  padding: 72px 0 0;
+  background: transparent;
+}
+
+.theme-advantech .cs-alarm-panels .cs-alarm-after .cs-alarm-state-row {
+  align-self: center;
+}
+
+.theme-advantech .cs-alarm-tip > span:not(.cs-alarm-tip-arrow) {
+  display: block;
 }
 
 .theme-advantech .cs-sol-fhr {
@@ -2462,6 +2518,8 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 @media (max-width: 1100px) {
   .theme-advantech .cs-role-radial {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
     --cs-stack-box-min-height: 0;
     --cs-stack-box-gap: 16px;
   }
@@ -2628,35 +2686,35 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-copy-title-width: auto;
   }
 
-  /* Alarm-level hover demo keeps the compact public-live horizontal rows. */
+  /* Alarm-level demo uses the same full-width toggle contract at every size. */
   .theme-advantech .cs-alarm-demo {
     --cs-flex-cluster-direction: column;
-    --cs-flex-cluster-align: center !important;
-    --cs-flex-cluster-gap: 12px !important;
-    --cs-flex-cluster-padding: 20px 12px 16px !important;
+    --cs-flex-cluster-align: stretch !important;
+    --cs-flex-cluster-gap: 10px !important;
+    --cs-flex-cluster-padding: 12px !important;
+  }
+
+  .theme-advantech .cs-alarm-toggle {
+    width: 100%;
   }
 
   .theme-advantech .cs-alarm-panel,
   .theme-advantech .cs-alarm-state-row {
     --cs-flex-cluster-direction: row;
     --cs-flex-cluster-align: center;
-    --cs-flex-cluster-justify: flex-start;
+    --cs-flex-cluster-justify: center;
     --cs-flex-cluster-padding: 0;
-    --cs-flex-cluster-bg: transparent;
+    --cs-flex-cluster-bg: #f6faff;
     --cs-flex-cluster-margin: 0;
   }
 
   .theme-advantech .cs-alarm-arrow {
-    display: inline-block;
-    --cs-flex-cluster-direction: row;
-    --cs-flex-cluster-padding: 0;
-    --cs-flex-cluster-bg: transparent;
-    --cs-flex-cluster-transform: none;
+    display: none;
   }
 
-  /* room above the "after" state for its tooltip */
-  .theme-advantech .cs-alarm-after {
-    --cs-flex-cluster-margin: 80px 0 0;
+  .theme-advantech .cs-alarm-mode-hover:checked ~ .cs-alarm-after {
+    margin-top: 0;
+    --cs-flex-cluster-margin: 0;
   }
 
   .theme-advantech .cs-sol-ba {

@@ -4,6 +4,7 @@ import {
   Children,
   createContext,
   isValidElement,
+  useId,
   useContext,
   useMemo,
   useState,
@@ -15,6 +16,7 @@ import {
 import { AnimatePresence, motion, type AnimatePresenceProps } from 'framer-motion';
 
 interface TabsContextValue {
+  highlightId: string;
   value: string;
   setValue: (value: string) => void;
 }
@@ -36,8 +38,12 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export function Tabs({ defaultValue, className = '', children, ...props }: TabsProps) {
+  const id = useId();
   const [value, setValue] = useState(defaultValue);
-  const contextValue = useMemo(() => ({ value, setValue }), [value]);
+  const contextValue = useMemo(
+    () => ({ highlightId: `tabs-active-highlight-${id}`, value, setValue }),
+    [id, value],
+  );
 
   return (
     <TabsContext.Provider value={contextValue}>
@@ -88,13 +94,13 @@ export interface TabsHighlightItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export function TabsHighlightItem({ value, className = '', children, ...props }: TabsHighlightItemProps) {
-  const { value: activeValue } = useTabsContext();
+  const { highlightId, value: activeValue } = useTabsContext();
   const active = activeValue === value;
 
   return (
     <div className={className} data-state={active ? 'active' : 'inactive'} {...props}>
       {active ? (
-        <motion.span className="tabs-active-highlight" layoutId="tabs-active-highlight" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />
+        <motion.span className="tabs-active-highlight" layoutId={highlightId} transition={{ type: 'spring', stiffness: 420, damping: 34 }} />
       ) : null}
       {children}
     </div>
