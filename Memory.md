@@ -1,6 +1,10 @@
 # Project Memory
 
-## 2026-07-05 Design System docs — Example surface 撰寫規範
+## 2026-07-12 案例頁中文文案：zh 字串三處同步（改文案必讀）
+
+- **踩坑機制**：各案例頁（advantech / crypto-arsenal / laushu）的 `i18n.ts` 是「zh 字串 → en 字串」的 key-map，同一句 zh 原文可能同時存在於 ① `sections/*.tsx`（JSX 或 `t("...")`）、② `data.ts`、③ `i18n.ts` 的 key。**改任何一句中文，必須先 Grep 全 repo 找出所有出現處並全部同步改成一模一樣的新句**，漏一處英文版查 key 就會失敗、退回顯示中文。改完用 Grep 驗證舊句 0 筆。
+- **文案基準（2026-07-12 全站去 AI 味 pass，commit 35d0428）**：「不是 A 而是 B」句式每頁最多 1 次（advantech 留「讓 AI 主動出現在需要判斷的地方，而不是等人來問。」）；台灣用語統一「使用者／回饋／週」；中英文與數字之間半形空格；「賦能」標題與「落地」是 Hming 明確決定保留的詞，不要「順手修正」。
+- advantech `i18n.ts` 曾累積 orphan key（來源端文案改版後舊 key 沒清），本次已清 5 個；日後改文案順手 Grep 確認 key 仍被引用。
 
 寫 `/design-system` 元件文件時，Example 區只放「視覺 / 狀態展示」，不要塞用途、流程、邊界、無障礙、真實使用情境或實作說明。這些「為什麼 / 何時 / 如何用」的資訊要移到對應的資訊架構 section，Example 標籤只在需要區分 variant / state 時才出現。
 
