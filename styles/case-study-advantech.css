@@ -128,59 +128,185 @@
 }
 
 /* ── 02 Overview ── */
-.theme-advantech .cs-overview .cs-overview-body {
-  --cs-stack-box-gap: 0;
-  --cs-stack-box-margin: 0 0 24px;
-}
-
-.theme-advantech .cs-overview-tldr {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: var(--hm-space-md);
-  margin-bottom: var(--hm-space-xl);
-}
-
-.theme-advantech .cs-overview-tldr-item {
-  grid-column: span 2;
-  --cs-stack-box-gap: var(--hm-space-sm);
-  padding: var(--hm-space-lg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-}
-
-.theme-advantech .cs-overview-tldr-item:nth-child(4),
-.theme-advantech .cs-overview-tldr-item:nth-child(5) {
-  grid-column: span 3;
-}
-
-.theme-advantech .cs-overview-tldr-label,
-.theme-advantech .cs-overview-tldr-text,
-.theme-advantech .cs-overview-prototype-kicker,
-.theme-advantech .cs-overview-prototype-title {
+.theme-advantech .cs-walkthrough-kicker,
+.theme-advantech .cs-walkthrough-title {
   margin: 0;
 }
 
-.theme-advantech .cs-overview-tldr-label,
-.theme-advantech .cs-overview-prototype-kicker {
+.theme-advantech .cs-walkthrough-kicker {
   color: var(--theme-primary, #005796);
 }
 
-.theme-advantech .cs-overview-prototype {
-  --cs-stack-box-gap: var(--hm-space-lg);
+/* ── 02a Overview outcome walkthrough ── */
+.theme-advantech .cs-outcome-walkthrough {
+  display: grid;
+  gap: var(--hm-space-lg);
   padding: var(--hm-space-xl);
-  border-radius: 12px;
-  background: #f1f8fd;
+  border-radius: var(--hm-radius-lg);
+  background: var(--cs-surface-soft, #fafcfe);
+  border: 1px solid var(--cs-line-soft);
 }
 
-.theme-advantech .cs-overview-prototype-copy {
-  --cs-stack-box-gap: var(--hm-space-xs);
+.theme-advantech .cs-walkthrough-copy {
+  display: grid;
+  gap: var(--hm-space-xs);
   max-width: 760px;
 }
 
-.theme-advantech .cs-overview-prototype-title {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+.theme-advantech .cs-walkthrough-title {
+  font-size: var(--fs-h3);
   line-height: 1.35;
+  color: var(--cs-text-heading);
+}
+
+/* 沿用 Selected Works 共用 tabs，只覆寫案例頁所需的滿版尺寸。 */
+.theme-advantech .cs-walkthrough-tabs {
+  width: 100%;
+  max-width: none;
+}
+
+.theme-advantech .cs-walkthrough-tab {
+  min-height: 48px;
+  padding: var(--hm-space-2xs) var(--hm-space-sm);
+  font-size: var(--fs-sm);
+  line-height: 1.3;
+}
+
+/* Stage：上下排列，圖面全寬放大，資訊列在下方 */
+.theme-advantech .cs-walkthrough-stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hm-space-md);
+  outline: none;
+}
+
+.theme-advantech .cs-walkthrough-stage:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 4px;
+  border-radius: var(--hm-radius-md);
+}
+
+.theme-advantech .cs-walkthrough-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--cs-line-soft);
+  border-radius: var(--hm-radius-md);
+  background: #ffffff;
+  aspect-ratio: 16 / 9;
+}
+
+.theme-advantech .cs-walkthrough-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.theme-advantech .cs-walkthrough-frame img.is-active {
+  opacity: 1;
+}
+
+.theme-advantech .cs-walkthrough-panel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "progress caption controls"
+    "dots dots dots";
+  align-items: center;
+  column-gap: var(--hm-space-lg);
+  row-gap: var(--hm-space-md);
+}
+
+.theme-advantech .cs-walkthrough-progress {
+  grid-area: progress;
+  margin: 0;
+  color: var(--cs-accent);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.theme-advantech .cs-walkthrough-caption {
+  grid-area: caption;
+  margin: 0;
+  color: var(--cs-text-secondary);
+}
+
+.theme-advantech .cs-walkthrough-controls {
+  grid-area: controls;
+  display: flex;
+  gap: var(--hm-space-2xs);
+}
+
+.theme-advantech .cs-walkthrough-btn {
+  padding: var(--hm-space-2xs) var(--hm-space-md);
+  border: 1px solid var(--cs-line-soft);
+  border-radius: var(--hm-map-radius-pill);
+  background: #ffffff;
+  color: var(--cs-ink);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.theme-advantech .cs-walkthrough-btn:hover:not(:disabled) {
+  border-color: var(--cs-accent);
+  color: var(--cs-accent);
+}
+
+.theme-advantech .cs-walkthrough-btn--primary,
+.theme-advantech .cs-walkthrough-btn--primary:hover:not(:disabled) {
+  border-color: var(--cs-accent);
+  background: var(--cs-accent);
+  color: #ffffff;
+}
+
+.theme-advantech .cs-walkthrough-btn:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.theme-advantech .cs-walkthrough-btn:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 2px;
+}
+
+.theme-advantech .cs-walkthrough-dots {
+  grid-area: dots;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-2xs);
+}
+
+.theme-advantech .cs-walkthrough-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--hm-map-radius-pill);
+  background: var(--cs-line);
+  cursor: pointer;
+  transition: background 0.2s ease, width 0.2s ease;
+}
+
+.theme-advantech .cs-walkthrough-dot:hover {
+  background: var(--cs-line-strong);
+}
+
+.theme-advantech .cs-walkthrough-dot[aria-current="true"] {
+  width: 24px;
+  background: var(--cs-accent);
+}
+
+.theme-advantech .cs-walkthrough-dot:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 2px;
 }
 
 .theme-advantech .cs-alarm-demo--interactive {
@@ -237,34 +363,25 @@
   --cs-flex-cluster-padding: 84px 12px 12px;
 }
 
-@media (max-width: 1023px) {
-  .theme-advantech .cs-overview-tldr {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .theme-advantech .cs-overview-tldr-item,
-  .theme-advantech .cs-overview-tldr-item:nth-child(4),
-  .theme-advantech .cs-overview-tldr-item:nth-child(5) {
-    grid-column: span 1;
-  }
-
-  .theme-advantech .cs-overview-tldr-item:last-child {
-    grid-column: 1 / -1;
+@media (max-width: 768px) {
+  .theme-advantech .cs-outcome-walkthrough {
+    padding: var(--hm-space-md);
   }
 }
 
 @media (max-width: 768px) {
-  .theme-advantech .cs-overview-tldr {
-    grid-template-columns: 1fr;
+  /* 資訊列改單欄堆疊：步數＋說明在上，控制鍵與圓點在下 */
+  .theme-advantech .cs-walkthrough-panel {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "progress caption"
+      "controls controls"
+      "dots dots";
+    column-gap: var(--hm-space-sm);
   }
 
-  .theme-advantech .cs-overview-tldr-item:last-child {
-    grid-column: auto;
-  }
-
-  .theme-advantech .cs-overview-tldr-item,
-  .theme-advantech .cs-overview-prototype {
-    padding: var(--hm-space-md);
+  .theme-advantech .cs-walkthrough-controls {
+    justify-content: flex-start;
   }
 }
 

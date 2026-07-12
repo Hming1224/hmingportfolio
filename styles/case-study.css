@@ -369,6 +369,95 @@
   line-height: 1.7;
 }
 
+/* CaseOverview 共用骨架：導言與整合摘要的垂直節奏 */
+.cs-overview-lead {
+  margin-bottom: var(--cs-overview-lead-gap, var(--hm-space-lg));
+}
+
+/* 關鍵數據與 TL;DR 成對呈現，避免兩組摘要彼此斷裂。 */
+.cs-overview-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: var(--cs-overview-summary-gap, var(--hm-space-xl));
+  border: 1px solid var(--cs-overview-summary-border, var(--cs-line-soft, var(--cs-line)));
+  border-radius: var(--hm-radius-lg);
+  background: var(--cs-overview-summary-bg, var(--surface, #ffffff));
+  overflow: hidden;
+}
+
+.cs-overview-summary-item {
+  display: grid;
+  grid-template-columns: minmax(112px, 0.38fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--hm-space-lg);
+  padding: var(--hm-space-xl);
+}
+
+.cs-overview-summary-item:nth-child(even) {
+  border-left: 1px solid var(--cs-overview-summary-border, var(--cs-line-soft, var(--cs-line)));
+}
+
+.cs-overview-summary-item:nth-child(n + 3) {
+  border-top: 1px solid var(--cs-overview-summary-border, var(--cs-line-soft, var(--cs-line)));
+}
+
+.cs-overview-stat,
+.cs-overview-summary-copy {
+  display: grid;
+  gap: var(--hm-space-3xs);
+}
+
+.cs-overview-stat-value {
+  color: var(--cs-overview-stat-value-color, var(--cs-accent));
+  font-size: var(--cs-overview-stat-value-size, var(--fs-h3));
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.cs-overview-stat-label {
+  color: var(--cs-overview-stat-label-color, var(--cs-text-heading));
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.cs-overview-stat-note {
+  color: var(--cs-overview-stat-note-color, var(--cs-text-muted));
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+
+.cs-overview-summary-label,
+.cs-overview-summary-text {
+  margin: 0;
+}
+
+.cs-overview-summary-label {
+  color: var(--cs-overview-summary-label-color, var(--cs-accent));
+}
+
+@media (max-width: 1023px) {
+  .cs-overview-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-overview-summary-item:nth-child(even) {
+    border-left: 0;
+  }
+
+  .cs-overview-summary-item:nth-child(n + 2) {
+    border-top: 1px solid var(--cs-overview-summary-border, var(--cs-line-soft, var(--cs-line)));
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-overview-summary-item {
+    grid-template-columns: 1fr;
+    gap: var(--hm-space-md);
+    padding: var(--hm-space-lg);
+  }
+}
+
 .cs-card-kicker {
   display: inline-block;
   width: fit-content;

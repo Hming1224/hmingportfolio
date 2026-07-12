@@ -21,7 +21,7 @@ export default async function ResultSection() {
       <div className="cs-result-content cs-stack-box">
         <p className="cs-result-kicker cs-section-kicker">REFLECTIONS</p>
         <h2 className="cs-heading-white" style={{ marginBottom: 8 }}>
-          {t("設計真正融入工作流程、並建立信任感的 AI 體驗。")}
+          {t("四次關鍵轉折，重新定義我如何設計工業 AI。")}
         </h2>
         <div className="cs-divider-white" />
         <CaseGrid variant="two" className="cs-result-grid">
