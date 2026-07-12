@@ -77,20 +77,11 @@ export default async function Hero() {
             textAlign="inherit"
           />
 
-          <figure className="hero-quote-card">
-            <span className="hero-quote-mark" aria-hidden="true">“</span>
-            <blockquote className="hero-quote-primary">
-              {t.rich('positioning', {
-                mark: (chunks) => (
-                  <span className="highlight-text hero-highlight-purple">
-                    <span className="highlight-text-mark" aria-hidden="true" />
-                    <span className="highlight-text-content">{chunks}</span>
-                  </span>
-                ),
-              })}
-            </blockquote>
-            <p className="hero-quote-description">{t('description')}</p>
-          </figure>
+          <p className="hero-subtitle">
+            {t.rich('description', {
+              shiny: (chunks) => <span className="hero-shiny-text">{chunks}</span>,
+            })}
+          </p>
         </div>
 
         <div className="hero-actions">
