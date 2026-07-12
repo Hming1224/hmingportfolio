@@ -23,7 +23,7 @@ export default async function OverviewSection() {
       title={t("把只能回交易所處理的風險控制，帶回量化策略平台內。")}
     >
       <p className="cs-section-lead">
-        {t("這個專案不是單純新增平倉按鈕，而是補上人與自動策略之間缺少的控制流程：讓交易者能在需要時介入，又不讓策略因外部操作失去狀態。")}
+        {t("這個專案要補的，是人與自動策略之間缺少的那段控制流程：讓交易者能在需要時介入，又不讓策略因為外部操作而失去狀態。表面上像是加一顆平倉按鈕，實際要解的是這段控制流程。")}
       </p>
 
       <div className="cs-overview-tldr" role="list" aria-label={t("專案快速總覽")}>

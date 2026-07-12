@@ -112,8 +112,8 @@ const en = {
     "Understand the paper-based filing flow, break down stakeholder needs, and improve the digital filing experience.",
   "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。":
     "Optimized the flow of a company sending forms to contractors: adding contractors, creating forms, and merging forms.",
-  "專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。":
-    "The core wasn't simply moving a paper form online — it was first unpacking the task relationships between accountants, companies, contractors and admins, then turning the most efficiency-critical flows into an actionable product prototype.",
+  "這個專案真正要解的，是會計師、公司、外包工作者與管理員之間的協作關係：先拆清楚誰該做什麼，再把最影響效率的流程整理成可以直接操作的產品原型。把紙本表單搬上線只是表面。":
+    "What this project really tackles is the collaboration between accountants, companies, contractors, and admins: first getting clear on who does what, then turning the most efficiency-critical flows into a directly usable product prototype. Moving the paper form online is only the surface.",
   "建立外包人員資料庫": "Build a contractor database",
   "使用者掌握外包人員資料，日後有需求可立即找人展開合作。":
     "Users keep contractor records on hand, so they can find people and start collaborating instantly when needed.",
@@ -135,13 +135,13 @@ const en = {
   "訪談勞贖負責人並自行收集資料，了解外包與勞報單簽署流程，釐清會計師、公司、外包工作者三者關係。此平台至少包含四種核心利害關係人：":
     "By interviewing the Laushu owner and gathering data, I mapped the outsourcing and form-signing flow and clarified the relationship between accountant, company and contractor. The platform involves at least four core stakeholders:",
   "會計師": "Accountant",
-  "勞贖主要用戶，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。":
+  "勞贖主要使用者，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。":
     "Laushu's primary user — sends forms through Laushu and helps companies get contractor confirmations and compile records (accounting firm / accountant / bookkeeper).",
   "公司使用者": "Company user",
   "會計事務所的主要服務對象，會計事務所協助公司向旗下外包工作者開立勞報單。":
     "The accounting firm's main client; the firm helps the company issue forms to its contractors.",
   "外包工作者": "Contractor",
-  "勞贖的終端用戶，確認勞報單是否成立，並向公司領取工資。":
+  "勞贖的終端使用者，確認勞報單是否成立，並向公司領取工資。":
     "Laushu's end user — confirms whether a form is valid and collects payment from the company.",
   "勞贖管理員": "Laushu admin",
   "管理會計師帳號。": "Manages accountant accounts.",
@@ -195,7 +195,7 @@ const en = {
   "使用者動機、行為、目標": "User motivation, behavior, goals",
   "使用者潛在的需求": "Latent user needs",
   "用例重要程度": "Use-case importance",
-  "使用者反饋": "User feedback",
+  "使用者回饋": "User feedback",
   "系統易用性分數": "System usability score",
 
   // ── Survey / interview structure ──

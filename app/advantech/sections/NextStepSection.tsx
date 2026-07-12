@@ -35,7 +35,7 @@ export default async function NextStepSection() {
 
       <div className="cs-ns-vision cs-stack-box">
         <p className="cs-ns-vision-title cs-copy-title">{t("智慧工作流程平台願景")}</p>
-        <p className="cs-ns-vision-text cs-copy-body">最終，我們預期這套 AI 系統不只是提升 Chatbot 的回答能力，而是能逐步成為支援廠務管理決策的智慧工作流程平台。隨著 AI 資料庫更加完整、模型判斷能力持續提升，系統將能幫助使用者更快理解數據、預測風險、取得行動建議，進一步提升工作效率，並推動更智慧、即時且資料驅動的能源管理流程。</p>
+        <p className="cs-ns-vision-text cs-copy-body">最終，我們期待這套 AI 系統能從「把 Chatbot 回答得更好」，逐步長成支援廠務管理決策的智慧工作流程平台。隨著 AI 資料庫更完整、模型判斷力持續提升，系統會幫使用者更快讀懂數據、預測風險、拿到行動建議。</p>
       </div>
     </section>
   );

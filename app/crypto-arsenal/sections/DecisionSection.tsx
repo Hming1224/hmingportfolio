@@ -43,7 +43,7 @@ export default async function DecisionSection() {
       </CaseGrid>
       <p className="cs-section-lead cs-section-lead--medium-gap">
         {t(
-          "所以方向很明確：把平倉收進 CA 內。手動平倉只結束當下這一筆倉位、策略進入空倉，未來再符合開倉條件時機器人仍會自動開倉，讓用戶可以同時享有自動化交易的紀律以及自主控管收益的權利。",
+          "所以方向很明確：把平倉收進 CA 內。手動平倉只結束當下這一筆倉位、策略進入空倉，未來再符合開倉條件時機器人仍會自動開倉，讓使用者可以同時享有自動化交易的紀律以及自主控管收益的權利。",
         )}
       </p>
     </section>

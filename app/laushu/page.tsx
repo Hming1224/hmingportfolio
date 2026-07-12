@@ -72,9 +72,9 @@ const overviewCards = [
 ];
 
 const stakeholderCards = [
-  { title: "會計師", body: "勞贖主要用戶，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。" },
+  { title: "會計師", body: "勞贖主要使用者，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。" },
   { title: "公司使用者", body: "會計事務所的主要服務對象，會計事務所協助公司向旗下外包工作者開立勞報單。" },
-  { title: "外包工作者", body: "勞贖的終端用戶，確認勞報單是否成立，並向公司領取工資。" },
+  { title: "外包工作者", body: "勞贖的終端使用者，確認勞報單是否成立，並向公司領取工資。" },
   { title: "勞贖管理員", body: "管理會計師帳號。" },
 ];
 
@@ -102,7 +102,7 @@ const researchTable = {
         ["報帳操作步驟", "使用軟體", "資料輸入習慣 / 順序"],
         ["使用者動機、行為、目標"],
         ["使用者潛在的需求", "用例重要程度"],
-        ["使用者反饋", "系統易用性分數"],
+        ["使用者回饋", "系統易用性分數"],
       ],
     },
   ],
@@ -482,7 +482,7 @@ function OverviewSection() {
     <section id="cs-sec-overview" className="cs-section laushu-overview-section">
       <LaushuHead eyebrow="專案總覽" title="讓建檔、計算、寄送與回簽，從紙本往返變成一條數位流程。" />
       <p className="cs-section-lead cs-section-lead--wide cs-section-lead--bottom-gap">
-        專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
+        這個專案真正要解的，是會計師、公司、外包工作者與管理員之間的協作關係：先拆清楚誰該做什麼，再把最影響效率的流程整理成可以直接操作的產品原型。把紙本表單搬上線只是表面。
       </p>
       <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--overview laushu-overview-tldr">
         {overviewCards.map((card) => (
