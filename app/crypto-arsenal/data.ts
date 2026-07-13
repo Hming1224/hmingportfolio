@@ -601,34 +601,50 @@ export const iterationBoards: IterationBoard[] = [
 ];
 
 export interface FinalFlow {
+  id: string;
   kicker: string;
   title: string;
+  overviewLabel: string;
+  overviewProgressLabel: string;
   video: string;
   mask?: string;
   alt: string;
+  overviewCaption: string;
 }
 
 export const finalFlows: FinalFlow[] = [
   {
+    id: "limit-close",
     kicker: "操作流程 1",
     title: "CA 內手動限價平倉",
+    overviewLabel: "手動限價平倉",
+    overviewProgressLabel: "流程01",
     video: `${IMG}/final/close-position-limit.mp4`,
     mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動限價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口",
+    overviewCaption: "在 Trading Details 中選擇限價平倉，輸入價格與數量後確認送出。",
   },
   {
+    id: "market-close",
     kicker: "操作流程 1",
     title: "CA 內手動市價平倉",
+    overviewLabel: "手動市價平倉",
+    overviewProgressLabel: "流程02",
     video: `${IMG}/final/close-position-market.mp4`,
     mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動市價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口",
+    overviewCaption: "在 Trading Details 中選擇市價平倉，輸入數量後立即完成。",
   },
   {
+    id: "take-profit-stop-loss",
     kicker: "操作流程 2",
     title: "CA 內手動止盈止損",
+    overviewLabel: "手動止盈止損",
+    overviewProgressLabel: "流程03",
     video: `${IMG}/final/tp-sl-subtitled.mp4`,
     mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動止盈止損的最終介面：Trading Details 彈窗中的 TP/SL 設定入口",
+    overviewCaption: "在倉位列表中設定止盈與止損價格，策略同步保留運行狀態。",
   },
 ];
 
