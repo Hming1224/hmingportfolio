@@ -1371,7 +1371,7 @@
   .hero-sticky-how-might {
     z-index: 6;
     right: auto;
-    left: calc(69% - 1px);
+    left: 69%;
     top: 27%;
     rotate: 15deg;
   }
@@ -1535,6 +1535,7 @@
 
   .section-heading {
     gap: 24px;
+    overflow: clip;
     padding: 48px 0;
   }
 
