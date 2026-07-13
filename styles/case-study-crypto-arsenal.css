@@ -507,16 +507,6 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   justify-content: center;
 }
 
-.theme-crypto-arsenal #cs-sec-overview .ca-overview-impact-metrics .cs-metric-value {
-  margin-bottom: 4px;
-  font-size: clamp(30px, 3.6vw, 44px);
-  white-space: nowrap;
-}
-
-.theme-crypto-arsenal #cs-sec-overview .ca-overview-impact-metrics .cs-metric-label {
-  font-size: var(--fs-body);
-}
-
 .theme-crypto-arsenal #cs-sec-overview .ca-overview-impact-balance {
   grid-column: 1 / -1;
   margin: 0;
@@ -696,17 +686,6 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 }
 
 /* ── RWD ── */
-@media (min-width: 1280px) {
-  .theme-crypto-arsenal #cs-sec-overview .cs-overview-stage-copy {
-    align-self: stretch;
-  }
-
-  .theme-crypto-arsenal #cs-sec-overview .cs-overview-stage-details {
-    flex: 1;
-    align-content: space-between;
-  }
-}
-
 @media (max-width: 1023px) {
   .theme-crypto-arsenal #cs-sec-impact .cs-metric-grid {
     grid-template-columns: 1fr;

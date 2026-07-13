@@ -201,13 +201,15 @@ function OverviewEvidence({ item }: { item: CaseOverviewItem }) {
   if (item.media) {
     return (
       <figure className="cs-overview-stage-media">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={item.media.src}
-          alt={item.media.alt}
-          className={`is-${item.media.fit ?? 'cover'}`}
-          draggable={false}
-        />
+        <div className="cs-overview-stage-media-viewport">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.media.src}
+            alt={item.media.alt}
+            className={`is-${item.media.fit ?? 'cover'}`}
+            draggable={false}
+          />
+        </div>
         {item.media.caption ? <figcaption>{item.media.caption}</figcaption> : null}
       </figure>
     );
