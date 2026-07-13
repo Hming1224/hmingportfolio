@@ -1537,6 +1537,7 @@
     gap: 24px;
     overflow: clip;
     padding: 48px 0;
+    width: calc(100vw - 1px);
   }
 
   .section-heading > span:first-child {
