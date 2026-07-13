@@ -44,6 +44,7 @@ export function Accordion({
   onValueChange,
   type = "single",
   value,
+  style,
 }: {
   children: ReactNode;
   className?: string;
@@ -51,6 +52,7 @@ export function Accordion({
   onValueChange?: (value: string | string[]) => void;
   type?: AccordionType;
   value?: string | string[];
+  style?: React.CSSProperties;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState(() => toArray(defaultValue));
@@ -89,7 +91,7 @@ export function Accordion({
 
   return (
     <AccordionContext.Provider value={context}>
-      <div className={cn("hm-accordion", className)} ref={rootRef}>
+      <div className={cn("hm-accordion", className)} ref={rootRef} style={style}>
         {children}
       </div>
     </AccordionContext.Provider>

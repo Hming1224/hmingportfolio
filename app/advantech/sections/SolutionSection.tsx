@@ -241,7 +241,7 @@ export default async function SolutionSection() {
               <p className="cs-sol-ftitle">Feature 1.1｜自主需量分析</p>
             </div>
             <div className="cs-sol-fcbody">
-              <p className="cs-sol-fsub">由使用者自主操控介面，從預測、超約預警到 AI 建議，讓能源管理不只看圖表，而是能直接支援決策。</p>
+              <p className="cs-sol-fsub">由使用者自主操控介面，從預測、超約預警一路到 AI 建議，讓能源管理從看圖表推進到直接支援決策。</p>
               <div className="cs-sol-dpts cs-stack-box">
                 <div className="cs-sol-dpt cs-stack-box">
                   <p className="cs-sol-dpt-l cs-copy-title">超約風險分析</p>
@@ -270,7 +270,7 @@ export default async function SolutionSection() {
         <FeatureStep
           src="/projects/advantech/solution/final-f11-03.webp"
           alt="Feature 1.1 AI 需量分析回覆"
-          note={<p>AI chatbot 從資料庫中讀取相關資訊，並整合 LLM 回答框架，提供需量分析與折線圖表。另外，提供問題模組供用戶持續深入提問。</p>}
+          note={<p>AI chatbot 從資料庫中讀取相關資訊，並整合 LLM 回答框架，提供需量分析與折線圖表。另外，提供問題模組供使用者持續深入提問。</p>}
         />
         <div className="cs-sol-fconn" aria-hidden="true"><img src="/projects/advantech/solution/connector-1.svg" alt="" suppressHydrationWarning /></div>
         <FeatureStep
@@ -296,7 +296,7 @@ export default async function SolutionSection() {
               <p className="cs-sol-ftitle">Feature 1.2｜主動通知預警</p>
             </div>
             <div className="cs-sol-fcbody">
-              <p className="cs-sol-fsub">由系統後台間段式預測，將問題嚴重程度分級預告用戶，促成決策者快速擬定解決方案。</p>
+              <p className="cs-sol-fsub">由系統後台週期性預測，將問題嚴重程度分級預告使用者，促成決策者快速擬定解決方案。</p>
               <div className="cs-sol-dpts cs-stack-box">
                 <div className="cs-sol-dpt cs-stack-box">
                   <p className="cs-sol-dpt-l cs-copy-title">超約風險分析</p>

@@ -7,7 +7,7 @@ const IMG = "/projects/crypto-arsenal";
 export const heroTasks = ["二手研究", "線框稿", "原型設計", "設計交付影片"];
 
 export const flowSteps = [
-  "二手研究 / 用戶反饋",
+  "二手研究 / 使用者回饋",
   "UI flow 提案",
   "線框稿設計",
   "與 PO 討論可行性",
@@ -308,21 +308,21 @@ export const wireframeBoards: WireframeBoard[] = [
             alt: "CA 內手動平倉方案一 step 1：在策略詳情頁的趨勢圖旁呈現倉位資訊",
             width: WF_W,
             height: WF_H,
-            caption: "右上角新增Exchange Record的Tab，點擊後可以看到倉位資訊，選擇對應的倉位，點擊close按鈕。",
+            caption: "右上角新增 Exchange Record 的 Tab，點擊後可以看到倉位資訊，選擇對應的倉位，點擊 close 按鈕。",
           },
           {
             img: `${WIRE}/close-option-1-step-2.png`,
             alt: "CA 內手動平倉方案一 step 2：使用者在 Matrix Chart 旁查看平倉資訊",
             width: WF_W,
             height: WF_H,
-            caption: "彈出Pop-up視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。",
+            caption: "彈出 Pop-up 視窗，預設以限價平倉，輸入金額與數量，最後再點 confirm 按鈕。",
           },
           {
             img: `${WIRE}/close-option-1-step-3.png`,
             alt: "CA 內手動平倉方案一 step 3：使用者完成平倉設定",
             width: WF_W,
             height: WF_H,
-            caption: "也可以在最上方的點選市價平倉，輸入數量後，最後再點confirm按鈕。",
+            caption: "也可以在最上方的點選市價平倉，輸入數量後，最後再點 confirm 按鈕。",
           },
         ],
         reasonTitle: "未採納原因",
@@ -337,33 +337,33 @@ export const wireframeBoards: WireframeBoard[] = [
             alt: "CA 內手動平倉方案二 step 1：以 Dropdown List 顯示倉位資訊",
             width: WF_W,
             height: 1084,
-            caption: "在原本的策略機器人bar右方加入交易資訊欄，顯示該策略目前倉位數量，以及交易筆數，點擊該按鈕。",
+            caption: "在原本的策略機器人 bar 右方加入交易資訊欄，顯示該策略目前倉位數量，以及交易筆數，點擊該按鈕。",
           },
           {
             img: `${WIRE}/close-option-2-step-2.png`,
             alt: "CA 內手動平倉方案二 step 2：展開 Dropdown List 查看倉位",
             width: WF_W,
             height: 1084,
-            caption: "顯示下拉選單，可看到倉位資訊，選擇對應的倉位，點擊close按鈕。",
+            caption: "顯示下拉選單，可看到倉位資訊，選擇對應的倉位，點擊 close 按鈕。",
           },
           {
             img: `${WIRE}/close-option-2-step-3.png`,
             alt: "CA 內手動平倉方案二 step 3：在 Dropdown List 中選擇平倉操作",
             width: WF_W,
             height: WF_H,
-            caption: "彈出Pop-up視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。",
+            caption: "彈出 Pop-up 視窗，預設以限價平倉，輸入金額與數量，最後再點 confirm 按鈕。",
           },
           {
             img: `${WIRE}/close-option-2-step-4.png`,
             alt: "CA 內手動平倉方案二 step 4：完成平倉設定",
             width: WF_W,
             height: WF_H,
-            caption: "也可以在最上方的點選市價平倉，輸入數量後，最後再點confirm按鈕。",
+            caption: "也可以在最上方的點選市價平倉，輸入數量後，最後再點 confirm 按鈕。",
           },
         ],
         reasonTitle: "未採納原因",
         reasonBody:
-          "用 Dropdown 顯示倉位資訊於該運行的策略機器人 bar 下方會導致無法完整呈現其他策略機器人，交易所也有限制至多一次呈現 20 筆訂單 / 倉位的限制。",
+          "用 Dropdown 把倉位資訊顯示在該策略機器人 bar 下方，會擋到其他策略機器人的完整呈現；加上交易所本身也限制一次最多顯示 20 筆訂單 / 倉位。",
       },
       {
         label: "最終方案：Sidebar",
@@ -374,33 +374,33 @@ export const wireframeBoards: WireframeBoard[] = [
             alt: "CA 內手動平倉最終方案 step 1：從策略詳情頁進入 Sidebar 流程",
             width: WF_W,
             height: WF_H,
-            caption: "將原本action欄位，另外新增view details按鈕，點擊該按鈕。",
+            caption: "將原本 action 欄位，另外新增 view details 按鈕，點擊該按鈕。",
           },
           {
             img: `${WIRE}/close-final-step-2.png`,
             alt: "CA 內手動平倉最終方案 step 2：Sidebar 展開可操作倉位",
             width: WF_W,
             height: WF_H,
-            caption: "彈出Pop-up視窗，可看到倉位資訊，選擇對應的倉位，點擊close按鈕。",
+            caption: "彈出 Pop-up 視窗，可看到倉位資訊，選擇對應的倉位，點擊 close 按鈕。",
           },
           {
             img: `${WIRE}/close-final-step-3.png`,
             alt: "CA 內手動平倉最終方案 step 3：選擇平倉項目",
             width: WF_W,
             height: WF_H,
-            caption: "從右邊sidebar彈出視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。",
+            caption: "從右邊 sidebar 彈出視窗，預設以限價平倉，輸入金額與數量，最後再點 confirm 按鈕。",
           },
           {
             img: `${WIRE}/close-final-step-4.png`,
             alt: "CA 內手動平倉最終方案 step 4：確認平倉參數",
             width: WF_W,
             height: WF_H,
-            caption: "也可以在最上方的點選市價平倉，輸入數量後，最後再點confirm按鈕。",
+            caption: "也可以在最上方的點選市價平倉，輸入數量後，最後再點 confirm 按鈕。",
           },
         ],
         reasonTitle: "採納理由",
         reasonBody:
-          "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，用戶可以點選有興趣機器人並加入到右邊清單中。將用戶原本就已經熟悉 UI 流程整合到新的倉位資訊設計流程中，提升用戶操作的流暢度。",
+          "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，使用者可以點選有興趣機器人並加入到右邊清單中。平倉沿用這套大家已經熟悉的操作，讓使用者不用為了平倉重新適應一套新流程。",
         referenceImages: WATCHLIST_REFERENCES,
       },
     ],
@@ -418,33 +418,33 @@ export const wireframeBoards: WireframeBoard[] = [
             alt: "CA 內手動止盈止損方案一 step 1：以 Checkbox 形式設定 TP/SL",
             width: WF_W,
             height: WF_H,
-            caption: "將原本action欄位，另外新增view details按鈕，點擊該按鈕。",
+            caption: "將原本 action 欄位，另外新增 view details 按鈕，點擊該按鈕。",
           },
           {
             img: `${WIRE}/tpsl-option-1-step-2.png`,
             alt: "CA 內手動止盈止損方案一 step 2：勾選 Checkbox 進入 TP/SL 設定",
             width: WF_W,
             height: WF_H,
-            caption: "彈出Pop-up視窗，可看到倉位資訊，TP/SL的checkbox在該倉位的正下方。",
+            caption: "彈出 Pop-up 視窗，可看到倉位資訊，TP/SL 的 checkbox 在該倉位的正下方。",
           },
           {
             img: `${WIRE}/tpsl-option-1-step-3.png`,
             alt: "CA 內手動止盈止損方案一 step 3：設定止盈與止損條件",
             width: WF_W,
             height: WF_H,
-            caption: "勾選TP/SL的checkbox，在右邊輸入止盈止損價格，最後點選add按鈕。",
+            caption: "勾選 TP/SL 的 checkbox，在右邊輸入止盈止損價格，最後點選 add 按鈕。",
           },
           {
             img: `${WIRE}/tpsl-option-1-step-4.png`,
             alt: "CA 內手動止盈止損方案一 step 4：完成 TP/SL 設定",
             width: WF_W,
             height: WF_H,
-            caption: "完成TP/SL下單後，可看到下單價格，需要修改可以再點擊add按鈕。",
+            caption: "完成 TP/SL 下單後，可看到下單價格，需要修改可以再點擊 add 按鈕。",
           },
         ],
         reasonTitle: "未採納原因",
         reasonBody:
-          "雖然這個版本是參考幣安平台的現行設計，固然是個不錯且用戶習慣的設計，然而 CA 目前沒有該元件，需要重新手刻較費時。",
+          "這個版本參考幣安現行設計，是使用者習慣、也還不錯的做法，但 CA 目前沒有這個元件，要重新手刻比較費時。",
       },
       {
         label: "方案二：Dropdown List",
@@ -454,28 +454,28 @@ export const wireframeBoards: WireframeBoard[] = [
             alt: "CA 內手動止盈止損方案二 step 1：以 Dropdown List 顯示 TP/SL 入口",
             width: WF_W,
             height: WF_H,
-            caption: "將原本action欄位，另外新增view details按鈕，點擊該按鈕。",
+            caption: "將原本 action 欄位，另外新增 view details 按鈕，點擊該按鈕。",
           },
           {
             img: `${WIRE}/tpsl-option-2-step-2.png`,
             alt: "CA 內手動止盈止損方案二 step 2：展開 Dropdown List",
             width: WF_W,
             height: WF_H,
-            caption: "彈出Pop-up視窗，可看到倉位資訊，最右邊有TP/SL欄位，點擊add按鈕。",
+            caption: "彈出 Pop-up 視窗，可看到倉位資訊，最右邊有 TP/SL 欄位，點擊 add 按鈕。",
           },
           {
             img: `${WIRE}/tpsl-option-2-step-3.png`,
             alt: "CA 內手動止盈止損方案二 step 3：設定止盈止損條件",
             width: WF_W,
             height: WF_H,
-            caption: "點擊add按鈕，在下方跳出dropdown視窗，輸入止盈止損價格，最後點選confirm按鈕。",
+            caption: "點擊 add 按鈕，在下方跳出 dropdown 視窗，輸入止盈止損價格，最後點選 confirm 按鈕。",
           },
           {
             img: `${WIRE}/tpsl-option-2-step-4.png`,
             alt: "CA 內手動止盈止損方案二 step 4：確認 TP/SL 設定",
             width: WF_W,
             height: WF_H,
-            caption: "完成TP/SL下單後，可看到下單價格，需要修改可以再點擊add按鈕。",
+            caption: "完成 TP/SL 下單後，可看到下單價格，需要修改可以再點擊 add 按鈕。",
           },
         ],
         reasonTitle: "未採納原因",
@@ -491,33 +491,33 @@ export const wireframeBoards: WireframeBoard[] = [
             alt: "CA 內手動止盈止損最終方案 step 1：從策略詳情頁進入 Sidebar",
             width: WF_W,
             height: WF_H,
-            caption: "將原本action欄位，另外新增view details按鈕，點擊該按鈕。",
+            caption: "將原本 action 欄位，另外新增 view details 按鈕，點擊該按鈕。",
           },
           {
             img: `${WIRE}/tpsl-final-step-2.png`,
             alt: "CA 內手動止盈止損最終方案 step 2：Sidebar 展開 TP/SL 設定",
             width: WF_W,
             height: WF_H,
-            caption: "彈出Pop-up視窗，可看到倉位資訊，最右邊有TP/SL欄位，點擊add按鈕。",
+            caption: "彈出 Pop-up 視窗，可看到倉位資訊，最右邊有 TP/SL 欄位，點擊 add 按鈕。",
           },
           {
             img: `${WIRE}/tpsl-final-step-3.png`,
             alt: "CA 內手動止盈止損最終方案 step 3：確認止盈止損參數",
             width: WF_W,
             height: WF_H,
-            caption: "從右邊sidebar彈出視窗，TP和SL可分別輸入金額，最後再點confirm按鈕。",
+            caption: "從右邊 sidebar 彈出視窗，TP 和 SL 可分別輸入金額，最後再點 confirm 按鈕。",
           },
           {
             img: `${WIRE}/tpsl-final-step-4.png`,
             alt: "CA 內手動止盈止損最終方案 step 4：完成 TP/SL 設定",
             width: WF_W,
             height: WF_H,
-            caption: "完成TP/SL下單後，可看到下單價格，需要修改可以再點擊add按鈕。",
+            caption: "完成 TP/SL 下單後，可看到下單價格，需要修改可以再點擊 add 按鈕。",
           },
         ],
         reasonTitle: "採納理由",
         reasonBody:
-          "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，用戶可以點選有興趣機器人並加入到右邊清單中。將用戶原本就已經熟悉 UI 流程整合到新的倉位資訊設計流程中，提升用戶操作的流暢度。",
+          "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，使用者可以點選有興趣機器人並加入到右邊清單中。設定止盈止損時沿用同一套熟悉的操作，讓使用者少一層上手門檻。",
         referenceImages: WATCHLIST_REFERENCES,
       },
     ],
@@ -556,9 +556,9 @@ export const iterationBoards: IterationBoard[] = [
   {
     badge: "操作流程 1",
     title: "平倉數量互動方式",
-    label: "貼合用戶實際需求修正",
+    label: "貼合使用者實際需求修正",
     paragraphs: [
-      "原本的平倉數量採用輸入框搭配下拉選單的方式，使用者需要點擊欄位後，再從 10%、20%、50%、100% 等固定比例中選擇。這種設計雖然能快速選取常用比例，但這些比例若非用戶的選擇，則需要手動輸入。另外，選項展開後也會覆蓋下方內容，讓彈窗視覺變得較擁擠。",
+      "原本的平倉數量採用輸入框搭配下拉選單的方式，使用者需要點擊欄位後，再從 10%、20%、50%、100% 等固定比例中選擇。這種設計雖然能快速選取常用比例，但這些比例若非使用者的選擇，則需要手動輸入。另外，選項展開後也會覆蓋下方內容，讓彈窗視覺變得較擁擠。",
       "調整後將平倉數量元件改為「輸入框 + 比例滑桿」的形式。使用者可以直接透過滑桿調整平倉比例，並即時看到目前比例數值，例如 0%。相較於下拉選單，滑桿更適合表達「從 0% 到 100%」這種連續比例的操作，也讓平倉數量的調整方式更直覺。",
     ],
     beforeImg: `${IMG}/iteration/figma/iter-qty-before-content.png`,
@@ -571,10 +571,10 @@ export const iterationBoards: IterationBoard[] = [
   {
     badge: "操作流程 2",
     title: "系統資訊顯示機制",
-    label: "符合多數用戶的使用體驗",
+    label: "符合多數使用者的使用體驗",
     paragraphs: [
       "原本的 TP / SL 功能說明直接放在彈窗最下方，將完整的規則與限制一次性呈現在介面中。這樣雖然能讓使用者立即看到所有資訊，但也讓主要操作區被大量文字擠壓，視覺負擔較重。對已熟悉功能的使用者來說，這些長篇描述並不是每次操作都需要閱讀，反而會降低操作效率，讓介面顯得擁擠、不夠俐落。",
-      "調整後將完整的功能說明收斂到標題旁的 info 元件中，只有在使用者 hover 或需要進一步理解時才會讀取到詳細資訊。這讓介面預設狀態更乾淨，主操作區能更聚焦在 Take Profit、Stop Loss 的價格設定與確認操作上，減少不必要的文字干擾。這樣的調整同時滿足了新手與專家的使用情境：對專家來說，他們通常已經理解 TP / SL 的運作規則，乾淨簡潔的介面能讓他們更快速完成設定，也更適合長期高頻使用；對新手來說，必要的專業資訊並沒有被移除，而是被放在可自主查看的 info 元件中，當他們需要了解觸發邏輯、適用範圍或限制條件時，可以主動滑到 info 查看完整說明。",
+      "調整後將完整的功能說明收斂到標題旁的 info 元件中，只有在使用者 hover 或需要進一步理解時才會讀取到詳細資訊。這讓介面預設狀態更乾淨，主操作區能更聚焦在 Take Profit、Stop Loss 的價格設定與確認操作上，減少不必要的文字干擾。這樣的調整同時滿足了新手與專家的使用情境：對專家來說，他們通常已經理解 TP / SL 的運作規則，乾淨簡潔的介面能讓他們更快速完成設定，也更適合長期高頻使用；對新手來說，必要的專業資訊仍完整保留，只是收進可自主查看的 info 元件中，當他們需要了解觸發邏輯、適用範圍或限制條件時，可以主動滑到 info 查看完整說明。",
     ],
     beforeImg: `${IMG}/iteration/figma/iter-info-before-content.png`,
     beforeAlt: "迭代前：TP/SL 彈窗將完整功能說明直接放在最下方，操作區被大量文字擠壓",
@@ -588,8 +588,8 @@ export const iterationBoards: IterationBoard[] = [
     title: "止盈止損操作按鈕",
     label: "預期操作與介面對齊",
     paragraphs: [
-      "原本在 TP/SL 欄位中，即使該倉位已經設定過止盈止損，仍然顯示 Add 按鈕。這容易讓使用者誤解目前還可以「新增」另一組 TP/SL 委託，彷彿能持續替同一個倉位加掛多筆止盈止損設定。然而，在 CA 的操作邏輯中，TP/SL 是針對整個倉位一次性下單。當倉位已經送出 TP/SL 委託後，後續能做的行為並不是再次新增，而是調整原本已存在的止盈止損設定。因此，使用 Add 會讓介面語意與實際系統邏輯產生落差，增加使用者判斷成本。",
-      "調整後，當倉位已經存在 TP/SL 設定時，按鈕文字改為 Modify。這讓使用者能更直覺地理解：目前不是要新增一筆新的止盈止損委託，而是要修改原本針對整個倉位設定的 TP/SL。這樣的調整讓操作語意更符合系統邏輯，也降低了使用者對後續操作的誤解。使用者看到 Modify 時，會自然反射出「我現在是在調整既有的整倉止盈止損設定」，而不是以為可以再次加掛新的 TP/SL 單。",
+      "原本在 TP/SL 欄位中，即使該倉位已經設定過止盈止損，仍然顯示 Add 按鈕。這容易讓使用者誤解目前還可以「新增」另一組 TP/SL 委託，彷彿能持續替同一個倉位加掛多筆止盈止損設定。然而，在 CA 的操作邏輯中，TP/SL 是針對整個倉位一次性下單，委託送出後，後續能做的只有調整這筆既有設定。因此，使用 Add 會讓介面語意與實際系統邏輯產生落差，增加使用者判斷成本。",
+      "調整後，當倉位已經存在 TP/SL 設定時，按鈕文字改為 Modify。使用者看到 Modify，就會知道自己是在調整整個倉位既有的止盈止損設定，不會再誤以為能加掛一筆新的 TP/SL 單。這樣操作語意更貼近系統實際邏輯，也少了對後續操作的誤解。",
     ],
     beforeImg: `${IMG}/iteration/figma/iter-tpsl-before-content.png`,
     beforeAlt: "迭代前：倉位已設定止盈止損仍顯示 Add 按鈕",
@@ -601,39 +601,54 @@ export const iterationBoards: IterationBoard[] = [
 ];
 
 export interface FinalFlow {
+  id: string;
   kicker: string;
   title: string;
+  overviewLabel: string;
+  overviewProgressLabel: string;
   video: string;
   mask?: string;
   alt: string;
+  overviewCaption: string;
 }
 
 export const finalFlows: FinalFlow[] = [
   {
+    id: "limit-close",
     kicker: "操作流程 1",
     title: "CA 內手動限價平倉",
+    overviewLabel: "手動限價平倉",
+    overviewProgressLabel: "流程01",
     video: `${IMG}/final/close-position-limit.mp4`,
     mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動限價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口",
+    overviewCaption: "在 Trading Details 中選擇限價平倉，輸入價格與數量後確認送出。",
   },
   {
+    id: "market-close",
     kicker: "操作流程 1",
     title: "CA 內手動市價平倉",
+    overviewLabel: "手動市價平倉",
+    overviewProgressLabel: "流程02",
     video: `${IMG}/final/close-position-market.mp4`,
     mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動市價平倉的最終介面：Trading Details 彈窗中的倉位列表與平倉入口",
+    overviewCaption: "在 Trading Details 中選擇市價平倉，輸入數量後立即完成。",
   },
   {
+    id: "take-profit-stop-loss",
     kicker: "操作流程 2",
     title: "CA 內手動止盈止損",
+    overviewLabel: "手動止盈止損",
+    overviewProgressLabel: "流程03",
     video: `${IMG}/final/tp-sl-subtitled.mp4`,
     mask: `${IMG}/final/tpsl-mask-alpha.png`,
     alt: "CA 內手動止盈止損的最終介面：Trading Details 彈窗中的 TP/SL 設定入口",
+    overviewCaption: "在倉位列表中設定止盈與止損價格，策略同步保留運行狀態。",
   },
 ];
 
-/* ── 設計成效（內部任務式可用性測試 + 流程層級指標）──
-   數字皆為內部測試與設計流程觀察，非線上後台營運數據；method note 已於頁面標明。 */
+/* ── 設計成效（5 位具合約交易經驗的內部成員簡單易用性測試）── */
 export interface ImpactStat {
   value: string;
   label: string;
@@ -642,63 +657,99 @@ export interface ImpactStat {
 
 export const impactStats: ImpactStat[] = [
   {
-    value: "5/5",
-    label: "內部測試者完成核心任務",
-    body: "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。",
-  },
-  {
-    value: "3 步",
-    label: "與交易所一致的操作步數",
-    body: "平倉流程對齊 Binance / OKX / Bybit 的既有步數，既有交易者幾乎零學習成本即可接續。",
-  },
-  {
     value: "−58%",
     label: "平均操作時間",
-    body: "三個流程從「跳去交易所操作」改成「在 CA 內直接完成」，平均省下約 58% 的操作時間。",
+    body: "三項核心任務平均由 65 秒降至約 27 秒。",
+  },
+  {
+    value: "77.5 / 100",
+    label: "整體易用性評分",
+    body: "受測者普遍認為新版操作容易理解，且能延續既有交易習慣。",
   },
 ];
 
 /* before / after 操作時間對比（原本要跳交易所來回 vs 新版在 CA 內完成）。
-   before / after 為秒數（純數字，單位另外翻譯），cut 為縮短百分比。 */
+   before / after 為秒數（純數字，單位另外翻譯）。 */
 export interface ImpactTime {
   flow: string;
   before: string;
   after: string;
-  cut: string;
 }
 
 export const impactTimes: ImpactTime[] = [
-  { flow: "手動限價平倉", before: "65", after: "28", cut: "−57%" },
-  { flow: "手動市價平倉", before: "48", after: "19", cut: "−60%" },
-  { flow: "手動止盈止損", before: "82", after: "35", cut: "−57%" },
+  { flow: "手動限價平倉", before: "65", after: "28" },
+  { flow: "手動市價平倉", before: "48", after: "19" },
+  { flow: "手動止盈止損", before: "82", after: "35" },
 ];
 
 export interface ImpactQuote {
   text: string;
-  who: string;
-  role: string;
+  label: string;
+  showInOverview?: boolean;
 }
 
-export const impactQuotes: ImpactQuote[] = [
+export interface ImpactNarrativeCard {
+  title: string;
+  body: string;
+}
+
+export interface ImpactFinding extends ImpactNarrativeCard {
+  tone: "positive" | "negative";
+  quotes: ImpactQuote[];
+}
+
+export const impactFindings: ImpactFinding[] = [
   {
-    text: "跟我平常用交易所的操作幾乎一樣，不用重新學。",
-    who: "內部測試者",
-    role: "合約交易使用者",
+    title: "熟悉的交易操作能順利轉移",
+    body: "市價、限價與平倉流程延續常見交易所的操作邏輯，受測者能直接套用既有經驗完成操作。",
+    tone: "positive",
+    quotes: [
+      {
+        text: "市價和限價的按鈕放在持倉資訊旁，流程跟我常用的交易所很接近；看到價格和數量欄位後，我知道下一步該填什麼，不太需要重新理解。",
+        label: "合約交易使用者",
+        showInOverview: true,
+      },
+      {
+        text: "以前要切去交易所，再確認交易對、方向和部位；現在從策略頁就能找到同一筆持倉並完成平倉，少了重新比對資料的過程。",
+        label: "量化策略使用者",
+        showInOverview: true,
+      },
+    ],
   },
   {
-    text: "平倉和止盈止損直接在策略頁就能設，不用再切回交易所，整個順很多。",
-    who: "內部測試者",
-    role: "量化策略使用者",
+    title: "止盈止損的困難來自判斷，而不是操作入口",
+    body: "使用者需要同時理解多空方向、價格關係、輸入單位及觸發條件，認知負擔明顯高於平倉。",
+    tone: "negative",
+    quotes: [
+      {
+        text: "設定止盈止損時，我會來回確認多空方向、設定價格和百分比距離，還要判斷 Mark Price 或 Last Price 會怎麼觸發，資訊比平倉多很多。",
+        label: "產品設計師",
+        showInOverview: true,
+      },
+      {
+        text: "按下確認後，我想立刻看到條件是否送出成功、交易所有沒有同步，以及之後價格到哪個位置會真正觸發，不然會擔心設定沒有生效。",
+        label: "前端工程師",
+      },
+    ],
+  },
+];
+
+export const impactOverviewQuotes = impactFindings.flatMap((finding) =>
+  finding.quotes.filter((item) => item.showInOverview),
+);
+
+export const impactPriorities: ImpactNarrativeCard[] = [
+  {
+    title: "價格與輸入單位對照",
+    body: "同時呈現設定價格、百分比距離與預估盈虧，降低使用者自行換算的負擔。",
   },
   {
-    text: "一眼就看得到每個倉位離止盈止損還有多遠，這在以前的 CA 看不到。",
-    who: "內部測試者",
-    role: "產品團隊成員",
+    title: "多空方向與觸發條件提示",
+    body: "依持倉方向提示合理的止盈止損區間，並在送出前清楚預覽觸發條件。",
   },
   {
-    text: "限價跟市價分得很清楚，跟著畫面走第一次就順利完成。",
-    who: "內部測試者",
-    role: "前端工程師",
+    title: "執行與同步狀態",
+    body: "清楚呈現送出中、成功、失敗，以及交易所持倉是否完成同步。",
   },
 ];
 
@@ -717,11 +768,11 @@ export const reflectCards: ReflectCard[] = [
   {
     num: "02",
     title: "用內部測試補足驗證節奏",
-    body: "在沒有額外資源安排正式用戶測試的情況下，透過內部團隊、工程師與熟悉產品流程的成員快速測試操作邏輯，及早發現資訊層級、流程理解與實作限制問題。",
+    body: "在沒有額外資源安排正式使用者測試的情況下，透過內部團隊、工程師與熟悉產品流程的成員快速測試操作邏輯，及早發現資訊層級、流程理解與實作限制問題。",
   },
   {
     num: "03",
     title: "把參考設計轉化成適合 CA 的流程",
-    body: "參考交易所既有模式時，重點不是照搬介面，而是理解使用者已熟悉的操作習慣，再結合 CA 原本的設計系統、風控邏輯與平台元件，轉化成更一致且可落地的方案。",
+    body: "參考交易所既有模式，不代表把整套介面照搬過來。我們的做法是讀懂使用者已經熟悉的操作習慣，再結合 CA 原本的設計系統、風控邏輯與平台元件，轉化成更一致、也更好落地的方案。",
   },
 ];

@@ -1,0 +1,93 @@
+name: Post Deploy Smoke
+run-name: Post deploy smoke - ${{ github.event.deployment_status.environment || 'manual' }}
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      smoke_base_url:
+        description: URL to smoke test
+        required: true
+        type: string
+      environment:
+        description: Preview or Production
+        required: true
+        default: Preview
+        type: choice
+        options:
+          - Preview
+          - Production
+
+concurrency:
+  group: post-deploy-smoke-${{ github.event.deployment_status.environment || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Remote smoke
+    # deployment_status fires on every Vercel deploy; only auto-run for Production.
+    # Preview correctness is already gated by Design System CI on the same commit.
+    # Use workflow_dispatch to smoke a Preview URL on demand.
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && contains(github.event.deployment_status.environment, 'Production'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      SMOKE_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.smoke_base_url || github.event.deployment_status.environment_url }}
+      SMOKE_ENVIRONMENT: ${{ github.event_name == 'workflow_dispatch' && inputs.environment || github.event.deployment_status.environment }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Warm up deployment
+        env:
+          BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: |
+          for route in /en /zh-TW /en/about-me /zh-TW/about-me /en/advantech /zh-TW/advantech /en/crypto-arsenal /zh-TW/crypto-arsenal /en/laushu /zh-TW/laushu /en/design-system /zh-TW/design-system /en/contact /zh-TW/contact; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 -H "x-vercel-protection-bypass: $BYPASS" "$SMOKE_BASE_URL$route" || echo "ERR")
+            echo "warmup $route -> $code"
+          done
+
+      - name: Smoke regression
+        run: npm run smoke:regression
+
+      - name: Smoke design system
+        run: npm run smoke:ds
+
+      - name: Smoke contact on preview
+        if: ${{ !contains(env.SMOKE_ENVIRONMENT, 'Production') }}
+        run: npm run smoke:contact
+
+      - name: Smoke contact page only on production
+        if: ${{ contains(env.SMOKE_ENVIRONMENT, 'Production') }}
+        run: npm run smoke:contact -- --grep-invert @form
+
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-deploy-playwright-artifacts
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14

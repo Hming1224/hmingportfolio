@@ -40,7 +40,7 @@ export default async function ResearchSection() {
       <CaseSectionHeader kicker={t("交易所介面參考")} title={t("盤點交易所通用的倉位資訊、平倉、止盈止損流程")} />
       <p className="cs-section-lead">
         {t(
-          "為了順利讓使用者無縫熟悉流程，我以 Binance / Bybit / OKX 的實際介面進行競品流程參考，拆解三家共通的倉位資訊欄位、平倉和止盈止損流程，另外同時考量交易所能夠回傳的資料，收斂出專屬於 CA 的操作流程。",
+          "為了讓使用者一上手就熟悉流程，我參考 Binance / Bybit / OKX 的實際介面，拆解三家共通的倉位資訊欄位、平倉和止盈止損流程，同時考量交易所能回傳的資料，收斂出專屬於 CA 的操作流程。",
         )}
       </p>
 

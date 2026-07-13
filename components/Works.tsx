@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import type { Locale } from "@/i18n/routing";
@@ -8,17 +7,9 @@ import {
   getProjects,
   type ProjectSummary,
 } from "../data/projects";
-import {
-  Tabs,
-  TabsHighlight,
-  TabsHighlightItem,
-  TabsList,
-  TabsPanel,
-  TabsPanels,
-  TabsTab,
-} from "./animate-ui/primitives/base/tabs";
+import ProjectCard from "./ProjectCard";
 import SplitText from "./animate-ui/primitives/texts/SplitText";
-import Button from "./ui/Button";
+import WorkCategoryTabs from "./WorkCategoryTabs";
 
 function useScrollReveal() {
   const listRef = useRef<HTMLDivElement>(null);
@@ -54,56 +45,6 @@ function useScrollReveal() {
   }, []);
 
   return listRef;
-}
-
-function ProjectCard({ project }: { project: ProjectSummary }) {
-  const t = useTranslations("works");
-  const disabled = project.status === "coming-soon";
-
-  return (
-    <article
-      className={`project-card tone-${project.tone}`}
-      id={project.cardId ?? `project-${project.slug}`}
-    >
-      <div className="project-media">
-        <Image
-          className="project-image"
-          src={project.cover}
-          alt={project.title}
-          fill
-          sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1279px) calc(100vw - 96px), 1200px"
-        />
-        <div className="project-scrim" />
-      </div>
-
-      <div className="project-info">
-        <div className="project-meta">
-          <div className="project-logo-wrap">
-            <Image src={project.logo} alt="" fill sizes="168px" />
-          </div>
-          <div className="project-title">
-            <h3>{project.title}</h3>
-            <p>{project.date}</p>
-          </div>
-          <p className="project-description">{project.description}</p>
-          <div className="project-tags">
-            {project.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
-        </div>
-        {disabled ? (
-          <Button size="lg" disabled>
-            {t("comingSoon")}
-          </Button>
-        ) : (
-          <Button href={project.href ?? "/"} size="lg">
-            {t("learnMore")}
-          </Button>
-        )}
-      </div>
-    </article>
-  );
 }
 
 function ProjectList({ projects: list }: { projects: ProjectSummary[] }) {
@@ -148,31 +89,20 @@ export default function Works() {
         <span />
       </div>
 
-      <Tabs defaultValue="enterprise" className="project-tabs">
-        <TabsHighlight className="project-tabs-highlight">
-          <TabsList className="project-tabs-list">
-            <TabsHighlightItem value="enterprise" className="project-tabs-item">
-              <TabsTab value="enterprise" className="project-tabs-tab">
-                {t("enterprise")}
-              </TabsTab>
-            </TabsHighlightItem>
-            <TabsHighlightItem value="school" className="project-tabs-item">
-              <TabsTab value="school" className="project-tabs-tab">
-                {t("school")}
-              </TabsTab>
-            </TabsHighlightItem>
-          </TabsList>
-        </TabsHighlight>
-
-        <TabsPanels mode="wait">
-          <TabsPanel value="enterprise">
-            <ProjectList projects={enterpriseProjects} />
-          </TabsPanel>
-          <TabsPanel value="school">
-            <ProjectList projects={schoolProjects} />
-          </TabsPanel>
-        </TabsPanels>
-      </Tabs>
+      <WorkCategoryTabs
+        tabs={[
+          {
+            value: "enterprise",
+            label: t("enterprise"),
+            content: <ProjectList projects={enterpriseProjects} />,
+          },
+          {
+            value: "school",
+            label: t("school"),
+            content: <ProjectList projects={schoolProjects} />,
+          },
+        ]}
+      />
     </section>
   );
 }

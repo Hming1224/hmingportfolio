@@ -1,6 +1,7 @@
 "use client";
 
 import lottie, { type AnimationItem } from "lottie-web";
+import { ChevronDown } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { createPortal } from "react-dom";
@@ -99,9 +100,7 @@ export default function LanguageSwitcher() {
           onClick={() => setOpen((value) => !value)}
         >
           <span>{t("current")}</span>
-          <svg viewBox="0 0 12 12" aria-hidden="true">
-            <path d="m2.5 4.5 3.5 3 3.5-3" />
-          </svg>
+          <ChevronDown aria-hidden="true" size={12} strokeWidth={1.5} />
         </button>
 
         <div className="language-switcher-menu" role="menu" aria-label={t("menu")}>

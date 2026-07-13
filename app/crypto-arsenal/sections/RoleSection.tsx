@@ -9,7 +9,7 @@ export default async function RoleSection() {
       <CaseSectionHeader kicker={t("角色與工作流")} title={t("在 CA 的工作模式")} tone="secondary" />
       <p className="cs-section-lead">
         {t(
-          "在 CA，每 1–2 週會持續一個 sprint，小功能設計時程約 2–4 周，大功能設計時程約需 1–3 個月。除了與 PO 持續討論產品功能上線時程及每週用戶反饋，多數 feature 以二手桌面研究與競品設計為基礎，我身為設計師的設計流程如下：",
+          "在 CA，每 1–2 週會持續一個 sprint，小功能設計時程約 2–4 週，大功能設計時程約需 1–3 個月。除了與 PO 持續討論產品功能上線時程及每週使用者回饋，多數 feature 以二手桌面研究與競品設計為基礎，我身為設計師的設計流程如下：",
         )}
       </p>
       <div className="cs-step-flow" role="list" aria-label={t("單一 feature 的設計流程")}>

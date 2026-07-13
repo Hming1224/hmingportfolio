@@ -180,6 +180,24 @@
   --hm-btn-transition-duration: var(--hm-map-duration-btn);
   --hm-btn-transition-easing: var(--hm-map-easing-btn);
 
+  /* ── Tabs / segmented controls ── */
+  --hm-tabs-bg: var(--hm-surface);
+  --hm-tabs-active-bg: var(--hm-paper);
+  --hm-tabs-text-color: var(--hm-muted);
+  --hm-tabs-text-active-color: var(--hm-ink);
+  --hm-tabs-active-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+  --hm-tabs-radius: var(--hm-radius-pill);
+  --hm-tabs-gap: 4px;
+  --hm-tabs-padding: 4px;
+  --hm-tabs-height-md: 48px;
+  --hm-tabs-control-height-md: 40px;
+  --hm-tabs-font-size-md: var(--fs-body);
+  --hm-tabs-height-sm: 40px;
+  --hm-tabs-control-height-sm: 32px;
+  --hm-tabs-font-size-sm: var(--fs-xs);
+
   /* ── Motion ── */
   --hm-duration-instant: 100ms;
   --hm-duration-fast: 180ms;
@@ -197,17 +215,7 @@
   --hm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --hm-ease-emphasized: cubic-bezier(0.215, 0.61, 0.355, 1);
 
-  /* ── Spacing ── */
-  --hm-space-1: 4px;
-  --hm-space-2: 8px;
-  --hm-space-3: 12px;
-  --hm-space-4: 16px;
-  --hm-space-6: 24px;
-  --hm-space-8: 32px;
-  --hm-space-10: 40px;
-  --hm-space-12: 48px;
-  --hm-space-16: 64px;
-  --hm-space-20: 80px;
+  /* ── Spacing (8px base, t-shirt scale) ── */
   --hm-space-3xs: 4px;
   --hm-space-2xs: 8px;
   --hm-space-xs: 12px;
@@ -304,22 +312,23 @@
   --surface: var(--hm-surface);
   --purple-hover: var(--hm-purple-hover);
   --about-accent: #ffd467;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.25);
-  --shadow-card-hover: 0 16px 32px rgba(0, 0, 0, 0.16);
+  /* --hm-shadow-* hold the real values; --shadow-* are @deprecated aliases. */
+  --hm-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --hm-shadow-md: 0 10px 20px rgba(0, 0, 0, 0.12);
+  --hm-shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --hm-shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.25);
+  --hm-shadow-card-hover: 0 16px 32px rgba(0, 0, 0, 0.16);
+  --shadow-sm: var(--hm-shadow-sm);
+  --shadow-md: var(--hm-shadow-md);
+  --shadow-lg: var(--hm-shadow-lg);
+  --shadow-xl: var(--hm-shadow-xl);
+  --shadow-card-hover: var(--hm-shadow-card-hover);
   --shadow-purple-soft: 0 12px 24px rgba(93, 98, 216, 0.08);
   --shadow-photo: -5px 10px 20px rgba(0, 0, 0, 0.12);
   --shadow-soft:
     0 0.6px 0.6px rgba(0, 0, 0, 0.12),
     0 2.3px 2.3px rgba(0, 0, 0, 0.12),
     0 10px 10px rgba(0, 0, 0, 0.12);
-  --hm-shadow-sm: var(--shadow-sm);
-  --hm-shadow-md: var(--shadow-md);
-  --hm-shadow-lg: var(--shadow-lg);
-  --hm-shadow-xl: var(--shadow-xl);
-  --hm-shadow-card-hover: var(--shadow-card-hover);
   --hm-radius-btn: var(--hm-radius-button);
   --hm-page-gutter: var(--page-gutter);
 
@@ -365,6 +374,42 @@
   --cs-badge-bg: #4c4c4c;
   --cs-badge-text: #ffffff;
   --cs-shadow-color: rgba(0, 0, 0, 0.12);
+
+  /* Shared case-study overview / walkthrough geometry and type. */
+  --cs-focus-ring-width: 3px;
+  --cs-focus-ring-offset: 2px;
+  --cs-overview-to-showcase-gap: var(--hm-space-lg);
+  --cs-overview-stage-gap: var(--hm-space-lg);
+  --cs-overview-stage-padding: var(--hm-space-lg);
+  --cs-overview-tab-min-height: var(--hm-space-2xl);
+  --cs-overview-copy-min-width: 17.5rem;
+  --cs-overview-media-min-height: 20rem;
+  --cs-overview-icon-size: 2.25rem;
+  --cs-overview-icon-glyph-size: var(--fs-h4);
+  --cs-overview-stage-title-size: var(--fs-h3);
+  --cs-overview-evidence-value-size: var(--fs-h1);
+  --cs-overview-evidence-label-size: var(--fs-h3);
+  --cs-overview-active-line-size: 0.1875rem;
+  --cs-overview-control-min-height: var(--hm-btn-height-sm);
+  --cs-overview-motion-duration: var(--hm-duration-fast);
+  --cs-overview-shadow: var(--hm-shadow-sm);
+  --cs-overview-mobile-stage-padding: var(--hm-space-md);
+  --cs-overview-mobile-tab-min-height: var(--hm-btn-height-md-mobile);
+  --cs-overview-tablet-media-min-height: 18.75rem;
+  --cs-overview-mobile-media-min-height: 15rem;
+  --cs-walkthrough-gap: var(--hm-space-md);
+  --cs-walkthrough-padding: var(--hm-space-lg);
+  --cs-walkthrough-copy-gap: var(--hm-space-2xs);
+  --cs-walkthrough-copy-max-width: none;
+  --cs-walkthrough-title-size: var(--fs-h3);
+  --cs-walkthrough-kicker-size: var(--fs-xs);
+  --cs-walkthrough-stage-gap: var(--hm-space-sm);
+  --cs-walkthrough-button-min-height: var(--hm-btn-height-sm);
+  --cs-walkthrough-dot-size: var(--hm-space-2xs);
+  --cs-walkthrough-dot-active-size: var(--hm-space-md);
+  --cs-walkthrough-motion-duration: var(--hm-duration-fast);
+  --cs-walkthrough-frame-aspect-ratio: 16 / 9;
+  --cs-walkthrough-disabled-opacity: 0.4;
 }
 
 .hm-grid {
@@ -416,33 +461,12 @@
 }
 
 /* ── 專案主題（換色盤）──
-   每個案例頁在 <main class="cs-page theme-xxx"> 掛一個 theme，
-   只覆寫大標主色 --text-heading；其餘文字階梯沿用全域中性值。
-   新增專案＝在這裡加一行 .theme-xxx { --text-heading: 主色 } 即可。 */
-.theme-advantech {
-  --text-heading: #093060;
-  --cs-accent: #005796;
-  --cs-accent-strong: #093060;
-  --cs-accent-soft: #e5effa;
-  --cs-surface-soft: #fafcfe;
-  --cs-line: #cbdef4;
-  --cs-line-strong: #d5dfec;
-  --cs-text-heading: #093060;
-  --cs-shadow-color: rgba(9, 48, 96, 0.12);
-  /* 研華主色：深藍 */
-}
-
-.theme-crypto-arsenal {
-  --text-heading: #252a47;
-  --cs-accent: #376adc;
-  --cs-accent-strong: #252a47;
-  --cs-accent-soft: #e8eafa;
-  --cs-line: #d8deec;
-  --cs-line-strong: #d8deec;
-  --cs-text-heading: #252a47;
-  --cs-shadow-color: rgba(37, 42, 71, 0.12);
-  /* Crypto Arsenal 主色：深 navy（Figma node 2574-83 primary base） */
-}
+   每個案例頁在 <main class="cs-page theme-xxx"> 掛一個 theme，覆寫大標主色
+   與 --cs-* 語意色；其餘中性階沿用全域值。
+   Theme 一律定義在該案例的 route CSS（styles/case-study-<slug>.css），
+   不放這裡（見 docs/design-system/08-ai-implementation-rules.md §3）。
+   舊的 .theme-advantech / .theme-crypto-arsenal 重複區塊已於 2026-07-09 移除，
+   值已合併進各自的 route CSS。 */
 
 * {
   box-sizing: border-box;
@@ -747,6 +771,7 @@ button {
   padding: 10px 12px;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .language-switcher {
@@ -791,6 +816,7 @@ button {
   color: var(--ink);
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
   transition:
     border-color 180ms ease,
@@ -1006,7 +1032,7 @@ button {
   --hm-alert-color: var(--hm-info);
   --hm-alert-soft: var(--hm-info-soft);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   padding: 14px 16px;
   border: 1px solid color-mix(in srgb, var(--hm-alert-color) 28%, transparent);
@@ -1304,6 +1330,7 @@ button {
   place-items: center;
   width: 40px;
   height: 40px;
+  --social-icon-color: var(--hm-ink);
 }
 
 .social-logo {
@@ -1311,20 +1338,39 @@ button {
   display: block;
   width: 40px;
   height: 40px;
-  object-fit: contain;
-  transition: opacity 180ms ease;
+  background-color: var(--social-icon-color);
+  -webkit-mask: var(--social-icon) center / contain no-repeat;
+  mask: var(--social-icon) center / contain no-repeat;
+  transition: background-color var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
-.social-logo-color {
-  opacity: 0;
+.social-link:hover,
+.social-link:focus-visible {
+  --social-icon-color: var(--hm-purple);
 }
 
-.social-link:hover .social-logo-color {
-  opacity: 1;
-}
+@media (min-width: 769px) and (max-width: 900px) {
+  .site-nav {
+    gap: 12px;
+    padding-inline: clamp(32px, 5.2vw, 48px);
+  }
 
-.social-link:hover .social-logo-gray {
-  opacity: 0;
+  .nav-top {
+    min-width: 84px;
+  }
+
+  .nav-links a {
+    padding-inline: 8px;
+  }
+
+  .language-switcher {
+    margin-left: 4px;
+  }
+
+  .language-switcher-trigger {
+    min-width: 64px;
+    padding-inline: 10px;
+  }
 }
 
 @media (max-width: 768px) {

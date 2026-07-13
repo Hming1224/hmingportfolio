@@ -54,7 +54,7 @@ export default async function IterationSection() {
     <section id="cs-sec-iteration" className="cs-section-surface">
       <CaseSectionHeader kicker="Design Iteration" title={t("設計元件迭代")} tone="secondary" />
       <p className="cs-section-lead">
-        {t("透過內部團隊人員與工程師測試，將部分元件進行迭代修正，更加提升用戶使用體驗。")}
+        {t("我們找內部團隊和工程師實測，逐一修過策略機器人 Bar 的資訊顯示、平倉的數量互動與止盈止損按鈕文字，讓每個元件都更貼近使用者實際的操作理解。")}
       </p>
       {iterationBoards.map((board) => (
         <Board board={board} t={t} key={board.title} />

@@ -3,24 +3,14 @@
    next navigation, spacing, type tokens, and button rules. */
 
 .theme-laushu {
-  --cs-accent: #9300f0;
-  --cs-accent-strong: #37005f;
-  --cs-accent-soft: #decbff;
-  --cs-surface-soft: #f8f7fa;
-  --cs-line: rgba(99, 0, 165, 0.16);
-  --cs-line-strong: rgba(99, 0, 165, 0.24);
-  --cs-text-heading: #37005f;
-  --cs-text-body: #1f2933;
-  --cs-text-secondary: #6a558a;
-  --cs-text-muted: #6a558a;
-  --cs-shadow-color: rgba(55, 0, 95, 0.12);
-  --laushu-primary-100: #fdfcff;
+  /* Figma node 419:42260 — selected steps 0.5 / 1.5 / 3 / 4 / 5 / 7 / 9. */
+  --laushu-primary-100: #f4f0ff;
   --laushu-primary-200: #decbff;
-  --laushu-primary-300: #c399ff;
-  --laushu-primary-400: #ab5fff;
-  --laushu-primary-500: #9300f0;
-  --laushu-primary-600: #6300a5;
-  --laushu-primary-700: #37005f;
+  --laushu-primary-300: #bea7fd;
+  --laushu-primary-400: #a88afd;
+  --laushu-primary-500: #926dfc;
+  --laushu-primary-600: #5f42b1;
+  --laushu-primary-700: #2c1766;
   --laushu-tertiary-100: #f8f7fa;
   --laushu-tertiary-200: #d3cce0;
   --laushu-tertiary-300: #afa2c6;
@@ -30,10 +20,51 @@
   --laushu-grey-200: #d2d2e2;
   --laushu-grey-500: #5e5e91;
   --laushu-grey-700: #1f1f3b;
-  --laushu-line: rgba(99, 0, 165, 0.16);
-  --laushu-shadow: 0 16px 40px rgba(55, 0, 95, 0.08);
+  --laushu-line: color-mix(in srgb, var(--laushu-primary-600) 16%, transparent);
+  --laushu-shadow: 0 16px 40px color-mix(in srgb, var(--laushu-primary-700) 8%, transparent);
   --laushu-content-max: 1920px;
+  --cs-accent: var(--laushu-primary-600);
+  --cs-accent-strong: var(--laushu-primary-700);
+  --cs-accent-soft: var(--laushu-primary-200);
+  --cs-surface-soft: var(--laushu-primary-100);
+  --cs-line: var(--laushu-line);
+  --cs-line-soft: color-mix(in srgb, var(--laushu-primary-600) 12%, transparent);
+  --cs-line-strong: color-mix(in srgb, var(--laushu-primary-600) 24%, transparent);
+  --cs-text-heading: var(--laushu-primary-700);
+  --cs-text-body: #1f2933;
+  --cs-text-secondary: #6a558a;
+  --cs-text-muted: #6a558a;
+  --cs-shadow-color: color-mix(in srgb, var(--laushu-primary-700) 12%, transparent);
+  --cs-overview-summary-border: color-mix(in srgb, var(--laushu-primary-600) 14%, transparent);
+  --cs-overview-shadow: 0 12px 32px color-mix(in srgb, var(--laushu-primary-700) 8%, transparent);
   --text-heading: var(--laushu-primary-700);
+}
+
+.theme-laushu #cs-sec-overview .laushu-overview-impact-metrics {
+  --cs-grid-gap: 16px;
+  --cs-metric-value-color: var(--laushu-primary-500);
+  align-content: center;
+  height: 100%;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.theme-laushu #cs-sec-overview .laushu-overview-impact-metrics > .cs-card {
+  --cs-card-gap: 10px;
+  --cs-card-padding: clamp(20px, 2.4vw, 28px);
+  --cs-card-padding-mobile: 20px;
+  --cs-card-bg: #ffffff;
+  --cs-card-border: color-mix(in srgb, var(--laushu-primary-600) 14%, transparent);
+  --cs-card-radius: 14px;
+  --cs-card-shadow: 0 6px 18px color-mix(in srgb, var(--laushu-primary-700) 6%, transparent);
+  justify-content: center;
+}
+
+.theme-laushu #cs-sec-overview .laushu-overview-impact-balance {
+  margin: 0;
+  padding-top: 2px;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
 }
 
 .theme-laushu .cs-divider {
@@ -68,7 +99,6 @@
 }
 
 
-.theme-laushu .laushu-overview-section,
 .theme-laushu .laushu-process-section,
 .theme-laushu .laushu-learning-section {
   background: #ffffff;
@@ -82,7 +112,7 @@
 .theme-laushu .cs-explainer-layout {
   --cs-explainer-layout-max-width: var(--laushu-content-max);
   --cs-explainer-title-margin: 12px 0 40px;
-  --cs-explainer-title-color: #4852c3;
+  --cs-explainer-title-color: var(--laushu-primary-600);
   --cs-explainer-title-size: var(--fs-h3);
   --cs-explainer-title-line-height: 1.3;
   --cs-explainer-body-color: var(--text-secondary);
@@ -104,25 +134,17 @@
 
 .theme-laushu .cs-subsection-title--wide {
   --cs-subsection-title-wide-max: var(--laushu-content-max);
-  --cs-subsection-title-accent-color: #4852c3;
+  --cs-subsection-title-accent-color: var(--laushu-primary-600);
   --cs-subsection-title-weight: 800;
   --cs-subsection-title-line-height: 1.35;
 }
 
-
-.theme-laushu .laushu-overview-section > .cs-showcase-media {
-  --cs-showcase-media-max-width: var(--laushu-content-max);
-  --cs-showcase-media-margin: 40px auto 0;
-  --cs-showcase-media-radius: 20px;
-  --cs-showcase-media-line-height: 0;
-}
 
 .theme-laushu .cs-topic-grid {
   --cs-topic-grid-max-width: var(--laushu-content-max);
 }
 
 @media (min-width: 769px) and (max-width: 1023px) {
-  .theme-laushu .laushu-overview-section .cs-topic-grid--overview,
   .theme-laushu .laushu-converge-section .cs-topic-grid--usecase,
   .theme-laushu .cs-reflection-grid {
     grid-template-columns: 1fr;
@@ -132,7 +154,7 @@
 .theme-laushu .cs-topic-card {
   --cs-topic-card-bg: #ffffff;
   --cs-topic-card-border: var(--laushu-line);
-  --cs-topic-card-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+  --cs-topic-card-shadow: 0 2px 16px color-mix(in srgb, var(--laushu-primary-700) 4%, transparent);
   --cs-topic-card-padding: 24px;
   --cs-topic-card-padding-mobile: 20px;
   --cs-topic-card-radius: 16px;
@@ -159,8 +181,8 @@
 
 .theme-laushu .cs-article {
   --cs-article-title-color: var(--laushu-primary-700);
-  --cs-article-kicker-color: var(--laushu-primary-500);
-  --cs-article-num-color: var(--laushu-primary-500);
+  --cs-article-kicker-color: var(--laushu-primary-600);
+  --cs-article-num-color: var(--laushu-primary-600);
   --cs-rich-copy-color: var(--text-body);
 }
 
@@ -183,7 +205,7 @@
 }
 
 .theme-laushu .cs-section-header--case-wide .cs-section-kicker {
-  color: var(--laushu-primary-500);
+  color: var(--laushu-primary-600);
 }
 
 .theme-laushu .cs-section-header--case-wide .cs-section-title {
@@ -201,28 +223,28 @@
 
 /* 專案總覽 3 張卡片：Figma 漸層紫底 + 淺陰影 */
 .theme-laushu .cs-topic-grid--overview .cs-topic-card {
-  --cs-topic-card-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+  --cs-topic-card-shadow: 0 2px 8px color-mix(in srgb, var(--laushu-primary-700) 4%, transparent);
 }
 
 .theme-laushu .cs-topic-grid--overview .cs-topic-card:nth-child(1) {
-  background: #fbf9ff;
+  background: var(--laushu-primary-100);
 }
 
 .theme-laushu .cs-topic-grid--overview .cs-topic-card:nth-child(2) {
-  background: #f5eeff;
+  background: var(--laushu-primary-200);
 }
 
 .theme-laushu .cs-topic-grid--overview .cs-topic-card:nth-child(3) {
-  background: #e6e2ff;
+  background: var(--laushu-primary-300);
 }
 
 .theme-laushu .cs-topic-grid--problem .cs-topic-card {
   --cs-topic-card-padding: 25px;
-  --cs-topic-card-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+  --cs-topic-card-shadow: 0 2px 8px color-mix(in srgb, var(--laushu-primary-700) 4%, transparent);
 }
 
 .theme-laushu .cs-topic-grid--problem .cs-topic-card-kicker {
-  background: #f5eeff;
+  background: var(--laushu-primary-100);
   --cs-topic-card-kicker-line-height: 18px;
 }
 
@@ -326,7 +348,7 @@
 }
 
 .theme-laushu .cs-iteration-badge {
-  --cs-iteration-badge-bg: #4852c3;
+  --cs-iteration-badge-bg: var(--laushu-primary-600);
   --cs-iteration-badge-size: 14px;
 }
 
@@ -351,11 +373,11 @@
 .theme-laushu .cs-iteration-panel {
   --cs-iteration-panel-border: #d8deec;
   --cs-iteration-panel-radius: 16px;
-  --cs-iteration-panel-bg: #fbf9ff;
+  --cs-iteration-panel-bg: var(--laushu-primary-100);
 }
 
 .theme-laushu .cs-iteration-panel figcaption {
-  --cs-iteration-panel-caption-bg: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, #ced2ff 100%);
+  --cs-iteration-panel-caption-bg: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, var(--laushu-primary-200) 100%);
   --cs-iteration-panel-caption-color: #241b31;
   --cs-iteration-panel-caption-line-height: 31.5px;
   letter-spacing: -0.44px;
@@ -364,7 +386,7 @@
 .theme-laushu .cs-iteration-arrow {
   --cs-iteration-arrow-width: 41px;
   --cs-iteration-arrow-height: 47px;
-  --cs-iteration-arrow-color: #6f56bd;
+  --cs-iteration-arrow-color: var(--laushu-primary-600);
   flex: 0 0 auto;
   color: var(--cs-iteration-arrow-color);
 }
@@ -436,7 +458,7 @@
 }
 
 .theme-laushu .cs-flow-frame--split {
-  --cs-flow-header-bg: linear-gradient(162deg, #4852c3 3%, #d0b6f5 101%);
+  --cs-flow-header-bg: linear-gradient(162deg, var(--laushu-primary-600) 3%, var(--laushu-primary-300) 101%);
 }
 
 /* Flow diagrams */
@@ -512,7 +534,7 @@
 }
 
 .theme-laushu .laushu-understand-section .cs-article h3 {
-  color: #4852c3;
+  color: var(--laushu-primary-600);
 }
 
 .theme-laushu .laushu-understand-section .cs-article-num {
@@ -526,15 +548,15 @@
 .theme-laushu .laushu-understand-section .cs-topic-grid--stakeholder .cs-topic-card {
   --cs-topic-card-min-height: 251px;
   --cs-topic-card-padding: 25px;
-  --cs-topic-card-bg: #fbf9ff;
-  --cs-topic-card-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+  --cs-topic-card-bg: var(--laushu-primary-100);
+  --cs-topic-card-shadow: 0 2px 8px color-mix(in srgb, var(--laushu-primary-700) 4%, transparent);
 }
 
 .theme-laushu .laushu-understand-section .cs-topic-grid--stakeholder .cs-topic-card-kicker {
   --cs-topic-card-kicker-line-height: 18px;
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1023px) {
   .theme-laushu .cs-topic-grid--problem {
     grid-template-columns: 1fr;
   }
@@ -573,25 +595,25 @@
   --cs-survey-stat-value-color: var(--laushu-primary-600);
   --cs-survey-stat-label-color: var(--text-secondary);
   --cs-survey-subtitle-color: var(--laushu-primary-700);
-  --cs-survey-donut-track-color: #f1ebf8;
+  --cs-survey-donut-track-color: var(--laushu-primary-100);
   --cs-survey-donut-center-color: var(--laushu-primary-700);
   --cs-survey-donut-center-label-color: var(--text-secondary);
   --cs-survey-text-color: var(--text-secondary);
   --cs-survey-strong-color: var(--text-body);
   --cs-survey-bar-value-color: var(--laushu-primary-600);
-  --cs-survey-bar-bg: #f1ebf8;
+  --cs-survey-bar-bg: var(--laushu-primary-100);
   --cs-survey-bar-fill-bg: var(--laushu-primary-400);
   --cs-survey-summary-border-color: var(--laushu-primary-500);
   --cs-survey-summary-color: var(--text-body);
-  --cs-survey-insight-bg: linear-gradient(120deg, rgba(245, 238, 255, 0.5) 0%, rgba(141, 150, 249, 0.5) 100%);
-  --cs-survey-insight-col-border: 1px solid rgba(99, 0, 165, 0.12);
-  --cs-survey-insight-col-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.52) 1%, rgba(248, 246, 255, 0.86) 100%);
-  --cs-survey-insight-label-bg: #decbff;
-  --cs-survey-insight-label-color: #37005f;
-  --cs-survey-insight-pain-label-bg: #decbff;
-  --cs-survey-insight-pain-label-color: #37005f;
-  --cs-survey-insight-title-color: #37005f;
-  --cs-survey-quote-color: #ab5fff;
+  --cs-survey-insight-bg: linear-gradient(120deg, color-mix(in srgb, var(--laushu-primary-100) 50%, transparent) 0%, color-mix(in srgb, var(--laushu-primary-400) 50%, transparent) 100%);
+  --cs-survey-insight-col-border: 1px solid color-mix(in srgb, var(--laushu-primary-600) 12%, transparent);
+  --cs-survey-insight-col-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.52) 1%, color-mix(in srgb, var(--laushu-primary-100) 86%, transparent) 100%);
+  --cs-survey-insight-label-bg: var(--laushu-primary-200);
+  --cs-survey-insight-label-color: var(--laushu-primary-700);
+  --cs-survey-insight-pain-label-bg: var(--laushu-primary-200);
+  --cs-survey-insight-pain-label-color: var(--laushu-primary-700);
+  --cs-survey-insight-title-color: var(--laushu-primary-700);
+  --cs-survey-quote-color: var(--laushu-primary-400);
   --cs-survey-insight-summary-bg: var(--laushu-primary-700);
 }
 
@@ -599,7 +621,7 @@
   --cs-survey-flow-max-width: var(--laushu-content-max);
   --cs-survey-flow-columns: minmax(180px, 0.8fr) minmax(320px, 1.5fr) minmax(180px, 0.8fr);
   --cs-survey-node-min-height: 137px;
-  --cs-survey-node-bg: #f5eeff;
+  --cs-survey-node-bg: var(--laushu-primary-100);
   --cs-survey-node-title-color: var(--laushu-primary-700);
   --cs-survey-node-text-color: var(--laushu-tertiary-500);
   --cs-survey-note-color: #1f2933;
@@ -660,14 +682,14 @@
 
 .theme-laushu .cs-survey-panel--stats {
   --cs-survey-stats-border: 1px solid var(--laushu-line);
-  --cs-survey-stats-bg: #fbf9ff;
+  --cs-survey-stats-bg: var(--laushu-primary-100);
   --cs-survey-stats-radius: 20px;
 }
 
 .theme-laushu .cs-survey-summary {
   border: 1px solid var(--laushu-line);
   border-radius: 16px;
-  background: #f5eeff;
+  background: var(--laushu-primary-100);
 }
 
 .theme-laushu .cs-survey-panel--insight {
@@ -678,7 +700,7 @@
   display: grid;
   gap: 16px;
   border: 1px solid var(--laushu-line);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.52) 1%, rgba(248, 246, 255, 0.86) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.52) 1%, color-mix(in srgb, var(--laushu-primary-100) 86%, transparent) 100%);
   color: #1f2933;
   font-weight: 500;
 }
@@ -691,8 +713,8 @@
   align-items: center;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #decbff;
-  color: #37005f;
+  background: var(--laushu-primary-200);
+  color: var(--laushu-primary-700);
   font-size: var(--fs-xs);
   font-weight: 700;
   line-height: 18px;
@@ -714,7 +736,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 }
 
 .theme-laushu .cs-survey-block-head {
-  --cs-survey-block-kicker-color: var(--laushu-primary-500);
+  --cs-survey-block-kicker-color: var(--laushu-primary-600);
   --cs-survey-block-title-color: var(--laushu-primary-700);
 }
 
@@ -732,7 +754,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 .theme-laushu .cs-guide-list-card {
   --cs-guide-list-card-border: var(--laushu-line);
   --cs-guide-list-card-radius: 16px;
-  --cs-guide-list-card-shadow: 0 2px 16px rgba(55, 0, 95, 0.04);
+  --cs-guide-list-card-shadow: 0 2px 16px color-mix(in srgb, var(--laushu-primary-700) 4%, transparent);
   --cs-guide-list-title-border-bottom: 1px solid var(--laushu-line);
   --cs-guide-list-title-color: var(--laushu-primary-700);
   --cs-guide-list-strong-color: var(--laushu-tertiary-700);
@@ -748,7 +770,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-guide-list-title-margin: 0;
   --cs-guide-list-title-padding: 24px 28px;
   --cs-guide-list-title-border-bottom: 0;
-  --cs-guide-list-title-bg: linear-gradient(90deg, #decbff 0%, rgba(255, 255, 255, 0) 100%);
+  --cs-guide-list-title-bg: linear-gradient(90deg, var(--laushu-primary-200) 0%, rgba(255, 255, 255, 0) 100%);
   --cs-guide-list-title-color: var(--laushu-primary-700);
   --cs-guide-list-title-line-height: 1.5;
   --cs-guide-list-title-white-space: nowrap;
@@ -756,7 +778,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-guide-list-gap: 0;
   --cs-guide-list-row-gap: 4px 12px;
   --cs-guide-list-item-padding-bottom: 14px;
-  --cs-guide-list-dot-bg: #9261ef;
+  --cs-guide-list-dot-bg: var(--laushu-primary-500);
   --cs-guide-list-line-bg: var(--laushu-primary-200);
   --cs-guide-list-li-display: grid;
   --cs-guide-list-li-columns: 10px minmax(0, 1fr);
@@ -781,7 +803,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-persona-card-columns: minmax(240px, 0.62fr) minmax(0, 1fr);
   --cs-persona-card-padding: 25px;
   --cs-persona-card-border: var(--laushu-line);
-  --cs-persona-card-bg: #fbf9ff;
+  --cs-persona-card-bg: var(--laushu-primary-100);
   --cs-card-shadow: none;
   --cs-persona-body-color: #5d6674;
   --cs-persona-copy-align-self: center;
@@ -813,7 +835,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 }
 
 .theme-laushu .laushu-converge-section .cs-article h3 {
-  color: #4852c3;
+  color: var(--laushu-primary-600);
 }
 
 .theme-laushu .laushu-converge-section .cs-article-num {
@@ -839,8 +861,8 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-topic-card-padding: 25px;
   --cs-topic-card-border: var(--laushu-line);
   --cs-topic-card-radius: 16px;
-  --cs-topic-card-bg: #fbf9ff;
-  --cs-topic-card-shadow: 0 2px 8px rgba(55, 0, 95, 0.04);
+  --cs-topic-card-bg: var(--laushu-primary-100);
+  --cs-topic-card-shadow: 0 2px 8px color-mix(in srgb, var(--laushu-primary-700) 4%, transparent);
   --cs-topic-card-title-margin: 0 0 12px;
   --cs-topic-card-title-color: var(--laushu-tertiary-700);
   --cs-topic-card-title-size: var(--fs-h4);
@@ -888,7 +910,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 }
 
 .theme-laushu .laushu-iterate-section .cs-article h3 {
-  color: #4852c3;
+  color: var(--laushu-primary-600);
 }
 
 .theme-laushu .laushu-iterate-section .cs-article-num {
@@ -973,7 +995,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 .theme-laushu .laushu-iterate-section .cs-iteration-badge {
   --cs-iteration-badge-width: fit-content;
   --cs-iteration-badge-padding: 9px 14px;
-  --cs-iteration-badge-bg: #4852c3;
+  --cs-iteration-badge-bg: var(--laushu-primary-600);
   --cs-iteration-badge-size: var(--fs-sm);
   --cs-iteration-badge-line-height: 17px;
 }
@@ -1009,7 +1031,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-before-after-narrative-gap: var(--cs-iteration-board-gap);
   --cs-before-after-narrative-header-gap: 24px;
   --cs-before-after-narrative-badge-padding: 9px 14px;
-  --cs-before-after-narrative-badge-bg: #4852c3;
+  --cs-before-after-narrative-badge-bg: var(--laushu-primary-600);
   --cs-before-after-narrative-badge-size: var(--fs-sm);
   --cs-before-after-narrative-badge-weight: 600;
   --cs-before-after-narrative-badge-line-height: 17px;
@@ -1029,15 +1051,15 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
   --cs-before-after-narrative-comparison-gap: var(--cs-iteration-compare-gap, 24px);
   --cs-before-after-narrative-panel-border: #d8deec;
   --cs-before-after-narrative-panel-radius: 16px;
-  --cs-before-after-narrative-panel-bg: #fbf9ff;
+  --cs-before-after-narrative-panel-bg: var(--laushu-primary-100);
   --cs-before-after-narrative-panel-head-padding: var(--cs-iteration-panel-caption-padding, 16px);
-  --cs-before-after-narrative-panel-head-bg: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, #ced2ff 100%);
+  --cs-before-after-narrative-panel-head-bg: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, var(--laushu-primary-200) 100%);
   --cs-before-after-narrative-panel-head-color: #241b31;
   --cs-before-after-narrative-panel-head-size: var(--cs-iteration-panel-caption-size, 18px);
   --cs-before-after-narrative-panel-head-weight: var(--cs-iteration-panel-caption-weight, 700);
   --cs-before-after-narrative-panel-head-line-height: 31.5px;
   --cs-before-after-narrative-panel-body-padding: var(--cs-iteration-panel-media-padding, 18px);
-  --cs-before-after-narrative-connector-color: #6f56bd;
+  --cs-before-after-narrative-connector-color: var(--laushu-primary-600);
   --cs-before-after-narrative-connector-width: 41px;
 }
 

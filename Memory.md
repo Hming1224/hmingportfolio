@@ -1,5 +1,38 @@
 # Project Memory
 
+## 2026-07-13 案例頁：HMW 與解決方案的敘事邊界
+
+- **先建立商業因果鏈（CA）**：使用者缺少交易控制權 → 無法自主掌握損益 → 對平台的不確定感與信任風險提高 → 策略機器人啟用意願、登入與使用頻率可能下降 → CA 的交易量與收益可能受影響。未有線上數據前，後半段只能寫成商業假設／風險，不可冒充已證實成果。
+- **HMW 要描述更大的機會範圍**：聚焦使用者想達成的自主性、信任與長期使用體驗，不可直接指定「平倉、止盈止損、同步機器人狀態」等特定功能。
+- **解決方案不是 HMW 的因果說明**：任何具體功能都只是 HMW 底下的候選方向；必須透過使用者回饋、競品研究、流程分析與驗證逐步推理、收斂後，才呈現為適合的設計方案。
+- CA Overview 的正確敘事順序：商業／使用者問題 → 廣義設計目標 → HMW → 研究與推理 → 收斂出的交易控制流程 → 驗證與商業假設。
+- **案例頁 HMW 的 scope 要介於使用者需求與企業命題之間**：一句話至少交代「主要使用者或決策角色」、「可延伸的問題範圍」與「企業層級結果」，但不要把所有研究證據、限制條件和解法細節都塞進命題。可以適度抽象，讓面試官一眼理解問題從誰開始、會影響到多大範圍，以及為什麼值得企業投入；具體數字、場景、法規與功能形式留在前後文支持。
+- **Advantech 的 HMW 要由小到大**：短期先說清楚單一廠區如何管理多棟建物與設備、及早發現用電風險並避免超約罰款；長期再延伸到不同廠區，提高能源使用效益並降低營運成本。符合法規與全球規範是企業必須滿足的條件，其商業意義是降低受罰風險與成本，不應把合規本身寫成最終價值。AI 是專案既定方向，可以出現在命題；主動通知、chatbot、帶入脈絡等 UI 形式仍屬研究後才收斂的解法。文案用白話描述問題，避免只有跨系統、跨廠區等大 scope 或過多能源專業術語。
+
+## 2026-07-12 案例頁中文文案：zh 字串三處同步（改文案必讀）
+
+- **踩坑機制**：各案例頁（advantech / crypto-arsenal / laushu）的 `i18n.ts` 是「zh 字串 → en 字串」的 key-map，同一句 zh 原文可能同時存在於 ① `sections/*.tsx`（JSX 或 `t("...")`）、② `data.ts`、③ `i18n.ts` 的 key。**改任何一句中文，必須先 Grep 全 repo 找出所有出現處並全部同步改成一模一樣的新句**，漏一處英文版查 key 就會失敗、退回顯示中文。改完用 Grep 驗證舊句 0 筆。
+- **文案基準（2026-07-12 全站去 AI 味 pass，commit 35d0428）**：「不是 A 而是 B」句式每頁最多 1 次（advantech 留「讓 AI 主動出現在需要判斷的地方，而不是等人來問。」）；台灣用語統一「使用者／回饋／週」；中英文與數字之間半形空格；「賦能」標題與「落地」是 Hming 明確決定保留的詞，不要「順手修正」。
+- advantech `i18n.ts` 曾累積 orphan key（來源端文案改版後舊 key 沒清），本次已清 5 個；日後改文案順手 Grep 確認 key 仍被引用。
+
+寫 `/design-system` 元件文件時，Example 區只放「視覺 / 狀態展示」，不要塞用途、流程、邊界、無障礙、真實使用情境或實作說明。這些「為什麼 / 何時 / 如何用」的資訊要移到對應的資訊架構 section，Example 標籤只在需要區分 variant / state 時才出現。
+
+Rule (source of truth, keep verbatim):
+
+- Examples are visual/state demos only.
+- Do not put usage, purpose, flow, boundary, accessibility, real usage, or implementation explanation inside the example surface.
+- If the information explains why/when/how the component is used, move it to:
+  - When to use
+  - States / Behavior
+  - Anatomy
+  - Code guidance
+  - Accessibility
+  - Reference
+- Example labels are allowed only when they distinguish variants or states.
+- If there is only one example, remove the extra purple label.
+
+> 對應 smoke 守門：`tests/smoke/design-system.spec.ts` 已檢查「Example 不塞長文說明」「Reference 不出現 Gap Analysis / Remediation Plan」等內容邊界；改文件時若動到這些結構，先看該 spec 再改，別讓 Example 又長回說明文。
+
 ## 2026-06-25 Case Study Design System consolidation start
 
 - 新增 `components/case-study/CaseHero.tsx` 與 `CaseInfoGrid.tsx`，三個已發布案例頁的 Hero / info grid 先共用 DOM 與 API，但保留既有 `cs-hero-*` / `cs-info-*` class，避免第一步就改變視覺。

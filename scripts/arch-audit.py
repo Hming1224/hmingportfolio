@@ -76,8 +76,11 @@ def audit_css_isolation():
                     content = file.read()
                     for css in route_css_rules:
                         basename = os.path.basename(css)
-                        # Look for imports of this CSS file
-                        if basename in content:
+                        # Match actual import statements only (import "...css" / from "...css").
+                        # A bare substring match would false-positive on documentation strings
+                        # (e.g. design-system docs listing "styles/home.css" as a source reference).
+                        import_pattern = r'(?:import|from)\s+["\'][^"\']*' + re.escape(basename) + r'["\']'
+                        if re.search(import_pattern, content):
                             imports_found[css].append(rel_file)
             except Exception as e:
                 pass

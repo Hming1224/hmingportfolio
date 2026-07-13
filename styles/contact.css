@@ -352,15 +352,22 @@
 .form-field label {
   position: absolute;
   left: 16px;
-  top: 20px;
+  top: 28px;
+  transform: translateY(-50%);
   color: var(--muted);
   font-size: 16px;
   font-weight: 500;
   pointer-events: none;
   transition:
     color var(--hm-duration-fast) var(--hm-ease-standard),
+    top var(--hm-duration-fast) var(--hm-ease-out),
     transform var(--hm-duration-fast) var(--hm-ease-out);
   transform-origin: left top;
+}
+
+.form-field.is-textarea label {
+  top: 16px;
+  transform: none;
 }
 
 /* Floating behavior when active */
@@ -368,7 +375,8 @@
 .form-field input:not(:placeholder-shown) ~ label,
 .form-field textarea:focus ~ label,
 .form-field textarea:not(:placeholder-shown) ~ label {
-  transform: translateY(-12px) scale(0.75);
+  top: 8px;
+  transform: scale(0.75);
   color: var(--purple);
   font-weight: 600;
 }
@@ -421,6 +429,112 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.contact-review-modal {
+  display: grid;
+  gap: 24px;
+  min-width: min(100%, 460px);
+}
+
+.contact-review-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.contact-review-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.contact-review-row {
+  display: grid;
+  grid-template-columns: minmax(96px, 0.32fr) minmax(0, 1fr);
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-review-row:last-child {
+  border-bottom: 0;
+}
+
+.contact-review-row dt,
+.contact-review-row dd {
+  margin: 0;
+}
+
+.contact-review-row dt {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.contact-review-row dd {
+  min-width: 0;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.contact-review-row.is-message dd {
+  white-space: pre-wrap;
+}
+
+.contact-review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.contact-review-actions .ds-button-primary {
+  order: 2;
+}
+
+.contact-review-actions .ds-button-secondary {
+  order: 1;
+}
+
+.contact-review-skeleton {
+  width: min(100%, 260px);
+  height: 18px;
+}
+
+.contact-review-skeleton.is-long {
+  width: 100%;
+  height: 18px;
+  margin-bottom: 10px;
+}
+
+.contact-review-skeleton.is-medium {
+  width: min(72%, 280px);
+  height: 18px;
+}
+
+@media (max-width: 640px) {
+  .contact-review-modal {
+    min-width: 0;
+  }
+
+  .contact-review-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .contact-review-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .contact-review-actions .ds-button-primary,
+  .contact-review-actions .ds-button-secondary {
+    order: 0;
+  }
 }
 
 .spinner-icon {

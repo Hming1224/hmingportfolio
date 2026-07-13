@@ -32,7 +32,7 @@ type TermNote = {
 };
 
 const infoItems: InfoItem[] = [
-  { label: "時間", value: ["2026.06-2026.07 still updating"] },
+  { label: "時間", value: ["2026.06 – 現在（持續迭代中）"] },
   { label: "角色", value: ["Product Designer"] },
   { label: "負責項目", value: ["研究整理", "系統規劃", "元件盤點", "AI 協作流程設計", "前端實作驗證"] },
   {

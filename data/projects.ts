@@ -47,7 +47,7 @@ const zhProjects: ProjectSummary[] = [
     navigationTitle: "手動平倉與止盈止損流程設計",
     date: "2023.06 - 2023.08",
     description:
-      "這是一個自動化之量化交易平台，用戶可以選擇有潛力的投資標的進行買賣，也可以訂閱創作者上架的交易機器人之策略。專案的目標是滿足已啟動交易的策略機器人下可以順利手動平倉或添加止盈止損訂單之流程設計與開發。",
+      "這是一個自動化之量化交易平台，使用者可以選擇有潛力的投資標的進行買賣，也可以訂閱創作者上架的交易機器人之策略。專案的目標是滿足已啟動交易的策略機器人下可以順利手動平倉或添加止盈止損訂單之流程設計與開發。",
     cover: "/projects/crypto-arsenal/cover/cover.webp",
     logo: "/projects/crypto-arsenal/cover/logo.webp",
     tags: ["UI/UX 設計", "二手研究", "FinTech"],
@@ -115,7 +115,7 @@ const zhProjects: ProjectSummary[] = [
     navigationTitle: "Web3 數位憑證平台",
     date: "2022.12 - 2023.02",
     description:
-      "本專案與國泰數位發展中心技術團隊合作，開發一款以Web3為基礎的數位證書服務平台。這次專案共歷時2個月，我主要負責使用者體驗設計、Web 介面設計、用戶研究，以及用戶測試。",
+      "本專案與國泰數位發展中心技術團隊合作，開發一款以 Web3 為基礎的數位證書服務平台。這次專案共歷時 2 個月，我主要負責使用者體驗設計、Web 介面設計、使用者研究，以及使用者測試。",
     cover: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
     logo: "https://framerusercontent.com/images/P57DkJCf8P5Yrz7l53G2waxdHIM.jpeg",
     tags: ["UIUX 設計", "網頁設計", "End-to-end 設計", "網站開發中"],

@@ -9,6 +9,7 @@ import type { Locale } from "../../i18n/routing";
 
 const en = {
   "時間": "Timeline",
+  "2026.06 – 現在（持續迭代中）": "Jun 2026 – Present (ongoing)",
   "角色": "Role",
   "負責項目": "Responsibilities",
   "產出": "Outputs",

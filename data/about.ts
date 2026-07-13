@@ -34,7 +34,7 @@ const zhExperiences = [
     image: "https://framerusercontent.com/images/dIryK4ZcMPoWUc9rlwSZzl9F88Y.jpeg",
     points: [
       "維護並重整 Design System，統一 3大不同功能元件與對應頁面，並應用於 20+ 個產品設計流程，提升視覺與互動一致性。",
-      "進行使用者訪談與競品分析，完成 6+ 個產品功能，既有產品優化 12+ 項 UX 問題，與 20+ 個 RWD 頁面設計。",
+      "進行使用者訪談與競品分析，完成 6+ 個產品功能，修正既有產品 12+ 項 UX 問題，與 20+ 個 RWD 頁面設計。",
       [
         { text: "在 Scrum 中擔任助理 PO，優化設計流程與檔案管理，" },
         { text: "協助 Sprint 產出提升至過往 1.5 倍", highlight: true },
@@ -135,7 +135,7 @@ const zhEducatorItems = [
     title: "OpenHCI 2024 暑期工作坊",
     href: "https://www.2024.openhci.com/",
     role: "設計組組長",
-    desc: "籌備營期3個月，帶領設計組共3人負責營隊教學計劃與課程內容安排，並且於營期提供 40 位學員設計思考集訓",
+    desc: "籌備營期 3 個月，帶領設計組共 3 人負責營隊教學計劃與課程內容安排，並且於營期提供 40 位學員設計思考集訓",
     date: "2024.05-2024.08",
     image: "/educator/openhci.jpg",
   },
@@ -144,7 +144,7 @@ const zhEducatorItems = [
     title: "NCCU 112-2 人機介面設計課程",
     href: null,
     role: "課程助教",
-    desc: "協助 60 位大學生Figma操作教學，負責期中 / 期末評分、批改作業與專案指導",
+    desc: "協助 60 位大學生 Figma 操作教學，負責期中 / 期末評分、批改作業與專案指導",
     date: "2024.02-2024.06",
     image: "/educator/人機介面設計課程發表.jpg",
   },
@@ -153,7 +153,7 @@ const zhEducatorItems = [
     title: "NCCU 114-1 人機互動設計課程",
     href: null,
     role: "課程助教",
-    desc: "指導學碩同學共20組期末專案，提供 TA office hour 諮詢與每週作業回饋",
+    desc: "指導學碩同學共 20 組期末專案，提供 TA office hour 諮詢與每週作業回饋",
     date: "2025.09-2026.01",
     image: "/educator/nccu-ta.png",
   },
@@ -326,7 +326,7 @@ const copyByLocale = {
     heroTitle: "從重新認識自己，到設計產品體驗",
     intro: [
       "我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Product Designer。",
-      "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計不是單純美化畫面，而是將複雜的問題、需求與限制，轉化為清楚、直覺且可落地的使用者體驗。",
+      "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計就是把複雜的問題、需求與限制，收斂成使用者用得順、也真的能落地的體驗。",
       "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究、介面設計、prototype 與跨部門協作經驗。現在的我，正持續探索 AI 工具如何幫助設計師更有效率地釐清問題、建立 MVP，並推進產品驗證，朝 Product Builder 的方向前進。",
     ],
     headings: {

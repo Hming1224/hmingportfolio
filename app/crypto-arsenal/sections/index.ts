@@ -1,4 +1,5 @@
 export { default as HeroSection } from "./HeroSection";
+export { default as OverviewSection } from "./OverviewSection";
 export { default as BackgroundSection } from "./BackgroundSection";
 export { default as RoleSection } from "./RoleSection";
 export { default as ProblemSection } from "./ProblemSection";

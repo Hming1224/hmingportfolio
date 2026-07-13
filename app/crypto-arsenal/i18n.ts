@@ -5,11 +5,13 @@ import type { Locale } from "../../i18n/routing";
 const en = {
   "左右滑動查看更多": "Swipe to see more",
   // ── TOC ──
+  "專案總覽": "Project Overview",
   "專案背景": "Overview",
+  "產品介紹": "Product Introduction",
   "工作模式": "My Role",
   "問題定義": "Problem",
   "介面現況": "Current State",
-  "關鍵決策": "Key Decision",
+  "設計理由": "Design Rationale",
   "競品參考": "Benchmark",
   "Wireframe": "Wireframe",
   "設計迭代": "Iteration",
@@ -19,6 +21,49 @@ const en = {
   "返回首頁": "Back to Home",
   "下一個專案": "Next Project",
   "：": ": ",
+
+  // ── Project Overview ──
+  "問題": "Problem",
+  "影響": "Impact",
+  "專案快速總覽": "Project at a glance",
+  "成果走查": "Outcome walkthrough",
+  "成果走查流程切換": "Switch outcome flow",
+  "成果走查影片": "Outcome walkthrough video",
+  "流程": "Flow",
+  "流程01": "Flow 01",
+  "流程02": "Flow 02",
+  "流程03": "Flow 03",
+  "← 上一步": "← Previous",
+  "下一步 →": "Next →",
+  "跳到步驟": "Go to step",
+  "把只能回交易所處理的風險控制，帶回量化策略平台內。": "Bringing risk controls that once required an exchange back into the quant-strategy platform.",
+  "Crypto Arsenal（CA）是量化交易平台：策略機器人替使用者自動下單，但人想介入自己的倉位時，CA 裡沒有任何入口——跳回交易所手動操作，還可能讓整支策略被判定異常、強制停掉。我從使用者回饋與三家交易所的既有流程出發，把倉位資訊、限價與市價平倉、止盈止損整合進 CA，讓人工介入變成系統看得懂的合法操作。":
+    "Crypto Arsenal (CA) is a quantitative trading platform where strategy bots place orders automatically. But when traders needed to intervene in their own positions, CA offered no entry point. Switching back to the exchange could cause the entire strategy to be flagged as abnormal and forcibly stopped. Starting from user feedback and the established flows of three exchanges, I brought position data, limit and market closes, and take-profit / stop-loss controls into CA, turning manual intervention into a valid action the system can understand.",
+  "策略會自動交易，但人要介入時，只能冒著弄壞策略的風險回交易所。": "Strategies trade automatically, but human intervention meant returning to the exchange and risking a broken strategy.",
+  "策略開發者：同時跑多支策略的人": "Strategy developers running multiple strategies",
+  "策略賺了多少看得到，但現在開的是多倉還是空倉、正在賺還是賠，CA 介面上完全看不出來；想確認只能登入交易所，多支策略同時跑時，根本分不清哪一筆倉位是哪支策略開的。": "They could see strategy returns, but CA showed neither whether a position was long or short nor whether it was currently gaining or losing. Checking required logging into the exchange, where positions from multiple strategies were impossible to tell apart.",
+  "交易者：跟著策略下單、想保留主控權的人": "Traders following strategies who still want control",
+  "獲利到滿意想先落袋、或市場變化太快想提前止損，都只能乾等策略條件被觸發；有人跳回交易所手動平倉，整支策略被系統判定異常、強制停掉，還救不回來。": "Whether they wanted to lock in gains or cut losses before conditions triggered, traders could only wait. Some closed positions manually on the exchange, causing the system to flag and forcibly stop the entire strategy with no way to recover it.",
+  "平台：CA 的商業風險": "Platform: CA's business risk",
+  "如果核心風險控制只能回交易所完成，CA 就無法承接完整交易流程；長期會削弱使用者留在平台操作的意願，也影響平台的交易抽成機會。": "If core risk controls can only happen on the exchange, CA cannot support the complete trading flow. Over time, that weakens users' incentive to stay on the platform and reduces opportunities for transaction-fee revenue.",
+  "想確認倉位只能登入交易所：這些資訊在當時的 CA 裡完全看不到。": "Checking a position required logging into the exchange; none of this information was visible in CA at the time.",
+  "把交易控制權還給使用者，讓損益能自主掌握，也維持對 CA 的信任與策略使用意願。": "Give users back control over their trades and profit and loss, while sustaining trust in CA and their willingness to keep using strategies.",
+  "商業命題": "Business premise",
+  "缺少交易控制權不只造成單次操作不便：當使用者無法依市場變化主動停利或止損，損益就只能被動交給策略決定。長期累積的不確定感，可能降低對平台的信任、策略機器人的啟用意願與回訪頻率，進一步影響 CA 的交易量與收益。": "Lacking control over trades creates more than a one-off inconvenience. When users cannot take profit or cut losses as the market changes, their outcomes remain passively determined by the strategy. Over time, that uncertainty may weaken trust in the platform, reduce strategy-bot activation and return frequency, and ultimately affect CA's trading volume and revenue.",
+  "How might we": "How might we",
+  "我們如何讓 CA 用戶在使用自動交易策略的同時，仍能自主掌握交易與損益，並建立值得長期信任、持續使用的策略交易體驗？": "How might we help CA users retain control over their trades and profit and loss while using automated trading strategies, creating a strategy-trading experience they can trust and keep using over time?",
+  "Binance TP/SL 設定彈窗，可設定止盈與止損觸發價格": "Binance TP/SL dialog for setting take-profit and stop-loss trigger prices",
+  "研究 Binance、Bybit、OKX 的交易控制流程後，我將「沿用成熟操作模式」收斂為其中一個設計方向。": "After studying the trade-control flows of Binance, Bybit, and OKX, I converged on reusing established interaction patterns as one design direction.",
+  "將三項核心交易流程整合進 CA，平均操作時間縮短 58%。": "Bringing three core trading flows into CA cut average task time by 58%.",
+  "三項任務平均由 65 秒降至約 27 秒。": "Average time across the three tasks fell from 65 seconds to about 27 seconds.",
+  "三項核心任務平均由 65 秒降至約 27 秒。": "Average time across the three core tasks fell from 65 seconds to about 27 seconds.",
+  "整體易用性評分": "Overall usability score",
+  "5 位內部受測者完成任務後填寫 SUS 問卷。": "Five internal participants completed the SUS questionnaire after the tasks.",
+  "受測者能沿用既有交易經驗，但止盈止損的資訊判讀仍是下一輪優化重點。": "Participants could carry over their existing trading experience, while interpreting TP/SL information remains the top priority for the next iteration.",
+  "從限價、市價平倉到止盈止損，三個核心流程都能在 CA 內完成。": "From limit and market closes to take-profit / stop-loss, all three core flows now happen inside CA.",
+  "在 Trading Details 中選擇限價平倉，輸入價格與數量後確認送出。": "Choose a limit close in Trading Details, enter the price and quantity, then confirm the order.",
+  "在 Trading Details 中選擇市價平倉，輸入數量後立即完成。": "Choose a market close in Trading Details, enter the quantity, and complete it immediately.",
+  "在倉位列表中設定止盈與止損價格，策略同步保留運行狀態。": "Set take-profit and stop-loss prices from the position list while keeping the strategy state in sync and running.",
 
   // ── Hero ──
   "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計":
@@ -37,7 +82,7 @@ const en = {
   "使用軟體": "Software Used",
   "負責項目": "Responsibilities",
   "二手研究": "Secondary Research",
-  "線框稿": "Wireframing",
+  "線框稿": "Wireframe",
   "原型設計": "Prototyping",
   "設計交付影片": "Design Handoff Videos",
   "Crypto Arsenal 量化交易平台介面主視覺": "Crypto Arsenal quantitative trading platform interface",
@@ -52,24 +97,24 @@ const en = {
   "但加密交易的門檻在於：通常得":
     "But crypto trading has a high barrier: it usually requires ",
   "手動盯盤、手動下單": "manually watching the market and placing orders",
-  "，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
-    ", along with a solid understanding of the market. That's where \"trading strategies\" come in — programs or algorithms that monitor the market and trade more efficiently.",
+  "，還要對市場有一定了解。於是「交易策略」出現了：策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
+    ", along with a solid understanding of the market. That's where \"trading strategies\" come in: programs or algorithms that monitor the market and trade more efficiently.",
   "而 ": "",
   " 就是一個直接串接交易所、提供交易者自動化策略來交易的平台。它同時服務兩種角色，形成一個策略供需的生態系。":
     " is a platform that connects directly to exchanges and provides traders with automated strategies. It serves two roles at once, forming a supply-and-demand ecosystem around strategies.",
   "這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 ":
     "This model creates value for traders, developers, and the platform alike. However, strategies are not ",
   "100% 全自動": "100% fully automated",
-  "，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
+  "，往往仍需要交易者依市場狀況自己微調，這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
     ", so traders often still need to fine-tune them based on market conditions. That's exactly the starting point this \"position display and manual close\" feature set out to solve.",
   "就像傳統金融市場，加密市場裡的交易者透過交易所把法幣（如 USD）換成加密貨幣；交易所就像中間人，幫交易者完成買賣、並連到背後的區塊鏈。":
     "Just like traditional financial markets, traders in crypto markets convert fiat (e.g. USD) into cryptocurrency through exchanges. The exchange acts as the middleman that completes trades and connects to the underlying blockchain.",
-  "但加密交易的門檻在於：通常得手動盯盤、手動下單，還要對市場有一定了解。於是「交易策略」出現了——策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
-    "But crypto trading has a high barrier: it usually requires manually watching the market, placing orders by hand, and a solid understanding of the market. That's where \"trading strategies\" come in — a strategy is a program or algorithm that monitors the market and trades more efficiently on the trader's behalf.",
+  "但加密交易的門檻在於：通常得手動盯盤、手動下單，還要對市場有一定了解。於是「交易策略」出現了：策略是一段程式或演算法，幫交易者監控市場、更有效率地交易。":
+    "But crypto trading has a high barrier: it usually requires manually watching the market, placing orders by hand, and a solid understanding of the market. That's where \"trading strategies\" come in: a strategy is a program or algorithm that monitors the market and trades more efficiently on the trader's behalf.",
   "而 Crypto Arsenal 就是一個直接串接交易所、提供交易者自動化策略來交易的平台。它同時服務兩種角色，形成一個策略供需的生態系。":
     "Crypto Arsenal is a platform that connects directly to exchanges and provides traders with automated strategies. It serves two roles at once, forming a supply-and-demand ecosystem around strategies.",
-  "這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 100% 全自動，往往仍需要交易者依市場狀況自己微調——這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
-    "This model creates value for traders, developers, and the platform alike. But strategies are not 100% fully automated — traders often still need to fine-tune based on market conditions. That's exactly the starting point this \"position display and manual close\" feature set out to solve.",
+  "這個模式為交易者、開發者與平台本身同時創造價值。不過策略並非 100% 全自動，往往仍需要交易者依市場狀況自己微調，這正是後來「倉位顯示與手動平倉」這個功能要解決的起點。":
+    "This model creates value for traders, developers, and the platform alike. But strategies are not 100% fully automated; traders often still need to fine-tune based on market conditions. That's exactly the starting point this \"position display and manual close\" feature set out to solve.",
   // diagram 1 labels
   "用法幣買進加密貨幣": "Buy crypto with fiat",
   "加密貨幣互換": "Crypto swap",
@@ -97,10 +142,10 @@ const en = {
   // ── Role ──
   "角色與工作流": "Role & Workflow",
   "在 CA 的工作模式": "How I Worked at CA",
-  "在 CA，每 1–2 週會持續一個 sprint，小功能設計時程約 2–4 周，大功能設計時程約需 1–3 個月。除了與 PO 持續討論產品功能上線時程及每週用戶反饋，多數 feature 以二手桌面研究與競品設計為基礎，我身為設計師的設計流程如下：":
+  "在 CA，每 1–2 週會持續一個 sprint，小功能設計時程約 2–4 週，大功能設計時程約需 1–3 個月。除了與 PO 持續討論產品功能上線時程及每週使用者回饋，多數 feature 以二手桌面研究與競品設計為基礎，我身為設計師的設計流程如下：":
     "At CA, work ran in 1–2 week sprints — small features took about 2–4 weeks to design, larger ones 1–3 months. Beyond ongoing discussions with the PO on release timing and weekly user feedback, most features were grounded in secondary desk research and competitive design. My design process as a designer was as follows:",
   "單一 feature 的設計流程": "Design process for a single feature",
-  "二手研究 / 用戶反饋": "Secondary research / feedback",
+  "二手研究 / 使用者回饋": "Secondary research / feedback",
   "UI flow 提案": "UI flow proposal",
   "線框稿設計": "Wireframing",
   "與 PO 討論可行性": "Feasibility review with PO",
@@ -108,11 +153,11 @@ const en = {
   "Jira 排 tickets": "Jira ticketing",
 
   // ── Problem ──
-  "用戶痛點：整體策略賺賠看得到，倉位狀態卻看不見":
+  "使用者痛點：整體策略賺賠看得到，倉位狀態卻看不見":
     "User Pain: Overall P&L Is Visible, but Position State Isn't",
   "CA 介面只呈現策略的整體績效（獲利、ROI、未實現 ROI、資產分布），卻沒直接顯示這支策略目前實際持有哪些倉位。使用者因此卡在幾個反覆出現的情境裡。":
     "The CA interface only shows a strategy's overall performance (profit, ROI, unrealized ROI, asset allocation), but doesn't directly show which positions the strategy currently holds. As a result, users get stuck in a few recurring situations.",
-  "使用者在CA 平台上使用策略機器人交易時，雖然可以看到策略整體賺了多少，卻無法清楚理解「現在到底開了什麼倉位」。當同時啟動多支策略、或同一支策略可能開多也可能開空時，使用者無法直接判斷目前是多倉還是空倉、倉位數量、入場價、標記價、浮動盈虧，以及該倉位距離止盈 / 止損還有多遠。":
+  "使用者在 CA 平台上使用策略機器人交易時，雖然可以看到策略整體賺了多少，卻無法清楚理解「現在到底開了什麼倉位」。當同時啟動多支策略、或同一支策略可能開多也可能開空時，使用者無法直接判斷目前是多倉還是空倉、倉位數量、入場價、標記價、浮動盈虧，以及該倉位距離止盈 / 止損還有多遠。":
     "When users trade with strategy bots on CA, they can see the strategy's overall profit, but they cannot clearly understand \"what position is open right now.\" When multiple strategies are running at the same time, or when a single strategy may open either long or short positions, users cannot directly tell whether the current position is long or short, its size, entry price, mark price, floating P&L, or how far it is from take-profit / stop-loss.",
   "「策略賺了多少我看得到，但它現在開的是多倉還是空倉、正在賺還是賠，介面上完全看不出來。」":
     "\"I can see how much the strategy has made, but whether it's currently long or short, in profit or in loss — the interface shows none of it.\"",
@@ -152,9 +197,10 @@ const en = {
 
   // ── Decision ──
   "問題延伸的後果": "Consequence of the Problem",
-  "兩種平倉路徑，結果天差地遠": "Two Closing Paths, Wildly Different Outcomes",
-  "問題不只是「看不到倉位」，而是使用者為了控制單筆風險去交易所平倉，反而可能讓整支策略報廢——機器人偵測到自己管理的倉位突然消失、狀態錯亂，為風險控管只能停掉策略且無法恢復。":
-    "The problem isn't just \"can't see the position.\" When a user closes on the exchange to control single-trade risk, it can wreck the entire strategy — the bot detects that a position it manages has suddenly vanished, its state breaks, and for risk control it can only stop the strategy with no way to recover.",
+  "把手動平倉搬進 CA，策略不再因人為介入被誤殺":
+    "Bringing Manual Close into CA, So Intervention No Longer Kills the Strategy",
+  "問題不只是「看不到倉位」，而是使用者為了控制單筆風險去交易所平倉，反而可能讓整支策略報廢：機器人偵測到自己管理的倉位突然消失、狀態錯亂，為風險控管只能停掉策略且無法恢復。":
+    "The problem isn't just \"can't see the position.\" When a user closes on the exchange to control single-trade risk, it can wreck the entire strategy: the bot detects that a position it manages has suddenly vanished, its state breaks, and for risk control it can only stop the strategy with no way to recover.",
   "目前在交易所手動平倉": "Closing manually on the exchange (today)",
   "CA 看不懂你的意圖": "CA Can't Read Your Intent",
   "使用者跳出 CA、到交易所手動操作": "User leaves CA and acts on the exchange",
@@ -167,14 +213,14 @@ const en = {
   "CA 告知機器人這是主動、合法的指令": "CA tells the bot this is an intentional, valid command",
   "機器人同步狀態、不進入錯誤保護": "The bot syncs state and doesn't enter error protection",
   "→ 只結束當前倉位、策略繼續運行": "→ Only the current position closes; the strategy keeps running",
-  "所以方向很明確：把平倉收進 CA 內。手動平倉只結束當下這一筆倉位、策略進入空倉，未來再符合開倉條件時機器人仍會自動開倉，讓用戶可以同時享有自動化交易的紀律以及自主控管收益的權利。":
+  "所以方向很明確：把平倉收進 CA 內。手動平倉只結束當下這一筆倉位、策略進入空倉，未來再符合開倉條件時機器人仍會自動開倉，讓使用者可以同時享有自動化交易的紀律以及自主控管收益的權利。":
     "So the direction is clear: bring closing inside CA. A manual close only ends the current position and moves the strategy to flat; when entry conditions are met again, the bot still opens automatically — giving users both the discipline of automated trading and the freedom to manage their own returns.",
 
   // ── Research ──
   "交易所介面參考": "Exchange UI Benchmark",
   "盤點交易所通用的倉位資訊、平倉、止盈止損流程":
     "Mapping Common Exchange Patterns for Positions, Closing, and TP/SL",
-  "為了順利讓使用者無縫熟悉流程，我以 Binance / Bybit / OKX 的實際介面進行競品流程參考，拆解三家共通的倉位資訊欄位、平倉和止盈止損流程，另外同時考量交易所能夠回傳的資料，收斂出專屬於 CA 的操作流程。":
+  "為了讓使用者一上手就熟悉流程，我參考 Binance / Bybit / OKX 的實際介面，拆解三家共通的倉位資訊欄位、平倉和止盈止損流程，同時考量交易所能回傳的資料，收斂出專屬於 CA 的操作流程。":
     "To let users pick up the flow seamlessly, I benchmarked the real interfaces of Binance / Bybit / OKX, breaking down the position fields, closing flows, and TP/SL flows the three share. Considering also what data the exchanges can return, I converged on an operation flow tailored to CA.",
   "交易詳細資訊確認": "Trade Detail Confirmation",
   "從三家交易所介面收斂出交易合約中倉位最通用、可從交易所撈取之數據，並且也是使用者最關心的欄位。":
@@ -241,33 +287,33 @@ const en = {
   "Wireframe 目前頁數": "Current wireframe page",
   "切換到步驟": "Switch to step",
   "未採納原因": "Why It Wasn't Chosen",
-  "右上角新增Exchange Record的Tab，點擊後可以看到倉位資訊，選擇對應的倉位，點擊close按鈕。":
+  "右上角新增 Exchange Record 的 Tab，點擊後可以看到倉位資訊，選擇對應的倉位，點擊 close 按鈕。":
     "Add an Exchange Record tab in the top right. Click it to view position details, select the corresponding position, and click the close button.",
-  "彈出Pop-up視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。":
+  "彈出 Pop-up 視窗，預設以限價平倉，輸入金額與數量，最後再點 confirm 按鈕。":
     "A pop-up window appears, defaulting to limit close. Enter the price and quantity, then click the confirm button.",
-  "也可以在最上方的點選市價平倉，輸入數量後，最後再點confirm按鈕。":
+  "也可以在最上方的點選市價平倉，輸入數量後，最後再點 confirm 按鈕。":
     "Alternatively, click market close at the top, enter the quantity, and click the confirm button.",
-  "在原本的策略機器人bar右方加入交易資訊欄，顯示該策略目前倉位數量，以及交易筆數，點擊該按鈕。":
+  "在原本的策略機器人 bar 右方加入交易資訊欄，顯示該策略目前倉位數量，以及交易筆數，點擊該按鈕。":
     "Add a trade info section to the right of the original strategy bot bar showing the current position size and number of trades, and click the button.",
-  "顯示下拉選單，可看到倉位資訊，選擇對應的倉位，點擊close按鈕。":
+  "顯示下拉選單，可看到倉位資訊，選擇對應的倉位，點擊 close 按鈕。":
     "Show a dropdown menu where position details can be viewed. Select the corresponding position and click the close button.",
-  "將原本action欄位，另外新增view details按鈕，點擊該按鈕。":
+  "將原本 action 欄位，另外新增 view details 按鈕，點擊該按鈕。":
     "Add a view details button to the original action column, and click the button.",
-  "彈出Pop-up視窗，可看到倉位資訊，選擇對應的倉位，點擊close按鈕。":
+  "彈出 Pop-up 視窗，可看到倉位資訊，選擇對應的倉位，點擊 close 按鈕。":
     "A pop-up window appears showing position details. Select the corresponding position and click the close button.",
-  "從右邊sidebar彈出視窗，預設以限價平倉，輸入金額與數量，最後再點confirm按鈕。":
+  "從右邊 sidebar 彈出視窗，預設以限價平倉，輸入金額與數量，最後再點 confirm 按鈕。":
     "A sidebar slides out from the right, defaulting to limit close. Enter the price and quantity, then click the confirm button.",
-  "彈出Pop-up視窗，可看到倉位資訊，TP/SL的checkbox在該倉位的正下方。":
+  "彈出 Pop-up 視窗，可看到倉位資訊，TP/SL 的 checkbox 在該倉位的正下方。":
     "A pop-up window appears showing position details, with the TP/SL checkbox directly below the position.",
-  "勾選TP/SL的checkbox，在右邊輸入止盈止損價格，最後點選add按鈕。":
+  "勾選 TP/SL 的 checkbox，在右邊輸入止盈止損價格，最後點選 add 按鈕。":
     "Check the TP/SL checkbox, enter the take-profit and stop-loss prices on the right, and click the add button.",
-  "完成TP/SL下單後，可看到下單價格，需要修改可以再點擊add按鈕。":
+  "完成 TP/SL 下單後，可看到下單價格，需要修改可以再點擊 add 按鈕。":
     "After completing the TP/SL order, the order prices are visible. To modify them, click the add button again.",
-  "彈出Pop-up視窗，可看到倉位資訊，最右邊有TP/SL欄位，點擊add按鈕。":
+  "彈出 Pop-up 視窗，可看到倉位資訊，最右邊有 TP/SL 欄位，點擊 add 按鈕。":
     "A pop-up window appears showing position details. There is a TP/SL column on the far right; click the add button.",
-  "點擊add按鈕，在下方跳出dropdown視窗，輸入止盈止損價格，最後點選confirm按鈕。":
+  "點擊 add 按鈕，在下方跳出 dropdown 視窗，輸入止盈止損價格，最後點選 confirm 按鈕。":
     "Click the add button to expand a dropdown below. Enter the take-profit and stop-loss prices, then click the confirm button.",
-  "從右邊sidebar彈出視窗，TP和SL可分別輸入金額，最後再點confirm按鈕。":
+  "從右邊 sidebar 彈出視窗，TP 和 SL 可分別輸入金額，最後再點 confirm 按鈕。":
     "A sidebar slides out from the right. Enter values for TP and SL separately, then click the confirm button.",
   "CA Watchlist 頁面既有 Sidebar 操作流程參考":
     "Reference from CA's existing Watchlist sidebar flow",
@@ -325,23 +371,25 @@ const en = {
     "Manual TP/SL final option, step 4: complete TP/SL setup",
   "左邊的趨勢圖需要往左縮小，以資訊層級而言，趨勢圖當中會標記何時進場和出場，若圖表過小很難點擊這些資訊。另外，右邊空間無法塞入 8–10 欄交易所的所有資訊，必定會有部分資訊被犧牲。":
     "The trend chart on the left has to shrink, but in terms of hierarchy the chart marks entry and exit points — too small and those become hard to tap. And the right side can't fit all 8–10 columns of exchange data, so some information is inevitably sacrificed.",
-  "用 Dropdown 顯示倉位資訊於該運行的策略機器人 bar 下方會導致無法完整呈現其他策略機器人，交易所也有限制至多一次呈現 20 筆訂單 / 倉位的限制。":
+  "用 Dropdown 把倉位資訊顯示在該策略機器人 bar 下方，會擋到其他策略機器人的完整呈現；加上交易所本身也限制一次最多顯示 20 筆訂單 / 倉位。":
     "Showing position details in a dropdown under the running strategy bot bar would prevent other strategy bots from being fully visible. Exchanges also limit how many orders / positions can be shown at once, often around 20.",
-  "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，用戶可以點選有興趣機器人並加入到右邊清單中。將用戶原本就已經熟悉 UI 流程整合到新的倉位資訊設計流程中，提升用戶操作的流暢度。":
-    "The final direction references CA's Watchlist flow for selecting strategy bots: after tapping add, the right sidebar opens and users can select bots to add to the list. Reusing a UI flow users already know makes the new position-information flow smoother.",
+  "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，使用者可以點選有興趣機器人並加入到右邊清單中。平倉沿用這套大家已經熟悉的操作，讓使用者不用為了平倉重新適應一套新流程。":
+    "This flow references CA's Watchlist pattern for selecting strategy bots: after tapping add, the right sidebar opens and users add bots to the list. Closing a position reuses this familiar flow, so users don't have to relearn anything just to close out.",
+  "參考 CA 中 Watchlist 頁面的選擇策略機器人流程，點擊 add 按鈕後，右邊的 sidebar 展開，使用者可以點選有興趣機器人並加入到右邊清單中。設定止盈止損時沿用同一套熟悉的操作，讓使用者少一層上手門檻。":
+    "This flow references CA's Watchlist pattern for selecting strategy bots: after tapping add, the right sidebar opens and users add bots to the list. Setting take-profit / stop-loss reuses the same familiar flow, lowering the learning curve.",
   "CA Watchlist 頁面點擊 add 按鈕後開啟 Sidebar 的操作流程參考":
     "CA Watchlist reference: tapping add opens the sidebar flow",
   "CA Watchlist 頁面右側 Sidebar 選擇策略機器人並加入清單的操作流程參考":
     "CA Watchlist reference: selecting strategy bots in the right sidebar and adding them to the list",
-  "雖然這個版本是參考幣安平台的現行設計，固然是個不錯且用戶習慣的設計，然而 CA 目前沒有該元件，需要重新手刻較費時。":
+  "這個版本參考幣安現行設計，是使用者習慣、也還不錯的做法，但 CA 目前沒有這個元件，要重新手刻比較費時。":
     "Although this version references Binance's current pattern and is familiar to users, CA does not currently have this component, so building it from scratch would take more time.",
   "目前的 Dropdown List 在平台中僅用於設定策略機器人的 API 或是交易幣別設定，若是用於新增全新的委託或是平倉，這樣設計會與原本 Dropdown List 使用邏輯有衝突。":
     "In the current platform, dropdown lists are mainly used for configuring a strategy bot's API or trading pairs. Using one to create a new order or close a position would conflict with the existing dropdown logic.",
 
   // ── Iteration ──
   "設計元件迭代": "Component Iteration",
-  "透過內部團隊人員與工程師測試，將部分元件進行迭代修正，更加提升用戶使用體驗。":
-    "Through testing with the internal team and engineers, I iterated on several components to further improve the user experience.",
+  "我們找內部團隊和工程師實測，逐一修過策略機器人 Bar 的資訊顯示、平倉的數量互動與止盈止損按鈕文字，讓每個元件都更貼近使用者實際的操作理解。":
+    "I tested with the internal team and engineers, then reworked components one by one — the strategy-bot bar's information display, the close-position quantity interaction, and the TP/SL button label — so each maps more closely to how users actually read it.",
   "操作流程\n1 & 2": "Flow\n1 & 2",
   "策略機器人Bar UI顯示資訊": "Strategy Bot Bar UI Information",
   "優化策略列表資訊層級與操作按鈕一致性": "Optimizing Information Hierarchy and Button Consistency in Strategy List",
@@ -354,27 +402,27 @@ const en = {
   "迭代後：移除非必要欄位至 Accumulated EC，Action 區新增 Duplicate 與 View Details 按鈕":
     "After: Non-essential columns are moved to Accumulated EC, and Duplicate and View Details buttons are added to the Action column.",
   "平倉數量互動方式": "Close-Quantity Interaction",
-  "貼合用戶實際需求修正": "Fixed to match real user needs",
-  "原本的平倉數量採用輸入框搭配下拉選單的方式，使用者需要點擊欄位後，再從 10%、20%、50%、100% 等固定比例中選擇。這種設計雖然能快速選取常用比例，但這些比例若非用戶的選擇，則需要手動輸入。另外，選項展開後也會覆蓋下方內容，讓彈窗視覺變得較擁擠。":
+  "貼合使用者實際需求修正": "Fixed to match real user needs",
+  "原本的平倉數量採用輸入框搭配下拉選單的方式，使用者需要點擊欄位後，再從 10%、20%、50%、100% 等固定比例中選擇。這種設計雖然能快速選取常用比例，但這些比例若非使用者的選擇，則需要手動輸入。另外，選項展開後也會覆蓋下方內容，讓彈窗視覺變得較擁擠。":
     "The original close-quantity used an input field with a dropdown: users tapped the field, then picked from fixed ratios like 10%, 20%, 50%, 100%. It made common ratios quick to select, but anything off-list had to be typed manually. The expanded dropdown also covered the content below, making the dialog feel cramped.",
   "調整後將平倉數量元件改為「輸入框 + 比例滑桿」的形式。使用者可以直接透過滑桿調整平倉比例，並即時看到目前比例數值，例如 0%。相較於下拉選單，滑桿更適合表達「從 0% 到 100%」這種連續比例的操作，也讓平倉數量的調整方式更直覺。":
     "The revised component became an input field plus a ratio slider. Users adjust the close ratio directly via the slider and see the current value live, e.g. 0%. Compared with a dropdown, a slider better expresses a continuous \"0% to 100%\" range and makes adjusting the close quantity more intuitive.",
   "迭代前：平倉數量使用下拉選單，展開後覆蓋彈窗下方內容": "Before: close quantity used a dropdown that covered the content below when expanded",
   "迭代後：平倉數量改為輸入框加比例滑桿，並即時顯示預估損益說明": "After: close quantity became an input plus ratio slider with live estimated P&L",
   "系統資訊顯示機制": "System-Info Display",
-  "符合多數用戶的使用體驗": "Fits how most users work",
+  "符合多數使用者的使用體驗": "Fits how most users work",
   "原本的 TP / SL 功能說明直接放在彈窗最下方，將完整的規則與限制一次性呈現在介面中。這樣雖然能讓使用者立即看到所有資訊，但也讓主要操作區被大量文字擠壓，視覺負擔較重。對已熟悉功能的使用者來說，這些長篇描述並不是每次操作都需要閱讀，反而會降低操作效率，讓介面顯得擁擠、不夠俐落。":
     "The original TP/SL explanation sat at the very bottom of the dialog, presenting all rules and limits at once. It let users see everything immediately, but it crowded the main controls with text and felt heavy. For users already familiar with the feature, these long descriptions don't need reading every time — they actually slowed things down and made the interface feel cluttered.",
-  "調整後將完整的功能說明收斂到標題旁的 info 元件中，只有在使用者 hover 或需要進一步理解時才會讀取到詳細資訊。這讓介面預設狀態更乾淨，主操作區能更聚焦在 Take Profit、Stop Loss 的價格設定與確認操作上，減少不必要的文字干擾。這樣的調整同時滿足了新手與專家的使用情境：對專家來說，他們通常已經理解 TP / SL 的運作規則，乾淨簡潔的介面能讓他們更快速完成設定，也更適合長期高頻使用；對新手來說，必要的專業資訊並沒有被移除，而是被放在可自主查看的 info 元件中，當他們需要了解觸發邏輯、適用範圍或限制條件時，可以主動滑到 info 查看完整說明。":
+  "調整後將完整的功能說明收斂到標題旁的 info 元件中，只有在使用者 hover 或需要進一步理解時才會讀取到詳細資訊。這讓介面預設狀態更乾淨，主操作區能更聚焦在 Take Profit、Stop Loss 的價格設定與確認操作上，減少不必要的文字干擾。這樣的調整同時滿足了新手與專家的使用情境：對專家來說，他們通常已經理解 TP / SL 的運作規則，乾淨簡潔的介面能讓他們更快速完成設定，也更適合長期高頻使用；對新手來說，必要的專業資訊仍完整保留，只是收進可自主查看的 info 元件中，當他們需要了解觸發邏輯、適用範圍或限制條件時，可以主動滑到 info 查看完整說明。":
     "The revision collapsed the full explanation into an info element beside the title, surfacing details only on hover or when the user wants more. This keeps the default state cleaner and lets the main area focus on setting and confirming Take Profit / Stop Loss prices, with less text noise. It serves both novices and experts: experts already know how TP/SL works and a clean interface lets them set up faster for high-frequency use; for novices, the necessary detail isn't removed but tucked into a self-serve info element they can open when they need to understand triggers, scope, or limits.",
   "迭代前：TP/SL 彈窗將完整功能說明直接放在最下方，操作區被大量文字擠壓": "Before: the TP/SL dialog placed the full explanation at the bottom, crowding the controls",
   "迭代後：功能說明收斂到標題旁的 info 元件，hover 才顯示完整說明": "After: the explanation collapsed into an info element by the title, shown on hover",
   "止盈止損操作按鈕": "TP/SL Action Button",
   "預期操作與介面對齊": "Aligning intent with the interface",
-  "原本在 TP/SL 欄位中，即使該倉位已經設定過止盈止損，仍然顯示 Add 按鈕。這容易讓使用者誤解目前還可以「新增」另一組 TP/SL 委託，彷彿能持續替同一個倉位加掛多筆止盈止損設定。然而，在 CA 的操作邏輯中，TP/SL 是針對整個倉位一次性下單。當倉位已經送出 TP/SL 委託後，後續能做的行為並不是再次新增，而是調整原本已存在的止盈止損設定。因此，使用 Add 會讓介面語意與實際系統邏輯產生落差，增加使用者判斷成本。":
+  "原本在 TP/SL 欄位中，即使該倉位已經設定過止盈止損，仍然顯示 Add 按鈕。這容易讓使用者誤解目前還可以「新增」另一組 TP/SL 委託，彷彿能持續替同一個倉位加掛多筆止盈止損設定。然而，在 CA 的操作邏輯中，TP/SL 是針對整個倉位一次性下單，委託送出後，後續能做的只有調整這筆既有設定。因此，使用 Add 會讓介面語意與實際系統邏輯產生落差，增加使用者判斷成本。":
     "Originally the TP/SL field showed an Add button even after a position already had TP/SL set. That made users think they could \"add\" another TP/SL order, as if stacking multiple settings on one position. But in CA's logic, TP/SL is a one-time order for the whole position. Once submitted, the next action isn't adding again — it's adjusting the existing setting. So Add created a gap between the interface's meaning and the actual system logic, raising the user's cognitive cost.",
-  "調整後，當倉位已經存在 TP/SL 設定時，按鈕文字改為 Modify。這讓使用者能更直覺地理解：目前不是要新增一筆新的止盈止損委託，而是要修改原本針對整個倉位設定的 TP/SL。這樣的調整讓操作語意更符合系統邏輯，也降低了使用者對後續操作的誤解。使用者看到 Modify 時，會自然反射出「我現在是在調整既有的整倉止盈止損設定」，而不是以為可以再次加掛新的 TP/SL 單。":
-    "After the change, when a position already has TP/SL, the button reads Modify. Users grasp it intuitively: this isn't adding a new TP/SL order but editing the existing whole-position setting. The wording now matches the system logic and reduces misreading of what comes next. Seeing Modify, users naturally register \"I'm adjusting the existing whole-position TP/SL,\" not stacking a new order.",
+  "調整後，當倉位已經存在 TP/SL 設定時，按鈕文字改為 Modify。使用者看到 Modify，就會知道自己是在調整整個倉位既有的止盈止損設定，不會再誤以為能加掛一筆新的 TP/SL 單。這樣操作語意更貼近系統實際邏輯，也少了對後續操作的誤解。":
+    "After the change, when a position already has TP/SL, the button reads Modify. Seeing Modify, users understand they are adjusting the existing whole-position TP/SL and no longer assume they can stack a new order. The wording now sits closer to the system's actual logic and reduces misreading of what comes next.",
   "迭代前：倉位已設定止盈止損仍顯示 Add 按鈕": "Before: a position with TP/SL already set still showed an Add button",
   "迭代後：倉位已存在 TP/SL 設定時按鈕文字改為 Modify": "After: the button reads Modify when a position already has TP/SL set",
 
@@ -393,58 +441,73 @@ const en = {
     "Final UI for manual TP/SL inside CA: the TP/SL entry in the Trading Details dialog",
 
   // ── Design Impact ──
-  "用內部測試與流程指標驗證":
-    "Validated with Internal Testing and Flow-Level Metrics",
-  "實習階段沒有資源做正式的大規模用戶測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。":
-    "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself, such as the number of steps to complete a task and the average time spent on each flow.",
-  "3 步": "3 steps",
-  "內部測試者完成核心任務": "Internal testers completing core tasks",
-  "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。":
-    "All five internal members familiar with futures trading completed manual close and TP/SL setup without any prompting.",
-  "與交易所一致的操作步數": "Step count matched to the exchanges",
-  "平倉流程對齊 Binance / OKX / Bybit 的既有步數，既有交易者幾乎零學習成本即可接續。":
-    "The close flow matches the existing step count on Binance / OKX / Bybit, so existing traders can pick it up with almost zero learning cost.",
+  "延續熟悉的交易邏輯，三項核心任務平均縮短 58%":
+    "Familiar trading logic cut average time across three core tasks by 58%",
+  "我的驗證假設是：如果 CA 延續交易者熟悉的操作邏輯與用詞，使用者應能直接在策略頁完成平倉與止盈止損，不必切回交易所。":
+    "My validation hypothesis was that if CA kept the trading logic and terminology familiar to traders, users could close positions and set TP/SL directly on the strategy page without switching back to the exchange.",
+  "我邀請 5 位具合約交易經驗的內部成員進行簡單易用性測試，完成限價平倉、市價平倉與止盈止損三項任務，主要記錄操作時間、整體易用性與現場回饋。":
+    "I invited five internal participants with futures-trading experience to a simple usability test. They completed limit close, market close, and TP/SL tasks while I recorded task time, overall usability, and feedback.",
+  "受測者普遍認為新版操作容易理解，且能延續既有交易習慣。":
+    "Participants generally found the new flow easy to understand and consistent with their existing trading habits.",
+  "測試洞見": "Test insight",
+  "止盈止損仍有較高判讀負擔": "TP/SL still carries a higher interpretation burden",
+  "使用者需要同時理解多空方向、價格關係、輸入單位及觸發條件，認知負擔明顯高於平倉。":
+    "Users must interpret position direction, price relationships, input units, and trigger conditions at the same time, creating noticeably more cognitive load than closing a position.",
   "平均操作時間": "Avg. time on task",
-  "三個流程從「跳去交易所操作」改成「在 CA 內直接完成」，平均省下約 58% 的操作時間。":
-    "Moving all three flows from “hop over to the exchange” to “done inside CA” cuts the average time on task by about 58%.",
-  "操作時間對比：原本得跳去交易所來回，新版在 CA 內直接完成":
-    "Time on task: previously a round trip to the exchange, now done directly inside CA",
-  "操作流程": "Flow",
-  "原本（CA → 交易所）": "Before (CA → exchange)",
-  "新版（CA 內）": "After (inside CA)",
-  "縮短": "Reduced",
+  "三項任務操作時間比較": "Task time across the three core flows",
+  "原流程需切換至交易所並重新定位持倉；新版可直接從 CA 策略頁完成。":
+    "The original flow required switching to the exchange and finding the position again; the new flow is completed directly from the CA strategy page.",
+  "任務": "Task",
+  "原流程": "Original flow",
+  "新版": "New flow",
   "手動限價平倉": "Manual limit close",
   "手動市價平倉": "Manual market close",
   "手動止盈止損": "Manual TP/SL",
   "秒": "s",
-  "跟我平常用交易所的操作幾乎一樣，不用重新學。":
-    "It works almost exactly like the exchanges I already use — nothing new to learn.",
-  "平倉和止盈止損直接在策略頁就能設，不用再切回交易所，整個順很多。":
-    "I can set close and TP/SL right on the strategy page without switching back to the exchange — so much smoother.",
-  "一眼就看得到每個倉位離止盈止損還有多遠，這在以前的 CA 看不到。":
-    "I can see at a glance how far each position is from its TP/SL — you couldn't see that in the old CA.",
-  "限價跟市價分得很清楚，跟著畫面走第一次就順利完成。":
-    "Limit and market are clearly separated; I followed the screens and got it right on the first try.",
-  "內部測試者": "Internal tester",
+  "使用者回饋摘要": "User feedback summary",
+  "質化洞察與支持回饋": "Qualitative insights and supporting feedback",
+  "支持這項洞察的回饋": "Feedback supporting this insight",
+  "市價和限價的按鈕放在持倉資訊旁，流程跟我常用的交易所很接近；看到價格和數量欄位後，我知道下一步該填什麼，不太需要重新理解。":
+    "The market and limit controls sit next to the position details, and the flow feels like the exchanges I use. Once I see the price and quantity fields, I know what to enter next without having to relearn the process.",
+  "以前要切去交易所，再確認交易對、方向和部位；現在從策略頁就能找到同一筆持倉並完成平倉，少了重新比對資料的過程。":
+    "I used to switch to the exchange and recheck the trading pair, direction, and position. Now I can find the same position and close it from the strategy page without comparing everything again.",
+  "設定止盈止損時，我會來回確認多空方向、設定價格和百分比距離，還要判斷 Mark Price 或 Last Price 會怎麼觸發，資訊比平倉多很多。":
+    "When setting TP/SL, I go back and forth between position direction, target price, and percentage distance. I also have to work out how Mark Price or Last Price will trigger it, so there is much more to interpret than with closing a position.",
+  "按下確認後，我想立刻看到條件是否送出成功、交易所有沒有同步，以及之後價格到哪個位置會真正觸發，不然會擔心設定沒有生效。":
+    "After I confirm, I want immediate feedback that the conditions were submitted, that the exchange is synced, and exactly where the price will trigger them. Otherwise, I worry that the setup did not take effect.",
+  "前端工程師": "Frontend Engineer",
   "合約交易使用者": "Futures trader",
   "量化策略使用者": "Quant-strategy user",
-  "產品團隊成員": "Product team",
-  "前端工程師": "Frontend engineer",
-  "驗證方式：以 5 名內部成員進行任務式可用性測試（請受測者在無提示下完成指定的平倉 / 止盈止損任務）。上述數字為內部測試與設計流程觀察，非線上後台營運數據。":
-    "Method: a task-based usability test with five internal members (each asked to complete the close / TP-SL tasks unaided). These figures come from internal testing and design-flow observations, not live production analytics.",
+  "質化收斂": "Qualitative takeaways",
+  "熟悉的交易操作能順利轉移": "Familiar trading interactions transferred smoothly",
+  "市價、限價與平倉流程延續常見交易所的操作邏輯，受測者能直接套用既有經驗完成操作。":
+    "Market, limit, and close flows follow interaction logic common to major exchanges, allowing participants to apply their existing experience directly.",
+  "止盈止損的困難來自判斷，而不是操作入口": "The difficulty with TP/SL comes from judgment, not finding the entry point",
+  "下一輪優先改善": "Priorities for the next iteration",
+  "價格與輸入單位對照": "Connect price and input units",
+  "同時呈現設定價格、百分比距離與預估盈虧，降低使用者自行換算的負擔。":
+    "Show the target price, percentage distance, and estimated profit or loss together to reduce manual calculation.",
+  "多空方向與觸發條件提示": "Clarify position direction and trigger conditions",
+  "依持倉方向提示合理的止盈止損區間，並在送出前清楚預覽觸發條件。":
+    "Suggest reasonable TP/SL ranges based on position direction and clearly preview the trigger conditions before submission.",
+  "執行與同步狀態": "Execution and sync status",
+  "清楚呈現送出中、成功、失敗，以及交易所持倉是否完成同步。":
+    "Clearly show submitting, success, and failure states, along with whether the exchange position has finished syncing.",
+  "本次由 5 位具合約交易經驗的內部成員進行簡單易用性測試，結果用於檢查操作流程與找出後續改善方向。":
+    "Five internal participants with futures-trading experience took part in this simple usability test. The results were used to check the flow and identify next improvements.",
 
   // ── Reflect ──
   "在快節奏與限制下做設計": "Designing in Fast-Moving Product Constraints",
-  "這份實習讓我學會在快節奏產品開發中做設計判斷：當沒有額外資源安排正式用戶測試時，透過內部團隊與工程師快速驗證流程，再把交易所既有操作習慣、CA 原本的設計系統與技術限制一起納入取捨。":
+  "這份實習讓我學會在快節奏產品開發中做設計判斷：當沒有額外資源安排正式使用者測試時，透過內部團隊與工程師快速驗證流程，再把交易所既有操作習慣、CA 原本的設計系統與技術限制一起納入取捨。":
     "This internship taught me how to make design decisions in a fast-moving product environment: when there were no extra resources for formal user testing, I validated flows quickly with the internal team and engineers, then balanced exchange interaction patterns with CA's existing design system and technical constraints.",
   "在快節奏中快速收斂方案": "Converging Quickly in a Fast-Moving Product Cycle",
   "以 1–2 週為節奏，把模糊的產品需求拆成可討論的 flow、wireframe 與原型畫面，讓團隊能更快對齊方向並推進交付。":
     "On a 1-2 week rhythm, I broke fuzzy product needs into discussable flows, wireframes, and prototypes so the team could align faster and keep delivery moving.",
   "用內部測試補足驗證節奏": "Using Internal Testing to Keep Validation Moving",
-  "在沒有額外資源安排正式用戶測試的情況下，透過內部團隊、工程師與熟悉產品流程的成員快速測試操作邏輯，及早發現資訊層級、流程理解與實作限制問題。":
+  "在沒有額外資源安排正式使用者測試的情況下，透過內部團隊、工程師與熟悉產品流程的成員快速測試操作邏輯，及早發現資訊層級、流程理解與實作限制問題。":
     "Without extra resources for formal user testing, I used internal team members, engineers, and people familiar with the product flow to quickly test interaction logic and catch issues in information hierarchy, flow comprehension, and implementation constraints early.",
   "把參考設計轉化成適合 CA 的流程": "Translating References into a CA-Native Flow",
-  "參考交易所既有模式時，重點不是照搬介面，而是理解使用者已熟悉的操作習慣，再結合 CA 原本的設計系統、風控邏輯與平台元件，轉化成更一致且可落地的方案。":
+  "參考交易所既有模式，不代表把整套介面照搬過來。我們的做法是讀懂使用者已經熟悉的操作習慣，再結合 CA 原本的設計系統、風控邏輯與平台元件，轉化成更一致、也更好落地的方案。":
     "When referencing exchange patterns, the goal was not to copy the interface, but to understand familiar user behaviors and translate them through CA's existing design system, risk-control logic, and platform components into a more consistent and feasible solution.",
 } as const;
 

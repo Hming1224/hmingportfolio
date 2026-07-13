@@ -1,6 +1,6 @@
 'use client';
 import { useLocale } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState, type MouseEvent } from 'react';
 import type { Locale } from '../i18n/routing';
 
 export interface TocSection {
@@ -10,6 +10,17 @@ export interface TocSection {
 
 interface CaseTOCProps {
   sections: TocSection[];
+  activeSectionId?: string;
+  visible?: boolean;
+  onNavigate?: (id: string) => void;
+}
+
+export interface CaseTOCViewProps {
+  sections: TocSection[];
+  activeId: string;
+  visible?: boolean;
+  ariaLabel: string;
+  onSectionClick?: (event: MouseEvent<HTMLAnchorElement>, id: string) => void;
 }
 
 type TocScrollLock = {
@@ -18,12 +29,50 @@ type TocScrollLock = {
   cleanup: () => void;
 };
 
-export default function CaseTOC({ sections }: CaseTOCProps) {
+export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function CaseTOCView(
+  { sections, activeId, visible = false, ariaLabel, onSectionClick },
+  ref,
+) {
+  return (
+    <nav
+      ref={ref}
+      className={`cs-toc${visible ? ' is-visible' : ''}`}
+      aria-label={ariaLabel}
+    >
+      <ul className="cs-toc-list">
+        {sections.map(({ id, title }) => (
+          <li
+            key={id}
+            className={`cs-toc-item${activeId === id ? ' cs-toc-item--active' : ''}`}
+          >
+            <a
+              href={`#${id}`}
+              className="cs-toc-link"
+              onClick={(event) => onSectionClick?.(event, id)}
+              aria-current={activeId === id ? 'true' : undefined}
+            >
+              {title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+});
+
+export default function CaseTOC({
+  sections,
+  activeSectionId,
+  visible: visibleOverride,
+  onNavigate,
+}: CaseTOCProps) {
   const locale = useLocale() as Locale;
   const [activeId, setActiveId] = useState<string>(sections[0]?.id ?? '');
   const [visible, setVisible] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const scrollLockRef = useRef<TocScrollLock | null>(null);
+  const resolvedActiveId = activeSectionId ?? activeId;
+  const resolvedVisible = visibleOverride ?? visible;
 
   const clearScrollLock = () => {
     const lock = scrollLockRef.current;
@@ -35,6 +84,8 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
 
   // 第一個內容 section 到達 navbar 下緣後才淡入；避免 hero / section 預覽露出時 TOC 太早出現。
   useEffect(() => {
+    if (visibleOverride !== undefined) return;
+
     const region = navRef.current?.closest('.cs-toc-layout');
     const firstSection = document.getElementById(sections[0]?.id ?? '');
     if (!region || !firstSection) return;
@@ -65,9 +116,11 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
       window.removeEventListener('hashchange', updateVisibility);
       window.removeEventListener('load', updateVisibility);
     };
-  }, [sections]);
+  }, [sections, visibleOverride]);
 
   useEffect(() => {
+    if (activeSectionId !== undefined) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (scrollLockRef.current) return;
@@ -86,12 +139,19 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
     });
 
     return () => observer.disconnect();
-  }, [sections]);
+  }, [sections, activeSectionId]);
 
   useEffect(() => clearScrollLock, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    if (onNavigate) {
+      clearScrollLock();
+      setActiveId(id);
+      onNavigate(id);
+      return;
+    }
+
     const target = document.getElementById(id);
     if (!target) return;
 
@@ -124,28 +184,13 @@ export default function CaseTOC({ sections }: CaseTOCProps) {
   };
 
   return (
-    <nav
+    <CaseTOCView
       ref={navRef}
-      className={`cs-toc${visible ? ' is-visible' : ''}`}
-      aria-label={locale === 'en' ? 'Table of contents' : '頁內目錄'}
-    >
-      <ul className="cs-toc-list">
-        {sections.map(({ id, title }) => (
-          <li
-            key={id}
-            className={`cs-toc-item${activeId === id ? ' cs-toc-item--active' : ''}`}
-          >
-            <a
-              href={`#${id}`}
-              className="cs-toc-link"
-              onClick={(e) => handleClick(e, id)}
-              aria-current={activeId === id ? 'true' : undefined}
-            >
-              {title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+      sections={sections}
+      activeId={resolvedActiveId}
+      visible={resolvedVisible}
+      ariaLabel={locale === 'en' ? 'Table of contents' : '頁內目錄'}
+      onSectionClick={handleClick}
+    />
   );
 }

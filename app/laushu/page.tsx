@@ -35,6 +35,7 @@ import {
   TaskFlowThreeDiagram,
   TaskFlowTwoDiagram,
 } from "./components/TaskFlowDiagrams";
+import { OverviewSection } from "./sections";
 
 const IMG = "/projects/laushu";
 const CONN1 = "/projects/advantech/solution/connector-1.svg";
@@ -48,25 +49,10 @@ const roleItems = [
   { label: "工具", value: ["FigJam", "Figma"] },
 ];
 
-const overviewCards = [
-  {
-    title: "目標",
-    body: "Laushu 勞贖為籌備上線中的數位化勞報單系統。此設計優化專案與其負責人合作，測試現有紙本勞報單數位化的流程易用性，於上線前提供改善建議。",
-  },
-  {
-    title: "需求",
-    body: "了解紙本勞報單報帳流程、拆解利害關係人需求，並優化數位化勞報單報帳體驗。",
-  },
-  {
-    title: "設計流程",
-    body: "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。",
-  },
-];
-
 const stakeholderCards = [
-  { title: "會計師", body: "勞贖主要用戶，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。" },
+  { title: "會計師", body: "勞贖主要使用者，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。" },
   { title: "公司使用者", body: "會計事務所的主要服務對象，會計事務所協助公司向旗下外包工作者開立勞報單。" },
-  { title: "外包工作者", body: "勞贖的終端用戶，確認勞報單是否成立，並向公司領取工資。" },
+  { title: "外包工作者", body: "勞贖的終端使用者，確認勞報單是否成立，並向公司領取工資。" },
   { title: "勞贖管理員", body: "管理會計師帳號。" },
 ];
 
@@ -94,7 +80,7 @@ const researchTable = {
         ["報帳操作步驟", "使用軟體", "資料輸入習慣 / 順序"],
         ["使用者動機、行為、目標"],
         ["使用者潛在的需求", "用例重要程度"],
-        ["使用者反饋", "系統易用性分數"],
+        ["使用者回饋", "系統易用性分數"],
       ],
     },
   ],
@@ -426,7 +412,7 @@ export default async function LaushuPage() {
       }}
       hero={localizeLaushuTree(locale, HeroSection())}
     >
-      {localizeLaushuTree(locale, OverviewSection())}
+      <OverviewSection />
       {localizeLaushuTree(locale, ProblemSection())}
       {localizeLaushuTree(locale, UnderstandSection())}
       {localizeLaushuTree(locale, ConvergeSection())}
@@ -464,31 +450,6 @@ function HeroSection() {
       title="從紙本化繁為簡：勞務報酬系統的數位流程優化"
       infoItems={infoItems}
     />
-  );
-}
-
-function OverviewSection() {
-  return (
-    <section id="cs-sec-overview" className="cs-section laushu-overview-section">
-      <LaushuHead eyebrow="專案總覽" title="將紙本勞報單流程轉譯成可測試、可上線的數位體驗。" />
-      <p className="cs-section-lead cs-section-lead--wide cs-section-lead--bottom-gap">
-        專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。
-      </p>
-      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--overview">
-        {overviewCards.map((card) => (
-          <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
-        ))}
-      </CaseGrid>
-      <CaseMedia className="cs-showcase-media" variant="full">
-        <Image
-          src={`${IMG}/overview-hero.png`}
-          alt="Laushu 勞務報酬系統介面總覽"
-          width={2268}
-          height={1376}
-          sizes="(max-width: 768px) calc(100vw - 48px), 1440px"
-        />
-      </CaseMedia>
-    </section>
   );
 }
 
@@ -885,7 +846,7 @@ const reflections = [
   },
   {
     title: "介面用詞與說明，本身就是體驗",
-    body: "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」——像把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。",
+    body: "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」，例如把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。",
   },
   {
     title: "從流程優化走向商業導入驗證",
