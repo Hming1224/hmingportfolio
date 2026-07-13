@@ -552,7 +552,7 @@
   font-size: var(--fs-h3);
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 8px;
+  margin: 0 0 var(--hm-space-2xs);
 }
 
 .theme-advantech .cs-sub-section-desc {
@@ -976,14 +976,14 @@
     grid-template-columns: 1fr auto 1fr auto 1fr;
     grid-template-rows: auto auto 1fr;
     align-items: stretch;
-    column-gap: 16px;
+    column-gap: var(--hm-space-sm);
   }
 
   .theme-advantech .cs-iv-stage {
     grid-row: 1 / -1;
     display: grid;
     grid-template-rows: subgrid;
-    row-gap: 16px;
+    row-gap: var(--hm-space-sm);
   }
 
   .theme-advantech .cs-iv-arrow {
@@ -1080,13 +1080,13 @@
 /* ── Design Scenario ── */
 /* ── Design Scenario (Section 05) ── */
 .theme-advantech .cs-ds-scenario {
-  margin-bottom: 48px;
+  margin-bottom: var(--hm-space-xl);
 }
 
 .theme-advantech .cs-ds-head {
   --cs-flex-cluster-align: flex-start;
   --cs-flex-cluster-gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: var(--hm-space-md);
 }
 
 .theme-advantech .cs-ds-title {
@@ -1496,13 +1496,13 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 }
 
 .theme-advantech #cs-sec-solution .cs-before-after-narrative-header {
-  padding: 0 8px;
+  padding: 0 var(--hm-space-2xs);
   overflow: hidden;
 }
 
 .theme-advantech #cs-sec-solution .cs-before-after-narrative-badge {
   width: 160px;
-  padding: 8px 16px;
+  padding: var(--hm-space-2xs) var(--hm-space-sm);
   border-radius: 999px;
   background: #ebf6fe;
   color: #0072bd;
@@ -1883,7 +1883,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     --cs-flex-cluster-align: stretch;
     --cs-flex-cluster-gap: 8px;
     --cs-flex-cluster-min-height: 90px;
-    margin-top: 8px;
+    margin-top: var(--hm-space-2xs);
     padding: 72px 0 0;
     background: transparent;
   }
@@ -2113,7 +2113,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
 }
 
 .theme-advantech .cs-ns-header > .cs-ns-divider {
-  margin-bottom: 24px;
+  margin-bottom: var(--hm-space-md);
 }
 
 .theme-advantech .cs-ns-cards {
@@ -2393,7 +2393,7 @@ html[lang="en"] .theme-advantech .cs-ds-pill {
     left: auto;
     top: auto;
     max-width: 100%;
-    padding: 24px;
+    padding: var(--hm-space-md);
   }
 
   .theme-advantech .cs-sol-flow-name {

@@ -23,7 +23,7 @@
 }
 
 .about-page {
-  padding-top: 80px;
+  padding-top: var(--hm-space-3xl);
 }
 
 .about-hero {
@@ -281,7 +281,7 @@
   display: grid;
   gap: 10px;
   align-content: center;
-  padding: 48px;
+  padding: var(--hm-space-xl);
 }
 
 .experience-year,
@@ -306,7 +306,7 @@
 }
 
 .experience-copy ul {
-  margin: 16px 0 0;
+  margin: var(--hm-space-sm) 0 0;
   padding-left: 20px;
   list-style: disc;
   line-height: 1.6;
@@ -314,7 +314,7 @@
 }
 
 .experience-copy li {
-  margin-bottom: 8px;
+  margin-bottom: var(--hm-space-2xs);
 }
 
 .experience-copy li:last-child {
@@ -350,8 +350,8 @@
 
 .skills-panel {
   display: grid;
-  gap: 32px;
-  padding: 48px;
+  gap: var(--hm-space-lg);
+  padding: var(--hm-space-xl);
   border-radius: 16px;
   background: var(--surface);
   box-shadow: var(--shadow-md);
@@ -360,7 +360,7 @@
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: var(--hm-space-md);
 }
 
 @media (max-width: 1024px) {
@@ -378,7 +378,7 @@
   }
 
   .experience-copy {
-    padding: 32px;
+    padding: var(--hm-space-lg);
   }
 }
 
@@ -444,7 +444,7 @@
 .skill-card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--hm-space-xs);
 }
 
 .skill-card-icon {
@@ -484,14 +484,14 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--hm-space-sm);
   text-align: left;
 }
 
 .skill-item {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
   font-size: 15px;
   color: var(--muted);
   line-height: 1.4;
@@ -509,7 +509,7 @@
   border-radius: 50%;
   background: var(--accent-color);
   opacity: 0.4;
-  margin-top: 8px;
+  margin-top: var(--hm-space-2xs);
   flex-shrink: 0;
   transition:
     transform 200ms ease,
@@ -533,7 +533,7 @@
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(8, minmax(82px, 1fr));
-  gap: 12px;
+  gap: var(--hm-space-xs);
 }
 
 .tool-item {
@@ -555,16 +555,16 @@
 
 .education-list {
   display: grid;
-  gap: 24px;
-  margin-bottom: 48px;
+  gap: var(--hm-space-md);
+  margin-bottom: var(--hm-space-xl);
 }
 
 .education-card {
   display: grid;
   grid-template-columns: 140px minmax(0, 1fr);
-  gap: 48px;
+  gap: var(--hm-space-xl);
   align-items: center;
-  padding: 48px;
+  padding: var(--hm-space-xl);
   border-radius: 16px;
   background: white;
   box-shadow: var(--shadow-md);
@@ -576,7 +576,7 @@
 
 .education-card div {
   display: grid;
-  gap: 12px;
+  gap: var(--hm-space-xs);
 }
 
 /* ── Design Values：Animated shine cards ── */
@@ -598,7 +598,7 @@
   flex-direction: column;
   gap: 20px;
   height: 100%;
-  padding: 32px;
+  padding: var(--hm-space-lg);
   border-radius: 16px;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -863,15 +863,15 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
   padding: 28px 32px;
   color: white;
 }
 
 .educator-badge {
   width: fit-content;
-  margin-bottom: 4px;
-  padding: 4px 8px;
+  margin-bottom: var(--hm-space-3xs);
+  padding: var(--hm-space-3xs) var(--hm-space-2xs);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
   color: rgba(255, 255, 255, 0.88);
@@ -912,7 +912,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
   padding-top: 10px;
 }
 
@@ -971,7 +971,7 @@
 @media (max-width: 1023px) {
   .about-window-body {
     grid-template-columns: 260px minmax(0, 1fr);
-    gap: 32px;
+    gap: var(--hm-space-lg);
   }
 
   .about-intro-copy h1 {
@@ -995,13 +995,13 @@
   }
 
   .about-hero {
-    padding: 48px 24px 24px;
+    padding: var(--hm-space-xl) var(--hm-space-md) var(--hm-space-md);
   }
 
   .about-window-body {
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 24px;
+    gap: var(--hm-space-md);
+    padding: var(--hm-space-md);
   }
 
   .about-intro-copy h1 {
@@ -1020,7 +1020,7 @@
   .experience-layout,
   .skills-panel,
   .education-list {
-    margin-inline: 24px;
+    margin-inline: var(--hm-space-md);
   }
 
   .experience-card,
@@ -1030,7 +1030,7 @@
 
   .skills-panel,
   .education-card {
-    padding: 24px;
+    padding: var(--hm-space-md);
   }
 
   .experience-copy h3,
@@ -1044,7 +1044,7 @@
     flex-direction: column;
     grid-template-columns: 1fr;
     align-items: stretch;
-    gap: 24px;
+    gap: var(--hm-space-md);
   }
 
   .year-rail {
@@ -1111,7 +1111,7 @@
   }
 
   .experience-copy {
-    padding: 24px;
+    padding: var(--hm-space-md);
   }
 
   .experience-role,
@@ -1134,12 +1134,12 @@
 
   .design-values-section {
     grid-template-columns: 1fr;
-    margin-inline: 24px;
+    margin-inline: var(--hm-space-md);
   }
 
   .design-value-card {
-    padding: 24px;
-    gap: 16px;
+    padding: var(--hm-space-md);
+    gap: var(--hm-space-sm);
   }
 
   .design-value-card h3 {
@@ -1148,7 +1148,7 @@
 
   .educator-section {
     grid-template-columns: 1fr;
-    margin-inline: 24px;
+    margin-inline: var(--hm-space-md);
   }
 
   .educator-card:nth-child(1),
@@ -1176,11 +1176,11 @@
    對應 Figma 340 / 439 規格。放在 768 斷點之後以覆蓋橫式佈局。 */
 @media (max-width: 440px) {
   .about-hero {
-    padding-inline: 16px;
+    padding-inline: var(--hm-space-sm);
   }
 
   .about-window-body {
-    padding: 24px;
+    padding: var(--hm-space-md);
   }
 
   .avatar-profile-wrap {

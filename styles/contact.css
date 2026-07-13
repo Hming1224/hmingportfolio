@@ -52,7 +52,7 @@
 }
 
 .contact-info-header h2 {
-  margin: 0 0 12px;
+  margin: 0 0 var(--hm-space-xs);
   color: var(--ink);
   font-size: var(--fs-h1);
   font-weight: 700;
@@ -129,7 +129,7 @@
 
 .method-details {
   display: grid;
-  gap: 4px;
+  gap: var(--hm-space-3xs);
   flex: 1 0 0;
   min-width: 0;
 }
@@ -232,8 +232,8 @@
     grid-template-areas:
       "icon details"
       "icon copy";
-    column-gap: 16px;
-    row-gap: 12px;
+    column-gap: var(--hm-space-sm);
+    row-gap: var(--hm-space-xs);
     align-items: center;
   }
 
@@ -276,8 +276,8 @@
 
 .contact-card {
   display: grid;
-  gap: 32px;
-  padding: 48px;
+  gap: var(--hm-space-lg);
+  padding: var(--hm-space-xl);
   border-radius: 16px;
   background: var(--hm-paper);
   border: 1px solid var(--line);
@@ -290,7 +290,7 @@
 }
 
 .contact-card-header h3 {
-  margin: 0 0 8px;
+  margin: 0 0 var(--hm-space-2xs);
   color: var(--ink);
   font-size: var(--fs-h3);
   font-weight: 700;
@@ -305,19 +305,19 @@
 
 .contact-form {
   display: grid;
-  gap: 24px;
+  gap: var(--hm-space-md);
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: var(--hm-space-sm);
 }
 
 @media (max-width: 640px) {
   .form-row {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: var(--hm-space-md);
   }
 }
 
@@ -428,12 +428,12 @@
 .btn-content {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
 }
 
 .contact-review-modal {
   display: grid;
-  gap: 24px;
+  gap: var(--hm-space-md);
   min-width: min(100%, 460px);
 }
 
@@ -446,15 +446,15 @@
 
 .contact-review-list {
   display: grid;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   margin: 0;
 }
 
 .contact-review-row {
   display: grid;
   grid-template-columns: minmax(96px, 0.32fr) minmax(0, 1fr);
-  gap: 16px;
-  padding: 12px 0;
+  gap: var(--hm-space-sm);
+  padding: var(--hm-space-xs) 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -489,7 +489,7 @@
 .contact-review-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: var(--hm-space-xs);
 }
 
 .contact-review-actions .ds-button-primary {
@@ -523,7 +523,7 @@
 
   .contact-review-row {
     grid-template-columns: 1fr;
-    gap: 4px;
+    gap: var(--hm-space-3xs);
   }
 
   .contact-review-actions {
@@ -577,8 +577,8 @@
   }
 
   .contact-method-item {
-    padding: 16px;
-    gap: 12px;
+    padding: var(--hm-space-sm);
+    gap: var(--hm-space-xs);
   }
 
   /* Tighten the icon + copy button so the value column is wide enough for the
@@ -604,8 +604,8 @@
   }
 
   .contact-card {
-    padding: 24px;
-    gap: 24px;
+    padding: var(--hm-space-md);
+    gap: var(--hm-space-md);
   }
 
 }

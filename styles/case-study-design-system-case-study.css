@@ -38,7 +38,7 @@
 
 .ds-case-hero__subtitle {
   max-width: 920px;
-  margin: 24px 0 0;
+  margin: var(--hm-space-md) 0 0;
   color: var(--cs-text-secondary);
   font-size: var(--fs-body);
   line-height: 1.8;
@@ -106,7 +106,7 @@
 }
 
 .ds-case-narrative-card p + p {
-  margin-top: 16px;
+  margin-top: var(--hm-space-sm);
 }
 
 .ds-case-quote {
@@ -172,7 +172,7 @@
 }
 
 .ds-case-lesson {
-  margin-top: 8px !important;
+  margin-top: var(--hm-space-2xs) !important;
   color: var(--cs-accent-strong) !important;
   font-weight: 700;
 }
@@ -183,7 +183,7 @@
   margin-top: 40px;
   border: 1px solid var(--cs-line);
   border-radius: 24px;
-  padding: 32px;
+  padding: var(--hm-space-lg);
   background: linear-gradient(135deg, #ffffff, var(--cs-surface));
   box-shadow: var(--ds-case-card-shadow);
 }
@@ -192,7 +192,7 @@
   display: grid;
   gap: 10px;
   max-width: 760px;
-  margin-bottom: 32px;
+  margin-bottom: var(--hm-space-lg);
 }
 
 .ds-case-workflow__header h3 {
@@ -223,7 +223,7 @@
   position: relative;
   display: grid;
   align-content: start;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   min-width: 0;
   border: 1px solid var(--cs-line);
   border-radius: 18px;
@@ -303,7 +303,7 @@
 
 .ds-case-list-card ul {
   display: grid;
-  gap: 16px;
+  gap: var(--hm-space-sm);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -311,7 +311,7 @@
 
 .ds-case-list-card li {
   position: relative;
-  padding-left: 24px;
+  padding-left: var(--hm-space-md);
   color: var(--cs-text-secondary);
   line-height: 1.75;
 }
@@ -338,7 +338,7 @@
   place-items: center;
   width: 48px;
   height: 48px;
-  margin-bottom: 4px;
+  margin-bottom: var(--hm-space-3xs);
   border-radius: 14px;
   background: var(--cs-accent-soft);
   color: var(--cs-accent-strong);
@@ -387,7 +387,7 @@
 
 .ds-case-term-notes {
   width: 100%;
-  margin-top: 32px;
+  margin-top: var(--hm-space-lg);
   border-top: 1px solid var(--cs-line);
   padding-top: 22px;
 }
@@ -409,7 +409,7 @@
 
 .ds-case-term-note {
   display: grid;
-  gap: 4px;
+  gap: var(--hm-space-3xs);
   min-width: 0;
 }
 
@@ -441,7 +441,7 @@
 .ds-case-stage-chip {
   display: inline-block;
   width: fit-content;
-  margin-bottom: 4px;
+  margin-bottom: var(--hm-space-3xs);
   padding: 5px 12px;
   border-radius: 999px;
   background: var(--cs-accent);
@@ -473,7 +473,7 @@
 .ds-case-verdict {
   display: inline-block;
   width: fit-content;
-  margin-bottom: 4px;
+  margin-bottom: var(--hm-space-3xs);
   padding: 5px 12px;
   border-radius: var(--hm-radius-tag, 4px);
   background: var(--cs-accent);
@@ -503,7 +503,7 @@
 .ds-case-question-callout {
   width: 100%;
   box-sizing: border-box;
-  margin: 24px 0;
+  margin: var(--hm-space-md) 0;
   padding: 24px 28px;
   border-left: 4px solid var(--cs-line-strong);
   color: var(--cs-text-heading);
@@ -520,13 +520,13 @@
   margin-top: 36px;
   border: 1px solid var(--cs-line);
   border-radius: 24px;
-  padding: 32px;
+  padding: var(--hm-space-lg);
   background: #ffffff;
   box-shadow: var(--ds-case-card-shadow);
 }
 
 .ds-case-decision-log h3 {
-  margin: 0 0 8px;
+  margin: 0 0 var(--hm-space-2xs);
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
   line-height: 1.35;
@@ -577,7 +577,7 @@
 /* ── Outcome：防護網 ── */
 
 .ds-case-guard-lead {
-  margin-top: 48px;
+  margin-top: var(--hm-space-xl);
 }
 
 .ds-case-guard-name {
@@ -607,7 +607,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 24px;
+  gap: var(--hm-space-md);
   width: 100%;
   box-sizing: border-box;
   margin-top: 36px;
@@ -626,7 +626,7 @@
 }
 
 .ds-case-design-system-cta p {
-  margin: 8px 0 0;
+  margin: var(--hm-space-2xs) 0 0;
   color: var(--cs-text-secondary);
   line-height: 1.7;
 }
@@ -648,7 +648,7 @@
 
 @media (max-width: 1024px) {
   .ds-case-workflow {
-    padding: 24px;
+    padding: var(--hm-space-md);
     border-radius: 20px;
   }
 
