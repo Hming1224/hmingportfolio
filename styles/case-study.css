@@ -744,6 +744,266 @@
   }
 }
 
+/* OutcomeWalkthrough：案例共用的成果流程切換，支援圖片步驟與影片流程。 */
+.cs-walkthrough-kicker,
+.cs-walkthrough-title {
+  margin: 0;
+}
+
+.cs-walkthrough-kicker {
+  color: var(--cs-walkthrough-kicker-color, var(--cs-accent));
+  font-size: var(--cs-walkthrough-kicker-size);
+  font-weight: var(--cs-walkthrough-kicker-weight, 700);
+  line-height: var(--cs-walkthrough-kicker-line-height, 1);
+  letter-spacing: var(--cs-walkthrough-kicker-letter-spacing, 0.12em);
+  text-transform: var(--cs-walkthrough-kicker-transform, uppercase);
+}
+
+.cs-outcome-walkthrough {
+  display: grid;
+  gap: var(--cs-walkthrough-gap);
+  padding: var(--cs-walkthrough-padding);
+  border: 1px solid var(--cs-line-soft, var(--cs-line));
+  border-radius: var(--hm-radius-lg);
+  background: var(--cs-walkthrough-surface, var(--cs-surface-soft, #fafcfe));
+}
+
+.cs-outcome-walkthrough > *,
+.cs-walkthrough-stage,
+.cs-walkthrough-frame,
+.cs-walkthrough-panel {
+  min-width: 0;
+}
+
+.cs-walkthrough-copy {
+  display: grid;
+  gap: var(--cs-walkthrough-copy-gap);
+  max-width: var(--cs-walkthrough-copy-max-width);
+}
+
+.cs-walkthrough-title {
+  color: var(--cs-text-heading);
+  font-size: var(--cs-walkthrough-title-size);
+  font-weight: 800;
+  line-height: 1.22;
+}
+
+.cs-walkthrough-tabs {
+  width: 100%;
+  max-width: none;
+}
+
+.cs-walkthrough-tabs-list {
+  --hm-tabs-bg: var(--cs-accent-soft, var(--hm-blue-50));
+  --hm-tabs-active-bg: var(--cs-walkthrough-active-tab-bg, var(--cs-surface, #ffffff));
+  /* Keep inactive labels one tonal step darker than the tab surface. */
+  --hm-tabs-text-color: var(
+    --cs-walkthrough-inactive-tab-color,
+    color-mix(in srgb, var(--hm-tabs-bg) 62%, var(--cs-text-heading))
+  );
+  --hm-tabs-text-active-color: var(--cs-text-heading);
+}
+
+.cs-walkthrough-stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs-walkthrough-stage-gap);
+  outline: none;
+}
+
+.cs-walkthrough-stage:focus-visible {
+  outline: var(--cs-focus-ring-width) solid var(--cs-accent);
+  outline-offset: var(--cs-focus-ring-offset);
+  border-radius: var(--hm-radius-md);
+}
+
+.cs-walkthrough-frame {
+  position: relative;
+  overflow: hidden;
+  border: var(--cs-walkthrough-frame-border, 1px solid var(--cs-line-soft, var(--cs-line)));
+  border-radius: var(--hm-radius-md);
+  background: var(--cs-surface, #ffffff);
+  aspect-ratio: var(--cs-walkthrough-frame-aspect-ratio);
+}
+
+.cs-walkthrough-frame img,
+.cs-walkthrough-frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity var(--cs-walkthrough-motion-duration) var(--hm-ease-standard);
+}
+
+.cs-walkthrough-frame img.is-active,
+.cs-walkthrough-frame video.is-active {
+  opacity: 1;
+}
+
+.cs-walkthrough-frame video.cs-walkthrough-video--masked {
+  background: transparent;
+  -webkit-mask-image: var(--cs-walkthrough-video-mask);
+  mask-image: var(--cs-walkthrough-video-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.cs-walkthrough-panel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "progress caption controls"
+    "dots dots dots";
+  align-items: center;
+  column-gap: var(--hm-space-md);
+  row-gap: var(--hm-space-sm);
+}
+
+.cs-walkthrough-panel[data-single-step="true"] {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "progress caption";
+}
+
+.cs-walkthrough-progress {
+  grid-area: progress;
+  margin: 0;
+  color: var(--cs-accent);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.cs-walkthrough-caption {
+  grid-area: caption;
+  margin: 0;
+  color: var(--cs-text-secondary);
+}
+
+.cs-walkthrough-controls {
+  grid-area: controls;
+  display: flex;
+  gap: var(--hm-space-2xs);
+}
+
+.cs-walkthrough-btn {
+  min-height: var(--cs-walkthrough-button-min-height);
+  padding: var(--hm-space-2xs) var(--hm-space-md);
+  border: 1px solid var(--cs-line-soft, var(--cs-line));
+  border-radius: var(--hm-map-radius-pill);
+  background: var(--cs-surface, #ffffff);
+  color: var(--cs-text-body);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background var(--cs-walkthrough-motion-duration) var(--hm-ease-standard),
+    color var(--cs-walkthrough-motion-duration) var(--hm-ease-standard),
+    border-color var(--cs-walkthrough-motion-duration) var(--hm-ease-standard),
+    opacity var(--cs-walkthrough-motion-duration) var(--hm-ease-standard);
+}
+
+.cs-walkthrough-btn:hover:not(:disabled) {
+  border-color: var(--cs-accent);
+  color: var(--cs-accent);
+}
+
+.cs-walkthrough-btn--primary,
+.cs-walkthrough-btn--primary:hover:not(:disabled) {
+  border-color: var(--cs-accent);
+  background: var(--cs-accent);
+  color: #ffffff;
+}
+
+.cs-walkthrough-btn:disabled {
+  cursor: default;
+  opacity: var(--cs-walkthrough-disabled-opacity);
+}
+
+.cs-walkthrough-btn:focus-visible,
+.cs-walkthrough-dot:focus-visible {
+  outline: var(--cs-focus-ring-width) solid var(--cs-accent);
+  outline-offset: var(--cs-focus-ring-offset);
+}
+
+.cs-walkthrough-dots {
+  grid-area: dots;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--hm-space-2xs);
+}
+
+.cs-walkthrough-dot {
+  width: var(--cs-walkthrough-dot-size);
+  height: var(--cs-walkthrough-dot-size);
+  padding: 0;
+  border: 0;
+  border-radius: var(--hm-map-radius-pill);
+  background: var(--cs-line);
+  cursor: pointer;
+  transition:
+    background var(--cs-walkthrough-motion-duration) var(--hm-ease-standard),
+    width var(--cs-walkthrough-motion-duration) var(--hm-ease-standard);
+}
+
+.cs-walkthrough-dot:hover {
+  background: var(--cs-line-strong);
+}
+
+.cs-walkthrough-dot[aria-current="true"] {
+  width: var(--cs-walkthrough-dot-active-size);
+  background: var(--cs-accent);
+}
+
+@media (max-width: 768px) {
+  .cs-outcome-walkthrough {
+    padding: var(--hm-space-md);
+  }
+
+  .cs-walkthrough-panel {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "progress caption"
+      "controls controls"
+      "dots dots";
+    column-gap: var(--hm-space-sm);
+  }
+
+  .cs-walkthrough-panel[data-single-step="true"] {
+    grid-template-areas: "progress caption";
+  }
+
+  .cs-walkthrough-controls {
+    width: 100%;
+  }
+
+  .cs-walkthrough-controls > .cs-walkthrough-btn {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-walkthrough-tabs-list {
+    align-items: stretch;
+  }
+
+  .cs-walkthrough-tab {
+    min-height: 48px;
+    padding-block: var(--hm-space-3xs);
+    line-height: 1.2;
+    white-space: normal;
+  }
+}
+
 /* Advantech impact blueprint: existing systems feed one AI/RAG hub, then branch to outcomes. */
 .cs-impact-blueprint {
   position: relative;

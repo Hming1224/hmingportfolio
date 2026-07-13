@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type KeyboardEvent } from "react";
+import { useState, type CSSProperties, type KeyboardEvent } from "react";
 import {
   Tabs,
   TabsHighlight,
@@ -9,18 +9,30 @@ import {
   TabsPanel,
   TabsPanels,
   TabsTab,
-} from "../../../components/animate-ui/primitives/base/tabs";
+} from "../animate-ui/primitives/base/tabs";
 
 export interface WalkthroughStep {
   src: string;
   alt: string;
   caption: string;
+  media?: "image" | "video";
+  poster?: string;
+  mask?: string;
 }
+
+type WalkthroughVideoStyle = CSSProperties & {
+  "--cs-walkthrough-video-mask"?: string;
+};
+
+type OutcomeWalkthroughStyle = CSSProperties & {
+  "--cs-walkthrough-frame-aspect-ratio"?: string;
+};
 
 export interface WalkthroughFlow {
   id: string;
   label: string;
   steps: WalkthroughStep[];
+  progressLabel?: string;
 }
 
 export interface WalkthroughLabels {
@@ -32,31 +44,37 @@ export interface WalkthroughLabels {
   goToStep: string;
 }
 
-interface OutcomeWalkthroughProps {
+export interface OutcomeWalkthroughProps {
   kicker: string;
   title: string;
   flows: WalkthroughFlow[];
   labels: WalkthroughLabels;
+  frameAspectRatio?: string;
+  ui?: {
+    controls?: boolean;
+    dots?: boolean;
+  };
 }
 
-/**
- * 總覽區的整案成果走查：以期末交付的實際 UI 圖面重現三條核心流程，
- * 讓看的人自己「點下一步」走完，而不是只看單一元件或影片。
- */
 export default function OutcomeWalkthrough({
   kicker,
   title,
   flows,
   labels,
+  frameAspectRatio,
+  ui,
 }: OutcomeWalkthroughProps) {
   const initialFlow = flows[0];
+  const style: OutcomeWalkthroughStyle | undefined = frameAspectRatio
+    ? { "--cs-walkthrough-frame-aspect-ratio": frameAspectRatio }
+    : undefined;
 
   if (!initialFlow) return null;
 
   return (
-    <Tabs defaultValue={initialFlow.id} className="cs-outcome-walkthrough">
+    <Tabs defaultValue={initialFlow.id} className="cs-outcome-walkthrough" style={style}>
       <div className="cs-walkthrough-copy">
-        <p className="cs-walkthrough-kicker cs-copy-title">{kicker}</p>
+        <p className="cs-walkthrough-kicker">{kicker}</p>
         <h3 className="cs-walkthrough-title">{title}</h3>
       </div>
 
@@ -80,7 +98,7 @@ export default function OutcomeWalkthrough({
       <TabsPanels className="cs-walkthrough-panels" mode="wait">
         {flows.map((flow) => (
           <TabsPanel key={flow.id} value={flow.id}>
-            <WalkthroughFlowPanel flow={flow} labels={labels} />
+            <WalkthroughFlowPanel flow={flow} labels={labels} ui={ui} />
           </TabsPanel>
         ))}
       </TabsPanels>
@@ -88,11 +106,22 @@ export default function OutcomeWalkthrough({
   );
 }
 
-function WalkthroughFlowPanel({ flow, labels }: { flow: WalkthroughFlow; labels: WalkthroughLabels }) {
+function WalkthroughFlowPanel({
+  flow,
+  labels,
+  ui,
+}: {
+  flow: WalkthroughFlow;
+  labels: WalkthroughLabels;
+  ui?: OutcomeWalkthroughProps["ui"];
+}) {
   const [stepIndex, setStepIndex] = useState(0);
-
   const total = flow.steps.length;
-  const step = flow.steps[stepIndex] ?? flow.steps[0]!;
+  const step = flow.steps[stepIndex] ?? flow.steps[0];
+  const showControls = (ui?.controls ?? true) && total > 1;
+  const showDots = (ui?.dots ?? true) && total > 1;
+
+  if (!step) return null;
 
   const goToStep = (index: number) => {
     setStepIndex(Math.min(Math.max(index, 0), total - 1));
@@ -116,28 +145,56 @@ function WalkthroughFlowPanel({ flow, labels }: { flow: WalkthroughFlow; labels:
       tabIndex={0}
       onKeyDown={onStageKeyDown}
     >
-        <div className="cs-walkthrough-frame">
-          {flow.steps.map((item, index) => (
+      <div className="cs-walkthrough-frame">
+        {flow.steps.map((item, index) => {
+          const isActive = index === stepIndex;
+
+          if (item.media === "video") {
+            const videoStyle: WalkthroughVideoStyle | undefined = item.mask
+              ? { "--cs-walkthrough-video-mask": `url(${item.mask})` }
+              : undefined;
+
+            return (
+              <video
+                key={item.src}
+                src={item.src}
+                poster={item.poster}
+                className={`${isActive ? "is-active" : ""}${item.mask ? " cs-walkthrough-video--masked" : ""}`.trim() || undefined}
+                style={videoStyle}
+                aria-label={isActive ? item.alt : undefined}
+                aria-hidden={!isActive}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              />
+            );
+          }
+
+          return (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               key={item.src}
               src={item.src}
-              alt={index === stepIndex ? item.alt : ""}
-              className={index === stepIndex ? "is-active" : undefined}
-              aria-hidden={index !== stepIndex}
+              alt={isActive ? item.alt : ""}
+              className={isActive ? "is-active" : undefined}
+              aria-hidden={!isActive}
               draggable={false}
               loading={index === 0 ? "eager" : "lazy"}
             />
-          ))}
-        </div>
+          );
+        })}
+      </div>
 
-        <div className="cs-walkthrough-panel">
-          <p className="cs-walkthrough-progress" aria-hidden="true">
-            {labels.step} {String(stepIndex + 1).padStart(2, "0")}
-          </p>
-          <p className="cs-walkthrough-caption cs-copy-body" aria-live="polite">
-            {step.caption}
-          </p>
+      <div className="cs-walkthrough-panel" data-single-step={total === 1}>
+        <p className="cs-walkthrough-progress" aria-hidden="true">
+          {flow.progressLabel ?? `${labels.step} ${String(stepIndex + 1).padStart(2, "0")}`}
+        </p>
+        <p className="cs-walkthrough-caption cs-copy-body" aria-live="polite">
+          {step.caption}
+        </p>
+        {showControls ? (
           <div className="cs-walkthrough-controls">
             <button
               type="button"
@@ -156,6 +213,8 @@ function WalkthroughFlowPanel({ flow, labels }: { flow: WalkthroughFlow; labels:
               {labels.next}
             </button>
           </div>
+        ) : null}
+        {showDots ? (
           <div className="cs-walkthrough-dots">
             {flow.steps.map((item, index) => (
               <button
@@ -168,7 +227,8 @@ function WalkthroughFlowPanel({ flow, labels }: { flow: WalkthroughFlow; labels:
               />
             ))}
           </div>
-        </div>
+        ) : null}
+      </div>
     </div>
   );
 }

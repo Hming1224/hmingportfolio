@@ -11,6 +11,7 @@ export { default as CaseFlowFrame } from './CaseFlowFrame';
 export { default as CaseMedia } from './CaseMedia';
 export { default as CaseMetricGrid } from './CaseMetricGrid';
 export { default as CaseOverview } from './CaseOverview';
+export { default as OutcomeWalkthrough } from './OutcomeWalkthrough';
 export { default as CaseProposalTabs } from './CaseProposalTabs';
 export { default as CaseSection } from './CaseSection';
 export { default as CaseHeading } from './CaseHeading';
@@ -38,6 +39,12 @@ export {
   type CaseOverviewProps,
   type CaseOverviewStat,
 } from './CaseOverview';
+export {
+  type OutcomeWalkthroughProps,
+  type WalkthroughFlow,
+  type WalkthroughLabels,
+  type WalkthroughStep,
+} from './OutcomeWalkthrough';
 export { type CaseProposalTab } from './CaseProposalTabs';
 export { type CaseSectionHeaderProps, type CaseSectionHeaderTone } from './CaseSectionHeader';
 export { type TocSection } from '../CaseTOC';

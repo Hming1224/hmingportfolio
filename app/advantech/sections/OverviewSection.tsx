@@ -1,6 +1,5 @@
-import { CaseOverview } from "../../../components/case-study";
+import { CaseOverview, OutcomeWalkthrough } from "../../../components/case-study";
 import ImpactBlueprint from "../components/ImpactBlueprint";
-import OutcomeWalkthrough from "../components/OutcomeWalkthrough";
 import { getAdvantechTranslator } from "../i18n-server";
 
 const overviewItems = [
@@ -160,6 +159,7 @@ export default async function OverviewSection() {
       itemsLabel={t("專案快速總覽")}
       showcase={
         <OutcomeWalkthrough
+          key="showcase"
           kicker={t("成果走查")}
           title={t("從需量分析、超約預警到設備異常，AI 讓每個風險都有下一步。")}
           flows={walkthroughFlows.map((flow) => ({
