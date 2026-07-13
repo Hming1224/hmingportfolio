@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { getLocale } from "next-intl/server";
@@ -9,13 +8,10 @@ import {
   CaseFeatureRow,
   CaseFlowFrame,
   CaseGrid,
-  CaseHero,
   CaseMedia,
-  CaseSectionHeader,
   CaseStudyShell,
   FlowScrollHint,
   ZoomableImage,
-  type CaseInfoItem,
   type TocSection,
 } from "../../components/case-study";
 import FeatureConnectors from "../../components/case-study/FeatureConnectors";
@@ -35,31 +31,18 @@ import {
   TaskFlowThreeDiagram,
   TaskFlowTwoDiagram,
 } from "./components/TaskFlowDiagrams";
-import { OverviewSection } from "./sections";
+import { HeroSection, OverviewSection, ProblemSection, ReflectionSection } from "./sections";
+import { ArticleBlock, InfoCard, LaushuHead } from "./components/LaushuPrimitives";
 
 const IMG = "/projects/laushu";
 const CONN1 = "/projects/advantech/solution/connector-1.svg";
 const CONN2 = "/projects/advantech/solution/connector-2.svg";
-
-const roleItems = [
-  { label: "時間", value: ["2024.3 - 2024.6"] },
-  { label: "團隊成員", value: ["3x 研究員", "1x 設計師"] },
-  { label: "角色", value: ["UX/UI", "設計師"] },
-  { label: "負責項目", value: ["線框稿", "互動原型", "協同參與訪談、", "易用性測試"] },
-  { label: "工具", value: ["FigJam", "Figma"] },
-];
 
 const stakeholderCards = [
   { title: "會計師", body: "勞贖主要使用者，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。" },
   { title: "公司使用者", body: "會計事務所的主要服務對象，會計事務所協助公司向旗下外包工作者開立勞報單。" },
   { title: "外包工作者", body: "勞贖的終端使用者，確認勞報單是否成立，並向公司領取工資。" },
   { title: "勞贖管理員", body: "管理會計師帳號。" },
-];
-
-const problemCards = [
-  { title: "僅作為佐證用", body: "公司外包時，每次都須請外包人員簽署紙本勞報單，但此紙本最後僅作為交易佐證。" },
-  { title: "流程繁瑣", body: "流程包含許多細節，像是所得類別、二代健保的計算等，很多創業者不知情下違反規定。" },
-  { title: "過程耗時", body: "會計師需人工核對且逐筆建檔；外包人員即使不須進公司，還是必須專程跑一趟公司或郵局。" },
 ];
 
 const researchTable = {
@@ -410,78 +393,17 @@ export default async function LaushuPage() {
         homeLabel: t("返回首頁"),
         nextLabel: `${t("下一個專案")}${t("：")}${nextProjectLabel}`,
       }}
-      hero={localizeLaushuTree(locale, HeroSection())}
+      hero={<HeroSection />}
     >
       <OverviewSection />
-      {localizeLaushuTree(locale, ProblemSection())}
+      <ProblemSection />
       {localizeLaushuTree(locale, UnderstandSection())}
       {localizeLaushuTree(locale, ConvergeSection())}
       {localizeLaushuTree(locale, IterateSection(t("← 左右滑動查看更多")))}
       {localizeLaushuTree(locale, PrototypeSection())}
       {localizeLaushuTree(locale, DemoSection())}
-      {localizeLaushuTree(locale, ReflectionSection())}
+      <ReflectionSection />
     </CaseStudyShell>
-  );
-}
-
-function HeroSection() {
-  const infoItems: CaseInfoItem[] = roleItems.map((item) => ({
-    label: item.label,
-    value: item.value.map((line, index) => (
-      <span key={line}>
-        {line}
-        {index < item.value.length - 1 ? <br /> : null}
-      </span>
-    )),
-  }));
-
-  return (
-    <CaseHero
-      cover={{
-        src: `${IMG}/hero-cover.png`,
-        alt: "Laushu 勞贖設計優化專案主視覺",
-        objectPosition: "center",
-        sizes: "100vw",
-      }}
-      coverClassName="laushu-hero-cover"
-      infoClassName="laushu-hero-info"
-      infoGridClassName="cs-info-row--divided"
-      meta={<span className="cs-tags">WEB・SaaS・UX Research・UI Design</span>}
-      title="從紙本化繁為簡：勞務報酬系統的數位流程優化"
-      infoItems={infoItems}
-    />
-  );
-}
-
-function ProblemSection() {
-  return (
-    <section id="cs-sec-problem" className="cs-section laushu-problem-section">
-      <LaushuHead eyebrow="問題定義" title="過去建立紙本勞報單費時費力，但最後紙本單據僅作為佐證用。" />
-      <div className="cs-explainer-layout">
-        <div className="cs-explainer-copy">
-          <span className="cs-explainer-pill">科普小知識</span>
-          <h4 className="cs-explainer-title">勞報單是什麼？</h4>
-          <p>
-            勞務報酬單，簡稱「勞報單」，為公司支付「酬勞」給「個人」時使用的證明單據，可作為公司支出的證明，並列入領到酬勞者的綜合所得稅中。
-          </p>
-        </div>
-        <CaseMedia className="cs-document-preview" caption="勞報單範例" variant="full">
-          <Image
-            src={`${IMG}/labor-form-example.png`}
-            alt="勞務報酬單範例"
-            width={982}
-            height={808}
-            sizes="(max-width: 1023px) calc(100vw - 88px), 456px"
-          />
-        </CaseMedia>
-      </div>
-      <h3 className="cs-subsection-title cs-subsection-title--wide cs-subsection-title--top-gap cs-subsection-title--accent">現階段勞報單的問題</h3>
-      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--problem">
-        {problemCards.map((card, index) => (
-          <InfoCard title={card.title} number={`0${index + 1}`} key={card.title}>{card.body}</InfoCard>
-        ))}
-      </CaseGrid>
-    </section>
   );
 }
 
@@ -839,38 +761,6 @@ function DemoSection() {
   );
 }
 
-const reflections = [
-  {
-    title: "以替代研究策略推進流程驗證",
-    body: "如果重新執行一次，我會在研究初期建立主要與替代受訪者名單，降低招募不順對研究進度的影響。當無法訪談核心利害關係人時，會改以協作角色訪談、非同步訪談或流程文件分析補足資訊缺口。\n\n設計策略上，會先將已掌握的會計人員流程定義為 MVP 假設，並透過第一版上線後的任務完成率、錯誤率與使用者回饋進行驗證。若初版成效不如預期，再依據實際使用情境推出 v2 上線版本，持續優化流程。",
-  },
-  {
-    title: "介面用詞與說明，本身就是體驗",
-    body: "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」，例如把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。",
-  },
-  {
-    title: "從流程優化走向商業導入驗證",
-    body: "若後續繼續推進，我會將重點從流程可用性延伸到商業導入驗證。Laushu 不只是勞務報酬單的線上化工具，更需要釐清誰是實際使用者、誰是導入決策者，以及系統能為公司降低多少行政與溝通成本。\n\n因此，下一步會補充訪談公司負責人、財務／人資主管與會計事務所，了解不同角色對導入工具的決策標準。同時將 UX 指標轉化為更具商業意義的成效指標，例如處理時間、錯誤率、來回確認次數與人力成本變化，進一步評估產品是否具備 B2B SaaS、按使用量計費，或作為會計事務所工具包的商業潛力。",
-  },
-];
-
-function ReflectionSection() {
-  return (
-    <section id="cs-sec-reflection" className="cs-section laushu-learning-section">
-      <LaushuHead eyebrow="學習反思" title="線下與線上整合的數位流程考驗" />
-      <CaseGrid variant="three" className="cs-reflection-grid">
-        {reflections.map((r, index) => (
-          <CaseCard variant="accent" className="cs-reflection-card" key={r.title}>
-            <span className="cs-reflection-card-num">{String(index + 1).padStart(2, "0")}</span>
-            <h3 className="cs-reflection-card-title">{r.title}</h3>
-            <p>{r.body}</p>
-          </CaseCard>
-        ))}
-      </CaseGrid>
-    </section>
-  );
-}
-
 function ResearchTable() {
   return (
     <>
@@ -902,38 +792,4 @@ function ResearchTable() {
       </CaseMedia>
     </>
   );
-}
-
-function InfoCard({ title, number, image, children }: { title: string; number?: string; image?: string; children: ReactNode }) {
-  return (
-    <CaseCard className={`cs-topic-card${image ? " cs-topic-card--illustrated" : ""}`}>
-      {number ? <span className="cs-topic-card-kicker">{number}</span> : null}
-      {image ? (
-        <span className="cs-topic-card-art" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image} alt="" loading="lazy" />
-        </span>
-      ) : null}
-      <h4>{title}</h4>
-      <p>{children}</p>
-    </CaseCard>
-  );
-}
-
-function ArticleBlock({ title, number, kicker, children }: { title: string; number?: string; kicker?: string; children: ReactNode }) {
-  return (
-    <section className="cs-article">
-      {kicker ? <p className="cs-article-kicker">{kicker}</p> : null}
-      <h3>
-        {number ? <span className="cs-article-num">{number} / </span> : null}
-        {title}
-      </h3>
-      <div className="cs-rich-copy">{children}</div>
-    </section>
-  );
-}
-
-/** Figma 風格 section 標題：小寫眉標 + 大論點句 + 分隔線（對齊 Figma node 2797:1521）。 */
-function LaushuHead({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return <CaseSectionHeader className="cs-section-header--case-wide" kicker={eyebrow} title={title} />;
 }
