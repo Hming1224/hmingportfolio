@@ -48,21 +48,19 @@ const en = {
   "平台：CA 的商業風險": "Platform: CA's business risk",
   "如果核心風險控制只能回交易所完成，CA 就無法承接完整交易流程；長期會削弱使用者留在平台操作的意願，也影響平台的交易抽成機會。": "If core risk controls can only happen on the exchange, CA cannot support the complete trading flow. Over time, that weakens users' incentive to stay on the platform and reduces opportunities for transaction-fee revenue.",
   "想確認倉位只能登入交易所：這些資訊在當時的 CA 裡完全看不到。": "Checking a position required logging into the exchange; none of this information was visible in CA at the time.",
-  "讓人工介入變成系統看得懂的合法指令，而不是要修復的異常。": "Turn manual intervention into a valid command the system understands, not an error it must recover from.",
-  "關鍵洞察": "Key insight",
-  "表面上像是加一顆平倉按鈕，實際要補的是人與自動策略之間缺少的控制流程：在 CA 內操作時，系統主動告知機器人「這是使用者的合法指令」，機器人同步狀態、不進入錯誤保護，策略繼續運行。": "What looked like adding a close-position button was really a missing control flow between people and automated strategies. When an action happens inside CA, the system tells the bot it is a valid user command, allowing the bot to sync state, avoid error protection, and keep the strategy running.",
+  "把交易控制權還給使用者，讓損益能自主掌握，也維持對 CA 的信任與策略使用意願。": "Give users back control over their trades and profit and loss, while sustaining trust in CA and their willingness to keep using strategies.",
+  "商業命題": "Business premise",
+  "缺少交易控制權不只造成單次操作不便：當使用者無法依市場變化主動停利或止損，損益就只能被動交給策略決定。長期累積的不確定感，可能降低對平台的信任、策略機器人的啟用意願與回訪頻率，進一步影響 CA 的交易量與收益。": "Lacking control over trades creates more than a one-off inconvenience. When users cannot take profit or cut losses as the market changes, their outcomes remain passively determined by the strategy. Over time, that uncertainty may weaken trust in the platform, reduce strategy-bot activation and return frequency, and ultimately affect CA's trading volume and revenue.",
   "How might we": "How might we",
-  "我們如何讓交易者在 CA 內就能平倉、設定止盈止損，同時讓策略機器人理解這是主動介入，而不是需要急停的異常？": "How might we let traders close positions and set take-profit / stop-loss inside CA while helping strategy bots recognize active intervention rather than an anomaly that requires an emergency stop?",
+  "我們如何讓 CA 用戶在使用自動交易策略的同時，仍能自主掌握交易與損益，並建立值得長期信任、持續使用的策略交易體驗？": "How might we help CA users retain control over their trades and profit and loss while using automated trading strategies, creating a strategy-trading experience they can trust and keep using over time?",
   "Binance TP/SL 設定彈窗，可設定止盈與止損觸發價格": "Binance TP/SL dialog for setting take-profit and stop-loss trigger prices",
-  "從 Binance、Bybit、OKX 已建立的操作節奏出發：CA 不發明新流程，讓交易者不用重新學。": "Starting from familiar patterns established by Binance, Bybit, and OKX, CA avoids inventing a new flow and gives traders nothing new to learn.",
-  "三個核心流程留在 CA 內完成，平均操作時間縮短約 58%。": "Keeping three core flows inside CA reduced average operation time by about 58%.",
-  "內部測試者回饋": "Internal tester feedback",
-  "「跟我平常用交易所的操作幾乎一樣，不用重新學。平倉和止盈止損直接在策略頁就能設，不用再切回交易所，整個順很多。」": "\"It works almost exactly like the exchanges I already use, so there is nothing new to learn. I can close positions and set take-profit / stop-loss right on the strategy page without switching back to the exchange. The whole flow feels much smoother.\"",
-  "落地進度": "Implementation progress",
-  "完成設計交付影片、與 PO 和工程確認可行性後，兩個操作流程以 Jira tickets 排入開發；設計以工程可直接實作的規格交接。": "After delivering design handoff videos and confirming feasibility with the PO and engineers, two operation flows were scheduled for development as Jira tickets. The design was handed off as implementation-ready specifications.",
-  "驗證提醒": "Validation note",
-  "「操作時間的數字來自 5 名內部成員的任務測試，不是線上營運數據；真實交易者在真金白銀的壓力下是否一樣順手，還需要上線後驗證。」": "\"The operation-time figure comes from task testing with five internal team members, not live product data. Whether real traders find it equally smooth under the pressure of real money still needs post-launch validation.\"",
-  "5 人內部任務測試 · 三流程平均": "5-person internal task test · average across three flows",
+  "研究 Binance、Bybit、OKX 的交易控制流程後，我將「沿用成熟操作模式」收斂為其中一個設計方向。": "After studying the trade-control flows of Binance, Bybit, and OKX, I converged on reusing established interaction patterns as one design direction.",
+  "將三項核心交易流程整合進 CA，平均操作時間縮短 58%。": "Bringing three core trading flows into CA cut average task time by 58%.",
+  "三項任務平均由 65 秒降至約 27 秒。": "Average time across the three tasks fell from 65 seconds to about 27 seconds.",
+  "三項核心任務平均由 65 秒降至約 27 秒。": "Average time across the three core tasks fell from 65 seconds to about 27 seconds.",
+  "整體易用性評分": "Overall usability score",
+  "5 位內部受測者完成任務後填寫 SUS 問卷。": "Five internal participants completed the SUS questionnaire after the tasks.",
+  "受測者能沿用既有交易經驗，但止盈止損的資訊判讀仍是下一輪優化重點。": "Participants could carry over their existing trading experience, while interpreting TP/SL information remains the top priority for the next iteration.",
   "從限價、市價平倉到止盈止損，三個核心流程都能在 CA 內完成。": "From limit and market closes to take-profit / stop-loss, all three core flows now happen inside CA.",
   "在 Trading Details 中選擇限價平倉，輸入價格與數量後確認送出。": "Choose a limit close in Trading Details, enter the price and quantity, then confirm the order.",
   "在 Trading Details 中選擇市價平倉，輸入數量後立即完成。": "Choose a market close in Trading Details, enter the quantity, and complete it immediately.",
@@ -444,55 +442,60 @@ const en = {
     "Final UI for manual TP/SL inside CA: the TP/SL entry in the Trading Details dialog",
 
   // ── Design Impact ──
-  "與交易所相同步數、操作時間減 58%，把既有操作習慣無縫接進 CA":
-    "Same Steps as the Exchange, 58% Less Time — Existing Habits Carry Straight into CA",
-  "實習階段沒有資源做正式的大規模使用者測試，所以我用兩種方式檢驗這套平倉與止盈止損流程好不好上手：一是找 5 位內部成員做任務式可用性測試，二是直接看流程本身的指標，例如：完成一次操作要幾步、每個流程平均操作花費的時間等。":
-    "There were no resources for formal large-scale user testing during the internship, so I checked how easy the close and TP/SL flows were to learn in two ways: a task-based usability test with five internal members, and metrics I could read straight off the flow itself, such as the number of steps to complete a task and the average time spent on each flow.",
-  "我的驗證假設是：如果 CA 延續交易者熟悉的操作節奏與用詞，他們應該能留在平台內完成平倉與止盈止損，不必切回交易所。我以 5 位熟悉合約交易的內部成員進行任務測試，觀察操作路徑、卡點與時間；小樣本結果用來找洞見，不當成正式成功率。":
-    "My validation hypothesis was that if CA preserved traders' familiar interaction rhythm and terminology, they should be able to complete close and TP/SL tasks inside the platform without returning to the exchange. I ran task tests with five internal members familiar with futures trading, observing paths, friction, and time. The small sample was used to find insights, not presented as a formal success rate.",
-  "任務洞見": "Task insights",
-  "驗證熟悉操作能否轉移": "Testing whether familiar habits transfer",
-  "5 名熟悉合約交易的內部成員以既有交易經驗操作；回饋聚焦在流程熟悉度、控制感與是否需要切回交易所。":
-    "Five internal members familiar with futures trading used their existing trading experience. Feedback focused on familiarity, sense of control, and whether they still needed to switch back to the exchange.",
-  "相同步數": "Same step count",
-  "維持交易所熟悉節奏": "Preserving the exchange's familiar rhythm",
-  "平倉流程對齊 Binance / OKX / Bybit 的既有三步節奏；目標是沿用交易者熟悉的操作，不硬去砍步驟數。":
-    "The close flow matches the familiar three-step rhythm used by Binance, OKX, and Bybit. The point is to avoid adding unfamiliar interactions, not to claim a reduction in steps.",
-  "3 步": "3 steps",
-  "內部測試者完成核心任務": "Internal testers completing core tasks",
-  "5 名熟悉合約交易的內部成員，在無提示下皆完成手動平倉與止盈止損設定。":
-    "All five internal members familiar with futures trading completed manual close and TP/SL setup without any prompting.",
-  "與交易所一致的操作步數": "Step count matched to the exchanges",
-  "平倉流程對齊 Binance / OKX / Bybit 的既有步數，既有交易者幾乎零學習成本即可接續。":
-    "The close flow matches the existing step count on Binance / OKX / Bybit, so existing traders can pick it up with almost zero learning cost.",
+  "延續熟悉的交易邏輯，三項核心任務平均縮短 58%":
+    "Familiar trading logic cut average time across three core tasks by 58%",
+  "我的驗證假設是：如果 CA 延續交易者熟悉的操作邏輯與用詞，使用者應能直接在策略頁完成平倉與止盈止損，不必切回交易所。":
+    "My validation hypothesis was that if CA kept the trading logic and terminology familiar to traders, users could close positions and set TP/SL directly on the strategy page without switching back to the exchange.",
+  "我邀請 5 位具合約交易經驗的內部成員進行簡單易用性測試，完成限價平倉、市價平倉與止盈止損三項任務，主要記錄操作時間、整體易用性與現場回饋。":
+    "I invited five internal participants with futures-trading experience to a simple usability test. They completed limit close, market close, and TP/SL tasks while I recorded task time, overall usability, and feedback.",
+  "受測者普遍認為新版操作容易理解，且能延續既有交易習慣。":
+    "Participants generally found the new flow easy to understand and consistent with their existing trading habits.",
+  "測試洞見": "Test insight",
+  "止盈止損仍有較高判讀負擔": "TP/SL still carries a higher interpretation burden",
+  "使用者需要同時理解多空方向、價格關係、輸入單位及觸發條件，認知負擔明顯高於平倉。":
+    "Users must interpret position direction, price relationships, input units, and trigger conditions at the same time, creating noticeably more cognitive load than closing a position.",
   "平均操作時間": "Avg. time on task",
-  "三個流程從「跳去交易所操作」改成「在 CA 內直接完成」，平均省下約 58% 的操作時間。":
-    "Moving all three flows from “hop over to the exchange” to “done inside CA” cuts the average time on task by about 58%.",
-  "操作時間對比：原本得跳去交易所來回，新版在 CA 內直接完成":
-    "Time on task: previously a round trip to the exchange, now done directly inside CA",
-  "操作流程": "Flow",
-  "原本（CA → 交易所）": "Before (CA → exchange)",
-  "新版（CA 內）": "After (inside CA)",
-  "縮短": "Reduced",
+  "三項任務操作時間比較": "Task time across the three core flows",
+  "原流程需切換至交易所並重新定位持倉；新版可直接從 CA 策略頁完成。":
+    "The original flow required switching to the exchange and finding the position again; the new flow is completed directly from the CA strategy page.",
+  "任務": "Task",
+  "原流程": "Original flow",
+  "新版": "New flow",
   "手動限價平倉": "Manual limit close",
   "手動市價平倉": "Manual market close",
   "手動止盈止損": "Manual TP/SL",
   "秒": "s",
-  "跟我平常用交易所的操作幾乎一樣，不用重新學。":
-    "It works almost exactly like the exchanges I already use — nothing new to learn.",
-  "平倉和止盈止損直接在策略頁就能設，不用再切回交易所，整個順很多。":
-    "I can set close and TP/SL right on the strategy page without switching back to the exchange — so much smoother.",
-  "一眼就看得到每個倉位離止盈止損還有多遠，這在以前的 CA 看不到。":
-    "I can see at a glance how far each position is from its TP/SL — you couldn't see that in the old CA.",
-  "限價跟市價分得很清楚，跟著畫面走第一次就順利完成。":
-    "Limit and market are clearly separated; I followed the screens and got it right on the first try.",
-  "內部測試者": "Internal tester",
+  "使用者回饋摘要": "User feedback summary",
+  "質化洞察與支持回饋": "Qualitative insights and supporting feedback",
+  "支持這項洞察的回饋": "Feedback supporting this insight",
+  "市價和限價的按鈕放在持倉資訊旁，流程跟我常用的交易所很接近；看到價格和數量欄位後，我知道下一步該填什麼，不太需要重新理解。":
+    "The market and limit controls sit next to the position details, and the flow feels like the exchanges I use. Once I see the price and quantity fields, I know what to enter next without having to relearn the process.",
+  "以前要切去交易所，再確認交易對、方向和部位；現在從策略頁就能找到同一筆持倉並完成平倉，少了重新比對資料的過程。":
+    "I used to switch to the exchange and recheck the trading pair, direction, and position. Now I can find the same position and close it from the strategy page without comparing everything again.",
+  "設定止盈止損時，我會來回確認多空方向、設定價格和百分比距離，還要判斷 Mark Price 或 Last Price 會怎麼觸發，資訊比平倉多很多。":
+    "When setting TP/SL, I go back and forth between position direction, target price, and percentage distance. I also have to work out how Mark Price or Last Price will trigger it, so there is much more to interpret than with closing a position.",
+  "按下確認後，我想立刻看到條件是否送出成功、交易所有沒有同步，以及之後價格到哪個位置會真正觸發，不然會擔心設定沒有生效。":
+    "After I confirm, I want immediate feedback that the conditions were submitted, that the exchange is synced, and exactly where the price will trigger them. Otherwise, I worry that the setup did not take effect.",
+  "前端工程師": "Frontend Engineer",
   "合約交易使用者": "Futures trader",
   "量化策略使用者": "Quant-strategy user",
-  "產品團隊成員": "Product team",
-  "前端工程師": "Frontend engineer",
-  "驗證方式：以 5 名內部成員進行任務式可用性測試（請受測者在無提示下完成指定的平倉 / 止盈止損任務）。上述數字為內部測試與設計流程觀察，非線上後台營運數據。":
-    "Method: a task-based usability test with five internal members (each asked to complete the close / TP-SL tasks unaided). These figures come from internal testing and design-flow observations, not live production analytics.",
+  "質化收斂": "Qualitative takeaways",
+  "熟悉的交易操作能順利轉移": "Familiar trading interactions transferred smoothly",
+  "市價、限價與平倉流程延續常見交易所的操作邏輯，受測者能直接套用既有經驗完成操作。":
+    "Market, limit, and close flows follow interaction logic common to major exchanges, allowing participants to apply their existing experience directly.",
+  "止盈止損的困難來自判斷，而不是操作入口": "The difficulty with TP/SL comes from judgment, not finding the entry point",
+  "下一輪優先改善": "Priorities for the next iteration",
+  "價格與輸入單位對照": "Connect price and input units",
+  "同時呈現設定價格、百分比距離與預估盈虧，降低使用者自行換算的負擔。":
+    "Show the target price, percentage distance, and estimated profit or loss together to reduce manual calculation.",
+  "多空方向與觸發條件提示": "Clarify position direction and trigger conditions",
+  "依持倉方向提示合理的止盈止損區間，並在送出前清楚預覽觸發條件。":
+    "Suggest reasonable TP/SL ranges based on position direction and clearly preview the trigger conditions before submission.",
+  "執行與同步狀態": "Execution and sync status",
+  "清楚呈現送出中、成功、失敗，以及交易所持倉是否完成同步。":
+    "Clearly show submitting, success, and failure states, along with whether the exchange position has finished syncing.",
+  "本次由 5 位具合約交易經驗的內部成員進行簡單易用性測試，結果用於檢查操作流程與找出後續改善方向。":
+    "Five internal participants with futures-trading experience took part in this simple usability test. The results were used to check the flow and identify next improvements.",
 
   // ── Reflect ──
   "在快節奏與限制下做設計": "Designing in Fast-Moving Product Constraints",

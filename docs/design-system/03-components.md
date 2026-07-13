@@ -185,6 +185,21 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - 流程外框：使用 `CaseFlowFrame variant="default" | "plain" | "split"` 與 `cs-flow-frame-*`；default 為有框說明圖、plain 為無框矩陣容器、split 為 header / scroll panel 分離。route 只提供內容圖形、最小寬與必要 caption / header theme。
 - 功能步驟：使用 `CaseFeatureRow`；原型展示用 `cs-feature-row--prototype`，媒體與說明框不得再掛 `cs-sol-fr` / `cs-sol-fimg` / `cs-sol-fnote`。
 
+#### CaseOverview contract
+
+`CaseOverview` 用於案例開頭快速交代問題、設計目標與影響。每個 tab 可以提供文字卡、量化指標、媒體或專案專屬視覺，但內容必須符合該 tab 的敘事責任。
+
+影響 tab 的內容邊界：
+
+- item 設為 `kind="impact"` 且包含 `stat`、`media` 或 `visual` 時，元件會固定先呈現量化／證據內容：桌機在左、平板與手機在上；質化回饋接續在右側或下方。其他 tab 維持原本的敘事順序。
+- 只放可追溯的量化結果與有來源的質化回饋，例如任務時間、完成率、錯誤率、使用者引言或利害關係人回饋。
+- 樣本數、測試方法與數據限制應放在對應指標的 `stat.note`，作為證據脈絡，而不是另外建立「落地進度」或「驗證提醒」卡片。
+- 不放開發排程、Jira 狀態、交付完成度、工程可行性、roadmap、功能清單或方案藍圖；這些屬於交付狀態、解決方案或下一步，不是影響證據。
+- 沒有可信的量化資料時，只呈現真實的質化回饋，不得為了填滿版面推估或虛構數字。
+- 純文字不容易看出重點時，可以用圖表、資訊視覺化或動畫強化同一份證據；視覺化不能取代證據，圖表數值必須能回溯到原始資料，動畫也不得把預期效益包裝成已發生的成果。
+
+當 item 沒有 `stat`、`media` 或 `visual` 時，元件會自動改為單欄內容版型，不渲染空白證據區。
+
 #### BeforeAfterNarrativeFrame contract
 
 `BeforeAfterNarrativeFrame` is an implemented shared slot-based narrative layout frame. It shares stable Layer 2 anatomy for a single before / after narrative while allowing route-local media and storytelling content to remain colocated in slots.

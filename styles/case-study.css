@@ -470,6 +470,22 @@
   animation: cs-overview-enter var(--cs-overview-motion-duration) var(--hm-ease-out);
 }
 
+.cs-overview-stage[data-has-evidence='false'] {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'title'
+    'copy'
+    'footer';
+}
+
+.cs-overview-stage[data-evidence-first='true'] {
+  grid-template-columns: minmax(0, 1.25fr) minmax(var(--cs-overview-copy-min-width), 0.85fr);
+  grid-template-areas:
+    'title title'
+    'evidence copy'
+    'footer footer';
+}
+
 @keyframes cs-overview-enter {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -711,6 +727,15 @@
       'title'
       'copy'
       'evidence'
+      'footer';
+  }
+
+  .cs-overview-stage[data-evidence-first='true'] {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'title'
+      'evidence'
+      'copy'
       'footer';
   }
 

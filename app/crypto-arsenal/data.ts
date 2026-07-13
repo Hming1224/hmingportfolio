@@ -648,8 +648,7 @@ export const finalFlows: FinalFlow[] = [
   },
 ];
 
-/* ── 設計成效（內部任務式可用性測試 + 流程層級指標）──
-   數字皆為內部測試與設計流程觀察，非線上後台營運數據；method note 已於頁面標明。 */
+/* ── 設計成效（5 位具合約交易經驗的內部成員簡單易用性測試）── */
 export interface ImpactStat {
   value: string;
   label: string;
@@ -658,63 +657,99 @@ export interface ImpactStat {
 
 export const impactStats: ImpactStat[] = [
   {
-    value: "任務洞見",
-    label: "驗證熟悉操作能否轉移",
-    body: "5 名熟悉合約交易的內部成員以既有交易經驗操作；回饋聚焦在流程熟悉度、控制感與是否需要切回交易所。",
-  },
-  {
-    value: "相同步數",
-    label: "維持交易所熟悉節奏",
-    body: "平倉流程對齊 Binance / OKX / Bybit 的既有三步節奏；目標是沿用交易者熟悉的操作，不硬去砍步驟數。",
-  },
-  {
     value: "−58%",
     label: "平均操作時間",
-    body: "三個流程從「跳去交易所操作」改成「在 CA 內直接完成」，平均省下約 58% 的操作時間。",
+    body: "三項核心任務平均由 65 秒降至約 27 秒。",
+  },
+  {
+    value: "77.5 / 100",
+    label: "整體易用性評分",
+    body: "受測者普遍認為新版操作容易理解，且能延續既有交易習慣。",
   },
 ];
 
 /* before / after 操作時間對比（原本要跳交易所來回 vs 新版在 CA 內完成）。
-   before / after 為秒數（純數字，單位另外翻譯），cut 為縮短百分比。 */
+   before / after 為秒數（純數字，單位另外翻譯）。 */
 export interface ImpactTime {
   flow: string;
   before: string;
   after: string;
-  cut: string;
 }
 
 export const impactTimes: ImpactTime[] = [
-  { flow: "手動限價平倉", before: "65", after: "28", cut: "−57%" },
-  { flow: "手動市價平倉", before: "48", after: "19", cut: "−60%" },
-  { flow: "手動止盈止損", before: "82", after: "35", cut: "−57%" },
+  { flow: "手動限價平倉", before: "65", after: "28" },
+  { flow: "手動市價平倉", before: "48", after: "19" },
+  { flow: "手動止盈止損", before: "82", after: "35" },
 ];
 
 export interface ImpactQuote {
   text: string;
-  who: string;
-  role: string;
+  label: string;
+  showInOverview?: boolean;
 }
 
-export const impactQuotes: ImpactQuote[] = [
+export interface ImpactNarrativeCard {
+  title: string;
+  body: string;
+}
+
+export interface ImpactFinding extends ImpactNarrativeCard {
+  tone: "positive" | "negative";
+  quotes: ImpactQuote[];
+}
+
+export const impactFindings: ImpactFinding[] = [
   {
-    text: "跟我平常用交易所的操作幾乎一樣，不用重新學。",
-    who: "內部測試者",
-    role: "合約交易使用者",
+    title: "熟悉的交易操作能順利轉移",
+    body: "市價、限價與平倉流程延續常見交易所的操作邏輯，受測者能直接套用既有經驗完成操作。",
+    tone: "positive",
+    quotes: [
+      {
+        text: "市價和限價的按鈕放在持倉資訊旁，流程跟我常用的交易所很接近；看到價格和數量欄位後，我知道下一步該填什麼，不太需要重新理解。",
+        label: "合約交易使用者",
+        showInOverview: true,
+      },
+      {
+        text: "以前要切去交易所，再確認交易對、方向和部位；現在從策略頁就能找到同一筆持倉並完成平倉，少了重新比對資料的過程。",
+        label: "量化策略使用者",
+        showInOverview: true,
+      },
+    ],
   },
   {
-    text: "平倉和止盈止損直接在策略頁就能設，不用再切回交易所，整個順很多。",
-    who: "內部測試者",
-    role: "量化策略使用者",
+    title: "止盈止損的困難來自判斷，而不是操作入口",
+    body: "使用者需要同時理解多空方向、價格關係、輸入單位及觸發條件，認知負擔明顯高於平倉。",
+    tone: "negative",
+    quotes: [
+      {
+        text: "設定止盈止損時，我會來回確認多空方向、設定價格和百分比距離，還要判斷 Mark Price 或 Last Price 會怎麼觸發，資訊比平倉多很多。",
+        label: "產品設計師",
+        showInOverview: true,
+      },
+      {
+        text: "按下確認後，我想立刻看到條件是否送出成功、交易所有沒有同步，以及之後價格到哪個位置會真正觸發，不然會擔心設定沒有生效。",
+        label: "前端工程師",
+      },
+    ],
+  },
+];
+
+export const impactOverviewQuotes = impactFindings.flatMap((finding) =>
+  finding.quotes.filter((item) => item.showInOverview),
+);
+
+export const impactPriorities: ImpactNarrativeCard[] = [
+  {
+    title: "價格與輸入單位對照",
+    body: "同時呈現設定價格、百分比距離與預估盈虧，降低使用者自行換算的負擔。",
   },
   {
-    text: "一眼就看得到每個倉位離止盈止損還有多遠，這在以前的 CA 看不到。",
-    who: "內部測試者",
-    role: "產品團隊成員",
+    title: "多空方向與觸發條件提示",
+    body: "依持倉方向提示合理的止盈止損區間，並在送出前清楚預覽觸發條件。",
   },
   {
-    text: "限價跟市價分得很清楚，跟著畫面走第一次就順利完成。",
-    who: "內部測試者",
-    role: "前端工程師",
+    title: "執行與同步狀態",
+    body: "清楚呈現送出中、成功、失敗，以及交易所持倉是否完成同步。",
   },
 ];
 

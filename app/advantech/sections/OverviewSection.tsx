@@ -1,5 +1,4 @@
 import { CaseOverview, OutcomeWalkthrough } from "../../../components/case-study";
-import ImpactBlueprint from "../components/ImpactBlueprint";
 import { getAdvantechTranslator } from "../i18n-server";
 
 const overviewItems = [
@@ -45,7 +44,7 @@ const overviewItems = [
       },
       {
         label: "How might we",
-        text: "我們如何在不改變既有巡檢習慣的前提下，讓 AI 主動把判斷依據送到需要它的人面前？",
+        text: "我們如何運用 AI，讓廠務團隊從單一廠區到跨廠區管理，都能及早掌握用電風險，提升能源使用效益並降低營運成本？",
         icon: "question",
         variant: "highlight",
       },
@@ -59,7 +58,7 @@ const overviewItems = [
   },
   {
     label: "影響",
-    title: "設計在實習結束前進入開發，並長成跨系統的整合藍圖。",
+    title: "產品負責人肯定：設計不只停在 Chatbot，而是延伸為完整的能源管理藍圖。",
     details: [
       {
         label: "iEMS 產品負責人",
@@ -67,20 +66,7 @@ const overviewItems = [
         icon: "quote",
         variant: "quote",
       },
-      {
-        label: "落地進度",
-        text: "2.5 個月內交付 2 大模組、4 項功能的完整設計；期中的需量管理設計獲主管認可、直接沿用到期末。實習結束前，需量模組後端已由 RD 動工開發，設備模組排定接續落地。",
-        icon: "business",
-        variant: "default",
-      },
-      {
-        label: "驗證提醒",
-        text: "「目前還沒有真的找使用者測試，所以現在整理出的問題清單，能不能涵蓋廠務人員每天真正會問的事情，這部分還需要再驗證。」",
-        icon: "validation",
-        variant: "default",
-      },
     ],
-    visual: "impact-blueprint",
   },
 ] as const;
 
@@ -142,19 +128,6 @@ export default async function OverviewSection() {
           caption: t(item.media.caption),
           fit: item.media.fit,
         } : undefined,
-        visual: "visual" in item ? (
-          <ImpactBlueprint
-            ariaLabel={t("EcoWatch 與 HVAC 資料透過 AI 與 RAG，流向跨廠區監測、長期報表與機台面板。")}
-            labels={{
-              ecowatch: "EcoWatch",
-              hvac: "HVAC",
-              hub: "AI + RAG",
-              crossSite: t("跨廠區監測"),
-              reports: t("長期追蹤與報表"),
-              machinePanel: t("機台面板"),
-            }}
-          />
-        ) : undefined,
       }))}
       itemsLabel={t("專案快速總覽")}
       showcase={

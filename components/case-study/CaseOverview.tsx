@@ -27,6 +27,7 @@ export interface CaseOverviewDetail {
 }
 
 export interface CaseOverviewItem {
+  kind?: 'problem' | 'goal' | 'impact';
   label: string;
   title: string;
   text?: string;
@@ -62,6 +63,9 @@ export default function CaseOverview({
   const activeItem = items[activeIndex] ?? items[0];
 
   if (!activeItem) return null;
+
+  const hasEvidence = Boolean(activeItem.visual || activeItem.media || activeItem.stat);
+  const evidenceFirst = activeItem.kind === 'impact' && hasEvidence;
 
   const selectStep = (index: number) => {
     setActiveIndex(Math.min(Math.max(index, 0), items.length - 1));
@@ -125,6 +129,8 @@ export default function CaseOverview({
           className="cs-overview-stage"
           role="tabpanel"
           aria-labelledby={`${tabsId}-tab-${activeIndex}`}
+          data-has-evidence={hasEvidence}
+          data-evidence-first={evidenceFirst}
           key={activeIndex}
         >
           <h3 className="cs-overview-stage-title">{activeItem.title}</h3>
@@ -207,7 +213,7 @@ function OverviewEvidence({ item }: { item: CaseOverviewItem }) {
     );
   }
 
-  if (!item.stat) return <div className="cs-overview-stage-evidence" aria-hidden="true" />;
+  if (!item.stat) return null;
 
   return (
     <div className="cs-overview-stage-evidence">
