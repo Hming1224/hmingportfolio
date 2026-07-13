@@ -20,7 +20,16 @@ import { Modal } from "../ui/Modal";
 import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/Toast";
 import CaseHero from "../case-study/CaseHero";
-import { CaseCard, CaseGrid, CaseMedia, CaseSection, CaseSectionHeader, type CaseInfoItem } from "../case-study";
+import {
+  CaseCard,
+  CaseGrid,
+  CaseMedia,
+  CaseOverview,
+  CaseSection,
+  CaseSectionHeader,
+  OutcomeWalkthrough,
+  type CaseInfoItem,
+} from "../case-study";
 import { BeforeAfterPanel } from "../case-study/BeforeAfterPanel";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import FlowScrollHint from "../case-study/FlowScrollHint";
@@ -1489,6 +1498,147 @@ export default function ComponentDemo({
             title={caseCopy.sectionTitle}
           />
         </section>
+      </DemoBlock>
+    );
+  }
+
+  if (type === "case-overview") {
+    const items = [
+      {
+        kind: "problem" as const,
+        label: zh ? "問題" : "Problem",
+        title: zh
+          ? "策略會自動交易，但人要介入時，只能冒著弄壞策略的風險回交易所。"
+          : "Strategies trade automatically, but manual intervention risks breaking them.",
+        details: [{
+          label: zh ? "策略開發者" : "Strategy developers",
+          text: zh
+            ? "CA 看得到策略損益，卻看不到實際倉位；多支策略同時運行時，使用者無法分辨交易來源。"
+            : "CA showed strategy PnL but not the underlying position, making concurrent strategies difficult to distinguish.",
+          icon: "user" as const,
+        }],
+        media: {
+          src: "/projects/crypto-arsenal/research/positions-binance.webp",
+          alt: zh ? "Binance 合約倉位列表介面" : "Binance futures position list",
+          caption: zh ? "當時只能回交易所確認倉位。" : "At the time, positions could only be checked on the exchange.",
+          fit: "contain" as const,
+        },
+      },
+      {
+        kind: "goal" as const,
+        label: zh ? "挑戰" : "Design goal",
+        title: zh
+          ? "把交易控制權還給使用者，同時維持策略與平台狀態一致。"
+          : "Return trading control to users while keeping strategy and platform state aligned.",
+        details: [{
+          label: "How might we",
+          text: zh
+            ? "如何讓使用者保留自動交易的效率，也能在 CA 內安全介入損益？"
+            : "How might we preserve automation while allowing safe position control inside CA?",
+          icon: "question" as const,
+          variant: "highlight" as const,
+        }],
+        media: {
+          src: "/projects/crypto-arsenal/research/steps/tpsl-binance-2-setup.webp",
+          alt: zh ? "Binance 止盈止損設定彈窗" : "Binance take-profit and stop-loss dialog",
+          caption: zh ? "研究成熟交易所的風險控制流程。" : "Researching established exchange risk-control flows.",
+          fit: "contain" as const,
+        },
+      },
+      {
+        kind: "impact" as const,
+        label: zh ? "影響" : "Impact",
+        title: zh ? "三項核心交易流程整合進 CA。" : "Three core trading flows moved into CA.",
+        details: [{
+          label: zh ? "測試結果" : "Test result",
+          text: zh
+            ? "5 位內部受測者完成任務後，整體 SUS 易用性評分為 77.5。"
+            : "Five internal participants completed the tasks and rated overall usability at 77.5 SUS.",
+          icon: "validation" as const,
+        }],
+        visual: (
+          <CaseGrid variant="stack" className="ca-overview-impact-metrics">
+            <CaseCard variant="metric">
+              <span className="cs-metric-value">−58%</span>
+              <strong className="cs-metric-label">{zh ? "平均操作時間" : "Average task time"}</strong>
+              <p className="cs-metric-body">{zh ? "三項任務平均由 65 秒降至約 27 秒。" : "Three tasks dropped from 65 seconds to about 27 seconds on average."}</p>
+            </CaseCard>
+            <CaseCard variant="metric">
+              <span className="cs-metric-value">77.5 / 100</span>
+              <strong className="cs-metric-label">{zh ? "整體易用性評分" : "Overall usability"}</strong>
+              <p className="cs-metric-body">{zh ? "5 位內部受測者完成任務後填寫 SUS。" : "Five internal participants completed a SUS survey after the tasks."}</p>
+            </CaseCard>
+          </CaseGrid>
+        ),
+      },
+    ];
+
+    return (
+      <DemoBlock contextLabel={contextLabel}>
+        <div className={`cs-page theme-crypto-arsenal ${styles.cryptoCaseDemoTheme}`}>
+          <CaseOverview
+            id="cs-sec-ds-case-overview-demo"
+            kicker={zh ? "專案總覽" : "Project Overview"}
+            title={zh ? "把只能回交易所處理的風險控制，帶回量化策略平台內。" : "Bring exchange-only risk controls into the strategy platform."}
+            items={items}
+            itemsLabel={zh ? "專案快速總覽" : "Project overview steps"}
+          />
+        </div>
+      </DemoBlock>
+    );
+  }
+
+  if (type === "outcome-walkthrough") {
+    return (
+      <DemoBlock contextLabel={contextLabel}>
+        <div className={`cs-page theme-advantech ${styles.advantechCaseDemoTheme}`}>
+          <OutcomeWalkthrough
+            kicker={zh ? "成果走查" : "Outcome walkthrough"}
+            title={zh ? "從需量分析到設備異常，每個風險都有下一步。" : "From demand analysis to equipment anomalies, every risk has a next step."}
+            flows={[
+              {
+                id: "demand-analysis",
+                label: zh ? "需量分析 × AI 建議" : "Demand analysis × AI",
+                steps: [
+                  {
+                    src: "/projects/advantech/solution/final-f11-01.webp",
+                    alt: zh ? "需量管理頁的超約預警入口" : "Overage alert entry on demand management",
+                    caption: zh ? "點選超約預警，系統自動帶入時間與地點。" : "Selecting the alert automatically adds time and location context.",
+                  },
+                  {
+                    src: "/projects/advantech/solution/final-f11-02.webp",
+                    alt: zh ? "AI 自動代入需量預測提問" : "AI pre-fills a demand forecast question",
+                    caption: zh ? "AI 自動代入問題，第一次提問就對到目前畫面。" : "AI pre-fills a question tied to the current screen.",
+                  },
+                ],
+              },
+              {
+                id: "equipment-anomaly",
+                label: zh ? "設備異常分析" : "Equipment anomaly",
+                steps: [
+                  {
+                    src: "/projects/advantech/solution/final-f2-01.webp",
+                    alt: zh ? "設備能耗異常通知" : "Equipment energy anomaly notification",
+                    caption: zh ? "設備異常時主動通知，將告警模式帶進維護情境。" : "Anomalies trigger proactive alerts for maintenance workflows.",
+                  },
+                  {
+                    src: "/projects/advantech/solution/final-f2-03.webp",
+                    alt: zh ? "AI 異常分析摘要" : "AI anomaly analysis summary",
+                    caption: zh ? "AI 彙整資料，先給問題摘要與可能來源。" : "AI summarizes the issue and points to likely sources.",
+                  },
+                ],
+              },
+            ]}
+            labels={{
+              flows: zh ? "成果走查流程切換" : "Outcome walkthrough flows",
+              stage: zh ? "成果走查畫面，可用左右方向鍵切換步驟" : "Outcome walkthrough stage; use left and right arrows to change steps",
+              step: zh ? "步驟" : "Step",
+              prev: zh ? "← 上一步" : "← Previous",
+              next: zh ? "下一步 →" : "Next →",
+              goToStep: zh ? "跳到步驟" : "Go to step",
+            }}
+          />
+        </div>
       </DemoBlock>
     );
   }

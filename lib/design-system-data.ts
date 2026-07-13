@@ -61,6 +61,8 @@ export const designSystemSections = [
       "case-hero",
       "case-section",
       "case-section-header",
+      "case-overview",
+      "outcome-walkthrough",
       "case-card",
       "case-grid",
       "case-media",
