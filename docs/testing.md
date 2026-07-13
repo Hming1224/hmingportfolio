@@ -73,15 +73,35 @@ Vercel preview URLs sit behind Vercel Authentication, so CI would only ever see 
 Binding policy for every agent working in this repo. It exists because a 2026-07-05 incident burned an hour on six force-push CI retries.
 
 1. **CI is a detector, not an auto-repair loop.** A red run means "classify the failure" (test bug? environment difference? real regression?), never "keep changing things until green".
-2. **Test tasks must never touch production UI.** No CSS, component, or content edits from within a testing/infra task.
-3. **Suspected production bug → stop and report first.** Do not fix it directly; the fix is a separate route-local task. Interim: a documented known-issue budget in the affected spec (with comment + follow-up task) keeps CI green and honest.
-4. **One repair round per failing test.** A single fix attempt is allowed.
-5. **Still red after that round → stop and output a triage report**: failing test, route, viewport, error, artifact path, your hypothesis, and options. No further attempts, no amend + force-push retries.
+2. **Pure testing/infra tasks must not touch production UI.** If verification reveals a low-risk RWD issue inside an already-authorized maintenance task, reclassify it as the bounded RWD repair exception below instead of mixing test and production changes in one attempt.
+3. **High-impact or ambiguous production bugs → stop and report first.** Changes to shared primitives, content, design direction, interaction contracts, or test expectations require separate approval. Low-risk RWD repairs follow the exception below. A documented pre-existing issue may use a narrow known-issue budget in the affected spec, with a comment and follow-up task.
+4. **One repair attempt per evidence-backed hypothesis.** If it fails, return to audit. Do not keep changing numbers under the same hypothesis; another attempt requires new measurements that identify a different root cause.
+5. **Stop when evidence runs out or scope expands.** Output a triage report when no new root-cause evidence is available, the repair would cross the low-risk boundary, or the same hypothesis already failed. No amend + force-push retry loops.
 6. **Debug with targeted tests only** (`npx playwright test <spec> --grep "<name>"`). Never rerun the full suite while iterating, and never push just to "see if CI passes now".
 7. **Never skip a failing test** (`test.skip` / `test.fixme` / deleting it). The documented budget in rule 3 is the only sanctioned interim measure.
 8. **Never loosen an assertion to silence a failure.** Tolerances/budgets are only for documented pre-existing issues, never for changes made in the current task.
 9. **Never change tests and production code in the same attempt**, unless the task explicitly allows it — otherwise you cannot tell which change did what.
 10. **Full regression runs only as a gate**: CI on push/PR/main and manual dispatch. It is not a local debug tool.
+
+### Autonomous Low-Risk RWD Repair Exception
+
+Agents may complete `audit → smallest fix → targeted verification → commit` without asking Hming first when all of the following are true:
+
+- The issue is a reversible RWD/layout defect on an existing route or component, such as minor overflow, alignment, wrapping, spacing, or breakpoint behavior.
+- The repair stays route-local or component-local and does not change shared primitives, content, design direction, interaction behavior, dependencies, or test expectations.
+- The root cause is supported by direct evidence such as DOM metrics, computed styles, screenshots, traces, or a reproducible targeted test.
+- The current task already authorizes maintenance of the affected area.
+
+Required workflow:
+
+1. Audit first and record the failing route, viewport, element, measurement, and relevant clipping/layout chain.
+2. Apply the smallest production fix. Do not modify tests in the same attempt.
+3. Run only the matching targeted verification while iterating.
+4. If the fix fails, return to audit. A new repair is allowed only after fresh evidence identifies a different root cause; blind pixel nudges are not allowed.
+5. After targeted checks pass, stage only the related files and create a focused commit for the completed audit-and-fix unit. Audit-only work with no file changes does not need an empty commit.
+6. Push, merge, and deploy only when the current task or repository rules already authorize those actions.
+
+Stop and ask Hming when the repair would alter a liked interface, shared contract, content, accessibility behavior, test tolerance, or any area outside the authorized scope.
 
 ## Known Environment Caveat
 
