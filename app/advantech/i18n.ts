@@ -10,7 +10,6 @@ import type { Locale } from "../../i18n/routing";
 const en = {
   "專案背景": "Project Overview",
   "問題": "Problem",
-  "設計目標": "Design goal",
   "解決方案": "Solution",
   "影響": "Impact",
   "專案快速總覽": "Project at a glance",

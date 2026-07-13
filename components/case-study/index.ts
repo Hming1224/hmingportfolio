@@ -11,6 +11,7 @@ export { default as CaseFlowFrame } from './CaseFlowFrame';
 export { default as CaseMedia } from './CaseMedia';
 export { default as CaseMetricGrid } from './CaseMetricGrid';
 export { default as CaseOverview } from './CaseOverview';
+export { getCaseOverviewLabel } from './CaseOverview.i18n';
 export { default as OutcomeWalkthrough } from './OutcomeWalkthrough';
 export { default as CaseProposalTabs } from './CaseProposalTabs';
 export { default as CaseSection } from './CaseSection';

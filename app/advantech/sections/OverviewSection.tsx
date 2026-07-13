@@ -1,4 +1,4 @@
-import { CaseOverview, OutcomeWalkthrough } from "../../../components/case-study";
+import { CaseOverview, getCaseOverviewLabel, OutcomeWalkthrough } from "../../../components/case-study";
 import { getAdvantechTranslator } from "../i18n-server";
 
 const overviewItems = [
@@ -106,7 +106,7 @@ const walkthroughFlows = [
 ] as const;
 
 export default async function OverviewSection() {
-  const { t } = await getAdvantechTranslator();
+  const { t, locale } = await getAdvantechTranslator();
   return (
     <CaseOverview
       className="cs-overview"
@@ -114,7 +114,7 @@ export default async function OverviewSection() {
       title={t("數據散落在系統與廠區之間：讓 AI 成為使用者做判斷的統一入口。")}
       lead={t("研華 iEMS 已收齊水、電、氣與設備資料，但對廠務人員與系統整合商（SI）這兩種使用者來說，拿到的都還是 raw data：EcoWatch、HVAC 與不同廠區各自運作，風險判斷仍靠經驗拼湊。我從兩種使用者的決策流程出發，把 AI 從被動問答改成能跨系統取數、主動帶入脈絡，並延伸到長期報表與機台面板的整合藍圖。")}
       items={overviewItems.map((item) => ({
-        label: t(item.label),
+        label: getCaseOverviewLabel(locale, item.label),
         title: t(item.title),
         details: item.details.map((detail) => ({
           label: t(detail.label),

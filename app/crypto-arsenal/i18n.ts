@@ -24,7 +24,6 @@ const en = {
 
   // ── Project Overview ──
   "問題": "Problem",
-  "設計目標": "Design goal",
   "影響": "Impact",
   "專案快速總覽": "Project at a glance",
   "成果走查": "Outcome walkthrough",

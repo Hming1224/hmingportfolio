@@ -1,4 +1,4 @@
-import { CaseCard, CaseGrid, CaseOverview, OutcomeWalkthrough } from "../../../components/case-study";
+import { CaseCard, CaseGrid, CaseOverview, getCaseOverviewLabel, OutcomeWalkthrough } from "../../../components/case-study";
 import { finalFlows, impactOverviewQuotes } from "../data";
 import { getCryptoArsenalTranslator } from "../i18n-server";
 
@@ -85,7 +85,7 @@ export default async function OverviewSection() {
       lead={t("Crypto Arsenal（CA）是量化交易平台：策略機器人替使用者自動下單，但人想介入自己的倉位時，CA 裡沒有任何入口——跳回交易所手動操作，還可能讓整支策略被判定異常、強制停掉。我從使用者回饋與三家交易所的既有流程出發，把倉位資訊、限價與市價平倉、止盈止損整合進 CA，讓人工介入變成系統看得懂的合法操作。")}
       items={overviewItems.map((item) => ({
         kind: item.kind,
-        label: t(item.label),
+        label: getCaseOverviewLabel(locale, item.label),
         title: t(item.title),
         details: item.details.map((detail) => ({
           label: t(detail.label),
