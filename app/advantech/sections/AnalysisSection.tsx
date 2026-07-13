@@ -15,7 +15,7 @@ export default async function AnalysisSection() {
       title={t("從 AI 工具與 EMS 競品中找出 GenAI 聊天機器人的機會。")}
     >
       <p className="cs-body-muted" style={{ marginBottom: 36 }}>
-        {t("透過產業 AI 工具、能源管理系統競品與 AI 功能模組比較，釐清聊天機器人不只是搜尋入口，而是能協助使用者完成問題來源、異常診斷與節能決策的工作流程介面。")}
+        {t("透過產業 AI 工具、能源管理系統競品與 AI 功能模組比較，我們把聊天機器人從搜尋入口重新定位成工作流程介面，協助使用者找出問題來源、診斷異常、做出節能決策。")}
       </p>
 
       {/* 01 */}

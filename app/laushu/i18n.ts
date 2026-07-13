@@ -56,10 +56,72 @@ const en = {
 
   // ── Overview ──
   "總覽 Overview": "Overview",
+  "問題": "Problem",
+  "影響": "Impact",
   "目標": "Goal",
   "需求": "Needs",
   "原型": "Prototype",
   "設計流程": "Design Process",
+  "專案快速總覽": "Project at a glance",
+  "勞贖（Laushu）想把紙本勞務報酬單搬上線，但真正要解的是會計師、公司與外包工作者三方的協作：建檔、稅額計算、寄送與回簽分散在不同人手上，重複輸入與來回確認吃掉大量時間。我與研究團隊從問卷與訪談出發，把最影響效率的三條流程做成可直接操作的原型，再用任務測試與 SUS 量表驗證，完成六處介面迭代。":
+    "Laushu set out to move paper labor forms online, but the real challenge was coordination among accountants, companies, and contractors. Record setup, tax calculations, delivery, and countersigning were split across different people, consuming time through repeated entry and back-and-forth confirmation. Working with the research team, I used surveys and interviews to turn the three highest-impact flows into interactive prototypes, then validated them through task testing and the SUS questionnaire, leading to six interface iterations.",
+  "紙本勞報單牽動三方來回，最後卻只是一張佐證用的單據。":
+    "Paper labor forms send three parties back and forth, only to end as supporting records.",
+  "公司：每次外包都要開單的人": "Company: the party issuing a form for every outsourced job",
+  "每次外包都須請外包人員簽署紙本勞報單，流程還牽涉所得類別、二代健保的計算，很多創業者不知情就違反規定；追回簽、追進度全靠人工。":
+    "Every outsourced job requires the contractor to sign a paper labor form. The process also involves income categories and supplementary health-insurance calculations, so many founders break the rules without realizing it; chasing signatures and tracking progress are entirely manual.",
+  "會計師：協助公司彙整勞報資料的人": "Accountant: the person compiling labor-form records for the company",
+  "需要人工核對且逐筆建檔；一年才收一次勞報單，容易發生檔案遺失或忘記存檔，會計師與公司之間的資訊隔閡是他最有感的痛點。":
+    "Each record must be checked and entered manually. Because labor forms are collected only once a year, files can be lost or left unsaved; the information gap between accountants and companies was the accountant's most pressing pain point.",
+  "外包工作者：簽收領錢的人": "Contractor: the person signing to receive payment",
+  "即使工作不須進公司，還是得備齊身分證、存摺等證件，專程跑一趟公司或郵局簽紙本；證件缺東缺西，就得再跑一次。":
+    "Even when the work does not require an office visit, contractors still have to gather an ID, passbook, and other documents, then make a dedicated trip to the company or post office to sign on paper. If anything is missing, they have to make the trip again.",
+  "勞務報酬單範例": "Sample labor remuneration form",
+  "紙本勞報單範例：欄位多、計算細，簽完最後只作為交易佐證。":
+    "Sample paper labor form: many fields and detailed calculations, ultimately signed only as proof of the transaction.",
+  "在產品上線前，把三方協作的紙本流程轉譯成清楚、可完成的數位任務。":
+    "Before launch, translate the three-party paper workflow into clear digital tasks people can complete.",
+  "研究路線的轉折": "Research pivot",
+  "問卷回收 39 份、以會計人員為主，但實際只約到 1 位會計師受訪；我們把訪談對象調整為會自己經手勞報單的公司負責人，並收斂出他們最麻煩的三件事：管理外包人員、確認簽收、減少回簽次數。":
+    "Most of the 39 survey responses came from accounting staff, but we were able to interview only one accountant. We shifted recruitment to company owners who handle labor forms themselves and narrowed their biggest pain points to three tasks: managing contractors, confirming receipt, and reducing countersigning rounds.",
+  "How might we": "How might we",
+  "我們如何讓公司、會計師與外包工作者在同一套系統完成建檔、計算、寄送與回簽，減少來回確認的時間與行政成本？":
+    "How might we help companies, accountants, and contractors complete record setup, calculations, delivery, and countersigning in one system, reducing time spent on back-and-forth confirmation and administrative costs?",
+  "Laushu 勞報單使用者歷程 journey map": "Laushu labor-form user journey map",
+  "以受訪者經驗盤點建立 → 發放 → 回簽 → 建檔的完整歷程，找出最卡的環節。":
+    "Mapping the full setup → issue → countersign → filing journey from participant experiences revealed the biggest bottlenecks.",
+  "SUS 易用性分數達 82.5，任務測試推動六處設計迭代。":
+    "A SUS usability score of 82.5 and task testing drove six design iterations.",
+  "測試方式": "Testing method",
+  "邀請 2 位受訪過的使用者（節目企劃、攝影工作室老闆）以放聲思考法完成三條核心流程的任務測試，並填寫 SUS 易用性量表，據此收斂迭代方向。":
+    "Two previously interviewed users—a program planner and a photography studio owner—completed task tests across the three core flows using think-aloud protocol, then filled out the SUS questionnaire to guide the iteration priorities.",
+  "迭代重點": "Iteration focus",
+  "六處調整都在降低判斷成本：欄位排序、稅額與日期提示、把「所得人」換成看得懂的用詞、列表分頁、寄出前預覽、合併清單分組，讓使用者更快找到資料、寄出前敢按確認。":
+    "All six changes reduced decision effort: column order, tax and date guidance, replacing the term ‘income recipient’ with clearer wording, list pagination, a pre-send preview, and grouped merged forms. Users could find records faster and confirm with more confidence before sending.",
+  "SUS 易用性分數": "SUS usability score",
+  "2 位使用者完成三條核心流程任務測試後填寫 SUS 量表。":
+    "Two users completed task tests across the three core flows, then filled out the SUS questionnaire.",
+  "介面與流程迭代": "Interface and flow iterations",
+  "依任務測試與 SUS 結果，完成六處介面與流程調整。":
+    "Task-testing and SUS results led to six interface and flow improvements.",
+  "本案屬上線前驗證；大量單據情境仍需上線後以真實數據驗證。":
+    "This was pre-launch validation; performance with high form volumes still needs verification with real post-launch data.",
+  "成果走查": "Outcome walkthrough",
+  "建檔、開單到合併，三條核心流程都在同一套系統完成。":
+    "From record setup and form creation to merging, all three core flows happen in one system.",
+  "建立勞務報酬單": "Create a labor remuneration form",
+  "流程01": "Flow 01",
+  "流程02": "Flow 02",
+  "流程03": "Flow 03",
+  "Laushu 建立外包人員資料庫操作示範影片": "Laushu contractor-database flow demo video",
+  "Laushu 建立勞務報酬單操作示範影片": "Laushu labor-form creation flow demo video",
+  "Laushu 合併多張勞報單操作示範影片": "Laushu labor-form merging flow demo video",
+  "成果走查流程切換": "Switch outcome flow",
+  "成果走查影片": "Outcome walkthrough video",
+  "流程": "Flow",
+  "← 上一步": "← Previous",
+  "下一步 →": "Next →",
+  "跳到步驟": "Go to step",
 
   // ── Section ledes (Figma 描述句副標) ──
   "研究設計": "Research Design",
@@ -75,6 +137,8 @@ const en = {
   "現階段勞報單的問題": "Current problems with labor forms",
   "將紙本勞報單流程轉譯成可測試、可上線的數位體驗。":
     "Translating a paper-based labor-form process into a testable, launch-ready digital experience.",
+  "讓建檔、計算、寄送與回簽，從紙本往返變成一條數位流程。":
+    "Turning record setup, calculation, delivery, and countersigning from paper handoffs into one digital flow.",
 
   // ── Section titles ──
   "專案總覽 Overview": "Overview",
@@ -92,8 +156,6 @@ const en = {
     "Understand the paper-based filing flow, break down stakeholder needs, and improve the digital filing experience.",
   "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。":
     "Optimized the flow of a company sending forms to contractors: adding contractors, creating forms, and merging forms.",
-  "專案核心不是單純把紙本表單搬到線上，而是先拆解會計師、公司、外包工作者與管理員之間的任務關係，再把最影響效率的流程整理成可操作的產品原型。":
-    "The core wasn't simply moving a paper form online — it was first unpacking the task relationships between accountants, companies, contractors and admins, then turning the most efficiency-critical flows into an actionable product prototype.",
   "建立外包人員資料庫": "Build a contractor database",
   "使用者掌握外包人員資料，日後有需求可立即找人展開合作。":
     "Users keep contractor records on hand, so they can find people and start collaborating instantly when needed.",
@@ -115,13 +177,13 @@ const en = {
   "訪談勞贖負責人並自行收集資料，了解外包與勞報單簽署流程，釐清會計師、公司、外包工作者三者關係。此平台至少包含四種核心利害關係人：":
     "By interviewing the Laushu owner and gathering data, I mapped the outsourcing and form-signing flow and clarified the relationship between accountant, company and contractor. The platform involves at least four core stakeholders:",
   "會計師": "Accountant",
-  "勞贖主要用戶，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。":
+  "勞贖主要使用者，透過勞贖寄出勞報單，協助公司供外包工作者確認、彙整勞報資料（會計事務所 / 會計師 / 記帳士）。":
     "Laushu's primary user — sends forms through Laushu and helps companies get contractor confirmations and compile records (accounting firm / accountant / bookkeeper).",
   "公司使用者": "Company user",
   "會計事務所的主要服務對象，會計事務所協助公司向旗下外包工作者開立勞報單。":
     "The accounting firm's main client; the firm helps the company issue forms to its contractors.",
   "外包工作者": "Contractor",
-  "勞贖的終端用戶，確認勞報單是否成立，並向公司領取工資。":
+  "勞贖的終端使用者，確認勞報單是否成立，並向公司領取工資。":
     "Laushu's end user — confirms whether a form is valid and collects payment from the company.",
   "勞贖管理員": "Laushu admin",
   "管理會計師帳號。": "Manages accountant accounts.",
@@ -175,7 +237,7 @@ const en = {
   "使用者動機、行為、目標": "User motivation, behavior, goals",
   "使用者潛在的需求": "Latent user needs",
   "用例重要程度": "Use-case importance",
-  "使用者反饋": "User feedback",
+  "使用者回饋": "User feedback",
   "系統易用性分數": "System usability score",
 
   // ── Survey / interview structure ──
@@ -379,8 +441,8 @@ const en = {
   "如果重新執行一次，我會在研究初期建立主要與替代受訪者名單，降低招募不順對研究進度的影響。當無法訪談核心利害關係人時，會改以協作角色訪談、非同步訪談或流程文件分析補足資訊缺口。\n\n設計策略上，會先將已掌握的會計人員流程定義為 MVP 假設，並透過第一版上線後的任務完成率、錯誤率與使用者回饋進行驗證。若初版成效不如預期，再依據實際使用情境推出 v2 上線版本，持續優化流程。":
     "If I were to run the project again, I would build both primary and backup participant lists early in the research phase to reduce the impact of recruiting delays. When core stakeholders cannot be interviewed, I would use collaborator interviews, asynchronous interviews, or process document analysis to fill the information gaps.\n\nStrategically, I would first define the accounting-staff workflow already understood as an MVP hypothesis, then validate it after the first release through task completion rate, error rate, and user feedback. If the initial version underperforms, I would use real usage scenarios to shape a v2 release and continue improving the flow.",
   "介面用詞與說明，本身就是體驗": "Interface wording and guidance are part of the experience",
-  "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」——像把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。":
-    "Labor forms involve professional concepts — tax rates, filing categories, supplementary health insurance — that users don't necessarily understand. Looking back, many iterations were really about \"rewording\" and \"adding guidance\": replacing the unintuitive term \"income recipient\" with plainer language, adding a line of explanation where people got stuck, and surfacing the withholding percentage directly. It made me realize interface copy is itself part of the experience — translating jargon into the user's language often lowers the barrier more than adding another feature.",
+  "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」，例如把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。":
+    "Labor forms involve professional concepts such as tax rates, filing categories, and supplementary health insurance that users don't necessarily understand. Looking back, many iterations were really about \"rewording\" and \"adding guidance\": replacing the unintuitive term \"income recipient\" with plainer language, adding a line of explanation where people got stuck, and surfacing the withholding percentage directly. It made me realize interface copy is itself part of the experience; translating jargon into the user's language often lowers the barrier more than adding another feature.",
   "從流程優化走向商業導入驗證": "From flow optimization to business adoption validation",
   "若後續繼續推進，我會將重點從流程可用性延伸到商業導入驗證。Laushu 不只是勞務報酬單的線上化工具，更需要釐清誰是實際使用者、誰是導入決策者，以及系統能為公司降低多少行政與溝通成本。\n\n因此，下一步會補充訪談公司負責人、財務／人資主管與會計事務所，了解不同角色對導入工具的決策標準。同時將 UX 指標轉化為更具商業意義的成效指標，例如處理時間、錯誤率、來回確認次數與人力成本變化，進一步評估產品是否具備 B2B SaaS、按使用量計費，或作為會計事務所工具包的商業潛力。":
     "If the project continues, I would extend the focus from flow usability to business adoption validation. Laushu is not only a tool for digitizing labor-remuneration forms; it also needs to clarify who the actual users are, who makes adoption decisions, and how much administrative and communication cost the system can reduce for companies.\n\nThe next step would be to interview company owners, finance or HR leads, and accounting firms to understand each role's decision criteria for adopting the tool. I would also translate UX metrics into more business-relevant outcome metrics, such as processing time, error rate, back-and-forth confirmation count, and labor cost change, to further evaluate whether the product has potential as a B2B SaaS product, a usage-based service, or part of an accounting-firm toolkit.",

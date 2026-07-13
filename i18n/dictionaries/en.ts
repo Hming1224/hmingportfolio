@@ -17,9 +17,9 @@ const messages = {
     loading: "Switching language",
   },
   hero: {
-    badge: "2+ years in industry. Open to opportunities!",
+    badge: "Product designer with 2+ years’ experience, open to new opportunities.",
     greeting: "Hi! I'm Brian Huang",
-    taglines: "Research needs with empathy|Explore design with curiosity|Build products with clarity",
+    description: "With a background in <shiny>art</shiny>, <shiny>mechanical engineering</shiny>, and <shiny>HCI</shiny>, I turn complex problems into usable products by balancing user, business, and engineering needs.",
     journey: "My Journey",
     works: "View My Work",
   },

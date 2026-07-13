@@ -57,7 +57,7 @@ export default async function AdventechPage() {
     { id: "cs-sec-scenario", title: tocLabel("設計策略", "Design Strategy") },
     { id: "cs-sec-solution", title: tocLabel("設計方案", "Solution") },
     { id: "cs-sec-next", title: tocLabel("下一步", "Next Steps") },
-    { id: "cs-sec-result", title: tocLabel("Reflections", "Reflections") },
+    { id: "cs-sec-result", title: tocLabel("學習反思", "Reflections") },
   ];
 
   return (
