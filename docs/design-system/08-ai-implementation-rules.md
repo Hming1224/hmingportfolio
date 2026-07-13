@@ -72,12 +72,31 @@ Rules:
 
 - Do not create `--hm-*` tokens for one page or one visual.
 - Do not create `--cs-*` tokens unless the same semantic value is shared by Case Study patterns.
+- `.theme-<slug>` blocks are defined **only in that project's route CSS** (`styles/case-study-<slug>.css`), never in `styles/tokens.css`. The `.theme-advantech` / `.theme-crypto-arsenal` blocks still in `tokens.css` are legacy duplicates scheduled for removal (2026-07-05 audit); do not extend them and do not add new `.theme-*` blocks to `tokens.css`.
 - Do not make components consume primitive color scale tokens directly unless explicitly documented.
 - Target state: `.theme-<slug>` should primarily define semantic color, surface, text, and brand mappings.
 - Current production CSS may still contain transitional route-specific or colocated component custom properties for spacing, radius, layout, min-width, matrix, flow, timeline, and diagram geometry. These transitional variables must not trigger an immediate route CSS refactor.
 - Design token aliases are allowed only when they are visual-preserving and the component contract or visual baseline is clear.
 - Visualization geometry, matrix columns, timeline geometry, SVG connector coordinates, and route-specific min-width should remain local or colocated unless a component abstraction assessment proves reuse is safe.
 - One-off narrative visuals may keep local CSS values if they preserve storytelling or prevent visual regression.
+
+### Breakpoint boundary rules
+
+Canonical breakpoints are 768 / 1024 / 1440 (`lib/breakpoints.ts` is the executable source; CSS custom properties cannot drive `@media`).
+
+For the three core breakpoints, new `@media` queries must use these exact boundary pairs so a `max-width` rule and its `min-width` counterpart never both apply at the same viewport width:
+
+| Range | max-width side | min-width side |
+|---|---|---|
+| Mobile ≤ 768 | `(max-width: 768px)` | `(min-width: 769px)` |
+| Tablet ≤ 1023 | `(max-width: 1023px)` | `(min-width: 1024px)` |
+| Wide ≥ 1440 | `(max-width: 1439px)` | `(min-width: 1440px)` |
+
+Rules:
+
+- Never mix boundary variants in one file (e.g. `min-width: 768px` alongside `max-width: 768px` makes both apply at exactly 768px; `max-width: 1024px` alongside `min-width: 1024px` does the same at 1024px).
+- Ad-hoc route-local breakpoints (e.g. 900 / 1100 / 1200) remain allowed for narrative visuals; only the three core breakpoints must follow this table.
+- Existing files that mix variants (known 2026-07-05: `home.css`, `case-study-advantech.css`, and `max-width: 1024px` usage in `about.css` / `contact.css` / `case-study-laushu.css` / `case-study-design-system-case-study.css`) are fixed as their own scoped batch — one file per batch with breakpoint smoke tests — never in passing while doing unrelated work.
 
 ## 4. Component and pattern rules
 
