@@ -248,8 +248,6 @@ components:
 
 ---
 
----
-
 ## 13. Token v2：`--hm-*` 單一前綴
 
 - 新 code 一律使用 `--hm-*`。
@@ -257,6 +255,8 @@ components:
 - Primitive 色階為 `--hm-{purple|blue|green|peach|brown}-50` 到 `-900`；元件不可直接消費 primitive，必須透過 semantic token。
 - Status semantic：`--hm-success`、`--hm-warning`、`--hm-error`、`--hm-info`，各自搭配 `-soft` 背景。
 - Spacing：`--hm-space-3xs` 到 `--hm-space-3xl`，以 8px 基準建立主系統間距尺；新 code 優先使用 token，不直接散寫 16/24/32/48。
+  - 尺外 spacing 在本次機械遷移中先保留；是否維持、改值或新增 token，必須另做設計審視，不得在沒有設計決策時自行 snap 到最近的 token。
+  - 只有與現有 spacing token **精確等值**的 A 類宣告，才可做不改變 computed value 的機械式遷移；混合值與尺外值不在此範圍。
 - Radius：`--hm-radius-sm/md/lg/pill/button` 對應 8 / 12 / 16 / 999 / 200；主系統元件 radius 一律優先吃 token。
 - Layout / Grid：`--hm-container`、`--hm-container-wide`、`--hm-grid-gutter`、`--hm-grid-gutter-lg`，搭配 `.hm-grid` helper 使用。
 - Z-index：base `0`、sticky `10`、navbar `100`、overlay `200`、modal `300`、toast `400`。
