@@ -1535,9 +1535,7 @@
 
   .section-heading {
     gap: 24px;
-    overflow: clip;
     padding: 48px 0;
-    width: calc(100vw - 1px);
   }
 
   .section-heading > span:first-child {
@@ -1555,6 +1553,10 @@
 
   .project-tabs-highlight {
     width: 100%;
+  }
+
+  .projects-section .project-tabs-item {
+    flex: 1 1 auto;
   }
 
   .project-tabs-list:not([data-compact-on-mobile="true"]) .project-tabs-tab {
