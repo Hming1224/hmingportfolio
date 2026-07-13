@@ -521,7 +521,7 @@
 }
 
 .theme-laushu .laushu-understand-section > .cs-flow-hint[data-visible="true"] {
-  margin-bottom: 12px;
+  margin-bottom: var(--hm-space-xs);
 }
 
 .theme-laushu .laushu-understand-section > .cs-flow-hint[data-visible="true"] + .cs-data-table-frame {
@@ -648,7 +648,7 @@
 
   .theme-laushu .laushu-understand-section .cs-survey-flow-mid {
     width: min(100%, 288px);
-    gap: 16px;
+    gap: var(--hm-space-sm);
   }
 
   .theme-laushu .laushu-understand-section .cs-survey-arrow {
@@ -698,7 +698,7 @@
 
 .theme-laushu .cs-survey-insight-summary {
   display: grid;
-  gap: 16px;
+  gap: var(--hm-space-sm);
   border: 1px solid var(--laushu-line);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.52) 1%, color-mix(in srgb, var(--laushu-primary-100) 86%, transparent) 100%);
   color: #1f2933;
@@ -727,7 +727,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 @media (min-width: 1024px) {
   .theme-laushu .cs-survey-panel--stats .cs-survey-chart-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    gap: var(--hm-space-sm);
   }
 
   .theme-laushu .cs-survey-panel--stats .cs-survey-bar-groups {
@@ -788,7 +788,7 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 
 /* Persona 文字欄 + 三位受訪者整理板 */
 .theme-laushu .cs-persona-tags {
-  margin-bottom: 12px;
+  margin-bottom: var(--hm-space-xs);
 }
 
 .theme-laushu .cs-persona-list {
@@ -947,11 +947,11 @@ html[lang="en"] .theme-laushu .cs-survey-insight-summary::before {
 }
 
 .theme-laushu .laushu-iterate-section .cs-flow-hint[data-visible="true"] {
-  margin: 0 0 12px;
+  margin: 0 0 var(--hm-space-xs);
 }
 
 .theme-laushu .laushu-iterate-section .cs-flow-frame-group:has(> .cs-flow-hint[data-visible="true"]) .cs-flow-frame-header {
-  margin-bottom: 8px;
+  margin-bottom: var(--hm-space-2xs);
 }
 
 .theme-laushu .laushu-iterate-section .cs-flow-frame--split .cs-flow-frame-scroll {

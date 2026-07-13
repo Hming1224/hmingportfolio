@@ -162,7 +162,7 @@
 
 @media (max-width: 768px) {
   .theme-crypto-arsenal #cs-sec-background {
-    padding-block: 48px;
+    padding-block: var(--hm-space-xl);
   }
 }
 
@@ -189,7 +189,7 @@
   --cs-quote-role-line-height: 1.9;
   container-type: inline-size;
   justify-content: space-between;
-  gap: 24px;
+  gap: var(--hm-space-md);
 }
 
 .theme-crypto-arsenal #cs-sec-problem .cs-avatar {
@@ -280,7 +280,7 @@
 }
 
 .theme-crypto-arsenal #cs-sec-decision > .cs-grid .cs-card h3 {
-  margin: 0 0 16px;
+  margin: 0 0 var(--hm-space-sm);
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--ca-navy);
@@ -340,7 +340,7 @@
   --cs-card-border: transparent;
   --cs-card-radius: 20px;
   border: 0;
-  margin-top: 64px;
+  margin-top: var(--hm-space-2xl);
 }
 
 @media (min-width: 769px) {
@@ -406,7 +406,7 @@
   --cs-before-after-narrative-panel-head-bg: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
   --cs-before-after-narrative-panel-head-color: var(--cs-accent);
   --cs-before-after-narrative-panel-head-line-height: 31.5px;
-  margin-top: 24px;
+  margin-top: var(--hm-space-md);
 }
 
 .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
@@ -444,7 +444,7 @@
 }
 
 .theme-crypto-arsenal #cs-sec-final .cs-media {
-  margin: 80px 0 80px;
+  margin: var(--hm-space-3xl) 0 var(--hm-space-3xl);
 }
 
 .theme-crypto-arsenal #cs-sec-final .cs-media-frame {
@@ -474,7 +474,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 }
 
 .theme-crypto-arsenal #cs-sec-reflect > .cs-grid .cs-card h3 {
-  margin: 0 0 8px;
+  margin: 0 0 var(--hm-space-2xs);
   font-size: var(--fs-h4);
   font-weight: 700;
   line-height: 1.4;
@@ -541,8 +541,8 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 
 .theme-crypto-arsenal #cs-sec-impact .ca-impact-table-intro {
   display: grid;
-  gap: 4px;
-  margin-bottom: 12px;
+  gap: var(--hm-space-3xs);
+  margin-bottom: var(--hm-space-xs);
 }
 
 .theme-crypto-arsenal #cs-sec-impact .ca-impact-table-intro .ca-impact-table-title,
@@ -604,8 +604,8 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 
 .theme-crypto-arsenal #cs-sec-impact .ca-impact-finding-summary {
   display: grid;
-  gap: 8px;
-  padding: 24px;
+  gap: var(--hm-space-2xs);
+  padding: var(--hm-space-md);
 }
 
 .theme-crypto-arsenal #cs-sec-impact .ca-impact-finding-summary h4,
@@ -631,7 +631,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 
 .theme-crypto-arsenal #cs-sec-impact .ca-impact-finding-evidence {
   display: grid;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   margin-top: auto;
   padding: 20px 24px 24px;
   border-top: 1px solid #cdeadd;
@@ -656,7 +656,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 
 .theme-crypto-arsenal #cs-sec-impact .ca-impact-feedback-summary {
   display: grid;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   padding: 16px 18px;
   border: 1px solid color-mix(in srgb, #cdeadd 72%, white);
   border-radius: 12px;
@@ -693,7 +693,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-detail-row {
     flex-direction: column;
-    gap: 8px;
+    gap: var(--hm-space-2xs);
     padding: 0;
   }
 
@@ -703,7 +703,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-row {
     align-items: flex-start;
-    gap: 16px;
+    gap: var(--hm-space-sm);
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-pill-badge {
@@ -718,12 +718,12 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: var(--hm-space-2xs);
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-header {
     align-items: flex-start;
-    gap: 16px;
+    gap: var(--hm-space-sm);
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-badge {
@@ -751,7 +751,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   }
 
   .theme-crypto-arsenal #cs-sec-impact .ca-impact-feedback-summary {
-    padding: 16px;
+    padding: var(--hm-space-sm);
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-pill-badge {
@@ -770,7 +770,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   }
 
   .theme-crypto-arsenal #cs-sec-research > .cs-card .cs-flow-hint[data-visible="false"] + .cs-flow-frame {
-    margin-top: 24px;
+    margin-top: var(--hm-space-md);
   }
 
   .theme-crypto-arsenal #cs-sec-research > .cs-card .cs-flow-frame--plain .cs-flow-frame-scroll {
@@ -785,7 +785,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--hm-space-xs);
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-card-heading-title {
@@ -807,7 +807,7 @@ body:has(.theme-crypto-arsenal) .cs-video-lightbox-frame {
   .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--hm-space-xs);
   }
 
   .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-title {
