@@ -32,14 +32,70 @@ export function expectNoConsoleErrors(errors: ConsoleErrors) {
 // bug awaiting its own fix task. Never raise a budget to silence a new failure —
 // a new overflow on a route without a budget is a real regression.
 export async function expectNoHorizontalOverflow(page: Page, knownIssueBudgetPx = 0) {
-  const overflow = await page.evaluate(() => {
+  const { candidates, overflow } = await page.evaluate((budget) => {
     const doc = document.documentElement;
-    return Math.max(0, doc.scrollWidth - doc.clientWidth);
-  });
+    const overflow = Math.max(0, doc.scrollWidth - doc.clientWidth);
+    if (overflow <= budget) return { candidates: [], overflow };
+
+    const pathFor = (element: Element) => {
+      const parts: string[] = [];
+      for (let current: Element | null = element; current && parts.length < 4; current = current.parentElement) {
+        const id = current.id ? `#${CSS.escape(current.id)}` : "";
+        const classes = [...current.classList].slice(0, 2).map((name) => `.${CSS.escape(name)}`).join("");
+        parts.unshift(`${current.tagName.toLowerCase()}${id}${classes}`);
+        if (id) break;
+      }
+      return parts.join(" > ");
+    };
+
+    const belongsToHiddenFixedTree = (element: Element) => {
+      for (let current: Element | null = element; current; current = current.parentElement) {
+        const style = getComputedStyle(current);
+        if (style.visibility === "hidden" && style.position === "fixed") return true;
+      }
+      return false;
+    };
+
+    const candidates = [...document.querySelectorAll("*")]
+      .filter((element) => !belongsToHiddenFixedTree(element))
+      .map((element) => {
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        const excess = Math.max(0, rect.right - doc.clientWidth, -rect.left);
+        const ownOverflow = Math.max(0, element.scrollWidth - element.clientWidth);
+        return {
+          path: pathFor(element),
+          left: rect.left,
+          right: rect.right,
+          width: rect.width,
+          scrollWidth: element.scrollWidth,
+          clientWidth: element.clientWidth,
+          overflowX: style.overflowX,
+          position: style.position,
+          transform: style.transform,
+          excess,
+          ownOverflow,
+        };
+      })
+      .filter((candidate) =>
+        candidate.excess > 0 || (candidate.ownOverflow > 0 && candidate.overflowX === "visible"),
+      )
+      .sort((a, b) => b.excess - a.excess || b.ownOverflow - a.ownOverflow)
+      .slice(0, 10);
+
+    return { candidates, overflow };
+  }, knownIssueBudgetPx);
+
+  const details = candidates.map((candidate) =>
+    `${candidate.path} rect=${candidate.left.toFixed(2)}..${candidate.right.toFixed(2)} (${candidate.width.toFixed(2)}) ` +
+    `scroll=${candidate.scrollWidth}/${candidate.clientWidth} overflowX=${candidate.overflowX} ` +
+    `position=${candidate.position} transform=${candidate.transform}`,
+  );
 
   expect(
     overflow,
-    `Horizontal overflow ${overflow}px exceeds allowed ${knownIssueBudgetPx}px at ${page.url()}`,
+    `Horizontal overflow ${overflow}px exceeds allowed ${knownIssueBudgetPx}px at ${page.url()}` +
+      (details.length ? `\nCandidates:\n${details.join("\n")}` : "\nCandidates: none found"),
   ).toBeLessThanOrEqual(knownIssueBudgetPx);
 }
 
