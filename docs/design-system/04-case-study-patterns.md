@@ -37,6 +37,38 @@ Design System 必須覆蓋整個作品集，案例頁不能因為內容不同就
 - Comparison matrix, flow diagram, timeline, and wide SVG diagram should remain local / colocated unless their component anatomy and responsive behavior are proven stable across cases.
 - 2026-07-02 reuse assessment is complete; outcomes and reopen conditions are recorded in `06-governance.md` under Reuse Assessment.
 
+### Overview and Outcome Walkthrough Patterns
+
+> **Status:** Implemented shared patterns with live adoption in Advantech, Crypto Arsenal, and Laushu `OverviewSection`.
+
+`CaseOverview` and `OutcomeWalkthrough` form the opening narrative sequence used by all three case-study routes:
+
+1. `CaseOverview` summarizes the problem, design goal, and impact one step at a time.
+2. Its optional `showcase` slot composes route-owned follow-up content.
+3. `OutcomeWalkthrough` uses that slot to present final flows as step-based image or video sequences.
+
+#### `CaseOverview` boundary
+
+- The component owns the `CaseSection` wrapper, roving-tabindex step navigation, active tabpanel, detail-card anatomy, evidence slot, and previous / next controls.
+- Routes own localized titles, detail copy, media, metrics, project-specific visuals, and the optional `showcase` composition.
+- Step labels are translated through `components/case-study/CaseOverview.i18n.ts`; route content is localized before it reaches the component.
+- Evidence resolves in `visual > media > stat` order. An item with `kind: "impact"` and evidence renders evidence before qualitative detail.
+- `.cs-overview-*` selectors and shared sizing / motion values belong to `styles/case-study.css` and `styles/tokens.css`. Route CSS may only remap theme values or preserve project-specific visuals.
+
+#### `OutcomeWalkthrough` boundary
+
+- The component owns flow switching, the focusable stage, active media state, captions, previous / next controls, and dots.
+- Routes own flow labels, localized control labels, captions, media sources, optional video poster / mask, and frame aspect ratio.
+- Flow switching reuses the animate-ui Tabs primitives and `.project-tabs-*` contract. Keep the primitive behavior documented under Tabs instead of duplicating it here.
+- A walkthrough step may use an image or video. Design-system demos use existing production images only, avoiding autoplay cost while preserving the production data shape.
+- `.cs-outcome-walkthrough` and `.cs-walkthrough-*` belong to `styles/case-study.css`; route themes may remap semantic values without changing the shared DOM.
+
+Adoption:
+
+- `app/advantech/sections/OverviewSection.tsx`
+- `app/crypto-arsenal/sections/OverviewSection.tsx`
+- `app/laushu/sections/OverviewSection.tsx`
+
 ### Before / After Narrative Pattern
 
 > **Status:** Implemented shared pattern with partial route adoption.
