@@ -62,3 +62,6 @@ public/projects/*/_staging/
 
 # 一次性暫存工作區（驗證腳本、debug 產物）— 不進 git
 tmp/
+
+# Browser Control 本地執行診斷 — 不進 git
+/reports/runs/
