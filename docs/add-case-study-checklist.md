@@ -14,9 +14,33 @@
 ## 2. Route 與 route CSS
 
 - 建 `app/<slug>/page.tsx`。
+- 檔案佈局見下方「標準檔案架構（必遵守）」。
 - 建 `styles/case-study-<slug>.css`，**只在這支 page.tsx `import`**（route-scoped，不要進 `app/globals.css`）。
 - 不要把新案例的 CSS 寫進 `case-study.css`（那是共用骨架）或別的案例 CSS。
 - **把新的 route CSS 登記進 `scripts/arch-audit.py` 的 `route_css_rules`**（加一行：CSS 路徑 → 允許 import 的檔案）。沒登記的話 `npm run audit:architecture` 不會檢查它，隔離規則等於沒生效（2026-07-05 audit 就是漏了 DS case study 才補這條）。
+
+## 標準檔案架構（必遵守）
+
+```text
+app/<slug>/
+  page.tsx          ← 只做 generateMetadata、tocSections、CaseStudyShell 組裝；不含 section 實作與長常數
+  data.ts           ← 跨 section 共用的資料常數才放這；單一 section 專用常數留在該 section（可省略）
+  i18n.ts           ← zh-TW → en key map，export translate<Name>(locale, text)
+  i18n-server.ts    ← 包裝 getLocale()，回傳 { locale, t }
+  sections/
+    index.ts        ← barrel export
+    HeroSection.tsx
+    XxxSection.tsx  ← 一個 section 一檔；預設為 async server component，所有可見文字經 t() 翻譯
+  components/       ← 案例專屬視覺或互動元件（diagram、demo、lightbox 等）
+styles/case-study-<slug>.css  ← route-scoped theme CSS，只在該 page.tsx import
+```
+
+硬規則：
+
+1. section 內文字一律走 `t()`（由 `i18n-server.ts` 提供）；不得使用 `localizeTree` 類的遞迴 JSX 翻譯。
+2. zh-TW 原文字串是 i18n key：同一句話在 `.tsx`、`data.ts`、`i18n.ts` 必須一字不差。
+3. 通用版型優先使用 `components/case-study/` 共用元件；route CSS 只調 `--cs-*` token 與案例外觀，不重寫共用骨架。
+4. `page.tsx` 只負責 metadata、TOC、專案資料與 `CaseStudyShell` 組裝；出現 section JSX 實作或大型常數就必須拆出。
 
 ## 3. 用共用骨架
 
@@ -41,7 +65,7 @@
 
 ## 5. Section 元件
 
-- 先一頁刻完；section 太大再依 TOC 拆 `app/<slug>/sections/`。
+- 一開始就依 TOC 拆成 `app/<slug>/sections/`，一個 section 一檔；`page.tsx` 只做組裝。
 - 有 state / effect / DOM query 的互動元件才加 `"use client"`，放 `app/<slug>/components/`；section 預設維持 server component。
 - **只在「同一個 pattern 第二次出現」時，才把它抽成 `components/case-study/` 的共用 primitive**（如 `CaseHero` / `CaseGrid` / `CaseCard` / `CaseMedia` / `BeforeAfter`）。只服務單一案例就先留在該案例內，不要過早抽象。
 

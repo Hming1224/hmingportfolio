@@ -32,6 +32,7 @@ Apply those shared rules to this project.
 - Prefer focused edits over broad rewrites.
 - Verify UI changes visually when a local dev server can run.
 - Summarize changed files and verification results at the end of each task.
+- New case-study routes must follow the standard structure in `docs/add-case-study-checklist.md` (`sections/` + `i18n.ts` + `i18n-server.ts`; add `data.ts` only for data shared across sections; no inline sections in `page.tsx`).
 - 對話回覆格式：每次回覆必須包含且主動整理以下三個標題區塊：
   - **✅ 剛完成** (總結完成工作)
   - **👉 建議下一步** (列出下一步建議)

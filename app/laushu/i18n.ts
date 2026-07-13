@@ -1,10 +1,3 @@
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  type ReactElement,
-  type ReactNode,
-} from "react";
 import type { Locale } from "../../i18n/routing";
 
 /* Laushu 案例頁 zh-TW → en 對照。
@@ -568,37 +561,4 @@ type LaushuKey = keyof typeof en;
 
 export function translateLaushu(locale: Locale, text: string) {
   return locale === "en" ? en[text as LaushuKey] ?? text : text;
-}
-
-export function translateLaushuData<T>(locale: Locale, value: T): T {
-  if (typeof value === "string") return translateLaushu(locale, value) as T;
-  if (Array.isArray(value)) {
-    const translateItem = (item: unknown) => translateLaushuData(locale, item);
-    return (value.some(isValidElement)
-      ? Children.map(value, translateItem)
-      : value.map(translateItem)) as T;
-  }
-  if (isValidElement(value)) return localizeLaushuTree(locale, value) as T;
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.entries(value).map(([key, item]) => [key, translateLaushuData(locale, item)]),
-    ) as T;
-  }
-  return value;
-}
-
-export function localizeLaushuTree(locale: Locale, node: ReactNode): ReactNode {
-  if (typeof node === "string") return translateLaushu(locale, node);
-  if (Array.isArray(node)) {
-    return Children.map(node, (item) => localizeLaushuTree(locale, item));
-  }
-  if (!isValidElement(node)) return node;
-
-  const element = node as ReactElement<Record<string, unknown>>;
-  const { children, ...restProps } = element.props;
-  const props = translateLaushuData(locale, restProps);
-  const localizedChildren = Children.map(children as ReactNode, (child) =>
-    localizeLaushuTree(locale, child),
-  );
-  return cloneElement(element, props, localizedChildren);
 }
