@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 type NodeTone = "action" | "page" | "decision";
+type Translate = (text: string) => string;
 
 function FlowDefs({ id }: { id: string }) {
   return (
@@ -88,10 +89,10 @@ function Connector({
   );
 }
 
-export function TaskFlowOneDiagram() {
+export function TaskFlowOneDiagram({ t }: { t: Translate }) {
   const marker = "task-flow-1-arrow";
   return (
-    <svg viewBox="0 0 2140 1360" className="cs-task-flow-graphic cs-task-flow-graphic--one" role="img" aria-label="建立外包人員資料庫任務流程圖">
+    <svg viewBox="0 0 2140 1360" className="cs-task-flow-graphic cs-task-flow-graphic--one" role="img" aria-label={t("建立外包人員資料庫任務流程圖")}>
       <FlowDefs id={marker} />
 
       {/* 外包人員資料頁 → 三個主要任務 */}
@@ -106,10 +107,10 @@ export function TaskFlowOneDiagram() {
       <Connector d="M524 524 H596" marker={marker} />
       <Connector d="M812 524 H884" marker={marker} />
       <Connector d="M1100 524 H1172" marker={marker} />
-      <Connector d="M1388 524 H1540" marker={marker} label="否" labelX={1464} labelY={500} />
+      <Connector d="M1388 524 H1540" marker={marker} label={t("否")} labelX={1464} labelY={500} />
       <Connector d="M1756 524 H1810 V342 H1876" marker={marker} />
       <Connector d="M1756 524 H1810 V706 H1876" marker={marker} />
-      <Connector d="M1464 524 V860 H1540" marker={marker} label="是" labelX={1488} labelY={700} />
+      <Connector d="M1464 524 V860 H1540" marker={marker} label={t("是")} labelX={1488} labelY={700} />
 
       {/* 儲存後回到建立頁；單純儲存後回到外包人員資料頁 */}
       <Connector d="M2092 342 H2116 V24 H704 V76" marker={marker} />
@@ -126,31 +127,31 @@ export function TaskFlowOneDiagram() {
       <Connector d="M1388 860 H1428 V660 H992 V636" marker={marker} />
       <Connector d="M1388 1196 H1418 V1320 H704 V1136" marker={marker} />
 
-      <FlowNode x={0} y={436} size={176} visualSize={216} tone="page">外包人員資料頁</FlowNode>
-      <FlowNode x={328} y={100} size={176} visualSize={216} tone="action">建立人員勞報單</FlowNode>
-      <FlowNode x={616} y={100} size={176} visualSize={216} tone="page">建立勞報單頁</FlowNode>
-      <FlowNode x={328} y={436} size={176} visualSize={216} tone="action">新增外包人員</FlowNode>
-      <FlowNode x={616} y={436} size={176} visualSize={216} tone="page">新增人員頁</FlowNode>
-      <FlowNode x={904} y={436} size={176} visualSize={216} tone="action">填寫身份資料</FlowNode>
-      <FlowNode x={1192} y={436} size={176} visualSize={216} tone="decision">是否已有相同身分證字號</FlowNode>
-      <FlowNode x={1560} y={436} size={176} visualSize={216} tone="action">上傳身分證存摺影本</FlowNode>
-      <FlowNode x={1896} y={254} size={176} visualSize={216} tone="action">儲存並建立勞報單</FlowNode>
-      <FlowNode x={1896} y={618} size={176} visualSize={216} tone="action">儲存</FlowNode>
-      <FlowNode x={1560} y={772} size={176} visualSize={216} tone="action">系統提醒曾建立過</FlowNode>
-      <FlowNode x={328} y={940} size={176} visualSize={216} tone="action">查看業務</FlowNode>
-      <FlowNode x={616} y={940} size={176} visualSize={216} tone="page">人員業務頁</FlowNode>
-      <FlowNode x={904} y={772} size={176} visualSize={216} tone="action">編輯個人資料</FlowNode>
-      <FlowNode x={1192} y={772} size={176} visualSize={216} tone="page">編輯人員頁</FlowNode>
-      <FlowNode x={904} y={1108} size={176} visualSize={216} tone="action">查看個人資料</FlowNode>
-      <FlowNode x={1192} y={1108} size={176} visualSize={216} tone="page">查看人員頁</FlowNode>
+      <FlowNode x={0} y={436} size={176} visualSize={216} tone="page">{t("外包人員資料頁")}</FlowNode>
+      <FlowNode x={328} y={100} size={176} visualSize={216} tone="action">{t("建立人員勞報單")}</FlowNode>
+      <FlowNode x={616} y={100} size={176} visualSize={216} tone="page">{t("建立勞報單頁")}</FlowNode>
+      <FlowNode x={328} y={436} size={176} visualSize={216} tone="action">{t("新增外包人員")}</FlowNode>
+      <FlowNode x={616} y={436} size={176} visualSize={216} tone="page">{t("新增人員頁")}</FlowNode>
+      <FlowNode x={904} y={436} size={176} visualSize={216} tone="action">{t("填寫身份資料")}</FlowNode>
+      <FlowNode x={1192} y={436} size={176} visualSize={216} tone="decision">{t("是否已有相同身分證字號")}</FlowNode>
+      <FlowNode x={1560} y={436} size={176} visualSize={216} tone="action">{t("上傳身分證存摺影本")}</FlowNode>
+      <FlowNode x={1896} y={254} size={176} visualSize={216} tone="action">{t("儲存並建立勞報單")}</FlowNode>
+      <FlowNode x={1896} y={618} size={176} visualSize={216} tone="action">{t("儲存")}</FlowNode>
+      <FlowNode x={1560} y={772} size={176} visualSize={216} tone="action">{t("系統提醒曾建立過")}</FlowNode>
+      <FlowNode x={328} y={940} size={176} visualSize={216} tone="action">{t("查看業務")}</FlowNode>
+      <FlowNode x={616} y={940} size={176} visualSize={216} tone="page">{t("人員業務頁")}</FlowNode>
+      <FlowNode x={904} y={772} size={176} visualSize={216} tone="action">{t("編輯個人資料")}</FlowNode>
+      <FlowNode x={1192} y={772} size={176} visualSize={216} tone="page">{t("編輯人員頁")}</FlowNode>
+      <FlowNode x={904} y={1108} size={176} visualSize={216} tone="action">{t("查看個人資料")}</FlowNode>
+      <FlowNode x={1192} y={1108} size={176} visualSize={216} tone="page">{t("查看人員頁")}</FlowNode>
     </svg>
   );
 }
 
-export function TaskFlowTwoDiagram() {
+export function TaskFlowTwoDiagram({ t }: { t: Translate }) {
   const marker = "task-flow-2-arrow";
   return (
-    <svg viewBox="0 0 1995 1132" className="cs-task-flow-graphic cs-task-flow-graphic--two" role="img" aria-label="建立勞務報酬單任務流程圖">
+    <svg viewBox="0 0 1995 1132" className="cs-task-flow-graphic cs-task-flow-graphic--two" role="img" aria-label={t("建立勞務報酬單任務流程圖")}>
       <FlowDefs id={marker} />
       <g transform="translate(0 93)">
 
@@ -175,41 +176,41 @@ export function TaskFlowTwoDiagram() {
       <Connector d="M1671 447 H1735" marker={marker} />
 
       {/* 儲存與取消：上方分成兩條獨立回流線 */}
-      <Connector d="M978 32 V0 H101 V327" marker={marker} label="儲存並返回" labelX={540} labelY={-42} />
-      <Connector d="M1571 327 V0 H1010 V28" marker={marker} label="取消" labelX={1275} labelY={-42} />
+      <Connector d="M978 32 V0 H101 V327" marker={marker} label={t("儲存並返回")} labelX={540} labelY={-42} />
+      <Connector d="M1571 327 V0 H1010 V28" marker={marker} label={t("取消")} labelX={1275} labelY={-42} />
       <Connector
         d="M1843 555 V937 H101 V567"
         marker={marker}
-        label="返回勞務報酬單頁面，且發送信件給外包人員"
+        label={t("返回勞務報酬單頁面，且發送信件給外包人員")}
         labelX={930}
         labelY={988}
         labelWidth={420}
         labelHeight={54}
       />
 
-      <FlowNode x={0} y={347} size={201} visualSize={241} tone="page">勞務報酬單頁面</FlowNode>
-      <FlowNode x={305} y={52} size={176} visualSize={216} tone="action">建立勞報單（所得人填寫）</FlowNode>
-      <FlowNode x={305} y={359} size={176} visualSize={216} tone="action">建立勞報單（公司客戶填寫・新增外包人員）</FlowNode>
-      <FlowNode x={305} y={696} size={176} visualSize={216} tone="action">建立勞報單（公司客戶填寫・既有外包人員）</FlowNode>
-      <FlowNode x={585} y={40} size={201} visualSize={241} tone="page">建立勞務報酬單頁面</FlowNode>
-      <FlowNode x={585} y={347} size={201} visualSize={241} tone="page">建立勞務報酬單頁面</FlowNode>
-      <FlowNode x={585} y={684} size={201} visualSize={241} tone="page">建立勞務報酬單頁面</FlowNode>
-      <FlowNode x={890} y={52} size={176} visualSize={216} tone="action">填寫資料：基本資料、勞報內容與金額、付款資訊</FlowNode>
-      <FlowNode x={890} y={359} size={176} visualSize={216} tone="action">填寫資料：基本資料、勞報內容與金額、付款資訊</FlowNode>
-      <FlowNode x={890} y={696} size={176} visualSize={216} tone="action">填寫資料：接待姓名、勞報內容與金額</FlowNode>
-      <FlowNode x={1170} y={359} size={176} visualSize={216} tone="action">點擊「填寫完畢」</FlowNode>
-      <FlowNode x={1450} y={347} size={201} visualSize={241} tone="page">編輯發送信件頁面</FlowNode>
-      <FlowNode x={1755} y={359} size={176} visualSize={216} tone="action">點選「寄出確認信」</FlowNode>
+      <FlowNode x={0} y={347} size={201} visualSize={241} tone="page">{t("勞務報酬單頁面")}</FlowNode>
+      <FlowNode x={305} y={52} size={176} visualSize={216} tone="action">{t("建立勞報單（所得人填寫）")}</FlowNode>
+      <FlowNode x={305} y={359} size={176} visualSize={216} tone="action">{t("建立勞報單（公司客戶填寫・新增外包人員）")}</FlowNode>
+      <FlowNode x={305} y={696} size={176} visualSize={216} tone="action">{t("建立勞報單（公司客戶填寫・既有外包人員）")}</FlowNode>
+      <FlowNode x={585} y={40} size={201} visualSize={241} tone="page">{t("建立勞務報酬單頁面")}</FlowNode>
+      <FlowNode x={585} y={347} size={201} visualSize={241} tone="page">{t("建立勞務報酬單頁面")}</FlowNode>
+      <FlowNode x={585} y={684} size={201} visualSize={241} tone="page">{t("建立勞務報酬單頁面")}</FlowNode>
+      <FlowNode x={890} y={52} size={176} visualSize={216} tone="action">{t("填寫資料：基本資料、勞報內容與金額、付款資訊")}</FlowNode>
+      <FlowNode x={890} y={359} size={176} visualSize={216} tone="action">{t("填寫資料：基本資料、勞報內容與金額、付款資訊")}</FlowNode>
+      <FlowNode x={890} y={696} size={176} visualSize={216} tone="action">{t("填寫資料：接待姓名、勞報內容與金額")}</FlowNode>
+      <FlowNode x={1170} y={359} size={176} visualSize={216} tone="action">{t("點擊「填寫完畢」")}</FlowNode>
+      <FlowNode x={1450} y={347} size={201} visualSize={241} tone="page">{t("編輯發送信件頁面")}</FlowNode>
+      <FlowNode x={1755} y={359} size={176} visualSize={216} tone="action">{t("點選「寄出確認信」")}</FlowNode>
       </g>
     </svg>
   );
 }
 
-export function TaskFlowThreeDiagram() {
+export function TaskFlowThreeDiagram({ t }: { t: Translate }) {
   const marker = "task-flow-3-arrow";
   const size = 257;
   return (
-    <svg viewBox="0 0 3994 617" className="cs-task-flow-graphic cs-task-flow-graphic--three" role="img" aria-label="合併多張勞務報酬單任務流程圖">
+    <svg viewBox="0 0 3994 617" className="cs-task-flow-graphic cs-task-flow-graphic--three" role="img" aria-label={t("合併多張勞務報酬單任務流程圖")}>
       <FlowDefs id={marker} />
 
       {/* 第一段依 Figma 為反向：建立勞報單頁 → 建立外包人員資訊 */}
@@ -222,27 +223,27 @@ export function TaskFlowThreeDiagram() {
       <Connector d="M1756 128.5 H1864" marker={marker} />
       <Connector d="M2129 128.5 H2238" marker={marker} />
       <Connector d="M2503 128.5 H2612" marker={marker} />
-      <Connector d="M2877 128.5 H2986" marker={marker} label="是" labelX={2932} labelY={102} />
+      <Connector d="M2877 128.5 H2986" marker={marker} label={t("是")} labelX={2932} labelY={102} />
       <Connector d="M3251 128.5 H3359" marker={marker} />
-      <Connector d="M3624 128.5 H3733" marker={marker} label="是" labelX={3678} labelY={102} />
+      <Connector d="M3624 128.5 H3733" marker={marker} label={t("是")} labelX={3678} labelY={102} />
 
       {/* 兩個判斷的「否」分支與單張確認後匯入寄送簽收 */}
-      <Connector d="M2744 261 V489 H3359" marker={marker} label="否" labelX={3052} labelY={489} />
-      <Connector d="M3491 261 V356" marker={marker} label="否" labelX={3491} labelY={309} />
+      <Connector d="M2744 261 V489 H3359" marker={marker} label={t("否")} labelX={3052} labelY={489} />
+      <Connector d="M3491 261 V356" marker={marker} label={t("否")} labelX={3491} labelY={309} />
       <Connector d="M3866 261 V489 H3624" marker={marker} />
 
-      <FlowNode x={0} y={0} size={size} tone="action">承辦人建立外包人員資訊</FlowNode>
-      <FlowNode x={374} y={0} size={size} tone="page">承辦人建立勞報單頁</FlowNode>
-      <FlowNode x={748} y={0} size={size} tone="action">活動結束，承辦人執行支付款項</FlowNode>
-      <FlowNode x={1121} y={0} size={size} tone="page">搜尋外包者姓名</FlowNode>
-      <FlowNode x={1495} y={0} size={size} tone="page">同一個外包者多張勞報單結果畫面</FlowNode>
-      <FlowNode x={1868} y={0} size={size} tone="action">合併</FlowNode>
-      <FlowNode x={2242} y={0} size={size} tone="page">選擇單張、確認合併</FlowNode>
-      <FlowNode x={2616} y={0} size={size} tone="decision">是否超過兩萬</FlowNode>
-      <FlowNode x={2990} y={0} size={size} tone="page">文字提醒：代扣二代健保</FlowNode>
-      <FlowNode x={3363} y={0} size={size} tone="decision">是否拆單</FlowNode>
-      <FlowNode x={3737} y={0} size={size} tone="page">單張確認頁</FlowNode>
-      <FlowNode x={3363} y={360} size={size} tone="action">寄送簽收</FlowNode>
+      <FlowNode x={0} y={0} size={size} tone="action">{t("承辦人建立外包人員資訊")}</FlowNode>
+      <FlowNode x={374} y={0} size={size} tone="page">{t("承辦人建立勞報單頁")}</FlowNode>
+      <FlowNode x={748} y={0} size={size} tone="action">{t("活動結束，承辦人執行支付款項")}</FlowNode>
+      <FlowNode x={1121} y={0} size={size} tone="page">{t("搜尋外包者姓名")}</FlowNode>
+      <FlowNode x={1495} y={0} size={size} tone="page">{t("同一個外包者多張勞報單結果畫面")}</FlowNode>
+      <FlowNode x={1868} y={0} size={size} tone="action">{t("合併")}</FlowNode>
+      <FlowNode x={2242} y={0} size={size} tone="page">{t("選擇單張、確認合併")}</FlowNode>
+      <FlowNode x={2616} y={0} size={size} tone="decision">{t("是否超過兩萬")}</FlowNode>
+      <FlowNode x={2990} y={0} size={size} tone="page">{t("文字提醒：代扣二代健保")}</FlowNode>
+      <FlowNode x={3363} y={0} size={size} tone="decision">{t("是否拆單")}</FlowNode>
+      <FlowNode x={3737} y={0} size={size} tone="page">{t("單張確認頁")}</FlowNode>
+      <FlowNode x={3363} y={360} size={size} tone="action">{t("寄送簽收")}</FlowNode>
     </svg>
   );
 }
