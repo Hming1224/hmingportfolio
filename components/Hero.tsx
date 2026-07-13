@@ -77,14 +77,14 @@ export default async function Hero() {
             textAlign="inherit"
           />
 
-          <p className="hero-subtitle">
+          <p className="hero-subtitle" data-hero-roll-in>
             {t.rich('description', {
               shiny: (chunks) => <span className="hero-shiny-text">{chunks}</span>,
             })}
           </p>
         </div>
 
-        <div className="hero-actions">
+        <div className="hero-actions" data-hero-roll-in>
           <Button href="/about-me" variant="secondary">{t('journey')}</Button>
           <Button href="#projects">{t('works')}</Button>
         </div>
