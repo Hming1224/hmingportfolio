@@ -53,7 +53,7 @@
 
 .cs-toc-link {
   display: block;
-  padding: 8px 0 8px 16px;
+  padding: var(--hm-space-2xs) 0 var(--hm-space-2xs) var(--hm-space-sm);
   margin-left: -1.5px;
   font-size: var(--fs-sm);
   font-weight: 400;
@@ -93,7 +93,7 @@
     max-width: min(220px, calc(var(--page-gutter) - 40px));
     max-height: calc(100vh - 128px - 20px);
     overflow-y: auto;
-    padding: 16px 16px;
+    padding: var(--hm-space-sm) var(--hm-space-sm);
     box-sizing: border-box;
     /* 與 navbar 同款半透明毛玻璃 */
     background: rgba(255, 255, 255, 0.94);
@@ -143,7 +143,7 @@
   font-size: var(--fs-h2);
   font-weight: 700;
   color: var(--cs-text-heading);
-  margin: 0 0 24px;
+  margin: 0 0 var(--hm-space-md);
   line-height: 1.22;
 }
 
@@ -171,7 +171,7 @@
 }
 
 .cs-section-kicker {
-  margin: 0 0 12px;
+  margin: 0 0 var(--hm-space-xs);
   color: var(--cs-section-kicker-color);
   font-size: var(--fs-xs);
   font-weight: 700;
@@ -192,7 +192,7 @@
 
 .cs-section-description {
   max-width: var(--cs-section-description-max, none);
-  margin: 0 0 24px;
+  margin: 0 0 var(--hm-space-md);
   color: var(--cs-text-secondary);
   font-size: var(--fs-body);
   line-height: 1.75;
@@ -202,7 +202,7 @@
   font-size: var(--fs-h2);
   font-weight: 700;
   color: var(--cs-text-inverse);
-  margin: 0 0 16px;
+  margin: 0 0 var(--hm-space-sm);
   line-height: 1.3;
 }
 
@@ -224,7 +224,7 @@
   font-size: clamp(16px, 1.5vw, 20px);
   font-weight: 700;
   color: var(--hm-ink);
-  margin: 0 0 12px;
+  margin: 0 0 var(--hm-space-xs);
 }
 
 .cs-body {
@@ -253,7 +253,7 @@
 
 .cs-section-block--large-gap,
 .cs-section-lead--large-gap {
-  margin-top: 48px;
+  margin-top: var(--hm-space-xl);
 }
 
 .cs-section-lead--medium-gap {
@@ -280,7 +280,7 @@
 }
 
 .cs-section-note {
-  margin: 16px 0 0;
+  margin: var(--hm-space-sm) 0 0;
   color: var(--cs-section-note-color, var(--cs-text-secondary));
   font-size: var(--fs-xs);
   line-height: 1.7;
@@ -355,7 +355,7 @@
 }
 
 .cs-metric-label {
-  margin: 0 0 8px;
+  margin: 0 0 var(--hm-space-2xs);
   color: var(--cs-metric-label-color, var(--cs-text-heading));
   font-size: var(--fs-h4);
   font-weight: 700;
@@ -489,7 +489,7 @@
 }
 
 .cs-overview-stage[data-evidence-first='true'] .cs-overview-stage-visual .cs-metric-value {
-  margin-bottom: 4px;
+  margin-bottom: var(--hm-space-3xs);
   font-size: clamp(30px, 3.6vw, 44px);
   white-space: nowrap;
 }
@@ -1156,7 +1156,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
   width: 126px;
   padding: 10px;
   border: 1px solid #c9d9e8;
@@ -2682,7 +2682,7 @@
 
 .cs-survey-block-head > span {
   display: inline-block;
-  margin-bottom: 8px;
+  margin-bottom: var(--hm-space-2xs);
   color: var(--cs-survey-block-kicker-color, var(--cs-accent));
   font-size: var(--fs-sm);
   font-weight: 700;
@@ -2698,13 +2698,13 @@
 .cs-survey-stat-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: var(--hm-space-sm);
 }
 
 .cs-survey-stat-card {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--hm-space-3xs);
   padding: 20px;
   border: var(--cs-survey-card-border, 1px solid var(--cs-line));
   border-radius: 16px;
@@ -2725,13 +2725,13 @@
 .cs-survey-chart-grid {
   display: grid;
   grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.4fr);
-  gap: 24px;
-  margin-top: 24px;
+  gap: var(--hm-space-md);
+  margin-top: var(--hm-space-md);
 }
 
 .cs-survey-donut-card,
 .cs-survey-bars {
-  padding: 24px;
+  padding: var(--hm-space-md);
   border: var(--cs-survey-card-border, 1px solid var(--cs-line));
   border-radius: 16px;
   background: #ffffff;
@@ -2747,7 +2747,7 @@
 .cs-survey-donut-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: var(--hm-space-sm);
   align-items: center;
 }
 
@@ -2812,7 +2812,7 @@
 .cs-survey-donut-legend li {
   display: grid;
   grid-template-columns: 10px minmax(0, 1fr) auto;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
   align-items: center;
   color: var(--cs-survey-text-color, var(--cs-text-secondary));
   font-size: var(--fs-sm);
@@ -2831,18 +2831,18 @@
 .cs-survey-bar-groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: var(--hm-space-sm);
 }
 
 .cs-survey-bar-list {
   display: grid;
-  gap: 16px;
+  gap: var(--hm-space-sm);
 }
 
 .cs-survey-bar-label {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   margin-bottom: 6px;
   color: var(--cs-survey-text-color, var(--cs-text-secondary));
   font-size: var(--fs-sm);
@@ -2867,7 +2867,7 @@
 }
 
 .cs-survey-summary {
-  margin: 24px 0 0;
+  margin: var(--hm-space-md) 0 0;
   padding: 16px 20px;
   border-left: 4px solid var(--cs-survey-summary-border-color, var(--cs-accent));
   background: #ffffff;
@@ -2889,7 +2889,7 @@
 }
 
 .cs-survey-insight-col {
-  padding: 24px;
+  padding: var(--hm-space-md);
   border: var(--cs-survey-insight-col-border, 1px solid var(--cs-line));
   border-radius: 16px;
   background: var(--cs-survey-insight-col-bg, #ffffff);
@@ -2911,7 +2911,7 @@
 }
 
 .cs-survey-insight-col h4 {
-  margin: 16px 0;
+  margin: var(--hm-space-sm) 0;
   color: var(--cs-survey-insight-title-color, var(--cs-text-heading));
   font-size: var(--fs-h4);
   line-height: 1.5;
@@ -3128,7 +3128,7 @@
 }
 
 .cs-media--compact-gap {
-  margin-top: 24px;
+  margin-top: var(--hm-space-md);
 }
 
 .cs-media-frame {
@@ -3273,7 +3273,7 @@
 .cs-before-after {
   display: flex;
   align-items: stretch;
-  gap: 24px;
+  gap: var(--hm-space-md);
 }
 
 .cs-before-after-panel {
@@ -3288,7 +3288,7 @@
 }
 
 .cs-before-after-head {
-  padding: 16px;
+  padding: var(--hm-space-sm);
   background: linear-gradient(269deg, rgba(255, 255, 255, 0.24), var(--cs-accent-soft) 63%);
   color: var(--cs-accent);
   font-size: 18px;
@@ -3578,7 +3578,7 @@
 }
 
 .cs-flow-frame--plain .cs-flow-frame-scroll {
-  margin-top: 24px;
+  margin-top: var(--hm-space-md);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -3588,7 +3588,7 @@
   padding: var(--cs-flow-frame-split-header-padding, 25px 29px);
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
   margin-bottom: 20px;
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-lg);
@@ -3763,10 +3763,10 @@
 .cs-feature-row--process .cs-feature-row-note {
   display: flex;
   flex: 0 0 30%;
-  padding: 24px;
+  padding: var(--hm-space-md);
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   border: 1px solid var(--cs-feature-row-line, var(--cs-line));
   border-radius: var(--hm-radius-lg);
   background: var(--hm-paper);
@@ -3812,7 +3812,7 @@
   padding: 25px;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: var(--hm-space-xs);
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-lg);
   background: var(--hm-paper);
@@ -4030,7 +4030,7 @@
 
 @media (min-width: 1024px) and (max-width: 1439px) {
   .cs-feature-row--process .cs-feature-row-note {
-    padding: 16px;
+    padding: var(--hm-space-sm);
   }
 }
 
@@ -4059,7 +4059,7 @@
 
   .cs-before-after {
     flex-direction: column;
-    gap: 16px;
+    gap: var(--hm-space-sm);
   }
 
   .cs-before-after-arrow {
@@ -4071,7 +4071,7 @@
   }
 
   .cs-before-after-head {
-    padding: 12px 16px;
+    padding: var(--hm-space-xs) var(--hm-space-sm);
     font-size: 16px;
     line-height: 26px;
   }
@@ -4461,8 +4461,8 @@
 .cs-hero-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: var(--hm-space-xs);
+  margin-bottom: var(--hm-space-md);
 }
 
 .cs-title {
@@ -4471,7 +4471,7 @@
   font-weight: 700;
   line-height: 1.265;
   color: var(--cs-text-heading);
-  margin: 0 0 24px;
+  margin: 0 0 var(--hm-space-md);
 }
 
 @media (min-width: 1441px) {
@@ -4501,7 +4501,7 @@
   min-width: 0;
   width: fit-content;
   max-width: 100%;
-  padding: 12px 0;
+  padding: var(--hm-space-xs) 0;
   border-radius: 8px;
 }
 
@@ -4511,7 +4511,7 @@
   font-size: var(--fs-xs);
   font-weight: 500;
   color: var(--cs-text-muted);
-  margin-bottom: 8px;
+  margin-bottom: var(--hm-space-2xs);
 }
 
 .cs-info-value {
@@ -4544,7 +4544,7 @@
 .cs-info-tasks {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
 }
 
 .cs-info-tasks span {
@@ -4608,14 +4608,14 @@
 }
 
 .cs-proposal--wireframe {
-  margin-top: 16px;
+  margin-top: var(--hm-space-sm);
   background: var(--hm-paper);
 }
 
 .cs-proposal-tabs {
   display: flex;
   align-items: stretch;
-  gap: 4px;
+  gap: var(--hm-space-3xs);
   min-height: 48px;
   padding: 0;
   background: transparent;
@@ -4627,10 +4627,10 @@
   align-self: stretch;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
   min-width: 0;
   min-height: 48px;
-  padding: 8px;
+  padding: var(--hm-space-2xs);
   border: 0;
   border-radius: 12px 12px 0 0;
   outline: none;
@@ -4696,7 +4696,7 @@
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr) 44px;
   align-items: center;
-  gap: 24px;
+  gap: var(--hm-space-md);
 }
 
 .cs-proposal-frame {
@@ -4785,7 +4785,7 @@
 .cs-proposal-dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: var(--hm-space-2xs);
 }
 
 .cs-proposal-dot {
@@ -4812,12 +4812,12 @@
 }
 
 .cs-proposal-reason {
-  padding-top: 16px;
+  padding-top: var(--hm-space-sm);
   border-top: 1px solid var(--cs-proposal-line);
 }
 
 .cs-proposal-reason-title {
-  margin: 0 0 8px;
+  margin: 0 0 var(--hm-space-2xs);
   color: var(--cs-proposal-heading);
   font-size: var(--fs-body);
   font-weight: 700;
@@ -4834,7 +4834,7 @@
 .cs-proposal-references {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: var(--hm-space-md);
   margin-top: 18px;
 }
 
@@ -4855,7 +4855,7 @@
 /* ── Next Project Nav ── */
 .cs-next-nav {
   display: flex;
-  gap: 24px;
+  gap: var(--hm-space-md);
   align-items: center;
   justify-content: flex-end;
   padding: 48px var(--page-gutter);
@@ -4915,7 +4915,7 @@
   .cs-proposal--solution .cs-proposal-frame {
     grid-column: 1 / -1;
     grid-row: 1;
-    gap: 12px;
+    gap: var(--hm-space-xs);
   }
 
   .cs-proposal--solution .cs-proposal-stage > .cs-proposal-nav:first-of-type {
@@ -4947,7 +4947,7 @@
   }
 
   .cs-proposal--wireframe .cs-proposal-frame {
-    gap: 12px;
+    gap: var(--hm-space-xs);
   }
 
   .cs-proposal--wireframe .cs-proposal-shot {
@@ -4961,7 +4961,7 @@
   .cs-proposal--wireframe .cs-proposal-mobile-controls {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: var(--hm-space-sm);
   }
 
   .cs-proposal--wireframe .cs-proposal-nav--mobile {
@@ -4991,7 +4991,7 @@
   .cs-next-nav {
     flex-direction: column-reverse;
     align-items: stretch;
-    gap: 12px;
+    gap: var(--hm-space-xs);
   }
 }
 
@@ -5009,13 +5009,13 @@
   }
 
   .cs-hero-info {
-    padding-top: 32px;
+    padding-top: var(--hm-space-lg);
   }
 
   .cs-hero-meta {
     align-items: flex-start;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--hm-space-2xs);
   }
 
   .cs-info-row {
@@ -5047,7 +5047,7 @@
 
   .cs-info-tasks {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: var(--hm-space-2xs);
   }
 
   .cs-next-nav .ds-button {
@@ -5070,7 +5070,7 @@
   display: none;
   align-items: center;
   gap: 5px;
-  margin: 0 0 12px;
+  margin: 0 0 var(--hm-space-xs);
   font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
@@ -5096,7 +5096,7 @@
    (now zeroed above), so give the hint that breathing room back above it — this
    matches advantech, where the preceding element already supplies it. */
 .theme-crypto-arsenal .cs-flow-hint[data-visible="true"] {
-  margin-top: 24px;
+  margin-top: var(--hm-space-md);
 }
 
 .cs-flow-hint-icon {
