@@ -1371,7 +1371,7 @@
   .hero-sticky-how-might {
     z-index: 6;
     right: auto;
-    left: 69%;
+    left: calc(69% - 1px);
     top: 27%;
     rotate: 15deg;
   }
