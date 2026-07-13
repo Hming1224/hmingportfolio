@@ -2952,6 +2952,41 @@
   --page-gutter: 0;
 }
 
+/* Route theme styles stay isolated to their production pages. Mirror only the
+   semantic variables needed by these production-backed docs demos. */
+.cryptoCaseDemoTheme {
+  --text-heading: #252a47;
+  --cs-accent: #376adc;
+  --cs-accent-strong: #252a47;
+  --cs-accent-soft: #e8eafa;
+  --cs-surface: #f4f6fc;
+  --cs-surface-soft: #f4f6fc;
+  --cs-line: #d8deec;
+  --cs-line-strong: #d8deec;
+  --cs-text-heading: #252a47;
+  --cs-text-body: #2b2c30;
+  --cs-text-secondary: #4a4c52;
+  --cs-text-muted: #6c6e77;
+  --cs-shadow-color: rgba(37, 42, 71, 0.12);
+}
+
+.advantechCaseDemoTheme {
+  --text-heading: #093060;
+  --cs-accent: #005796;
+  --cs-accent-strong: #093060;
+  --cs-accent-soft: #e5effa;
+  --cs-surface-soft: #fafcfe;
+  --cs-line: #cbdef4;
+  --cs-line-strong: #d5dfec;
+  --cs-text-heading: #093060;
+  --cs-text-body: #191919;
+  --cs-text-secondary: #425466;
+  --cs-text-muted: #a0a0a0;
+  --cs-shadow-color: rgba(9, 48, 96, 0.12);
+  --cs-walkthrough-kicker-size: var(--fs-xs);
+  --cs-walkthrough-kicker-color: #0072bd;
+}
+
 .caseSectionSourceDemo {
   --cs-section-title-max: 760px;
   width: min(100%, 920px);

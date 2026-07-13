@@ -1575,7 +1575,7 @@ export default function ComponentDemo({
 
     return (
       <DemoBlock contextLabel={contextLabel}>
-        <div className="cs-page theme-crypto-arsenal">
+        <div className={`cs-page theme-crypto-arsenal ${styles.cryptoCaseDemoTheme}`}>
           <CaseOverview
             id="cs-sec-ds-case-overview-demo"
             kicker={zh ? "專案總覽" : "Project Overview"}
@@ -1591,7 +1591,7 @@ export default function ComponentDemo({
   if (type === "outcome-walkthrough") {
     return (
       <DemoBlock contextLabel={contextLabel}>
-        <div className="cs-page theme-advantech">
+        <div className={`cs-page theme-advantech ${styles.advantechCaseDemoTheme}`}>
           <OutcomeWalkthrough
             kicker={zh ? "成果走查" : "Outcome walkthrough"}
             title={zh ? "從需量分析到設備異常，每個風險都有下一步。" : "From demand analysis to equipment anomalies, every risk has a next step."}
