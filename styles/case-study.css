@@ -5053,6 +5053,13 @@
   .cs-next-nav .ds-button {
     white-space: normal;
   }
+
+  .cs-next-project-button .ds-button-content > span {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 }
 
 /* ── Shared swipe hint for horizontally-scrolling flow charts ──
