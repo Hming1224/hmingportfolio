@@ -35,6 +35,7 @@ import {
   TaskFlowThreeDiagram,
   TaskFlowTwoDiagram,
 } from "./components/TaskFlowDiagrams";
+import { OverviewSection } from "./sections";
 
 const IMG = "/projects/laushu";
 const CONN1 = "/projects/advantech/solution/connector-1.svg";
@@ -46,29 +47,6 @@ const roleItems = [
   { label: "角色", value: ["UX/UI", "設計師"] },
   { label: "負責項目", value: ["線框稿", "互動原型", "協同參與訪談、", "易用性測試"] },
   { label: "工具", value: ["FigJam", "Figma"] },
-];
-
-const overviewCards = [
-  {
-    title: "問題",
-    body: "紙本勞報單牽涉建檔、稅額計算、寄送與回簽；資訊分散在會計師、公司與外包工作者之間，容易重複輸入與來回確認。",
-  },
-  {
-    title: "設計目標",
-    body: "在產品上線前，把多方協作的紙本流程轉譯成清楚、可完成的數位任務，並透過測試找出操作門檻。",
-  },
-  {
-    title: "解決方案",
-    body: "串起建立外包人員資料庫、建立勞報單與合併單據三個流程，讓資料填寫、稅額計算、寄送與線上回簽在同一套系統完成。",
-  },
-  {
-    title: "影響",
-    body: "任務測試協助團隊找出流程、介面與用詞問題並完成迭代；本案屬上線前驗證，因此不把測試結果包裝成正式營運成效。",
-  },
-  {
-    title: "我的角色",
-    body: "協同參與研究與訪談，負責 wireframe、互動原型與易用性測試，將研究發現轉成可操作的介面調整。",
-  },
 ];
 
 const stakeholderCards = [
@@ -434,7 +412,7 @@ export default async function LaushuPage() {
       }}
       hero={localizeLaushuTree(locale, HeroSection())}
     >
-      {localizeLaushuTree(locale, OverviewSection())}
+      <OverviewSection />
       {localizeLaushuTree(locale, ProblemSection())}
       {localizeLaushuTree(locale, UnderstandSection())}
       {localizeLaushuTree(locale, ConvergeSection())}
@@ -472,37 +450,6 @@ function HeroSection() {
       title="從紙本化繁為簡：勞務報酬系統的數位流程優化"
       infoItems={infoItems}
     />
-  );
-}
-
-function OverviewSection() {
-  const prototype = demoItems[1]!;
-
-  return (
-    <section id="cs-sec-overview" className="cs-section laushu-overview-section">
-      <LaushuHead eyebrow="專案總覽" title="讓建檔、計算、寄送與回簽，從紙本往返變成一條數位流程。" />
-      <p className="cs-section-lead cs-section-lead--wide cs-section-lead--bottom-gap">
-        這個專案真正要解的，是會計師、公司、外包工作者與管理員之間的協作關係：先拆清楚誰該做什麼，再把最影響效率的流程整理成可以直接操作的產品原型。把紙本表單搬上線只是表面。
-      </p>
-      <CaseGrid variant="three" className="cs-topic-grid cs-topic-grid--overview laushu-overview-tldr">
-        {overviewCards.map((card) => (
-          <InfoCard title={card.title} key={card.title}>{card.body}</InfoCard>
-        ))}
-      </CaseGrid>
-
-      <div className="laushu-overview-prototype">
-        <div className="laushu-overview-prototype-copy">
-          <p className="laushu-overview-prototype-kicker">核心流程預覽</p>
-          <h3>直接操作看看：一張勞報單如何建立、寄出並等待線上回簽。</h3>
-          <p>{prototype.body}</p>
-        </div>
-        <CaseMedia className="laushu-overview-prototype-media" variant="full">
-          <video controls preload="metadata" poster={prototype.poster} playsInline aria-label={prototype.title}>
-            <source src={prototype.video} type="video/mp4" />
-          </video>
-        </CaseMedia>
-      </div>
-    </section>
   );
 }
 

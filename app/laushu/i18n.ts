@@ -57,15 +57,71 @@ const en = {
   // ── Overview ──
   "總覽 Overview": "Overview",
   "問題": "Problem",
-  "設計目標": "Design goal",
-  "解決方案": "Solution",
   "影響": "Impact",
-  "我的角色": "My role",
-  "核心流程預覽": "Core flow preview",
   "目標": "Goal",
   "需求": "Needs",
   "原型": "Prototype",
   "設計流程": "Design Process",
+  "專案快速總覽": "Project at a glance",
+  "勞贖（Laushu）想把紙本勞務報酬單搬上線，但真正要解的是會計師、公司與外包工作者三方的協作：建檔、稅額計算、寄送與回簽分散在不同人手上，重複輸入與來回確認吃掉大量時間。我與研究團隊從問卷與訪談出發，把最影響效率的三條流程做成可直接操作的原型，再用任務測試與 SUS 量表驗證，完成六處介面迭代。":
+    "Laushu set out to move paper labor forms online, but the real challenge was coordination among accountants, companies, and contractors. Record setup, tax calculations, delivery, and countersigning were split across different people, consuming time through repeated entry and back-and-forth confirmation. Working with the research team, I used surveys and interviews to turn the three highest-impact flows into interactive prototypes, then validated them through task testing and the SUS questionnaire, leading to six interface iterations.",
+  "紙本勞報單牽動三方來回，最後卻只是一張佐證用的單據。":
+    "Paper labor forms send three parties back and forth, only to end as supporting records.",
+  "公司：每次外包都要開單的人": "Company: the party issuing a form for every outsourced job",
+  "每次外包都須請外包人員簽署紙本勞報單，流程還牽涉所得類別、二代健保的計算，很多創業者不知情就違反規定；追回簽、追進度全靠人工。":
+    "Every outsourced job requires the contractor to sign a paper labor form. The process also involves income categories and supplementary health-insurance calculations, so many founders break the rules without realizing it; chasing signatures and tracking progress are entirely manual.",
+  "會計師：協助公司彙整勞報資料的人": "Accountant: the person compiling labor-form records for the company",
+  "需要人工核對且逐筆建檔；一年才收一次勞報單，容易發生檔案遺失或忘記存檔，會計師與公司之間的資訊隔閡是他最有感的痛點。":
+    "Each record must be checked and entered manually. Because labor forms are collected only once a year, files can be lost or left unsaved; the information gap between accountants and companies was the accountant's most pressing pain point.",
+  "外包工作者：簽收領錢的人": "Contractor: the person signing to receive payment",
+  "即使工作不須進公司，還是得備齊身分證、存摺等證件，專程跑一趟公司或郵局簽紙本；證件缺東缺西，就得再跑一次。":
+    "Even when the work does not require an office visit, contractors still have to gather an ID, passbook, and other documents, then make a dedicated trip to the company or post office to sign on paper. If anything is missing, they have to make the trip again.",
+  "勞務報酬單範例": "Sample labor remuneration form",
+  "紙本勞報單範例：欄位多、計算細，簽完最後只作為交易佐證。":
+    "Sample paper labor form: many fields and detailed calculations, ultimately signed only as proof of the transaction.",
+  "在產品上線前，把三方協作的紙本流程轉譯成清楚、可完成的數位任務。":
+    "Before launch, translate the three-party paper workflow into clear digital tasks people can complete.",
+  "研究路線的轉折": "Research pivot",
+  "問卷回收 39 份、以會計人員為主，但實際只約到 1 位會計師受訪；我們把訪談對象調整為會自己經手勞報單的公司負責人，並收斂出他們最麻煩的三件事：管理外包人員、確認簽收、減少回簽次數。":
+    "Most of the 39 survey responses came from accounting staff, but we were able to interview only one accountant. We shifted recruitment to company owners who handle labor forms themselves and narrowed their biggest pain points to three tasks: managing contractors, confirming receipt, and reducing countersigning rounds.",
+  "How might we": "How might we",
+  "我們如何讓公司、會計師與外包工作者在同一套系統完成建檔、計算、寄送與回簽，減少來回確認的時間與行政成本？":
+    "How might we help companies, accountants, and contractors complete record setup, calculations, delivery, and countersigning in one system, reducing time spent on back-and-forth confirmation and administrative costs?",
+  "Laushu 勞報單使用者歷程 journey map": "Laushu labor-form user journey map",
+  "以受訪者經驗盤點建立 → 發放 → 回簽 → 建檔的完整歷程，找出最卡的環節。":
+    "Mapping the full setup → issue → countersign → filing journey from participant experiences revealed the biggest bottlenecks.",
+  "SUS 易用性分數達 82.5，任務測試推動六處設計迭代。":
+    "A SUS usability score of 82.5 and task testing drove six design iterations.",
+  "測試方式": "Testing method",
+  "邀請 2 位受訪過的使用者（節目企劃、攝影工作室老闆）以放聲思考法完成三條核心流程的任務測試，並填寫 SUS 易用性量表，據此收斂迭代方向。":
+    "Two previously interviewed users—a program planner and a photography studio owner—completed task tests across the three core flows using think-aloud protocol, then filled out the SUS questionnaire to guide the iteration priorities.",
+  "迭代重點": "Iteration focus",
+  "六處調整都在降低判斷成本：欄位排序、稅額與日期提示、把「所得人」換成看得懂的用詞、列表分頁、寄出前預覽、合併清單分組，讓使用者更快找到資料、寄出前敢按確認。":
+    "All six changes reduced decision effort: column order, tax and date guidance, replacing the term ‘income recipient’ with clearer wording, list pagination, a pre-send preview, and grouped merged forms. Users could find records faster and confirm with more confidence before sending.",
+  "SUS 易用性分數": "SUS usability score",
+  "2 位使用者完成三條核心流程任務測試後填寫 SUS 量表。":
+    "Two users completed task tests across the three core flows, then filled out the SUS questionnaire.",
+  "介面與流程迭代": "Interface and flow iterations",
+  "依任務測試與 SUS 結果，完成六處介面與流程調整。":
+    "Task-testing and SUS results led to six interface and flow improvements.",
+  "本案屬上線前驗證；大量單據情境仍需上線後以真實數據驗證。":
+    "This was pre-launch validation; performance with high form volumes still needs verification with real post-launch data.",
+  "成果走查": "Outcome walkthrough",
+  "建檔、開單到合併，三條核心流程都在同一套系統完成。":
+    "From record setup and form creation to merging, all three core flows happen in one system.",
+  "建立勞務報酬單": "Create a labor remuneration form",
+  "流程01": "Flow 01",
+  "流程02": "Flow 02",
+  "流程03": "Flow 03",
+  "Laushu 建立外包人員資料庫操作示範影片": "Laushu contractor-database flow demo video",
+  "Laushu 建立勞務報酬單操作示範影片": "Laushu labor-form creation flow demo video",
+  "Laushu 合併多張勞報單操作示範影片": "Laushu labor-form merging flow demo video",
+  "成果走查流程切換": "Switch outcome flow",
+  "成果走查影片": "Outcome walkthrough video",
+  "流程": "Flow",
+  "← 上一步": "← Previous",
+  "下一步 →": "Next →",
+  "跳到步驟": "Go to step",
 
   // ── Section ledes (Figma 描述句副標) ──
   "研究設計": "Research Design",
@@ -83,18 +139,6 @@ const en = {
     "Translating a paper-based labor-form process into a testable, launch-ready digital experience.",
   "讓建檔、計算、寄送與回簽，從紙本往返變成一條數位流程。":
     "Turning record setup, calculation, delivery, and countersigning from paper handoffs into one digital flow.",
-  "紙本勞報單牽涉建檔、稅額計算、寄送與回簽；資訊分散在會計師、公司與外包工作者之間，容易重複輸入與來回確認。":
-    "Paper labor forms involve record setup, tax calculations, delivery, and countersigning. Information is fragmented across accountants, companies, and contractors, creating repeated entry and back-and-forth confirmation.",
-  "在產品上線前，把多方協作的紙本流程轉譯成清楚、可完成的數位任務，並透過測試找出操作門檻。":
-    "Before launch, translate a multi-party paper workflow into clear, completable digital tasks and use testing to uncover usability barriers.",
-  "串起建立外包人員資料庫、建立勞報單與合併單據三個流程，讓資料填寫、稅額計算、寄送與線上回簽在同一套系統完成。":
-    "Connected contractor records, form creation, and form merging so data entry, tax calculation, delivery, and online countersigning can happen in one system.",
-  "任務測試協助團隊找出流程、介面與用詞問題並完成迭代；本案屬上線前驗證，因此不把測試結果包裝成正式營運成效。":
-    "Task testing helped the team identify and iterate on flow, interface, and wording issues. Because this was pre-launch validation, the results are not presented as live business impact.",
-  "協同參與研究與訪談，負責 wireframe、互動原型與易用性測試，將研究發現轉成可操作的介面調整。":
-    "Collaborated on research and interviews, owned wireframes, interactive prototypes, and usability testing, and translated findings into actionable interface changes.",
-  "直接操作看看：一張勞報單如何建立、寄出並等待線上回簽。":
-    "Try the core flow: see how a labor form is created, sent, and prepared for online countersigning.",
 
   // ── Section titles ──
   "專案總覽 Overview": "Overview",
@@ -112,8 +156,6 @@ const en = {
     "Understand the paper-based filing flow, break down stakeholder needs, and improve the digital filing experience.",
   "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。":
     "Optimized the flow of a company sending forms to contractors: adding contractors, creating forms, and merging forms.",
-  "這個專案真正要解的，是會計師、公司、外包工作者與管理員之間的協作關係：先拆清楚誰該做什麼，再把最影響效率的流程整理成可以直接操作的產品原型。把紙本表單搬上線只是表面。":
-    "What this project really tackles is the collaboration between accountants, companies, contractors, and admins: first getting clear on who does what, then turning the most efficiency-critical flows into a directly usable product prototype. Moving the paper form online is only the surface.",
   "建立外包人員資料庫": "Build a contractor database",
   "使用者掌握外包人員資料，日後有需求可立即找人展開合作。":
     "Users keep contractor records on hand, so they can find people and start collaborating instantly when needed.",
