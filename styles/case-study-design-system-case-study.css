@@ -59,7 +59,7 @@
   display: grid;
   gap: 6px;
   color: var(--hm-ink);
-  font-size: clamp(16px, 1.16vw, 18px);
+  font-size: var(--fs-h4);
   font-weight: 700;
   line-height: 1.45;
   overflow-wrap: normal;
@@ -86,13 +86,15 @@
   margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
+  font-weight: var(--hm-fw-bold);
   line-height: 1.35;
 }
 
 .theme-design-system-case-study .cs-card p {
   margin: 0;
   color: var(--cs-text-secondary);
-  line-height: 1.75;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
 }
 
 .ds-case-card-grid {
@@ -755,10 +757,6 @@
   .ds-case-info-grid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-
-  .ds-case-info-grid .cs-info-value {
-    font-size: 16px;
   }
 
   .ds-case-workflow {
