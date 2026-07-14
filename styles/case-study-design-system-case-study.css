@@ -290,7 +290,7 @@
   background: var(--cs-accent-soft);
   color: var(--cs-accent-strong);
   font-size: var(--fs-sm);
-  font-weight: 800;
+  font-weight: var(--hm-fw-bold);
 }
 
 .ds-case-table tbody th {
@@ -398,7 +398,7 @@
   margin: 0 0 14px;
   color: var(--cs-text-muted);
   font-size: var(--fs-sm);
-  font-weight: 800;
+  font-weight: var(--hm-fw-bold);
   letter-spacing: 0.04em;
 }
 
@@ -418,7 +418,7 @@
 .ds-case-term-note dt {
   color: var(--cs-text-heading);
   font-size: var(--fs-sm);
-  font-weight: 800;
+  font-weight: var(--hm-fw-bold);
   line-height: 1.45;
 }
 
@@ -496,7 +496,7 @@
   margin-bottom: 2px;
   color: var(--cs-text-heading);
   font-size: var(--fs-xs);
-  font-weight: 800;
+  font-weight: var(--hm-fw-bold);
   letter-spacing: 0.04em;
 }
 
