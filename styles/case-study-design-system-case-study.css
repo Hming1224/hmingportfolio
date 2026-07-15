@@ -90,8 +90,7 @@
 
 .theme-design-system-case-study :is(
   .ds-case-motivation-card,
-  .ds-case-metric--numeric,
-  .ds-case-metric--text
+  .ds-case-outcome-metric
 ) {
   --cs-card-shadow: var(--ds-case-card-shadow);
 }
@@ -1170,36 +1169,49 @@
 }
 
 .ds-case-outcome-grid {
-  --cs-metric-grid-min: 260px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--hm-space-lg);
+  align-items: stretch;
   --cs-metric-label-color: var(--cs-text-body);
 }
 
-.ds-case-outcome-grid .cs-metric-value {
+.ds-case-outcome-metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hm-space-2xs);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-lg);
+  padding: var(--hm-space-lg);
+  background: var(--hm-paper);
+}
+
+.ds-case-outcome-metric .cs-metric-value {
+  margin: 0;
+  color: var(--cs-accent-strong);
   overflow-wrap: normal;
   word-break: normal;
-  font-size: clamp(28px, 4vw, 52px);
+  font-size: clamp(56px, 7vw, 88px);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
-.ds-case-outcome-summary {
-  display: grid;
-  gap: var(--hm-space-2xs);
-  margin-top: var(--hm-space-lg);
-  border-left: 4px solid var(--cs-accent);
-  padding: var(--hm-space-md) var(--hm-space-lg);
-  background: var(--cs-accent-soft);
+.ds-case-outcome-metric--teal .cs-metric-value {
+  color: var(--cs-teal-strong);
 }
 
-.ds-case-outcome-summary h3,
-.ds-case-outcome-summary p {
+.ds-case-outcome-metric .cs-metric-label,
+.ds-case-outcome-metric .cs-metric-body {
   margin: 0;
 }
 
-.ds-case-outcome-summary h3 {
+.ds-case-outcome-metric .cs-metric-label {
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
+  line-height: 1.4;
 }
 
-.ds-case-outcome-summary p,
+.ds-case-outcome-metric .cs-metric-body,
 .ds-case-limit-note {
   color: var(--cs-text-secondary);
   line-height: 1.7;
@@ -1297,9 +1309,6 @@
     padding-top: var(--hm-space-xs);
   }
 
-  .ds-case-outcome-summary {
-    padding: var(--hm-space-md);
-  }
 }
 
 /* ── Readability pass: stronger hierarchy and fuller wide-screen composition ── */
@@ -1835,18 +1844,6 @@
   color: var(--cs-text-secondary);
 }
 
-.ds-case-outcome-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.ds-case-outcome-grid .ds-case-metric--text .cs-metric-value {
-  font-size: clamp(24px, 3vw, 40px);
-}
-
-.ds-case-outcome-grid .ds-case-metric--numeric .cs-metric-value {
-  font-size: clamp(44px, 6vw, 72px);
-}
-
 .ds-case-reflection-list {
   display: grid;
   gap: var(--hm-space-md);
@@ -1938,6 +1935,10 @@
 
   .ds-case-outcome-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ds-case-outcome-metric {
+    padding: var(--hm-space-md);
   }
 
   .ds-case-reflection-list li {
