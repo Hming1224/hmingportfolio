@@ -1,5 +1,4 @@
 import { CaseSection } from "../../../components/case-study";
-import Button from "../../../components/ui/Button";
 import { getDsTranslator } from "../i18n-server";
 
 const reflections = [
@@ -40,13 +39,6 @@ export default async function ReflectionSection() {
       <p className="ds-case-limit-note">
         {t("目前主要由我維護，尚未累積多人協作或長期維護時間的前後比較；後續會持續記錄自動檢查攔下的問題與常見修改所需步驟。")}
       </p>
-      <div className="ds-case-design-system-cta">
-        <div>
-          <h3>{t("查看實作後的 Design System 文件")}</h3>
-          <p>{t("這套規則最後整理成可瀏覽的文件頁，內容對應實際使用的 foundations、tokens、components、patterns 與 governance。")}</p>
-        </div>
-        <Button className="ds-case-design-system-cta__button" href="/design-system">{t("前往 Design System")}</Button>
-      </div>
     </CaseSection>
   );
 }
