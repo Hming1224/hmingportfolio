@@ -3,9 +3,9 @@
    stay owned by styles/case-study.css and components/case-study. */
 
 .theme-design-system-case-study {
-  --cs-accent: #5d62d8;
-  --cs-accent-strong: #363986;
-  --cs-accent-soft: #f0f1ff;
+  --cs-accent: var(--hm-purple-600);
+  --cs-accent-strong: var(--hm-purple-900);
+  --cs-accent-soft: var(--hm-purple-50);
   /* Semantic hues: amber = turning point / caution / lesson; teal = validation / passing / AI execution. */
   --cs-amber: #d97706;
   --cs-amber-strong: #9a4b08;
@@ -17,17 +17,19 @@
   --cs-surface-soft: #f6f7fc;
   --cs-line: #d9dcef;
   --cs-line-strong: #b7bcdf;
-  --cs-text-heading: #363986;
+  --cs-text-heading: var(--hm-purple-900);
   --cs-text-body: var(--ink);
   --cs-text-secondary: #45485f;
   --cs-text-muted: #56596d;
+  --cs-media-caption-color: var(--cs-text-muted);
+  --cs-media-caption-font-size: var(--fs-xs);
   --cs-shadow-color: rgba(54, 57, 134, 0.12);
-  --ds-case-card-shadow: 0 18px 44px rgba(54, 57, 134, 0.08);
-  --ds-case-content-block-gap: 36px;
   --text-heading: var(--cs-text-heading);
 }
 
 .theme-design-system-case-study.cs-page {
+  --ds-case-card-shadow: 0 18px 44px rgba(54, 57, 134, 0.08);
+  --ds-case-content-block-gap: 36px;
   background: #ffffff;
 }
 
@@ -86,11 +88,19 @@
   grid-column: auto;
 }
 
-.theme-design-system-case-study .cs-card {
+.theme-design-system-case-study :is(
+  .ds-case-motivation-card,
+  .ds-case-quality-card,
+  .ds-case-metric--numeric,
+  .ds-case-metric--text
+) {
   --cs-card-shadow: var(--ds-case-card-shadow);
 }
 
-.theme-design-system-case-study .cs-card h3 {
+.theme-design-system-case-study :is(
+  .ds-case-motivation-card,
+  .ds-case-quality-card
+) h3 {
   margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
@@ -98,7 +108,10 @@
   line-height: 1.35;
 }
 
-.theme-design-system-case-study .cs-card p {
+.theme-design-system-case-study :is(
+  .ds-case-motivation-card,
+  .ds-case-quality-card
+) p {
   margin: 0;
   color: var(--cs-text-secondary);
   font-size: var(--fs-sm);
@@ -107,16 +120,6 @@
 
 .ds-case-card-grid {
   margin-top: var(--ds-case-content-block-gap);
-}
-
-.ds-case-narrative-card,
-.ds-case-list-card {
-  width: 100%;
-  margin-top: var(--ds-case-content-block-gap);
-}
-
-.ds-case-narrative-card p + p {
-  margin-top: var(--hm-space-sm);
 }
 
 .ds-case-editorial-statement {
@@ -130,7 +133,7 @@
   border-top: 1px solid var(--cs-line-strong);
   border-bottom: 1px solid var(--cs-line-strong);
   padding: 30px 0;
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: clamp(20px, 2vw, 26px);
   font-weight: 600;
   line-height: 1.55;
@@ -153,7 +156,7 @@
   box-sizing: border-box;
   overflow: hidden;
   padding: 72px var(--page-gutter);
-  background: linear-gradient(120deg, #2e3170 0%, #363986 55%, #43479f 100%);
+  background: linear-gradient(120deg, #2e3170 0%, var(--hm-purple-900) 55%, #43479f 100%);
   color: #ffffff;
 }
 
@@ -223,6 +226,11 @@
   height: auto;
 }
 
+.theme-design-system-case-study .cs-media-caption {
+  font-weight: var(--hm-fw-regular);
+  text-align: center;
+}
+
 .ds-case-timeline {
   position: relative;
   display: grid;
@@ -239,7 +247,7 @@
   bottom: 12px;
   left: 8px;
   width: 2px;
-  background: var(--cs-amber);
+  background: var(--cs-accent);
 }
 
 .ds-case-timeline__item {
@@ -256,10 +264,10 @@
   left: -43px;
   width: 16px;
   height: 16px;
-  border: 4px solid var(--cs-amber-soft);
+  border: 4px solid var(--cs-accent-soft);
   border-radius: 999px;
-  background: var(--cs-amber);
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--cs-amber-soft) 82%, transparent);
+  background: var(--cs-accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--cs-accent-soft) 82%, transparent);
 }
 
 .ds-case-timeline__header {
@@ -272,12 +280,13 @@
   margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--fs-h3);
+  font-weight: var(--hm-fw-bold);
   line-height: 1.35;
 }
 
 .ds-case-index {
   flex: 0 0 auto;
-  color: var(--cs-amber-strong);
+  color: var(--cs-accent-strong);
   font-size: var(--fs-xs);
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -293,17 +302,18 @@
 .ds-case-lesson {
   max-width: 68ch;
   margin: var(--hm-space-2xs) 0 0;
-  border-left: 3px solid var(--cs-amber);
+  border-left: 3px solid var(--cs-accent);
   border-radius: 0 var(--hm-radius-sm) var(--hm-radius-sm) 0;
   padding: var(--hm-space-sm) var(--hm-space-md);
-  background: var(--cs-amber-soft);
-  color: var(--cs-amber-strong);
+  background: var(--cs-accent-soft);
+  color: var(--cs-text-secondary);
   line-height: 1.65;
 }
 
 .ds-case-lesson strong {
   display: block;
   margin-bottom: var(--hm-space-3xs);
+  color: var(--cs-accent-strong);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
 }
@@ -327,75 +337,6 @@
   color: var(--cs-text-secondary);
   font-size: var(--fs-body);
   line-height: 1.75;
-}
-
-.ds-case-table-frame {
-  width: 100%;
-  margin-top: var(--ds-case-content-block-gap);
-  overflow-x: auto;
-  border: 1px solid var(--cs-line);
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: var(--ds-case-card-shadow);
-}
-
-.ds-case-table {
-  width: 100%;
-  min-width: 760px;
-  border-collapse: collapse;
-}
-
-.ds-case-table th,
-.ds-case-table td {
-  padding: 18px 20px;
-  border-bottom: 1px solid var(--cs-line);
-  color: var(--cs-text-secondary);
-  text-align: left;
-  vertical-align: top;
-  line-height: 1.65;
-}
-
-.ds-case-table thead th {
-  background: var(--cs-accent-soft);
-  color: var(--cs-accent-strong);
-  font-size: var(--fs-sm);
-  font-weight: var(--hm-fw-bold);
-}
-
-.ds-case-table tbody th {
-  color: var(--cs-text-heading);
-  font-weight: 700;
-}
-
-.ds-case-table tr:last-child th,
-.ds-case-table tr:last-child td {
-  border-bottom: 0;
-}
-
-.ds-case-list-card ul {
-  display: grid;
-  gap: var(--hm-space-sm);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ds-case-list-card li {
-  position: relative;
-  padding-left: var(--hm-space-md);
-  color: var(--cs-text-secondary);
-  line-height: 1.75;
-}
-
-.ds-case-list-card li::before {
-  content: "";
-  position: absolute;
-  top: 0.72em;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--cs-accent);
 }
 
 /* ── Why：圖標卡片 ── */
@@ -479,7 +420,7 @@
 }
 
 .ds-case-term-note dt {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-secondary);
   font-size: var(--fs-sm);
   font-weight: var(--hm-fw-bold);
   line-height: 1.45;
@@ -557,7 +498,7 @@
 .ds-case-brake-card p strong {
   display: block;
   margin-bottom: 2px;
-  color: var(--cs-text-heading);
+  color: var(--cs-text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
   letter-spacing: 0.04em;
@@ -571,7 +512,7 @@
   margin: var(--hm-space-md) 0;
   padding: 24px 28px;
   border-left: 4px solid var(--cs-line-strong);
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: var(--fs-h3);
   font-weight: 700;
   line-height: 1.45;
@@ -650,11 +591,7 @@
   letter-spacing: 0.02em;
 }
 
-/* ── Reflection：反思卡與文件 CTA ── */
-
-.ds-case-reflection-card {
-  align-content: start;
-}
+/* ── Reflection index + overview document CTA ── */
 
 .ds-case-reflection-index {
   display: inline-grid;
@@ -683,10 +620,15 @@
   box-shadow: var(--ds-case-card-shadow);
 }
 
+.cs-overview .ds-case-design-system-cta {
+  margin-top: 0;
+}
+
 .ds-case-design-system-cta h3 {
   margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
+  font-weight: var(--hm-fw-bold);
   line-height: 1.35;
 }
 
@@ -726,7 +668,7 @@
     gap: var(--hm-space-sm);
     margin-top: 40px;
     padding: 24px 0;
-    font-size: 18px;
+    font-size: var(--fs-h3);
   }
 
   .ds-case-act-divider {
@@ -826,79 +768,6 @@
   max-width: 920px;
 }
 
-/* ── Overview: three scannable groups (專案 / 責任分工 / 具體產出) ── */
-.ds-case-overview-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--hm-space-xl);
-  margin-top: var(--ds-case-content-block-gap);
-}
-
-.ds-case-overview-col {
-  display: grid;
-  align-content: start;
-  gap: var(--hm-space-sm);
-}
-
-.ds-case-overview-col__label {
-  color: var(--cs-accent-strong);
-  font-size: var(--fs-xs);
-  font-weight: var(--hm-fw-bold);
-  letter-spacing: 0.06em;
-}
-
-.ds-case-overview-col__statement {
-  margin: 0;
-  color: var(--cs-text-heading);
-  font-size: var(--fs-h4);
-  font-weight: var(--hm-fw-bold);
-  line-height: 1.4;
-}
-
-.ds-case-overview-col__list {
-  display: grid;
-  margin: var(--hm-space-2xs) 0 0;
-}
-
-.ds-case-overview-detail {
-  display: grid;
-  gap: var(--hm-space-3xs);
-  padding: var(--hm-space-sm) 0;
-}
-
-.ds-case-overview-detail + .ds-case-overview-detail {
-  border-top: 1px solid var(--cs-line);
-}
-
-.ds-case-overview-detail dt {
-  color: var(--cs-text-heading);
-  font-size: var(--fs-xs);
-  font-weight: var(--hm-fw-bold);
-}
-
-.ds-case-overview-detail--dot dt {
-  position: relative;
-  padding-left: 16px;
-}
-
-.ds-case-overview-detail--dot dt::before {
-  content: "";
-  position: absolute;
-  top: 0.5em;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--cs-teal);
-}
-
-.ds-case-overview-detail dd {
-  margin: 0;
-  color: var(--cs-text-secondary);
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-}
-
 .ds-case-growth-flow,
 .ds-case-decision-flow {
   margin-top: var(--ds-case-content-block-gap);
@@ -946,7 +815,7 @@
 }
 
 .ds-case-growth-flow__list strong {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: var(--fs-h4);
   line-height: 1.35;
 }
@@ -971,7 +840,7 @@
 
 .ds-case-motivation-card dt,
 .ds-case-decision-log dt {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
 }
@@ -1054,7 +923,7 @@
 
 .ds-case-decision-node strong,
 .ds-case-decision-branch strong {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   line-height: 1.45;
 }
 
@@ -1103,6 +972,7 @@
   margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--fs-h3);
+  font-weight: var(--hm-fw-bold);
   line-height: 1.35;
 }
 
@@ -1266,6 +1136,8 @@
 }
 
 .ds-case-semantic-table {
+  --cs-data-table-matrix-head-color: var(--cs-text-secondary);
+  --cs-data-table-matrix-row-head-color: var(--cs-text-body);
   min-width: 680px;
 }
 
@@ -1287,7 +1159,7 @@
 }
 
 .ds-case-control-demo > div > span {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
 }
@@ -1352,7 +1224,7 @@
 
 .ds-case-governance-flow h4 {
   margin: 0;
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: var(--fs-sm);
 }
 
@@ -1409,7 +1281,7 @@
 
 .ds-case-decision-log li h4 {
   margin: 0;
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: var(--fs-body);
   line-height: 1.45;
 }
@@ -1420,6 +1292,7 @@
 
 .ds-case-outcome-grid {
   --cs-metric-grid-min: 260px;
+  --cs-metric-label-color: var(--cs-text-body);
 }
 
 .ds-case-outcome-grid .cs-metric-value {
@@ -1459,13 +1332,7 @@
 }
 
 @media (max-width: 1024px) {
-  .ds-case-overview-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--hm-space-lg);
-  }
-
-  .ds-case-motivation-grid,
-  .ds-case-reflection-grid {
+  .ds-case-motivation-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1485,11 +1352,6 @@
 }
 
 @media (max-width: 768px) {
-  .ds-case-overview-grid {
-    grid-template-columns: 1fr;
-    gap: var(--hm-space-md);
-  }
-
   .ds-case-governance-flow {
     padding: var(--hm-space-md);
   }
@@ -1982,7 +1844,7 @@
 
 .ds-case-decision-node strong,
 .ds-case-decision-node--question strong {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: var(--fs-h4);
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -2070,11 +1932,12 @@
 }
 
 .ds-case-decision-legend strong {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: var(--fs-xs);
 }
 
 .ds-case-framework-table-frame {
+  margin-top: var(--ds-case-content-block-gap);
   border-radius: var(--hm-radius-md);
   box-shadow: none;
 }
@@ -2094,6 +1957,7 @@
   background: var(--cs-surface);
   color: var(--cs-text-secondary);
   font-size: var(--fs-xs);
+  text-align: left;
 }
 
 .ds-case-framework-table .ds-case-term-pill {
@@ -2335,7 +2199,7 @@
 }
 
 .ds-case-decision-log__problem {
-  color: var(--cs-text-heading);
+  color: var(--cs-text-body);
   font-size: var(--fs-sm);
   line-height: 1.55;
 }
@@ -2426,6 +2290,7 @@
 .ds-case-reflection-list h3 {
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
+  font-weight: var(--hm-fw-bold);
 }
 
 .ds-case-reflection-list p {
