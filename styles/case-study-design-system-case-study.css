@@ -938,8 +938,7 @@
 }
 
 .ds-case-growth-flow__list span,
-.ds-case-index-chip,
-.ds-case-example-card__number {
+.ds-case-index-chip {
   color: var(--cs-accent-strong);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
@@ -958,7 +957,6 @@
 }
 
 .ds-case-motivation-card dl,
-.ds-case-example-meta,
 .ds-case-decision-log dl {
   display: grid;
   gap: var(--hm-space-sm);
@@ -966,14 +964,12 @@
 }
 
 .ds-case-motivation-card dl > div,
-.ds-case-example-meta > div,
 .ds-case-decision-log dl > div {
   display: grid;
   gap: var(--hm-space-3xs);
 }
 
 .ds-case-motivation-card dt,
-.ds-case-example-meta dt,
 .ds-case-decision-log dt {
   color: var(--cs-text-heading);
   font-size: var(--fs-xs);
@@ -981,7 +977,6 @@
 }
 
 .ds-case-motivation-card dd,
-.ds-case-example-meta dd,
 .ds-case-decision-log dd {
   margin: 0;
   color: var(--cs-text-secondary);
@@ -1067,41 +1062,165 @@
   min-width: 980px;
 }
 
-.ds-case-example-stack {
-  --cs-grid-gap: var(--hm-space-xl);
+.ds-case-evolution-cases {
+  display: grid;
+  gap: clamp(64px, 8vw, 104px);
+  margin-top: var(--ds-case-content-block-gap);
 }
 
-.ds-case-example-card {
-  padding: var(--hm-space-xl);
+.ds-case-evolution-case {
+  display: grid;
+  gap: var(--hm-space-xl);
+  min-width: 0;
+  border-top: 1px solid var(--cs-line-strong);
+  padding-top: var(--hm-space-xl);
 }
 
-.ds-case-example-card__header {
+.ds-case-evolution-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.ds-case-evolution-header__number {
+  color: var(--cs-accent-soft);
+  font-size: clamp(72px, 10vw, 136px);
+  font-weight: var(--hm-fw-bold);
+  line-height: 0.78;
+  letter-spacing: -0.07em;
+}
+
+.ds-case-evolution-header__copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hm-space-md);
+  min-width: 0;
+}
+
+.ds-case-evolution-header h3 {
+  margin: 0;
+  color: var(--cs-text-heading);
+  font-size: var(--fs-h3);
+  line-height: 1.35;
+}
+
+.ds-case-evolution-header__badge {
+  flex: 0 0 auto;
+  border-radius: var(--hm-radius-pill);
+  padding: var(--hm-space-2xs) var(--hm-space-sm);
+  background: var(--cs-accent-soft);
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-xs);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.4;
+}
+
+.ds-case-evolution-narrative {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-md);
+  min-width: 0;
+}
+
+.ds-case-evolution-narrative p {
+  margin: 0;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+}
+
+.ds-case-evolution-narrative__opening {
+  display: grid;
+  gap: var(--hm-space-xs);
+}
+
+.ds-case-evolution-narrative__evidence {
   display: grid;
   gap: var(--hm-space-2xs);
-  border-bottom: 1px solid var(--cs-line);
-  padding-bottom: var(--hm-space-md);
+  margin: 0;
+  border-left: 2px solid var(--cs-line-strong);
+  padding-left: var(--hm-space-md);
 }
 
-.ds-case-example-card__header h3 {
-  font-size: var(--fs-h3) !important;
+.ds-case-evolution-narrative__evidence span,
+.ds-case-evolution-narrative__decision span,
+.ds-case-evolution-narrative__validation span {
+  font-size: var(--fs-xs);
+  font-weight: var(--hm-fw-bold);
+  letter-spacing: 0.04em;
 }
 
-.ds-case-example-meta {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--hm-space-md) var(--hm-space-xl);
+.ds-case-evolution-narrative__evidence span {
+  color: var(--cs-text-muted);
 }
 
-.ds-case-example-meta > div:last-child {
-  grid-column: 1 / -1;
+.ds-case-evolution-narrative__decision {
+  display: grid;
+  gap: var(--hm-space-2xs);
+  border-left: 4px solid var(--cs-accent);
+  border-radius: 0 var(--hm-radius-sm) var(--hm-radius-sm) 0;
+  padding: var(--hm-space-sm) var(--hm-space-md);
+  background: var(--cs-accent-soft);
 }
 
-.ds-case-example-media {
-  margin-top: var(--hm-space-lg);
+.ds-case-evolution-narrative__decision span,
+.ds-case-evolution-narrative__decision p {
+  color: var(--cs-accent-strong);
 }
 
-.ds-case-example-media .cs-media-frame {
+.ds-case-evolution-narrative__decision p {
+  font-weight: var(--hm-fw-semibold);
+}
+
+.ds-case-evolution-narrative__validation {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--hm-space-xs);
+  color: var(--cs-teal-strong) !important;
+  font-size: var(--fs-xs) !important;
+}
+
+.ds-case-evolution-narrative__validation::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.55em;
+  border-radius: var(--hm-radius-pill);
+  background: var(--cs-teal);
+}
+
+.ds-case-evolution-narrative__validation span {
+  flex: 0 0 auto;
+  color: var(--cs-teal-strong);
+}
+
+.ds-case-evolution-case__media-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: clamp(28px, 4vw, 56px);
+}
+
+.ds-case-evolution-media {
+  margin: 0;
+}
+
+.ds-case-evolution-media .cs-media-frame {
   border-color: var(--cs-line);
   box-shadow: none;
+}
+
+.ds-case-evolution-case--matrix .ds-case-evolution-narrative,
+.ds-case-evolution-case--semantic .ds-case-evolution-narrative {
+  max-width: 820px;
+}
+
+.ds-case-evolution-case__semantic-layout {
+  display: grid;
+  gap: var(--hm-space-md);
 }
 
 .ds-case-matrix {
@@ -1142,7 +1261,7 @@
 }
 
 .ds-case-semantic-table-frame {
-  margin-top: var(--hm-space-lg);
+  margin-top: 0;
   box-shadow: none;
 }
 
@@ -1354,13 +1473,14 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .ds-case-example-meta,
   .ds-case-control-demo {
     grid-template-columns: 1fr;
   }
+}
 
-  .ds-case-example-meta > div:last-child {
-    grid-column: auto;
+@media (max-width: 1023px) {
+  .ds-case-evolution-case__media-layout {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1370,9 +1490,31 @@
     gap: var(--hm-space-md);
   }
 
-  .ds-case-example-card,
   .ds-case-governance-flow {
     padding: var(--hm-space-md);
+  }
+
+  .ds-case-evolution-cases {
+    gap: var(--hm-space-2xl);
+  }
+
+  .ds-case-evolution-case {
+    gap: var(--hm-space-lg);
+    padding-top: var(--hm-space-lg);
+  }
+
+  .ds-case-evolution-header {
+    grid-template-columns: 1fr;
+    gap: var(--hm-space-sm);
+  }
+
+  .ds-case-evolution-header__number {
+    font-size: clamp(64px, 24vw, 92px);
+  }
+
+  .ds-case-evolution-header__copy {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .ds-case-matrix {

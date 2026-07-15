@@ -70,6 +70,12 @@ export default async function DesignSystemCaseStudyPage() {
       />
       <TurningPointsSection />
       <FrameworkSection />
+      <ActDivider
+        actLabel="ACT 3"
+        kicker={t("三個演化案例")}
+        title={t("同一套框架，三種不同的決定")}
+        lead={t("共用、保留單頁、先定義用途——三個案例用同一個判斷順序，走到三個不同結論。")}
+      />
       <EvolutionCasesSection />
       <GovernanceSection />
       <OutcomeSection />

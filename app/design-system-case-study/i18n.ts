@@ -394,6 +394,8 @@ const en = {
   "沿用基礎 token 與共用外框，特殊內容留在該頁。": "Reuse foundational tokens and shared frames while keeping specialized content on the page.",
 
   "三個案例證明：外觀相似，不代表適合共用": "Three Cases Show Why Visual Similarity Does Not Guarantee Reuse",
+  "同一套框架，三種不同的決定": "One Framework, Three Different Decisions",
+  "共用、保留單頁、先定義用途——三個案例用同一個判斷順序，走到三個不同結論。": "Share it, keep it page-specific, or define the purpose first—three cases follow the same reasoning and reach three different conclusions.",
   "三個案例使用相同的判斷順序：先看情境與用途，再確認證據、做出決定，最後用實際 route、viewport 與互動驗證結果。": "All three cases follow the same sequence: understand the context and purpose, review the evidence, make a decision, and validate it across real routes, viewports, and interactions.",
   "案例": "Case",
   "情境": "Context",
@@ -424,6 +426,7 @@ const en = {
   "外觀相似": "Similar Appearance",
   "背景、標號與排列承擔不同敘事": "Backgrounds, numbering, and layouts serve different narratives",
   "保留單頁設計": "Keep Page-Specific",
+  "先定義用途": "Define the Purpose First",
   "多重對比版面": "Multi-Comparison Layout",
   "都有 Before／After": "Both Use Before/After Comparisons",
   "同區呈現多組比較，內容模型不同": "Multiple comparisons appear together, with a different content model",
