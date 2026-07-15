@@ -299,6 +299,10 @@ const en = {
   "當作品集持續成長，分散在各頁的設計規則開始難以維護": "As the Portfolio Grew, Page-Level Design Rules Became Harder to Maintain",
   "作品集一開始以快速完成頁面為主。這個做法讓內容能先成形並公開展示，也符合當時的需求。": "The portfolio initially prioritized getting pages finished quickly. That approach met the early need to shape the content and publish the work.",
   "隨著案例增加，重複版型、分散樣式與跨頁修改風險逐漸浮現。使用 AI 協助盤點與開發後，我也發現速度只有在規則、分工與驗收方式清楚時，才能轉化為穩定品質。": "As more case studies were added, repeated layouts, scattered styles, and cross-page change risks became more visible. AI accelerated audits and implementation, but that speed only produced reliable quality when the rules, responsibilities, and review process were clear.",
+  "作品集一開始以快速完成頁面為主；隨著案例增加，原本適合單頁的做法開始讓重複版型與分散樣式增加跨頁同步與維護成本。": "The portfolio initially prioritized finishing pages quickly. As more case studies were added, an approach suited to individual pages began to increase synchronization and maintenance costs across the site.",
+  "我知道需要一套 Design System，把能共用的規則整理起來；但當時只有方向，還不清楚文件、元件和實際程式應該怎麼連在一起。": "I knew the portfolio needed a Design System to organize reusable rules, but at that point I only had a direction. I did not yet know how the documentation, components, and implementation should connect.",
+  "我先參考 Ant Design 與 Google Material Design，逐項比較作品集的顏色層級、間距、圓角、字級，以及 hover、focus、disabled 等元件狀態，共整理出十幾個缺口。": "I first reviewed Ant Design and Google Material Design, then compared the portfolio's color hierarchy, spacing, radius, typography, and component states such as hover, focus, and disabled. This identified more than ten gaps.",
+  "接著用 Figma Make 做出包含系統介紹、缺口清單與升級計畫的互動雛形，先把腦中模糊的「想要一套系統」變成看得見、可以討論的第一版規劃。": "I then used Figma Make to create an interactive prototype covering the system overview, gap list, and upgrade plan. It turned the vague idea of wanting a system into a visible first plan that could be discussed.",
   "問題不是某一頁沒有設計，而是設計依據分散後，修改成本與影響範圍一起增加。": "The issue was not a lack of design on any single page. It was that scattered design rules increased both the cost and reach of every change.",
   "左右滑動查看流程": "Scroll horizontally to view the process",
   "案例增加": "More Case Studies",
@@ -321,6 +325,7 @@ const en = {
   "若 code 與文件各自維護，規則很快又會回到個人記憶與零散說明中。": "When code and documentation are maintained separately, rules quickly fall back into personal memory and scattered notes.",
   "需要建立一套能被實際程式、文件與協作者共同使用的依據。": "The project needed a shared foundation that the implementation, documentation, and collaborators could all use.",
   "第一版互動雛形先整理理想狀態；後續再以實際網站為準，補上元件邊界與驗證流程。": "The first interactive prototype mapped the intended state. Later work used the live site as the source of truth and added component boundaries and a validation workflow.",
+  "Figma Make 第一版互動雛形：先把 Design System 的方向變成可以討論的介面。": "The first Figma Make prototype turned the Design System direction into an interface that could be discussed.",
   "Design System 第一版互動雛形，包含系統介紹、缺口清單與升級計畫。": "The first Design System prototype, covering the system overview, identified gaps, and an upgrade plan.",
   "把設計規則從個人記憶中移出，建立成 code、文件與協作者都能讀取的共同依據。": "Move design rules out of personal memory and into a shared foundation that code, documentation, and collaborators can all read.",
 
