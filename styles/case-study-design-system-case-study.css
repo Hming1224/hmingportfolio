@@ -110,6 +110,30 @@
   line-height: 1.7;
 }
 
+.theme-design-system-case-study :is(
+  .ds-case-icon-card,
+  .ds-case-stage-card,
+  .ds-case-brake-card
+) h3 {
+  margin: 0;
+  color: var(--cs-text-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.35;
+}
+
+.theme-design-system-case-study :is(
+  .ds-case-icon-card,
+  .ds-case-stage-card,
+  .ds-case-brake-card,
+  .ds-case-narrative-card
+) p {
+  margin: 0;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
 .ds-case-card-grid {
   margin-top: var(--ds-case-content-block-gap);
 }
@@ -469,7 +493,7 @@
 .ds-case-brake-card p strong {
   display: block;
   margin-bottom: 2px;
-  color: var(--cs-text-secondary);
+  color: var(--cs-text-heading);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
   letter-spacing: 0.04em;
