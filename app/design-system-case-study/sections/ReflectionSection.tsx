@@ -1,4 +1,4 @@
-import { CaseCard, CaseGrid, CaseSection } from "../../../components/case-study";
+import { CaseSection } from "../../../components/case-study";
 import Button from "../../../components/ui/Button";
 import { getDsTranslator } from "../i18n-server";
 
@@ -29,15 +29,14 @@ export default async function ReflectionSection() {
       <p className="cs-section-lead">
         {t("AI 適合大量搜尋、比較、實作與驗證；設計語意、元件邊界與最終品質仍需要人的判斷。")}
       </p>
-      <CaseGrid variant="three" className="ds-case-card-grid ds-case-reflection-grid">
+      <ol className="ds-case-reflection-list">
         {reflections.map((item, index) => (
-          <CaseCard className="ds-case-reflection-card" key={item.title}>
+          <li key={item.title}>
             <span className="ds-case-reflection-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            <h3>{t(item.title)}</h3>
-            <p>{t(item.body)}</p>
-          </CaseCard>
+            <div><h3>{t(item.title)}</h3><p>{t(item.body)}</p></div>
+          </li>
         ))}
-      </CaseGrid>
+      </ol>
       <p className="ds-case-limit-note">
         {t("目前主要由我維護，尚未累積多人協作或長期維護時間的前後比較；後續會持續記錄自動檢查攔下的問題與常見修改所需步驟。")}
       </p>

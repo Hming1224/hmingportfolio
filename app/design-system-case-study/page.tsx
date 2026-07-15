@@ -77,6 +77,12 @@ export default async function DesignSystemCaseStudyPage() {
         lead={t("共用、保留單頁、先定義用途——三個案例用同一個判斷順序，走到三個不同結論。")}
       />
       <EvolutionCasesSection />
+      <ActDivider
+        actLabel="ACT 4"
+        kicker={t("治理與成果")}
+        title={t("把品質固定在流程裡")}
+        lead={t("自動檢查守住正確性，人工驗收守住設計意圖；四個案例頁如今沿用同一套依據。")}
+      />
       <GovernanceSection />
       <OutcomeSection />
       <ReflectionSection />

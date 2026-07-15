@@ -37,7 +37,7 @@ export default async function OutcomeSection() {
       </p>
       <CaseMetricGrid className="ds-case-card-grid ds-case-outcome-grid">
         {outcomes.map((outcome) => (
-          <CaseCard variant="metric" key={outcome.label}>
+          <CaseCard className={outcome.value === "4" ? "ds-case-metric--numeric" : "ds-case-metric--text"} variant="metric" key={outcome.label}>
             <span className="cs-metric-value">{t(outcome.value)}</span>
             <h3 className="cs-metric-label">{t(outcome.label)}</h3>
             <p className="cs-metric-body">{t(outcome.body)}</p>
