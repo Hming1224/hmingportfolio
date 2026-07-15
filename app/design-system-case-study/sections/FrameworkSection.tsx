@@ -113,8 +113,8 @@ export default async function FrameworkSection() {
         </div>
       </CaseFlowFrame>
 
-      <div className="ds-case-table-frame ds-case-framework-table-frame">
-        <table className="ds-case-table ds-case-framework-table">
+      <div className="cs-data-table-frame ds-case-framework-table-frame">
+        <table className="cs-data-table cs-data-table--matrix ds-case-framework-table">
           <thead><tr><th>{t("看到的現象")}</th><th>{t("判斷依據")}</th><th>{t("採取方式")}</th><th>{t("最終放置位置")}</th></tr></thead>
           <tbody>
             {frameworkRows.map((row) => (
