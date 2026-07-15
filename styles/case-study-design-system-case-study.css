@@ -1479,12 +1479,15 @@
 
 .ds-case-decision-tree__row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto 260px;
+  grid-template-columns: minmax(0, 1fr) auto 280px;
   align-items: stretch;
   gap: var(--hm-space-lg);
 }
 
 .ds-case-decision-tree__condition {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-md);
   padding: var(--hm-space-md);
@@ -1495,8 +1498,17 @@
   color: var(--cs-text-secondary);
 }
 
+.ds-case-decision-tree__condition strong {
+  display: block;
+  margin-top: var(--hm-space-2xs);
+  color: var(--cs-text-heading);
+  font-size: var(--fs-body);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.5;
+}
+
 .ds-case-decision-tree__condition p {
-  margin: var(--hm-space-3xs) 0 0;
+  margin: var(--hm-space-2xs) 0 0;
   color: var(--cs-text-body);
   font-size: var(--fs-sm);
   line-height: 1.7;
@@ -1516,6 +1528,9 @@
 }
 
 .ds-case-decision-tree__result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-left: 4px solid var(--cs-line-strong);
   border-radius: 0 var(--hm-radius-md) var(--hm-radius-md) 0;
   padding: var(--hm-space-md);
@@ -1530,6 +1545,10 @@
 .ds-case-decision-tree__result--shared {
   border-left-color: var(--cs-teal);
   background: var(--cs-teal-soft);
+}
+
+.ds-case-decision-tree__result--local {
+  border-left-color: var(--cs-line-strong);
 }
 
 .ds-case-decision-tree__result strong {
@@ -1547,6 +1566,19 @@
 
 .ds-case-decision-tree__result--shared strong {
   color: var(--cs-teal-strong);
+}
+
+.ds-case-decision-tree__takeaway {
+  margin: var(--hm-space-xl) auto 0;
+  max-width: 880px;
+  border-left: 4px solid var(--cs-accent);
+  border-radius: 0 var(--hm-radius-md) var(--hm-radius-md) 0;
+  padding: var(--hm-space-md) var(--hm-space-lg);
+  background: var(--cs-accent-soft);
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.9;
 }
 
 @media (max-width: 1024px) {
@@ -1583,6 +1615,10 @@
 
   .ds-case-decision-tree__result--shared {
     border-top-color: var(--cs-teal);
+  }
+
+  .ds-case-decision-tree__result--local {
+    border-top-color: var(--cs-line-strong);
   }
 }
 

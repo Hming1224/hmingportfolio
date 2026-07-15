@@ -5,24 +5,43 @@ import { getDsTranslator } from "../i18n-server";
 
 const frameworkRows = [
   {
-    signal: "只有設計值跨頁一致",
-    action: "集中管理數值與命名，不改元件結構",
-    result: "Design Token",
-    example: "顏色／間距／字級",
+    signal: "顏色、間距、字級等值反覆出現",
+    reason: "重複的只是設計值，元件結構各自不同——該共用的是規則，不是元件。",
+    term: "Design Tokens",
+    action: "先收斂成 design token，集中管理數值與命名。",
+    example: "例：全站的顏色／間距／字級",
     variant: "token",
   },
   {
-    signal: "結構、用途、互動穩定重複，未來通常要一起變",
-    action: "先定義 API、狀態與限制，再整理共用實作",
-    result: "Shared Component",
-    example: "Before / After 外框",
+    signal: "外框和排列方式重複，但內容每次不同",
+    reason: "重複的是「殼」：版面與響應式行為穩定，內容要留給各頁發揮。",
+    term: "Slot-based Composition",
+    action: "只抽出穩定外框，內容區塊留給各頁替換。",
+    example: "例：Before / After 敘事外框",
     variant: "shared",
   },
   {
-    signal: "只服務單一案例，或只有外觀像",
-    action: "沿用基礎 token 與外框，特殊內容留在該頁",
-    result: "Route-local",
-    example: "反思卡單頁敘事",
+    signal: "兩個元件長得像，但用途容易混淆",
+    reason: "外觀相似不代表用途相同，先分清楚彼此的邊界，再談要不要共用。",
+    term: "Component Contract",
+    action: "先寫清楚各自適合承載什麼內容、有哪些狀態、什麼情境下不該使用。",
+    example: "例：兩張長得像、分工不同的卡片",
+    variant: "shared",
+  },
+  {
+    signal: "同樣結構和行為穩定重複出現",
+    reason: "結構、用途、互動一起重複，未來多半也要一起改。",
+    term: "Componentization（Rule of Three）",
+    action: "等使用場景夠明確再抽成共用元件，避免太早把例外綁進核心 API。",
+    example: "例：同一個版型出現第三次才動手",
+    variant: "shared",
+  },
+  {
+    signal: "只服務某一頁的特定敘事",
+    reason: "只有外觀像、或只出現一次，硬共用反而讓共用層揹例外。",
+    term: "Local Component（colocation）",
+    action: "沿用基礎 token 與外框，特殊內容留在該頁。",
+    example: "例：反思卡單頁敘事",
     variant: "local",
   },
 ] as const;
@@ -40,33 +59,48 @@ export default async function FrameworkSection() {
         <div className="ds-case-decision-tree__root">
           <span>{t("起點")}</span>
           <h3>{t("一個跨頁重複出現的模式")}</h3>
-          <p>{t("先問兩件事：重複的是值還是結構？用途與未來變動一致嗎？")}</p>
+          <p>{t("先問一件事：重複的是「值」、「殼」，還是「整件事」？")}</p>
         </div>
 
         {frameworkRows.map((row) => (
-          <div className="ds-case-decision-tree__row" key={row.result}>
+          <div className="ds-case-decision-tree__row" key={row.term}>
             <div className="ds-case-decision-tree__condition">
               <span>{t("看到的現象")}</span>
-              <p>{t(row.signal)}</p>
+              <strong>{t(row.signal)}</strong>
+              <p>{t(row.reason)}</p>
             </div>
             <ArrowRight className="ds-case-decision-tree__arrow" size={24} strokeWidth={1.5} aria-hidden="true" />
             <div className={`ds-case-decision-tree__result ds-case-decision-tree__result--${row.variant}`}>
-              <span className={`ds-case-term-pill ds-case-term-pill--${row.variant}`}>{t(row.result)}</span>
+              <span className={`ds-case-term-pill ds-case-term-pill--${row.variant}`}>{t(row.term)}</span>
               <strong>{t(row.action)}</strong>
-              <small>{t(`例：${row.example}`)}</small>
+              <small>{t(row.example)}</small>
             </div>
           </div>
         ))}
       </div>
+
+      <blockquote className="ds-case-decision-tree__takeaway">
+        {t("重複的是「值」就 token 化；重複的是「殼」就留 slot；重複的是「整件事」才做成共用元件；只出現一次的，讓它留在原地。")}
+      </blockquote>
 
       <TermNotes
         title={t("名詞說明")}
         ariaLabel={t("這一段的名詞說明")}
         items={[
           { term: "Design Token", description: t("有名稱、可重複引用的設計值。") },
-          { term: "Shared Component", description: t("由多個頁面共同使用、集中維護的一份元件實作。") },
+          {
+            term: "Slot-based Composition",
+            description: t("固定外框、內容可替換的組合方式，兼顧一致性與各頁彈性。"),
+          },
+          {
+            term: "Component Contract",
+            description: t("元件的使用規則：適合承載什麼內容、有哪些狀態、什麼情境不該使用。"),
+          },
+          {
+            term: "Rule of Three",
+            description: t("實務判斷原則：同樣結構重複出現三次左右，再抽成共用元件。"),
+          },
           { term: "route-local", description: t("只存在特定頁面的樣式或結構。") },
-          { term: "component API", description: t("元件對外提供的使用方式，包括可傳入的內容、狀態與限制。") },
         ]}
       />
     </CaseSection>
