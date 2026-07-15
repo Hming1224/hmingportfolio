@@ -107,7 +107,7 @@ export default async function GovernanceSection() {
       <div className="ds-case-decision-log">
         <h3 className="cs-subsection-title">{t("把每次的取捨寫下來，維護才不用靠記憶")}</h3>
         <p className="cs-section-note">
-          {t("這些是規則被決定的痕跡；下次遇到類似狀況，先翻紀錄，不用從頭再想一次。")}
+          {t("這些紀錄保留了每條規則的形成過程；下次遇到類似狀況，先翻紀錄，不用從頭再想一次。")}
         </p>
         <ol>
           {decisionLog.map((entry) => (

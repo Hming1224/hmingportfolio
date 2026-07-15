@@ -5,7 +5,7 @@ const outcomes = [
   {
     value: "307",
     label: "個唯一設計 token",
-    body: "styles/tokens.css 內的唯一 CSS custom properties，涵蓋色彩、字級、間距、圓角、陰影與動態。",
+    body: "這些 CSS custom properties 集中在 styles/tokens.css，涵蓋色彩、字級、間距、圓角、陰影與動態。",
     tone: "accent",
   },
   {

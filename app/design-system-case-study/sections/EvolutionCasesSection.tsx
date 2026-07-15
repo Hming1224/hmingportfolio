@@ -117,10 +117,10 @@ export default async function EvolutionCasesSection() {
     <CaseSection
       id="cs-sec-evolution"
       kicker={t("三個演化案例")}
-      title={t("三個案例證明：外觀相似，不代表適合共用")}
+      title={t("三個案例說明：外觀相似，不代表適合共用")}
     >
       <p className="cs-section-lead">
-        {t("同樣是「看起來很像的東西」，我卻做了三個相反的決定：一個共用、一個不共用、一個乾脆先重新定義。差別不在版型像不像，而在每次判斷時，我看的是什麼。")}
+        {t("同樣是「看起來很像的東西」，我做出的決定卻不同：一個共用、一個不共用，另一個先重新定義。差別不在版型像不像，而在每次判斷時，我看的是什麼。")}
       </p>
 
       <div className="ds-case-evolution-cases">
@@ -225,7 +225,7 @@ export default async function EvolutionCasesSection() {
       </div>
 
       <p className="ds-case-editorial-statement">
-        {t("三個決定看起來相反，靠的卻是同一套判斷順序。真正決定結果的，從來不是版型像不像，而是它的用途、內容模型與未來會怎麼變——這也是為什麼我把判斷寫成框架，而不是每次憑感覺重來。")}
+        {t("三個決定雖然不同，判斷順序都一樣。我會先看用途、內容模型與未來的變動方式，再決定怎麼處理；把這套順序寫成框架，下一次就不用重新憑感覺判斷。")}
       </p>
     </CaseSection>
   );

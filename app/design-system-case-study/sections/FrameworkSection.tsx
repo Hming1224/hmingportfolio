@@ -7,7 +7,7 @@ const frameworkRows = [
     signal: "只有值重複：顏色、間距、字級跨頁一致",
     action: "集中管理數值與命名，不改元件結構",
     result: "Design Token",
-    example: "顏色 / 間距 / 字級",
+    example: "顏色／間距／字級",
     variant: "token",
   },
   {
