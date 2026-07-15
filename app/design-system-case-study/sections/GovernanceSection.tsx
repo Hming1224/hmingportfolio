@@ -1,48 +1,121 @@
 import { CaseCard, CaseGrid, CaseSection } from "../../../components/case-study";
-import TermNotes from "../components/TermNotes";
 import { getDsTranslator } from "../i18n-server";
 
+const maintenanceSteps = [
+  { title: "定義任務", body: "先寫清楚修改範圍、不可修改項目與驗收標準。" },
+  { title: "唯讀盤點", body: "AI 先搜尋使用位置、重複模式與可能影響，不直接修改。" },
+  { title: "確認邊界", body: "我確認問題、方向，以及 token、shared 與 local 的放置位置。" },
+  { title: "小批次實作", body: "AI 依照已確認規格調整程式，每批只處理一個明確範圍。" },
+  { title: "程式與 route 檢查", body: "依任務執行 lint、type check、build、token、連結與 targeted route 驗證。" },
+  { title: "人工驗收", body: "我檢查雙語、跨 route、跨 viewport、互動與原本設計意圖。" },
+  { title: "不符就撤回", body: "若結果偏離設計意圖，就撤回或縮小修改，不持續疊加修補。" },
+  { title: "同步紀錄", body: "通過後更新文件、決策紀錄與版本，讓下一次修改可追溯。" },
+];
+
+const qualityLayers = [
+  {
+    title: "規格一致性",
+    body: "確認修改範圍、元件 API、Design Token、shared／local 邊界、i18n、accessibility 與 reduced motion。",
+    owner: "依已確認規格逐項核對",
+  },
+  {
+    title: "技術正確性",
+    body: "依任務執行 lint、type check、build、token check 與 targeted route 驗證，並檢查 console error 與 horizontal overflow。",
+    owner: "可重複執行的程式檢查",
+  },
+  {
+    title: "視覺與互動品質",
+    body: "檢查 1440、1024、768、390 的雙語版面、圖片比例、表格、tab、hover、focus 與鍵盤操作。",
+    owner: "跨 route 與 viewport 人工檢查",
+  },
+  {
+    title: "設計意圖",
+    body: "判斷是否真正解決問題、保留案例差異，並避免為了共用而增加不必要的複雜度。",
+    owner: "由我做出最終是否接受的決定",
+  },
+];
+
 const decisionLog = [
-  "專案標籤圓角固定 4px——不再每頁各自發揮。",
-  "一個畫面原則上只放一顆 primary CTA——是 guideline 不是硬規則，但偏離要有理由。",
-  "Dark mode：token 先備好、公開切換先不開——場景不足前，不增加維護面。",
-  "StatusBadge 這類「還沒有真實使用場景」的元件，一律緩建。",
-  "未上線的案子用 disabled 底色呈現，不做假連結騙點擊。",
-  "文件目錄只列 production 真的在用的元件——文件站上線後，把 30 個項目全數稽核過一輪，確認每一項都對得上實際頁面。",
-  "文件站本身也吃同一套規則：讀者看的內容和維護用的規則分開寫，文件也走一樣的 audit → 修正 → 驗收流程。",
+  {
+    problem: "相似的 Before／After 版型是否應共用？",
+    basis: "外框、內容順序與 RWD 行為穩定重複，但各頁內容不同。",
+    decision: "共用固定外框與 slot，案例內容保持獨立。",
+    validation: "跨案例 route 與四個 viewport 比對。",
+  },
+  {
+    problem: "反思卡是否應整理成單一 shared component？",
+    basis: "背景、標號與排列方式承擔不同敘事用途。",
+    decision: "共用 CaseCard 與 Design Token，敘事版型留在 route-local。",
+    validation: "確認單頁樣式不影響其他案例。",
+  },
+  {
+    problem: "尚未出現真實需求的元件是否先建立？",
+    basis: "缺少穩定內容模型與第二個使用情境。",
+    decision: "暫緩建立，等需求再次出現後重新評估。",
+    validation: "文件只列實際程式正在使用的項目。",
+  },
 ];
 
 export default async function GovernanceSection() {
   const { t } = await getDsTranslator();
   return (
-    <CaseSection id="cs-sec-governance" kicker={t("GOVERNANCE")} title={t("Governance 與 AI 協作：讓流程可管理、可驗證")} surface>
-      <p className="cs-section-lead">{t("規範如果只存在人腦裡，就很難被穩定執行。")}</p>
-      <p className="cs-section-lead">{t("這套系統和一般做法比較不一樣的地方，是我把 AI 也當成需要被管理的協作者。相關規則最後整理成兩層文件，加上一份決策紀錄：")}</p>
-      <CaseGrid variant="two" className="ds-case-card-grid">
-        <CaseCard>
-          <h3>{t("文件層——把規則寫成可執行的邊界")}</h3>
-          <p>{t("10 份規格文件整理了 tokens、components、patterns、accessibility 與 governance。元件的職責邊界用 component contract 寫清楚：適合承載什麼內容、哪些行為不保證、遇到不明確情境時必須停下來確認。")}</p>
-        </CaseCard>
-        <CaseCard>
-          <h3>{t("流程層——每張工單都有權限邊界")}</h3>
-          <p>{t("AI-assisted implementation 一律走分段權限，每張任務都寫清楚「這一段只能做什麼、禁止做什麼」：audit 只看不改；implementation 不負責 commit；commit 只提交指定檔案；驗證通過後才 push。這樣可以避免修改範圍在過程中失控。")}</p>
-        </CaseCard>
-      </CaseGrid>
-      <div className="ds-case-decision-log">
-        <h3>{t("決策紀錄——做過的取捨，寫下來就不用重複討論")}</h3>
-        <p>{t("所有標準化決策逐項整理後寫進治理文件，變成查得到的紀錄。摘幾條實際的：")}</p>
-        <ol>{decisionLog.map((entry) => <li key={entry}>{t(entry)}</li>)}</ol>
+    <CaseSection
+      id="cs-sec-governance"
+      kicker={t("治理與驗證")}
+      title={t("自動檢查守住正確性，人工驗收守住設計意圖")}
+      surface
+    >
+      <div className="ds-case-governance-flow" aria-labelledby="ds-case-governance-flow-title">
+        <div className="ds-case-workflow__header">
+          <h3 id="ds-case-governance-flow-title">{t("可持續執行的品質流程")}</h3>
+          <p>{t("穩定品質來自明確輸入、有限範圍、自動檢查、人工驗收與可回溯紀錄。")}</p>
+        </div>
+        <ol>
+          {maintenanceSteps.map((step, index) => (
+            <li key={step.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div><h4>{t(step.title)}</h4><p>{t(step.body)}</p></div>
+            </li>
+          ))}
+        </ol>
+        <p className="ds-case-governance-gate">{t("未經人工驗收，不 push、merge 或 deploy。")}</p>
       </div>
-      <blockquote className="ds-case-quote">{t("把規則寫下來之後，每一次協作都不用重新解釋一遍脈絡——這是這些文件帶給我最實際的好處。")}</blockquote>
-      <TermNotes
-        title={t("名詞註釋")}
-        ariaLabel={t("專有名詞註釋")}
-        items={[
-          { term: t("AI-assisted workflow"), description: t("這裡指由我設定目標、邊界和驗證條件，再讓 AI 協助盤點或執行部分任務的工作流程。") },
-          { term: t("Feature branch"), description: t("Feature branch 是先把改動放在獨立分支驗證，避免直接影響正式站的版本。") },
-          { term: t("Preview"), description: t("Preview 是合併到正式版本前的預覽環境，用來做最後的畫面和流程確認。") },
-        ]}
-      />
+
+      <div className="ds-case-subsection-header">
+        <h3>{t("AI 產出品質的四層檢查")}</h3>
+        <p>{t("前兩層確認是否符合規格並能正常運作；後兩層確認實際體驗與設計意圖。")}</p>
+      </div>
+      <CaseGrid variant="two" className="ds-case-card-grid ds-case-quality-grid">
+        {qualityLayers.map((layer, index) => (
+          <CaseCard className="ds-case-quality-card" key={layer.title}>
+            <span className="ds-case-quality-card__number">0{index + 1}</span>
+            <h3>{t(layer.title)}</h3>
+            <p>{t(layer.body)}</p>
+            <strong>{t(layer.owner)}</strong>
+          </CaseCard>
+        ))}
+      </CaseGrid>
+
+      <p className="ds-case-editorial-statement">
+        {t("通過 build 代表程式可以建立，不代表版面、互動與案例差異符合設計意圖。")}
+      </p>
+
+      <div className="ds-case-decision-log">
+        <h3>{t("代表性決策紀錄")}</h3>
+        <p>{t("每筆紀錄保留問題、判斷依據、決定與驗證方式，讓後續修改能追溯當時的取捨。")}</p>
+        <ol>
+          {decisionLog.map((entry) => (
+            <li key={entry.problem}>
+              <h4>{t(entry.problem)}</h4>
+              <dl>
+                <div><dt>{t("判斷依據")}</dt><dd>{t(entry.basis)}</dd></div>
+                <div><dt>{t("決定")}</dt><dd>{t(entry.decision)}</dd></div>
+                <div><dt>{t("驗證方式")}</dt><dd>{t(entry.validation)}</dd></div>
+              </dl>
+            </li>
+          ))}
+        </ol>
+      </div>
     </CaseSection>
   );
 }

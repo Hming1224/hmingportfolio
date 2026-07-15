@@ -444,3 +444,21 @@ Do not include these in the shared DataTable / ScrollContainer contract:
 - `Alert` / `Toast`：使用 success / warning / error / info 四種 status token。
 - `Modal`：ESC 關閉、backdrop 點擊關閉、focus trap、關閉後焦點回到觸發元素。
 - `Skeleton` 遵守 reduced-motion；`EmptyState` 結構為 icon + title + description + optional CTA。
+
+---
+
+## 18. 元件候選清單（Component Candidates）
+
+> 規則（rule of three）：新 UI 一律先 route-local；發現跨頁重複時**只登記在這裡，不動手抽**。同一模式累積 **3 次**真實出現，才另開獨立任務（Component Strategy Audit → 小批 implementation）抽成共用元件。AI agent 不得跳過此清單自行新抽共用元件。
+
+每筆候選記錄格式：
+
+| 候選名稱 | 長什麼樣（一句話） | 出現位置（route / 檔案） | 差異點 | 出現次數 | 登記日期 |
+|---|---|---|---|---|---|
+| （範例）StatCallout | 大數字 + 說明文字的統計強調塊 | `/work/advantech`、`/work/crypto-arsenal` | crypto 版多一個 icon | 2 | YYYY-MM-DD |
+
+**目前候選**：
+
+| 候選名稱 | 長什麼樣（一句話） | 出現位置（route / 檔案） | 差異點 | 出現次數 | 登記日期 |
+|---|---|---|---|---|---|
+| （尚無） | | | | | |

@@ -1,60 +1,63 @@
 import { CaseCard, CaseSection } from "../../../components/case-study";
-import TermNotes from "../components/TermNotes";
 import { getDsTranslator } from "../i18n-server";
 
 const turningPoints = [
   {
-    title: "轉折一：設計文件和實際 code 脫節",
-    body: "第一版規劃整理成了設計文件，但實際網站裡仍有許多寫死的顏色、間距和每頁各自的 CSS 解法。文件描述的是理想狀態，卻沒有同步反映 production code 的真實狀況。",
-    lesson: "後來我把 production code 視為 source of truth：先盤點實際狀態，再更新文件和規則。",
+    title: "文件描述與實際網站逐漸脫節",
+    event: "第一版文件整理的是預期狀態，但網站仍保留寫死的顏色、分散的間距與各頁獨立 CSS。",
+    finding: "比對文件與正式頁面後，才確認規劃內容不能直接代表實際使用方式。",
+    change: "後續改為先盤點 live site，再依真實結構更新規則與文件。",
   },
   {
-    title: "轉折二：沒有先 audit 的大範圍修改，造成視覺回歸",
-    body: "早期我曾讓 AI 依照完整計劃一次處理多個案例頁，結果把原本屬於單頁敘事的版型過早推進共用層，造成邊框疊加、間距跑掉和手機版水平溢出。",
-    lesson: "這次學到的是：不管誰來執行，動手前都要先釐清影響範圍和層級。",
+    title: "大範圍修改放大 visual regression",
+    event: "早期一次 AI 輔助修改同時觸及多個案例頁，部分單頁版型過早共用。",
+    finding: "邊框重疊、間距改變與手機版水平溢出，顯示外觀相似不足以成為共用依據。",
+    change: "修改前先確認用途、影響 route 與不可改動項目，再決定是否共用。",
   },
   {
-    title: "轉折三：把風險整理成可重複的流程",
-    body: "後來我把 AI 協作拆成診斷、實作、驗證和回歸檢查的分段流程。AI 仍然可以協助執行，但每一步都有明確邊界、驗證條件和可回溯的 checkpoint。",
-    lesson: "audit → implementation → validation → smoke → commit → push。",
+    title: "改成小批次實作與逐批驗收",
+    event: "當盤點、決策、實作與檢查混在同一批工作中，問題發生後很難定位來源。",
+    finding: "拆開階段後，每次修改都有明確範圍、檢查條件與可回復版本。",
+    change: "形成先盤點、後決策、再實作與驗收的維護方式。",
   },
 ];
 
 const workflowSteps = [
-  { title: "Audit", body: "先盤點現況與風險，確認這次要改的是樣式、元件、內容，還是頁面結構。" },
-  { title: "Implementation", body: "一次只修改一個明確範圍，避免把太多問題混在同一批改動裡。" },
-  { title: "Validation", body: "用 lint、token 檢查與 build 確認基礎品質。" },
-  { title: "Smoke", body: "在主要頁面與斷點快速檢查畫面、互動與 console，確認沒有明顯回歸。" },
-  { title: "Commit", body: "驗證通過後才建立 checkpoint，讓每次改動都可以被追蹤。" },
-  { title: "Push", body: "先推到 feature branch，經過 preview 與人工確認後再合併到 main。" },
+  { title: "唯讀盤點", body: "先找出實際使用位置、重複模式與可能受影響的頁面，不直接修改。" },
+  { title: "確認決策與範圍", body: "由我確認元件邊界、不可修改項目與驗收標準。" },
+  { title: "小批次實作", body: "規格確認後，由 AI 在有限範圍內調整程式，避免一次觸及過多頁面。" },
+  { title: "自動檢查與人工驗收", body: "先檢查程式與 route，再確認雙語、版面、互動與案例差異；通過後保留版本紀錄。" },
 ];
 
 export default async function TurningPointsSection() {
   const { t } = await getDsTranslator();
   return (
-    <CaseSection id="cs-sec-turning-points" kicker={t("TURNING POINTS")} title={t("三次轉折：這個專案學到最多的三段")}>
+    <CaseSection
+      id="cs-sec-turning-points"
+      kicker={t("三次轉折")}
+      title={t("三次實際問題，讓流程轉向先盤點、小批次修改與驗收")}
+    >
       <p className="cs-section-lead">
-        {t("這套系統很難說是一次「建」好的，比較像是一路修出來的——每次轉折，都讓我放掉一個原本以為理所當然的假設。")}
+        {t("這三次轉折讓我重新界定設計決策、AI 執行範圍與品質驗收的責任。")}
       </p>
       <div className="ds-case-timeline">
         {turningPoints.map((item, index) => (
           <CaseCard className="ds-case-timeline__item" key={item.title}>
             <span className="ds-case-index">{String(index + 1).padStart(2, "0")}</span>
             <h3>{t(item.title)}</h3>
-            <p>{t(item.body)}</p>
-            <p className="ds-case-lesson">{t(item.lesson)}</p>
+            <p><strong>{t("發生什麼")}</strong>{t(item.event)}</p>
+            <p><strong>{t("如何發現")}</strong>{t(item.finding)}</p>
+            <p className="ds-case-lesson"><strong>{t("因此改變")}</strong>{t(item.change)}</p>
           </CaseCard>
         ))}
       </div>
+
       <div className="ds-case-workflow" aria-labelledby="ds-case-workflow-title">
         <div className="ds-case-workflow__header">
-          <h3 id="ds-case-workflow-title">{t("AI collaboration workflow")}</h3>
-          <p>
-            {t("我設計這套 AI-assisted workflow，是為了讓 AI 協作可以被管理、驗證與回溯。")}
-            {t("先診斷，再小範圍改動；每一步都驗證，最後才建立可回溯的 checkpoint。")}
-          </p>
+          <h3 id="ds-case-workflow-title">{t("調整後的修改流程")}</h3>
+          <p>{t("流程先把判斷與執行分開，再用自動檢查與人工驗收共同決定是否保留變更。")}</p>
         </div>
-        <ol className="ds-case-workflow__list">
+        <ol className="ds-case-workflow__list ds-case-workflow__list--four">
           {workflowSteps.map((step, index) => (
             <li className="ds-case-workflow__item" key={step.title}>
               <span className="ds-case-workflow__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
@@ -64,16 +67,6 @@ export default async function TurningPointsSection() {
           ))}
         </ol>
       </div>
-      <TermNotes
-        title={t("名詞註釋")}
-        ariaLabel={t("專有名詞註釋")}
-        items={[
-          { term: t("Regression"), description: t("Regression 指修改後意外破壞原本正常的畫面或互動。") },
-          { term: t("Smoke testing"), description: t("Smoke testing 是快速檢查主要頁面、斷點與互動是否仍正常，用來及早發現明顯問題。") },
-          { term: t("Rollback"), description: t("Rollback 是在改動出問題時，能回到上一個穩定版本。") },
-          { term: t("Production code as source of truth"), description: t("這裡指最終判斷以實際上線程式碼為準，而不是只看文件或設計稿。") },
-        ]}
-      />
     </CaseSection>
   );
 }

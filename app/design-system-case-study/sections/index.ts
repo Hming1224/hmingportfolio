@@ -1,6 +1,4 @@
-export { default as EvolutionASection } from "./EvolutionASection";
-export { default as EvolutionBSection } from "./EvolutionBSection";
-export { default as EvolutionCSection } from "./EvolutionCSection";
+export { default as EvolutionCasesSection } from "./EvolutionCasesSection";
 export { default as FrameworkSection } from "./FrameworkSection";
 export { default as GovernanceSection } from "./GovernanceSection";
 export { default as HeroSection } from "./HeroSection";

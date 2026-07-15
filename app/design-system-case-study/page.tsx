@@ -7,9 +7,7 @@ import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
 import { translateDs } from "./i18n";
 import {
-  EvolutionASection,
-  EvolutionBSection,
-  EvolutionCSection,
+  EvolutionCasesSection,
   FrameworkSection,
   GovernanceSection,
   HeroSection,
@@ -40,16 +38,14 @@ export default async function DesignSystemCaseStudyPage() {
   const nextProject = getNextProject(project.slug, locale);
   const nextProjectLabel = nextProject.navigationTitle ?? nextProject.title;
   const tocSections: TocSection[] = [
-    { id: "cs-sec-why", title: t("為什麼要建 Design System") },
-    { id: "cs-sec-starting-point", title: t("起點") },
+    { id: "cs-sec-overview", title: t("專案總覽") },
+    { id: "cs-sec-motivation", title: t("起心動念") },
     { id: "cs-sec-turning-points", title: t("三次轉折") },
-    { id: "cs-sec-framework", title: t("決策框架") },
-    { id: "cs-sec-evolution-a", title: t("演化實例 A") },
-    { id: "cs-sec-evolution-b", title: t("演化實例 B") },
-    { id: "cs-sec-evolution-c", title: t("演化實例 C") },
-    { id: "cs-sec-governance", title: t("Governance 與 AI 協作") },
-    { id: "cs-sec-outcome", title: t("Outcome") },
-    { id: "cs-sec-reflection", title: t("Reflection") },
+    { id: "cs-sec-framework", title: t("判斷框架") },
+    { id: "cs-sec-evolution", title: t("三個演化案例") },
+    { id: "cs-sec-governance", title: t("治理與驗證") },
+    { id: "cs-sec-outcome", title: t("最終成果") },
+    { id: "cs-sec-reflection", title: t("學習反思") },
   ];
 
   return (
@@ -67,9 +63,7 @@ export default async function DesignSystemCaseStudyPage() {
       <StartingPointSection />
       <TurningPointsSection />
       <FrameworkSection />
-      <EvolutionASection />
-      <EvolutionBSection />
-      <EvolutionCSection />
+      <EvolutionCasesSection />
       <GovernanceSection />
       <OutcomeSection />
       <ReflectionSection />

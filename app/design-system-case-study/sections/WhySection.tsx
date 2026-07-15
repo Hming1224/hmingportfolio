@@ -1,94 +1,105 @@
-import { CaseCard, CaseGrid, CaseSection } from "../../../components/case-study";
-import TermNotes from "../components/TermNotes";
+import { CaseOverview } from "../../../components/case-study";
 import { getDsTranslator } from "../i18n-server";
 
-function IconRepeat() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M17 2.5 21 6.5l-4 4" />
-      <path d="M3 11V9a3 3 0 0 1 3-3h15" />
-      <path d="M7 21.5 3 17.5l4-4" />
-      <path d="M21 13v2a3 3 0 0 1-3 3H3" />
-    </svg>
-  );
-}
-
-function IconAgents() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="5.5" cy="6" r="2.5" />
-      <circle cx="18.5" cy="6" r="2.5" />
-      <circle cx="12" cy="18" r="2.5" />
-      <path d="M7.6 7.6 10.2 16" />
-      <path d="M16.4 7.6 13.8 16" />
-      <path d="M8 6h8" />
-    </svg>
-  );
-}
-
-function IconBadgeCheck() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 2.5l2.4 1.8 3-.3 1.1 2.8 2.8 1.1-.3 3 1.8 2.4-1.8 2.4.3 3-2.8 1.1-1.1 2.8-3-.3-2.4 1.8-2.4-1.8-3 .3-1.1-2.8-2.8-1.1.3-3L1.2 13.3 3 10.9l-.3-3 2.8-1.1 1.1-2.8 3 .3z" />
-      <path d="M8.5 12.5l2.4 2.4 4.6-5" />
-    </svg>
-  );
-}
-
-const whyCards = [
+const overviewItems = [
   {
-    icon: <IconRepeat />,
-    title: "頁面迭代太頻繁",
-    body: "同一種「前後對比」版型，在不同案例頁各自實作；顏色、間距也散落在各頁 CSS 裡。當網站越來越大，任何微調都可能變成重複修改。",
+    kind: "problem",
+    label: "專案",
+    title: "把持續成長的作品集，整理成可長期維護的產品系統。",
+    details: [
+      {
+        label: "起點",
+        text: "作品集先以完成內容與頁面為主，讓案例可以快速成形並公開展示。",
+        icon: "question",
+        variant: "default",
+      },
+      {
+        label: "範圍",
+        text: "以四個既有案例頁為範圍，整理設計規則、共用版型、文件與檢查方式。",
+        icon: "question",
+        variant: "default",
+      },
+      {
+        label: "目標",
+        text: "讓 code、文件與協作者使用同一套規則，同時保留每個案例需要的敘事差異。",
+        icon: "question",
+        variant: "default",
+      },
+    ],
   },
   {
-    icon: <IconAgents />,
-    title: "AI 協作需要明確邊界",
-    body: "我會使用 AI 協助盤點、實作與檢查，但如果沒有共同規範，每次修改都可能採用不同寫法。AI 要能穩定協作，前提是規則、權限和驗證方式都被寫清楚。",
+    kind: "goal",
+    label: "責任分工",
+    title: "我負責定義方向、做出判斷並驗收結果；AI 協助分析、實作與驗證。",
+    details: [
+      {
+        label: "我的責任",
+        text: "定義問題、設計原則、元件邊界、修改範圍、方案取捨與驗收標準。",
+        icon: "user",
+        variant: "default",
+      },
+      {
+        label: "AI 協助",
+        text: "搜尋程式與樣式、比較重複模式、依照已確認規格實作、測試與除錯。",
+        icon: "hypothesis",
+        variant: "default",
+      },
+      {
+        label: "品質責任",
+        text: "自動檢查通過後，我仍會確認跨頁版面、互動與案例差異是否符合原本設計意圖。",
+        icon: "validation",
+        variant: "default",
+      },
+    ],
   },
   {
-    icon: <IconBadgeCheck />,
-    title: "把理解落到真實作品裡",
-    body: "與其停留在「知道 design system」的理解，我更想用自己的作品集實際做一次：從規則建立、元件盤點到長期維護，把整個過程走一遍、也記錄下來。",
+    kind: "impact",
+    label: "具體產出",
+    title: "設計規則、共用元件、文件與檢查流程形成同一套維護依據。",
+    details: [
+      {
+        label: "四個案例頁",
+        text: "四個既有案例頁開始依循集中管理的設計規則與共用案例元件。",
+        icon: "validation",
+        variant: "default",
+      },
+      {
+        label: "元件邊界",
+        text: "重複且用途穩定的模式整理成共用元件；案例限定的敘事保留在 route-local。",
+        icon: "validation",
+        variant: "default",
+      },
+      {
+        label: "文件與檢查",
+        text: "規格文件對應實際程式，並搭配自動檢查與人工視覺驗收。",
+        icon: "validation",
+        variant: "default",
+      },
+    ],
   },
-];
+] as const;
 
 export default async function WhySection() {
   const { t } = await getDsTranslator();
+
   return (
-    <CaseSection id="cs-sec-why" kicker={t("WHY")} title={t("為什麼要幫自己的作品集建 Design System？")}>
-      <p className="cs-section-lead">
-        {t("網站不是沒有設計，只是設計散落在每一頁，沒有集中管理的地方。")}
-      </p>
-      <p className="cs-section-lead">
-        {t("作品集網站是用「先把畫面做出來」的方式快速成形的——這個起點沒有錯，它讓內容先能展示。但隨著頁面越改越多，三個問題越來越明顯：")}
-      </p>
-      <CaseGrid variant="three" className="ds-case-card-grid">
-        {whyCards.map((card) => (
-          <CaseCard className="ds-case-icon-card" key={card.title}>
-            <span className="ds-case-icon" aria-hidden="true">{card.icon}</span>
-            <h3>{t(card.title)}</h3>
-            <p>{t(card.body)}</p>
-          </CaseCard>
-        ))}
-      </CaseGrid>
-      <blockquote className="ds-case-quote">
-        {t("把「規則」從人的腦中搬出來，變成 code 和文件都讀得到的單一來源（single source of truth）。")}
-      </blockquote>
-      <TermNotes
-        title={t("名詞註釋")}
-        ariaLabel={t("專有名詞註釋")}
-        items={[
-          {
-            term: t("Design system"),
-            description: t("這裡指一套管理介面規則的方法，包含設計變數、元件使用方式、內容版型和維護流程。"),
-          },
-          {
-            term: t("Single source of truth"),
-            description: t("指團隊判斷時只依賴同一個可信來源，避免文件、設計稿和實作各說各話。"),
-          },
-        ]}
-      />
-    </CaseSection>
+    <CaseOverview
+      id="cs-sec-overview"
+      kicker={t("專案總覽")}
+      title={t("用 Design System 管理作品集，也用明確分工控制 AI 協作品質")}
+      lead={t("這是一個持續迭代的自發專案。除了整理樣式，也建立人與 AI 都能依循、驗證與回溯的維護方式。")}
+      items={overviewItems.map((item) => ({
+        kind: item.kind,
+        label: t(item.label),
+        title: t(item.title),
+        details: item.details.map((detail) => ({
+          label: t(detail.label),
+          text: t(detail.text),
+          icon: detail.icon,
+          variant: detail.variant,
+        })),
+      }))}
+      itemsLabel={t("專案快速總覽")}
+    />
   );
 }
