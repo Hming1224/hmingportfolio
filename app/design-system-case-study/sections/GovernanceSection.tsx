@@ -1,5 +1,23 @@
+import Image from "next/image";
+import { AlertTriangle } from "lucide-react";
 import { CaseSection } from "../../../components/case-study";
 import { getDsTranslator } from "../i18n-server";
+
+function GovernanceOwnerMark({ owner, label }: { owner: "human" | "ai"; label: string }) {
+  const src = owner === "human"
+    ? "/avatar/avatar-yellow.png"
+    : "/projects/crypto-arsenal/background/icons/bot.svg";
+
+  return (
+    <span
+      className={`ds-case-governance-owner-mark ds-case-governance-owner-mark--${owner}`}
+      aria-label={label}
+      title={label}
+    >
+      <Image src={src} alt="" width={28} height={28} loading="eager" unoptimized />
+    </span>
+  );
+}
 
 const maintenanceStages = [
   {
@@ -35,21 +53,6 @@ const maintenanceStages = [
   },
 ] as const;
 
-const decisionLog = [
-  {
-    decision: "專案標籤圓角固定為 4px，由所有案例頁共用。",
-    validation: "確認所有案例頁的專案標籤使用一致圓角。",
-  },
-  {
-    decision: "一個畫面原則上只放一顆 primary CTA；這是使用原則，若有不同做法需要說明原因。",
-    validation: "逐頁檢查 primary CTA 數量與例外說明。",
-  },
-  {
-    decision: "Dark mode：先準備設計變數，使用情境足夠明確後再開放切換。",
-    validation: "確認設計變數已備妥，並保留明確的啟用條件。",
-  },
-];
-
 export default async function GovernanceSection() {
   const { t } = await getDsTranslator();
   return (
@@ -65,8 +68,14 @@ export default async function GovernanceSection() {
 
       <div className="ds-case-governance-loop">
         <div className="ds-case-governance-legend">
-          <span><i className="ds-case-owner-dot ds-case-owner-dot--human" />{t("由我負責")}</span>
-          <span><i className="ds-case-owner-dot ds-case-owner-dot--ai" />{t("AI 執行")}</span>
+          <span>
+            <GovernanceOwnerMark owner="human" label={t("由我負責")} />
+            {t("由我負責")}
+          </span>
+          <span>
+            <GovernanceOwnerMark owner="ai" label={t("AI 執行")} />
+            {t("AI 執行")}
+          </span>
         </div>
         <ol>
           {maintenanceStages.map((stage, index) => (
@@ -76,11 +85,11 @@ export default async function GovernanceSection() {
                 <span className="ds-case-governance-loop__owner">
                   {stage.title === "驗收" ? (
                     <>
-                      <i className="ds-case-owner-dot ds-case-owner-dot--human" />
-                      <i className="ds-case-owner-dot ds-case-owner-dot--ai" />
+                      <GovernanceOwnerMark owner="human" label={t("由我負責")} />
+                      <GovernanceOwnerMark owner="ai" label={t("AI 執行")} />
                     </>
                   ) : (
-                    <i className={`ds-case-owner-dot ds-case-owner-dot--${stage.owner}`} />
+                    <GovernanceOwnerMark owner={stage.owner} label={t(stage.ownerLabel)} />
                   )}
                   {t(stage.ownerLabel)}
                 </span>
@@ -102,25 +111,10 @@ export default async function GovernanceSection() {
         </ol>
       </div>
 
-      <p className="ds-case-governance-gate">{t("未經人工驗收，不 push、merge 或 deploy。")}</p>
-
-      <div className="ds-case-decision-log">
-        <h3 className="cs-subsection-title">{t("把每次的取捨寫下來，維護才不用靠記憶")}</h3>
-        <p className="cs-section-note">
-          {t("這些紀錄保留了每條規則的形成過程；下次遇到類似狀況，先翻紀錄，不用從頭再想一次。")}
-        </p>
-        <ol>
-          {decisionLog.map((entry) => (
-            <li key={entry.decision}>
-              <div>
-                <strong>{t(entry.decision)}</strong>
-                <span className="ds-case-decision-log__status">{t("已確認")}</span>
-              </div>
-              <p><b>{t("驗證方式")}</b>{t(entry.validation)}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
+      <p className="ds-case-governance-gate">
+        <AlertTriangle size={20} aria-hidden="true" />
+        {t("未經人工驗收，不 push、merge 或 deploy。")}
+      </p>
     </CaseSection>
   );
 }

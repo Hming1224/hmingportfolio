@@ -489,68 +489,6 @@
   line-height: 1.45;
 }
 
-/* ── Governance：決策帳 ── */
-
-.ds-case-decision-log {
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: var(--ds-case-content-block-gap);
-  border: 1px solid var(--cs-line);
-  border-radius: 24px;
-  padding: var(--hm-space-lg);
-  background: #ffffff;
-  box-shadow: var(--ds-case-card-shadow);
-}
-
-.ds-case-decision-log h3 {
-  margin: 0 0 var(--hm-space-2xs);
-  color: var(--cs-text-heading);
-  font-size: var(--fs-h4);
-  line-height: 1.35;
-}
-
-.ds-case-decision-log > p {
-  margin: 0 0 20px;
-  color: var(--cs-text-secondary);
-  line-height: 1.75;
-}
-
-.ds-case-decision-log ol {
-  display: grid;
-  gap: 14px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: decision-entry;
-}
-
-.ds-case-decision-log li {
-  position: relative;
-  padding: 14px 16px 14px 60px;
-  border: 1px solid var(--cs-line);
-  border-radius: 14px;
-  background: var(--cs-surface);
-  color: var(--cs-text-secondary);
-  line-height: 1.7;
-  counter-increment: decision-entry;
-}
-
-.ds-case-decision-log li::before {
-  content: counter(decision-entry, decimal-leading-zero);
-  position: absolute;
-  top: 14px;
-  left: 16px;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: var(--cs-accent-soft);
-  color: var(--cs-accent-strong);
-  font-size: var(--fs-xs);
-  font-weight: 800;
-}
-
 /* ── Outcome：防護網 ── */
 
 .ds-case-guard-lead {
@@ -689,15 +627,6 @@
     font-size: var(--fs-h4);
   }
 
-  .ds-case-decision-log {
-    padding: 22px;
-    border-radius: 20px;
-  }
-
-  .ds-case-decision-log li {
-    padding: 12px 14px 12px 56px;
-  }
-
   .ds-case-design-system-cta {
     grid-template-columns: 1fr;
     align-items: start;
@@ -794,28 +723,24 @@
   align-content: start;
 }
 
-.ds-case-motivation-card dl,
-.ds-case-decision-log dl {
+.ds-case-motivation-card dl {
   display: grid;
   gap: var(--hm-space-sm);
   margin: var(--hm-space-sm) 0 0;
 }
 
-.ds-case-motivation-card dl > div,
-.ds-case-decision-log dl > div {
+.ds-case-motivation-card dl > div {
   display: grid;
   gap: var(--hm-space-3xs);
 }
 
-.ds-case-motivation-card dt,
-.ds-case-decision-log dt {
+.ds-case-motivation-card dt {
   color: var(--cs-text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
 }
 
-.ds-case-motivation-card dd,
-.ds-case-decision-log dd {
+.ds-case-motivation-card dd {
   margin: 0;
   color: var(--cs-text-secondary);
   font-size: var(--fs-sm);
@@ -1247,17 +1172,6 @@
   text-underline-offset: 4px;
 }
 
-.ds-case-decision-log li h4 {
-  margin: 0;
-  color: var(--cs-text-body);
-  font-size: var(--fs-body);
-  line-height: 1.45;
-}
-
-.ds-case-decision-log li::before {
-  top: 16px;
-}
-
 .ds-case-outcome-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--hm-space-lg);
@@ -1435,77 +1349,6 @@
   font-weight: var(--hm-fw-bold);
 }
 
-.ds-case-governance-gate {
-  border: 0;
-  border-radius: var(--hm-radius-md);
-  padding: var(--hm-space-sm) var(--hm-space-md);
-  background: var(--cs-accent-strong);
-  color: #ffffff;
-  text-align: center;
-}
-
-.ds-case-decision-log {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
-  gap: var(--hm-space-2xs) var(--hm-space-xl);
-  border-color: var(--cs-line-strong);
-}
-
-.ds-case-decision-log > p {
-  margin: 0;
-}
-
-.ds-case-decision-log ol {
-  grid-column: 1 / -1;
-  margin-top: var(--hm-space-md);
-}
-
-.ds-case-decision-log li {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 2fr);
-  gap: var(--hm-space-xl);
-  align-items: start;
-  border-color: var(--cs-line-strong);
-  padding: var(--hm-space-lg) var(--hm-space-lg) var(--hm-space-lg) 76px;
-  background: #ffffff;
-  box-shadow: 0 8px 22px rgba(54, 57, 134, 0.06);
-}
-
-.ds-case-decision-log li::before {
-  top: var(--hm-space-lg);
-  left: var(--hm-space-md);
-  background: var(--cs-accent-strong);
-  color: #ffffff;
-}
-
-.ds-case-decision-log dl {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--hm-space-md);
-  margin: 0;
-}
-
-.ds-case-decision-log dl > div {
-  align-content: start;
-  border-left: 2px solid var(--cs-line-strong);
-  padding-left: var(--hm-space-sm);
-}
-
-@media (max-width: 1024px) {
-  .ds-case-decision-log {
-    grid-template-columns: 1fr;
-  }
-
-  .ds-case-decision-log > p,
-  .ds-case-decision-log ol {
-    grid-column: 1;
-  }
-
-  .ds-case-decision-log li {
-    grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1.5fr);
-    gap: var(--hm-space-lg);
-  }
-}
-
 @media (max-width: 768px) {
   .ds-case-growth-flow__list {
     grid-template-columns: 1fr;
@@ -1526,28 +1369,6 @@
     transform: translateX(-50%) rotate(90deg);
   }
 
-  .ds-case-decision-log {
-    gap: var(--hm-space-xs);
-  }
-
-  .ds-case-decision-log ol {
-    margin-top: var(--hm-space-sm);
-  }
-
-  .ds-case-decision-log li {
-    grid-template-columns: 1fr;
-    gap: var(--hm-space-md);
-    padding: 68px var(--hm-space-md) var(--hm-space-md);
-  }
-
-  .ds-case-decision-log li::before {
-    top: var(--hm-space-md);
-    left: var(--hm-space-md);
-  }
-
-  .ds-case-decision-log dl {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ── Placement decision tree ── */
@@ -1719,17 +1540,19 @@
   gap: var(--hm-space-3xs);
 }
 
-.ds-case-owner-dot {
-  display: inline-block;
+.ds-case-governance-owner-mark {
+  display: inline-flex;
   flex: 0 0 auto;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--cs-accent);
+  overflow: hidden;
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-pill);
+  background: #fff;
+  line-height: 0;
 }
 
-.ds-case-owner-dot--ai {
-  background: var(--cs-teal);
+.ds-case-governance-owner-mark img {
+  display: block;
+  object-fit: cover;
 }
 
 .ds-case-governance-loop {
@@ -1845,93 +1668,18 @@
 }
 
 .ds-case-governance-gate {
+  display: flex;
+  align-items: center;
+  gap: var(--hm-space-2xs);
   margin: var(--hm-space-lg) 0 0;
-  border: 0;
+  border: 1px solid var(--cs-amber);
+  border-left-width: 4px;
   border-radius: var(--hm-radius-md);
   padding: var(--hm-space-sm) var(--hm-space-md);
-  background: var(--cs-accent-strong);
-  color: #fff;
+  background: var(--cs-amber-soft);
+  color: var(--cs-amber-strong);
   font-size: var(--fs-sm);
   font-weight: var(--hm-fw-semibold);
-  text-align: center;
-}
-
-.ds-case-decision-log {
-  display: block;
-  margin-top: var(--ds-case-content-block-gap);
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.ds-case-decision-log h3 {
-  margin: 0;
-}
-
-.ds-case-decision-log > p {
-  margin: var(--hm-space-2xs) 0 0;
-}
-
-.ds-case-decision-log ol {
-  display: grid;
-  gap: var(--hm-space-sm);
-  margin: var(--hm-space-md) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ds-case-decision-log li {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--hm-space-xs) var(--hm-space-md);
-  border: 0;
-  border-left: 2px solid var(--cs-teal);
-  border-radius: 0;
-  padding: var(--hm-space-sm) 0 var(--hm-space-sm) var(--hm-space-md);
-  background: transparent;
-  box-shadow: none;
-}
-
-.ds-case-decision-log li::before {
-  content: none;
-}
-
-.ds-case-decision-log li > div {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--hm-space-sm);
-}
-
-.ds-case-decision-log li strong {
-  color: var(--cs-text-body);
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-}
-
-.ds-case-decision-log__status {
-  flex: 0 0 auto;
-  border-radius: var(--hm-radius-pill);
-  padding: var(--hm-space-2xs) var(--hm-space-sm);
-  background: var(--cs-teal-soft);
-  color: var(--cs-teal-strong);
-  font-size: var(--fs-xs);
-  font-weight: var(--hm-fw-semibold);
-}
-
-.ds-case-decision-log li > p {
-  grid-column: 1 / -1;
-  margin: 0;
-  color: var(--cs-text-muted);
-  font-size: var(--fs-xs);
-  line-height: 1.6;
-}
-
-.ds-case-decision-log li > p b {
-  margin-right: var(--hm-space-2xs);
-  color: var(--cs-text-secondary);
 }
 
 .ds-case-reflection-list {
@@ -2011,16 +1759,6 @@
 
   .ds-case-governance-loop__stage--ai {
     border-left-color: var(--cs-teal);
-  }
-
-  .ds-case-decision-log li {
-    grid-template-columns: 1fr;
-    gap: var(--hm-space-sm);
-    padding: var(--hm-space-md) 0;
-  }
-
-  .ds-case-decision-log li > div {
-    flex-wrap: wrap;
   }
 
   .ds-case-outcome-grid {
