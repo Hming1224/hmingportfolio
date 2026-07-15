@@ -69,11 +69,11 @@ export default async function StartingPointSection() {
           <CaseCard className="ds-case-motivation-card" key={card.title}>
             <span className="ds-case-index-chip">{t("動機")} {String(index + 1).padStart(2, "0")}</span>
             <h3>{t(card.title)}</h3>
-            <dl>
-              <div><dt>{t("觀察")}</dt><dd>{t(card.observation)}</dd></div>
-              <div><dt>{t("影響")}</dt><dd>{t(card.impact)}</dd></div>
-              <div><dt>{t("為什麼要處理")}</dt><dd>{t(card.reason)}</dd></div>
-            </dl>
+            <div className="ds-case-motivation-card__body">
+              <p>{t(card.observation)}</p>
+              <p>{t(card.impact)}</p>
+            </div>
+            <p className="ds-case-motivation-card__conclusion">{t(card.reason)}</p>
           </CaseCard>
         ))}
       </CaseGrid>

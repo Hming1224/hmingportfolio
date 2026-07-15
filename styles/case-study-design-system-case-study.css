@@ -6,6 +6,13 @@
   --cs-accent: #5d62d8;
   --cs-accent-strong: #363986;
   --cs-accent-soft: #f0f1ff;
+  /* Semantic hues: amber = turning point / caution / lesson; teal = validation / passing / AI execution. */
+  --cs-amber: #d97706;
+  --cs-amber-strong: #9a4b08;
+  --cs-amber-soft: #fdf1e3;
+  --cs-teal: #0d9488;
+  --cs-teal-strong: #0f6e64;
+  --cs-teal-soft: #e4f7f4;
   --cs-surface: #f6f7fc;
   --cs-surface-soft: #f6f7fc;
   --cs-line: #d9dcef;
@@ -136,6 +143,65 @@
   height: 3px;
   margin-top: 0.72em;
   background: var(--cs-accent);
+}
+
+/* ── Act divider (幕間分隔・方案 A 深靛滿版色帶) ──
+   Full-bleed within a gutter-padded .cs-section via negative page-gutter margins. */
+.ds-case-act-divider {
+  position: relative;
+  margin-inline: calc(var(--page-gutter) * -1);
+  overflow: hidden;
+  padding: 72px var(--page-gutter);
+  background: linear-gradient(120deg, #2e3170 0%, #363986 55%, #43479f 100%);
+  color: #ffffff;
+}
+
+.ds-case-act-divider__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--hm-space-sm);
+  max-width: 760px;
+}
+
+.ds-case-act-divider__kicker {
+  color: #f5c98a;
+  font-size: var(--fs-xs);
+  font-weight: var(--hm-fw-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ds-case-act-divider__title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.ds-case-act-divider__lead {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--fs-body);
+  line-height: 1.8;
+}
+
+.ds-case-act-divider__number {
+  position: absolute;
+  top: 50%;
+  right: var(--page-gutter);
+  z-index: 0;
+  color: transparent;
+  font-size: 240px;
+  font-weight: var(--hm-fw-bold);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.22);
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .ds-case-media {
@@ -702,6 +768,18 @@
     font-size: 18px;
   }
 
+  .ds-case-act-divider {
+    padding: 48px var(--page-gutter);
+  }
+
+  .ds-case-act-divider__number {
+    top: 24px;
+    right: var(--page-gutter);
+    font-size: 120px;
+    transform: none;
+    opacity: 0.5;
+  }
+
   .ds-case-timeline__item {
     grid-template-columns: 1fr;
   }
@@ -808,6 +886,79 @@
   max-width: 920px;
 }
 
+/* ── Overview: three scannable groups (專案 / 責任分工 / 具體產出) ── */
+.ds-case-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--hm-space-xl);
+  margin-top: var(--ds-case-content-block-gap);
+}
+
+.ds-case-overview-col {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-sm);
+}
+
+.ds-case-overview-col__label {
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-xs);
+  font-weight: var(--hm-fw-bold);
+  letter-spacing: 0.06em;
+}
+
+.ds-case-overview-col__statement {
+  margin: 0;
+  color: var(--cs-text-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.4;
+}
+
+.ds-case-overview-col__list {
+  display: grid;
+  margin: var(--hm-space-2xs) 0 0;
+}
+
+.ds-case-overview-detail {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  padding: var(--hm-space-sm) 0;
+}
+
+.ds-case-overview-detail + .ds-case-overview-detail {
+  border-top: 1px solid var(--cs-line);
+}
+
+.ds-case-overview-detail dt {
+  color: var(--cs-text-heading);
+  font-size: var(--fs-xs);
+  font-weight: var(--hm-fw-bold);
+}
+
+.ds-case-overview-detail--dot dt {
+  position: relative;
+  padding-left: 16px;
+}
+
+.ds-case-overview-detail--dot dt::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--cs-teal);
+}
+
+.ds-case-overview-detail dd {
+  margin: 0;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
 .ds-case-growth-flow,
 .ds-case-decision-flow {
   margin-top: var(--ds-case-content-block-gap);
@@ -897,6 +1048,38 @@
   color: var(--cs-text-secondary);
   font-size: var(--fs-sm);
   line-height: 1.7;
+}
+
+/* ── Motivation card: leaner body + accent conclusion bar as the single focal point ── */
+.ds-case-motivation-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-case-motivation-card__body {
+  display: grid;
+  gap: var(--hm-space-xs);
+  margin-top: var(--hm-space-sm);
+  margin-bottom: var(--hm-space-md);
+}
+
+.ds-case-motivation-card__body p {
+  margin: 0;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+.ds-case-motivation-card__conclusion {
+  margin-top: auto;
+  border-left: 4px solid var(--cs-accent);
+  border-radius: 0 var(--hm-radius-sm) var(--hm-radius-sm) 0;
+  padding: var(--hm-space-sm) var(--hm-space-md);
+  background: var(--cs-accent-soft);
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.6;
 }
 
 .ds-case-timeline__item p strong {
@@ -1239,6 +1422,11 @@
 }
 
 @media (max-width: 1024px) {
+  .ds-case-overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--hm-space-lg);
+  }
+
   .ds-case-motivation-grid,
   .ds-case-reflection-grid {
     grid-template-columns: 1fr;
@@ -1260,6 +1448,11 @@
 }
 
 @media (max-width: 768px) {
+  .ds-case-overview-grid {
+    grid-template-columns: 1fr;
+    gap: var(--hm-space-md);
+  }
+
   .ds-case-example-card,
   .ds-case-governance-flow {
     padding: var(--hm-space-md);
@@ -1345,18 +1538,18 @@
 }
 
 .ds-case-growth-flow__list li:last-child {
-  border-color: var(--cs-accent-strong);
-  background: var(--cs-accent-strong);
-  box-shadow: 0 14px 32px rgba(54, 57, 134, 0.2);
+  border-color: var(--cs-amber);
+  background: var(--cs-amber-soft);
+  box-shadow: 0 14px 32px rgba(154, 75, 8, 0.14);
 }
 
 .ds-case-growth-flow__list li:last-child span {
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--cs-amber);
   color: #ffffff;
 }
 
 .ds-case-growth-flow__list li:last-child strong {
-  color: #ffffff;
+  color: var(--cs-amber-strong);
 }
 
 .ds-case-growth-flow__list li:not(:last-child)::after {
