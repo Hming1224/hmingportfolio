@@ -1,4 +1,4 @@
-import { CaseCard, CaseSection } from "../../../components/case-study";
+import { CaseSection } from "../../../components/case-study";
 import { getDsTranslator } from "../i18n-server";
 
 const turningPoints = [
@@ -22,13 +22,6 @@ const turningPoints = [
   },
 ];
 
-const workflowSteps = [
-  { title: "唯讀盤點", body: "先找出實際使用位置、重複模式與可能受影響的頁面，不直接修改。" },
-  { title: "確認決策與範圍", body: "由我確認元件邊界、不可修改項目與驗收標準。" },
-  { title: "小批次實作", body: "規格確認後，由 AI 在有限範圍內調整程式，避免一次觸及過多頁面。" },
-  { title: "自動檢查與人工驗收", body: "先檢查程式與 route，再確認雙語、版面、互動與案例差異；通過後保留版本紀錄。" },
-];
-
 export default async function TurningPointsSection() {
   const { t } = await getDsTranslator();
   return (
@@ -42,30 +35,15 @@ export default async function TurningPointsSection() {
       </p>
       <div className="ds-case-timeline">
         {turningPoints.map((item, index) => (
-          <CaseCard className="ds-case-timeline__item" key={item.title}>
-            <span className="ds-case-index">{String(index + 1).padStart(2, "0")}</span>
-            <h3>{t(item.title)}</h3>
-            <p><strong>{t("發生什麼")}</strong>{t(item.event)}</p>
-            <p><strong>{t("如何發現")}</strong>{t(item.finding)}</p>
+          <article className="ds-case-timeline__item" key={item.title}>
+            <header className="ds-case-timeline__header">
+              <span className="ds-case-index">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{t(item.title)}</h3>
+            </header>
+            <p className="ds-case-timeline__body">{t(item.event)} {t(item.finding)}</p>
             <p className="ds-case-lesson"><strong>{t("因此改變")}</strong>{t(item.change)}</p>
-          </CaseCard>
+          </article>
         ))}
-      </div>
-
-      <div className="ds-case-workflow" aria-labelledby="ds-case-workflow-title">
-        <div className="ds-case-workflow__header">
-          <h3 id="ds-case-workflow-title">{t("調整後的修改流程")}</h3>
-          <p>{t("流程先把判斷與執行分開，再用自動檢查與人工驗收共同決定是否保留變更。")}</p>
-        </div>
-        <ol className="ds-case-workflow__list ds-case-workflow__list--four">
-          {workflowSteps.map((step, index) => (
-            <li className="ds-case-workflow__item" key={step.title}>
-              <span className="ds-case-workflow__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <h4>{t(step.title)}</h4>
-              <p>{t(step.body)}</p>
-            </li>
-          ))}
-        </ol>
       </div>
     </CaseSection>
   );

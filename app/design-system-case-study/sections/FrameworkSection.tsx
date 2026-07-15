@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CaseCard, CaseFlowFrame, CaseGrid, CaseSection } from "../../../components/case-study";
+import { CaseFlowFrame, CaseSection } from "../../../components/case-study";
 import DecisionFlowConnectors from "../components/DecisionFlowConnectors";
 import { getDsTranslator } from "../i18n-server";
 
@@ -49,27 +49,6 @@ export default async function FrameworkSection() {
       <p className="cs-section-lead">
         {t("AI 可以快速找出重複，但是否值得共用仍涉及設計語意、使用情境與未來變動風險，因此由我做出最後判斷。")}
       </p>
-
-      <CaseGrid variant="two" className="ds-case-card-grid ds-case-responsibility-grid">
-        <CaseCard className="ds-case-responsibility-card">
-          <span className="ds-case-index-chip">{t("由我負責")}</span>
-          <h3>{t("需要設計判斷與取捨的工作")}</h3>
-          <ul>
-            <li>{t("問題定義、優先順序與案例敘事目標")}</li>
-            <li>{t("元件語意、共用邊界與互動意圖")}</li>
-            <li>{t("方案取捨、驗收標準與最終是否通過")}</li>
-          </ul>
-        </CaseCard>
-        <CaseCard className="ds-case-responsibility-card">
-          <span className="ds-case-index-chip">{t("AI 協助")}</span>
-          <h3>{t("規格明確且能重複驗證的工作")}</h3>
-          <ul>
-            <li>{t("搜尋使用位置、盤點重複模式與比較差異")}</li>
-            <li>{t("依照已確認規格實作、重構與定位錯誤")}</li>
-            <li>{t("執行自動檢查並整理修改與驗證紀錄")}</li>
-          </ul>
-        </CaseCard>
-      </CaseGrid>
 
       <CaseFlowFrame
         className="ds-case-decision-flow"
@@ -123,12 +102,18 @@ export default async function FrameworkSection() {
           </div>
         </div>
         <div className="ds-case-decision-legend" aria-label={t("流程責任圖例")}>
-          <span><DecisionOwnerMark owner="human" label={t("由我負責")} />{t("由我負責")}</span>
-          <span><DecisionOwnerMark owner="ai" label={t("AI 執行")} />{t("AI 執行")}</span>
+          <span>
+            <DecisionOwnerMark owner="human" label={t("由我負責")} />
+            <span><strong>{t("由我負責")}</strong>{t("定義語意、取捨與驗收標準。")}</span>
+          </span>
+          <span>
+            <DecisionOwnerMark owner="ai" label={t("AI 執行")} />
+            <span><strong>{t("AI 執行")}</strong>{t("在規格、範圍與驗收條件明確後實作並回報。")}</span>
+          </span>
         </div>
       </CaseFlowFrame>
 
-      <div className="ds-case-table-frame">
+      <div className="ds-case-table-frame ds-case-framework-table-frame">
         <table className="ds-case-table ds-case-framework-table">
           <thead><tr><th>{t("看到的現象")}</th><th>{t("判斷依據")}</th><th>{t("採取方式")}</th><th>{t("最終放置位置")}</th></tr></thead>
           <tbody>
@@ -137,7 +122,7 @@ export default async function FrameworkSection() {
                 <th scope="row">{t(row.signal)}</th>
                 <td>{t(row.basis)}</td>
                 <td>{t(row.action)}</td>
-                <td><span className="ds-case-term-pill">{t(row.result)}</span></td>
+                <td><span className={`ds-case-term-pill ds-case-term-pill--${row.result === "Design Token" ? "token" : row.result === "Shared Component" ? "shared" : "local"}`}>{t(row.result)}</span></td>
               </tr>
             ))}
           </tbody>

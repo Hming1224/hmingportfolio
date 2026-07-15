@@ -5,6 +5,7 @@ import { CaseStudyShell, type TocSection } from "../../components/case-study";
 import { getNextProject, getProjectBySlug } from "../../data/projects";
 import type { Locale } from "../../i18n/routing";
 import { createLocalizedMetadata } from "../../lib/metadata";
+import ActDivider from "./components/ActDivider";
 import { translateDs } from "./i18n";
 import {
   EvolutionCasesSection,
@@ -61,6 +62,12 @@ export default async function DesignSystemCaseStudyPage() {
     >
       <WhySection />
       <StartingPointSection />
+      <ActDivider
+        actLabel="ACT 2"
+        kicker={t("轉折與框架")}
+        title={t("三次真實問題，換來一套判斷框架")}
+        lead={t("文件脫節、跑版、流程混雜——三次轉折不是失誤紀錄，而是這套系統長出判斷規則的過程。")}
+      />
       <TurningPointsSection />
       <FrameworkSection />
       <EvolutionCasesSection />

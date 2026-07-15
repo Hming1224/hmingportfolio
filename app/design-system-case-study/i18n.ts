@@ -322,6 +322,9 @@ const en = {
   "把設計規則從個人記憶中移出，建立成 code、文件與協作者都能讀取的共同依據。": "Move design rules out of personal memory and into a shared foundation that code, documentation, and collaborators can all read.",
 
   "三次實際問題，讓流程轉向先盤點、小批次修改與驗收": "Three Real Problems Shifted the Workflow Toward Audits, Smaller Changes, and Review",
+  "轉折與框架": "Turning Points & Framework",
+  "三次真實問題，換來一套判斷框架": "Three Real Problems, One Decision Framework",
+  "文件脫節、跑版、流程混雜——三次轉折不是失誤紀錄，而是這套系統長出判斷規則的過程。": "Drifting docs, broken layouts, and a tangled process—the three turning points are not a record of mistakes but how this system grew its rules.",
   "這三次轉折不是單純的開發錯誤，而是讓我重新界定設計決策、AI 執行範圍與品質驗收的責任。": "These turning points were more than implementation mistakes. They led me to redefine responsibility for design decisions, the scope of AI execution, and quality review.",
   "發生什麼": "What Happened",
   "如何發現": "How It Was Found",
@@ -354,6 +357,8 @@ const en = {
   "由我負責": "My Responsibility",
   "AI 執行": "AI Execution",
   "流程責任圖例": "Flow Responsibility Legend",
+  "定義語意、取捨與驗收標準。": "Defines meaning, tradeoffs, and acceptance criteria.",
+  "在規格、範圍與驗收條件明確後實作並回報。": "Implements and reports once the specification, scope, and acceptance criteria are clear.",
   "需要設計判斷與取捨的工作": "Work That Requires Design Judgment",
   "問題定義、優先順序與案例敘事目標": "Problem definition, priorities, and case-study narrative goals",
   "元件語意、共用邊界與互動意圖": "Component meaning, shared boundaries, and interaction intent",
