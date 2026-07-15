@@ -13,6 +13,7 @@ const cases = [
     evidence: "AI 協助比較使用位置與樣式後，確認外框、間距與響應式行為穩定重複，每頁內容則保留差異。",
     decision: "先共用固定外框，再在模式穩定後整理視覺元件；文案、圖片與敘事仍由各頁決定。",
     decisionBadge: "共用固定外框",
+    spine: ["該共用", "但要等它先穩定"],
     validation: "比對採用元件的案例 route，並在桌機、平板與手機確認內容順序、圖片比例與溢出。",
   },
   {
@@ -23,6 +24,7 @@ const cases = [
     evidence: "進一步比較後，發現它們的用途、內容模型與變動方式不同；強行共用會增加 props、條件分支與例外。",
     decision: "只共用基礎 CaseCard、Grid 與 Design Token，敘事結構保留在各自 route-local implementation。",
     decisionBadge: "保留單頁設計",
+    spine: ["不共用", "即使它們很像"],
     validation: "確認 route-local 樣式不外溢，並檢查保留單頁實作後是否仍沿用共用間距、色彩與 RWD 規則。",
   },
   {
@@ -33,6 +35,7 @@ const cases = [
     evidence: "Button 與 Link 的語意、鍵盤行為與 accessibility 不同；CTA 則是畫面中的行動目的，不是固定元件類型。",
     decision: "先定義用途，再由既有 Button API 依是否提供 href 呈現 button 或 link；文件分別說明使用情境。",
     decisionBadge: "先定義用途",
+    spine: ["先別問共不共用", "先問這到底是什麼"],
     validation: "檢查實際 HTML 語意、連結目的地、鍵盤 focus 與 hover 狀態，再確認視覺層級符合 CTA 目的。",
   },
 ];
@@ -52,7 +55,12 @@ function CaseHeader({
         {item.number}
       </span>
       <div className="ds-case-evolution-header__copy">
-        <h3>{t(item.title)}</h3>
+        <div>
+          <h3>{t(item.title)}</h3>
+          <p className="ds-case-evolution-header__spine">
+            {t(item.spine[0])}<span> —— {t(item.spine[1])}</span>
+          </p>
+        </div>
         <span className="ds-case-evolution-header__badge">
           {t(item.decisionBadge)}
         </span>
@@ -75,7 +83,6 @@ function CaseNarrative({
         <p>{t(item.initial)}</p>
       </div>
       <blockquote className="ds-case-evolution-narrative__evidence">
-        <span>{t("關鍵證據")}</span>
         <p>{t(item.evidence)}</p>
       </blockquote>
       <div className="ds-case-evolution-narrative__decision">
@@ -83,7 +90,7 @@ function CaseNarrative({
         <p>{t(item.decision)}</p>
       </div>
       <p className="ds-case-evolution-narrative__validation">
-        <span>{t("如何驗證")}</span>
+        <span>{t("怎麼確認：")}</span>
         {t(item.validation)}
       </p>
     </div>
@@ -113,7 +120,7 @@ export default async function EvolutionCasesSection() {
       title={t("三個案例證明：外觀相似，不代表適合共用")}
     >
       <p className="cs-section-lead">
-        {t("三個案例使用相同的判斷順序：先看情境與用途，再確認證據、做出決定，最後用實際 route、viewport 與互動驗證結果。")}
+        {t("同樣是「看起來很像的東西」，我卻做了三個相反的決定：一個共用、一個不共用、一個乾脆先重新定義。差別不在版型像不像，而在每次判斷時，我看的是什麼。")}
       </p>
 
       <div className="ds-case-evolution-cases">
@@ -139,6 +146,10 @@ export default async function EvolutionCasesSection() {
             </CaseMedia>
           </div>
         </article>
+
+        <p className="ds-case-evolution-bridge">
+          {t("共用一次成功，不代表下一個相似的版型也適用同樣的答案。")}
+        </p>
 
         <article className="ds-case-evolution-case ds-case-evolution-case--matrix">
           <CaseHeader item={cases[1]} t={t} />
@@ -170,6 +181,10 @@ export default async function EvolutionCasesSection() {
             ))}
           </div>
         </article>
+
+        <p className="ds-case-evolution-bridge">
+          {t("前兩次都在回答「要不要共用」；直到第三次我才發現，有時真正該問的，根本不是這個。")}
+        </p>
 
         <article className="ds-case-evolution-case ds-case-evolution-case--semantic">
           <CaseHeader item={cases[2]} t={t} />
@@ -208,6 +223,10 @@ export default async function EvolutionCasesSection() {
           </div>
         </article>
       </div>
+
+      <p className="ds-case-editorial-statement">
+        {t("三個決定看起來相反，靠的卻是同一套判斷順序。真正決定結果的，從來不是版型像不像，而是它的用途、內容模型與未來會怎麼變——這也是為什麼我把判斷寫成框架，而不是每次憑感覺重來。")}
+      </p>
     </CaseSection>
   );
 }

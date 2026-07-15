@@ -886,7 +886,7 @@
 
 .ds-case-evolution-cases {
   display: grid;
-  gap: clamp(64px, 8vw, 104px);
+  gap: 0;
   margin-top: var(--ds-case-content-block-gap);
 }
 
@@ -921,6 +921,10 @@
   min-width: 0;
 }
 
+.ds-case-evolution-header__copy > div {
+  min-width: 0;
+}
+
 .ds-case-evolution-header h3 {
   margin: 0;
   color: var(--cs-text-heading);
@@ -929,12 +933,24 @@
   line-height: 1.35;
 }
 
+.ds-case-evolution-header__spine {
+  margin: var(--hm-space-2xs) 0 0;
+  color: var(--cs-text-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.4;
+}
+
+.ds-case-evolution-header__spine span {
+  color: var(--cs-text-secondary);
+}
+
 .ds-case-evolution-header__badge {
   flex: 0 0 auto;
   border-radius: var(--hm-radius-pill);
   padding: var(--hm-space-2xs) var(--hm-space-sm);
-  background: var(--cs-accent-soft);
-  color: var(--cs-accent-strong);
+  background: var(--cs-surface);
+  color: var(--cs-text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
   line-height: 1.4;
@@ -956,18 +972,21 @@
 
 .ds-case-evolution-narrative__opening {
   display: grid;
-  gap: var(--hm-space-xs);
+  gap: var(--hm-space-sm);
+}
+
+.ds-case-evolution-narrative__opening p {
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-body);
+  line-height: 1.8;
 }
 
 .ds-case-evolution-narrative__evidence {
-  display: grid;
-  gap: var(--hm-space-2xs);
   margin: 0;
-  border-left: 2px solid var(--cs-line-strong);
+  border-left: 3px solid var(--cs-line-strong);
   padding-left: var(--hm-space-md);
 }
 
-.ds-case-evolution-narrative__evidence span,
 .ds-case-evolution-narrative__decision span,
 .ds-case-evolution-narrative__validation span {
   font-size: var(--fs-xs);
@@ -975,8 +994,9 @@
   letter-spacing: 0.04em;
 }
 
-.ds-case-evolution-narrative__evidence span {
-  color: var(--cs-text-muted);
+.ds-case-evolution-narrative__evidence p {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
 }
 
 .ds-case-evolution-narrative__decision {
@@ -986,6 +1006,10 @@
   border-radius: 0 var(--hm-radius-sm) var(--hm-radius-sm) 0;
   padding: var(--hm-space-sm) var(--hm-space-md);
   background: var(--cs-accent-soft);
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-sm);
+  font-weight: var(--hm-fw-semibold);
+  line-height: 1.6;
 }
 
 .ds-case-evolution-narrative__decision span,
@@ -995,14 +1019,16 @@
 
 .ds-case-evolution-narrative__decision p {
   font-weight: var(--hm-fw-semibold);
+  line-height: 1.6;
 }
 
 .ds-case-evolution-narrative__validation {
   display: flex;
   align-items: flex-start;
   gap: var(--hm-space-xs);
-  color: var(--cs-teal-strong) !important;
+  color: var(--cs-text-muted) !important;
   font-size: var(--fs-xs) !important;
+  line-height: 1.6 !important;
 }
 
 .ds-case-evolution-narrative__validation::before {
@@ -1017,7 +1043,34 @@
 
 .ds-case-evolution-narrative__validation span {
   flex: 0 0 auto;
-  color: var(--cs-teal-strong);
+  color: var(--cs-text-muted);
+}
+
+.ds-case-evolution-bridge {
+  max-width: 52ch;
+  margin: var(--hm-space-xl) auto;
+  color: var(--cs-text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.ds-case-evolution-bridge::before,
+.ds-case-evolution-bridge::after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: var(--hm-space-lg);
+  margin: 0 auto;
+  background: var(--cs-line-strong);
+}
+
+.ds-case-evolution-bridge::before {
+  margin-bottom: var(--hm-space-sm);
+}
+
+.ds-case-evolution-bridge::after {
+  margin-top: var(--hm-space-sm);
 }
 
 .ds-case-evolution-case__media-layout {
@@ -1309,10 +1362,6 @@
     padding: var(--hm-space-md);
   }
 
-  .ds-case-evolution-cases {
-    gap: var(--hm-space-2xl);
-  }
-
   .ds-case-evolution-case {
     gap: var(--hm-space-lg);
     padding-top: var(--hm-space-lg);
@@ -1330,6 +1379,16 @@
   .ds-case-evolution-header__copy {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .ds-case-evolution-bridge {
+    max-width: 100%;
+    padding-inline: var(--hm-space-sm);
+  }
+
+  .ds-case-evolution-bridge::before,
+  .ds-case-evolution-bridge::after {
+    height: var(--hm-space-md);
   }
 
   .ds-case-matrix {
