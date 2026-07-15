@@ -5,7 +5,7 @@ import { getDsTranslator } from "../i18n-server";
 
 const frameworkRows = [
   {
-    signal: "只有值重複：顏色、間距、字級跨頁一致",
+    signal: "只有設計值跨頁一致",
     action: "集中管理數值與命名，不改元件結構",
     result: "Design Token",
     example: "顏色／間距／字級",
@@ -36,10 +36,6 @@ export default async function FrameworkSection() {
       title={t("先判斷用途與風險，再決定共用或保留單頁彈性")}
       surface
     >
-      <p className="cs-section-lead">
-        {t("AI 能快速找出重複，但一個模式該進 token、共用元件，還是留在單頁，取決於它的語意、使用情境與未來變動——這張圖就是我判斷放哪的依據。")}
-      </p>
-
       <div className="ds-case-decision-tree">
         <div className="ds-case-decision-tree__root">
           <span>{t("起點")}</span>
@@ -52,7 +48,6 @@ export default async function FrameworkSection() {
             <div className="ds-case-decision-tree__condition">
               <span>{t("看到的現象")}</span>
               <p>{t(row.signal)}</p>
-              <small>{t(`怎麼做：${row.action}`)}</small>
             </div>
             <ArrowRight className="ds-case-decision-tree__arrow" size={24} strokeWidth={1.5} aria-hidden="true" />
             <div className={`ds-case-decision-tree__result ds-case-decision-tree__result--${row.variant}`}>
@@ -68,9 +63,9 @@ export default async function FrameworkSection() {
         title={t("名詞說明")}
         ariaLabel={t("這一段的名詞說明")}
         items={[
-          { term: "Design Token", description: t("集中管理設計值（design tokens）：把顏色、字級、間距等設定放在同一處，讓不同頁面沿用相同規則。") },
-          { term: "Shared Component", description: t("Shared Component 是結構、用途與互動都穩定重複時，由多個頁面共用的元件實作。") },
-          { term: "route-local", description: t("Route-local 是只服務單一頁面的樣式或結構，不會被抽成全站共用規則。") },
+          { term: "Design Token", description: t("有名稱、可重複引用的設計值。") },
+          { term: "Shared Component", description: t("由多個頁面共同使用、集中維護的一份元件實作。") },
+          { term: "route-local", description: t("只存在特定頁面的樣式或結構。") },
           { term: "component API", description: t("Component API 是元件對外提供的使用方式，包括可傳入的內容、狀態與限制。") },
         ]}
       />

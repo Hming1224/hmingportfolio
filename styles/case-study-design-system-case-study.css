@@ -1427,7 +1427,6 @@
   line-height: 1.7;
 }
 
-.ds-case-decision-tree__condition small,
 .ds-case-decision-tree__result small {
   display: block;
   margin-top: var(--hm-space-2xs);
