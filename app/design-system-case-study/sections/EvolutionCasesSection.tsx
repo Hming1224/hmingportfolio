@@ -175,8 +175,8 @@ export default async function EvolutionCasesSection() {
           <CaseHeader item={cases[2]} t={t} />
           <CaseNarrative item={cases[2]} t={t} />
           <div className="ds-case-evolution-case__semantic-layout">
-            <div className="ds-case-table-frame ds-case-semantic-table-frame">
-              <table className="ds-case-table ds-case-semantic-table">
+            <div className="cs-data-table-frame ds-case-semantic-table-frame">
+              <table className="cs-data-table cs-data-table--matrix ds-case-semantic-table">
                 <thead>
                   <tr>
                     <th>{t("概念")}</th>
