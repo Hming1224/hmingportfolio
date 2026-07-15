@@ -33,7 +33,7 @@ export default async function FrameworkSection() {
     <CaseSection
       id="cs-sec-framework"
       kicker={t("判斷框架")}
-      title={t("先判斷用途與風險，再決定共用或保留單頁彈性")}
+      title={t("先看重複的是什麼，再決定要不要共用")}
       surface
     >
       <div className="ds-case-decision-tree">
@@ -66,7 +66,7 @@ export default async function FrameworkSection() {
           { term: "Design Token", description: t("有名稱、可重複引用的設計值。") },
           { term: "Shared Component", description: t("由多個頁面共同使用、集中維護的一份元件實作。") },
           { term: "route-local", description: t("只存在特定頁面的樣式或結構。") },
-          { term: "component API", description: t("Component API 是元件對外提供的使用方式，包括可傳入的內容、狀態與限制。") },
+          { term: "component API", description: t("元件對外提供的使用方式，包括可傳入的內容、狀態與限制。") },
         ]}
       />
     </CaseSection>

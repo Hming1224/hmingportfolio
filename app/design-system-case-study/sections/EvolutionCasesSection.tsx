@@ -14,7 +14,7 @@ const cases = [
     title: "重複穩定後，才整理成共用元件",
     situation: "多個案例頁各自出現相似的 Before／After 版型，但內容與細節仍在調整。",
     initial: "先維持各頁獨立，避免因外觀相近就過早綁定結構。",
-    evidence: "AI 協助比較使用位置與樣式後，確認外框、間距與響應式行為穩定重複，每頁內容則保留差異。",
+    evidence: "AI 協助比較使用位置與樣式後，確認穩定重複的是外框、間距與響應式行為，而不是每頁內容。",
     decision: "先共用固定外框，再在模式穩定後整理視覺元件；文案、圖片與敘事仍由各頁決定。",
     spine: ["該共用", "但要等它先穩定"],
     validation: "比對採用元件的案例 route，並在桌機、平板與手機確認內容順序、圖片比例與溢出。",
@@ -25,7 +25,7 @@ const cases = [
     situation: "反思卡、多重對比版面與影片外框看起來具有相似卡片結構。",
     initial: "曾考慮用同一個 shared component 收斂這些版型。",
     evidence: "進一步比較後，發現它們的用途、內容模型與變動方式不同；強行共用會增加 props、條件分支與例外。",
-    decision: "只共用基礎 CaseCard、Grid 與 Design Token，敘事結構保留在各自 route-local implementation。",
+    decision: "最後只共用基礎的 CaseCard、Grid 和 Design Token；每個案例的敘事結構仍留在自己的 route-local implementation。",
     spine: ["不共用", "即使它們很像"],
     validation: "確認 route-local 樣式不外溢，並檢查保留單頁實作後是否仍沿用共用間距、色彩與 RWD 規則。",
   },
@@ -35,7 +35,7 @@ const cases = [
     situation: "全站有多個外觀看似按鈕的操作，但有些執行當前頁面行為，有些則帶使用者前往其他位置。",
     initial: null,
     evidence: null,
-    decision: "先定義用途，再由既有 Button API 依是否提供 href 呈現 button 或 link；文件分別說明使用情境。",
+    decision: "我先定義用途，再讓既有的 Button API 根據有沒有 href，輸出 button 或 link，並在文件中分別寫清楚使用時機。",
     spine: ["先別問共不共用", "先問這到底是什麼"],
     validation: "檢查實際 HTML 語意、連結目的地、鍵盤 focus 與 hover 狀態，再確認視覺層級符合 CTA 目的。",
   },
@@ -257,8 +257,8 @@ export default async function EvolutionCasesSection() {
         title={t("名詞說明")}
         ariaLabel={t("這一段的名詞說明")}
         items={[
-          { term: "LinkButton / href", description: t("LinkButton 是外觀像按鈕的連結；href 是它帶使用者前往的目的地址。") },
-          { term: "CTA / screen reader", description: t("CTA 是畫面希望使用者採取的行動；screen reader 會依 HTML 語意向視障使用者報讀元件角色。") },
+          { term: "LinkButton / href", description: t("LinkButton 是外觀像按鈕的連結；href 則是連結要前往的網址。") },
+          { term: "CTA / screen reader", description: t("CTA 指的是畫面要引導使用者完成的行動；screen reader 會根據 HTML 語意，向視障使用者讀出元件角色。") },
         ]}
       />
     </CaseSection>

@@ -29,13 +29,13 @@ const maintenanceStages = [
   },
   {
     title: "執行",
-    body: "AI 先唯讀盤點使用位置、重複模式與影響範圍，再依確認規格小批次實作，每批只動一個明確範圍。",
+    body: "AI 先盤點使用位置、重複模式和影響範圍，這一步不動程式；確認規格後再分批實作，每批只處理一個明確範圍。",
     owner: "ai",
     ownerLabel: "AI 執行",
   },
   {
     title: "驗收",
-    body: "先跑 lint、type check、build、token 與 targeted route 檢查，再由我確認雙語、跨 route、跨 viewport、互動與設計意圖。",
+    body: "先跑 lint、type check、build、token 和指定頁面檢查；接著由我確認雙語內容、跨頁版面、不同螢幕寬度的呈現、互動與設計意圖。",
     owner: "human",
     ownerLabel: "我＋AI",
     checks: [
@@ -44,7 +44,7 @@ const maintenanceStages = [
       { title: "視覺與互動品質", owner: "human" },
       { title: "設計意圖", owner: "human" },
     ],
-    footnote: "通過 build 只代表程式能建起來，不代表版面、互動與案例差異符合設計意圖——所以自動檢查之後一定接人工驗收。",
+    footnote: "build 通過，只能確認程式建得起來；版面、互動與案例差異是否符合設計意圖，還是要由我人工驗收。",
   },
   {
     title: "收斂與留痕",
@@ -64,7 +64,7 @@ export default async function GovernanceSection() {
       surface
     >
       <p className="cs-section-lead">
-        {t("前面談的是每次怎麼決定；這一段談的是，不管決定什麼，都用同一套流程去做、驗、記。")}
+        {t("前面說的是怎麼做決定。決定之後，我會固定照這套流程執行、驗收並留下紀錄。")}
       </p>
 
       <div className="ds-case-governance-loop">
@@ -123,7 +123,7 @@ export default async function GovernanceSection() {
         items={[
           { term: "smoke testing", description: t("快速確認主要頁面、不同螢幕寬度與互動是否正常，用來及早發現明顯問題。") },
           { term: "rollback", description: t("改動出現問題時，回到上一個穩定版本。") },
-          { term: "feature branch", description: t("先把改動放在獨立分支驗證，避免直接影響正式站的版本。") },
+          { term: "feature branch", description: t("先把改動放在獨立分支驗證，避免直接影響正式站。") },
           { term: "preview", description: t("合併到正式版本前的預覽環境，用來做最後的畫面和流程確認。") },
         ]}
       />
