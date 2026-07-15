@@ -71,8 +71,12 @@ export default async function GovernanceSection() {
     >
       <div className="ds-case-governance-flow" aria-labelledby="ds-case-governance-flow-title">
         <div className="ds-case-workflow__header">
-          <h3 id="ds-case-governance-flow-title">{t("可持續執行的品質流程")}</h3>
-          <p>{t("穩定品質來自明確輸入、有限範圍、自動檢查、人工驗收與可回溯紀錄。")}</p>
+          <h3 className="cs-subsection-title" id="ds-case-governance-flow-title">
+            {t("可持續執行的品質流程")}
+          </h3>
+          <p className="cs-section-note">
+            {t("穩定品質來自明確輸入、有限範圍、自動檢查、人工驗收與可回溯紀錄。")}
+          </p>
         </div>
         <div className="ds-case-governance-legend">
           <span><i className="ds-case-owner-dot ds-case-owner-dot--human" />{t("由我負責")}</span>
@@ -90,8 +94,12 @@ export default async function GovernanceSection() {
       </div>
 
       <div className="ds-case-subsection-header">
-        <h3>{t("AI 產出品質的四層檢查")}</h3>
-        <p>{t("前兩層確認是否符合規格並能正常運作；後兩層確認實際體驗與設計意圖。")}</p>
+        <h3 className="cs-subsection-title">
+          {t("AI 產出品質的四層檢查")}
+        </h3>
+        <p className="cs-section-note">
+          {t("前兩層確認是否符合規格並能正常運作；後兩層確認實際體驗與設計意圖。")}
+        </p>
       </div>
       <CaseGrid variant="two" className="ds-case-card-grid ds-case-quality-grid">
         {qualityLayers.map((layer, index) => (
@@ -109,8 +117,10 @@ export default async function GovernanceSection() {
       </p>
 
       <div className="ds-case-decision-log">
-        <h3>{t("代表性決策紀錄")}</h3>
-        <p>{t("每筆紀錄保留問題、判斷依據、決定與驗證方式，讓後續修改能追溯當時的取捨。")}</p>
+        <h3 className="cs-subsection-title">{t("代表性決策紀錄")}</h3>
+        <p className="cs-section-note">
+          {t("每筆紀錄保留問題、判斷依據、決定與驗證方式，讓後續修改能追溯當時的取捨。")}
+        </p>
         <ol>
           {decisionLog.map((entry) => (
             <li key={entry.problem}>
