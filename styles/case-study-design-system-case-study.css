@@ -2181,6 +2181,8 @@
 }
 
 .ds-case-reflection-list {
+  display: grid;
+  gap: var(--hm-space-md);
   margin: var(--ds-case-content-block-gap) 0 0;
   padding: 0;
   list-style: none;
@@ -2191,12 +2193,11 @@
   grid-template-columns: 88px minmax(0, 1fr);
   gap: var(--hm-space-lg);
   align-items: start;
-  padding: var(--hm-space-lg) 0;
-  border-bottom: 1px solid var(--cs-line-strong);
-}
-
-.ds-case-reflection-list li:first-child {
-  border-top: 1px solid var(--cs-line-strong);
+  border: 0;
+  border-radius: var(--hm-radius-md);
+  padding: var(--hm-space-lg);
+  background: var(--hm-paper);
+  box-shadow: var(--ds-case-card-shadow);
 }
 
 .ds-case-reflection-list .ds-case-reflection-index {
