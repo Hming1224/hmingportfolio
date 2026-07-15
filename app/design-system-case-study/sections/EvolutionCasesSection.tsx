@@ -1,7 +1,10 @@
-import Image from "next/image";
-import { CaseMedia, CaseSection } from "../../../components/case-study";
+import {
+  BeforeAfterNarrativeFrame,
+  CaseCard,
+  CaseGrid,
+  CaseSection,
+} from "../../../components/case-study";
 import SemanticControlDemo from "../components/SemanticControlDemo";
-import { ASSET } from "../data";
 import { getDsTranslator } from "../i18n-server";
 
 const cases = [
@@ -55,15 +58,15 @@ function CaseHeader({
         {item.number}
       </span>
       <div className="ds-case-evolution-header__copy">
-        <div>
-          <h3>{t(item.title)}</h3>
+        <h3>{t(item.title)}</h3>
+        <div className="ds-case-evolution-header__meta">
           <p className="ds-case-evolution-header__spine">
             {t(item.spine[0])}<span> —— {t(item.spine[1])}</span>
           </p>
+          <span className="ds-case-evolution-header__badge">
+            {t(item.decisionBadge)}
+          </span>
         </div>
-        <span className="ds-case-evolution-header__badge">
-          {t(item.decisionBadge)}
-        </span>
       </div>
     </header>
   );
@@ -93,6 +96,61 @@ function CaseNarrative({
         <span>{t("怎麼確認：")}</span>
         {t(item.validation)}
       </p>
+    </div>
+  );
+}
+
+function LiveBeforeAfterExample({ t }: { t: (text: string) => string }) {
+  return (
+    <div className="ds-case-evolution-example-surface">
+      <span className="ds-case-evolution-context-label">
+        {t("真實元件：BeforeAfterNarrativeFrame")}
+      </span>
+      <BeforeAfterNarrativeFrame
+        className="ds-case-evolution-before-after-live"
+        badge={t("共用固定外框")}
+        title={t("固定外框、內容可替換")}
+        points={[
+          {
+            label: t("整理共用的視覺元件"),
+            content: <p>{t("不同案例共用排列方式，但保留自己的文案、圖片與說明。")}</p>,
+          },
+        ]}
+        beforeLabel="Before"
+        afterLabel="After"
+        before={<p>{t("各頁先獨立完成")}</p>}
+        after={<p>{t("整理共用的視覺元件")}</p>}
+      />
+    </div>
+  );
+}
+
+function LiveBoundaryComparison({ t }: { t: (text: string) => string }) {
+  return (
+    <div className="ds-case-evolution-example-surface">
+      <CaseGrid className="ds-case-evolution-component-comparison" variant="two">
+        <div className="ds-case-evolution-example-column">
+          <span className="ds-case-evolution-context-label">{t("共用基礎")}</span>
+          <CaseCard className="ds-case-evolution-shared-example">
+            <h4>{t("CaseCard／Grid")}</h4>
+            <p>{t("只共用基礎 CaseCard、Grid 與 Design Token，敘事結構保留在各自 route-local implementation。")}</p>
+          </CaseCard>
+        </div>
+        <div className="ds-case-evolution-example-column">
+          <span className="ds-case-evolution-context-label">
+            {t("真實元件：route-local 反思卡")}
+          </span>
+          <ol className="ds-case-reflection-list ds-case-evolution-reflection-example">
+            <li>
+              <span className="ds-case-reflection-index" aria-hidden="true">01</span>
+              <div>
+                <h3>{t("共用不是越多越好")}</h3>
+                <p>{t("AI 能快速找出相似模式，但只有用途、內容模型與未來變動方式都穩定時，整理成共用元件才真正降低維護成本。")}</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </CaseGrid>
     </div>
   );
 }
@@ -128,22 +186,7 @@ export default async function EvolutionCasesSection() {
           <CaseHeader item={cases[0]} t={t} />
           <div className="ds-case-evolution-case__media-layout">
             <CaseNarrative item={cases[0]} t={t} />
-            <CaseMedia
-              className="ds-case-evolution-media"
-              caption={t(
-                "Before／After 版型從各頁獨立製作，逐步整理成固定外框與可替換內容的共用模式。",
-              )}
-            >
-              <Image
-                src={`${ASSET}/solution/before-after-evolution.webp`}
-                alt={t(
-                  "Before／After 版型從三個單頁實作逐步整理成共用外框與視覺元件。",
-                )}
-                width={1600}
-                height={900}
-                sizes="(max-width: 768px) calc(100vw - 80px), calc(100vw - 160px)"
-              />
-            </CaseMedia>
+            <LiveBeforeAfterExample t={t} />
           </div>
         </article>
 
@@ -154,32 +197,38 @@ export default async function EvolutionCasesSection() {
         <article className="ds-case-evolution-case ds-case-evolution-case--matrix">
           <CaseHeader item={cases[1]} t={t} />
           <CaseNarrative item={cases[1]} t={t} />
-          <div
-            className="ds-case-matrix"
-            role="region"
-            aria-label={t("外觀相似但不共用的判斷矩陣")}
-          >
-            <div className="ds-case-matrix__row ds-case-matrix__row--head">
-              <span>{t("候選版型")}</span>
-              <span>{t("看似相同")}</span>
-              <span>{t("實際差異")}</span>
-              <span>{t("最後處理")}</span>
-            </div>
-            {decisionMatrix.map((row) => (
-              <div className="ds-case-matrix__row" key={row[0]}>
-                {row.map((cell, cellIndex) => (
-                  <span
-                    data-label={t(
-                      ["候選版型", "看似相同", "實際差異", "最後處理"][cellIndex],
-                    )}
-                    key={cell}
-                  >
-                    {t(cell)}
-                  </span>
-                ))}
+          <div className="ds-case-evolution-matrix-block">
+            <p className="ds-case-evolution-lead-in">
+              {t("我把當時比較過的版型整理成一張表：")}
+            </p>
+            <div
+              className="ds-case-matrix"
+              role="region"
+              aria-label={t("外觀相似但不共用的判斷矩陣")}
+            >
+              <div className="ds-case-matrix__row ds-case-matrix__row--head">
+                <span>{t("候選版型")}</span>
+                <span>{t("看似相同")}</span>
+                <span>{t("實際差異")}</span>
+                <span>{t("最後處理")}</span>
               </div>
-            ))}
+              {decisionMatrix.map((row) => (
+                <div className="ds-case-matrix__row" key={row[0]}>
+                  {row.map((cell, cellIndex) => (
+                    <span
+                      data-label={t(
+                        ["候選版型", "看似相同", "實際差異", "最後處理"][cellIndex],
+                      )}
+                      key={cell}
+                    >
+                      {t(cell)}
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
+          <LiveBoundaryComparison t={t} />
         </article>
 
         <p className="ds-case-evolution-bridge">
@@ -190,36 +239,41 @@ export default async function EvolutionCasesSection() {
           <CaseHeader item={cases[2]} t={t} />
           <CaseNarrative item={cases[2]} t={t} />
           <div className="ds-case-evolution-case__semantic-layout">
-            <div className="cs-data-table-frame ds-case-semantic-table-frame">
-              <table className="cs-data-table cs-data-table--matrix ds-case-semantic-table">
-                <thead>
-                  <tr>
-                    <th>{t("概念")}</th>
-                    <th>{t("主要用途")}</th>
-                    <th>{t("實際例子")}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {semanticRows.map(([name, purpose, example]) => (
-                    <tr key={name}>
-                      <th scope="row">{t(name)}</th>
-                      <td>{t(purpose)}</td>
-                      <td>{t(example)}</td>
+            <div className="ds-case-evolution-example-surface ds-case-evolution-semantic-example">
+              <span className="ds-case-evolution-context-label">
+                {t("真實元件：Button、Link 與 LinkButton")}
+              </span>
+              <div className="cs-data-table-frame ds-case-semantic-table-frame">
+                <table className="cs-data-table cs-data-table--matrix ds-case-semantic-table">
+                  <thead>
+                    <tr>
+                      <th>{t("概念")}</th>
+                      <th>{t("主要用途")}</th>
+                      <th>{t("實際例子")}</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {semanticRows.map(([name, purpose, example]) => (
+                      <tr key={name}>
+                        <th scope="row">{t(name)}</th>
+                        <td>{t(purpose)}</td>
+                        <td>{t(example)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <SemanticControlDemo
+                buttonActionLabel={t("複製聯絡方式")}
+                buttonLabel={t("Button：執行操作")}
+                copiedLabel={t("已複製")}
+                groupLabel={t("Button、Link 與 LinkButton 實際範例")}
+                linkButtonLabel={t("LinkButton：連結語意、按鈕外觀")}
+                linkButtonTargetLabel={t("查看最終成果")}
+                linkLabel={t("Link：前往位置")}
+                linkTargetLabel={t("查看判斷框架")}
+              />
             </div>
-            <SemanticControlDemo
-              buttonActionLabel={t("複製聯絡方式")}
-              buttonLabel={t("Button：執行操作")}
-              copiedLabel={t("已複製")}
-              groupLabel={t("Button、Link 與 LinkButton 實際範例")}
-              linkButtonLabel={t("LinkButton：連結語意、按鈕外觀")}
-              linkButtonTargetLabel={t("查看最終成果")}
-              linkLabel={t("Link：前往位置")}
-              linkTargetLabel={t("查看判斷框架")}
-            />
           </div>
         </article>
       </div>

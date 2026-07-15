@@ -877,22 +877,23 @@
 
 .ds-case-evolution-header__number {
   color: var(--cs-accent-soft);
-  font-size: clamp(72px, 10vw, 136px);
+  font-size: clamp(56px, 7vw, 96px);
   font-weight: var(--hm-fw-bold);
   line-height: 0.78;
   letter-spacing: -0.07em;
 }
 
 .ds-case-evolution-header__copy {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--hm-space-md);
+  display: grid;
   min-width: 0;
 }
 
-.ds-case-evolution-header__copy > div {
-  min-width: 0;
+.ds-case-evolution-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hm-space-xs);
+  margin-top: var(--hm-space-2xs);
 }
 
 .ds-case-evolution-header h3 {
@@ -904,7 +905,7 @@
 }
 
 .ds-case-evolution-header__spine {
-  margin: var(--hm-space-2xs) 0 0;
+  margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
   font-weight: var(--hm-fw-semibold);
@@ -1050,13 +1051,44 @@
   gap: clamp(28px, 4vw, 56px);
 }
 
-.ds-case-evolution-media {
+.ds-case-evolution-example-surface {
+  display: grid;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  border-radius: var(--hm-radius-lg);
+  padding: var(--hm-space-md);
+  background: var(--cs-surface);
+}
+
+.ds-case-evolution-context-label {
+  color: var(--cs-text-muted);
+  font-size: var(--fs-xs);
+  font-weight: var(--hm-fw-bold);
+  line-height: 1.5;
+}
+
+.ds-case-evolution-before-after-live {
+  --cs-card-padding: var(--hm-space-md);
+  --cs-before-after-narrative-gap: var(--hm-space-sm);
+  --cs-before-after-narrative-body-gap: var(--hm-space-sm);
+  --cs-before-after-narrative-point-columns: 1fr;
+  --cs-before-after-narrative-point-gap: var(--hm-space-2xs);
+  --cs-before-after-narrative-comparison-gap: var(--hm-space-sm);
+  --cs-before-after-narrative-panel-body-padding: var(--hm-space-sm);
+}
+
+.ds-case-evolution-before-after-live :is(
+  .cs-before-after-narrative-point-content p,
+  .cs-before-after-narrative-panel-body p
+) {
   margin: 0;
 }
 
-.ds-case-evolution-media .cs-media-frame {
-  border-color: var(--cs-line);
-  box-shadow: none;
+.ds-case-evolution-before-after-live .cs-before-after-narrative-panel-body p {
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  text-align: center;
 }
 
 .ds-case-evolution-case--matrix .ds-case-evolution-narrative,
@@ -1069,8 +1101,20 @@
   gap: var(--hm-space-md);
 }
 
+.ds-case-evolution-matrix-block {
+  display: grid;
+  gap: var(--hm-space-sm);
+}
+
+.ds-case-evolution-lead-in {
+  margin: 0;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
 .ds-case-matrix {
-  margin-top: var(--hm-space-lg);
+  margin-top: 0;
   overflow: hidden;
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-md);
@@ -1115,6 +1159,52 @@
   --cs-data-table-matrix-head-color: var(--cs-text-secondary);
   --cs-data-table-matrix-row-head-color: var(--cs-text-body);
   min-width: 680px;
+}
+
+.ds-case-evolution-component-comparison {
+  gap: var(--hm-space-md);
+}
+
+.ds-case-evolution-example-column {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+}
+
+.ds-case-evolution-shared-example {
+  height: 100%;
+}
+
+.ds-case-evolution-shared-example h4,
+.ds-case-evolution-shared-example p {
+  margin: 0;
+}
+
+.ds-case-evolution-shared-example h4 {
+  color: var(--cs-text-heading);
+  font-size: var(--fs-h4);
+  line-height: 1.4;
+}
+
+.ds-case-evolution-shared-example p {
+  margin-top: var(--hm-space-sm);
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+.ds-case-evolution-reflection-example {
+  height: 100%;
+  margin: 0;
+}
+
+.ds-case-evolution-reflection-example li {
+  height: 100%;
+}
+
+.ds-case-evolution-semantic-example .ds-case-control-demo {
+  margin-top: 0;
 }
 
 .ds-case-control-demo {
@@ -1245,17 +1335,13 @@
   }
 
   .ds-case-evolution-header {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
     gap: var(--hm-space-sm);
   }
 
-  .ds-case-evolution-header__number {
-    font-size: clamp(64px, 24vw, 92px);
-  }
-
-  .ds-case-evolution-header__copy {
+  .ds-case-evolution-header__meta {
     align-items: flex-start;
-    flex-direction: column;
   }
 
   .ds-case-evolution-bridge {
