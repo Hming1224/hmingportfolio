@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { AlertTriangle } from "lucide-react";
 import { CaseSection } from "../../../components/case-study";
+import TermNotes from "../components/TermNotes";
 import { getDsTranslator } from "../i18n-server";
 
 function GovernanceOwnerMark({ owner, label }: { owner: "human" | "ai"; label: string }) {
@@ -115,6 +116,17 @@ export default async function GovernanceSection() {
         <AlertTriangle size={20} aria-hidden="true" />
         {t("未經人工驗收，不 push、merge 或 deploy。")}
       </p>
+
+      <TermNotes
+        title={t("名詞說明")}
+        ariaLabel={t("這一段的名詞說明")}
+        items={[
+          { term: "smoke testing", description: t("快速確認主要頁面、不同螢幕寬度與互動是否正常，用來及早發現明顯問題。") },
+          { term: "rollback", description: t("改動出現問題時，回到上一個穩定版本。") },
+          { term: "feature branch", description: t("先把改動放在獨立分支驗證，避免直接影響正式站的版本。") },
+          { term: "preview", description: t("合併到正式版本前的預覽環境，用來做最後的畫面和流程確認。") },
+        ]}
+      />
     </CaseSection>
   );
 }

@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { CaseSection } from "../../../components/case-study";
+import TermNotes from "../components/TermNotes";
 import { getDsTranslator } from "../i18n-server";
 
 const frameworkRows = [
@@ -62,6 +63,17 @@ export default async function FrameworkSection() {
           </div>
         ))}
       </div>
+
+      <TermNotes
+        title={t("名詞說明")}
+        ariaLabel={t("這一段的名詞說明")}
+        items={[
+          { term: "Design Token", description: t("集中管理設計值（design tokens）：把顏色、字級、間距等設定放在同一處，讓不同頁面沿用相同規則。") },
+          { term: "Shared Component", description: t("Shared Component 是結構、用途與互動都穩定重複時，由多個頁面共用的元件實作。") },
+          { term: "route-local", description: t("Route-local 是只服務單一頁面的樣式或結構，不會被抽成全站共用規則。") },
+          { term: "component API", description: t("Component API 是元件對外提供的使用方式，包括可傳入的內容、狀態與限制。") },
+        ]}
+      />
     </CaseSection>
   );
 }

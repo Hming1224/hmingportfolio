@@ -364,15 +364,15 @@
 
 .ds-case-term-notes {
   width: 100%;
-  margin-top: var(--hm-space-lg);
+  margin-top: var(--ds-case-content-block-gap);
   border-top: 1px solid var(--cs-line);
-  padding-top: 22px;
+  padding-top: var(--hm-space-md);
 }
 
 .ds-case-term-notes h3 {
-  margin: 0 0 14px;
+  margin: 0 0 var(--hm-space-sm);
   color: var(--cs-text-muted);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: var(--hm-fw-bold);
   letter-spacing: 0.04em;
 }
@@ -380,7 +380,7 @@
 .ds-case-term-notes dl {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px 24px;
+  gap: var(--hm-space-sm) var(--hm-space-lg);
   margin: 0;
 }
 
@@ -391,7 +391,7 @@
 }
 
 .ds-case-term-note dt {
-  color: var(--cs-text-secondary);
+  color: var(--cs-text-heading);
   font-size: var(--fs-sm);
   font-weight: var(--hm-fw-bold);
   line-height: 1.45;
@@ -401,7 +401,7 @@
   margin: 0;
   color: var(--cs-text-secondary);
   font-size: var(--fs-sm);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 /* ── Evolution A：階段卡與箭頭 ── */
@@ -648,16 +648,6 @@
     gap: 20px;
   }
 
-  .ds-case-term-notes {
-    margin-top: 26px;
-    padding-top: 18px;
-  }
-
-  .ds-case-term-notes h3,
-  .ds-case-term-note dt,
-  .ds-case-term-note dd {
-    font-size: var(--fs-xs);
-  }
 }
 
 /* ── Narrative rebuild: motivation, decision boundaries, cases, governance ── */

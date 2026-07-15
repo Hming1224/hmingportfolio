@@ -5,6 +5,7 @@ import {
   CaseSection,
 } from "../../../components/case-study";
 import SemanticControlDemo from "../components/SemanticControlDemo";
+import TermNotes from "../components/TermNotes";
 import { getDsTranslator } from "../i18n-server";
 
 const cases = [
@@ -281,6 +282,19 @@ export default async function EvolutionCasesSection() {
       <p className="ds-case-editorial-statement">
         {t("三個決定雖然不同，判斷順序都一樣。我會先看用途、內容模型與未來的變動方式，再決定怎麼處理；把這套順序寫成框架，下一次就不用重新憑感覺判斷。")}
       </p>
+
+      <TermNotes
+        title={t("名詞說明")}
+        ariaLabel={t("這一段的名詞說明")}
+        items={[
+          { term: "slot-based composition", description: t("固定外框、內容可替換（slot-based composition）：共用排列方式，但讓各頁放入自己的內容。") },
+          { term: "Rule of Three", description: t("相同需求穩定出現多次後，再評估是否整理成共用元件（Rule of Three）。") },
+          { term: "visual regression", description: t("指修改後意外破壞原本正常的畫面或互動。") },
+          { term: t("CaseCard／Grid"), description: t("CaseCard 與 Grid 是本站案例頁共用的基礎卡片外框與版面元件。") },
+          { term: "LinkButton / href", description: t("LinkButton 是外觀像按鈕的連結；href 是它帶使用者前往的目的地址。") },
+          { term: "CTA / screen reader", description: t("CTA 是畫面希望使用者採取的行動；screen reader 會依 HTML 語意向視障使用者報讀元件角色。") },
+        ]}
+      />
     </CaseSection>
   );
 }
