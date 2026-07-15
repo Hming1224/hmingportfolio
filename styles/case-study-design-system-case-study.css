@@ -658,6 +658,10 @@
   max-width: 920px;
 }
 
+.ds-case-prose--after-motivation-cards {
+  margin-top: var(--ds-case-content-block-gap);
+}
+
 .ds-case-growth-flow {
   margin-top: var(--ds-case-content-block-gap);
 }

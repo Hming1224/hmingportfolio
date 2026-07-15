@@ -1,8 +1,59 @@
 import Image from "next/image";
-import { CaseMedia, CaseSection } from "../../../components/case-study";
+import { CaseCard, CaseGrid, CaseMedia, CaseSection } from "../../../components/case-study";
 import TermNotes from "../components/TermNotes";
 import { ASSET } from "../data";
 import { getDsTranslator } from "../i18n-server";
+
+function IconRepeat() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17 2.5 21 6.5l-4 4" />
+      <path d="M3 11V9a3 3 0 0 1 3-3h15" />
+      <path d="M7 21.5 3 17.5l4-4" />
+      <path d="M21 13v2a3 3 0 0 1-3 3H3" />
+    </svg>
+  );
+}
+
+function IconAgents() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="5.5" cy="6" r="2.5" />
+      <circle cx="18.5" cy="6" r="2.5" />
+      <circle cx="12" cy="18" r="2.5" />
+      <path d="M7.6 7.6 10.2 16" />
+      <path d="M16.4 7.6 13.8 16" />
+      <path d="M8 6h8" />
+    </svg>
+  );
+}
+
+function IconBadgeCheck() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 2.5l2.4 1.8 3-.3 1.1 2.8 2.8 1.1-.3 3 1.8 2.4-1.8 2.4.3 3-2.8 1.1-1.1 2.8-3-.3-2.4 1.8-2.4-1.8-3 .3-1.1-2.8-2.8-1.1.3-3L1.2 13.3 3 10.9l-.3-3 2.8-1.1 1.1-2.8 3 .3z" />
+      <path d="M8.5 12.5l2.4 2.4 4.6-5" />
+    </svg>
+  );
+}
+
+const motivationCards = [
+  {
+    icon: <IconRepeat />,
+    title: "頁面迭代太頻繁",
+    body: "同一種「前後對比」版型，在不同案例頁各自實作；顏色、間距也散落在各頁 CSS 裡。當網站越來越大，任何微調都可能變成重複修改。",
+  },
+  {
+    icon: <IconAgents />,
+    title: "AI 協作需要明確邊界",
+    body: "我會使用 AI 協助盤點、實作與檢查，但如果沒有共同規範，每次修改都可能採用不同寫法。AI 要能穩定協作，前提是規則、權限和驗證方式都被寫清楚。",
+  },
+  {
+    icon: <IconBadgeCheck />,
+    title: "把理解落到真實作品裡",
+    body: "與其停留在「知道 design system」的理解，我更想用自己的作品集實際做一次：從規則建立、元件盤點到長期維護，把整個過程走一遍、也記錄下來。",
+  },
+];
 
 export default async function StartingPointSection() {
   const { t } = await getDsTranslator();
@@ -16,11 +67,24 @@ export default async function StartingPointSection() {
     >
       <div className="ds-case-prose">
         <p className="cs-section-lead">
-          {t("作品集一開始以快速完成頁面為主；隨著案例增加，原本適合單頁的做法開始讓重複版型與分散樣式增加跨頁同步與維護成本。")}
+          {t("網站不是沒有設計，只是設計散落在每一頁，沒有集中管理的地方。")}
         </p>
         <p className="cs-section-lead">
-          {t("我知道需要一套 Design System，把能共用的規則整理起來；但當時只有方向，還不清楚文件、元件和實際程式應該怎麼連在一起。")}
+          {t("作品集網站一開始是用「先把畫面做出來」的方式快速成形，讓內容可以先上線展示。但隨著頁面越改越多，三個問題也慢慢浮現：")}
         </p>
+      </div>
+
+      <CaseGrid variant="three" className="ds-case-card-grid">
+        {motivationCards.map((card) => (
+          <CaseCard className="ds-case-icon-card" key={card.title}>
+            <span className="ds-case-icon" aria-hidden="true">{card.icon}</span>
+            <h3>{t(card.title)}</h3>
+            <p>{t(card.body)}</p>
+          </CaseCard>
+        ))}
+      </CaseGrid>
+
+      <div className="ds-case-prose ds-case-prose--after-motivation-cards">
         <p className="cs-section-lead">
           {t("我先參考 Ant Design 與 Google Material Design，逐項比較作品集的顏色層級、間距、圓角、字級，以及 hover、focus、disabled 等元件狀態，共整理出十幾個缺口。")}
         </p>
