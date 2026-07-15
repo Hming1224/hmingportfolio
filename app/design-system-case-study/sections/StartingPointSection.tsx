@@ -14,17 +14,17 @@ export default async function StartingPointSection() {
       surface
     >
       <p className="cs-section-lead">
-        {t("不從零發明，先看成熟系統如何整理規則、元件與文件。")}
+        {t("我沒有從零開始，而是先研究成熟系統怎麼整理規則、元件和文件。")}
       </p>
       <CaseCard className="ds-case-narrative-card">
         <p>
           {t("我拿 ")}<b>{t("Ant Design")}</b>{t(" 和 ")}<b>{t("Google Material Design")}</b>{t(" 當基準，逐項對照自己的網站做 ")}<b>{t("gap analysis")}</b>{t("：顏色有沒有分層？間距、圓角、字級有沒有規則？元件狀態（hover / focus / disabled）齊不齊？盤點下來列出了十幾個缺口。")}
         </p>
         <p>
-          {t("接著用 ")}<b>{t("Figma Make")}</b>{t(" 把第一版系統規劃做成互動雛形——包含系統介紹、缺口清單和升級計畫三個頁面。這一步幫我把腦中模糊的「想要一套系統」變成看得見、可以討論的東西。")}
+          {t("接著，我用 ")}<b>{t("Figma Make")}</b>{t(" 把第一版系統規劃做成三頁互動雛形：系統介紹、缺口清單和升級計畫。原本腦中模糊的「想要一套系統」，這時終於變成看得見、可以討論的介面。")}
         </p>
         <p>
-          {t("但這裡也埋下了第一個伏筆：")}<b>{t("規劃是規劃，code 是 code。雛形畫得再完整，不等於網站真的照它運作。")}</b>
+          {t("當時我還沒處理一個關鍵問題：")}<b>{t("規劃和 code 仍是兩套東西。雛形畫得再完整，也不代表網站真的照它運作。")}</b>
         </p>
       </CaseCard>
       <CaseMedia

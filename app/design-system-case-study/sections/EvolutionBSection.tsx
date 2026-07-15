@@ -22,7 +22,7 @@ const brakeCases = [
     title: "通用 Tag、表格外框、影片燈箱",
     temptation: "「以後一定用得到」，先做起來放著。",
     judgment: "都還沒有足夠穩定的使用場景。需求出現之前抽的元件多半是在猜，而猜錯的抽象比重複的 code 更難維護。",
-    decision: "行為先寫進文件、元件緩建；等 rule of three 條件成立再重啟評估。",
+    decision: "先把預期行為寫進文件，暫緩建立元件；等 rule of three 條件成立後再重新評估。",
   },
 ];
 
@@ -48,7 +48,7 @@ export default async function EvolutionBSection() {
           {t("印象最深的一次：我曾一口氣盤點 8 個「看起來可以抽」的 pattern，")}<b>{t("結論是一個都不抽")}</b>{t("。那次盤點沒有產出任何新元件，留下的是 8 條寫進治理文件的「為什麼不抽」。對我來說，把不做的理由寫清楚，跟多做幾個元件一樣重要。")}
         </p>
       </CaseCard>
-      <blockquote className="ds-case-quote">{t("抽象是有成本的。每多一個共用元件，就多一份契約要維護、多一群頁面被綁在一起。")}</blockquote>
+      <blockquote className="ds-case-quote">{t("抽象是有成本的。每多一個共用元件，就多一份契約要維護，也會讓更多頁面受到它的影響。")}</blockquote>
       <TermNotes
         title={t("名詞註釋")}
         ariaLabel={t("專有名詞註釋")}

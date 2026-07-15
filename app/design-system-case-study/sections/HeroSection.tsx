@@ -54,7 +54,7 @@ export default async function HeroSection() {
           {t("把自己的作品集當產品做：一套邊用邊長出來的 Design System")}
         </h1>
         <p className="ds-case-hero__subtitle">
-          {t("這是我在製作作品集網站期間，自發啟動的 side project。我把網站本身當成產品管理，逐步建立 design tokens、元件契約和 AI-assisted workflow。這一頁記錄的不是一次規劃到位的成果，而是我在重複樣式、元件邊界和 AI 協作風險逐漸出現後，怎麼把問題整理成可維護、可驗證、可回溯的工作流程。")}
+          {t("這是我在製作作品集網站時主動開始的 side project。我把網站本身當成產品，逐步建立 design tokens、元件契約和 AI-assisted workflow。隨著樣式開始重複、元件邊界變得模糊，AI 協作也出現風險，我把一路遇到的問題整理成能維護、能驗證，也查得到修改紀錄的工作方式。")}
         </p>
         <CaseInfoGrid items={heroInfoItems} className="cs-info-row--divided ds-case-info-grid" />
       </div>

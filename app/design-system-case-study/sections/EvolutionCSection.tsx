@@ -12,7 +12,7 @@ const semanticRows = [
 export default async function EvolutionCSection() {
   const { t } = await getDsTranslator();
   return (
-    <CaseSection id="cs-sec-evolution-c" kicker={t("EVOLUTION C")} title={t("演化實例 C：語意分不清時，先拆文件、不拆 code")}>
+    <CaseSection id="cs-sec-evolution-c" kicker={t("EVOLUTION C")} title={t("演化實例 C：語意分不清時，先分開寫規格，不急著拆 code")}>
       <p className="cs-section-lead">{t("不是每個問題都要用「改 code」來解決。")}</p>
       <p className="cs-section-lead">{t("整理全站按鈕時，我卡在一個看起來很小的問題：")}</p>
       <p className="ds-case-question-callout">{t("「View case study」長得像按鈕，那它是 Button 嗎？")}</p>
@@ -28,16 +28,16 @@ export default async function EvolutionCSection() {
         </table>
       </div>
       <CaseCard className="ds-case-narrative-card">
-        <p>{t("為什麼要分這麼細？因為使用者對兩者的預期不同：link 可以右鍵開新分頁、複製網址；button 是觸發一個當下的操作。Screen reader 也會把兩者報讀成不同角色——語意用錯，輔助科技的使用者會對點擊結果有錯誤期待。")}</p>
-        <p>{t("最後的決策是")}<b>{t("「文件拆、code 不拆」")}</b>{t("：在規格文件裡把 Button 和 LinkButton 的 contract 分開寫清楚；code 維持同一個 Button 元件（有 href 就 render 成連結）。因為現階段把 code 拆成兩個元件，只會製造一波 import 搬移和 regression 風險——語意的問題，用文件就能解決，就不要動 code。")}</p>
-        <p>{t("這正是決策框架第三列「用途易混淆 → Component Contract」的實際案例：抽象不是只有「抽元件」一種形式，把契約寫清楚，本身就是一種系統化。")}</p>
+        <p>{t("為什麼要分這麼細？因為使用者對 link 和 button 的預期不同：link 可以右鍵開新分頁、複製網址；button 會執行當下的操作。Screen reader 也會把它們讀成不同角色。語意用錯，使用輔助科技的人就可能誤判點擊後會發生什麼。")}</p>
+        <p>{t("最後我決定")}<b>{t("「文件拆、code 不拆」")}</b>{t("：在規格文件裡分別寫清楚 Button 和 LinkButton 的 contract；code 則維持同一個 Button 元件，有 href 時就 render 成連結。現階段若拆成兩個元件，得大批調整 import，也會增加 regression 風險。既然先把使用規則寫清楚就能解決，就不急著動 code。")}</p>
+        <p>{t("這個案例最後落在決策框架第三列「用途易混淆 → Component Contract」。除了抽元件，把使用契約寫清楚，也能解決重複出現的問題。")}</p>
       </CaseCard>
       <TermNotes
         title={t("名詞註釋")}
         ariaLabel={t("專有名詞註釋")}
         items={[
           { term: t("LinkButton"), description: t("LinkButton 是語意上帶使用者前往另一個位置、視覺上看起來像按鈕的連結。") },
-          { term: t("Screen reader"), description: t("Screen reader 是協助視障使用者讀取畫面內容的輔助科技，會依照 HTML 語意報讀不同角色。") },
+          { term: t("Screen reader"), description: t("Screen reader 是協助視障使用者讀取畫面內容的輔助科技，會依照 HTML 語意讀出不同角色。") },
           { term: t("Component contract"), description: t("Component contract 指的是元件的使用規則，例如它適合承載什麼內容、有哪些狀態、什麼情境下不該使用。") },
         ]}
       />

@@ -48,8 +48,8 @@ const whyCards = [
   },
   {
     icon: <IconBadgeCheck />,
-    title: "把理解落到真實作品裡",
-    body: "與其停留在「知道 design system」的理解，我更想用自己的作品集實際做一次：從規則建立、元件盤點到長期維護，把整個過程走一遍、也記錄下來。",
+    title: "用自己的作品集實際做一次",
+    body: "我不想只停在「知道 design system」這一步，所以直接拿自己的作品集來做：從建立規則、盤點元件到後續維護，完整走過一次，也把過程記錄下來。",
   },
 ];
 
@@ -61,7 +61,7 @@ export default async function WhySection() {
         {t("網站不是沒有設計，只是設計散落在每一頁，沒有集中管理的地方。")}
       </p>
       <p className="cs-section-lead">
-        {t("作品集網站是用「先把畫面做出來」的方式快速成形的——這個起點沒有錯，它讓內容先能展示。但隨著頁面越改越多，三個問題越來越明顯：")}
+        {t("作品集網站一開始是用「先把畫面做出來」的方式快速成形，讓內容可以先上線展示。但隨著頁面越改越多，三個問題也慢慢浮現：")}
       </p>
       <CaseGrid variant="three" className="ds-case-card-grid">
         {whyCards.map((card) => (
@@ -73,7 +73,7 @@ export default async function WhySection() {
         ))}
       </CaseGrid>
       <blockquote className="ds-case-quote">
-        {t("把「規則」從人的腦中搬出來，變成 code 和文件都讀得到的單一來源（single source of truth）。")}
+        {t("把原本散落在腦中的規則寫進 code 和文件，讓大家都能從同一個來源查到。")}
       </blockquote>
       <TermNotes
         title={t("名詞註釋")}

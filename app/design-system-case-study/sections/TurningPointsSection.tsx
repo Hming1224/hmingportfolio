@@ -32,9 +32,9 @@ const workflowSteps = [
 export default async function TurningPointsSection() {
   const { t } = await getDsTranslator();
   return (
-    <CaseSection id="cs-sec-turning-points" kicker={t("TURNING POINTS")} title={t("三次轉折：這個專案學到最多的三段")}>
+    <CaseSection id="cs-sec-turning-points" kicker={t("TURNING POINTS")} title={t("三次轉折：這套系統是怎麼一路修出來的")}>
       <p className="cs-section-lead">
-        {t("這套系統很難說是一次「建」好的，比較像是一路修出來的——每次轉折，都讓我放掉一個原本以為理所當然的假設。")}
+        {t("這套系統不是一次建好的，而是一路修出來的。每次出問題，都讓我重新檢查一個原本以為理所當然的做法。")}
       </p>
       <div className="ds-case-timeline">
         {turningPoints.map((item, index) => (
@@ -50,8 +50,8 @@ export default async function TurningPointsSection() {
         <div className="ds-case-workflow__header">
           <h3 id="ds-case-workflow-title">{t("AI collaboration workflow")}</h3>
           <p>
-            {t("我設計這套 AI-assisted workflow，是為了讓 AI 協作可以被管理、驗證與回溯。")}
-            {t("先診斷，再小範圍改動；每一步都驗證，最後才建立可回溯的 checkpoint。")}
+            {t("這套 AI-assisted workflow 把每次協作拆成可檢查的步驟：")}
+            {t("先診斷，再小範圍修改；每一步都驗證，最後留下 checkpoint，出問題時查得到也退得回去。")}
           </p>
         </div>
         <ol className="ds-case-workflow__list">

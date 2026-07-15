@@ -31,7 +31,7 @@ const outcomeMetrics = [
   {
     value: "3",
     label: "validation scripts",
-    body: "check-design-tokens、check-links 與 architecture audit 負責檢查 token、素材連結和樣式 ownership，讓規則不是只靠人工記得。",
+    body: "check-design-tokens、check-links 與 architecture audit 會檢查 token、素材連結和樣式 ownership，讓這些規則不只靠人工記憶。",
   },
 ];
 
@@ -45,7 +45,7 @@ export default async function OutcomeSection() {
   const { t } = await getDsTranslator();
   return (
     <CaseSection id="cs-sec-outcome" kicker={t("OUTCOME")} title={t("產出與防護網")}>
-      <p className="cs-section-lead">{t("系統建好只是開始，更重要的是它能不能防止之後慢慢走樣。先看幾個數字：")}</p>
+      <p className="cs-section-lead">{t("除了元件和文件，我也補上檢查機制，避免網站在後續修改中慢慢走樣。")}</p>
       <CaseMetricGrid className="ds-case-card-grid">
         {outcomeMetrics.map((metric) => (
           <CaseCard variant="metric" key={metric.label}>
@@ -55,7 +55,7 @@ export default async function OutcomeSection() {
           </CaseCard>
         ))}
       </CaseMetricGrid>
-      <p className="cs-section-lead ds-case-guard-lead">{t("再看防護網——規則被打破時，讓工具先發現，不用只靠人工檢查：")}</p>
+      <p className="cs-section-lead ds-case-guard-lead">{t("當規則被打破時，先由工具攔下明顯問題，再交給人工確認：")}</p>
       <CaseGrid variant="three" className="ds-case-card-grid ds-case-guard-grid">
         {guardrails.map((guard) => (
           <CaseCard key={guard.name}>
