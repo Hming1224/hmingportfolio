@@ -18,7 +18,7 @@ const turningPoints = [
     title: "改成小批次實作與逐批驗收",
     event: "當盤點、決策、實作與檢查混在同一批工作中，問題發生後很難定位來源。",
     finding: "拆開階段後，每次修改都有明確範圍、檢查條件與可回復版本。",
-    change: "形成先盤點、後決策、再實作與驗收的維護方式。",
+    change: "每次修改先盤點現況與影響 route；若涉及設計意圖、用途或共用取捨，就先由我判斷，再定義範圍與驗收條件後執行。",
   },
 ];
 
@@ -41,7 +41,7 @@ export default async function TurningPointsSection() {
               <h3>{t(item.title)}</h3>
             </header>
             <p className="ds-case-timeline__body">{t(item.event)} {t(item.finding)}</p>
-            <p className="ds-case-lesson"><strong>{t("因此改變")}</strong>{t(item.change)}</p>
+            <p className="ds-case-lesson"><strong>{t("修正方向")}</strong>{t(item.change)}</p>
           </article>
         ))}
       </div>
