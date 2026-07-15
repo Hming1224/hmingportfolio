@@ -1,162 +1,58 @@
+import Image from "next/image";
 import {
-  BeforeAfterNarrativeFrame,
   CaseCard,
   CaseGrid,
+  CaseMedia,
   CaseSection,
 } from "../../../components/case-study";
-import SemanticControlDemo from "../components/SemanticControlDemo";
 import TermNotes from "../components/TermNotes";
+import { ASSET } from "../data";
 import { getDsTranslator } from "../i18n-server";
 
-const cases = [
+const evolutionSteps = [
   {
-    number: "01",
-    title: "重複穩定後，才整理成共用元件",
-    situation: "多個案例頁各自出現相似的 Before／After 版型，但內容與細節仍在調整。",
-    initial: "先維持各頁獨立，避免因外觀相近就過早綁定結構。",
-    evidence: "AI 協助比較使用位置與樣式後，確認穩定重複的是外框、間距與響應式行為，而不是每頁內容。",
-    decision: "先共用固定外框，再在模式穩定後整理視覺元件；文案、圖片與敘事仍由各頁決定。",
-    spine: ["該共用", "但要等它先穩定"],
-    validation: "比對採用元件的案例 route，並在桌機、平板與手機確認內容順序、圖片比例與溢出。",
+    title: "各自實作",
+    body: "不同案例頁各自實作類似的 Before / After 版型，視覺相近但 code 完全獨立。這時如果直接抽共用，只會把還沒穩定的差異綁在一起。",
   },
   {
-    number: "02",
-    title: "外觀相似，也可能不適合共用",
-    situation: "反思卡、多重對比版面與影片外框看起來具有相似卡片結構。",
-    initial: "曾考慮用同一個 shared component 收斂這些版型。",
-    evidence: "進一步比較後，發現它們的用途、內容模型與變動方式不同；強行共用會增加 props、條件分支與例外。",
-    decision: "最後只共用基礎的 CaseCard、Grid 和 Design Token；每個案例的敘事結構仍留在自己的 route-local implementation。",
-    spine: ["不共用", "即使它們很像"],
-    validation: "確認 route-local 樣式不外溢，並檢查保留單頁實作後是否仍沿用共用間距、色彩與 RWD 規則。",
+    title: "先 audit，再抽出敘事外框",
+    body: "盤點後確認，真正重複的是版面配置與 RWD 行為，不是內容本身。所以我抽出 slot-based 的敘事外框，讓各頁保留自己的文案、圖片和說明節奏。",
   },
   {
-    number: "03",
-    title: "先分清用途，再決定元件與 API",
-    situation: "全站有多個外觀看似按鈕的操作，但有些執行當前頁面行為，有些則帶使用者前往其他位置。",
-    initial: null,
-    evidence: null,
-    decision: "我先定義用途，再讓既有的 Button API 根據有沒有 href，輸出 button 或 link，並在文件中分別寫清楚使用時機。",
-    spine: ["先別問共不共用", "先問這到底是什麼"],
-    validation: "檢查實際 HTML 語意、連結目的地、鍵盤 focus 與 hover 狀態，再確認視覺層級符合 CTA 目的。",
+    title: "再拆出視覺外殼",
+    body: "第二步才把「有標籤的面板」拆成更底層的視覺外殼，並保留既有樣式掛鉤，讓已上線頁面可以在不改變畫面的情況下遷移。",
   },
 ];
 
-type EvolutionCase = (typeof cases)[number];
-
-function CaseHeader({
-  item,
-  t,
-}: {
-  item: EvolutionCase;
-  t: (text: string) => string;
-}) {
-  return (
-    <header className="ds-case-evolution-header">
-      <span className="ds-case-evolution-header__number" aria-hidden="true">
-        {item.number}
-      </span>
-      <div className="ds-case-evolution-header__copy">
-        <h3>{t(item.title)}</h3>
-        <div className="ds-case-evolution-header__meta">
-          <p className="ds-case-evolution-header__spine">
-            {t(item.spine[0])}<span> —— {t(item.spine[1])}</span>
-          </p>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function CaseNarrative({
-  item,
-  t,
-}: {
-  item: EvolutionCase;
-  t: (text: string) => string;
-}) {
-  return (
-    <div className="ds-case-evolution-narrative">
-      <div className="ds-case-evolution-narrative__opening">
-        <p>{t(item.situation)}</p>
-        {item.initial ? <p>{t(item.initial)}</p> : null}
-      </div>
-      {item.evidence ? (
-        <blockquote className="ds-case-evolution-narrative__evidence">
-          <p>{t(item.evidence)}</p>
-        </blockquote>
-      ) : null}
-      <div className="ds-case-evolution-narrative__decision">
-        <span>{t("最終決定")}</span>
-        <p>{t(item.decision)}</p>
-      </div>
-      <p className="ds-case-evolution-narrative__validation">
-        <span>{t("怎麼確認：")}</span>
-        {t(item.validation)}
-      </p>
-    </div>
-  );
-}
-
-function LiveBeforeAfterExample({ t }: { t: (text: string) => string }) {
-  return (
-    <div className="ds-case-evolution-example-surface">
-      <span className="ds-case-evolution-context-label">
-        {t("真實元件：BeforeAfterNarrativeFrame")}
-      </span>
-      <BeforeAfterNarrativeFrame
-        className="ds-case-evolution-before-after-live"
-        badge={t("共用外框")}
-        title={t("Before／After 內容由各頁傳入")}
-        beforeLabel="Before"
-        afterLabel="After"
-        before={<p>{t("各頁的 Before 內容")}</p>}
-        after={<p>{t("各頁的 After 內容")}</p>}
-      />
-    </div>
-  );
-}
-
-function LiveBoundaryComparison({ t }: { t: (text: string) => string }) {
-  return (
-    <div className="ds-case-evolution-example-surface">
-      <CaseGrid className="ds-case-evolution-component-comparison" variant="two">
-        <div className="ds-case-evolution-example-column">
-          <span className="ds-case-evolution-context-label">{t("共用基礎")}</span>
-          <CaseCard className="ds-case-evolution-shared-example">
-            <h4>{t("CaseCard／Grid")}</h4>
-            <p>{t("共用外框、間距與兩欄排列。")}</p>
-          </CaseCard>
-        </div>
-        <div className="ds-case-evolution-example-column">
-          <span className="ds-case-evolution-context-label">
-            {t("真實元件：route-local 反思卡")}
-          </span>
-          <ol className="ds-case-reflection-list ds-case-evolution-reflection-example">
-            <li>
-              <span className="ds-case-reflection-index" aria-hidden="true">01</span>
-              <div>
-                <h3>{t("保留案例敘事")}</h3>
-                <p>{t("標號、背景與內容順序留在這一頁。")}</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </CaseGrid>
-    </div>
-  );
-}
-
-const decisionMatrix = [
-  ["反思卡", "外觀相似", "背景、標號與排列承擔不同敘事", "保留單頁設計"],
-  ["多重對比版面", "都有 Before／After", "同區呈現多組比較，內容模型不同", "保留單頁設計"],
-  ["尚未有穩定情境的版型", "未來可能重複", "缺少第二個真實使用案例", "暫緩建立"],
+const brakeCases = [
+  {
+    verdict: "KEEP LOCAL",
+    title: "各案例頁的反思卡片",
+    temptation: "三個案例頁都有反思卡片，結構相似，看起來是現成的共用候選。",
+    judgment: "有些反思卡片的背景、標號和排列方式其實是那一頁的敘事識別；硬統一會讓不同案例的語氣被磨平。",
+    decision: "共用層停在底層的卡片外殼、Grid 和 tokens，版型各自保留。",
+  },
+  {
+    verdict: "KEEP LOCAL",
+    title: "Advantech 的多重對比版面",
+    temptation: "已經有共用的 Before / After 外框了，把這兩塊也塞進去，就「全站統一」了。",
+    judgment: "既有共用外框的契約是「一個外框、一組對比」；這類版面是多組對比同框，語意不同。硬塞進去，元件會為了遷就例外長出太多開關。",
+    decision: "刻意保留在頁面本地；等真的出現第二個多重對比場景，再設計新的契約。",
+  },
+  {
+    verdict: "DEFERRED",
+    title: "通用 Tag、表格外框、影片燈箱",
+    temptation: "「以後一定用得到」，先做起來放著。",
+    judgment: "都還沒有足夠穩定的使用場景。需求出現之前抽的元件多半是在猜，而猜錯的抽象比重複的 code 更難維護。",
+    decision: "先把預期行為寫進文件，暫緩建立元件；等 rule of three 條件成立後再重新評估。",
+  },
 ];
 
 const semanticRows = [
-  ["Button", "執行目前頁面的操作", "送出、複製、開啟 lightbox"],
-  ["Link", "前往另一個頁面或位置", "案例頁、首頁、外部網站"],
-  ["LinkButton", "語意是 Link，外觀像 Button", "View case study、Next project"],
-  ["CTA", "畫面希望使用者採取的行動", "可由 Button 或 Link 承擔"],
+  ["Button", "在當下情境執行操作（command action）", "送出表單、複製 email、打開 lightbox"],
+  ["Link", "帶使用者前往目的地（navigation action）", "去案例頁、回首頁、開外部 prototype"],
+  ["LinkButton", "語意是 Link、視覺長得像 Button", "View case study、Next project"],
+  ["CTA", "不是元件，是這一顆在畫面上的「角色」（usage role）", "Hero 主按鈕、卡片的 Learn More"],
 ];
 
 export default async function EvolutionCasesSection() {
@@ -165,102 +61,138 @@ export default async function EvolutionCasesSection() {
   return (
     <CaseSection
       id="cs-sec-evolution"
-      title={t("三個案例說明：外觀相似，不代表適合共用")}
+      title={t("三個演化案例：從共用到保留單頁彈性")}
     >
-      <div className="ds-case-evolution-cases">
-        <article className="ds-case-evolution-case ds-case-evolution-case--media">
-          <CaseHeader item={cases[0]} t={t} />
-          <div className="ds-case-evolution-case__media-layout">
-            <CaseNarrative item={cases[0]} t={t} />
-            <LiveBeforeAfterExample t={t} />
-          </div>
+      <div className="ds-case-evolution-story-cards">
+        <article
+          aria-labelledby="ds-case-evolution-a-title"
+          className="ds-case-evolution-story-card"
+        >
+          <header className="ds-case-evolution-story-card__header">
+            <span>{t("EVOLUTION A")}</span>
+            <h3 id="ds-case-evolution-a-title">{t("Before / After 版型的三段抽象")}</h3>
+          </header>
+          <p className="cs-section-lead">{t("同一個版型寫了三次之後，才動手抽象——而且分三步走，不是一次到位。")}</p>
+          <CaseGrid variant="three" className="ds-case-card-grid ds-case-stage-grid">
+            {evolutionSteps.map((step, index) => (
+              <CaseCard className="ds-case-stage-card" key={step.title}>
+                <span className="ds-case-stage-chip" aria-hidden="true">
+                  {t("STEP ")}{String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{t(step.title)}</h3>
+                <p>{t(step.body)}</p>
+              </CaseCard>
+            ))}
+          </CaseGrid>
+          <CaseMedia
+            className="ds-case-media"
+            caption={t("Before / After pattern 從三頁各自實作，演化成 slot-based narrative frame。")}
+          >
+            <Image
+              src={`${ASSET}/solution/before-after-evolution.webp`}
+              alt={t("Before and after diagram showing three local implementations evolving into shared narrative frame and panel shell.")}
+              width={1600}
+              height={900}
+              sizes="(max-width: 768px) calc(100vw - 48px), calc(100vw - 96px)"
+            />
+          </CaseMedia>
+          <TermNotes
+            title={t("名詞註釋")}
+            ariaLabel={t("專有名詞註釋")}
+            items={[
+              { term: t("Slot-based narrative frame"), description: t("這裡指固定版面結構、開放內容替換的敘事外框，讓不同案例能共用排列方式但保留自己的內容。") },
+              { term: t("Local implementation"), description: t("Local implementation 是先在單一頁面完成實作，等模式穩定後再評估是否抽到共用層。") },
+            ]}
+          />
         </article>
 
-        <article className="ds-case-evolution-case ds-case-evolution-case--matrix">
-          <CaseHeader item={cases[1]} t={t} />
-          <CaseNarrative item={cases[1]} t={t} />
-          <div className="ds-case-evolution-matrix-block">
-            <div
-              className="ds-case-matrix"
-              role="region"
-              aria-label={t("外觀相似但不共用的判斷矩陣")}
-            >
-              <div className="ds-case-matrix__row ds-case-matrix__row--head">
-                <span>{t("候選版型")}</span>
-                <span>{t("看似相同")}</span>
-                <span>{t("實際差異")}</span>
-                <span>{t("最後處理")}</span>
-              </div>
-              {decisionMatrix.map((row) => (
-                <div className="ds-case-matrix__row" key={row[0]}>
-                  {row.map((cell, cellIndex) => (
-                    <span
-                      data-label={t(
-                        ["候選版型", "看似相同", "實際差異", "最後處理"][cellIndex],
-                      )}
-                      key={cell}
-                    >
-                      {t(cell)}
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <LiveBoundaryComparison t={t} />
+        <article
+          aria-labelledby="ds-case-evolution-b-title"
+          className="ds-case-evolution-story-card"
+        >
+          <header className="ds-case-evolution-story-card__header">
+            <span>{t("EVOLUTION B")}</span>
+            <h3 id="ds-case-evolution-b-title">{t("知道何時「不要」抽象")}</h3>
+          </header>
+          <p className="cs-section-lead">{t("我後來的理解是：系統不一定要什麼都共用，但每個「刻意不共用」的地方，最好都講得出理由。")}</p>
+          <p className="cs-section-lead">{t("有了共用元件之後，最大的誘惑是把所有長得像的東西都塞進去。為了避免過早抽象，每次想共用之前，我都會先把「誘惑、判斷、決定」寫下來：")}</p>
+          <CaseGrid variant="three" className="ds-case-card-grid">
+            {brakeCases.map((item) => (
+              <CaseCard className="ds-case-brake-card" key={item.title}>
+                <span className={`ds-case-verdict${item.verdict === "DEFERRED" ? " ds-case-verdict--deferred" : ""}`}>
+                  {t(item.verdict)}
+                </span>
+                <h3>{t(item.title)}</h3>
+                <p><strong>{t("誘惑")}</strong>{t(item.temptation)}</p>
+                <p><strong>{t("判斷")}</strong>{t(item.judgment)}</p>
+                <p><strong>{t("決定")}</strong>{t(item.decision)}</p>
+              </CaseCard>
+            ))}
+          </CaseGrid>
+          <CaseCard className="ds-case-narrative-card">
+            <p>
+              {t("印象最深的一次：我曾一口氣盤點 8 個「看起來可以抽」的 pattern，")}
+              <b>{t("結論是一個都不抽")}</b>
+              {t("。那次盤點沒有產出任何新元件，留下的是 8 條寫進治理文件的「為什麼不抽」。對我來說，把不做的理由寫清楚，跟多做幾個元件一樣重要。")}
+            </p>
+          </CaseCard>
+          <blockquote className="ds-case-quote">
+            {t("抽象是有成本的。每多一個共用元件，就多一份契約要維護，也會讓更多頁面受到它的影響。")}
+          </blockquote>
+          <TermNotes
+            title={t("名詞註釋")}
+            ariaLabel={t("專有名詞註釋")}
+            items={[
+              { term: t("Local component"), description: t("Local component 是只服務單一頁面或單一敘事情境的元件，不一定要抽成全站共用。") },
+              { term: t("Component abstraction"), description: t("Component abstraction 是把重複的結構整理成共用元件，但它同時會增加使用規則和維護成本。") },
+            ]}
+          />
         </article>
 
-        <article className="ds-case-evolution-case ds-case-evolution-case--semantic">
-          <CaseHeader item={cases[2]} t={t} />
-          <CaseNarrative item={cases[2]} t={t} />
-          <div className="ds-case-evolution-case__semantic-layout">
-            <div className="ds-case-evolution-example-surface ds-case-evolution-semantic-example">
-              <span className="ds-case-evolution-context-label">
-                {t("真實元件：Button、Link 與 LinkButton")}
-              </span>
-              <div className="cs-data-table-frame ds-case-semantic-table-frame">
-                <table className="cs-data-table cs-data-table--matrix ds-case-semantic-table">
-                  <thead>
-                    <tr>
-                      <th>{t("概念")}</th>
-                      <th>{t("主要用途")}</th>
-                      <th>{t("實際例子")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {semanticRows.map(([name, purpose, example]) => (
-                      <tr key={name}>
-                        <th scope="row">{t(name)}</th>
-                        <td>{t(purpose)}</td>
-                        <td>{t(example)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <SemanticControlDemo
-                buttonActionLabel={t("複製聯絡方式")}
-                buttonLabel={t("Button：執行操作")}
-                copiedLabel={t("已複製")}
-                groupLabel={t("Button、Link 與 LinkButton 實際範例")}
-                linkButtonLabel={t("LinkButton：連結語意、按鈕外觀")}
-                linkButtonTargetLabel={t("查看最終成果")}
-                linkLabel={t("Link：前往位置")}
-                linkTargetLabel={t("查看判斷框架")}
-              />
-            </div>
+        <article
+          aria-labelledby="ds-case-evolution-c-title"
+          className="ds-case-evolution-story-card"
+        >
+          <header className="ds-case-evolution-story-card__header">
+            <span>{t("EVOLUTION C")}</span>
+            <h3 id="ds-case-evolution-c-title">{t("語意分不清時，先分開寫規格，不急著拆 code")}</h3>
+          </header>
+          <p className="cs-section-lead">{t("不是每個問題都要用「改 code」來解決。")}</p>
+          <p className="cs-section-lead">{t("整理全站按鈕時，我卡在一個看起來很小的問題：")}</p>
+          <p className="ds-case-question-callout">{t("「View case study」長得像按鈕，那它是 Button 嗎？")}</p>
+          <p className="cs-section-lead">{t("全站有十幾個這種「像按鈕的東西」，不先分類清楚，之後 token 化和抽元件都會踩空。查證 W3C 與 Material Design 的相關定義後，我把它們拆成四個概念：")}</p>
+          <div className="ds-case-table-frame">
+            <table className="ds-case-table">
+              <thead>
+                <tr><th>{t("概念")}</th><th>{t("是什麼")}</th><th>{t("例子")}</th></tr>
+              </thead>
+              <tbody>
+                {semanticRows.map(([term, meaning, examples]) => (
+                  <tr key={term}>
+                    <th scope="row">{t(term)}</th>
+                    <td>{t(meaning)}</td>
+                    <td>{t(examples)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+          <CaseCard className="ds-case-narrative-card">
+            <p>{t("為什麼要分這麼細？因為使用者對 link 和 button 的預期不同：link 可以右鍵開新分頁、複製網址；button 會執行當下的操作。Screen reader 也會把它們讀成不同角色。語意用錯，使用輔助科技的人就可能誤判點擊後會發生什麼。")}</p>
+            <p>{t("最後我決定")}<b>{t("「文件拆、code 不拆」")}</b>{t("：在規格文件裡分別寫清楚 Button 和 LinkButton 的 contract；code 則維持同一個 Button 元件，有 href 時就 render 成連結。現階段若拆成兩個元件，得大批調整 import，也會增加 regression 風險。既然先把使用規則寫清楚就能解決，就不急著動 code。")}</p>
+            <p>{t("這個案例最後落在決策框架第三列「用途易混淆 → Component Contract」。除了抽元件，把使用契約寫清楚，也能解決重複出現的問題。")}</p>
+          </CaseCard>
+          <TermNotes
+            title={t("名詞註釋")}
+            ariaLabel={t("專有名詞註釋")}
+            items={[
+              { term: t("LinkButton"), description: t("LinkButton 是語意上帶使用者前往另一個位置、視覺上看起來像按鈕的連結。") },
+              { term: t("Screen reader"), description: t("Screen reader 是協助視障使用者讀取畫面內容的輔助科技，會依照 HTML 語意讀出不同角色。") },
+              { term: t("Component contract"), description: t("Component contract 指的是元件的使用規則，例如它適合承載什麼內容、有哪些狀態、什麼情境下不該使用。") },
+            ]}
+          />
         </article>
       </div>
-
-      <TermNotes
-        title={t("名詞說明")}
-        ariaLabel={t("這一段的名詞說明")}
-        items={[
-          { term: "LinkButton / href", description: t("LinkButton 是外觀像按鈕的連結；href 則是連結要前往的網址。") },
-          { term: "CTA / screen reader", description: t("CTA 指的是畫面要引導使用者完成的行動；screen reader 會根據 HTML 語意，向視障使用者讀出元件角色。") },
-        ]}
-      />
     </CaseSection>
   );
 }
