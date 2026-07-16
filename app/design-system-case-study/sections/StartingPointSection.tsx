@@ -67,10 +67,7 @@ export default async function StartingPointSection() {
     >
       <div className="ds-case-prose">
         <p className="cs-section-lead">
-          {t("設計一直都在，只是分散在每一頁，沒有集中管理。")}
-        </p>
-        <p className="cs-section-lead">
-          {t("回到專案一開始，我的優先順序是先把案例內容和畫面做出來，讓作品能上線。頁面增加後，三個問題開始反覆出現：")}
+          {t("作品集一開始以快速完成頁面為主；隨著案例增加，原本適合單頁的做法開始讓重複版型與分散樣式增加跨頁同步與維護成本，後續延伸出下面三個問題：")}
         </p>
       </div>
 
