@@ -200,7 +200,6 @@ const en = {
 
   "共用不是越多越好": "More Reuse Is Not Always Better",
   "驗證流程也是 Design System 的一部分": "Validation Is Part of the Design System",
-  "這個專案從製作作品集網站的過程延伸而來。我負責定義問題、元件邊界與驗收標準，AI 協助盤點、實作和驗證，再把規則與修改紀錄整理成一套可長期維護的 Design System。": "This project grew out of building my portfolio website. I defined the problems, component boundaries, and acceptance criteria, while AI helped with audits, implementation, and validation. I then organized the rules and change records into a Design System built for long-term maintenance.",
   "設計決策由我負責，AI 則協助盤點程式、實作和檢查。": "I own the design decisions, while AI helps audit the code, implement changes, and run checks.",
   "用 Design System 管理作品集，也把我與 AI 的分工寫清楚": "Managing My Portfolio with a Design System—and Clarifying How AI and I Divide the Work",
   "這次不只整理樣式，也把修改範圍、分工和檢查方式寫清楚，讓我和 AI 能在同一套規則下協作。": "This work goes beyond organizing styles. It also defines the change scope, division of responsibilities, and review process so AI and I can work from the same rules.",
