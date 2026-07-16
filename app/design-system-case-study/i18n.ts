@@ -161,6 +161,7 @@ const en = {
 
   "THREE CASES": "THREE CASES",
   "三個演化案例：從共用到保留單頁彈性": "Three Evolution Cases: From Shared Patterns to Page-Specific Flexibility",
+  "判斷路徑講完，實際遇到時到底怎麼決定？下面三個案例，我都用同一套判斷去想，最後卻走到三種不同的結果——一個抽成共用、一個刻意留在單頁、一個先把用途分清楚再動手。": "So how does that decision path play out in practice? In the three cases below I applied the same reasoning, yet reached three different outcomes—one became a shared component, one stayed deliberately page-local, and one waited until its purpose was clearly defined.",
   "Before / After 版型的三段抽象": "Abstracting the Before / After Pattern in Three Steps",
   "同一個版型寫了三次之後，才動手抽象——而且分三步走，不是一次到位。": "I only abstracted the pattern after it appeared across three pages, and I did it in steps rather than all at once.",
   "STEP ": "STEP ",

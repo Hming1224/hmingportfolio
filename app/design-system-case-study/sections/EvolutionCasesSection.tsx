@@ -63,6 +63,9 @@ export default async function EvolutionCasesSection() {
       id="cs-sec-evolution"
       title={t("三個演化案例：從共用到保留單頁彈性")}
     >
+      <p className="cs-section-lead">
+        {t("判斷路徑講完，實際遇到時到底怎麼決定？下面三個案例，我都用同一套判斷去想，最後卻走到三種不同的結果——一個抽成共用、一個刻意留在單頁、一個先把用途分清楚再動手。")}
+      </p>
       <div className="ds-case-evolution-story-cards">
         <article
           aria-labelledby="ds-case-evolution-a-title"
