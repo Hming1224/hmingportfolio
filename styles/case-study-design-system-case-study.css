@@ -1513,12 +1513,14 @@
 
 .ds-case-decision-tree__row {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) auto minmax(280px, 1fr);
+  grid-template-columns: minmax(0, 1.5fr) auto minmax(0, 1.15fr) minmax(150px, 0.85fr);
+  grid-template-areas: "condition arrow result demo";
   align-items: stretch;
   gap: var(--hm-space-lg);
 }
 
 .ds-case-decision-tree__condition {
+  grid-area: condition;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1557,11 +1559,13 @@
 }
 
 .ds-case-decision-tree__arrow {
+  grid-area: arrow;
   align-self: center;
   color: var(--cs-line-strong);
 }
 
 .ds-case-decision-tree__result {
+  grid-area: result;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1614,9 +1618,121 @@
   line-height: 1.9;
 }
 
+.ds-case-decision-tree__demo {
+  grid-area: demo;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--hm-space-2xs);
+  padding: var(--hm-space-sm);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-md);
+  background: #fff;
+}
+
+/* tokens: 色票 + 間距刻度 + 字級 */
+.ds-case-tree-demo__swatches { display: flex; gap: 6px; }
+.ds-case-tree-demo__swatches span { width: 14px; height: 14px; border-radius: 50%; }
+.ds-case-tree-demo__swatches span:nth-child(1) { background: var(--cs-accent); }
+.ds-case-tree-demo__swatches span:nth-child(2) { background: var(--cs-teal); }
+.ds-case-tree-demo__swatches span:nth-child(3) { background: var(--cs-amber); }
+.ds-case-tree-demo__swatches span:nth-child(4) { background: var(--cs-line-strong); }
+.ds-case-tree-demo__bars { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.ds-case-tree-demo__bars span { height: 5px; border-radius: 999px; background: var(--cs-line-strong); }
+.ds-case-tree-demo__bars span:nth-child(1) { width: 18px; }
+.ds-case-tree-demo__bars span:nth-child(2) { width: 30px; }
+.ds-case-tree-demo__bars span:nth-child(3) { width: 42px; }
+.ds-case-tree-demo__type { display: flex; align-items: baseline; gap: 6px; color: var(--cs-text-secondary); font-weight: var(--hm-fw-bold); }
+.ds-case-tree-demo__type span:nth-child(1) { font-size: var(--fs-xs); }
+.ds-case-tree-demo__type span:nth-child(2) { font-size: var(--fs-body); }
+
+/* slot: 固定外框 + 虛線 slot */
+.ds-case-tree-demo__frame {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; max-width: 140px; height: 64px;
+  border: 1.5px solid var(--cs-teal);
+  border-radius: var(--hm-radius-md);
+  background: var(--cs-teal-soft);
+}
+.ds-case-tree-demo__slot {
+  display: flex; align-items: center; justify-content: center;
+  width: 68%; height: 58%;
+  border: 1.5px dashed var(--cs-teal-strong);
+  border-radius: var(--hm-radius-sm);
+  background: #fff;
+  font-size: var(--fs-xs);
+  color: var(--cs-teal-strong);
+}
+
+/* contract: 兩張長得像、分工不同的卡 */
+.ds-case-tree-demo__cards { display: flex; gap: var(--hm-space-2xs); }
+.ds-case-tree-demo__mini {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: center;
+  width: 52px; height: 60px;
+  padding-bottom: 8px;
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-sm);
+  background: #fff;
+}
+.ds-case-tree-demo__mini::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  border-radius: var(--hm-radius-sm) var(--hm-radius-sm) 0 0;
+}
+.ds-case-tree-demo__mini--a::before { background: var(--cs-teal); }
+.ds-case-tree-demo__mini--b::before { background: var(--cs-amber); }
+.ds-case-tree-demo__mini span { font-size: var(--fs-xs); font-weight: var(--hm-fw-bold); }
+.ds-case-tree-demo__mini--a span { color: var(--cs-teal-strong); }
+.ds-case-tree-demo__mini--b span { color: var(--cs-amber-strong); }
+
+/* rule of three: 1 2 3 → 抽成一個 */
+.ds-case-tree-demo__rule { display: flex; align-items: center; gap: 5px; }
+.ds-case-tree-demo__tile {
+  display: flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border: 1px dashed var(--cs-line-strong);
+  border-radius: var(--hm-radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--cs-text-muted);
+}
+.ds-case-tree-demo__rule-arrow { color: var(--cs-line-strong); font-size: var(--fs-sm); }
+.ds-case-tree-demo__rule-out {
+  width: 24px; height: 24px;
+  border: 1px solid var(--cs-teal);
+  border-radius: var(--hm-radius-sm);
+  background: var(--cs-teal-soft);
+}
+
+/* local: 單頁專用卡 */
+.ds-case-tree-demo__pinned {
+  position: relative;
+  width: 76px; height: 60px;
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-sm);
+  background: #fff;
+}
+.ds-case-tree-demo__tag {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--cs-line);
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: var(--hm-fw-bold);
+  white-space: nowrap;
+}
+
 @media (max-width: 1024px) {
   .ds-case-decision-tree__row {
-    grid-template-columns: minmax(0, 1.6fr) auto minmax(200px, 1fr);
+    grid-template-columns: minmax(0, 1.4fr) auto minmax(0, 1fr);
+    grid-template-areas:
+      "condition arrow result"
+      "demo demo demo";
+  }
+  .ds-case-decision-tree__demo {
+    flex-direction: row;
+    gap: var(--hm-space-md);
   }
 }
 
@@ -1627,6 +1743,11 @@
 
   .ds-case-decision-tree__row {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "condition"
+      "arrow"
+      "result"
+      "demo";
     gap: var(--hm-space-sm);
   }
 
