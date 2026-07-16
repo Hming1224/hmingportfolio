@@ -793,7 +793,6 @@
 .ds-case-prose {
   display: grid;
   gap: var(--hm-space-sm);
-  max-width: 920px;
 }
 
 .ds-case-prose--after-motivation-cards {
@@ -953,7 +952,6 @@
 
 .ds-case-evolution-story-card > .cs-section-lead {
   margin: 0;
-  max-width: 900px;
 }
 
 .ds-case-evolution-cases {
