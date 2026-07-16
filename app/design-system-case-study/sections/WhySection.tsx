@@ -2,7 +2,22 @@ import { CaseOverview } from "../../../components/case-study";
 import Button from "../../../components/ui/Button";
 import { getDsTranslator } from "../i18n-server";
 
-const overviewItems = [
+type OverviewDetail = {
+  label: string;
+  text: string;
+  note?: string;
+  icon: "user" | "hypothesis" | "question" | "validation";
+  variant: "default" | "highlight";
+};
+
+type OverviewItem = {
+  kind: "problem" | "goal" | "impact";
+  label: string;
+  title: string;
+  details: readonly OverviewDetail[];
+};
+
+const overviewItems: readonly OverviewItem[] = [
   {
     kind: "problem",
     label: "專案",
@@ -10,21 +25,23 @@ const overviewItems = [
     details: [
       {
         label: "起點",
-        text: "作品集先以完成內容與頁面為主，讓案例可以快速成形並公開展示。",
+        text: "網站一開始先求快速上線，設計規則散落在各頁 CSS；頁面一多，任何微調都變成重複修改。",
         icon: "question",
         variant: "default",
       },
       {
-        label: "範圍",
-        text: "以四個既有案例頁為範圍，整理設計規則、共用版型、文件與檢查方式。",
-        icon: "question",
+        label: "三次轉折",
+        text: "文件脫節、大範圍修改跑版、流程混雜——三次真實問題，逼我把「該不該共用」整理成一條判斷路徑。",
+        note: "完整過程在下方「三次轉折」與「判斷框架」",
+        icon: "hypothesis",
         variant: "default",
       },
       {
-        label: "目標",
-        text: "讓 code、文件與協作者使用同一套規則，同時保留每個案例需要的敘事差異。",
-        icon: "question",
-        variant: "default",
+        label: "三種決定",
+        text: "同一套判斷走進三個案例，得到三種不同決定；其中一次盤點了 8 個共用候選，結論是一個都不抽。",
+        note: "三個案例的取捨在下方「三個演化案例」",
+        icon: "validation",
+        variant: "highlight",
       },
     ],
   },
@@ -41,44 +58,46 @@ const overviewItems = [
       },
       {
         label: "AI 協助",
-        text: "盤點程式與樣式，找出重複模式，再依照已確認的規格實作、測試和除錯。",
+        text: "先盤點使用位置和重複模式，這一步不動程式；規格確認後再分批實作，每批只處理一個明確範圍。",
         icon: "hypothesis",
         variant: "default",
       },
       {
-        label: "品質責任",
-        text: "自動檢查通過後，我會再看一次跨頁版面、互動和案例差異，確認沒有偏離原本的設計意圖。",
+        label: "品質閘門",
+        text: "自動檢查守住技術正確，設計意圖由我人工驗收——未經人工驗收，不 push、merge 或 deploy。",
+        note: "四步驟流程在下方「治理與驗證」",
         icon: "validation",
-        variant: "default",
+        variant: "highlight",
       },
     ],
   },
   {
     kind: "impact",
     label: "具體產出",
-    title: "設計規則、共用元件、文件與檢查流程形成同一套維護依據。",
+    title: "307 個 design token、21 個共用元件、3 支自動檢查，四個案例頁從此沿用同一套依據。",
     details: [
       {
-        label: "四個案例頁",
-        text: "四個既有案例頁開始依循集中管理的設計規則與共用案例元件。",
+        label: "307 個 design token",
+        text: "色彩、字級、間距、圓角與元件狀態都有名字、集中管理，改一個值就全站生效。",
         icon: "validation",
         variant: "default",
       },
       {
-        label: "元件邊界",
-        text: "重複且用途穩定的模式整理成共用元件；只服務單一案例的敘事版型，仍留在該案例頁。",
+        label: "21 個共用 case-study 元件",
+        text: "只收結構、用途、行為都穩定重複的模式；只服務單一敘事的版型，刻意留在該頁。",
         icon: "validation",
-        variant: "default",
+        variant: "highlight",
       },
       {
-        label: "文件與檢查",
-        text: "規格文件對應實際程式，並搭配自動檢查與人工視覺驗收。",
+        label: "3 支自動檢查腳本",
+        text: "token 使用、素材連結與樣式範圍都有對應腳本檢查，在 commit 前先攔下明顯錯誤。",
+        note: "數字明細在下方「最終成果」",
         icon: "validation",
         variant: "default",
       },
     ],
   },
-] as const;
+];
 
 export default async function WhySection() {
   const { t } = await getDsTranslator();
@@ -96,6 +115,7 @@ export default async function WhySection() {
         details: item.details.map((detail) => ({
           label: t(detail.label),
           text: t(detail.text),
+          note: detail.note ? t(detail.note) : undefined,
           icon: detail.icon,
           variant: detail.variant,
         })),
