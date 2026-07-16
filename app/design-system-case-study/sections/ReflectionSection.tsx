@@ -36,9 +36,6 @@ export default async function ReflectionSection() {
           </li>
         ))}
       </ol>
-      <p className="ds-case-limit-note">
-        {t("目前主要還是我一個人維護，所以還沒有多人協作或長期維護時間的前後比較。接下來會記錄兩件事：自動檢查實際攔下哪些問題，以及常見修改需要多少步驟。")}
-      </p>
     </CaseSection>
   );
 }

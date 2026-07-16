@@ -245,7 +245,6 @@ const en = {
   "知道何時不要急著共用": "Knowing When Not to Reuse Too Soon",
   "案例 A 抽出共用外框後，下一個問題是：哪些東西應該刻意留在單頁？有了共用元件，很容易想把所有長得像的東西都塞進去。為了避免太早共用，我會先寫下「情境、判斷、決定」，確認每個不共用的地方都有理由。": "After Case A produced a shared frame, the next question was what should deliberately remain page-specific. Once shared components exist, it is easy to force every similar-looking pattern into them. To avoid sharing too early, I write down the context, judgment, and decision so every local choice has a clear reason.",
   "元件共用化": "Component reuse",
-  "目前主要還是我一個人維護，所以還沒有多人協作或長期維護時間的前後比較。接下來會記錄兩件事：自動檢查實際攔下哪些問題，以及常見修改需要多少步驟。": "I am still the primary maintainer, so I do not yet have before-and-after comparisons for multi-person collaboration or long-term maintenance time. Next, I will record two things: which issues the automated checks actually catch, and how many steps common changes require.",
   "如果只有設計值重複、元件結構各自不同，就共用規則，不抽元件。": "If only the design values repeat while the component structures differ, share the rules rather than the components.",
   "把這些值整理成 design token，統一管理數值與命名。": "Turn those values into design tokens and manage their values and names in one place.",
   "版面配置與響應式行為穩定重複，但每頁內容不同。": "The layout and responsive behavior repeat consistently, but each page has different content.",
