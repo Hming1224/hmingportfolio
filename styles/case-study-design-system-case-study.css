@@ -308,14 +308,12 @@
 }
 
 .ds-case-timeline__body {
-  max-width: 68ch;
   margin: 0;
   color: var(--cs-text-secondary);
   line-height: 1.75;
 }
 
 .ds-case-lesson {
-  max-width: 68ch;
   margin: var(--hm-space-2xs) 0 0;
   border-left: 3px solid var(--cs-accent);
   border-radius: 0 var(--hm-radius-sm) var(--hm-radius-sm) 0;
@@ -1480,8 +1478,6 @@
 
 .ds-case-decision-tree__root {
   width: 100%;
-  max-width: 560px;
-  margin-inline: auto;
   border: 1px solid var(--cs-line-strong);
   border-radius: var(--hm-radius-lg);
   padding: var(--hm-space-md);
