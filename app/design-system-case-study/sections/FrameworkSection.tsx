@@ -123,12 +123,14 @@ export default async function FrameworkSection() {
               <p>{t(row.reason)}</p>
             </div>
             <ArrowRight className="ds-case-decision-tree__arrow" size={24} strokeWidth={1.5} aria-hidden="true" />
-            <div className={`ds-case-decision-tree__result ds-case-decision-tree__result--${row.variant}`}>
-              <span className={`ds-case-term-pill ds-case-term-pill--${row.variant}`}>{t(row.term)}</span>
-              <strong>{t(row.action)}</strong>
-            </div>
-            <div className={`ds-case-decision-tree__demo ds-case-decision-tree__demo--${row.demo}`} aria-hidden="true">
-              <FrameworkDemo kind={row.demo} t={t} />
+            <div className={`ds-case-decision-tree__outcome ds-case-decision-tree__outcome--${row.variant}`}>
+              <div className="ds-case-decision-tree__result">
+                <span className={`ds-case-term-pill ds-case-term-pill--${row.variant}`}>{t(row.term)}</span>
+                <strong>{t(row.action)}</strong>
+              </div>
+              <div className={`ds-case-decision-tree__demo ds-case-decision-tree__demo--${row.demo}`} aria-hidden="true">
+                <FrameworkDemo kind={row.demo} t={t} />
+              </div>
             </div>
           </div>
         ))}
