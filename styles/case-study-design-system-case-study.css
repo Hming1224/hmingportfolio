@@ -251,7 +251,6 @@
   position: relative;
   display: grid;
   gap: clamp(28px, 4vw, 44px);
-  max-width: 900px;
   margin-top: var(--ds-case-content-block-gap);
   padding-left: 44px;
 }
@@ -2010,9 +2009,24 @@
   color: var(--cs-accent-strong);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1535px) {
   .ds-case-governance-loop > ol {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .theme-design-system-case-study .cs-overview-step-tab {
+    padding-inline: var(--hm-space-2xs);
+    font-size: var(--fs-xs);
+  }
+}
+
+@media (max-width: 360px) {
+  .theme-design-system-case-study .cs-overview-step-tab {
+    flex-direction: column;
+    gap: 0;
+    padding-inline: calc(var(--hm-space-3xs) / 2);
   }
 }
 
