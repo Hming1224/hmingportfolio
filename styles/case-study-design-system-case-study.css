@@ -1661,7 +1661,7 @@
   padding-bottom: 8px;
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-sm);
-  background: #fff;
+  background: var(--hm-surface);
 }
 .ds-case-tree-demo__mini::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
@@ -1680,6 +1680,7 @@
   width: 22px; height: 22px;
   border: 1px dashed var(--cs-line-strong);
   border-radius: var(--hm-radius-sm);
+  background: var(--hm-surface);
   font-size: var(--fs-xs);
   color: var(--cs-text-muted);
 }
@@ -1697,7 +1698,7 @@
   width: 76px; height: 60px;
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-sm);
-  background: #fff;
+  background: var(--hm-surface);
 }
 .ds-case-tree-demo__tag {
   position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
