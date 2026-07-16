@@ -810,7 +810,7 @@
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-lg);
   padding: clamp(28px, 4vw, 48px);
-  background: var(--hm-paper);
+  background: var(--cs-surface);
   box-shadow: var(--ds-case-card-shadow);
 }
 
