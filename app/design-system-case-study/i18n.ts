@@ -1,10 +1,3 @@
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  type ReactElement,
-  type ReactNode,
-} from "react";
 import type { Locale } from "../../i18n/routing";
 
 const en = {
@@ -291,37 +284,4 @@ type DsKey = keyof typeof en;
 
 export function translateDs(locale: Locale, text: string) {
   return locale === "en" ? en[text as DsKey] ?? text : text;
-}
-
-export function translateDsData<T>(locale: Locale, value: T): T {
-  if (typeof value === "string") return translateDs(locale, value) as T;
-  if (Array.isArray(value)) {
-    const translateItem = (item: unknown) => translateDsData(locale, item);
-    return (value.some(isValidElement)
-      ? Children.map(value, translateItem)
-      : value.map(translateItem)) as T;
-  }
-  if (isValidElement(value)) return localizeDsTree(locale, value) as T;
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.entries(value).map(([key, item]) => [key, translateDsData(locale, item)]),
-    ) as T;
-  }
-  return value;
-}
-
-export function localizeDsTree(locale: Locale, node: ReactNode): ReactNode {
-  if (typeof node === "string") return translateDs(locale, node);
-  if (Array.isArray(node)) {
-    return Children.map(node, (item) => localizeDsTree(locale, item));
-  }
-  if (!isValidElement(node)) return node;
-
-  const element = node as ReactElement<Record<string, unknown>>;
-  const { children, ...restProps } = element.props;
-  const props = translateDsData(locale, restProps);
-  const localizedChildren = Children.map(children as ReactNode, (child) =>
-    localizeDsTree(locale, child),
-  );
-  return cloneElement(element, props, localizedChildren);
 }
