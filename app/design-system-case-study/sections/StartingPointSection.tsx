@@ -110,10 +110,8 @@ export default async function StartingPointSection() {
         title={t("名詞說明")}
         ariaLabel={t("這一段的名詞說明")}
         items={[
-          { term: "design tokens", description: t("集中管理設計值（design tokens）：把顏色、字級、間距等設定放在同一處，讓不同頁面沿用相同規則。") },
-          { term: "component contract", description: t("元件使用規則（component contract）：說明元件適合承載的內容、支援的狀態與不適用的情境。") },
-          { term: "AI-assisted workflow", description: t("AI-assisted workflow 是由我先定義目標、範圍與驗收條件，再讓 AI 協助盤點、實作與檢查的協作流程。") },
-          { term: "gap analysis", description: t("Gap analysis 是把現況和目標標準放在一起比對，找出缺口和優先改善項目。") },
+          { term: "Ant Design / Material Design", description: t("業界成熟的設計系統，這裡拿來當比對基準，逐項對照作品集還缺哪些規範。") },
+          { term: "hover / focus / disabled", description: t("元件在滑鼠移入、鍵盤聚焦、不能點擊時各自的樣子；設計系統要事先把這些狀態都定義好。") },
           { term: "Figma Make", description: t("Figma Make 是用來快速產生互動雛形的工具，這裡用來把系統規劃先做成可討論的介面。") },
         ]}
       />

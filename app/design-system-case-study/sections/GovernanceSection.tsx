@@ -122,10 +122,9 @@ export default async function GovernanceSection() {
         title={t("名詞說明")}
         ariaLabel={t("這一段的名詞說明")}
         items={[
-          { term: "smoke testing", description: t("快速確認主要頁面、不同螢幕寬度與互動是否正常，用來及早發現明顯問題。") },
-          { term: "rollback", description: t("改動出現問題時，回到上一個穩定版本。") },
-          { term: "feature branch", description: t("先把改動放在獨立分支驗證，避免直接影響正式站。") },
-          { term: "preview", description: t("合併到正式版本前的預覽環境，用來做最後的畫面和流程確認。") },
+          { term: "token・shared・local", description: t("設計系統的三層放置邏輯：可重複引用的設計值放 token，跨頁共用的結構放 shared，只服務單一頁面的留在 local。") },
+          { term: "lint / type check / build", description: t("三種自動檢查：lint 抓格式與寫法問題、type check 抓型別錯誤、build 確認整個網站能順利建置。") },
+          { term: "push / merge / deploy", description: t("把改動送上遠端（push）、合併進正式分支（merge）、部署上線（deploy）；這三步一旦執行就會影響正式站。") },
         ]}
       />
     </CaseSection>

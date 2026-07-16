@@ -157,7 +157,7 @@ export default async function FrameworkSection() {
             term: "Rule of Three",
             description: t("實務判斷原則：同樣結構重複出現三次左右，再抽成共用元件。"),
           },
-          { term: "route-local", description: t("只存在特定頁面的樣式或結構。") },
+          { term: "Local Component（colocation）", description: t("只服務單一頁面、跟著該頁一起存放的元件，不抽進共用層。") },
         ]}
       />
     </CaseSection>
