@@ -6,7 +6,7 @@ type OverviewDetail = {
   label: string;
   text: string;
   note?: string;
-  icon: "user" | "hypothesis" | "question" | "validation";
+  icon: "question" | "validation" | "humanAvatar" | "aiAvatar" | "warning" | "decision" | "quality";
   variant: "default" | "highlight";
 };
 
@@ -33,14 +33,14 @@ const overviewItems: readonly OverviewItem[] = [
         label: "三次轉折",
         text: "文件脫節、大範圍修改跑版、流程混雜——三次真實問題，逼我把「該不該共用」整理成一條判斷路徑。",
         note: "完整過程在下方「三次轉折」與「判斷框架」",
-        icon: "hypothesis",
+        icon: "warning",
         variant: "default",
       },
       {
         label: "三種決定",
         text: "同一套判斷走進三個案例，得到三種不同決定；其中一次盤點了 8 個共用候選，結論是一個都不抽。",
         note: "三個案例的取捨在下方「三個演化案例」",
-        icon: "validation",
+        icon: "decision",
         variant: "highlight",
       },
     ],
@@ -53,20 +53,20 @@ const overviewItems: readonly OverviewItem[] = [
       {
         label: "我的責任",
         text: "定義問題、設計原則、元件邊界、修改範圍、方案取捨與驗收標準。",
-        icon: "user",
+        icon: "humanAvatar",
         variant: "default",
       },
       {
         label: "AI 協助",
         text: "先盤點使用位置和重複模式，這一步不動程式；規格確認後再分批實作，每批只處理一個明確範圍。",
-        icon: "hypothesis",
+        icon: "aiAvatar",
         variant: "default",
       },
       {
         label: "品質閘門",
         text: "自動檢查守住技術正確，設計意圖由我人工驗收——未經人工驗收，不 push、merge 或 deploy。",
         note: "四步驟流程在下方「治理與驗證」",
-        icon: "validation",
+        icon: "quality",
         variant: "highlight",
       },
     ],

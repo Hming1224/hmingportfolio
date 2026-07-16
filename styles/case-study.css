@@ -601,6 +601,30 @@
   stroke-width: 1.9;
 }
 
+.cs-overview-detail-icon[data-icon='humanAvatar'],
+.cs-overview-detail-icon[data-icon='aiAvatar'] {
+  overflow: hidden;
+  border: 1px solid var(--cs-line-soft, var(--cs-line));
+  border-radius: var(--hm-radius-pill);
+}
+
+.cs-overview-detail-icon[data-icon='humanAvatar'] {
+  background: #ffffff;
+}
+
+.cs-overview-detail-icon[data-icon='humanAvatar'] img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-overview-detail-icon[data-icon='aiAvatar'] {
+  border-color: color-mix(in srgb, var(--cs-teal, var(--cs-accent)) 28%, transparent);
+  background: var(--cs-teal-soft, var(--cs-accent-soft));
+  color: var(--cs-teal-strong, var(--cs-accent));
+}
+
 .cs-overview-detail-copy {
   display: grid;
   gap: var(--hm-space-3xs);

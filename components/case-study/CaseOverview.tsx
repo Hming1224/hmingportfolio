@@ -1,7 +1,20 @@
 'use client';
 
+import Image from 'next/image';
 import { useId, useState, type KeyboardEvent, type ReactNode } from 'react';
-import { Building2, CircleHelp, Lightbulb, Quote, ShieldCheck, UserRound, type LucideIcon } from 'lucide-react';
+import {
+  AlertTriangle,
+  BadgeCheck,
+  Bot,
+  Building2,
+  CircleHelp,
+  GitBranch,
+  Lightbulb,
+  Quote,
+  ShieldCheck,
+  UserRound,
+  type LucideIcon,
+} from 'lucide-react';
 import { cn } from '../../lib/utils';
 import CaseSection from './CaseSection';
 
@@ -22,7 +35,18 @@ export interface CaseOverviewDetail {
   label: string;
   text: string;
   note?: string;
-  icon?: 'user' | 'business' | 'hypothesis' | 'question' | 'quote' | 'validation';
+  icon?:
+    | 'user'
+    | 'business'
+    | 'hypothesis'
+    | 'question'
+    | 'quote'
+    | 'validation'
+    | 'humanAvatar'
+    | 'aiAvatar'
+    | 'warning'
+    | 'decision'
+    | 'quality';
   variant?: 'default' | 'highlight' | 'quote';
 }
 
@@ -141,11 +165,16 @@ export default function CaseOverview({
               <dl className="cs-overview-stage-details">
                 {activeItem.details.map((detail) => {
                   const DetailIcon = detail.icon ? overviewDetailIcons[detail.icon] : null;
+                  const hasDetailIcon = detail.icon === 'humanAvatar' || Boolean(DetailIcon);
                   return (
                     <div key={detail.label} className="cs-overview-detail-card" data-variant={detail.variant ?? 'default'}>
-                      {DetailIcon ? (
-                        <span className="cs-overview-detail-icon" aria-hidden="true">
-                          <DetailIcon />
+                      {hasDetailIcon ? (
+                        <span className="cs-overview-detail-icon" data-icon={detail.icon} aria-hidden="true">
+                          {detail.icon === 'humanAvatar' ? (
+                            <Image src="/avatar/avatar-yellow.png" alt="" width={36} height={36} loading="eager" unoptimized />
+                          ) : DetailIcon ? (
+                            <DetailIcon />
+                          ) : null}
                         </span>
                       ) : null}
                       <div className="cs-overview-detail-copy">
@@ -184,13 +213,17 @@ export default function CaseOverview({
   );
 }
 
-const overviewDetailIcons: Record<NonNullable<CaseOverviewDetail['icon']>, LucideIcon> = {
+const overviewDetailIcons: Partial<Record<NonNullable<CaseOverviewDetail['icon']>, LucideIcon>> = {
   user: UserRound,
   business: Building2,
   hypothesis: Lightbulb,
   question: CircleHelp,
   quote: Quote,
   validation: ShieldCheck,
+  aiAvatar: Bot,
+  warning: AlertTriangle,
+  decision: GitBranch,
+  quality: BadgeCheck,
 };
 
 function OverviewEvidence({ item }: { item: CaseOverviewItem }) {
