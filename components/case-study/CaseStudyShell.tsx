@@ -5,6 +5,7 @@ import ScrollProgress from '../ScrollProgress';
 import CaseTOC, { type TocSection } from '../CaseTOC';
 import { cn } from '../../lib/utils';
 import Button from '../ui/Button';
+import AnimatedContent from '../../app/about-me/AnimatedContent';
 
 interface NextNav {
   /** 「返回首頁」連結，預設 '/'。 */
@@ -47,7 +48,15 @@ export default function CaseStudyShell({
       <ScrollProgress />
       <Navbar />
 
-      {hero}
+      <AnimatedContent
+        distance={120}
+        duration={0.95}
+        scale={0.96}
+        ease="power3.out"
+        threshold={0.05}
+      >
+        {hero}
+      </AnimatedContent>
 
       {/* TOC Layout: wraps all content sections */}
       <div className="cs-toc-layout">
