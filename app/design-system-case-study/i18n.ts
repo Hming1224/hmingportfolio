@@ -202,7 +202,7 @@ const en = {
   "驗證流程也是 Design System 的一部分": "Validation Is Part of the Design System",
   "設計決策由我負責，AI 則協助盤點程式、實作和檢查。": "I own the design decisions, while AI helps audit the code, implement changes, and run checks.",
   "用 Design System 管理作品集，也把我與 AI 的分工寫清楚": "Managing My Portfolio with a Design System—and Clarifying How AI and I Divide the Work",
-  "這次不只整理樣式，也把修改範圍、分工和檢查方式寫清楚，讓我和 AI 能在同一套規則下協作。": "This work goes beyond organizing styles. It also defines the change scope, division of responsibilities, and review process so AI and I can work from the same rules.",
+  "這個專案從作品集的跨頁維護問題出發：我負責定義設計決策、元件邊界與驗收標準，AI 協助盤點程式並分批實作，最後把規則落成集中管理的 design token、共用案例元件與自動檢查流程。": "This project began with the challenge of maintaining a growing portfolio across pages. I defined the design decisions, component boundaries, and acceptance criteria, while AI helped audit the code and implement changes in focused batches. Together, that work became centrally managed design tokens, shared case-study components, and automated checks.",
   "我也把這套規則整理成可瀏覽的文件頁，內容直接對應網站正在使用的設計基礎、tokens、元件、版型和治理方式。": "I also organized these rules into browsable documentation that maps directly to the design foundations, tokens, components, patterns, and governance used on the live site.",
   "同一版型反覆實作": "The Same Layout Was Reimplemented Across Pages",
   "同一種「前後對比」版型，在不同案例頁各做一份，顏色和間距也散落在各頁 CSS 裡。網站一變大，同一個微調就可能要重複處理。": "The same before-and-after layout was built separately on different case-study pages, while colors and spacing remained scattered across page-level CSS. As the site grew, even one small adjustment could require repeated work.",

@@ -107,7 +107,7 @@ export default async function WhySection() {
       id="cs-sec-overview"
       kicker={t("專案總覽")}
       title={t("用 Design System 管理作品集，也把我與 AI 的分工寫清楚")}
-      lead={t("這次不只整理樣式，也把修改範圍、分工和檢查方式寫清楚，讓我和 AI 能在同一套規則下協作。")}
+      lead={t("這個專案從作品集的跨頁維護問題出發：我負責定義設計決策、元件邊界與驗收標準，AI 協助盤點程式並分批實作，最後把規則落成集中管理的 design token、共用案例元件與自動檢查流程。")}
       items={overviewItems.map((item) => ({
         kind: item.kind,
         label: t(item.label),
