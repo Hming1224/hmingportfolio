@@ -6,25 +6,25 @@ import { getDsTranslator } from "../i18n-server";
 const frameworkRows = [
   {
     signal: "顏色、間距、字級等值反覆出現",
-    reason: "重複的只是設計值，元件結構各自不同——該共用的是規則，不是元件。",
+    reason: "如果只有設計值重複、元件結構各自不同，就共用規則，不抽元件。",
     term: "Design Tokens",
-    action: "先收斂成 design token，集中管理數值與命名。",
+    action: "把這些值整理成 design token，統一管理數值與命名。",
     variant: "token",
     demo: "tokens",
   },
   {
     signal: "外框和排列方式重複，但內容每次不同",
-    reason: "重複的是「殼」：版面與響應式行為穩定，內容要留給各頁發揮。",
+    reason: "版面配置與響應式行為穩定重複，但每頁內容不同。",
     term: "Slot-based Composition",
-    action: "只抽出穩定外框，內容區塊留給各頁替換。",
+    action: "抽出共用外框，文案、圖片與其他內容由各頁傳入。",
     variant: "shared",
     demo: "slot",
   },
   {
     signal: "兩個元件長得像，但用途容易混淆",
-    reason: "外觀相似不代表用途相同，先分清楚彼此的邊界，再談要不要共用。",
+    reason: "外觀相似不代表用途相同。用途還分不清時，先釐清彼此的使用邊界，不急著共用。",
     term: "Component Contract",
-    action: "先寫清楚各自適合承載什麼內容、有哪些狀態、什麼情境下不該使用。",
+    action: "把可承載的內容、支援狀態與不適用情境寫成 Component Contract。",
     variant: "shared",
     demo: "contract",
   },
@@ -106,7 +106,7 @@ export default async function FrameworkSection() {
       surface
     >
       <p className="cs-section-lead">
-        {t("這幾個轉折裡，最常讓我猶豫的都是同一件事：眼前這個東西到底該不該共用。與其每次憑感覺決定，我後來把它整理成一條判斷路徑，遇到重複的東西就照著走一遍。")}
+        {t("前面的實作過程裡，我反覆遇到同一個問題：眼前這個東西到底該不該共用？後來我把判斷方式整理成一條路徑，每次看到跨頁重複的模式，就照著檢查一次。")}
       </p>
       <div className="ds-case-decision-tree">
         <div className="ds-case-decision-tree__root">
@@ -137,7 +137,7 @@ export default async function FrameworkSection() {
       </div>
 
       <blockquote className="ds-case-decision-tree__takeaway">
-        {t("重複的是「值」就 token 化；重複的是「殼」就留 slot；重複的是「整件事」才做成共用元件；只出現一次的，讓它留在原地。")}
+        {t("最後我留下四條規則：值重複就整理成 token；外框重複就保留 slot；結構、用途與互動一起重複，才抽成共用元件；只服務單一頁面的內容，就留在該頁。接下來三個案例，分別對應這幾種判斷。")}
       </blockquote>
 
       <TermNotes

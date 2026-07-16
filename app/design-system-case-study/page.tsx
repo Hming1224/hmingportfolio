@@ -66,15 +66,15 @@ export default async function DesignSystemCaseStudyPage() {
         actLabel="ACT 2"
         kicker={t("轉折與框架")}
         title={t("三次真實問題，換來一套判斷框架")}
-        lead={t("文件脫節、跑版、流程混雜——三次轉折不是失誤紀錄，而是這套系統長出判斷規則的過程。")}
+        lead={t("第一版規劃做出來後，文件脫節、跑版和流程混雜，才真正改變了後續做法。接下來三次實作問題，各補上了一條新的判斷規則。")}
       />
       <TurningPointsSection />
       <FrameworkSection />
       <ActDivider
         actLabel="ACT 3"
         kicker={t("三個演化案例")}
-        title={t("同一套框架，三種不同的決定")}
-        lead={t("共用、保留單頁、先定義用途——三個案例用同一個判斷順序，走到三個不同結論。")}
+        title={t("把判斷框架放回真實案例")}
+        lead={t("接下來三個案例分別從重複版型、過早抽象與語意混淆出發，看看同一套框架如何導向不同決定。")}
       />
       <EvolutionCasesSection />
       <ActDivider

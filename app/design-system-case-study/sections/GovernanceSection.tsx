@@ -35,7 +35,7 @@ const maintenanceStages = [
   },
   {
     title: "驗收",
-    body: "先跑 lint、type check、build、token 和指定頁面檢查；接著由我確認雙語內容、跨頁版面、不同螢幕寬度的呈現、互動與設計意圖。",
+    body: "先跑 lint、type check、build、token 檢查與指定頁面檢查；接著由我確認雙語內容、跨頁版面、不同螢幕寬度的呈現、互動與設計意圖。",
     owner: "human",
     ownerLabel: "我＋AI",
     checks: [
@@ -44,11 +44,11 @@ const maintenanceStages = [
       { title: "視覺與互動品質", owner: "human" },
       { title: "設計意圖", owner: "human" },
     ],
-    footnote: "build 通過，只能確認程式建得起來；版面、互動與案例差異是否符合設計意圖，還是要由我人工驗收。",
+    footnote: "build 通過，只能確認程式建得起來；版面、互動與案例差異是否符合設計意圖，仍要由我驗收。",
   },
   {
-    title: "收斂與留痕",
-    body: "結果不符就撤回或縮小修改，不持續疊加修補；通過後更新文件、決策紀錄與版本，讓下一次修改可追溯。",
+    title: "收斂與紀錄",
+    body: "驗收結果不符標準，就撤回或縮小修改範圍，不在原本的問題上繼續加補丁；通過後更新文件、決策紀錄與版本，讓下一次修改查得到來龍去脈。",
     owner: "human",
     ownerLabel: "由我負責",
   },
@@ -60,11 +60,11 @@ export default async function GovernanceSection() {
     <CaseSection
       id="cs-sec-governance"
       kicker={t("治理與驗證")}
-      title={t("導入或維護時，每次都照同一套流程做、驗、記")}
+      title={t("決定之後，修改要經過四個步驟")}
       surface
     >
       <p className="cs-section-lead">
-        {t("前面說的是怎麼做決定。決定之後，我會固定照這套流程執行、驗收並留下紀錄。")}
+        {t("前三個案例的結論不同，進入實作後，我都會照相同的四個步驟處理。")}
       </p>
 
       <div className="ds-case-governance-loop">
@@ -124,7 +124,7 @@ export default async function GovernanceSection() {
         items={[
           { term: "token・shared・local", description: t("設計系統的三層放置邏輯：可重複引用的設計值放 token，跨頁共用的結構放 shared，只服務單一頁面的留在 local。") },
           { term: "lint / type check / build", description: t("三種自動檢查：lint 抓格式與寫法問題、type check 抓型別錯誤、build 確認整個網站能順利建置。") },
-          { term: "push / merge / deploy", description: t("把改動送上遠端（push）、合併進正式分支（merge）、部署上線（deploy）；這三步一旦執行就會影響正式站。") },
+          { term: "push / merge / deploy", description: t("把改動送上遠端（push）、合併進正式分支（merge）、部署上線（deploy）。三者的影響範圍不同，執行前都要完成對應檢查。") },
         ]}
       />
     </CaseSection>

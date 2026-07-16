@@ -13,15 +13,15 @@ import { getDsTranslator } from "../i18n-server";
 const evolutionSteps = [
   {
     title: "各自實作",
-    body: "不同案例頁各自實作類似的 Before / After 版型，視覺相近但 code 完全獨立。這時如果直接抽共用，只會把還沒穩定的差異綁在一起。",
+    body: "不同案例頁用了相似的 Before / After 版型，畫面接近，程式碼卻彼此獨立。當時內容與細節還在調整，直接共用會把尚未穩定的差異綁在一起。",
   },
   {
-    title: "先 audit，再抽出敘事外框",
-    body: "盤點後確認，真正重複的是版面配置與 RWD 行為，不是內容本身。所以我抽出 slot-based 的敘事外框，讓各頁保留自己的文案、圖片和說明節奏。",
+    title: "先盤點，再抽出敘事外框",
+    body: "盤點後，我確認穩定重複的是版面配置與 RWD 行為，內容仍由各頁自行安排。因此我抽出 slot-based 的敘事外框，保留各頁原本的文案、圖片與說明節奏。",
   },
   {
     title: "再拆出視覺外殼",
-    body: "第二步才把「有標籤的面板」拆成更底層的視覺外殼，並保留既有樣式掛鉤，讓已上線頁面可以在不改變畫面的情況下遷移。",
+    body: "敘事外框穩定後，我才把「有標籤的面板」往下拆成視覺外殼，同時保留既有樣式掛鉤，讓已上線頁面可以在畫面不變的情況下遷移。",
   },
 ];
 
@@ -36,16 +36,16 @@ const brakeCases = [
   {
     verdict: "KEEP LOCAL",
     title: "Advantech 的多重對比版面",
-    temptation: "已經有共用的 Before / After 外框了，把這兩塊也塞進去，就「全站統一」了。",
-    judgment: "既有共用外框的契約是「一個外框、一組對比」；這類版面是多組對比同框，語意不同。硬塞進去，元件會為了遷就例外長出太多開關。",
+    temptation: "已經有共用的 Before / After 外框，很容易想把 Advantech 的多組對比也塞進去，追求「全站統一」。",
+    judgment: "既有外框的契約是「一個外框、一組對比」；Advantech 則是在同一個外框裡放多組對比，用途不同。硬塞進去，元件會為了遷就例外長出太多開關。",
     decision: "刻意保留在頁面本地；等真的出現第二個多重對比場景，再設計新的契約。",
   },
   {
     verdict: "DEFERRED",
     title: "通用 Tag、表格外框、影片燈箱",
-    temptation: "「以後一定用得到」，先做起來放著。",
-    judgment: "都還沒有足夠穩定的使用場景。需求出現之前抽的元件多半是在猜，而猜錯的抽象比重複的 code 更難維護。",
-    decision: "先把預期行為寫進文件，暫緩建立元件；等 rule of three 條件成立後再重新評估。",
+    temptation: "「以後一定用得到」，所以先做起來放著。",
+    judgment: "這些項目還沒有穩定的使用場景。需求出現前就抽元件，只能靠猜；抽錯共用邊界，會比暫時重複的程式碼更難維護。",
+    decision: "先把預期行為寫進文件，暫緩建立元件；等 Rule of Three 的條件成立，再重新評估。",
   },
 ];
 
@@ -62,10 +62,10 @@ export default async function EvolutionCasesSection() {
   return (
     <CaseSection
       id="cs-sec-evolution"
-      title={t("三個演化案例：從共用到保留單頁彈性")}
+      title={t("三個案例，三種不同的共用決定")}
     >
       <p className="cs-section-lead">
-        {t("判斷路徑講完，實際遇到時到底怎麼決定？下面三個案例，我都用同一套判斷去想，最後卻走到三種不同的結果——一個抽成共用、一個刻意留在單頁、一個先把用途分清楚再動手。")}
+        {t("把前面的判斷路徑放回實作後，三個案例走到不同結果：一個抽成共用、一個刻意留在單頁，另一個先把用途分清楚，暫時不動程式碼。")}
       </p>
       <div className="ds-case-evolution-story-cards">
         <article
@@ -76,7 +76,7 @@ export default async function EvolutionCasesSection() {
             <span>{t("EVOLUTION A")}</span>
             <h3 id="ds-case-evolution-a-title">{t("Before / After 版型的三段抽象")}</h3>
           </header>
-          <p className="cs-section-lead">{t("同一個版型寫了三次之後，才動手抽象——而且分三步走，不是一次到位。")}</p>
+          <p className="cs-section-lead">{t("同一種 Before / After 版型在三個案例頁各自實作後，我才開始整理共用結構。整個過程分成三步，沒有一次改完。")}</p>
           <CaseGrid variant="three" className="ds-case-card-grid ds-case-stage-grid">
             {evolutionSteps.map((step, index) => (
               <CaseCard className="ds-case-stage-card" key={step.title}>
@@ -90,7 +90,7 @@ export default async function EvolutionCasesSection() {
           </CaseGrid>
           <CaseMedia
             className="ds-case-media"
-            caption={t("Before / After pattern 從三頁各自實作，演化成 slot-based narrative frame。")}
+            caption={t("三個案例頁各自實作的 Before / After 版型，最後收斂成共用的 slot-based narrative frame。")}
           >
             <Image
               src={`${ASSET}/solution/before-after-evolution.webp`}
@@ -104,8 +104,8 @@ export default async function EvolutionCasesSection() {
             title={t("名詞註釋")}
             ariaLabel={t("專有名詞註釋")}
             items={[
-              { term: t("Slot-based narrative frame"), description: t("這裡指固定版面結構、開放內容替換的敘事外框，讓不同案例能共用排列方式但保留自己的內容。") },
-              { term: t("Local implementation"), description: t("Local implementation 是先在單一頁面完成實作，等模式穩定後再評估是否抽到共用層。") },
+              { term: t("Slot-based narrative frame"), description: t("固定版面結構、讓各頁自行放入內容的敘事外框；不同案例可以共用排列方式，同時保留自己的文案與圖片。") },
+              { term: t("Local implementation"), description: t("先在單一頁面完成實作，等模式穩定後，再評估要不要移到共用層。") },
             ]}
           />
         </article>
@@ -118,8 +118,7 @@ export default async function EvolutionCasesSection() {
             <span>{t("EVOLUTION B")}</span>
             <h3 id="ds-case-evolution-b-title">{t("知道何時「不要」抽象")}</h3>
           </header>
-          <p className="cs-section-lead">{t("我後來的理解是：系統不一定要什麼都共用，但每個「刻意不共用」的地方，最好都講得出理由。")}</p>
-          <p className="cs-section-lead">{t("有了共用元件之後，最大的誘惑是把所有長得像的東西都塞進去。為了避免過早抽象，每次想共用之前，我都會先把「誘惑、判斷、決定」寫下來：")}</p>
+          <p className="cs-section-lead">{t("案例 A 抽出共用外框後，下一個問題是：哪些東西應該刻意留在單頁？有了共用元件，很容易想把所有長得像的東西都塞進去。為了避免過早抽象，我會先寫下「誘惑、判斷、決定」，確認每個不共用的地方都有理由。")}</p>
           <CaseGrid variant="three" className="ds-case-card-grid">
             {brakeCases.map((item) => (
               <CaseCard className="ds-case-brake-card" key={item.title}>
@@ -135,20 +134,20 @@ export default async function EvolutionCasesSection() {
           </CaseGrid>
           <CaseCard className="ds-case-narrative-card">
             <p>
-              {t("印象最深的一次：我曾一口氣盤點 8 個「看起來可以抽」的 pattern，")}
+              {t("把這套記錄方式用在全站盤點時，最讓我印象深刻的一次，是一口氣檢查 8 個「看起來可以抽」的 pattern，")}
               <b>{t("結論是一個都不抽")}</b>
               {t("。那次盤點沒有產出任何新元件，留下的是 8 條寫進治理文件的「為什麼不抽」。對我來說，把不做的理由寫清楚，跟多做幾個元件一樣重要。")}
             </p>
           </CaseCard>
           <blockquote className="ds-case-quote">
-            {t("抽象是有成本的。每多一個共用元件，就多一份契約要維護，也會讓更多頁面受到它的影響。")}
+            {t("那次盤點讓我更確定：每多一個共用元件，就多一份契約要維護，也會讓更多頁面一起承擔變動。")}
           </blockquote>
           <TermNotes
             title={t("名詞註釋")}
             ariaLabel={t("專有名詞註釋")}
             items={[
-              { term: t("Local component"), description: t("Local component 是只服務單一頁面或單一敘事情境的元件，不一定要抽成全站共用。") },
-              { term: t("Component abstraction"), description: t("Component abstraction 是把重複的結構整理成共用元件，但它同時會增加使用規則和維護成本。") },
+              { term: t("Local component"), description: t("只服務單一頁面或單一敘事情境的元件，可保留在該頁，不必抽成全站共用。") },
+              { term: t("Component abstraction"), description: t("把重複結構整理成共用元件的做法；共用後也會增加使用規則與維護成本。") },
             ]}
           />
         </article>
@@ -159,12 +158,11 @@ export default async function EvolutionCasesSection() {
         >
           <header className="ds-case-evolution-story-card__header">
             <span>{t("EVOLUTION C")}</span>
-            <h3 id="ds-case-evolution-c-title">{t("語意分不清時，先分開寫規格，不急著拆 code")}</h3>
+            <h3 id="ds-case-evolution-c-title">{t("語意分不清時，先寫規格，暫時不拆程式碼")}</h3>
           </header>
-          <p className="cs-section-lead">{t("不是每個問題都要用「改 code」來解決。")}</p>
-          <p className="cs-section-lead">{t("整理全站按鈕時，我卡在一個看起來很小的問題：")}</p>
+          <p className="cs-section-lead">{t("前一個案例決定不共用；這個案例則先不動程式碼，而是把用途分清楚。整理全站按鈕時，我卡在一個看起來很小的問題：")}</p>
           <p className="ds-case-question-callout">{t("「View case study」長得像按鈕，那它是 Button 嗎？")}</p>
-          <p className="cs-section-lead">{t("全站有十幾個這種「像按鈕的東西」，不先分類清楚，之後 token 化和抽元件都會踩空。查證 W3C 與 Material Design 的相關定義後，我把它們拆成四個概念：")}</p>
+          <p className="cs-section-lead">{t("全站有十幾個這種「像按鈕的東西」。如果沒有先分清楚用途，後續的 token 規則與共用元件就容易混用。查證 W3C 與 Material Design 的相關定義後，我把它們分成四個概念：")}</p>
           <div className="ds-case-table-frame">
             <table className="ds-case-table">
               <colgroup>
@@ -195,17 +193,17 @@ export default async function EvolutionCasesSection() {
             </table>
           </div>
           <CaseCard className="ds-case-narrative-card">
-            <p>{t("為什麼要分這麼細？因為使用者對 link 和 button 的預期不同：link 可以右鍵開新分頁、複製網址；button 會執行當下的操作。Screen reader 也會把它們讀成不同角色。語意用錯，使用輔助科技的人就可能誤判點擊後會發生什麼。")}</p>
-            <p>{t("最後我決定")}<b>{t("「文件拆、code 不拆」")}</b>{t("：在規格文件裡分別寫清楚 Button 和 LinkButton 的 contract；code 則維持同一個 Button 元件，有 href 時就 render 成連結。現階段若拆成兩個元件，得大批調整 import，也會增加 regression 風險。既然先把使用規則寫清楚就能解決，就不急著動 code。")}</p>
-            <p>{t("這個案例最後落在決策框架第三列「用途易混淆 → Component Contract」。除了抽元件，把使用契約寫清楚，也能解決重複出現的問題。")}</p>
+            <p>{t("這四個概念會直接影響互動預期：link 可以右鍵開新分頁、複製網址；button 會執行當下的操作。Screen reader 也會把它們讀成不同角色。語意用錯，使用輔助科技的人就可能誤判點擊後會發生什麼。")}</p>
+            <p>{t("最後我決定")}<b>{t("「文件拆、程式碼不拆」")}</b>{t("。規格文件分別寫清楚 Button 和 LinkButton 的 contract；實作仍維持同一個 Button 元件，有 href 時就 render 成連結。現在拆成兩個元件，得大批調整 import，也會增加 regression 風險。先把使用規則寫清楚，就足以解決眼前的問題。")}</p>
+            <p>{t("這正是判斷框架裡的「用途易混淆 → Component Contract」：不必立刻抽元件，先把使用契約寫清楚，就能處理反覆出現的語意混淆。")}</p>
           </CaseCard>
           <TermNotes
             title={t("名詞註釋")}
             ariaLabel={t("專有名詞註釋")}
             items={[
-              { term: t("LinkButton"), description: t("LinkButton 是語意上帶使用者前往另一個位置、視覺上看起來像按鈕的連結。") },
-              { term: t("Screen reader"), description: t("Screen reader 是協助視障使用者讀取畫面內容的輔助科技，會依照 HTML 語意讀出不同角色。") },
-              { term: t("Component contract"), description: t("Component contract 指的是元件的使用規則，例如它適合承載什麼內容、有哪些狀態、什麼情境下不該使用。") },
+              { term: t("LinkButton"), description: t("語意上帶使用者前往另一個位置、視覺上看起來像按鈕的連結。") },
+              { term: t("Screen reader"), description: t("協助視障使用者讀取畫面內容的輔助科技，會依 HTML 語意報讀不同角色。") },
+              { term: t("Component contract"), description: t("元件的使用規則，包括適合承載的內容、支援狀態與不適用情境。") },
             ]}
           />
         </article>

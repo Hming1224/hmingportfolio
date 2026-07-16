@@ -31,7 +31,7 @@ const overviewItems = [
   {
     kind: "goal",
     label: "責任分工",
-    title: "我負責定義方向、做出判斷並驗收結果；AI 協助分析、實作與驗證。",
+    title: "設計決策由我負責，AI 則協助盤點程式、實作和檢查。",
     details: [
       {
         label: "我的責任",
@@ -41,13 +41,13 @@ const overviewItems = [
       },
       {
         label: "AI 協助",
-        text: "搜尋程式與樣式、比較重複模式、依照已確認規格實作、測試與除錯。",
+        text: "盤點程式與樣式，找出重複模式，再依照已確認的規格實作、測試和除錯。",
         icon: "hypothesis",
         variant: "default",
       },
       {
         label: "品質責任",
-        text: "自動檢查通過後，我仍會確認跨頁版面、互動與案例差異是否符合原本設計意圖。",
+        text: "自動檢查通過後，我會再看一次跨頁版面、互動和案例差異，確認沒有偏離原本的設計意圖。",
         icon: "validation",
         variant: "default",
       },
@@ -66,7 +66,7 @@ const overviewItems = [
       },
       {
         label: "元件邊界",
-        text: "重複且用途穩定的模式整理成共用元件；案例限定的敘事保留在 route-local。",
+        text: "重複且用途穩定的模式整理成共用元件；只服務單一案例的敘事版型，仍留在該案例頁。",
         icon: "validation",
         variant: "default",
       },
@@ -87,8 +87,8 @@ export default async function WhySection() {
     <CaseOverview
       id="cs-sec-overview"
       kicker={t("專案總覽")}
-      title={t("用 Design System 管理作品集，也用明確分工控制 AI 協作品質")}
-      lead={t("這是一個持續迭代的自發專案。除了整理樣式，也建立人與 AI 都能依循、驗證與回溯的維護方式。")}
+      title={t("用 Design System 管理作品集，也把我與 AI 的分工寫清楚")}
+      lead={t("這次不只整理樣式，也把修改範圍、分工和檢查方式寫清楚，讓我和 AI 能在同一套規則下協作。")}
       items={overviewItems.map((item) => ({
         kind: item.kind,
         label: t(item.label),
@@ -105,7 +105,7 @@ export default async function WhySection() {
         <div className="ds-case-design-system-cta">
           <div>
             <h3>{t("查看實作後的 Design System 文件")}</h3>
-            <p>{t("這套規則最後整理成可瀏覽的文件頁，內容對應實際使用的 foundations、tokens、components、patterns 與 governance。")}</p>
+            <p>{t("我也把這套規則整理成可瀏覽的文件頁，內容直接對應網站正在使用的設計基礎、tokens、元件、版型和治理方式。")}</p>
           </div>
           <Button className="ds-case-design-system-cta__button" href="/design-system">
             {t("前往 Design System")}

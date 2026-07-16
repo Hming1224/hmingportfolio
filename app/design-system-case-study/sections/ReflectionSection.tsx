@@ -4,15 +4,15 @@ import { getDsTranslator } from "../i18n-server";
 const reflections = [
   {
     title: "共用不是越多越好",
-    body: "AI 能快速找出相似模式，但只有用途、內容模型與未來變動方式都穩定時，整理成共用元件才真正降低維護成本。",
+    body: "AI 很快就能找出相似模式。用途、內容模型與未來變動方式都穩定後，我才會整理成共用元件，確定它真的能降低維護成本。",
   },
   {
-    title: "規則必須能被程式與協作者執行",
-    body: "Design Token、component contract 與決策紀錄不能只停留在說明文件，還要對應實際程式與可檢查的使用方式。",
+    title: "規則要落進程式，也要讓協作者能照著做",
+    body: "每一條 design token、component contract 與決策紀錄，都要對應到實際程式和可檢查的使用方式。只寫在說明文件裡不夠。",
   },
   {
     title: "驗證流程也是 Design System 的一部分",
-    body: "穩定品質來自有限範圍、自動檢查、人工驗收與可回溯版本，不依賴單次生成結果。",
+    body: "我把修改範圍、自動檢查、人工驗收與版本紀錄串成固定流程，不把品質押在某一次生成結果上。",
   },
 ];
 
@@ -22,11 +22,11 @@ export default async function ReflectionSection() {
     <CaseSection
       id="cs-sec-reflection"
       kicker={t("學習反思")}
-      title={t("穩定品質來自清楚邊界與驗證流程，不是更多共用元件")}
+      title={t("做完這套系統，我留下三個判斷")}
       surface
     >
       <p className="cs-section-lead">
-        {t("AI 適合大量搜尋、比較、實作與驗證；設計語意、元件邊界與最終品質仍需要人的判斷。")}
+        {t("這三組數字說明做出了什麼；回頭看整個過程，我更在意哪些工作適合交給 AI，哪些判斷仍要由我負責。")}
       </p>
       <ol className="ds-case-reflection-list">
         {reflections.map((item, index) => (
@@ -37,7 +37,7 @@ export default async function ReflectionSection() {
         ))}
       </ol>
       <p className="ds-case-limit-note">
-        {t("目前主要由我維護，尚未累積多人協作或長期維護時間的前後比較；後續會持續記錄自動檢查攔下的問題與常見修改所需步驟。")}
+        {t("目前主要還是我一個人維護，所以還沒有多人協作或長期維護時間的前後比較。接下來會記錄兩件事：自動檢查實際攔下哪些問題，以及常見修改需要多少步驟。")}
       </p>
     </CaseSection>
   );

@@ -40,18 +40,18 @@ function IconBadgeCheck() {
 const motivationCards = [
   {
     icon: <IconRepeat />,
-    title: "頁面迭代太頻繁",
-    body: "同一種「前後對比」版型，在不同案例頁各自實作；顏色、間距也散落在各頁 CSS 裡。當網站越來越大，任何微調都可能變成重複修改。",
+    title: "同一版型反覆實作",
+    body: "同一種「前後對比」版型，在不同案例頁各做一份，顏色和間距也散落在各頁 CSS 裡。網站一變大，同一個微調就可能要重複處理。",
   },
   {
     icon: <IconAgents />,
     title: "AI 協作需要明確邊界",
-    body: "我會使用 AI 協助盤點、實作與檢查，但如果沒有共同規範，每次修改都可能採用不同寫法。AI 要能穩定協作，前提是規則、權限和驗證方式都被寫清楚。",
+    body: "我用 AI 協助盤點、實作和檢查；如果沒有共同規範，同一種修改每次都可能寫成不同版本。要讓協作結果穩定，就得先寫清楚規則、權限和驗證方式。",
   },
   {
     icon: <IconBadgeCheck />,
-    title: "把理解落到真實作品裡",
-    body: "與其停留在「知道 design system」的理解，我更想用自己的作品集實際做一次：從規則建立、元件盤點到長期維護，把整個過程走一遍、也記錄下來。",
+    title: "用自己的作品集驗證 Design System",
+    body: "我不想只停在理論理解，所以直接拿作品集來做：從規則建立、元件盤點到長期維護，完整走過一次並留下紀錄。",
   },
 ];
 
@@ -67,10 +67,10 @@ export default async function StartingPointSection() {
     >
       <div className="ds-case-prose">
         <p className="cs-section-lead">
-          {t("網站不是沒有設計，只是設計散落在每一頁，沒有集中管理的地方。")}
+          {t("設計一直都在，只是分散在每一頁，沒有集中管理。")}
         </p>
         <p className="cs-section-lead">
-          {t("作品集網站一開始是用「先把畫面做出來」的方式快速成形，讓內容可以先上線展示。但隨著頁面越改越多，三個問題也慢慢浮現：")}
+          {t("回到專案一開始，我的優先順序是先把案例內容和畫面做出來，讓作品能上線。頁面增加後，三個問題開始反覆出現：")}
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export default async function StartingPointSection() {
 
       <div className="ds-case-prose ds-case-prose--after-motivation-cards">
         <p className="cs-section-lead">
-          {t("我先參考 Ant Design 與 Google Material Design，逐項比較作品集的顏色層級、間距、圓角、字級，以及 hover、focus、disabled 等元件狀態，共整理出十幾個缺口。")}
+          {t("這三個問題把下一步指向同一件事：先弄清楚作品集缺哪些規範。我參考 Ant Design 與 Google Material Design，再逐項比較顏色層級、間距、圓角、字級，以及 hover、focus、disabled 等元件狀態，共整理出十幾個缺口。")}
         </p>
         <p className="cs-section-lead">
           {t("接著用 Figma Make 做出包含系統介紹、缺口清單與升級計畫的互動雛形，先把腦中模糊的「想要一套系統」變成看得見、可以討論的第一版規劃。")}
@@ -95,7 +95,7 @@ export default async function StartingPointSection() {
 
       <CaseMedia
         className="ds-case-media"
-        caption={t("Figma Make 第一版互動雛形：先把 Design System 的方向變成可以討論的介面。")}
+        caption={t("Figma Make 第一版互動雛形，包含系統介紹、缺口清單與升級計畫。")}
       >
         <Image
           src={`${ASSET}/research/figma-make-prototype.webp`}
@@ -110,9 +110,9 @@ export default async function StartingPointSection() {
         title={t("名詞說明")}
         ariaLabel={t("這一段的名詞說明")}
         items={[
-          { term: "Ant Design / Material Design", description: t("業界成熟的設計系統，這裡拿來當比對基準，逐項對照作品集還缺哪些規範。") },
+          { term: "Ant Design / Material Design", description: t("我用這兩套設計系統當比對基準，逐項檢查作品集還缺哪些規範。") },
           { term: "hover / focus / disabled", description: t("元件在滑鼠移入、鍵盤聚焦、不能點擊時各自的樣子；設計系統要事先把這些狀態都定義好。") },
-          { term: "Figma Make", description: t("Figma Make 是用來快速產生互動雛形的工具，這裡用來把系統規劃先做成可討論的介面。") },
+          { term: "Figma Make", description: t("用來快速產生互動雛形的工具。") },
         ]}
       />
     </CaseSection>
