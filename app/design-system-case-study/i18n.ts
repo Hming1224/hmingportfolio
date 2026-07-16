@@ -422,6 +422,7 @@ const en = {
   "先檢查程式與 route，再確認雙語、版面、互動與案例差異；通過後保留版本紀錄。": "Check the code and routes first, then review both languages, layouts, interactions, and case-specific differences before recording the approved version.",
 
   "先看重複的是什麼，再決定要不要共用": "Identify What Repeats Before Deciding Whether to Share It",
+  "這幾個轉折裡，最常讓我猶豫的都是同一件事：眼前這個東西到底該不該共用。與其每次憑感覺決定，我後來把它整理成一條判斷路徑，遇到重複的東西就照著走一遍。": "Across these turning points, the same question kept coming up: should this thing be shared or not? Instead of deciding by feel each time, I turned it into a decision path I could walk through whenever something repeated.",
   "需要設計判斷與取捨的工作": "Work That Requires Design Judgment",
   "問題定義、優先順序與案例敘事目標": "Problem definition, priorities, and case-study narrative goals",
   "元件語意、共用邊界與互動意圖": "Component meaning, shared boundaries, and interaction intent",

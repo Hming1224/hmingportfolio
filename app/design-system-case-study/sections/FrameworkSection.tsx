@@ -55,6 +55,9 @@ export default async function FrameworkSection() {
       title={t("先看重複的是什麼，再決定要不要共用")}
       surface
     >
+      <p className="cs-section-lead">
+        {t("這幾個轉折裡，最常讓我猶豫的都是同一件事：眼前這個東西到底該不該共用。與其每次憑感覺決定，我後來把它整理成一條判斷路徑，遇到重複的東西就照著走一遍。")}
+      </p>
       <div className="ds-case-decision-tree">
         <div className="ds-case-decision-tree__root">
           <span>{t("起點")}</span>
