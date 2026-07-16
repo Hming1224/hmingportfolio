@@ -81,8 +81,9 @@ export default async function GovernanceSection() {
         <ol>
           {maintenanceStages.map((stage, index) => (
             <li className={`ds-case-governance-loop__stage ds-case-governance-loop__stage--${stage.owner}`} key={stage.title}>
-              <div className="ds-case-governance-loop__meta">
+              <header className="ds-case-governance-loop__header">
                 <span className="ds-case-governance-loop__number">0{index + 1}</span>
+                <h3>{t(stage.title)}</h3>
                 <span className="ds-case-governance-loop__owner">
                   {stage.title === "驗收" ? (
                     <>
@@ -92,21 +93,21 @@ export default async function GovernanceSection() {
                   ) : (
                     <GovernanceOwnerMark owner={stage.owner} label={t(stage.ownerLabel)} />
                   )}
-                  {t(stage.ownerLabel)}
                 </span>
+              </header>
+              <div className="ds-case-governance-loop__body">
+                <p>{t(stage.body)}</p>
+                {"checks" in stage ? (
+                  <ul className="ds-case-governance-check">
+                    {stage.checks.map((check) => (
+                      <li className={`ds-case-governance-check__item ds-case-governance-check__item--${check.owner}`} key={check.title}>
+                        {t(check.title)}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                {"footnote" in stage ? <small>{t(stage.footnote)}</small> : null}
               </div>
-              <h3>{t(stage.title)}</h3>
-              <p>{t(stage.body)}</p>
-              {"checks" in stage ? (
-                <ul className="ds-case-governance-check">
-                  {stage.checks.map((check) => (
-                    <li className={`ds-case-governance-check__item ds-case-governance-check__item--${check.owner}`} key={check.title}>
-                      {t(check.title)}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-              {"footnote" in stage ? <small>{t(stage.footnote)}</small> : null}
             </li>
           ))}
         </ol>

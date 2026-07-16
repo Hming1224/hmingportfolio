@@ -1823,22 +1823,34 @@
   display: flex;
   min-width: 0;
   flex-direction: column;
+  overflow: hidden;
   border: 1px solid var(--cs-line);
-  border-top: 3px solid var(--cs-accent);
   border-radius: var(--hm-radius-lg);
-  padding: var(--hm-space-md);
   background: #fff;
 }
 
-.ds-case-governance-loop__stage--ai {
-  border-top-color: var(--cs-teal);
+.ds-case-governance-loop__header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--hm-space-2xs);
+  min-height: 80px;
+  padding: var(--hm-space-md);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--cs-accent) 24%, #fff) 0%,
+    var(--cs-accent-soft) 62%,
+    #fff 100%
+  );
 }
 
-.ds-case-governance-loop__meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--hm-space-xs);
+.ds-case-governance-loop__stage--ai .ds-case-governance-loop__header {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--cs-teal) 22%, #fff) 0%,
+    var(--cs-teal-soft) 62%,
+    #fff 100%
+  );
 }
 
 .ds-case-governance-loop__number {
@@ -1858,21 +1870,29 @@
 }
 
 .ds-case-governance-loop__owner {
+  justify-self: end;
   color: var(--cs-text-muted);
   font-size: var(--fs-xs);
   font-weight: var(--hm-fw-semibold);
 }
 
-.ds-case-governance-loop__stage h3 {
-  margin: var(--hm-space-sm) 0 0;
+.ds-case-governance-loop__header h3 {
+  margin: 0;
   color: var(--cs-text-heading);
   font-size: var(--fs-h4);
   font-weight: var(--hm-fw-bold);
   line-height: 1.4;
 }
 
-.ds-case-governance-loop__stage > p {
-  margin: var(--hm-space-2xs) 0 0;
+.ds-case-governance-loop__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--hm-space-md);
+}
+
+.ds-case-governance-loop__body > p {
+  margin: 0;
   color: var(--cs-text-secondary);
   font-size: var(--fs-sm);
   line-height: 1.7;
@@ -1908,7 +1928,7 @@
   background: var(--cs-teal);
 }
 
-.ds-case-governance-loop__stage > small {
+.ds-case-governance-loop__body > small {
   display: block;
   margin-top: var(--hm-space-sm);
   color: var(--cs-text-muted);
@@ -1999,15 +2019,6 @@
 @media (max-width: 768px) {
   .ds-case-governance-loop > ol {
     grid-template-columns: 1fr;
-  }
-
-  .ds-case-governance-loop__stage {
-    border-top: 1px solid var(--cs-line);
-    border-left: 3px solid var(--cs-accent);
-  }
-
-  .ds-case-governance-loop__stage--ai {
-    border-left-color: var(--cs-teal);
   }
 
   .ds-case-outcome-grid {
