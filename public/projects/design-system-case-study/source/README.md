@@ -6,7 +6,8 @@ These files are the editable source files for the generated WebP visuals used by
 
 - `cover.html` -> `../cover/cover.webp`
 - `ai-workflow.html` -> `../solution/ai-workflow.webp`
-- `before-after-evolution.html` -> `../solution/before-after-evolution.webp`
+
+`before-after-evolution.html` is retained as an editable reference. The case study now renders that comparison directly in HTML/CSS, so it no longer generates a WebP asset.
 
 Open these HTML files in a browser or import them into Figma to edit the layout, text, colors, and shapes.
 

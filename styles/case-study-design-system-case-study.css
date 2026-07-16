@@ -516,7 +516,7 @@
 .ds-case-evolution-diagram {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
+  align-items: stretch;
   gap: var(--hm-space-md);
   width: 100%;
   padding: var(--hm-space-xl);
@@ -564,6 +564,7 @@
 }
 
 .ds-case-evolution-diagram__arrow {
+  align-self: center;
   color: var(--cs-accent);
 }
 
@@ -1336,33 +1337,6 @@
   height: 100%;
 }
 
-.ds-case-evolution-semantic-example .ds-case-control-demo {
-  margin-top: 0;
-}
-
-.ds-case-control-demo {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--hm-space-md);
-  margin-top: var(--hm-space-md);
-}
-
-.ds-case-control-demo > div {
-  display: grid;
-  align-content: space-between;
-  gap: var(--hm-space-sm);
-  border: 1px solid var(--cs-line);
-  border-radius: var(--hm-radius-md);
-  padding: var(--hm-space-md);
-  background: var(--cs-surface);
-}
-
-.ds-case-control-demo > div > span {
-  color: var(--cs-text-secondary);
-  font-size: var(--fs-xs);
-  font-weight: var(--hm-fw-bold);
-}
-
 .theme-design-system-case-study .ds-button-secondary {
   color: var(--cs-text-secondary);
   box-shadow: inset 0 0 0 2px var(--cs-line-strong);
@@ -1370,14 +1344,6 @@
 
 .theme-design-system-case-study .cs-flow-hint {
   color: var(--cs-text-secondary);
-}
-
-.ds-case-control-demo a:not(.ds-button) {
-  width: fit-content;
-  color: var(--cs-accent-strong);
-  font-weight: var(--hm-fw-bold);
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
 .ds-case-outcome-grid {
@@ -1436,10 +1402,6 @@
 
 @media (max-width: 1024px) {
   .ds-case-motivation-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ds-case-control-demo {
     grid-template-columns: 1fr;
   }
 }

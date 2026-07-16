@@ -71,6 +71,7 @@ const en = {
   "整理全站按鈕時，我卡在一個看起來很小的問題：": "While organizing buttons across the site, I got stuck on a small but important question:",
   "在當下情境執行操作（command action）": "Executes an action in the current context",
   "帶使用者前往目的地（navigation action）": "Takes users to a destination",
+  "View case study、Next project": "View case study, Next project",
   "不是元件，是這一顆在畫面上的「角色」（usage role）": "Not a component; a usage role in a specific layout",
   "最後我決定": "I ultimately decided to ",
 
