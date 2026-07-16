@@ -5,6 +5,7 @@ import {
   CaseMedia,
   CaseSection,
 } from "../../../components/case-study";
+import SemanticTableExample from "../components/SemanticTableExample";
 import TermNotes from "../components/TermNotes";
 import { ASSET } from "../data";
 import { getDsTranslator } from "../i18n-server";
@@ -49,11 +50,11 @@ const brakeCases = [
 ];
 
 const semanticRows = [
-  ["Button", "在當下情境執行操作（command action）", "送出表單、複製 email、打開 lightbox"],
-  ["Link", "帶使用者前往目的地（navigation action）", "去案例頁、回首頁、開外部 prototype"],
-  ["LinkButton", "語意是 Link、視覺長得像 Button", "View case study、Next project"],
-  ["CTA", "不是元件，是這一顆在畫面上的「角色」（usage role）", "Hero 主按鈕、卡片的 Learn More"],
-];
+  ["Button", "在當下情境執行操作（command action）", "送出表單、複製 email、打開 lightbox", "button", "複製 email"],
+  ["Link", "帶使用者前往目的地（navigation action）", "去案例頁、回首頁、開外部 prototype", "link", "查看判斷框架"],
+  ["LinkButton", "語意是 Link、視覺長得像 Button", "View case study、Next project", "linkButton", "查看最終成果"],
+  ["CTA", "不是元件，是這一顆在畫面上的「角色」（usage role）", "Hero 主按鈕、卡片的 Learn More", "cta", "前往 Design System"],
+] as const;
 
 export default async function EvolutionCasesSection() {
   const { t } = await getDsTranslator();
@@ -166,15 +167,28 @@ export default async function EvolutionCasesSection() {
           <p className="cs-section-lead">{t("全站有十幾個這種「像按鈕的東西」，不先分類清楚，之後 token 化和抽元件都會踩空。查證 W3C 與 Material Design 的相關定義後，我把它們拆成四個概念：")}</p>
           <div className="ds-case-table-frame">
             <table className="ds-case-table">
+              <colgroup>
+                <col className="ds-case-table__concept-column" />
+                <col className="ds-case-table__definition-column" />
+                <col className="ds-case-table__example-copy-column" />
+                <col className="ds-case-table__ui-column" />
+              </colgroup>
               <thead>
-                <tr><th>{t("概念")}</th><th>{t("是什麼")}</th><th>{t("例子")}</th></tr>
+                <tr><th>{t("概念")}</th><th>{t("是什麼")}</th><th>{t("例子")}</th><th>{t("UI 元件範例")}</th></tr>
               </thead>
               <tbody>
-                {semanticRows.map(([term, meaning, examples]) => (
+                {semanticRows.map(([term, meaning, examples, exampleKind, exampleLabel]) => (
                   <tr key={term}>
                     <th scope="row">{t(term)}</th>
                     <td>{t(meaning)}</td>
                     <td>{t(examples)}</td>
+                    <td className="ds-case-table__example">
+                      <SemanticTableExample
+                        copiedLabel={t("已複製")}
+                        kind={exampleKind}
+                        label={t(exampleLabel)}
+                      />
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -261,6 +261,8 @@ const en = {
   "概念": "Concept",
   "是什麼": "Meaning",
   "例子": "Examples",
+  "UI 元件範例": "UI Component Example",
+  "複製 email": "Copy Email",
   "執行目前頁面的操作": "Performs an action on the current page",
   "送出表單、複製 email、打開 lightbox": "Submit a form, copy an email, open a lightbox",
   "前往另一個頁面或位置": "Takes users to another page or location",
