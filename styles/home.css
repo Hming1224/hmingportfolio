@@ -533,7 +533,7 @@
 
 /* 6 sticky note positions — offset by nav 80px */
 .hero-sticky-1 {
-  left: 31%;
+  left: 38%;
   top: 18%;
   animation:
     heroShootTopL 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both,
@@ -541,7 +541,7 @@
 }
 
 .hero-sticky-2 {
-  left: 38%;
+  left: 45%;
   top: 14%;
   animation:
     heroShootTop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both,
@@ -1506,7 +1506,7 @@
   }
 
   .hero-cursor-brian {
-    left: 39.875%;
+    left: 46.875%;
   }
 }
 
