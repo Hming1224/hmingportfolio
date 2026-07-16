@@ -29,21 +29,21 @@ const brakeCases = [
   {
     verdict: "KEEP LOCAL",
     title: "各案例頁的反思卡片",
-    temptation: "三個案例頁都有反思卡片，結構相似，看起來是現成的共用候選。",
+    context: "三個案例頁都有反思卡片，結構相似，看起來是現成的共用候選。",
     judgment: "有些反思卡片的背景、標號和排列方式其實是那一頁的敘事識別；硬統一會讓不同案例的語氣被磨平。",
     decision: "共用層停在底層的卡片外殼、Grid 和 tokens，版型各自保留。",
   },
   {
     verdict: "KEEP LOCAL",
     title: "Advantech 的多重對比版面",
-    temptation: "已經有共用的 Before / After 外框，很容易想把 Advantech 的多組對比也塞進去，追求「全站統一」。",
+    context: "已經有共用的 Before / After 外框，很容易想把 Advantech 的多組對比也塞進去，追求「全站統一」。",
     judgment: "既有外框的契約是「一個外框、一組對比」；Advantech 則是在同一個外框裡放多組對比，用途不同。硬塞進去，元件會為了遷就例外長出太多開關。",
     decision: "刻意保留在頁面本地；等真的出現第二個多重對比場景，再設計新的契約。",
   },
   {
     verdict: "DEFERRED",
     title: "通用 Tag、表格外框、影片燈箱",
-    temptation: "「以後一定用得到」，所以先做起來放著。",
+    context: "「以後一定用得到」，所以先做起來放著。",
     judgment: "這些項目還沒有穩定的使用場景。需求出現前就抽元件，只能靠猜；抽錯共用邊界，會比暫時重複的程式碼更難維護。",
     decision: "先把預期行為寫進文件，暫緩建立元件；等 Rule of Three 的條件成立，再重新評估。",
   },
@@ -74,7 +74,7 @@ export default async function EvolutionCasesSection() {
         >
           <header className="ds-case-evolution-story-card__header">
             <span>{t("EVOLUTION A")}</span>
-            <h3 id="ds-case-evolution-a-title">{t("Before / After 版型的三段抽象")}</h3>
+            <h3 id="ds-case-evolution-a-title">{t("Before / After 版型的三步共用化")}</h3>
           </header>
           <p className="cs-section-lead">{t("同一種 Before / After 版型在三個案例頁各自實作後，我才開始整理共用結構。整個過程分成三步，沒有一次改完。")}</p>
           <CaseGrid variant="three" className="ds-case-card-grid ds-case-stage-grid">
@@ -116,9 +116,9 @@ export default async function EvolutionCasesSection() {
         >
           <header className="ds-case-evolution-story-card__header">
             <span>{t("EVOLUTION B")}</span>
-            <h3 id="ds-case-evolution-b-title">{t("知道何時「不要」抽象")}</h3>
+            <h3 id="ds-case-evolution-b-title">{t("知道何時不要急著共用")}</h3>
           </header>
-          <p className="cs-section-lead">{t("案例 A 抽出共用外框後，下一個問題是：哪些東西應該刻意留在單頁？有了共用元件，很容易想把所有長得像的東西都塞進去。為了避免過早抽象，我會先寫下「誘惑、判斷、決定」，確認每個不共用的地方都有理由。")}</p>
+          <p className="cs-section-lead">{t("案例 A 抽出共用外框後，下一個問題是：哪些東西應該刻意留在單頁？有了共用元件，很容易想把所有長得像的東西都塞進去。為了避免太早共用，我會先寫下「情境、判斷、決定」，確認每個不共用的地方都有理由。")}</p>
           <CaseGrid variant="three" className="ds-case-card-grid">
             {brakeCases.map((item) => (
               <CaseCard className="ds-case-brake-card" key={item.title}>
@@ -126,7 +126,7 @@ export default async function EvolutionCasesSection() {
                   {t(item.verdict)}
                 </span>
                 <h3>{t(item.title)}</h3>
-                <p><strong>{t("誘惑")}</strong>{t(item.temptation)}</p>
+                <p><strong>{t("情境")}</strong>{t(item.context)}</p>
                 <p><strong>{t("判斷")}</strong>{t(item.judgment)}</p>
                 <p><strong>{t("決定")}</strong>{t(item.decision)}</p>
               </CaseCard>
@@ -147,7 +147,7 @@ export default async function EvolutionCasesSection() {
             ariaLabel={t("專有名詞註釋")}
             items={[
               { term: t("Local component"), description: t("只服務單一頁面或單一敘事情境的元件，可保留在該頁，不必抽成全站共用。") },
-              { term: t("Component abstraction"), description: t("把重複結構整理成共用元件的做法；共用後也會增加使用規則與維護成本。") },
+              { term: t("元件共用化"), description: t("把重複結構整理成共用元件的做法；共用後也會增加使用規則與維護成本。") },
             ]}
           />
         </article>

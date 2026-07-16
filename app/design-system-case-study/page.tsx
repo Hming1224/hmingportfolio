@@ -74,7 +74,7 @@ export default async function DesignSystemCaseStudyPage() {
         actLabel="ACT 3"
         kicker={t("三個演化案例")}
         title={t("把判斷框架放回真實案例")}
-        lead={t("接下來三個案例分別從重複版型、過早抽象與語意混淆出發，看看同一套框架如何導向不同決定。")}
+        lead={t("接下來三個案例分別從重複版型、過早共用與語意混淆出發，看看同一套框架如何導向不同決定。")}
       />
       <EvolutionCasesSection />
       <ActDivider
