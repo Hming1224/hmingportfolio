@@ -315,7 +315,7 @@ const messages = {
       title: "If you want to see how this system lands inside real case-study work",
       body: "Go back to the selected projects to see the same thinking applied to IoT, enterprise SaaS, and narrative-heavy product work. Or reach out and we can talk about how design thinking connects to product and engineering.",
       primaryAction: "Back to selected work",
-      secondaryAction: "Contact me",
+      secondaryAction: "Explore the iteration process",
     },
   },
 };

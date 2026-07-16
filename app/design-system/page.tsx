@@ -178,7 +178,7 @@ export default async function DesignSystemPage() {
                 <Button href="/#projects">
                   {copy.cta.primaryAction}
                 </Button>
-                <Button variant="secondary" href="/contact">
+                <Button variant="secondary" href="/design-system-case-study">
                   {copy.cta.secondaryAction}
                 </Button>
               </div>

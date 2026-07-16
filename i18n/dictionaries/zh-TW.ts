@@ -315,7 +315,7 @@ const messages = {
       title: "如果你想看這套系統怎麼落到真實案例裡",
       body: "可以直接回到作品案例，看同一套判斷怎麼被應用在 IoT、企業 SaaS 與內容敘事上。也歡迎直接找我聊聊，怎麼把設計思維接到產品與工程。",
       primaryAction: "回到精選案例",
-      secondaryAction: "聯絡我",
+      secondaryAction: "了解迭代過程",
     },
   },
 };
