@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import {
   CaseCard,
@@ -29,6 +30,12 @@ const brakeCases = [
   {
     verdict: "KEEP LOCAL",
     title: "各案例頁的反思卡片",
+    shot: {
+      src: "brake-reflection-cards.webp",
+      alt: "三個案例頁的反思卡片截圖：結構相同，但配色與排版各自不同。",
+      width: 1199,
+      height: 958,
+    },
     context: "三個案例頁都有反思卡片，結構相似，看起來是現成的共用候選。",
     judgment: "有些反思卡片的背景、標號和排列方式其實是那一頁的敘事識別；硬統一會讓不同案例的語氣被磨平。",
     decision: "共用層停在底層的卡片外殼、Grid 和 tokens，版型各自保留。",
@@ -36,6 +43,12 @@ const brakeCases = [
   {
     verdict: "KEEP LOCAL",
     title: "Advantech 的多重對比版面",
+    shot: {
+      src: "brake-advantech-multi.webp",
+      alt: "Advantech 案例頁的多重對比版面截圖：同一個外框裡放了多組修正說明與 Before / After 對比。",
+      width: 1400,
+      height: 1234,
+    },
     context: "已經有共用的 Before / After 外框，很容易想把 Advantech 的多組對比也塞進去，追求「全站統一」。",
     judgment: "既有外框的契約是「一個外框、一組對比」；Advantech 則是在同一個外框裡放多組對比，用途不同。硬塞進去，元件會為了遷就例外長出太多開關。",
     decision: "刻意保留在頁面本地；等真的出現第二個多重對比場景，再設計新的契約。",
@@ -43,6 +56,12 @@ const brakeCases = [
   {
     verdict: "DEFERRED",
     title: "通用 Tag、表格外框、影片燈箱",
+    shot: {
+      src: "brake-deferred-patterns.webp",
+      alt: "站上零散出現的影片展示、資料表格與標籤截圖，都是被暫緩抽成共用元件的候選。",
+      width: 1200,
+      height: 1173,
+    },
     context: "「以後一定用得到」，所以先做起來放著。",
     judgment: "這些項目還沒有穩定的使用場景。需求出現前就抽元件，只能靠猜；抽錯共用邊界，會比暫時重複的程式碼更難維護。",
     decision: "先把預期行為寫進文件，暫緩建立元件；等 Rule of Three 的條件成立，再重新評估。",
@@ -92,13 +111,31 @@ export default async function EvolutionCasesSection() {
             className="ds-case-media"
             caption={t("三個案例頁各自實作的 Before / After 版型，最後收斂成共用的 slot-based narrative frame。")}
           >
-            <Image
-              src={`${ASSET}/solution/before-after-evolution.webp`}
-              alt={t("Before and after diagram showing three local implementations evolving into shared narrative frame and panel shell.")}
-              width={1600}
-              height={900}
-              sizes="(max-width: 768px) calc(100vw - 48px), calc(100vw - 96px)"
-            />
+            <div
+              className="ds-case-evolution-diagram"
+              role="img"
+              aria-label={t("三個案例頁各自實作的 Before / After 版型，最後收斂成共用的 slot-based narrative frame。")}
+            >
+              <div className="ds-case-evolution-diagram__panel">
+                <span className="ds-case-evolution-diagram__label">Before</span>
+                {["Advantech", "Laushu", "Crypto Arsenal"].map((pageName) => (
+                  <div className="ds-case-evolution-diagram__row" key={pageName}>
+                    <span className="ds-case-evolution-diagram__chip ds-case-evolution-diagram__chip--page">{pageName}</span>
+                    <span className="ds-case-evolution-diagram__chip">local CSS / DOM</span>
+                  </div>
+                ))}
+              </div>
+              <ArrowRight className="ds-case-evolution-diagram__arrow" size={28} strokeWidth={1.8} aria-hidden="true" />
+              <div className="ds-case-evolution-diagram__panel">
+                <span className="ds-case-evolution-diagram__label">After</span>
+                <div className="ds-case-evolution-diagram__stack">
+                  <span className="ds-case-evolution-diagram__node">BeforeAfterNarrativeFrame</span>
+                  <span className="ds-case-evolution-diagram__link" aria-hidden="true" />
+                  <span className="ds-case-evolution-diagram__node">BeforeAfterPanel</span>
+                  <span className="ds-case-evolution-diagram__note">{t("相容層讓已上線頁面的畫面維持不變")}</span>
+                </div>
+              </div>
+            </div>
           </CaseMedia>
           <TermNotes
             title={t("名詞註釋")}
@@ -126,6 +163,15 @@ export default async function EvolutionCasesSection() {
                   {t(item.verdict)}
                 </span>
                 <h3>{t(item.title)}</h3>
+                <span className="ds-case-brake-card__shot">
+                  <Image
+                    src={`${ASSET}/evolution/${item.shot.src}`}
+                    alt={t(item.shot.alt)}
+                    width={item.shot.width}
+                    height={item.shot.height}
+                    sizes="(max-width: 768px) calc(100vw - 48px), 360px"
+                  />
+                </span>
                 <p><strong>{t("情境")}</strong>{t(item.context)}</p>
                 <p><strong>{t("判斷")}</strong>{t(item.judgment)}</p>
                 <p><strong>{t("決定")}</strong>{t(item.decision)}</p>

@@ -35,6 +35,10 @@ const en = {
   "自動檢查": "Automated checks",
   "名詞註釋": "Terms",
   "專有名詞註釋": "Term notes",
+  "三個案例頁的反思卡片截圖：結構相同，但配色與排版各自不同。": "Screenshots of the reflection cards from three case studies: identical structure, but each keeps its own colors and layout.",
+  "Advantech 案例頁的多重對比版面截圖：同一個外框裡放了多組修正說明與 Before / After 對比。": "Screenshot of Advantech's multi-comparison layout: one frame holding several revision notes and before/after pairs.",
+  "站上零散出現的影片展示、資料表格與標籤截圖，都是被暫緩抽成共用元件的候選。": "Screenshots of the video showcase, data table, and tags scattered across the site — all candidates whose extraction into shared components was deferred.",
+  "相容層讓已上線頁面的畫面維持不變": "A compatibility layer keeps live pages looking exactly the same",
 
   " 和 ": " and ",
   "接著用 ": "Then I used ",

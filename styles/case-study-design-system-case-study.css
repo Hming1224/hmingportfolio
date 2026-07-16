@@ -496,6 +496,123 @@
   letter-spacing: 0.04em;
 }
 
+.ds-case-brake-card__shot {
+  display: block;
+  margin: var(--hm-space-2xs) 0 var(--hm-space-xs);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-sm);
+  overflow: hidden;
+  background: var(--cs-surface);
+}
+
+.ds-case-brake-card__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Evolution A：版型收斂示意圖 ── */
+
+.ds-case-evolution-diagram {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--hm-space-md);
+  width: 100%;
+  padding: var(--hm-space-xl);
+  background: #ffffff;
+}
+
+.ds-case-evolution-diagram__panel {
+  display: grid;
+  gap: var(--hm-space-sm);
+  padding: var(--hm-space-lg);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-md);
+  background: var(--cs-surface);
+}
+
+.ds-case-evolution-diagram__label {
+  color: var(--cs-text-heading);
+  font-size: var(--fs-body);
+  font-weight: 800;
+}
+
+.ds-case-evolution-diagram__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--hm-space-xs);
+}
+
+.ds-case-evolution-diagram__chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-sm);
+  background: #ffffff;
+  color: var(--cs-text-secondary);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.ds-case-evolution-diagram__chip--page {
+  color: var(--cs-accent-strong);
+  font-weight: 700;
+}
+
+.ds-case-evolution-diagram__arrow {
+  color: var(--cs-accent);
+}
+
+.ds-case-evolution-diagram__stack {
+  display: grid;
+  justify-items: center;
+}
+
+.ds-case-evolution-diagram__node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--hm-space-xs) var(--hm-space-sm);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--hm-radius-sm);
+  background: #ffffff;
+  color: var(--cs-accent-strong);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+.ds-case-evolution-diagram__link {
+  width: 2px;
+  height: 20px;
+  background: var(--cs-accent);
+}
+
+.ds-case-evolution-diagram__note {
+  margin-top: var(--hm-space-xs);
+  color: var(--cs-text-muted);
+  font-size: var(--fs-xs);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .ds-case-evolution-diagram {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--hm-space-md);
+  }
+
+  .ds-case-evolution-diagram__arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+}
+
 /* ── Evolution C：問題提示 ── */
 
 .ds-case-question-callout {
