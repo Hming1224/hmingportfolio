@@ -1791,12 +1791,22 @@
 
 .ds-case-governance-owner-mark {
   display: inline-flex;
+  width: 28px;
+  height: 28px;
   flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-pill);
   background: #fff;
   line-height: 0;
+}
+
+.ds-case-governance-owner-mark--ai {
+  border-color: color-mix(in srgb, var(--cs-teal) 28%, transparent);
+  background: var(--cs-teal-soft);
+  color: var(--cs-teal-strong);
 }
 
 .ds-case-governance-owner-mark img {
@@ -1851,6 +1861,10 @@
     var(--cs-teal-soft) 62%,
     #fff 100%
   );
+}
+
+.ds-case-governance-loop__stage--ai .ds-case-governance-loop__header h3 {
+  color: var(--cs-teal-strong);
 }
 
 .ds-case-governance-loop__number {

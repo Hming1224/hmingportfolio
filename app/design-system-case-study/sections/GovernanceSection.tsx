@@ -1,21 +1,21 @@
 import Image from "next/image";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Bot } from "lucide-react";
 import { CaseSection } from "../../../components/case-study";
 import TermNotes from "../components/TermNotes";
 import { getDsTranslator } from "../i18n-server";
 
 function GovernanceOwnerMark({ owner, label }: { owner: "human" | "ai"; label: string }) {
-  const src = owner === "human"
-    ? "/avatar/avatar-yellow.png"
-    : "/projects/crypto-arsenal/background/icons/bot.svg";
-
   return (
     <span
       className={`ds-case-governance-owner-mark ds-case-governance-owner-mark--${owner}`}
       aria-label={label}
       title={label}
     >
-      <Image src={src} alt="" width={28} height={28} loading="eager" unoptimized />
+      {owner === "human" ? (
+        <Image src="/avatar/avatar-yellow.png" alt="" width={28} height={28} loading="eager" unoptimized />
+      ) : (
+        <Bot size={18} strokeWidth={1.8} aria-hidden="true" />
+      )}
     </span>
   );
 }
