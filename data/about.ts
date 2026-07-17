@@ -121,18 +121,18 @@ const tools = [
 const zhDesignValues = [
   {
     iconId: "layers",
-    title: "跨領域的眼界，比單一專業更能發現問題",
+    title: "跨領域的眼界，讓我看見別人習慣忽略的地方",
     desc: "機械工程的訓練讓我習慣從結構與系統出發思考，設計學習則讓我開始關注人的感受與行為。兩種視角並存，讓我更容易在別人習以為常的地方，看見值得改善的設計機會。",
   },
   {
     iconId: "search",
     title: "理解永遠優先於解法",
-    desc: "我習慣在動筆之前，先花時間釐清問題真正的成因。跳過理解直接給答案，往往只是在解決表象；搞懂背後的動機與限制，設計才有機會對到真正需要改善的地方。",
+    desc: "我習慣在動筆之前，先花時間釐清問題真正的成因。跳過理解直接給答案，通常只會解決到看得見的那一層；搞懂背後的動機與限制，設計才有機會對到真正需要改善的地方。",
   },
   {
     iconId: "zap",
     title: "好的設計讓複雜變成直覺",
-    desc: "產品的邏輯可以很複雜，但使用者不應該感受到這份複雜。我把設計的成功定義為：讓人第一次使用就知道該怎麼做，不需要說明書，也不會走錯路。",
+    desc: "產品的邏輯可以很複雜，但使用者不應該感受到這份複雜。對我來說，設計成功就是讓人第一次使用就知道該怎麼做，不需要說明書，也不會走錯路。",
   },
 ];
 
@@ -142,7 +142,7 @@ const zhEducatorItems = [
     title: "OpenHCI 2024 暑期工作坊",
     href: "https://www.2024.openhci.com/",
     role: "設計組組長",
-    desc: "籌備營期 3 個月，帶領設計組共 3 人負責營隊教學計劃與課程內容安排，並且於營期提供 40 位學員設計思考集訓",
+    desc: "籌備營期 3 個月，帶領設計組共 3 人負責營隊教學計劃與課程內容安排，營期帶 40 位學員做設計思考集訓",
     date: "2024.05-2024.08",
     image: "/educator/openhci.jpg",
   },
@@ -337,11 +337,11 @@ const enEducatorItems = [
 
 const copyByLocale = {
   "zh-TW": {
-    heroTitle: "從重新認識自己，到設計產品體驗",
+    heroTitle: "以多元視角打造有說服力的產品體驗",
     intro: [
       "我是黃宣銘，一名結合 UI/UX 設計、產品思維與工程背景的 Product Designer。",
-      "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計就是與 PO/PM 及各方利害關係人一起釐清問題、收斂方向，把複雜的需求與限制，轉化成使用者用得順、也真的能落地的體驗。",
-      "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究與訪談、競品分析、介面與互動設計、Design System、prototype 與跨部門協作經驗。現在的我，也把 AI 工具實際導入設計、前端 prototype 與產品規格整理流程，用來建立問題框架、設計 MVP，並驗證商業目標與使用者體驗，朝 Product Builder 的方向前進。",
+      "我從機械工程走進產品設計，先在電子代工業（OEM/ODM）做專案管理，再進到新創與 B2B 團隊做 UIUX。這段路讓我站在工程與使用者中間：把使用者的需求翻譯成工程聽得懂的規格，也把技術限制翻譯回設計決策。對我來說，設計就是與 PO/PM 及各方利害關係人一起釐清問題、收斂方向，把複雜的需求與限制，轉化成使用者用得順、也真的能落地的體驗。",
+      "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究與訪談、競品分析、介面與互動設計、Design System、prototype 與跨部門協作經驗。我也把 AI 工具實際導入設計、前端 prototype 與產品規格整理流程，用來建立問題框架、設計 MVP，並驗證商業目標與使用者體驗，朝 Product Builder 的方向前進。",
     ],
     headings: {
       values: "設計信念",
@@ -368,10 +368,10 @@ const copyByLocale = {
     ],
   },
   en: {
-    heroTitle: "From Self-Rediscovery to Product Experience Design",
+    heroTitle: "Designing Convincing Product Experiences Through Multiple Perspectives",
     intro: [
       "I'm Brian Huang, a product designer combining UI/UX design, product thinking, and an engineering background.",
-      "A serious illness during university led me to rediscover my passion for aesthetics and design. The systems thinking I developed through mechanical engineering later became a strong foundation for product design. To me, design is not simply about making screens look better; it is about working with POs/PMs and stakeholders to clarify the problem and converge on a direction, turning complex needs and constraints into experiences that are clear, intuitive, and feasible.",
+      "I moved into product design from mechanical engineering — first as a project manager in electronics OEM/ODM manufacturing, then into UI/UX at startups and B2B teams. That path taught me to sit between engineering and users: translating user needs into specs engineers can act on, and translating technical constraints back into design decisions. To me, design is not simply about making screens look better; it is about working with POs/PMs and stakeholders to clarify the problem and converge on a direction, turning complex needs and constraints into experiences that are clear, intuitive, and feasible.",
       "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research and interviews, competitive analysis, interface and interaction design, design systems, prototyping, and cross-functional collaboration. Today, I also bring AI tools into design, front-end prototyping, and product spec work to frame problems, design MVPs, and validate business goals against user experience, as I grow toward becoming a Product Builder.",
     ],
     headings: {

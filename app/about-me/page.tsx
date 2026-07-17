@@ -264,7 +264,7 @@ export default async function AboutMePage() {
                   delay={42}
                   duration={0.72}
                   ease="power3.out"
-                  splitType="chars"
+                  splitType="words, chars"
                   from={{ opacity: 0, y: 34 }}
                   to={{ opacity: 1, y: 0 }}
                   threshold={0.1}
