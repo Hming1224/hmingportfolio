@@ -33,9 +33,7 @@ const zhExperiences = [
         { text: "。" },
       ],
       [
-        { text: "依 " },
-        { text: "20+ 個操作流程", highlight: true },
-        { text: "重整既有 Figma Design System，對齊前端建立的 Storybook 命名，並在 handoff 圖面標註可重用元件，" },
+        { text: "依 20+ 個操作流程重整既有 Figma Design System，對齊前端建立的 Storybook 命名，並在 handoff 圖面標註可重用元件，" },
         { text: "讓設計與工程能直接對照既有實作", highlight: true },
         { text: "。" },
       ],
@@ -205,9 +203,7 @@ const enExperiences = [
         { text: "." },
       ],
       [
-        { text: "Reorganized the existing Figma design system across " },
-        { text: "20+ user flows", highlight: true },
-        { text: ", aligned naming with the front-end Storybook glossary, and annotated reusable components in handoff files " },
+        { text: "Reorganized the existing Figma design system across 20+ user flows, aligned naming with the front-end Storybook glossary, and annotated reusable components in handoff files " },
         { text: "so design and engineering could map directly to existing implementations", highlight: true },
         { text: "." },
       ],
