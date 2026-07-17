@@ -3740,7 +3740,7 @@
   }
 
   .categorySection[id] {
-    scroll-margin-top: calc(120px + var(--hm-space-2xs));
+    scroll-margin-top: calc(120px + var(--hm-space-md));
   }
 
   .sidebarToggle:hover,
