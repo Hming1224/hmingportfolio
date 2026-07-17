@@ -190,7 +190,6 @@ export default function CaseProposalTabs({
                 width={slide.width ?? defaultImageWidth}
                 height={slide.height ?? defaultImageHeight}
                 sizes={imageSizes}
-                unoptimized
                 style={{ width: "100%", height: "auto", display: "block" }}
               />
               <div className="cs-proposal-count" aria-label={labels.currentPage}>
@@ -253,7 +252,6 @@ export default function CaseProposalTabs({
                     width={item.width}
                     height={item.height}
                     sizes="(max-width: 768px) 100vw, 48vw"
-                    unoptimized
                   />
                 </figure>
               ))}

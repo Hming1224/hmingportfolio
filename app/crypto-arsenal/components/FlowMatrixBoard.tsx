@@ -64,7 +64,7 @@ export default function FlowMatrixBoard({ matrix, t }: FlowMatrixBoardProps) {
             <div className="cs-comparison-matrix-row" style={{ gridTemplateColumns: columns }} key={row.name}>
               <div className="cs-comparison-matrix-label">
                 <span className="cs-comparison-matrix-label-logo">
-                  <Image src={row.logo} alt="" width={28} height={28} unoptimized />
+                  <Image src={row.logo} alt="" width={28} height={28} />
                 </span>
                 <span className="cs-comparison-matrix-label-name">{row.name}</span>
               </div>

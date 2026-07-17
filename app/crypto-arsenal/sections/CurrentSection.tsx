@@ -20,7 +20,6 @@ export default async function CurrentSection() {
           height={1371}
           sizes="(max-width: 768px) 100vw, 1440px"
           style={{ width: "100%", height: "auto" }}
-          unoptimized
         />
       </CaseMedia>
     </section>

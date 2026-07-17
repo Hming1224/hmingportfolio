@@ -18,7 +18,7 @@ export default async function ProductBackgroundSection() {
         <CaseCard variant="accent" className="cs-product-card">
           <div className="cs-flex-cluster">
             <div className="cs-product-logo cs-object-box">
-              <Image src="/projects/advantech/research/ecowatch-icon.webp" alt="ECOWatch" fill style={{ objectFit: "cover" }} unoptimized />
+              <Image src="/projects/advantech/research/ecowatch-icon.webp" alt="ECOWatch" fill style={{ objectFit: "cover" }} />
             </div>
             <h3 className="cs-product-card-name cs-copy-title">ECOWatch</h3>
           </div>
@@ -37,7 +37,6 @@ export default async function ProductBackgroundSection() {
               alt={t("ECOWatch 系統截圖")}
               fill
               style={{ objectFit: "cover", objectPosition: "center" }}
-              unoptimized
             />
           </CaseMedia>
         </CaseCard>
@@ -45,7 +44,7 @@ export default async function ProductBackgroundSection() {
         <CaseCard variant="accent" className="cs-product-card">
           <div className="cs-flex-cluster">
             <div className="cs-product-logo cs-object-box">
-              <Image src="/projects/advantech/research/hvac-icon.webp" alt="HVAC" fill style={{ objectFit: "cover" }} unoptimized />
+              <Image src="/projects/advantech/research/hvac-icon.webp" alt="HVAC" fill style={{ objectFit: "cover" }} />
             </div>
             <h3 className="cs-product-card-name cs-copy-title">HVAC</h3>
           </div>
@@ -64,7 +63,6 @@ export default async function ProductBackgroundSection() {
               alt={t("HVAC 系統截圖")}
               fill
               style={{ objectFit: "cover", objectPosition: "center" }}
-              unoptimized
             />
           </CaseMedia>
         </CaseCard>

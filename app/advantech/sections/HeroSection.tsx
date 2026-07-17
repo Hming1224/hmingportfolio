@@ -66,7 +66,6 @@ export default async function HeroSection() {
       cover={{
         src: "/projects/advantech/cover/hero-cover.webp",
         alt: "WISE-iEMS ECOWatch UI",
-        unoptimized: true,
       }}
       meta={
         <>

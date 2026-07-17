@@ -8,7 +8,6 @@ interface CaseHeroCover {
   alt: string;
   objectPosition?: CSSProperties['objectPosition'];
   sizes?: string;
-  unoptimized?: boolean;
 }
 
 interface CaseHeroProps {
@@ -41,7 +40,6 @@ export default function CaseHero({
             sizes={cover.sizes}
             style={{ objectFit: 'cover', objectPosition: cover.objectPosition ?? 'center top' }}
             priority
-            unoptimized={cover.unoptimized}
           />
         </div>
       </div>

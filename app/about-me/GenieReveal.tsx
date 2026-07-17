@@ -309,6 +309,8 @@ export default function GenieReveal({
         }}
       />
       <div ref={dockIconRef} className="genie-dock-icon" aria-hidden="true">
+        {/* genie 動畫的起點，須在動畫觸發當下就緒；配合 preload + 同步解碼，
+            走原檔省去優化往返（來源為 168px / 28KB 的 dock 專用圖）。 */}
         <Image
           src={dockIconSrc}
           alt=""

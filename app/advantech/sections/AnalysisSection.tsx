@@ -28,7 +28,7 @@ export default async function AnalysisSection() {
           {aiTools.map((item) => (
             <CaseCard key={item.title} variant="accent" className="cs-comp-card">
               <CaseMedia className="cs-comp-media" contentClassName="cs-comp-card-img cs-object-box">
-                <Image src={item.img} alt={item.title} fill style={{ objectFit: "cover" }} unoptimized />
+                <Image src={item.img} alt={item.title} fill style={{ objectFit: "cover" }} />
               </CaseMedia>
               <h4 className="cs-comp-card-title cs-copy-title">{item.title}</h4>
               <p className="cs-comp-card-desc cs-copy-body">{item.desc}</p>
@@ -48,7 +48,7 @@ export default async function AnalysisSection() {
           {emsItems.map((item) => (
             <CaseCard key={item.name} className="cs-comp-ems-card cs-flex-cluster">
               <CaseMedia className="cs-comp-ems-media" contentClassName="cs-comp-ems-img cs-object-box">
-                <Image src={item.img} alt={item.name} fill style={{ objectFit: "cover" }} unoptimized />
+                <Image src={item.img} alt={item.name} fill style={{ objectFit: "cover" }} />
               </CaseMedia>
               <div className="cs-comp-ems-body cs-stack-box">
                 <h4 className="cs-comp-ems-name cs-copy-title">{item.name}</h4>

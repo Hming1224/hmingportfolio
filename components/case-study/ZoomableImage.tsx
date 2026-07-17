@@ -76,7 +76,6 @@ export default function ZoomableImage({
           width={width}
           height={height}
           sizes={sizes}
-          unoptimized
           className={`cs-zoomable-image-media${imageClassName ? ` ${imageClassName}` : ""}`}
         />
         <span className="cs-zoomable-icon" aria-hidden="true">
@@ -108,6 +107,8 @@ export default function ZoomableImage({
           >
             ×
           </button>
+          {/* Lightbox 的用途就是放大讀 UI 細節文字，故走原圖不做失真壓縮；
+              縮圖（上方）維持優化。 */}
           <Image
             src={src}
             alt={alt}

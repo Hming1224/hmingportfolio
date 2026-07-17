@@ -31,7 +31,7 @@ export default async function ScenarioSection() {
         <div key={sc.title} className="cs-ds-scenario">
           {/* ── Scenario header ── */}
           <div className="cs-ds-head cs-flex-cluster">
-            <Image src={sc.icon} width={48} height={48} alt="" unoptimized />
+            <Image src={sc.icon} width={48} height={48} alt="" />
             <div>
               <h3 className="cs-ds-title cs-copy-title" style={{ color: sc.titleColor }}>{sc.title}</h3>
               <p className="cs-ds-subdesc cs-copy-body">{sc.desc}</p>

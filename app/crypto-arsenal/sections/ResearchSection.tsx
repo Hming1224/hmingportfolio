@@ -14,7 +14,7 @@ function ExchangeBlock({ shot, t }: { shot: ExchangeShot; t: (s: string) => stri
     <CaseCard>
       <div className="cs-brand-label">
         <span className="cs-brand-mark">
-          <Image src={shot.logo} alt="" width={32} height={32} unoptimized />
+          <Image src={shot.logo} alt="" width={32} height={32} />
         </span>
         <span className="cs-brand-name">{shot.name}</span>
       </div>
@@ -26,7 +26,6 @@ function ExchangeBlock({ shot, t }: { shot: ExchangeShot; t: (s: string) => stri
           height={shot.height}
           sizes="(max-width: 1199px) 100vw, 700px"
           style={{ width: "100%", height: "auto" }}
-          unoptimized
         />
       </CaseMedia>
     </CaseCard>

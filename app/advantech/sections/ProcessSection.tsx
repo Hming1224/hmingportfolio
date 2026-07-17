@@ -15,7 +15,6 @@ export default async function ProcessSection() {
           alt=""
           fill
           style={{ objectFit: "cover" }}
-          unoptimized
         />
       </div>
       <div className="cs-process-overlay cs-object-box" />

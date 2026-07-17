@@ -42,7 +42,6 @@ export default function VimeoPlayer({ videoId, poster, title }: Props) {
             src={poster}
             alt={title}
             fill
-            unoptimized
             sizes="(max-width: 768px) 100vw, 960px"
             style={{ objectFit: 'cover' }}
           />

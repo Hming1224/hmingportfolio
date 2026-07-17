@@ -20,7 +20,7 @@ export default async function InterviewSection() {
       <div className="cs-iv-personas cs-flex-cluster">
         <div className="cs-iv-persona cs-flex-cluster">
           <div className="cs-iv-persona-img cs-object-box">
-            <Image src="/projects/advantech/research/interview-persona-factory.webp" alt="內部廠務人員" fill style={{ objectFit: "cover" }} unoptimized />
+            <Image src="/projects/advantech/research/interview-persona-factory.webp" alt="內部廠務人員" fill style={{ objectFit: "cover" }} />
           </div>
           <div>
             <h3 className="cs-iv-persona-name cs-copy-title">內部廠務人員</h3>
@@ -29,7 +29,7 @@ export default async function InterviewSection() {
         </div>
         <div className="cs-iv-persona cs-flex-cluster">
           <div className="cs-iv-persona-img cs-object-box">
-            <Image src="/projects/advantech/research/interview-persona-si.webp" alt="系統整合商" fill style={{ objectFit: "cover" }} unoptimized />
+            <Image src="/projects/advantech/research/interview-persona-si.webp" alt="系統整合商" fill style={{ objectFit: "cover" }} />
           </div>
           <div>
             <h3 className="cs-iv-persona-name cs-copy-title">系統整合商（SI）</h3>
@@ -110,7 +110,7 @@ export default async function InterviewSection() {
             ))}
           </div>
           <div className="cs-synthesis-photo cs-object-box">
-            <Image src="/projects/advantech/research/interview-synthesis-photo.webp" alt="訪談現場" fill style={{ objectFit: "cover" }} unoptimized />
+            <Image src="/projects/advantech/research/interview-synthesis-photo.webp" alt="訪談現場" fill style={{ objectFit: "cover" }} />
           </div>
         </div>
       </div>

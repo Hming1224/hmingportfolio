@@ -1447,7 +1447,6 @@ export default function ComponentDemo({
             cover={{
               src: "/projects/advantech/cover/hero-cover.webp",
               alt: "WISE-iEMS ECOWatch UI",
-              unoptimized: true,
             }}
             meta={
               <>
@@ -1713,7 +1712,6 @@ export default function ComponentDemo({
             height={1371}
             sizes="(max-width: 768px) 100vw, 860px"
             style={{ width: "100%", height: "auto" }}
-            unoptimized
           />
         </CaseMedia>
       </DemoBlock>

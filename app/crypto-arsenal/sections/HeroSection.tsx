@@ -53,7 +53,6 @@ export default async function HeroSection() {
       cover={{
         src: "/projects/crypto-arsenal/cover/hero-cover.webp",
         alt: t("Crypto Arsenal 量化交易平台介面主視覺"),
-        unoptimized: true,
       }}
       meta={<span className="cs-tags">WEB・FinTech・Crypto・UX Design・UI Design</span>}
       title={t("重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計")}

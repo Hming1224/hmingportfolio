@@ -32,7 +32,6 @@ export default async function RoleSection() {
             fill
             sizes="240px"
             style={{ objectFit: "cover" }}
-            unoptimized
           />
         </div>
         {cards.map((item, index) => (
