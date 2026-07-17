@@ -14,15 +14,10 @@ const zhExperiences = [
     points: [
       "在 PM 與正職設計師帶領下，與另一位設計實習生分工，透過競品分析、使用者訪談與功能設計，把既定的 GenAI 需求轉為主動決策支援方案，解決平台數據完整、卻無從判斷該先處理什麼的痛點。",
       [
-        { text: "2.5 個月內完成期初、期中、期末三階段 POC 提案與迭代，" },
-        { text: "向 CEO 報告專案成果", highlight: true },
-        { text: "；我負責超約預警與模式識別的 wireframe、互動流程與 prototype。" },
+        { text: "2.5 個月內完成期初、期中、期末三階段 POC 提案與迭代", highlight: true },
+        { text: "，向 CEO 報告專案成果；我負責超約預警與模式識別的 wireframe、互動流程與 prototype。" },
       ],
-      [
-        { text: "超約預警與模式識別" },
-        { text: "兩項方案獲採納", highlight: true },
-        { text: "進入後續規劃，我提供訪談洞察與設計方案供 PM 排定開發優先級，其中超約預警已於實習結束前啟動後端開發。" },
-      ],
+      "超約預警與模式識別兩項方案獲採納進入後續規劃，我提供訪談洞察與設計方案供 PM 排定開發優先級，其中超約預警已於實習結束前啟動後端開發。",
     ] satisfies ExperiencePoint[],
   },
   {
@@ -40,13 +35,15 @@ const zhExperiences = [
       [
         { text: "依 " },
         { text: "20+ 個操作流程", highlight: true },
-        { text: "重整既有 Figma Design System，對齊前端建立的 Storybook 命名，並在 handoff 圖面標註可重用元件，讓設計與工程能直接對照既有實作。" },
+        { text: "重整既有 Figma Design System，對齊前端建立的 Storybook 命名，並在 handoff 圖面標註可重用元件，" },
+        { text: "讓設計與工程能直接對照既有實作", highlight: true },
+        { text: "。" },
       ],
       "補齊 20+ 個既有桌機頁面的平板與手機版設計，完成工程 handoff 並正式上線，改善產品前期 desktop-first 留下的跨裝置體驗缺口。",
       [
-        { text: "在 8 人工程團隊的雙週 Scrum 中擔任助理 PO，將使用者回饋排定優先級、協調 UI team " },
-        { text: "推動 6+ 項功能上線", highlight: true },
-        { text: "；同期每個 Sprint 完成的 ticket 數平均提升約 44%。" },
+        { text: "在 8 人工程團隊的雙週 Scrum 中擔任助理 PO，將使用者回饋排定優先級、協調 UI team 推動 6+ 項功能上線；同期每個 Sprint 完成的 ticket 數" },
+        { text: "平均提升約 44%", highlight: true },
+        { text: "。" },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -62,11 +59,7 @@ const zhExperiences = [
         { text: "探索式研究", highlight: true },
         { text: "，改問決策顧慮與執行困難。" },
       ],
-      [
-        { text: "完成發證方、申請方、驗證方" },
-        { text: "三方共 9 場角色訪談", highlight: true },
-        { text: "，並據此修正團隊假設：驗證其實是加值而非剛需，因而收斂產品定位。" },
-      ],
+      "完成發證方、申請方、驗證方三方共 9 場角色訪談，並據此修正團隊假設：驗證其實是加值而非剛需，因而收斂產品定位。",
       "與產品經理及國泰金控技術團隊協作，對齊產品規格、開發方向與合規情境下的使用者體驗。",
       "交付 wireframe 與 Figma 互動 prototype，支援可用性測試與多輪設計迭代，並完成整體流程走查。",
     ] satisfies ExperiencePoint[],
@@ -83,11 +76,7 @@ const zhExperiences = [
         { text: "平均提前 1.5 週", highlight: true },
         { text: "完成備料與交付。" },
       ],
-      [
-        { text: "在 " },
-        { text: "2 個 milestone", highlight: true },
-        { text: " 遇到測試物料短缺時，協調替代供應商與到貨排程，讓工程團隊如期取得物料並依原定時程完成測試。" },
-      ],
+      "在 2 個 milestone 遇到測試物料短缺時，協調替代供應商與到貨排程，讓工程團隊如期取得物料並依原定時程完成測試。",
     ] satisfies ExperiencePoint[],
   },
 ];
@@ -197,15 +186,10 @@ const enExperiences = [
     points: [
       "Guided by the PM and a full-time designer, I worked with another design intern to turn predefined GenAI requirements into proactive decision-support concepts through competitive analysis, user interviews, and feature design — addressing a platform where the data was complete but the priorities were not.",
       [
-        { text: "Ran the Early Design Campaign's kickoff, midterm, and final POC reviews within 2.5 months and " },
-        { text: "presented results to the CEO", highlight: true },
-        { text: "; I owned the wireframes, interaction flows, and prototypes for overage alerts and pattern recognition." },
+        { text: "Ran the Early Design Campaign's kickoff, midterm, and final POC reviews within 2.5 months", highlight: true },
+        { text: " and presented results to the CEO; I owned the wireframes, interaction flows, and prototypes for overage alerts and pattern recognition." },
       ],
-      [
-        { text: "Both design concepts — overage alerts and pattern recognition — " },
-        { text: "were accepted", highlight: true },
-        { text: " for further planning; I provided research insights and design proposals for PM prioritization, with backend implementation of overage alerts underway before the internship ended." },
-      ],
+      "Both design concepts — overage alerts and pattern recognition — were accepted for further planning; I provided research insights and design proposals for PM prioritization, with backend implementation of overage alerts underway before the internship ended.",
     ] satisfies ExperiencePoint[],
   },
   {
@@ -223,13 +207,15 @@ const enExperiences = [
       [
         { text: "Reorganized the existing Figma design system across " },
         { text: "20+ user flows", highlight: true },
-        { text: ", aligned naming with the front-end Storybook glossary, and annotated reusable components in handoff files so design and engineering could map directly to existing implementations." },
+        { text: ", aligned naming with the front-end Storybook glossary, and annotated reusable components in handoff files " },
+        { text: "so design and engineering could map directly to existing implementations", highlight: true },
+        { text: "." },
       ],
       "Delivered tablet and mobile designs for 20+ existing desktop pages and shipped them, closing the cross-device gaps left by the product's early desktop-first development.",
       [
-        { text: "Served as assistant PO on an eight-engineer, biweekly Scrum team — prioritized user feedback and coordinated the UI team in " },
-        { text: "shipping 6+ features", highlight: true },
-        { text: "; completed tickets per Sprint rose about 44% on average." },
+        { text: "Served as assistant PO on an eight-engineer, biweekly Scrum team — prioritized user feedback and coordinated the UI team in shipping 6+ features; completed tickets per Sprint rose " },
+        { text: "about 44% on average", highlight: true },
+        { text: "." },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -245,11 +231,7 @@ const enExperiences = [
         { text: "exploratory research", highlight: true },
         { text: ", probing decision concerns and execution barriers instead." },
       ],
-      [
-        { text: "Ran " },
-        { text: "9 role-based interviews", highlight: true },
-        { text: " across issuers, applicants, and verifiers, which corrected the team's assumption: verification was a value-add rather than a must-have, narrowing the product positioning." },
-      ],
+      "Ran 9 role-based interviews across issuers, applicants, and verifiers, which corrected the team's assumption: verification was a value-add rather than a must-have, narrowing the product positioning.",
       "Collaborated with product managers and Cathay Financial Holdings' technology team to align product requirements, development direction, and UX within compliance constraints.",
       "Delivered wireframes and Figma interactive prototypes to support usability testing and multiple rounds of design iteration, completing an end-to-end flow walkthrough.",
     ] satisfies ExperiencePoint[],
