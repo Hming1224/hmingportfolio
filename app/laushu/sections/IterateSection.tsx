@@ -193,6 +193,7 @@ export default async function IterateSection() {
         ))}
       </div>
       <ArticleBlock title={t("測試結果")} number="03">
+        <p>{t("SUS ：82.5 (excellent) 介面容易了解與使用。")}</p>
         <p>{t("根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。")}</p>
       </ArticleBlock>
       <CaseMedia className="cs-showcase-media" variant="full">
