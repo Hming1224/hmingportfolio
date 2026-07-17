@@ -12,17 +12,16 @@ const zhExperiences = [
     date: "2024.06 - 2024.08",
     image: "/projects/advantech/cover/cover.webp",
     points: [
+      "與 PM 及團隊將 AI 切入點從「能回答什麼」重新定位為「何時主動出現」，解決平台數據完整、卻無從判斷該先處理什麼的痛點。",
       [
-        { text: "參與 AI 能源管理平台產品設計，於 " },
+        { text: "以競品分析、使用者訪談與內部工作坊推翻團隊原本「全能 Chatbot」的假設，於 " },
         { text: "2.5 個月內完成 3 次設計提案", highlight: true },
         { text: "，並依時程通過上級主管/ CEO 審查。" },
       ],
-      "進行使用者訪談與痛點分析，將企業級 AI 產品需求整理為可討論、可驗證的功能方向。",
-      "設計並提案 AI Chatbot 整合方案，與專案 PM 協助團隊評估後續產品路線與功能模組優先順序。",
       [
         { text: "最終提案中有 " },
         { text: "2 項主要模組功能獲採納", highlight: true },
-        { text: "，順利進入工程開發排程。" },
+        { text: "，順利進入工程開發排程，並與專案 PM 共同排定後續產品路線與功能模組優先順序。" },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -33,10 +32,15 @@ const zhExperiences = [
     date: "2023.03 - 2023.10",
     image: "/experience/crypto-arsenal.webp",
     points: [
-      "維護並重整 Design System，統一 3大不同功能元件與對應頁面，並應用於 20+ 個產品設計流程，提升視覺與互動一致性。",
+      [
+        { text: "整合三項核心交易流程，消除使用者需跳離平台手動介入、進而弄壞既有策略的風險，" },
+        { text: "平均操作時間縮短 58%", highlight: true },
+        { text: "。" },
+      ],
+      "維護並重整 Design System，統一 3 大不同功能元件與對應頁面，並應用於 20+ 個產品設計流程，提升視覺與互動一致性。",
       "進行使用者訪談與競品分析，完成 6+ 個產品功能，修正既有產品 12+ 項 UX 問題，與 20+ 個 RWD 頁面設計。",
       [
-        { text: "在 Scrum 中擔任助理 PO，優化設計流程與檔案管理，" },
+        { text: "在 Scrum 中擔任助理 PO，主動導入 Scrum board 與 prototype video 優化設計 handoff，讓工程更快理解設計意圖，" },
         { text: "協助 Sprint 產出提升至過往 1.5 倍", highlight: true },
         { text: "。" },
       ],
@@ -49,10 +53,14 @@ const zhExperiences = [
     date: "2022.11 - 2023.02",
     image: "/experience/taiwan-blockchain-academia.webp",
     points: [
-      "透過使用者訪談與研究，釐清非技術使用者進入 Web3 服務時的理解斷點與操作阻礙。",
+      "主導 DID 數位證書平台的使用者研究與 wireframe。因發現受訪者皆無真實數位證書的使用經驗，將訪綱從產品功能操作改為探索式研究，改問決策顧慮與執行困難。",
+      [
+        { text: "完成發證方、申請方、驗證方" },
+        { text: "三方共 9 場角色訪談", highlight: true },
+        { text: "，並據此修正團隊假設：證書驗證其實是加值而非剛需，因而將產品定位收斂至省時價值。" },
+      ],
       "與產品經理及國泰金控技術團隊協作，對齊產品規格、開發方向與合規情境下的使用者體驗。",
-      "製作 wireframe 與互動 prototype，支援可用性測試與多輪設計迭代。",
-      "協助工程團隊將區塊鏈技術整合至使用流程，同時維持服務的易用性與可理解性。",
+      "交付 wireframe 與 Figma 互動 prototype，支援可用性測試與多輪設計迭代，並完成全平台走查。",
     ] satisfies ExperiencePoint[],
   },
   {
@@ -68,7 +76,6 @@ const zhExperiences = [
         { text: "完成預訂交付。" },
       ],
       "在 2 個 milestone 中因應物料短缺風險，重新協調料件與測試排程，成功將原可能延誤的時程拉回期限內。",
-      "撰寫產品規格並與工程師對齊可行性測試，在品質標準、供應限制與交付壓力間維持平衡。",
     ] satisfies ExperiencePoint[],
   },
 ];
@@ -78,7 +85,7 @@ const zhSkillCategories = [
     title: "產品設計",
     toneClass: "is-product-design",
     iconId: "layout",
-    skills: ["UI flow", "設計系統", "線框圖 / 原型設計", "響應式網頁設計", "基礎前端知識"],
+    skills: ["Figma", "UI flow", "設計系統", "線框圖 / 原型設計", "響應式網頁設計", "基礎前端知識"],
   },
   {
     title: "使用者研究",
@@ -176,17 +183,16 @@ const enExperiences = [
     date: "2024.06 - 2024.08",
     image: "/projects/advantech/cover/cover.webp",
     points: [
+      "Worked with the PM and team to reframe the AI entry point from \"what it can answer\" to \"when it should surface,\" addressing a platform where the data was complete but the priorities were not.",
       [
-        { text: "Contributed to an AI energy management platform and delivered " },
+        { text: "Overturned the team's \"ask-anything chatbot\" assumption through competitive analysis, user interviews, and internal workshops; delivered " },
         { text: "three design proposals within 2.5 months", highlight: true },
         { text: ", passing reviews with senior leadership and the CEO on schedule." },
       ],
-      "Conducted user interviews and pain-point analysis, translating enterprise AI requirements into testable product directions.",
-      "Designed and proposed an AI chatbot integration, working with the project PM to evaluate the product roadmap and prioritize feature modules.",
       [
         { text: "The final proposal had " },
         { text: "two core feature modules approved", highlight: true },
-        { text: " and moved into the engineering roadmap." },
+        { text: " into the engineering roadmap, and I partnered with the PM to prioritize the product roadmap and feature modules." },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -197,11 +203,16 @@ const enExperiences = [
     date: "2023.03 - 2023.10",
     image: "/experience/crypto-arsenal.webp",
     points: [
+      [
+        { text: "Integrated three core trading flows into the platform, removing the risk of users breaking their own running strategies to intervene manually, " },
+        { text: "cutting average task time by 58%", highlight: true },
+        { text: "." },
+      ],
       "Maintained and reorganized the design system, unifying three major feature areas and applying it across 20+ product design flows.",
       "Conducted user interviews and competitive analysis, delivered 6+ product features, improved 12+ UX issues, and designed 20+ responsive pages.",
       [
-        { text: "Served as an assistant Product Owner in Scrum, improving design workflows and file management to " },
-        { text: "increase Sprint output to 1.5x its previous level", highlight: true },
+        { text: "Served as an assistant Product Owner in Scrum, introducing a Scrum board and prototype videos to improve design handoff and help engineers grasp design intent faster, " },
+        { text: "increasing Sprint output to 1.5x its previous level", highlight: true },
         { text: "." },
       ],
     ] satisfies ExperiencePoint[],
@@ -213,10 +224,14 @@ const enExperiences = [
     date: "2022.11 - 2023.02",
     image: "/experience/taiwan-blockchain-academia.webp",
     points: [
-      "Used interviews and research to uncover comprehension gaps and usability barriers for non-technical users entering Web3 services.",
+      "Led user research and wireframing for a DID digital credential platform. When participants turned out to have no real experience with digital credentials, I shifted the interview guide from feature-level questions to exploratory research, probing decision concerns and execution barriers instead.",
+      [
+        { text: "Ran " },
+        { text: "9 role-based interviews", highlight: true },
+        { text: " across issuers, applicants, and verifiers, which corrected the team's assumption: verification was a value-add rather than a must-have, narrowing the product positioning toward time savings." },
+      ],
       "Collaborated with product managers and Cathay Financial Holdings' technology team to align product requirements, development direction, and UX within compliance constraints.",
-      "Created wireframes and interactive prototypes to support usability testing and multiple rounds of design iteration.",
-      "Helped engineers integrate blockchain technology into the user journey while keeping the service approachable and understandable.",
+      "Delivered wireframes and Figma interactive prototypes to support usability testing and multiple rounds of design iteration, completing a full-platform walkthrough.",
     ] satisfies ExperiencePoint[],
   },
   {
@@ -232,7 +247,6 @@ const enExperiences = [
         { text: "." },
       ],
       "Responded to material shortage risks across two milestones, rescheduling components and testing to bring potentially delayed deliveries back on track.",
-      "Wrote product specifications and aligned feasibility testing with engineers, balancing quality standards, supply constraints, and delivery pressure.",
     ] satisfies ExperiencePoint[],
   },
 ];
@@ -242,7 +256,7 @@ const enSkillCategories = [
     title: "Product Design",
     toneClass: "is-product-design",
     iconId: "layout",
-    skills: ["UI Flows", "Design Systems", "Wireframing / Prototyping", "Responsive Web Design", "Frontend Fundamentals"],
+    skills: ["Figma", "UI Flows", "Design Systems", "Wireframing / Prototyping", "Responsive Web Design", "Frontend Fundamentals"],
   },
   {
     title: "User Research",
@@ -325,9 +339,9 @@ const copyByLocale = {
   "zh-TW": {
     heroTitle: "從重新認識自己，到設計產品體驗",
     intro: [
-      "我是黃宣銘，一名結合 UI/UX 設計、商業願景與工程背景的 Product Designer。",
-      "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計就是把複雜的問題、需求與限制，收斂成使用者用得順、也真的能落地的體驗。",
-      "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究、介面設計、prototype 與跨部門協作經驗。現在的我，正持續探索 AI 工具如何幫助設計師更有效率地釐清問題、建立 MVP，並推進產品驗證，朝 Product Builder 的方向前進。",
+      "我是黃宣銘，一名結合 UI/UX 設計、產品思維與工程背景的 Product Designer。",
+      "大學時期的一場重病，讓我重新理解自己對美感與設計的熱情；而機械工程訓練出的系統思維，則成為我進入產品設計後的重要基礎。對我來說，設計就是與 PO/PM 及各方利害關係人一起釐清問題、收斂方向，把複雜的需求與限制，轉化成使用者用得順、也真的能落地的體驗。",
+      "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究與訪談、競品分析、介面與互動設計、Design System、prototype 與跨部門協作經驗。現在的我，也把 AI 工具實際導入設計、前端 prototype 與產品規格整理流程，用來建立問題框架、設計 MVP，並驗證商業目標與使用者體驗，朝 Product Builder 的方向前進。",
     ],
     headings: {
       values: "設計信念",
@@ -356,9 +370,9 @@ const copyByLocale = {
   en: {
     heroTitle: "From Self-Rediscovery to Product Experience Design",
     intro: [
-      "I'm Brian Huang, a product designer combining UI/UX design, business perspective, and an engineering background.",
-      "A serious illness during university led me to rediscover my passion for aesthetics and design. The systems thinking I developed through mechanical engineering later became a strong foundation for product design. To me, design is not simply about making screens look better; it is about turning complex problems, needs, and constraints into experiences that are clear, intuitive, and feasible.",
-      "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research, interface design, prototyping, and cross-functional collaboration. Today, I continue exploring how AI tools can help designers clarify problems, build MVPs, and accelerate product validation as I grow toward becoming a Product Builder.",
+      "I'm Brian Huang, a product designer combining UI/UX design, product thinking, and an engineering background.",
+      "A serious illness during university led me to rediscover my passion for aesthetics and design. The systems thinking I developed through mechanical engineering later became a strong foundation for product design. To me, design is not simply about making screens look better; it is about working with POs/PMs and stakeholders to clarify the problem and converge on a direction, turning complex needs and constraints into experiences that are clear, intuitive, and feasible.",
+      "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research and interviews, competitive analysis, interface and interaction design, design systems, prototyping, and cross-functional collaboration. Today, I also bring AI tools into design, front-end prototyping, and product spec work to frame problems, design MVPs, and validate business goals against user experience, as I grow toward becoming a Product Builder.",
     ],
     headings: {
       values: "Design Values",
