@@ -88,6 +88,8 @@ const en = {
   "是什麼": "Meaning",
   "例子": "Examples",
   "UI 元件範例": "UI Component Example",
+  "左右滑動查看更多": "Swipe horizontally to see more",
+  "按鈕語意比較表": "Button semantics comparison table",
   "複製 email": "Copy Email",
   "送出表單、複製 email、打開 lightbox": "Submit a form, copy an email, open a lightbox",
   "去案例頁、回首頁、開外部 prototype": "Open a case study, go home, open an external prototype",

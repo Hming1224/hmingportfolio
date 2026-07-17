@@ -340,6 +340,8 @@ Native data tables should use semantic table markup by default: `<table>`, `<the
 
 The table wrapper owns horizontal scrolling, not the page. Responsive table behavior should preserve the two-dimensional relationship of rows and columns.
 
+When a table wrapper genuinely overflows, the caller must place `FlowScrollHint` immediately before it. The hint remains hidden when the table fits and appears only when horizontal scrolling is available.
+
 Do not replace a semantic data table with a `div` data grid unless there is a specific interaction requirement that native table semantics cannot support.
 
 Table surface, border, radius, shadow, typography, and cell padding may use design token aliases only when the refactor is visual-preserving.

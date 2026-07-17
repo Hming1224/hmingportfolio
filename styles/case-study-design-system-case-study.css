@@ -1216,6 +1216,14 @@
   box-shadow: var(--ds-case-card-shadow);
 }
 
+.theme-design-system-case-study .ds-case-evolution-story-card > .cs-flow-hint[data-visible="true"] {
+  margin-top: var(--ds-case-content-block-gap);
+}
+
+.theme-design-system-case-study .cs-flow-hint[data-visible="true"] + .ds-case-table-frame {
+  margin-top: 0;
+}
+
 .ds-case-table {
   width: 100%;
   min-width: 860px;

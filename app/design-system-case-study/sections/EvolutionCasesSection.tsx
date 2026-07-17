@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import {
   CaseCard,
+  FlowScrollHint,
   CaseGrid,
   CaseMedia,
   CaseSection,
@@ -209,7 +210,13 @@ export default async function EvolutionCasesSection() {
           <p className="cs-section-lead">{t("前一個案例決定不共用；這個案例則先不動程式碼，而是把用途分清楚。整理全站按鈕時，我卡在一個看起來很小的問題：")}</p>
           <p className="ds-case-question-callout">{t("「View case study」長得像按鈕，那它是 Button 嗎？")}</p>
           <p className="cs-section-lead">{t("全站有十幾個這種「像按鈕的東西」。如果沒有先分清楚用途，後續的 token 規則與共用元件就容易混用。查證 W3C 與 Material Design 的相關定義後，我把它們分成四個概念：")}</p>
-          <div className="ds-case-table-frame">
+          <FlowScrollHint label={t("左右滑動查看更多")} />
+          <div
+            aria-label={t("按鈕語意比較表")}
+            className="ds-case-table-frame"
+            role="region"
+            tabIndex={0}
+          >
             <table className="ds-case-table">
               <colgroup>
                 <col className="ds-case-table__concept-column" />
@@ -218,7 +225,7 @@ export default async function EvolutionCasesSection() {
                 <col className="ds-case-table__ui-column" />
               </colgroup>
               <thead>
-                <tr><th>{t("概念")}</th><th>{t("是什麼")}</th><th>{t("例子")}</th><th>{t("UI 元件範例")}</th></tr>
+                <tr><th scope="col">{t("概念")}</th><th scope="col">{t("是什麼")}</th><th scope="col">{t("例子")}</th><th scope="col">{t("UI 元件範例")}</th></tr>
               </thead>
               <tbody>
                 {semanticRows.map(([term, meaning, examples, exampleKind, exampleLabel]) => (
