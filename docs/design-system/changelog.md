@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-17 — SplitText 長標題限制
+
+- `07-content-and-motion.md` 新增 15.1：SplitText 在 `splitType="chars"` 下，GSAP 會注入 `white-space: nowrap`，配合元件的 `overflow: hidden` 導致長標題被裁切而非換行；解法是改用 `splitType="words, chars"`。
+- 起因：About Me hero 標題改長後於三個斷點全部破版（375px 溢出 89px）。此限制既有，原標題夠短所以未暴露。
+- 影響範圍：Hero、Works、Design System、About Me 四處共用 `SplitText`，改長標題前都應先讀 15.1。
+
 ## 2026-06-27 — Split design-system.md
 
 - 將原始單一 `design-system.md` 拆成 `docs/design-system/` 文件組。
