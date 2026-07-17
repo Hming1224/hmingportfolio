@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { CaseCard, CaseGrid, CaseMedia, CaseSection } from "../../../components/case-study";
-import TermNotes from "../components/TermNotes";
 import { ASSET } from "../data";
 import { getDsTranslator } from "../i18n-server";
 
@@ -103,15 +102,6 @@ export default async function StartingPointSection() {
         />
       </CaseMedia>
 
-      <TermNotes
-        title={t("名詞說明")}
-        ariaLabel={t("這一段的名詞說明")}
-        items={[
-          { term: "Ant Design / Material Design", description: t("我用這兩套設計系統當比對基準，逐項檢查作品集還缺哪些規範。") },
-          { term: "hover / focus / disabled", description: t("元件在滑鼠移入、鍵盤聚焦、不能點擊時各自的樣子；設計系統要事先把這些狀態都定義好。") },
-          { term: "Figma Make", description: t("用來快速產生互動雛形的工具。") },
-        ]}
-      />
     </CaseSection>
   );
 }

@@ -74,7 +74,7 @@ const overviewItems: readonly OverviewItem[] = [
   {
     kind: "impact",
     label: "具體產出",
-    title: "307 個 design token、21 個共用元件、3 支自動檢查，四個案例頁從此沿用同一套依據。",
+    title: "從設計規範到可維護的產品基礎",
     details: [
       {
         label: "307 個 design token",

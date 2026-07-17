@@ -129,7 +129,7 @@ const en = {
   "品質閘門": "Quality Gate",
   "自動檢查守住技術正確，設計意圖由我人工驗收——未經人工驗收，不 push、merge 或 deploy。": "Automated checks guard technical correctness; I review design intent by hand — nothing gets pushed, merged, or deployed without human sign-off.",
   "四步驟流程在下方「治理與驗證」": "The four-step loop is in Governance and Validation below.",
-  "307 個 design token、21 個共用元件、3 支自動檢查，四個案例頁從此沿用同一套依據。": "307 design tokens, 21 shared components, and 3 automated checks — four case studies now run on one shared foundation.",
+  "從設計規範到可維護的產品基礎": "From Design Standards to a Maintainable Product Foundation",
   "307 個 design token": "307 design tokens",
   "色彩、字級、間距、圓角與元件狀態都有名字、集中管理，改一個值就全站生效。": "Colors, type scale, spacing, radii, and component states are all named and centrally managed — change one value and it applies site-wide.",
   "21 個共用 case-study 元件": "21 shared case-study components",

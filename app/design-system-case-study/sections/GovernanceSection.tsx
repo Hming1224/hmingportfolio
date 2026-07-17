@@ -122,7 +122,6 @@ export default async function GovernanceSection() {
         title={t("名詞說明")}
         ariaLabel={t("這一段的名詞說明")}
         items={[
-          { term: "token・shared・local", description: t("設計系統的三層放置邏輯：可重複引用的設計值放 token，跨頁共用的結構放 shared，只服務單一頁面的留在 local。") },
           { term: "lint / type check / build", description: t("三種自動檢查：lint 抓格式與寫法問題、type check 抓型別錯誤、build 確認整個網站能順利建置。") },
           { term: "push / merge / deploy", description: t("把改動送上遠端（push）、合併進正式分支（merge）、部署上線（deploy）。三者的影響範圍不同，執行前都要完成對應檢查。") },
         ]}

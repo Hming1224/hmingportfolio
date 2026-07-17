@@ -8,7 +8,6 @@ import {
   CaseSection,
 } from "../../../components/case-study";
 import SemanticTableExample from "../components/SemanticTableExample";
-import TermNotes from "../components/TermNotes";
 import { ASSET } from "../data";
 import { getDsTranslator } from "../i18n-server";
 
@@ -138,14 +137,6 @@ export default async function EvolutionCasesSection() {
               </div>
             </div>
           </CaseMedia>
-          <TermNotes
-            title={t("名詞註釋")}
-            ariaLabel={t("專有名詞註釋")}
-            items={[
-              { term: t("Slot-based narrative frame"), description: t("固定版面結構、讓各頁自行放入內容的敘事外框；不同案例可以共用排列方式，同時保留自己的文案與圖片。") },
-              { term: t("Local implementation"), description: t("先在單一頁面完成實作，等模式穩定後，再評估要不要移到共用層。") },
-            ]}
-          />
         </article>
 
         <article
@@ -189,14 +180,6 @@ export default async function EvolutionCasesSection() {
           <blockquote className="ds-case-quote">
             {t("那次盤點讓我更確定：每多一個共用元件，就多一份契約要維護，也會讓更多頁面一起承擔變動。")}
           </blockquote>
-          <TermNotes
-            title={t("名詞註釋")}
-            ariaLabel={t("專有名詞註釋")}
-            items={[
-              { term: t("Local component"), description: t("只服務單一頁面或單一敘事情境的元件，可保留在該頁，不必抽成全站共用。") },
-              { term: t("元件共用化"), description: t("把重複結構整理成共用元件的做法；共用後也會增加使用規則與維護成本。") },
-            ]}
-          />
         </article>
 
         <article
@@ -250,15 +233,6 @@ export default async function EvolutionCasesSection() {
             <p>{t("最後我決定")}<b>{t("「文件拆、程式碼不拆」")}</b>{t("。規格文件分別寫清楚 Button 和 LinkButton 的 contract；實作仍維持同一個 Button 元件，有 href 時就 render 成連結。現在拆成兩個元件，得大批調整 import，也會增加 regression 風險。先把使用規則寫清楚，就足以解決眼前的問題。")}</p>
             <p>{t("這正是判斷框架裡的「用途易混淆 → Component Contract」：不必立刻抽元件，先把使用契約寫清楚，就能處理反覆出現的語意混淆。")}</p>
           </CaseCard>
-          <TermNotes
-            title={t("名詞註釋")}
-            ariaLabel={t("專有名詞註釋")}
-            items={[
-              { term: t("LinkButton"), description: t("語意上帶使用者前往另一個位置、視覺上看起來像按鈕的連結。") },
-              { term: t("Screen reader"), description: t("協助視障使用者讀取畫面內容的輔助科技，會依 HTML 語意報讀不同角色。") },
-              { term: t("Component contract"), description: t("元件的使用規則，包括適合承載的內容、支援狀態與不適用情境。") },
-            ]}
-          />
         </article>
       </div>
     </CaseSection>

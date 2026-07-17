@@ -1,6 +1,5 @@
 import { ArrowRight } from "lucide-react";
 import { CaseSection } from "../../../components/case-study";
-import TermNotes from "../components/TermNotes";
 import { getDsTranslator } from "../i18n-server";
 
 const frameworkRows = [
@@ -140,26 +139,6 @@ export default async function FrameworkSection() {
         {t("最後我留下四條規則：值重複就整理成 token；外框重複就保留 slot；結構、用途與互動一起重複，才抽成共用元件；只服務單一頁面的內容，就留在該頁。接下來三個案例，分別對應這幾種判斷。")}
       </blockquote>
 
-      <TermNotes
-        title={t("名詞說明")}
-        ariaLabel={t("這一段的名詞說明")}
-        items={[
-          { term: "Design Token", description: t("有名稱、可重複引用的設計值。") },
-          {
-            term: "Slot-based Composition",
-            description: t("固定外框、內容可替換的組合方式，兼顧一致性與各頁彈性。"),
-          },
-          {
-            term: "Component Contract",
-            description: t("元件的使用規則：適合承載什麼內容、有哪些狀態、什麼情境不該使用。"),
-          },
-          {
-            term: "Rule of Three",
-            description: t("實務判斷原則：同樣結構重複出現三次左右，再抽成共用元件。"),
-          },
-          { term: "Local Component（colocation）", description: t("只服務單一頁面、跟著該頁一起存放的元件，不抽進共用層。") },
-        ]}
-      />
     </CaseSection>
   );
 }
