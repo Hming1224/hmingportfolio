@@ -315,10 +315,16 @@
 
 .experience-copy li {
   margin-bottom: var(--hm-space-2xs);
+  color: var(--ink-hover);
+  transition: color var(--hm-duration-fast) var(--hm-ease-standard);
 }
 
 .experience-copy li:last-child {
   margin-bottom: 0;
+}
+
+.experience-card:hover .experience-copy li {
+  color: var(--ink);
 }
 
 /* Resume highlighted metrics styling */
