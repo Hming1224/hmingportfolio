@@ -368,11 +368,11 @@ const copyByLocale = {
     ],
   },
   en: {
-    heroTitle: "Designing Convincing Product Experiences Through Multiple Perspectives",
+    heroTitle: "Designing Compelling Product Experiences from Multiple Perspectives",
     intro: [
       "I'm Brian Huang, a product designer combining UI/UX design, product thinking, and an engineering background.",
       "I moved into product design from mechanical engineering — first as a project manager in electronics OEM/ODM manufacturing, then into UI/UX at startups and B2B teams. That path taught me to sit between engineering and users: translating user needs into specs engineers can act on, and translating technical constraints back into design decisions. To me, design is not simply about making screens look better; it is about working with POs/PMs and stakeholders to clarify the problem and converge on a direction, turning complex needs and constraints into experiences that are clear, intuitive, and feasible.",
-      "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research and interviews, competitive analysis, interface and interaction design, design systems, prototyping, and cross-functional collaboration. Today, I also bring AI tools into design, front-end prototyping, and product spec work to frame problems, design MVPs, and validate business goals against user experience, as I grow toward becoming a Product Builder.",
+      "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research and interviews, competitive analysis, interface and interaction design, design systems, prototyping, and cross-functional collaboration. I also bring AI tools into design, front-end prototyping, and product spec work to frame problems, design MVPs, and validate business goals against user experience, as I grow toward becoming a Product Builder.",
     ],
     headings: {
       values: "Design Values",
