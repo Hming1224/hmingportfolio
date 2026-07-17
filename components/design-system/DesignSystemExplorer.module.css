@@ -3739,6 +3739,10 @@
       color var(--hm-duration-fast) var(--hm-ease-standard);
   }
 
+  .categorySection[id] {
+    scroll-margin-top: calc(120px + var(--hm-space-2xs));
+  }
+
   .sidebarToggle:hover,
   .sidebarToggle:focus-visible {
     border-color: var(--hm-purple);
