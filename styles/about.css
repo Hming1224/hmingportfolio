@@ -823,6 +823,8 @@
   width: 100%;
   height: 100%;
   z-index: 0;
+  /* 照片為 lazy load，底色讓卡片在圖片就緒前仍有實體感而非空白 */
+  background: var(--hm-muted);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 

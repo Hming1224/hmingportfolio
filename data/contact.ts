@@ -12,7 +12,7 @@ const contactCopy = {
 } satisfies Record<Locale, { title: string; subtitle: string }>;
 
 const contactDetails = {
-  heroImage: "https://framerusercontent.com/images/NB9UIWMSY1Vp8KhJ1oEDFdGQI.jpg",
+  heroImage: "/contact/hero.webp",
   email: "hmingdesigner@gmail.com",
   phone: "+886 978-629-321",
   socials: {

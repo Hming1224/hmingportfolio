@@ -155,7 +155,7 @@ const zhEducatorItems = [
     role: "課程助教",
     desc: "指導學碩同學共 20 組期末專案，提供 TA office hour 諮詢與每週作業回饋",
     date: "2025.09-2026.01",
-    image: "/educator/nccu-ta.png",
+    image: "/educator/nccu-ta.jpg",
   },
   {
     badge: "16+",
@@ -308,7 +308,7 @@ const enEducatorItems = [
     role: "Teaching Assistant",
     desc: "Mentored 20 undergraduate and graduate project teams through weekly feedback and TA office hours.",
     date: "2025.09-2026.01",
-    image: "/educator/nccu-ta.png",
+    image: "/educator/nccu-ta.jpg",
   },
   {
     badge: "16+",

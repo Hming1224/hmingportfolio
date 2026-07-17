@@ -171,7 +171,7 @@ export default function CaseOverview({
                       {hasDetailIcon ? (
                         <span className="cs-overview-detail-icon" data-icon={detail.icon} aria-hidden="true">
                           {detail.icon === 'humanAvatar' ? (
-                            <Image src="/avatar/avatar-yellow.png" alt="" width={36} height={36} loading="eager" unoptimized />
+                            <Image src="/avatar/avatar-yellow-icon.png" alt="" width={36} height={36} loading="eager" unoptimized />
                           ) : DetailIcon ? (
                             <DetailIcon />
                           ) : null}

@@ -14,23 +14,8 @@ type EducatorItem = {
   image: string;
 };
 
-function preloadImages(urls: string[]) {
-  return Promise.all(
-    urls.map(
-      (src) =>
-        new Promise<void>((resolve) => {
-          const image = new window.Image();
-          image.src = src;
-          image.onload = () => resolve();
-          image.onerror = () => resolve();
-        }),
-    ),
-  );
-}
-
 export default function EducatorMasonry({ items }: { items: EducatorItem[] }) {
   const containerRef = useRef<HTMLElement | null>(null);
-  const [imagesReady, setImagesReady] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   const hasMounted = useRef(false);
 
@@ -42,18 +27,6 @@ export default function EducatorMasonry({ items }: { items: EducatorItem[] }) {
       })),
     [items],
   );
-
-  useEffect(() => {
-    let isActive = true;
-
-    preloadImages(educatorItems.map((item) => item.image)).then(() =>
-      isActive ? setImagesReady(true) : undefined,
-    );
-
-    return () => {
-      isActive = false;
-    };
-  }, [educatorItems]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -78,7 +51,7 @@ export default function EducatorMasonry({ items }: { items: EducatorItem[] }) {
   }, [containerRef, hasEntered]);
 
   useLayoutEffect(() => {
-    if (!hasEntered || !imagesReady || educatorItems.length === 0) return;
+    if (!hasEntered || educatorItems.length === 0) return;
 
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -126,7 +99,7 @@ export default function EducatorMasonry({ items }: { items: EducatorItem[] }) {
     });
 
     hasMounted.current = true;
-  }, [educatorItems, hasEntered, imagesReady]);
+  }, [educatorItems, hasEntered]);
 
   return (
     <section ref={containerRef} className="educator-section educator-masonry">

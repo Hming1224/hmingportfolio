@@ -9,7 +9,7 @@ import { getAdvantechTranslator } from "../i18n-server";
 function OwnerMark({ label }: { label: string }) {
   return (
     <span className="cs-ds-owner cs-object-box">
-      <Image src="/avatar/avatar-yellow.png" alt={label} width={22} height={22} />
+      <Image src="/avatar/avatar-yellow-icon.png" alt={label} width={22} height={22} />
     </span>
   );
 }

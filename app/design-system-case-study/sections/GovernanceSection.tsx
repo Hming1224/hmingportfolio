@@ -12,7 +12,7 @@ function GovernanceOwnerMark({ owner, label }: { owner: "human" | "ai"; label: s
       title={label}
     >
       {owner === "human" ? (
-        <Image src="/avatar/avatar-yellow.png" alt="" width={28} height={28} loading="eager" unoptimized />
+        <Image src="/avatar/avatar-yellow-icon.png" alt="" width={28} height={28} loading="eager" unoptimized />
       ) : (
         <Bot size={18} strokeWidth={1.8} aria-hidden="true" />
       )}
