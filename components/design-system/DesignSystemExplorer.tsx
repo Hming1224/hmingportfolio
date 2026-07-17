@@ -129,7 +129,7 @@ export default function DesignSystemExplorer({
   ), []);
 
   const shouldScrollAfterNavSelect = useCallback(() => {
-    if (isMobileNavLayout()) return false;
+    if (isMobileNavLayout()) return true;
 
     const workspace = document.getElementById("design-system-workspace");
     if (!workspace) return true;
