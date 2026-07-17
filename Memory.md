@@ -577,3 +577,24 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **往後任何設計系統升級、新 token、新共用元件或新狀態完成時，都要同步更新 `/design-system` 頁對應區塊與 Token Reference。** 不要只改 code 不改文件頁。
 - Token Reference 以 `styles/tokens.css` 為單一真實來源；若新增 token，必須同步補進設計系統頁的 reference 表與必要說明。
 - 公開網站不放 gap analysis / maturity roadmap；這類內容改放面試或內部輔助文件，例如 `100_Todo/drafts/job-hunt/2026-06-25_設計系統面試對答.md`。
+
+## 2026-07-17 圖片效能：三種「繞過 Next 圖片優化」的模式（PSI contact 頁 71 分主因）
+
+- **背景**：PSI 實測 `/contact` 手機版 71 分（LCP 5.7s）、首頁 86 分。Hming 以為是「圖片解析度太差 / 檔案太大」，實際主因是**圖片沒走 `/_next/image` 優化管線**，跟檔案大小無關。
+- **踩坑 1 — hero 圖放外部網域**：`data/contact.ts` 的 `heroImage` 指向 `framerusercontent.com`（舊 Framer 站遺留）。即使優化後只有 77KB，仍需「Vercel 優化服務 → 外部網域抓圖 → 轉檔」多段往返 → LCP 5.7s。
+  - **錯誤做法**：把外部 CDN 圖片留在 `next.config.ts` 的 `remotePatterns` 就當作沒問題。
+  - **正確做法**：下載存進 `public/`，改本地路徑。存 `public/contact/hero.webp`（3840px, 91KB，比原 368KB JPEG 還小）。
+- **踩坑 2 — 手動 `new window.Image()` preload 會繞過優化且造成重複下載**：`app/about-me/EducatorMasonry.tsx` 原本用 `preloadImages()` 直接 `new window.Image(); image.src = "/educator/x.jpg"` 來 gate 進場動畫。
+  - 這會抓**原始檔**（繞過 `/_next/image`），而 `<Image>` 元件另外再抓優化版 → 同張圖下載兩次以上。正式站實測：4 張原圖各被抓 2 次 + 4 個優化版本，約 10MB。
+  - 而且 gate 是「**全部**載完才顯示整區」，慢速網路下使用者可能滑過去了卡片還是 opacity 0（該區 CSS 預設 `opacity: 0`，全靠 GSAP 顯示）。
+  - **正確做法**：移除 preload，單純依 IntersectionObserver 進場，圖片交給 Next 自行 lazy load；補 `.educator-card-photo { background: var(--hm-muted) }` 當載入前的底色。
+- **踩坑 3 — `unoptimized` + 巨大原圖當小圖示**：`avatar-yellow.png` 與 `decorations/badge-icon.png` 是**位元組完全相同的重複檔**（各 1.7MB / 2824×2771），卻只渲染成 22–36px。兩處還加了 `unoptimized` → 直接抓 1.7MB 原檔。
+  - **正確做法**：建 `avatar-yellow-icon.png`（144px = 36px@4x, 7.8KB）；`badge-icon.png` 原地縮至 96px（Hero 用純 `<img>`，縮小後不必改 code）。實測傳輸 **1697KB → 1.7KB**。
+  - **判準**：icon 用途的圖，來源檔就該是 icon 尺寸（最大渲染 ×4），不要放 master 原圖進 `public/`（`public/` 是「被服務的目錄」不是設計原稿庫）。
+- **踩坑 4 — 照片存成 PNG**：`nccu-ta.png` 2048×1365 不透明照片存 PNG＝3MB。用 `sharp().stats()` 的 `isOpaque` 可判斷有無透明通道；無透明就該用 JPEG/WebP。
+- **工具**：本機無 cwebp/imagemagick，但**專案已內建 `sharp`**（Next 的圖片引擎），直接 `node -e "require('sharp')..."` 就能批次轉檔／量尺寸，不用另裝。
+- **字體**：`app/layout.tsx` 的 `Space_Grotesk({ display: "block" })` 會在字體載入前完全隱藏文字（最多 3s），是 PSI「阻斷算繪 650ms」來源之一 → 改 `"swap"`。
+- **⚠️ 驗證陷阱（重要，會誤判成 bug）**：MCP 瀏覽器分頁的 `document.visibilityState` 是 **`"hidden"`**，此時 **IntersectionObserver 完全不觸發**（連新建的 observer 都收不到初始回呼）、rAF 被節流、`computer` 的 scroll 會逾時。
+  - 症狀：靠 IntersectionObserver 顯示的區塊（如 educator 卡片）永遠 opacity 0，看起來像被改壞。
+  - **正確做法**：先跟**正式站做同樣操作的對照測試**再下結論；驗證改動優先用**不依賴可見度的證據**（network requests、curl 實際傳輸大小、產出的 CSS），不要只靠截圖。
+- **PSI 額度**：`pagespeedonline.googleapis.com` 免費額度有每日上限，反覆測會被鎖（`Quota exceeded`）；網頁版 UI 也會跟著卡住。要測分數請節制，或隔天再跑。
