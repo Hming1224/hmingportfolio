@@ -12,16 +12,16 @@ const zhExperiences = [
     date: "2024.06 - 2024.08",
     image: "/projects/advantech/cover/cover.webp",
     points: [
-      "與 PM 及團隊將 AI 切入點從「能回答什麼」重新定位為「何時主動出現」，解決平台數據完整、卻無從判斷該先處理什麼的痛點。",
+      "在 PM 與正職設計師帶領下，與另一位設計實習生分工，透過競品分析、使用者訪談與功能設計，把既定的 GenAI 需求轉為主動決策支援方案，解決平台數據完整、卻無從判斷該先處理什麼的痛點。",
       [
-        { text: "以競品分析、使用者訪談與內部工作坊推翻團隊原本「全能 Chatbot」的假設，於 " },
-        { text: "2.5 個月內完成 3 次設計提案", highlight: true },
-        { text: "，並依時程通過上級主管/ CEO 審查。" },
+        { text: "2.5 個月內完成期初、期中、期末三階段 POC 提案與迭代，" },
+        { text: "向 CEO 報告專案成果", highlight: true },
+        { text: "；我負責超約預警與模式識別的 wireframe、互動流程與 prototype。" },
       ],
       [
-        { text: "最終提案中有 " },
-        { text: "2 項主要模組功能獲採納", highlight: true },
-        { text: "，順利進入工程開發排程，並與專案 PM 共同排定後續產品路線與功能模組優先順序。" },
+        { text: "超約預警與模式識別" },
+        { text: "兩項方案獲採納", highlight: true },
+        { text: "進入後續規劃，我提供訪談洞察與設計方案供 PM 排定開發優先級，其中超約預警已於實習結束前啟動後端開發。" },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -33,16 +33,20 @@ const zhExperiences = [
     image: "/experience/crypto-arsenal.webp",
     points: [
       [
-        { text: "整合三項核心交易流程，消除使用者需跳離平台手動介入、進而弄壞既有策略的風險，" },
-        { text: "平均操作時間縮短 58%", highlight: true },
+        { text: "設計並推動三項核心操作流程上線，讓使用者無須跳回交易所手動介入、進而弄壞既有策略；內部測試操作時間由 65 秒降至約 27 秒，" },
+        { text: "縮短 58%", highlight: true },
         { text: "。" },
       ],
-      "維護並重整 Design System，統一 3 大不同功能元件與對應頁面，並應用於 20+ 個產品設計流程，提升視覺與互動一致性。",
-      "進行使用者訪談與競品分析，完成 6+ 個產品功能，修正既有產品 12+ 項 UX 問題，與 20+ 個 RWD 頁面設計。",
       [
-        { text: "在 Scrum 中擔任助理 PO，主動導入 Scrum board 與 prototype video 優化設計 handoff，讓工程更快理解設計意圖，" },
-        { text: "協助 Sprint 產出提升至過往 1.5 倍", highlight: true },
-        { text: "。" },
+        { text: "依 " },
+        { text: "20+ 個操作流程", highlight: true },
+        { text: "重整既有 Figma Design System，對齊前端建立的 Storybook 命名，並在 handoff 圖面標註可重用元件，讓設計與工程能直接對照既有實作。" },
+      ],
+      "補齊 20+ 個既有桌機頁面的平板與手機版設計，完成工程 handoff 並正式上線，改善產品前期 desktop-first 留下的跨裝置體驗缺口。",
+      [
+        { text: "在 8 人工程團隊的雙週 Scrum 中擔任助理 PO，將使用者回饋排定優先級、協調 UI team " },
+        { text: "推動 6+ 項功能上線", highlight: true },
+        { text: "；同期每個 Sprint 完成的 ticket 數平均提升約 44%。" },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -53,14 +57,18 @@ const zhExperiences = [
     date: "2022.11 - 2023.02",
     image: "/experience/taiwan-blockchain-academia.webp",
     points: [
-      "主導 DID 數位證書平台的使用者研究與 wireframe。因發現受訪者皆無真實數位證書的使用經驗，將訪綱從產品功能操作改為探索式研究，改問決策顧慮與執行困難。",
+      [
+        { text: "主導 DID 數位證書平台的使用者研究與 wireframe。因發現受訪者皆無真實數位證書使用經驗，將訪綱從功能操作改為" },
+        { text: "探索式研究", highlight: true },
+        { text: "，改問決策顧慮與執行困難。" },
+      ],
       [
         { text: "完成發證方、申請方、驗證方" },
         { text: "三方共 9 場角色訪談", highlight: true },
-        { text: "，並據此修正團隊假設：證書驗證其實是加值而非剛需，因而將產品定位收斂至省時價值。" },
+        { text: "，並據此修正團隊假設：驗證其實是加值而非剛需，因而收斂產品定位。" },
       ],
       "與產品經理及國泰金控技術團隊協作，對齊產品規格、開發方向與合規情境下的使用者體驗。",
-      "交付 wireframe 與 Figma 互動 prototype，支援可用性測試與多輪設計迭代，並完成全平台走查。",
+      "交付 wireframe 與 Figma 互動 prototype，支援可用性測試與多輪設計迭代，並完成整體流程走查。",
     ] satisfies ExperiencePoint[],
   },
   {
@@ -71,11 +79,15 @@ const zhExperiences = [
     image: "/experience/lcfc.webp",
     points: [
       [
-        { text: "協調工程、供應商與跨部門時程，" },
+        { text: "協調工程、供應商與跨部門排程，預先盤點測試物件、物料需求與到貨時間，較原定工程測試日期" },
         { text: "平均提前 1.5 週", highlight: true },
-        { text: "完成預訂交付。" },
+        { text: "完成備料與交付。" },
       ],
-      "在 2 個 milestone 中因應物料短缺風險，重新協調料件與測試排程，成功將原可能延誤的時程拉回期限內。",
+      [
+        { text: "在 " },
+        { text: "2 個 milestone", highlight: true },
+        { text: " 遇到測試物料短缺時，協調替代供應商與到貨排程，讓工程團隊如期取得物料並依原定時程完成測試。" },
+      ],
     ] satisfies ExperiencePoint[],
   },
 ];
@@ -183,16 +195,16 @@ const enExperiences = [
     date: "2024.06 - 2024.08",
     image: "/projects/advantech/cover/cover.webp",
     points: [
-      "Worked with the PM and team to reframe the AI entry point from \"what it can answer\" to \"when it should surface,\" addressing a platform where the data was complete but the priorities were not.",
+      "Guided by the PM and a full-time designer, I worked with another design intern to turn predefined GenAI requirements into proactive decision-support concepts through competitive analysis, user interviews, and feature design — addressing a platform where the data was complete but the priorities were not.",
       [
-        { text: "Overturned the team's \"ask-anything chatbot\" assumption through competitive analysis, user interviews, and internal workshops; delivered " },
-        { text: "three design proposals within 2.5 months", highlight: true },
-        { text: ", passing reviews with senior leadership and the CEO on schedule." },
+        { text: "Ran the Early Design Campaign's kickoff, midterm, and final POC reviews within 2.5 months and " },
+        { text: "presented results to the CEO", highlight: true },
+        { text: "; I owned the wireframes, interaction flows, and prototypes for overage alerts and pattern recognition." },
       ],
       [
-        { text: "The final proposal had " },
-        { text: "two core feature modules approved", highlight: true },
-        { text: " into the engineering roadmap, and I partnered with the PM to prioritize the product roadmap and feature modules." },
+        { text: "Both design concepts — overage alerts and pattern recognition — " },
+        { text: "were accepted", highlight: true },
+        { text: " for further planning; I provided research insights and design proposals for PM prioritization, with backend implementation of overage alerts underway before the internship ended." },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -204,16 +216,20 @@ const enExperiences = [
     image: "/experience/crypto-arsenal.webp",
     points: [
       [
-        { text: "Integrated three core trading flows into the platform, removing the risk of users breaking their own running strategies to intervene manually, " },
-        { text: "cutting average task time by 58%", highlight: true },
+        { text: "Designed and shipped three core trading flows so users no longer had to return to the exchange to intervene manually and risk breaking their own strategies; in internal testing, average task time fell from 65 to about 27 seconds — a " },
+        { text: "58% reduction", highlight: true },
         { text: "." },
       ],
-      "Maintained and reorganized the design system, unifying three major feature areas and applying it across 20+ product design flows.",
-      "Conducted user interviews and competitive analysis, delivered 6+ product features, improved 12+ UX issues, and designed 20+ responsive pages.",
       [
-        { text: "Served as an assistant Product Owner in Scrum, introducing a Scrum board and prototype videos to improve design handoff and help engineers grasp design intent faster, " },
-        { text: "increasing Sprint output to 1.5x its previous level", highlight: true },
-        { text: "." },
+        { text: "Reorganized the existing Figma design system across " },
+        { text: "20+ user flows", highlight: true },
+        { text: ", aligned naming with the front-end Storybook glossary, and annotated reusable components in handoff files so design and engineering could map directly to existing implementations." },
+      ],
+      "Delivered tablet and mobile designs for 20+ existing desktop pages and shipped them, closing the cross-device gaps left by the product's early desktop-first development.",
+      [
+        { text: "Served as assistant PO on an eight-engineer, biweekly Scrum team — prioritized user feedback and coordinated the UI team in " },
+        { text: "shipping 6+ features", highlight: true },
+        { text: "; completed tickets per Sprint rose about 44% on average." },
       ],
     ] satisfies ExperiencePoint[],
   },
@@ -224,14 +240,18 @@ const enExperiences = [
     date: "2022.11 - 2023.02",
     image: "/experience/taiwan-blockchain-academia.webp",
     points: [
-      "Led user research and wireframing for a DID digital credential platform. When participants turned out to have no real experience with digital credentials, I shifted the interview guide from feature-level questions to exploratory research, probing decision concerns and execution barriers instead.",
+      [
+        { text: "Led user research and wireframing for a DID digital credential platform. When participants turned out to have no real experience with digital credentials, I shifted the interview guide from feature-level questions to " },
+        { text: "exploratory research", highlight: true },
+        { text: ", probing decision concerns and execution barriers instead." },
+      ],
       [
         { text: "Ran " },
         { text: "9 role-based interviews", highlight: true },
-        { text: " across issuers, applicants, and verifiers, which corrected the team's assumption: verification was a value-add rather than a must-have, narrowing the product positioning toward time savings." },
+        { text: " across issuers, applicants, and verifiers, which corrected the team's assumption: verification was a value-add rather than a must-have, narrowing the product positioning." },
       ],
       "Collaborated with product managers and Cathay Financial Holdings' technology team to align product requirements, development direction, and UX within compliance constraints.",
-      "Delivered wireframes and Figma interactive prototypes to support usability testing and multiple rounds of design iteration, completing a full-platform walkthrough.",
+      "Delivered wireframes and Figma interactive prototypes to support usability testing and multiple rounds of design iteration, completing an end-to-end flow walkthrough.",
     ] satisfies ExperiencePoint[],
   },
   {
@@ -242,11 +262,11 @@ const enExperiences = [
     image: "/experience/lcfc.webp",
     points: [
       [
-        { text: "Coordinated engineering, suppliers, and cross-functional schedules to deliver " },
-        { text: "an average of 1.5 weeks ahead of plan", highlight: true },
-        { text: "." },
+        { text: "Coordinated engineers, suppliers, and cross-functional schedules, pre-checking test units, material needs, and delivery timing to provide test materials " },
+        { text: "~1.5 weeks ahead", highlight: true },
+        { text: " of scheduled engineering testing." },
       ],
-      "Responded to material shortage risks across two milestones, rescheduling components and testing to bring potentially delayed deliveries back on track.",
+      "Across two milestones, coordinated alternate suppliers and delivery schedules when test materials ran short, so engineers received the materials and testing proceeded on time.",
     ] satisfies ExperiencePoint[],
   },
 ];
