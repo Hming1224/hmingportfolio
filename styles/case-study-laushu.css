@@ -90,10 +90,6 @@
   object-position: center;
 }
 
-.theme-laushu .laushu-hero-info {
-  background: linear-gradient(180deg, #ffffff 0%, var(--laushu-primary-100) 100%);
-}
-
 .theme-laushu .cs-info-row--divided {
   --cs-info-row-divided-border: 1px solid var(--laushu-line);
 }
