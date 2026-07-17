@@ -101,8 +101,8 @@ const zhProjects: ProjectSummary[] = [
     date: "2023.10 - 2023.12",
     description:
       "NCCUSpace是一款專注於提升政大學生預約校園空間的資訊服務平台。專案致力於減低預約流程複雜度與客製化預約空間。",
-    cover: "https://framerusercontent.com/images/QPe9idFph9AwvwFOSCV4JJDLJZ0.png",
-    logo: "https://framerusercontent.com/images/jocDTIVjs0ouwwKqNVnrI02aYGQ.png",
+    cover: "/projects/nccuspace/cover/cover.webp",
+    logo: "/projects/nccuspace/cover/logo.png",
     tags: ["UIUX 設計", "網頁設計", "團隊專案", "課堂專案"],
     tone: "brown",
     category: "school",
@@ -116,8 +116,8 @@ const zhProjects: ProjectSummary[] = [
     date: "2022.12 - 2023.02",
     description:
       "本專案與國泰數位發展中心技術團隊合作，開發一款以 Web3 為基礎的數位證書服務平台。這次專案共歷時 2 個月，我主要負責使用者體驗設計、Web 介面設計、使用者研究，以及使用者測試。",
-    cover: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
-    logo: "https://framerusercontent.com/images/P57DkJCf8P5Yrz7l53G2waxdHIM.jpeg",
+    cover: "/projects/tba/cover/cover.webp",
+    logo: "/projects/tba/cover/logo.webp",
     tags: ["UIUX 設計", "網頁設計", "End-to-end 設計", "網站開發中"],
     tone: "green",
     category: "enterprise",
@@ -205,8 +205,8 @@ const enProjects: ProjectSummary[] = [
     date: "2023.10 - 2023.12",
     description:
       "An information service that helps NCCU students book campus spaces more easily. The project focused on simplifying a complex reservation flow and helping students find spaces that match their needs.",
-    cover: "https://framerusercontent.com/images/QPe9idFph9AwvwFOSCV4JJDLJZ0.png",
-    logo: "https://framerusercontent.com/images/jocDTIVjs0ouwwKqNVnrI02aYGQ.png",
+    cover: "/projects/nccuspace/cover/cover.webp",
+    logo: "/projects/nccuspace/cover/logo.png",
     tags: ["UI/UX Design", "Web Design", "Team Project", "Course Project"],
     tone: "brown",
     category: "school",
@@ -220,8 +220,8 @@ const enProjects: ProjectSummary[] = [
     date: "2022.12 - 2023.02",
     description:
       "A Web3-based digital credential service developed with Cathay Financial Holdings' digital technology team. During the two-month project, I led UX design, web interface design, user research, and usability testing.",
-    cover: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
-    logo: "https://framerusercontent.com/images/P57DkJCf8P5Yrz7l53G2waxdHIM.jpeg",
+    cover: "/projects/tba/cover/cover.webp",
+    logo: "/projects/tba/cover/logo.webp",
     tags: ["UI/UX Design", "Web Design", "End-to-End Design", "In Development"],
     tone: "green",
     category: "enterprise",

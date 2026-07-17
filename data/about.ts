@@ -31,7 +31,7 @@ const zhExperiences = [
     title: "Crypto-Arsenal",
     role: "UIUX & PM 實習生",
     date: "2023.03 - 2023.10",
-    image: "https://framerusercontent.com/images/dIryK4ZcMPoWUc9rlwSZzl9F88Y.jpeg",
+    image: "/experience/crypto-arsenal.webp",
     points: [
       "維護並重整 Design System，統一 3大不同功能元件與對應頁面，並應用於 20+ 個產品設計流程，提升視覺與互動一致性。",
       "進行使用者訪談與競品分析，完成 6+ 個產品功能，修正既有產品 12+ 項 UX 問題，與 20+ 個 RWD 頁面設計。",
@@ -47,7 +47,7 @@ const zhExperiences = [
     title: "Taiwan Blockchain Academia",
     role: "產品設計師（約聘）",
     date: "2022.11 - 2023.02",
-    image: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
+    image: "/experience/taiwan-blockchain-academia.webp",
     points: [
       "透過使用者訪談與研究，釐清非技術使用者進入 Web3 服務時的理解斷點與操作阻礙。",
       "與產品經理及國泰金控技術團隊協作，對齊產品規格、開發方向與合規情境下的使用者體驗。",
@@ -60,7 +60,7 @@ const zhExperiences = [
     title: "LCFC 合肥聯寶電子科技",
     role: "助理專案管理師",
     date: "2021.05 - 2021.12",
-    image: "https://framerusercontent.com/images/2aFK7DdC44h75205XrUXIGN0s.jpeg",
+    image: "/experience/lcfc.webp",
     points: [
       [
         { text: "協調工程、供應商與跨部門時程，" },
@@ -101,14 +101,14 @@ const zhSkillCategories = [
 ];
 
 const tools = [
-  ["Figma", "https://framerusercontent.com/images/NFQE0lJpudFMnMlrxUlqwsTZobI.png"],
-  ["Canva", "https://framerusercontent.com/images/xViGpNQGhsx0NAPy32ilYcniF4.png"],
-  ["Framer", "https://framerusercontent.com/images/iGMc0V6aPbUXiqLig37GL6mpDYw.png"],
+  ["Figma", "/tools/figma-logo.png"],
+  ["Canva", "/tools/canva-logo.png"],
+  ["Framer", "/tools/framer-logo.png"],
   ["lottielab", "/tools/lottielab-logo.png"],
-  ["Photoshop", "https://framerusercontent.com/images/G2wWkpP4Un4CQNemoiK0ou60O7o.png"],
-  ["Illustrator", "https://framerusercontent.com/images/M0cU5uSFBQOhsa5CV9hdrPIMPY.png"],
-  ["Adobe XD", "https://framerusercontent.com/images/7u5X456ibsvVQsGgqzKdFJ2ukIs.png"],
-  ["After Effects", "https://framerusercontent.com/images/5ozjkYgaLwp6eZsoVcGOW30U1z4.png"],
+  ["Photoshop", "/tools/photoshop-logo.png"],
+  ["Illustrator", "/tools/illustrator-logo.png"],
+  ["Adobe XD", "/tools/adobe-xd-logo.png"],
+  ["After Effects", "/tools/after-effects-logo.png"],
 ] as const;
 
 const zhDesignValues = [
@@ -195,7 +195,7 @@ const enExperiences = [
     title: "Crypto-Arsenal",
     role: "UI/UX & PM Intern",
     date: "2023.03 - 2023.10",
-    image: "https://framerusercontent.com/images/dIryK4ZcMPoWUc9rlwSZzl9F88Y.jpeg",
+    image: "/experience/crypto-arsenal.webp",
     points: [
       "Maintained and reorganized the design system, unifying three major feature areas and applying it across 20+ product design flows.",
       "Conducted user interviews and competitive analysis, delivered 6+ product features, improved 12+ UX issues, and designed 20+ responsive pages.",
@@ -211,7 +211,7 @@ const enExperiences = [
     title: "Taiwan Blockchain Academia",
     role: "Product Designer (Contract)",
     date: "2022.11 - 2023.02",
-    image: "https://framerusercontent.com/images/CA1UxcHBL02pPYicWXOrbAAjruA.jpg",
+    image: "/experience/taiwan-blockchain-academia.webp",
     points: [
       "Used interviews and research to uncover comprehension gaps and usability barriers for non-technical users entering Web3 services.",
       "Collaborated with product managers and Cathay Financial Holdings' technology team to align product requirements, development direction, and UX within compliance constraints.",
@@ -224,7 +224,7 @@ const enExperiences = [
     title: "LCFC",
     role: "Assistant Project Manager",
     date: "2021.05 - 2021.12",
-    image: "https://framerusercontent.com/images/2aFK7DdC44h75205XrUXIGN0s.jpeg",
+    image: "/experience/lcfc.webp",
     points: [
       [
         { text: "Coordinated engineering, suppliers, and cross-functional schedules to deliver " },
@@ -343,13 +343,13 @@ const copyByLocale = {
         date: "2023.09 - 2026.05",
         badge: "GPA 4.07",
         description: "主修使用者體驗研究、人機互動、設計思考與人工智慧。",
-        image: "https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png",
+        image: "/education/nccu-logo.png",
       },
       {
         school: "國立成功大學 機械工程學系",
         date: "2017.09 - 2021.02",
         description: "主修熱力學與機械設計，並以設計思維和使用者中心設計作為第二專業。",
-        image: "https://framerusercontent.com/images/o53UPGa6UhydVFF9ZPVPLPqKJ20.png",
+        image: "/education/ncku-logo.png",
       },
     ],
   },
@@ -374,13 +374,13 @@ const copyByLocale = {
         date: "2023.09 - 2026.05",
         badge: "GPA 4.07",
         description: "Focused on UX research, human-computer interaction, design thinking, and artificial intelligence.",
-        image: "https://framerusercontent.com/images/Ac7sKcF2w4TpZnOI28BGtm3h8.png",
+        image: "/education/nccu-logo.png",
       },
       {
         school: "National Cheng Kung University, B.S. in Mechanical Engineering",
         date: "2017.09 - 2021.02",
         description: "Studied thermodynamics and mechanical design, with design thinking and human-centered design as a secondary focus.",
-        image: "https://framerusercontent.com/images/o53UPGa6UhydVFF9ZPVPLPqKJ20.png",
+        image: "/education/ncku-logo.png",
       },
     ],
   },
