@@ -598,3 +598,17 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
   - 症狀：靠 IntersectionObserver 顯示的區塊（如 educator 卡片）永遠 opacity 0，看起來像被改壞。
   - **正確做法**：先跟**正式站做同樣操作的對照測試**再下結論；驗證改動優先用**不依賴可見度的證據**（network requests、curl 實際傳輸大小、產出的 CSS），不要只靠截圖。
 - **PSI 額度**：`pagespeedonline.googleapis.com` 免費額度有每日上限，反覆測會被鎖（`Quota exceeded`）；網頁版 UI 也會跟著卡住。要測分數請節制，或隔天再跑。
+
+## 2026-07-17 移除 framerusercontent 外部圖：盤點結果與編碼踩坑（承上則）
+
+- **盤點比預期多**：原以為 `data/about.ts` 只有 3 張外部圖，實際全站共 **16 張**：about.ts 12 張（工作經歷照 3、工具 logo 7、校徽 2；因 zh-TW/en 雙語系複製，共 17 處引用）＋ `data/projects.ts` 4 張（首頁專案卡 cover/logo，8 處引用）。**改這類東西一定先 `grep -c` 全站盤點，不要只看上次回報的數字。**
+- **踩坑 — 重新編碼 PNG 反而變大**：Framer CDN 的原始 PNG 多為**索引色（palette / 8-bit）**，直接用 `sharp().png()` 重編會產出 32-bit RGBA → 檔案暴增（canva 20KB→**104KB**、ncku 16KB→**108KB**）。
+  - **錯誤做法**：假設「重新壓縮一定會變小」，轉完不比對就覆蓋。
+  - **正確做法**：`png({ palette: true, quality: 90 })`，並且 **palette / rgba / 原檔三者都產出後取最小**；原檔已是最佳就直接沿用（本次 canva、ncku 即沿用原檔）。
+  - 判準：**轉檔後一定要跟原檔比大小**，變大就代表做錯了。
+- **透明通道**：所有 logo（工具 7 個 + 校徽 2 個）都含 alpha，必須保留 → 維持 PNG 或用 `webp({ alphaQuality: 100 })`。用 `sharp().metadata().hasAlpha` 與 `stats().isOpaque` 判斷；**不透明**的照片才轉 webp。
+- **尺寸依 render size 決定，不是憑感覺**：先讀元件的 `sizes` / `width`＝實際渲染，再乘 2–4x。本次：工作經歷照 `sizes="(max-width:1024px) calc(100vw - 48px), 269px"` → 最大 ~976px → 出 1920px；工具 logo `width={80}` → 出 320px；校徽 `width={140}` → 出 560px；首頁 cover `sizes` 最大 1200px → 出 2400px。
+- **沿用既有慣例，不要自創**：`public/tools/` 早有 `lottielab-logo.png`（`<name>-logo.png`）；專案卡一律 `public/projects/<slug>/cover/{cover,logo}.webp`。新增資產前先 `ls` 看鄰居怎麼命名。
+- **重複圖片可重用**：TBA 的首頁 cover 與 about.ts 的 TBA 工作經歷照是**同一張圖**（同一組 Framer URL），本地化後直接 `cp` 重用，不要存兩份。
+- **收尾：移除 `next.config.ts` 的 `images.remotePatterns`**。全站已無外部圖來源，移除後日後誤用外部網域圖片會**直接 build 失敗**，而不是默默變慢。這比寫註解提醒有效——把規則變成機器會擋的東西。
+- **驗證方式**（因 MCP 瀏覽器 `visibilityState=hidden` 截圖不可靠，見上一則）：用 DOM 查 `外部圖數量` 與 `破圖數量`（`img.complete && img.naturalWidth===0`）＋ `sharp().metadata()` 驗每個新資產可解碼 ＋ curl 查 HTTP 200。首頁 18 張、about-me 23 張，外部圖 0、破圖 0。
