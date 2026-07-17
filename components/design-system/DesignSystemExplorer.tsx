@@ -288,15 +288,19 @@ export default function DesignSystemExplorer({
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const setProgress = (progress: number) => {
+    const setProgress = (progress: number, isMobileLayout = false) => {
       const clampedProgress = Math.min(1, Math.max(0, progress));
       const segmentProgress = (start: number, end: number) => {
         if (clampedProgress <= start) return 0;
         if (clampedProgress >= end) return 1;
         return (clampedProgress - start) / (end - start);
       };
-      const heroExitProgress = segmentProgress(0.24, 0.56);
-      const shellEnterProgress = segmentProgress(0.56, 1);
+      const heroExitProgress = isMobileLayout
+        ? segmentProgress(0.3, 0.8)
+        : segmentProgress(0.24, 0.56);
+      const shellEnterProgress = isMobileLayout
+        ? segmentProgress(0.08, 0.55)
+        : segmentProgress(0.56, 1);
       const heroOpacity = Math.max(0.001, 1 - heroExitProgress);
       const shellOpacity = Math.max(0.001, shellEnterProgress);
 
@@ -397,14 +401,19 @@ export default function DesignSystemExplorer({
       if (gateAnimating) return;
 
       const shellTop = shell.offsetTop;
-      const start = Math.max(0, shellTop - window.innerHeight - 120);
-      const end = Math.max(start + 1, shellTop - 120);
+      const isMobileLayout = window.matchMedia("(max-width: 900px)").matches;
+      const start = isMobileLayout
+        ? Math.max(0, shellTop - Math.min(window.innerHeight * 0.4, 320))
+        : Math.max(0, shellTop - window.innerHeight - 120);
+      const end = isMobileLayout
+        ? Math.max(start + 1, shellTop - 48)
+        : Math.max(start + 1, shellTop - 120);
       const progress = (window.scrollY - start) / (end - start);
       const scrollingDown = window.scrollY >= lastScrollY;
 
-      const crossedGate = scrollingDown
+      const crossedGate = !isMobileLayout && (scrollingDown
         ? progress > 0.25 && progress < 0.98
-        : progress > 0.02 && progress < 0.75;
+        : progress > 0.02 && progress < 0.75);
 
       if (crossedGate) {
         const target = scrollingDown ? end : start;
@@ -418,7 +427,7 @@ export default function DesignSystemExplorer({
       }
 
       const snappedProgress = progress > 0.98 ? 1 : progress < 0.02 ? 0 : progress;
-      setProgress(snappedProgress);
+      setProgress(snappedProgress, isMobileLayout);
       setWorkspaceVisibility(snappedProgress);
 
       lastScrollY = window.scrollY;

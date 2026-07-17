@@ -3688,6 +3688,10 @@
 }
 
 @media (max-width: 900px) {
+  .hero {
+    position: relative;
+  }
+
   .heroInner {
     width: min(100% - 40px, 760px);
   }
