@@ -49,6 +49,8 @@ export default async function LaushuPage() {
 
   return (
     <CaseStudyShell
+      projectSlug={project.slug}
+      locale={locale}
       theme="theme-laushu"
       tocSections={tocSections}
       nextNav={{

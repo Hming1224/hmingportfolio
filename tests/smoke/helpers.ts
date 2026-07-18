@@ -9,6 +9,23 @@ export const viewports = {
 
 export type ConsoleErrors = string[];
 
+const analyticsOptOutPages = new WeakSet<Page>();
+
+async function enableAnalyticsOptOut(page: Page) {
+  if (analyticsOptOutPages.has(page)) return;
+
+  await page.addInitScript(() => {
+    if (window.top !== window) return;
+
+    try {
+      window.localStorage.setItem("hming_analytics_opt_out", "1");
+    } catch {
+      // Storage can be unavailable in privacy-restricted browser contexts.
+    }
+  });
+  analyticsOptOutPages.add(page);
+}
+
 export function collectConsoleErrors(page: Page) {
   const errors: ConsoleErrors = [];
 
@@ -122,6 +139,7 @@ export async function setViewport(page: Page, width: keyof typeof viewports | nu
 }
 
 export async function gotoAndWait(page: Page, route: string) {
+  await enableAnalyticsOptOut(page);
   const response = await page.goto(route, { waitUntil: "domcontentloaded" });
   await page.locator("main").first().waitFor({ state: "visible" });
   // Best-effort settle. Must be bounded: with no timeout this await never

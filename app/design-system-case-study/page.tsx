@@ -52,6 +52,8 @@ export default async function DesignSystemCaseStudyPage() {
 
   return (
     <CaseStudyShell
+      projectSlug={project.slug}
+      locale={locale}
       theme="theme-design-system-case-study"
       tocSections={tocSections}
       nextNav={{

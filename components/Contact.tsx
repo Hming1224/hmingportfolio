@@ -1,6 +1,5 @@
 "use client";
 
-import { sendGAEvent } from "@next/third-parties/google";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, Check, Mail, Phone } from "lucide-react";
@@ -9,6 +8,7 @@ import AnimatedContent from "../app/about-me/AnimatedContent";
 import { getContactData } from "../data/contact";
 import type { Locale } from "../i18n/routing";
 import { config } from "../lib/config";
+import { getLastCaseAttribution, sendAnalyticsEvent } from "../lib/analytics";
 import Button from "./ui/Button";
 import { Modal } from "./ui/Modal";
 import { Skeleton } from "./ui/Skeleton";
@@ -97,7 +97,10 @@ export default function Contact() {
       if (response.ok) {
         setReviewOpen(false);
         setStatus("success");
-        sendGAEvent("event", "contact_form_submit", { locale });
+        sendAnalyticsEvent("contact_form_submit", {
+          locale,
+          ...getLastCaseAttribution(),
+        });
         formRef.current?.reset();
         setPendingSubmission(null);
       } else {
