@@ -715,7 +715,7 @@
     grid-template-columns: 40px minmax(0, 1fr);
     gap: var(--hm-space-sm);
     margin-top: 40px;
-    padding: 24px 0;
+    padding: var(--hm-space-md) 0;
     font-size: var(--fs-h3);
   }
 
@@ -1275,7 +1275,7 @@
 }
 
 .ds-case-table td.ds-case-table__example {
-  padding-inline: 16px;
+  padding-inline: var(--hm-space-sm);
 }
 
 .ds-case-table__example .ds-button {
@@ -1705,7 +1705,7 @@
 .ds-case-tree-demo__swatches span:nth-child(2) { background: var(--cs-teal); }
 .ds-case-tree-demo__swatches span:nth-child(3) { background: var(--cs-amber); }
 .ds-case-tree-demo__swatches span:nth-child(4) { background: var(--cs-line-strong); }
-.ds-case-tree-demo__bars { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.ds-case-tree-demo__bars { display: flex; flex-direction: column; gap: var(--hm-space-3xs); align-items: center; }
 .ds-case-tree-demo__bars span { height: 5px; border-radius: 999px; background: var(--cs-line-strong); }
 .ds-case-tree-demo__bars span:nth-child(1) { width: 18px; }
 .ds-case-tree-demo__bars span:nth-child(2) { width: 30px; }
@@ -1738,7 +1738,7 @@
   position: relative;
   display: flex; align-items: flex-end; justify-content: center;
   width: 52px; height: 60px;
-  padding-bottom: 8px;
+  padding-bottom: var(--hm-space-2xs);
   border: 1px solid var(--cs-line);
   border-radius: var(--hm-radius-sm);
   background: var(--hm-surface);

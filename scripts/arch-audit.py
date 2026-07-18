@@ -233,6 +233,67 @@ def audit_project_extension():
     print(" (A lower number indicates better architecture encapsulation!)")
     print()
 
+# 7. Spacing Token Residual Check
+# Flags "A-class" spacing declarations: raw px values that all sit exactly on the
+# t-shirt scale (and thus should use --hm-space-* tokens per 08 rules / checklist).
+# Off-scale values are intentional geometry and are NOT flagged (snap is forbidden).
+SPACING_PROPS = {
+    'padding', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+    'padding-inline', 'padding-inline-start', 'padding-inline-end',
+    'padding-block', 'padding-block-start', 'padding-block-end',
+    'margin', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+    'margin-inline', 'margin-inline-start', 'margin-inline-end',
+    'margin-block', 'margin-block-start', 'margin-block-end',
+    'gap', 'row-gap', 'column-gap',
+}
+SPACING_SCALE_PX = {'4', '8', '12', '16', '24', '32', '48', '64', '80'}
+
+def audit_spacing_residuals():
+    print("--- 7. Spacing Token Residual Check ---")
+    css_files = []
+    for root, dirs, files in os.walk(WORKSPACE):
+        if any(p in root for p in ['node_modules', '.next', '.git', 'public']):
+            continue
+        for f in files:
+            if f.endswith('.css'):
+                css_files.append(os.path.join(root, f))
+
+    decl_re = re.compile(r'(?:^|[;{])\s*([a-z-]+)\s*:\s*([^;{}]+);')
+    violations = []
+    for filepath in css_files:
+        rel_file = os.path.relpath(filepath, WORKSPACE)
+        try:
+            with open(filepath, 'r', encoding='utf-8') as file:
+                content = file.read()
+        except Exception:
+            continue
+        for m in decl_re.finditer(content):
+            prop, value = m.group(1), m.group(2).strip()
+            if prop not in SPACING_PROPS:
+                continue
+            # fail-closed: anything beyond plain on-scale px / 0 / auto is not our business
+            if any(tok in value for tok in ('var(', 'calc(', 'clamp(', 'min(', 'max(', '/*', '!')):
+                continue
+            parts = value.split()
+            if not parts:
+                continue
+            def on_scale(p):
+                if p in ('0', 'auto'):
+                    return True
+                return p.endswith('px') and p[:-2] in SPACING_SCALE_PX
+            has_px = any(p.endswith('px') for p in parts)
+            if has_px and all(on_scale(p) for p in parts):
+                line = content.count('\n', 0, m.start(2)) + 1
+                violations.append(f"{rel_file}:{line}  {prop}: {value};")
+
+    if violations:
+        print(f" WARNING: {len(violations)} on-scale spacing declaration(s) should use --hm-space-* tokens:")
+        for v in violations:
+            print(f"  - {v}")
+    else:
+        print(" SUCCESS: No on-scale raw px spacing left; new code follows the token rule.")
+    print()
+
 # 4. Public Directory Large Assets Ranking
 def audit_public_assets():
     print("--- 4. Public Directory Large Assets Ranking (Top 10) ---")
@@ -262,3 +323,4 @@ if __name__ == '__main__':
     audit_public_assets()
     audit_case_study_inventory()
     audit_case_study_theme_roots()
+    audit_spacing_residuals()
