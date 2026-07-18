@@ -1,0 +1,246 @@
+/*
+ * AvatarProfile motion — pure CSS replacement for the former framer-motion logic.
+ * This component is an inline-hardcoded island shared by /about-me and /design-system,
+ * so values live here (module travels with the component) rather than in tokens.css.
+ *
+ * Hover propagation: descendant selectors from `.root`.
+ *   - Desktop pointers: `@media (hover: hover) .root:hover ...`
+ *   - Touch / press mode: `.root[data-pressed="true"] ...` (set by the React press logic)
+ * A pure touch device never matches `(hover: hover)`, so hover never sticks there.
+ */
+
+/* Registered custom properties so the ripple colors can transition on hover. */
+@property --ripple-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.65);
+}
+@property --ripple-bg-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.12);
+}
+@property --ripple-shadow-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.35);
+}
+
+.root {
+  /* back-out easing approximates the original spring(300, 20) micro-overshoot */
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 0.45s var(--ease-back);
+  /* one-time entrance; `backwards` holds the from-state pre-start but does NOT
+     hold the end-state, so hover transform transitions still work afterward */
+  animation: avatarEntrance 0.5s var(--ease-back) backwards;
+}
+
+@keyframes avatarEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ---- Avatar cross-fade ---- */
+.initialImage {
+  opacity: 1;
+  transition: opacity 0.45s var(--ease-back);
+}
+.hoverImage {
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-back);
+}
+
+/* ---- Orbit rotate + badge counter-rotate ---- */
+.orbitGroup {
+  transform: rotate(0deg);
+  transition: transform 0.45s var(--ease-back);
+}
+.badgeCounter {
+  transform: rotate(0deg);
+  transition: transform 0.45s var(--ease-back);
+}
+
+/* ---- Badge gray/color cross-fade + arrow fade-in ---- */
+.badgeImage {
+  opacity: 1;
+  transition: opacity 0.45s var(--ease-back);
+}
+.badgeHoverImage {
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-back);
+}
+.arrow {
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-back);
+}
+
+/* ---- Infinite wobble (rotate + scale on two nested layers = two periods) ---- */
+.wobbleRotate {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  animation: wobbleRotate var(--wobble-rotate-dur) ease-in-out infinite;
+}
+.wobbleScale {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  animation: wobbleScale var(--wobble-scale-dur) ease-in-out infinite;
+}
+@keyframes wobbleRotate {
+  0%,
+  100% {
+    transform: rotate(calc(var(--wobble-range) * -1deg));
+  }
+  50% {
+    transform: rotate(calc(var(--wobble-range) * 1deg));
+  }
+}
+@keyframes wobbleScale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(var(--wobble-scale));
+  }
+}
+
+/* ---- Ripple ---- */
+.rippleContainer {
+  --ripple-color: rgba(255, 255, 255, 0.65);
+  --ripple-bg-color: rgba(255, 255, 255, 0.12);
+  --ripple-shadow-color: rgba(255, 255, 255, 0.35);
+  transition:
+    --ripple-color 0.3s ease,
+    --ripple-bg-color 0.3s ease,
+    --ripple-shadow-color 0.3s ease;
+}
+.ring {
+  position: absolute;
+  left: -135px;
+  top: -135px;
+  width: 270px;
+  height: 270px;
+  border-radius: 9999px;
+  opacity: 0; /* base hidden; the animation drives visibility */
+  border: 2px solid var(--ripple-color);
+  background: radial-gradient(circle, var(--ripple-bg-color) 60%, transparent 100%);
+  box-shadow: 0 0 16px var(--ripple-shadow-color);
+  animation: ripple 2.5s ease-out infinite;
+}
+.ring2 {
+  animation-delay: 1.25s;
+}
+@keyframes ripple {
+  0% {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* ================= Hover state ================= */
+/* Desktop pointers */
+@media (hover: hover) {
+  .root:hover {
+    transform: scale(1.02);
+  }
+  .root:hover .initialImage {
+    opacity: 0;
+  }
+  .root:hover .hoverImage {
+    opacity: 1;
+  }
+  .root:hover .orbitGroup {
+    transform: rotate(-38deg);
+  }
+  .root:hover .badgeCounter {
+    transform: rotate(38deg);
+  }
+  .root:hover .badgeImage {
+    opacity: 0;
+  }
+  .root:hover .badgeHoverImage {
+    opacity: 1;
+  }
+  .root:hover .arrow {
+    opacity: 1;
+  }
+  .root:hover .rippleContainer {
+    --ripple-color: rgba(253, 224, 71, 0.65);
+    --ripple-bg-color: rgba(253, 224, 71, 0.12);
+    --ripple-shadow-color: rgba(253, 224, 71, 0.35);
+  }
+}
+
+/* Touch / press mode */
+.root[data-pressed="true"] {
+  transform: scale(1.02);
+}
+.root[data-pressed="true"] .initialImage {
+  opacity: 0;
+}
+.root[data-pressed="true"] .hoverImage {
+  opacity: 1;
+}
+.root[data-pressed="true"] .orbitGroup {
+  transform: rotate(-38deg);
+}
+.root[data-pressed="true"] .badgeCounter {
+  transform: rotate(38deg);
+}
+.root[data-pressed="true"] .badgeImage {
+  opacity: 0;
+}
+.root[data-pressed="true"] .badgeHoverImage {
+  opacity: 1;
+}
+.root[data-pressed="true"] .arrow {
+  opacity: 1;
+}
+.root[data-pressed="true"] .rippleContainer {
+  --ripple-color: rgba(253, 224, 71, 0.65);
+  --ripple-bg-color: rgba(253, 224, 71, 0.12);
+  --ripple-shadow-color: rgba(253, 224, 71, 0.35);
+}
+
+/* ================= Reduced motion ================= */
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    animation: none;
+  }
+  .wobbleRotate,
+  .wobbleScale,
+  .ring {
+    animation: none;
+  }
+  .ring {
+    opacity: 0; /* stays hidden without the driving animation */
+  }
+  .root,
+  .initialImage,
+  .hoverImage,
+  .orbitGroup,
+  .badgeCounter,
+  .badgeImage,
+  .badgeHoverImage,
+  .arrow,
+  .rippleContainer {
+    transition: none; /* keep hover state changes instant, no motion */
+  }
+}

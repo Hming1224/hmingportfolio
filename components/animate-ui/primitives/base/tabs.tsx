@@ -191,7 +191,7 @@ export function TabsPanel({ className = '', children, ...props }: TabsPanelProps
 
 export interface TabsPanelsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   children: ReactNode;
-  /** 舊 API 相容：framer-motion 時代的 AnimatePresence mode，現以 CSS 進場動畫取代，僅淡入不做退場 */
+  /** 舊 API 相容：早期動畫庫時代的 AnimatePresence mode，現以 CSS 進場動畫取代，僅淡入不做退場 */
   mode?: 'wait' | 'sync' | 'popLayout';
 }
 

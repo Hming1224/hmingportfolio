@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { CSSProperties } from "react";
-import { motion, Variants } from "framer-motion";
+import styles from "./AvatarProfile.module.css";
 
 export interface AvatarProfileProps {
   imageSrc: string;
@@ -18,198 +18,18 @@ export interface AvatarProfileProps {
   arrowSrc?: string;
 }
 
-const spring = {
-  type: "spring" as const,
-  stiffness: 300,
-  damping: 20,
-  mass: 1,
+type WobbleCustomProperties = CSSProperties & {
+  "--wobble-range": number;
+  "--wobble-rotate-dur": string;
+  "--wobble-scale": number;
+  "--wobble-scale-dur": string;
 };
 
-const rootVariants: Variants = {
-  initial: {
-    opacity: 0,
-    scale: 0.96,
-    y: 16,
-  },
-  animate: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: spring,
-  },
-  hover: {
-    opacity: 1,
-    scale: 1.02,
-    y: 0,
-    transition: spring,
-  },
-};
-
-const avatarFrameVariants: Variants = {
-  animate: {
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: spring,
-  },
-  hover: {
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: spring,
-  },
-};
-
-const initialImageVariants: Variants = {
-  animate: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: spring,
-  },
-  hover: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: spring,
-  },
-};
-
-const hoverImageVariants: Variants = {
-  animate: {
-    opacity: 0,
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: spring,
-  },
-  hover: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: spring,
-  },
-};
-
-const orbitGroupVariants: Variants = {
-  animate: {
-    rotate: 0,
-    transition: spring,
-  },
-  hover: {
-    rotate: -38,
-    transition: spring,
-  },
-};
-
-const badgeCounterRotateVariants: Variants = {
-  animate: {
-    rotate: 0,
-    transition: spring,
-  },
-  hover: {
-    rotate: 38,
-    transition: spring,
-  },
-};
-
-const badgeImageVariants: Variants = {
-  animate: {
-    opacity: 1,
-    transition: spring,
-  },
-  hover: {
-    opacity: 0,
-    transition: spring,
-  },
-};
-
-const badgeHoverImageVariants: Variants = {
-  animate: {
-    opacity: 0,
-    transition: spring,
-  },
-  hover: {
-    opacity: 1,
-    transition: spring,
-  },
-};
-
-const arrowImageVariants: Variants = {
-  animate: {
-    opacity: 0,
-    transition: spring,
-  },
-  hover: {
-    opacity: 1,
-    transition: spring,
-  },
-};
-
-type RippleCustomProperties = CSSProperties & {
-  "--ripple-color": string;
-  "--ripple-bg-color": string;
-  "--ripple-shadow-color": string;
-};
-
-const rippleVariants: Variants = {
-  animate: {
-    "--ripple-color": "rgba(255, 255, 255, 0.65)",
-    "--ripple-bg-color": "rgba(255, 255, 255, 0.12)",
-    "--ripple-shadow-color": "rgba(255, 255, 255, 0.35)",
-    transition: { duration: 0.3 }
-  } as Variants[string],
-  hover: {
-    "--ripple-color": "rgba(253, 224, 71, 0.65)",
-    "--ripple-bg-color": "rgba(253, 224, 71, 0.12)",
-    "--ripple-shadow-color": "rgba(253, 224, 71, 0.35)",
-    transition: { duration: 0.3 }
-  } as Variants[string],
-};
-
-// 無限擴散迴圈。animate 與 hover 共用同一份定義，
-// 這樣父層切到 hover 時 ripple 不會中斷，只跟著 rippleVariants 換顏色。
-const ring1Loop = {
-  scale: [0.98, 1.45],
-  opacity: [0, 0.8, 0],
-  transition: {
-    duration: 2.5,
-    ease: "easeOut" as const,
-    repeat: Infinity,
-    delay: 0,
-  },
-};
-
-const ring2Loop = {
-  scale: [0.98, 1.45],
-  opacity: [0, 0.8, 0],
-  transition: {
-    duration: 2.5,
-    ease: "easeOut" as const,
-    repeat: Infinity,
-    delay: 1.25,
-  },
-};
-
-const ring1Variants: Variants = {
-  animate: ring1Loop,
-  hover: ring1Loop,
-};
-
-const ring2Variants: Variants = {
-  animate: ring2Loop,
-  hover: ring2Loop,
-};
-
-function ImageLayer({ src, variants }: { src: string; variants: Variants }) {
+function ImageLayer({ src, className }: { src: string; className: string }) {
   return (
-    <motion.span
-      className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+    <span
+      className={`absolute inset-0 bg-contain bg-center bg-no-repeat ${className}`}
       style={{ backgroundImage: `url(${src})` }}
-      variants={variants}
       aria-hidden="true"
     />
   );
@@ -218,8 +38,8 @@ function ImageLayer({ src, variants }: { src: string; variants: Variants }) {
 function BadgeImage({ src, hoverSrc }: { src: string; hoverSrc: string }) {
   return (
     <>
-      <ImageLayer src={src} variants={badgeImageVariants} />
-      <ImageLayer src={hoverSrc} variants={badgeHoverImageVariants} />
+      <ImageLayer src={src} className={styles.badgeImage} />
+      <ImageLayer src={hoverSrc} className={styles.badgeHoverImage} />
     </>
   );
 }
@@ -239,37 +59,32 @@ function WobbleBadge({
   scaleRange: number;
   scaleDuration: number;
 }) {
+  // Two nested layers so rotate and scale run on independent periods
+  // (a single element's transform can only be driven by one keyframe at a time).
   return (
-    <motion.div
-      className="relative h-full w-full"
-      animate={{
-        rotate: [-rotateRange, rotateRange, -rotateRange],
-        scale: [1, scaleRange, 1],
-      }}
-      transition={{
-        rotate: {
-          duration,
-          ease: "easeInOut",
-          repeat: Infinity,
-        },
-        scale: {
-          duration: scaleDuration,
-          ease: "easeInOut",
-          repeat: Infinity,
-        },
-      }}
+    <div
+      className={styles.wobbleRotate}
+      style={
+        {
+          "--wobble-range": rotateRange,
+          "--wobble-rotate-dur": `${duration}s`,
+          "--wobble-scale": scaleRange,
+          "--wobble-scale-dur": `${scaleDuration}s`,
+        } as WobbleCustomProperties
+      }
     >
-      <BadgeImage src={src} hoverSrc={hoverSrc} />
-    </motion.div>
+      <div className={styles.wobbleScale}>
+        <BadgeImage src={src} hoverSrc={hoverSrc} />
+      </div>
+    </div>
   );
 }
 
 function ArrowMark({ src }: { src: string }) {
   return (
-    <motion.span
-      className="block h-full w-full bg-contain bg-center bg-no-repeat"
+    <span
+      className={`block h-full w-full bg-contain bg-center bg-no-repeat ${styles.arrow}`}
       style={{ backgroundImage: `url(${src})` }}
-      variants={arrowImageVariants}
       aria-hidden="true"
     />
   );
@@ -311,7 +126,7 @@ export default function AvatarProfile({
 }: AvatarProfileProps) {
   const [usesPressInteraction, setUsesPressInteraction] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const pointerQuery = window.matchMedia("(pointer: coarse)");
@@ -340,7 +155,7 @@ export default function AvatarProfile({
 
     const handleDocumentClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (ref.current && !ref.current.contains(target)) {
+      if (rootRef.current && !rootRef.current.contains(target)) {
         setIsTapped(false);
       }
     };
@@ -355,99 +170,57 @@ export default function AvatarProfile({
   const badgeRadius = 160;
   const arrowRadius = 198;
 
+  const isPressed = usesPressInteraction && isTapped;
+
   return (
-    <motion.div
-      ref={ref}
-      className={`relative overflow-visible cursor-pointer ${className}`}
+    <div
+      ref={rootRef}
+      className={`${styles.root} relative overflow-visible cursor-pointer ${className}`}
       style={{ width: 440, height: 427 }}
-      initial="initial"
-      animate={usesPressInteraction ? (isTapped ? "hover" : "animate") : "animate"}
-      whileHover={usesPressInteraction ? undefined : "hover"}
+      data-pressed={isPressed ? "true" : undefined}
       onClick={(e) => {
         if (usesPressInteraction) {
           e.stopPropagation();
           setIsTapped((prev) => !prev);
         }
       }}
-      variants={rootVariants}
     >
       {/* Ripple effect - visible before and during hover, rendered behind avatar frame */}
-      <motion.div
-        className="absolute pointer-events-none"
-        style={{
-          left: 220,
-          top: 215,
-          width: 0,
-          height: 0,
-          "--ripple-color": "rgba(255, 255, 255, 0.65)",
-          "--ripple-bg-color": "rgba(255, 255, 255, 0.12)",
-          "--ripple-shadow-color": "rgba(255, 255, 255, 0.35)",
-        } as RippleCustomProperties}
-        variants={rippleVariants}
+      <div
+        className={`${styles.rippleContainer} absolute pointer-events-none`}
+        style={{ left: 220, top: 215, width: 0, height: 0 }}
         aria-hidden="true"
       >
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            left: -135,
-            top: -135,
-            width: 270,
-            height: 270,
-            border: '2px solid var(--ripple-color)',
-            background: 'radial-gradient(circle, var(--ripple-bg-color) 60%, transparent 100%)',
-            boxShadow: '0 0 16px var(--ripple-shadow-color)',
-          }}
-          variants={ring1Variants}
-        />
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            left: -135,
-            top: -135,
-            width: 270,
-            height: 270,
-            border: '2px solid var(--ripple-color)',
-            background: 'radial-gradient(circle, var(--ripple-bg-color) 60%, transparent 100%)',
-            boxShadow: '0 0 16px var(--ripple-shadow-color)',
-          }}
-          variants={ring2Variants}
-        />
-      </motion.div>
+        <div className={styles.ring} />
+        <div className={`${styles.ring} ${styles.ring2}`} />
+      </div>
 
-      <motion.div
+      <div
         className="absolute overflow-visible"
         style={{ left: 50, top: 48, width: 340, height: 334 }}
-        variants={avatarFrameVariants}
       >
-        <motion.img
+        {/* eslint-disable-next-line @next/next/no-img-element -- fixed-size cross-fade layer, next/image would complicate the object-contain overlay */}
+        <img
           src={imageSrc}
           alt={imageAlt}
-          className="absolute inset-0 h-full w-full object-contain object-center"
-          variants={initialImageVariants}
+          className={`absolute inset-0 h-full w-full object-contain object-center ${styles.initialImage}`}
         />
-        <motion.img
+        {/* eslint-disable-next-line @next/next/no-img-element -- fixed-size cross-fade layer, next/image would complicate the object-contain overlay */}
+        <img
           src={hoverImageSrc ?? imageSrc}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-contain object-center"
-          variants={hoverImageVariants}
+          className={`absolute inset-0 h-full w-full object-contain object-center ${styles.hoverImage}`}
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="absolute"
+      <div
+        className={`${styles.orbitGroup} absolute`}
         style={{ left: 220, top: 214, width: 0, height: 0 }}
-        variants={orbitGroupVariants}
         aria-hidden="true"
       >
-        <motion.div
-          className={badgeClassName}
-          style={polarPosition(222, badgeRadius, badgeSize)}
-        >
-          <motion.div
-            className="relative h-full w-full"
-            variants={badgeCounterRotateVariants}
-          >
+        <div className={badgeClassName} style={polarPosition(222, badgeRadius, badgeSize)}>
+          <div className={`${styles.badgeCounter} relative h-full w-full`}>
             <WobbleBadge
               src={drillIconSrc}
               hoverSrc={drillIconHoverSrc}
@@ -456,26 +229,17 @@ export default function AvatarProfile({
               scaleRange={1.08}
               scaleDuration={2.8}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <div
-          className="absolute"
-          style={polarPosition(274, arrowRadius, arrowSize)}
-        >
+        <div className="absolute" style={polarPosition(274, arrowRadius, arrowSize)}>
           <div className="h-full w-full" style={{ rotate: "10deg" }}>
             <ArrowMark src={arrowSrc} />
           </div>
         </div>
 
-        <motion.div
-          className={badgeClassName}
-          style={polarPosition(0, badgeRadius, badgeSize)}
-        >
-          <motion.div
-            className="relative h-full w-full"
-            variants={badgeCounterRotateVariants}
-          >
+        <div className={badgeClassName} style={polarPosition(0, badgeRadius, badgeSize)}>
+          <div className={`${styles.badgeCounter} relative h-full w-full`}>
             <WobbleBadge
               src={groupIconSrc}
               hoverSrc={groupIconHoverSrc}
@@ -484,26 +248,17 @@ export default function AvatarProfile({
               scaleRange={1.06}
               scaleDuration={3.1}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <div
-          className="absolute"
-          style={polarPosition(40, arrowRadius, arrowSize)}
-        >
+        <div className="absolute" style={polarPosition(40, arrowRadius, arrowSize)}>
           <div className="h-full w-full" style={{ rotate: "150deg" }}>
             <ArrowMark src={arrowSrc} />
           </div>
         </div>
 
-        <motion.div
-          className={badgeClassName}
-          style={polarPosition(112, badgeRadius, badgeSize)}
-        >
-          <motion.div
-            className="relative h-full w-full"
-            variants={badgeCounterRotateVariants}
-          >
+        <div className={badgeClassName} style={polarPosition(112, badgeRadius, badgeSize)}>
+          <div className={`${styles.badgeCounter} relative h-full w-full`}>
             <WobbleBadge
               src={lightbulbIconSrc}
               hoverSrc={lightbulbIconHoverSrc}
@@ -512,18 +267,15 @@ export default function AvatarProfile({
               scaleRange={1.09}
               scaleDuration={3.4}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <div
-          className="absolute"
-          style={polarPosition(154, arrowRadius, arrowSize)}
-        >
+        <div className="absolute" style={polarPosition(154, arrowRadius, arrowSize)}>
           <div className="h-full w-full" style={{ rotate: "-120deg" }}>
             <ArrowMark src={arrowSrc} />
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
