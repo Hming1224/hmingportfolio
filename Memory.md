@@ -612,3 +612,14 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **重複圖片可重用**：TBA 的首頁 cover 與 about.ts 的 TBA 工作經歷照是**同一張圖**（同一組 Framer URL），本地化後直接 `cp` 重用，不要存兩份。
 - **收尾：移除 `next.config.ts` 的 `images.remotePatterns`**。全站已無外部圖來源，移除後日後誤用外部網域圖片會**直接 build 失敗**，而不是默默變慢。這比寫註解提醒有效——把規則變成機器會擋的東西。
 - **驗證方式**（因 MCP 瀏覽器 `visibilityState=hidden` 截圖不可靠，見上一則）：用 DOM 查 `外部圖數量` 與 `破圖數量`（`img.complete && img.naturalWidth===0`）＋ `sharp().metadata()` 驗每個新資產可解碼 ＋ curl 查 HTTP 200。首頁 18 張、about-me 23 張，外部圖 0、破圖 0。
+
+## 2026-07-18 CSS 載入架構：route 專屬 CSS 不進 globals（PSI 阻斷算繪 860ms 的修法）
+
+- **規則**：`app/globals.css` 只准留 `tailwindcss` + `tokens.css` + `home.css`；about / contact / case-study 與各案例的 route CSS 一律在**該 route 的 `page.tsx`** import。`[locale]` 版全部 re-export 根 page，所以一處 import 即覆蓋雙語系。
+- **層疊順序**：案例頁先 import 共用 `case-study.css`、再 import route 專屬（shared → specific），維持原 globals 時代的覆蓋關係。
+- **`/design-system` 文件頁也要 `case-study.css`**：ComponentDemo 會渲染 Case* 共用元件。
+- **共用樣式的家**：Navbar / Footer / `.ds-button` / `.hm-modal` / `.hm-toast` / `.hm-skeleton` 都在 `tokens.css`（全域）。新增全站共用元件的樣式放 tokens.css，不要放 route CSS（歷史教訓：`.btn-content` 殘留在 contact.css）。
+- **效果**：首頁阻斷算繪 CSS gzip 後 50.0KB → 26.6KB（−47%），PSI 手機 90 分後的下一級槓桿。
+- **驗證法**：curl 每條 route 的 HTML 抓 `<link>` CSS、grep 標記 class（該有的在、不該有的不在）＋ 瀏覽器查 `document.styleSheets` 規則；比截圖可靠（背景分頁節流會讓截圖全白）。
+- **zsh 陷阱**：`for u in $multiline_var` 在 zsh 不會斷行拆分（bash 會），要用 `| while read -r u`。
+- 第三方腳本：MicrosoftClarity 用 `lazyOnload`（等頁面閒置才載）；改回 afterInteractive 會重新跟首屏搶主執行緒。
