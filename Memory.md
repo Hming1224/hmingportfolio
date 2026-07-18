@@ -623,3 +623,12 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **驗證法**：curl 每條 route 的 HTML 抓 `<link>` CSS、grep 標記 class（該有的在、不該有的不在）＋ 瀏覽器查 `document.styleSheets` 規則；比截圖可靠（背景分頁節流會讓截圖全白）。
 - **zsh 陷阱**：`for u in $multiline_var` 在 zsh 不會斷行拆分（bash 會），要用 `| while read -r u`。
 - 第三方腳本：MicrosoftClarity 用 `lazyOnload`（等頁面閒置才載）；改回 afterInteractive 會重新跟首屏搶主執行緒。
+
+## 2026-07-18 JS 瘦身：tabs 甩掉 framer-motion + 兩個假目標的判別
+
+- **tabs 原始元件（`components/animate-ui/primitives/base/tabs.tsx`）已無 framer-motion**：active 底塊滑動改手寫 FLIP（setValue 時記舊 rect → 新底塊 useLayoutEffect 內用 WAAPI `el.animate` 從位移差起跑；曲線 260ms / cubic-bezier(0.22,1,0.36,1) 同原設計），面板切換改 CSS `.tabs-panel-enter`（在 home.css，token 化）。API 相容、退場動畫已移除（僅進場）。**不要為了「更順的退場」把 framer-motion 加回來**——那一包 42.9KB gzip，當初整包只服務這兩個動畫。
+- **效果**：首頁 JS 390 → 311KB gzip（正式站實測）；framer-motion 同步從所有案例頁 bundle 消失。
+- **殘留**：about-me 的 `AvatarProfile.tsx` 仍靜態 import framer-motion（48KB chunk）。要清就從它下手，屆時 framer-motion 可整包移出依賴。
+- **假目標 1 — core-js polyfill chunk（38.6KB gzip）**：那是 Next 自帶 `polyfill-nomodule.js`，script 標籤掛 `noModule`，現代瀏覽器**不會下載**。看到 chunk 清單裡有 core-js 不要當成優化目標；判別法：回 HTML 查該 src 的 script 是否帶 `noModule`。
+- **假目標 2 — GA gtag 改 lazyOnload**：`@next/third-parties` 的 `sendGAEvent` 依賴 `<GoogleAnalytics>` 元件做模組側初始化，拆掉元件自己手寫 lazy 載入會讓 `resume_click` / `contact_form_submit` **無聲丟失**（sendGAEvent 判定未初始化直接 no-op）。GA 是 afterInteractive、不擋 FCP/LCP，動它報酬低風險高。
+- **量測心法**：production chunk 的特徵字串會被 mangle（`HTMLProjectionNode` 查不到），要用多組抗 mangle 特徵（`ProjectionNode` / `motionComponentSymbol` / `framerAppearId`）交叉驗證。
