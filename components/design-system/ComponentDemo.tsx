@@ -315,7 +315,7 @@ const boundaryReferenceItems = {
       extractionCondition: "Revisit only if the same motion contract repeats across independent routes with stable timing, trigger, reduced-motion, and accessibility expectations.",
       source: "styles/home.css / components/design-system/DesignSystemExplorer.tsx / app/about-me/",
       status: "Route-local narrative motion",
-      nextStep: "Keep as documented motion boundaries; AvatarProfile reduced-motion remains a follow-up production task.",
+      nextStep: "Keep as documented motion boundaries; AvatarProfile's reduced-motion support shipped with the pure-CSS rewrite.",
     },
     {
       pattern: "ProjectTag",
@@ -497,7 +497,7 @@ const boundaryReferenceItems = {
       extractionCondition: "只有當相同 motion contract 跨獨立路由重複出現，且 timing、trigger、reduced-motion 與 accessibility expectations 穩定後，才重新評估提升。",
       source: "styles/home.css / components/design-system/DesignSystemExplorer.tsx / app/about-me/",
       status: "Route-local narrative motion",
-      nextStep: "維持在 motion boundary 文件中；AvatarProfile reduced-motion 保留為後續 production task。",
+      nextStep: "維持在 motion boundary 文件中；AvatarProfile 已於純 CSS 改寫時補上 reduced-motion 支援。",
     },
     {
       pattern: "ProjectTag",
