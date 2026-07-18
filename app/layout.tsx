@@ -47,6 +47,7 @@ export default async function RootLayout({
   const locale = await getLocale();
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID || "x88rcqjtre";
+  const analyticsEnabled = process.env.VERCEL_ENV === "production";
 
   return (
     <html
@@ -58,7 +59,7 @@ export default async function RootLayout({
         <ScrollBehaviorFix />
         {children}
         <DesignSystemReturnBar />
-        <AnalyticsProviders gaId={gaId} clarityId={clarityId} />
+        {analyticsEnabled ? <AnalyticsProviders gaId={gaId} clarityId={clarityId} /> : null}
       </body>
     </html>
   );

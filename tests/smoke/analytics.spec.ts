@@ -8,6 +8,9 @@ const cases = [
   { route: "/en/laushu", slug: "laushu" },
 ];
 
+const smokeHostname = new URL(process.env.SMOKE_BASE_URL ?? "http://127.0.0.1").hostname;
+const isProductionSmoke = ["hmingdesign.com", "www.hmingdesign.com"].includes(smokeHostname);
+
 type DataLayerEvent = ["event", string, Record<string, unknown>];
 
 async function createTrackedPage(browser: Browser, baseURL: string | undefined) {
@@ -90,7 +93,32 @@ test("analytics opt-out route never loads analytics in a clean context", async (
   }
 });
 
+test("non-production never loads analytics without browser opt-out", async ({ browser, baseURL }) => {
+  test.skip(isProductionSmoke, "Production tracking check runs in the event tests");
+
+  const context = await browser.newContext({ baseURL });
+  const page = await context.newPage();
+  const externalRequests: string[] = [];
+  page.on("request", (request) => {
+    if (/googletagmanager\.com|google-analytics\.com|clarity\.ms/i.test(request.url())) {
+      externalRequests.push(request.url());
+    }
+  });
+
+  try {
+    await gotoTracked(page, "/en");
+    await page.waitForTimeout(250);
+    await expect(page.evaluate(() => localStorage.getItem("hming_analytics_opt_out"))).resolves.toBeNull();
+    await expect(page.locator("#_next-ga, #ms-clarity, script[src*='googletagmanager.com'], script[src*='clarity.ms']")).toHaveCount(0);
+    await expect.poll(() => externalRequests).toEqual([]);
+  } finally {
+    await context.close();
+  }
+});
+
 test.describe("funnel events in a fresh tracking context", () => {
+  test.skip(!isProductionSmoke, "Analytics is intentionally disabled outside production");
+
   test("published ProjectCard sends project_open once", async ({ browser, baseURL }) => {
     const { context, page } = await createTrackedPage(browser, baseURL);
     try {
@@ -164,6 +192,8 @@ test.describe("funnel events in a fresh tracking context", () => {
 });
 
 test.describe("case analytics in a fresh tracking context", () => {
+  test.skip(!isProductionSmoke, "Analytics is intentionally disabled outside production");
+
   test("case_engaged needs visible 30 seconds and 50% scroll, then sends once", async ({ browser, baseURL }) => {
     const { context, page } = await createTrackedPage(browser, baseURL);
     try {
