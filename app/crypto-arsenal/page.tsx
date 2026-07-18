@@ -63,6 +63,8 @@ export default async function CryptoArsenalPage() {
 
   return (
     <CaseStudyShell
+      projectSlug={project.slug}
+      locale={locale}
       theme="theme-crypto-arsenal"
       tocSections={tocSections}
       nextNav={{

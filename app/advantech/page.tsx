@@ -63,6 +63,8 @@ export default async function AdventechPage() {
 
   return (
     <CaseStudyShell
+      projectSlug={project.slug}
+      locale={locale}
       theme="theme-advantech"
       tocSections={tocSections}
       nextNav={{

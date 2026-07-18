@@ -1,13 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import type { ProjectSummary } from "@/data/projects";
+import type { Locale } from "@/i18n/routing";
+import { sendAnalyticsEvent } from "@/lib/analytics";
 import Button from "./ui/Button";
 
 export default function ProjectCard({ project }: { project: ProjectSummary }) {
   const t = useTranslations("works");
+  const locale = useLocale() as Locale;
+  const pathname = usePathname();
   const disabled = project.status === "coming-soon";
+  const destinationPath = project.href ?? "/";
+
+  const handleProjectOpen = () => {
+    if (!["/", "/en", "/zh-TW"].includes(pathname)) return;
+    sendAnalyticsEvent("project_open", {
+      project_slug: project.slug,
+      locale,
+      destination_path: destinationPath,
+    });
+  };
 
   return (
     <article
@@ -46,7 +61,7 @@ export default function ProjectCard({ project }: { project: ProjectSummary }) {
             {t("comingSoon")}
           </Button>
         ) : (
-          <Button href={project.href ?? "/"} size="lg">
+          <Button href={destinationPath} size="lg" onClick={handleProjectOpen}>
             {t("learnMore")}
           </Button>
         )}

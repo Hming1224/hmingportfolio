@@ -6,6 +6,8 @@ import CaseTOC, { type TocSection } from '../CaseTOC';
 import { cn } from '../../lib/utils';
 import Button from '../ui/Button';
 import AnimatedContent from '../../app/about-me/AnimatedContent';
+import type { Locale } from '../../i18n/routing';
+import CaseStudyAnalytics from '../analytics/CaseStudyAnalytics';
 
 interface NextNav {
   /** 「返回首頁」連結，預設 '/'。 */
@@ -17,6 +19,8 @@ interface NextNav {
 }
 
 interface CaseStudyShellProps {
+  projectSlug: string;
+  locale: Locale;
   /** 專案主題 class，例如 'theme-advantech'（只覆寫大標主色）。 */
   theme: string;
   /** 各專案客製的 hero section（夾在 Navbar 與 TOC 佈局之間）。 */
@@ -34,6 +38,8 @@ interface CaseStudyShellProps {
  * 新增一個案例頁只要：掛 theme、傳 hero、tocSections、nextNav，再把各 section 當 children。
  */
 export default function CaseStudyShell({
+  projectSlug,
+  locale,
   theme,
   hero,
   tocSections,
@@ -45,6 +51,7 @@ export default function CaseStudyShell({
 
   return (
     <main className={cn('cs-page', theme)}>
+      <CaseStudyAnalytics projectSlug={projectSlug} locale={locale} />
       <ScrollProgress />
       <Navbar />
 

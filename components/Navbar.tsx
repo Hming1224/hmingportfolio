@@ -1,14 +1,16 @@
 'use client';
 
-import { sendGAEvent } from '@next/third-parties/google';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '@/i18n/navigation';
+import type { Locale } from '@/i18n/routing';
+import { getLastCaseAttribution, sendAnalyticsEvent } from '@/lib/analytics';
 import AnimatedLogo from './AnimatedLogo';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
   const t = useTranslations('nav');
+  const locale = useLocale() as Locale;
   const [open, setOpen] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const openRef = useRef(false);
@@ -117,7 +119,11 @@ export default function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => {
-            sendGAEvent("event", "resume_click", { href: t('resumeHref') });
+            sendAnalyticsEvent("resume_click", {
+              href: t('resumeHref'),
+              locale,
+              ...getLastCaseAttribution(),
+            });
             setOpen(false);
           }}
         >
