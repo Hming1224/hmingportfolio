@@ -4,21 +4,26 @@ import {
   Children,
   createContext,
   isValidElement,
-  useId,
   useContext,
+  useId,
+  useLayoutEffect,
   useMemo,
+  useRef,
   useState,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
+  type MutableRefObject,
   type ReactElement,
   type ReactNode,
 } from 'react';
-import { AnimatePresence, motion, type AnimatePresenceProps } from 'framer-motion';
 
 interface TabsContextValue {
   highlightId: string;
   value: string;
   setValue: (value: string) => void;
+  /** 切換前的 active highlight 位置，供新 highlight 做 FLIP 滑動動畫 */
+  pendingFromRectRef: MutableRefObject<DOMRect | null>;
+  activeSpanRef: MutableRefObject<HTMLSpanElement | null>;
 }
 
 const TabsContext = createContext<TabsContextValue | null>(null);
@@ -39,9 +44,21 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
 
 export function Tabs({ defaultValue, className = '', children, ...props }: TabsProps) {
   const id = useId();
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValueState] = useState(defaultValue);
+  const pendingFromRectRef = useRef<DOMRect | null>(null);
+  const activeSpanRef = useRef<HTMLSpanElement | null>(null);
   const contextValue = useMemo(
-    () => ({ highlightId: `tabs-active-highlight-${id}`, value, setValue }),
+    () => ({
+      highlightId: `tabs-active-highlight-${id}`,
+      value,
+      // 換頁前先記下目前 highlight 的位置，新 highlight 掛載時據此起跑
+      setValue: (next: string) => {
+        pendingFromRectRef.current = activeSpanRef.current?.getBoundingClientRect() ?? null;
+        setValueState(next);
+      },
+      pendingFromRectRef,
+      activeSpanRef,
+    }),
     [id, value],
   );
 
@@ -94,13 +111,43 @@ export interface TabsHighlightItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export function TabsHighlightItem({ value, className = '', children, ...props }: TabsHighlightItemProps) {
-  const { highlightId, value: activeValue } = useTabsContext();
+  const { value: activeValue, pendingFromRectRef, activeSpanRef } = useTabsContext();
   const active = activeValue === value;
+  const spanRef = useRef<HTMLSpanElement | null>(null);
+
+  // FLIP：新 highlight 掛載時，從舊 highlight 的位置平移／縮放回自己的位置。
+  // useLayoutEffect 在繪製前執行，量測與起跑同一幀完成，不會閃爍。
+  useLayoutEffect(() => {
+    const el = spanRef.current;
+    if (!active || !el) return;
+    activeSpanRef.current = el;
+
+    const from = pendingFromRectRef.current;
+    pendingFromRectRef.current = null;
+    if (!from) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const to = el.getBoundingClientRect();
+    const dx = from.left - to.left;
+    const dy = from.top - to.top;
+    const sx = to.width ? from.width / to.width : 1;
+    const sy = to.height ? from.height / to.height : 1;
+    if (dx === 0 && dy === 0 && sx === 1 && sy === 1) return;
+
+    const animation = el.animate(
+      [
+        { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
+        { transform: 'translate(0, 0) scale(1, 1)' },
+      ],
+      { duration: 260, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+    );
+    return () => animation.cancel();
+  }, [active, activeSpanRef, pendingFromRectRef]);
 
   return (
     <div className={className} data-state={active ? 'active' : 'inactive'} {...props}>
       {active ? (
-        <motion.span className="tabs-active-highlight" layoutId={highlightId} transition={{ type: 'spring', stiffness: 420, damping: 34 }} />
+        <span ref={spanRef} className="tabs-active-highlight" style={{ transformOrigin: '0 0' }} />
       ) : null}
       {children}
     </div>
@@ -144,29 +191,23 @@ export function TabsPanel({ className = '', children, ...props }: TabsPanelProps
 
 export interface TabsPanelsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   children: ReactNode;
-  mode?: AnimatePresenceProps['mode'];
+  /** 舊 API 相容：framer-motion 時代的 AnimatePresence mode，現以 CSS 進場動畫取代，僅淡入不做退場 */
+  mode?: 'wait' | 'sync' | 'popLayout';
 }
 
-export function TabsPanels({ mode = 'wait', className = '', children, ...props }: TabsPanelsProps) {
+export function TabsPanels({ mode, className = '', children, ...props }: TabsPanelsProps) {
+  void mode; // 舊 API 相容：接受但不使用（動畫已改 CSS 進場）
   const { value } = useTabsContext();
   const panels = Children.toArray(children).filter(isValidElement) as ReactElement<TabsPanelProps>[];
   const activePanel = panels.find((panel) => panel.props.value === value);
 
   return (
     <div className={className} {...props}>
-      <AnimatePresence mode={mode} initial={false}>
-        {activePanel ? (
-          <motion.div
-            key={value}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            initial={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {activePanel}
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      {activePanel ? (
+        <div key={value} className="tabs-panel-enter">
+          {activePanel}
+        </div>
+      ) : null}
     </div>
   );
 }

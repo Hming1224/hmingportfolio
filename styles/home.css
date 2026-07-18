@@ -814,6 +814,28 @@
   box-shadow: var(--hm-tabs-active-shadow);
 }
 
+/* Tabs 面板切換進場（取代 framer-motion AnimatePresence；退場不做動畫） */
+.tabs-panel-enter {
+  animation: tabs-panel-enter var(--hm-duration-base) var(--hm-ease-out);
+}
+
+@keyframes tabs-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs-panel-enter {
+    animation: none;
+  }
+}
+
 .project-tabs-tab {
   position: relative;
   z-index: 1;
