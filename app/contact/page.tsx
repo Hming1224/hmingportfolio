@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import "../../styles/contact.css";
 import Contact from '../../components/Contact';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';

@@ -5,7 +5,8 @@ export default function MicrosoftClarity() {
   if (!id) return null;
 
   return (
-    <Script id="ms-clarity" strategy="afterInteractive">
+    // lazyOnload：等頁面閒置才載入，避免與首屏渲染搶主執行緒（PSI 主執行緒 2.1s 的第三方部分）
+    <Script id="ms-clarity" strategy="lazyOnload">
       {`(function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;

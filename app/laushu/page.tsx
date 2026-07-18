@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import "../../styles/case-study.css";
 import "../../styles/case-study-laushu.css";
 import { CaseStudyShell, type TocSection } from "../../components/case-study";
 import { getNextProject, getProjectBySlug } from "../../data/projects";

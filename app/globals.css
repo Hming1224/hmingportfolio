@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
 @import "../styles/home.css";
-@import "../styles/about.css";
-@import "../styles/contact.css";
-@import "../styles/case-study.css";
+/* about / contact / case-study 為 route 專屬，改由各 route 的 page.tsx 匯入，
+   避免首頁載入用不到的阻斷算繪 CSS（perf: PSI render-blocking 860ms）。 */

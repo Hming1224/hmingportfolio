@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import "../../styles/about.css";
 import { Fragment } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
