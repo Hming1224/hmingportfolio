@@ -374,6 +374,11 @@
   --cs-badge-bg: #4c4c4c;
   --cs-badge-text: #ffffff;
   --cs-shadow-color: rgba(0, 0, 0, 0.12);
+  --cs-toc-mobile-top: calc(80px + var(--hm-space-sm));
+  --cs-toc-mobile-control-height: 40px;
+  --cs-toc-mobile-anchor-offset: calc(
+    var(--cs-toc-mobile-top) + var(--cs-toc-mobile-control-height) + var(--hm-space-sm)
+  );
 
   /* Shared case-study overview / walkthrough geometry and type. */
   --cs-focus-ring-width: 3px;

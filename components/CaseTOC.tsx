@@ -1,4 +1,5 @@
 'use client';
+import { ListTree } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { forwardRef, useEffect, useRef, useState, type MouseEvent } from 'react';
 import type { Locale } from '../i18n/routing';
@@ -33,30 +34,74 @@ export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function Ca
   { sections, activeId, visible = false, ariaLabel, onSectionClick },
   ref,
 ) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    if (visible) return;
+    const frameId = window.requestAnimationFrame(() => setMobileOpen(false));
+    return () => window.cancelAnimationFrame(frameId);
+  }, [visible]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileOpen(false);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileOpen]);
+
+  const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    const isMobileCard = mobileOpen && window.matchMedia('(max-width: 900px)').matches;
+    if (!isMobileCard) {
+      onSectionClick?.(event, id);
+      return;
+    }
+
+    event.preventDefault();
+    setMobileOpen(false);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(() => onSectionClick?.(event, id), prefersReducedMotion ? 0 : 480);
+  };
+
   return (
-    <nav
-      ref={ref}
-      className={`cs-toc${visible ? ' is-visible' : ''}`}
-      aria-label={ariaLabel}
-    >
-      <ul className="cs-toc-list">
-        {sections.map(({ id, title }) => (
-          <li
-            key={id}
-            className={`cs-toc-item${activeId === id ? ' cs-toc-item--active' : ''}`}
-          >
-            <a
-              href={`#${id}`}
-              className="cs-toc-link"
-              onClick={(event) => onSectionClick?.(event, id)}
-              aria-current={activeId === id ? 'true' : undefined}
+    <>
+      <button
+        aria-expanded={mobileOpen}
+        aria-label={ariaLabel}
+        className={`cs-toc-mobile-toggle${visible ? ' is-visible' : ''}`}
+        onClick={() => setMobileOpen((open) => !open)}
+        type="button"
+      >
+        <ListTree aria-hidden="true" size={18} strokeWidth={2} />
+        <span>{ariaLabel}</span>
+      </button>
+      <nav
+        ref={ref}
+        className={`cs-toc${visible ? ' is-visible' : ''}${mobileOpen ? ' cs-toc--mobile-open' : ''}`}
+        aria-label={ariaLabel}
+      >
+        <ul className="cs-toc-list">
+          {sections.map(({ id, title }) => (
+            <li
+              key={id}
+              className={`cs-toc-item${activeId === id ? ' cs-toc-item--active' : ''}`}
             >
-              {title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+              <a
+                href={`#${id}`}
+                className="cs-toc-link"
+                onClick={(event) => handleSectionClick(event, id)}
+                aria-current={activeId === id ? 'true' : undefined}
+              >
+                {title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 });
 
@@ -93,7 +138,10 @@ export default function CaseTOC({
     const updateVisibility = () => {
       const firstTop = firstSection.getBoundingClientRect().top;
       const regionBottom = region.getBoundingClientRect().bottom;
-      const navbarOffset = 96;
+      const mobileOffset = Number.parseFloat(window.getComputedStyle(firstSection).scrollMarginTop);
+      const navbarOffset = window.matchMedia('(max-width: 900px)').matches && Number.isFinite(mobileOffset)
+        ? mobileOffset
+        : 96;
       setVisible(firstTop <= navbarOffset && regionBottom >= 128);
     };
 

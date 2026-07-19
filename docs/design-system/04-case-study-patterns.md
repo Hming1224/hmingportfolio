@@ -20,6 +20,8 @@ Design System 必須覆蓋整個作品集，案例頁不能因為內容不同就
 ## TOC 標題與分隔線規範
 
 - **核心規則**：所有透過 Table of Contents (TOC) 導覽點擊進入的案例頁大標題（即對應於 TOC `id` 錨點的區塊主標題，例如 `.cs-heading`、`.ca-h2` 等），其下方**必須緊鄰一條水平分隔線**（`.cs-divider` 或其專案/主題變體）。
+- **手機互動**：900px 以下不讓桌機 TOC 字卡持續佔據閱讀空間；第一個專案總覽 section 到達定位線後，改顯示左上角章節目錄按鈕。點擊後在按鈕下方展開原本的 TOC 字卡，使用者選擇 section 後收起字卡，再把目標標題停在 navbar、按鈕與上下間距的總高度下方。
+- **定位 offset**：手機錨點由 `--cs-toc-mobile-anchor-offset` 統一管理，目前為 `80px navbar + 16px 上間距 + 40px 按鈕 + 16px 下間距`。案例 route 不得各自覆寫魔術數字。
 - **實作方式**：
   - **標準區塊**：使用 `CaseSection` 元件，其內部會自動渲染 `CaseHeading`（內含 `h2` 與 `.cs-divider` / `.cs-divider-white`）。
   - **自訂/客製化區塊（如 Process, Result, Next Step, 以及 Crypto Arsenal 所有區塊）**：若不使用 `CaseSection` 元件，必須在區塊的大標題（`h2`）下方手動置入分隔線（例如 `<div className="cs-divider" />` 或使用 `CaseHeading` 元件）。

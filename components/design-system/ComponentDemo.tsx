@@ -56,7 +56,7 @@ const caseExamples = {
     zoomCaption: "ZoomableImage is used through case media and lightbox wrappers for real product screenshots.",
     localExceptions: [
       "Advantech Board 2 / 3: route-local multi-comparison boards in SolutionSection.",
-      "CaseTOC: protected floating navigation in CaseStudyShell.",
+      "CaseTOC: responsive section navigation in CaseStudyShell.",
       "Laushu task flow: route-local diagram geometry and connector endpoints.",
       "Crypto matrix / FlowMatrixBoard: visual storytelling matrix, not a shared ARIA grid.",
     ],
@@ -78,7 +78,7 @@ const caseExamples = {
     zoomCaption: "ZoomableImage 透過案例 media 與 lightbox wrapper 使用於真實產品截圖。",
     localExceptions: [
       "Advantech Board 2 / 3：SolutionSection 內的 頁面限定多比較 board。",
-      "CaseTOC：CaseStudyShell 裡受保護的浮動導覽。",
+      "CaseTOC：CaseStudyShell 裡的響應式章節導覽。",
       "Laushu task flow：頁面限定 diagram geometry 與 connector endpoints。",
       "Crypto matrix / FlowMatrixBoard：視覺敘事矩陣，不是 shared ARIA grid。",
     ],
@@ -827,8 +827,8 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
             </aside>
             <p className={styles.caseTocMobileNote}>
               {zh
-                ? "手機版正式案例頁不使用側邊目錄；目錄會直接隱藏，這裡只保留可捲動的假 section 示意閱讀位置。"
-                : "Mobile case pages do not use the side table of contents; it is hidden, so this example keeps only the scrollable section preview."}
+                ? "手機版滑到專案總覽後會顯示章節目錄按鈕；點擊展開原本的 TOC 字卡，再選擇要前往的 section。"
+                : "On mobile, the table-of-contents button appears at the project overview and expands the original TOC card for choosing a section."}
             </p>
             <div className={styles.caseTocRouteCrop} ref={scrollContainerRef}>
               {sections.map((section, index) => (
