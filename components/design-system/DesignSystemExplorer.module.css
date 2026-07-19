@@ -2763,9 +2763,14 @@
 
 .caseTocPreviewShell :global(.cs-toc-layout) {
   display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: var(--hm-space-lg);
-  align-items: start;
+  gap: var(--hm-space-sm);
+}
+
+.caseTocDemoToc {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  align-self: start;
 }
 
 .caseTocPreviewShell :global(.cs-toc) {
@@ -2802,9 +2807,12 @@
 
 .caseTocRouteCrop {
   display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
   gap: var(--hm-space-sm);
   max-height: 520px;
   overflow-y: auto;
+  overflow-anchor: none;
+  scroll-padding-top: 0;
   scroll-behavior: smooth;
   padding: var(--hm-space-lg);
   border: 1px solid var(--cs-line);
@@ -2813,6 +2821,12 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.62)),
     var(--cs-surface-soft);
   color: var(--cs-text-secondary);
+}
+
+.caseTocRouteSections {
+  display: grid;
+  gap: var(--hm-space-sm);
+  min-width: 0;
 }
 
 .caseTocWireSection {
@@ -3655,10 +3669,20 @@
   outline-offset: 2px;
 }
 
+@media (max-width: 1100px) {
+  .caseTocRouteCrop {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .caseTocDemoToc {
+    position: static;
+    width: 100%;
+  }
+}
+
 @media (max-width: 900px) {
   .caseTocPreviewShell {
-    position: relative;
-    padding-top: calc(var(--hm-space-md) + 40px + var(--hm-space-md));
+    padding: var(--hm-space-md);
     overflow: hidden;
   }
 
@@ -3667,23 +3691,29 @@
   }
 
   .caseTocPreviewShell :global(.cs-toc-aside) {
-    display: contents;
+    display: block;
   }
 
-  .caseTocPreviewShell :global(.cs-toc-mobile-toggle) {
-    position: absolute;
-    top: var(--hm-space-md);
-    left: var(--hm-space-md);
+  .caseTocDemoToc {
+    position: sticky;
+    top: var(--hm-space-sm);
+    z-index: 42;
+    width: fit-content;
+    height: 40px;
   }
 
-  .caseTocPreviewShell :global(.cs-toc) {
+  .caseTocDemoToc :global(.cs-toc-mobile-toggle) {
+    position: static;
+  }
+
+  .caseTocDemoToc :global(.cs-toc) {
     position: absolute;
-    top: calc(var(--hm-space-md) + 40px + var(--hm-space-sm));
+    top: calc(40px + var(--hm-space-sm));
     bottom: auto;
-    left: var(--hm-space-md);
+    left: 0;
     z-index: 41;
-    width: min(280px, calc(100% - (var(--hm-space-md) * 2)));
-    max-height: calc(100% - var(--hm-space-3xl));
+    width: min(280px, calc(100vw - (var(--hm-space-lg) * 2)));
+    max-height: min(360px, calc(100dvh - 220px));
     padding: var(--hm-space-sm);
     opacity: 0;
     visibility: hidden;
@@ -3691,7 +3721,7 @@
     transform: translateY(-8px) scale(0.98);
   }
 
-  .caseTocPreviewShell :global(.cs-toc.is-visible.cs-toc--mobile-open) {
+  .caseTocDemoToc :global(.cs-toc.is-visible.cs-toc--mobile-open) {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -3703,7 +3733,9 @@
   }
 
   .caseTocRouteCrop {
-    min-height: 180px;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 320px;
+    scroll-padding-top: calc(var(--hm-space-sm) + 40px + var(--hm-space-sm));
   }
 }
 

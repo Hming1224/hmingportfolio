@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ChevronDown, X } from "lucide-react";
 import lottie, { type AnimationItem } from "lottie-web";
-import type { ReactNode } from "react";
+import type { MouseEvent as ReactMouseEvent, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import AdvantechProposalTabs from "@/app/advantech/components/ProposalTabs";
 import { painCards } from "@/app/crypto-arsenal/data";
@@ -762,6 +762,7 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
   const zh = locale === "zh-TW";
   const sections = advantechTocSections[locale];
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const pageScrollBeforeNavigateRef = useRef<{ x: number; y: number } | null>(null);
   const [activeSectionId, setActiveSectionId] = useState(sections[0]?.id ?? "");
 
   useEffect(() => {
@@ -800,13 +801,28 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
 
     const containerRect = container.getBoundingClientRect();
     const targetRect = target.getBoundingClientRect();
-    const top = container.scrollTop + targetRect.top - containerRect.top;
-    const pageX = window.scrollX;
-    const pageY = window.scrollY;
+    const scrollPaddingTop = Number.parseFloat(window.getComputedStyle(container).scrollPaddingTop) || 0;
+    const top = Math.max(0, container.scrollTop + targetRect.top - containerRect.top - scrollPaddingTop);
+    const pageScrollBeforeNavigate = pageScrollBeforeNavigateRef.current ?? {
+      x: window.scrollX,
+      y: window.scrollY,
+    };
+    const previousScrollBehavior = container.style.scrollBehavior;
 
     setActiveSectionId(id);
+    container.style.scrollBehavior = "auto";
     container.scrollTo({ top, behavior: "auto" });
-    window.requestAnimationFrame(() => window.scrollTo(pageX, pageY));
+    window.scrollTo(pageScrollBeforeNavigate.x, pageScrollBeforeNavigate.y);
+    window.requestAnimationFrame(() => {
+      container.style.scrollBehavior = previousScrollBehavior;
+      window.scrollTo(pageScrollBeforeNavigate.x, pageScrollBeforeNavigate.y);
+      pageScrollBeforeNavigateRef.current = null;
+    });
+  };
+
+  const handleExampleClickCapture = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!(event.target instanceof Element) || !event.target.closest(".cs-toc-link")) return;
+    pageScrollBeforeNavigateRef.current = { x: window.scrollX, y: window.scrollY };
   };
 
   return (
@@ -817,31 +833,37 @@ function CaseTocInteractiveDemo({ contextLabel, locale }: { contextLabel?: strin
       <section aria-label={zh ? "CaseTOC production 視覺狀態" : "CaseTOC production visual state"}>
         <div className={`cs-page theme-advantech ${styles.caseTocPreviewShell}`}>
           <div className="cs-toc-layout">
-            <aside className="cs-toc-aside">
-              <CaseTOC
-                sections={sections}
-                activeSectionId={activeSectionId}
-                visible
-                onNavigate={handleNavigate}
-              />
-            </aside>
             <p className={styles.caseTocMobileNote}>
               {zh
-                ? "手機版滑到專案總覽後會顯示章節目錄按鈕；點擊展開原本的 TOC 字卡，再選擇要前往的 section。"
-                : "On mobile, the table-of-contents button appears at the project overview and expands the original TOC card for choosing a section."}
+                ? "手機版的章節目錄會留在下方範例畫布內；展開字卡並選擇 section，只會捲動這個範例。"
+                : "On mobile, the table of contents stays inside the example viewport; choosing a section scrolls only this example."}
             </p>
-            <div className={styles.caseTocRouteCrop} ref={scrollContainerRef}>
-              {sections.map((section, index) => (
-                <section
-                  className={styles.caseTocWireSection}
-                  id={section.id}
-                  key={section.id}
-                >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <h4>{section.title}</h4>
-                  <div aria-hidden="true" />
-                </section>
-              ))}
+            <div
+              className={styles.caseTocRouteCrop}
+              onClickCapture={handleExampleClickCapture}
+              ref={scrollContainerRef}
+            >
+              <aside className={`cs-toc-aside ${styles.caseTocDemoToc}`}>
+                <CaseTOC
+                  sections={sections}
+                  activeSectionId={activeSectionId}
+                  visible
+                  onNavigate={handleNavigate}
+                />
+              </aside>
+              <div className={styles.caseTocRouteSections}>
+                {sections.map((section, index) => (
+                  <section
+                    className={styles.caseTocWireSection}
+                    id={section.id}
+                    key={section.id}
+                  >
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h4>{section.title}</h4>
+                    <div aria-hidden="true" />
+                  </section>
+                ))}
+              </div>
             </div>
           </div>
         </div>
