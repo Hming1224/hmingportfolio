@@ -21,6 +21,7 @@ export interface CaseTOCViewProps {
   activeId: string;
   visible?: boolean;
   ariaLabel: string;
+  localScrollOnly?: boolean;
   onSectionClick?: (event: MouseEvent<HTMLAnchorElement>, id: string) => void;
 }
 
@@ -30,8 +31,26 @@ type TocScrollLock = {
   cleanup: () => void;
 };
 
+type CaseTocScrollOptions = {
+  behavior: ScrollBehavior;
+  container?: HTMLElement;
+  top?: number;
+};
+
+export function scrollCaseTocTarget(
+  target: HTMLElement,
+  { behavior, container, top }: CaseTocScrollOptions,
+) {
+  if (container && top !== undefined) {
+    container.scrollTo({ top, behavior });
+    return;
+  }
+
+  target.scrollIntoView({ behavior, block: 'start' });
+}
+
 export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function CaseTOCView(
-  { sections, activeId, visible = false, ariaLabel, onSectionClick },
+  { sections, activeId, visible = false, ariaLabel, localScrollOnly = false, onSectionClick },
   ref,
 ) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -54,7 +73,10 @@ export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function Ca
   }, [mobileOpen]);
 
   const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
-    const isMobileCard = mobileOpen && window.matchMedia('(max-width: 900px)').matches;
+    const toggle = event.currentTarget.closest('.cs-toc')?.previousElementSibling;
+    const isMobileCard = mobileOpen
+      && toggle instanceof HTMLElement
+      && window.getComputedStyle(toggle).display !== 'none';
     if (!isMobileCard) {
       onSectionClick?.(event, id);
       return;
@@ -92,6 +114,7 @@ export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function Ca
               <a
                 href={`#${id}`}
                 className="cs-toc-link"
+                data-scroll-scope={localScrollOnly ? 'nearest' : undefined}
                 onClick={(event) => handleSectionClick(event, id)}
                 aria-current={activeId === id ? 'true' : undefined}
               >
@@ -225,9 +248,8 @@ export default function CaseTOC({
     };
 
     window.addEventListener('scrollend', handleScrollEnd, { once: true });
-    target.scrollIntoView({
+    scrollCaseTocTarget(target, {
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
-      block: 'start',
     });
   };
 
@@ -238,6 +260,7 @@ export default function CaseTOC({
       activeId={resolvedActiveId}
       visible={resolvedVisible}
       ariaLabel={locale === 'en' ? 'Table of contents' : '頁內目錄'}
+      localScrollOnly={Boolean(onNavigate)}
       onSectionClick={handleClick}
     />
   );

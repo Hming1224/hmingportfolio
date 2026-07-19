@@ -35,6 +35,7 @@ export default function ScrollBehaviorFix() {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
       if (!anchor) return;
+      if (anchor.dataset.scrollScope === 'nearest') return;
 
       const href = anchor.getAttribute('href');
       if (!href) return;

@@ -2754,11 +2754,6 @@
 
 .caseTocPreviewShell {
   width: 100%;
-  padding: var(--hm-space-lg);
-  overflow: hidden;
-  border: 1px solid var(--cs-line);
-  border-radius: var(--hm-radius-lg);
-  background: var(--cs-surface);
 }
 
 .caseTocPreviewShell :global(.cs-toc-layout) {
@@ -2766,11 +2761,23 @@
   gap: var(--hm-space-sm);
 }
 
-.caseTocDemoToc {
+.caseTocDesktopLayout {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: var(--hm-space-lg);
+  align-items: start;
+  min-width: 0;
+}
+
+.caseTocDesktopToc {
   position: sticky;
   top: 0;
   z-index: 2;
   align-self: start;
+}
+
+.caseTocPreviewShell .caseTocMobileToc {
+  display: none;
 }
 
 .caseTocPreviewShell :global(.cs-toc) {
@@ -2806,9 +2813,6 @@
 }
 
 .caseTocRouteCrop {
-  display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: var(--hm-space-sm);
   max-height: 520px;
   overflow-y: auto;
   overflow-anchor: none;
@@ -3670,43 +3674,51 @@
 }
 
 @media (max-width: 1100px) {
-  .caseTocRouteCrop {
+  .caseTocDesktopLayout {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .caseTocDemoToc {
-    position: static;
-    width: 100%;
-  }
-}
-
-@media (max-width: 900px) {
-  .caseTocPreviewShell {
-    padding: var(--hm-space-md);
-    overflow: hidden;
+  .caseTocPreviewShell .caseTocDesktopToc {
+    display: none;
   }
 
-  .caseTocPreviewShell :global(.cs-toc-layout) {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .caseTocPreviewShell :global(.cs-toc-aside) {
-    display: block;
-  }
-
-  .caseTocDemoToc {
+  .caseTocPreviewShell .caseTocMobileToc {
     position: sticky;
     top: var(--hm-space-sm);
     z-index: 42;
+    display: block;
     width: fit-content;
     height: 40px;
   }
 
-  .caseTocDemoToc :global(.cs-toc-mobile-toggle) {
+  .caseTocMobileToc :global(.cs-toc-mobile-toggle) {
     position: static;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--hm-space-2xs);
+    min-height: 40px;
+    padding: var(--hm-space-2xs) var(--hm-space-xs);
+    border: 1px solid var(--cs-line);
+    border-radius: var(--hm-radius-pill);
+    background: color-mix(in srgb, var(--cs-surface) 94%, white);
+    color: var(--cs-text-heading);
+    font: inherit;
+    font-size: var(--hm-fs-sm);
+    font-weight: var(--hm-fw-semibold);
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
   }
 
-  .caseTocDemoToc :global(.cs-toc) {
+  .caseTocMobileToc :global(.cs-toc-mobile-toggle:hover),
+  .caseTocMobileToc :global(.cs-toc-mobile-toggle:focus-visible) {
+    border-color: var(--cs-accent);
+    background: var(--cs-accent-soft, var(--purple-light));
+    color: var(--cs-accent);
+  }
+
+  .caseTocPreviewShell .caseTocMobileToc :global(.cs-toc.is-visible) {
+    display: block;
     position: absolute;
     top: calc(40px + var(--hm-space-sm));
     bottom: auto;
@@ -3721,7 +3733,7 @@
     transform: translateY(-8px) scale(0.98);
   }
 
-  .caseTocDemoToc :global(.cs-toc.is-visible.cs-toc--mobile-open) {
+  .caseTocPreviewShell .caseTocMobileToc :global(.cs-toc.is-visible.cs-toc--mobile-open) {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -3733,7 +3745,9 @@
   }
 
   .caseTocRouteCrop {
-    grid-template-columns: minmax(0, 1fr);
+    display: grid;
+    align-content: start;
+    gap: var(--hm-space-lg);
     min-height: 320px;
     scroll-padding-top: calc(var(--hm-space-sm) + 40px + var(--hm-space-sm));
   }
