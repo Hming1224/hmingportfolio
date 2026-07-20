@@ -488,7 +488,7 @@ const Cover: Page = () => (
 /* ---------- P2：About Me 的背景故事＋設計信念 ---------- */
 
 const DesignValueCard = ({ icon, title, desc, color, soft, delay }: { icon: string; title: string; desc: string; color: string; soft: string; delay: string }) => (
-  <div className="im-fadeup im-lift" style={{ position: 'relative', minWidth: 0, height: 430, padding: '34px 30px', borderRadius: 16, background: surface, border: `1px solid ${line}`, boxShadow: cardShadow, overflow: 'hidden', animationDelay: delay }}>
+  <div className="im-fadeup im-lift" style={{ position: 'relative', minWidth: 0, height: '100%', padding: '34px 30px', borderRadius: 16, background: surface, border: `1px solid ${line}`, boxShadow: cardShadow, overflow: 'hidden', animationDelay: delay }}>
     <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 6, background: color }} />
     <div style={{ width: 64, height: 64, borderRadius: 14, background: soft, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Icon name={icon} size={31} color={color} />
@@ -499,14 +499,15 @@ const DesignValueCard = ({ icon, title, desc, color, soft, delay }: { icon: stri
 );
 
 const AboutMe: Page = () => (
-  <div style={{ ...fill, padding: '82px 160px' }}>
+  <div style={{ ...fill, padding: '82px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>ABOUT ME</Eyebrow>
     <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 58, fontWeight: 700, margin: 0, lineHeight: 1.2 }}>
       我的背景，塑造了我看待設計的方式
     </h2>
     <HeadingRule />
-    <div style={{ display: 'grid', gridTemplateColumns: '500px 1fr', gap: 44, marginTop: 46 }}>
-      <div className="im-fadeup" style={{ minHeight: 520, padding: 38, borderRadius: 16, background: accentSoft, animationDelay: '100ms' }}>
+    <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingBottom: 44 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '500px 1fr', gap: 44, width: '100%' }}>
+      <div className="im-fadeup" style={{ minHeight: 540, padding: 38, borderRadius: 16, background: accentSoft, display: 'flex', flexDirection: 'column', animationDelay: '100ms' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
           <div style={{ width: 118, height: 118, borderRadius: '50%', overflow: 'hidden', background: '#f4d238', boxShadow: '0 12px 28px rgba(52, 52, 52, .12)', flexShrink: 0 }}>
             <img src={avatarYellow} alt="黃宣銘" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -526,19 +527,20 @@ const AboutMe: Page = () => (
         <p style={{ fontSize: 24, lineHeight: 1.55, margin: '30px 0 0' }}>
           這段跨領域歷程，讓我習慣站在工程與使用者中間，把需求與技術限制轉成能落地的設計決策。
         </p>
-        <div style={{ borderTop: '1px solid rgba(93, 98, 216, .18)', marginTop: 30, paddingTop: 24 }}>
+        <div style={{ borderTop: '1px solid rgba(93, 98, 216, .18)', marginTop: 'auto', paddingTop: 24 }}>
           <div style={{ fontSize: 19, color: muted, letterSpacing: '0.12em' }}>PERSONALITY</div>
           <div style={{ fontSize: 27, fontWeight: 700, color: 'var(--osd-accent)', marginTop: 10 }}>好奇理解 · 同理溝通 · 務實落地</div>
         </div>
       </div>
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div style={{ fontSize: 22, color: muted, letterSpacing: '0.12em', marginBottom: 18 }}>我的設計信念</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 20 }}>
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 20 }}>
           <DesignValueCard icon="layers" title="跨領域的眼界" desc="同時理解產品結構、技術限制與人的使用感受，從不同角色之間看見容易被忽略的機會。" color="#5d62d8" soft="rgba(93, 98, 216, .10)" delay="160ms" />
           <DesignValueCard icon="search" title="理解優先於解法" desc="開始設計之前，先釐清問題成因、使用者動機與現實限制，避免只解決表面的症狀。" color="#e8856b" soft="rgba(232, 133, 107, .12)" delay="240ms" />
           <DesignValueCard icon="zap" title="讓複雜變成直覺" desc="產品邏輯可以複雜，但使用者應該能快速理解下一步，順利完成真正想做的事情。" color="#3a9f78" soft="rgba(58, 159, 120, .12)" delay="320ms" />
         </div>
       </div>
+    </div>
     </div>
     <Footer />
   </div>
@@ -553,7 +555,7 @@ const careerStages = [
 ] as const;
 
 const CareerTimeline = ({ active }: { active: number }) => (
-  <div className="im-fadeup" style={{ position: 'relative', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', marginTop: 34, animationDelay: '100ms' }}>
+  <div className="im-fadeup" style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', marginTop: 34, animationDelay: '100ms' }}>
     <div style={{ position: 'absolute', left: 28, right: 28, top: 35, height: 4, background: line }} />
     {careerStages.map((stage, index) => {
       const isActive = index === active;
@@ -562,8 +564,8 @@ const CareerTimeline = ({ active }: { active: number }) => (
           <span style={{ position: 'relative', zIndex: 1, width: 70, height: 70, borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ffffff', border: `3px solid ${isActive ? 'var(--osd-accent)' : '#d8d8dc'}`, boxShadow: isActive ? '0 0 0 8px rgba(93, 98, 216, .12)' : 'none', overflow: 'hidden' }}>
             <img src={stage.image} alt={stage.imageAlt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', opacity: isActive ? 1 : 0.45 }} />
           </span>
-          <div style={{ position: 'relative', zIndex: 1, background: '#ffffff', paddingRight: 22 }}>
-            <div style={{ fontSize: 23, fontWeight: 700, color: isActive ? 'var(--osd-accent)' : muted }}>{stage.company}</div>
+          <div style={{ position: 'relative', zIndex: 1, background: '#ffffff', padding: '0 14px 0 0' }}>
+            <div style={{ fontSize: 23, fontWeight: 700, color: isActive ? 'var(--osd-accent)' : muted, whiteSpace: 'nowrap' }}>{stage.company}</div>
             <div style={{ fontSize: 19, color: muted, marginTop: 4 }}>{stage.date}</div>
           </div>
         </div>
@@ -588,18 +590,19 @@ type CareerChapterProps = {
   field: string;
   role: string;
   context: string;
-  points: Array<{ title: string; detail: string }>;
+  points: Array<{ title: string; detail: React.ReactNode }>;
   takeaway: string;
 };
 
 const CareerChapter = ({ active, title, field, role, context, points, takeaway }: CareerChapterProps) => {
   const stage = careerStages[active];
   return (
-    <div style={{ ...fill, padding: '78px 160px' }}>
+    <div style={{ ...fill, padding: '78px 160px', display: 'flex', flexDirection: 'column' }}>
       <Eyebrow>CAREER JOURNEY · 0{active + 1}/03</Eyebrow>
       <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 54, fontWeight: 700, margin: 0, lineHeight: 1.2, maxWidth: 1540 }}>{title}</h2>
       <CareerTimeline active={active} />
-      <div className="im-fadeup" style={{ display: 'grid', gridTemplateColumns: '430px 1fr', gap: 66, marginTop: 46, animationDelay: '220ms' }}>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingBottom: 40 }}>
+      <div className="im-fadeup" style={{ display: 'grid', gridTemplateColumns: '430px 1fr', gap: 66, width: '100%', animationDelay: '220ms' }}>
         <div style={{ background: accentSoft, borderRadius: 16, padding: 34, minHeight: 388 }}>
           <div style={{ width: 108, height: 108, borderRadius: 20, overflow: 'hidden', background: '#ffffff', boxShadow: cardShadow }}>
             <img src={stage.image} alt={stage.imageAlt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
@@ -616,6 +619,7 @@ const CareerChapter = ({ active, title, field, role, context, points, takeaway }
             <strong style={{ color: 'var(--osd-accent)' }}>累積的經驗：</strong>{takeaway}
           </div>
         </div>
+      </div>
       </div>
       <Footer />
     </div>
@@ -684,19 +688,20 @@ const MethodStep = ({ index, icon, title, detail }: { index: string; icon: strin
 );
 
 const Method: Page = () => (
-  <div style={{ ...fill, padding: '96px 160px' }}>
+  <div style={{ ...fill, padding: '96px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>HOW I WORK</Eyebrow>
     <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 58, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
       三段經驗，最後收斂成我現在的四步工作方式
     </h2>
     <HeadingRule />
-    <div className="im-fadeup" style={{ display: 'flex', marginTop: 50, background: surface, border: `1px solid ${line}`, borderRadius: 16, overflow: 'hidden', boxShadow: cardShadow, animationDelay: '120ms' }}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 38, paddingBottom: 44 }}>
+    <div className="im-fadeup" style={{ display: 'flex', background: surface, border: `1px solid ${line}`, borderRadius: 16, overflow: 'hidden', boxShadow: cardShadow, animationDelay: '120ms' }}>
       <MethodStep index="01" icon="search" title="理解場域" detail="使用者、產品脈絡與現實限制" />
       <MethodStep index="02" icon="target" title="定義問題" detail="驗證假設，找出真正優先的問題" />
       <MethodStep index="03" icon="branch" title="轉成方案" detail="把證據變成可評估流程與 prototype" />
       <MethodStep index="04" icon="send" title="推進驗證" detail="透過 handoff、系統與檢查完成交付" />
     </div>
-    <div className="im-fadeup" style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 48, marginTop: 34, padding: '30px 36px', background: accentSoft, borderRadius: 16, animationDelay: '260ms' }}>
+    <div className="im-fadeup" style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 48, padding: '30px 36px', background: accentSoft, borderRadius: 16, animationDelay: '260ms' }}>
       <div style={{ display: 'flex', gap: 20 }}>
         <Icon name="usercheck" size={34} />
         <div><div style={{ fontSize: 25, fontWeight: 700 }}>我負責</div><div style={{ fontSize: 25, lineHeight: 1.5, marginTop: 8 }}>問題、優先順序、設計取捨、驗收與最終責任</div></div>
@@ -705,6 +710,7 @@ const Method: Page = () => (
         <Icon name="cpu" size={34} />
         <div><div style={{ fontSize: 25, fontWeight: 700 }}>近期 AI 協助</div><div style={{ fontSize: 25, lineHeight: 1.5, marginTop: 8 }}>盤點、規格執行、重複產出、指定檢查</div></div>
       </div>
+    </div>
     </div>
     <Footer />
   </div>
@@ -725,17 +731,20 @@ const CommunityTile = ({ image, eyebrow, title, metric, style }: { image: string
 );
 
 const Community: Page = () => (
-  <div style={{ ...fill, padding: '84px 160px' }}>
+  <div style={{ ...fill, padding: '84px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>BEYOND WORK</Eyebrow>
     <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 55, fontWeight: 700, margin: 0, lineHeight: 1.25, maxWidth: 1500 }}>
       我也把設計方法，變成別人能一起使用的東西
     </h2>
-    <div style={{ display: 'grid', gridTemplateColumns: '1.62fr 1fr', gridTemplateRows: '235px 235px', gap: 22, marginTop: 42 }}>
+    <HeadingRule />
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingBottom: 44 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1.62fr 1fr', gridTemplateRows: '248px 248px', gap: 22 }}>
       <CommunityTile image={openhciPhoto} eyebrow="OPENHCI 2024 · 設計組組長" title="帶領設計思考集訓" metric="40 位學員" style={{ gridRow: '1 / span 2' }} />
       <CommunityTile image={nccuPhoto} eyebrow="NCCU · 課程助教" title="Figma 教學與專案回饋" metric="60 位／20 組" style={{}} />
       <CommunityTile image={hackathonPhoto} eyebrow="EVOLUTION · 共同籌備" title="陪學員把想法做出來" metric="16 位學員" style={{}} />
     </div>
-    <div style={{ fontSize: 25, color: muted, marginTop: 24 }}>說清楚、給具體回饋，也陪團隊一起完成。</div>
+    <div style={{ fontSize: 25, color: muted, marginTop: 26 }}>說清楚、給具體回饋，也陪團隊一起完成。</div>
+    </div>
     <Footer />
   </div>
 );
@@ -750,13 +759,14 @@ const FitRow = ({ lead, text, icon }: { lead: string; text: string; icon: string
 );
 
 const FitClose: Page = () => (
-  <div style={{ ...fill, padding: '96px 160px' }}>
+  <div style={{ ...fill, padding: '96px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>WHY THIS ROLE</Eyebrow>
     <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 58, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
       我的經驗，如何回應{COMPANY}現在的題目
     </h2>
     <HeadingRule />
-    <div style={{ display: 'grid', gridTemplateColumns: '500px 1fr', gap: 72, marginTop: 50 }}>
+    <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingBottom: 44 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '500px 1fr', gap: 72, width: '100%' }}>
       <div className="im-fadeup" style={{ minHeight: 464, background: accentSoft, borderRadius: 16, padding: 48, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         <div><div style={{ fontSize: 23, color: 'var(--osd-accent)', fontWeight: 600 }}>COMPANY / PRODUCT</div><div style={{ fontSize: 46, fontWeight: 700, marginTop: 20 }}>{COMPANY}</div></div>
         <ImagePlaceholder hint="公司產品畫面／Logo" width={404} height={230} />
@@ -767,6 +777,7 @@ const FitClose: Page = () => (
         <FitRow lead="相近證據" icon="briefcase" text="我在【案例】曾【真實行動／結果】" />
         <FitRow lead="可帶入價值" icon="send" text="把【能力】用在【具體產品／團隊情境】" />
       </div>
+    </div>
     </div>
     <Footer />
   </div>
@@ -785,17 +796,19 @@ const WeekCard = ({ period, title, action, output, icon }: { period: string; tit
 );
 
 const WhatNext: Page = () => (
-  <div style={{ ...fill, padding: '96px 160px' }}>
+  <div style={{ ...fill, padding: '96px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>FIRST 6 WEEKS</Eyebrow>
     <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 60, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>加入後的前六週，我會這樣開始</h2>
     <HeadingRule />
-    <div className="im-fadeup" style={{ position: 'relative', display: 'flex', gap: 68, marginTop: 88 }}>
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 4, background: 'var(--osd-accent)' }} />
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingBottom: 44 }}>
+    <div className="im-fadeup" style={{ position: 'relative', display: 'flex', gap: 68, paddingTop: 14 }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 14, height: 4, background: 'var(--osd-accent)' }} />
       <WeekCard period="第 1–2 週" icon="search" title="理解" action="理解【核心流程】、使用者、商業目標與團隊決策方式" output="脈絡與問題地圖" />
       <WeekCard period="第 3–4 週" icon="box" title="參與" action="跟著真實任務協作，接手一個邊界清楚的問題" output="可評估的設計產出" />
       <WeekCard period="第 5–6 週" icon="bulb" title="提出" action="整理觀察、機會與待驗證假設，和團隊對齊下一步" output="討論用建議" />
     </div>
-    <p style={{ fontSize: 24, color: muted, marginTop: 42 }}>這是根據公開資訊提出的起點，實際方向會依團隊目前的重心調整。</p>
+    <p style={{ fontSize: 24, color: muted, marginTop: 46 }}>這是根據公開資訊提出的起點，實際方向會依團隊目前的重心調整。</p>
+    </div>
     <Footer />
   </div>
 );
@@ -817,14 +830,14 @@ const ThankYou: Page = () => (
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.16)' }} />
       <img src={logo} alt="Hming" style={{ position: 'absolute', top: 72, left: 160, height: 54, filter: 'brightness(0) invert(1)' }} />
     </div>
-    <div style={{ height: 700, background: surface, padding: '72px 160px 64px', display: 'grid', gridTemplateColumns: '1fr 760px', gap: 100 }}>
+    <div style={{ height: 700, background: surface, padding: '0 160px', display: 'grid', gridTemplateColumns: '1fr 760px', gap: 100, alignContent: 'center', alignItems: 'center' }}>
       <div className="im-fadeup">
         <div style={{ fontSize: 24, color: 'var(--osd-accent)', fontWeight: 600, letterSpacing: '0.14em' }}>THANK YOU</div>
         <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 96, lineHeight: 1.05, margin: '26px 0 0', fontWeight: 700 }}>謝謝聆聽</h2>
         <p style={{ fontSize: 31, color: muted, marginTop: 30 }}>期待進一步交流。</p>
         <p style={{ fontSize: 24, color: muted, marginTop: 68 }}>黃宣銘 Hming Huang · Product Designer</p>
       </div>
-      <div style={{ alignSelf: 'start' }}>
+      <div>
         <ContactMethodRow icon="globe" label="PORTFOLIO" value="hmingdesign.com" />
         <ContactMethodRow icon="mail" label="EMAIL" value="hmingdesigner@gmail.com" />
         <ContactMethodRow icon="usercheck" label="LINKEDIN" value="linkedin.com/in/brian-huang-a36759128" />
