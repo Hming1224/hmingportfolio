@@ -4,6 +4,18 @@ import logo from '@assets/logos/hming.svg';
 import cursorArrow from '@assets/decorations/cursor-arrow.svg';
 import cursorEngineers from '@assets/decorations/cursor-engineers.svg';
 import cursorPm from '@assets/decorations/cursor-pm.svg';
+import contactHero from './assets/contact-hero.webp';
+import advantechLogo from './assets/advantech-logo.png';
+import avatarYellow from './assets/avatar-yellow.png';
+import claudeAgent from './assets/claude-agent.svg';
+import codexAgent from './assets/codex-agent.svg';
+import cryptoArsenalLogo from './assets/crypto-arsenal-logo.png';
+import figmaApp from './assets/figma-app.png';
+import hackathonPhoto from './assets/hackathon.jpg';
+import nccuPhoto from './assets/nccu-ta.jpg';
+import openhciPhoto from './assets/openhci.jpg';
+import profileSuit from './assets/profile-suit.png';
+import tbaLogo from './assets/tba-logo.png';
 
 /* ═══════════════ BRAND TOKENS — 換公司只改這一區 ═══════════════ */
 /* 值來源：themes/hming-portfolio.md（預設）或 themes/company-<公司>.md。
@@ -41,8 +53,9 @@ const COMPANY = '【公司名】';
    shimmer 徽章、heroShine 流光、游標標籤彈簧射入＋漂浮、fadeUp、卡片 hover 浮起。
    scoped `im-` 前綴，module top-level 注入一次。 */
 const STYLE_ID = 'osd-anim-intro-master';
-if (typeof document !== 'undefined' && !document.getElementById(STYLE_ID)) {
-  const style = document.createElement('style');
+if (typeof document !== 'undefined') {
+  const existingStyle = document.getElementById(STYLE_ID);
+  const style = existingStyle instanceof HTMLStyleElement ? existingStyle : document.createElement('style');
   style.id = STYLE_ID;
   style.textContent = `
 @property --im-shimmer { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
@@ -50,8 +63,13 @@ if (typeof document !== 'undefined' && !document.getElementById(STYLE_ID)) {
 @keyframes im-fadeup { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes im-shine { 0% { background-position: 150% center; } 100% { background-position: -50% center; } }
 @keyframes im-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes im-float-reverse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+@keyframes im-node-ripple { 0% { opacity: .68; transform: scale(.72); } 75%, 100% { opacity: 0; transform: scale(1.65); } }
+@keyframes im-agent-pop { from { opacity: 0; transform: scale(.52); } to { opacity: 1; transform: scale(1); } }
+@keyframes im-shoot-tl { from { opacity: 0; transform: translate(-110px, -70px); } to { opacity: 1; transform: translate(0, 0); } }
 @keyframes im-shoot-tr { from { opacity: 0; transform: translate(110px, -70px); } to { opacity: 1; transform: translate(0, 0); } }
 @keyframes im-shoot-r { from { opacity: 0; transform: translate(140px, 0); } to { opacity: 1; transform: translate(0, 0); } }
+@keyframes im-shoot-br { from { opacity: 0; transform: translate(110px, 70px); } to { opacity: 1; transform: translate(0, 0); } }
 @keyframes im-shoot-bl { from { opacity: 0; transform: translate(-90px, 100px); } to { opacity: 1; transform: translate(0, 0); } }
 @keyframes im-shoot-l { from { opacity: 0; transform: translate(-140px, 0); } to { opacity: 1; transform: translate(0, 0); } }
 .im-fadeup { animation: im-fadeup 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
@@ -72,9 +90,15 @@ if (typeof document !== 'undefined' && !document.getElementById(STYLE_ID)) {
 }
 .im-shimmer-wrap--band { display: block; border-radius: 14px; }
 .im-float { animation: im-float 4s ease-in-out infinite; }
+.im-node-ripple { animation: im-node-ripple 2.4s ease-out infinite; }
+.im-node-ripple--delay { animation-delay: 1.2s; }
 .im-shoot-tr { animation: im-shoot-tr 750ms cubic-bezier(0.34, 1.56, 0.64, 1) 150ms both, im-float 4s ease-in-out 1s infinite; }
 .im-shoot-r { animation: im-shoot-r 750ms cubic-bezier(0.34, 1.56, 0.64, 1) 300ms both, im-float 4s ease-in-out 1.15s infinite; }
 .im-shoot-bl { animation: im-shoot-bl 750ms cubic-bezier(0.34, 1.56, 0.64, 1) 450ms both, im-float 4s ease-in-out 1.3s infinite; }
+.im-agent-pop { animation: im-agent-pop 650ms cubic-bezier(0.34, 1.56, 0.64, 1) 150ms both, im-float-reverse 4s ease-in-out 950ms infinite; }
+.im-cursor-tl { animation: im-shoot-tl 750ms cubic-bezier(0.34, 1.56, 0.64, 1) 180ms both, im-float 4s ease-in-out 1.03s infinite; }
+.im-cursor-br { animation: im-shoot-br 750ms cubic-bezier(0.34, 1.56, 0.64, 1) 180ms both, im-float 4s ease-in-out 1.03s infinite; }
+.im-cursor-bl { animation: im-shoot-bl 750ms cubic-bezier(0.34, 1.56, 0.64, 1) 180ms both, im-float 4s ease-in-out 1.03s infinite; }
 .im-duty-l { animation: im-shoot-l 600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both; }
 .im-duty-r { animation: im-shoot-r 600ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both; }
 .im-lift { transition: transform 180ms ease, box-shadow 180ms ease; }
@@ -89,7 +113,7 @@ if (typeof document !== 'undefined' && !document.getElementById(STYLE_ID)) {
   [class^='im-'], [class*=' im-'] { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 `;
-  document.head.appendChild(style);
+  if (!existingStyle) document.head.appendChild(style);
 }
 
 // 全 deck 統一轉場：RISE（安靜的上浮＋淡入）；封面用 SETTLE（多一絲 blur），同一家族
@@ -127,6 +151,13 @@ const fill = {
 
 /* ── Icon 系統：lucide 風格 inline SVG（與網站 about 頁 icon 同語系），不引入套件 ── */
 const ICON_PATHS: Record<string, React.ReactNode> = {
+  layers: (
+    <>
+      <polygon points="12 2 22 8.5 12 15 2 8.5" />
+      <polyline points="2 15.5 12 22 22 15.5" />
+      <polyline points="2 12 12 18.5 22 12" />
+    </>
+  ),
   search: (
     <>
       <circle cx="11" cy="11" r="8" />
@@ -223,6 +254,7 @@ const ICON_PATHS: Record<string, React.ReactNode> = {
       <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5" />
     </>
   ),
+  zap: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />,
   check: <polyline points="20 6 9 17 4 12" />,
   mail: (
     <>
@@ -343,7 +375,7 @@ const CursorTag = ({
 }) => (
   <div className={className} style={{ position: 'absolute', zIndex: 3, pointerEvents: 'none', ...style }}>
     <span style={{ display: 'inline-flex', alignItems: 'flex-start', gap: 10 }}>
-      <img src={icon} style={{ width: 30, height: 40 }} />
+      <img src={icon} alt="" style={{ width: 30, height: 40 }} />
       <span
         style={{
           padding: '8px 22px',
@@ -362,57 +394,76 @@ const CursorTag = ({
   </div>
 );
 
+const AgentGlyph = ({ src, alt, size, iconSize, entrance, style }: { src: string; alt: string; size: number; iconSize: number; entrance: string; style: React.CSSProperties }) => (
+  <div
+    className={entrance}
+    style={{
+      position: 'absolute',
+      zIndex: 2,
+      width: size,
+      height: size,
+      borderRadius: Math.round(size * 0.21),
+      background: '#ffffff',
+      border: `1px solid ${line}`,
+      boxShadow: '0 12px 32px rgba(52, 52, 52, .14)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      ...style,
+    }}
+  >
+    <img src={src} alt={alt} style={{ width: iconSize, height: iconSize, display: 'block' }} />
+  </div>
+);
+
 const Cover: Page = () => (
   <div style={{ ...fill, padding: '120px 160px', display: 'flex', gap: 100, alignItems: 'center', overflow: 'hidden' }}>
-    <img src={logo} className="im-fadeup" style={{ position: 'absolute', top: 100, left: 160, height: 56 }} />
+    <img src={logo} alt="Hming" className="im-fadeup" style={{ position: 'absolute', top: 100, left: 160, height: 56 }} />
     <div style={{ flex: 1, position: 'relative', zIndex: 2 }}>
       <div className="im-fadeup" style={{ animationDelay: '80ms' }}>
-        <span className="im-shimmer-wrap" style={{ marginBottom: 32 }}>
+        <span className="im-shimmer-wrap">
           <span
             style={{
               display: 'inline-flex',
-              padding: '12px 32px',
+              padding: '11px 28px',
               borderRadius: 200,
               background: '#f3f1ff',
-              fontSize: 26,
+              fontSize: 24,
               fontWeight: 600,
               letterSpacing: '0.14em',
               color: 'var(--osd-accent)',
             }}
           >
-            INTERVIEW · {COMPANY} · 【YYYY.MM.DD】
+            INTERVIEW · 2026.07.XX
           </span>
         </span>
       </div>
       <p
         className="im-fadeup"
-        style={{ fontSize: 44, fontWeight: 700, margin: '36px 0 0', fontFamily: 'var(--osd-font-display)', animationDelay: '160ms' }}
+        style={{ fontSize: 84, fontWeight: 700, margin: '36px 0 0', lineHeight: 1.12, fontFamily: 'var(--osd-font-display)', letterSpacing: '-0.02em', animationDelay: '140ms' }}
       >
-        黃宣銘 Hming Huang
+        黃宣銘 Brian Huang
       </p>
       <h1
         className="im-fadeup"
         style={{
           fontFamily: 'var(--osd-font-display)',
-          fontSize: 80,
+          fontSize: 64,
           fontWeight: 700,
-          lineHeight: 1.25,
-          letterSpacing: '-0.01em',
-          margin: '28px 0 0',
-          animationDelay: '240ms',
+          lineHeight: 1.08,
+          letterSpacing: '-0.025em',
+          margin: '24px 0 0',
+          animationDelay: '200ms',
         }}
       >
-        把複雜的產品問題，轉成團隊能一起推進的<span className="im-shine">設計決策</span>
+        <span className="im-shine">Product Designer</span>
       </h1>
-      <p className="im-fadeup" style={{ fontSize: 32, color: muted, marginTop: 36, lineHeight: 1.5, animationDelay: '320ms' }}>
-        Product Designer · 複雜 B2B 產品 · 【職缺名稱】面試簡報
-      </p>
     </div>
     {/* 照片後的紫色量塊，給右半邊一點深度 */}
     <div
       style={{
         position: 'absolute',
-        right: 100,
+        right: 180,
         top: 200,
         width: 560,
         height: 560,
@@ -421,310 +472,364 @@ const Cover: Page = () => (
         zIndex: 0,
       }}
     />
-    <div className="im-fadeup" style={{ position: 'relative', zIndex: 1, animationDelay: '200ms' }}>
-      <ImagePlaceholder hint="你的個人照片（半身、背景乾淨）" width={420} height={520} />
+    <div className="im-fadeup" style={{ position: 'relative', right: 80, zIndex: 1, width: 500, height: 660, marginTop: 94, flexShrink: 0, animationDelay: '200ms' }}>
+      <img src={profileSuit} alt="黃宣銘西裝形象照" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom', display: 'block' }} />
     </div>
-    <CursorTag text="使用者洞察" color="#4B7BEC" icon={cursorArrow} className="im-shoot-tr" style={{ right: 490, top: 214 }} />
-    <CursorTag text="工程可行性" color="#26DE81" icon={cursorEngineers} className="im-shoot-r" style={{ right: 96, top: 700 }} />
-    <CursorTag text="商業目標" color="#FD9644" icon={cursorPm} className="im-shoot-bl" style={{ right: 556, top: 806 }} />
+    <AgentGlyph src={figmaApp} alt="Figma" size={72} iconSize={42} entrance="im-agent-pop" style={{ right: 420, top: 166, animationDelay: '270ms, 1070ms' }} />
+    <AgentGlyph src={claudeAgent} alt="Claude" size={108} iconSize={68} entrance="im-agent-pop" style={{ right: 158, top: 320, animationDelay: '240ms, 1040ms' }} />
+    <AgentGlyph src={codexAgent} alt="Codex" size={90} iconSize={54} entrance="im-agent-pop" style={{ right: 660, top: 600, animationDelay: '150ms, 950ms' }} />
+    <CursorTag text="使用者洞察" color="#4B7BEC" icon={cursorArrow} className="im-cursor-tl" style={{ right: 570, top: 214, animationDelay: '300ms, 1150ms' }} />
+    <CursorTag text="工程可行性" color="#26DE81" icon={cursorEngineers} className="im-cursor-br" style={{ right: 120, top: 700, animationDelay: '210ms, 1060ms' }} />
+    <CursorTag text="商業目標" color="#FD9644" icon={cursorPm} className="im-cursor-bl" style={{ right: 636, top: 806, animationDelay: '180ms, 1030ms' }} />
     <Footer />
   </div>
 );
 
-/* ---------- 背景如何形成視角 ---------- */
+/* ---------- P2：About Me 的背景故事＋設計信念 ---------- */
 
-const PathCard = ({ index, title, desc, icon, delay = 0 }: { index: string; title: string; desc: string; icon: string; delay?: number }) => (
-  <div
-    className="im-fadeup"
-    style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 20, borderTop: `4px solid var(--osd-accent)`, paddingTop: 32, animationDelay: `${delay}ms` }}
-  >
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-      <Icon name={icon} size={30} />
-      <span style={{ fontSize: 26, fontWeight: 600, color: muted, letterSpacing: '0.12em' }}>{index}</span>
+const DesignValueCard = ({ icon, title, desc, color, soft, delay }: { icon: string; title: string; desc: string; color: string; soft: string; delay: string }) => (
+  <div className="im-fadeup im-lift" style={{ position: 'relative', minWidth: 0, height: 430, padding: '34px 30px', borderRadius: 16, background: surface, border: `1px solid ${line}`, boxShadow: cardShadow, overflow: 'hidden', animationDelay: delay }}>
+    <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 6, background: color }} />
+    <div style={{ width: 64, height: 64, borderRadius: 14, background: soft, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Icon name={icon} size={31} color={color} />
     </div>
-    <div style={{ fontSize: 38, fontWeight: 700 }}>{title}</div>
-    <div style={{ fontSize: 28, lineHeight: 1.55, color: muted }}>{desc}</div>
+    <div style={{ fontSize: 31, lineHeight: 1.3, fontWeight: 700, color, marginTop: 30 }}>{title}</div>
+    <div style={{ fontSize: 23, lineHeight: 1.55, color: muted, marginTop: 22 }}>{desc}</div>
   </div>
 );
 
-const Background: Page = () => (
-  <div style={{ ...fill, padding: '120px 160px' }}>
-    <Eyebrow>BACKGROUND</Eyebrow>
-    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 60, fontWeight: 700, margin: 0, lineHeight: 1.3, maxWidth: 1500 }}>
-      我習慣站在使用者、產品與工程之間，把彼此的語言轉成可執行的決策
+const AboutMe: Page = () => (
+  <div style={{ ...fill, padding: '82px 160px' }}>
+    <Eyebrow>ABOUT ME</Eyebrow>
+    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 58, fontWeight: 700, margin: 0, lineHeight: 1.2 }}>
+      我的背景，塑造了我看待設計的方式
     </h2>
     <HeadingRule />
-    <div style={{ display: 'flex', gap: 56, marginTop: 88 }}>
-      <PathCard index="機械工程" icon="wrench" title="從系統看問題" desc="習慣從結構、系統與限制理解一個問題長什麼樣" delay={120} />
-      <PathCard index="電子代工專案管理" icon="clipboard" title="理解怎麼交付" desc="排程、依賴與跨部門協作，知道一件事要上線得過哪些關" delay={240} />
-      <PathCard index="產品設計" icon="pentool" title="翻譯成體驗" desc="把需求、研究與限制，轉成使用者好懂、工程能做的設計" delay={360} />
+    <div style={{ display: 'grid', gridTemplateColumns: '500px 1fr', gap: 44, marginTop: 46 }}>
+      <div className="im-fadeup" style={{ minHeight: 520, padding: 38, borderRadius: 16, background: accentSoft, animationDelay: '100ms' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+          <div style={{ width: 118, height: 118, borderRadius: '50%', overflow: 'hidden', background: '#f4d238', boxShadow: '0 12px 28px rgba(52, 52, 52, .12)', flexShrink: 0 }}>
+            <img src={avatarYellow} alt="黃宣銘" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div>
+            <div style={{ fontSize: 21, color: 'var(--osd-accent)', fontWeight: 700, letterSpacing: '0.1em' }}>MY BACKGROUND</div>
+            <div style={{ fontSize: 28, lineHeight: 1.25, fontWeight: 700, marginTop: 10, whiteSpace: 'nowrap' }}>從工程走進產品設計</div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginTop: 34, fontSize: 21, fontWeight: 600 }}>
+          <span style={{ padding: '9px 14px', borderRadius: 999, background: '#ffffff' }}>機械工程</span>
+          <span style={{ color: 'var(--osd-accent)' }}>→</span>
+          <span style={{ padding: '9px 14px', borderRadius: 999, background: '#ffffff' }}>ODM 專案管理</span>
+          <span style={{ color: 'var(--osd-accent)' }}>→</span>
+          <span style={{ padding: '9px 14px', borderRadius: 999, background: '#ffffff' }}>UIUX</span>
+        </div>
+        <p style={{ fontSize: 24, lineHeight: 1.55, margin: '30px 0 0' }}>
+          這段跨領域歷程，讓我習慣站在工程與使用者中間，把需求與技術限制轉成能落地的設計決策。
+        </p>
+        <div style={{ borderTop: '1px solid rgba(93, 98, 216, .18)', marginTop: 30, paddingTop: 24 }}>
+          <div style={{ fontSize: 19, color: muted, letterSpacing: '0.12em' }}>PERSONALITY</div>
+          <div style={{ fontSize: 27, fontWeight: 700, color: 'var(--osd-accent)', marginTop: 10 }}>好奇理解 · 同理溝通 · 務實落地</div>
+        </div>
+      </div>
+      <div>
+        <div style={{ fontSize: 22, color: muted, letterSpacing: '0.12em', marginBottom: 18 }}>我的設計信念</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 20 }}>
+          <DesignValueCard icon="layers" title="跨領域的眼界" desc="同時理解產品結構、技術限制與人的使用感受，從不同角色之間看見容易被忽略的機會。" color="#5d62d8" soft="rgba(93, 98, 216, .10)" delay="160ms" />
+          <DesignValueCard icon="search" title="理解優先於解法" desc="開始設計之前，先釐清問題成因、使用者動機與現實限制，避免只解決表面的症狀。" color="#e8856b" soft="rgba(232, 133, 107, .12)" delay="240ms" />
+          <DesignValueCard icon="zap" title="讓複雜變成直覺" desc="產品邏輯可以複雜，但使用者應該能快速理解下一步，順利完成真正想做的事情。" color="#3a9f78" soft="rgba(58, 159, 120, .12)" delay="320ms" />
+        </div>
+      </div>
     </div>
     <Footer />
   </div>
 );
 
-/* ---------- 核心能力與案例證據 ---------- */
+/* ---------- P3–P5：同一條職涯主線，逐頁說明工作與累積的經驗 ---------- */
 
-const AbilityCard = ({ title, desc, evidence, icon, delay = 0 }: { title: string; desc: string; evidence: string; icon: string; delay?: number }) => (
-  <div
-    className="im-fadeup im-lift"
-    style={{
-      flex: 1,
-      background: surface,
-      border: `1px solid ${line}`,
-      borderRadius: 'var(--osd-radius)',
-      padding: '44px 40px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 24,
-      boxShadow: cardShadow,
-      animationDelay: `${delay}ms`,
-    }}
-  >
-    <IconChip name={icon} />
-    <div style={{ fontSize: 36, fontWeight: 700 }}>{title}</div>
-    <div style={{ fontSize: 28, lineHeight: 1.55, color: muted }}>{desc}</div>
-    <div style={{ fontSize: 26, lineHeight: 1.55, color: 'var(--osd-accent)', fontWeight: 600, marginTop: 'auto' }}>
-      {evidence}
+const careerStages = [
+  { company: 'TBA', date: '2022.11–2023.02', image: tbaLogo, imageAlt: 'Taiwan Blockchain Academia' },
+  { company: 'Crypto Arsenal', date: '2023.03–10', image: cryptoArsenalLogo, imageAlt: 'Crypto Arsenal' },
+  { company: 'Advantech', date: '2024.06–08', image: advantechLogo, imageAlt: 'Advantech' },
+] as const;
+
+const CareerTimeline = ({ active }: { active: number }) => (
+  <div className="im-fadeup" style={{ position: 'relative', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', marginTop: 34, animationDelay: '100ms' }}>
+    <div style={{ position: 'absolute', left: 28, right: 28, top: 35, height: 4, background: line }} />
+    {careerStages.map((stage, index) => {
+      const isActive = index === active;
+      return (
+        <div key={stage.company} style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 20 }}>
+          <span style={{ position: 'relative', zIndex: 1, width: 70, height: 70, borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ffffff', border: `3px solid ${isActive ? 'var(--osd-accent)' : '#d8d8dc'}`, boxShadow: isActive ? '0 0 0 8px rgba(93, 98, 216, .12)' : 'none', overflow: 'hidden' }}>
+            <img src={stage.image} alt={stage.imageAlt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', opacity: isActive ? 1 : 0.45 }} />
+          </span>
+          <div style={{ position: 'relative', zIndex: 1, background: '#ffffff', paddingRight: 22 }}>
+            <div style={{ fontSize: 23, fontWeight: 700, color: isActive ? 'var(--osd-accent)' : muted }}>{stage.company}</div>
+            <div style={{ fontSize: 19, color: muted, marginTop: 4 }}>{stage.date}</div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+);
+
+const WorkPoint = ({ index, title, detail }: { index: string; title: string; detail: React.ReactNode }) => (
+  <div style={{ display: 'grid', gridTemplateColumns: '54px 1fr', gap: 20, padding: '20px 0', borderTop: `1px solid ${line}` }}>
+    <div style={{ fontSize: 21, color: 'var(--osd-accent)', fontWeight: 700 }}>{index}</div>
+    <div>
+      <div style={{ fontSize: 27, fontWeight: 700 }}>{title}</div>
+      <div style={{ fontSize: 23, lineHeight: 1.45, color: muted, marginTop: 6 }}>{detail}</div>
     </div>
   </div>
 );
 
-const Abilities: Page = () => (
-  <div style={{ ...fill, padding: '120px 160px' }}>
-    <Eyebrow>WHAT I DO BEST</Eyebrow>
-    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 72, fontWeight: 700, margin: 0, lineHeight: 1.2 }}>
-      拆清楚問題、轉成決策、推進上線
-    </h2>
-    <HeadingRule />
-    <div style={{ display: 'flex', gap: 48, marginTop: 64 }}>
-      <AbilityCard
-        icon="search"
-        title="拆解複雜問題"
-        desc="整理使用者、商業與技術限制，確認真正要解的問題"
-        evidence="Advantech：訪談把被動問答的 Chatbot，收斂成主動決策支援"
-        delay={120}
-      />
-      <AbilityCard
-        icon="branch"
-        title="把研究轉成決策"
-        desc="讓研究不停在洞察，而是影響優先順序與設計方向"
-        evidence="Advantech：以超約預警與模式識別，把研究變成 PM 能評估的方案"
-        delay={240}
-      />
-      <AbilityCard
-        icon="send"
-        title="推進到可交付"
-        desc="用 prototype、Design System 與 handoff，把設計推到可驗證、可上線"
-        evidence="Crypto Arsenal：核心交易流程與 20+ 頁 RWD 上線，對齊 Storybook 命名"
-        delay={360}
-      />
-    </div>
-    <Footer />
-  </div>
-);
-
-/* ---------- 案例鉤子：兩案各證明一件事 ---------- */
-
-const CaseCard = ({
-  name,
-  tag,
-  hook,
-  role,
-  status,
-  delay = 0,
-}: {
-  name: string;
-  tag: string;
-  hook: string;
+type CareerChapterProps = {
+  active: number;
+  title: string;
+  field: string;
   role: string;
-  status: string;
-  delay?: number;
-}) => (
-  <div
-    className="im-fadeup im-lift"
-    style={{
-      flex: 1,
-      position: 'relative',
-      background: surface,
-      border: `1px solid ${line}`,
-      borderRadius: 'var(--osd-radius)',
-      padding: '48px 44px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 24,
-      boxShadow: cardShadow,
-      animationDelay: `${delay}ms`,
-    }}
-  >
-    <span className="im-arrow" style={{ position: 'absolute', top: 40, right: 44, fontSize: 40, color: 'var(--osd-accent)' }}>
-      ↗
-    </span>
-    <div style={{ fontSize: 24, fontWeight: 600, letterSpacing: '0.14em', color: 'var(--osd-accent)' }}>{tag}</div>
-    <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 700, lineHeight: 1.25 }}>{name}</div>
-    <div style={{ fontSize: 30, lineHeight: 1.55 }}>{hook}</div>
-    <div style={{ fontSize: 24, lineHeight: 1.5, color: muted, marginTop: 'auto' }}>{role}</div>
-    <div style={{ fontSize: 24, lineHeight: 1.5, color: muted }}>{status}</div>
+  context: string;
+  points: Array<{ title: string; detail: string }>;
+  takeaway: string;
+};
+
+const CareerChapter = ({ active, title, field, role, context, points, takeaway }: CareerChapterProps) => {
+  const stage = careerStages[active];
+  return (
+    <div style={{ ...fill, padding: '78px 160px' }}>
+      <Eyebrow>CAREER JOURNEY · 0{active + 1}/03</Eyebrow>
+      <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 54, fontWeight: 700, margin: 0, lineHeight: 1.2, maxWidth: 1540 }}>{title}</h2>
+      <CareerTimeline active={active} />
+      <div className="im-fadeup" style={{ display: 'grid', gridTemplateColumns: '430px 1fr', gap: 66, marginTop: 46, animationDelay: '220ms' }}>
+        <div style={{ background: accentSoft, borderRadius: 16, padding: 34, minHeight: 388 }}>
+          <div style={{ width: 108, height: 108, borderRadius: 20, overflow: 'hidden', background: '#ffffff', boxShadow: cardShadow }}>
+            <img src={stage.image} alt={stage.imageAlt} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+          </div>
+          <div style={{ fontSize: 37, fontWeight: 700, marginTop: 24 }}>{stage.company}</div>
+          <div style={{ fontSize: 23, color: 'var(--osd-accent)', fontWeight: 600, marginTop: 8 }}>{role}</div>
+          <div style={{ fontSize: 25, color: muted, marginTop: 8 }}>{field}</div>
+          <div style={{ fontSize: 23, lineHeight: 1.45, marginTop: 24 }}>{context}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 21, color: muted, letterSpacing: '0.12em', marginBottom: 10 }}>我實際做了什麼</div>
+          {points.map((point, index) => <WorkPoint key={point.title} index={`0${index + 1}`} title={point.title} detail={point.detail} />)}
+          <div style={{ marginTop: 18, padding: '18px 24px', borderRadius: 12, background: surface, borderLeft: '5px solid var(--osd-accent)', fontSize: 25, lineHeight: 1.4 }}>
+            <strong style={{ color: 'var(--osd-accent)' }}>累積的經驗：</strong>{takeaway}
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+const TbaJourney: Page = () => (
+  <CareerChapter
+    active={0}
+    title="先理解陌生場域，才能定義對的產品問題"
+    role="Product Designer"
+    field="Web3／DID 證書平台"
+    context="以 Web3／DID 概念設計的數位證書平台。"
+    points={[
+      { title: '釐清角色與使用情境', detail: '完成 9 次角色訪談，整理不同利害關係人的需求與認知差異。' },
+      { title: '和 PM 收斂產品定位', detail: '把研究發現帶回團隊，重新對齊核心使用者與產品價值。' },
+      { title: '用原型修正核心流程', detail: '將定位轉成操作流程，透過回饋持續調整設計假設。' },
+    ]}
+    takeaway="研究不是證明原本的想法，而是幫助團隊修正假設。"
+  />
+);
+
+const CryptoJourney: Page = () => (
+  <CareerChapter
+    active={1}
+    title="設計不只提出方案，也要和團隊一起上線"
+    role="UIUX & PM Intern"
+    field="量化交易產品"
+    context="提供量化策略與自動化交易功能的加密貨幣交易平台。"
+    points={[
+      { title: '把站外操作收回產品內', detail: '整理原本需要人工介入的步驟，重新設計可在站內完成的核心流程。' },
+      { title: '與工程協作完成交付', detail: '處理 20+ 響應式頁面，並和跨職能團隊推進功能實作。' },
+      { title: '用測試確認流程效率', detail: <>3 項核心流程上線；5 人內部測試由 <span className="im-shine" style={{ fontWeight: 700 }}>約 65 秒縮短至 27 秒</span>。</> },
+    ]}
+    takeaway="設計只有進入真實產品、被團隊交付，才算完成。"
+  />
+);
+
+const AdvantechJourney: Page = () => (
+  <CareerChapter
+    active={2}
+    title="把研究證據，轉成團隊能評估的產品方案"
+    role="UIUX Design Intern"
+    field="B2B AI 能源管理"
+    context="整合 GenAI 的 B2B 能源管理系統，協助人員處理異常與用電資訊。"
+    points={[
+      { title: '理解真實能源管理工作', detail: '訪談內部機電人員與外部系統整合商，整理異常處理與用電管理需求。' },
+      { title: '重新整理 GenAI 使用情境', detail: '將被動問答概念轉成異常提醒、排除建議與超約預警等主動支援。' },
+      { title: '透過三階段提案推進', detail: '以研究、原型與產品影片溝通方案；超約預警於實習結束前啟動後端實作。' },
+    ]}
+    takeaway="洞察要變成可比較、可取捨、能推進的方案，才會影響產品決策。"
+  />
+);
+
+/* ---------- P6：三段經驗收斂成工作方法＋近期 AI 協作界線 ---------- */
+
+const MethodStep = ({ index, icon, title, detail }: { index: string; icon: string; title: string; detail: string }) => (
+  <div style={{ flex: 1, padding: '34px 32px', borderLeft: `1px solid ${line}` }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <IconChip name={icon} />
+      <span style={{ fontSize: 22, color: muted }}>{index}</span>
+    </div>
+    <div style={{ fontSize: 34, fontWeight: 700, marginTop: 28 }}>{title}</div>
+    <div style={{ fontSize: 25, lineHeight: 1.5, color: muted, marginTop: 14 }}>{detail}</div>
   </div>
 );
 
-const CasesOverview: Page = () => (
-  <div style={{ ...fill, padding: '120px 160px' }}>
-    <Eyebrow>SELECTED WORK</Eyebrow>
-    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 72, fontWeight: 700, margin: 0, lineHeight: 1.2 }}>
-      兩個案例，各證明一件事
+const Method: Page = () => (
+  <div style={{ ...fill, padding: '96px 160px' }}>
+    <Eyebrow>HOW I WORK</Eyebrow>
+    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 58, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
+      三段經驗，最後收斂成我現在的四步工作方式
     </h2>
     <HeadingRule />
-    <div style={{ display: 'flex', gap: 64, marginTop: 64 }}>
-      <CaseCard
-        name="Advantech AI Chatbot"
-        tag="產品判斷與研究轉化"
-        hook="訪談讓 AI 從等人提問，轉向主動提醒該先處理什麼。"
-        role="2024 · UIUX 設計實習生 · 2.5 個月"
-        status="三階段 POC；超約預警於實習結束前啟動後端實作"
-        delay={120}
-      />
-      <CaseCard
-        name="Crypto Arsenal"
-        tag="跨職能推進與正式上線"
-        hook="把站外手動操作搬回產品內，並對齊設計與工程的元件語言。"
-        role="2023 · UIUX & PM 實習生 · 8 個月"
-        status="核心交易流程與 20+ 個 RWD 頁面正式上線"
-        delay={240}
-      />
+    <div className="im-fadeup" style={{ display: 'flex', marginTop: 50, background: surface, border: `1px solid ${line}`, borderRadius: 16, overflow: 'hidden', boxShadow: cardShadow, animationDelay: '120ms' }}>
+      <MethodStep index="01" icon="search" title="理解場域" detail="使用者、產品脈絡與現實限制" />
+      <MethodStep index="02" icon="target" title="定義問題" detail="驗證假設，找出真正優先的問題" />
+      <MethodStep index="03" icon="branch" title="轉成方案" detail="把證據變成可評估流程與 prototype" />
+      <MethodStep index="04" icon="send" title="推進驗證" detail="透過 handoff、系統與檢查完成交付" />
     </div>
-    <p style={{ fontSize: 26, color: muted, marginTop: 48 }}>接下來可依職缺需求，深入其中一個案例。</p>
+    <div className="im-fadeup" style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 48, marginTop: 34, padding: '30px 36px', background: accentSoft, borderRadius: 16, animationDelay: '260ms' }}>
+      <div style={{ display: 'flex', gap: 20 }}>
+        <Icon name="usercheck" size={34} />
+        <div><div style={{ fontSize: 25, fontWeight: 700 }}>我負責</div><div style={{ fontSize: 25, lineHeight: 1.5, marginTop: 8 }}>問題、優先順序、設計取捨、驗收與最終責任</div></div>
+      </div>
+      <div style={{ display: 'flex', gap: 20 }}>
+        <Icon name="cpu" size={34} />
+        <div><div style={{ fontSize: 25, fontWeight: 700 }}>近期 AI 協助</div><div style={{ fontSize: 25, lineHeight: 1.5, marginTop: 8 }}>盤點、規格執行、重複產出、指定檢查</div></div>
+      </div>
+    </div>
     <Footer />
   </div>
 );
 
-/* ---------- AI 與本人的責任邊界 ---------- */
+/* ---------- P7：人性的一面，以 About educator bento 呈現 ---------- */
 
-const DutyItem = ({ text }: { text: string }) => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 30, lineHeight: 1.5 }}>
-    <Icon name="check" size={26} />
-    <span>{text}</span>
-  </div>
-);
-
-const DutyCard = ({ title, items, icon, entrance }: { title: string; items: [string, string, string, string]; icon: string; entrance: string }) => (
-  <div
-    className={entrance}
-    style={{
-      flex: 1,
-      background: surface,
-      border: `1px solid ${line}`,
-      borderRadius: 'var(--osd-radius)',
-      padding: '44px 48px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 24,
-      boxShadow: cardShadow,
-    }}
-  >
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 34, fontWeight: 700, color: 'var(--osd-accent)' }}>
-      <Icon name={icon} size={34} />
-      <span>{title}</span>
+const CommunityTile = ({ image, eyebrow, title, metric, style }: { image: string; eyebrow: string; title: string; metric: string; style: React.CSSProperties }) => (
+  <div className="im-fadeup" style={{ position: 'relative', overflow: 'hidden', borderRadius: 16, background: '#222222', ...style }}>
+    <img src={image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,.82), rgba(0,0,0,0) 62%)' }} />
+    <div style={{ position: 'absolute', left: 30, right: 30, bottom: 26, color: '#ffffff' }}>
+      <div style={{ fontSize: 19, letterSpacing: '0.12em', opacity: 0.78 }}>{eyebrow}</div>
+      <div style={{ fontSize: 30, fontWeight: 700, marginTop: 8 }}>{title}</div>
     </div>
-    <DutyItem text={items[0]} />
-    <DutyItem text={items[1]} />
-    <DutyItem text={items[2]} />
-    <DutyItem text={items[3]} />
+    <div style={{ position: 'absolute', top: 24, right: 24, padding: '8px 16px', borderRadius: 999, background: '#ffffff', color: 'var(--osd-accent)', fontSize: 21, fontWeight: 700 }}>{metric}</div>
   </div>
 );
 
-const AiBoundary: Page = () => (
-  <div style={{ ...fill, padding: '120px 160px' }}>
-    <Eyebrow>WORKING WITH AI</Eyebrow>
-    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 60, fontWeight: 700, margin: 0, lineHeight: 1.3, maxWidth: 1500 }}>
-      AI 可以加速執行，但問題、取捨與最後責任不能外包
+const Community: Page = () => (
+  <div style={{ ...fill, padding: '84px 160px' }}>
+    <Eyebrow>BEYOND WORK</Eyebrow>
+    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 55, fontWeight: 700, margin: 0, lineHeight: 1.25, maxWidth: 1500 }}>
+      我也把設計方法，變成別人能一起使用的東西
     </h2>
-    <HeadingRule />
-    <div style={{ display: 'flex', gap: 48, marginTop: 64 }}>
-      <DutyCard title="我負責" icon="usercheck" items={['定義問題與目標', '優先順序與設計取捨', '訂驗收條件', '最終品質與責任']} entrance="im-duty-l" />
-      <DutyCard title="AI 協助" icon="cpu" items={['大量盤點與整理', '規格清楚的執行', '重複性的產出', '指定項目的檢查']} entrance="im-duty-r" />
+    <div style={{ display: 'grid', gridTemplateColumns: '1.62fr 1fr', gridTemplateRows: '235px 235px', gap: 22, marginTop: 42 }}>
+      <CommunityTile image={openhciPhoto} eyebrow="OPENHCI 2024 · 設計組組長" title="帶領設計思考集訓" metric="40 位學員" style={{ gridRow: '1 / span 2' }} />
+      <CommunityTile image={nccuPhoto} eyebrow="NCCU · 課程助教" title="Figma 教學與專案回饋" metric="60 位／20 組" style={{}} />
+      <CommunityTile image={hackathonPhoto} eyebrow="EVOLUTION · 共同籌備" title="陪學員把想法做出來" metric="16 位學員" style={{}} />
     </div>
+    <div style={{ fontSize: 25, color: muted, marginTop: 24 }}>說清楚、給具體回饋，也陪團隊一起完成。</div>
     <Footer />
   </div>
 );
 
-/* ---------- 公司／JD 客製收尾＋轉場 ---------- */
+/* ---------- P8：公司／JD 客製契合鏈 ---------- */
 
-const FitRow = ({ lead, text, icon, delay = 0 }: { lead: string; text: string; icon: string; delay?: number }) => (
-  <div className="im-fadeup" style={{ display: 'flex', gap: 64, borderTop: `1px solid ${line}`, paddingTop: 32, animationDelay: `${delay}ms` }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 28, fontWeight: 600, color: 'var(--osd-accent)', width: 240, flexShrink: 0 }}>
-      <Icon name={icon} size={28} />
-      <span>{lead}</span>
-    </div>
-    <div style={{ fontSize: 32, lineHeight: 1.5 }}>{text}</div>
+const FitRow = ({ lead, text, icon }: { lead: string; text: string; icon: string }) => (
+  <div style={{ display: 'grid', gridTemplateColumns: '230px 1fr', gap: 34, alignItems: 'center', minHeight: 112, borderTop: `1px solid ${line}` }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 25, fontWeight: 600, color: 'var(--osd-accent)' }}><Icon name={icon} size={28} />{lead}</div>
+    <div style={{ fontSize: 29, lineHeight: 1.45 }}>{text}</div>
   </div>
 );
 
 const FitClose: Page = () => (
-  <div style={{ ...fill, padding: '120px 160px' }}>
+  <div style={{ ...fill, padding: '96px 160px' }}>
     <Eyebrow>WHY THIS ROLE</Eyebrow>
-    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 64, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
-      這些能力，剛好對上{COMPANY}現在要解的題
+    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 58, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
+      我的經驗，如何回應{COMPANY}現在的題目
     </h2>
     <HeadingRule />
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 32, marginTop: 56 }}>
-      <FitRow lead="我觀察到" icon="eye" text="【公司產品】正在處理【需補充：產品或市場挑戰】" delay={120} />
-      <FitRow lead="這個職缺需要" icon="target" text="【需補充：職缺的核心需求】" delay={240} />
-      <FitRow lead="我能帶進來的" icon="briefcase" text="我在【相關案例】做過【需補充：對應的經驗】，可以直接用在【需補充：對方的哪件事】" delay={360} />
+    <div style={{ display: 'grid', gridTemplateColumns: '500px 1fr', gap: 72, marginTop: 50 }}>
+      <div className="im-fadeup" style={{ minHeight: 464, background: accentSoft, borderRadius: 16, padding: 48, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div><div style={{ fontSize: 23, color: 'var(--osd-accent)', fontWeight: 600 }}>COMPANY / PRODUCT</div><div style={{ fontSize: 46, fontWeight: 700, marginTop: 20 }}>{COMPANY}</div></div>
+        <ImagePlaceholder hint="公司產品畫面／Logo" width={404} height={230} />
+      </div>
+      <div>
+        <FitRow lead="產品觀察" icon="eye" text="【公司產品】正在處理【具體產品／市場問題】" />
+        <FitRow lead="JD 真需求" icon="target" text="這個職缺最需要【一項關鍵能力】" />
+        <FitRow lead="相近證據" icon="briefcase" text="我在【案例】曾【真實行動／結果】" />
+        <FitRow lead="可帶入價值" icon="send" text="把【能力】用在【具體產品／團隊情境】" />
+      </div>
     </div>
     <Footer />
   </div>
 );
 
-/* ---------- 加入後的前六週（What）＋轉場 ---------- */
+/* ---------- P9：可依公司階段調整的前六週 ---------- */
+
+const WeekCard = ({ period, title, action, output, icon }: { period: string; title: string; action: string; output: string; icon: string }) => (
+  <div style={{ flex: 1, position: 'relative', paddingTop: 52 }}>
+    <div style={{ position: 'absolute', top: -14, left: 0, width: 30, height: 30, borderRadius: '50%', background: 'var(--osd-accent)', border: '7px solid #ffffff', boxShadow: `0 0 0 2px var(--osd-accent)` }} />
+    <div style={{ display: 'flex', alignItems: 'center', gap: 14, color: 'var(--osd-accent)', fontSize: 23, fontWeight: 600 }}><Icon name={icon} size={28} />{period}</div>
+    <div style={{ fontSize: 38, fontWeight: 700, marginTop: 20 }}>{title}</div>
+    <div style={{ fontSize: 27, lineHeight: 1.5, color: muted, marginTop: 18 }}>{action}</div>
+    <div style={{ marginTop: 26, padding: '20px 22px', borderRadius: 12, background: accentSoft, fontSize: 25, color: 'var(--osd-accent)', fontWeight: 600 }}>產出｜{output}</div>
+  </div>
+);
 
 const WhatNext: Page = () => (
-  <div style={{ ...fill, padding: '120px 160px' }}>
+  <div style={{ ...fill, padding: '96px 160px' }}>
     <Eyebrow>FIRST 6 WEEKS</Eyebrow>
-    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 64, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
-      加入後的前六週，我會這樣開始
-    </h2>
+    <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 60, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>加入後的前六週，我會這樣開始</h2>
     <HeadingRule />
-    <div style={{ display: 'flex', gap: 56, marginTop: 56 }}>
-      <PathCard index="第 1–2 週" icon="search" title="理解產品與用戶" desc="深入研究【公司產品】的既有流程，釐清體驗痛點，建立基本判斷" delay={120} />
-      <PathCard index="第 3–4 週" icon="box" title="接手完整任務" desc="在真實的工作流程裡，找到自己能發揮的節奏和位置" delay={240} />
-      <PathCard index="第 5–6 週" icon="bulb" title="提出具體建議" desc="研究競品、找出差異化機會，整理成能和團隊討論的建議" delay={360} />
+    <div className="im-fadeup" style={{ position: 'relative', display: 'flex', gap: 68, marginTop: 88 }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 4, background: 'var(--osd-accent)' }} />
+      <WeekCard period="第 1–2 週" icon="search" title="理解" action="理解【核心流程】、使用者、商業目標與團隊決策方式" output="脈絡與問題地圖" />
+      <WeekCard period="第 3–4 週" icon="box" title="參與" action="跟著真實任務協作，接手一個邊界清楚的問題" output="可評估的設計產出" />
+      <WeekCard period="第 5–6 週" icon="bulb" title="提出" action="整理觀察、機會與待驗證假設，和團隊對齊下一步" output="討論用建議" />
     </div>
-    <p className="im-fadeup" style={{ fontSize: 26, lineHeight: 1.55, color: muted, marginTop: 40, maxWidth: 1500, animationDelay: '480ms' }}>
-      計畫會依團隊階段彈性調整；也不確定這些方向和你們現在的規劃有多少交集，最後問答想多了解團隊目前的重心。
-    </p>
-    {/* 轉場帶套上與封面徽章同款的 shimmer 邊框，首尾呼應 */}
-    <div className="im-fadeup" style={{ marginTop: 40, animationDelay: '600ms' }}>
-      <div className="im-shimmer-wrap im-shimmer-wrap--band">
-        <div
-          style={{
-            background: accentSoft,
-            borderRadius: 'var(--osd-radius)',
-            padding: '32px 44px',
-            fontSize: 32,
-            lineHeight: 1.5,
-            fontWeight: 600,
-            color: 'var(--osd-accent)',
-          }}
-        >
-          接下來，我想用【主案例】說明我是如何做判斷、取捨並推進交付。
-        </div>
+    <p style={{ fontSize: 24, color: muted, marginTop: 42 }}>這是根據公開資訊提出的起點，實際方向會依團隊目前的重心調整。</p>
+    <Footer />
+  </div>
+);
+
+/* ---------- P10：Contact 語彙的安靜收尾，不放 QR Code ---------- */
+
+const ContactMethodRow = ({ icon, label, value }: { icon: string; label: string; value: string }) => (
+  <div style={{ display: 'grid', gridTemplateColumns: '64px 150px 1fr', alignItems: 'center', gap: 20, minHeight: 88, borderTop: `1px solid ${line}` }}>
+    <div style={{ width: 54, height: 54, borderRadius: 12, background: accentSoft, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name={icon} size={28} /></div>
+    <div style={{ fontSize: 22, color: muted }}>{label}</div>
+    <div style={{ fontSize: 26, fontWeight: 600 }}>{value}</div>
+  </div>
+);
+
+const ThankYou: Page = () => (
+  <div style={{ ...fill, overflow: 'hidden' }}>
+    <div style={{ height: 380, position: 'relative', overflow: 'hidden' }}>
+      <img src={contactHero} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.16)' }} />
+      <img src={logo} alt="Hming" style={{ position: 'absolute', top: 72, left: 160, height: 54, filter: 'brightness(0) invert(1)' }} />
+    </div>
+    <div style={{ height: 700, background: surface, padding: '72px 160px 64px', display: 'grid', gridTemplateColumns: '1fr 760px', gap: 100 }}>
+      <div className="im-fadeup">
+        <div style={{ fontSize: 24, color: 'var(--osd-accent)', fontWeight: 600, letterSpacing: '0.14em' }}>THANK YOU</div>
+        <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 96, lineHeight: 1.05, margin: '26px 0 0', fontWeight: 700 }}>謝謝聆聽</h2>
+        <p style={{ fontSize: 31, color: muted, marginTop: 30 }}>期待進一步交流。</p>
+        <p style={{ fontSize: 24, color: muted, marginTop: 68 }}>黃宣銘 Hming Huang · Product Designer</p>
+      </div>
+      <div style={{ alignSelf: 'start' }}>
+        <ContactMethodRow icon="globe" label="PORTFOLIO" value="hmingdesign.com" />
+        <ContactMethodRow icon="mail" label="EMAIL" value="hmingdesigner@gmail.com" />
+        <ContactMethodRow icon="usercheck" label="LINKEDIN" value="linkedin.com/in/brian-huang-a36759128" />
       </div>
     </div>
-    <div
-      className="im-fadeup"
-      style={{ display: 'flex', alignItems: 'center', gap: 40, fontSize: 24, color: muted, marginTop: 36, animationDelay: '700ms' }}
-    >
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
-        <Icon name="globe" size={24} color={muted} />
-        hmingdesign.com
-      </span>
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
-        <Icon name="mail" size={24} color={muted} />
-        hmingdesigner@gmail.com
-      </span>
-    </div>
-    <Footer />
   </div>
 );
 
@@ -734,4 +839,4 @@ export const meta: SlideMeta = {
   createdAt: '2026-07-18T19:28:36.771Z',
 };
 
-export default [Cover, Background, Abilities, CasesOverview, AiBoundary, FitClose, WhatNext] satisfies Page[];
+export default [Cover, AboutMe, TbaJourney, CryptoJourney, AdvantechJourney, Method, Community, FitClose, WhatNext, ThankYou] satisfies Page[];
