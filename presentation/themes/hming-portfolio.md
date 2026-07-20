@@ -115,8 +115,10 @@ description: <公司名>面試用品牌皮
 3. 複製公版：`cp -r slides/intro-master slides/intro-<公司>`（專案簡報同理：`case-advantech` → `case-advantech-<公司>`）。
 4. 改副本 `index.tsx` **頂部 BRAND TOKENS 區塊**：`FONT_LINK_ID`（換成新 slide id）、`design` palette 與 fonts、`accentSoft`、`COMPANY`、`FONT_HREF`；以及最上方的 `logo` import 路徑。頁面 JSX 一律不動。
 5. 改 `meta`：`title` 加公司名、`theme: 'company-<公司>'`。
-6. 填【公司名】相關內容：封面日期、職缺名稱、「為什麼是我」三個理由。
-7. dev server 逐頁截圖驗證（字體 fallback、對比、無爆版）。
+6. **封面客製（intro deck，2026-07-20 Hming 拍板）**：封面左上 logo 換成**對方公司 logo**、大字「Product Designer」改成**該公司職缺名稱**、eyebrow 日期改面試日；封面維持人名主導。
+7. 填其餘公司內容：FitClose 契合鏈四行（觀察／JD 需求／證據／價值）、前六週的【核心流程】。
+8. **動畫色一起換**：shimmer 徽章的紫（`#c4b5fd`／`#5d62d8`）與流光 `im-shine` 漸層色寫在注入的動畫 CSS 內（`STYLE_ID` 區塊），不在 BRAND TOKENS——換品牌時要同步改；封面游標標籤三色（藍綠橘）為固定語彙，可不換。
+9. dev server 逐頁截圖驗證（字體 fallback、對比、無爆版）。
 
 ### 機制限制（為什麼是複製而不是切換器）
 
