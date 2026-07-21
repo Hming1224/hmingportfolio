@@ -94,5 +94,10 @@ ds-bundle/
 /docs/reviews/
 /docs/design-system/audit/
 /docs/public-repo-readiness.md
+/docs/design-system/08-ai-implementation-rules.md
+/docs/design-system/09-integrated-workflow.md
+/docs/design-system/10-catalog-audit.md
+/docs/design-system/11-usage-api-audit.md
+/docs/design-system/MANIFEST.txt
 /scripts/capture-brand-film.mjs
 /scripts/build-brand-film-animatic.mjs

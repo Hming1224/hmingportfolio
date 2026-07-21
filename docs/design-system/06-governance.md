@@ -189,18 +189,7 @@ Boundaries:
 
 ## AI / Agent Governance
 
-所有 AI / Agent 修改 code 前，必須先閱讀：
-
-```txt
-docs/design-system/design-system.md
-docs/design-system/02-tokens.md
-docs/design-system/03-components.md
-docs/design-system/04-case-study-patterns.md
-docs/design-system/05-accessibility.md
-docs/design-system/08-ai-implementation-rules.md
-```
-
-Design System 落地禁止一次大改，必須依照 `audit/implementation-task-order.md` 分成 audit、low-risk token fix、shared components、case study pages、visual QA 五階段處理。
+設計系統修改應從現況 audit 開始，限定在單一路由、元件或 token 範圍內，並在合併前完成 lint、token、build 與相關 route checks。
 
 任何 AI 任務完成後，必須回報：
 

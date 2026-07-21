@@ -1,8 +1,9 @@
 import os
 import re
 import sys
+from pathlib import Path
 
-WORKSPACE = '/Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio'
+WORKSPACE = str(Path(__file__).resolve().parents[1])
 PUBLIC_DIR = os.path.join(WORKSPACE, 'public')
 
 dirs_to_scan = [
