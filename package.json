@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "start:test": "next start -p 3100",
-    "lint": "eslint",
+    "lint": "eslint app components data i18n lib proxy.ts next.config.ts",
     "check:tokens": "node scripts/check-design-tokens.mjs",
     "verify:quick": "git diff --check && npm run lint && npm run check:tokens",
     "verify:build": "npm run verify:quick && npm run build",

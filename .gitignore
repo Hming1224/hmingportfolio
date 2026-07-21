@@ -47,15 +47,26 @@ next-env.d.ts
 
 # local agent / tool config
 .claude/
-.codex/*
-!.codex/hooks.json
+.agents/
+.codex/
+.vscode/
 .playwright-mcp/
+
+# private collaboration instructions and memory
+/AGENTS.md
+/CLAUDE.md
+/Memory.md
 
 # design iterations — 自動截圖 hook 已停用，整個資料夾不進 git
 /iterations/
 
 # Crypto Arsenal 案例頁製作暫存（Figma 驗證 render、影片 poster、影片工作檔）— 不進 git，定版後另匯出最終素材
 public/projects/*/_staging/
+
+# historical prototypes and raw exports kept outside the public code snapshot
+/variants/
+public/projects/*/_figma-raw/
+public/projects/design-system-case-study/source/
 
 # git worktree directory
 /.worktrees/
@@ -65,3 +76,23 @@ tmp/
 
 # Browser Control 本地執行診斷 — 不進 git
 /reports/runs/
+
+# design-sync
+.ds-sync/
+ds-bundle/
+/.design-sync/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+
+# private presentation and brand-film production workspaces
+/presentation/
+/docs/brand-film/
+
+# internal planning, review, and publication-preparation artifacts
+/docs/plans/
+/docs/reviews/
+/docs/design-system/audit/
+/docs/public-repo-readiness.md
+/scripts/capture-brand-film.mjs
+/scripts/build-brand-film-animatic.mjs
