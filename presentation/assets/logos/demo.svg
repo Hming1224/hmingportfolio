@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 56">
-  <rect width="56" height="56" rx="14" fill="#0d7a68"/>
-  <path d="M16 38V18h10a10 10 0 0 1 0 20H16zm6-6h4a4 4 0 0 0 0-8h-4v8z" fill="#ffffff"/>
-  <text x="72" y="40" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700" fill="#0d7a68">DemoCo</text>
-</svg>
