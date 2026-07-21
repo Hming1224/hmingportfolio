@@ -632,3 +632,11 @@ Files: `app/globals.css`、`app/advantech/page.tsx`、`components/CaseTOC.tsx`(�
 - **假目標 1 — core-js polyfill chunk（38.6KB gzip）**：那是 Next 自帶 `polyfill-nomodule.js`，script 標籤掛 `noModule`，現代瀏覽器**不會下載**。看到 chunk 清單裡有 core-js 不要當成優化目標；判別法：回 HTML 查該 src 的 script 是否帶 `noModule`。
 - **假目標 2 — GA gtag 改 lazyOnload**：`@next/third-parties` 的 `sendGAEvent` 依賴 `<GoogleAnalytics>` 元件做模組側初始化，拆掉元件自己手寫 lazy 載入會讓 `resume_click` / `contact_form_submit` **無聲丟失**（sendGAEvent 判定未初始化直接 no-op）。GA 是 afterInteractive、不擋 FCP/LCP，動它報酬低風險高。
 - **量測心法**：production chunk 的特徵字串會被 mangle（`HTMLProjectionNode` 查不到），要用多組抗 mangle 特徵（`ProjectionNode` / `motionComponentSymbol` / `framerAppearId`）交叉驗證。
+
+## 2026-07-19 open-slide 簡報 workspace（presentation/）
+
+- **位置**：`presentation/` 是 open-slide workspace（React 簡報框架，node_modules 已被自帶 .gitignore 擋掉）。個人品牌類簡報一律用 `presentation/themes/hming-portfolio.md` 主題（對齊正式站 tokens.css 的白底＋ink＋品牌紫＋Space Grotesk），不要用 skill 預設主題。
+- **雙公版架構（2026-07-19 重構，原 interview-master 已改名瘦身）**：`intro-master`（自我介紹 8 頁）＋ `case-master`（專案深講公版 9 頁佔位）＋ 實例 `case-advantech`、`case-crypto`。投遞時**複製公版**成 `intro-<公司>` 副本、只換檔案頂部 BRAND TOKENS 區塊＋Logo（官方檔，禁截圖），流程 checklist 在 hming-portfolio.md「公司品牌切換」章；`intro-demo` ＋ `themes/company-demo.md` 是完整示範。Design panel 要求 design const 為字面值，所以品牌層是複製抄值、不是 runtime 切換。
+- **啟動**：`.claude/launch.json` 的 `presentation` 設定 → `npm --prefix presentation run dev -- --port 5174`。**port 固定 5174**——5173 常被 ours-app 的 vite 佔走，open-slide dev 支援 `-p/--port`。
+- **內容口徑**：母版兩個作品（Advantech AI Chatbot、Crypto 交易平台）的文案直接沿用 `100_Todo/drafts/job-hunt/2026-07-17_作品集-履歷證據對照.md` 的「統一說法」，含誠信註記（Sprint 約 +44% 為團隊約數、Advantech 功能未上線）。改數字先改對照文件，再同步簡報。
+- **每次面試要換的欄位**：【公司名】【YYYY.MM.DD】【職缺名稱】＋ 第 12 頁「為什麼是我」三個理由；圖片佔位（個人照、兩案例截圖）用 dev UI 的 Assets 面板上傳替換。
