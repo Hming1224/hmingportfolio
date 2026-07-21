@@ -5,7 +5,7 @@
 ## 18. Accessibility
 
 - 一般文字對比至少 WCAG AA `4.5:1`；大型文字至少 `3:1`。
-- 所有互動元件支援 `Tab`；native Button 用 `Enter` / `Space`；Select / modal dialog 用 `Escape` 關閉。
+- 所有互動元件支援 `Tab`；native Button 用 `Enter` / `Space`；modal dialog 用 `Escape` 關閉。
 - 不移除 focus outline；統一使用 `:focus-visible` ring。
 - 純裝飾圖片與 Hero decoration 使用空 `alt` 或 `aria-hidden="true"`。
 - Loading / success / error 回饋使用 `aria-busy`、`role="status"` 或 `role="alert"`，不能只靠顏色。

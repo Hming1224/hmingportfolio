@@ -11,7 +11,7 @@ import {
   TabsTab,
 } from "../animate-ui/primitives/base/tabs";
 
-export interface WalkthroughStep {
+interface WalkthroughStep {
   src: string;
   alt: string;
   caption: string;
@@ -28,14 +28,14 @@ type OutcomeWalkthroughStyle = CSSProperties & {
   "--cs-walkthrough-frame-aspect-ratio"?: string;
 };
 
-export interface WalkthroughFlow {
+interface WalkthroughFlow {
   id: string;
   label: string;
   steps: WalkthroughStep[];
   progressLabel?: string;
 }
 
-export interface WalkthroughLabels {
+interface WalkthroughLabels {
   flows: string;
   stage: string;
   step: string;

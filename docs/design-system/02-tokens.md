@@ -124,7 +124,7 @@ layout:
   grid-gutter: "24px"
   grid-gutter-lg: "32px"
 
-breakpoint:   # 文件值；JS 單一來源在 lib/breakpoints.ts。CSS var 不能用於 @media
+breakpoint:   # 文件值；CSS var 不能用於 @media
   mobile: "768px"
   tablet: "1024px"
   desktop: "1440px"
@@ -260,4 +260,4 @@ components:
 - Radius：`--hm-radius-sm/md/lg/pill/button` 對應 8 / 12 / 16 / 999 / 200；主系統元件 radius 一律優先吃 token。
 - Layout / Grid：`--hm-container`、`--hm-container-wide`、`--hm-grid-gutter`、`--hm-grid-gutter-lg`，搭配 `.hm-grid` helper 使用。
 - Z-index：base `0`、sticky `10`、navbar `100`、overlay `200`、modal `300`、toast `400`。
-- Breakpoint 文件值：mobile `768px`、tablet `1024px`、desktop `1440px`；JS 單一來源為 `lib/breakpoints.ts`。CSS custom property 無法直接用於 `@media`，不可假裝能動態取代斷點。
+- Breakpoint 文件值：mobile `768px`、tablet `1024px`、desktop `1440px`。CSS custom property 無法直接用於 `@media`，因此 route styles 直接使用這三個已記錄的邊界。

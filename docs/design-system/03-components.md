@@ -180,7 +180,6 @@ About 頁技能卡是「元件自帶區域 token」的範本：
 - 一般卡片 / 網格 / 媒體：使用 `CaseCard`、`CaseGrid`、`CaseMedia`，結構 class 為 `cs-card-*`、`cs-grid-*`、`cs-media-*`。
 - 段落 lead：使用 `cs-section-lead`；文字色透過 `--cs-section-lead-*` token 調整，不再新增 `ca-lead` / `ca-narrow`。
 - 方案展示：使用 `CaseProposalTabs variant="solution" | "wireframe"`；DOM 與樣式只使用 `cs-proposal-*`，theme 差異透過 variant modifier 與 custom properties 控制，不再新增 `cs-sol-tab-*` 或 `ca-wf-*`。提案 banner 使用 `cs-proposal-banner-*`，route 只提供顏色 token。
-- 前後比較：使用 `CaseBeforeAfter` 與 `cs-before-after-*`；桌機橫排、`≤768px` 直排，箭頭方向由共用 RWD 控制。
 - 敘事型前後比較：使用 `BeforeAfterNarrativeFrame` 與 `cs-before-after-narrative-*`；它是 implemented shared slot-based narrative layout frame，用於 single-comparison narrative frames。Crypto IterationSection、Laushu iteration board、Advantech Board 1 pilot 已採用；Advantech Board 2 / Board 3 仍 deferred / route-local。
 - 流程外框：使用 `CaseFlowFrame variant="default" | "plain" | "split"` 與 `cs-flow-frame-*`；default 為有框說明圖、plain 為無框矩陣容器、split 為 header / scroll panel 分離。route 只提供內容圖形、最小寬與必要 caption / header theme。
 - 功能步驟：使用 `CaseFeatureRow`；原型展示用 `cs-feature-row--prototype`，媒體與說明框不得再掛 `cs-sol-fr` / `cs-sol-fimg` / `cs-sol-fnote`。
@@ -222,8 +221,6 @@ It does not own:
 - route-specific storytelling geometry
 - `figure` / `figcaption` semantics
 
-`CaseBeforeAfter` remains the simple two-panel comparison component. Do not expand `CaseBeforeAfter` into the broader narrative frame.
-
 #### BeforeAfterPanel contract
 
 `BeforeAfterPanel` is an implemented shared visual shell component for a single before / after state panel.
@@ -232,7 +229,6 @@ Current status:
 - implemented and exported from `components/case-study`
 - used internally by `BeforeAfterNarrativeFrame` for labeled before / after panels
 - not directly route-adopted
-- not used internally by `CaseBeforeAfter`
 
 It owns:
 - panel container
@@ -273,8 +269,6 @@ export type BeforeAfterPanelProps = {
 The component uses `children` for slot-based composition. It is a visual shell only: it does not add interactive behavior, does not add `aria-label` by default, and does not guarantee `figure` / `figcaption` semantics.
 
 `BeforeAfterPanel` is now used internally by `BeforeAfterNarrativeFrame` for labeled before / after panels. Production routes still adopt `BeforeAfterNarrativeFrame`, not `BeforeAfterPanel` directly.
-
-`CaseBeforeAfter` remains a separate simple two-panel comparison component. `CaseBeforeAfter` has not been refactored to use `BeforeAfterPanel`.
 
 #### CaseMedia contract
 
@@ -442,10 +436,9 @@ Do not include these in the shared DataTable / ScrollContainer contract:
 
 - `Button`：`primary | secondary | danger`，支援 `loading`；loading 必須設 `aria-busy`、停用重複提交並保留原按鈕寬度。
 - Input：default / focus / error / success；錯誤訊息使用 `--hm-error` + `--fs-xs`，並用 `aria-describedby` 連到欄位。
-- `Select`、`Checkbox`、`Radio`：必須包含 default / hover / focus / checked / disabled / error。
 - `Alert` / `Toast`：使用 success / warning / error / info 四種 status token。
 - `Modal`：ESC 關閉、backdrop 點擊關閉、focus trap、關閉後焦點回到觸發元素。
-- `Skeleton` 遵守 reduced-motion；`EmptyState` 結構為 icon + title + description + optional CTA。
+- `Skeleton` 遵守 reduced-motion。
 
 ---
 

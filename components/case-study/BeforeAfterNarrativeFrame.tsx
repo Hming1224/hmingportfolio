@@ -3,9 +3,9 @@ import { cn } from '../../lib/utils';
 import { BeforeAfterPanel } from './BeforeAfterPanel';
 import CaseCard from './CaseCard';
 
-export type BeforeAfterNarrativeTone = 'blue' | 'cyan' | 'purple' | 'neutral';
+type BeforeAfterNarrativeTone = 'blue' | 'cyan' | 'purple' | 'neutral';
 
-export type BeforeAfterNarrativePoint = {
+type BeforeAfterNarrativePoint = {
   label: ReactNode;
   content: ReactNode;
 };

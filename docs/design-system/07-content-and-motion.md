@@ -39,6 +39,6 @@
 
 ## 16. Theme、Status 與資料視覺化
 
-- Dark theme token 保留，但目前站點預設停用，不主動在 `<html>` 掛 `.dark` 或 `data-theme="dark"`。`ThemeToggle` 可保留作未來功能，不影響現況。
+- 目前作品集只提供 light theme；若未來正式導入 dark theme，再以實際 route 與元件狀態補齊 token、控制元件與驗證。
 - Dark semantic 至少覆蓋 paper、surface、ink、muted、line 與文字階梯；案例頁品牌色可維持局部 scope。
 - 圖表依序使用 `--hm-chart-1` 到 `--hm-chart-6`。不可只靠顏色表達狀態；線圖搭配 dash / marker，區域圖搭配 pattern 或直接標籤。

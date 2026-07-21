@@ -55,7 +55,7 @@
 - **首頁**：`Hero`、`Works`、`AvatarProfile`
 - **Hero 裝飾**（`components/hero-decorations/`）：`StickyNote`、`CursorTag`、`WireframeFrame`、`AiWidgetFrame`、`ToggleDecoration`、`WalPencilDecoration`、`AnnotationPin`、`HeroBottomGroupCenter`、`HeroEntranceController`
 - **About 頁**：`About`、`YearRail`、`app/about-me/` 下的 `AnimatedContent`、`EducatorMasonry`、`GrowthReveal`
-- **案例頁共用**（`components/case-study/`）：`CaseStudyShell`、`CaseSection`、`CaseHeading`、`CaseHero`、`CaseInfoGrid`、`CaseSectionHeader`、`CaseCard`、`CaseGrid`、`CaseMedia`、`CaseMetricGrid`、`CaseProposalTabs`、`CaseBeforeAfter`、`CaseFlowFrame`、`CaseFeatureRow`、`ZoomableImage`、`FlowScrollHint`、`FeatureConnectors`
+- **案例頁共用**（`components/case-study/`）：`CaseStudyShell`、`CaseSection`、`CaseHeading`、`CaseHero`、`CaseInfoGrid`、`CaseSectionHeader`、`CaseCard`、`CaseGrid`、`CaseMedia`、`CaseMetricGrid`、`CaseProposalTabs`、`BeforeAfterNarrativeFrame`、`CaseFlowFrame`、`CaseFeatureRow`、`ZoomableImage`、`FlowScrollHint`、`FeatureConnectors`
 - **案例頁仍待收斂**：少數 route 專屬 section 組合、舊 selector 與 visualization 外圍樣式；內容圖形的座標與 SVG path 繼續留在各案例
 - **案例內容視覺**：各案例 route 下的流程圖、connector、產品截圖與專案資料；這些是內容資產，不是另一套 UI system
 - **Contact**：`Contact`

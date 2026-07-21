@@ -423,16 +423,6 @@
   margin-top: var(--cs-detail-body-paragraph-gap);
 }
 
-.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-panel {
-  --cs-card-padding-mobile: 0;
-  --cs-card-shadow: none;
-  background: var(--ca-bg-soft);
-}
-
-.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-head {
-  background: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
-}
-
 /* ── 09 最終介面 ── */
 .theme-crypto-arsenal #cs-sec-final .cs-proposal-banner {
   --cs-proposal-banner-padding: 18px 28px;

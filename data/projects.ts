@@ -234,9 +234,6 @@ const projectsByLocale = {
   "zh-TW": zhProjects,
 } satisfies Record<Locale, ProjectSummary[]>;
 
-// Keep the existing Chinese default for case-study pages until their Phase 5 migration.
-export const projects = zhProjects;
-
 export function getProjects(locale: Locale): ProjectSummary[] {
   return projectsByLocale[locale];
 }

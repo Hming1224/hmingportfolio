@@ -30,7 +30,6 @@ import {
   OutcomeWalkthrough,
   type CaseInfoItem,
 } from "../case-study";
-import { BeforeAfterPanel } from "../case-study/BeforeAfterPanel";
 import { BeforeAfterNarrativeFrame } from "../case-study/BeforeAfterNarrativeFrame";
 import FlowScrollHint from "../case-study/FlowScrollHint";
 import ZoomableImage from "../case-study/ZoomableImage";
@@ -148,50 +147,6 @@ function FakeImagePlaceholder({ className }: { className?: string }) {
 
 function BeforeAfterDemoSlot() {
   return <FakeImagePlaceholder className={styles.beforeAfterPanelImagePlaceholder} />;
-}
-
-function BeforeAfterNarrativeConnector() {
-  return (
-    <div className="cs-before-after-narrative-connector" aria-hidden="true">
-      <svg width="41" height="47" viewBox="0 0 47.1362 40.5292" fill="none" focusable="false">
-        <path
-          d="M23.5681 40.5292L0 20.2153H10.157V0H36.9792V20.2153H47.1362L23.5681 40.5292Z"
-          fill="currentColor"
-        />
-      </svg>
-    </div>
-  );
-}
-
-function BeforeAfterNarrativeComparisonDemo() {
-  return (
-    <div
-      className={classNames(
-        "cs-before-after-narrative cs-before-after-narrative-comparison",
-        styles.beforeAfterComparisonDemo,
-      )}
-    >
-      <BeforeAfterPanel
-        title="Before"
-        tone="cyan"
-        className="cs-before-after-narrative-panel"
-        headerClassName="cs-before-after-narrative-panel-head"
-        bodyClassName="cs-before-after-narrative-panel-body"
-      >
-        <BeforeAfterDemoSlot />
-      </BeforeAfterPanel>
-      <BeforeAfterNarrativeConnector />
-      <BeforeAfterPanel
-        title="After"
-        tone="cyan"
-        className="cs-before-after-narrative-panel"
-        headerClassName="cs-before-after-narrative-panel-head"
-        bodyClassName="cs-before-after-narrative-panel-body"
-      >
-        <BeforeAfterDemoSlot />
-      </BeforeAfterPanel>
-    </div>
-  );
 }
 
 const advantechTocSections = {
@@ -343,7 +298,7 @@ const boundaryReferenceItems = {
       currentUsage: "Used inside the Design System documentation sidebar to expand and collapse navigation groups.",
       boundary: "Accordion currently belongs to the documentation shell. It is not documented as a general-purpose portfolio component because its live usage, styling, and behavior are tied to the design-system navigation sidebar.",
       extractionCondition: "Promote only if the same disclosure pattern is reused across independent product surfaces with a stable item, trigger, panel, keyboard, and accessibility contract.",
-      source: "components/ui/Accordion.tsx / components/design-system/DesignSystemExplorer.tsx / components/design-system/DesignSystemDocsNav.tsx",
+      source: "components/ui/Accordion.tsx / components/design-system/DesignSystemExplorer.tsx",
       status: "Documentation shell navigation anatomy",
       nextStep: "Keep documented through Component Boundaries; revisit only if the same disclosure contract is adopted outside the documentation shell.",
     },
@@ -525,7 +480,7 @@ const boundaryReferenceItems = {
       currentUsage: "用於 Design System 文件側邊欄，展開或收合導覽分類。",
       boundary: "Accordion 目前屬於 文件站骨架 的內部組成；因為它的 實際使用位置、樣式與互動行為都綁定 design-system navigation sidebar，所以不作為通用 作品集元件 文件化。",
       extractionCondition: "只有當相同 disclosure 模式 被多個獨立產品區塊重用，且 item、觸發、panel、keyboard 與 accessibility 契約穩定後，才重新評估提升為 visible 元件。",
-      source: "components/ui/Accordion.tsx / components/design-system/DesignSystemExplorer.tsx / components/design-system/DesignSystemDocsNav.tsx",
+      source: "components/ui/Accordion.tsx / components/design-system/DesignSystemExplorer.tsx",
       status: "Documentation shell navigation anatomy",
       nextStep: "維持透過 Component Boundaries 說明；只有當相同 disclosure 契約 在 文件站骨架 之外被採用時才重新評估。",
     },
@@ -1329,42 +1284,6 @@ export default function ComponentDemo({
     );
   }
 
-  if (type === "select") {
-    return (
-      <ContractOnlyCard
-        locale={locale}
-        title={zh ? "Select 契約 尚未進入正式作品集" : "Select contract is not in the live portfolio yet"}
-        recommendation={zh ? "若未來 Contact form 增加詢問類型或服務分類，且選項超過四個，再先導入 production flow 後回頭文件化。" : "If the Contact form later adds inquiry type or service-category choices with more than four options, implement it in production first and document the real flow afterward."}
-        source="components/ui/Select.tsx"
-        status="candidate"
-      />
-    );
-  }
-
-  if (type === "checkbox") {
-    return (
-      <ContractOnlyCard
-        locale={locale}
-        title={zh ? "Checkbox 契約 目前只保留為候選" : "Checkbox contract is currently a candidate"}
-        recommendation={zh ? "作品集目前沒有多選設定或同意事項需要它；不要為了保留元件而塞進 Contact form。" : "The portfolio currently has no multi-select setting or consent task that needs it; do not force it into the Contact form just to keep the component visible."}
-        source="components/ui/Checkbox.tsx"
-        status="candidate"
-      />
-    );
-  }
-
-  if (type === "radio") {
-    return (
-      <ContractOnlyCard
-        locale={locale}
-        title={zh ? "Radio 契約 尚未有正式使用情境" : "Radio contract has no current production context"}
-        recommendation={zh ? "只有當未來表單出現少量互斥選項，且真的能降低填寫成本時，才導入 production。" : "Introduce it only when a future form has a small set of mutually exclusive options and the control genuinely reduces form effort."}
-        source="components/ui/Radio.tsx"
-        status="candidate"
-      />
-    );
-  }
-
   if (type === "tabs") {
     const tabs = [
       { value: "enterprise", label: zh ? "企業應用" : "Industry Projects" },
@@ -1777,16 +1696,6 @@ export default function ComponentDemo({
     );
   }
 
-  if (type === "case-before-after") {
-    return (
-      <DemoBlock className={styles.beforeAfterSourceDemo} contextLabel={contextLabel}>
-        <div className="cs-page theme-advantech">
-          <BeforeAfterNarrativeComparisonDemo />
-        </div>
-      </DemoBlock>
-    );
-  }
-
   if (type === "before-after-narrative") {
     return (
       <DemoBlock className={styles.beforeAfterNarrativeDemo} contextLabel={contextLabel}>
@@ -2017,18 +1926,6 @@ export default function ComponentDemo({
           </div>
         </article>
       </DemoBlock>
-    );
-  }
-
-  if (type === "empty") {
-    return (
-      <ContractOnlyCard
-        locale={locale}
-        title={zh ? "EmptyState 目前沒有列表空狀態" : "EmptyState has no current list-empty surface"}
-        recommendation={zh ? "目前作品集沒有搜尋、篩選或資料列表空狀態。等 production 出現真實無資料情境，再用真實文案文件化。" : "The portfolio currently has no search, filter, or list-empty state. Document it with real copy only after a production no-data case exists."}
-        source="components/ui/EmptyState.tsx"
-        status="backlog"
-      />
     );
   }
 

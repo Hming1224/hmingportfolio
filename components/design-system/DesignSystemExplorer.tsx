@@ -53,8 +53,6 @@ function docSectionForAnchor(
     "token-model": "tokens",
     "token-reference": "tokens",
     reference: "tokens",
-    "future-candidates": "future-backlog",
-    backlog: "future-backlog",
     "scroll-progress": "local-exceptions",
     "case-next-nav": "local-exceptions",
     "case-info-card": "local-exceptions",

@@ -45,5 +45,10 @@
     "knip": "^6.17.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "knip": {
+    "ignoreBinaries": [
+      "python3"
+    ]
   }
 }

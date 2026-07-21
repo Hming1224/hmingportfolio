@@ -66,7 +66,6 @@ export const designSystemSections = [
       "case-card",
       "case-grid",
       "case-media",
-      "case-before-after",
       "before-after-narrative-frame",
       "zoomable-image",
       "flow-scroll-hint",
@@ -87,7 +86,7 @@ export const designSystemSections = [
   {
     label: "Reference",
     labelZh: "參考資料",
-    items: ["tokens", "local-exceptions", "future-backlog"].map((slug) => ({
+    items: ["tokens", "local-exceptions"].map((slug) => ({
       kind: "reference" as const,
       slug,
     })),
