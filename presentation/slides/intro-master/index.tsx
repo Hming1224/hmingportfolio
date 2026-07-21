@@ -10,6 +10,8 @@ import avatarYellow from './assets/avatar-yellow.png';
 import claudeAgent from './assets/claude-agent.svg';
 import codexAgent from './assets/codex-agent.svg';
 import cryptoArsenalLogo from './assets/crypto-arsenal-logo.png';
+import nccuLogo from './assets/nccu-logo.png';
+import nckuLogo from './assets/ncku-logo.png';
 import figmaApp from './assets/figma-app.png';
 import hackathonPhoto from './assets/hackathon.jpg';
 import nccuPhoto from './assets/nccu-ta.jpg';
@@ -498,6 +500,29 @@ const DesignValueCard = ({ icon, title, desc, color, soft, delay }: { icon: stri
   </div>
 );
 
+const EduRow = ({ logo, school, program, year }: { logo: string; school: string; program: string; year: string }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+    <div style={{ width: 54, height: 54, borderRadius: 12, background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+      <img src={logo} alt={school} style={{ width: '80%', height: '80%', objectFit: 'contain', display: 'block' }} />
+    </div>
+    <div style={{ minWidth: 0 }}>
+      <div style={{ fontSize: 21, fontWeight: 700, whiteSpace: 'nowrap' }}>{school}</div>
+      <div style={{ fontSize: 17, color: muted, marginTop: 3 }}>{program} · {year}</div>
+    </div>
+  </div>
+);
+
+const PathStep = ({ label }: { label: string }) => (
+  <span style={{ padding: '11px 24px', borderRadius: 999, background: '#ffffff', whiteSpace: 'nowrap', flexShrink: 0, boxShadow: '0 2px 8px rgba(52, 52, 52, .06)' }}>{label}</span>
+);
+
+const PathLink = () => (
+  <span style={{ flex: 1, display: 'flex', alignItems: 'center', color: 'var(--osd-accent)', margin: '0 10px', minWidth: 24 }}>
+    <span style={{ flex: 1, height: 2, background: 'currentColor', opacity: 0.28, borderRadius: 2 }} />
+    <span style={{ marginLeft: 4, fontSize: 18, lineHeight: 1 }}>▶</span>
+  </span>
+);
+
 const AboutMe: Page = () => (
   <div style={{ ...fill, padding: '82px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>ABOUT ME</Eyebrow>
@@ -505,42 +530,40 @@ const AboutMe: Page = () => (
       我的背景，塑造了我看待設計的方式
     </h2>
     <HeadingRule />
-    <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingBottom: 44 }}>
-    <div style={{ display: 'grid', gridTemplateColumns: '500px 1fr', gap: 44, width: '100%' }}>
-      <div className="im-fadeup" style={{ minHeight: 540, padding: 38, borderRadius: 16, background: accentSoft, display: 'flex', flexDirection: 'column', animationDelay: '100ms' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-          <div style={{ width: 118, height: 118, borderRadius: '50%', overflow: 'hidden', background: '#f4d238', boxShadow: '0 12px 28px rgba(52, 52, 52, .12)', flexShrink: 0 }}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 28, paddingBottom: 44 }}>
+      {/* 紫框 banner：全寬橫向，三區＝定位／職涯路徑／學歷 */}
+      <div className="im-fadeup" style={{ display: 'grid', gridTemplateColumns: '1.75fr 1fr', borderRadius: 16, background: accentSoft, padding: '34px 0', animationDelay: '100ms' }}>
+        {/* 區 A：大頭貼在左；右側＝大標＋經歷路徑（撐滿頭貼右方整區） */}
+        <div style={{ padding: '0 44px', display: 'flex', alignItems: 'center', gap: 32 }}>
+          <div style={{ width: 160, height: 160, borderRadius: '50%', overflow: 'hidden', background: '#f4d238', boxShadow: '0 14px 32px rgba(52, 52, 52, .14)', flexShrink: 0 }}>
             <img src={avatarYellow} alt="黃宣銘" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
-          <div>
-            <div style={{ fontSize: 21, color: 'var(--osd-accent)', fontWeight: 700, letterSpacing: '0.1em' }}>MY BACKGROUND</div>
-            <div style={{ fontSize: 28, lineHeight: 1.25, fontWeight: 700, marginTop: 10, whiteSpace: 'nowrap' }}>從工程走進產品設計</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 19, color: 'var(--osd-accent)', fontWeight: 700, letterSpacing: '0.1em' }}>MY BACKGROUND</div>
+            <div style={{ fontSize: 36, lineHeight: 1.2, fontWeight: 700, marginTop: 8, whiteSpace: 'nowrap' }}>從工程走進產品設計</div>
+            {/* 經歷：連接線把三段撐滿右側整區 */}
+            <div style={{ display: 'flex', alignItems: 'center', fontSize: 20, fontWeight: 600, marginTop: 26 }}>
+              <PathStep label="機械工程" />
+              <PathLink />
+              <PathStep label="ODM 專案管理" />
+              <PathLink />
+              <PathStep label="UIUX 設計" />
+            </div>
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginTop: 34, fontSize: 21, fontWeight: 600 }}>
-          <span style={{ padding: '9px 14px', borderRadius: 999, background: '#ffffff' }}>機械工程</span>
-          <span style={{ color: 'var(--osd-accent)' }}>→</span>
-          <span style={{ padding: '9px 14px', borderRadius: 999, background: '#ffffff' }}>ODM 專案管理</span>
-          <span style={{ color: 'var(--osd-accent)' }}>→</span>
-          <span style={{ padding: '9px 14px', borderRadius: 999, background: '#ffffff' }}>UIUX</span>
-        </div>
-        <p style={{ fontSize: 24, lineHeight: 1.55, margin: '30px 0 0' }}>
-          這段跨領域歷程，讓我習慣站在工程與使用者中間，把需求與技術限制轉成能落地的設計決策。
-        </p>
-        <div style={{ borderTop: '1px solid rgba(93, 98, 216, .18)', marginTop: 'auto', paddingTop: 24 }}>
-          <div style={{ fontSize: 19, color: muted, letterSpacing: '0.12em' }}>PERSONALITY</div>
-          <div style={{ fontSize: 27, fontWeight: 700, color: 'var(--osd-accent)', marginTop: 10 }}>好奇理解 · 同理溝通 · 務實落地</div>
+        {/* 區 C：學歷兩校 */}
+        <div style={{ padding: '0 40px', borderLeft: '1px solid rgba(93, 98, 216, .18)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 22 }}>
+          <div style={{ fontSize: 17, color: muted, letterSpacing: '0.12em' }}>學歷</div>
+          <EduRow logo={nccuLogo} school="國立政治大學" program="數位內容碩士學位學程" year="2023–2026" />
+          <EduRow logo={nckuLogo} school="國立成功大學" program="機械工程學系" year="2017–2021" />
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontSize: 22, color: muted, letterSpacing: '0.12em', marginBottom: 18 }}>我的設計信念</div>
-        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 20 }}>
-          <DesignValueCard icon="layers" title="跨領域的眼界" desc="同時理解產品結構、技術限制與人的使用感受，從不同角色之間看見容易被忽略的機會。" color="#5d62d8" soft="rgba(93, 98, 216, .10)" delay="160ms" />
-          <DesignValueCard icon="search" title="理解優先於解法" desc="開始設計之前，先釐清問題成因、使用者動機與現實限制，避免只解決表面的症狀。" color="#e8856b" soft="rgba(232, 133, 107, .12)" delay="240ms" />
-          <DesignValueCard icon="zap" title="讓複雜變成直覺" desc="產品邏輯可以複雜，但使用者應該能快速理解下一步，順利完成真正想做的事情。" color="#3a9f78" soft="rgba(58, 159, 120, .12)" delay="320ms" />
-        </div>
+      {/* 設計信念：三張卡等分左右寬度 */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        <DesignValueCard icon="layers" title="跨領域的眼界" desc="同時理解產品結構、技術限制與人的使用感受，從不同角色之間看見容易被忽略的機會。" color="#5d62d8" soft="rgba(93, 98, 216, .10)" delay="160ms" />
+        <DesignValueCard icon="search" title="理解優先於解法" desc="開始設計之前，先釐清問題成因、使用者動機與現實限制，避免只解決表面的症狀。" color="#e8856b" soft="rgba(232, 133, 107, .12)" delay="240ms" />
+        <DesignValueCard icon="zap" title="讓複雜變成直覺" desc="產品邏輯可以複雜，但使用者應該能快速理解下一步，順利完成真正想做的事情。" color="#3a9f78" soft="rgba(58, 159, 120, .12)" delay="320ms" />
       </div>
-    </div>
     </div>
     <Footer />
   </div>
@@ -645,7 +668,7 @@ const TbaJourney: Page = () => (
 const CryptoJourney: Page = () => (
   <CareerChapter
     active={1}
-    title="設計不只提出方案，也要和團隊一起上線"
+    title="設計不只提出解方，也要提升交付效率"
     role="UIUX & PM Intern"
     field="量化交易產品"
     context="提供量化策略與自動化交易功能的加密貨幣交易平台。"
@@ -661,7 +684,7 @@ const CryptoJourney: Page = () => (
 const AdvantechJourney: Page = () => (
   <CareerChapter
     active={2}
-    title="把研究證據，轉成團隊能評估的產品方案"
+    title="把訪談洞察，轉成團隊能評估的產品方案"
     role="UIUX Design Intern"
     field="B2B AI 能源管理"
     context="整合 GenAI 的 B2B 能源管理系統，協助人員處理異常與用電資訊。"
@@ -691,7 +714,7 @@ const Method: Page = () => (
   <div style={{ ...fill, padding: '96px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>HOW I WORK</Eyebrow>
     <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 58, fontWeight: 700, margin: 0, lineHeight: 1.25 }}>
-      三段經驗，最後收斂成我現在的四步工作方式
+      三段經驗，最後收斂成我現在的四步工作思維
     </h2>
     <HeadingRule />
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 38, paddingBottom: 44 }}>
@@ -734,7 +757,7 @@ const Community: Page = () => (
   <div style={{ ...fill, padding: '84px 160px', display: 'flex', flexDirection: 'column' }}>
     <Eyebrow>BEYOND WORK</Eyebrow>
     <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 55, fontWeight: 700, margin: 0, lineHeight: 1.25, maxWidth: 1500 }}>
-      我也把設計方法，變成別人能一起使用的東西
+      將過往設計經驗分享到課堂中
     </h2>
     <HeadingRule />
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingBottom: 44 }}>
@@ -835,7 +858,6 @@ const ThankYou: Page = () => (
         <div style={{ fontSize: 24, color: 'var(--osd-accent)', fontWeight: 600, letterSpacing: '0.14em' }}>THANK YOU</div>
         <h2 style={{ fontFamily: 'var(--osd-font-display)', fontSize: 96, lineHeight: 1.05, margin: '26px 0 0', fontWeight: 700 }}>謝謝聆聽</h2>
         <p style={{ fontSize: 31, color: muted, marginTop: 30 }}>期待進一步交流。</p>
-        <p style={{ fontSize: 24, color: muted, marginTop: 68 }}>黃宣銘 Hming Huang · Product Designer</p>
       </div>
       <div>
         <ContactMethodRow icon="globe" label="PORTFOLIO" value="hmingdesign.com" />
