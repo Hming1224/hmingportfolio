@@ -23,7 +23,7 @@ export default async function ResultSection() {
           {locale === "en" ? "REFLECTIONS" : t("學習反思")}
         </p>
         <h2 className="cs-heading-white" style={{ marginBottom: 8 }}>
-          {t("四次關鍵轉折，重新定義我如何設計工業 AI。")}
+          {t("從設計 AI 功能，到界定決策、驗證與信任。")}
         </h2>
         <div className="cs-divider-white" />
         <CaseGrid variant="two" className="cs-result-grid">
