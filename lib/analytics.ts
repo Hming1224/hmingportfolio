@@ -2,8 +2,8 @@ import { sendGAEvent } from "@next/third-parties/google";
 
 import type { Locale } from "@/i18n/routing";
 
-export const ANALYTICS_OPT_OUT_KEY = "hming_analytics_opt_out";
-export const LAST_CASE_SLUG_KEY = "hming-last-case-slug";
+const ANALYTICS_OPT_OUT_KEY = "hming_analytics_opt_out";
+const LAST_CASE_SLUG_KEY = "hming-last-case-slug";
 
 type LastCaseAttribution = {
   project_slug?: string;
@@ -60,7 +60,7 @@ export function setAnalyticsOptOut(optedOut: boolean) {
   }
 }
 
-export function getLastCaseSlug() {
+function getLastCaseSlug() {
   if (typeof window === "undefined") return null;
 
   try {

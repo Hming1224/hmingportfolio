@@ -29,7 +29,7 @@ export type CaseProposalTab = {
   referenceImages?: CaseProposalReference[];
 };
 
-export type CaseProposalTabsVariant = "solution" | "wireframe";
+type CaseProposalTabsVariant = "solution" | "wireframe";
 
 type CaseProposalTabsLabels = {
   previous: string;

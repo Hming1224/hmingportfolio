@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hming Portfolio
 
-## Getting Started
+Personal portfolio and UX/UI case-study site by Hming Huang. The site presents selected work across product design, interaction design, design systems, and front-end implementation.
 
-First, run the development server:
+Live site: [hmingdesign.com](https://hmingdesign.com)
+
+## What is in this repository
+
+- A multilingual Next.js portfolio (`/zh-TW` and `/en`)
+- UX/UI case studies for Advantech, Crypto Arsenal, Laushu, and the design-system project
+- A production-backed design-system documentation route
+- Responsive layouts, interaction demos, motion, image/video media, and accessibility-minded UI states
+
+The repository is primarily a record of the shipped portfolio experience and its implementation. Some case-study work is presented for portfolio purposes rather than as a reusable product template.
+
+The public snapshot intentionally excludes the private `presentation/` and `docs/brand-film/` workspaces, along with local agent instructions, memory, hooks, and editor configuration.
+
+## Tech stack
+
+- Next.js 16 and React 19
+- TypeScript
+- CSS modules and project-scoped CSS
+- `next-intl` for localization
+- GSAP and Lottie for selected motion
+- Playwright for smoke tests
+- Vercel for deployment
+
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The public site can run without analytics configuration. The `cp` step creates a local-only `.env.local`; edit it only if you want to configure the optional integrations below.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Environment variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `NEXT_PUBLIC_FORMSPREE_ID` — optional contact-form endpoint ID. The example includes the public portfolio endpoint; replace it if you use your own Formspree form.
+- `NEXT_PUBLIC_GA_ID` — optional Google Analytics 4 Measurement ID.
+- `NEXT_PUBLIC_CLARITY_ID` — optional Microsoft Clarity Project ID.
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000). Useful verification commands:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run verify:quick   # diff check, lint, design-token check
+npm run verify:build   # quick checks plus production build
+npm run verify:full    # build plus the full smoke suite
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See [`docs/testing.md`](docs/testing.md) for the verification policy and targeted smoke commands.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How Codex and GPT-5.6 were used
 
-## Deploy on Vercel
+This portfolio was developed with Hming as the designer and decision-maker, working alongside Codex and GPT-5.6. AI support was part of the design-to-code workflow, not a replacement for authorship or review.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Codex
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Codex was used inside the repository to:
+
+- turn approved design and content decisions into focused Next.js, React, TypeScript, and CSS changes;
+- refactor route structure and reusable case-study / design-system components;
+- maintain localization, responsive behavior, motion states, and accessibility details;
+- run lint, token checks, builds, targeted Playwright smoke tests, and browser-based layout checks;
+- keep implementation notes, validation evidence, and handoff documentation close to the code.
+
+### GPT-5.6
+
+GPT-5.6 was used as a reasoning and review partner for:
+
+- clarifying the narrative of case studies and the information hierarchy of the portfolio;
+- comparing implementation options before a change was made;
+- reviewing responsive and design-system decisions against the intended visual baseline;
+- identifying regression risks, missing validation, and work that should remain route-local instead of being prematurely abstracted.
+
+Hming made the final calls on visual direction, content, evidence, scope, and release decisions. AI-generated changes were reviewed locally and validated with the project checks before being treated as finished.
+
+## License and media
+
+See [`LICENSE`](LICENSE) for the portfolio viewing and evaluation terms. Do not assume that the case-study content, client-related materials, screenshots, fonts, music, or video assets are available for reuse; third-party rights remain with their respective owners.

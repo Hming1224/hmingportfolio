@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import CaseSectionHeader from './CaseSectionHeader';
 
-export type CaseHeadingTone = 'default' | 'white';
+type CaseHeadingTone = 'default' | 'white';
 
 export interface CaseHeadingProps {
   kicker?: string;

@@ -18,20 +18,20 @@ import {
 import { cn } from '../../lib/utils';
 import CaseSection from './CaseSection';
 
-export interface CaseOverviewStat {
+interface CaseOverviewStat {
   value: string;
   label: string;
   note?: string;
 }
 
-export interface CaseOverviewMedia {
+interface CaseOverviewMedia {
   src: string;
   alt: string;
   caption?: string;
   fit?: 'cover' | 'contain';
 }
 
-export interface CaseOverviewDetail {
+interface CaseOverviewDetail {
   label: string;
   text: string;
   note?: string;
@@ -50,7 +50,7 @@ export interface CaseOverviewDetail {
   variant?: 'default' | 'highlight' | 'quote';
 }
 
-export interface CaseOverviewItem {
+interface CaseOverviewItem {
   kind?: 'problem' | 'goal' | 'impact';
   label: string;
   title: string;

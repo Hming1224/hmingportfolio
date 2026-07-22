@@ -167,40 +167,6 @@ export function StakeholderFlow({ t }: { t: Translator }) {
   );
 }
 
-/** 解決方案流程：公司 → 外包工作者（發送 / 發出工資 / 確認） */
-export function SolutionFlow({ t }: { t: Translator }) {
-  return (
-    <div className="cs-diagram-frame cs-diagram-frame--flow">
-      <svg
-        viewBox="0 0 900 360"
-        className="cs-diagram-graphic cs-diagram-graphic--flow"
-        role="img"
-        aria-label={t("公司發送勞報單給外包工作者的流程")}
-      >
-        <ArrowDefs id="laushu-arrow-sol" />
-        <g stroke="#c7c2d6" strokeWidth="2" fill="none">
-          <path d="M300 110 C420 55 540 55 640 108" markerEnd="url(#laushu-arrow-sol)" />
-          <path d="M310 180 H600" markerEnd="url(#laushu-arrow-sol)" />
-          <path d="M640 252 C540 305 420 305 300 250" markerEnd="url(#laushu-arrow-sol)" />
-        </g>
-
-        <Node cx={170} cy={180} r={120} tone="deep" />
-        <Node cx={730} cy={180} r={110} />
-
-        <NodeImage href={`${PEOPLE}/company.png`} cx={170} top={52} w={150} h={131} />
-        <NodeImage href={`${PEOPLE}/worker.png`} cx={730} top={40} w={130} h={150} />
-
-        <NodeLabel cx={170} cy={232} lines={[t("公司")]} />
-        <NodeLabel cx={730} cy={232} lines={[t("外包工作者")]} />
-
-        <EdgeLabel x={470} y={62}>{t("發送勞報單")}</EdgeLabel>
-        <EdgeLabel x={455} y={166}>{t("發出工資")}</EdgeLabel>
-        <EdgeLabel x={470} y={300}>{t("確認勞報單")}</EdgeLabel>
-      </svg>
-    </div>
-  );
-}
-
 /** 問卷／訪談結構：基本資料 → 會計師 */
 export function SurveyFlow({ note, t }: { note: ReactNode; t: Translator }) {
   return (

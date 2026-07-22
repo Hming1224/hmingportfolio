@@ -248,7 +248,7 @@
   --hm-z-toast: 400;
 
   /* CSS custom properties cannot drive @media queries. Documentation only;
-     JS uses lib/breakpoints.ts as the executable source. */
+     route styles use the documented 768 / 1024 / 1440 boundaries directly. */
   --hm-bp-mobile: 768px;
   --hm-bp-tablet: 1024px;
   --hm-bp-desktop: 1440px;
@@ -423,53 +423,11 @@
   grid-template-columns: repeat(auto-fit, minmax(var(--hm-grid-min, 240px), 1fr));
 }
 
-:root.dark,
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --hm-paper: #18181b;
-  --hm-surface: #1c1c1f;
-  --hm-ink: #fafafa;
-  --hm-ink-hover: #e4e4e7;
-  --hm-muted: #a1a1aa;
-  --hm-line: rgba(255, 255, 255, 0.1);
-  --hm-line-strong: rgba(255, 255, 255, 0.2);
-  --hm-disabled: #52525b;
-  --hm-success: #6ee7b7;
-  --hm-success-soft: #183c32;
-  --hm-warning: #fbbf24;
-  --hm-warning-soft: #422f0a;
-  --hm-error: #f87171;
-  --hm-error-hover: #fca5a5;
-  --hm-error-soft: #451a1a;
-  --hm-info: #60a5fa;
-  --hm-info-soft: #172554;
-  --text-heading: #fafafa;
-  --text-body: #e4e4e7;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-}
-
-:root.dark .site-nav,
-:root[data-theme="dark"] .site-nav {
-  background: rgba(24, 24, 27, 0.94);
-}
-
-:root.dark .brand-logo-anim,
-:root[data-theme="dark"] .brand-logo-anim {
-  filter: invert(1);
-}
-
-:root.dark :is(.language-switcher-trigger, .language-switcher-menu, .site-footer),
-:root[data-theme="dark"] :is(.language-switcher-trigger, .language-switcher-menu, .site-footer) {
-  background: var(--hm-paper);
-  color: var(--hm-ink);
-}
-
 /* ── 專案主題（換色盤）──
    每個案例頁在 <main class="cs-page theme-xxx"> 掛一個 theme，覆寫大標主色
    與 --cs-* 語意色；其餘中性階沿用全域值。
    Theme 一律定義在該案例的 route CSS（styles/case-study-<slug>.css），
-   不放這裡（見 docs/design-system/08-ai-implementation-rules.md §3）。
+   不放這裡（見 docs/design-system/02-tokens.md）。
    舊的 .theme-advantech / .theme-crypto-arsenal 重複區塊已於 2026-07-09 移除，
    值已合併進各自的 route CSS。 */
 
@@ -784,29 +742,6 @@ button {
   margin-left: var(--hm-space-2xs);
 }
 
-.theme-toggle {
-  display: inline-grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  margin-left: var(--hm-space-2xs);
-  border: 1px solid var(--hm-line);
-  border-radius: 999px;
-  background: var(--hm-paper);
-  color: var(--hm-ink);
-  cursor: pointer;
-  transition:
-    border-color var(--hm-duration-fast) var(--hm-ease-standard),
-    background-color var(--hm-duration-fast) var(--hm-ease-standard),
-    color var(--hm-duration-fast) var(--hm-ease-standard);
-}
-
-.theme-toggle:hover {
-  border-color: var(--hm-purple);
-  background: var(--hm-purple-light);
-  color: var(--hm-purple);
-}
-
 .language-switcher-trigger {
   display: inline-flex;
   align-items: center;
@@ -1114,156 +1049,6 @@ button {
   font-size: var(--fs-h3);
 }
 
-.hm-choice {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--hm-ink);
-  cursor: pointer;
-}
-
-.hm-choice input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
-
-.hm-checkbox-control,
-.hm-radio-control {
-  display: inline-grid;
-  flex: none;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border: 1px solid var(--hm-line-strong);
-  background: var(--hm-paper);
-  color: #fff;
-  transition:
-    border-color var(--hm-duration-fast) var(--hm-ease-standard),
-    background-color var(--hm-duration-fast) var(--hm-ease-standard),
-    box-shadow var(--hm-duration-fast) var(--hm-ease-standard);
-}
-
-.hm-checkbox-control {
-  border-radius: 6px;
-}
-
-.hm-radio-control {
-  border-radius: 999px;
-}
-
-.hm-checkbox-control svg {
-  opacity: 0;
-}
-
-.hm-choice input:checked + .hm-checkbox-control {
-  border-color: var(--hm-purple);
-  background: var(--hm-purple);
-}
-
-.hm-choice input:checked + .hm-checkbox-control svg {
-  opacity: 1;
-}
-
-.hm-choice input:checked + .hm-radio-control {
-  border: 5px solid var(--hm-purple);
-}
-
-.hm-choice input:focus-visible + :is(.hm-checkbox-control, .hm-radio-control) {
-  box-shadow: 0 0 0 3px var(--hm-purple-soft);
-}
-
-.hm-choice input:disabled + :is(.hm-checkbox-control, .hm-radio-control) {
-  border-color: var(--hm-disabled);
-  background: var(--hm-surface);
-}
-
-.hm-choice:has(input:disabled) {
-  color: var(--hm-muted);
-  cursor: not-allowed;
-}
-
-.hm-choice.is-error :is(.hm-checkbox-control, .hm-radio-control) {
-  border-color: var(--hm-error);
-  box-shadow: 0 0 0 3px var(--hm-error-soft);
-}
-
-.hm-select {
-  position: relative;
-  width: 100%;
-}
-
-.hm-select-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--hm-space-xs);
-  width: 100%;
-  min-height: 48px;
-  padding: var(--hm-space-xs) var(--hm-space-sm);
-  border: 1px solid var(--hm-line);
-  border-radius: 12px;
-  background: var(--hm-surface);
-  color: var(--hm-ink);
-  text-align: left;
-  cursor: pointer;
-}
-
-.hm-select-trigger .is-placeholder {
-  color: var(--hm-muted);
-}
-
-.hm-select.is-open .hm-select-trigger {
-  border-color: var(--hm-purple);
-  box-shadow: 0 0 0 3px var(--hm-purple-soft);
-}
-
-.hm-select.is-error .hm-select-trigger {
-  border-color: var(--hm-error);
-  box-shadow: 0 0 0 3px var(--hm-error-soft);
-}
-
-.hm-select-trigger:disabled {
-  color: var(--hm-muted);
-  cursor: not-allowed;
-}
-
-.hm-select-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  left: 0;
-  z-index: var(--hm-z-sticky);
-  display: grid;
-  gap: var(--hm-space-3xs);
-  padding: 6px;
-  border: 1px solid var(--hm-line);
-  border-radius: 12px;
-  background: var(--hm-paper);
-  box-shadow: var(--shadow-md);
-}
-
-.hm-select-menu button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 40px;
-  padding: 8px 10px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--hm-ink);
-  text-align: left;
-  cursor: pointer;
-}
-
-.hm-select-menu button:hover,
-.hm-select-menu button[aria-selected="true"] {
-  background: var(--hm-purple-light);
-  color: var(--hm-purple);
-}
-
 .hm-skeleton {
   display: block;
   min-height: 16px;
@@ -1278,34 +1063,6 @@ button {
   );
   background-size: 200% 100%;
   animation: hm-skeleton-shimmer var(--hm-duration-enter) linear infinite;
-}
-
-.hm-empty-state {
-  display: grid;
-  justify-items: center;
-  gap: var(--hm-space-xs);
-  padding: var(--hm-space-md);
-  border: 1px dashed var(--hm-line-strong);
-  border-radius: 12px;
-  background: var(--hm-surface);
-  color: var(--hm-muted);
-  text-align: center;
-}
-
-.hm-empty-state h3,
-.hm-empty-state p {
-  margin: 0;
-}
-
-.hm-empty-state h3 {
-  color: var(--hm-ink);
-  font-size: var(--fs-body);
-}
-
-.hm-empty-state p {
-  margin-top: var(--hm-space-3xs);
-  font-size: var(--fs-sm);
-  line-height: 1.5;
 }
 
 @keyframes hm-toast-enter {

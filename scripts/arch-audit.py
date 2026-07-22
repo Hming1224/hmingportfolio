@@ -1,8 +1,9 @@
 import os
 import re
 from collections import Counter, defaultdict
+from pathlib import Path
 
-WORKSPACE = '/Users/hmingdesigner/Documents/Hming-AI-agent/400_Projects/hmingportfolio'
+WORKSPACE = str(Path(__file__).resolve().parents[1])
 CASE_STUDY_CSS = [
     'styles/case-study.css',
     'styles/case-study-advantech.css',

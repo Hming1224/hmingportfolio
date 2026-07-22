@@ -4,13 +4,13 @@ import Image from "next/image";
 import { useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
 
-export type ZoomableImageLabels = {
+type ZoomableImageLabels = {
   close: string;
   separator: string;
   zoom: string;
 };
 
-export type ZoomableImageLightboxMode = "default" | "fullscreen";
+type ZoomableImageLightboxMode = "default" | "fullscreen";
 
 export type ZoomableImageProps = {
   alt: string;

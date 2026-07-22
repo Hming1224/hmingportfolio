@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
-export type CaseSectionHeaderTone = 'default' | 'secondary' | 'warning' | 'inverse';
+type CaseSectionHeaderTone = 'default' | 'secondary' | 'warning' | 'inverse';
 
 export interface CaseSectionHeaderProps {
   className?: string;

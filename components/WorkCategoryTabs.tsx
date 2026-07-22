@@ -12,7 +12,7 @@ import {
   type TabsSize,
 } from "./animate-ui/primitives/base/tabs";
 
-export type WorkCategoryTab = {
+type WorkCategoryTab = {
   value: string;
   label: string;
   content: ReactNode;

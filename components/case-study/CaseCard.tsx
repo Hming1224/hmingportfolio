@@ -1,7 +1,7 @@
 import type { CSSProperties, ElementType, ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
-export type CaseCardVariant = 'default' | 'accent' | 'metric' | 'media';
+type CaseCardVariant = 'default' | 'accent' | 'metric' | 'media';
 
 export interface CaseCardProps {
   /** Preserves the existing semantic wrapper contract; card styling stays on the shared class shell. */

@@ -682,7 +682,7 @@ export const impactTimes: ImpactTime[] = [
   { flow: "手動止盈止損", before: "82", after: "35" },
 ];
 
-export interface ImpactQuote {
+interface ImpactQuote {
   text: string;
   label: string;
   showInOverview?: boolean;

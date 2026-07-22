@@ -33,25 +33,6 @@ test.describe("design system route smoke", () => {
     }
   }
 
-  test("locks approved catalog and backlog content", async ({ page }) => {
-    const errors = collectConsoleErrors(page);
-    await setViewport(page, 1440);
-    await openDesignSystemDoc(page, "/en/design-system#future-backlog");
-
-    await expect(page.getByText(/Future candidates not shown in the live catalog: Radio and Alert/)).toBeVisible();
-    await expect(page.getByText(/Backlog contracts not shown in this catalog: Select, Checkbox, and EmptyState/)).toBeVisible();
-    await expect(page.getByText(/Gap Analysis|Remediation Plan/)).toHaveCount(0);
-
-    const nav = page.locator("aside nav").first();
-    await expect(nav.getByText(/^Radio$/)).toHaveCount(0);
-    await expect(nav.getByText(/^Alert$/)).toHaveCount(0);
-    await expect(nav.getByText(/^Select$/)).toHaveCount(0);
-    await expect(nav.getByText(/^Checkbox$/)).toHaveCount(0);
-    await expect(nav.getByText(/^EmptyState$/)).toHaveCount(0);
-
-    await expectNoHorizontalOverflow(page);
-    expectNoConsoleErrors(errors);
-  });
 });
 
 test.describe("CaseTOC scoped demo", () => {
@@ -66,7 +47,7 @@ test.describe("CaseTOC scoped demo", () => {
       await expect(demo.locator(".cs-toc-link").first()).toBeVisible();
       await expect(demo.locator("#cs-sec-ds-toc-role")).toBeVisible();
 
-      const scrollHost = demo.locator(".cs-toc-layout > div").first();
+      const scrollHost = demo.locator(".cs-toc-layout > div > div").first();
       const beforeWindowScroll = await page.evaluate(() => window.scrollY);
       const roleLink = demo.locator(".cs-toc-link", { hasText: /My Role|我的角色/ }).first();
 
@@ -92,6 +73,7 @@ test.describe("CaseTOC scoped demo", () => {
         )
         .toBe(true);
 
+      await scrollHost.dispatchEvent("scrollend");
       await scrollHost.evaluate((element) => {
         const target = element.querySelector<HTMLElement>("#cs-sec-ds-toc-analysis");
         if (!target) return;
@@ -176,18 +158,16 @@ test.describe("DemoBlock label contract", () => {
 
 test.describe("Before / After docs", () => {
   for (const route of [
-    "/en/design-system#case-before-after",
     "/en/design-system#before-after-narrative-frame",
-    "/zh-TW/design-system#case-before-after",
     "/zh-TW/design-system#before-after-narrative-frame",
   ]) {
     test(`${route} renders component contract and section order`, async ({ page }) => {
       await setViewport(page, 390);
       const errors = collectConsoleErrors(page);
       await openDesignSystemDoc(page, route);
-      const doc = page.locator("article", { has: page.locator(".cs-before-after, .cs-before-after-narrative") }).first();
+      const doc = page.locator("article", { has: page.locator(".cs-before-after-narrative") }).first();
 
-      await expect(doc.locator(".cs-before-after, .cs-before-after-narrative").first()).toBeVisible();
+      await expect(doc.locator(".cs-before-after-narrative").first()).toBeVisible();
       await expect(doc.getByRole("heading", { name: /Examples|範例/ })).toBeVisible();
       await expect(doc.getByRole("heading", { name: /When to use|使用時機/ })).toBeVisible();
       await expect(doc.getByRole("heading", { name: /States \/ Behavior|行為 \/ 邊界|Behavior|狀態/ }).first()).toBeVisible();
@@ -196,7 +176,7 @@ test.describe("Before / After docs", () => {
       await expect(doc.getByRole("heading", { name: /Design Tokens|設計 Token/ })).toBeVisible();
       await expect(doc.getByRole("heading", { name: /Accessibility|無障礙/ })).toBeVisible();
       await expect(doc.getByRole("heading", { name: /Reference|參考/ })).toBeVisible();
-      await expect(doc.getByText(/BeforeAfterPanel is rendered internally|BeforeAfterPanel 由這個 frame 內部渲染/)).toHaveCount(route.includes("narrative") ? 1 : 0);
+      await expect(doc.getByText(/BeforeAfterPanel is rendered internally|BeforeAfterPanel 由這個 frame 內部渲染/)).toHaveCount(1);
       await expectNoHorizontalOverflow(page);
       expectNoConsoleErrors(errors);
     });

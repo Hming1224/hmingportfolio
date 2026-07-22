@@ -76,7 +76,7 @@
 
 - Reflection cards: keep local. Anatomy is similar, but Laushu's gradient surface and number pill are storytelling identity. Keep the shared layer at `CaseCard` + `CaseGrid` + design tokens.
 - Feature / insight cards: keep local, share tokens only. The three case studies use materially different anatomy and storytelling roles.
-- Before-after variants: do not expand `CaseBeforeAfter`. Advantech iteration variants remain local.
+- Before-after variants: use `BeforeAfterNarrativeFrame` only where its stable anatomy fits. Advantech iteration variants remain local.
 - Metadata chips: share tokens only. Do not add a generic Tag / Pill primitive.
 - Simple research cards: the existing shared shell (`CaseCard` + `CaseMedia`) is sufficient.
 - Data table wrapper: deferred. The behavior is already defined in `03-components.md`; do not extract a shared wrapper component yet.
@@ -87,8 +87,6 @@
 
 Decision:
 `BeforeAfterNarrativeFrame` is the implemented shared slot-based layout frame for single-comparison before / after narrative frames.
-- Keep `CaseBeforeAfter` as the simple two-panel shared component.
-- Do not expand `CaseBeforeAfter` with storytelling-specific props.
 - Use `BeforeAfterNarrativeFrame` for single-comparison narrative frames when Layer 2 anatomy is stable.
 - Keep multi-comparison scenario boards local until a separate multi-comparison contract is designed.
 - Keep media wrappers, annotations, redlines, proportional media sizing, and route-specific storytelling geometry local / colocated.
@@ -116,12 +114,10 @@ Current decision:
 - It is now used internally by `BeforeAfterNarrativeFrame` for labeled panels.
 - It is not directly route-adopted.
 - It must not be treated as a production replacement for existing route panels until a separate adoption plan is approved.
-- `CaseBeforeAfter` remains unchanged.
 
 Allowed future path:
 - C1 compatibility bridge completed the internal `BeforeAfterNarrativeFrame` usage while preserving legacy narrative panel class hooks for route CSS compatibility.
-- Future work should focus on whether any route-local panels or `CaseBeforeAfter` should adopt the shell, but only after separate planning and smoke requirements.
-- `CaseBeforeAfter` should not be refactored to use `BeforeAfterPanel` without a separate compatibility audit.
+- Future work should focus on whether any route-local panels should adopt the shell, but only after separate planning and smoke requirements.
 
 Boundaries:
 - `BeforeAfterPanel` is a visual shell, not a semantic figure component.
@@ -189,18 +185,7 @@ Boundaries:
 
 ## AI / Agent Governance
 
-所有 AI / Agent 修改 code 前，必須先閱讀：
-
-```txt
-docs/design-system/design-system.md
-docs/design-system/02-tokens.md
-docs/design-system/03-components.md
-docs/design-system/04-case-study-patterns.md
-docs/design-system/05-accessibility.md
-docs/design-system/08-ai-implementation-rules.md
-```
-
-Design System 落地禁止一次大改，必須依照 `audit/implementation-task-order.md` 分成 audit、low-risk token fix、shared components、case study pages、visual QA 五階段處理。
+設計系統修改應從現況 audit 開始，限定在單一路由、元件或 token 範圍內，並在合併前完成 lint、token、build 與相關 route checks。
 
 任何 AI 任務完成後，必須回報：
 

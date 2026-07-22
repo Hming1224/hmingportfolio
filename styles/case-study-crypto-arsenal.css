@@ -3,7 +3,7 @@
    慣例（同 case-study-advantech.css）：
    本檔所有「Crypto Arsenal 私有」selector 一律以 `.theme-crypto-arsenal` 開頭，
    不污染全域；共用外殼（cs-page / cs-hero-* / cs-toc-* / cs-next-*）在 case-study.css。
-   設計來源：Figma Portfolio-Site node 2574-249（完稿）＋ variants/crypto-arsenal/prototype.html。 */
+   設計來源：Figma Portfolio-Site node 2574-249（完稿）。 */
 
 /* ── 區域色票（CA 案例頁專屬）──
    scope 在 .theme-crypto-arsenal，不進全域 :root（見 docs/design-system.md §2.7）。
@@ -421,16 +421,6 @@
 
 .theme-crypto-arsenal #cs-sec-iteration .cs-before-after-narrative-point-content p+p {
   margin-top: var(--cs-detail-body-paragraph-gap);
-}
-
-.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-panel {
-  --cs-card-padding-mobile: 0;
-  --cs-card-shadow: none;
-  background: var(--ca-bg-soft);
-}
-
-.theme-crypto-arsenal #cs-sec-iteration .cs-before-after-head {
-  background: linear-gradient(269deg, rgba(221, 226, 251, 0.25), #dde2fb 63%);
 }
 
 /* ── 09 最終介面 ── */

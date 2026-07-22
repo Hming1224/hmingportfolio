@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
-export type CaseGridVariant = 'two' | 'three' | 'four' | 'auto' | 'stack';
+type CaseGridVariant = 'two' | 'three' | 'four' | 'auto' | 'stack';
 
 export interface CaseGridProps {
   children: ReactNode;

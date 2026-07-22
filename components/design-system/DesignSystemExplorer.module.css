@@ -2944,7 +2944,6 @@
 .caseMediaDemo,
 .caseMediaDemoShell,
 .caseMediaSourceDemo,
-.beforeAfterSourceDemo,
 .beforeAfterNarrativeDemo,
 .flowHintDemo,
 .localExceptionsDemo,
@@ -3373,7 +3372,6 @@
   font-size: var(--hm-fs-sm);
 }
 
-.beforeAfterSourceDemo :global(.cs-before-after-narrative-comparison),
 .beforeAfterNarrativeDemo :global(.cs-before-after-narrative) {
   width: 100%;
 }
@@ -3382,11 +3380,6 @@
   width: 100%;
   max-width: 100%;
   border-radius: var(--hm-radius-md);
-}
-
-.beforeAfterComparisonDemo {
-  --cs-before-after-narrative-panel-body-padding: var(--hm-space-md);
-  --cs-before-after-narrative-comparison-gap: var(--hm-space-lg);
 }
 
 .beforeAfterNarrativeTitlePlaceholder,

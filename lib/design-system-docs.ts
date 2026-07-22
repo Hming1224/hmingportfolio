@@ -1,27 +1,27 @@
 export type DesignSystemLocale = "en" | "zh-TW";
 export type DesignSystemDocKind = "foundation" | "component" | "reference";
 
-export type DesignSystemAnatomyPart = {
+type DesignSystemAnatomyPart = {
   part: string;
   description: string;
   owner: string;
   code: string;
 };
 
-export type DesignSystemCodeGuidance = {
+type DesignSystemCodeGuidance = {
   importPath: string;
   example: string;
   props: Array<{ name: string; type: string; description: string; usedBy?: string }>;
   notes?: string[];
 };
 
-export type DesignSystemTokenMapping = {
+type DesignSystemTokenMapping = {
   token: string;
   role: string;
   usage?: string;
 };
 
-export type DesignSystemStateRow = {
+type DesignSystemStateRow = {
   state: string;
   appliesTo: string;
   behavior: string;
@@ -68,10 +68,6 @@ export type DesignSystemDoc = {
   referenceCardsZh?: Array<{ label: string; value: string }>;
   demo?: string;
 };
-
-import { designSystemSections } from "./design-system-data";
-
-export { designSystemSections };
 
 const foundations: DesignSystemDoc[] = [
   {
@@ -1329,9 +1325,6 @@ const componentSeeds: ComponentSeed[] = [
       { label: "相關", value: "FloatingInput、Button、Modal、Toast" },
     ],
   },
-  { slug: "select", title: "Select", titleZh: "下拉選單", category: "Data Entry", source: "components/ui/Select.tsx", demo: "select", states: ["placeholder", "open", "selected", "focus", "error", "disabled"], tokens: ["--hm-surface", "--hm-line", "--hm-ink", "--hm-muted", "--hm-radius-md", "--hm-duration-fast"], usage: ["Contract-only candidate.", "No current live usage in portfolio routes.", "Not a production example; keep it for future product surfaces or maintenance consistency.", "Use when options exceed four and keyboard navigation / focus management is required."], usageZh: ["僅保留契約的候選元件。", "目前正式作品集頁面尚未直接使用。", "不是目前正式站範例；先保留給未來產品介面或維護一致性。", "選項超過 4 個，且需要鍵盤導覽與焦點管理時才使用。"] },
-  { slug: "checkbox", title: "Checkbox", titleZh: "核取方塊", category: "Data Entry", source: "components/ui/Checkbox.tsx", demo: "checkbox", states: ["unchecked", "checked", "focus", "error", "disabled"], tokens: ["--hm-purple", "--hm-line", "--hm-surface", "--hm-radius-sm"], usage: ["Contract-only candidate.", "No current live usage in portfolio routes.", "Not a production example; do not add it to Contact unless a real multi-select task appears.", "Use for multi-select choices or independent boolean settings."], usageZh: ["僅保留契約的候選元件。", "目前正式作品集頁面尚未直接使用。", "不是目前正式站範例；除非真的出現多選任務，不應硬塞進 Contact。", "用於多選或獨立的 boolean 設定。"] },
-  { slug: "radio", title: "Radio", titleZh: "單選按鈕", category: "Data Entry", source: "components/ui/Radio.tsx", demo: "radio", states: ["unchecked", "checked", "focus", "error", "disabled"], tokens: ["--hm-purple", "--hm-line", "--hm-surface", "--hm-radius-pill"], usage: ["Contract-only candidate.", "No current live usage in portfolio routes.", "Not a production example; implement in production first if a real mutually exclusive choice appears.", "Use for mutually exclusive choices with fewer than four options."], usageZh: ["僅保留契約的候選元件。", "目前正式作品集頁面尚未直接使用。", "不是目前正式站範例；若未來有真實互斥選項，應先導入 production 再文件化。", "用於少於 4 個選項的單選互斥情境。"] },
   {
     slug: "project-card",
     title: "ProjectCard",
@@ -2122,7 +2115,6 @@ const componentSeeds: ComponentSeed[] = [
     ],
     references: ["components/case-study/CaseMedia.tsx", "components/case-study/ZoomableImage.tsx", "styles/case-study.css"],
   },
-  { slug: "case-before-after", title: "CaseBeforeAfter", titleZh: "前後比較", category: "Case Study", source: "components/case-study/CaseBeforeAfter.tsx", hideSourceInHeader: true, status: "Source-level component", statusZh: "原始碼層級元件", description: "A reusable two-panel comparison primitive for before / after states.", descriptionZh: "用於 before / after 狀態的可重用雙欄比較 primitive。", exampleLabel: "Two-panel comparison", exampleLabelZh: "雙欄比較", demo: "case-before-after", usage: ["Use for simple two-panel before / after comparisons.", "Good when the comparison itself is reusable, but the route does not need a full narrative frame.", "Do not use it as a replacement for BeforeAfterNarrativeFrame."], usageZh: ["適合用在單純的 before / after 雙欄比較。", "如果只是比較兩個狀態，不需要完整案例敘事框架，可以用它。", "不應拿來取代 BeforeAfterNarrativeFrame。"], behavior: [{ label: "Scope", description: "Source-level comparison primitive." }, { label: "Route adoption", description: "No current direct route adoption in Advantech, Crypto Arsenal, or Laushu." }, { label: "Responsive layout", description: "The comparison stacks on narrow viewports through the production case-study CSS." }, { label: "Selector boundary", description: "The `.cs-before-after-panel` selector belongs to CaseBeforeAfter." }], behaviorZh: [{ label: "範圍", description: "Source-level comparison primitive。" }, { label: "頁面採用", description: "目前 Advantech、Crypto Arsenal、Laushu 都沒有直接 頁面採用。" }, { label: "響應式版面", description: "窄版會透過 正式案例頁 CSS 改為上下堆疊。" }, { label: "Selector 邊界", description: "`.cs-before-after-panel` selector 屬於 CaseBeforeAfter。" }], anatomyParts: [{ part: "Root", description: "Wraps the comparison and owns the two-panel layout.", owner: "CaseBeforeAfter", code: ".cs-before-after" }, { part: "Before panel", description: "Receives the before state through the `before` ReactNode prop.", owner: "CaseBeforeAfter", code: ".cs-before-after-panel" }, { part: "After panel", description: "Receives the after state through the `after` ReactNode prop.", owner: "CaseBeforeAfter", code: ".cs-before-after-panel" }, { part: "Label", description: "Optional before / after labels shown above each content slot.", owner: "CaseBeforeAfter", code: ".cs-before-after-head" }, { part: "Panel content slot", description: "Slot for concise state content, media, or structured comparison details.", owner: "Route / caller", code: ".cs-before-after-content" }, { part: "Selector boundary", description: "The panel selector belongs to this independent component, not BeforeAfterNarrativeFrame.", owner: "CaseBeforeAfter", code: ".cs-before-after-panel" }], anatomyPartsZh: [{ part: "Root", description: "包住整個比較區，負責雙欄 版面。", owner: "CaseBeforeAfter", code: ".cs-before-after" }, { part: "Before panel", description: "透過 `before` ReactNode prop 接收 before 狀態。", owner: "CaseBeforeAfter", code: ".cs-before-after-panel" }, { part: "After panel", description: "透過 `after` ReactNode prop 接收 after 狀態。", owner: "CaseBeforeAfter", code: ".cs-before-after-panel" }, { part: "Label", description: "每個內容 slot 上方的 optional before / after 標籤。", owner: "CaseBeforeAfter", code: ".cs-before-after-head" }, { part: "Panel content slot", description: "放置簡短狀態內容、媒體或結構化比較細節。", owner: "Route / caller", code: ".cs-before-after-content" }, { part: "Selector 邊界", description: "這個 panel selector 屬於獨立的 CaseBeforeAfter，不屬於 BeforeAfterNarrativeFrame。", owner: "CaseBeforeAfter", code: ".cs-before-after-panel" }], codeGuidance: { importPath: "components/case-study/CaseBeforeAfter.tsx", example: "import CaseBeforeAfter from \"@/components/case-study/CaseBeforeAfter\";\n\n<CaseBeforeAfter\n  beforeLabel=\"Before\"\n  afterLabel=\"After\"\n  before={<YourBeforeState />}\n  after={<YourAfterState />}\n/>", props: [{ name: "before", type: "ReactNode", description: "Content rendered in the before panel." }, { name: "after", type: "ReactNode", description: "Content rendered in the after panel." }, { name: "beforeLabel", type: "ReactNode", description: "Optional label for the before panel." }, { name: "afterLabel", type: "ReactNode", description: "Optional label for the after panel." }, { name: "className", type: "string", description: "Optional className for the root wrapper." }], notes: ["Use it for simple state comparison only."] }, codeGuidanceZh: { importPath: "components/case-study/CaseBeforeAfter.tsx", example: "import CaseBeforeAfter from \"@/components/case-study/CaseBeforeAfter\";\n\n<CaseBeforeAfter\n  beforeLabel=\"Before\"\n  afterLabel=\"After\"\n  before={<YourBeforeState />}\n  after={<YourAfterState />}\n/>", props: [{ name: "before", type: "ReactNode", description: "before panel 內渲染的內容。" }, { name: "after", type: "ReactNode", description: "after panel 內渲染的內容。" }, { name: "beforeLabel", type: "ReactNode", description: "before panel 的 optional 標籤。" }, { name: "afterLabel", type: "ReactNode", description: "after panel 的 optional 標籤。" }, { name: "className", type: "string", description: "root wrapper 的 optional className。" }], notes: ["只用於簡單狀態比較。"] }, tokenMappings: [{ token: "--cs-surface", role: "Panel and card surface inherited through the case-study shell." }, { token: "--cs-line", role: "Borders and dividers used by the comparison panels." }, { token: "--cs-accent", role: "Directional arrow and case accent color." }, { token: "--hm-space-md", role: "Shared spacing rhythm for the comparison layout." }], tokenMappingsZh: [{ token: "--cs-surface", role: "透過 case-study 骨架 繼承的 panel / card 表面。" }, { token: "--cs-line", role: "比較 panel 的 border 與 divider。" }, { token: "--cs-accent", role: "方向箭頭與案例 accent color。" }, { token: "--hm-space-md", role: "比較版面使用的共用 間距 rhythm。" }], accessibility: ["Content should remain readable in both panels.", "Labels should identify the before / after states.", "Do not rely on color alone to communicate the comparison."], accessibilityZh: ["兩個 panel 內的內容都必須維持可讀。", "Label 需要清楚標示 before / after 狀態。", "不要只依賴顏色傳達比較關係。"], tokens: ["--cs-surface", "--cs-line", "--cs-accent", "--hm-space-md"], referenceCards: [{ label: "Source", value: "components/case-study/CaseBeforeAfter.tsx" }, { label: "CSS", value: ".cs-before-after / .cs-before-after-panel" }, { label: "Live usage", value: "No current direct route adoption" }, { label: "Boundary", value: ".cs-before-after-panel belongs to CaseBeforeAfter" }], referenceCardsZh: [{ label: "原始碼", value: "components/case-study/CaseBeforeAfter.tsx" }, { label: "CSS", value: ".cs-before-after / .cs-before-after-panel" }, { label: "實際使用位置", value: "目前沒有直接 頁面採用" }, { label: "邊界", value: ".cs-before-after-panel 屬於 CaseBeforeAfter" }], references: ["components/case-study/CaseBeforeAfter.tsx", "styles/case-study.css"] },
   { slug: "before-after-narrative-frame", title: "BeforeAfterNarrativeFrame", titleZh: "敘事型前後比較框架", category: "Case Study", source: "components/case-study/BeforeAfterNarrativeFrame.tsx", hideSourceInHeader: true, status: "Live route pattern", statusZh: "正式路由模式", description: "A case-study narrative frame for guided before / after comparisons.", descriptionZh: "用於案例頁引導式 before / after 比較的敘事框架。", exampleLabel: "Advantech / SolutionSection / Board 1", exampleLabelZh: "Advantech / SolutionSection / Board 1", demo: "before-after-narrative", usage: ["Use when a case-study section needs a guided before / after narrative.", "Use when the frame must carry scenario, design decision, and comparison structure.", "The frame owns the repeatable narrative shell; each route owns screenshots, redlines, sizing, and specific design judgment."], usageZh: ["適合用在案例頁需要引導式 before / after 敘事的段落。", "當畫面需要承載情境、設計決策與比較結構時使用。", "frame 負責可重複的敘事外框；截圖、redline、尺寸與專案判斷仍由各案例頁負責。"], behavior: [{ label: "Route-owned content", description: "Routes own screenshots, redlines, sizing, and project-specific judgment." }, { label: "Responsive layout", description: "The comparison stacks on narrow viewports through the production case-study CSS." }, { label: "Panel slots", description: "Before and after content remains route-provided." }, { label: "Comparison flow", description: "The connector communicates relationship, but it cannot be the only meaning." }], behaviorZh: [{ label: "頁面自有內容", description: "截圖、redline、尺寸與專案判斷由各頁面負責。" }, { label: "響應式版面", description: "窄版會透過 正式案例頁 CSS 改為上下堆疊。" }, { label: "Panel slots", description: "Before 與 after 內容仍由頁面提供。" }, { label: "比較流程", description: "connector 用來傳達關係，但不能成為唯一語意。" }], anatomyParts: [{ part: "Frame shell", description: "Case-study narrative container for a guided comparison.", owner: "BeforeAfterNarrativeFrame", code: ".cs-before-after-narrative" }, { part: "Scenario badge / header", description: "Identifies the comparison moment and frames the section title.", owner: "BeforeAfterNarrativeFrame", code: ".cs-before-after-narrative-header / badge" }, { part: "Before panel", description: "Before state rendered through the internal panel shell.", owner: "BeforeAfterNarrativeFrame + BeforeAfterPanel", code: ".cs-before-after-state-panel" }, { part: "After panel", description: "After state rendered through the internal panel shell.", owner: "BeforeAfterNarrativeFrame + BeforeAfterPanel", code: ".cs-before-after-state-panel" }, { part: "Connector", description: "Visual relationship marker between the before and after panels.", owner: "BeforeAfterNarrativeFrame", code: ".cs-before-after-narrative-connector" }, { part: "Narrative copy", description: "Optional point list supplied by the route when the comparison needs explanation.", owner: "Route / caller", code: "points[]" }, { part: "BeforeAfterPanel internal visual shell", description: "Rendered inside BeforeAfterNarrativeFrame; internal anatomy, not a standalone route-level pattern.", owner: "BeforeAfterPanel", code: "components/case-study/BeforeAfterPanel.tsx" }], anatomyPartsZh: [{ part: "Frame shell", description: "案例頁引導式比較的敘事容器。", owner: "BeforeAfterNarrativeFrame", code: ".cs-before-after-narrative" }, { part: "Scenario badge / header", description: "標示比較情境，並建立 section title。", owner: "BeforeAfterNarrativeFrame", code: ".cs-before-after-narrative-header / badge" }, { part: "Before panel", description: "透過 internal panel 骨架 渲染 before 狀態。", owner: "BeforeAfterNarrativeFrame + BeforeAfterPanel", code: ".cs-before-after-state-panel" }, { part: "After panel", description: "透過 internal panel 骨架 渲染 after 狀態。", owner: "BeforeAfterNarrativeFrame + BeforeAfterPanel", code: ".cs-before-after-state-panel" }, { part: "Connector", description: "before 與 after panel 之間的視覺關係標記。", owner: "BeforeAfterNarrativeFrame", code: ".cs-before-after-narrative-connector" }, { part: "Narrative copy", description: "需要補充比較說明時，由頁面提供 optional point list。", owner: "Route / caller", code: "points[]" }, { part: "BeforeAfterPanel internal visual shell", description: "在 BeforeAfterNarrativeFrame 內部渲染；它是 內部組成，不是獨立頁面層級模式。", owner: "BeforeAfterPanel", code: "components/case-study/BeforeAfterPanel.tsx" }], codeGuidance: { importPath: "components/case-study/BeforeAfterNarrativeFrame.tsx", example: "import { BeforeAfterNarrativeFrame } from \"@/components/case-study/BeforeAfterNarrativeFrame\";\n\n<BeforeAfterNarrativeFrame\n  badge=\"Scenario 1\"\n  title=\"AI Chatbot component\"\n  beforeLabel=\"Before\"\n  afterLabel=\"After\"\n  before={<BeforeMedia />}\n  after={<AfterMedia />}\n  points={[{ label: \"Decision\", content: \"...\" }]}\n  tone=\"blue\"\n/>", props: [{ name: "badge", type: "ReactNode", description: "Scenario or moment label shown in the frame header." }, { name: "title", type: "ReactNode", description: "Primary heading for the comparison frame." }, { name: "before", type: "ReactNode", description: "Route-provided before-state content." }, { name: "after", type: "ReactNode", description: "Route-provided after-state content." }, { name: "beforeLabel / afterLabel", type: "ReactNode", description: "Labels that enable the internal BeforeAfterPanel shells." }, { name: "points", type: "BeforeAfterNarrativePoint[]", description: "Optional narrative points supplied by the route." }, { name: "tone", type: "\"blue\" | \"cyan\" | \"purple\" | \"neutral\"", description: "Tone preset for panel accent styling." }, { name: "connector", type: "ReactNode", description: "Optional custom connector between before and after panels." }, { name: "className slots", type: "string", description: "Optional className hooks for route-owned sizing and media context." }], notes: ["BeforeAfterPanel is rendered internally by this frame."] }, codeGuidanceZh: { importPath: "components/case-study/BeforeAfterNarrativeFrame.tsx", example: "import { BeforeAfterNarrativeFrame } from \"@/components/case-study/BeforeAfterNarrativeFrame\";\n\n<BeforeAfterNarrativeFrame\n  badge=\"Scenario 1\"\n  title=\"AI Chatbot component\"\n  beforeLabel=\"Before\"\n  afterLabel=\"After\"\n  before={<BeforeMedia />}\n  after={<AfterMedia />}\n  points={[{ label: \"Decision\", content: \"...\" }]}\n  tone=\"blue\"\n/>", props: [{ name: "badge", type: "ReactNode", description: "frame header 內的情境或比較時刻標籤。" }, { name: "title", type: "ReactNode", description: "比較 frame 的主標題。" }, { name: "before", type: "ReactNode", description: "頁面提供的 before-state content。" }, { name: "after", type: "ReactNode", description: "頁面提供的 after-state content。" }, { name: "beforeLabel / afterLabel", type: "ReactNode", description: "啟用 internal BeforeAfterPanel 骨架 的 labels。" }, { name: "points", type: "BeforeAfterNarrativePoint[]", description: "頁面提供的 optional narrative points。" }, { name: "tone", type: "\"blue\" | \"cyan\" | \"purple\" | \"neutral\"", description: "panel accent styling 的 tone preset。" }, { name: "connector", type: "ReactNode", description: "before / after panel 之間的 optional custom connector。" }, { name: "className slots", type: "string", description: "頁面自有 sizing 與 media 脈絡 的 optional className hooks。" }], notes: ["BeforeAfterPanel 由這個 frame 內部渲染。"] }, tokenMappings: [{ token: ".cs-before-after-narrative", role: "Root shell for the guided narrative frame." }, { token: ".cs-before-after-narrative[data-tone]", role: "Tone-specific accent mapping derived from existing case-study tokens." }, { token: "--cs-before-after-narrative-panel-*", role: "Route-overridable panel shell values." }, { token: "--cs-before-after-state-panel-*", role: "Internal BeforeAfterPanel visual shell values." }, { token: "--hm-blue / --hm-purple / --cs-accent", role: "Tone mapping used by the narrative frame and route themes." }], tokenMappingsZh: [{ token: ".cs-before-after-narrative", role: "引導式 narrative frame 的 root 骨架。" }, { token: ".cs-before-after-narrative[data-tone]", role: "由既有 case-study tokens 推導的 tone-specific accent mapping。" }, { token: "--cs-before-after-narrative-panel-*", role: "頁面可覆寫的 panel 骨架 values。" }, { token: "--cs-before-after-state-panel-*", role: "internal BeforeAfterPanel visual shell values。" }, { token: "--hm-blue / --hm-purple / --cs-accent", role: "narrative frame 與 頁面 theme 使用的 tone mapping。" }], accessibility: ["Before / after labels must be readable.", "The comparison should not rely on arrow direction alone.", "Panel content must remain meaningful when stacked.", "Narrative copy should not duplicate inaccessible visual-only content."], accessibilityZh: ["Before / after labels 必須可讀。", "比較關係不能只依賴箭頭方向。", "窄版堆疊時，panel 內容仍需有意義。", "敘事文字不應只是重複不可讀的純視覺資訊。"], tokens: ["--cs-before-after-narrative-panel-*", "--cs-before-after-state-panel-*", "--cs-accent", "--hm-space-md"], referenceCards: [{ label: "Source", value: "components/case-study/BeforeAfterNarrativeFrame.tsx" }, { label: "Live usage", value: "Advantech / Crypto Arsenal / Laushu" }, { label: "Internal part", value: "BeforeAfterPanel" }, { label: "Boundary", value: "Route owns media, redlines, sizing, and project-specific judgment" }], referenceCardsZh: [{ label: "原始碼", value: "components/case-study/BeforeAfterNarrativeFrame.tsx" }, { label: "實際使用位置", value: "Advantech / Crypto Arsenal / Laushu" }, { label: "內部組成", value: "BeforeAfterPanel" }, { label: "邊界", value: "media、redline、尺寸與專案判斷由頁面負責" }], references: ["components/case-study/BeforeAfterNarrativeFrame.tsx", "components/case-study/BeforeAfterPanel.tsx", "styles/case-study.css"] },
   {
     slug: "zoomable-image",
@@ -2813,7 +2805,6 @@ const componentSeeds: ComponentSeed[] = [
       { label: "相關元件", value: "Modal、Button loading、Toast" },
     ],
   },
-  { slug: "empty-state", title: "EmptyState", titleZh: "空狀態", category: "Feedback", source: "components/ui/EmptyState.tsx", demo: "empty", states: ["message only", "description", "with CTA"], usage: ["Backlog candidate.", "No current live usage in portfolio routes.", "Not a production example; use after a real search, filter, or list-empty state exists."], usageZh: ["待辦候選元件。", "目前正式作品集頁面尚未直接使用。", "不是目前正式站範例；等真實搜尋、篩選或列表空狀態出現後再使用。"], tokens: ["--hm-muted", "--hm-ink", "--hm-space-md"], accessibility: ["提供清晰說明文字取代空白。"] },
 ];
 
 const components: DesignSystemDoc[] = componentSeeds.map((item) => ({
@@ -3002,50 +2993,12 @@ const references: DesignSystemDoc[] = [
       "app/crypto-arsenal/sections/ResearchSection.tsx",
       "app/crypto-arsenal/components/FlowMatrixBoard.tsx",
       "components/case-study/BeforeAfterPanel.tsx",
-      "components/case-study/CaseBeforeAfter.tsx",
       "components/ui/Accordion.tsx",
-      "components/design-system/DesignSystemDocsNav.tsx",
       "components/design-system/DesignSystemExplorer.tsx",
       "docs/design-system/06-governance.md",
       "docs/design-system/03-components.md",
     ],
   },
-  {
-    kind: "reference",
-    slug: "future-backlog",
-    title: "Future Candidates / Backlog",
-    titleZh: "候選元件 / 待辦清單",
-    description: "Source-level contracts that are intentionally excluded from the live component catalog until a production route adopts them.",
-    descriptionZh: "尚未進入 live 元件目錄 的 原始碼層級 contracts；等正式頁面 真的採用後再文件化。",
-    category: "Reference",
-    usage: [
-      "Future candidates not shown in the live catalog: Radio and Alert.",
-      "Radio may be useful if the Contact form later adds a small set of inquiry-type choices.",
-      "Alert may be useful if failed submissions need a persistent error summary.",
-      "Backlog contracts not shown in this catalog: Select, Checkbox, and EmptyState.",
-      "They remain source-level candidates only and should return to this site after a real portfolio route adopts them.",
-    ],
-    usageZh: [
-      "未放入 live catalog 的 future 候選：Radio、Alert。",
-      "若 Contact 表單未來需要少量詢問類型選項，Radio 可能適合。",
-      "若送出失敗需要持續顯示的錯誤摘要，Alert 可能適合。",
-      "未放入本 catalog 的 backlog contracts：Select、Checkbox、EmptyState。",
-      "它們目前只保留為 原始碼層級 候選；等正式作品集頁面 真的採用後，才回到這份文件站。",
-    ],
-    references: ["components/ui/Radio.tsx", "components/ui/Alert.tsx", "components/ui/Select.tsx", "components/ui/Checkbox.tsx", "components/ui/EmptyState.tsx"],
-  },
 ];
 
 export const designSystemDocs = [...foundations, ...components, ...references];
-
-export function getDesignSystemDoc(kind: string, slug: string) {
-  const normalizedKind =
-    kind === "foundations" ? "foundation" : kind === "components" ? "component" : "reference";
-  return designSystemDocs.find((doc) => doc.kind === normalizedKind && doc.slug === slug);
-}
-
-export function getDesignSystemHref(kind: DesignSystemDocKind, slug: string) {
-  const segment =
-    kind === "foundation" ? "foundations" : kind === "component" ? "components" : "reference";
-  return `/design-system/${segment}/${slug}`;
-}

@@ -3,8 +3,6 @@ export { default as CaseHero } from './CaseHero';
 export { default as CaseInfoGrid } from './CaseInfoGrid';
 export { default as CaseGrid } from './CaseGrid';
 export { default as CaseCard } from './CaseCard';
-export { default as CaseBeforeAfter } from './CaseBeforeAfter';
-export { BeforeAfterPanel } from './BeforeAfterPanel';
 export { BeforeAfterNarrativeFrame } from './BeforeAfterNarrativeFrame';
 export { default as CaseFeatureRow } from './CaseFeatureRow';
 export { default as CaseFlowFrame } from './CaseFlowFrame';
@@ -13,44 +11,10 @@ export { default as CaseMetricGrid } from './CaseMetricGrid';
 export { default as CaseOverview } from './CaseOverview';
 export { getCaseOverviewLabel } from './CaseOverview.i18n';
 export { default as OutcomeWalkthrough } from './OutcomeWalkthrough';
-export { default as CaseProposalTabs } from './CaseProposalTabs';
 export { default as CaseSection } from './CaseSection';
 export { default as CaseHeading } from './CaseHeading';
 export { default as CaseSectionHeader } from './CaseSectionHeader';
 export { default as ZoomableImage } from './ZoomableImage';
 export { default as FlowScrollHint } from './FlowScrollHint';
-export { default as FeatureConnectors } from './FeatureConnectors';
-export { setupFeatureConnectors } from './FeatureConnectors';
-export {
-  type BeforeAfterNarrativeFrameProps,
-  type BeforeAfterNarrativePoint,
-  type BeforeAfterNarrativeTone,
-} from './BeforeAfterNarrativeFrame';
-export {
-  type BeforeAfterPanelProps,
-  type BeforeAfterPanelTone,
-} from './BeforeAfterPanel';
-export { type CaseCardProps, type CaseCardVariant } from './CaseCard';
-export { type CaseGridProps, type CaseGridVariant } from './CaseGrid';
-export { type CaseHeadingProps, type CaseHeadingTone } from './CaseHeading';
 export { type CaseInfoItem } from './CaseInfoGrid';
-export { type CaseMediaProps, type CaseMediaVariant } from './CaseMedia';
-export {
-  type CaseOverviewItem,
-  type CaseOverviewProps,
-  type CaseOverviewStat,
-} from './CaseOverview';
-export {
-  type OutcomeWalkthroughProps,
-  type WalkthroughFlow,
-  type WalkthroughLabels,
-  type WalkthroughStep,
-} from './OutcomeWalkthrough';
-export { type CaseProposalTab } from './CaseProposalTabs';
-export { type CaseSectionHeaderProps, type CaseSectionHeaderTone } from './CaseSectionHeader';
 export { type TocSection } from '../CaseTOC';
-export {
-  type ZoomableImageLabels,
-  type ZoomableImageLightboxMode,
-  type ZoomableImageProps,
-} from './ZoomableImage';

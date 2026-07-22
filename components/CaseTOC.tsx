@@ -16,7 +16,7 @@ interface CaseTOCProps {
   onNavigate?: (id: string) => void;
 }
 
-export interface CaseTOCViewProps {
+interface CaseTOCViewProps {
   sections: TocSection[];
   activeId: string;
   visible?: boolean;
@@ -49,7 +49,7 @@ export function scrollCaseTocTarget(
   target.scrollIntoView({ behavior, block: 'start' });
 }
 
-export const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function CaseTOCView(
+const CaseTOCView = forwardRef<HTMLElement, CaseTOCViewProps>(function CaseTOCView(
   { sections, activeId, visible = false, ariaLabel, localScrollOnly = false, onSectionClick },
   ref,
 ) {

@@ -75,7 +75,7 @@ Adoption:
 
 > **Status:** Implemented shared pattern with partial route adoption.
 
-`CaseBeforeAfter` is the existing simple shared component for simple two-panel media comparisons. `BeforeAfterNarrativeFrame` is the implemented shared slot-based layout frame for the broader narrative anatomy. Crypto IterationSection and Laushu iteration board have adopted it; Advantech Board 1 has adopted it as a pilot. Advantech Board 2 / Board 3 remain deferred / route-local.
+`BeforeAfterNarrativeFrame` is the implemented shared slot-based layout frame for the broader narrative anatomy. Crypto IterationSection and Laushu iteration board have adopted it; Advantech Board 1 has adopted it as a pilot. Advantech Board 2 / Board 3 remain deferred / route-local.
 
 Adoption status:
 - Crypto IterationSection: adopted
@@ -175,13 +175,13 @@ Production routes still adopt `BeforeAfterNarrativeFrame`, not `BeforeAfterPanel
 
 The C1 compatibility bridge completed this internal use while preserving legacy narrative panel class hooks for route CSS compatibility. Existing route-scoped CSS continues to apply through `.cs-before-after-narrative-panel*` classes.
 
-`CaseBeforeAfter` remains a separate simple two-panel comparison component. `BeforeAfterPanel` is not a replacement for `BeforeAfterNarrativeFrame` or `CaseBeforeAfter`.
+`BeforeAfterPanel` is internal anatomy and is not a replacement for `BeforeAfterNarrativeFrame`.
 
 `BeforeAfterPanel` owns only the state panel visual shell. Media, annotations, redline labels, image sizing, and route-specific geometry remain slot content or route-local.
 
 #### Governance
 
-Do not expand `CaseBeforeAfter` to cover the broader narrative pattern. Use `BeforeAfterNarrativeFrame` for single-comparison narrative frames when the Layer 2 anatomy is stable. Keep multi-comparison scenario boards local until a separate multi-comparison contract is designed. Adopt one route at a time with visual-preserving migration and smoke testing.
+Use `BeforeAfterNarrativeFrame` for single-comparison narrative frames when the Layer 2 anatomy is stable. Keep multi-comparison scenario boards local until a separate multi-comparison contract is designed. Adopt one route at a time with visual-preserving migration and smoke testing.
 
 ---
 

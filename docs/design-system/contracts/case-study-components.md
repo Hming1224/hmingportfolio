@@ -85,7 +85,6 @@ Use this checklist as batches stabilize:
 - [ ] `CaseMetricGrid`
 - [ ] `CaseProposalTabs`
 - [ ] `CaseFeatureRow`
-- [ ] `CaseBeforeAfter`
 - [ ] `CaseFlowFrame`
 - [ ] `ZoomableImage`
 - [ ] `FlowScrollHint`
