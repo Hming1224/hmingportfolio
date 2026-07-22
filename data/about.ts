@@ -338,7 +338,7 @@ const copyByLocale = {
     heroTitle: "以多元視角打造有說服力的產品體驗",
     intro: [
       "我是黃宣銘，一名結合 UI/UX 設計、產品思維與工程背景的 Product Designer。",
-      "我從機械工程走進產品設計，先在電子代工業（OEM/ODM）做專案管理，再進到新創與 B2B 團隊做 UIUX。這段路讓我站在工程與使用者中間：把使用者的需求翻譯成工程聽得懂的規格，也把技術限制翻譯回設計決策。對我來說，設計就是與 PO/PM 及各方利害關係人一起釐清問題、收斂方向，把複雜的需求與限制，轉化成使用者用得順、也真的能落地的體驗。",
+      "我從機械工程走進產品設計，先在電子設計代工業（ODM）做專案管理，再進到新創與 B2B 團隊做 UIUX。這段路讓我站在工程與使用者中間：把使用者的需求翻譯成工程聽得懂的規格，也把技術限制翻譯回設計決策。對我來說，設計就是與 PO/PM 及各方利害關係人一起釐清問題、收斂方向，把複雜的需求與限制，轉化成使用者用得順、也真的能落地的體驗。",
       "過去我參與過 B2B AI 能源管理平台、量化交易產品與 Web3 服務設計，累積使用者研究與訪談、競品分析、介面與互動設計、Design System、prototype 與跨部門協作經驗。我也把 AI 工具實際導入設計、前端 prototype 與產品規格整理流程，用來建立問題框架、設計 MVP，並驗證商業目標與使用者體驗，朝 Product Builder 的方向前進。",
     ],
     headings: {
@@ -369,7 +369,7 @@ const copyByLocale = {
     heroTitle: "Designing Compelling Product Experiences from Multiple Perspectives",
     intro: [
       "I'm Brian Huang, a product designer combining UI/UX design, product thinking, and an engineering background.",
-      "I moved into product design from mechanical engineering — first as a project manager in electronics OEM/ODM manufacturing, then into UI/UX at startups and B2B teams. That path taught me to sit between engineering and users: translating user needs into specs engineers can act on, and translating technical constraints back into design decisions. To me, design is not simply about making screens look better; it is about working with POs/PMs and stakeholders to clarify the problem and converge on a direction, turning complex needs and constraints into experiences that are clear, intuitive, and feasible.",
+      "I moved into product design from mechanical engineering — first as a project manager in electronics ODM manufacturing, then into UI/UX at startups and B2B teams. That path taught me to sit between engineering and users: translating user needs into specs engineers can act on, and translating technical constraints back into design decisions. To me, design is not simply about making screens look better; it is about working with POs/PMs and stakeholders to clarify the problem and converge on a direction, turning complex needs and constraints into experiences that are clear, intuitive, and feasible.",
       "I have contributed to a B2B AI energy management platform, a quantitative trading product, and a Web3 service, building experience across user research and interviews, competitive analysis, interface and interaction design, design systems, prototyping, and cross-functional collaboration. I also bring AI tools into design, front-end prototyping, and product spec work to frame problems, design MVPs, and validate business goals against user experience, as I grow toward becoming a Product Builder.",
     ],
     headings: {
