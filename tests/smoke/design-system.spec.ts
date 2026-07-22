@@ -47,7 +47,7 @@ test.describe("CaseTOC scoped demo", () => {
       await expect(demo.locator(".cs-toc-link").first()).toBeVisible();
       await expect(demo.locator("#cs-sec-ds-toc-role")).toBeVisible();
 
-      const scrollHost = demo.locator(".cs-toc-layout > div").first();
+      const scrollHost = demo.locator(".cs-toc-layout > div > div").first();
       const beforeWindowScroll = await page.evaluate(() => window.scrollY);
       const roleLink = demo.locator(".cs-toc-link", { hasText: /My Role|我的角色/ }).first();
 
@@ -73,6 +73,7 @@ test.describe("CaseTOC scoped demo", () => {
         )
         .toBe(true);
 
+      await scrollHost.dispatchEvent("scrollend");
       await scrollHost.evaluate((element) => {
         const target = element.querySelector<HTMLElement>("#cs-sec-ds-toc-analysis");
         if (!target) return;
