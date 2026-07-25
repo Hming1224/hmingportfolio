@@ -44,9 +44,15 @@ const overviewItems = [
       },
       {
         label: "How might we",
-        text: "我們如何運用 AI，讓廠務團隊從單一廠區到跨廠區管理，都能及早掌握用電風險，提升能源使用效益並降低營運成本？",
+        text: "我們如何運用主動帶入脈絡的 AI，協助廠務團隊及早看懂能源與設備風險、判斷處理優先順序，並找到可執行的下一步？",
         icon: "question",
         variant: "highlight",
+      },
+      {
+        label: "設計假設",
+        text: "如果 AI 能在異常發生時主動帶入時間、地點、設備與風險層級，廠務人員就能減少查找與拼湊資訊的時間，更快排定處理優先順序並採取行動。",
+        icon: "hypothesis",
+        variant: "default",
       },
     ],
     media: {
@@ -58,7 +64,7 @@ const overviewItems = [
   },
   {
     label: "影響",
-    title: "從 AI 概念走向可驗證、可擴展的能源管理方案",
+    title: "兩項方案獲採納，超約預警啟動後端實作；實際節能成效留待上線驗證。",
     details: [
       {
         label: "CEO",

@@ -37,17 +37,17 @@ const overviewItems = [
   {
     kind: "goal",
     label: "設計目標",
-    title: "把交易控制權還給使用者，讓損益能自主掌握，也維持對 CA 的信任與策略使用意願。",
+    title: "把交易控制權帶回 CA，讓使用者不必離站或中斷策略也能管理風險。",
     details: [
       {
-        label: "商業命題",
-        text: "缺少交易控制權不只造成單次操作不便：當使用者無法依市場變化主動停利或止損，損益就只能被動交給策略決定。長期累積的不確定感，可能降低對平台的信任、策略機器人的啟用意願與回訪頻率，進一步影響 CA 的交易量與收益。",
+        label: "設計假設",
+        text: "如果把交易所熟悉的倉位、平倉與止盈止損模式整合進 CA，並讓人工操作與策略狀態同步，使用者就能在不中斷策略的情況下完成風險控制，並提高對操作結果的信心。",
         icon: "hypothesis",
         variant: "default",
       },
       {
         label: "How might we",
-        text: "我們如何讓 CA 用戶在使用自動交易策略的同時，仍能自主掌握交易與損益，並建立值得長期信任、持續使用的策略交易體驗？",
+        text: "我們如何讓使用自動交易策略的使用者，不必離開 CA 或中斷策略，就能看懂倉位、完成必要的風險控制，並對操作結果建立足夠信心？",
         icon: "question",
         variant: "highlight",
       },
@@ -62,7 +62,7 @@ const overviewItems = [
   {
     kind: "impact",
     label: "影響",
-    title: "將三項核心交易流程整合進 CA，平均操作時間縮短 58%。",
+    title: "將三項風險控制流程整合進 CA，平均操作時間縮短 58%；止盈止損判讀仍待優化。",
     details: impactOverviewQuotes.map((item) => ({
       label: item.label,
       text: item.text,
