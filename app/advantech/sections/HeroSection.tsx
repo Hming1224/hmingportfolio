@@ -54,8 +54,6 @@ export default async function HeroSection() {
           Canva
           <br />
           Screen studio
-          <br />
-          Adobe After Effects
         </>
       ),
     },
