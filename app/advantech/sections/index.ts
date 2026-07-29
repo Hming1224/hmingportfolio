@@ -7,5 +7,5 @@ export { default as AnalysisSection } from "./AnalysisSection";
 export { default as InterviewSection } from "./InterviewSection";
 export { default as ScenarioSection } from "./ScenarioSection";
 export { default as SolutionSection } from "./SolutionSection";
-export { default as NextStepSection } from "./NextStepSection";
+export { default as PocOutcomeSection } from "./PocOutcomeSection";
 export { default as ResultSection } from "./ResultSection";

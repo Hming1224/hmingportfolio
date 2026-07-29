@@ -69,7 +69,7 @@ export default async function HeroSection() {
       }}
       meta={
         <>
-          <span className="cs-badge">Early Design Project</span>
+          <span className="cs-badge">{t("前瞻設計計畫・POC 概念驗證提案")}</span>
           <span className="cs-tags">WEB・B2B・AI Chatbot・UX Design・UI Design</span>
         </>
       }

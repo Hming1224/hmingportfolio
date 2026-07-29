@@ -47,6 +47,7 @@ interface WalkthroughLabels {
 export interface OutcomeWalkthroughProps {
   kicker: string;
   title: string;
+  description?: string;
   flows: WalkthroughFlow[];
   labels: WalkthroughLabels;
   frameAspectRatio?: string;
@@ -59,6 +60,7 @@ export interface OutcomeWalkthroughProps {
 export default function OutcomeWalkthrough({
   kicker,
   title,
+  description,
   flows,
   labels,
   frameAspectRatio,
@@ -76,6 +78,9 @@ export default function OutcomeWalkthrough({
       <div className="cs-walkthrough-copy">
         <p className="cs-walkthrough-kicker">{kicker}</p>
         <h3 className="cs-walkthrough-title">{title}</h3>
+        {description ? (
+          <p className="cs-walkthrough-description cs-copy-body">{description}</p>
+        ) : null}
       </div>
 
       <TabsHighlight className="project-tabs-highlight cs-walkthrough-tabs">

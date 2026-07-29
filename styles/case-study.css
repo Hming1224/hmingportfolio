@@ -982,7 +982,8 @@
 
 /* OutcomeWalkthrough：案例共用的成果流程切換，支援圖片步驟與影片流程。 */
 .cs-walkthrough-kicker,
-.cs-walkthrough-title {
+.cs-walkthrough-title,
+.cs-walkthrough-description {
   margin: 0;
 }
 
@@ -1022,6 +1023,10 @@
   font-size: var(--cs-walkthrough-title-size);
   font-weight: 800;
   line-height: 1.22;
+}
+
+.cs-walkthrough-description {
+  color: var(--cs-text-muted);
 }
 
 .cs-walkthrough-tabs {

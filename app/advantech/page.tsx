@@ -20,7 +20,7 @@ import {
   InterviewSection,
   ScenarioSection,
   SolutionSection,
-  NextStepSection,
+  PocOutcomeSection,
   ResultSection,
 } from "./sections";
 
@@ -57,7 +57,7 @@ export default async function AdventechPage() {
     { id: "cs-sec-interview", title: tocLabel("使用者研究", "User Research") },
     { id: "cs-sec-scenario", title: tocLabel("設計策略", "Design Strategy") },
     { id: "cs-sec-solution", title: tocLabel("設計方案", "Solution") },
-    { id: "cs-sec-next", title: tocLabel("下一步", "Next Steps") },
+    { id: "cs-sec-poc-outcome", title: tocLabel("POC 成果", "POC Outcome") },
     { id: "cs-sec-result", title: tocLabel("學習反思", "Reflections") },
   ];
 
@@ -98,8 +98,8 @@ export default async function AdventechPage() {
       {/* ── 06 Solution ── */}
       <SolutionSection />
 
-      {/* ── 07 Next Step ── */}
-      <NextStepSection />
+      {/* ── 07 POC Outcome ── */}
+      <PocOutcomeSection />
 
       {/* ── 08 Result ── */}
       <ResultSection />

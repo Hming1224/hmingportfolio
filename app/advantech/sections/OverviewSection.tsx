@@ -48,12 +48,6 @@ const overviewItems = [
         icon: "question",
         variant: "highlight",
       },
-      {
-        label: "設計假設",
-        text: "如果 AI 能在異常發生時主動帶入時間、地點、設備與風險層級，廠務人員就能減少查找與拼湊資訊的時間，更快排定處理優先順序並採取行動。",
-        icon: "hypothesis",
-        variant: "default",
-      },
     ],
     media: {
       src: "/projects/advantech/research/interview-synthesis-photo.webp",
@@ -64,25 +58,28 @@ const overviewItems = [
   },
   {
     label: "影響",
-    title: "兩項方案獲採納，超約預警啟動後端實作；實際節能成效留待上線驗證。",
+    title: "將模糊的 AI 構想，收斂成可評估、可延續的產品方向",
     details: [
       {
-        label: "CEO",
-        text: "「方向是對的，但最後還是要回到成果。AI 導入之後，客戶到底少用了多少電？設備異常能不能更早被發現？維修時間和停機損失有沒有下降？下一步先把這幾個指標定清楚，再用實際數據證明它的價值。做得到，它就不只是一個功能，而是客戶願意付費的服務。」",
-        icon: "quote",
-        variant: "quote",
+        label: "產品方向",
+        text: "從泛用 Chatbot，收斂為兩個明確情境",
+        note: "聚焦需量超約與設備能效異常，並讓 AI 分析直接進入既有圖表、通知與工作流程，而不是要求使用者先主動提問。",
+        icon: "hypothesis",
+        variant: "highlight",
       },
       {
-        label: "iEMS 產品負責人",
-        text: "「這次的設計沒有只停在 AI chatbot 本身，而是有把它放回整個能源管理系統裡思考。從短期導入、日常查詢，一路規劃到長期的數據追蹤和報表，這個 blueprint 是清楚的。未來 AI 不應該只存在電腦或手機裡，也要思考怎麼整合到機台面板或現場設備上。」",
-        icon: "quote",
-        variant: "quote",
+        label: "團隊共識",
+        text: "從抽象構想，變成團隊可共同評估的原型",
+        note: "原型具體呈現 AI 的介入時機、資訊層級與風險處理方式，讓產品、設計、工程與商業角色能直接討論技術可行性與實作範圍。",
+        icon: "validation",
+        variant: "highlight",
       },
       {
-        label: "UI Team Lead",
-        text: "「你們這次有抓到一個滿重要的方向，就是沒有另外做一套 AI 操作，而是把它放進原本的異常判讀跟處理流程裡。前面也有透過研華廠區的訪談，去了解現場人員怎麼查資料、判斷異常，所以這一版的設計是有實際情境支撐的。不過，目前接觸到的主要還是研華自己的廠區。之後如果團隊繼續往下發展，可能會再找不同類型的客戶或場域來驗證，看看他們的設備配置、管理流程和使用習慣，會不會帶出其他問題。有些狀況可能也要等系統實際使用一段時間，從客戶回報或操作紀錄裡才看得出來。到時候就可以再整理他們在哪些地方看不懂、需要反覆確認，或沒有採用 AI 的建議，再回頭調整資訊呈現和操作流程。」",
-        icon: "quote",
-        variant: "quote",
+        label: "驗證邊界",
+        text: "方向獲得認可，但實際成效仍待驗證",
+        note: "經過 3 次 POC 提案，CEO、iEMS 產品負責人與 UI Team Lead 認為方向可行，並肯定 AI 應融入既有異常處理流程；節能、異常發現、維修效率與採用情況，仍需透過真實場域的 Pilot 補足證據。",
+        icon: "question",
+        variant: "highlight",
       },
     ],
   },
@@ -93,32 +90,32 @@ const walkthroughFlows = [
     id: "demand-analysis",
     label: "需量分析 × AI 建議",
     steps: [
-      { src: "/projects/advantech/solution/final-f11-01.webp", alt: "需量管理頁面，游標停在超約預警按鈕上", caption: "使用者在需量管理頁點「超約預警」，前台自動帶入時間與地點脈絡，不用打任何字。" },
-      { src: "/projects/advantech/solution/final-f11-02.webp", alt: "AI Chatbot 彈出並自動代入需量預測提問", caption: "AI Chatbot 彈出並自動代入問題，第一次提問就精準對到使用者正在看的畫面。" },
-      { src: "/projects/advantech/solution/final-f11-03.webp", alt: "AI 回覆需量分析與折線圖表", caption: "AI 讀取資料庫回覆需量分析與趨勢圖表，並附上問題模組讓使用者往下追問。" },
-      { src: "/projects/advantech/solution/final-f11-04.webp", alt: "AI 回覆避免超約的結構化建議", caption: "一鍵追問「如何避免超約」，AI 回覆結構化的行動建議，而不是一段難以消化的長文。" },
-      { src: "/projects/advantech/solution/final-f11-05.webp", alt: "AI 以圖表列出高耗能設備排名", caption: "再追問高耗能設備排名，AI 用圖表列出最該優先處理的設備，從數據直接推進到行動。" },
+      { src: "/projects/advantech/solution/final-f11-01.webp", alt: "需量管理頁面，游標停在超約預警按鈕上", caption: "提案讓使用者從需量管理頁點選「超約預警」，由介面自動帶入時間與地點脈絡，不必先輸入問題。" },
+      { src: "/projects/advantech/solution/final-f11-02.webp", alt: "AI Chatbot 彈出並自動代入需量預測提問", caption: "Prototype 示範 Chatbot 如何自動帶入提問，讓第一個問題對應使用者正在查看的畫面。" },
+      { src: "/projects/advantech/solution/final-f11-03.webp", alt: "AI 回覆需量分析與折線圖表", caption: "概念流程呈現 AI 未來可以如何回覆需量分析、趨勢圖表與後續追問入口；資料擷取與回答準確度仍待技術驗證。" },
+      { src: "/projects/advantech/solution/final-f11-04.webp", alt: "AI 回覆避免超約的結構化建議", caption: "提案以結構化行動建議取代長篇回覆，示範使用者可能如何繼續探索避免超約的方法。" },
+      { src: "/projects/advantech/solution/final-f11-05.webp", alt: "AI 以圖表列出高耗能設備排名", caption: "提案以圖表呈現高耗能設備排序，具體化從數據分析銜接到處理優先順序的可能流程。" },
     ],
   },
   {
     id: "overage-alert",
     label: "超約預警通知",
     steps: [
-      { src: "/projects/advantech/solution/final-f12-01.webp", alt: "系統通知中心顯示超約預警", caption: "需量預測超標時，系統主動推送通知，讓 AI 找上使用者，而不是等人來查。" },
-      { src: "/projects/advantech/solution/final-f12-02.webp", alt: "通知內的三級告警與發生時間", caption: "通知帶三級告警：依預測超約的剩餘時間分級（1 小時內列嚴重），先看懂風險急迫度再決定怎麼處理。" },
-      { src: "/projects/advantech/solution/final-f12-03.webp", alt: "AI 分析視窗顯示超約原因", caption: "點開 AI 分析，直接看到這次超約風險的原因判讀與時間點。" },
-      { src: "/projects/advantech/solution/final-f12-04.webp", alt: "高耗電設備清單", caption: "附上高耗電設備清單，馬上知道該先關哪一台，把決策資訊直接送進告警。" },
+      { src: "/projects/advantech/solution/final-f12-01.webp", alt: "系統通知中心顯示超約預警", caption: "Prototype 示範需量預測超標時，系統可以如何主動推送通知，而不必等使用者自行查找。" },
+      { src: "/projects/advantech/solution/final-f12-02.webp", alt: "通知內的三級告警與發生時間", caption: "提案依預測超約的剩餘時間呈現三級告警，協助團隊討論風險排序應如何顯示。" },
+      { src: "/projects/advantech/solution/final-f12-03.webp", alt: "AI 分析視窗顯示超約原因", caption: "概念流程呈現使用者點開 AI 分析後，可以如何查看可能原因與預測時間點。" },
+      { src: "/projects/advantech/solution/final-f12-04.webp", alt: "高耗電設備清單", caption: "提案把高耗電設備清單放進告警脈絡，示範系統可能如何支援處理優先順序的判斷。" },
     ],
   },
   {
     id: "equipment-anomaly",
     label: "設備異常分析",
     steps: [
-      { src: "/projects/advantech/solution/final-f2-01.webp", alt: "設備能耗異常的系統通知", caption: "設備能耗出現異常時，系統同樣主動通知，將告警模式複用在設備維護情境。" },
-      { src: "/projects/advantech/solution/final-f2-02.webp", alt: "設備報警等級與異常標記", caption: "三級告警標出異常設備與嚴重程度，維護人員一眼掌握現場狀態。" },
-      { src: "/projects/advantech/solution/final-f2-03.webp", alt: "AI 異常分析摘要", caption: "AI 彙整進出水溫度與事件資料，先給問題摘要、指出可能的問題來源。" },
-      { src: "/projects/advantech/solution/final-f2-04.webp", alt: "事件分析的溫度變化圖表", caption: "展開事件分析：過去一個月的進出水溫度變化圖，直接標出異常發生的時間點。" },
-      { src: "/projects/advantech/solution/final-f2-05.webp", alt: "AI 故障排除建議", caption: "AI 對照維修手冊與故障代碼，給出現場可直接執行的異常排除步驟。" },
+      { src: "/projects/advantech/solution/final-f2-01.webp", alt: "設備能耗異常的系統通知", caption: "Prototype 將同一套主動告警概念延伸到設備維護情境，示範異常通知可能出現的位置。" },
+      { src: "/projects/advantech/solution/final-f2-02.webp", alt: "設備報警等級與異常標記", caption: "提案用三級告警標示設備與嚴重程度，具體化現場狀態的資訊層級。" },
+      { src: "/projects/advantech/solution/final-f2-03.webp", alt: "AI 異常分析摘要", caption: "概念流程呈現 AI 未來可以如何彙整進出水溫度與事件資料，並指出可能的問題來源。" },
+      { src: "/projects/advantech/solution/final-f2-04.webp", alt: "事件分析的溫度變化圖表", caption: "提案以一個月的溫度變化圖標示異常時間點，示範事件分析所需的資料脈絡。" },
+      { src: "/projects/advantech/solution/final-f2-05.webp", alt: "AI 故障排除建議", caption: "提案示範 AI 未來可以如何參照維修手冊與故障代碼提出排除步驟；準確度與可追溯性仍待驗證。" },
     ],
   },
 ] as const;
@@ -130,13 +127,20 @@ export default async function OverviewSection() {
       className="cs-overview"
       kicker={t("專案總覽")}
       title={t("數據散落在系統與廠區之間：讓 AI 成為使用者做判斷的統一入口。")}
-      lead={t("研華 iEMS 已收齊水、電、氣與設備資料，但對廠務人員與系統整合商（SI）這兩種使用者來說，拿到的都還是 raw data：EcoWatch、HVAC 與不同廠區各自運作，風險判斷仍靠經驗拼湊。我從兩種使用者的決策流程出發，把 AI 從被動問答改成能跨系統取數、主動帶入脈絡，並延伸到長期報表與機台面板的整合藍圖。")}
+      lead={
+        <span className="ca-poc-context">
+          <strong>{t("以前期 POC 探索生成式 AI 能如何為 iEMS 創造價值")}</strong>
+          <span>{t("本專案屬於研華 Early Design Campaign 的前期探索，目的是將新興技術與商業機會轉化為可具體討論的產品概念。")}</span>
+          <span>{t("這一階段並不是交付可正式上線的功能，而是找出值得投入的使用情境、釐清需要整合的資料與系統能力，並提供產品、設計與工程團隊共同評估下一步的具體提案。")}</span>
+        </span>
+      }
       items={overviewItems.map((item) => ({
         label: getCaseOverviewLabel(locale, item.label),
         title: t(item.title),
         details: item.details.map((detail) => ({
           label: t(detail.label),
           text: t(detail.text),
+          note: "note" in detail ? t(detail.note) : undefined,
           icon: detail.icon,
           variant: detail.variant,
         })),
@@ -152,7 +156,8 @@ export default async function OverviewSection() {
         <OutcomeWalkthrough
           key="showcase"
           kicker={t("成果走查")}
-          title={t("從需量分析、超約預警到設備異常，AI 讓每個風險都有下一步。")}
+          title={t("提案將需量風險與設備異常串成更清楚的判斷流程")}
+          description={t("POC 具體呈現使用者未來可以如何從發現問題、查看脈絡與 AI 輔助分析，一路銜接到可能的處理方向。")}
           flows={walkthroughFlows.map((flow) => ({
             id: flow.id,
             label: t(flow.label),

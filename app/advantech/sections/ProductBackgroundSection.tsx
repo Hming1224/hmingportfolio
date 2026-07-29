@@ -24,7 +24,7 @@ export default async function ProductBackgroundSection() {
           </div>
           <div className="cs-product-card-divider" />
           <p className="cs-product-card-body cs-copy-body">
-            {t("監控建築內水、電、氣、熱等公共資源的即時用量，整合子計量、能耗分析、即時告警與自動報表功能，協助設施管理者全面掌握能源消耗狀況。平均可達 3–10% 的節能成效，節省 80% 的人工巡查時間。")}
+            {t("研華既有 ECOWatch 產品資料指出，系統可監控建築內水、電、氣、熱等公共資源的即時用量，並整合子計量、能耗分析、即時告警與自動報表；其既有產品成效資料為平均節能 3–10%、節省 80% 人工巡查時間。這些數據屬於 ECOWatch 產品本身，不是本次 AI POC 的驗證成果。")}
           </p>
           <div className="cs-product-tags cs-flex-cluster">
             {["能耗監控", "即時告警", "子計量", "自動報表"].map((tag) => (

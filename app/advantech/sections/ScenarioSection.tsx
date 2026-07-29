@@ -21,10 +21,10 @@ export default async function ScenarioSection() {
     <CaseSection
       id="cs-sec-scenario"
       kicker={t("設計策略")}
-      title={t("將使用者痛點轉化為兩個可落地的 AI 情境。")}
+      title={t("將使用者痛點轉化為兩個可進一步驗證的 AI 情境。")}
     >
       <p className="cs-body-muted" style={{ marginBottom: 48 }}>
-        {t("專案研究過後，團隊透過工作坊討論功能優先級，將使用者痛點轉譯為兩個可落地的 AI 應用情境。每個情境都從底層 AI 機制出發，對應到核心功能，最後落到使用者會接觸的介面呈現。")}
+        {t("研究與工作坊將使用者痛點收斂為兩個可進一步驗證的 AI 應用情境。每個情境都從可能需要的 AI 機制出發，對應核心功能，再以介面 Prototype 具體呈現。")}
       </p>
 
       {localizedScenarios.map((sc) => (

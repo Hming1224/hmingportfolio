@@ -39,7 +39,7 @@ export default async function SolutionSection() {
       surface
       className="cs-solution-section"
       kicker={t("設計方案")}
-      title={t("從情境發想、迭代到最終 AI 聊天機器人體驗。")}
+      title={t("從情境發想、迭代到 AI 體驗提案。")}
     >
       <p className="cs-body-muted" style={{ marginBottom: 56 }}>
         依據前述定義的設計情境，後續迭代將聚焦在幾個會直接影響決策判斷的介面：AI Chatbot、超約預警分析視窗、設備能耗異常分析視窗，以及其中的圖表、資料表與 AI 建議區塊。
@@ -83,7 +83,7 @@ export default async function SolutionSection() {
             {
               label: "修正視窗寬度",
               content: (
-                <p>最初，ECOWatch 與 HVAC 的預設聊天視窗寬度設定為 360px。然而，當使用者需要查看詳細分析內容時，必須點擊按鈕展開聊天視窗，這增加了額外操作步驟，也中斷了整體使用體驗。為了提升可用性，我們將預設聊天視窗寬度<strong>從 360px 調整為 640px</strong>，使其與展開後的版本一致，讓使用者能更直接、順暢地瀏覽分析內容。</p>
+                <p>最初，ECOWatch 與 HVAC 的預設聊天視窗寬度設定為 360px。使用者若要查看詳細分析內容，必須額外展開聊天視窗。提案將預設寬度<strong>從 360px 調整為 640px</strong>，目的是減少一次展開操作並保留更多分析空間；是否更容易瀏覽，仍待可用性測試確認。</p>
               ),
             },
             {
@@ -91,7 +91,7 @@ export default async function SolutionSection() {
               content: (
                 <>
                   <p>原本的圖表主要呈現單一時間點的異常狀況，使用者只能看到局部的超約警示與數值，較難理解該異常在整體用電趨勢中的位置，也無法快速判斷後續是否仍存在超約風險。</p>
-                  <p>調整後的圖表擴展為完整的需量分析視覺化，補上更清楚的時間軸、kW 單位、目標需量線與預測需量線，讓使用者能同時掌握歷史用電趨勢與未來預測變化。透過不同顏色區分谷時段、尖時段與預測區段，並加入圖例說明與關鍵數值標記，使用者可以更直覺地判讀高風險時段、比較目標值與預測值，進一步支援後續的能源調度與決策。</p>
+                  <p>調整後的圖表補上時間軸、kW 單位、目標需量線與預測需量線，並以顏色區分谷時段、尖時段與預測區段。設計目的是讓歷史趨勢、未來預測與高風險時段能在同一畫面比較；使用者是否能更容易判讀，仍待可用性測試確認。</p>
                 </>
               ),
             },
@@ -143,7 +143,7 @@ export default async function SolutionSection() {
           </div>
           <div className="cs-sol-dr cs-flex-cluster">
             <p className="cs-sol-drlabel cs-copy-title">趨勢預測分析排版修正</p>
-            <p className="cs-sol-drbody cs-copy-body">原本的版面將大量文字分析與圖表並排呈現，使用者需要一邊閱讀左側長段落，一邊對照右側圖表資訊，整體閱讀動線較分散。調整後將版面改為由上而下的閱讀順序，先在上方呈現最重要的分析摘要，讓使用者一進入畫面就能快速掌握目前風險狀況，強化了資訊層級、閱讀順序與重點辨識效率。</p>
+            <p className="cs-sol-drbody cs-copy-body">原本的版面將長篇分析與圖表並排，閱讀時需要在兩側來回對照。提案改為由上而下的順序，先呈現分析摘要，再接續圖表與細節；目的是建立更清楚的資訊層級，實際閱讀效率仍待可用性測試確認。</p>
           </div>
           <div className="cs-sol-ba cs-flex-cluster">
             <div className="cs-sol-bapanel cs-stack-box">
@@ -162,7 +162,7 @@ export default async function SolutionSection() {
           </div>
           <div className="cs-sol-dr cs-flex-cluster">
             <p className="cs-sol-drlabel cs-copy-title">修正設備識別資訊</p>
-            <p className="cs-sol-drbody cs-copy-body">原本表格使用「設備編號」作為主要識別資訊，與廠務人員實際查找設備的習慣不一致，且超過 10 筆以上的資料讓使用者需要花更多時間瀏覽。調整後將「設備編號」改為使用者更熟悉的「代號」，並將排名精簡為前 10 筆高耗能設備，讓使用者能更快掌握優先改善對象。</p>
+            <p className="cs-sol-drbody cs-copy-body">原本表格使用「設備編號」作為主要識別資訊，與訪談中廠務人員查找設備的方式不一致。提案改用較熟悉的「代號」，並將排名精簡為前 10 筆高耗能設備；是否能縮短查找與判斷時間，仍待測試。</p>
           </div>
           <div className="cs-sol-ba cs-flex-cluster">
             <div className="cs-sol-bapanel cs-stack-box">
@@ -208,7 +208,7 @@ export default async function SolutionSection() {
           </div>
           <div className="cs-sol-dr cs-flex-cluster">
             <p className="cs-sol-drlabel cs-copy-title">修正故障備忘錄</p>
-            <p className="cs-sol-drbody cs-copy-body">原本的故障備忘錄以簡單表格呈現，資訊較扁平，使用者只能看到單一原因與處理方式，較難判斷故障過去發生的頻率與不同可能原因之間的優先順序。調整後加入 AI 深度分析區塊，先整理歷史異常處理方式，讓使用者能快速掌握可能的故障原因，將過去維修紀錄轉化為可參考的診斷摘要。</p>
+            <p className="cs-sol-drbody cs-copy-body">原本的故障備忘錄只呈現單一原因與處理方式，難以比較過去發生頻率與不同可能原因。提案加入 AI 分析區塊，將歷史異常處理方式整理成診斷摘要；摘要是否能幫助使用者判斷原因優先順序，仍待測試。</p>
           </div>
           <div className="cs-sol-ba cs-flex-cluster">
             <div className="cs-sol-bapanel cs-stack-box">
@@ -230,8 +230,8 @@ export default async function SolutionSection() {
 
       {/* ── Final Feature Block ── */}
       <div className="cs-sol-block">
-        <h3 className="cs-sol-blk-title cs-copy-title">最終 3 種 feature 的介面細節</h3>
-        <p className="cs-sol-blk-desc cs-text-muted-blue cs-copy-body">最終介面聚焦在告警提示、進階分析與建議生成，讓使用者能從異常發現一路走到決策行動。</p>
+        <h3 className="cs-sol-blk-title cs-copy-title">提案中的 3 種 feature 介面細節</h3>
+        <p className="cs-sol-blk-desc cs-text-muted-blue cs-copy-body">介面提案聚焦在告警提示、進階分析與建議生成，具體呈現使用者未來可能如何從發現異常銜接到判斷與行動。</p>
         <FeatureConnectors />
 
         {/* Feature 1.1 */}
@@ -241,15 +241,15 @@ export default async function SolutionSection() {
               <p className="cs-sol-ftitle">Feature 1.1｜自主需量分析</p>
             </div>
             <div className="cs-sol-fcbody">
-              <p className="cs-sol-fsub">由使用者自主操控介面，從預測、超約預警一路到 AI 建議，讓能源管理從看圖表推進到直接支援決策。</p>
+              <p className="cs-sol-fsub">Prototype 串起預測、超約預警與 AI 建議，示範能源管理介面可以如何從圖表閱讀延伸到決策輔助。</p>
               <div className="cs-sol-dpts cs-stack-box">
                 <div className="cs-sol-dpt cs-stack-box">
                   <p className="cs-sol-dpt-l cs-copy-title">超約風險分析</p>
-                  <p className="cs-sol-dpt-b cs-copy-body">在需量曲線中標記預測高峰、超約風險區間與 AI 說明，讓使用者快速理解問題發生時間點。</p>
+                  <p className="cs-sol-dpt-b cs-copy-body">在需量曲線中標記預測高峰、超約風險區間與 AI 說明，具體呈現問題時間點的資訊層級。</p>
                 </div>
                 <div className="cs-sol-dpt cs-stack-box">
                   <p className="cs-sol-dpt-l cs-copy-title">對話式建議</p>
-                  <p className="cs-sol-dpt-b cs-copy-body">使用者可以透過 AI Chatbot 查詢需量預測、取得超約提醒，並進一步詢問節能建議或高耗能設備排名，快速掌握能源狀況與下一步行動。</p>
+                  <p className="cs-sol-dpt-b cs-copy-body">提案示範使用者未來可以如何透過 AI Chatbot 查詢需量預測、查看超約提醒，並延伸詢問節能建議或高耗能設備排序。</p>
                 </div>
               </div>
             </div>
@@ -296,11 +296,11 @@ export default async function SolutionSection() {
               <p className="cs-sol-ftitle">Feature 1.2｜主動通知預警</p>
             </div>
             <div className="cs-sol-fcbody">
-              <p className="cs-sol-fsub">由系統後台週期性預測，將問題嚴重程度分級預告使用者，促成決策者快速擬定解決方案。</p>
+              <p className="cs-sol-fsub">提案以週期性預測與嚴重程度分級，示範系統可以如何主動提供決策脈絡；警報準確度與實際反應仍待驗證。</p>
               <div className="cs-sol-dpts cs-stack-box">
                 <div className="cs-sol-dpt cs-stack-box">
                   <p className="cs-sol-dpt-l cs-copy-title">超約風險分析</p>
-                  <p className="cs-sol-dpt-b cs-copy-body">在需量曲線中標記預測高峰、超約風險區間與 AI 說明，讓使用者快速理解問題發生時間點。</p>
+                  <p className="cs-sol-dpt-b cs-copy-body">在需量曲線中標記預測高峰、超約風險區間與 AI 說明，具體呈現問題時間點的資訊層級。</p>
                 </div>
                 <div className="cs-sol-dpt cs-stack-box">
                   <p className="cs-sol-dpt-l cs-copy-title">主動通知</p>
