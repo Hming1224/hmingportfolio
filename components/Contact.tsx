@@ -15,7 +15,7 @@ import { Skeleton } from "./ui/Skeleton";
 import { Toast } from "./ui/Toast";
 
 type RequiredField = "name" | "company" | "email" | "message";
-type ContactSubmission = Record<"name" | "company" | "email" | "phone" | "message", string>;
+type ContactSubmission = Record<"name" | "company" | "email" | "phone" | "message" | "_gotcha", string>;
 
 export default function Contact() {
   const locale = useLocale() as Locale;
@@ -53,6 +53,7 @@ export default function Contact() {
       email: String(data.get("email") ?? "").trim(),
       phone: String(data.get("phone") ?? "").trim(),
       message: String(data.get("message") ?? "").trim(),
+      _gotcha: String(data.get("_gotcha") ?? "").trim(),
     };
   };
 
@@ -80,6 +81,12 @@ export default function Contact() {
 
   const handleConfirmSend = async () => {
     if (!pendingSubmission || status === "loading") return;
+    if (!config.formspreeId) {
+      setReviewOpen(false);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
     setStatus("loading");
 
     try {
@@ -276,6 +283,14 @@ export default function Contact() {
               </div>
 
               <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="_gotcha"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ display: "none" }}
+                />
                 <div className={`form-field ${fieldErrors.name ? "input--error" : ""}`}>
                   <input
                     type="text"

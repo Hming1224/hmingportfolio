@@ -19,8 +19,11 @@ test.describe("contact route light smoke", () => {
         const response = await gotoAndWait(page, route);
 
         await expectNot404(page, response?.status());
+        expect(response?.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
+        expect(response?.headers()["x-content-type-options"]).toBe("nosniff");
         await expectNoHorizontalOverflow(page);
         await expect(page.locator("form.contact-form")).toBeVisible();
+        await expect(page.locator('input[name="_gotcha"]')).toBeHidden();
         await expect(page.locator('input[name="name"]')).toBeVisible();
         await expect(page.locator('input[name="company"]')).toBeVisible();
         await expect(page.locator('input[name="email"]')).toBeVisible();

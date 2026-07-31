@@ -37,7 +37,7 @@ The public site can run without analytics configuration. The `cp` step creates a
 
 Environment variables:
 
-- `NEXT_PUBLIC_FORMSPREE_ID` — optional contact-form endpoint ID. The example includes the public portfolio endpoint; replace it if you use your own Formspree form.
+- `NEXT_PUBLIC_FORMSPREE_ID` — contact-form endpoint ID. Required for form submissions; keep the value in local/Vercel environment settings rather than this public repository.
 - `NEXT_PUBLIC_GA_ID` — optional Google Analytics 4 Measurement ID.
 - `NEXT_PUBLIC_CLARITY_ID` — optional Microsoft Clarity Project ID.
 
