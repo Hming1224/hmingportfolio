@@ -27,7 +27,7 @@ export default async function RoleSection() {
         </svg>
         <div className="cs-role-center cs-object-box">
           <Image
-            src="/projects/advantech/research/role-center.webp"
+            src="/projects/advantech/research/role-center.jpg"
             alt={t("專案工作證與工作現場照片")}
             fill
             sizes="240px"
