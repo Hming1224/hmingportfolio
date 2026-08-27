@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import "../../styles/contact.css";
 // 文件頁的 ComponentDemo 會渲染 Case* 共用元件，需要 case-study.css
 import "../../styles/case-study.css";
 import Footer from "../../components/Footer";
