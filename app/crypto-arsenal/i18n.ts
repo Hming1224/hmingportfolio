@@ -5,8 +5,7 @@ import type { Locale } from "../../i18n/routing";
 const en = {
   "左右滑動查看更多": "Swipe to see more",
   // ── TOC ──
-  "專案總覽": "Project Overview",
-  "專案背景": "Overview",
+  "專案總覽": "Overview",
   "產品介紹": "Product Introduction",
   "工作模式": "My Role",
   "問題定義": "Problem",
@@ -27,7 +26,7 @@ const en = {
   "影響": "Impact",
   "專案快速總覽": "Project at a glance",
   "成果走查": "Outcome walkthrough",
-  "成果走查流程切換": "Switch outcome flow",
+  "成果走查流程切換": "Switch walkthrough flow",
   "成果走查影片": "Outcome walkthrough video",
   "流程": "Flow",
   "流程01": "Flow 01",
@@ -74,7 +73,7 @@ const en = {
   "產品設計師": "Product Designer",
   "產品": "Product",
   "量化交易平台": "Quantitative Trading Platform",
-  "團隊成員": "Team Members",
+  "團隊成員": "Team",
   "1位產品負責人": "1 Product Owner",
   "1位UIUX設計師": "1 UI/UX Designer",
   "2位全端工程師": "2 Full-stack Engineers",
@@ -213,8 +212,8 @@ const en = {
   "Position、Open Orders、Order History、Position History": "Position, Open Orders, Order History, Position History",
   "倉位資訊": "Position Fields",
   // 操作流程
-  "操作流程 1": "Flow 1",
-  "操作流程 2": "Flow 2",
+  "操作流程 1": "Task flow 1",
+  "操作流程 2": "Task flow 2",
   "合約平倉": "Futures Close",
   "合約止盈止損": "Futures TP/SL",
   // 對比矩陣：步驟欄標題 + 結論 + lightbox
@@ -256,7 +255,7 @@ const en = {
   "下一張 wireframe": "Next wireframe",
   "Wireframe 步驟": "Wireframe steps",
   "Wireframe 目前頁數": "Current wireframe page",
-  "切換到步驟": "Switch to step",
+  "切換到步驟": "Go to step",
   "未採納原因": "Why It Wasn't Chosen",
   "右上角新增 Exchange Record 的 Tab，點擊後可以看到倉位資訊，選擇對應的倉位，點擊 close 按鈕。":
     "Add an Exchange Record tab in the top right. Click it to view position details, select the corresponding position, and click the close button.",
