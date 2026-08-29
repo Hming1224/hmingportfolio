@@ -9,7 +9,7 @@
     "start:test": "next start -p 3100",
     "lint": "eslint app components data i18n lib proxy.ts next.config.ts",
     "check:tokens": "node scripts/check-design-tokens.mjs",
-    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs --strict",
     "verify:quick": "git diff --check && npm run lint && npm run check:tokens && npm run check:i18n",
     "verify:build": "npm run verify:quick && npm run build",
     "smoke:ds": "playwright test tests/smoke/design-system.spec.ts --project=chromium",

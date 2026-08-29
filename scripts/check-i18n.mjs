@@ -5,7 +5,8 @@
      1. 全站 dictionary（zh-TW / en）key 結構不一致，或 en 還留著中文
      2. route dict 缺 key：source 有 t("中文") 但英文對照不存在  → /en 直接顯示中文
      3. route dict 死 key：英文對照還在，但中文原文已經從 source 消失（僅警告）
-   用法：node scripts/check-i18n.mjs [--strict]   （--strict 讓死 key 也算失敗） */
+   用法：npm run check:i18n              死 key 也算失敗（verify:quick 走這條）
+         node scripts/check-i18n.mjs     寫到一半想暫時放行死 key 時用，只警告 */
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
