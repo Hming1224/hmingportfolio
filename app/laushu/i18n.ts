@@ -25,6 +25,7 @@ const en = {
   "方法": "Methods",
   "工具": "Tools",
   "時間": "Timeline",
+  "2024.3 - 2024.6": "Mar 2024 – Jun 2024",
   "設計優化": "UX Optimization",
   "UIUX 設計師": "UI/UX Designer",
   "任務測試": "Task Testing",

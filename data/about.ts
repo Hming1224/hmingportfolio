@@ -179,7 +179,7 @@ const enExperiences = [
     year: "2024",
     title: "Advantech",
     role: "UI/UX Design Intern",
-    date: "2024.06 - 2024.08",
+    date: "Jun 2024 – Aug 2024",
     image: "/projects/advantech/cover/cover.webp",
     points: [
       "Guided by the PM and a full-time designer, I worked with another design intern to turn predefined GenAI requirements into proactive decision-support concepts through competitive analysis, user interviews, and feature design — addressing a platform where the data was complete but the priorities were not.",
@@ -194,7 +194,7 @@ const enExperiences = [
     year: "2023",
     title: "Crypto-Arsenal",
     role: "UI/UX & PM Intern",
-    date: "2023.03 - 2023.10",
+    date: "Mar 2023 – Oct 2023",
     image: "/experience/crypto-arsenal.webp",
     points: [
       [
@@ -219,7 +219,7 @@ const enExperiences = [
     year: "2022",
     title: "Taiwan Blockchain Academia",
     role: "Product Designer (Contract)",
-    date: "2022.11 - 2023.02",
+    date: "Nov 2022 – Feb 2023",
     image: "/experience/taiwan-blockchain-academia.webp",
     points: [
       [
@@ -236,7 +236,7 @@ const enExperiences = [
     year: "2021",
     title: "LCFC",
     role: "Assistant Project Manager",
-    date: "2021.05 - 2021.12",
+    date: "May 2021 – Dec 2021",
     image: "/experience/lcfc.webp",
     points: [
       [
@@ -301,7 +301,7 @@ const enEducatorItems = [
     href: "https://www.2024.openhci.com/",
     role: "Design Team Lead",
     desc: "Led a three-person design team through three months of preparation, developing the curriculum and delivering an intensive design thinking workshop for 40 participants.",
-    date: "2024.05-2024.08",
+    date: "May 2024 – Aug 2024",
     image: "/educator/openhci.jpg",
   },
   {
@@ -310,7 +310,7 @@ const enEducatorItems = [
     href: null,
     role: "Teaching Assistant",
     desc: "Taught Figma to 60 undergraduate students and supported grading, assignment reviews, and project mentoring throughout the course.",
-    date: "2024.02-2024.06",
+    date: "Feb 2024 – Jun 2024",
     image: "/educator/人機介面設計課程發表.jpg",
   },
   {
@@ -319,7 +319,7 @@ const enEducatorItems = [
     href: null,
     role: "Teaching Assistant",
     desc: "Mentored 20 undergraduate and graduate project teams through weekly feedback and TA office hours.",
-    date: "2025.09-2026.01",
+    date: "Sep 2025 – Jan 2026",
     image: "/educator/nccu-ta.jpg",
   },
   {
@@ -328,7 +328,7 @@ const enEducatorItems = [
     href: null,
     role: "Co-organizer",
     desc: "Co-organized a two-day design hackathon, mentored 16 participants, and reviewed final projects with industry designers.",
-    date: "2024.06",
+    date: "Jun 2024",
     image: "/educator/hackathon.jpg",
   },
 ];
@@ -383,14 +383,14 @@ const copyByLocale = {
     education: [
       {
         school: "National Chengchi University, M.S. in Digital Content & Technologies",
-        date: "2023.09 - 2026.05",
+        date: "Sep 2023 – May 2026",
         badge: "GPA 4.07",
         description: "Focused on UX research, human-computer interaction, design thinking, and artificial intelligence.",
         image: "/education/nccu-logo.png",
       },
       {
         school: "National Cheng Kung University, B.S. in Mechanical Engineering",
-        date: "2017.09 - 2021.02",
+        date: "Sep 2017 – Feb 2021",
         description: "Studied thermodynamics and mechanical design, with design thinking and human-centered design as a secondary focus.",
         image: "/education/ncku-logo.png",
       },

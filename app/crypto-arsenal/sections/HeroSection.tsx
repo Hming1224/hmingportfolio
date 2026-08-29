@@ -9,9 +9,9 @@ export default async function HeroSection() {
       label: t("時間進程"),
       value: (
         <span className="cs-info-value--timeline">
-          <span>2023.06</span>
+          <span>{t("2023.06")}</span>
           <span className="cs-info-timeline-sep" aria-hidden="true">–</span>
-          <span>2023.08</span>
+          <span>{t("2023.08")}</span>
         </span>
       ),
     },

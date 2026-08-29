@@ -68,6 +68,8 @@ const en = {
   "重掌交易主控權：量化交易平台的手動平倉與止盈止損流程設計":
     "Giving Traders Back Control: Manual Close & Take-Profit / Stop-Loss Flow Design for a Quant Trading Platform",
   "時間進程": "Timeline",
+  "2023.06": "Jun 2023",
+  "2023.08": "Aug 2023",
   "我的角色": "My Role",
   "UIUX設計師": "UI/UX Designer",
   "產品設計師": "Product Designer",

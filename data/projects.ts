@@ -131,7 +131,7 @@ const enProjects: ProjectSummary[] = [
     cardId: "project-advantech-wiseiems",
     title: "Empowering Facility Operators and System Integrators: Streamlining EcoWatch and HVAC Operations via Generative AI",
     navigationTitle: "GenAI EcoWatch and HVAC Operations",
-    date: "2024.06 - 2024.08",
+    date: "Jun 2024 – Aug 2024",
     description:
       "A data platform designed with Advantech for factory teams and managers to monitor energy use and carbon emissions across facilities. The project introduced an AI chatbot to make energy management faster and more actionable.",
     cover: "/projects/advantech/cover/cover.webp",
@@ -149,7 +149,7 @@ const enProjects: ProjectSummary[] = [
     slug: "crypto-arsenal",
     title: "Giving Traders Back Control: Manual Close & Take-Profit / Stop-Loss Flow Design for a Quant Trading Platform",
     navigationTitle: "Manual Close & Take-Profit / Stop-Loss Flow Design",
-    date: "2023.06 - 2023.08",
+    date: "Jun 2023 – Aug 2023",
     description:
       "An automated quantitative trading platform where users can trade promising assets and subscribe to strategies published by bot creators. I designed and developed flows for reviewing personal holdings and scaling into positions.",
     cover: "/projects/crypto-arsenal/cover/cover.webp",
@@ -185,7 +185,7 @@ const enProjects: ProjectSummary[] = [
     slug: "laushu",
     title: "From Paper to a Smooth Digital Flow:UX Optimization for a Contractor Payment System",
     navigationTitle: "Contractor Payment System UX Optimization",
-    date: "2024.02 - 2024.04",
+    date: "Feb 2024 – Apr 2024",
     description:
       "A contractor payment system that helps companies prepare payment forms, collect signatures, and organize tax records when working with external professionals, reducing administrative effort and improving efficiency.",
     cover: "/projects/laushu/cover/cover.webp",
@@ -202,7 +202,7 @@ const enProjects: ProjectSummary[] = [
     cardId: "project4",
     title: "From Endless Searching to One-Glance Booking ：Redesigning Study Room Booking for NCCU Library",
     navigationTitle: "NCCU Study Room Booking Redesign",
-    date: "2023.10 - 2023.12",
+    date: "Oct 2023 – Dec 2023",
     description:
       "An information service that helps NCCU students book campus spaces more easily. The project focused on simplifying a complex reservation flow and helping students find spaces that match their needs.",
     cover: "/projects/nccuspace/cover/cover.webp",
@@ -217,7 +217,7 @@ const enProjects: ProjectSummary[] = [
     cardId: "project3",
     title: "From Issuing to Holding to Verifying: A Web3 Digital Credential Platform Built on Cathay's DID Wallet",
     navigationTitle: "Web3 Digital Credential Platform",
-    date: "2022.12 - 2023.02",
+    date: "Dec 2022 – Feb 2023",
     description:
       "A Web3-based digital credential service developed with Cathay Financial Holdings' digital technology team. During the two-month project, I led UX design, web interface design, user research, and usability testing.",
     cover: "/projects/tba/cover/cover.webp",

@@ -125,6 +125,8 @@ const en = {
   "：": ": ",
   "、": ", ",
   "時間進程": "Timeline",
+  "2024.06": "Jun 2024",
+  "2024.08": "Aug 2024",
   "團隊成員": "Team",
   "負責項目": "Responsibilities",
   "使用軟體": "Software Used",
