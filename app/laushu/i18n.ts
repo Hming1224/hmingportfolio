@@ -109,6 +109,8 @@ const en = {
   "Laushu 建立外包人員資料庫操作示範影片": "Laushu contractor-database flow demo video",
   "Laushu 建立勞務報酬單操作示範影片": "Laushu labor-form creation flow demo video",
   "Laushu 合併多張勞報單操作示範影片": "Laushu labor-form merging flow demo video",
+  "Laushu Hi-fi 原型設計總覽": "Laushu hi-fi prototype overview",
+  "Laushu 任務測試與 SUS 結果": "Laushu task-testing and SUS results",
   "成果走查流程切換": "Switch outcome flow",
   "成果走查影片": "Outcome walkthrough video",
   "流程": "Flow",
