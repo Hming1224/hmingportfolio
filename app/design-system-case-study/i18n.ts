@@ -33,8 +33,6 @@ const en = {
   "影響": "Impact",
   "四個案例頁": "Four case studies",
   "自動檢查": "Automated checks",
-  "名詞註釋": "Terms",
-  "專有名詞註釋": "Term notes",
   "三個案例頁的反思卡片截圖：結構相同，但配色與排版各自不同。": "Screenshots of the reflection cards from three case studies: identical structure, but each keeps its own colors and layout.",
   "Advantech 案例頁的多重對比版面截圖：同一個外框裡放了多組修正說明與 Before / After 對比。": "Screenshot of Advantech's multi-comparison layout: one frame holding several revision notes and before/after pairs.",
   "站上零散出現的影片展示、資料表格與標籤截圖，都是被暫緩抽成共用元件的候選。": "Screenshots of the video showcase, data table, and tags scattered across the site — all candidates whose extraction into shared components was deferred.",
@@ -44,11 +42,7 @@ const en = {
   "接著用 ": "Then I used ",
   "名詞說明": "Term Notes",
   "這一段的名詞說明": "Term notes for this section",
-  "元件在滑鼠移入、鍵盤聚焦、不能點擊時各自的樣子；設計系統要事先把這些狀態都定義好。": "How a component looks on mouse hover, keyboard focus, and when disabled — a design system defines all of these states up front.",
-  "設計系統的三層放置邏輯：可重複引用的設計值放 token，跨頁共用的結構放 shared，只服務單一頁面的留在 local。": "The system's three-layer placement rule: reusable design values go in tokens, cross-page structures in shared components, and single-page needs stay local.",
   "三種自動檢查：lint 抓格式與寫法問題、type check 抓型別錯誤、build 確認整個網站能順利建置。": "Three automated checks: lint catches formatting and code-style issues, type check catches type errors, and build confirms the whole site compiles.",
-  "只服務單一頁面、跟著該頁一起存放的元件，不抽進共用層。": "A component that serves a single page and is kept alongside it, rather than lifted into the shared layer.",
-  "有名稱、可重複引用的設計值。": "A named design value that can be reused.",
 
   "顏色、間距、字級等值反覆出現": "Color, spacing, type, or other values repeat",
   "外框和排列方式重複，但內容每次不同": "Frames and layout repeat, but content changes each time",
@@ -75,7 +69,6 @@ const en = {
   "不是元件，是這一顆在畫面上的「角色」（usage role）": "Not a component; a usage role in a specific layout",
   "最後我決定": "I ultimately decided to ",
 
-  "固定外框、內容可替換": "Stable Frame, Replaceable Content",
 
   "各案例頁的反思卡片": "Reflection Cards Across Case Studies",
   "Advantech 的多重對比版面": "Advantech's Multi-Comparison Layout",
@@ -166,9 +159,6 @@ const en = {
   "Componentization（Rule of Three）": "Componentization (Rule of Three)",
   "只有外觀像、或只出現一次，硬共用反而讓共用層揹例外。": "When things only look alike or appear once, forcing them to share just burdens the shared layer with exceptions.",
   "Local Component（colocation）": "Local Component (colocation)",
-  "固定外框、內容可替換的組合方式，兼顧一致性與各頁彈性。": "A composition pattern with a fixed frame and replaceable content, balancing consistency with per-page flexibility.",
-  "元件的使用規則：適合承載什麼內容、有哪些狀態、什麼情境不該使用。": "A component's usage rules: what content it should carry, which states it has, and when it should not be used.",
-  "實務判斷原則：同樣結構重複出現三次左右，再抽成共用元件。": "A practical rule of thumb: extract a shared component once the same structure has appeared about three times.",
 
   "把判斷框架放回真實案例": "Putting the Decision Framework Back Into Real Cases",
   "案例": "Case",
@@ -215,8 +205,6 @@ const en = {
   "作品集一開始以快速完成頁面為主；隨著案例增加，原本適合單頁的做法開始讓重複版型與分散樣式增加跨頁同步與維護成本，後續延伸出下面三個問題：": "The portfolio initially prioritized shipping pages quickly. As the number of case studies grew, approaches that worked for individual pages led to more repeated layouts and scattered styles, increasing the cost of cross-page updates and maintenance. This resulted in the following three problems:",
   "這三個問題把下一步指向同一件事：先弄清楚作品集缺哪些規範。我參考 Ant Design 與 Google Material Design，再逐項比較顏色層級、間距、圓角、字級，以及 hover、focus、disabled 等元件狀態，共整理出十幾個缺口。": "These three problems pointed to the same next step: identify which standards the portfolio was missing. I reviewed Ant Design and Google Material Design, then compared the portfolio's color hierarchy, spacing, radius, typography, and component states such as hover, focus, and disabled. This surfaced more than ten gaps.",
   "Figma Make 第一版互動雛形，包含系統介紹、缺口清單與升級計畫。": "The first Figma Make interactive prototype included a system overview, a gap list, and an upgrade plan.",
-  "我用這兩套設計系統當比對基準，逐項檢查作品集還缺哪些規範。": "I used these two design systems as benchmarks to check which standards the portfolio was still missing.",
-  "用來快速產生互動雛形的工具。": "A tool for quickly creating interactive prototypes.",
   "後來改成先盤點正式站，再依實際使用的結構更新規則與文件。": "I changed the process to audit the live site first, then update the rules and documentation to match the structures actually in use.",
   "大範圍修改讓跑版問題一起擴大": "Broad Changes Caused Layout Problems to Spread",
   "早期有一批 AI 輔助修改同時動到多個案例頁，也太早把部分單頁版型抽成共用元件。": "Early on, one batch of AI-assisted changes touched multiple case studies and turned some page-specific layouts into shared components too soon.",
@@ -249,7 +237,6 @@ const en = {
   "Before / After 版型的三步共用化": "Turning the Before / After Pattern into a Shared Component in Three Steps",
   "知道何時不要急著共用": "Knowing When Not to Reuse Too Soon",
   "案例 A 抽出共用外框後，下一個問題是：哪些東西應該刻意留在單頁？有了共用元件，很容易想把所有長得像的東西都塞進去。為了避免太早共用，我會先寫下「情境、判斷、決定」，確認每個不共用的地方都有理由。": "After Case A produced a shared frame, the next question was what should deliberately remain page-specific. Once shared components exist, it is easy to force every similar-looking pattern into them. To avoid sharing too early, I write down the context, judgment, and decision so every local choice has a clear reason.",
-  "元件共用化": "Component reuse",
   "如果只有設計值重複、元件結構各自不同，就共用規則，不抽元件。": "If only the design values repeat while the component structures differ, share the rules rather than the components.",
   "把這些值整理成 design token，統一管理數值與命名。": "Turn those values into design tokens and manage their values and names in one place.",
   "版面配置與響應式行為穩定重複，但每頁內容不同。": "The layout and responsive behavior repeat consistently, but each page has different content.",
@@ -271,12 +258,8 @@ const en = {
   "把前面的判斷路徑放回實作後，三個案例走到不同結果：一個抽成共用、一個刻意留在單頁，另一個先把用途分清楚，暫時不動程式碼。": "Applying the decision path to real implementation led to three different outcomes: one pattern became shared, one deliberately stayed page-specific, and one remained unchanged in code until its purpose was clear.",
   "同一種 Before / After 版型在三個案例頁各自實作後，我才開始整理共用結構。整個過程分成三步，沒有一次改完。": "I started consolidating the shared structure only after the same Before / After layout had been implemented across three case-study pages. The work happened in three steps rather than one large rewrite.",
   "三個案例頁各自實作的 Before / After 版型，最後收斂成共用的 slot-based narrative frame。": "The Before / After layouts implemented separately across three case-study pages eventually converged into a shared slot-based narrative frame.",
-  "固定版面結構、讓各頁自行放入內容的敘事外框；不同案例可以共用排列方式，同時保留自己的文案與圖片。": "A narrative frame with a stable layout that lets each page provide its own content. Different case studies can share the arrangement while keeping their own copy and images.",
-  "先在單一頁面完成實作，等模式穩定後，再評估要不要移到共用層。": "Complete the implementation on a single page first, then decide whether to move it into the shared layer once the pattern stabilizes.",
   "把這套記錄方式用在全站盤點時，最讓我印象深刻的一次，是一口氣檢查 8 個「看起來可以抽」的 pattern，": "The most memorable time I used this record in a site-wide audit, I reviewed eight patterns that looked extractable, ",
   "那次盤點讓我更確定：每多一個共用元件，就多一份契約要維護，也會讓更多頁面一起承擔變動。": "That audit made one thing clear: every shared component adds another contract to maintain and makes more pages share the impact of future changes.",
-  "只服務單一頁面或單一敘事情境的元件，可保留在該頁，不必抽成全站共用。": "A component that serves one page or one narrative context can stay on that page instead of becoming site-wide shared code.",
-  "把重複結構整理成共用元件的做法；共用後也會增加使用規則與維護成本。": "The practice of turning repeated structures into shared components; sharing also adds usage rules and maintenance costs.",
   "語意分不清時，先寫規格，暫時不拆程式碼": "When Semantics Are Unclear, Write the Specification Before Splitting the Code",
   "前一個案例決定不共用；這個案例則先不動程式碼，而是把用途分清楚。整理全站按鈕時，我卡在一個看起來很小的問題：": "The previous case stayed local. In this one, I left the code unchanged and clarified the purpose first. While auditing buttons across the site, I got stuck on a question that looked small:",
   "全站有十幾個這種「像按鈕的東西」。如果沒有先分清楚用途，後續的 token 規則與共用元件就容易混用。查證 W3C 與 Material Design 的相關定義後，我把它們分成四個概念：": "There were more than ten button-like elements across the site. Without separating their purposes first, later token rules and shared components could easily be misapplied. After reviewing the relevant W3C and Material Design definitions, I separated them into four concepts:",
@@ -284,9 +267,6 @@ const en = {
   "「文件拆、程式碼不拆」": "split the documentation, not the code",
   "。規格文件分別寫清楚 Button 和 LinkButton 的 contract；實作仍維持同一個 Button 元件，有 href 時就 render 成連結。現在拆成兩個元件，得大批調整 import，也會增加 regression 風險。先把使用規則寫清楚，就足以解決眼前的問題。": ". The specification defines separate contracts for Button and LinkButton, while the implementation keeps a single Button component that renders as a link when href is present. Splitting it into two components now would require widespread import changes and increase regression risk. Clear usage rules are enough to solve the immediate problem.",
   "這正是判斷框架裡的「用途易混淆 → Component Contract」：不必立刻抽元件，先把使用契約寫清楚，就能處理反覆出現的語意混淆。": "This maps directly to the decision framework's ‘confusing purpose → Component Contract’ path: instead of extracting a component immediately, a clear usage contract can resolve recurring semantic confusion.",
-  "語意上帶使用者前往另一個位置、視覺上看起來像按鈕的連結。": "A link that takes users to another location while visually appearing as a button.",
-  "協助視障使用者讀取畫面內容的輔助科技，會依 HTML 語意報讀不同角色。": "Assistive technology that reads screen content for blind and low-vision users and announces different roles based on HTML semantics.",
-  "元件的使用規則，包括適合承載的內容、支援狀態與不適用情境。": "A component's usage rules, including supported content, states, and situations where it should not be used.",
 } as const;
 
 type DsKey = keyof typeof en;

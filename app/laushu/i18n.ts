@@ -8,10 +8,8 @@ const en = {
   "問題定義": "Problem",
   "了解使用者情境": "Understand Users",
   "收斂與洞察": "Converge & Insights",
-  "測試與設計迭代": "Test & Iterate",
   "測試與迭代": "Test & Iterate",
   "原型設計": "Prototype",
-  "成果 Demo": "Demo",
   "最終成果": "Final outcome",
   "學習反思": "Reflections",
   "返回首頁": "Back to Home",
@@ -21,8 +19,6 @@ const en = {
 
   // ── Hero ──
   "從紙本化繁為簡：勞務報酬系統的數位流程優化": "From Paper to a Smooth Digital Flow:UX Optimization for a Contractor Payment System",
-  "檢視目前紙本勞報單使用流程，透過訪談、設計與測試，優化勞贖勞報數位化系統，針對發送勞報單流程，提供設計體驗優化建議。":
-    "Reviewing the current paper-based labor remuneration workflow — through interviews, design and testing — to improve Laushu's digital labor-form system, with UX recommendations focused on the form-sending flow.",
   "Laushu 勞贖設計優化專案主視覺": "Laushu UX optimization project hero",
   "類型": "Type",
   "角色": "Role",
@@ -30,16 +26,12 @@ const en = {
   "工具": "Tools",
   "時間": "Timeline",
   "設計優化": "UX Optimization",
-  "團體專案": "Team Project",
   "UIUX 設計師": "UI/UX Designer",
-  "使用者研究員": "UX Researcher",
-  "訪談、問卷": "Interviews & Surveys",
   "任務測試": "Task Testing",
   "易用性測試": "Usability Testing",
   "團隊成員": "Team Members",
   "3x 研究員": "3x Researchers",
   "1x 設計師": "1x Designer",
-  "UX/UI 設計師": "UX/UI Designer",
   "設計師": "Designer",
   "UX/UI": "UX/UI",
   "負責項目": "Responsibilities",
@@ -48,7 +40,6 @@ const en = {
   "協同參與訪談、": "Co-conducting interviews",
 
   // ── Overview ──
-  "總覽 Overview": "Overview",
   "問題": "Problem",
   "影響": "Impact",
   "目標": "Goal",
@@ -130,41 +121,14 @@ const en = {
   "科普小知識": "Quick primer",
   "勞報單是什麼？": "What is a labor form?",
   "現階段勞報單的問題": "Current problems with labor forms",
-  "將紙本勞報單流程轉譯成可測試、可上線的數位體驗。":
-    "Translating a paper-based labor-form process into a testable, launch-ready digital experience.",
   "讓建檔、計算、寄送與回簽，從紙本往返變成一條數位流程。":
     "Turning record setup, calculation, delivery, and countersigning from paper handoffs into one digital flow.",
 
   // ── Section titles ──
-  "專案總覽 Overview": "Overview",
-  "問題定義 Problem": "Problem",
-  "了解使用者情境 Understand": "Understand Users",
-  "收斂與洞察 Converge": "Converge & Insights",
-  "測試與設計迭代 Iterate": "Test & Iterate",
-  "原型設計 Prototype": "Prototype",
-  "學習反思 Reflections": "Reflections",
 
   // ── Overview ──
-  "Laushu 勞贖為籌備上線中的數位化勞報單系統。此設計優化專案與其負責人合作，測試現有紙本勞報單數位化的流程易用性，於上線前提供改善建議。":
-    "Laushu is a digital labor-remuneration-form system preparing for launch. This UX optimization project, in collaboration with its product owner, tested the usability of digitizing the existing paper-based form flow and delivered improvement recommendations before launch.",
-  "了解紙本勞報單報帳流程、拆解利害關係人需求，並優化數位化勞報單報帳體驗。":
-    "Understand the paper-based filing flow, break down stakeholder needs, and improve the digital filing experience.",
-  "針對公司發送勞報單給外包人員流程優化設計：包含新建外包人員、建立勞報單、合併勞報單。":
-    "Optimized the flow of a company sending forms to contractors: adding contractors, creating forms, and merging forms.",
   "建立外包人員資料庫": "Build a contractor database",
-  "使用者掌握外包人員資料，日後有需求可立即找人展開合作。":
-    "Users keep contractor records on hand, so they can find people and start collaborating instantly when needed.",
-  "外包人員線上填寫資料、回簽勞報單": "Contractors fill in and counter-sign online",
-  "外包人員透過系統連結線上填寫與回簽，不必專程跑一趟。":
-    "Contractors fill in and counter-sign via a system link online — no dedicated trip required.",
   "合併多張勞報單": "Merge multiple forms",
-  "減少回簽次數與重複麻煩的確認步驟。": "Fewer counter-signs and fewer repetitive confirmation steps.",
-  "使用者掌握外包人員資料，日後有需求可立即找人展開合作":
-    "Users keep contractor records on hand and can find people instantly when needed",
-  "減少回簽次數與重複麻煩的確認步驟": "Fewer counter-signs and repetitive confirmation steps",
-  "省時、省力、省心，提升整體工作效率，讓財務工作既快樂又自由":
-    "Save time, effort and worry — boosting overall efficiency and making finance work freer and more enjoyable",
-  "公司發送勞報單給外包工作者": "The company sends labor forms to contractors",
 
   // ── Stakeholders ──
   "彙整使用勞報單流程": "Mapping the labor-form workflow",
@@ -186,7 +150,6 @@ const en = {
   "公司": "Company",
   "協助彙整勞報單": "Help compile forms",
   "會計師、公司與外包工作者的勞報單流程": "Labor-form flow between accountant, company and contractor",
-  "公司發送勞報單給外包工作者的流程": "Flow of the company sending labor forms to contractors",
   "回傳勞報單": "Return forms",
   "發送勞報單": "Send labor form",
   "發出工資": "Pay wages",
@@ -238,8 +201,6 @@ const en = {
   // ── Survey / interview structure ──
   "篩選受訪者": "Screening interviewees",
   "問卷": "Survey",
-  "設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整）。":
-    "Designed a survey to screen interviewees and learn which parts of the current form-filling process feel tedious (accountant: create → send → collect → compile).",
   "設計問卷篩選受訪者，了解目前勞報單填寫過程中，哪些環節感到繁雜（會計師：建立 → 發送 → 回收 → 彙整），並回收問卷驗證樣本輪廓。":
     "Designed a survey to screen interviewees, identify which parts of the form-filling process feel tedious (accountant: create → send → collect → compile), and validate the participant profile.",
   "基本資料": "Basic info",
@@ -311,7 +272,6 @@ const en = {
   "#許多外包工作 #有長期配合的人員": "#Lots of outsourcing #Long-term partners",
   "老闆會自己整理每個外包人員專屬的資料夾，存放勞報單與過去的資料，就像自己建置了一套資料庫。":
     "The owner organizes a dedicated folder for each contractor to store forms and past records — essentially building their own database by hand.",
-  "三位受訪者的訪談整理": "Synthesis of the three interviews",
   "摘要": "Summary",
   "下面整理三位受訪者的訪談摘要，從資料管理、會計配合到勞報單流程，盤點他們各自的經手方式與最有感的痛點。":
     "Below is a synthesis of the three interviews — covering data management, working with accountants, and the labor-form flow — capturing how each person handles things and the pain points they feel most.",
@@ -350,8 +310,6 @@ const en = {
   "任務測試與易用性量表": "Task testing & usability scale",
   "邀請上次接受訪談的 2 位受訪者再次進行介面評估：":
     "Invited the two prior interviewees back to evaluate the interface:",
-  "邀請上次接受訪談的 2 位受訪者再次進行介面評估。針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表。":
-    "Invited the two prior interviewees back to evaluate the interface. For the three key use cases I drew flows and built Figma prototypes, ran think-aloud task tests, and collected SUS usability scores.",
   "節目企劃：長期需要外包主持人": "Program planner: needs outsourced hosts long-term",
   "攝影工作室老闆：長期需要外包攝影師合作拍攝": "Studio owner: needs outsourced photographers long-term",
   "針對三個重要用例繪製流程圖，透過 Figma 原型讓受訪者以放聲思考法完成任務測試，並填寫 SUS 易用性量表：":
@@ -359,21 +317,6 @@ const en = {
   "設計介面、元件迭代": "Interface and component iteration",
   "這次介面與元件迭代聚焦在降低判斷成本、提升核對效率。透過調整資訊排序、用詞、提示文字與列表呈現，讓使用者能更快找到正確資料、理解欄位意義，並在寄出或合併前完成確認，降低錯填、漏填與誤合併的風險。":
     "This interface and component iteration focused on lowering decision cost and improving checking efficiency. By adjusting information order, wording, helper text, and list presentation, users can find the right records faster, understand field meaning, and confirm details before sending or merging, reducing wrong entries, omissions, and mistaken merges.",
-  "Flow 1：建立外包人員資料庫，便於掌管人員個人資料": "Flow 1: Build a contractor database to manage people's records",
-  "設計迭代 1-1：對使用者而言，首頁建立人員資料庫時，重要的是知道確切是哪位人員，因此不容易變動的身份資料須置前，以利辨識。":
-    "Iteration 1-1: When building the database, what matters most is knowing exactly who a person is — so stable identity fields are placed first for easier recognition.",
-  "Flow 2：建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽":
-    "Flow 2: Create a form and send a link for contractors to fill in / counter-sign",
-  "設計迭代 2-1：增加稅額 ％ 顯示與文字說明，讓使用者便於對照。":
-    "Iteration 2-1: Added tax % display and text notes so users can cross-check easily.",
-  "設計迭代 2-2：修正用詞，更容易理解。": "Iteration 2-2: Revised wording for easier comprehension.",
-  "設計迭代 2-3：優化資料呈現，快速查看已建立勞報單。":
-    "Iteration 2-3: Improved data presentation for quickly reviewing created forms.",
-  "設計迭代 2-4：增加預覽狀態，確保資料填寫正確後，寄出電子勞報單。":
-    "Iteration 2-4: Added a preview state to confirm details before sending the e-form.",
-  "Flow 3：合併多張勞務報酬單，減少回簽次數與調整稅額": "Flow 3: Merge multiple forms to cut counter-signs and adjust tax",
-  "設計迭代 3-1：優化合併勞報單功能，清楚顯示合併清單。":
-    "Iteration 3-1: Improved the merge feature to clearly show the merge list.",
   "測試結果": "Test results",
   "SUS ：82.5 (excellent) 介面容易了解與使用。": "SUS: 82.5 (excellent). The interface was easy to understand and use.",
   "根據任務測試與 SUS 分數收斂迭代方向，作為最終 Hi-fi 原型的設計依據。":
@@ -383,7 +326,6 @@ const en = {
   "最終 UI flow 展示": "Final UI flow showcase",
   "根據測試結果迭代完成 Hi-fi 原型，聚焦三條核心流程：建立外包人員、建立勞報單、合併勞報單。":
     "Iterated to a hi-fi prototype based on test results, focused on three core flows: adding contractors, creating forms, and merging forms.",
-  "Flow 1｜建立外包人員資料庫": "Flow 1｜Build the contractor database",
   "把外包人員的基本與付款資料建檔成資料庫，日後建立勞報單可直接帶入，免去重複輸入。":
     "Save each contractor's basic and payment details as a database, so labor forms can pull them in later without re-typing.",
   "進入「外包人員名單」，可瀏覽已建檔的外包人員，點「新建人員」開始建立。":
@@ -394,7 +336,6 @@ const en = {
     "Once the form is complete and documents are uploaded, click \"Save and leave\" to finish the record.",
   "回到名單，新建的「王明明」已加入資料庫，日後建立勞報單可直接選用。":
     "Back on the list, the new contractor \"Wang Ming-ming\" is now in the database, ready to be selected for future forms.",
-  "Flow 2｜建立勞務報酬單": "Flow 2｜Create a labor-payment form",
   "協助公司建立勞報單，系統自動計算稅額，再寄出確認信給外包人員線上簽收。":
     "Help the company create a form, auto-calculate the tax, then send a confirmation email for the contractor to counter-sign online.",
   "進入「勞務報酬單」頁面，點「建立勞報單」開始。":
@@ -409,7 +350,6 @@ const en = {
     "The system emails the form to the recipient for counter-signing and reminds them to sign before the deadline.",
   "回到勞報單清單，剛建立的單據已加入，可追蹤後續簽收狀態。":
     "Back on the form list, the newly created form has been added, so its counter-sign status can be tracked.",
-  "Flow 3｜合併多張勞務報酬單": "Flow 3｜Merge multiple labor forms",
   "測試驗證後的合併流程：合併多筆勞報資料、清楚呈現細項，減少回簽次數與稅務整理時間。":
     "The post-validation merge flow: combine multiple form records, present line items clearly, and cut counter-signs and tax-prep time.",
   "進入「勞務報酬單」頁面，輸入外包人員姓名後按下搜尋。":
@@ -433,30 +373,18 @@ const en = {
 
   // ── Reflection ──
   "以替代研究策略推進流程驗證": "Advancing flow validation with alternative research strategies",
-  "如果重新執行一次，我會在研究初期建立主要與替代受訪者名單，降低招募不順對研究進度的影響。當無法訪談核心利害關係人時，會改以協作角色訪談、非同步訪談或流程文件分析補足資訊缺口。\n\n設計策略上，會先將已掌握的會計人員流程定義為 MVP 假設，並透過第一版上線後的任務完成率、錯誤率與使用者回饋進行驗證。若初版成效不如預期，再依據實際使用情境推出 v2 上線版本，持續優化流程。":
-    "If I were to run the project again, I would build both primary and backup participant lists early in the research phase to reduce the impact of recruiting delays. When core stakeholders cannot be interviewed, I would use collaborator interviews, asynchronous interviews, or process document analysis to fill the information gaps.\n\nStrategically, I would first define the accounting-staff workflow already understood as an MVP hypothesis, then validate it after the first release through task completion rate, error rate, and user feedback. If the initial version underperforms, I would use real usage scenarios to shape a v2 release and continue improving the flow.",
   "介面用詞與說明，本身就是體驗": "Interface wording and guidance are part of the experience",
   "勞報單牽涉稅率、申報類別、二代健保這些專業概念，使用者不見得懂。回頭看會發現很多次迭代其實都在「改用詞」和「補說明」，例如把不直覺的「所得人」換成看得懂的講法、在容易卡住的地方補一句解釋、把扣稅百分比直接標出來。這讓我體會到：介面文字本身就是體驗的一部分，把專業術語翻成使用者的語言，常常比多加一個功能更能降低操作門檻。":
     "Labor forms involve professional concepts such as tax rates, filing categories, and supplementary health insurance that users don't necessarily understand. Looking back, many iterations were really about \"rewording\" and \"adding guidance\": replacing the unintuitive term \"income recipient\" with plainer language, adding a line of explanation where people got stuck, and surfacing the withholding percentage directly. It made me realize interface copy is itself part of the experience; translating jargon into the user's language often lowers the barrier more than adding another feature.",
   "從流程優化走向商業導入驗證": "From flow optimization to business adoption validation",
-  "若後續繼續推進，我會將重點從流程可用性延伸到商業導入驗證。Laushu 不只是勞務報酬單的線上化工具，更需要釐清誰是實際使用者、誰是導入決策者，以及系統能為公司降低多少行政與溝通成本。\n\n因此，下一步會補充訪談公司負責人、財務／人資主管與會計事務所，了解不同角色對導入工具的決策標準。同時將 UX 指標轉化為更具商業意義的成效指標，例如處理時間、錯誤率、來回確認次數與人力成本變化，進一步評估產品是否具備 B2B SaaS、按使用量計費，或作為會計事務所工具包的商業潛力。":
-    "If the project continues, I would extend the focus from flow usability to business adoption validation. Laushu is not only a tool for digitizing labor-remuneration forms; it also needs to clarify who the actual users are, who makes adoption decisions, and how much administrative and communication cost the system can reduce for companies.\n\nThe next step would be to interview company owners, finance or HR leads, and accounting firms to understand each role's decision criteria for adopting the tool. I would also translate UX metrics into more business-relevant outcome metrics, such as processing time, error rate, back-and-forth confirmation count, and labor cost change, to further evaluate whether the product has potential as a B2B SaaS product, a usage-based service, or part of an accounting-firm toolkit.",
 
   // ── Design iteration boards ──
-  "設計迭代與元件迭代": "Design & component iterations",
-  "依任務測試發現的問題，逐一調整介面流程與元件用詞。下面以 Before / After 對照，呈現每個操作流程的調整重點。":
-    "Based on problems surfaced in the task tests, I adjusted interface flows and component wording one by one. Each task flow's key changes are shown below as a Before / After comparison.",
   "操作流程 1": "Task flow 1",
   "操作流程 2": "Task flow 2",
   "操作流程 3": "Task flow 3",
-  "操作流程 4": "Task flow 4",
-  "操作流程 5": "Task flow 5",
-  "操作流程 6": "Task flow 6",
   "外包人員名單資訊排序": "Reordering the contractor list columns",
   "調整欄位優先級，提升人員辨識效率": "Reprioritize columns to speed up contractor recognition",
   "原本的欄位排序以一般資料欄位為主，將電子郵件與身分證字號放在前段，但在實際查找外包人員時，使用者更需要先確認姓名、戶籍地址與匯款資料，才能快速判斷是否正確對象。":
-    "Originally the columns led with general data fields, putting email and ID number up front. But when actually looking up a contractor, users first need to confirm the name, registered address and remittance details to quickly judge whether it's the right person.",
-  "原本的欄位排序以一般資料欄位為主，將電子郵件與身分證字號放在前段，但在實際查找外包人員時，使用者更需要先確認姓名、戶籍地址與匯款資料，才能快速判斷是否為正確對象。":
     "Originally the columns led with general data fields, putting email and ID number up front. But when actually looking up a contractor, users first need to confirm the name, registered address and remittance details to quickly judge whether it's the right person.",
   "調整後將欄位順序改為「姓名 → 戶籍地址 → 存摺 → 身分證字號 → 電子郵件」，把變動性低、辨識度高，且與付款流程直接相關的資訊提前，降低橫向掃描成本，提升查找與核對效率。":
     "After the change, the column order became \"Name → Registered address → Passbook → ID number → Email,\" moving low-volatility, high-recognition information directly tied to payment to the front — lowering horizontal scanning cost and improving lookup and cross-checking efficiency.",
@@ -472,8 +400,6 @@ const en = {
     "The \"filler\" block originally used \"Have the income recipient fill it in\" and \"Fill in yourself\" as option labels, but \"income recipient\" was unintuitive — users weren't sure whether it meant the contractor, internal staff, or the form creator. The \"New staff / Existing labor personnel\" options below were also misread as whether a record already existed, rather than distinguishing the contractor's status.",
   "調整後將選項文字修正為「外包人員填寫」與「自行填寫」，直接點出資料由誰填寫，讓使用者能更快理解兩種填寫方式的差異。同時將下方選項改為「首次外包人員／既有外包人員」，明確區分是第一次建立資料的外包人員，還是已存在於名單中的外包人員，降低用詞造成的判斷成本。":
     "After the change, the options were corrected to \"Contractor fills in\" and \"Fill in yourself,\" directly stating who enters the data so users grasp the difference faster. The lower options became \"First-time contractor / Existing contractor,\" clearly distinguishing a contractor recorded for the first time from one already on the list — lowering the judgment cost caused by wording.",
-  "調整後將選項文字修正為「外包人員填寫」與「自行填寫」，直接點出由誰完成，讓使用者能更快理解兩種填寫方式的差異。同時將下方選項改為「首次外包人員／既有外包人員」，明確區分是第一次建立資料的外包人員，還是已存在於名單中的外包人員，降低用詞造成的判斷成本。":
-    "After the change, the options were corrected to \"Contractor fills in\" and \"Fill in yourself,\" directly stating who completes it so users grasp the difference faster. The lower options became \"First-time contractor / Existing contractor,\" clearly distinguishing a contractor recorded for the first time from one already on the list — lowering the judgment cost caused by wording.",
   "列表資料呈現區": "List data presentation",
   "優化資料呈現，快速查看已建立勞報單": "Improve presentation for quickly reviewing created forms",
   "原本的勞務報酬單列表雖然已顯示建立日期、姓名、勞務內容、金額與簽收進度，但資料呈現較接近一般清單，缺少能幫助使用者快速判斷時間區間與資料批次的視覺提示。當勞報單數量增加時，使用者需要逐筆掃描日期，才能分辨哪些資料屬於同一年、同一批或需要優先處理的期間，查找效率較低。":
@@ -494,8 +420,6 @@ const en = {
     "After the change, merged forms are shown as a group, with a background-colored block clearly marking the merge scope so users can see at a glance which records are folded into the same merged form. A merge number and merge status were added in the notes column, making the merged data's source and relationships clearer.",
 
   // ── Task flowcharts ──
-  "針對三個重要用例繪製任務流程圖，作為原型測試的腳本依據（手機可左右滑動檢視）。":
-    "Task flowcharts were drawn for the three key use cases as the script for prototype testing (swipe horizontally on mobile).",
   "是": "Yes",
   "否": "No",
   "建立外包人員資料庫任務流程圖": "Build a contractor database — task flow",
@@ -504,8 +428,6 @@ const en = {
   // Flow 2
   "建立勞務報酬單，發送系統連結給外包人員填寫資料 / 回簽":
     "Create a labor form and send a link for the contractor to fill in / counter-sign",
-  "↩ 流程中可「儲存並返回」勞務報酬單頁面；點選「寄出確認信」後返回首頁，並發送信件給外包人員。":
-    "↩ You can \"save and return\" to the labor-form page along the way; after \"Send confirmation email,\" it returns to the home page and emails the contractor.",
   "儲存並返回": "Save and return",
   "取消": "Cancel",
   "返回勞務報酬單頁面，且發送信件給外包人員": "Return to the labor-form page and email the contractor",
@@ -521,8 +443,6 @@ const en = {
   "點選「寄出確認信」": "Click \"Send confirmation email\"",
   // Flow 1
   "建立外包人員資料庫，便於掌管人員個人資料": "Build a contractor database to manage personal data",
-  "↩ 「儲存」後返回外包人員資料頁；「編輯／查看人員頁」返回人員業務頁；「儲存並建立勞報單」接續建立勞報單流程。":
-    "↩ After \"Save,\" it returns to the contractor data page; \"Edit / View person page\" returns to the staff-tasks page; \"Save and create form\" continues into the create-form flow.",
   "外包人員資料頁": "Contractor data page",
   "建立人員勞報單": "Create the person's labor form",
   "建立勞報單頁": "Create-form page",
@@ -542,14 +462,11 @@ const en = {
   "查看人員頁": "View-person page",
   // Flow 3
   "合併多張勞務報酬單，減少回簽次數與調整稅額": "Merge multiple labor forms to cut counter-signs and adjust tax",
-  "↩ 「是否超過兩萬」為否、或「單張確認頁」確認後，皆進入「寄送簽收」。":
-    "↩ If \"over NT$20,000\" is no, or after the single-form confirmation page, both proceed to \"send for counter-sign.\"",
   "承辦人建立外包人員資訊": "Officer creates contractor info",
   "承辦人建立勞報單頁": "Officer's create-form page",
   "活動結束，承辦人執行支付款項": "After the event, the officer makes the payment",
   "搜尋外包者姓名": "Search contractor name",
   "同一個外包者多張勞報單結果畫面": "Results showing multiple forms for the same contractor",
-  "勾選同一外包者的多張勞報單": "Select multiple forms of the same contractor",
   "合併": "Merge",
   "選擇單張、確認合併": "Select forms and confirm merge",
   "是否超過兩萬": "Over NT$20,000?",
