@@ -80,6 +80,15 @@ export default function Contact() {
 
   const handleConfirmSend = async () => {
     if (!pendingSubmission || status === "loading") return;
+
+    // 未設定 NEXT_PUBLIC_FORMSPREE_ID 時不送出到無效端點，走既有錯誤流程
+    if (!config.formspreeId) {
+      setReviewOpen(false);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
+
     setStatus("loading");
 
     try {

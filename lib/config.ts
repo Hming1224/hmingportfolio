@@ -11,6 +11,6 @@ const getCleanFormspreeId = (id: string) => {
 
 export const config = {
   formspreeId: getCleanFormspreeId(
-    process.env.NEXT_PUBLIC_FORMSPREE_ID || "xkgwojzw",
+    process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "",
   ),
 } as const;
