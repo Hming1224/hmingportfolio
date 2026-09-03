@@ -40,5 +40,11 @@
 ## 16. Theme、Status 與資料視覺化
 
 - 目前作品集只提供 light theme；若未來正式導入 dark theme，再以實際 route 與元件狀態補齊 token、控制元件與驗證。
+- `/ai-impact` 使用 route-local 深灰與黃色視覺，不代表全站 dark theme。顏色只在 `.ai-impact-page` 內生效，不寫入 theme persistence。
+- 首頁 `Reveal AI mindset` 以按住 800ms 完成蓄力；進度、填色與文字換色共用同一數值。取消時回到初始狀態，不導頁。
+- 進入與返回 `/ai-impact` 使用按鈕實際中心的 circular View Transition。不支援 API 或偏好 reduced motion 時直接導頁，仍需回到目標頁頂部。
+- AI Impact Hero 沿用首頁裝飾定位與進場節奏，只替換 route-local 樣式與 yellow-outline asset；亮光限於點點圖層，以單圈波紋從 Hero 中心向外擴散，波紋經過後恢復暗點並完全消失，不做左右掃過或整面點亮。波紋使用覆蓋完整 Hero 的圓形 radial mask，禁止用縮放中的矩形 mask 造成上下水平裁切；半徑全程線性前進，不在循環頭尾停頓，只用透明度完成淡入與淡出。
+- AI Impact Workflow 固定為 7 階段。桌機與手機都使用原生垂直 scroll 判定目前階段，水平 track 只停在 7 個完整卡片落點；切換時下一張短暫滑入並貼齊左側，不允許停在兩張之間。向下前進、向上返回，且不攔截 wheel。只有 `prefers-reduced-motion: reduce` 改為自然垂直卡片，保留相同內容與進度資訊。
+- Workflow 內每個 Skill 都是獨立標籤；滑鼠 hover 或鍵盤 focus 時顯示用途 tooltip。Tooltip 需使用 `role="tooltip"` 與 `aria-describedby` 對應，不以 hover 作為唯一取得說明的方式。
 - Dark semantic 至少覆蓋 paper、surface、ink、muted、line 與文字階梯；案例頁品牌色可維持局部 scope。
 - 圖表依序使用 `--hm-chart-1` 到 `--hm-chart-6`。不可只靠顏色表達狀態；線圖搭配 dash / marker，區域圖搭配 pattern 或直接標籤。
