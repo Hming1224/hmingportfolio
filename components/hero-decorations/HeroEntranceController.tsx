@@ -6,9 +6,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroEntranceController() {
+export default function HeroEntranceController({ rootSelector = '.hero' }: { rootSelector?: string }) {
   useEffect(() => {
-    const section = document.querySelector<HTMLElement>('.hero');
+    const section = document.querySelector<HTMLElement>(rootSelector);
     if (!section) return;
 
     const prefersReducedMotion = window.matchMedia(
@@ -97,7 +97,7 @@ export default function HeroEntranceController() {
       st.kill();
       gsap.killTweensOf(getRollInContent());
     };
-  }, []);
+  }, [rootSelector]);
 
   return null;
 }

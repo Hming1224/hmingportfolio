@@ -3,14 +3,24 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { getLastCaseAttribution, sendAnalyticsEvent } from '@/lib/analytics';
+import { runAiImpactTransition } from './ai-impact/AiImpactViewTransition';
 import AnimatedLogo from './AnimatedLogo';
 import LanguageSwitcher from './LanguageSwitcher';
 
-export default function Navbar() {
+export default function Navbar({
+  variant = 'default',
+  onBack,
+}: {
+  variant?: 'default' | 'aiImpact';
+  onBack?: () => void;
+}) {
   const t = useTranslations('nav');
+  const aiT = useTranslations('aiImpact');
   const locale = useLocale() as Locale;
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const openRef = useRef(false);
@@ -84,11 +94,37 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav ref={navRef} className={`site-nav ${open ? 'is-open' : ''}`} aria-label={t('ariaLabel')}>
+    <nav
+      ref={navRef}
+      className={`site-nav${variant === 'aiImpact' ? ' site-nav--ai-impact' : ''} ${open ? 'is-open' : ''}`}
+      aria-label={t('ariaLabel')}
+    >
       <div className="nav-top">
-        <Link href="/" prefetch={false} className="brand" aria-label="Brian Huang home">
-          <AnimatedLogo />
-        </Link>
+        {variant === 'aiImpact' ? (
+          <button
+            className="ai-impact-back"
+            type="button"
+            onClick={(event) => {
+              if (onBack) {
+                onBack();
+                return;
+              }
+              void runAiImpactTransition({
+                anchor: event.currentTarget,
+                direction: 'leave',
+                navigate: () => router.push('/'),
+                readySelector: '.hero:not(.ai-impact-hero)',
+              });
+            }}
+          >
+            <span aria-hidden="true">←</span>
+            {aiT('back')}
+          </button>
+        ) : (
+          <Link href="/" prefetch={false} className="brand" aria-label="Brian Huang home">
+            <AnimatedLogo />
+          </Link>
+        )}
         <button
           className="menu-button"
           type="button"
