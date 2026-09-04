@@ -54,6 +54,12 @@ export default function SplitText({
   const [fontsLoaded, setFontsLoaded] = useState(
     () => typeof document !== 'undefined' && document.fonts.status === 'loaded',
   );
+  const [pageTransitionReady, setPageTransitionReady] = useState(
+    () =>
+      typeof document === 'undefined' ||
+      !document.documentElement.dataset.aiImpactTransition ||
+      Boolean(document.documentElement.dataset.aiImpactContentReady),
+  );
 
   useEffect(() => {
     onCompleteRef.current = onLetterAnimationComplete;
@@ -69,9 +75,17 @@ export default function SplitText({
     });
   }, []);
 
+  useEffect(() => {
+    if (pageTransitionReady) return;
+
+    const handleTransitionEnd = () => setPageTransitionReady(true);
+    window.addEventListener('ai-impact-transition-content-ready', handleTransitionEnd, { once: true });
+    return () => window.removeEventListener('ai-impact-transition-content-ready', handleTransitionEnd);
+  }, [pageTransitionReady]);
+
   useGSAP(
     () => {
-      if (!ref.current || !text || !fontsLoaded) {
+      if (!ref.current || !text || !fontsLoaded || !pageTransitionReady) {
         return;
       }
 
@@ -189,6 +203,7 @@ export default function SplitText({
         rootMargin,
         resetOnLeave,
         fontsLoaded,
+        pageTransitionReady,
       ],
       scope: ref,
     },
@@ -207,6 +222,7 @@ export default function SplitText({
         textAlign,
         overflow: 'hidden',
         display: 'inline-block',
+        visibility: pageTransitionReady ? undefined : 'hidden',
         whiteSpace: 'normal',
         wordWrap: 'break-word',
         willChange: 'transform, opacity',

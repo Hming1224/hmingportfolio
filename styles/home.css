@@ -155,7 +155,6 @@
 }
 
 .ai-impact-reveal {
-  --charge-progress: 0;
   position: relative;
   display: grid;
   min-width: 190px;
@@ -178,13 +177,16 @@
 
 .ai-impact-reveal__fill,
 .ai-impact-reveal__label--active {
-  clip-path: inset(0 calc((1 - var(--charge-progress)) * 100%) 0 0);
+  clip-path: inset(0 100% 0 0);
   transition: clip-path var(--hm-duration-base) var(--hm-ease-out);
+  will-change: clip-path;
 }
 
 .ai-impact-reveal.is-charging .ai-impact-reveal__fill,
 .ai-impact-reveal.is-charging .ai-impact-reveal__label--active {
-  transition: none;
+  clip-path: inset(0);
+  transition-duration: 800ms;
+  transition-timing-function: linear;
 }
 
 .ai-impact-reveal__fill {

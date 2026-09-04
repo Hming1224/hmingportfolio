@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { type MouseEvent, useEffect, useRef, useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useRouter } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
@@ -28,6 +28,34 @@ export default function Navbar({
   const accumulatedDelta = useRef(0);
   const navHidden = useRef(false);
   const stopTimer = useRef<number | null>(null);
+
+  function navigateFromAiImpact(
+    event: MouseEvent<HTMLAnchorElement>,
+    href: '/#projects' | '/about-me' | '/design-system' | '/contact',
+    readySelector: string,
+    scrollTarget?: string,
+  ) {
+    setOpen(false);
+    if (
+      variant !== 'aiImpact' ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    void runAiImpactTransition({
+      anchor: event.currentTarget,
+      direction: 'leave',
+      navigate: () => router.push(href === '/#projects' ? '/' : href),
+      readySelector,
+      scrollTarget,
+    });
+  }
 
   function setNavHidden(nextHidden: boolean) {
     if (navHidden.current === nextHidden) {
@@ -138,16 +166,29 @@ export default function Navbar({
       </div>
 
       <div className="nav-links">
-        <Link href="/#projects" prefetch={false} onClick={() => setOpen(false)}>
+        <Link
+          href="/#projects"
+          prefetch={false}
+          onClick={(event) => navigateFromAiImpact(event, '/#projects', '#projects', '#projects')}
+        >
           {t('projects')}
         </Link>
-        <Link href="/about-me" onClick={() => setOpen(false)}>
+        <Link
+          href="/about-me"
+          onClick={(event) => navigateFromAiImpact(event, '/about-me', '.about-page')}
+        >
           {t('about')}
         </Link>
-        <Link href="/design-system" onClick={() => setOpen(false)}>
+        <Link
+          href="/design-system"
+          onClick={(event) => navigateFromAiImpact(event, '/design-system', '#ds-title')}
+        >
           {t('designSystem')}
         </Link>
-        <Link href="/contact" onClick={() => setOpen(false)}>
+        <Link
+          href="/contact"
+          onClick={(event) => navigateFromAiImpact(event, '/contact', '#contact')}
+        >
           {t('contact')}
         </Link>
         <a
@@ -165,7 +206,7 @@ export default function Navbar({
         >
           {t('resume')}
         </a>
-        <LanguageSwitcher />
+        <LanguageSwitcher variant={variant} />
       </div>
       <div className="nav-line" />
     </nav>

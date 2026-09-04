@@ -14,6 +14,7 @@ export default function HeroEntranceController({ rootSelector = '.hero' }: { roo
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
+    let replayQueued = false;
 
     const getDecos = () =>
       Array.from(section.querySelectorAll<HTMLElement>('.hero-decoration'));
@@ -70,7 +71,23 @@ export default function HeroEntranceController({ rootSelector = '.hero' }: { roo
       freezeRollInContent();
     };
 
+    const replayAfterTransition = () => {
+      replayQueued = false;
+      replay();
+    };
+
     const replay = () => {
+      if (
+        document.documentElement.dataset.aiImpactTransition &&
+        !document.documentElement.dataset.aiImpactContentReady
+      ) {
+        if (!replayQueued) {
+          replayQueued = true;
+          window.addEventListener('ai-impact-transition-content-ready', replayAfterTransition, { once: true });
+        }
+        return;
+      }
+
       // Force synchronous reflow while "none" state is committed,
       // then remove inline overrides so CSS animations restart from scratch.
       void section.offsetHeight;
@@ -95,6 +112,7 @@ export default function HeroEntranceController({ rootSelector = '.hero' }: { roo
 
     return () => {
       st.kill();
+      window.removeEventListener('ai-impact-transition-content-ready', replayAfterTransition);
       gsap.killTweensOf(getRollInContent());
     };
   }, [rootSelector]);

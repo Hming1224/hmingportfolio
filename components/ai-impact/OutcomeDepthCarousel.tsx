@@ -44,13 +44,13 @@ type DragState = {
   pointerId: number;
 };
 
-const CARD_WIDTH = 400;
+const CARD_WIDTH = 576;
 const CARD_HEIGHT = 440;
-const DEPTH = 220;
-const SPREAD = 90;
-const TILT = 22;
-const PERSPECTIVE = 1400;
-const VISIBLE_CARDS = 4;
+const DEPTH = 240;
+const STACK_GAP = 22;
+const TILT = 5;
+const PERSPECTIVE = 1800;
+const VISIBLE_CARDS = 3;
 const FALLOFF = 0.2;
 const BLUR = 6;
 const DURATION = 0.7;
@@ -88,8 +88,12 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
       const absoluteDistance = Math.abs(distance);
       const shown = absoluteDistance <= VISIBLE_CARDS + 0.5;
       const translateZ = -DEPTH * distance;
-      const translateX = SPREAD * distance;
       const rotateY = TILT * clamp(distance, 0, 1);
+      const perspectiveScale = PERSPECTIVE / (PERSPECTIVE + DEPTH * Math.max(0, distance));
+      const rotatedHalfWidth = (CARD_WIDTH / 2) * Math.cos((rotateY * Math.PI) / 180);
+      const translateX = distance > 0
+        ? (CARD_WIDTH / 2 + STACK_GAP * distance) / perspectiveScale - rotatedHalfWidth
+        : STACK_GAP * distance;
       let opacity = distance < 0 ? Math.max(0, 1 + distance) : 1;
       if (!shown) opacity = 0;
 
@@ -151,8 +155,8 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
     const root = rootRef.current;
     if (!root) return;
     const observer = new ResizeObserver(([entry]) => {
-      const neededWidth = CARD_WIDTH + SPREAD * 2 + 120;
-      const minimumScale = entry.contentRect.width < 600 ? 0.75 : 0.4;
+      const neededWidth = CARD_WIDTH + STACK_GAP * VISIBLE_CARDS + 80;
+      const minimumScale = entry.contentRect.width < 600 ? 0.58 : 0.4;
       scaleRef.current = clamp(entry.contentRect.width / neededWidth, minimumScale, 1);
       layout(positionRef.current);
     });
@@ -269,7 +273,7 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
               if (!dragRef.current?.moved) setFocus(index, true);
             }}
           >
-            <Image src={item.image} alt={item.imageAlt} fill sizes="300px" priority={index === 0} draggable={false} />
+            <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 768px) 85vw, 576px" priority={index === 0} draggable={false} />
             <span
               className="ai-impact-outcomes__tint"
               ref={(element) => { tintRefs.current[index] = element; }}

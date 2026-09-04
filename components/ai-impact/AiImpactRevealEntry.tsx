@@ -1,37 +1,48 @@
 'use client';
 
-import type { CSSProperties, KeyboardEvent, PointerEvent } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type { KeyboardEvent, PointerEvent } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { runAiImpactTransition } from './AiImpactViewTransition';
 
 const HOLD_DURATION = 800;
+let routeWarmup: Promise<unknown> | null = null;
+
+function warmAiImpactRoute() {
+  routeWarmup ??= Promise.all([
+    import('./AiImpactStoryStage'),
+    import('./WorkflowCarousel'),
+    import('./OutcomeDepthCarousel'),
+  ]);
+  return routeWarmup;
+}
 
 export default function AiImpactRevealEntry() {
   const t = useTranslations('aiImpact');
   const router = useRouter();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const frameRef = useRef<number | null>(null);
-  const startedAtRef = useRef(0);
+  const holdTimerRef = useRef<number | null>(null);
   const activeRef = useRef(false);
   const triggeredRef = useRef(false);
   const pointerRef = useRef<number | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [charging, setCharging] = useState(false);
 
-  function clearFrame() {
-    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
-    frameRef.current = null;
+  function clearHoldTimer() {
+    if (holdTimerRef.current !== null) window.clearTimeout(holdTimerRef.current);
+    holdTimerRef.current = null;
   }
 
   async function complete() {
     if (triggeredRef.current || !buttonRef.current) return;
     triggeredRef.current = true;
     activeRef.current = false;
-    clearFrame();
-    setProgress(1);
-    setCharging(false);
+    clearHoldTimer();
+
+    // Let the fully charged state reach the screen before View Transition
+    // snapshots the old page. This avoids batching the last fill frame with
+    // the route render, which made the handoff feel like it paused at 100%.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+
     await runAiImpactTransition({
       anchor: buttonRef.current,
       direction: 'enter',
@@ -40,33 +51,23 @@ export default function AiImpactRevealEntry() {
     });
   }
 
-  function tick(now: number) {
-    if (!activeRef.current) return;
-    const nextProgress = Math.min((now - startedAtRef.current) / HOLD_DURATION, 1);
-    setProgress(nextProgress);
-    if (nextProgress >= 1) {
-      void complete();
-      return;
-    }
-    frameRef.current = requestAnimationFrame(tick);
-  }
-
   function start() {
     if (activeRef.current || triggeredRef.current) return;
+    void warmAiImpactRoute();
     activeRef.current = true;
-    startedAtRef.current = performance.now();
-    setCharging(true);
-    clearFrame();
-    frameRef.current = requestAnimationFrame(tick);
+    buttonRef.current?.classList.add('is-charging');
+    clearHoldTimer();
+    holdTimerRef.current = window.setTimeout(() => {
+      void complete();
+    }, HOLD_DURATION);
   }
 
   function cancel() {
     if (!activeRef.current || triggeredRef.current) return;
     activeRef.current = false;
     pointerRef.current = null;
-    clearFrame();
-    setCharging(false);
-    setProgress(0);
+    clearHoldTimer();
+    buttonRef.current?.classList.remove('is-charging');
   }
 
   function handlePointerDown(event: PointerEvent<HTMLButtonElement>) {
@@ -96,16 +97,31 @@ export default function AiImpactRevealEntry() {
     cancel();
   }
 
-  useEffect(() => () => clearFrame(), []);
+  useEffect(() => {
+    router.prefetch('/ai-impact');
+    const supportsIdleCallback = typeof window.requestIdleCallback === 'function';
+    const warmupId = supportsIdleCallback
+      ? window.requestIdleCallback(() => {
+          void warmAiImpactRoute();
+        }, { timeout: HOLD_DURATION })
+      : window.setTimeout(() => {
+          void warmAiImpactRoute();
+        }, HOLD_DURATION);
+
+    return () => {
+      if (supportsIdleCallback) window.cancelIdleCallback(warmupId);
+      else window.clearTimeout(warmupId);
+      clearHoldTimer();
+    };
+  }, [router]);
 
   return (
     <div className="ai-impact-entry">
       <button
         ref={buttonRef}
-        className={`ai-impact-reveal${charging ? ' is-charging' : ''}`}
+        className="ai-impact-reveal"
         type="button"
         aria-label={t('revealAria')}
-        style={{ '--charge-progress': progress } as CSSProperties}
         onContextMenu={(event) => event.preventDefault()}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
