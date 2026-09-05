@@ -654,7 +654,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   min-width: 0;
   border: 1px solid color-mix(in srgb, var(--ai-line) 40%, transparent);
   border-radius: 24px;
-  background: color-mix(in srgb, var(--ai-line) 3%, transparent);
+  background: color-mix(in srgb, var(--ai-line) 3%, var(--ai-bg));
 }
 
 .ai-impact-workflow-progress {
@@ -1054,7 +1054,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--ai-line) 30%, transparent);
   border-radius: 18px;
-  background: color-mix(in srgb, var(--ai-line) 4%, transparent);
+  background: color-mix(in srgb, var(--ai-line) 4%, var(--ai-bg));
 }
 
 .ai-impact-workflow-paths article {
