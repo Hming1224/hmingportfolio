@@ -524,7 +524,7 @@ export default function AiImpactStoryStage({
             { section: 'outcomes' as const, number: '03', title: labels.outcomes.title, step: OUTCOMES_STEP },
           ].map((item) => (
             <button type="button" className={activeSection === item.section ? 'is-active' : ''} aria-current={activeSection === item.section ? 'step' : undefined} onClick={() => goToStep(item.step)} key={item.section}>
-              <span>{item.number}</span><span>{item.title}</span>
+              <span>{item.number}</span><span className="ai-impact-story__nav-label"><span>{item.title}</span></span>
             </button>
           ))}
         </nav>

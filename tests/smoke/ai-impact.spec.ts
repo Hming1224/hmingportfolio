@@ -381,31 +381,40 @@ test.describe('AI Impact page', () => {
   });
 
   for (const width of [1024, 1440]) {
-    test(`desktop mindset overview distributes the four nodes across the full rail at ${width}px`, async ({ page }) => {
+    test(`desktop mindset overview aligns each node and copy group at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
       await gotoAndWait(page, '/zh-TW/ai-impact');
       await scrollStoryToStep(page, 0);
 
       const geometry = await page.locator('.ai-impact-story-mindset__steps').evaluate((rail) => {
         const icons = Array.from(rail.querySelectorAll<HTMLElement>('.ai-impact-mindset__icon'));
-        const positions = icons.map((icon) => {
+        const iconPositions = icons.map((icon) => {
           const step = icon.closest<HTMLElement>('.ai-impact-story-mindset__step')!;
           return step.offsetLeft + icon.offsetLeft;
         });
-        const centers = icons.map((icon, index) => positions[index] + icon.offsetWidth / 2);
+        const iconCenters = icons.map((icon, index) => iconPositions[index] + icon.offsetWidth / 2);
+        const copyCenters = icons.map((icon) => {
+          const step = icon.closest<HTMLElement>('.ai-impact-story-mindset__step')!;
+          const copy = step.querySelector<HTMLElement>(':scope > div')!;
+          return step.offsetLeft + copy.offsetLeft + copy.offsetWidth / 2;
+        });
         const firstIcon = icons[0];
         const lastIcon = icons.at(-1)!;
+        const expectedInset = (rail.clientWidth / 4 - firstIcon.offsetWidth) / 2;
 
         return {
-          firstInset: positions[0],
-          lastInset: rail.clientWidth - positions.at(-1)! - lastIcon.offsetWidth,
-          gaps: centers.slice(1).map((center, index) => center - centers[index]),
+          expectedInset,
+          firstInset: iconPositions[0],
+          lastInset: rail.clientWidth - iconPositions.at(-1)! - lastIcon.offsetWidth,
+          gaps: iconCenters.slice(1).map((center, index) => center - iconCenters[index]),
+          alignmentDeltas: iconCenters.map((center, index) => Math.abs(center - copyCenters[index])),
         };
       });
 
-      expect(Math.abs(geometry.firstInset)).toBeLessThan(2);
-      expect(Math.abs(geometry.lastInset)).toBeLessThan(2);
+      expect(Math.abs(geometry.firstInset - geometry.expectedInset)).toBeLessThan(2);
+      expect(Math.abs(geometry.lastInset - geometry.expectedInset)).toBeLessThan(2);
       expect(Math.max(...geometry.gaps) - Math.min(...geometry.gaps)).toBeLessThan(2);
+      expect(Math.max(...geometry.alignmentDeltas)).toBeLessThan(2);
       await expectNoHorizontalOverflow(page);
     });
   }

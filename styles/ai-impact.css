@@ -1777,7 +1777,10 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 .ai-impact-story__nav {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 50%;
+  width: max-content;
+  max-width: 100%;
+  transform: translateX(-50%);
   z-index: 20;
   display: flex;
   gap: 6px;
@@ -1785,13 +1788,21 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   border: 1px solid color-mix(in srgb, var(--ai-line) 24%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--ai-bg) 94%, transparent);
+  transform-origin: center;
+  transition: transform var(--hm-duration-enter) var(--hm-ease-spring);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ai-impact-story__nav:hover {
+    transform: translateX(-50%) scale(1.12);
+  }
 }
 
 .ai-impact-story__nav button {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
-  gap: 7px;
+  gap: 0;
   padding: 8px 12px;
   border: 0;
   border-radius: 999px;
@@ -1803,6 +1814,31 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   transition:
     background-color var(--hm-duration-base) var(--hm-ease-standard),
     color var(--hm-duration-base) var(--hm-ease-standard);
+}
+
+.ai-impact-story__nav-label {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-columns var(--hm-duration-base) var(--hm-ease-standard),
+    opacity var(--hm-duration-base) var(--hm-ease-standard);
+}
+
+.ai-impact-story__nav-label > span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ai-impact-story__nav button:is(.is-active, :hover, :focus-visible) .ai-impact-story__nav-label {
+  grid-template-columns: 1fr;
+  opacity: 1;
+}
+
+.ai-impact-story__nav button:is(.is-active, :hover, :focus-visible) .ai-impact-story__nav-label > span {
+  padding-left: 7px;
 }
 
 .ai-impact-story__nav button > span:first-child {
@@ -1826,7 +1862,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   display: grid;
   width: 100vw;
   min-width: 0;
-  padding: 8px max(var(--page-gutter), calc((100vw - 1180px) / 2)) 18px;
+  padding: calc(54px + var(--hm-space-md)) max(var(--page-gutter), calc((100vw - 1180px) / 2)) 18px;
   opacity: 0;
   pointer-events: none;
   transform: translateX(-50%) scale(0.94);
@@ -1853,7 +1889,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
 .ai-impact-story__intro {
   min-width: 0;
-  padding-right: 340px;
+  padding-right: 0;
 }
 
 .ai-impact-story__intro .ai-impact-section__number {
@@ -2028,12 +2064,6 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   min-width: 0;
 }
 
-/* Keep the long workflow heading below the fixed section tabs without
-   constraining its usable width. */
-.ai-impact-story__scene--workflow .ai-impact-story__intro {
-  padding-top: var(--hm-space-lg);
-}
-
 .ai-impact-story-workflow {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
@@ -2091,18 +2121,11 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 }
 
 @media (min-width: 769px) {
-  .ai-impact-story__scene--mindset .ai-impact-story__intro h2 {
-    font-size: clamp(42px, 4.7vw, 64px);
-  }
-
-  .ai-impact-story__scene--mindset .ai-impact-story__intro > p:last-child {
-    font-size: 17px;
-    line-height: 1.7;
-  }
-
   .ai-impact-story-mindset.is-overview .ai-impact-mindset__icon {
-    position: absolute;
-    top: 0;
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-self: center;
     width: 80px;
     height: 80px;
   }
@@ -2114,23 +2137,8 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step {
     position: relative;
-    padding-top: 108px;
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(1) .ai-impact-mindset__icon {
-    left: 0;
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(2) .ai-impact-mindset__icon {
-    left: calc(33.3333% - 26.6667px);
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(3) .ai-impact-mindset__icon {
-    left: calc(66.6667% - 53.3333px);
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(4) .ai-impact-mindset__icon {
-    left: calc(100% - 80px);
+    grid-template-rows: 80px auto;
+    gap: 28px;
   }
 
   .ai-impact-story-mindset.is-overview .ai-impact-mindset__icon svg {
@@ -2140,34 +2148,15 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:not(:last-child)::after {
     top: 39px;
-    width: calc(133.3333% - 106.6667px);
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(1)::after {
-    left: 80px;
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(2)::after {
-    left: calc(33.3333% + 53.3333px);
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(3)::after {
-    left: calc(66.6667% + 26.6667px);
+    left: calc(50% + 40px);
+    width: calc(100% - 80px);
   }
 
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step > div {
+    width: 100%;
     min-width: 0;
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(2) > div,
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:nth-child(3) > div {
     padding-inline: 18px;
     text-align: center;
-  }
-
-  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:last-child > div {
-    padding-left: 18px;
-    text-align: right;
   }
 
   .ai-impact-story-mindset.is-overview .ai-impact-mindset__number {
@@ -2225,12 +2214,17 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     padding-inline: 10px;
   }
 
-  .ai-impact-story__nav button > span:last-child {
-    display: none;
+  .ai-impact-story__nav button {
+    min-width: 44px;
+    flex-shrink: 1;
+  }
+
+  .ai-impact-story__nav-label > span {
+    white-space: normal;
   }
 
   .ai-impact-story__scene {
-    padding: 58px max(20px, calc((100vw - 620px) / 2)) 10px;
+    padding: calc(54px + var(--hm-space-md)) max(20px, calc((100vw - 620px) / 2)) 10px;
   }
 
   .ai-impact-story__intro {
