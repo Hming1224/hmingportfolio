@@ -241,7 +241,7 @@ const messages = {
       items: [
         {
           type: "數位產品與系統",
-          title: "作品集與 Design System remediation",
+          title: "作品集與設計系統",
           body: "把介面問題分類後分批修正，保護正式站基準，也整理出可重用與應保留 local 的邊界。",
           stages: ["03", "04", "05", "06", "07"],
           skills: ["frontend-craft", "browse", "rwd-audit"],
