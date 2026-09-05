@@ -839,7 +839,9 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   flex: 0 0 100%;
   min-width: 100%;
   height: 100%;
-  padding: clamp(24px, 4vw, 48px);
+  /* 直向留白跟著可用高度縮放：面板高度由視窗決定，內容卻是固定的，
+     視窗一矮就會撞破 padding 被面板裁掉（skill pill 貼齊底線）。 */
+  padding: clamp(16px, 3svh, 48px) clamp(24px, 4vw, 48px);
   border: 0;
   background: transparent;
 }
@@ -850,7 +852,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
 }
 
 .ai-impact-workflow-slide__number {
-  margin: 0 0 16px;
+  margin: 0 0 clamp(8px, 1.6svh, 16px);
   color: var(--ai-deep);
   font-size: 12px;
   font-weight: 700;
@@ -866,7 +868,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
 }
 
 .ai-impact-workflow-slide__body {
-  margin: 18px 0 0;
+  margin: clamp(10px, 1.8svh, 18px) 0 0;
   color: var(--ai-copy-muted);
   font-size: 15px;
   line-height: 1.7;
@@ -874,15 +876,15 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
 
 .ai-impact-workflow-slide dl {
   display: grid;
-  gap: 11px;
-  margin: 28px 0 0;
+  gap: clamp(7px, 1.1svh, 11px);
+  margin: clamp(14px, 2.6svh, 28px) 0 0;
 }
 
 .ai-impact-workflow-slide dl > div {
   display: grid;
   grid-template-columns: 106px minmax(0, 1fr);
   gap: 14px;
-  padding-top: 11px;
+  padding-top: clamp(7px, 1.1svh, 11px);
   border-top: 1px solid color-mix(in srgb, var(--ai-line) 18%, transparent);
 }
 
@@ -2443,5 +2445,39 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
   .ai-impact-story-mindset.is-detail.is-complete .ai-impact-story-mindset__step:last-child .ai-impact-mindset__icon {
     animation: none;
+  }
+}
+
+/* 矮視窗（筆電、開了開發者工具、瀏覽器放大）時收緊 workflow 卡片的字級與行距。
+   面板高度跟著視窗走、內容卻是固定的，不收緊就會撞破 padding 被面板裁掉 —
+   最先犧牲的是最底下那排 skill pill。 */
+@media (min-width: 769px) and (max-height: 820px) {
+  .ai-impact-workflow-slide h3 {
+    font-size: clamp(22px, 2.4vw, 32px);
+  }
+
+  .ai-impact-workflow-slide__body {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ai-impact-workflow-slide dt,
+  .ai-impact-workflow-slide dd {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .ai-impact-workflow-slide dl > div {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  /* pill 收窄一點，三顆 skill 才排得進同一行、不會多吃一整行高度 */
+  .ai-impact-workflow-skills {
+    gap: 6px;
+  }
+
+  .ai-impact-skill {
+    padding: 1px 6px;
   }
 }
