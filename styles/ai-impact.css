@@ -1205,11 +1205,11 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   background: linear-gradient(
     180deg,
     transparent 28%,
-    rgb(5 6 10 / 3%) 40%,
-    rgb(5 6 10 / 10%) 52%,
-    rgb(5 6 10 / 28%) 66%,
-    rgb(5 6 10 / 62%) 82%,
-    rgb(5 6 10 / 94%) 100%
+    color-mix(in srgb, var(--ai-bg) 3%, transparent) 40%,
+    color-mix(in srgb, var(--ai-bg) 10%, transparent) 52%,
+    color-mix(in srgb, var(--ai-bg) 28%, transparent) 66%,
+    color-mix(in srgb, var(--ai-bg) 62%, transparent) 82%,
+    color-mix(in srgb, var(--ai-bg) 94%, transparent) 100%
   );
   pointer-events: none;
 }
@@ -1218,12 +1218,12 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
 .ai-impact-outcomes__card.is-active:focus .ai-impact-outcomes__shade {
   background: linear-gradient(
     180deg,
-    rgb(5 6 10 / 4%) 8%,
-    rgb(5 6 10 / 9%) 24%,
-    rgb(5 6 10 / 20%) 40%,
-    rgb(5 6 10 / 42%) 58%,
-    rgb(5 6 10 / 72%) 78%,
-    rgb(5 6 10 / 97%) 100%
+    color-mix(in srgb, var(--ai-bg) 4%, transparent) 8%,
+    color-mix(in srgb, var(--ai-bg) 9%, transparent) 24%,
+    color-mix(in srgb, var(--ai-bg) 20%, transparent) 40%,
+    color-mix(in srgb, var(--ai-bg) 42%, transparent) 58%,
+    color-mix(in srgb, var(--ai-bg) 72%, transparent) 78%,
+    color-mix(in srgb, var(--ai-bg) 97%, transparent) 100%
   );
 }
 
