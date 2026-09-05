@@ -1472,9 +1472,9 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
 
   .ai-impact-workflow-slide {
     grid-template-columns: 1fr;
-    align-content: center;
-    gap: 8px;
-    padding: 14px 16px;
+    align-content: start;
+    gap: var(--hm-space-sm);
+    padding: var(--hm-space-sm);
   }
 
   .ai-impact-workflow-progress__direction {
@@ -1488,7 +1488,7 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   }
 
   .ai-impact-workflow-slide__number {
-    margin-bottom: 7px;
+    margin-bottom: var(--hm-space-2xs);
   }
 
   .ai-impact-workflow-slide h3 {
@@ -1496,41 +1496,50 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   }
 
   .ai-impact-workflow-slide__body {
-    margin-top: 8px;
-    font-size: 13px;
-    line-height: 1.5;
+    margin-top: var(--hm-space-xs);
+    font-size: 14px;
+    line-height: 1.65;
   }
 
   .ai-impact-workflow-slide dl {
-    gap: 5px;
-    margin-top: 9px;
+    gap: var(--hm-space-xs);
+    margin-top: var(--hm-space-sm);
   }
 
   .ai-impact-workflow-slide dl > div {
     grid-template-columns: 76px minmax(0, 1fr);
-    gap: 8px;
-    padding-top: 6px;
+    gap: var(--hm-space-xs);
+    padding-top: var(--hm-space-xs);
   }
 
   .ai-impact-workflow-slide dt,
   .ai-impact-workflow-slide dd {
-    font-size: 11px;
-    line-height: 1.4;
+    font-size: 12px;
+    line-height: 1.55;
   }
 
+  /* 三欄並排在 350px 可用寬下每張只有約 100px，字會斷成四行。
+     手機改成上下堆疊，每張吃滿寬度，箭頭跟著轉成向下。 */
   .ai-impact-handoff {
-    gap: 5px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--hm-space-xs);
+  }
+
+  .ai-impact-handoff__arrow {
+    justify-self: center;
+    width: 16px;
+    transform: rotate(90deg);
   }
 
   .ai-impact-handoff__node {
-    gap: 4px;
-    min-height: 76px;
-    padding: 8px 7px;
+    gap: var(--hm-space-2xs);
+    min-height: 0;
+    padding: var(--hm-space-xs) var(--hm-space-sm);
   }
 
   .ai-impact-handoff__node svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 
   .ai-impact-handoff__node span {
@@ -1539,8 +1548,8 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   }
 
   .ai-impact-handoff__node strong {
-    font-size: 10px;
-    line-height: 1.35;
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .ai-impact-handoff__arrow {
@@ -2254,7 +2263,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px 14px;
+    gap: var(--hm-space-lg) var(--hm-space-sm);
   }
 
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:not(:last-child)::after {
@@ -2262,11 +2271,11 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story-mindset__step {
-    gap: 10px;
+    gap: var(--hm-space-xs);
   }
 
   .ai-impact-story-mindset__step h3 {
-    margin-bottom: 5px;
+    margin-bottom: var(--hm-space-2xs);
     font-size: 15px;
   }
 
@@ -2283,7 +2292,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
   .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 6px;
+    gap: var(--hm-space-2xs);
   }
 
   .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step {
@@ -2310,8 +2319,8 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story-mindset__proof .ai-impact-proof__body {
-    gap: 10px;
-    padding: 14px;
+    gap: var(--hm-space-xs);
+    padding: var(--hm-space-sm);
   }
 
   .ai-impact-story-mindset__proof .ai-impact-proof__surface {
@@ -2342,7 +2351,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story-mindset__proof figcaption {
-    padding: 10px 14px 12px;
+    padding: var(--hm-space-xs) var(--hm-space-sm);
   }
 
   .ai-impact-story-workflow {
@@ -2356,7 +2365,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story-workflow__paths .ai-impact-workflow-paths {
-    gap: 12px;
+    gap: var(--hm-space-sm);
   }
 
   .ai-impact-story-workflow__paths .ai-impact-workflow-paths__intro h3 {
@@ -2364,8 +2373,8 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story-workflow__paths .ai-impact-workflow-paths article {
-    gap: 8px;
-    padding: 12px;
+    gap: var(--hm-space-2xs);
+    padding: var(--hm-space-sm);
   }
 
   .ai-impact-story-workflow__paths .ai-impact-workflow-paths__icon {
@@ -2440,105 +2449,18 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 }
 
-/* 小螢幕手機（iPhone SE 等，舞台只有約 555px）：釘住的 story 版位固定，
-   內容卻是照 390×844 設計的，不再收一階就會壓到底部的捲動提示。 */
-@media (max-width: 768px) and (max-height: 800px) {
-  .ai-impact-story__scene {
-    padding-top: calc(54px + 4px);
+@media (max-width: 768px) {
+  /* 吸附時要讓開固定在頂端的站台 nav。
+     偏移定義在 html 上而不是 .ai-impact-page —— 自訂屬性只往下繼承，
+     定義在 .ai-impact-page 的話 html 讀不到，calc() 會整條失效變回 auto。
+     這裡的 80px 對應 tokens.css 的 `.site-nav { min-height: 80px }`；
+     --ai-nav-height 只存在於 .ai-impact-page，html 這層拿不到。 */
+  html:has(.ai-impact-story[data-static]) {
+    --ai-snap-offset: calc(80px + var(--hm-space-sm));
+    scroll-snap-type: y proximity;
+    scroll-padding-top: var(--ai-snap-offset);
   }
 
-  .ai-impact-story__intro h2 {
-    margin-bottom: 6px;
-    font-size: clamp(24px, 7vw, 30px);
-  }
-
-  .ai-impact-story__intro > p:last-child {
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  .ai-impact-story__intro .ai-impact-section__number {
-    margin-bottom: 6px;
-  }
-
-  .ai-impact-workflow-progress {
-    gap: 6px;
-  }
-
-  .ai-impact-workflow-slide h3 {
-    font-size: clamp(19px, 6vw, 24px);
-  }
-
-  .ai-impact-workflow-slide__body {
-    margin-top: 6px;
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  .ai-impact-workflow-slide dl {
-    gap: 4px;
-    margin-top: 8px;
-  }
-
-  .ai-impact-workflow-slide dl > div {
-    padding-top: 4px;
-  }
-
-  .ai-impact-workflow-slide dt,
-  .ai-impact-workflow-slide dd {
-    font-size: 10px;
-    line-height: 1.35;
-  }
-
-  .ai-impact-workflow-slide {
-    gap: 4px;
-  }
-
-  .ai-impact-handoff__node {
-    gap: 3px;
-    min-height: 58px;
-    padding: 6px;
-  }
-
-  .ai-impact-handoff__node svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .ai-impact-story-workflow__paths .ai-impact-workflow-paths {
-    gap: 8px;
-  }
-
-  .ai-impact-story-workflow__paths .ai-impact-workflow-paths__intro h3 {
-    font-size: 18px;
-  }
-
-  .ai-impact-story-workflow__paths .ai-impact-workflow-paths article {
-    gap: 5px;
-    padding: 8px 10px;
-  }
-
-  .ai-impact-story-workflow__paths .ai-impact-workflow-paths__icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .ai-impact-story-workflow__paths .ai-impact-workflow-paths h4 {
-    font-size: 13px;
-  }
-
-  .ai-impact-story-workflow__paths .ai-impact-workflow-paths article p {
-    font-size: 10px;
-    line-height: 1.4;
-  }
-}
-
-/* ── 極矮手機（iPhone SE 等）：story 不釘住，改成一般文件往下捲 ──
-   舞台只剩約 555px，釘住的版位塞不下任何一段的內容；與其把字壓到看不清，
-   不如把三段攤開讓使用者自己捲。查詢字串必須與 AiImpactStoryStage.tsx 的
-   STATIC_STORY_QUERY 一字不差，版面與行為才不會脫鉤。
-   選擇器一律帶 [data-static]，才蓋得過 .is-active 那組同名規則。 */
-@media (max-width: 768px) and (max-height: 700px) {
   .ai-impact-story[data-static] {
     height: auto;
   }
@@ -2546,13 +2468,15 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   .ai-impact-story[data-static] .ai-impact-story__stage {
     position: static;
     display: grid;
-    gap: 44px;
+    gap: var(--hm-space-2xl);
     height: auto;
     opacity: 1;
     transform: none;
     will-change: auto;
   }
 
+  /* 不做吸頂：膠囊浮在內文上會壓字，也跟「一次看一個」互相矛盾。
+     放在 story 開頭當作章節跳轉入口即可。 */
   .ai-impact-story[data-static] .ai-impact-story__nav {
     position: static;
     margin: 0 auto;
@@ -2575,7 +2499,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   .ai-impact-story[data-static] .ai-impact-story__scene--outcomes {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
-    gap: 16px;
+    gap: var(--hm-space-lg);
   }
 
   .ai-impact-story[data-static] .ai-impact-story__hint {
@@ -2585,20 +2509,20 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   /* 心法：四個步驟 + 兩張證據卡全部攤開 */
   .ai-impact-story[data-static] .ai-impact-story-mindset {
     display: grid;
-    gap: 18px;
+    gap: var(--hm-space-lg);
     height: auto;
   }
 
   .ai-impact-story[data-static] .ai-impact-story-mindset__proof {
     display: grid;
-    gap: 14px;
+    gap: var(--hm-space-lg);
   }
 
   /* Workflow：七個階段直接排成一列，組合邏輯接在後面 */
   .ai-impact-story[data-static] .ai-impact-story-workflow {
     display: grid;
     grid-template-rows: auto auto auto;
-    gap: 20px;
+    gap: var(--hm-space-lg);
     height: auto;
   }
 
@@ -2633,7 +2557,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
   .ai-impact-story[data-static] .ai-impact-workflow-carousel.is-embedded .ai-impact-workflow-track {
     display: grid;
-    gap: 14px;
+    gap: var(--hm-space-lg);
     height: auto;
     transform: none;
     transition: none;
@@ -2641,10 +2565,29 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 
   .ai-impact-story[data-static] .ai-impact-workflow-slide {
     height: auto;
-    padding: 16px;
+    padding: var(--hm-space-md) var(--hm-space-sm);
     border: 1px solid color-mix(in srgb, var(--ai-line) 24%, transparent);
     border-radius: 16px;
     background: color-mix(in srgb, var(--ai-line) 3%, var(--ai-bg));
+  }
+
+  /* ── 一次看一個：每個內容單元都是吸附點，捲過它的底部下一個才吸上來 ──
+     min-height 只給「不是可見卡片」的單元；卡片類（證據卡、階段卡）若強制
+     撐滿一屏，會變成一張中間大片空白的框，反而更難看。 */
+  .ai-impact-story[data-static] .ai-impact-story__intro,
+  .ai-impact-story[data-static] .ai-impact-story-mindset__steps,
+  .ai-impact-story[data-static] .ai-impact-proof,
+  .ai-impact-story[data-static] .ai-impact-workflow-slide,
+  .ai-impact-story[data-static] .ai-impact-workflow-paths,
+  .ai-impact-story[data-static] .ai-impact-outcomes {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+
+  .ai-impact-story[data-static] .ai-impact-story__intro,
+  .ai-impact-story[data-static] .ai-impact-story-mindset__steps {
+    align-content: center;
+    min-height: calc(100svh - var(--ai-snap-offset) - var(--hm-space-lg));
   }
 
   .ai-impact-story[data-static] .ai-impact-story-workflow__paths .ai-impact-workflow-paths {
@@ -2652,6 +2595,9 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     align-content: start;
   }
 
+  /* 卡片大小是元件用 CARD_WIDTH 依「容器寬度」算縮放，不吃容器高度，
+     所以這裡只要剛好包住縮放後的卡片即可，給更高只會多出空白。
+     手機上卡片文字偏小是元件的縮放邏輯造成的，屬於另一條待辦。 */
   .ai-impact-story[data-static] .ai-impact-story__scene--outcomes .ai-impact-outcomes {
     grid-column: 1;
     height: 340px;

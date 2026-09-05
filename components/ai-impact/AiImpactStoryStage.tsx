@@ -33,10 +33,11 @@ const OUTCOMES_STEP = 11;
 const STORY_STEP_COUNT = 12;
 const MINDSET_SEQUENCE_DURATION = 5700;
 const MINDSET_REPLAY_DELAY = 3000;
-/* 極矮的手機（iPhone SE 等）舞台只剩約 555px，釘住的 story 塞不下一段的內容。
-   這個尺寸改成一般文件往下捲，全部段落攤開。查詢字串必須與 ai-impact.css
-   裡的靜態版面 media query 一字不差，行為與版面才不會脫鉤。 */
-const STATIC_STORY_QUERY = '(max-width: 768px) and (max-height: 700px)';
+/* 手機的釘住版位只有約 338px，桌機有 380–420px，內容卻是同一份 —— 差額全靠削
+   間距硬塞，結果就是擠。手機改成每一段各占一個螢幕起跳、內容多就自然變高，
+   再用 scroll snap 維持「一次看一個」。查詢字串必須與 ai-impact.css 裡的
+   靜態版面 media query 一字不差，行為與版面才不會脫鉤。 */
+const STATIC_STORY_QUERY = '(max-width: 768px)';
 
 function toMilliseconds(value: string) {
   const duration = Number.parseFloat(value);
