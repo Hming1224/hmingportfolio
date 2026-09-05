@@ -28,7 +28,6 @@ type WorkflowCarouselProps = {
     input: string;
     action: string;
     output: string;
-    nextPhase: string;
   };
 };
 
@@ -106,9 +105,6 @@ export default function WorkflowCarousel({
             </article>
           ))}
         </div>
-        <p className={`ai-impact-workflow-next-hint${activeStage === items.length - 1 ? ' is-hidden' : ''}`} aria-hidden={activeStage === items.length - 1}>
-          <span>{labels.nextPhase}</span><ArrowRight aria-hidden="true" />
-        </p>
       </div>
     </div>
   );

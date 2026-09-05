@@ -776,44 +776,6 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   will-change: transform;
 }
 
-.ai-impact-workflow-next-hint {
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0;
-  padding: 7px 11px;
-  border: 1px solid color-mix(in srgb, var(--ai-line) 28%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--ai-bg) 92%, transparent);
-  color: var(--ai-copy-muted);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  text-transform: uppercase;
-  pointer-events: none;
-  transform: translateX(-50%);
-  transition:
-    color var(--hm-duration-base) var(--hm-ease-standard),
-    border-color var(--hm-duration-base) var(--hm-ease-standard),
-    opacity var(--hm-duration-base) var(--hm-ease-standard);
-}
-
-.ai-impact-workflow-next-hint svg {
-  width: 15px;
-  height: 15px;
-  color: var(--ai-hot);
-  animation: aiWorkflowNextHint var(--hm-duration-reveal) var(--hm-ease-in-out) infinite alternate;
-}
-
-.ai-impact-workflow-next-hint.is-hidden {
-  opacity: 0;
-}
-
 @keyframes aiWorkflowDirectionShine {
   from {
     opacity: 0.56;
@@ -1760,6 +1722,7 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
 }
 
 .ai-impact-story__stage {
+  --ai-story-hint-space: 43px;
   position: sticky;
   top: calc(var(--ai-nav-height) + var(--ai-section-top-gap));
   height: var(--ai-viewport-space);
@@ -1874,7 +1837,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   display: grid;
   width: 100vw;
   min-width: 0;
-  padding: calc(54px + var(--hm-space-md)) max(var(--page-gutter), calc((100vw - 1180px) / 2)) 18px;
+  padding: calc(54px + var(--hm-space-md)) max(var(--page-gutter), calc((100vw - 1180px) / 2)) var(--ai-story-hint-space);
   opacity: 0;
   pointer-events: none;
   transform: translateX(-50%) scale(0.94);
@@ -1897,6 +1860,39 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   transform: translateX(-50%) scale(1);
   visibility: visible;
   transition-delay: 0s;
+}
+
+/* 捲動提示：整個 story 共用一個，貼在舞台底部距下緣 16px。
+   scene 的 padding-bottom 已預留 --ai-story-hint-space，內容不會壓到它。 */
+.ai-impact-story__hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity var(--hm-duration-base) var(--hm-ease-standard);
+}
+
+.ai-impact-story__hint svg {
+  width: 15px;
+  height: 15px;
+  color: var(--ai-hot);
+  animation: aiWorkflowNextHint var(--hm-duration-reveal) var(--hm-ease-in-out) infinite alternate;
+}
+
+.ai-impact-story__hint.is-hidden {
+  opacity: 0;
 }
 
 .ai-impact-story__intro {
@@ -2236,6 +2232,8 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story__scene {
+    /* 手機版內容本來就離舞台底部夠遠（提示只需 31px），
+       不必再加預留 — 多加反而會把面板壓扁、內容往上溢出。 */
     padding: calc(54px + var(--hm-space-md)) max(20px, calc((100vw - 620px) / 2)) 10px;
   }
 
@@ -2452,6 +2450,20 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
    面板高度跟著視窗走、內容卻是固定的，不收緊就會撞破 padding 被面板裁掉 —
    最先犧牲的是最底下那排 skill pill。 */
 @media (min-width: 769px) and (max-height: 820px) {
+  .ai-impact-story__intro .ai-impact-section__number {
+    margin-bottom: 8px;
+  }
+
+  .ai-impact-story__intro h2 {
+    margin-bottom: 10px;
+    font-size: clamp(28px, 3vw, 38px);
+  }
+
+  .ai-impact-story__intro > p:last-child {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
   .ai-impact-workflow-slide h3 {
     font-size: clamp(22px, 2.4vw, 32px);
   }

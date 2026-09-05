@@ -156,6 +156,8 @@ export default function AiImpactStoryStage({
   const evidenceIndex = activeStep === 1 ? 0 : activeStep === 2 ? 1 : null;
   const workflowStage = clamp(activeStep - WORKFLOW_START, 0, workflowItems.length - 1);
   const workflowMode = activeStep === PATHS_STEP ? 'paths' : 'stages';
+  /* 捲動提示從第一步一路陪到底，只有走進最後一段（03 成果）才收掉。 */
+  const isLastStep = activeStep === STORY_STEP_COUNT - 1;
 
   const getMetrics = useCallback(() => {
     const root = rootRef.current;
@@ -601,6 +603,10 @@ export default function AiImpactStoryStage({
           </div>
           <OutcomeDepthCarousel items={outcomes} labels={{ carousel: labels.outcomes.carousel, previous: labels.outcomes.previous, next: labels.outcomes.next, stages: labels.outcomes.stages, skills: labels.outcomes.skills }} />
         </section>
+
+        <p className={`ai-impact-story__hint${isLastStep ? ' is-hidden' : ''}`} aria-hidden={isLastStep}>
+          <span>{labels.workflow.labels.nextPhase}</span><ArrowRight aria-hidden="true" />
+        </p>
       </div>
     </div>
   );
