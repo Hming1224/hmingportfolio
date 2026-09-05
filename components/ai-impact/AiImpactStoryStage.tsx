@@ -177,6 +177,13 @@ export default function AiImpactStoryStage({
     });
   }, [getMetrics]);
 
+  /* 導覽列與階段點是「直接跳到某一段」，距離超過一步就別平滑捲動——
+     中間每個 scene 都會被快速掃過一次，只剩干擾。相鄰的一步維持平滑。 */
+  const jumpToStep = useCallback((step: number) => {
+    const target = clamp(step, 0, STORY_STEP_COUNT - 1);
+    goToStep(target, Math.abs(target - activeStepRef.current) > 1 ? 'instant' : 'smooth');
+  }, [goToStep]);
+
   useEffect(() => {
     const story = rootRef.current;
     const stage = stageRef.current;
@@ -523,7 +530,7 @@ export default function AiImpactStoryStage({
             { section: 'workflow' as const, number: '02', title: labels.workflow.title, step: WORKFLOW_START },
             { section: 'outcomes' as const, number: '03', title: labels.outcomes.title, step: OUTCOMES_STEP },
           ].map((item) => (
-            <button type="button" className={activeSection === item.section ? 'is-active' : ''} aria-current={activeSection === item.section ? 'step' : undefined} onClick={() => goToStep(item.step)} key={item.section}>
+            <button type="button" className={activeSection === item.section ? 'is-active' : ''} aria-current={activeSection === item.section ? 'step' : undefined} onClick={() => jumpToStep(item.step)} key={item.section}>
               <span>{item.number}</span><span className="ai-impact-story__nav-label"><span>{item.title}</span></span>
             </button>
           ))}
@@ -564,7 +571,7 @@ export default function AiImpactStoryStage({
               <p>{labels.workflow.lead}</p>
             </div>
             <div className={`ai-impact-story-workflow__panel${workflowMode === 'stages' ? ' is-active' : ''}`}>
-              <WorkflowCarousel items={workflowItems} progressLabel={labels.workflow.progressLabel} labels={labels.workflow.labels} activeStage={workflowStage} onStageSelect={(stage) => goToStep(WORKFLOW_START + stage)} embedded />
+              <WorkflowCarousel items={workflowItems} progressLabel={labels.workflow.progressLabel} labels={labels.workflow.labels} activeStage={workflowStage} onStageSelect={(stage) => jumpToStep(WORKFLOW_START + stage)} embedded />
             </div>
             <div className={`ai-impact-story-workflow__paths${workflowMode === 'paths' ? ' is-active' : ''}`}>
               <div className="ai-impact-workflow-paths" id="ai-impact-workflow-paths">
