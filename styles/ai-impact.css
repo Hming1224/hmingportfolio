@@ -1473,8 +1473,8 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   .ai-impact-workflow-slide {
     grid-template-columns: 1fr;
     align-content: center;
-    gap: 14px;
-    padding: 14px 16px 62px;
+    gap: 8px;
+    padding: 14px 16px;
   }
 
   .ai-impact-workflow-progress__direction {
@@ -1485,13 +1485,6 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   .ai-impact-workflow-progress__direction svg {
     width: 16px;
     height: 16px;
-  }
-
-  .ai-impact-workflow-next-hint {
-    bottom: 12px;
-    gap: 7px;
-    padding: 6px 9px;
-    font-size: 9px;
   }
 
   .ai-impact-workflow-slide__number {
@@ -1509,8 +1502,8 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   }
 
   .ai-impact-workflow-slide dl {
-    gap: 6px;
-    margin-top: 12px;
+    gap: 5px;
+    margin-top: 9px;
   }
 
   .ai-impact-workflow-slide dl > div {
@@ -1530,9 +1523,9 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   }
 
   .ai-impact-handoff__node {
-    gap: 5px;
-    min-height: 112px;
-    padding: 10px 8px;
+    gap: 4px;
+    min-height: 76px;
+    padding: 8px 7px;
   }
 
   .ai-impact-handoff__node svg {
@@ -1672,8 +1665,7 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
     transform: none;
   }
 
-  .ai-impact-workflow-progress__direction,
-  .ai-impact-workflow-next-hint {
+  .ai-impact-workflow-progress__direction {
     display: none;
   }
 
@@ -2228,14 +2220,14 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     flex-shrink: 1;
   }
 
-  .ai-impact-story__nav-label > span {
-    white-space: normal;
+  /* 手機版只留 01/02/03。展開的章節名會換行把導覽撐到 208px 高，
+     壓過下面的標題；而那個名稱本來就以 h2 的形式顯示在正下方。 */
+  .ai-impact-story__nav-label {
+    display: none;
   }
 
   .ai-impact-story__scene {
-    /* 手機版內容本來就離舞台底部夠遠（提示只需 31px），
-       不必再加預留 — 多加反而會把面板壓扁、內容往上溢出。 */
-    padding: calc(54px + var(--hm-space-md)) max(20px, calc((100vw - 620px) / 2)) 10px;
+    padding: calc(54px + var(--hm-space-md)) max(20px, calc((100vw - 620px) / 2)) var(--ai-story-hint-space);
   }
 
   .ai-impact-story__intro {
@@ -2438,11 +2430,105 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     transition: none;
   }
 
+  .ai-impact-story__hint svg,
   .ai-impact-story-mindset.is-overview .ai-impact-mindset__icon {
     animation: none;
   }
 
   .ai-impact-story-mindset.is-detail.is-complete .ai-impact-story-mindset__step:last-child .ai-impact-mindset__icon {
     animation: none;
+  }
+}
+
+/* 小螢幕手機（iPhone SE 等，舞台只有約 555px）：釘住的 story 版位固定，
+   內容卻是照 390×844 設計的，不再收一階就會壓到底部的捲動提示。 */
+@media (max-width: 768px) and (max-height: 800px) {
+  .ai-impact-story__scene {
+    padding-top: calc(54px + 4px);
+  }
+
+  .ai-impact-story__intro h2 {
+    margin-bottom: 6px;
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
+  .ai-impact-story__intro > p:last-child {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .ai-impact-story__intro .ai-impact-section__number {
+    margin-bottom: 6px;
+  }
+
+  .ai-impact-workflow-progress {
+    gap: 6px;
+  }
+
+  .ai-impact-workflow-slide h3 {
+    font-size: clamp(19px, 6vw, 24px);
+  }
+
+  .ai-impact-workflow-slide__body {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .ai-impact-workflow-slide dl {
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .ai-impact-workflow-slide dl > div {
+    padding-top: 4px;
+  }
+
+  .ai-impact-workflow-slide dt,
+  .ai-impact-workflow-slide dd {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .ai-impact-workflow-slide {
+    gap: 4px;
+  }
+
+  .ai-impact-handoff__node {
+    gap: 3px;
+    min-height: 58px;
+    padding: 6px;
+  }
+
+  .ai-impact-handoff__node svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths {
+    gap: 8px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths__intro h3 {
+    font-size: 18px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths article {
+    gap: 5px;
+    padding: 8px 10px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths h4 {
+    font-size: 13px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths article p {
+    font-size: 10px;
+    line-height: 1.4;
   }
 }
