@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import DotPattern from '@/components/ui/dot-pattern';
 import AiImpactStoryStage, {
   type MindsetEvidence,
   type MindsetItem,
@@ -17,6 +18,9 @@ export default async function AiImpactContent() {
 
   return (
     <div className="ai-impact-content">
+      <div className="ai-impact-content__dots" aria-hidden="true">
+        <DotPattern className="ai-impact-dots ai-impact-dots--story" />
+      </div>
       <AiImpactStoryStage
         mindsetItems={mindsetItems}
         mindsetEvidence={mindsetEvidence}
