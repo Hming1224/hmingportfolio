@@ -1751,12 +1751,6 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   pointer-events: none;
 }
 
-.ai-impact-dots--story {
-  fill: color-mix(in srgb, var(--ai-deep) 30%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 30%, black 82%);
-  mask-image: linear-gradient(to bottom, transparent 30%, black 82%);
-}
-
 .ai-impact-story {
   width: min(1180px, calc(100% - (2 * var(--page-gutter))));
   height: var(--story-scroll-height);

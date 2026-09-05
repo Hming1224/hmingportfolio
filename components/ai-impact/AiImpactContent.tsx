@@ -19,7 +19,7 @@ export default async function AiImpactContent() {
   return (
     <div className="ai-impact-content">
       <div className="ai-impact-content__dots" aria-hidden="true">
-        <DotPattern className="ai-impact-dots ai-impact-dots--story" />
+        <DotPattern className="ai-impact-dots ai-impact-dots--base" />
       </div>
       <AiImpactStoryStage
         mindsetItems={mindsetItems}
