@@ -33,6 +33,10 @@ const OUTCOMES_STEP = 11;
 const STORY_STEP_COUNT = 12;
 const MINDSET_SEQUENCE_DURATION = 5700;
 const MINDSET_REPLAY_DELAY = 3000;
+/* 極矮的手機（iPhone SE 等）舞台只剩約 555px，釘住的 story 塞不下一段的內容。
+   這個尺寸改成一般文件往下捲，全部段落攤開。查詢字串必須與 ai-impact.css
+   裡的靜態版面 media query 一字不差，行為與版面才不會脫鉤。 */
+const STATIC_STORY_QUERY = '(max-width: 768px) and (max-height: 700px)';
 
 function toMilliseconds(value: string) {
   const duration = Number.parseFloat(value);
@@ -150,14 +154,17 @@ export default function AiImpactStoryStage({
   const mindsetRectsRef = useRef<DOMRect[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+  const [isStatic, setIsStatic] = useState(false);
+  const [staticSection, setStaticSection] = useState<StorySection>('mindset');
 
-  const activeSection = getSection(activeStep);
-  const mindsetMode = activeStep === 0 ? 'overview' : 'detail';
+  const activeSection = isStatic ? staticSection : getSection(activeStep);
+  const mindsetMode = isStatic || activeStep === 0 ? 'overview' : 'detail';
   const evidenceIndex = activeStep === 1 ? 0 : activeStep === 2 ? 1 : null;
   const workflowStage = clamp(activeStep - WORKFLOW_START, 0, workflowItems.length - 1);
   const workflowMode = activeStep === PATHS_STEP ? 'paths' : 'stages';
-  /* 捲動提示從第一步一路陪到底，只有走進最後一段（03 成果）才收掉。 */
-  const isLastStep = activeStep === STORY_STEP_COUNT - 1;
+  /* 捲動提示從第一步一路陪到底，只有走進最後一段（03 成果）才收掉。
+     靜態版面沒有「下一步」可言，整個不顯示。 */
+  const isLastStep = isStatic || activeStep === STORY_STEP_COUNT - 1;
 
   const getMetrics = useCallback(() => {
     const root = rootRef.current;
@@ -182,11 +189,47 @@ export default function AiImpactStoryStage({
   /* 導覽列與階段點是「直接跳到某一段」，距離超過一步就別平滑捲動——
      中間每個 scene 都會被快速掃過一次，只剩干擾。相鄰的一步維持平滑。 */
   const jumpToStep = useCallback((step: number) => {
+    if (isStatic) {
+      const scenes = rootRef.current?.querySelectorAll<HTMLElement>('.ai-impact-story__scene');
+      const index = step < WORKFLOW_START ? 0 : step < OUTCOMES_STEP ? 1 : 2;
+      scenes?.[index]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     const target = clamp(step, 0, STORY_STEP_COUNT - 1);
     goToStep(target, Math.abs(target - activeStepRef.current) > 1 ? 'instant' : 'smooth');
-  }, [goToStep]);
+  }, [goToStep, isStatic]);
 
   useEffect(() => {
+    const query = window.matchMedia(STATIC_STORY_QUERY);
+    const sync = () => setIsStatic(query.matches);
+    sync();
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, []);
+
+  /* 靜態版面沒有 step 可推，導覽改用「哪一段在畫面上」決定 active。 */
+  useEffect(() => {
+    const story = rootRef.current;
+    if (!isStatic || !story) return;
+    const scenes = Array.from(
+      story.querySelectorAll<HTMLElement>('.ai-impact-story__scene'),
+    );
+    if (!scenes.length) return;
+    const sections: StorySection[] = ['mindset', 'workflow', 'outcomes'];
+    /* 每個 scene 都比視窗高，用 intersectionRatio 判斷會永遠達不到門檻。
+       改成經典 scrollspy：只看視窗中央那條窄帶被哪一段佔住。 */
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.find((entry) => entry.isIntersecting);
+      if (!visible) return;
+      const index = scenes.indexOf(visible.target as HTMLElement);
+      if (index >= 0) setStaticSection(sections[index]);
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    scenes.forEach((scene) => observer.observe(scene));
+    return () => observer.disconnect();
+  }, [isStatic]);
+
+  useEffect(() => {
+    if (isStatic) return;
     const story = rootRef.current;
     const stage = stageRef.current;
     const hero = document.querySelector<HTMLElement>('.ai-impact-hero');
@@ -348,9 +391,10 @@ export default function AiImpactStoryStage({
       delete pageRoot.dataset.aiStoryVisible;
       clearProgress();
     };
-  }, []);
+  }, [isStatic]);
 
   useEffect(() => {
+    if (isStatic) return;
     const update = () => {
       frameRef.current = null;
       const metrics = getMetrics();
@@ -427,9 +471,10 @@ export default function AiImpactStoryStage({
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
       if (wheelTimerRef.current !== null) window.clearTimeout(wheelTimerRef.current);
     };
-  }, [getMetrics, goToStep]);
+  }, [getMetrics, goToStep, isStatic]);
 
   useLayoutEffect(() => {
+    if (isStatic) return;
     const nodes = mindsetNodeRefs.current.filter((node): node is HTMLLIElement => Boolean(node));
     if (!nodes.length) return;
     const nextRects = nodes.map((node) => node.getBoundingClientRect());
@@ -452,7 +497,7 @@ export default function AiImpactStoryStage({
       });
     }
     mindsetRectsRef.current = nextRects;
-  }, [mindsetMode]);
+  }, [mindsetMode, isStatic]);
 
   useEffect(() => {
     const element = mindsetStepsRef.current;
@@ -488,7 +533,7 @@ export default function AiImpactStoryStage({
     };
 
     const observer = new IntersectionObserver(([entry]) => {
-      active = activeStep === 0 && entry.isIntersecting;
+      active = !isStatic && activeStep === 0 && entry.isIntersecting;
       stop();
       if (active && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) play();
     }, { threshold: 0.3 });
@@ -499,19 +544,21 @@ export default function AiImpactStoryStage({
       stop();
       observer.disconnect();
     };
-  }, [activeStep]);
+  }, [activeStep, isStatic]);
 
   const sectionClass = (section: StorySection) => {
+    if (isStatic) return 'is-active';
     const order = { mindset: 0, workflow: 1, outcomes: 2 };
     if (section === activeSection) return 'is-active';
     return order[section] < order[activeSection] ? 'is-before' : 'is-after';
   };
+  const sceneHidden = (section: StorySection) => !isStatic && activeSection !== section;
   const style = {
     '--story-scroll-height': `calc(var(--ai-viewport-space) + ${(STORY_STEP_COUNT - 1) * 100}svh)`,
   } as CSSProperties;
 
   return (
-    <div className="ai-impact-story" data-active-step={activeStep + 1} data-active-section={activeSection} data-direction={direction} data-progress="0.000" ref={rootRef} style={style}>
+    <div className="ai-impact-story" data-static={isStatic ? 'true' : undefined} data-active-step={activeStep + 1} data-active-section={activeSection} data-direction={direction} data-progress="0.000" ref={rootRef} style={style}>
       <div
         className="ai-impact-story__stage"
         ref={stageRef}
@@ -538,7 +585,7 @@ export default function AiImpactStoryStage({
           ))}
         </nav>
 
-        <section className={`ai-impact-story__scene ai-impact-story__scene--mindset ${sectionClass('mindset')}`} aria-labelledby="ai-impact-mindset" aria-hidden={activeSection !== 'mindset'} inert={activeSection !== 'mindset'}>
+        <section className={`ai-impact-story__scene ai-impact-story__scene--mindset ${sectionClass('mindset')}`} aria-labelledby="ai-impact-mindset" aria-hidden={sceneHidden('mindset')} inert={sceneHidden('mindset')}>
           <div className="ai-impact-story__intro">
             <p className="ai-impact-section__number">01</p>
             <h2 id="ai-impact-mindset">{labels.mindset.title}</h2>
@@ -560,22 +607,26 @@ export default function AiImpactStoryStage({
               })}
             </ol>
             <div className="ai-impact-story-mindset__proof" aria-live="polite">
-              {evidenceIndex !== null && mindsetEvidence[evidenceIndex] ? <MindsetProof item={mindsetEvidence[evidenceIndex]} key={mindsetEvidence[evidenceIndex].kind} /> : null}
+              {isStatic
+                ? mindsetEvidence.map((item) => <MindsetProof item={item} key={item.kind} />)
+                : evidenceIndex !== null && mindsetEvidence[evidenceIndex]
+                  ? <MindsetProof item={mindsetEvidence[evidenceIndex]} key={mindsetEvidence[evidenceIndex].kind} />
+                  : null}
             </div>
           </div>
         </section>
 
-        <section className={`ai-impact-story__scene ai-impact-story__scene--workflow ${sectionClass('workflow')}`} aria-labelledby="ai-impact-workflow" aria-hidden={activeSection !== 'workflow'} inert={activeSection !== 'workflow'}>
+        <section className={`ai-impact-story__scene ai-impact-story__scene--workflow ${sectionClass('workflow')}`} aria-labelledby="ai-impact-workflow" aria-hidden={sceneHidden('workflow')} inert={sceneHidden('workflow')}>
           <div className={`ai-impact-story-workflow is-${workflowMode}`}>
             <div className="ai-impact-story__intro">
               <p className="ai-impact-section__number">02</p>
               <h2 id="ai-impact-workflow">{labels.workflow.title}</h2>
               <p>{labels.workflow.lead}</p>
             </div>
-            <div className={`ai-impact-story-workflow__panel${workflowMode === 'stages' ? ' is-active' : ''}`}>
+            <div className={`ai-impact-story-workflow__panel${isStatic || workflowMode === 'stages' ? ' is-active' : ''}`}>
               <WorkflowCarousel items={workflowItems} progressLabel={labels.workflow.progressLabel} labels={labels.workflow.labels} activeStage={workflowStage} onStageSelect={(stage) => jumpToStep(WORKFLOW_START + stage)} embedded />
             </div>
-            <div className={`ai-impact-story-workflow__paths${workflowMode === 'paths' ? ' is-active' : ''}`}>
+            <div className={`ai-impact-story-workflow__paths${isStatic || workflowMode === 'paths' ? ' is-active' : ''}`}>
               <div className="ai-impact-workflow-paths" id="ai-impact-workflow-paths">
                 <div className="ai-impact-workflow-paths__intro"><p>{labels.workflow.pathsLabel}</p><h3>{labels.workflow.pathsTitle}</h3></div>
                 <div className="ai-impact-workflow-paths__grid">
@@ -597,7 +648,7 @@ export default function AiImpactStoryStage({
           </div>
         </section>
 
-        <section className={`ai-impact-story__scene ai-impact-story__scene--outcomes ${sectionClass('outcomes')}`} aria-labelledby="ai-impact-example" aria-hidden={activeSection !== 'outcomes'} inert={activeSection !== 'outcomes'}>
+        <section className={`ai-impact-story__scene ai-impact-story__scene--outcomes ${sectionClass('outcomes')}`} aria-labelledby="ai-impact-example" aria-hidden={sceneHidden('outcomes')} inert={sceneHidden('outcomes')}>
           <div className="ai-impact-story__intro">
             <p className="ai-impact-section__number">03</p><h2 id="ai-impact-example">{labels.outcomes.title}</h2><p>{labels.outcomes.lead}</p>
           </div>
