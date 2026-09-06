@@ -1631,13 +1631,12 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
     padding-top: 0;
   }
 
+  /* 手機的卡片幾乎佔滿容器寬度，左右箭頭沒有可以站的位置，一定會壓在卡片上。
+     這個尺寸改用滑動換卡（根層已經是 touch-action: pan-y，橫向手勢交給輪播、
+     直向留給頁面捲動），底下的圓點仍然可以點，也保留鍵盤左右鍵。 */
   .ai-impact-outcomes__arrow {
-    width: 40px;
-    height: 40px;
+    display: none;
   }
-
-  .ai-impact-outcomes__arrow--prev { left: 0; }
-  .ai-impact-outcomes__arrow--next { right: 0; }
 }
 
 @keyframes aiMindsetGlowVertical {
