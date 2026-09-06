@@ -1839,35 +1839,38 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   padding: calc(54px + var(--hm-space-md)) max(var(--page-gutter), calc((100vw - 1180px) / 2)) var(--ai-story-hint-space);
   opacity: 0;
   pointer-events: none;
-  /* 離場保留「放大到消失」的動態，進場則直接停在最終位置、等離場走完才淡入。
-     原本兩段同時進行、而且進場自己也從 scale(0.94) 移動，
-     視覺上會變成「01 標題跳一次、02 標題再跳一次」。 */
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(0.94);
   transform-origin: center center;
   visibility: hidden;
+  /* 時長與緩動維持原本的柔和節奏，只把「進場」排到「離場」之後。
+     原本兩段同時進行，兩個標題會在同一個位置一前一後各自移動，
+     看起來像「01 標題跳一次、02 標題再跳一次」。 */
   transition:
-    opacity var(--hm-duration-base) var(--hm-ease-out),
+    opacity var(--hm-duration-image) var(--hm-ease-in-out),
     transform var(--hm-duration-enter) var(--hm-ease-emphasized),
     visibility 0s linear var(--hm-duration-enter);
 }
 
-/* 離場：放大並淡出 */
+/* 離場：整段放大到消失 */
 .ai-impact-story__scene.is-before {
   transform: translateX(-50%) scale(1.12);
 }
 
 .ai-impact-story__scene.is-active {
+  /* 進場延到離場淡出即將結束時才起跑（0.8 倍，不用整段 1.0，
+     否則中間會出現一段畫面全空、看起來像閃一下）。
+     opacity 與 transform 要一起延遲，否則放大會在看不見時就跑完，
+     真正出現時已經是原尺寸，就沒有「放大出場」了。 */
+  --ai-scene-enter-delay: calc(var(--hm-duration-image) * 0.8);
+
   z-index: 2;
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(1);
   visibility: visible;
-  /* 等上一段的淡出走完才開始，才會是「01 消失 → 02 出現」而不是兩個疊在一起 */
   transition:
-    /* 延遲抓在「離場淡出快結束」而不是「完全結束」：
-       用整段 base 會讓中間出現約 125ms 兩邊都全透明的空窗，看起來像閃一下。 */
-    opacity var(--hm-duration-base) var(--hm-ease-out) calc(var(--hm-duration-base) * 0.55),
-    transform var(--hm-duration-enter) var(--hm-ease-emphasized),
+    opacity var(--hm-duration-image) var(--hm-ease-in-out) var(--ai-scene-enter-delay),
+    transform var(--hm-duration-enter) var(--hm-ease-emphasized) var(--ai-scene-enter-delay),
     visibility 0s linear 0s;
 }
 
