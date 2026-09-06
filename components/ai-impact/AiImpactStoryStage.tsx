@@ -145,6 +145,10 @@ export default function AiImpactStoryStage({
   const wheelTimerRef = useRef<number | null>(null);
   const touchStartRef = useRef<number | null>(null);
   const touchTriggeredRef = useRef(false);
+  /* 同一次手勢如果曾經用來捲動段內，就不讓它順勢換段——
+     必須放手、重新滑一次才會前進，否則捲到底的那一下會直接跳頁。 */
+  const touchConsumedRef = useRef(false);
+  const wheelConsumedRef = useRef(false);
   const mindsetStepsRef = useRef<HTMLOListElement>(null);
   const mindsetNodeRefs = useRef<Array<HTMLLIElement | null>>([]);
   const mindsetRectsRef = useRef<DOMRect[]>([]);
@@ -393,11 +397,26 @@ export default function AiImpactStoryStage({
     };
     const unlockWheel = () => {
       if (wheelTimerRef.current !== null) window.clearTimeout(wheelTimerRef.current);
-      wheelTimerRef.current = window.setTimeout(() => { wheelGestureRef.current = false; }, 420);
+      wheelTimerRef.current = window.setTimeout(() => {
+        wheelGestureRef.current = false;
+        wheelConsumedRef.current = false;
+      }, 420);
     };
     const handleWheel = (event: WheelEvent) => {
-      if (!isPinned() || Math.abs(event.deltaY) < 8) return;
-      if (canScrollWithin(event.deltaY)) return;
+      if (Math.abs(event.deltaY) < 8) return;
+      /* 這個判斷要排在 isPinned() 之前：舞台還沒完全釘住時我們不攔事件，
+         但瀏覽器仍會捲動段內；若那時沒記下「這段動作在捲內容」，
+         等釘住後的第一個事件就會看到「已經到底」而立刻換頁。 */
+      if (canScrollWithin(event.deltaY)) {
+        wheelConsumedRef.current = true;
+        unlockWheel();
+        return;
+      }
+      if (!isPinned()) return;
+      if (wheelConsumedRef.current) {
+        unlockWheel();
+        return;
+      }
       const target = activeStepRef.current + (event.deltaY > 0 ? 1 : -1);
       if (target < 0 || target >= STORY_STEP_COUNT) return;
       event.preventDefault();
@@ -409,13 +428,19 @@ export default function AiImpactStoryStage({
     const handleTouchStart = (event: TouchEvent) => {
       touchStartRef.current = event.touches[0]?.clientY ?? null;
       touchTriggeredRef.current = false;
+      touchConsumedRef.current = false;
     };
     const handleTouchMove = (event: TouchEvent) => {
       const start = touchStartRef.current;
       const current = event.touches[0]?.clientY;
-      if (start === null || current === undefined || !isPinned()) return;
+      if (start === null || current === undefined) return;
       const delta = start - current;
-      if (canScrollWithin(delta)) return;
+      /* 同上：先記錄「這一次手勢在捲內容」，再判斷是否釘住。 */
+      if (canScrollWithin(delta)) {
+        touchConsumedRef.current = true;
+        return;
+      }
+      if (!isPinned() || touchConsumedRef.current) return;
       const target = activeStepRef.current + (delta > 0 ? 1 : -1);
       if (Math.abs(delta) < 10 || target < 0 || target >= STORY_STEP_COUNT) return;
       event.preventDefault();
@@ -426,6 +451,7 @@ export default function AiImpactStoryStage({
     const handleTouchEnd = () => {
       touchStartRef.current = null;
       touchTriggeredRef.current = false;
+      touchConsumedRef.current = false;
     };
 
     update();
