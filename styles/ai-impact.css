@@ -2261,9 +2261,10 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     gap: var(--hm-space-xs);
   }
 
+  /* 手機由上到下排一欄：2×2 會把每格壓到約 150px 寬，標題全部斷行 */
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--hm-space-lg) var(--hm-space-sm);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--hm-space-lg);
   }
 
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:not(:last-child)::after {
@@ -2502,6 +2503,13 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     align-self: start;
     grid-template-rows: auto auto;
   }
+
+  /* 階段面板與組合邏輯疊在同一個 grid 格子裡，列高會被「比較高的那個」決定；
+     看組合邏輯時上方就多出一大塊空白。手機直接讓沒啟用的那塊不佔位。 */
+  .ai-impact-story-workflow__panel:not(.is-active),
+  .ai-impact-story-workflow__paths:not(.is-active) {
+    display: none;
+  }
 }
 
 /* 段內捲動時，內容會從上方的章節膠囊與下方的提示底下經過。
@@ -2541,5 +2549,28 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
       var(--ai-bg)
     );
     pointer-events: none;
+  }
+}
+
+/* 成果卡整張是用 transform scale 縮小的（元件依容器寬度算係數），
+   卡片上的文字也會跟著縮到讀不了。這裡把係數反向抵銷：
+   文字層縮放 1/scale、寬度乘上 scale，視覺寬度不變、字級回到原本大小。 */
+.ai-impact-outcomes__content {
+  width: calc(100% * var(--outcome-scale, 1));
+  transform: scale(calc(1 / var(--outcome-scale, 1)));
+  transform-origin: bottom left;
+}
+
+/* 文字回到正常字級後會佔到卡片一半高度，原本卡片自己的漸層只暗到下緣約三成，
+   蓋不住。這裡給文字層自己的底，才不會壓在亮色截圖上讀不到。 */
+@media (max-width: 768px) {
+  .ai-impact-outcomes__content {
+    padding-top: var(--hm-space-lg);
+    background: linear-gradient(
+      to top,
+      var(--ai-bg),
+      color-mix(in srgb, var(--ai-bg) 92%, transparent) 62%,
+      transparent
+    );
   }
 }

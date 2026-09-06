@@ -101,6 +101,9 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
       const blur = Math.min(BLUR, (back / Math.max(1, VISIBLE_CARDS)) * BLUR);
 
       card.style.transform = `translate(-50%, -50%) scale(${scaleRef.current}) translateX(${translateX.toFixed(2)}px) translateZ(${translateZ.toFixed(2)}px) rotateY(${rotateY.toFixed(3)}deg)`;
+      /* 卡片整張被 scale 縮小，上面的文字也會跟著縮到讀不了。
+         把係數交給 CSS，讓文字層反向抵銷，字級才不隨卡片大小改變。 */
+      card.style.setProperty('--outcome-scale', String(scaleRef.current));
       card.style.opacity = opacity.toFixed(3);
       card.style.filter = `brightness(${brightness.toFixed(3)}) blur(${blur.toFixed(2)}px)`;
       card.style.zIndex = String(Math.round(2000 - distance * 20));
