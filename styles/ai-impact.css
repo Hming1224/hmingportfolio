@@ -221,10 +221,11 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   color: var(--ai-hot);
 }
 
-/* 便利貼在 AI Impact 版本被統一改成透明外框，六張疊在一起時字會互相穿透、
-   看起來像糊成一團。給一個比頁面底色稍亮的實心灰，疊起來才有前後關係。 */
+/* 便利貼在 AI Impact 版本被統一改成透明外框，六張疊在一起時字會互相穿透。
+   這裡只需要「不透明」把後面的字擋住，顏色就用頁面底色本身 ——
+   用比底色亮的灰會讓卡片自己跳出來，破壞整頁的線稿感。 */
 .ai-impact-page [data-hero-variant='ai-impact'] .sticky-note {
-  background: color-mix(in srgb, var(--ai-copy) 18%, var(--ai-bg)) !important;
+  background: var(--ai-bg) !important;
 }
 
 /* 右上角的 Business Goals 游標原本貼著最右邊那張便利貼，往右挪開。
