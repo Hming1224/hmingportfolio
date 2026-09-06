@@ -2485,13 +2485,32 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     /* 內容比版位高時要從頂端往下排；置中會讓內容往上下同時溢出自己的 content box，
        捲到底也碰不到最後那段。 */
     align-content: start;
-    /* 底部預留用「透明下邊框」，不用 padding-bottom 也不用佔位元素：
-       ① 捲動容器的下內距不會被算進 scrollHeight（實測 scrollHeight = 上內距 + 內容）；
-       ② 佔位用的 grid item 會被塞進被壓縮的列裡，推不動溢出的內容。
-       邊框則是直接把可視區（clientHeight）縮小，捲動範圍自然多出這一段，
-       內容永遠停在遮罩上方。 */
     padding-bottom: 0;
-    border-bottom: calc(var(--ai-story-hint-space) + var(--hm-space-md)) solid transparent;
+  }
+
+  /* 捲動末端的預留空間加在「內容容器自己身上」，不加在 scene：
+     ① scene 的 padding-bottom 不會被算進 scrollHeight（下內距整個被吃掉）；
+     ② 用 scene 的透明下邊框雖然能撐出捲動範圍，但會把內容的裁切線往上推 67px，
+        底部漸層與提示都還留在舞台底緣，結果就是「沒有漸層 + 提示離內容很遠」。
+     內容容器的 padding 是它自己高度的一部分，一定會被算進 scrollHeight，
+     裁切線也維持在舞台底緣，漸層才蓋得到內容邊界。 */
+  .ai-impact-story-mindset,
+  .ai-impact-story-workflow {
+    padding-bottom: calc(var(--ai-story-hint-space) + var(--hm-space-md));
+  }
+
+  /* 心法這層是 scene 的 grid item，預設 stretch 成版位高度，
+     它的 padding-bottom 就被關在那個高度裡、撐不出捲動空間，
+     證據卡還會直接溢出到舞台底緣落進遮罩。要用 align-self: start 讓它貼齊內容
+     （與 .ai-impact-story-workflow 同樣的處理）。 */
+  .ai-impact-story-mindset {
+    align-self: start;
+    align-items: start;
+  }
+
+  /* 成果輪播用 margin 而不是 padding：它內部靠 flex 置中，加 padding 會把卡片推偏。 */
+  .ai-impact-story__scene--outcomes .ai-impact-outcomes {
+    margin-bottom: calc(var(--ai-story-hint-space) + var(--hm-space-md));
   }
 
   .ai-impact-story__scene::-webkit-scrollbar {
