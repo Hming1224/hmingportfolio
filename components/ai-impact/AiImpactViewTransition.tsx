@@ -34,15 +34,22 @@ function toMilliseconds(value: string) {
   return 0;
 }
 
-function getTransitionMotion() {
+/* 兩個方向的手感不一樣，不能共用同一條曲線。
+   進場是「圓從按鈕長大」：套 --hm-ease-out（cubic-bezier(0.22, 1, 0.36, 1)）會在
+   四分之一的時間就走完 79% 的半徑，圓還沒長就蓋滿畫面，看起來是跳接。
+   等速才會從第一個影格就穩定往外推，看得到它長大。
+   離場是圓縮小，同一條曲線前快後慢，最後那一小圈會慢慢收起來，手感是對的，維持原樣。 */
+function getTransitionMotion(direction: 'enter' | 'leave') {
   const styles = getComputedStyle(document.documentElement);
-  const enterDuration = toMilliseconds(styles.getPropertyValue('--hm-duration-enter'));
+  const enterDuration = toMilliseconds(styles.getPropertyValue('--hm-duration-enter')) || 600;
   const fastDuration = toMilliseconds(styles.getPropertyValue('--hm-duration-fast'));
+  const leaveEasing = styles.getPropertyValue('--hm-ease-out').trim() || 'cubic-bezier(0.22, 1, 0.36, 1)';
 
-  return {
-    duration: enterDuration + fastDuration || 780,
-    easing: styles.getPropertyValue('--hm-ease-out').trim() || 'cubic-bezier(0.22, 1, 0.36, 1)',
-  };
+  if (direction === 'enter') {
+    return { duration: enterDuration, easing: 'linear' };
+  }
+
+  return { duration: enterDuration + fastDuration, easing: leaveEasing };
 }
 
 function releaseTransitionContent() {
@@ -57,6 +64,11 @@ function finishAiImpactTransition() {
     contentReadyTimer = null;
   }
   releaseTransitionContent();
+  /* fill: 'forwards' 的動畫跑完不會自己消失，會一直掛在文件的動畫清單上。
+     下一次轉場重新產生同一個 ::view-transition-new(root) 時，舊動畫會再度套用、
+     把 clip-path 直接拉到終點——畫面上就是圓圈瞬間跳掉或殘留一圈黑。
+     這裡只是把跑完的動畫清掉，不影響任何位置或尺寸計算。 */
+  activeAnimation?.cancel();
   activeAnimation = null;
   transitioning = false;
   delete document.documentElement.dataset.aiImpactTransition;
@@ -124,7 +136,7 @@ export async function runAiImpactTransition({
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const transitionDocument = document as TransitionDocument;
-  const motion = getTransitionMotion();
+  const motion = getTransitionMotion(direction);
   const restoreScroll = () => {
     if (scrollTarget) {
       document.querySelector(scrollTarget)?.scrollIntoView();

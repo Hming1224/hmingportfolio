@@ -6,9 +6,14 @@ import { Link } from '@/i18n/navigation';
 import { useRouter } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { getLastCaseAttribution, sendAnalyticsEvent } from '@/lib/analytics';
+import { prefetchFullRoute } from '@/lib/route-prefetch';
 import { runAiImpactTransition } from './ai-impact/AiImpactViewTransition';
 import AnimatedLogo from './AnimatedLogo';
 import LanguageSwitcher from './LanguageSwitcher';
+
+/* 離開 AI Impact 的四個去處。這頁的導頁包在 View Transition 裡，
+   payload 沒先抓好就會在凍結的畫面上等網路，變成「頓一下才跑動畫」。 */
+const AI_IMPACT_EXIT_ROUTES = ['/', '/about-me', '/design-system', '/contact'] as const;
 
 export default function Navbar({
   variant = 'default',
@@ -29,6 +34,13 @@ export default function Navbar({
   const navHidden = useRef(false);
   const stopTimer = useRef<number | null>(null);
 
+  const isAiImpact = variant === 'aiImpact';
+
+  function warmExitRoute(href: string) {
+    if (!isAiImpact) return;
+    prefetchFullRoute(router, href);
+  }
+
   function navigateFromAiImpact(
     event: MouseEvent<HTMLAnchorElement>,
     href: '/#projects' | '/about-me' | '/design-system' | '/contact',
@@ -37,7 +49,7 @@ export default function Navbar({
   ) {
     setOpen(false);
     if (
-      variant !== 'aiImpact' ||
+      !isAiImpact ||
       event.button !== 0 ||
       event.metaKey ||
       event.ctrlKey ||
@@ -71,8 +83,22 @@ export default function Navbar({
     openRef.current = open;
     if (open) {
       setNavHidden(false);
+      /* 手機沒有 hover，展開選單就是點連結前唯一的預告，趁這時候把去處抓回來。 */
+      if (isAiImpact) AI_IMPACT_EXIT_ROUTES.forEach((href) => prefetchFullRoute(router, href));
     }
-  }, [open]);
+  }, [open, isAiImpact, router]);
+
+  useEffect(() => {
+    if (!isAiImpact) return;
+    /* 返回鍵指向首頁，是最常用的出口，載入完就先暖起來。 */
+    const warm = () => prefetchFullRoute(router, '/');
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(warm, { timeout: 1200 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(warm, 600);
+    return () => window.clearTimeout(id);
+  }, [isAiImpact, router]);
 
   useEffect(() => {
     document.documentElement.dataset.navHidden = 'false';
@@ -132,6 +158,8 @@ export default function Navbar({
           <button
             className="ai-impact-back"
             type="button"
+            onPointerEnter={() => warmExitRoute('/')}
+            onFocus={() => warmExitRoute('/')}
             onClick={(event) => {
               if (onBack) {
                 onBack();
@@ -169,24 +197,32 @@ export default function Navbar({
         <Link
           href="/#projects"
           prefetch={false}
+          onPointerEnter={() => warmExitRoute('/')}
+          onFocus={() => warmExitRoute('/')}
           onClick={(event) => navigateFromAiImpact(event, '/#projects', '#projects', '#projects')}
         >
           {t('projects')}
         </Link>
         <Link
           href="/about-me"
+          onPointerEnter={() => warmExitRoute('/about-me')}
+          onFocus={() => warmExitRoute('/about-me')}
           onClick={(event) => navigateFromAiImpact(event, '/about-me', '.about-page')}
         >
           {t('about')}
         </Link>
         <Link
           href="/design-system"
+          onPointerEnter={() => warmExitRoute('/design-system')}
+          onFocus={() => warmExitRoute('/design-system')}
           onClick={(event) => navigateFromAiImpact(event, '/design-system', '#ds-title')}
         >
           {t('designSystem')}
         </Link>
         <Link
           href="/contact"
+          onPointerEnter={() => warmExitRoute('/contact')}
+          onFocus={() => warmExitRoute('/contact')}
           onClick={(event) => navigateFromAiImpact(event, '/contact', '#contact')}
         >
           {t('contact')}

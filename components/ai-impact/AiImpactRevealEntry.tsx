@@ -4,6 +4,7 @@ import type { KeyboardEvent, MouseEvent, PointerEvent } from 'react';
 import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
+import { prefetchFullRoute } from '@/lib/route-prefetch';
 import { runAiImpactTransition } from './AiImpactViewTransition';
 
 const HOLD_DURATION = 800;
@@ -22,14 +23,21 @@ export default function AiImpactRevealEntry({ label }: { label?: string } = {}) 
   const t = useTranslations('aiImpact');
   const router = useRouter();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const fillRef = useRef<HTMLSpanElement | null>(null);
   const holdTimerRef = useRef<number | null>(null);
   const activeRef = useRef(false);
   const triggeredRef = useRef(false);
   const pointerRef = useRef<number | null>(null);
+  const fillDoneRef = useRef<(() => void) | null>(null);
 
   function clearHoldTimer() {
     if (holdTimerRef.current !== null) window.clearTimeout(holdTimerRef.current);
     holdTimerRef.current = null;
+  }
+
+  function detachFillListener() {
+    fillDoneRef.current?.();
+    fillDoneRef.current = null;
   }
 
   async function complete() {
@@ -37,11 +45,7 @@ export default function AiImpactRevealEntry({ label }: { label?: string } = {}) 
     triggeredRef.current = true;
     activeRef.current = false;
     clearHoldTimer();
-
-    // Let the fully charged state reach the screen before View Transition
-    // snapshots the old page. This avoids batching the last fill frame with
-    // the route render, which made the handoff feel like it paused at 100%.
-    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    detachFillListener();
 
     await runAiImpactTransition({
       anchor: buttonRef.current,
@@ -54,12 +58,30 @@ export default function AiImpactRevealEntry({ label }: { label?: string } = {}) 
   function start() {
     if (activeRef.current || triggeredRef.current) return;
     void warmAiImpactRoute();
+    // 長按這 800ms 就是拿來把 RSC payload 抓回來的，導頁當下才不用等網路。
+    prefetchFullRoute(router, '/ai-impact');
     activeRef.current = true;
     buttonRef.current?.classList.add('is-charging');
     clearHoldTimer();
+    detachFillListener();
+
+    /* 交棒的時機綁在充能條自己的 transitionend，不是另外算一個 800ms 計時器。
+       計時器會比 CSS transition 早幾毫秒到，畫面被 View Transition 凍住時
+       進度條就停在 99%，看起來像「充滿了卻卡住不動」。 */
+    const fill = fillRef.current;
+    if (fill) {
+      const onFillEnd = (event: TransitionEvent) => {
+        if (event.propertyName !== 'clip-path' || event.target !== fill) return;
+        void complete();
+      };
+      fill.addEventListener('transitionend', onFillEnd);
+      fillDoneRef.current = () => fill.removeEventListener('transitionend', onFillEnd);
+    }
+
+    /* transitionend 在背景分頁、或動畫被系統略過時不會來，留一個保底計時器。 */
     holdTimerRef.current = window.setTimeout(() => {
       void complete();
-    }, HOLD_DURATION);
+    }, HOLD_DURATION + (fill ? 220 : 0));
   }
 
   function cancel() {
@@ -67,6 +89,8 @@ export default function AiImpactRevealEntry({ label }: { label?: string } = {}) 
     activeRef.current = false;
     pointerRef.current = null;
     clearHoldTimer();
+    /* 先拆監聽再收回填色，否則回彈的那段 transition 也會觸發 transitionend。 */
+    detachFillListener();
     buttonRef.current?.classList.remove('is-charging');
   }
 
@@ -98,7 +122,7 @@ export default function AiImpactRevealEntry({ label }: { label?: string } = {}) 
   }
 
   useEffect(() => {
-    router.prefetch('/ai-impact');
+    prefetchFullRoute(router, '/ai-impact');
     const supportsIdleCallback = typeof window.requestIdleCallback === 'function';
     const warmupId = supportsIdleCallback
       ? window.requestIdleCallback(() => {
@@ -112,6 +136,7 @@ export default function AiImpactRevealEntry({ label }: { label?: string } = {}) 
       if (supportsIdleCallback) window.cancelIdleCallback(warmupId);
       else window.clearTimeout(warmupId);
       clearHoldTimer();
+      detachFillListener();
     };
   }, [router]);
 
@@ -134,7 +159,7 @@ export default function AiImpactRevealEntry({ label }: { label?: string } = {}) 
       aria-label={t('revealAria')}
       {...handlers}
     >
-      <span className="ai-impact-reveal__fill" aria-hidden="true" />
+      <span className="ai-impact-reveal__fill" ref={fillRef} aria-hidden="true" />
       <span className="ds-button-content ai-impact-reveal__label"><span>{text}</span></span>
       <span className="ds-button-content ai-impact-reveal__label ai-impact-reveal__label--active" aria-hidden="true">
         <span>{text}</span>
