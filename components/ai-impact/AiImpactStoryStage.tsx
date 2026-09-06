@@ -33,11 +33,6 @@ const OUTCOMES_STEP = 11;
 const STORY_STEP_COUNT = 12;
 const MINDSET_SEQUENCE_DURATION = 5700;
 const MINDSET_REPLAY_DELAY = 3000;
-/* 手機的釘住版位只有約 338px，桌機有 380–420px，內容卻是同一份 —— 差額全靠削
-   間距硬塞，結果就是擠。手機改成每一段各占一個螢幕起跳、內容多就自然變高，
-   再用 scroll snap 維持「一次看一個」。查詢字串必須與 ai-impact.css 裡的
-   靜態版面 media query 一字不差，行為與版面才不會脫鉤。 */
-const STATIC_STORY_QUERY = '(max-width: 768px)';
 
 function toMilliseconds(value: string) {
   const duration = Number.parseFloat(value);
@@ -155,17 +150,14 @@ export default function AiImpactStoryStage({
   const mindsetRectsRef = useRef<DOMRect[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
-  const [isStatic, setIsStatic] = useState(false);
-  const [staticSection, setStaticSection] = useState<StorySection>('mindset');
-
-  const activeSection = isStatic ? staticSection : getSection(activeStep);
-  const mindsetMode = isStatic || activeStep === 0 ? 'overview' : 'detail';
+  const activeSection = getSection(activeStep);
+  const mindsetMode = activeStep === 0 ? 'overview' : 'detail';
   const evidenceIndex = activeStep === 1 ? 0 : activeStep === 2 ? 1 : null;
   const workflowStage = clamp(activeStep - WORKFLOW_START, 0, workflowItems.length - 1);
   const workflowMode = activeStep === PATHS_STEP ? 'paths' : 'stages';
   /* 捲動提示從第一步一路陪到底，只有走進最後一段（03 成果）才收掉。
      靜態版面沒有「下一步」可言，整個不顯示。 */
-  const isLastStep = isStatic || activeStep === STORY_STEP_COUNT - 1;
+  const isLastStep = activeStep === STORY_STEP_COUNT - 1;
 
   const getMetrics = useCallback(() => {
     const root = rootRef.current;
@@ -190,47 +182,11 @@ export default function AiImpactStoryStage({
   /* 導覽列與階段點是「直接跳到某一段」，距離超過一步就別平滑捲動——
      中間每個 scene 都會被快速掃過一次，只剩干擾。相鄰的一步維持平滑。 */
   const jumpToStep = useCallback((step: number) => {
-    if (isStatic) {
-      const scenes = rootRef.current?.querySelectorAll<HTMLElement>('.ai-impact-story__scene');
-      const index = step < WORKFLOW_START ? 0 : step < OUTCOMES_STEP ? 1 : 2;
-      scenes?.[index]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
-    }
     const target = clamp(step, 0, STORY_STEP_COUNT - 1);
     goToStep(target, Math.abs(target - activeStepRef.current) > 1 ? 'instant' : 'smooth');
-  }, [goToStep, isStatic]);
+  }, [goToStep]);
 
   useEffect(() => {
-    const query = window.matchMedia(STATIC_STORY_QUERY);
-    const sync = () => setIsStatic(query.matches);
-    sync();
-    query.addEventListener('change', sync);
-    return () => query.removeEventListener('change', sync);
-  }, []);
-
-  /* 靜態版面沒有 step 可推，導覽改用「哪一段在畫面上」決定 active。 */
-  useEffect(() => {
-    const story = rootRef.current;
-    if (!isStatic || !story) return;
-    const scenes = Array.from(
-      story.querySelectorAll<HTMLElement>('.ai-impact-story__scene'),
-    );
-    if (!scenes.length) return;
-    const sections: StorySection[] = ['mindset', 'workflow', 'outcomes'];
-    /* 每個 scene 都比視窗高，用 intersectionRatio 判斷會永遠達不到門檻。
-       改成經典 scrollspy：只看視窗中央那條窄帶被哪一段佔住。 */
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.find((entry) => entry.isIntersecting);
-      if (!visible) return;
-      const index = scenes.indexOf(visible.target as HTMLElement);
-      if (index >= 0) setStaticSection(sections[index]);
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-    scenes.forEach((scene) => observer.observe(scene));
-    return () => observer.disconnect();
-  }, [isStatic]);
-
-  useEffect(() => {
-    if (isStatic) return;
     const story = rootRef.current;
     const stage = stageRef.current;
     const hero = document.querySelector<HTMLElement>('.ai-impact-hero');
@@ -392,10 +348,9 @@ export default function AiImpactStoryStage({
       delete pageRoot.dataset.aiStoryVisible;
       clearProgress();
     };
-  }, [isStatic]);
+  }, []);
 
   useEffect(() => {
-    if (isStatic) return;
     const update = () => {
       frameRef.current = null;
       const metrics = getMetrics();
@@ -414,6 +369,22 @@ export default function AiImpactStoryStage({
     const scheduleUpdate = () => {
       if (frameRef.current === null) frameRef.current = window.requestAnimationFrame(update);
     };
+    /* 手機上一段的內容可能比版位高，這時 scene 自己是捲動容器。
+       先讓它捲，捲到盡頭才換下一段 —— 桌機沒開 overflow，這裡一律回 false，
+       行為不變。必須檢查 computed overflow：內容溢出但沒開捲動時
+       scrollHeight 一樣會大於 clientHeight，只看數字會誤判成「還能捲」。 */
+    const activeScene = () =>
+      stageRef.current?.querySelector<HTMLElement>('.ai-impact-story__scene.is-active') ?? null;
+    const canScrollWithin = (direction: number) => {
+      const scene = activeScene();
+      if (!scene) return false;
+      const overflowY = window.getComputedStyle(scene).overflowY;
+      if (overflowY !== 'auto' && overflowY !== 'scroll') return false;
+      const max = scene.scrollHeight - scene.clientHeight;
+      if (max <= 1) return false;
+      return direction > 0 ? scene.scrollTop < max - 1 : scene.scrollTop > 1;
+    };
+
     const isPinned = () => {
       const metrics = getMetrics();
       if (!metrics) return false;
@@ -426,6 +397,7 @@ export default function AiImpactStoryStage({
     };
     const handleWheel = (event: WheelEvent) => {
       if (!isPinned() || Math.abs(event.deltaY) < 8) return;
+      if (canScrollWithin(event.deltaY)) return;
       const target = activeStepRef.current + (event.deltaY > 0 ? 1 : -1);
       if (target < 0 || target >= STORY_STEP_COUNT) return;
       event.preventDefault();
@@ -443,6 +415,7 @@ export default function AiImpactStoryStage({
       const current = event.touches[0]?.clientY;
       if (start === null || current === undefined || !isPinned()) return;
       const delta = start - current;
+      if (canScrollWithin(delta)) return;
       const target = activeStepRef.current + (delta > 0 ? 1 : -1);
       if (Math.abs(delta) < 10 || target < 0 || target >= STORY_STEP_COUNT) return;
       event.preventDefault();
@@ -472,10 +445,9 @@ export default function AiImpactStoryStage({
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
       if (wheelTimerRef.current !== null) window.clearTimeout(wheelTimerRef.current);
     };
-  }, [getMetrics, goToStep, isStatic]);
+  }, [getMetrics, goToStep]);
 
   useLayoutEffect(() => {
-    if (isStatic) return;
     const nodes = mindsetNodeRefs.current.filter((node): node is HTMLLIElement => Boolean(node));
     if (!nodes.length) return;
     const nextRects = nodes.map((node) => node.getBoundingClientRect());
@@ -498,7 +470,7 @@ export default function AiImpactStoryStage({
       });
     }
     mindsetRectsRef.current = nextRects;
-  }, [mindsetMode, isStatic]);
+  }, [mindsetMode]);
 
   useEffect(() => {
     const element = mindsetStepsRef.current;
@@ -534,7 +506,7 @@ export default function AiImpactStoryStage({
     };
 
     const observer = new IntersectionObserver(([entry]) => {
-      active = !isStatic && activeStep === 0 && entry.isIntersecting;
+      active = activeStep === 0 && entry.isIntersecting;
       stop();
       if (active && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) play();
     }, { threshold: 0.3 });
@@ -545,21 +517,35 @@ export default function AiImpactStoryStage({
       stop();
       observer.disconnect();
     };
-  }, [activeStep, isStatic]);
+  }, [activeStep]);
+
+  /* 換到新的一段時，把它的內部捲動歸位：往前走從頭看，往回走接在底部，
+     否則會停在上次離開的位置，看起來像跳掉一段內容。 */
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const frame = window.requestAnimationFrame(() => {
+      const scene = stage.querySelector<HTMLElement>('.ai-impact-story__scene.is-active');
+      if (!scene) return;
+      const overflowY = window.getComputedStyle(scene).overflowY;
+      if (overflowY !== 'auto' && overflowY !== 'scroll') return;
+      scene.scrollTop = direction === 'forward' ? 0 : scene.scrollHeight - scene.clientHeight;
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeStep, direction]);
 
   const sectionClass = (section: StorySection) => {
-    if (isStatic) return 'is-active';
     const order = { mindset: 0, workflow: 1, outcomes: 2 };
     if (section === activeSection) return 'is-active';
     return order[section] < order[activeSection] ? 'is-before' : 'is-after';
   };
-  const sceneHidden = (section: StorySection) => !isStatic && activeSection !== section;
+  const sceneHidden = (section: StorySection) => activeSection !== section;
   const style = {
     '--story-scroll-height': `calc(var(--ai-viewport-space) + ${(STORY_STEP_COUNT - 1) * 100}svh)`,
   } as CSSProperties;
 
   return (
-    <div className="ai-impact-story" data-static={isStatic ? 'true' : undefined} data-active-step={activeStep + 1} data-active-section={activeSection} data-direction={direction} data-progress="0.000" ref={rootRef} style={style}>
+    <div className="ai-impact-story" data-active-step={activeStep + 1} data-active-section={activeSection} data-direction={direction} data-progress="0.000" ref={rootRef} style={style}>
       <div
         className="ai-impact-story__stage"
         ref={stageRef}
@@ -608,11 +594,7 @@ export default function AiImpactStoryStage({
               })}
             </ol>
             <div className="ai-impact-story-mindset__proof" aria-live="polite">
-              {isStatic
-                ? mindsetEvidence.map((item) => <MindsetProof item={item} key={item.kind} />)
-                : evidenceIndex !== null && mindsetEvidence[evidenceIndex]
-                  ? <MindsetProof item={mindsetEvidence[evidenceIndex]} key={mindsetEvidence[evidenceIndex].kind} />
-                  : null}
+              {evidenceIndex !== null && mindsetEvidence[evidenceIndex] ? <MindsetProof item={mindsetEvidence[evidenceIndex]} key={mindsetEvidence[evidenceIndex].kind} /> : null}
             </div>
           </div>
         </section>
@@ -624,10 +606,10 @@ export default function AiImpactStoryStage({
               <h2 id="ai-impact-workflow">{labels.workflow.title}</h2>
               <p>{labels.workflow.lead}</p>
             </div>
-            <div className={`ai-impact-story-workflow__panel${isStatic || workflowMode === 'stages' ? ' is-active' : ''}`}>
+            <div className={`ai-impact-story-workflow__panel${workflowMode === 'stages' ? ' is-active' : ''}`}>
               <WorkflowCarousel items={workflowItems} progressLabel={labels.workflow.progressLabel} labels={labels.workflow.labels} activeStage={workflowStage} onStageSelect={(stage) => jumpToStep(WORKFLOW_START + stage)} embedded />
             </div>
-            <div className={`ai-impact-story-workflow__paths${isStatic || workflowMode === 'paths' ? ' is-active' : ''}`}>
+            <div className={`ai-impact-story-workflow__paths${workflowMode === 'paths' ? ' is-active' : ''}`}>
               <div className="ai-impact-workflow-paths" id="ai-impact-workflow-paths">
                 <div className="ai-impact-workflow-paths__intro"><p>{labels.workflow.pathsLabel}</p><h3>{labels.workflow.pathsTitle}</h3></div>
                 <div className="ai-impact-workflow-paths__grid">
