@@ -2265,8 +2265,21 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     gap: var(--hm-space-lg);
   }
 
+  /* 手機改單欄後，連接線要從橫向改成直向：從圖示下緣往下穿過列間距，接到下一個圖示。
+     圖示 64px，所以 top 從 68px 起；高度 = 這一格剩下的高 + 列間距。 */
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:not(:last-child)::after {
-    display: none;
+    top: 68px;
+    left: 31px;
+    width: 1px;
+    height: calc(100% - 68px + var(--hm-space-lg));
+    background:
+      linear-gradient(180deg, transparent, var(--ai-hot) 42%, white 50%, var(--ai-hot) 58%, transparent)
+        0 -100% / 100% 45% no-repeat,
+      color-mix(in srgb, var(--ai-line) 42%, transparent);
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-mindset__steps.is-animated .ai-impact-story-mindset__step:not(:last-child)::after {
+    animation-name: aiMindsetGlowVertical;
   }
 
   .ai-impact-story-mindset__step {
@@ -2292,6 +2305,14 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--hm-space-2xs);
+  }
+
+  /* detail 模式四個並排，標籤原本各自 80–101px、有的一行有的兩行，看起來參差。
+     給一個小於最短標籤的最大寬度，四個一致折成兩行。 */
+  .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step h3 {
+    max-width: 68px;
+    text-align: center;
+    text-wrap: balance;
   }
 
   .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step {
@@ -2326,17 +2347,19 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     min-height: 0;
   }
 
+  /* 證據卡的四格在手機改直式：橫排每格只有約 89px，字會被擠成兩三行。
+     箭頭跟著轉成向下。 */
   .ai-impact-story-mindset__proof .ai-impact-proof__diagram {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ai-impact-story-mindset__proof .ai-impact-proof__diagram-entry {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ai-impact-story-mindset__proof .ai-impact-proof__diagram-entry > svg {
-    margin: 0 var(--hm-space-3xs);
-    transform: none;
+    margin: var(--hm-space-3xs) auto;
+    transform: rotate(90deg);
   }
 
   .ai-impact-story-mindset__proof .ai-impact-proof__node {
