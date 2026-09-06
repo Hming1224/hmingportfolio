@@ -1839,26 +1839,35 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   padding: calc(54px + var(--hm-space-md)) max(var(--page-gutter), calc((100vw - 1180px) / 2)) var(--ai-story-hint-space);
   opacity: 0;
   pointer-events: none;
-  /* 章節之間只做淡入淡出，不做縮放位移。
-     原本離場是 scale(1.12)、進場是 scale(0.94)，兩個標題會在同一個位置一前一後
-     各自移動 17–34px，看起來像「01 標題跳一次、02 標題再跳一次」。
-     改成標題直接停在最終位置，舊的淡出、新的淡入。 */
+  /* 離場保留「放大到消失」的動態，進場則直接停在最終位置、等離場走完才淡入。
+     原本兩段同時進行、而且進場自己也從 scale(0.94) 移動，
+     視覺上會變成「01 標題跳一次、02 標題再跳一次」。 */
   transform: translateX(-50%);
   transform-origin: center center;
   visibility: hidden;
   transition:
     opacity var(--hm-duration-base) var(--hm-ease-out),
+    transform var(--hm-duration-enter) var(--hm-ease-emphasized),
     visibility 0s linear var(--hm-duration-enter);
+}
+
+/* 離場：放大並淡出 */
+.ai-impact-story__scene.is-before {
+  transform: translateX(-50%) scale(1.12);
 }
 
 .ai-impact-story__scene.is-active {
   z-index: 2;
   opacity: 1;
   pointer-events: auto;
+  transform: translateX(-50%);
   visibility: visible;
-  /* 進場稍微晚一點起跑，讓上一段先退乾淨，不會兩個標題同時出現 */
+  /* 等上一段的淡出走完才開始，才會是「01 消失 → 02 出現」而不是兩個疊在一起 */
   transition:
-    opacity var(--hm-duration-base) var(--hm-ease-out) calc(var(--hm-duration-base) * 0.4),
+    /* 延遲抓在「離場淡出快結束」而不是「完全結束」：
+       用整段 base 會讓中間出現約 125ms 兩邊都全透明的空窗，看起來像閃一下。 */
+    opacity var(--hm-duration-base) var(--hm-ease-out) calc(var(--hm-duration-base) * 0.55),
+    transform var(--hm-duration-enter) var(--hm-ease-emphasized),
     visibility 0s linear 0s;
 }
 
