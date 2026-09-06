@@ -221,10 +221,6 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   color: var(--ai-hot);
 }
 
-.ai-impact-page [data-hero-variant='ai-impact'] .cursor-tag:first-child .cursor-tag-icon {
-  filter: brightness(0) saturate(100%) invert(87%) sepia(96%) saturate(2170%) hue-rotate(330deg) brightness(103%);
-}
-
 .ai-impact-page [data-hero-variant='ai-impact'] .sticky-note p,
 .ai-impact-page [data-hero-variant='ai-impact'] .sticky-note-subtitle,
 .ai-impact-page [data-hero-variant='ai-impact'] .wireframe-label,
@@ -2572,5 +2568,17 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
       color-mix(in srgb, var(--ai-bg) 92%, transparent) 62%,
       transparent
     );
+  }
+}
+
+/* AI Impact 的主標比首頁大得多（clamp 到 104px），底部四個裝飾在 1280px 以下
+   會壓到副標；手機也一樣（只是 Hming 的機器高度 <800 剛好被舊規則擋掉）。
+   這四個是純裝飾，寬度不夠就整組收起。首頁維持原本行為不受影響。 */
+@media (max-width: 1279px) {
+  .ai-impact-page .hero-frame-large,
+  .ai-impact-page .hero-ai-widget,
+  .ai-impact-page .hero-wal-pencil,
+  .ai-impact-page .hero-toggle {
+    display: none;
   }
 }

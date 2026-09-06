@@ -16,7 +16,13 @@ export default function HeroDecorationStage({
 
   return (
     <div className="hero-decoration-stage" data-hero-variant={variant} aria-hidden="true">
-      <CursorTag text="User Insights" color="#4B7BEC" variant={variant} className="hero-decoration hero-cursor-brian" />
+      <CursorTag
+        text="User Insights"
+        color="#4B7BEC"
+        icon={aiImpact ? '/decorations/cursor-arrow-yellow-outline.svg' : '/decorations/cursor-arrow.svg'}
+        variant={variant}
+        className="hero-decoration hero-cursor-brian"
+      />
       <CursorTag
         text="Engineering Feasibility"
         color="#26DE81"
