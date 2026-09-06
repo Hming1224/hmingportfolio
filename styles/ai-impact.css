@@ -1469,10 +1469,11 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
     padding: var(--hm-space-2xs) var(--hm-space-xs);
   }
 
+  /* 綠 A：面板上緣 → 進度列內容，與綠 B（卡片上內距）同一級 */
   .ai-impact-workflow-progress {
     grid-template-columns: auto minmax(0, 1fr);
     gap: var(--hm-space-xs);
-    padding: var(--hm-space-xs) var(--hm-space-sm);
+    padding: var(--hm-space-md) var(--hm-space-sm);
   }
 
   .ai-impact-workflow-carousel__sticky {
@@ -1481,11 +1482,12 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
     border-radius: 18px;
   }
 
+  /* 綠 B：進度列底 → 卡片內容，與綠 A 同一級 */
   .ai-impact-workflow-slide {
     grid-template-columns: 1fr;
     align-content: start;
     gap: var(--hm-space-sm);
-    padding: var(--hm-space-sm);
+    padding: var(--hm-space-md) var(--hm-space-sm);
   }
 
   .ai-impact-workflow-progress__direction {
@@ -2230,8 +2232,9 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     display: none;
   }
 
+  /* 紅 A：54px 是章節膠囊自己的高度，後面那個 token 才是「膠囊底 → 區段起點」的間距 */
   .ai-impact-story__scene {
-    padding: calc(54px + var(--hm-space-md)) max(20px, calc((100vw - 620px) / 2)) var(--ai-story-hint-space);
+    padding: calc(54px + var(--hm-space-lg)) max(20px, calc((100vw - 620px) / 2)) var(--ai-story-hint-space);
   }
 
   .ai-impact-story__intro {
@@ -2350,8 +2353,9 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     padding: var(--hm-space-xs) var(--hm-space-sm);
   }
 
+  /* 紅 B：與紅 A 同一級，兩段之間的呼吸要一致 */
   .ai-impact-story-workflow {
-    gap: var(--hm-space-xs);
+    gap: var(--hm-space-lg);
   }
 
   .ai-impact-workflow-carousel.is-embedded .ai-impact-workflow-carousel__sticky {
