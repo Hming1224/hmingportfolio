@@ -1188,6 +1188,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   pointer-events: none;
 }
 
+.ai-impact-outcomes__card.is-expanded .ai-impact-outcomes__shade,
 .ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__shade,
 .ai-impact-outcomes__card.is-active:focus .ai-impact-outcomes__shade {
   background: linear-gradient(
@@ -1242,6 +1243,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
     transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.ai-impact-outcomes__card.is-active.is-expanded .ai-impact-outcomes__details,
 .ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__details,
 .ai-impact-outcomes__card.is-active:focus .ai-impact-outcomes__details {
   max-height: 180px;
@@ -1604,13 +1606,6 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
     padding-top: 0;
   }
 
-  .ai-impact-outcomes__card.is-active .ai-impact-outcomes__details {
-    max-height: 180px;
-    margin-top: var(--hm-space-xs);
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   .ai-impact-outcomes__arrow {
     width: 40px;
     height: 40px;
@@ -1624,15 +1619,6 @@ html[data-ai-impact-transition='leave']::view-transition-old(root) {
   from { background-position: 0 -100%, 0 0; }
   85% { background-position: 0 100%, 0 0; }
   to { background-position: 0 320%, 0 0; }
-}
-
-@media (hover: none) {
-  .ai-impact-outcomes__card.is-active .ai-impact-outcomes__details {
-    max-height: 180px;
-    margin-top: var(--hm-space-xs);
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2570,19 +2556,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   transform-origin: bottom left;
 }
 
-/* 文字回到正常字級後會佔到卡片一半高度，原本卡片自己的漸層只暗到下緣約三成，
-   蓋不住。這裡給文字層自己的底，才不會壓在亮色截圖上讀不到。 */
-@media (max-width: 768px) {
-  .ai-impact-outcomes__content {
-    padding-top: var(--hm-space-lg);
-    background: linear-gradient(
-      to top,
-      var(--ai-bg),
-      color-mix(in srgb, var(--ai-bg) 92%, transparent) 62%,
-      transparent
-    );
-  }
-}
+
 
 /* AI Impact 的主標比首頁大得多（clamp 到 104px），底部四個裝飾在 1280px 以下
    會壓到副標；手機也一樣（只是 Hming 的機器高度 <800 剛好被舊規則擋掉）。

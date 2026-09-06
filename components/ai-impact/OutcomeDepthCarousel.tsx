@@ -69,6 +69,8 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
   const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reducedMotionRef = useRef(false);
   const [active, setActive] = useState(0);
+  /* 詳細資訊預設收起，點目前這張卡才展開；換卡時收回。 */
+  const [expanded, setExpanded] = useState(false);
 
   const layout = useCallback((position: number) => {
     const count = items.length;
@@ -264,7 +266,7 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
       <div className="ai-impact-outcomes__stage">
         {items.map((item, index) => (
           <article
-            className={`ai-impact-outcomes__card${active === index ? ' is-active' : ''}`}
+            className={`ai-impact-outcomes__card${active === index ? ' is-active' : ''}${active === index && expanded ? ' is-expanded' : ''}`}
             key={item.title}
             ref={(element) => { cardRefs.current[index] = element; }}
             aria-roledescription="slide"
@@ -273,7 +275,13 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
             tabIndex={active === index ? 0 : -1}
             style={{ width: CARD_WIDTH, height: CARD_HEIGHT, borderRadius: 18 }}
             onClick={() => {
-              if (!dragRef.current?.moved) setFocus(index, true);
+              if (dragRef.current?.moved) return;
+              if (active === index) {
+                setExpanded((open) => !open);
+                return;
+              }
+              setExpanded(false);
+              setFocus(index, true);
             }}
           >
             <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 768px) 85vw, 576px" priority={index === 0} draggable={false} />
