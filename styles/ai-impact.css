@@ -1188,9 +1188,10 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   pointer-events: none;
 }
 
+/* 觸控裝置不吃 :hover——手機點一下會留下黏著的 hover 狀態，
+   卡片資訊就收不回去。hover 版本只給真正有游標的裝置。 */
 .ai-impact-outcomes__card.is-expanded .ai-impact-outcomes__shade,
-.ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__shade,
-.ai-impact-outcomes__card.is-active:focus .ai-impact-outcomes__shade {
+.ai-impact-outcomes__card.is-active:focus-visible .ai-impact-outcomes__shade {
   background: linear-gradient(
     180deg,
     color-mix(in srgb, var(--ai-bg) 4%, transparent) 8%,
@@ -1200,6 +1201,20 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
     color-mix(in srgb, var(--ai-bg) 72%, transparent) 78%,
     color-mix(in srgb, var(--ai-bg) 97%, transparent) 100%
   );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__shade {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ai-bg) 4%, transparent) 8%,
+      color-mix(in srgb, var(--ai-bg) 9%, transparent) 24%,
+      color-mix(in srgb, var(--ai-bg) 20%, transparent) 40%,
+      color-mix(in srgb, var(--ai-bg) 42%, transparent) 58%,
+      color-mix(in srgb, var(--ai-bg) 72%, transparent) 78%,
+      color-mix(in srgb, var(--ai-bg) 97%, transparent) 100%
+    );
+  }
 }
 
 .ai-impact-outcomes__content {
@@ -1244,12 +1259,20 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
 }
 
 .ai-impact-outcomes__card.is-active.is-expanded .ai-impact-outcomes__details,
-.ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__details,
-.ai-impact-outcomes__card.is-active:focus .ai-impact-outcomes__details {
+.ai-impact-outcomes__card.is-active:focus-visible .ai-impact-outcomes__details {
   max-height: 180px;
   margin-top: var(--hm-space-xs);
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__details {
+    max-height: 180px;
+    margin-top: var(--hm-space-xs);
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .ai-impact-outcomes__badge-row {

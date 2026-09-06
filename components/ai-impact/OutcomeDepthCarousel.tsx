@@ -149,6 +149,8 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
     if (index !== focusRef.current) {
       focusRef.current = index;
       setActive(index);
+      /* 換卡就收起詳細資訊——箭頭、圓點、拖曳、滾輪都走這裡。 */
+      setExpanded(false);
     }
   }, [items.length, tweenTo]);
 
@@ -189,6 +191,19 @@ export default function OutcomeDepthCarousel({ items, labels }: OutcomeDepthCaro
       if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current);
     };
   }, [items.length, layout, setFocus]);
+
+  /* 手機沒有 hover，資訊是點卡片展開的；點卡片以外的任何地方就該立刻收回，
+     不用先回頭再點一次卡片。用 capture 階段，避免被輪播自己的手勢處理吃掉。 */
+  useEffect(() => {
+    if (!expanded) return;
+    const collapseOnOutside = (event: PointerEvent) => {
+      const card = cardRefs.current[active];
+      if (card && event.target instanceof Node && card.contains(event.target)) return;
+      setExpanded(false);
+    };
+    document.addEventListener('pointerdown', collapseOnOutside, true);
+    return () => document.removeEventListener('pointerdown', collapseOnOutside, true);
+  }, [active, expanded]);
 
   useEffect(() => {
     reducedMotionRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
