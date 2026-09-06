@@ -463,7 +463,7 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Closed", appliesTo: "LanguageSwitcher", trigger: "Default render or menu closes.", behavior: "Only the trigger is visible.", whatChanges: "`.language-switcher` renders without `is-open`; the menu remains non-interactive.", liveUsage: "Global Navbar." },
       { state: "Open", appliesTo: "LanguageSwitcher", trigger: "User clicks the trigger button.", behavior: "The language menu opens.", whatChanges: "`aria-expanded` becomes true and `.language-switcher.is-open` exposes the menu.", liveUsage: "Global Navbar language menu." },
       { state: "Selected", appliesTo: "Language option", trigger: "Current `useLocale()` value matches an option.", behavior: "The current locale is marked as selected.", whatChanges: "The option receives `aria-checked` and a visible checkmark.", liveUsage: "English / Traditional Chinese options." },
-      { state: "Loading / pending", appliesTo: "Locale transition", trigger: "User chooses a different locale.", behavior: "The switcher disables repeat actions and shows the loading overlay.", whatChanges: "`showLoading` or `isPending` disables controls while `LanguageLoadingPortal` renders.", liveUsage: "Locale route replacement." },
+      { state: "Loading / pending", appliesTo: "Locale transition", trigger: "User chooses a different locale.", behavior: "The switcher disables repeat actions and shows a context-matched loading overlay.", whatChanges: "`showLoading` or `isPending` disables controls while `LanguageLoadingPortal` renders the default or AI Impact treatment.", liveUsage: "Locale route replacement." },
       { state: "Route / hash preservation", appliesTo: "Locale transition", trigger: "A different locale is selected.", behavior: "The current pathname and `window.location.hash` are kept.", whatChanges: "`router.replace(`${pathname}${hash}`, { locale: nextLocale })` changes locale without dropping the hash.", liveUsage: "All localized public routes." },
       { state: "Dismiss", appliesTo: "Open menu", trigger: "Outside pointer down or Escape key.", behavior: "The menu closes without changing locale.", whatChanges: "Document listeners call `setOpen(false)` while the menu is open.", liveUsage: "Navbar interaction cleanup." },
     ],
@@ -471,7 +471,7 @@ const componentSeeds: ComponentSeed[] = [
       { state: "Closed", appliesTo: "LanguageSwitcher", trigger: "預設 render 或選單關閉。", behavior: "只顯示觸發元素。", whatChanges: "`.language-switcher` 不帶 `is-open`；選單維持不可互動。", liveUsage: "全站 Navbar。" },
       { state: "Open", appliesTo: "LanguageSwitcher", trigger: "使用者點擊 觸發按鈕。", behavior: "語系選單展開。", whatChanges: "`aria-expanded` 變為 true，`.language-switcher.is-open` 顯示選單。", liveUsage: "全站 Navbar 語系選單。" },
       { state: "Selected", appliesTo: "Language option", trigger: "目前 `useLocale()` 符合某個 選項。", behavior: "目前語系被標示為 selected。", whatChanges: "選項取得 `aria-checked` 與可見 checkmark。", liveUsage: "English / 繁體中文 選項。" },
-      { state: "Loading / pending", appliesTo: "Locale transition", trigger: "使用者選擇不同語系。", behavior: "切換期間停用重複操作並顯示 loading overlay。", whatChanges: "`showLoading` 或 `isPending` 停用控制項，同時 render `LanguageLoadingPortal`。", liveUsage: "Locale route replacement。" },
+      { state: "Loading / pending", appliesTo: "Locale transition", trigger: "使用者選擇不同語系。", behavior: "切換期間停用重複操作，並顯示符合頁面情境的 loading overlay。", whatChanges: "`showLoading` 或 `isPending` 停用控制項，同時由 `LanguageLoadingPortal` render 預設或 AI Impact 樣式。", liveUsage: "Locale route replacement。" },
       { state: "Route / hash preservation", appliesTo: "Locale transition", trigger: "選到不同語系。", behavior: "保留目前 pathname 與 `window.location.hash`。", whatChanges: "`router.replace(`${pathname}${hash}`, { locale: nextLocale })` 切換語系但不丟失 hash。", liveUsage: "所有 localized 公開頁面。" },
       { state: "Dismiss", appliesTo: "Open menu", trigger: "點擊外部或按 Escape。", behavior: "關閉選單，不改變語系。", whatChanges: "選單開啟時的 document listeners 會呼叫 `setOpen(false)`。", liveUsage: "Navbar 互動收尾。" },
     ],
@@ -509,7 +509,7 @@ const componentSeeds: ComponentSeed[] = [
       importPath: "components/LanguageSwitcher.tsx",
       example: "import LanguageSwitcher from \"@/components/LanguageSwitcher\";\n\n<div className=\"nav-links\">\n  <LanguageSwitcher />\n</div>",
       props: [
-        { name: "props", type: "none", description: "The production component reads locale, translations, pathname, and router from app context." },
+        { name: "variant", type: '"default" | "aiImpact"', description: "Selects the default light loading treatment or the AI Impact black-and-yellow treatment." },
       ],
       notes: [
         "Mount it inside the localized app tree so `useLocale`, `useTranslations`, `usePathname`, and `useRouter` are available.",
@@ -521,7 +521,7 @@ const componentSeeds: ComponentSeed[] = [
       importPath: "components/LanguageSwitcher.tsx",
       example: "import LanguageSwitcher from \"@/components/LanguageSwitcher\";\n\n<div className=\"nav-links\">\n  <LanguageSwitcher />\n</div>",
       props: [
-        { name: "props", type: "none", description: "正式元件從 app context 讀取 locale、translations、pathname 與 router。" },
+        { name: "variant", type: '"default" | "aiImpact"', description: "選擇預設淺色 loading 樣式，或 AI Impact 的黑黃樣式。" },
       ],
       notes: [
         "需掛在 localized app tree 內，讓 `useLocale`、`useTranslations`、`usePathname` 與 `useRouter` 可用。",

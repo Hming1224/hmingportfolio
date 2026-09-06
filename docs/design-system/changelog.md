@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-09-03 — AI Impact route-local reveal
+
+- 首頁新增按住 800ms 的 `Reveal AI mindset` 入口，蓄力進度同步控制黑色填滿與黃色文字。
+- 新增 `/ai-impact` 中英文頁面，使用 route-local 深灰與三段黃色，並沿用首頁 Hero 裝飾定位與動畫契約。
+- 進入與返回採用按鈕中心的 circular View Transition；不支援 API 與 reduced-motion 情境保留直接導頁 fallback。
+- AI Workflow 改為 7 階段：桌機與手機都以垂直 scroll 切換固定水平落點，每次讓下一張完整滑入並貼齊左側，不停在半張；reduced-motion 使用完整的垂直卡片 fallback。
+- AI Workflow 的 Skill 改為獨立標籤，hover 或鍵盤 focus 時顯示內容與用途 tooltip。
+- 使用者研究階段依實際順序標示工具分工：Claude 規劃專案計劃書、ChatGPT 設計訪綱與問卷、NotebookLM 整理逐字稿與洞察。
+- 點點圖層亮光改為從 Hero 中心向外擴散的單圈波紋；波紋經過後恢復暗點並完全消失，避免整面點亮，reduced-motion 不顯示動態亮層。
+- 波紋移除循環頭尾的停頓與 `ease-out` 減速；使用鋪滿 Hero 的圓形 radial mask、線性半徑與首尾 opacity transition，避免縮放矩形 mask 形成上下水平裁切。
+- 新增四斷點、取消、鍵盤、返回首頁與 overflow 的 targeted smoke。
+
 ## 2026-07-17 — SplitText 長標題限制
 
 - `07-content-and-motion.md` 新增 15.1：SplitText 在 `splitType="chars"` 下，GSAP 會注入 `white-space: nowrap`，配合元件的 `overflow: hidden` 導致長標題被裁切而非換行；解法是改用 `splitType="words, chars"`。

@@ -143,6 +143,62 @@
   gap: var(--hm-space-2xs);
 }
 
+.ai-impact-reveal__fill,
+.ai-impact-reveal__label--active {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--hm-duration-base) var(--hm-ease-out);
+  will-change: clip-path;
+}
+
+.is-charging .ai-impact-reveal__fill,
+.is-charging .ai-impact-reveal__label--active {
+  clip-path: inset(0);
+  transition-duration: 800ms;
+  transition-timing-function: linear;
+}
+
+.ai-impact-reveal__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+}
+
+.ai-impact-reveal__label {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.ai-impact-reveal__label--active {
+  color: #ffc628;
+}
+
+/* Hero 行動鈕列版：外觀完全沿用 secondary 按鈕，只疊上長按充能的填色與第二層文字。
+   兩層文字放在同一個 grid 位置，用 clip-path 由左往右揭開。 */
+.ai-impact-reveal-cta {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ai-impact-reveal-cta .ai-impact-reveal__label {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  justify-self: center;
+}
+
+.ai-impact-reveal-cta .ai-impact-reveal__label--active,
+.ai-impact-reveal-cta:hover .ai-impact-reveal__label--active {
+  color: #ffc628;
+}
+
 @keyframes float-y {
   0%,
   100% {
@@ -1448,6 +1504,9 @@
     left: 12.8%;
     top: 36%;
   }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
 }
 
 @media (min-width: 769px) and (max-width: 1023px) {

@@ -1,0 +1,2657 @@
+body:has(.ai-impact-page) {
+  background: #252423;
+}
+
+@property --ai-wave-radius {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 6%;
+}
+
+.ai-impact-page {
+  --ai-bg: #252423;
+  --ai-line: #ffc628;
+  --ai-hot: #ffe628;
+  --ai-deep: #ffa828;
+  --ai-copy: #f7f3ea;
+  --ai-copy-muted: #c9c4b8;
+  --ai-nav-height: 80px;
+  --ai-section-top-gap: 32px;
+  --ai-viewport-space: calc(100svh - var(--ai-nav-height) - var(--ai-section-top-gap));
+  min-height: 100svh;
+  overflow: clip;
+  background: var(--ai-bg);
+  color: var(--ai-copy);
+}
+
+.ai-impact-page .site-nav,
+.ai-impact-page .site-footer {
+  background: color-mix(in srgb, var(--ai-bg) 94%, transparent);
+  color: var(--ai-line);
+}
+
+.ai-impact-page .nav-line {
+  background: color-mix(in srgb, var(--ai-line) 36%, transparent);
+}
+
+.ai-impact-page .nav-links a,
+.ai-impact-page .language-switcher-trigger {
+  color: var(--ai-line);
+}
+
+.ai-impact-page .nav-links a:hover,
+.ai-impact-page .nav-links a:focus-visible {
+  color: var(--ai-hot);
+}
+
+.ai-impact-page .language-switcher-trigger {
+  border-color: color-mix(in srgb, var(--ai-line) 45%, transparent);
+  background: transparent;
+}
+
+.ai-impact-page .language-switcher-trigger:hover,
+.ai-impact-page .language-switcher-trigger:focus-visible,
+.ai-impact-page .language-switcher.is-open .language-switcher-trigger {
+  border-color: var(--ai-hot);
+  background: color-mix(in srgb, var(--ai-line) 10%, transparent);
+  color: var(--ai-hot);
+}
+
+.ai-impact-page .language-switcher-menu {
+  border-color: color-mix(in srgb, var(--ai-line) 35%, transparent);
+  background: var(--ai-bg);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.3);
+}
+
+.ai-impact-page .language-switcher-menu button {
+  color: var(--ai-line);
+}
+
+.ai-impact-page .language-switcher-menu button:hover,
+.ai-impact-page .language-switcher-menu button:focus-visible,
+.ai-impact-page .language-switcher-menu button.is-active {
+  background: color-mix(in srgb, var(--ai-line) 12%, transparent);
+  color: var(--ai-hot);
+}
+
+.ai-impact-page .menu-button span {
+  background: var(--ai-line);
+}
+
+.ai-impact-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hm-space-2xs);
+  min-height: 44px;
+  padding: var(--hm-space-2xs) 0;
+  border: 0;
+  background: transparent;
+  color: var(--ai-line);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.ai-impact-back:hover,
+.ai-impact-back:focus-visible {
+  color: var(--ai-hot);
+}
+
+.ai-impact-back:focus-visible,
+.ai-impact-page a:focus-visible,
+.ai-impact-page button:focus-visible {
+  outline: 2px solid var(--ai-hot);
+  outline-offset: 4px;
+}
+
+.ai-impact-page .ai-impact-hero {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  background: var(--ai-bg);
+  color: var(--ai-line);
+  opacity: var(--ai-story-hero-opacity, 1);
+  transform:
+    translateY(var(--ai-story-hero-y, 0))
+    scale(var(--ai-story-hero-scale, 1))
+    translateZ(0);
+  will-change: opacity, transform;
+}
+
+html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
+  opacity: var(--ai-story-hero-opacity, 0.001);
+  transform:
+    translateY(var(--ai-story-hero-y, -72px))
+    scale(var(--ai-story-hero-scale, 0.98))
+    translateZ(0);
+}
+
+.ai-impact-hero__copy {
+  width: min(760px, 100%);
+}
+
+.ai-impact-eyebrow {
+  margin: 0;
+  color: var(--ai-deep);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ai-impact-hero h1 {
+  color: var(--ai-hot);
+  font-size: clamp(48px, 8vw, 104px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.ai-impact-hero .hero-subtitle {
+  max-width: 650px;
+  color: var(--ai-copy);
+}
+
+.ai-impact-dots {
+  z-index: 0;
+}
+
+.ai-impact-dots--base {
+  fill: color-mix(in srgb, var(--ai-deep) 42%, transparent);
+  mask-image: radial-gradient(ellipse 82% 72% at 50% 48%, black, transparent 78%);
+}
+
+.ai-impact-dots--highlight {
+  --ai-wave-radius: 6%;
+  fill: var(--ai-hot);
+  opacity: 0;
+  -webkit-mask-image: radial-gradient(
+    circle farthest-corner at 50% 50%,
+    transparent 0 calc(var(--ai-wave-radius) - 10%),
+    black calc(var(--ai-wave-radius) - 3%) calc(var(--ai-wave-radius) + 3%),
+    transparent calc(var(--ai-wave-radius) + 10%)
+  );
+  mask-image: radial-gradient(
+    circle farthest-corner at 50% 50%,
+    transparent 0 calc(var(--ai-wave-radius) - 10%),
+    black calc(var(--ai-wave-radius) - 3%) calc(var(--ai-wave-radius) + 3%),
+    transparent calc(var(--ai-wave-radius) + 10%)
+  );
+  -webkit-mask-position: 50% 50%;
+  mask-position: 50% 50%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  animation: aiDotWave 4.8s linear infinite;
+}
+
+@keyframes aiDotWave {
+  0% {
+    --ai-wave-radius: 6%;
+    opacity: 0;
+  }
+  12% {
+    --ai-wave-radius: 18%;
+    opacity: 1;
+  }
+  78% {
+    --ai-wave-radius: 88%;
+    opacity: 1;
+  }
+  100% {
+    --ai-wave-radius: 108%;
+    opacity: 0;
+  }
+}
+
+.ai-impact-page [data-hero-variant='ai-impact'] .cursor-tag-label,
+.ai-impact-page [data-hero-variant='ai-impact'] .sticky-note,
+.ai-impact-page [data-hero-variant='ai-impact'] .session-frame,
+.ai-impact-page [data-hero-variant='ai-impact'] .ai-widget-frame,
+.ai-impact-page [data-hero-variant='ai-impact'] .toggle-decoration-inner,
+.ai-impact-page [data-hero-variant='ai-impact'] .toggle-btn-off {
+  border-color: var(--ai-line);
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.ai-impact-page [data-hero-variant='ai-impact'] .cursor-tag-label {
+  border: 2px solid var(--ai-line);
+  color: var(--ai-hot);
+}
+
+/* 便利貼在 AI Impact 版本被統一改成透明外框，六張疊在一起時字會互相穿透。
+   這裡只需要「不透明」把後面的字擋住，顏色就用頁面底色本身 ——
+   用比底色亮的灰會讓卡片自己跳出來，破壞整頁的線稿感。 */
+.ai-impact-page [data-hero-variant='ai-impact'] .sticky-note {
+  background: var(--ai-bg) !important;
+}
+
+/* 右上角的 Business Goals 游標原本貼著最右邊那張便利貼，往右挪開。
+   窄視窗時 86% 會讓整個標籤（約 145px）被切掉，所以再夾一個以右緣回推的上限。 */
+.ai-impact-page [data-hero-variant='ai-impact'] .hero-cursor-pm {
+  left: min(86%, calc(100% - 160px));
+}
+
+.ai-impact-page [data-hero-variant='ai-impact'] .sticky-note p,
+.ai-impact-page [data-hero-variant='ai-impact'] .sticky-note-subtitle,
+.ai-impact-page [data-hero-variant='ai-impact'] .wireframe-label,
+.ai-impact-page [data-hero-variant='ai-impact'] .session-badge,
+.ai-impact-page [data-hero-variant='ai-impact'] .ai-widget-badge {
+  color: var(--ai-line) !important;
+}
+
+.ai-impact-page [data-hero-variant='ai-impact'] .sticky-note {
+  border: 2px solid var(--ai-line);
+}
+
+.ai-impact-page [data-hero-variant='ai-impact'] .session-content,
+.ai-impact-page [data-hero-variant='ai-impact'] .session-badge,
+.ai-impact-page [data-hero-variant='ai-impact'] .ai-widget-badge,
+.ai-impact-page [data-hero-variant='ai-impact'] .toggle-btn-on {
+  background: transparent;
+  box-shadow: none;
+}
+
+.ai-impact-page [data-hero-variant='ai-impact'] .session-line,
+.ai-impact-page [data-hero-variant='ai-impact'] .ai-widget-line {
+  background: var(--ai-deep);
+  opacity: 0.75;
+}
+
+.ai-impact-page [data-hero-variant='ai-impact'] .toggle-btn-on {
+  border: 2px solid var(--ai-hot);
+}
+
+.ai-impact-content {
+  width: min(1180px, calc(100% - (2 * var(--page-gutter))));
+  margin: 0 auto;
+  padding: var(--ai-section-top-gap) 0 clamp(40px, 5vw, 64px);
+}
+
+.ai-impact-section {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.65fr);
+  gap: var(--hm-space-lg);
+  min-height: var(--ai-viewport-space);
+  padding: var(--hm-space-lg) 0;
+  border-top: 1px solid color-mix(in srgb, var(--ai-line) 34%, transparent);
+  scroll-margin-top: calc(var(--ai-nav-height) + var(--ai-section-top-gap));
+}
+
+.ai-impact-section__intro {
+  align-self: start;
+  position: sticky;
+  top: 120px;
+}
+
+.ai-impact-section__number {
+  margin: 0 0 var(--hm-space-sm);
+  color: var(--ai-deep);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.ai-impact-section h2 {
+  margin: 0 0 var(--hm-space-sm);
+  color: var(--ai-hot);
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.ai-impact-section__intro > p:last-child {
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.ai-impact-section--mindset {
+  grid-template-columns: 1fr;
+  align-content: center;
+  gap: var(--hm-space-lg);
+}
+
+.ai-impact-section--mindset .ai-impact-section__intro {
+  position: static;
+  max-width: 760px;
+}
+
+.ai-impact-mindset {
+  display: grid;
+  gap: var(--hm-space-md);
+}
+
+.ai-impact-mindset__steps {
+  --ai-mindset-glow-duration: calc(var(--hm-duration-reveal) + var(--hm-duration-card));
+  --ai-mindset-step-stagger: 1.52s;
+  --ai-mindset-beam-lead: 0.4s;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--hm-space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-impact-mindset__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 31px;
+  left: 72px;
+  z-index: 0;
+  width: calc(100% - 52px);
+  height: 1px;
+  background:
+    linear-gradient(90deg, transparent, var(--ai-hot) 42%, white 50%, var(--ai-hot) 58%, transparent)
+      -100% 0 / 45% 100% no-repeat,
+    color-mix(in srgb, var(--ai-line) 42%, transparent);
+}
+
+.ai-impact-mindset__step {
+  position: relative;
+  display: grid;
+  gap: var(--hm-space-sm);
+}
+
+.ai-impact-mindset__icon {
+  z-index: 1;
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border: 1px solid var(--ai-line);
+  border-radius: 50%;
+  background: var(--ai-bg);
+  color: var(--ai-hot);
+  box-shadow: none;
+}
+
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__icon {
+  animation: aiMindsetNode var(--hm-duration-enter) var(--hm-ease-out) both;
+}
+
+.ai-impact-mindset__steps.is-resetting .ai-impact-mindset__icon {
+  animation: aiMindsetNodeExit var(--hm-duration-enter) var(--hm-ease-in-out) both;
+}
+
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(2) .ai-impact-mindset__icon {
+  animation-delay: var(--ai-mindset-step-stagger);
+}
+
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(3) .ai-impact-mindset__icon {
+  animation-delay: calc(var(--ai-mindset-step-stagger) + var(--ai-mindset-step-stagger));
+}
+
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(4) .ai-impact-mindset__icon {
+  animation-delay: calc(
+    var(--ai-mindset-step-stagger) +
+    var(--ai-mindset-step-stagger) +
+    var(--ai-mindset-step-stagger)
+  );
+}
+
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:not(:last-child)::after {
+  animation: aiMindsetGlow var(--ai-mindset-glow-duration) var(--hm-ease-in-out) both;
+  animation-delay: var(--ai-mindset-beam-lead);
+}
+
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(2)::after {
+  animation-delay: calc(var(--ai-mindset-beam-lead) + var(--ai-mindset-step-stagger));
+}
+
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(3)::after {
+  animation-delay: calc(
+    var(--ai-mindset-beam-lead) +
+    var(--ai-mindset-step-stagger) +
+    var(--ai-mindset-step-stagger)
+  );
+}
+
+@keyframes aiMindsetNode {
+  0% {
+    background-color: var(--ai-bg);
+    color: var(--ai-hot);
+    box-shadow: 0 0 0 transparent;
+    transform: scale(0.94);
+  }
+  45% {
+    background-color: color-mix(in srgb, var(--ai-hot) 58%, var(--ai-bg));
+    color: color-mix(in srgb, var(--ai-bg) 58%, var(--ai-hot));
+    box-shadow: 0 0 12px color-mix(in srgb, var(--ai-hot) 28%, transparent);
+    transform: scale(1.035);
+  }
+  100% {
+    background-color: var(--ai-hot);
+    color: var(--ai-bg);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--ai-hot) 48%, transparent);
+    transform: scale(1);
+  }
+}
+
+@keyframes aiMindsetNodeExit {
+  from {
+    background-color: var(--ai-hot);
+    color: var(--ai-bg);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--ai-hot) 48%, transparent);
+  }
+  to {
+    background-color: var(--ai-bg);
+    color: var(--ai-hot);
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+@keyframes aiMindsetGlow {
+  from { background-position: -100% 0, 0 0; }
+  85% { background-position: 100% 0, 0 0; }
+  to { background-position: 320% 0, 0 0; }
+}
+
+.ai-impact-mindset__number {
+  display: block;
+  margin-bottom: var(--hm-space-2xs);
+  color: var(--ai-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.ai-impact-mindset__step h3 {
+  margin: 0 0 var(--hm-space-2xs);
+  color: var(--ai-hot);
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.ai-impact-mindset__step p {
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.ai-impact-mindset__evidence {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hm-space-sm);
+}
+
+.ai-impact-mindset__evidence figure {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ai-line) 44%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ai-line) 5%, var(--ai-bg));
+}
+
+.ai-impact-proof__surface {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 250px;
+}
+
+.ai-impact-proof__file {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+  padding: var(--hm-space-3xs) var(--hm-space-2xs);
+  border: 1px solid color-mix(in srgb, var(--ai-line) 28%, transparent);
+  border-radius: 999px;
+  color: var(--ai-copy);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.ai-impact-proof__file svg {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  color: var(--ai-hot);
+}
+
+.ai-impact-proof__file span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ai-impact-proof__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-md);
+}
+
+.ai-impact-proof__heading {
+  display: grid;
+  gap: var(--hm-space-3xs);
+  min-width: 0;
+}
+
+.ai-impact-proof__heading > span {
+  color: var(--ai-deep);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ai-impact-proof__heading h3 {
+  margin: 0;
+  color: var(--ai-copy);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.3;
+}
+
+.ai-impact-proof__diagram {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  min-width: 0;
+}
+
+.ai-impact-proof__diagram-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-width: 0;
+}
+
+.ai-impact-proof__diagram-entry > svg {
+  width: 12px;
+  height: 12px;
+  margin: 0 var(--hm-space-3xs);
+  color: var(--ai-deep);
+}
+
+.ai-impact-proof__node {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+  min-height: 78px;
+  padding: var(--hm-space-2xs);
+  border: 1px solid color-mix(in srgb, var(--ai-line) 36%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ai-line) 6%, transparent);
+}
+
+.ai-impact-proof__node svg {
+  width: 17px;
+  height: 17px;
+  color: var(--ai-hot);
+}
+
+.ai-impact-proof__node span {
+  min-width: 0;
+  color: var(--ai-copy);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.ai-impact-proof--memory .ai-impact-proof__node {
+  background: color-mix(in srgb, var(--ai-hot) 7%, transparent);
+}
+
+.ai-impact-mindset__evidence figcaption {
+  min-width: 0;
+  padding: var(--hm-space-sm) var(--hm-space-md) var(--hm-space-sm);
+  border-top: 1px solid color-mix(in srgb, var(--ai-line) 24%, transparent);
+  background: color-mix(in srgb, var(--ai-bg) 62%, transparent);
+}
+
+.ai-impact-mindset__evidence figcaption p {
+  margin: 0;
+  color: var(--ai-copy);
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.ai-impact-example {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-impact-section--workflow {
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.65fr);
+}
+
+.ai-impact-section--workflow .ai-impact-section__intro {
+  grid-column: 1 / -1;
+  position: static;
+}
+
+.ai-impact-section--workflow .ai-impact-section__intro h2,
+.ai-impact-section--workflow .ai-impact-section__intro > p:last-child {
+  max-width: none;
+}
+
+.ai-impact-workflow-carousel {
+  grid-column: 1 / -1;
+  height: var(--workflow-scroll-height);
+  min-width: 0;
+  --workflow-offset: 0px;
+}
+
+.ai-impact-workflow-carousel__sticky {
+  position: sticky;
+  top: calc(var(--ai-nav-height) + var(--ai-section-top-gap));
+  height: min(var(--ai-viewport-space), 720px);
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--ai-line) 40%, transparent);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--ai-line) 3%, var(--ai-bg));
+}
+
+.ai-impact-workflow-progress {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--hm-space-md);
+  padding: var(--hm-space-md) var(--hm-space-md);
+  border-bottom: 1px solid color-mix(in srgb, var(--ai-line) 24%, transparent);
+}
+
+.ai-impact-workflow-progress p {
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.ai-impact-workflow-progress p span:first-child {
+  color: var(--ai-hot);
+}
+
+.ai-impact-workflow-progress ol {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-impact-workflow-progress li {
+  position: relative;
+  color: color-mix(in srgb, var(--ai-line) 46%, transparent);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ai-impact-workflow-progress button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: var(--hm-space-xs) 0 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ai-impact-workflow-progress button:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--ai-hot);
+  outline-offset: 3px;
+}
+
+.ai-impact-workflow-progress li::before,
+.ai-impact-workflow-progress li::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+}
+
+.ai-impact-workflow-progress li::before {
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: color-mix(in srgb, var(--ai-line) 28%, transparent);
+}
+
+.ai-impact-workflow-progress li::after {
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--ai-deep);
+  border-radius: 50%;
+  background: var(--ai-bg);
+  transform: translate(-50%, -50%);
+}
+
+.ai-impact-workflow-progress li.is-active {
+  color: var(--ai-hot);
+}
+
+.ai-impact-workflow-progress li.is-active::after {
+  border-color: var(--ai-hot);
+  background: var(--ai-hot);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ai-hot) 70%, transparent);
+}
+
+.ai-impact-workflow-progress__direction {
+  position: absolute;
+  top: -7px;
+  left: calc(50% + 12px);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: calc(100% - 24px);
+  height: 20px;
+  color: var(--ai-hot);
+  pointer-events: none;
+}
+
+.ai-impact-workflow-progress__direction svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+  animation: aiWorkflowDirectionShine var(--hm-duration-reveal) var(--hm-ease-in-out) infinite alternate;
+}
+
+.ai-impact-workflow-track {
+  display: flex;
+  gap: 0;
+  height: calc(100% - 74px);
+  padding: 0;
+  transform: translate3d(var(--workflow-offset), 0, 0);
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+@keyframes aiWorkflowDirectionShine {
+  from {
+    opacity: 0.56;
+    filter: drop-shadow(0 0 2px transparent);
+    transform: translateX(-5px);
+  }
+  to {
+    opacity: 1;
+    filter: drop-shadow(0 0 7px color-mix(in srgb, var(--ai-hot) 88%, transparent));
+    transform: translateX(5px);
+  }
+}
+
+@keyframes aiWorkflowNextHint {
+  from { transform: translateX(0); }
+  to { transform: translateX(5px); }
+}
+
+.ai-impact-workflow-slide {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-content: center;
+  gap: clamp(24px, 4vw, 52px);
+  flex: 0 0 100%;
+  min-width: 100%;
+  height: 100%;
+  /* 直向留白跟著可用高度縮放：面板高度由視窗決定，內容卻是固定的，
+     視窗一矮就會撞破 padding 被面板裁掉（skill pill 貼齊底線）。 */
+  padding: clamp(14px, 2.5svh, 48px) clamp(24px, 4vw, 48px);
+  border: 0;
+  background: transparent;
+}
+
+.ai-impact-workflow-slide__copy {
+  align-self: center;
+  min-width: 0;
+}
+
+.ai-impact-workflow-slide__number {
+  margin: 0 0 clamp(6px, 1.3svh, 16px);
+  color: var(--ai-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.ai-impact-workflow-slide h3 {
+  margin: 0;
+  color: var(--ai-hot);
+  font-size: clamp(24px, min(3vw, 4.4svh), 42px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.ai-impact-workflow-slide__body {
+  margin: clamp(8px, 1.5svh, 18px) 0 0;
+  color: var(--ai-copy-muted);
+  font-size: clamp(13px, 1.7svh, 15px);
+  line-height: 1.6;
+}
+
+.ai-impact-workflow-slide dl {
+  display: grid;
+  gap: clamp(5px, 1svh, 11px);
+  margin: clamp(10px, 2.1svh, 28px) 0 0;
+}
+
+.ai-impact-workflow-slide dl > div {
+  display: grid;
+  grid-template-columns: clamp(84px, 11.5svh, 106px) minmax(0, 1fr);
+  gap: clamp(10px, 1.5svh, 14px);
+  padding-top: clamp(5px, 1svh, 11px);
+  border-top: 1px solid color-mix(in srgb, var(--ai-line) 18%, transparent);
+}
+
+.ai-impact-workflow-slide dt,
+.ai-impact-workflow-slide dd {
+  margin: 0;
+  font-size: clamp(11px, 1.5svh, 13px);
+  line-height: 1.5;
+}
+
+.ai-impact-workflow-slide dt {
+  color: var(--ai-deep);
+  font-weight: 700;
+}
+
+.ai-impact-workflow-slide dd {
+  color: var(--ai-copy-muted);
+}
+
+.ai-impact-workflow-slide code {
+  color: var(--ai-hot);
+  font: inherit;
+}
+
+.ai-impact-workflow-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(5px, 0.8svh, 7px);
+}
+
+.ai-impact-skill {
+  position: relative;
+  display: inline-flex;
+  padding: clamp(1px, 0.25svh, 2px) clamp(6px, 0.8svh, 7px);
+  border: 1px solid color-mix(in srgb, var(--ai-line) 34%, transparent);
+  border-radius: 6px;
+  cursor: help;
+  outline: none;
+}
+
+.ai-impact-skill:hover,
+.ai-impact-skill:focus-visible {
+  border-color: var(--ai-hot);
+  background: color-mix(in srgb, var(--ai-hot) 8%, transparent);
+}
+
+.ai-impact-skill:focus-visible {
+  box-shadow: 0 0 0 2px var(--ai-bg), 0 0 0 4px var(--ai-hot);
+}
+
+.ai-impact-skill__tip {
+  position: absolute;
+  z-index: 4;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: max-content;
+  max-width: min(300px, calc(100vw - 48px));
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
+  border: 1px solid color-mix(in srgb, var(--ai-hot) 52%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ai-bg) 96%, black);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+  color: var(--ai-copy);
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity var(--hm-duration-fast), transform var(--hm-duration-fast);
+}
+
+.ai-impact-skill__tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 18px;
+  border: 6px solid transparent;
+  border-top-color: color-mix(in srgb, var(--ai-hot) 52%, transparent);
+}
+
+.ai-impact-skill:hover .ai-impact-skill__tip,
+.ai-impact-skill:focus .ai-impact-skill__tip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ai-impact-handoff {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-content: center;
+  align-items: stretch;
+  gap: var(--hm-space-2xs);
+  min-width: 0;
+}
+
+.ai-impact-handoff__node {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-2xs);
+  min-height: 190px;
+  padding: var(--hm-space-md);
+  border: 1px solid color-mix(in srgb, var(--ai-line) 30%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--ai-line) 5%, transparent);
+}
+
+.ai-impact-handoff__node--active {
+  border-color: color-mix(in srgb, var(--ai-hot) 60%, transparent);
+  background: color-mix(in srgb, var(--ai-hot) 7%, transparent);
+}
+
+.ai-impact-handoff__node svg {
+  width: 25px;
+  height: 25px;
+  color: var(--ai-hot);
+}
+
+.ai-impact-handoff__node span {
+  color: var(--ai-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ai-impact-handoff__node strong {
+  color: var(--ai-copy);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.ai-impact-handoff__arrow {
+  align-self: center;
+  width: 18px;
+  color: var(--ai-deep);
+}
+
+.ai-impact-workflow-paths {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--hm-space-md);
+  padding-top: clamp(64px, 9vw, 120px);
+}
+
+.ai-impact-workflow-paths__intro p {
+  margin: 0 0 var(--hm-space-xs);
+  color: var(--ai-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ai-impact-workflow-paths__intro h3 {
+  margin: 0;
+  color: var(--ai-copy);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.18;
+}
+
+.ai-impact-workflow-paths__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ai-line) 30%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--ai-line) 4%, var(--ai-bg));
+}
+
+.ai-impact-workflow-paths article {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-sm);
+  min-width: 0;
+  padding: var(--hm-space-md);
+  border-right: 1px solid color-mix(in srgb, var(--ai-line) 22%, transparent);
+}
+
+.ai-impact-workflow-paths article:last-child {
+  border-right: 0;
+}
+
+.ai-impact-workflow-paths__card-heading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--hm-space-xs);
+  min-width: 0;
+}
+
+.ai-impact-workflow-paths__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid color-mix(in srgb, var(--ai-hot) 52%, transparent);
+  border-radius: 12px;
+  color: var(--ai-hot);
+}
+
+.ai-impact-workflow-paths__icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.ai-impact-workflow-paths__card-heading > div {
+  min-width: 0;
+}
+
+.ai-impact-workflow-paths__card-heading > div > span {
+  color: var(--ai-hot);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  overflow-wrap: anywhere;
+}
+
+.ai-impact-workflow-paths h4 {
+  margin: var(--hm-space-2xs) 0 0;
+  color: var(--ai-copy);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.ai-impact-workflow-paths article p {
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ai-impact-section--outcomes .ai-impact-section__intro {
+  position: static;
+  align-self: center;
+}
+
+.ai-impact-section--outcomes {
+  grid-template-columns: minmax(250px, 0.7fr) minmax(0, 1.8fr);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: center;
+  padding-block: var(--hm-space-lg);
+}
+
+.ai-impact-outcomes {
+  position: relative;
+  grid-column: 2;
+  min-width: 0;
+  width: 100%;
+  height: 500px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: var(--outcome-perspective, 1400px);
+  perspective-origin: 50% 50%;
+  touch-action: pan-y;
+  outline: none;
+  user-select: none;
+  cursor: grab;
+  -webkit-user-select: none;
+}
+
+.ai-impact-outcomes:active {
+  cursor: grabbing;
+}
+
+.ai-impact-outcomes:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ai-copy) 50%, transparent);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.ai-impact-outcomes__stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.ai-impact-outcomes__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  background: #0b0d12;
+  box-shadow:
+    0 30px 60px -20px rgb(0 0 0 / 65%),
+    0 8px 20px -10px rgb(0 0 0 / 50%);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
+}
+
+.ai-impact-outcomes__card > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.ai-impact-outcomes__tint {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: #05060a;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.ai-impact-outcomes__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 28%,
+    color-mix(in srgb, var(--ai-bg) 3%, transparent) 40%,
+    color-mix(in srgb, var(--ai-bg) 10%, transparent) 52%,
+    color-mix(in srgb, var(--ai-bg) 28%, transparent) 66%,
+    color-mix(in srgb, var(--ai-bg) 62%, transparent) 82%,
+    color-mix(in srgb, var(--ai-bg) 94%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+/* 觸控裝置不吃 :hover——手機點一下會留下黏著的 hover 狀態，
+   卡片資訊就收不回去。hover 版本只給真正有游標的裝置。 */
+.ai-impact-outcomes__card.is-expanded .ai-impact-outcomes__shade,
+.ai-impact-outcomes__card.is-active:focus-visible .ai-impact-outcomes__shade {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ai-bg) 4%, transparent) 8%,
+    color-mix(in srgb, var(--ai-bg) 9%, transparent) 24%,
+    color-mix(in srgb, var(--ai-bg) 20%, transparent) 40%,
+    color-mix(in srgb, var(--ai-bg) 42%, transparent) 58%,
+    color-mix(in srgb, var(--ai-bg) 72%, transparent) 78%,
+    color-mix(in srgb, var(--ai-bg) 97%, transparent) 100%
+  );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__shade {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ai-bg) 4%, transparent) 8%,
+      color-mix(in srgb, var(--ai-bg) 9%, transparent) 24%,
+      color-mix(in srgb, var(--ai-bg) 20%, transparent) 40%,
+      color-mix(in srgb, var(--ai-bg) 42%, transparent) 58%,
+      color-mix(in srgb, var(--ai-bg) 72%, transparent) 78%,
+      color-mix(in srgb, var(--ai-bg) 97%, transparent) 100%
+    );
+  }
+}
+
+.ai-impact-outcomes__content {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  min-width: 0;
+  width: 100%;
+  padding: var(--hm-space-md);
+  color: var(--ai-copy);
+}
+
+.ai-impact-outcomes__type {
+  margin: 0 0 var(--hm-space-3xs);
+  color: var(--ai-hot);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ai-impact-outcomes h3 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 1.15;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.ai-impact-outcomes__details {
+  max-height: 0;
+  display: grid;
+  gap: var(--hm-space-2xs);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ai-impact-outcomes__card.is-active.is-expanded .ai-impact-outcomes__details,
+.ai-impact-outcomes__card.is-active:focus-visible .ai-impact-outcomes__details {
+  max-height: 180px;
+  margin-top: var(--hm-space-xs);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ai-impact-outcomes__card.is-active:hover .ai-impact-outcomes__details {
+    max-height: 180px;
+    margin-top: var(--hm-space-xs);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-impact-outcomes__badge-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hm-space-3xs);
+}
+
+.ai-impact-outcomes__badge-row > span {
+  color: var(--ai-hot);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-impact-outcomes__badge-row > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hm-space-3xs);
+}
+
+.ai-impact-outcomes__badge-row b {
+  padding: var(--hm-space-3xs) var(--hm-space-2xs);
+  border: 1px solid color-mix(in srgb, var(--ai-hot) 40%, transparent);
+  border-radius: 999px;
+  background: rgb(5 6 10 / 62%);
+  color: var(--ai-copy);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.ai-impact-outcomes__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  background: rgb(18 20 26 / 55%);
+  color: var(--ai-copy);
+  backdrop-filter: blur(8px);
+  transform: translateY(-50%);
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+  cursor: pointer;
+}
+
+.ai-impact-outcomes__arrow:hover,
+.ai-impact-outcomes__arrow:focus-visible {
+  border-color: rgb(255 255 255 / 40%);
+  background: rgb(28 31 40 / 85%);
+}
+
+.ai-impact-outcomes__arrow:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.ai-impact-outcomes__arrow--prev { left: 16px; }
+.ai-impact-outcomes__arrow--next { right: 16px; }
+
+.ai-impact-outcomes__dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  z-index: 3000;
+  display: flex;
+  gap: var(--hm-space-2xs);
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
+  border-radius: 999px;
+  background: rgb(14 16 22 / 40%);
+  backdrop-filter: blur(6px);
+  transform: translateX(-50%);
+}
+
+.ai-impact-outcomes__dots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 32%);
+  transition: width 250ms ease, background 250ms ease;
+  cursor: pointer;
+}
+
+.ai-impact-outcomes__dots button.is-active {
+  width: 20px;
+  background: var(--ai-copy);
+}
+
+.ai-impact-page .site-footer {
+  border-top: 1px solid color-mix(in srgb, var(--ai-line) 24%, transparent);
+  padding-top: var(--hm-space-md);
+}
+
+.ai-impact-page .social-links a {
+  --social-icon-color: var(--ai-line);
+}
+
+.ai-impact-page .social-link:hover,
+.ai-impact-page .social-link:focus-visible {
+  --social-icon-color: var(--ai-hot);
+}
+
+html[data-ai-impact-transition]::view-transition-old(root),
+html[data-ai-impact-transition]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-ai-impact-transition]:not([data-ai-impact-content-ready]) body * {
+  animation-play-state: paused !important;
+}
+
+html[data-ai-impact-transition='enter']::view-transition-old(root),
+html[data-ai-impact-transition='leave']::view-transition-new(root) {
+  z-index: 1;
+}
+
+html[data-ai-impact-transition='enter']::view-transition-new(root),
+html[data-ai-impact-transition='leave']::view-transition-old(root) {
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .ai-impact-page .site-nav {
+    background: var(--ai-bg);
+  }
+
+  .ai-impact-page .nav-top {
+    min-width: 0;
+  }
+
+  .ai-impact-hero h1 {
+    font-size: clamp(46px, 15vw, 72px);
+  }
+
+  .ai-impact-hero__copy {
+    gap: var(--hm-space-md);
+  }
+
+  .ai-impact-content {
+    width: min(100% - 40px, 620px);
+    padding: var(--ai-section-top-gap) 0 40px;
+  }
+
+  .ai-impact-section {
+    grid-template-columns: 1fr;
+    gap: var(--hm-space-md);
+    padding-block: var(--hm-space-lg);
+  }
+
+  .ai-impact-section__intro {
+    position: static;
+  }
+
+  .ai-impact-mindset__steps {
+    grid-template-columns: 1fr;
+    gap: var(--hm-space-md);
+  }
+
+  .ai-impact-mindset__steps::before {
+    display: none;
+  }
+
+  .ai-impact-mindset__step:not(:last-child)::after {
+    top: 72px;
+    left: 31px;
+    width: 1px;
+    height: calc(100% - 52px);
+    background:
+      linear-gradient(180deg, transparent, var(--ai-hot) 42%, white 50%, var(--ai-hot) 58%, transparent)
+        0 -100% / 100% 45% no-repeat,
+      color-mix(in srgb, var(--ai-line) 42%, transparent);
+  }
+
+  .ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:not(:last-child)::after {
+    animation-name: aiMindsetGlowVertical;
+  }
+
+  .ai-impact-mindset__step {
+    grid-template-columns: 64px minmax(0, 1fr);
+    align-items: start;
+    gap: var(--hm-space-sm);
+  }
+
+  .ai-impact-mindset__evidence {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-impact-proof__surface {
+    min-height: 0;
+  }
+
+  .ai-impact-proof__diagram {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-impact-proof__diagram-entry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ai-impact-proof__diagram-entry > svg {
+    margin: 5px auto;
+    transform: rotate(90deg);
+  }
+
+  .ai-impact-proof__node {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    justify-items: start;
+    min-height: 48px;
+    padding: var(--hm-space-2xs) var(--hm-space-xs);
+  }
+
+  /* 綠 A：面板上緣 → 進度列內容，與綠 B（卡片上內距）同一級 */
+  .ai-impact-workflow-progress {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--hm-space-xs);
+    padding: var(--hm-space-md) var(--hm-space-sm);
+  }
+
+  .ai-impact-workflow-carousel__sticky {
+    top: calc(var(--ai-nav-height) + var(--ai-section-top-gap));
+    height: var(--ai-viewport-space);
+    border-radius: 18px;
+  }
+
+  /* 綠 B：進度列底 → 卡片內容，與綠 A 同一級 */
+  .ai-impact-workflow-slide {
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: var(--hm-space-sm);
+    padding: var(--hm-space-md) var(--hm-space-sm);
+  }
+
+  .ai-impact-workflow-progress__direction {
+    left: calc(50% + 8px);
+    width: calc(100% - 16px);
+  }
+
+  .ai-impact-workflow-progress__direction svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ai-impact-workflow-slide__number {
+    margin-bottom: var(--hm-space-2xs);
+  }
+
+  .ai-impact-workflow-slide h3 {
+    font-size: clamp(23px, 7vw, 30px);
+  }
+
+  .ai-impact-workflow-slide__body {
+    margin-top: var(--hm-space-xs);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .ai-impact-workflow-slide dl {
+    gap: var(--hm-space-xs);
+    margin-top: var(--hm-space-sm);
+  }
+
+  .ai-impact-workflow-slide dl > div {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: var(--hm-space-xs);
+    padding-top: var(--hm-space-xs);
+  }
+
+  .ai-impact-workflow-slide dt,
+  .ai-impact-workflow-slide dd {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  /* 三欄並排在 350px 可用寬下每張只有約 100px，字會斷成四行。
+     手機改成上下堆疊，每張吃滿寬度，箭頭跟著轉成向下。 */
+  .ai-impact-handoff {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--hm-space-xs);
+  }
+
+  .ai-impact-handoff__arrow {
+    justify-self: center;
+    width: 16px;
+    transform: rotate(90deg);
+  }
+
+  .ai-impact-handoff__node {
+    gap: var(--hm-space-2xs);
+    min-height: 0;
+    padding: var(--hm-space-xs) var(--hm-space-sm);
+  }
+
+  .ai-impact-handoff__node svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ai-impact-handoff__node span {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+
+  .ai-impact-handoff__node strong {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .ai-impact-handoff__arrow {
+    width: 12px;
+  }
+
+  .ai-impact-workflow-paths {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-impact-workflow-paths__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-impact-workflow-paths article {
+    border-right: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--ai-line) 22%, transparent);
+  }
+
+  .ai-impact-workflow-paths article:last-child {
+    border-bottom: 0;
+  }
+
+  .ai-impact-outcomes {
+    grid-column: 1;
+    height: 410px;
+    overflow: hidden;
+  }
+
+  .ai-impact-outcomes__content {
+    padding: var(--hm-space-sm);
+  }
+
+  .ai-impact-outcomes h3 {
+    font-size: 22px;
+  }
+
+  .ai-impact-outcomes__badge-row {
+    gap: var(--hm-space-3xs);
+  }
+
+  .ai-impact-outcomes__badge-row > span {
+    padding-top: 0;
+  }
+
+  /* 手機的卡片幾乎佔滿容器寬度，左右箭頭沒有可以站的位置，一定會壓在卡片上。
+     這個尺寸改用滑動換卡（根層已經是 touch-action: pan-y，橫向手勢交給輪播、
+     直向留給頁面捲動），底下的圓點仍然可以點，也保留鍵盤左右鍵。 */
+  .ai-impact-outcomes__arrow {
+    display: none;
+  }
+}
+
+@keyframes aiMindsetGlowVertical {
+  from { background-position: 0 -100%, 0 0; }
+  85% { background-position: 0 100%, 0 0; }
+  to { background-position: 0 320%, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-impact-mindset__icon,
+  .ai-impact-mindset__steps.is-animated .ai-impact-mindset__icon,
+  .ai-impact-mindset__steps.is-resetting .ai-impact-mindset__icon {
+    background: var(--ai-hot);
+    color: var(--ai-bg);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--ai-hot) 36%, transparent);
+    animation: none;
+  }
+
+  .ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:not(:last-child)::after {
+    animation: none;
+  }
+
+  .ai-impact-dots--highlight {
+    opacity: 0;
+    animation: none;
+  }
+
+  .ai-impact-page .hero-decoration {
+    animation: none !important;
+  }
+
+  .ai-impact-outcomes__card,
+  .ai-impact-outcomes__card > img,
+  .ai-impact-outcomes__details,
+  .ai-impact-outcomes__arrow,
+  .ai-impact-outcomes__dots button {
+    transition: none;
+  }
+
+  .ai-impact-workflow-carousel {
+    height: auto;
+  }
+
+  .ai-impact-workflow-carousel__sticky {
+    position: static;
+    height: auto;
+  }
+
+  .ai-impact-workflow-track {
+    display: grid;
+    gap: var(--hm-space-sm);
+    height: auto;
+    padding: var(--hm-space-sm);
+    transform: none;
+  }
+
+  .ai-impact-workflow-progress__direction {
+    display: none;
+  }
+
+  .ai-impact-workflow-slide {
+    height: auto;
+    border: 1px solid color-mix(in srgb, var(--ai-line) 20%, transparent);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--ai-bg) 92%, var(--ai-line));
+  }
+
+}
+
+/* AI Impact scroll story: six content scenes sharing one pinned viewport. */
+.ai-impact-content {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  width: 100%;
+  padding: var(--ai-section-top-gap) 0 48px;
+}
+
+.ai-impact-content::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: var(--ai-bg);
+}
+
+.ai-impact-content__dots {
+  position: sticky;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100svh;
+  margin-bottom: -100svh;
+  pointer-events: none;
+}
+
+.ai-impact-story {
+  width: min(1180px, calc(100% - (2 * var(--page-gutter))));
+  height: var(--story-scroll-height);
+  margin: 0 auto;
+}
+
+.ai-impact-story__stage {
+  --ai-story-hint-space: 43px;
+  position: sticky;
+  top: calc(var(--ai-nav-height) + var(--ai-section-top-gap));
+  height: var(--ai-viewport-space);
+  overflow: visible;
+  outline: none;
+  opacity: var(--ai-story-stage-opacity, 0.001);
+  transform:
+    translateY(var(--ai-story-stage-y, 96px))
+    scale(var(--ai-story-stage-scale, 0.98))
+    translateZ(0);
+  will-change: opacity, transform;
+}
+
+html[data-ai-story-visible='true'] .ai-impact-story__stage {
+  opacity: var(--ai-story-stage-opacity, 1);
+  transform:
+    translateY(var(--ai-story-stage-y, 0))
+    scale(var(--ai-story-stage-scale, 1))
+    translateZ(0);
+}
+
+.ai-impact-story__stage:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--ai-hot) 54%, transparent);
+  outline-offset: 4px;
+}
+
+.ai-impact-story__nav {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: max-content;
+  max-width: 100%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: var(--hm-space-3xs);
+  padding: var(--hm-space-3xs);
+  border: 1px solid color-mix(in srgb, var(--ai-line) 24%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ai-bg) 94%, transparent);
+  transform-origin: center;
+  transition: transform var(--hm-duration-enter) var(--hm-ease-spring);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ai-impact-story__nav:hover {
+    transform: translateX(-50%) scale(1.12);
+  }
+}
+
+.ai-impact-story__nav button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0;
+  padding: var(--hm-space-2xs) var(--hm-space-xs);
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ai-copy-muted);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  transition:
+    background-color var(--hm-duration-base) var(--hm-ease-standard),
+    color var(--hm-duration-base) var(--hm-ease-standard);
+}
+
+.ai-impact-story__nav-label {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-columns var(--hm-duration-base) var(--hm-ease-standard),
+    opacity var(--hm-duration-base) var(--hm-ease-standard);
+}
+
+.ai-impact-story__nav-label > span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ai-impact-story__nav button:is(.is-active, :hover, :focus-visible) .ai-impact-story__nav-label {
+  grid-template-columns: 1fr;
+  opacity: 1;
+}
+
+.ai-impact-story__nav button:is(.is-active, :hover, :focus-visible) .ai-impact-story__nav-label > span {
+  padding-left: var(--hm-space-2xs);
+}
+
+.ai-impact-story__nav button > span:first-child {
+  color: var(--ai-deep);
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.ai-impact-story__nav button:hover,
+.ai-impact-story__nav button:focus-visible,
+.ai-impact-story__nav button.is-active {
+  background: color-mix(in srgb, var(--ai-hot) 11%, transparent);
+  color: var(--ai-hot);
+}
+
+.ai-impact-story__scene {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  display: grid;
+  width: 100vw;
+  min-width: 0;
+  padding: calc(54px + var(--hm-space-md)) max(var(--page-gutter), calc((100vw - 1180px) / 2)) var(--ai-story-hint-space);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.94);
+  transform-origin: center center;
+  visibility: hidden;
+  /* 時長與緩動維持原本的柔和節奏，只把「進場」排到「離場」之後。
+     原本兩段同時進行，兩個標題會在同一個位置一前一後各自移動，
+     看起來像「01 標題跳一次、02 標題再跳一次」。 */
+  transition:
+    opacity var(--hm-duration-image) var(--hm-ease-in-out),
+    transform var(--hm-duration-enter) var(--hm-ease-emphasized),
+    visibility 0s linear var(--hm-duration-enter);
+}
+
+/* 離場：整段放大到消失 */
+.ai-impact-story__scene.is-before {
+  transform: translateX(-50%) scale(1.12);
+}
+
+.ai-impact-story__scene.is-active {
+  /* 進場延到離場淡出即將結束時才起跑（0.8 倍，不用整段 1.0，
+     否則中間會出現一段畫面全空、看起來像閃一下）。
+     opacity 與 transform 要一起延遲，否則放大會在看不見時就跑完，
+     真正出現時已經是原尺寸，就沒有「放大出場」了。 */
+  --ai-scene-enter-delay: calc(var(--hm-duration-image) * 0.8);
+
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) scale(1);
+  visibility: visible;
+  transition:
+    opacity var(--hm-duration-image) var(--hm-ease-in-out) var(--ai-scene-enter-delay),
+    transform var(--hm-duration-enter) var(--hm-ease-emphasized) var(--ai-scene-enter-delay),
+    visibility 0s linear 0s;
+}
+
+/* 捲動提示：整個 story 共用一個，貼在舞台底部距下緣 16px。
+   scene 的 padding-bottom 已預留 --ai-story-hint-space，內容不會壓到它。 */
+.ai-impact-story__hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hm-space-2xs);
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity var(--hm-duration-base) var(--hm-ease-standard);
+}
+
+.ai-impact-story__hint svg {
+  width: 15px;
+  height: 15px;
+  color: var(--ai-hot);
+  animation: aiWorkflowNextHint var(--hm-duration-reveal) var(--hm-ease-in-out) infinite alternate;
+}
+
+.ai-impact-story__hint.is-hidden {
+  opacity: 0;
+}
+
+.ai-impact-story__intro {
+  min-width: 0;
+  padding-right: 0;
+}
+
+.ai-impact-story__intro .ai-impact-section__number {
+  margin-bottom: clamp(6px, 1.3svh, 12px);
+}
+
+.ai-impact-story__intro h2 {
+  margin: 0 0 clamp(8px, 1.5svh, 14px);
+  color: var(--ai-hot);
+  font-size: clamp(28px, min(4vw, 5.8svh), 52px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.ai-impact-story__intro > p:last-child {
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: clamp(13px, 1.65svh, 15px);
+  line-height: 1.6;
+}
+
+.ai-impact-story__scene--mindset {
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--hm-space-md);
+}
+
+.ai-impact-story-mindset {
+  display: grid;
+  min-height: 0;
+  align-items: center;
+}
+
+.ai-impact-story-mindset.is-overview {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ai-impact-story-mindset.is-detail {
+  grid-template-columns: minmax(260px, 0.52fr) minmax(0, 1.48fr);
+  gap: clamp(34px, 6vw, 76px);
+}
+
+.ai-impact-story-mindset__steps {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-impact-story-mindset.is-overview .ai-impact-story-mindset__steps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--hm-space-md);
+}
+
+.ai-impact-story-mindset.is-detail .ai-impact-story-mindset__steps {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--hm-space-xs);
+}
+
+.ai-impact-story-mindset__step {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  gap: var(--hm-space-sm);
+}
+
+.ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 31px;
+  left: 72px;
+  width: calc(100% - 52px);
+  height: 1px;
+  background:
+    linear-gradient(90deg, transparent, var(--ai-hot) 42%, white 50%, var(--ai-hot) 58%, transparent)
+      -100% 0 / 45% 100% no-repeat,
+    color-mix(in srgb, var(--ai-line) 42%, transparent);
+}
+
+.ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step {
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  min-height: 72px;
+}
+
+.ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 68px;
+  left: 31px;
+  width: 1px;
+  height: 18px;
+  background: color-mix(in srgb, var(--ai-line) 42%, transparent);
+}
+
+.ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step:not(:last-child) .ai-impact-mindset__icon,
+.ai-impact-story-mindset.is-detail.is-complete .ai-impact-story-mindset__step:last-child .ai-impact-mindset__icon {
+  background: var(--ai-hot);
+  color: var(--ai-bg);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ai-hot) 36%, transparent);
+}
+
+.ai-impact-story-mindset.is-detail.is-complete .ai-impact-story-mindset__step:last-child .ai-impact-mindset__icon {
+  animation: aiMindsetNode var(--hm-duration-enter) var(--hm-ease-out) both;
+}
+
+.ai-impact-story-mindset__step h3 {
+  margin: 0 0 var(--hm-space-2xs);
+  color: var(--ai-hot);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.ai-impact-story-mindset__step p {
+  margin: 0;
+  color: var(--ai-copy-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.ai-impact-story-mindset.is-detail .ai-impact-mindset__number,
+.ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step p {
+  display: none;
+}
+
+.ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.ai-impact-story-mindset__proof {
+  min-width: 0;
+}
+
+.ai-impact-story-mindset__proof:empty {
+  display: none;
+}
+
+.ai-impact-story-mindset__proof .ai-impact-proof {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ai-line) 44%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ai-line) 5%, var(--ai-bg));
+  animation: aiStoryPanelEnter var(--hm-duration-enter) var(--hm-ease-out) both;
+}
+
+.ai-impact-story-mindset__proof figcaption {
+  min-width: 0;
+  padding: var(--hm-space-sm) var(--hm-space-md) var(--hm-space-sm);
+  border-top: 1px solid color-mix(in srgb, var(--ai-line) 24%, transparent);
+  background: color-mix(in srgb, var(--ai-bg) 62%, transparent);
+}
+
+.ai-impact-story-mindset__proof figcaption p {
+  margin: 0;
+  color: var(--ai-copy);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@keyframes aiStoryPanelEnter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ai-impact-story__scene--workflow {
+  min-width: 0;
+}
+
+.ai-impact-story-workflow {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--hm-space-sm);
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.ai-impact-story-workflow__panel,
+.ai-impact-story-workflow__paths {
+  grid-row: 2;
+  grid-column: 1;
+  min-width: 0;
+  min-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18px);
+  visibility: hidden;
+  transition:
+    opacity var(--hm-duration-card) var(--hm-ease-in-out),
+    transform var(--hm-duration-enter) var(--hm-ease-out),
+    visibility 0s linear var(--hm-duration-enter);
+}
+
+.ai-impact-story-workflow__panel.is-active,
+.ai-impact-story-workflow__paths.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.ai-impact-workflow-carousel.is-embedded {
+  grid-column: auto;
+  height: 100%;
+}
+
+.ai-impact-workflow-carousel.is-embedded .ai-impact-workflow-carousel__sticky {
+  position: relative;
+  top: auto;
+  height: 100%;
+}
+
+.ai-impact-workflow-carousel.is-embedded .ai-impact-workflow-track {
+  transform: translate3d(var(--workflow-offset), 0, 0);
+  transition: transform var(--hm-duration-image) var(--hm-ease-out);
+}
+
+.ai-impact-story-workflow__paths .ai-impact-workflow-paths {
+  height: 100%;
+  align-content: center;
+  padding-top: 0;
+}
+
+@media (min-width: 769px) {
+  .ai-impact-story-mindset.is-overview .ai-impact-mindset__icon {
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-self: center;
+    width: 80px;
+    height: 80px;
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step {
+    position: relative;
+    grid-template-rows: 80px auto;
+    gap: var(--hm-space-md);
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-mindset__icon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:not(:last-child)::after {
+    top: 39px;
+    left: calc(50% + 40px);
+    width: calc(100% - 80px);
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step > div {
+    width: 100%;
+    min-width: 0;
+    padding-inline: var(--hm-space-sm);
+    text-align: center;
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-mindset__number {
+    margin-bottom: var(--hm-space-xs);
+    font-size: 13px;
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step h3 {
+    margin-bottom: var(--hm-space-2xs);
+    font-size: 21px;
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .ai-impact-story-workflow__panel {
+    align-self: center;
+    height: calc(100% - 64px);
+  }
+}
+
+.ai-impact-story__scene--outcomes {
+  grid-template-columns: minmax(250px, 0.7fr) minmax(0, 1.8fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 72px);
+}
+
+.ai-impact-story__scene--outcomes .ai-impact-story__intro {
+  padding-right: 0;
+}
+
+.ai-impact-story__scene--outcomes .ai-impact-outcomes {
+  grid-column: 2;
+  height: min(500px, calc(var(--ai-viewport-space) - 48px));
+}
+
+@media (max-width: 768px) {
+  .ai-impact-content {
+    padding: var(--ai-section-top-gap) 0 40px;
+  }
+
+  .ai-impact-story {
+    width: min(100% - 40px, 620px);
+  }
+
+  .ai-impact-story__nav {
+    top: 0;
+  }
+
+  .ai-impact-story__nav button {
+    min-width: 44px;
+    justify-content: center;
+    padding-inline: var(--hm-space-2xs);
+  }
+
+  .ai-impact-story__nav button {
+    min-width: 44px;
+    flex-shrink: 1;
+  }
+
+  /* 手機版只留 01/02/03。展開的章節名會換行把導覽撐到 208px 高，
+     壓過下面的標題；而那個名稱本來就以 h2 的形式顯示在正下方。 */
+  .ai-impact-story__nav-label {
+    display: none;
+  }
+
+  /* 紅 A：54px 是章節膠囊自己的高度，後面那個 token 才是「膠囊底 → 區段起點」的間距 */
+  .ai-impact-story__scene {
+    padding: calc(54px + var(--hm-space-lg)) max(20px, calc((100vw - 620px) / 2)) var(--ai-story-hint-space);
+  }
+
+  .ai-impact-story__intro {
+    padding-right: 0;
+  }
+
+  .ai-impact-story__scene--workflow .ai-impact-story__intro {
+    padding-top: 0;
+  }
+
+  .ai-impact-story__intro h2 {
+    margin-bottom: var(--hm-space-2xs);
+    font-size: clamp(30px, 9vw, 40px);
+  }
+
+  .ai-impact-story__intro > p:last-child {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .ai-impact-story__scene--mindset {
+    gap: var(--hm-space-xs);
+  }
+
+  /* 手機由上到下排一欄：2×2 會把每格壓到約 150px 寬，標題全部斷行 */
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--hm-space-lg);
+  }
+
+  /* 手機改單欄後，連接線要從橫向改成直向：從圖示下緣往下穿過列間距，接到下一個圖示。
+     圖示 64px，所以 top 從 68px 起；高度 = 這一格剩下的高 + 列間距。 */
+  .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__step:not(:last-child)::after {
+    top: 68px;
+    left: 31px;
+    width: 1px;
+    height: calc(100% - 68px + var(--hm-space-lg));
+    background:
+      linear-gradient(180deg, transparent, var(--ai-hot) 42%, white 50%, var(--ai-hot) 58%, transparent)
+        0 -100% / 100% 45% no-repeat,
+      color-mix(in srgb, var(--ai-line) 42%, transparent);
+  }
+
+  .ai-impact-story-mindset.is-overview .ai-impact-mindset__steps.is-animated .ai-impact-story-mindset__step:not(:last-child)::after {
+    animation-name: aiMindsetGlowVertical;
+  }
+
+  .ai-impact-story-mindset__step {
+    gap: var(--hm-space-xs);
+  }
+
+  .ai-impact-story-mindset__step h3 {
+    margin-bottom: var(--hm-space-2xs);
+    font-size: 15px;
+  }
+
+  .ai-impact-story-mindset__step p {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .ai-impact-story-mindset.is-detail {
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: var(--hm-space-xs);
+  }
+
+  .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--hm-space-2xs);
+  }
+
+  /* detail 模式四個並排，標籤原本各自 80–101px、有的一行有的兩行，看起來參差。
+     給一個小於最短標籤的最大寬度，四個一致折成兩行。 */
+  .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step h3 {
+    max-width: 68px;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    min-height: 76px;
+    text-align: center;
+  }
+
+  .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step:not(:last-child)::after {
+    top: 31px;
+    left: calc(50% + 36px);
+    width: calc(100% - 58px);
+    height: 1px;
+  }
+
+  .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__step h3 {
+    font-size: 10px;
+  }
+
+  .ai-impact-story-mindset.is-detail .ai-impact-mindset__icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .ai-impact-story-mindset__proof .ai-impact-proof__body {
+    gap: var(--hm-space-xs);
+    padding: var(--hm-space-sm);
+  }
+
+  .ai-impact-story-mindset__proof .ai-impact-proof__surface {
+    min-height: 0;
+  }
+
+  /* 證據卡的四格在手機改直式：橫排每格只有約 89px，字會被擠成兩三行。
+     箭頭跟著轉成向下。 */
+  .ai-impact-story-mindset__proof .ai-impact-proof__diagram {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ai-impact-story-mindset__proof .ai-impact-proof__diagram-entry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ai-impact-story-mindset__proof .ai-impact-proof__diagram-entry > svg {
+    margin: var(--hm-space-3xs) auto;
+    transform: rotate(90deg);
+  }
+
+  .ai-impact-story-mindset__proof .ai-impact-proof__node {
+    grid-template-columns: 1fr;
+    min-height: 64px;
+    padding: var(--hm-space-2xs);
+  }
+
+  .ai-impact-story-mindset__proof .ai-impact-proof__node span {
+    font-size: 8px;
+  }
+
+  .ai-impact-story-mindset__proof figcaption {
+    padding: var(--hm-space-xs) var(--hm-space-sm);
+  }
+
+  /* 紅 B：與紅 A 同一級，兩段之間的呼吸要一致 */
+  .ai-impact-story-workflow {
+    gap: var(--hm-space-lg);
+  }
+
+  .ai-impact-workflow-carousel.is-embedded .ai-impact-workflow-carousel__sticky {
+    position: relative;
+    top: auto;
+    height: 100%;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths {
+    gap: var(--hm-space-sm);
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths__intro h3 {
+    font-size: 22px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths article {
+    gap: var(--hm-space-2xs);
+    padding: var(--hm-space-sm);
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths__icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths h4 {
+    font-size: 14px;
+  }
+
+  .ai-impact-story-workflow__paths .ai-impact-workflow-paths article p {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .ai-impact-story__scene--outcomes {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: start;
+    gap: var(--hm-space-xs);
+  }
+
+  .ai-impact-story__scene--outcomes .ai-impact-outcomes {
+    grid-column: 1;
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .ai-impact-page .ai-impact-hero {
+    position: relative;
+  }
+
+  .ai-impact-story__stage,
+  html[data-ai-story-visible='true'] .ai-impact-story__stage {
+    transform: none;
+    will-change: opacity;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-impact-page .ai-impact-hero,
+  .ai-impact-story__stage,
+  html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero,
+  html[data-ai-story-visible='true'] .ai-impact-story__stage {
+    opacity: 1;
+    transform: translateZ(0);
+    transition: none;
+    will-change: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-impact-story__scene,
+  .ai-impact-story-workflow__panel,
+  .ai-impact-story-workflow__paths,
+  .ai-impact-workflow-carousel.is-embedded .ai-impact-workflow-track,
+  .ai-impact-story-mindset__proof .ai-impact-proof {
+    animation: none;
+    transition: none;
+  }
+
+  .ai-impact-story__hint svg,
+  .ai-impact-story-mindset.is-overview .ai-impact-mindset__icon {
+    animation: none;
+  }
+
+  .ai-impact-story-mindset.is-detail.is-complete .ai-impact-story-mindset__step:last-child .ai-impact-mindset__icon {
+    animation: none;
+  }
+}
+
+/* ── 手機：一段的內容比版位高時，讓這一段自己捲；捲到盡頭才換下一段 ──
+   釘住版位在手機只有約 338px，內容（尤其 handoff 改成上下堆疊後）本來就會更高。
+   與其削間距硬塞，不如讓這一段可以捲 —— 畫面上仍然一次只有一段。
+   overscroll-behavior: contain 擋掉捲動鏈結，避免捲到盡頭時整頁跟著滑掉。
+   換段的推進由 AiImpactStoryStage 的 canScrollWithin() 判斷邊界後才觸發。 */
+@media (max-width: 768px) {
+  .ai-impact-story__scene {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    /* 內容比版位高時要從頂端往下排；置中會讓內容往上下同時溢出自己的 content box，
+       捲到底也碰不到最後那段。 */
+    align-content: start;
+    padding-bottom: 0;
+  }
+
+  /* 捲動末端的預留空間加在「內容容器自己身上」，不加在 scene：
+     ① scene 的 padding-bottom 不會被算進 scrollHeight（下內距整個被吃掉）；
+     ② 用 scene 的透明下邊框雖然能撐出捲動範圍，但會把內容的裁切線往上推 67px，
+        底部漸層與提示都還留在舞台底緣，結果就是「沒有漸層 + 提示離內容很遠」。
+     內容容器的 padding 是它自己高度的一部分，一定會被算進 scrollHeight，
+     裁切線也維持在舞台底緣，漸層才蓋得到內容邊界。 */
+  .ai-impact-story-mindset,
+  .ai-impact-story-workflow {
+    padding-bottom: calc(var(--ai-story-hint-space) + var(--hm-space-md));
+  }
+
+  /* 心法這層是 scene 的 grid item，預設 stretch 成版位高度，
+     它的 padding-bottom 就被關在那個高度裡、撐不出捲動空間，
+     證據卡還會直接溢出到舞台底緣落進遮罩。要用 align-self: start 讓它貼齊內容
+     （與 .ai-impact-story-workflow 同樣的處理）。 */
+  .ai-impact-story-mindset {
+    align-self: start;
+    align-items: start;
+  }
+
+  /* 成果輪播用 margin 而不是 padding：它內部靠 flex 置中，加 padding 會把卡片推偏。 */
+  .ai-impact-story__scene--outcomes .ai-impact-outcomes {
+    margin-bottom: calc(var(--ai-story-hint-space) + var(--hm-space-md));
+  }
+
+  .ai-impact-story__scene::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 可捲之後就不必再把內容壓進一個版位，回到正常的段落節奏 */
+  .ai-impact-story__scene--mindset {
+    grid-template-rows: auto auto;
+    align-content: start;
+    gap: var(--hm-space-md);
+  }
+
+  .ai-impact-story-mindset {
+    height: auto;
+  }
+
+  .ai-impact-workflow-carousel.is-embedded,
+  .ai-impact-workflow-carousel.is-embedded .ai-impact-workflow-carousel__sticky {
+    height: auto;
+  }
+
+  .ai-impact-workflow-slide {
+    height: auto;
+  }
+
+  .ai-impact-story-workflow__panel {
+    align-self: start;
+    height: auto;
+  }
+
+  /* 這層是 scene 的 grid item，預設 stretch 成版位高度；內容再高也只是溢出去畫，
+     捲動容器算不到，最後一張卡就永遠停在 padding 裡碰不到。
+     grid item 要縮到內容高度得用 align-self: start，`height: auto` 沒有用。 */
+  .ai-impact-story-workflow {
+    align-self: start;
+    grid-template-rows: auto auto;
+  }
+
+  /* 階段面板與組合邏輯疊在同一個 grid 格子裡，列高會被「比較高的那個」決定；
+     看組合邏輯時上方就多出一大塊空白。手機直接讓沒啟用的那塊不佔位。 */
+  .ai-impact-story-workflow__panel:not(.is-active),
+  .ai-impact-story-workflow__paths:not(.is-active) {
+    display: none;
+  }
+}
+
+/* 段內捲動時，內容會從上方的章節膠囊與下方的提示底下經過。
+   上下各加一層漸變到底色的遮罩，讓文字在碰到它們之前先淡出。
+   放在 scene 之上（z-index 10）、膠囊與提示之下（z-index 20）。 */
+@media (max-width: 768px) {
+  .ai-impact-story__stage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: calc(54px + var(--hm-space-sm));
+    background: linear-gradient(
+      to top,
+      transparent,
+      color-mix(in srgb, var(--ai-bg) 88%, transparent) 45%,
+      var(--ai-bg)
+    );
+    pointer-events: none;
+  }
+
+  .ai-impact-story__stage::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    /* 遮罩高度要小於 scene 的 padding-bottom，捲到底時最後一段內容才在遮罩之上 */
+    height: var(--ai-story-hint-space);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      color-mix(in srgb, var(--ai-bg) 88%, transparent) 55%,
+      var(--ai-bg)
+    );
+    pointer-events: none;
+  }
+}
+
+/* 成果卡整張是用 transform scale 縮小的（元件依容器寬度算係數），
+   卡片上的文字也會跟著縮到讀不了。這裡把係數反向抵銷：
+   文字層縮放 1/scale、寬度乘上 scale，視覺寬度不變、字級回到原本大小。 */
+.ai-impact-outcomes__content {
+  width: calc(100% * var(--outcome-scale, 1));
+  transform: scale(calc(1 / var(--outcome-scale, 1)));
+  transform-origin: bottom left;
+}
+
+
+
+/* AI Impact 的主標比首頁大得多（clamp 到 104px），底部四個裝飾在 1280px 以下
+   會壓到副標；手機也一樣（只是 Hming 的機器高度 <800 剛好被舊規則擋掉）。
+   這四個是純裝飾，寬度不夠就整組收起。首頁維持原本行為不受影響。 */
+@media (max-width: 1279px) {
+  .ai-impact-page .hero-frame-large,
+  .ai-impact-page .hero-ai-widget,
+  .ai-impact-page .hero-wal-pencil,
+  .ai-impact-page .hero-toggle {
+    display: none;
+  }
+}

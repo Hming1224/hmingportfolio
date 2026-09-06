@@ -882,6 +882,59 @@ button {
   height: 100%;
 }
 
+.language-loading-backdrop--ai-impact {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 230, 40, 0.055), transparent 32%),
+    rgba(8, 8, 7, 0.78);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: hm-language-loading-backdrop-in var(--hm-duration-base) var(--hm-ease-standard) both;
+}
+
+.language-loading-overlay--ai-impact {
+  overflow: hidden;
+  border-color: rgba(255, 198, 40, 0.72);
+  background:
+    radial-gradient(circle, rgba(255, 230, 40, 0.12) 1px, transparent 1.4px) 0 0 / 12px 12px,
+    rgba(37, 36, 35, 0.97);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(255, 230, 40, 0.08),
+    0 0 30px rgba(255, 198, 40, 0.14);
+  animation: hm-language-loading-overlay-in var(--hm-duration-card) var(--hm-ease-out) both;
+}
+
+.language-loading-overlay--ai-impact::after {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 230, 40, 0.1);
+  border-radius: 13px;
+  content: "";
+  pointer-events: none;
+}
+
+.language-loading-animation--ai-impact {
+  position: relative;
+  z-index: 1;
+  filter: brightness(0) saturate(100%) invert(89%) sepia(95%) saturate(1187%) hue-rotate(338deg) brightness(105%) contrast(104%);
+}
+
+@keyframes hm-language-loading-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hm-language-loading-overlay-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 8px)) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 .nav-line {
   position: absolute;
   right: 0;

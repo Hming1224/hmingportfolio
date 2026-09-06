@@ -13,7 +13,13 @@ const languageOptions: Array<{ locale: Locale; label: string }> = [
   { locale: "zh-TW", label: "繁體中文" },
 ];
 
-export default function LanguageSwitcher() {
+type LanguageSwitcherVariant = "default" | "aiImpact";
+
+export default function LanguageSwitcher({
+  variant = "default",
+}: {
+  variant?: LanguageSwitcherVariant;
+}) {
   const t = useTranslations("language");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
@@ -121,24 +127,42 @@ export default function LanguageSwitcher() {
         </div>
       </div>
       {(showLoading || isPending) && (
-        <LanguageLoadingPortal label={t("loading")} />
+        <LanguageLoadingPortal label={t("loading")} variant={variant} />
       )}
     </>
   );
 }
 
-function LanguageLoadingPortal({ label }: { label: string }) {
+function LanguageLoadingPortal({
+  label,
+  variant,
+}: {
+  label: string;
+  variant: LanguageSwitcherVariant;
+}) {
+  const isAiImpact = variant === "aiImpact";
+
   return createPortal(
     <>
-      <div className="language-loading-backdrop" aria-hidden="true" />
-      <LanguageLoadingOverlay label={label} />
+      <div
+        className={`language-loading-backdrop${isAiImpact ? " language-loading-backdrop--ai-impact" : ""}`}
+        aria-hidden="true"
+      />
+      <LanguageLoadingOverlay label={label} variant={variant} />
     </>,
     document.body,
   );
 }
 
-function LanguageLoadingOverlay({ label }: { label: string }) {
+function LanguageLoadingOverlay({
+  label,
+  variant,
+}: {
+  label: string;
+  variant: LanguageSwitcherVariant;
+}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const isAiImpact = variant === "aiImpact";
 
   useEffect(() => {
     const container = containerRef.current;
@@ -166,8 +190,16 @@ function LanguageLoadingOverlay({ label }: { label: string }) {
   }, []);
 
   return (
-    <div className="language-loading-overlay" role="status" aria-label={label}>
-      <div ref={containerRef} className="language-loading-animation" aria-hidden="true" />
+    <div
+      className={`language-loading-overlay${isAiImpact ? " language-loading-overlay--ai-impact" : ""}`}
+      role="status"
+      aria-label={label}
+    >
+      <div
+        ref={containerRef}
+        className={`language-loading-animation${isAiImpact ? " language-loading-animation--ai-impact" : ""}`}
+        aria-hidden="true"
+      />
     </div>
   );
 }

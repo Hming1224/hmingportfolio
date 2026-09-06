@@ -79,6 +79,7 @@ export default function GenieReveal({
     let rafId = 0;
     let placementRafId = 0;
     let placementTimer = 0;
+    let waitingForPageTransition = false;
 
     const updateDockPlacement = () => {
       if (killed) return;
@@ -255,7 +256,23 @@ export default function GenieReveal({
     };
 
     // ── 預拍：頭貼 icon 先佔住畫面，快照稍微延後避免擋首屏 paint ─────────────
-    const snapshotTimer = window.setTimeout(takeSnapshot, 120);
+    const takeSnapshotAfterPageTransition = () => {
+      waitingForPageTransition = false;
+      if (!killed) void takeSnapshot();
+    };
+    const snapshotTimer = window.setTimeout(() => {
+      if (
+        document.documentElement.dataset.aiImpactTransition &&
+        !document.documentElement.dataset.aiImpactContentReady
+      ) {
+        waitingForPageTransition = true;
+        window.addEventListener('ai-impact-transition-content-ready', takeSnapshotAfterPageTransition, {
+          once: true,
+        });
+        return;
+      }
+      void takeSnapshot();
+    }, 120);
 
     // ── 觸發：滾到才播（首屏卡片一進視線即觸發）──────────────────────────
     const trigger = ScrollTrigger.create({
@@ -282,6 +299,9 @@ export default function GenieReveal({
       clearTimeout(snapshotTimer);
       clearTimeout(firstScreenTimer);
       clearTimeout(placementTimer);
+      if (waitingForPageTransition) {
+        window.removeEventListener('ai-impact-transition-content-ready', takeSnapshotAfterPageTransition);
+      }
       resizeObserver?.disconnect();
       window.removeEventListener("resize", scheduleDockPlacement);
       window.removeEventListener("orientationchange", scheduleDockPlacement);
