@@ -545,18 +545,26 @@ export default function AiImpactStoryStage({
     };
   }, [activeStep]);
 
-  /* 換到新的一段時，把它的內部捲動歸位：往前走從頭看，往回走接在底部，
-     否則會停在上次離開的位置，看起來像跳掉一段內容。 */
+  /* 換到新的一段時，把它的內部捲動歸位：往前走回到最上面從頭讀，往回走接在底部。
+     只設一次不夠——手機放開手指後的慣性捲動會在設定之後繼續推，
+     所以要連續壓住幾百毫秒，直到慣性耗盡為止。 */
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
-    const frame = window.requestAnimationFrame(() => {
+    let frame = 0;
+    const until = performance.now() + 420;
+    const hold = () => {
       const scene = stage.querySelector<HTMLElement>('.ai-impact-story__scene.is-active');
-      if (!scene) return;
-      const overflowY = window.getComputedStyle(scene).overflowY;
-      if (overflowY !== 'auto' && overflowY !== 'scroll') return;
-      scene.scrollTop = direction === 'forward' ? 0 : scene.scrollHeight - scene.clientHeight;
-    });
+      if (scene) {
+        const overflowY = window.getComputedStyle(scene).overflowY;
+        if (overflowY === 'auto' || overflowY === 'scroll') {
+          const target = direction === 'forward' ? 0 : scene.scrollHeight - scene.clientHeight;
+          if (Math.abs(scene.scrollTop - target) > 0.5) scene.scrollTop = target;
+        }
+      }
+      if (performance.now() < until) frame = window.requestAnimationFrame(hold);
+    };
+    frame = window.requestAnimationFrame(hold);
     return () => window.cancelAnimationFrame(frame);
   }, [activeStep, direction]);
 
