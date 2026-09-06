@@ -6,12 +6,19 @@ import {
   gotoAndWait,
 } from './helpers';
 
+/* 這支檔案的測試都靠捲動驅動 story stage，動畫與 sticky 量測對時序很敏感。
+   全域 fullyParallel: true 會讓同一支檔案裡的測試同時跑，多個瀏覽器搶 CPU 時
+   捲動位置與動畫進度都對不準——實測平行跑 32 個有 3 個失敗、耗時 9.7 分鐘，
+   改回檔案內循序則 32 個全過、1.6 分鐘。'default' 是循序但各自獨立
+   （不像 'serial' 會在第一個失敗後跳過其餘）。 */
+test.describe.configure({ mode: 'default' });
+
 async function scrollStoryToStep(page: Page, step: number) {
   const story = page.locator('.ai-impact-story');
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = 'auto';
   });
-  await story.evaluate((element, targetStep) => {
+  await story.evaluate((element: HTMLElement, targetStep) => {
     const stage = element.querySelector<HTMLElement>('.ai-impact-story__stage');
     if (!stage) return;
     const top = element.getBoundingClientRect().top + window.scrollY;
@@ -29,7 +36,7 @@ test.describe('AI Impact reveal entry', () => {
       const errors = collectConsoleErrors(page);
       await gotoAndWait(page, '/en');
 
-      const entry = page.locator('.ai-impact-entry');
+      const entry = page.locator('.ai-impact-reveal-cta');
       const hero = page.locator('.hero').first();
       await expect(entry).toBeVisible();
       const [entryBox, heroBox] = await Promise.all([entry.boundingBox(), hero.boundingBox()]);
@@ -47,7 +54,7 @@ test.describe('AI Impact reveal entry', () => {
   test('early release resets progress and does not navigate', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoAndWait(page, '/en');
-    const button = page.locator('.ai-impact-reveal');
+    const button = page.locator('.ai-impact-reveal-cta');
 
     await button.hover();
     await page.mouse.down();
@@ -63,7 +70,7 @@ test.describe('AI Impact reveal entry', () => {
     await page.setViewportSize({ width: 1024, height: 900 });
     const errors = collectConsoleErrors(page);
     await gotoAndWait(page, '/en');
-    const button = page.locator('.ai-impact-reveal');
+    const button = page.locator('.ai-impact-reveal-cta');
 
     await button.hover();
     await page.mouse.down();
@@ -106,7 +113,7 @@ test.describe('AI Impact reveal entry', () => {
   test('Space and Enter support the same hold threshold', async ({ page }) => {
     await page.setViewportSize({ width: 768, height: 1024 });
     await gotoAndWait(page, '/zh-TW');
-    const button = page.locator('.ai-impact-reveal');
+    const button = page.locator('.ai-impact-reveal-cta');
 
     await button.focus();
     await page.keyboard.down('Space');
@@ -126,7 +133,7 @@ test.describe('AI Impact reveal entry', () => {
     });
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoAndWait(page, '/en');
-    const button = page.locator('.ai-impact-reveal');
+    const button = page.locator('.ai-impact-reveal-cta');
 
     await button.hover();
     await page.mouse.down();
@@ -140,7 +147,7 @@ test.describe('AI Impact reveal entry', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoAndWait(page, '/en');
-    const button = page.locator('.ai-impact-reveal');
+    const button = page.locator('.ai-impact-reveal-cta');
 
     await button.hover();
     await page.mouse.down();
@@ -159,7 +166,7 @@ test.describe('AI Impact touch input', () => {
   test('touch hold reaches the same 800ms threshold', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoAndWait(page, '/en');
-    const buttonBox = await page.locator('.ai-impact-reveal').boundingBox();
+    const buttonBox = await page.locator('.ai-impact-reveal-cta').boundingBox();
     expect(buttonBox).not.toBeNull();
     if (!buttonBox) return;
 
@@ -179,6 +186,26 @@ test.describe('AI Impact touch input', () => {
     await scrollStoryToStep(page, 3);
     await expect(page.locator('.ai-impact-workflow-carousel')).toHaveAttribute('data-active-stage', '1');
 
+    /* commit d0f6c09 之後，手機上「內容會捲的 scene」要先捲到底、在盡頭停留
+       END_DWELL（320ms）才允許換段，否則滑動只會被當成捲內容。這是刻意的行為，
+       所以測試要先滿足這個前置條件，再驗證「一次滑動剛好前進一個階段」。
+       捲之前先等換段動畫落定，否則會捲到還在退場的那個 scene。 */
+    const distanceToSceneEnd = () =>
+      page.evaluate(() => {
+        const scene = document.querySelector<HTMLElement>('.ai-impact-story__scene.is-active');
+        if (!scene) return -1;
+        return scene.scrollHeight - scene.clientHeight - scene.scrollTop;
+      });
+
+    await page.waitForTimeout(600);
+    await page.evaluate(() => {
+      const scene = document.querySelector<HTMLElement>('.ai-impact-story__scene.is-active');
+      if (!scene) return;
+      scene.scrollTop = scene.scrollHeight - scene.clientHeight;
+    });
+    await expect.poll(distanceToSceneEnd).toBeLessThanOrEqual(1);
+    await page.waitForTimeout(420);
+
     const client = await page.context().newCDPSession(page);
     await client.send('Input.dispatchTouchEvent', {
       type: 'touchStart',
@@ -193,7 +220,7 @@ test.describe('AI Impact touch input', () => {
     await expect(story).toHaveAttribute('data-active-step', '5');
     await expect(page.locator('.ai-impact-workflow-carousel')).toHaveAttribute('data-active-stage', '2');
     await expect(page.locator('.ai-impact-workflow-slide[data-stage="2"]')).toBeVisible();
-    await expect(page.locator('.ai-impact-workflow-next-hint')).toContainText('滑動觀看下一步');
+    await expect(page.locator('.ai-impact-story__hint')).toContainText('滑動觀看下一步');
     await expectNoHorizontalOverflow(page);
   });
 });
@@ -269,7 +296,9 @@ test.describe('AI Impact page', () => {
       await expect(page.locator('.ai-impact-story-mindset__step')).toHaveCount(4);
       await expect(page.locator('.ai-impact-mindset__number')).toHaveText(['01', '02', '03', '04']);
       await expect(page.locator('.ai-impact-workflow-slide')).toHaveCount(7);
-      await expect(page.locator('.ai-impact-workflow-slide__media')).toHaveCount(0);
+      /* 原本查的 .ai-impact-workflow-slide__media 已經不存在，toHaveCount(0) 會永遠通過。
+         這一條的用意是「workflow 每一頁只放文字、不放圖」，改成直接查 img 才驗得到。 */
+      await expect(page.locator('.ai-impact-workflow-slide img')).toHaveCount(0);
       await expect(page.locator('.ai-impact-workflow-paths article')).toHaveCount(3);
       await expect(page.locator('.ai-impact-outcomes__card')).toHaveCount(4);
       await scrollStoryToStep(page, 2);
@@ -314,7 +343,7 @@ test.describe('AI Impact page', () => {
     const carousel = page.locator('.ai-impact-workflow-carousel');
     await expect(page.locator('.ai-impact-story__stage')).toHaveCSS('position', 'sticky');
     await expect(carousel.locator('li.is-active .ai-impact-workflow-progress__direction')).toHaveCount(1);
-    await expect(carousel.locator('.ai-impact-workflow-next-hint')).toContainText('Scroll for next phase');
+    await expect(page.locator('.ai-impact-story__hint')).toContainText('Scroll for next phase');
 
     await scrollStoryToStep(page, 0);
     await expect(story).toHaveAttribute('data-active-section', 'mindset');
@@ -343,11 +372,15 @@ test.describe('AI Impact page', () => {
     await expect(carousel).toHaveAttribute('data-active-stage', '7');
     await expect.poll(() => carousel.getAttribute('data-progress')).toBe('1.000');
     await expect(carousel.locator('.ai-impact-workflow-progress__direction')).toHaveCount(0);
-    await expect(carousel.locator('.ai-impact-workflow-next-hint')).toHaveClass(/is-hidden/);
+    /* 「往下一步」的提示以前掛在 workflow carousel 上、跑完第 7 階段就收起來；
+       現在改成整個 story 共用一個提示，只有走到最後一段才收。所以這裡改成
+       第 9 步仍然看得到、第 11 步（最後一段）才隱藏。 */
+    await expect(page.locator('.ai-impact-story__hint')).not.toHaveClass(/is-hidden/);
     await scrollStoryToStep(page, 10);
     await expect(page.locator('.ai-impact-story-workflow')).toHaveClass(/is-paths/);
     await scrollStoryToStep(page, 11);
     await expect(story).toHaveAttribute('data-active-section', 'outcomes');
+    await expect(page.locator('.ai-impact-story__hint')).toHaveClass(/is-hidden/);
     await expectNoHorizontalOverflow(page);
     expectNoConsoleErrors(errors);
   });
