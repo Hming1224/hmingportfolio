@@ -20,7 +20,7 @@ const messages = {
     badge: "1+年業界經驗的產品設計師，正在尋求新的機會！",
     greeting: "哈囉！我是黃宣銘 Brian Huang",
     description: "從<shiny>美術</shiny>、<shiny>機械</shiny>到<shiny>人機互動</shiny>，我習慣整合使用者、商業與工程的不同視角，把複雜問題轉化成真正能落地的產品。",
-    journey: "我的歷程",
+    journey: "我怎麼使用 AI",
     works: "查看作品",
   },
   works: {
@@ -61,7 +61,6 @@ const messages = {
   aiImpact: {
     reveal: "Reveal AI mindset",
     revealAria: "按住以開啟 AI 做事思維頁面",
-    revealHint: "按住 0.8 秒",
     back: "Back to Home",
     eyebrow: "決策、邊界與驗證",
     title: "The AI Impact",

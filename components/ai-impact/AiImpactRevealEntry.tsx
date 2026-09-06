@@ -1,6 +1,6 @@
 'use client';
 
-import type { KeyboardEvent, PointerEvent } from 'react';
+import type { KeyboardEvent, MouseEvent, PointerEvent } from 'react';
 import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
@@ -18,7 +18,7 @@ function warmAiImpactRoute() {
   return routeWarmup;
 }
 
-export default function AiImpactRevealEntry() {
+export default function AiImpactRevealEntry({ label }: { label?: string } = {}) {
   const t = useTranslations('aiImpact');
   const router = useRouter();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -115,28 +115,30 @@ export default function AiImpactRevealEntry() {
     };
   }, [router]);
 
+  const text = label ?? t('reveal');
+  const handlers = {
+    onContextMenu: (event: MouseEvent<HTMLButtonElement>) => event.preventDefault(),
+    onKeyDown: handleKeyDown,
+    onKeyUp: handleKeyUp,
+    onPointerCancel: handlePointerEnd,
+    onPointerDown: handlePointerDown,
+    onPointerLeave: cancel,
+    onPointerUp: handlePointerEnd,
+  };
+
   return (
-    <div className="ai-impact-entry">
-      <button
-        ref={buttonRef}
-        className="ai-impact-reveal"
-        type="button"
-        aria-label={t('revealAria')}
-        onContextMenu={(event) => event.preventDefault()}
-        onKeyDown={handleKeyDown}
-        onKeyUp={handleKeyUp}
-        onPointerCancel={handlePointerEnd}
-        onPointerDown={handlePointerDown}
-        onPointerLeave={cancel}
-        onPointerUp={handlePointerEnd}
-      >
-        <span className="ai-impact-reveal__fill" aria-hidden="true" />
-        <span className="ai-impact-reveal__label">{t('reveal')}</span>
-        <span className="ai-impact-reveal__label ai-impact-reveal__label--active" aria-hidden="true">
-          {t('reveal')}
-        </span>
-      </button>
-      <span className="ai-impact-entry__hint">{t('revealHint')}</span>
-    </div>
+    <button
+      ref={buttonRef}
+      className="ds-button ds-button-secondary ds-button-md ai-impact-reveal-cta"
+      type="button"
+      aria-label={t('revealAria')}
+      {...handlers}
+    >
+      <span className="ai-impact-reveal__fill" aria-hidden="true" />
+      <span className="ds-button-content ai-impact-reveal__label"><span>{text}</span></span>
+      <span className="ds-button-content ai-impact-reveal__label ai-impact-reveal__label--active" aria-hidden="true">
+        <span>{text}</span>
+      </span>
+    </button>
   );
 }

@@ -20,7 +20,7 @@ const messages = {
     badge: "Product designer with 1+ year of industry experience, open to new opportunities.",
     greeting: "Hi! I'm Brian Huang",
     description: "With a background in <shiny>art</shiny>, <shiny>mechanical engineering</shiny>, and <shiny>HCI</shiny>, I turn complex problems into usable products by balancing user, business, and engineering needs.",
-    journey: "My Journey",
+    journey: "How I use AI",
     works: "View My Work",
   },
   works: {
@@ -61,7 +61,6 @@ const messages = {
   aiImpact: {
     reveal: "Reveal AI mindset",
     revealAria: "Hold to reveal the AI mindset page",
-    revealHint: "Hold for 0.8 seconds",
     back: "Back to Home",
     eyebrow: "Decisions, boundaries, and proof",
     title: "The AI Impact",

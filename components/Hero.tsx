@@ -51,11 +51,10 @@ export default async function Hero() {
         </div>
 
         <div className="hero-actions" data-hero-roll-in>
-          <Button href="/about-me" variant="secondary">{t('journey')}</Button>
+          <AiImpactRevealEntry label={t('journey')} />
           <Button href="#projects">{t('works')}</Button>
         </div>
       </div>
-      <AiImpactRevealEntry />
     </section>
   );
 }
