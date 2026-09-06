@@ -33,6 +33,9 @@ const OUTCOMES_STEP = 11;
 const STORY_STEP_COUNT = 12;
 const MINDSET_SEQUENCE_DURATION = 5700;
 const MINDSET_REPLAY_DELAY = 3000;
+/* 內容抵達端點後要停留多久才允許換段。低於這個時間的「到底」通常是使用者還沒看到的
+   慣性捲動結果，直接換頁會像「沒滑到底就跳頁」。 */
+const END_DWELL = 320;
 
 function toMilliseconds(value: string) {
   const duration = Number.parseFloat(value);
@@ -149,6 +152,10 @@ export default function AiImpactStoryStage({
      必須放手、重新滑一次才會前進，否則捲到底的那一下會直接跳頁。 */
   const touchConsumedRef = useRef(false);
   const wheelConsumedRef = useRef(false);
+  /* 內容抵達端點的時間戳（上／下各記一個）。慣性捲動是在放手之後才把內容帶到底，
+     那段期間沒有任何事件，光看「現在是不是在底部」會讓下一次滑動立刻換頁——
+     使用者的感受就是「還沒滑到底就跳頁」。要求在端點停留一小段時間才放行。 */
+  const atEndSinceRef = useRef<{ down: number | null; up: number | null }>({ down: null, up: null });
   const mindsetStepsRef = useRef<HTMLOListElement>(null);
   const mindsetNodeRefs = useRef<Array<HTMLLIElement | null>>([]);
   const mindsetRectsRef = useRef<DOMRect[]>([]);
@@ -374,19 +381,46 @@ export default function AiImpactStoryStage({
       if (frameRef.current === null) frameRef.current = window.requestAnimationFrame(update);
     };
     /* 手機上一段的內容可能比版位高，這時 scene 自己是捲動容器。
-       先讓它捲，捲到盡頭才換下一段 —— 桌機沒開 overflow，這裡一律回 false，
-       行為不變。必須檢查 computed overflow：內容溢出但沒開捲動時
-       scrollHeight 一樣會大於 clientHeight，只看數字會誤判成「還能捲」。 */
+       先讓它捲，捲到盡頭並停留 END_DWELL 之後才允許換段。
+       桌機沒開 overflow，一律回 'advance'，行為不變。
+       必須檢查 computed overflow：內容溢出但沒開捲動時 scrollHeight 一樣大於
+       clientHeight，只看數字會把桌機誤判成「還能捲」而永遠換不了段。 */
     const activeScene = () =>
       stageRef.current?.querySelector<HTMLElement>('.ai-impact-story__scene.is-active') ?? null;
-    const canScrollWithin = (direction: number) => {
-      const scene = activeScene();
-      if (!scene) return false;
-      const overflowY = window.getComputedStyle(scene).overflowY;
-      if (overflowY !== 'auto' && overflowY !== 'scroll') return false;
+
+    const markEnds = (scene: HTMLElement) => {
       const max = scene.scrollHeight - scene.clientHeight;
-      if (max <= 1) return false;
-      return direction > 0 ? scene.scrollTop < max - 1 : scene.scrollTop > 1;
+      const ends = atEndSinceRef.current;
+      const now = performance.now();
+      if (max <= 1) return;
+      if (scene.scrollTop >= max - 1) ends.down ??= now;
+      else ends.down = null;
+      if (scene.scrollTop <= 1) ends.up ??= now;
+      else ends.up = null;
+    };
+
+    /* 慣性捲動期間沒有 touch 事件，靠 scroll 事件把「何時抵達端點」記下來，
+       使用者才不會因為看不到的慣性而多滑一次。scroll 不會冒泡，用捕獲階段接。 */
+    const handleSceneScroll = (event: Event) => {
+      const scene = activeScene();
+      if (!scene || event.target !== scene) return;
+      markEnds(scene);
+    };
+
+    type ScrollIntent = 'scroll' | 'hold' | 'advance';
+    const scrollIntent = (direction: number): ScrollIntent => {
+      const scene = activeScene();
+      if (!scene) return 'advance';
+      const overflowY = window.getComputedStyle(scene).overflowY;
+      if (overflowY !== 'auto' && overflowY !== 'scroll') return 'advance';
+      const max = scene.scrollHeight - scene.clientHeight;
+      if (max <= 1) return 'advance';
+      markEnds(scene);
+      const canScroll = direction > 0 ? scene.scrollTop < max - 1 : scene.scrollTop > 1;
+      if (canScroll) return 'scroll';
+      const since = direction > 0 ? atEndSinceRef.current.down : atEndSinceRef.current.up;
+      if (since === null) return 'hold';
+      return performance.now() - since >= END_DWELL ? 'advance' : 'hold';
     };
 
     const isPinned = () => {
@@ -407,8 +441,9 @@ export default function AiImpactStoryStage({
       /* 這個判斷要排在 isPinned() 之前：舞台還沒完全釘住時我們不攔事件，
          但瀏覽器仍會捲動段內；若那時沒記下「這段動作在捲內容」，
          等釘住後的第一個事件就會看到「已經到底」而立刻換頁。 */
-      if (canScrollWithin(event.deltaY)) {
-        wheelConsumedRef.current = true;
+      const intent = scrollIntent(event.deltaY);
+      if (intent !== 'advance') {
+        if (intent === 'scroll') wheelConsumedRef.current = true;
         unlockWheel();
         return;
       }
@@ -436,8 +471,9 @@ export default function AiImpactStoryStage({
       if (start === null || current === undefined) return;
       const delta = start - current;
       /* 同上：先記錄「這一次手勢在捲內容」，再判斷是否釘住。 */
-      if (canScrollWithin(delta)) {
-        touchConsumedRef.current = true;
+      const intent = scrollIntent(delta);
+      if (intent !== 'advance') {
+        if (intent === 'scroll') touchConsumedRef.current = true;
         return;
       }
       if (!isPinned() || touchConsumedRef.current) return;
@@ -461,7 +497,10 @@ export default function AiImpactStoryStage({
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    const stage = stageRef.current;
+    stage?.addEventListener('scroll', handleSceneScroll, true);
     return () => {
+      stage?.removeEventListener('scroll', handleSceneScroll, true);
       window.removeEventListener('scroll', scheduleUpdate);
       window.removeEventListener('resize', scheduleUpdate);
       window.removeEventListener('wheel', handleWheel);
@@ -551,6 +590,7 @@ export default function AiImpactStoryStage({
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
+    atEndSinceRef.current = { down: null, up: null };
     let frame = 0;
     const until = performance.now() + 420;
     const hold = () => {
