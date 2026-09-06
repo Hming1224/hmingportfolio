@@ -221,6 +221,18 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   color: var(--ai-hot);
 }
 
+/* 便利貼在 AI Impact 版本被統一改成透明外框，六張疊在一起時字會互相穿透、
+   看起來像糊成一團。給一個比頁面底色稍亮的實心灰，疊起來才有前後關係。 */
+.ai-impact-page [data-hero-variant='ai-impact'] .sticky-note {
+  background: color-mix(in srgb, var(--ai-copy) 18%, var(--ai-bg)) !important;
+}
+
+/* 右上角的 Business Goals 游標原本貼著最右邊那張便利貼，往右挪開。
+   窄視窗時 86% 會讓整個標籤（約 145px）被切掉，所以再夾一個以右緣回推的上限。 */
+.ai-impact-page [data-hero-variant='ai-impact'] .hero-cursor-pm {
+  left: min(86%, calc(100% - 160px));
+}
+
 .ai-impact-page [data-hero-variant='ai-impact'] .sticky-note p,
 .ai-impact-page [data-hero-variant='ai-impact'] .sticky-note-subtitle,
 .ai-impact-page [data-hero-variant='ai-impact'] .wireframe-label,
