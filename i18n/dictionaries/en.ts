@@ -62,10 +62,10 @@ const messages = {
     reveal: "Reveal AI mindset",
     revealAria: "Hold to reveal the AI mindset page",
     back: "Back to Home",
-    eyebrow: "Decisions, boundaries, and proof",
+    eyebrow: "Judgment, method, and continuity",
     title: "The AI Impact",
     description:
-      "I use AI to make product work more traceable: clarify the decision, keep the scope visible, build in small batches, and verify the result in the real interface.",
+      "I define the direction, the standard for success, and what counts as finished; AI carries out the work. Proven methods become reusable modules that outlast any single agent or platform.",
     mindset: {
       title: "My principles for working with AI",
       lead: "One successful run is not enough. I store proven methods as portable external memory, then adapt the context to reuse them across agents and platforms.",
@@ -240,7 +240,7 @@ const messages = {
       items: [
         {
           type: "Digital product and system",
-          title: "Portfolio and Design System remediation",
+          title: "Portfolio and design system",
           body: "Interface issues are classified and repaired in small batches, protecting the live baseline while clarifying reusable and route-local boundaries.",
           stages: ["03", "04", "05", "06", "07"],
           skills: ["frontend-craft", "browse", "rwd-audit"],
@@ -266,7 +266,7 @@ const messages = {
           skills: ["company-design-analysis", "job-resume-matching"],
           proof: "Role research, versioned resumes, interview material, and field-by-field read-back.",
           image: "/ai-impact/outcomes/job-search-workflow-v2.webp",
-          imageAlt: "Three company-specific versions of the same introduction deck side by side, each in that company’s colours",
+          imageAlt: "Three company-specific versions of the same introduction deck side by side, each in that company’s colors",
         },
         {
           type: "External memory",

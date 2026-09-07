@@ -62,10 +62,10 @@ const messages = {
     reveal: "Reveal AI mindset",
     revealAria: "按住以開啟 AI 做事思維頁面",
     back: "Back to Home",
-    eyebrow: "決策、邊界與驗證",
+    eyebrow: "判斷、方法與延續",
     title: "The AI Impact",
     description:
-      "我用 AI 讓產品工作更容易追溯：先釐清要支持的決定，讓範圍保持可見，再分批完成實作，最後回到真實介面驗收結果。",
+      "方向、成功標準與驗收由我定義，AI 負責執行；驗證過的方法收成可重複使用的模組，換 Agent 或平台都能接續。",
     mindset: {
       title: "我的 AI 使用心法",
       lead: "成功一次不夠。我把可行方法存成可攜的外部記憶；之後只需調整 context，就能跨 Agent 與平台複用。",
