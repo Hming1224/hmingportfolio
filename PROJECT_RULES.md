@@ -33,6 +33,8 @@ Next.js App Router 的個人作品集網站，中英雙語（next-intl），線�
 
 ## 分支與 push
 
+共用分支分級、清理授權與 worktree 管理見母 repo 的 `000_Agent/guides/branch-policy.md`；本節的專案契約優先，共用原 checkout 保持穩定，Git 狀態變更在專屬工作區處理。
+
 - **既有維護、小修、內容更新、文件** → 可以直接推 `main`
 - **全新功能、全新專案、影響範圍大的改動** → 開分支（`codex/...` 或對應工具前綴）再推
 - **分不清是新功能還是維護** → 先用一句話問 Hming，不要自行猜
