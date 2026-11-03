@@ -163,7 +163,8 @@
   z-index: 1;
   display: grid;
   gap: var(--hm-space-sm);
-  max-width: 760px;
+  /* 跟其他 section 的 lead 同寬撐滿，右側讓出裝飾大數字的位置 */
+  padding-right: 180px;
 }
 
 .ds-case-act-divider__kicker {
@@ -184,7 +185,6 @@
 }
 
 .ds-case-act-divider__lead {
-  max-width: 560px;
   margin: 0;
   color: rgba(255, 255, 255, 0.75);
   font-size: var(--fs-body);
@@ -703,6 +703,10 @@
 
   .ds-case-act-divider {
     padding: 48px var(--page-gutter);
+  }
+
+  .ds-case-act-divider__inner {
+    padding-right: 0;
   }
 
   .ds-case-act-divider__number {

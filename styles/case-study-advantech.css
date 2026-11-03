@@ -973,7 +973,7 @@
 @media (min-width: 769px) {
   .theme-advantech .cs-iv-workflow {
     display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
     grid-template-rows: auto auto 1fr;
     align-items: stretch;
     column-gap: var(--hm-space-sm);
@@ -983,6 +983,8 @@
     grid-row: 1 / -1;
     display: grid;
     grid-template-rows: subgrid;
+    /* .cs-stack-box 的 justify-content: flex-start 會讓隱含欄縮成內容寬，大螢幕內框不撐滿 */
+    grid-template-columns: minmax(0, 1fr);
     row-gap: var(--hm-space-sm);
   }
 
