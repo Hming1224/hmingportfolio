@@ -332,7 +332,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
 
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--mindset-count, 4), minmax(0, 1fr));
   gap: var(--hm-space-md);
   margin: 0;
   padding: 0;
@@ -380,37 +380,14 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   animation: aiMindsetNodeExit var(--hm-duration-enter) var(--hm-ease-in-out) both;
 }
 
-.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(2) .ai-impact-mindset__icon {
-  animation-delay: var(--ai-mindset-step-stagger);
-}
-
-.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(3) .ai-impact-mindset__icon {
-  animation-delay: calc(var(--ai-mindset-step-stagger) + var(--ai-mindset-step-stagger));
-}
-
-.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(4) .ai-impact-mindset__icon {
-  animation-delay: calc(
-    var(--ai-mindset-step-stagger) +
-    var(--ai-mindset-step-stagger) +
-    var(--ai-mindset-step-stagger)
-  );
+/* 每條心法的 style 帶 --step-index（0 起算），條數改了也不用補 nth-child。 */
+.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step .ai-impact-mindset__icon {
+  animation-delay: calc(var(--step-index, 0) * var(--ai-mindset-step-stagger));
 }
 
 .ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:not(:last-child)::after {
   animation: aiMindsetGlow var(--ai-mindset-glow-duration) var(--hm-ease-in-out) both;
-  animation-delay: var(--ai-mindset-beam-lead);
-}
-
-.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(2)::after {
-  animation-delay: calc(var(--ai-mindset-beam-lead) + var(--ai-mindset-step-stagger));
-}
-
-.ai-impact-mindset__steps.is-animated .ai-impact-mindset__step:nth-child(3)::after {
-  animation-delay: calc(
-    var(--ai-mindset-beam-lead) +
-    var(--ai-mindset-step-stagger) +
-    var(--ai-mindset-step-stagger)
-  );
+  animation-delay: calc(var(--ai-mindset-beam-lead) + var(--step-index, 0) * var(--ai-mindset-step-stagger));
 }
 
 @keyframes aiMindsetNode {
@@ -689,7 +666,7 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
 
 .ai-impact-workflow-progress ol {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--stage-count, 7), minmax(0, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1983,7 +1960,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 }
 
 .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__steps {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--mindset-count, 4), minmax(0, 1fr));
   gap: var(--hm-space-md);
 }
 
@@ -2173,7 +2150,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story-mindset.is-overview .ai-impact-story-mindset__steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--mindset-count, 4), minmax(0, 1fr));
     gap: 0;
   }
 
@@ -2338,7 +2315,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   }
 
   .ai-impact-story-mindset.is-detail .ai-impact-story-mindset__steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--mindset-count, 4), minmax(0, 1fr));
     gap: var(--hm-space-2xs);
   }
 

@@ -13,19 +13,45 @@ import {
    （不像 'serial' 會在第一個失敗後跳過其餘）。 */
 test.describe.configure({ mode: 'default' });
 
-async function scrollStoryToStep(page: Page, step: number) {
+/* 步數從頁面讀：元件把總步數寫在 data-step-count，Workflow 階段數就是 slide 數。
+   順序是 心法總覽 → 每張證據卡 → 每個 Workflow 階段 → 組合路徑 → 成果。
+   內容增減時測試不用改步數。 */
+async function getStorySteps(page: Page) {
   const story = page.locator('.ai-impact-story');
+  await expect(story).toHaveAttribute('data-step-count', /^\d+$/);
+  const stepCount = Number(await story.getAttribute('data-step-count'));
+  const stageCount = await page.locator('.ai-impact-workflow-slide').count();
+  const outcomesStep = stepCount - 1;
+  const pathsStep = outcomesStep - 1;
+  const workflowStart = pathsStep - stageCount;
+  return { stepCount, stageCount, workflowStart, pathsStep, outcomesStep };
+}
+
+type StoryTarget = number | 'paths' | 'outcomes' | 'lastStage' | { workflowStage: number };
+
+async function scrollStoryToStep(page: Page, target: StoryTarget) {
+  const story = page.locator('.ai-impact-story');
+  const steps = await getStorySteps(page);
+  const step = typeof target === 'number'
+    ? target
+    : target === 'paths'
+      ? steps.pathsStep
+      : target === 'outcomes'
+        ? steps.outcomesStep
+        : target === 'lastStage'
+          ? steps.pathsStep - 1
+          : steps.workflowStart + target.workflowStage;
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = 'auto';
   });
-  await story.evaluate((element: HTMLElement, targetStep) => {
+  await story.evaluate((element: HTMLElement, { targetStep, lastStep }) => {
     const stage = element.querySelector<HTMLElement>('.ai-impact-story__stage');
     if (!stage) return;
     const top = element.getBoundingClientRect().top + window.scrollY;
     const stickyTop = Number.parseFloat(window.getComputedStyle(stage).top);
     const range = element.offsetHeight - stage.offsetHeight;
-    window.scrollTo(0, top - stickyTop + range * (targetStep / 11));
-  }, step);
+    window.scrollTo(0, top - stickyTop + range * (targetStep / lastStep));
+  }, { targetStep: step, lastStep: steps.stepCount - 1 });
   await expect(story).toHaveAttribute('data-active-step', String(step + 1));
 }
 
@@ -183,7 +209,8 @@ test.describe('AI Impact touch input', () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoAndWait(page, '/zh-TW/ai-impact');
     const story = page.locator('.ai-impact-story');
-    await scrollStoryToStep(page, 3);
+    const steps = await getStorySteps(page);
+    await scrollStoryToStep(page, { workflowStage: 0 });
     await expect(page.locator('.ai-impact-workflow-carousel')).toHaveAttribute('data-active-stage', '1');
 
     /* commit d0f6c09 之後，手機上「內容會捲的 scene」要先捲到底、在盡頭停留
@@ -217,7 +244,7 @@ test.describe('AI Impact touch input', () => {
     });
     await client.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
 
-    await expect(story).toHaveAttribute('data-active-step', '5');
+    await expect(story).toHaveAttribute('data-active-step', String(steps.workflowStart + 2));
     await expect(page.locator('.ai-impact-workflow-carousel')).toHaveAttribute('data-active-stage', '2');
     await expect(page.locator('.ai-impact-workflow-slide[data-stage="2"]')).toBeVisible();
     await expect(page.locator('.ai-impact-story__hint')).toContainText('滑動觀看下一步');
@@ -306,7 +333,7 @@ test.describe('AI Impact page', () => {
       await expect(page.locator('.ai-impact-proof--memory')).toBeVisible();
       await expect(page.locator('.ai-impact-proof__file')).toHaveCount(1);
       await expect(page.locator('.ai-impact-proof__node')).toHaveCount(4);
-      await scrollStoryToStep(page, 3);
+      await scrollStoryToStep(page, { workflowStage: 0 });
       await expect(page.getByText(researchDetail, { exact: false })).toBeAttached();
       await expectNoHorizontalOverflow(page);
       expectNoConsoleErrors(errors);
@@ -320,7 +347,7 @@ test.describe('AI Impact page', () => {
 
     const carousel = page.locator('.ai-impact-outcomes');
     const activeCard = carousel.locator('.ai-impact-outcomes__card.is-active');
-    await scrollStoryToStep(page, 11);
+    await scrollStoryToStep(page, 'outcomes');
 
     await expect(carousel.locator('.ai-impact-outcomes__card')).toHaveCount(4);
     await expect(activeCard.locator('.ai-impact-outcomes__details')).toHaveCSS('opacity', '0');
@@ -334,7 +361,7 @@ test.describe('AI Impact page', () => {
     expectNoConsoleErrors(errors);
   });
 
-  test('desktop scroll maps the twelve scenes and all seven workflow phases', async ({ page }) => {
+  test('desktop scroll maps every scene and workflow phase', async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 900 });
     const errors = collectConsoleErrors(page);
     await gotoAndWait(page, '/en/ai-impact');
@@ -352,7 +379,7 @@ test.describe('AI Impact page', () => {
     await expect(page.locator('.ai-impact-proof--skill')).toBeVisible();
     await expect.poll(async () => page.locator('.ai-impact-mindset__icon').evaluateAll((icons) => {
       const first = getComputedStyle(icons[0]).backgroundColor;
-      const last = getComputedStyle(icons[3]).backgroundColor;
+      const last = getComputedStyle(icons[icons.length - 1]).backgroundColor;
       return first !== last;
     })).toBe(true);
     await scrollStoryToStep(page, 2);
@@ -365,20 +392,20 @@ test.describe('AI Impact page', () => {
       const restingBackground = getComputedStyle(document.body).backgroundColor;
       return icons.every((icon) => getComputedStyle(icon).backgroundColor !== restingBackground);
     })).toBe(true);
-    await scrollStoryToStep(page, 3);
+    await scrollStoryToStep(page, { workflowStage: 0 });
     await expect(story).toHaveAttribute('data-active-section', 'workflow');
     await expect(carousel).toHaveAttribute('data-active-stage', '1');
-    await scrollStoryToStep(page, 9);
-    await expect(carousel).toHaveAttribute('data-active-stage', '7');
+    await scrollStoryToStep(page, 'lastStage');
+    await expect(carousel).toHaveAttribute('data-active-stage', String((await getStorySteps(page)).stageCount));
     await expect.poll(() => carousel.getAttribute('data-progress')).toBe('1.000');
     await expect(carousel.locator('.ai-impact-workflow-progress__direction')).toHaveCount(0);
     /* 「往下一步」的提示以前掛在 workflow carousel 上、跑完第 7 階段就收起來；
        現在改成整個 story 共用一個提示，只有走到最後一段才收。所以這裡改成
-       第 9 步仍然看得到、第 11 步（最後一段）才隱藏。 */
+       最後一個 Workflow 階段仍然看得到、成果（最後一段）才隱藏。 */
     await expect(page.locator('.ai-impact-story__hint')).not.toHaveClass(/is-hidden/);
-    await scrollStoryToStep(page, 10);
+    await scrollStoryToStep(page, 'paths');
     await expect(page.locator('.ai-impact-story-workflow')).toHaveClass(/is-paths/);
-    await scrollStoryToStep(page, 11);
+    await scrollStoryToStep(page, 'outcomes');
     await expect(story).toHaveAttribute('data-active-section', 'outcomes');
     await expect(page.locator('.ai-impact-story__hint')).toHaveClass(/is-hidden/);
     await expectNoHorizontalOverflow(page);
@@ -528,12 +555,13 @@ test.describe('AI Impact page', () => {
     await gotoAndWait(page, '/zh-TW/ai-impact');
     const story = page.locator('.ai-impact-story');
     const nav = page.locator('.ai-impact-story__nav');
+    const steps = await getStorySteps(page);
     await scrollStoryToStep(page, 0);
 
     await nav.getByRole('button', { name: /02/ }).click();
-    await expect(story).toHaveAttribute('data-active-step', '4');
+    await expect(story).toHaveAttribute('data-active-step', String(steps.workflowStart + 1));
     await nav.getByRole('button', { name: /03/ }).click();
-    await expect(story).toHaveAttribute('data-active-step', '12');
+    await expect(story).toHaveAttribute('data-active-step', String(steps.stepCount));
     await nav.getByRole('button', { name: /01/ }).click();
     await expect(story).toHaveAttribute('data-active-step', '1');
   });
@@ -541,7 +569,7 @@ test.describe('AI Impact page', () => {
   test('workflow skills explain their purpose on hover and keyboard focus', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await gotoAndWait(page, '/zh-TW/ai-impact');
-    await scrollStoryToStep(page, 3);
+    await scrollStoryToStep(page, { workflowStage: 0 });
 
     const firstSkill = page.locator('.ai-impact-skill').first();
     const firstTip = firstSkill.getByRole('tooltip');
@@ -562,8 +590,9 @@ test.describe('AI Impact page', () => {
     await gotoAndWait(page, '/en/ai-impact');
     const story = page.locator('.ai-impact-story');
     await expect(page.locator('.ai-impact-story__stage')).toHaveCSS('position', 'sticky');
-    await scrollStoryToStep(page, 4);
-    await expect(story).toHaveAttribute('data-active-step', '5');
+    const steps = await getStorySteps(page);
+    await scrollStoryToStep(page, { workflowStage: 1 });
+    await expect(story).toHaveAttribute('data-active-step', String(steps.workflowStart + 2));
     await expect(page.locator('.ai-impact-workflow-carousel')).toHaveAttribute('data-active-stage', '2');
     await expectNoHorizontalOverflow(page);
 
@@ -604,7 +633,7 @@ test.describe('AI Impact page', () => {
       await page.setViewportSize({ width, height: 900 });
       await page.emulateMedia({ reducedMotion: 'reduce' });
       await gotoAndWait(page, '/zh-TW/ai-impact');
-      await scrollStoryToStep(page, 3);
+      await scrollStoryToStep(page, { workflowStage: 0 });
 
       const layout = await page.evaluate(() => {
         const title = document.querySelector<HTMLElement>('#ai-impact-workflow');
