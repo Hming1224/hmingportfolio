@@ -25,9 +25,9 @@ _不要用_：floating widget、sticker、掛件、浮動元件、裝飾物
 _底下的個別元件保留英文原名_：`StickyNote`、`CursorTag`、`WireframeFrame`、`AiWidgetFrame`、`AnnotationPin`、`ToggleDecoration`、`WalPencilDecoration`
 
 **階段**：
-AI Impact Workflow 裡 7 個彼此交接、可依任務選用的工作段落。程式碼裡是 `stage`。
+AI Impact Workflow 裡 8 個彼此交接、可依任務選用的工作段落。程式碼裡是 `stage`。
 _不要用_：案例、專案、模組、成果
-_為什麼_：這 7 個不是 7 個各自完成的成果案例。叫「案例」會讓面試官誤讀成 7 件獨立作品。
+_為什麼_：這 8 個不是 8 個各自完成的成果案例。叫「案例」會讓面試官誤讀成 8 件獨立作品。
 
 **Hero**：
 單獨講「Hero」預設指**首頁**的 Hero（`components/Hero.tsx`）。案例頁的那一塊一律說 `CaseHero`，不可只說「Hero」。

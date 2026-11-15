@@ -10,9 +10,11 @@ import {
   FileCode2,
   FlaskConical,
   FolderTree,
+  ListChecks,
   Play,
   RefreshCw,
   Search,
+  ShieldCheck,
 } from 'lucide-react';
 import {
   useCallback,
@@ -25,13 +27,18 @@ import {
 import OutcomeDepthCarousel, { type OutcomeItem } from './OutcomeDepthCarousel';
 import WorkflowCarousel, { type WorkflowStage } from './WorkflowCarousel';
 
-const mindsetIcons = [Compass, FlaskConical, Blocks, DatabaseBackup];
+const mindsetIcons = [Compass, FlaskConical, Blocks, DatabaseBackup, ShieldCheck];
+/* 每種證據卡的檔案標籤 icon 與流程節點 icon。 */
+const proofIcons = {
+  skill: { file: FileCode2, node: CircleCheckBig },
+  memory: { file: BrainCircuit, node: FolderTree },
+  check: { file: ListChecks, node: ShieldCheck },
+};
 const workflowPathIcons = [Search, Play, RefreshCw];
-const WORKFLOW_START = 3;
-const PATHS_STEP = 10;
-const OUTCOMES_STEP = 11;
-const STORY_STEP_COUNT = 12;
-const MINDSET_SEQUENCE_DURATION = 5700;
+/* 心法動畫：每條間隔要跟 CSS 的 --ai-mindset-step-stagger 一致；
+   總長 = 收尾時間 + 間隔 × (條數 − 1)，4 條時等於原本的 5700ms。 */
+const MINDSET_STAGGER_MS = 1520;
+const MINDSET_SEQUENCE_TAIL = 1140;
 const MINDSET_REPLAY_DELAY = 3000;
 /* 內容抵達端點後要停留多久才允許換段。低於這個時間的「到底」通常是使用者還沒看到的
    慣性捲動結果，直接換頁會像「沒滑到底就跳頁」。 */
@@ -45,7 +52,7 @@ function toMilliseconds(value: string) {
 
 export type MindsetItem = { title: string; body: string };
 export type MindsetEvidence = {
-  kind: 'skill' | 'memory';
+  kind: 'skill' | 'memory' | 'check';
   eyebrow: string;
   title: string;
   fileName: string;
@@ -53,6 +60,7 @@ export type MindsetEvidence = {
   caption: string;
 };
 export type WorkflowPath = { title: string; stages: string; body: string };
+export type OutcomeMetric = { value: string; label: string };
 
 type StoryLabels = {
   mindset: { title: string; lead: string };
@@ -80,6 +88,8 @@ type StoryLabels = {
     next: string;
     stages: string;
     skills: string;
+    metricsLabel: string;
+    metrics: OutcomeMetric[];
   };
 };
 
@@ -95,13 +105,23 @@ type AiImpactStoryStageProps = {
 type StorySection = 'mindset' | 'workflow' | 'outcomes';
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
-function getSection(step: number): StorySection {
-  if (step < WORKFLOW_START) return 'mindset';
-  if (step < OUTCOMES_STEP) return 'workflow';
+/* 步數從資料長度算：第 0 步心法總覽，接著每張證據卡一步，再來每個 Workflow 階段一步，
+   最後是組合路徑與成果各一步。以後加內容只要改文案，不用改這裡。 */
+function getStorySteps(evidenceCount: number, stageCount: number) {
+  const workflowStart = 1 + evidenceCount;
+  const pathsStep = workflowStart + stageCount;
+  const outcomesStep = pathsStep + 1;
+  return { workflowStart, pathsStep, outcomesStep, stepCount: outcomesStep + 1 };
+}
+
+function getSection(step: number, workflowStart: number, outcomesStep: number): StorySection {
+  if (step < workflowStart) return 'mindset';
+  if (step < outcomesStep) return 'workflow';
   return 'outcomes';
 }
 
 function MindsetProof({ item }: { item: MindsetEvidence }) {
+  const { file: FileIcon, node: NodeIcon } = proofIcons[item.kind];
   return (
     <figure className={`ai-impact-proof ai-impact-proof--${item.kind}`}>
       <div className="ai-impact-proof__surface">
@@ -111,14 +131,14 @@ function MindsetProof({ item }: { item: MindsetEvidence }) {
             <h3>{item.title}</h3>
           </div>
           <span className="ai-impact-proof__file">
-            {item.kind === 'skill' ? <FileCode2 aria-hidden="true" /> : <BrainCircuit aria-hidden="true" />}
+            <FileIcon aria-hidden="true" />
             <span>{item.fileName}</span>
           </span>
           <div className={`ai-impact-proof__diagram ai-impact-proof__diagram--${item.kind}`}>
             {item.items.map((entry, index) => (
               <div className="ai-impact-proof__diagram-entry" key={entry}>
                 <div className="ai-impact-proof__node">
-                  {item.kind === 'skill' ? <CircleCheckBig aria-hidden="true" /> : <FolderTree aria-hidden="true" />}
+                  <NodeIcon aria-hidden="true" />
                   <span>{entry}</span>
                 </div>
                 {index < item.items.length - 1 ? <ArrowRight aria-hidden="true" /> : null}
@@ -161,14 +181,18 @@ export default function AiImpactStoryStage({
   const mindsetRectsRef = useRef<DOMRect[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
-  const activeSection = getSection(activeStep);
+  const evidenceCount = mindsetEvidence.length;
+  const mindsetCount = mindsetItems.length;
+  const { workflowStart, pathsStep, outcomesStep, stepCount: storyStepCount } = getStorySteps(evidenceCount, workflowItems.length);
+  const activeSection = getSection(activeStep, workflowStart, outcomesStep);
   const mindsetMode = activeStep === 0 ? 'overview' : 'detail';
-  const evidenceIndex = activeStep === 1 ? 0 : activeStep === 2 ? 1 : null;
-  const workflowStage = clamp(activeStep - WORKFLOW_START, 0, workflowItems.length - 1);
-  const workflowMode = activeStep === PATHS_STEP ? 'paths' : 'stages';
+  const evidenceIndex = activeStep >= 1 && activeStep <= evidenceCount ? activeStep - 1 : null;
+  const isMindsetComplete = evidenceCount > 0 && activeStep === evidenceCount;
+  const workflowStage = clamp(activeStep - workflowStart, 0, workflowItems.length - 1);
+  const workflowMode = activeStep === pathsStep ? 'paths' : 'stages';
   /* 捲動提示從第一步一路陪到底，只有走進最後一段（03 成果）才收掉。
      靜態版面沒有「下一步」可言，整個不顯示。 */
-  const isLastStep = activeStep === STORY_STEP_COUNT - 1;
+  const isLastStep = activeStep === storyStepCount - 1;
 
   const getMetrics = useCallback(() => {
     const root = rootRef.current;
@@ -183,19 +207,19 @@ export default function AiImpactStoryStage({
   const goToStep = useCallback((step: number, behavior: ScrollBehavior = 'smooth') => {
     const metrics = getMetrics();
     if (!metrics) return;
-    const nextStep = clamp(step, 0, STORY_STEP_COUNT - 1);
+    const nextStep = clamp(step, 0, storyStepCount - 1);
     window.scrollTo({
-      top: metrics.top - metrics.stickyTop + metrics.range * (nextStep / (STORY_STEP_COUNT - 1)),
+      top: metrics.top - metrics.stickyTop + metrics.range * (nextStep / (storyStepCount - 1)),
       behavior,
     });
-  }, [getMetrics]);
+  }, [getMetrics, storyStepCount]);
 
   /* 導覽列與階段點是「直接跳到某一段」，距離超過一步就別平滑捲動——
      中間每個 scene 都會被快速掃過一次，只剩干擾。相鄰的一步維持平滑。 */
   const jumpToStep = useCallback((step: number) => {
-    const target = clamp(step, 0, STORY_STEP_COUNT - 1);
+    const target = clamp(step, 0, storyStepCount - 1);
     goToStep(target, Math.abs(target - activeStepRef.current) > 1 ? 'instant' : 'smooth');
-  }, [goToStep]);
+  }, [goToStep, storyStepCount]);
 
   useEffect(() => {
     const story = rootRef.current;
@@ -368,7 +392,7 @@ export default function AiImpactStoryStage({
       if (!metrics) return;
       const rect = metrics.root.getBoundingClientRect();
       const progress = clamp((metrics.stickyTop - rect.top) / metrics.range, 0, 1);
-      const nextStep = Math.round(progress * (STORY_STEP_COUNT - 1));
+      const nextStep = Math.round(progress * (storyStepCount - 1));
       metrics.root.dataset.progress = progress.toFixed(3);
       if (nextStep !== activeStepRef.current) {
         setDirection(nextStep > activeStepRef.current ? 'forward' : 'backward');
@@ -453,7 +477,7 @@ export default function AiImpactStoryStage({
         return;
       }
       const target = activeStepRef.current + (event.deltaY > 0 ? 1 : -1);
-      if (target < 0 || target >= STORY_STEP_COUNT) return;
+      if (target < 0 || target >= storyStepCount) return;
       event.preventDefault();
       unlockWheel();
       if (wheelGestureRef.current) return;
@@ -478,7 +502,7 @@ export default function AiImpactStoryStage({
       }
       if (!isPinned() || touchConsumedRef.current) return;
       const target = activeStepRef.current + (delta > 0 ? 1 : -1);
-      if (Math.abs(delta) < 10 || target < 0 || target >= STORY_STEP_COUNT) return;
+      if (Math.abs(delta) < 10 || target < 0 || target >= storyStepCount) return;
       event.preventDefault();
       if (touchTriggeredRef.current || Math.abs(delta) < 36) return;
       touchTriggeredRef.current = true;
@@ -510,7 +534,7 @@ export default function AiImpactStoryStage({
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
       if (wheelTimerRef.current !== null) window.clearTimeout(wheelTimerRef.current);
     };
-  }, [getMetrics, goToStep]);
+  }, [getMetrics, goToStep, storyStepCount]);
 
   useLayoutEffect(() => {
     const nodes = mindsetNodeRefs.current.filter((node): node is HTMLLIElement => Boolean(node));
@@ -545,6 +569,7 @@ export default function AiImpactStoryStage({
     let resetTimer = 0;
     let replayTimer = 0;
     let active = false;
+    const sequenceDuration = MINDSET_SEQUENCE_TAIL + MINDSET_STAGGER_MS * Math.max(mindsetCount - 1, 0);
     const resetDuration = toMilliseconds(
       window.getComputedStyle(element).getPropertyValue('--hm-duration-enter'),
     );
@@ -567,7 +592,7 @@ export default function AiImpactStoryStage({
           element.classList.remove('is-resetting');
           replayTimer = window.setTimeout(play, MINDSET_REPLAY_DELAY);
         }, resetDuration);
-      }, MINDSET_SEQUENCE_DURATION);
+      }, sequenceDuration);
     };
 
     const observer = new IntersectionObserver(([entry]) => {
@@ -582,7 +607,7 @@ export default function AiImpactStoryStage({
       stop();
       observer.disconnect();
     };
-  }, [activeStep]);
+  }, [activeStep, mindsetCount]);
 
   /* 換到新的一段時，把它的內部捲動歸位：往前走回到最上面從頭讀，往回走接在底部。
      只設一次不夠——手機放開手指後的慣性捲動會在設定之後繼續推，
@@ -615,11 +640,11 @@ export default function AiImpactStoryStage({
   };
   const sceneHidden = (section: StorySection) => activeSection !== section;
   const style = {
-    '--story-scroll-height': `calc(var(--ai-viewport-space) + ${(STORY_STEP_COUNT - 1) * 100}svh)`,
+    '--story-scroll-height': `calc(var(--ai-viewport-space) + ${(storyStepCount - 1) * 100}svh)`,
   } as CSSProperties;
 
   return (
-    <div className="ai-impact-story" data-active-step={activeStep + 1} data-active-section={activeSection} data-direction={direction} data-progress="0.000" ref={rootRef} style={style}>
+    <div className="ai-impact-story" data-active-step={activeStep + 1} data-step-count={storyStepCount} data-active-section={activeSection} data-direction={direction} data-progress="0.000" ref={rootRef} style={style}>
       <div
         className="ai-impact-story__stage"
         ref={stageRef}
@@ -637,8 +662,8 @@ export default function AiImpactStoryStage({
         <nav className="ai-impact-story__nav" aria-label="AI Impact sections">
           {[
             { section: 'mindset' as const, number: '01', title: labels.mindset.title, step: 0 },
-            { section: 'workflow' as const, number: '02', title: labels.workflow.title, step: WORKFLOW_START },
-            { section: 'outcomes' as const, number: '03', title: labels.outcomes.title, step: OUTCOMES_STEP },
+            { section: 'workflow' as const, number: '02', title: labels.workflow.title, step: workflowStart },
+            { section: 'outcomes' as const, number: '03', title: labels.outcomes.title, step: outcomesStep },
           ].map((item) => (
             <button type="button" className={activeSection === item.section ? 'is-active' : ''} aria-current={activeSection === item.section ? 'step' : undefined} onClick={() => jumpToStep(item.step)} key={item.section}>
               <span>{item.number}</span><span className="ai-impact-story__nav-label"><span>{item.title}</span></span>
@@ -652,12 +677,12 @@ export default function AiImpactStoryStage({
             <h2 id="ai-impact-mindset">{labels.mindset.title}</h2>
             <p>{labels.mindset.lead}</p>
           </div>
-          <div className={`ai-impact-story-mindset is-${mindsetMode}${activeStep === 2 ? ' is-complete' : ''}`}>
-            <ol className="ai-impact-story-mindset__steps ai-impact-mindset__steps" ref={mindsetStepsRef}>
+          <div className={`ai-impact-story-mindset is-${mindsetMode}${isMindsetComplete ? ' is-complete' : ''}`}>
+            <ol className="ai-impact-story-mindset__steps ai-impact-mindset__steps" ref={mindsetStepsRef} style={{ '--mindset-count': mindsetCount } as CSSProperties}>
               {mindsetItems.map((item, index) => {
                 const Icon = mindsetIcons[index];
                 return (
-                  <li className="ai-impact-story-mindset__step ai-impact-mindset__step" key={item.title} ref={(node) => { mindsetNodeRefs.current[index] = node; }}>
+                  <li className="ai-impact-story-mindset__step ai-impact-mindset__step" key={item.title} ref={(node) => { mindsetNodeRefs.current[index] = node; }} style={{ '--step-index': index } as CSSProperties}>
                     <span className="ai-impact-mindset__icon" aria-hidden="true"><Icon size={28} strokeWidth={1.8} /></span>
                     <div>
                       <span className="ai-impact-mindset__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
@@ -681,7 +706,7 @@ export default function AiImpactStoryStage({
               <p>{labels.workflow.lead}</p>
             </div>
             <div className={`ai-impact-story-workflow__panel${workflowMode === 'stages' ? ' is-active' : ''}`}>
-              <WorkflowCarousel items={workflowItems} progressLabel={labels.workflow.progressLabel} labels={labels.workflow.labels} activeStage={workflowStage} onStageSelect={(stage) => jumpToStep(WORKFLOW_START + stage)} embedded />
+              <WorkflowCarousel items={workflowItems} progressLabel={labels.workflow.progressLabel} labels={labels.workflow.labels} activeStage={workflowStage} onStageSelect={(stage) => jumpToStep(workflowStart + stage)} embedded />
             </div>
             <div className={`ai-impact-story-workflow__paths${workflowMode === 'paths' ? ' is-active' : ''}`}>
               <div className="ai-impact-workflow-paths" id="ai-impact-workflow-paths">
@@ -708,6 +733,11 @@ export default function AiImpactStoryStage({
         <section className={`ai-impact-story__scene ai-impact-story__scene--outcomes ${sectionClass('outcomes')}`} aria-labelledby="ai-impact-example" aria-hidden={sceneHidden('outcomes')} inert={sceneHidden('outcomes')}>
           <div className="ai-impact-story__intro">
             <p className="ai-impact-section__number">03</p><h2 id="ai-impact-example">{labels.outcomes.title}</h2><p>{labels.outcomes.lead}</p>
+            <ul className="ai-impact-metrics" aria-label={labels.outcomes.metricsLabel}>
+              {labels.outcomes.metrics.map((metric) => (
+                <li key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></li>
+              ))}
+            </ul>
           </div>
           <OutcomeDepthCarousel items={outcomes} labels={{ carousel: labels.outcomes.carousel, previous: labels.outcomes.previous, next: labels.outcomes.next, stages: labels.outcomes.stages, skills: labels.outcomes.skills }} />
         </section>

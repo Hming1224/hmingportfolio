@@ -54,7 +54,7 @@ export default function WorkflowCarousel({
             <span aria-hidden="true"> / </span>
             <span>{String(items.length).padStart(2, '0')}</span>
           </p>
-          <ol>
+          <ol style={{ '--stage-count': items.length } as CSSProperties}>
             {items.map((item, index) => (
               <li className={index === activeStage ? 'is-active' : ''} key={item.title}>
                 <button type="button" aria-label={`${String(index + 1).padStart(2, '0')} ${item.title}`} aria-current={index === activeStage ? 'step' : undefined} onClick={() => onStageSelect(index)}>
