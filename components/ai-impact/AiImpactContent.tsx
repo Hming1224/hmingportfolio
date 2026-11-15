@@ -3,6 +3,7 @@ import DotPattern from '@/components/ui/dot-pattern';
 import AiImpactStoryStage, {
   type MindsetEvidence,
   type MindsetItem,
+  type OutcomeMetric,
   type WorkflowPath,
 } from './AiImpactStoryStage';
 import { type OutcomeItem } from './OutcomeDepthCarousel';
@@ -56,6 +57,8 @@ export default async function AiImpactContent() {
             next: t('example.next'),
             stages: t('example.stagesLabel'),
             skills: t('example.skillsLabel'),
+            metricsLabel: t('example.metricsLabel'),
+            metrics: t.raw('example.metrics') as OutcomeMetric[],
           },
         }}
       />

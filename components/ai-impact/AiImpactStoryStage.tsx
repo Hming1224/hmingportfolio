@@ -10,9 +10,11 @@ import {
   FileCode2,
   FlaskConical,
   FolderTree,
+  ListChecks,
   Play,
   RefreshCw,
   Search,
+  ShieldCheck,
 } from 'lucide-react';
 import {
   useCallback,
@@ -25,7 +27,13 @@ import {
 import OutcomeDepthCarousel, { type OutcomeItem } from './OutcomeDepthCarousel';
 import WorkflowCarousel, { type WorkflowStage } from './WorkflowCarousel';
 
-const mindsetIcons = [Compass, FlaskConical, Blocks, DatabaseBackup];
+const mindsetIcons = [Compass, FlaskConical, Blocks, DatabaseBackup, ShieldCheck];
+/* 每種證據卡的檔案標籤 icon 與流程節點 icon。 */
+const proofIcons = {
+  skill: { file: FileCode2, node: CircleCheckBig },
+  memory: { file: BrainCircuit, node: FolderTree },
+  check: { file: ListChecks, node: ShieldCheck },
+};
 const workflowPathIcons = [Search, Play, RefreshCw];
 /* 心法動畫：每條間隔要跟 CSS 的 --ai-mindset-step-stagger 一致；
    總長 = 收尾時間 + 間隔 × (條數 − 1)，4 條時等於原本的 5700ms。 */
@@ -44,7 +52,7 @@ function toMilliseconds(value: string) {
 
 export type MindsetItem = { title: string; body: string };
 export type MindsetEvidence = {
-  kind: 'skill' | 'memory';
+  kind: 'skill' | 'memory' | 'check';
   eyebrow: string;
   title: string;
   fileName: string;
@@ -52,6 +60,7 @@ export type MindsetEvidence = {
   caption: string;
 };
 export type WorkflowPath = { title: string; stages: string; body: string };
+export type OutcomeMetric = { value: string; label: string };
 
 type StoryLabels = {
   mindset: { title: string; lead: string };
@@ -79,6 +88,8 @@ type StoryLabels = {
     next: string;
     stages: string;
     skills: string;
+    metricsLabel: string;
+    metrics: OutcomeMetric[];
   };
 };
 
@@ -110,6 +121,7 @@ function getSection(step: number, workflowStart: number, outcomesStep: number): 
 }
 
 function MindsetProof({ item }: { item: MindsetEvidence }) {
+  const { file: FileIcon, node: NodeIcon } = proofIcons[item.kind];
   return (
     <figure className={`ai-impact-proof ai-impact-proof--${item.kind}`}>
       <div className="ai-impact-proof__surface">
@@ -119,14 +131,14 @@ function MindsetProof({ item }: { item: MindsetEvidence }) {
             <h3>{item.title}</h3>
           </div>
           <span className="ai-impact-proof__file">
-            {item.kind === 'skill' ? <FileCode2 aria-hidden="true" /> : <BrainCircuit aria-hidden="true" />}
+            <FileIcon aria-hidden="true" />
             <span>{item.fileName}</span>
           </span>
           <div className={`ai-impact-proof__diagram ai-impact-proof__diagram--${item.kind}`}>
             {item.items.map((entry, index) => (
               <div className="ai-impact-proof__diagram-entry" key={entry}>
                 <div className="ai-impact-proof__node">
-                  {item.kind === 'skill' ? <CircleCheckBig aria-hidden="true" /> : <FolderTree aria-hidden="true" />}
+                  <NodeIcon aria-hidden="true" />
                   <span>{entry}</span>
                 </div>
                 {index < item.items.length - 1 ? <ArrowRight aria-hidden="true" /> : null}
@@ -721,6 +733,11 @@ export default function AiImpactStoryStage({
         <section className={`ai-impact-story__scene ai-impact-story__scene--outcomes ${sectionClass('outcomes')}`} aria-labelledby="ai-impact-example" aria-hidden={sceneHidden('outcomes')} inert={sceneHidden('outcomes')}>
           <div className="ai-impact-story__intro">
             <p className="ai-impact-section__number">03</p><h2 id="ai-impact-example">{labels.outcomes.title}</h2><p>{labels.outcomes.lead}</p>
+            <ul className="ai-impact-metrics" aria-label={labels.outcomes.metricsLabel}>
+              {labels.outcomes.metrics.map((metric) => (
+                <li key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></li>
+              ))}
+            </ul>
           </div>
           <OutcomeDepthCarousel items={outcomes} labels={{ carousel: labels.outcomes.carousel, previous: labels.outcomes.previous, next: labels.outcomes.next, stages: labels.outcomes.stages, skills: labels.outcomes.skills }} />
         </section>

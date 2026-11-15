@@ -583,6 +583,10 @@ html[data-ai-story-visible='true'] .ai-impact-page .ai-impact-hero {
   overflow-wrap: anywhere;
 }
 
+.ai-impact-proof--check .ai-impact-proof__node {
+  background: color-mix(in srgb, var(--ai-deep) 8%, transparent);
+}
+
 .ai-impact-proof--memory .ai-impact-proof__node {
   background: color-mix(in srgb, var(--ai-hot) 7%, transparent);
 }
@@ -1923,7 +1927,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   letter-spacing: -0.04em;
 }
 
-.ai-impact-story__intro > p:last-child {
+.ai-impact-story__intro > p:last-of-type {
   margin: 0;
   color: var(--ai-copy-muted);
   font-size: clamp(13px, 1.65svh, 15px);
@@ -2017,6 +2021,8 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
 }
 
 .ai-impact-story-mindset__step h3 {
+  /* 5 欄後每欄變窄，平衡換行避免最後一個字單獨掉到下一行。 */
+  text-wrap: balance;
   margin: 0 0 var(--hm-space-2xs);
   color: var(--ai-hot);
   font-size: 18px;
@@ -2209,6 +2215,42 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   padding-right: 0;
 }
 
+/* 成果區數字帶：route-local，三個數字橫排，手機改直排。 */
+.ai-impact-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--hm-space-xs);
+  margin: clamp(16px, 3svh, 28px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-impact-metrics li {
+  display: grid;
+  align-content: start;
+  gap: var(--hm-space-3xs);
+  min-width: 0;
+  padding-top: var(--hm-space-xs);
+  border-top: 1px solid color-mix(in srgb, var(--ai-line) 36%, transparent);
+}
+
+.ai-impact-metrics strong {
+  color: var(--ai-hot);
+  font-size: clamp(28px, min(3vw, 4.6svh), 40px);
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.ai-impact-metrics span {
+  min-width: 0;
+  color: var(--ai-copy-muted);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .ai-impact-story__scene--outcomes .ai-impact-outcomes {
   grid-column: 2;
   height: min(500px, calc(var(--ai-viewport-space) - 48px));
@@ -2262,7 +2304,7 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
     font-size: clamp(30px, 9vw, 40px);
   }
 
-  .ai-impact-story__intro > p:last-child {
+  .ai-impact-story__intro > p:last-of-type {
     font-size: 13px;
     line-height: 1.55;
   }
@@ -2630,5 +2672,25 @@ html[data-ai-story-visible='true'] .ai-impact-story__stage {
   .ai-impact-page .hero-wal-pencil,
   .ai-impact-page .hero-toggle {
     display: none;
+  }
+}
+
+/* 數字帶在手機改直排：每列數字在左、標籤在右，避免三欄把標籤壓到斷行。 */
+@media (max-width: 768px) {
+  .ai-impact-metrics {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: var(--hm-space-sm);
+  }
+
+  .ai-impact-metrics li {
+    grid-template-columns: 56px minmax(0, 1fr);
+    align-items: center;
+    gap: var(--hm-space-xs);
+    padding-block: var(--hm-space-2xs);
+  }
+
+  .ai-impact-metrics strong {
+    font-size: 24px;
   }
 }
