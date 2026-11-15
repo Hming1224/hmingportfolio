@@ -339,7 +339,7 @@ const messages = {
         {
           type: "Digital product and system",
           title: "An interactive 3D island website",
-          body: "A standalone Next.js 16 site, garena.hmingdesign.com, that brings my experience, observations as a player, and thoughts on the games industry into one scrolling story. The background is a three.js 3D archipelago, and the camera flies from island to island as you scroll.",
+          body: "A standalone Next.js 16 site that brings my experience, observations as a player, and thoughts on the games industry into one scrolling story. The background is a three.js 3D archipelago, and the camera flies from island to island as you scroll.",
           stages: ["01", "03", "05", "06"],
           skills: ["frontend-design", "frontend-craft", "speak-native-en"],
           proof: "The live site, a vitest test that checks every building and tree on the 3D islands sits on the ground, and records of copy and performance fixes made before launch.",

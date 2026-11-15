@@ -339,7 +339,7 @@ const messages = {
         {
           type: "數位產品與系統",
           title: "3D 群島主題的互動網站",
-          body: "用 Next.js 16 做的獨立網站 garena.hmingdesign.com，把經歷、遊戲玩家觀察和對遊戲產業的想法放進同一個捲動敘事；背景是 three.js 做的 3D 群島，捲動時鏡頭會一座島一座島飛過去。",
+          body: "用 Next.js 16 做的獨立網站，把經歷、遊戲玩家觀察和對遊戲產業的想法放進同一個捲動敘事；背景是 three.js 做的 3D 群島，捲動時鏡頭會一座島一座島飛過去。",
           stages: ["01", "03", "05", "06"],
           skills: ["frontend-design", "frontend-craft", "speak-native-en"],
           proof: "線上網站、vitest 測試檢查 3D 島上的建物與樹木都落在地面、上線前的文案與效能修正紀錄。",
